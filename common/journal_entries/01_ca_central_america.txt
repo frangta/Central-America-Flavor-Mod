@@ -1,0 +1,1220 @@
+﻿#je_ca_historic_situation_in_nicaragua = {
+#	icon = "gfx\interface\icons\event_icons\event_flags\event_uca_flag.dds"
+#	
+#	group = je_group_historical_content	
+#
+#	should_be_pinned_by_default = yes
+#	
+#	complete = {
+#		
+#	}
+#	
+#	fail = {
+#		
+#	}
+
+ca_central_america.7 # Separatism in Nicaragua
+ca_central_america.40 # Civil War in Nicaragua Historic
+ca_central_america.41 # Nicaragua appreciates intervention
+ca_central_america.47 # Nicaragua Beats to secessionists
+ca_central_america.48 # Nicaragua falls to secessionists
+ca_central_america.49 # Nicaragua declares independence Peaceful
+ca_central_america.69 # Civilwar in Nicaragua
+ca_central_america.70 # Nicaragua declares independence on Arms
+
+#	on_fail = {
+#		
+#	}
+#
+#	on_complete = {
+#		
+#	}
+#	
+#	weight = 100
+#	
+#	transferable = no
+#
+#	invalid = {
+#		NOT = { exists = c:UCA }
+#	}
+#	
+#}
+#je_ca_historic_situation_in_costarica = {
+#	icon = "gfx\interface\icons\event_icons\event_flags\event_uca_flag.dds"
+#	
+#	group = je_group_historical_content	
+#
+#	should_be_pinned_by_default = yes
+#	
+#	complete = {
+#		
+#	}
+#	
+#	fail = {
+#		
+#	}
+#	
+#	on_fail = {
+#		
+#	}
+#
+#	on_complete = {
+#		
+#	}
+#	
+#	weight = 100
+#	
+#	transferable = no
+#
+#	invalid = {
+#		NOT = { exists = c:UCA }
+#	}
+#	
+#}
+#je_ca_historic_situation_in_elsalvador = {
+#	icon = "gfx\interface\icons\event_icons\event_flags\event_uca_flag.dds"
+#	
+#	group = je_group_historical_content	
+#
+#	should_be_pinned_by_default = yes
+#	
+#	complete = {
+#		
+#	}
+#	
+#	fail = {
+#		
+#	}
+#	
+#	on_fail = {
+#		
+#	}
+#
+#	on_complete = {
+#		
+#	}
+#	
+#	weight = 100
+#	
+#	transferable = no
+#
+#	invalid = {
+#		NOT = { exists = c:UCA }
+#	}
+#	
+#}
+#je_ca_historic_situation_in_guatemala = {
+#	icon = "gfx\interface\icons\event_icons\event_flags\event_uca_flag.dds"
+#	
+#	group = je_group_historical_content	
+#
+#	should_be_pinned_by_default = yes
+#	
+#	complete = {
+#		
+#	}
+#	
+#	fail = {
+#		
+#	}
+#	
+#	on_fail = {
+#		
+#	}
+#
+#	on_complete = {
+#		
+#	}
+#	
+#	weight = 100
+#	
+#	transferable = no
+#
+#	invalid = {
+#		NOT = { exists = c:UCA }
+#	}
+#	
+#}
+#je_ca_historic_situation_in_losaltos = {
+#	icon = "gfx\interface\icons\event_icons\event_flags\event_uca_flag.dds"
+#	
+#	group = je_group_historical_content	
+#
+#	should_be_pinned_by_default = yes
+#	
+#	complete = {
+#		
+#	}
+#	
+#	fail = {
+#		
+#	}
+#	
+#	on_fail = {
+#		
+#	}
+#
+#	on_complete = {
+#		
+#	}
+#	
+#	weight = 100
+#	
+#	transferable = no
+#
+#	invalid = {
+#		NOT = { exists = c:UCA }
+#	}
+#	
+#}
+#je_ca_historic_situation_in_panama = {
+#	icon = "gfx\interface\icons\event_icons\event_flags\event_uca_flag.dds"
+#	
+#	group = je_group_historical_content	
+#
+#	should_be_pinned_by_default = yes
+#	
+#	complete = {
+#		
+#	}
+#	
+#	fail = {
+#		
+#	}
+#	
+#	on_fail = {
+#		
+#	}
+#
+#	on_complete = {
+#		
+#	}
+#	
+#	weight = 100
+#	
+#	transferable = no
+#
+#	invalid = {
+#		NOT = { exists = c:UCA }
+#	}
+#	
+#}
+#je_ca_historic_situation_in_honduras = {
+#	icon = "gfx\interface\icons\event_icons\event_flags\event_uca_flag.dds"
+#	
+#	group = je_group_historical_content	
+#
+#	should_be_pinned_by_default = yes
+#	
+#	complete = {
+#		
+#	}
+#	
+#	fail = {
+#		
+#	}
+#	
+#	on_fail = {
+#		
+#	}
+#
+#	on_complete = {
+#		
+#	}
+#	
+#	weight = 100
+#	
+#	transferable = no
+#
+#	invalid = {
+#		NOT = { exists = c:UCA }
+#	}
+#	
+#}
+
+central_america_falls_apart = { #vainilla
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_historical_content
+
+	should_be_pinned_by_default = yes
+
+	on_monthly_pulse = {
+		random_events = {
+			10 = 0
+			1 = central_america.3
+		}
+	}
+
+	complete = {
+		any_scope_state = {	
+			state_region = s:STATE_GUATEMALA
+			turmoil < 0.2
+		}
+		any_scope_state = {	
+			state_region = s:STATE_GUATEMALA
+			turmoil < 0.2
+		}
+		any_scope_state = {	
+			state_region = s:STATE_COSTA_RICA
+			turmoil < 0.2
+		}
+		any_scope_state = {	
+			state_region = s:STATE_SAN_SALVADOR
+			turmoil < 0.2
+		}
+		any_scope_state = {	
+			state_region = s:STATE_NICARAGUA
+			turmoil < 0.2
+		}
+	}
+
+	fail = {
+		custom_tooltip = {
+			text = central_america_fail_tt
+			any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_NICARAGUA
+				}
+				count < 3
+			}
+		}
+	}
+
+	on_fail = {
+		trigger_event = { id = ca_central_america.0 popup = yes }
+		custom_tooltip = central_america_capital_tt
+	}
+	
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = central_america_breakup_status
+			}
+		}
+	}
+	transferable = no
+	invalid = {
+	NOT = { exists = c:UCA }
+	}
+}
+je_historic_central_america_falls_apart = { #
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	
+	group = je_group_historical_content	
+
+	should_be_pinned_by_default = yes
+	
+	on_monthly_pulse = {
+		events = { 
+			ca_central_america.2 #Cholera Pandemic Hits Central America
+			ca_central_america.7 #Separatism in Nicaragua
+			ca_central_america.6 #Separatism in Costa Rica /Costa Rica declares independence Peaceful
+			ca_central_america.30 #Union Collapses Into Civil War /Accept Fate & Become El Salvador
+			ca_central_america.35 # Guatemala Declares Independence
+			ca_central_america.9 # Separatism in Honduras
+			ca_central_america.39 # Civil War in Guatemala /Separatism in Los Altos
+			ca_central_america.40 # Civil War in Nicaragua
+			ca_central_america.36 # Honduras Declares Independence
+		}
+		random_events = {
+			100 = 0
+			25 = ca_central_america.3 #Cholera Spreads In Central America
+		}
+	}
+
+	complete = {
+		OR = {
+			any_scope_state = {	
+				state_region = s:STATE_GUATEMALA
+				turmoil < 0.20
+			}
+			has_variable = recognized_guatemalan_independence
+		}
+		any_scope_state = {	
+			state_region = s:STATE_SAN_SALVADOR
+			turmoil < 0.20
+			
+		}
+		any_scope_state = {	
+			state_region = s:STATE_HONDURAS
+			turmoil < 0.20
+			has_variable = recognized_honduran_independence
+		}
+		any_scope_state = {	
+			state_region = s:STATE_NICARAGUA
+			turmoil < 0.20
+			has_variable = recognized_nicaraguan_independence			
+		}
+		OR = {
+			any_scope_state = {	
+				state_region = s:STATE_COSTA_RICA
+				turmoil < 0.20
+			}
+			has_variable = recognized_costa_rican_independence
+		}
+	}
+	
+	fail = {
+		custom_tooltip = {
+			text = central_america_fail_tt
+			any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_NICARAGUA
+					state_region = s:STATE_COSTA_RICA
+				}
+				count < 3
+			}
+		}
+	}
+	
+	on_fail = {
+		trigger_event = { id = ca_central_america.0 popup = yes }
+		custom_tooltip = central_america_capital_tt
+	}
+
+	on_complete = {
+		trigger_event = { id = central_america.13 }
+	}
+	
+	weight = 100
+	
+	transferable = no
+
+	invalid = {
+		NOT = { exists = c:UCA }
+	}
+}
+je_central_america_falls_apart = { #VERsion 2
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	
+	group = je_group_historical_content	
+
+	should_be_pinned_by_default = yes
+	
+	on_monthly_pulse = {
+		random_events = {
+			10 = 0
+			2 = central_america.10 #Nicaragua
+			1 = central_america.12 #Guatemala
+			2 = central_america.11 #Costa Rica
+			1 = central_america.19 #Los Altos
+			1 = central_america.20 #Honduras
+			
+			
+		}
+	}
+
+	complete = {
+		OR = {
+			any_scope_state = {	
+				state_region = s:STATE_GUATEMALA
+				turmoil < 0.20
+			}
+			has_variable = recognized_guatemalan_independence
+		}
+		any_scope_state = {	
+			state_region = s:STATE_SAN_SALVADOR
+			turmoil < 0.20
+		}
+		any_scope_state = {	
+			state_region = s:STATE_HONDURAS
+			turmoil < 0.20
+			has_variable = recognized_honduran_independence
+		}
+		any_scope_state = {	
+			state_region = s:STATE_NICARAGUA
+			turmoil < 0.20
+			has_variable = recognized_nicaraguan_independence			
+		}
+		OR = {
+			any_scope_state = {	
+				state_region = s:STATE_COSTA_RICA
+				turmoil < 0.20
+			}
+			has_variable = recognized_costa_rican_independence
+		}
+	}
+	
+	fail = {
+		custom_tooltip = {
+			text = central_america_fail_tt
+			any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_NICARAGUA
+					state_region = s:STATE_COSTA_RICA
+				}
+				count < 3
+			}
+		}
+	}
+	
+	on_fail = {
+		trigger_event = { id = central_america.2 popup = yes }
+		custom_tooltip = central_america_capital_tt
+	}
+
+	on_complete = {
+		trigger_event = { id = central_america.13 }
+	}
+	
+	weight = 100
+	
+	transferable = no
+
+	invalid = {
+		NOT = { exists = c:UCA }
+	}
+}
+ 
+ 
+je_central_american_fragile_unity = { #events 1836 - 1842
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_internal_affairs
+
+	should_be_pinned_by_default = yes
+    scripted_progress_bar = ca_core_progress_bar
+	complete = {
+		custom_tooltip = {
+			text = "ca_je_fragile_unity_goal_tt"
+			scope:journal_entry = {
+				"scripted_bar_progress(ca_core_progress_bar)" >= 100
+			}
+		}
+	 AND = {	   
+    	any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_NICARAGUA
+
+				}
+				count < 3
+		}
+	 }
+		
+	}
+	on_complete = {
+	trigger_event = { id = central_america.2 popup = yes }
+	}	
+	on_monthly_pulse = {
+	    ca_core_progress_bar = yes
+
+		}
+
+	
+	fail = {
+	    text = "central_america_fail_tt"
+		custom_tooltip = {
+			text = "ca_gain_fragile_unity_points"
+			scope:journal_entry = {
+				"scripted_bar_progress(ca_core_progress_bar)" <= 0
+			}
+		}
+    AND = {		
+	    any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_NICARAGUA
+
+				}
+				count < 5
+		}	
+	}
+	
+	}
+	on_fail = {
+	trigger_event = { id = central_america.2 popup = yes }
+	}	
+
+	transferable = no
+	invalid = {
+	NOT = { exists = c:UCA }
+	}
+}
+
+je_reunify_central_america = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_foreign_affairs
+
+	should_be_pinned_by_default = yes
+
+	complete = {
+		any_scope_state = {
+			state_region = s:STATE_SAN_SALVADOR
+		}
+		any_scope_state = {
+			state_region = s:STATE_GUATEMALA
+		}
+		any_scope_state = {
+			state_region = s:STATE_HONDURAS
+		}
+		any_scope_state = {
+			state_region = s:STATE_NICARAGUA
+		}
+		any_scope_state = {
+			state_region = s:STATE_COSTA_RICA
+		}
+	}
+	
+	on_complete = {
+		if = {
+			limit = {
+				NOT = { exists = c:UCA }
+			}
+			change_tag = UCA
+		}
+		trigger_event = { id = central_america.1 popup = yes }
+	}
+}
+
+je_first_costa_rica_civil_war ={
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_internal_affairs
+
+	should_be_pinned_by_default = yes
+	
+	modifiers_while_active = {
+	
+	}	
+	complete = {
+          The War of the League
+    }
+
+    on_complete = {
+	#trigger_event = { id =  }
+    }
+	
+		on_weekly_pulse = {
+		effect = {
+            calculate_costa_rica_civil_war = yes
+        }
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			change_variable = { name = costa_rica_civil_war_var add = var:costa_rica_civil_war_next }
+		}
+		random_events = {
+			# Pulse events affect the progress bar
+			120 = 0 
+			10 = caudillo.4
+			25 = caudillo.6
+		}
+	}
+
+	current_value = {
+		value = root.var:costa_rica_civil_war_var
+	}
+
+	goal_add_value = {
+		add = 1200
+	}
+
+	progressbar = yes
+
+	weight = 100
+}
+#je_frca_situation = { #The more I look at this Journal, the more I regret it
+#	icon = "gfx\interface\icons\event_icons\event_flags\event_uca_flag.dds"
+#	
+#	group = je_group_historical_content	
+#
+#	should_be_pinned_by_default = yes
+#	
+#	scripted_button = je_restore_order_gua_button
+#	scripted_button = je_restore_order_hon_button
+#	scripted_button = je_restore_order_nic_button
+#	scripted_button = je_restore_order_cos_button
+#	scripted_button = je_nicaragua_intervention_central_america_button
+#	
+#	immediate = {
+#		set_variable = {
+#			name = frca_support
+#			value = 0
+#		}
+#	}
+#	
+#	on_monthly_pulse = {
+#		events = { 
+#			ca_central_america.2 #Cholera Pandemic Hits Central America
+#			ca_central_america.7 #Separatism in Nicaragua
+#			ca_central_america.6 #Separatism in Costa Rica /Costa Rica declares independence Peaceful
+#			ca_central_america.30 #Union Collapses Into Civil War /Accept Fate & Become El Salvador
+#			ca_central_america.35 # Guatemala Declares Independence
+#			ca_central_america.9 # Separatism in Honduras
+#			ca_central_america.39 # Civil War in Guatemala / Separatism in Los Altos
+#			ca_central_america.40 # Civil War in Nicaragua
+#			ca_central_america.36 # Honduras Declares Independence
+#		}
+#		random_events = {
+#			100 = 0
+#			25 = journal_flavor_central_america.3 #Cholera Spreads In Central America
+#		}
+#	}
+#	
+#	on_weekly_pulse = {
+#		events = {
+#			journal_flavor_central_america.9 #Civil War Result
+#			journal_flavor_central_america.10 #Civil War Result
+#			journal_flavor_central_america.14 #Central American Dissolution -> Confederation via Conservatives in government
+#		}
+#		effect = {
+#			if = {
+#				limit = {
+#					has_variable = gua_support_var
+#					NOT = { exists = c:GUA }
+#					NOT = { has_variable = je_gua_support_var }
+#				}
+#				change_variable = { name = frca_support add = 1 }
+#				set_variable = { name = je_gua_support_var }
+#			}
+#			if = {
+#				limit = {
+#					OR = {
+#						NOT = { has_variable = gua_support_var }
+#						exists = c:GUA
+#					}
+#					has_variable = je_gua_support_var
+#				}
+#				change_variable = { name = frca_support subtract = 1 }
+#				remove_variable = je_gua_support_var
+#			}
+#			if = {
+#				limit = {
+#					has_variable = els_support_var
+#					NOT = { exists = c:ELS }
+#					NOT = { has_variable = je_els_support_var }
+#				}
+#				change_variable = { name = frca_support add = 1 }
+#				set_variable = { name = je_els_support_var }
+#			}
+#			if = {
+#				limit = {
+#					OR = {
+#						NOT = { has_variable = els_support_var }
+#						exists = c:ELS
+#					}
+#					has_variable = je_els_support_var
+#				}
+#				change_variable = { name = frca_support subtract = 1 }
+#				remove_variable = je_els_support_var
+#			}
+#			if = {
+#				limit = {
+#					has_variable = hon_support_var
+#					NOT = { exists = c:HON }
+#					NOT = { has_variable = je_hon_support_var }
+#				}
+#				change_variable = { name = frca_support add = 1 }
+#				set_variable = { name = je_hon_support_var }
+#			}
+#			if = {
+#				limit = {
+#					OR = {
+#						NOT = { has_variable = hon_support_var }
+#						exists = c:HON
+#					}
+#					has_variable = je_hon_support_var
+#				}
+#				change_variable = { name = frca_support subtract = 1 }
+#				remove_variable = je_hon_support_var
+#			}
+#			if = {
+#				limit = {
+#					has_variable = nic_support_var
+#					NOT = { exists = c:NIC }
+#					NOT = { has_variable = je_nic_support_var }
+#				}
+#				change_variable = { name = frca_support add = 1 }
+#				set_variable = { name = je_nic_support_var }
+#			}
+#			if = {
+#				limit = {
+#					OR = {
+#						NOT = { has_variable = nic_support_var }
+#						exists = c:NIC
+#					}
+#					has_variable = je_nic_support_var
+#				}
+#				change_variable = { name = frca_support subtract = 1 }
+#				remove_variable = je_nic_support_var
+#			}
+#			if = {
+#				limit = {
+#					has_variable = cos_support_var
+#					NOT = { exists = c:COS }
+#					NOT = { has_variable = je_cos_support_var }
+#				}
+#				change_variable = { name = frca_support add = 1 }
+#				set_variable = { name = je_cos_support_var }
+#			}
+#			if = {
+#				limit = {
+#					OR = {
+#						NOT = { has_variable = cos_support_var }
+#						exists = c:COS
+#					}
+#					has_variable = je_cos_support_var
+#				}
+#				change_variable = { name = frca_support subtract = 1 }
+#				remove_variable = je_cos_support_var
+#			}
+#			if = {
+#				limit = {
+#					exists = c:GUA
+#					has_variable = gua_support_var
+#				}
+#				remove_variable = gua_support_var
+#			}
+#			if = {
+#				limit = {
+#					exists = c:ELS
+#					has_variable = els_support_var
+#				}
+#				remove_variable = els_support_var
+#			}
+#			if = {
+#				limit = {
+#					exists = c:HON
+#					has_variable = hon_support_var
+#				}
+#				remove_variable = hon_support_var
+#			}
+#			if = {
+#				limit = {
+#					exists = c:NIC
+#					has_variable = nic_support_var
+#				}
+#				remove_variable = nic_support_var
+#			}
+#			if = {
+#				limit = {
+#					exists = c:COS
+#					has_variable = cos_support_var
+#				}
+#				remove_variable = cos_support_var
+#			}
+#		}
+#	}
+#
+#	complete = {
+#		custom_tooltip = { #Morazan's Presidency Modifier - Expires around the time the next elections kick in
+#			text = uca_election_tt
+#			NOT = { has_modifier = uca_morazan_presidency }
+#		}
+#		OR = {
+#			custom_tooltip = { 
+#				text = uca_won_war_tt
+#				OR = {
+#					has_variable = frca_won_war #Misleading var name, it's used also if you just dissolve the country or do something else that is accounted for
+#					AND = {
+#						has_variable = second_frca_civil_war_var
+#						is_at_war = no
+#						is_active_in_diplomatic_play = no
+#						NOT = { exists = c:GUA }
+#						NOT = { exists = c:HON }
+#						NOT = { exists = c:NIC }
+#						NOT = { exists = c:COS }
+#					}
+#				}
+#			}
+#			AND = {
+#				custom_tooltip = {
+#					text = guatemala_support_tt
+#					has_variable = gua_support_var
+#					NOT = { exists = c:GUA }
+#				}
+#				custom_tooltip = {
+#					text = el_salvador_support_tt
+#					has_variable = els_support_var
+#					NOT = { exists = c:ELS }
+#				}
+#				custom_tooltip = {
+#					text = honduras_support_tt
+#					has_variable = hon_support_var
+#					NOT = { exists = c:HON }
+#				}
+#				custom_tooltip = {
+#					text = nicaragua_support_tt
+#					has_variable = nic_support_var
+#					NOT = { exists = c:NIC }
+#				}
+#				custom_tooltip = {
+#					text = costa_rica_support_tt
+#					has_variable = cos_support_var
+#					NOT = { exists = c:COS }
+#				}
+#			}
+#		}
+#	}
+#	
+#	fail = {
+#		OR = {
+#			custom_tooltip = {
+#				text = frca_lost_war_tt
+#				has_variable = frca_lost_war
+#			}
+#		}
+#	}
+#	
+#	on_fail = {
+#		hidden_effect = { 
+#			ig:ig_landowners = {
+#				remove_ideology = ideology_central_american_reactionary
+#				add_ideology = ideology_caudillismo
+#			}
+#		
+#			ig:ig_armed_forces = {
+#				remove_ideology = ideology_central_american_reactionary
+#			}
+#
+#			ig:ig_devout = {
+#				add_ideology = ideology_paternalistic
+#				remove_ideology = ideology_central_american_reactionary
+#			}
+#			remove_variable = is_frca_var
+#			trigger_event = { id = ca_central_america.0 } 
+#		}
+#	}
+#
+#	on_complete = {
+#		remove_variable = uca_cholera_pandemic
+#		hidden_effect = { 
+#			ig:ig_landowners = {
+#				remove_ideology = ideology_central_american_reactionary
+#				add_ideology = ideology_caudillismo
+#			}
+#		
+#			ig:ig_armed_forces = {
+#				remove_ideology = ideology_central_american_reactionary
+#			}
+#
+#			ig:ig_devout = {
+#				add_ideology = ideology_paternalistic
+#				remove_ideology = ideology_central_american_reactionary
+#			}
+#			
+#			trigger_event = { id = journal_flavor_central_america.17 } 
+#		}
+#	}
+#	
+#	current_value = {
+#		value = root.var:frca_support
+#	}
+#
+#	goal_add_value = {
+#		add = 5
+#	}
+#
+#	progressbar = yes
+#	
+#	weight = 100
+#	
+#	transferable = no
+#
+#	invalid = {
+#		NOT = { exists = c:UCA }
+#	}
+#}
+je_ca_federalists_vs_separatists_situation = {
+	icon = "gfx\interface\icons\event_icons\event_flags\event_uca_flag.dds"
+	
+	group = je_group_historical_content	
+
+	should_be_pinned_by_default = yes
+	progressbar = yes
+   weight = 100
+
+	
+	complete = { #Federalists Win , The Play and AI Chosing
+		ig:ig_intelligentsia = {
+			is_in_government = yes
+		}
+		custom_tooltip = {
+			text = je_federalists_vs_separatists_goal_tt
+			scope:journal_entry = {
+				is_goal_complete = yes
+			}
+		}
+		
+	}
+	on_weekly_pulse = {
+		effect = {
+            calculate_federalists_vs_separatistsn_progress = yes
+        }
+	}	
+	on_complete = {
+			ig:ig_landowners = {
+				remove_ideology = ideology_central_american_reactionary
+				add_ideology = ideology_caudillismo
+			}
+		
+			ig:ig_armed_forces = {
+				remove_ideology = ideology_central_american_reactionary
+			}
+
+			ig:ig_devout = {
+				add_ideology = ideology_paternalistic
+				remove_ideology = ideology_central_american_reactionary
+			}
+		if = {  #Nicaragua Beats to secessionists
+			limit = {
+				c:NIC ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia
+					has_variable = death_of_francia_var
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.47 days = 3 }}
+
+		}
+		if = {  #Costa rica Beats to secessionists
+			limit = {
+				c:COS ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia
+					has_variable = death_of_francia_var
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.50 days = 3 }}
+
+		}
+
+		if = {  #Honduras Beats to secessionists
+			limit = {
+				c:NIC ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia
+					has_variable = death_of_francia_var
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.53 days = 3 }}
+
+		}
+
+		if = {  #Guatemala Beats to secessionists
+			limit = {
+				c:GUA ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia
+					has_variable = death_of_francia_var
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.59 days = 3 }}
+
+		}
+
+		if = {  #Los Altos Beats to secessionists
+			limit = {
+				c:ALT ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia
+					has_variable = death_of_francia_var
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.62 days = 3 }}
+
+		}
+
+		if = {  #El Salvador Beats to secessionists
+			limit = {
+				c:ELS ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia
+					has_variable = death_of_francia_var
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.56 days = 3 }}
+
+		}
+		show_as_tooltip = {
+			remove_modifier = age_of_caudillos_modifier
+		}	
+	}
+	
+	fail = { #Separatists Win, The Play and AI Chosing
+		ig:ig_landowners = {
+			is_in_government = yes
+		}
+		custom_tooltip = {
+			text = caudillo_complete
+			root.var:caudillo_var <= 0
+		}		
+	}
+	
+	on_fail = {
+       	ig:ig_landowners = {
+				remove_ideology = ideology_central_american_reactionary
+				add_ideology = ideology_caudillismo
+			}
+		
+			ig:ig_devout = {
+				add_ideology = ideology_paternalistic
+			}
+		if = {  #Nicaragua falls to secessionists
+			limit = {
+				c:NIC ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia2
+					has_variable = death_of_francia_var2
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.48 days = 3 }}
+
+		}
+		if = {  #Costa rica falls to secessionists
+			limit = {
+				c:COS ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia2
+					has_variable = death_of_francia_var2
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.51 days = 3 }}
+
+		}
+		if = {  #Honduras falls to secessionists
+			limit = {
+				c:HON ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia2
+					has_variable = death_of_francia_var2
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.54 days = 3 }}
+
+		}
+		if = {  #Guatemala falls to secessionists
+			limit = {
+				c:GUA ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia2
+					has_variable = death_of_francia_var2
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.60 days = 3 }}
+
+		}
+		if = {  #Los Altos falls to secessionists
+			limit = {
+				c:ALT ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia2
+					has_variable = death_of_francia_var2
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.63 days = 3 }}
+
+		}
+		if = {  #El Salvador  falls to secessionists
+			limit = {
+				c:ELS ?= this
+				NOR = { 
+					has_journal_entry = je_francocracia2
+					has_variable = death_of_francia_var2
+				}
+			}
+			c:UCA = {trigger_event = { id = ca_central_america.57 days = 3 }}
+
+		}
+		show_as_tooltip = {
+			add_modifier = {
+				name = age_of_caudillos_modifier
+				multiplier = 2
+			}
+		}
+		
+	}
+
+	transferable = no
+
+	invalid = {
+		NOT = { exists = c:UCA }
+	}
+	
+}
+# Morazan in Costa Rica
+
+#je_cos_morazan_situation = {
+#	icon = "gfx\interface\icons\event_icons\event_flags\event_uca_flag.dds"
+#	
+#	group = je_group_historical_content	
+#
+#	should_be_pinned_by_default = yes
+#	
+#	complete = {
+#		
+#	}
+#	
+#	fail = {
+#		
+#	}
+#	
+#	on_fail = {
+#		
+#	}
+#
+#	on_complete = {
+#		
+#	}
+#	
+#	weight = 100
+#	
+#	transferable = no
+#
+#	invalid = {
+#		NOT = { exists = c:UCA }
+#	}
+#	
+#}
+#je_ca_federalists_vs_separatists_situation = {
+#	icon = "gfx\interface\icons\event_icons\event_flags\event_uca_flag.dds"
+#	
+#	group = je_group_historical_content	
+#
+#	should_be_pinned_by_default = yes
+#	
+#	complete = {
+#		
+#	}
+#	
+#	fail = {
+#		
+#	}
+#	
+#	on_fail = {
+#		
+#	}
+#
+#	on_complete = {
+#		
+#	}
+#	
+#	weight = 100
+#	
+#	transferable = no
+#
+#	invalid = {
+#		NOT = { exists = c:UCA }
+#	}
+#	
+#}

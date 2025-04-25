@@ -1,0 +1,144 @@
+﻿creation_of_a_new_union_cos = {	
+    is_shown = { 
+		NOT = { country_has_primary_culture = cu:central_american}
+		exists = c:COS
+		c:COS = ROOT
+	}
+	possible = {
+        country_has_primary_culture = cu:costa_rican
+		has_technology_researched = nationalism
+        owns_entire_state_region = STATE_COSTA_RICA
+		owns_entire_state_region = STATE_PANAMA
+		owns_entire_state_region = STATE_NICARAGUA
+ 
+	}
+
+
+	when_taken = {
+       change_tag = CCR
+    }
+  	ai_chance = {
+		base = 0
+    }          
+   }
+creation_of_a_new_union_gua = {	
+    is_shown = { 
+		NOT = { country_has_primary_culture = cu:central_american}
+		exists = c:GUA
+		c:GUA = ROOT
+	}
+	possible = {
+        country_has_primary_culture = cu:guatemalan
+		has_technology_researched = nationalism
+        owns_entire_state_region = 	STATE_GUATEMALA
+		owns_entire_state_region = 	STATE_CHIAPAS
+        owns_entire_state_region =  STATE_YUCATAN
+ 
+	}
+
+
+	when_taken = {
+       change_tag = GGA
+    }
+  	ai_chance = {
+		base = 0
+    }          
+   }
+creation_of_a_new_union_els = {	
+    is_shown = { 
+		NOT = { country_has_primary_culture = cu:central_american}
+		exists = c:ELS
+		c:ELS = ROOT
+	}
+	possible = {
+        country_has_primary_culture = cu:el_salvadorian
+		has_technology_researched = nationalism
+        owns_entire_state_region = 	STATE_SAN_SALVADOR
+		owns_entire_state_region = 	STATE_GUATEMALA
+		owns_entire_state_region = 	STATE_HONDURAS
+ 
+	}
+
+
+	when_taken = {
+       change_tag = UEL
+    }
+  	ai_chance = {
+		base = 0
+    }          
+   }
+creation_of_a_new_union_nic = {	
+    is_shown = { 
+		NOT = { country_has_primary_culture = cu:central_american}
+		exists = c:COS
+		c:COS = ROOT
+	}
+	possible = {
+        country_has_primary_culture = cu:nicaraguan
+		has_technology_researched = nationalism
+        owns_entire_state_region =  STATE_NICARAGUA
+		owns_entire_state_region =	STATE_HONDURAS 
+		owns_entire_state_region =	STATE_COSTA_RICA 
+ 
+	}
+
+
+	when_taken = {
+       change_tag = RNI
+    }
+  	ai_chance = {
+		base = 0
+    }          
+   }
+creation_of_a_new_union_hon = {	
+    is_shown = { 
+		NOT = { country_has_primary_culture = cu:central_american}
+		exists = c:COS
+		c:COS = ROOT
+	}
+	possible = {
+        country_has_primary_culture = cu:honduran
+		has_technology_researched = nationalism
+        owns_entire_state_region = 	STATE_HONDURAS
+		owns_entire_state_region = 	STATE_NICARAGUA
+		owns_entire_state_region = 	STATE_SAN_SALVADOR
+ 
+	}
+
+
+	when_taken = {
+       change_tag = UHO
+    }
+  	ai_chance = {
+		base = 0
+    }          
+   }
+creation_of_a_new_union_pnm = {	
+    is_shown = { 
+		NOT = { country_has_primary_culture = cu:central_american}
+		exists = c:COS
+		c:COS = ROOT
+	}
+	possible = {
+        country_has_primary_culture = cu:panamanian
+		has_technology_researched = nationalism
+        owns_entire_state_region = STATE_PANAMA
+		owns_entire_state_region = STATE_COSTA_RICA
+		owns_entire_state_region = STATE_ANTIOQUIA
+ 
+	}
+
+
+	when_taken = {
+       change_tag = UPN
+    }
+  	ai_chance = {
+		base = 0
+    }          
+   }   
+
+
+	
+
+
+ 

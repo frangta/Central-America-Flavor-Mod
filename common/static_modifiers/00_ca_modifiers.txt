@@ -1,0 +1,152 @@
+﻿age_of_ca_caudillos_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_armed_forces_pop_attraction_mult = 0.3
+	interest_group_ig_armed_forces_pol_str_mult = 0.6
+	country_officers_pol_str_mult = 0.6
+}
+crisis_in_frca = {
+	country_cannot_start_law_enactment_bool = yes
+	country_cannot_cancel_law_enactment_bool = yes
+	country_disable_investment_pool_bool = yes
+    country_disallow_agitator_invites_bool = yes
+}
+
+#construct_conservative_stronghold_modifier = {
+#         icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+#
+#}
+#
+#ca_allow_multiple_alliances = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+#    country_allow_multiple_alliances_bool = yes
+#	
+#}
+
+	# Stronghold Events
+
+federal_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+}
+Removed_federal_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+}
+federal_stronghold_small_nation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+}
+unitary_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+}
+Removed_unitary_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+}
+unitary_stronghold_small_nation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+}
+separatism_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+}
+Removed_separatism_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+}
+separatism_stronghold_small_nation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+}	
+reactionary_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 interest_group_ig_petty_bourgeoisie_pop_attraction_mult = 0.50 
+}
+removing_Reactionary_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 interest_group_ig_petty_bourgeoisie_pop_attraction_mult = -0.50
+}
+reactionary_stronghold_Small_Nation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 interest_group_ig_petty_bourgeoisie_pop_attraction_mult = 0.15
+}
+conservative_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_landowners_pop_attraction_mult = 0.1
+	interest_group_ig_landowners_pol_str_mult = 0.3
+}
+age_of_conservativelist_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_landowners_pop_attraction_mult = 0.3
+	interest_group_ig_landowners_pol_str_mult = 0.6
+}
+conservative_stronghold_Small_Nation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_landowners_pop_attraction_mult = 0.1
+	interest_group_ig_landowners_pol_str_mult = 0.3
+}
+liberal_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 interest_group_ig_intelligentsia_pop_attraction_mult = 0.50
+	 interest_group_ig_intelligentsia_pol_str_mult = 0.3
+}
+age_of_liberal_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+		 interest_group_ig_intelligentsia_pop_attraction_mult = 0.50
+	     interest_group_ig_intelligentsia_pol_str_mult = 0.3		 
+}
+liberal_stronghold_Small_Nation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+		interest_group_ig_intelligentsia_pop_attraction_mult = 0.15 
+}
+######################Soon##########
+#Anarcho-Liberal_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}
+#Removed_Anarcho-Liberal_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}
+#Anarcho-Liberal_stronghold_Small_Nation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}
+#Socialist_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}
+#Removed_Socialist_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}
+#Socialist_stronghold_Small_Nation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}
+#Communist_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}
+#Removed_Communist_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}
+#Communist_stronghold_Small_Nation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}
+#Fascist_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}
+#Removed_Fascist_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}
+#Fascist_stronghold_Small_Nation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	 
+#}

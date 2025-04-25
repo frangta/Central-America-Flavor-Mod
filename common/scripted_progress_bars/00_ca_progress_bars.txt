@@ -1,0 +1,287 @@
+﻿ca_core_progress_bar = {
+ 	name = ""
+ 	desc = ""
+ 	second_desc = ""
+ 	
+	start_value = 100
+ 	min_value = 0
+ 	max_value = 200
+	
+	default_bad = yes
+
+    monthly_progress = {
+	add = {
+ 			desc = ""
+ 			 if = {
+		limit = {
+			ig:ig_intelligentsia = {
+				is_powerful = yes
+			}
+		}
+    value = -10		
+		}
+
+		
+	}
+	add = {
+	    desc = ""
+		if = {
+		limit = {
+			ig:ig_intelligentsia = {
+				is_in_government = yes
+			}
+		}
+     value = 1
+		
+	}
+	}
+	add = {
+ 			desc = ""
+ 			 if = {
+		limit = {
+			ig:ig_intelligentsia  = {
+				is_marginal = yes
+			}
+		}
+    value = -10		
+		}
+
+		
+	} 
+
+	add = {
+ 			desc = ""
+ 		if = {
+		        limit = {
+			OR = {
+				has_law = law_type:law_total_separation 
+				has_law = law_type:law_cultural_exclusion 
+				has_law = law_type:law_census_voting 
+				has_law = law_type:law_universal_suffrage
+                has_law = law_type:law_homesteading 
+				has_law = law_type:law_right_of_assembly  
+				has_law = law_type:law_elected_bureaucrats 
+				}
+
+		
+	            } 
+    value = -5
+ 		}
+    }
+	add = {
+ 		desc = ""
+ 		   if = {
+		    limit = {
+			OR = {
+				has_law = law_type:law_autocracy
+				has_law = law_type:law_oligarchy
+				has_law = law_type:law_single_party_state
+				has_law = law_type:law_state_religion 
+                has_law = law_type:law_national_supremacy 	
+				has_law = law_type:law_traditionalism 
+                has_law = law_type:law_hereditary_bureaucrats
+                has_law = law_type:law_tenant_farmers 
+                has_law = law_type:law_censorship 				
+			}
+		}
+    value = 10
+		
+	         } 
+ 	}
+	add = {
+ 			desc = ""
+ 			 if = {
+		       limit = {
+			     ig:ig_landowners = {
+				  is_powerful = yes
+			     }
+		       }
+              value = 10
+		
+	         } 
+ 	}
+	add = {
+ 			desc = ""
+ 			 if = {
+		        limit = {
+			    ig:ig_landowners = {
+				is_in_government = yes
+			}
+		        }       
+    value = 10
+		
+	         } 
+ 	}
+	add = {
+ 			desc = ""
+ 			 if = {
+		        		limit = {
+			ig:ig_landowners  = {
+				is_marginal = yes
+			}
+		}
+    value = -10
+		
+	         } 
+ 	}
+
+ 	}
+	add = {
+ 			desc = ""
+ 			 if = {
+		        limit = {
+				any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_NICARAGUA
+
+				}
+				count < 5
+		        }    
+		}
+			   
+		               
+    value = -15
+		
+	         } 
+ 	}
+	add = {
+ 			desc = ""
+ 			 if = {
+		        limit = {
+				any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_NICARAGUA
+
+				}
+				count < 4
+		        }    
+		}
+			   
+		               
+    value = -10
+		
+	         } 
+ 	}
+	add = {
+ 			desc = ""
+ 			 if = {
+		        limit = {
+				any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_NICARAGUA
+
+				}
+				count < 3
+		        }    
+		}
+			   
+		               
+    value = -5
+		
+	         } 
+ 	}	
+	add = {
+ 			desc = ""
+ 			 if = {
+		        limit = {}
+				any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_NICARAGUA
+
+				}
+				count < 3
+		        }    
+		
+    value = 20
+		
+	         } 
+ 	}
+	add = {
+ 			desc = ""
+ 			 if = {
+		        limit = {
+				any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_NICARAGUA
+
+				}
+				count < 2
+		        }    
+		}
+			   
+		               
+    value = 25
+		
+	         } 
+ 	}
+	add = {
+ 			desc = ""
+ 			 if = {
+		        limit = {
+				any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_NICARAGUA
+
+				}
+				count < 1
+		        }    
+		}
+			   
+		               
+    value = 30
+		
+	         } 
+ 	}	
+ 	
+
+
+}
+calculate_costa_rica_civil_war = {
+	set_variable = { name = costa_rica_civil_war_next value = 0 }
+
+}
+#ca_political_instability = {
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#}

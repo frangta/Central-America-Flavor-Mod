@@ -1,0 +1,2350 @@
+﻿
+@semy = 0.25
+@third = @[1/3]
+@fifth = @[1/5]
+@sixth = @[1/6]
+
+@canton_scale_cross_x = @[ ( 333 / 768 ) + 0.001 ]
+@canton_scale_cross_y = @[ ( 205 / 512 ) + 0.001 ]
+
+@canton_scale_sweden_x = @[ ( 255 / 768 ) + 0.001 ]
+@canton_scale_sweden_y = @[ ( 204 / 512 ) + 0.001 ]
+
+@uru_canton_height = 0.556
+@NZL_coa_offset = @[3/16] 
+@sm_fra = 0.16
+@pi = 3.1416
+
+
+COS_1845_alt = { # Costa Rica
+	# 1845's Costa rican proposed flag
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	
+	colored_emblem = {
+		texture = "ce_cross_finita.dds"
+		color1 = "white"
+		instance = { scale = { 1.0 1.0 } position = { 0.5 0.5 } }		
+	}
+	
+	colored_emblem = {
+		texture = "ce_canton.dds"
+		color1 = "red"
+		instance = { scale = { 0.99 1.0 } position = { 0.47 0.47 } }		
+	}
+	colored_emblem = {
+		texture = "ce_6_stars.dds"
+		color1 = "yellow5"
+		instance = { scale = { 0.57 0.57 } position = { 0.25 0.25 } }		
+	}
+
+	
+}
+COS_1848 = { # Costa Rica
+	# Adopted 1848 (variants of the UCA design before that)	
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 1.0 @[third*2] } position = { 0.5 0.5 } }		
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { 1.0 @third } position = { 0.5 0.5 } }		
+	}
+	textured_emblem = {
+		texture = "te_coa_costa_rica_1848.dds"
+		instance = { scale = { 0.35 0.35 } position = { 0.5 0.5 } }
+	}
+	
+}
+COS_subject_UCA = { # 
+
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}
+	colored_emblem = {
+		texture = "ce_coa_costa_rica.dds"
+		color1 = "yellow"
+		color2 = "blue_light"
+		color3 = "pink"
+		instance = { scale = { 0.3.5 0.3.5 } position = { 0.5 0.8 } }		
+	}	
+
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.4 0.4 } position = { 0.5 0.5 } }
+	}	
+}
+COS_subject = {
+	# Based on early CoA
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	color2 = "red"
+	
+	colored_emblem = {
+		texture = "ce_coa_costa_rica.dds"
+		color1 = "blue_light"
+		color2 = "green"
+		color3 = "peach"
+		instance = { scale = { 0.7 0.7 } position = { 0.75 0.5 } }		
+	}		
+}
+
+COS_subject_MEX = {
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	color2 = "white"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "red"
+	}	
+	colored_emblem = {
+		texture = "ce_coa_frame_costa_rica.dds"
+		color1 = "white"
+		color2 = "yellow"
+		color3 = "black"
+		instance = { scale = { 0.425 0.425 } position = { 0.5 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_star_06.dds"
+		color1 = "red"
+		instance = { scale = { 0.25 0.25 } position = { 0.5 0.5 } }		
+	}	
+}
+COS_subject_SPA = {
+	pattern = "pattern_ca_v19.dds"
+	color1 = "red"
+	color2 = "yellow"	
+	color3 = "white"
+	
+	colored_emblem = {
+		texture = "ce_bicolor_left_third_v2.dds"
+		color1 = "blue"
+		color2 = "red"
+		instance = { position = { 0.5 0.5 } }
+	}
+	textured_emblem = {
+		texture = "te_cmp_coa_spain.png"
+		instance = { scale = { 0.5 0.5 } position = { 0.5 0.5 } }
+	}
+	textured_emblem = {
+		texture = "te_cartago_v2.dds"
+		instance = { scale = { 0.5 0.5 } position = { 0.15 0.75 } }
+	}	
+
+}
+
+COS_absolute_monarchy = {
+
+	pattern = "pattern_ca_v12.dds"
+	color1 = "blue"
+    color1 = "red"	
+    color1 = "white"
+	colored_emblem = {
+		texture = "ce_cross_burgundy.dds"
+		color1 = "golden"
+
+	}	
+
+}
+
+COS_absolute_monarchy_v2 = {
+
+	pattern = "pattern_ca_v12.dds"
+	color1 = "white"
+	
+	colored_emblem = {
+		texture = "ce_cross_burgundy.dds"
+		color1 = "marine_green"
+		instance = { scale = { 0.5 0.7 } position = { 0.5 0.4.5 } }	
+	}
+	
+
+
+}
+ 
+COS_1838_1840 = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}
+	colored_emblem = {
+		texture = "ce_coa_costa_rica.dds"
+		color1 = "yellow"
+		color2 = "blue_light"
+		color3 = "white"
+		instance = { scale = { 0.3.5 0.3 } position = { 0.5 0.5 } }		
+	}	
+
+}
+
+COS_1840_1842_carrilo = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "blue_light"
+		color2 = "white"
+	}
+	colored_emblem = {
+		texture = "ce_coa_costa_rica_1840.dds"
+		color1 = "yellow"
+		color2 = "blue_light"
+		color3 = "white"
+		instance = { scale = { 0.3.5 0.3.5 } position = { 0.5 0.5 } }		
+	}	
+
+}
+
+COS_monarchy = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	
+	colored_emblem = {
+		texture = "ce_bicolor_bottom.dds"
+		color1 = "blue"
+		color2 = "blue"
+	}
+	textured_emblem = {
+		texture = "te_cartago.dds"
+		instance = { scale = { 0.5 0.7 } position = { 0.5 0.4.5 } }		
+	}
+
+}
+
+COS_subject_CLM = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "yellow"
+		color2 = "blue_light"
+	}	
+	colored_emblem = {
+		texture = "ce_coa_frame_costa_rica.dds"
+		color1 = "white"
+		color2 = "yellow"
+		color3 = "black"
+		instance = { scale = { 0.425 0.425 } position = { 0.5 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_star_06.dds"
+		color1 = "green"
+		instance = { scale = { 0.25 0.25 } position = { 0.5 0.5 } }		
+	}	
+}
+
+
+GUA = { # Guatemala
+
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue"
+	}
+	textured_emblem = {
+		texture = "te_guatemala_1825-1843.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
+	}
+}
+GUA_1843 = { # Guatemala
+
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue"
+	}
+	textured_emblem = {
+		texture = "te_guatemala_1843-1851.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
+	}
+}
+GUA_1871 = { # Guatemala
+	# Since 1871 
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_tricolor_vertical.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}
+	textured_emblem = {
+		texture = "te_cmp_coa_guatemala.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
+	}
+}
+GUA_subject = {	
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_tricolor_vertical.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}
+}
+GUA_subject_republic  = {	
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+
+	textured_emblem = {
+		texture = "te_guatemala_1843-1851.dds"
+		instance = { scale = { 0.45 0.45 } position = { 0.65 0.5 } }
+	
+	}
+}
+GUA_subject_monarchy = {	
+	
+	pattern = "pattern_solid.tga"
+	color1 = "cobalt_light_blue"
+
+	textured_emblem = {
+		texture = "te_guatemala_1843-1851.dds"
+		instance = { scale = { 0.45 0.45 } position = { 0.65 0.5 } }
+	
+	}
+}
+
+GUA_monarchy = {
+	# more or less the 1851 design
+	
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.5 @third } position = { 0.75 @[1/6] } }			
+		instance = { scale = { 0.5 @third } position = { 0.75 @[1/6*5] } }		
+	}		
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { 0.5 @third } position = { 0.25 @[1/6*5] } }		
+	}		
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.5 @third } position = { 0.25 @[1/6] } }		
+	}	
+	textured_emblem = {
+		texture = "te_coa_guatemala.dds"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+	}	
+}
+
+GUA_1858 = {
+	# 1858 design (UCA & SPA combination)
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "white"
+	color3 = "red"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 @[1/9*7] } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 @[1/9*5] } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 @third } }
+	}	
+	textured_emblem = {
+		texture = "te_coa_guatemala.dds"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+	
+	}	
+}
+GUA_subject_UCA = { 
+
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue"
+	}
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.4 0.4 } position = { 0.5 0.5 } }
+	}	
+
+	textured_emblem = {
+		texture = "te_guatemala_(1825-1843).dds"
+		instance = { scale = { 0.4 0.4 } position = { 0.5 0.5 } }
+	}	
+}
+GUA_subject_MEX = {	
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "white"
+	color3 = "red"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue"
+		color2 = "blue"
+		instance = { position = { 0.75 0.5 } scale = { 0.5 1.0 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "green"
+		color2 = "green"
+		instance = { position = { 0.25 0.25 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0.25 0.75 } scale = { 0.5 0.5 } }
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 @third } }
+	}		
+}
+
+GUA_prospain= {
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "white"
+	color3 = "red"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue"
+		color2 = "blue"
+		instance = { position = { 0.75 0.5 } scale = { 0.5 1.0 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0.25 0.25 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { position = { 0.25 0.75 } scale = { 0.5 0.5 } }
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 @third } }
+	}
+	textured_emblem = {
+		texture = "te_guatemala_(1851-1858).dds"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+	
+	}	
+}
+
+HON = { # Honduras
+	# 1866 design
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue"
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "blue"
+		color2 = "blue"
+		instance = { scale = { 0.15 0.15 } position = { 0.5 0.5 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.62 0.41 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.38 0.59 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.38 0.41 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.62 0.59 } }		
+	}	
+
+}
+HON_monarchy = {
+
+
+	pattern = "pattern_verical_bicolor_right_offset.dds"
+	color1 = "white"
+    color2 = "green"
+
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "white"
+		color2 = "blue"
+		instance = { scale = { 0.5 0.5 } position = { 0.25 0.5 } }		
+	}
+}
+HON_1838 = {
+	# early unofficial design without stars (1838-49)
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue"
+	}
+}
+
+HON_monarchy_v1 = { 
+    pattern = "pattern_solid.tga"
+	color1 = "blue"
+	
+	colored_emblem = {
+		texture = "ce_cross_burgundy.dds"
+		color1 = "green"
+		instance = { scale = { 0.5 0.5 } position = { 0.75 0.5 } }
+	}
+
+}
+
+HON_monarchy_v2 = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	
+	colored_emblem = {
+		texture = "ce_cross_burgundy.dds"
+		color1 = "marine_green"
+		instance = { scale = { 0.5 0.5 } position = { 0.75 0.5 } }
+	}
+
+}
+
+HON_subject = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "red"
+	
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.5 0.5 } position = { 0.75 0.5 } }
+	}		
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "blue"
+		color2 = "blue"
+		instance = { scale = { 0.16 -0.16 } position = { 0.75 0.5 } }	
+		instance = { scale = { 0.16 -0.16 } position = { 0.68 0.6 } }	
+		instance = { scale = { 0.16 -0.16 } position = { 0.82 0.6 } }	
+		instance = { scale = { 0.16 -0.16 } position = { 0.68 0.4 } }	
+		instance = { scale = { 0.16 -0.16 } position = { 0.82 0.4 } }			
+	}		
+}
+HON_subject_SPA = {
+	
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "yellow"
+	}
+	textured_emblem = {
+		texture = "te_coa_of_Honduras_prospanish.png"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+	
+	}
+
+}
+HON_subject_UCA = { # 
+
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue"
+	}
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.4 0.4 } position = { 0.5 0.5 } }
+	}	
+
+	textured_emblem = {
+		texture = "te_coa_of_Honduras.dds"
+		instance = { scale = { 0.4 0.4 } position = { 0.5 0.5 } }
+	}	
+}
+HON_subject_MEX = {
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	colored_emblem = {
+		texture = "ce_tricolor_vertical.dds"
+		color1 = "white"
+		color2 = "red"
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "blue"
+		color2 = "blue"
+		instance = { scale = { 0.15 0.15 } position = { 0.5 0.5 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.58 0.4 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.42 0.6 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.42 0.4 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.58 0.6 } }		
+	}	
+} 
+HON_communist = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.15 0.15 } position = { 0.5 0.6 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.62 0.41 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.38 0.58 } rotation = 11 }
+		instance = { scale = { 0.15 0.15 } position = { 0.38 0.41 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.62 0.58 } }		
+	}	
+}
+ELS = {
+	pattern = "pattern_solid.tga"
+	color1 = "light"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "light"
+	}
+}
+ELS_subject = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "blue"
+	
+	textured_emblem = {
+		texture = "te_el_salvador_2.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.75 0.5 } }		
+	}		
+}
+ELS_subject_SPA = {
+	
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "yellow"
+		color2 = "red"
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "red"
+        instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+	}
+}
+ELS_subject_UCA = { # 
+
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue"
+	}
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.4 0.4 } position = { 0.2 0.2 } }
+	}	
+
+
+}
+ELS_subject_MEX = {
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	colored_emblem = {
+		texture = "ce_tricolor_vertical.dds"
+		color1 = "white"
+		color2 = "red"
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.15 0.15 } position = { 0.075 0.125 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.166 0.125 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.258 0.125 } }		
+		instance = { scale = { 0.15 0.15 } position = { 0.075 0.275 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.166 0.275 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.258 0.275 } }	
+		instance = { scale = { 0.15 0.15 } position = { 0.075 0.425 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.166 0.425 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.258 0.425 } }			
+	}
+	textured_emblem = {
+		texture = "te_coa_mexico.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.5 0.2 } }
+	}
+} 
+ELS_1865 = { # El Salvador
+	# 1865 design (UCA flag before that)
+	
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	colored_emblem = {
+		texture = "ce_stripes_9.dds"
+		color1 = "blue"
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { @third @uru_canton_height } position = { @[third/2] @[uru_canton_height/2] } }
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.15 0.15 } position = { 0.075 0.125 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.166 0.125 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.258 0.125 } }		
+		instance = { scale = { 0.15 0.15 } position = { 0.075 0.275 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.166 0.275 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.258 0.275 } }	
+		instance = { scale = { 0.15 0.15 } position = { 0.075 0.425 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.166 0.425 } }
+		instance = { scale = { 0.15 0.15 } position = { 0.258 0.425 } }			
+	}
+}
+ELS_monarchy = {
+
+
+	pattern = "pattern_ca_v7.dds"
+	color1 = "cobalt_light_blue"
+    color2 = "white"
+
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "white"
+		color2 = "cobalt_light_blue"
+		instance = { scale = { 0.5 0.5 } position = { 0.25 0.5 } }		
+	}
+}
+
+MKT = { # Miskito
+	# 1824-52 6 stripes
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "blue"
+
+	colored_emblem = {
+		texture = "ce_stripes_06.dds"
+		color1 = color2
+		color2 = color2
+	}
+}
+MKT_late = {
+	# Later 1853-81 variants have 10 or 12 stripes
+
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "blue"
+
+	colored_emblem = {
+		texture = "ce_stripes_10.dds"
+		color1 = color2
+		color2 = color2
+	}
+}
+
+NIC = { # Nicaragua
+	# design adopted 1838 
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}	
+	textured_emblem = {
+		texture = "te_coa_nicaragua.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
+	}	
+}
+NIC_theocracy = {
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	
+	colored_emblem = {
+		texture = "ce_bicolor_bottom.dds"
+		color1 = "white"
+	}	
+	
+	colored_emblem = {
+		texture = "ce_cross_fleury.dds"
+		color1 = "yellow"
+	}	
+}
+NIC_communist = {
+	
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	
+	colored_emblem = {
+		texture = "ce_bicolor_bottom.dds"
+		color1 = "black"
+	}	
+	
+	colored_emblem = {
+		texture = "ce_hammer_hoe.dds"
+		color1 = "white"
+	}	
+}
+NIC_monarchy = {
+
+
+	pattern = "pattern_border_of_4.dds"
+	color1 = "cobalt_light_blue"
+    color2 = "white"
+
+	colored_emblem = {
+		texture = "ce_saltire_fimbriated.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { position = { 0.5 0.5 } }		
+	}
+}
+NIC_subject_UCA = { # 
+
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.4 0.4 } position = { 0.5 0.5 } }
+	}	
+	textured_emblem = {
+		texture = "te_coa_nicaragua.dds"
+		instance = { scale = { 0.37 0.37 } position = { 0.5 0.8 } }
+	}	
+
+}
+nicaragua_1854 = {
+	pattern = "pattern_solid.tga"
+	color1 = "yellow"
+	color2 = "white"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "brown_light"
+	}
+	textured_emblem = {
+		texture = "coa_nicaragua_(1854).dds"
+		instance = { scale = { 0.35 0.35 } position = { 0.5 0.5 } }
+	}
+
+}
+NIC_subject_MEX = {
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	colored_emblem = {
+		texture = "ce_tricolor_vertical.dds"
+		color1 = "white"
+		color2 = "red"
+	}
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "yellow_dark"
+		color2 = "yellow"
+		instance = { scale = { 0.455 0.455 } position = { 0.5 0.5 } }
+	}		
+	textured_emblem = {
+		texture = "te_coa_nicaragua.dds"
+		instance = { scale = { 0.54 0.54 } position = { 0.5 0.5 } }
+	}			
+}
+NIC_subject_SPA = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	colored_emblem = {
+		texture = "ce_tricolor_vertical.dds"
+		color1 = "yellow"
+		color2 = "red"
+	}
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "yellow_dark"
+		color2 = "yellow"
+		instance = { scale = { 0.455 0.455 } position = { 0.5 0.5 } }
+	}		
+	textured_emblem = {
+		texture = "te_cmp_coa_spain.png"
+		instance = { scale = { 0.54 0.54 } position = { 0.5 0.5 } }
+	}			
+}
+NIC_subject = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "white"
+	color3 = "red"
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.5 0.5 } position = { 0.75 0.5 } }
+	}		
+	textured_emblem = {
+		texture = "te_coa_nicaragua.dds"
+		instance = { scale = { 0.5 0.5 } position = { 0.75 0.5 } }
+	}			
+}
+
+PNM = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "red"
+	color3 = "blue"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = color2
+		color2 = color2
+		instance = { position = { 0.75 0.25 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = color2
+		color2 = color2
+		instance = { position = { 0.75 0.75 } scale = { @third @third } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = color3
+		color2 = color3
+		instance = { position = { 0.25 0.75 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = color3
+		color2 = color3
+		instance = { position = { 0.25 0.25 } scale = { @third @third } }
+	}
+}
+PNM_altenative_flag_v1 = {
+
+    pattern = "pattern_solid.tga"
+	color1 = "yellow"
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "red"
+	}
+	colored_emblem = {
+		texture = "ce_rhombus.dds"
+		color1 = blue
+		instance = { position = { 0 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = white
+		instance = { position = { 0.175 0.5 } scale = { 0.4 0.4 } }
+	}
+}
+
+PNM_subject = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "red"
+	color3 = "blue"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = color2
+		color2 = color2
+		instance = { position = { 0.75 0.75 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = color2
+		color2 = color2
+		instance = { position = { 0.75 0.25 } scale = { @third @third } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = color3
+		color2 = color3
+		instance = { position = { 0.25 0.25 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = color3
+		color2 = color3
+		instance = { position = { 0.25 0.75 } scale = { @third @third } }
+	}
+}
+PNM_subject_SPA = {
+
+	pattern = "pattern_ca_v17_tricolor_doubled.dds"
+	color1 = "yellow"
+	color2 = "red"
+	color3 = "white"
+ 	textured_emblem = {
+	
+		texture = "te_panama_city.dds"
+		instance = { scale = { 0.3 0.4 } position = { 0.5 0.5 } }
+	}
+
+}
+PNM_subject_CLM = {
+
+	pattern = "pattern_tricolore_1.dds"
+	color1 = "yellow"
+	color2 = "red"
+	color3 = "blue"
+ 	textured_emblem = {
+	
+		texture = "ca_of_the_federal_state_of_panama.dds"
+		instance = { scale = { 0.3 0.4 } position = { 0.5 0.5 } }
+	}
+
+}
+PNM_subject_MEX = {
+	# Mexican colours
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "red"
+	color3 = "green"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = color2
+		color2 = color2
+		instance = { position = { 0.75 0.75 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = color2
+		color2 = color2
+		instance = { position = { 0.75 0.25 } scale = { @third @third } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = color3
+		color2 = color3
+		instance = { position = { 0.25 0.25 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = color3
+		color2 = color3
+		instance = { position = { 0.25 0.75 } scale = { @third @third } }
+	}
+}
+CR1_union = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	
+
+	colored_emblem = {
+		texture = "ce_tricolor_vertical.dds"
+		color1 = "purple"
+		color2 = "black"
+	}
+	colored_emblem = {
+		texture = "ce_coa_frame_costa_rica.dds"
+		color1 = "white"
+		color2 = "yellow"
+		color3 = "black"
+		instance = { scale = { 0.425 0.425 } position = { 0.5 0.5 } }		
+	}
+	colored_emblem = {
+		texture = "ce_star_06.dds"
+		color1 = "marine_green"
+		instance = { scale = { 0.25 0.25 } position = { 0.5 0.5 } }		
+	}
+
+	
+}
+CR1 = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "white"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "marine_green"
+	}
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.65 0.65 } position = { 0.5 0.5 } }		
+	}	
+	
+}
+CR1_dic = { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	textured_emblem = {
+		texture = "te_uca_veraguas.dds"
+		instance = { scale = { 0.65 0.65 } position = { 0.35 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+		
+}
+CR1_dic_costa_rica = { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	colored_emblem = {
+		texture = "ce_coa_costa_rica_1840.dds"
+		color1 = "yellow"
+		color2 = "blue_light"
+		color3 = "white"
+		instance = { scale = { 0.45 0.75 } position = { 0.3 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+		
+}
+CR1_dic_nicaragua= { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	textured_emblem = {
+		texture = "te_cmp_coa_nicaragua.dds"
+		instance = { scale = { 0.45 0.75 } position = { 0.3 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+		
+}
+CR1_dic_el_salvador = { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	textured_emblem = {
+		texture = "te_el_salvador_2dds"
+		instance = { scale = { 0.45 0.75 } position = { 0.3 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+		
+}
+CR1_dic_honduras = { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	textured_emblem = {
+		texture = "te_coa_of_Honduras.dds"
+		instance = { scale = { 0.45 0.75 } position = { 0.3 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+		
+}
+CR1_dic_guatemala = { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	textured_emblem = {
+		texture = "te_guatemala_1843-1851.dds"
+		instance = { scale = { 0.45 0.75 } position = { 0.3 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+		
+}
+CR1_dic_2 = { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "yellow"
+		instance = { scale = { 1.0 1.0 } position = { 0.15 0.15 } }
+		instance = { scale = { 1.0 1.0 } position = { 0.3 0.3 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+		
+}
+CR1_dic_3 = { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	colored_emblem = {
+		texture = "ce_stars_circle_03.dds"
+		color1 = "yellow"
+		instance = { scale = { 0.75 0.75 } position = { 0.3 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+		
+}
+CR1_dic_4 = { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	colored_emblem = {
+		texture = "ce_stars_circle_04.dds"
+		color1 = "yellow"
+		instance = { scale = { 0.75 0.75 } position = { 0.3 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+		
+}
+CR1_dic_5 = { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	colored_emblem = {
+		texture = "ce_stars_circle_05.dds"
+		color1 = "yellow"
+		instance = { scale = { 0.75 0.75 } position = { 0.3 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+		
+}
+CR1_dic_6 = { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	colored_emblem = {
+		texture = "ce_stars_circle_06.dds"
+		color1 = "yellow"
+		instance = { scale = { 0.75 0.75 } position = { 0.3 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+		
+}
+CR1_dic_alt = { 
+
+    pattern = "pattern_solid.tga"
+	color1 = "marine_green"
+
+	colored_emblem = {
+		texture = "ce_coa_costa_rica_1840.dds"
+		color1 = "yellow"
+		color2 = "blue_light"
+		color3 = "white"
+		instance = { scale = { 0.45 0.75 } position = { 0.3 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 0.3 1.0 } position = { 0.8 0.5 } }		
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
+	}
+}
+UCA = { # Central America
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}	
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
+	}	
+}
+UCA = { # Central America
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}	
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
+	}	
+}
+UCA_monarchy = {
+	pattern = "pattern_per_saltire.dds"
+	color1 = "cobalt_blue2"
+	color2 = "white"		
+	
+	colored_emblem = {
+		texture = "ce_cross_burgundy.dds"
+		color1 = "red"
+
+	}	
+	
+}
+UCA_absolute_monarchy = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+			
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "blue_light"
+		color2 = "white"
+	}	
+	colored_emblem = {
+		texture = "ce_shield_iberian_cross_thin.dds"
+		color1 = "blue_light"
+		color2 = "white"		
+		instance = { scale = { 0.5 0.65 } position = { 0.5 0.525 } }
+	}		
+	colored_emblem = {
+		texture = "ce_christogram_03.dds"
+		color1 = "yellow"
+		color2 = "blue_light"
+		color3 = "white"
+		instance = { scale = { 0.465 0.465 } position = { 0.5 0.495 } }
+	}
+}
+
+UCA_alt = { # Central America
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "green2"
+	}	
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
+	}	
+}
+UCA_dictatorship = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+			
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}	
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.6 0.6 } position = { 0.5 0.5 } }
+	}	
+ 	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.10 0.10 } position = { 0.5 0.80 } }		
+		instance = { scale = { 0.10 0.10 } position = { 0.44 0.78 } }	
+		instance = { scale = { 0.10 0.10 } position = { 0.56 0.78 } }
+		instance = { scale = { 0.10 0.10 } position = { 0.40 0.72 } }	
+		instance = { scale = { 0.10 0.10 } position = { 0.60 0.72 } }		
+	}	
+}
+UCA_subject = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "blue_light"
+	
+	colored_emblem = {
+		texture = "ce_stripes_04.dds"
+		color1 = "blue_light"
+		color2 = "white"
+	}	
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.35 0.42 } position = { 0.75 0.5 } }
+	}		
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.33 0.40 } position = { 0.75 0.5 } }
+	}
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.4 0.4 } position = { 0.75 0.49 } }
+	}	
+}
+UCA_subject_SPA = {
+	# Basically inverted colours of the Guatemalan design
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	color2 = "white"
+	color3 = "blue"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 @[1/9*7] } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue_light"
+		color2 = "blue_light"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 @[1/9*5] } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 @third } }
+	}	
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.4 0.4 } position = { 0.5 0.5 } }
+	}	
+}
+UCA_subject_USA = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "blue_light"
+	
+	colored_emblem = {
+		texture = "ce_stripes_04.dds"
+		color1 = "blue_light"
+		color2 = "white"
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "blue"
+		color2 = "blue"
+		instance = { position = { 0.25 0.25 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.25 0.26 } scale = { 0.4 0.4 } }
+	}	
+}
+UCA_communist = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}	
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "white"
+		color2 = "yellow"
+		instance = { scale = { 0.5 0.5 } position = { 0.5 0.5 } }			
+	}
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { 0.43 0.43 } position = { 0.5 0.5 } }			
+	}	
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "yellow"
+		color2 = "red"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 }  }	
+	}
+}
+UCA_communist_v2 = { 
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}	
+	colored_emblem = {
+		texture = "ce_stripe_center.dds"
+		color1 = "red"
+		color2 = "red"
+	}
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.525 0.525 } position = { 0.5 0.5 } }			
+	}	
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { 0.475 0.475 } position = { 0.5 0.5 } }			
+	}	
+	colored_emblem = {
+		texture = "ce_frame_circle.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.425 0.425 } position = { 0.5 0.5 } }			
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 }  }	
+	}
+}
+#Chiapas
+CIP = { 
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "green"
+		color2 = "white"
+	}		
+	textured_emblem = {
+		texture = "te_coa_chiapas.dds"
+		instance = { scale = { 0.65 0.65 } position = { 0.5 0.485 } }
+	}	
+}
+CIP_subject = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "blue"
+	color3 = "red"
+	
+	textured_emblem = {
+		texture = "te_coa_chiapas.dds"
+		instance = { scale = { 0.575 0.575 } position = { 0.75 0.5 } }
+	}			
+}
+CIP_subject_MEX = {
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	colored_emblem = {
+		texture = "ce_tricolor_vertical.dds"
+		color1 = "white"
+		color2 = "red"
+	}		
+	textured_emblem = {
+		texture = "te_coa_chiapas.dds"
+		instance = { scale = { 0.65 0.65 } position = { 0.5 0.485 } }
+	}			
+}
+CIP_subject_frca = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 1.25 1.25 } position = { 0.5 0.5 } }
+	}	
+	colored_emblem = {
+		texture = "ce_fess_fimbriated.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { scale = { 1.15 1.15 } position = { 0.5 0.5 } }
+	}			
+}
+CIP_soconosco = { #dark blue variant used for reformed UCA, GUA and ALT
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "azure"
+	}
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "yellow"
+		instance = { scale = { 0.525 0.525 } position = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "white"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+	}
+	textured_emblem = {
+		texture = "te_coa_soconosco.dds"
+		instance = { scale = { 0.25 0.25 } position = { 0.5 0.5 } }
+	}			
+}
+CIP_soconosco_frca = { #light blue variant used for original UCA
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "blue_light"
+	}
+	colored_emblem = {
+		texture = "ce_shield_german_round_fess.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.4 0.4 } position = { 0.5 0.49 } }
+	}
+	colored_emblem = {
+		texture = "ce_shield_german_round_fess.dds"
+		color1 = "white"
+		color2 = "green_light"
+		instance = { scale = { 0.35 0.35 } position = { 0.5 0.49 } }
+	}
+	textured_emblem = {
+		texture = "te_coa_soconosco.dds"
+		instance = { scale = { 0.25 0.25 } position = { 0.5 0.5 } }
+	}			
+}
+CIP_republic = { 
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	colored_emblem = {
+		texture = "ce_tricolor_vertical.dds"
+		color1 = "white"
+		color2 = "azure"
+	}		
+	textured_emblem = {
+		texture = "te_coa_chiapas.dds"
+		instance = { scale = { 0.65 0.65 } position = { 0.5 0.485 } }
+	}
+}
+CIP_dictatorship = {
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "azure"
+	}		
+	textured_emblem = {
+		texture = "te_coa_chiapas.dds"
+		instance = { scale = { 0.65 0.65 } position = { 0.35 0.485 } }
+	}	
+}
+CIP_absolute_monarchy = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "te_coa_chiapas.dds"
+		instance = { scale = { 0.7 0.7 } position = { 0.5 0.485 } }
+	}
+}
+CIP_theocracy = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "green_light"
+		color2 = "yellow"
+	}	
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+	}	
+	textured_emblem = {
+		texture = "te_coa_soconosco.dds"
+		instance = { scale = { 0.275 0.275 } position = { 0.5 0.5 } }
+	}	
+}
+CIP_communist = { #Zapatista Flag
+	
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "red"
+		instance = { scale = { 0.65 0.65 } position = { 0.5 0.5 } }
+	}		
+}
+Pro-spanish_flag = {
+	
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "yellow"
+	}
+	
+}
+pro_colombeia_legacy = {
+	
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "yellow"
+		color2 = "cyanus_blue"
+	}
+
+}
+pro_gran_colombia ={
+	pattern = "pattern_ca_v23.dds"
+	color1 = "yellow"
+	color2 = "blue"
+	color2 = "red"	
+
+}
+
+pro_UCA = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "blue_light"
+		color2 = "white"
+	}
+}
+
+pro_granadian = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "green"
+		color2 = "white"
+	}
+}
+
+plan_of_veragua = {
+
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "white"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "marine_green"
+	}
+}
+########Costa Rica#####tags:
+##PC1 - Provinces of Costa rica 1 - 10 ##
+PC1 = { #San Jose
+pattern = "pattern_border_of_4.dds"
+color1 = "blue"
+color2 = "red"
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "white"
+		instance = { scale = { 0.525 0.525 } position = { 0.5 0.5 } }
+	}
+}
+PC2 = { #Guanacaste
+pattern = "pattern_ca_v1.5.dds"
+color1 = "green"	
+color2 = "blue"
+color3 = "white"
+	colored_emblem = {
+		texture = "ce_rhombus.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0 0.5 } }
+	}
+}
+PC3 = { #Nicoya
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	
+	colored_emblem = {
+		texture = "ce_bicolor_bottom.dds"
+		color1 = "green"
+		color2 = "green"
+	}
+
+}
+PC4 = { #Limon
+pattern = "pattern_ca_v1.5.dds"
+color1 = "white"
+color2 = "green10"
+color3 = "blue2"
+}
+PC5 = { #Heredia
+pattern = "pattern_solid.tga"
+color1 = "yellow"
+	colored_emblem = {
+		texture = "ce_bicolor_right.dds"
+		color1 = "red"
+
+	}
+		colored_emblem = {
+		texture = "ce_bicolor_right.dds"
+		color1 = "white"
+		instance = { scale = { 0.8  } position = { 0.3 0.5 } }
+	}
+}
+PC6 = { #Alajuela
+pattern = "pattern_ca_v1.5.dds"
+color1 = "red"
+color2 = "red"
+color3 = "black"
+}
+PC7 = { #Osa
+pattern = "pattern_ca_v12.dds"
+color1 = "white"
+color2 = "blue"
+color3 = "green"
+}
+PC8 = { #Cartago
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	
+	colored_emblem = {
+		texture = "ce_bicolor_bottom.dds"
+		color1 = "blue"
+		color2 = "blue"
+	}
+	textured_emblem = {
+		texture = "te_cartago.dds"
+		instance = { scale = { 0.5 0.7 } position = { 0.5 0.4.5 } }		
+	}
+}
+RDT = { #Talamanca
+pattern = "pattern_ca_v1.5.dds"
+color1 = "green10"
+color2 = "white"
+color3 = "blue5"
+}
+CCR = { #Confederation of Costa Rica
+pattern = "pattern_ca_v16_tricolor_bend_2.dds"
+color1 = "red"
+color2 = "cyan"
+color3 = "green"
+}
+###########Guatemala###tags:
+##DG1-Depataments_Guatemala 1-10 
+
+GGA = { #Gran Republic of Guatemala
+	pattern = "pattern_tricolore_1.dds"
+	color1 = "azure"
+}
+DG1 = { #Peten
+	pattern = "pattern_tricolore_1.dds"
+	color1 = "green"
+	color2 = "white"
+	color3 = "azure"
+}                                 
+DG2 = { #Izabal                   
+	pattern = "pattern_tricolore_1.dds"
+	color1 = "blue"
+	color2 = "white"
+	color3 = "green"
+}                                 
+DG3 = { #Verapaz                  
+	pattern = "pattern_per_saltire.dds"
+	color1 = "blue"
+	color2 = "white"
+}
+DG4 = { #Soconusco,
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "azure"
+	}
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "yellow"
+		instance = { scale = { 0.525 0.525 } position = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "white"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+	}
+	textured_emblem = {
+		texture = "te_coa_soconosco.dds"
+		instance = { scale = { 0.25 0.25 } position = { 0.5 0.5 } }
+	}
+}
+
+###########Nicaragua#####tags:PN1 - 10
+RNI = {
+
+}
+PN1 = { #Leon
+	pattern = "pattern_ca_v16_tricolor_bend_2.dds"
+	color1 = "white"
+	color2 = "green7"
+	color3 = "blue7"
+
+}
+PN2 = { #Managua
+	pattern = "pattern_border_double.dds"
+	color1 = "white"
+	color2 = "golden"
+	color3 = "blue"
+
+
+}
+PN3 = { #Matagalpa
+	pattern = "pattern_ca_v9.dds"
+	color1 = "green"
+	color2 = "blue"
+	color3 = "white"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "brown"
+		color2 = "brown"
+		instance = { position = { 0.25 0.25 } scale = { 0.5 0.5 } }
+	}
+}
+PN4 = { #Sur zone
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0.25 0.25 } scale = { 0.5 0.5 } }
+	}
+}
+PN5 = { #Nort zone
+	pattern = "pattern_solid.tga"
+	color1 = "brown"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "green"
+		color2 = "green"
+		instance = { position = { 0.25 0.25 } scale = { 0.5 0.5 } }
+	}
+}
+PN5 = { #Granada
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	textured_emblem = {
+		texture = "ce_of_granada.dds"
+		instance = { position = { 0.25 0.25 } scale = { 0.5 0.5 } }
+	}
+}
+###########El Salvador#####tags:DE
+
+UEL = {
+
+}
+DE1 = { #San Salvador
+    pattern = "pattern_solid.tga"
+    color1 = "blue"
+    color2 = "white"
+
+    colored_emblem = {
+        texture = "ce_bend_marshall.dds"
+        color1 = "green"
+        color2 = "white"
+    }
+}
+
+DE2 = { #Sonsonate
+    pattern = "pattern_solid.tga"
+    color1 = "green"
+    color2 = "gold"
+
+    colored_emblem = {
+        texture = "ce_tree.dds"
+        color1 = "gold"
+        color2 = "green"
+    }
+}
+
+DE3 = { #San Miguel
+    pattern = "pattern_solid.tga"
+    color1 = "red"
+    color2 = "blue"
+
+    colored_emblem = {
+        texture = "ce_star_06_pierced.dds"
+        color1 = "white"
+        color2 = "blue"
+    }
+}
+
+###########Honduras#####tags:DH1 - 10
+
+UHO = {
+
+}
+
+DH1 = { #Olancho
+pattern = "pattern_ca_v1.5.dds"
+color1 = "white"
+color2 = "white" 
+color3 = "green"
+
+    colored_emblem = {
+        texture = "ce_cmp_stars_12_circle.png"
+        color1 = "blue"
+    }
+}
+DH2 = { #Yoro-ce_rainforest.dds
+    pattern = "pattern_solid.tga"
+    color1 = "blue"
+
+
+    colored_emblem = {
+        texture = "ce_cmp_quadcolor_horizontal.png"
+        color1 = "white"
+        color2 = "yellow"
+		color3 = "green"
+    }
+}
+DH3 = { #Santa Barbara
+	pattern = "pattern_ca_v18.dds"
+	color1 = "green3"
+	color2 = "white"
+
+
+}
+DH4 = { #El Salvador
+    pattern = "pattern_ara_vassal.dds"
+    color1 = "blue"
+    color2 = "white"
+	color3 = "yellow"
+
+   # colored_emblem = {
+   #     texture = "ce_mountains.dds"
+   #     color1 = "green"
+   #     color2 = "white"
+   # }
+}
+DH5 = { #Comayagua
+    pattern = "pattern_solid.tga"
+    color1 = "gold"
+
+    colored_emblem = {
+        texture = "ce_castle.dds"
+        color1 = "white"
+        color2 = "blue"
+    }
+}
+DH6 = { #Tegucigalpa
+    pattern = "pattern_ca_v18.dds"
+    color1 = "blue_royal"
+    color2 = "yellow5"
+
+   # colored_emblem = {
+   #     texture = "ce_banner_escutcheon.dds"
+   #     color1 = "grey"
+   #     color2 = "yellow_dark"
+   # }
+}
+DH7 = { #San Miguel
+    pattern = "pattern_solid.tga"
+    color1 = "red"
+
+   #colored_emblem = {
+   #    texture = "canterbury_archiepiscopal_staff.dds"
+   #    color1 = "white"
+   #    color2 = "blue"
+   #	color3 = "white"
+   #}
+}
+###########Panama#####tags:PP1 - 10 Provinces of Panama
+
+UPN = {
+
+}
+VGA ={
+
+}
+PP1 = { #Bocas de toro
+    pattern = "pattern_rhombus.dds"
+    color1 = "blue"
+    color2 = "green"
+
+    #colored_emblem = {
+    #    texture = "ce_dolphin.dds"
+    #    color1 = "silver"
+    #    color2 = "blue"
+    #}
+}
+PP2 = { #Veragua
+    pattern = "pattern_ca_v3.dds"
+    color1 = "golden"
+    color2 = "green"
+
+    colored_emblem = {
+        texture = "ce_sphereplus_national_13.dds"
+        color1 = "gold"
+        color2 = "brown"
+    }
+}
+PP3 = { #Dariel
+    pattern = "pattern_per_saltire.dds"
+    color1 = "brown"
+    color2 = "green"
+
+    colored_emblem = {
+        texture = "ce_sphereplus_animal_04.dds"
+        color1 = "green"
+        color2 = "dark_green"
+    }
+}
+PP4 = { #Chiriqui
+    pattern = "pattern_large_bend_senester.dds"
+    color1 = "red"
+    color2 = "yellow"
+
+    #colored_emblem = {
+    #    texture = "ce_volcan.dds"
+    #    color1 = "black"
+    #    color2 = "yellow"
+    #}
+}
+PP5 = { #Azuero
+    pattern = "pattern_rhombus.dds"
+    color1 = "blue"
+    color2 = "white"
+
+    colored_emblem = {
+        texture = "ce_sphereplus_animal_13.dds"
+        color1 = "silver"
+        color2 = "blue"
+    }
+}
+PP6 = { #Soto_dark_blue
+    pattern = "pattern_verical_bicolor_offset.dds"
+    color1 = "blue_light"
+    color2 = "gold"
+
+   # colored_emblem = {
+   #     texture = "ce_sun_mill.dds"
+   #     color1 = "gold"
+   #     color2 = "dark_blue"
+   # }
+}
+PP7 = { #Colon
+    pattern = "pattern_twin_middle_border_vertical.tga"
+    color1 = "red"
+    color2 = "blue"
+
+    colored_emblem = {
+        texture = "ce_ship_manchester.dds"
+        color1 = "gold"
+        color2 = "blue"
+    }
+}
+PP8 = { #Panama
+    pattern = "pattern_per_bend_senester.dds"
+    color1 = "blue"
+    color2 = "white"
+
+    #colored_emblem = {
+    #    texture = "ce_bridge.dds"
+    #    color1 = "red"
+    #    color2 = "white"
+    #}
+}
