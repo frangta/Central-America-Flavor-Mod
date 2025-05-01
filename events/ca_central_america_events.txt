@@ -3,115 +3,119 @@ namespace = ca_central_america
 #A local newspaper proposed the formation of a state that would include the regions of Quetzaltenango, Totonicapán, Sololá and Suchitepéquez.
 #Voting of creation for Los altos
 #Creation of Los Altos
-# #The vote on the creation of the new state was missed
-# #The Fate of Soconusco
-# #English influence in the Caribbean
-# #Costa Rica / UCA Abandon ambitions in Bocas del Toro GBA Version 
-# #Costa Rica / UCA Abandon ambitions in Bocas del Toro CLN Version 
-# #Costa Rica / UCA CLN military intervention
-# #In Bocas de Toro on the creation of the independence new state
-# #The Fate of Bocas de Toro
-# #New Granada usurpation of Boca de Toro
-# #Nicaragua Declares Independence 30 de abril de 1838 Nicaragua
-# #Costa Rica Declares Independence 15 November de 1838
-# #Guatemala Declares Independence 17 de abril de 1839 gUATEMALA
-# #Honduras Declares Independence 5 de noviembre honduras
-# #Panama Declares independence November 1903
-# #El salvador Declares independence 2 de febrero de 1841 el salvador
-# #Los Altos Declares independence 31 de mayo de 1839
-# # Cholera Pandemic Hits Central America 
-# # Civil War in Guatemala
-# # Civil War in Costa Rica 
-# # Civil War in El salvador
-# # Civil War in Honduras
-# # Civil War in Nicaragua
-# # Civil War in Panama
-# # Civil War in Los Altos
-# #Guatemala appreciates intervention
-# #Costa Rica appreciates intervention
-# #El salvador appreciates intervention
-# #Honduras appreciates intervention
-# #Nicaragua appreciates intervention
-# #Panama appreciates intervention
-# #Los Altos appreciates intervention
-# #Guatemala falls to secessionists
-# #Costa Rica falls to secessionists
-# #El salvador falls to secessionists
-# #Honduras falls to secessionists
-# #Nicaragua falls to secessionists
-# #Panama falls to secessionists
-# #Los Altos falls to secessionists
-# #Guatemala Beats to secessionists
-# #Costa Rica Beats to secessionists
-# #El salvador Beats to secessionists
-# #Honduras Beats to secessionists
-# #Nicaragua Beats to secessionists
-# #Panama Beats to secessionists
-# #Los Altos Beats to secessionists
-# #Guatemala declares independence Peaceful
-# #Costa Rica declares independence Peaceful
-# #El salvador declares independence Peaceful
-# #Honduras declares independence Peaceful
-# #Nicaragua declares independence Peaceful
-# #Panama declares independence Peaceful
-# #Los Altos declares independence Peaceful
-# #Guatemala declares independence on Arms
-# #Costa Rica declares independence on Arms
-# #El salvador declares independence on Arms
-# #Honduras declares independence on Arms
-# #Nicaragua declares independence on Arms
-# #Panama declares independence on Arms
-# #Los Altos declares independence on Arms
-# # Defeat in the Second Civil War
-# # Victory in the Second Civil War 
-# # Dissolution of Central America 
-# # Separatism in Nicaragua
-# # Separatism in El salvador
-# # Separatism in Costa Rica
-# # Separatism in Guatemala
-# # Separatism in Honduras
-# # Separatism in Panama
-# # Separatism in Los Altos
-# # State secedes
-#
-#
-#
-######################################
-#
+#The vote on the creation of the new state was missed
+#The Fate of Soconusco
+#English influence in the Caribbean
+#Costa Rica / UCA Abandon ambitions in Bocas del Toro GBA Version 
+#Costa Rica / UCA Abandon ambitions in Bocas del Toro CLN Version 
+#Costa Rica / UCA CLN military intervention
+#In Bocas de Toro on the creation of the independence new state
+#The Fate of Bocas de Toro
+#New Granada usurpation of Boca de Toro
+#Nicaragua Declares Independence 30 de abril de 1838 Nicaragua
+#Costa Rica Declares Independence 15 November de 1838
+#Guatemala Declares Independence 17 de abril de 1839 gUATEMALA
+#Honduras Declares Independence 5 de noviembre honduras
+#Panama Declares independence November 1903
+#El salvador Declares independence 2 de febrero de 1841 el salvador
+#Los Altos Declares independence 31 de mayo de 1839
+## Cholera Pandemic Hits Central America 
+## Civil War in Guatemala
+## Civil War in Costa Rica 
+## Civil War in El salvador
+## Civil War in Honduras
+## Civil War in Nicaragua
+## Civil War in Panama
+## Civil War in Los Altos
+##Guatemala appreciates intervention
+##Costa Rica appreciates intervention
+##El salvador appreciates intervention
+##Honduras appreciates intervention
+##Nicaragua appreciates intervention
+##Panama appreciates intervention
+##Los Altos appreciates intervention
+##Guatemala falls to secessionists
+##Costa Rica falls to secessionists
+##El salvador falls to secessionists
+##Honduras falls to secessionists
+##Nicaragua falls to secessionists
+##Panama falls to secessionists
+##Los Altos falls to secessionists
+##Guatemala Beats to secessionists
+##Costa Rica Beats to secessionists
+##El salvador Beats to secessionists
+##Honduras Beats to secessionists
+##Nicaragua Beats to secessionists
+##Panama Beats to secessionists
+##Los Altos Beats to secessionists
+##Guatemala declares independence Peaceful
+##Costa Rica declares independence Peaceful
+##El salvador declares independence Peaceful
+##Honduras declares independence Peaceful
+##Nicaragua declares independence Peaceful
+##Panama declares independence Peaceful
+##Los Altos declares independence Peaceful
+##Guatemala declares independence on Arms
+##Costa Rica declares independence on Arms
+##El salvador declares independence on Arms
+##Honduras declares independence on Arms
+##Nicaragua declares independence on Arms
+##Panama declares independence on Arms
+##Los Altos declares independence on Arms
+#+# Defeat in the Second Civil War
+#+# Victory in the Second Civil War 
+#+# Dissolution of Central America 
+#-# Separatism in Nicaragua
+#-# Separatism in El salvador
+#-# Separatism in Costa Rica
+#-# Separatism in Guatemala
+#-# Separatism in Honduras
+#-# Separatism in Panama
+#-# Separatism in Los Altos
+
+#####################################
+## The fading Union
 ca_central_america.0 = {
 	type = country_event
 	placement = ROOT
 	title = ca_central_america.0.t
 	desc = ca_central_america.0.d
-	flavor = ca_central_america.0.f
+	flavor =  ca_central_america.0.f
+
 	duration = 3
+
 	event_image = {
 		video = "gfx/event_pictures/southamerica_election.bk2"
 	}
+
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+
 	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
 	trigger = {
-		has_game_started = yes
-		c:UCA = ROOT
-		exists = c:UCA
+	has_game_started = yes
+	c:UCA = ROOT
+	exists = c:UCA
 	}
 	immediate = {
-		hidden_effect = {
-			trigger_event = {
-				id = ca_setup_events.1
+	hidden_effect = {
+	  trigger_event = { 
+	  id = ca_setup_events.1
+	  }
 			}
-		}
 	}
-	option = {
+	option = { #Historic Railway Events
 		name = ca_central_america.0.a
 		ai_chance = {
 			base = 33.33
 			modifier = {
-				trigger = {}
+				trigger = {
+
+				}
 				add = -100
 			}
-		}
+		}		
 		add_journal_entry = {
 			type = je_historic_central_america_falls_apart
 		}
@@ -126,22 +130,24 @@ ca_central_america.0 = {
 				is_ai = yes
 			}
 			hidden_effect = {
-				trigger_event = {
-					id = ca_central_america.19  # Originalmente ca_central_america.7
+				trigger_event = { 
+					id = ca_central_america.7
 					years = 2
 				}
 			}
 		}
-	}
-	option = {
+	}	
+	option = { #Random Events
 		name = ca_central_america.0.b
 		ai_chance = {
 			base = 33.33
 			modifier = {
-				trigger = {}
+				trigger = {
+
+				}
 				add = -100
 			}
-		}
+		}		
 		add_journal_entry = {
 			type = je_central_america_falls_apart
 		}
@@ -153,15 +159,18 @@ ca_central_america.0 = {
 			limit = {
 				is_ai = yes
 			}
+
 		}
 	}
-	option = {
+	option = { #Vainilla Events
 		name = ca_central_america.0.c
 		default_option = yes
 		ai_chance = {
 			base = 33.33
 			modifier = {
-				trigger = {}
+				trigger = {
+
+				}
 				add = -100
 			}
 		}
@@ -177,73 +186,96 @@ ca_central_america.0 = {
 				is_ai = yes
 			}
 			hidden_effect = {
-				trigger_event = {
+				trigger_event = { 
 					id = central_america.4
 					years = 2
 				}
 			}
 		}
 	}
+	
 }
-
-ca_central_america.1 = {
+##A local newspaper proposed the formation of a state that would include the regions of Quetzaltenango, Totonicapán, Sololá and Suchitepéquez.
+ca_central_america.1 = { 
 	type = country_event
-	placement = s:STATE_GUATEMALA
+	placement = s:STATE_GUATEMALA	
 	title = ca_central_america.1.t
 	desc = ca_central_america.1.d
 	flavor = ca_central_america.1.f
+	
 	event_image = {
 		video = "southamerica_aristocrats"
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
+	
 	trigger = {
 		game_date =< 1836.5.1
-		exists = c:UCA
-		this = c:UCA
+		exists = c:UCA 
+		this = c:UCA 
 	}
+	
 	option = {
-		name = ca_central_america.1.a
+		name = ca_central_america.1.a #support the creation of a new state
 		default_option = yes
+				
+   
 		set_variable = more_liked_ALT
+		
 		ai_chance = {
 			base = 50
 		}
 	}
 	option = {
-		name = ca_central_america.1.b
+		name = ca_central_america.1.b #We have to stop the owner of this newspaper
 		trigger = {
 			c:UCA = {
-				is_enacting_law = law_type:law_censorship
+			is_enacting_law = law_type:law_censorship
 			}
 		}
 		scope:ca_guatemala_1836_1838 = {
-			set_variable = censorship_liked_ALT
-		}
-	}
+		set_variable = censorship_liked_ALT
+		}	
+	}	
 	option = {
-		name = ca_central_america.1.c
+		name = ca_central_america.1.c #Ignore the situation in Guatemala
 		scope:ca_guatemala_1836_1838 = {
-			set_variable = ignore_ALT
+		set_variable = ignore_ALT
 		}
+			
 	}
+	
 }
-
-ca_central_america.2 = {
+##Voting of creation for Los altos
+ca_central_america.2 = { # 2 de febrero de 1838 
 	type = country_event
+
+	
 	title = ca_central_america.2.t
 	desc = ca_central_america.2.d
 	flavor = ca_central_america.2.f
+	
 	event_image = {
 		video = ""
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
+	
 	trigger = {}
+
+	
+
+	
 	option = {
-		name = ca_central_america.2.a
+		name = ca_central_america.2.a #federal congress create a the new state
 		default_option = yes
 		set_variable = creation_ALT
 		ai_chance = {
@@ -251,90 +283,120 @@ ca_central_america.2 = {
 		}
 	}
 	option = {
-		name = ca_central_america.2.b
-		set_variable = rejects_ALT
+		name = ca_central_america.2.b #federal congress rejects the new state
+       set_variable = rejects_ALT
 		add_radicals = {
 			value = small_radicals
-		}
+	    }
 		ai_chance = {
 			base = 50
 		}
-	}
-}
+    }
 
-ca_central_america.3 = {
+	
+}
+##Creation of Los Altos
+ca_central_america.3 = { 
 	type = country_event
+
+	
 	title = ca_central_america.3.t
 	desc = ca_central_america.3.d
 	flavor = ca_central_america.3.f
+	
 	event_image = {
 		video = ""
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
+	
 	trigger = {
-		has_variable = creation_ALT
+    has_variable = creation_ALT
 	}
-	immediate = {
-		create_country = {
-			tag = ALT
-			origin = this
-			province = p:x42124E
-			province = p:x78C465
-			province = p:xD9BEFE
-			on_created = {
-				save_scope_as = scope_ALT
-			}
-		}
-		create_diplomatic_pact = {
-			country = c:ALT
-			type = subject_type_dependency
-		}
-	}
-	option = {
-		name = ca_central_america.3.a
-		default_option = yes
-		ai_chance = {
-			base = 50
-		}
-	}
-	option = {
-		name = ca_central_america.3.b
-		c:ALT = {}
-		play_as = c:ALT
-		ai_chance = {
-			base = 50
-		}
-	}
-}
+	
 
-ca_central_america.4 = {
+	immediate = { 
+	
+     create_country = {
+				tag = ALT
+				origin = this
+				province = p:x42124E
+				province = p:x78C465
+				province = p:xD9BEFE
+				on_created = {
+				save_scope_as = scope_ALT
+				}
+			}
+		
+		create_diplomatic_pact = {
+           country = c:ALT
+           type = subject_type_dependency
+       }
+	}
+
+	
+	
+	
+	option = {
+		name = ca_central_america.3.a #voting of a new state
+		default_option = yes
+			ai_chance = {
+			base = 50
+		}
+	}
+	option = {
+		name = ca_central_america.3.b #Play as the new state
+		c:ALT = {}
+
+		play_as = c:ALT
+		
+          ai_chance = {
+			base = 50
+		}
+	}
+	
+
+}
+##The vote on the creation of the new state was missed
+ca_central_america.4 = { 
 	type = country_event
+
+	
 	title = ca_central_america.4.t
 	desc = ca_central_america.4.d
 	flavor = ca_central_america.4.f
+	
 	event_image = {
 		video = ""
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
+	
 	option = {
-		name = ca_central_america.4.a
+		name = ca_central_america.4.a #federal congress create a the new state
 		scope:scope_ALT = {
 			change_relations = {
 				country = ROOT
 				value = 100
 			}
-		}
+			}
 		default_option = yes
 		ai_chance = {
 			base = 50
 		}
 	}
+	
 	option = {
-		name = ca_central_america.4.b
+		name = ca_central_america.4.b #federal congress rejects the new state
+
 		scope:secession_capital = {
 			state_region = {
 				add_claim = ROOT
@@ -353,198 +415,258 @@ ca_central_america.4 = {
 					add_devastation = 25
 				}
 			}
-		}
+	    }
 		ai_chance = {
 			base = 50
 		}
-	}
-}
+    }	
+	
+	#after = {
+	#}
 
-ca_central_america.5 = {
+}
+##The Fate of Soconusco
+ca_central_america.5 = { 
 	type = country_event
+
+	
 	title = ca_central_america.5.t
 	desc = ca_central_america.5.d
 	flavor = ca_central_america.5.f
+	
 	event_image = {
 		video = ""
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
-	trigger = {}
+	
+	trigger = {
+	}
+	
 	immediate = {
-		create_country = {
-			tag = DG6
-			origin = this
-			state = s:STATE_CHIAPAS.region_state:UCA
-			on_created = {
+			create_country = {
+				tag = DG6
+				origin = this
+				state = s:STATE_CHIAPAS.region_state:UCA
+				on_created = {
 				save_scope_as = scope_DG6
+				}
 			}
-		}
-	}
-	option = {
-		name = ca_central_america.5.a
-		create_diplomatic_pact = {
-			country = DG6
-			type = subject_type_dependency
-		}
-		set_variable = created_DG6
-		default_option = yes
-	}
-	option = {
-		name = ca_central_america.5.b
-		c:UCA = { annex = DG6 }
-		set_variable = guatelama_integrate_soconusco
-	}
-	option = {
-		name = ca_central_america.5.c
-		c:UCA = { annex = DG6 }
-		set_variable = quetzaltenango_integrate_soconusco
-	}
-}
+		
 
-ca_central_america.6 = {
+    }
+	option = {
+		name = ca_central_america.5.a #federal congress create a the new state
+	    create_diplomatic_pact = {
+           country = DG6
+           type = subject_type_dependency
+       }
+	}
+
+	   	set_variable = created_DG6
+		default_option = yes
+	
+	
+	option = {
+		name = ca_central_america.5.b #try to integrate Soconusco into to Guatemala
+        c:UCA = {annex = DG6}
+	   	set_variable = guatelama_integrate_soconusco
+    }	
+	option = {
+		name = ca_central_america.5.c #try to integrate Soconusco into the Quetzaltenango District
+        c:UCA = {annex = DG6}		
+	   	set_variable = quetzaltenango_integrate_soconusco
+    }	
+}
+##English influence in the Caribbean
+ca_central_america.6 = { 
 	type = country_event
 	title = ca_central_america.6.t
 	desc = ca_central_america.6.d
 	flavor = ca_central_america.6.f
+	
 	event_image = {
 		video = ""
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
+	
 	trigger = {
 		game_date =< 1836.1.1
-		exists = c:UCA
-		this = c:UCA
+		exists = c:UCA 
+		this = c:UCA 
 		any_province = {
 			p:x47C5F8 = {
-				owner = c:UCA
+			owner = c:UCA
 			}
-		}
-	}
-	immediate = {}
-	option = {
-		name = ca_central_america.6.a
-		default_option = yes
-		create_country = {
-			tag = PP1
-			origin = UCA
-			province = p:x47C5F8
-			on_created = {
-				save_scope_as = scope_PP1
-				create_character = {
-					first_name = John
-					last_name = Gallagher
-					historical = yes
-					is_general = yes
-					interest_group = ig_armed_forces
-					ideology = ideology:ideology_federalist
-					ruler = yes
-					ig_leader = yes
-					traits = {
-						explorer
-					}
-				}
-				create_diplomatic_pact = {
-					country = c:PP1
-					type = subject_type_dependency
-				}
-			}
-		}
-		set_variable = proclaim_pp1_uca
-		c:CLM = {
-			trigger_event = {
-				id = central_america.3
-				months = 6
-			}
-		}
-		ai_chance = {
-			base = 33.33
-		}
-	}
-	option = {
-		name = ca_central_america.6.b
-		set_owner_of_provinces = { country = c:GBR provinces = {x10EF80} }
-		c:GBR = {}
-		ai_chance = {
-			base = 33.33
-		}
-	}
-	option = {
-		name = ca_central_america.6.c
-		ai_chance = {
-			base = 33.33
-		}
-	}
-}
 
-ca_central_america.7 = {
+		}
+	}
+	
+
+	immediate = {
+
+	}
+	
+	option = {
+		name = ca_central_america.6.a #proclaim authority on the island of Bocas del Toro
+		default_option = yes
+	create_country = {
+	tag = PP1
+	origin = UCA
+	province = p:x47C5F8
+	on_created = {
+	save_scope_as = scope_PP1
+		         	create_character = {
+					first_name = John 
+				    last_name = Gallagher
+				    historical = yes
+	         	 	is_general = yes
+	         	 	interest_group = ig_armed_forces
+	         	 	ideology = ideology:ideology_federalist
+	         	 	ruler = yes
+	         	 	ig_leader = yes			
+	         	 	traits = {
+	         	 		explorer 
+	         	 	}
+	}
+			create_diplomatic_pact = {
+            country = c:PP1
+            type = subject_type_dependency
+        }
+    }	
+	}	
+   
+		set_variable = proclaim_pp1_uca
+		c:CLM = {		
+		trigger_event = { 
+			id = central_america.3
+			months = 6
+		}}
+		ai_chance = {
+			base = 33.33
+		}
+	}
+	option = {
+		name = ca_central_america.6.b #Let Britain's influence grow in Bocas del Toro
+		set_owner_of_provinces = { country = c:GBR provinces = {x10EF80} }	
+			c:GBR = {}
+	
+			
+			
+			ai_chance = {
+			base = 33.33
+		}
+	}	
+	option = {
+		name = ca_central_america.6.c #Abandon ambitions in Bocas del Toro
+		ai_chance = {
+			base = 33.33
+		}
+			
+	}
+	
+
+}
+##Costa Rica / UCA Abandon ambitions in Bocas del Toro GBA Version 
+ca_central_america.7 = { # 2 de febrero de 1838 
 	type = country_event
+
+	
 	title = ca_central_america.7.t
 	desc = ca_central_america.7.d
 	flavor = ca_central_america.7.f
+	
 	event_image = {
 		video = ""
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
+	
 	trigger = {}
+
+	
+
+	
 	option = {
-		name = ca_central_america.7.a
+		name = ca_central_america.7.a #reclam Bocas de Toro
 		default_option = yes
 		set_variable = creation_pp1_gbr
-		create_country = {
-			tag = PP1
-			origin = GBR
-			province = p:x47C5F8
-			on_created = {
-				save_scope_as = scope_PP1
-				create_character = {
-					is_general = yes
-					interest_group = ig_armed_forces
-					ideology = ideology:ideology_jingoist_leader
-					ruler = yes
-					ig_leader = yes
-					traits = {
-						explorer
-					}
-				}
-				create_diplomatic_pact = {
-					country = c:PP1
-					type = puppet
-				}
-			}
-		}
+	create_country = {
+	tag = PP1
+	origin = GBR
+	province = p:x47C5F8
+	on_created = {
+	save_scope_as = scope_PP1
+	create_character = {
+	    is_general = yes
+	    interest_group = ig_armed_forces
+	    ideology = ideology:ideology_jingoist_leader
+	    ruler = yes
+	    ig_leader = yes			
+	    traits = {
+	    explorer 
+	     }
+	}
+			create_diplomatic_pact = {
+            country = c:PP1
+            type = puppet
+        }
+    }	
+	}
 		ai_chance = {
 			base = 50
 		}
 	}
 	option = {
-		name = ca_central_america.7.b
-		set_variable = rejects_pp1_gbr
+		name = ca_central_america.7.b #DO NOTHING
+       set_variable = rejects_pp1_gbr
+
 		ai_chance = {
 			base = 50
 		}
-	}
-}
+    }
 
-ca_central_america.8 = {
+	
+}
+##Costa Rica / UCA Abandon ambitions in Bocas del Toro CLN Version 
+ca_central_america.8 = { # 2 de febrero de 1838 
 	type = country_event
+
+	
 	title = ca_central_america.8.t
 	desc = ca_central_america.8.d
 	flavor = ca_central_america.8.f
+	
 	event_image = {
 		video = ""
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
+	
 	trigger = {}
+
+	
+
+	
 	option = {
-		name = ca_central_america.8.a
+		name = ca_central_america.8.a #reclam Bocas de Toro
 		default_option = yes
 		set_variable = creation_ALT
 		ai_chance = {
@@ -552,79 +674,103 @@ ca_central_america.8 = {
 		}
 	}
 	option = {
-		name = ca_central_america.8.b
-		set_variable = rejects_ALT_gba
+		name = ca_central_america.8.b #DO NOTHING
+       set_variable = rejects_ALT_gba
 		add_radicals = {
 			value = small_radicals
-		}
+	    }
 		ai_chance = {
 			base = 50
 		}
-	}
-}
+    }
 
-ca_central_america.9 = {
+	
+}
+##Costa Rica / UCA CLN military intervention
+ca_central_america.9 = { # 2 de febrero de 1838 
 	type = country_event
+	
 	title = ca_central_america.9.t
 	desc = ca_central_america.9.d
 	flavor = ca_central_america.9.f
+	
 	event_image = {
 		video = ""
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
-	trigger = {}
+	
+	trigger = {
+	
+	}
+
+	
 	option = {
-		name = ca_central_america.9.a
+		name = ca_central_america.9.a #intervene militarily in Bocas de Toro
 		default_option = yes
 		set_owner_of_provinces = { country = c:CLM provinces = {x10EF80} }
 		set_variable = intervene_pp1
-		c:CLM = {
-			create_incident = {
-				country = UCA
-				value = 10
+				c:CLM = {
+				create_incident = {
+					country = UCA
+					value = 10
+				}
 			}
-		}
 		ai_chance = {
 			base = 50
 		}
 	}
 	option = {
-		name = ca_central_america.9.b
-		set_variable = rejects_pp1_clm
+		name = ca_central_america.9.b #DO NOTHING
+       set_variable = rejects_pp1_clm
+
 		ai_chance = {
 			base = 50
 		}
-	}
-}
+    }
 
-ca_central_america.10 = {
+	
+}
+##In Bocas de Toro on the creation of the independence new state
+ca_central_america.10 = { 
 	type = country_event
+
+	
 	title = ca_central_america.10.t
 	desc = ca_central_america.10.d
 	flavor = ca_central_america.10.f
+	
 	event_image = {
 		video = ""
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
+	
 	option = {
-		name = ca_central_america.10.a
+		name = ca_central_america.10.a #federal congress create a the new state
 		scope:scope_ALT = {
 			change_relations = {
 				country = ROOT
 				value = 100
 			}
-		}
+			}
 		default_option = yes
 		ai_chance = {
 			base = 50
 		}
 	}
+	
 	option = {
-		name = ca_central_america.10.b
+		name = ca_central_america.10.b #federal congress rejects the new state
+
 		scope:secession_capital = {
 			state_region = {
 				add_claim = ROOT
@@ -643,159 +789,215 @@ ca_central_america.10 = {
 					add_devastation = 25
 				}
 			}
-		}
+	    }
 		ai_chance = {
 			base = 50
 		}
-	}
-}
+    }	
+	
+	#after = {
+	#}
 
-ca_central_america.11 = {
+}
+##The Fate of Bocas de Toro
+ca_central_america.11 = { 
 	type = country_event
+
+	
 	title = ca_central_america.11.t
 	desc = ca_central_america.11.d
 	flavor = ca_central_america.11.f
+	
 	event_image = {
 		video = ""
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
-	trigger = {}
+	
+	trigger = {
+
+	
+	}
+	
 	immediate = {
+
+
 		it = {
-			limit = {
+				limit = {
 				exists = COS
 			}
-			s:STATE_PANAMA = {
-				add_claim = COS
-			}
-		}
-		it = {
-			limit = {
-				exists = UCA
-				NOT = { has_variable = rejects_pp1_uca }
-			}
-			s:STATE_PANAMA = {
-				add_claim = UCA
-			}
-		}
-		it = {
-			limit = {
-				NOT = { has_variable = rejects_pp1_clm }
-			}
-			s:STATE_PANAMA = {
-				add_claim = CLM
-			}
-		}
-		it = {
-			limit = {
-				NOT = { has_variable = rejects_pp1_gba }
-			}
-			s:STATE_PANAMA = {
-				add_claim = GBR
-			}
-		}
-		it = {
-			limit = {
-				NOT = { has_variable = rejects_pp1_usa }
-			}
-			s:STATE_PANAMA = {
-				add_claim = USA
-			}
-		}
+
+	s:STATE_PANAMA = {
+	add_claim = COS
 	}
-	option = {
-		name = ca_central_america.11.a
-		create_country = {
-			tag = PP1
-			origin = UCA
-			province = p:x47C5F8
-			on_created = {
-				save_scope_as = scope_PP1
+	}
+	
+	it = {
+		limit = {
+		exists = UCA
+			NOT = { has_variable = rejects_pp1_uca }
 			}
-		}
+ 	s:STATE_PANAMA = {
+	add_claim = UCA
+	}
+    }
+	it = {
+		limit = {
+			NOT = { has_variable = rejects_pp1_clm }
+			}
+
+	s:STATE_PANAMA = {
+	add_claim = CLM
+	}
+	}
+	it = {
+		limit = {
+			NOT = { has_variable = rejects_pp1_gba }
+			}
+
+	s:STATE_PANAMA = {
+	add_claim = GBR
+	}
+	}	
+	it = {
+		limit = {
+			NOT = { has_variable = rejects_pp1_usa }
+			}
+
+	s:STATE_PANAMA = {
+	add_claim = USA
+	}
+	}		
+
+    }
+	option = {
+		name = ca_central_america.11.a #federal congress create a the new state
+			create_country = {
+				tag = PP1
+				origin = UCA
+	            province = p:x47C5F8
+				on_created = {
+				save_scope_as = scope_PP1
+				}
+			}
+	
+
 		default_option = yes
 	}
-}
+	
 
-ca_central_america.12 = {
+}
+##New Granada usurpation of Boca de Toro
+ca_central_america.12 = { 
 	type = country_event
+
+	
 	title = ca_central_america.12.t
 	desc = ca_central_america.12.d
 	flavor = ca_central_america.12.f
+	
 	event_image = {
 		video = ""
 	}
+	
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
 	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
 	duration = 3
+	
 	option = {
-		name = ca_central_america.12.a
-		create_country = {
-			tag = PP1
-			origin = CLM
-			province = p:x47C5F8
-			on_created = {
+		name = ca_central_america.12.a #federal congress accepts the intervention
+			create_country = {
+				tag = PP1
+				origin = CLM
+	            province = p:x47C5F8
+				on_created = {
 				save_scope_as = scope_PP1
+				}
 			}
-		}
-		c:CLM = {
-			create_diplomatic_pact = {
-				country = PP1
-				type = subject_type_dependency
+			c:CLM = {
+		   create_diplomatic_pact = {
+           country = PP1
+           type = subject_type_dependency
+              }
 			}
-		}
-		create_diplomatic_play = {
-			name = intervention_in_bocas
-			target_country = c:PP1
-			type = dp_annex_war
-		}
-		change_relations = {
-			country = CLM
-			value = -100
-		}
+			
+			
+			create_diplomatic_play = {
+			
+				name = intervention_in_bocas
+				target_country = c:PP1
+				type = dp_annex_war
+			}
+
+			change_relations = {
+				country = CLM
+				value = -100
+			}
+			
 		default_option = yes
 		ai_chance = {
 			base = 50
 		}
 	}
+	
 	option = {
-		name = ca_central_america.12.b
+		name = ca_central_america.12.b #federal congress rejected the intervention
+
 		scope:secession_capital = {
 			state_region = {
 				add_claim = ROOT
 			}
 		}
 		s:STATE_COSTA_RICA = {
-			add_radicals = {
-				value = large_radicals
-			}
-			add_devastation = 10
+		add_radicals = {
+			value = large_radicals
+			
 		}
+		add_devastation = 10
+		}
+
+	    
 		ai_chance = {
 			base = 50
 		}
-	}
-}
+    }	
+	
 
+}
+## Dissolution of Central America
 ca_central_america.13 = {
 	type = country_event
 	placement = ROOT
 	title = ca_central_america.13.t
 	desc = ca_central_america.13.d
-	flavor = ca_central_america.13.f
+	flavor =  ca_central_america.13.f
+
 	duration = 3
+
 	event_image = {
 		video = "ep1_transfer_of_authority"
 	}
+
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
 	icon = "gfx/interface/icons/event_icons/event_fire.dds"
-	trigger = {}
+
+	trigger = {
+
+	}
+
 	immediate = {
 		capital = {
 			save_scope_as = capital_scope
 		}
+		
+		# Guatemala without Soconusco
 		if = {
 			limit = {
 				exists = s:STATE_GUATEMALA.region_state:UCA
@@ -810,21 +1012,189 @@ ca_central_america.13 = {
 				on_created = {
 					set_variable = secession_country
 					save_scope_as = scope_GUA
-					add_primary_culture = cu:guatemalan
-					remove_primary_culture = cu:central_american
-					s:STATE_GUATEMALA = {
-						add_homeland = cu:guatemalan
-						remove_homeland = cu:central_american
-					}
+				add_primary_culture = cu:guatemalan
+				remove_primary_culture = cu:central_american
+				s:STATE_GUATEMALA = {
+				add_homeland = cu:guatemalan
+				remove_homeland = cu:central_american
+				
+				}
+				}
+			}
+        }
+		#Guatemala With Soconusco
+        if = {
+			limit = {
+				exists = s:STATE_GUATEMALA.region_state:UCA
+				s:STATE_GUATEMALA.region_state:UCA = {
+					is_capital = no
+				}
+				has_variable = guatelama_integrate_soconusco
+			}
+			create_country = {
+				tag = GUA
+				origin = this
+				state = s:STATE_GUATEMALA.region_state:UCA
+				on_created = {
+					set_variable = ca_secession_country
+				}
+			}
+			c:GUA = { save_scope_as = scope_GUA }
+			if = {
+				limit = { exists = s:STATE_CHIAPAS.region_state:UCA }
+				s:STATE_CHIAPAS.region_state:UCA = { set_state_owner = c:GUA }
+			}
+		}
+		# Los Altos with Soconusco
+		if = {
+			limit = {
+			    has_variable = quetzaltenango_integrate_soconusco
+				NOT = { exists = c:ALT }
+				exists = s:STATE_CHIAPAS.region_state:UCA
+
+				s:STATE_CHIAPAS.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = ALT
+				origin = this
+				state = s:STATE_CHIAPAS.region_state:UCA
+				province = p:x42124E
+				province = p:x78C465
+				province = p:xD9BEFE
+				on_created = {
+					set_variable = secession_country
+					save_scope_as = scope_ALT					
 				}
 			}
 		}
-		# Otros if para crear otros países...
+		# Los Altos without Soconusco
+		if = {
+			limit = {
+			    NOT = { has_variable = quetzaltenango_integrate_soconusco }
+				NOT = { exists = c:ALT }
+				exists = s:STATE_CHIAPAS.region_state:UCA
+
+				s:STATE_CHIAPAS.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = ALT
+				origin = this
+				province = p:x42124E
+				province = p:x78C465
+				province = p:xD9BEFE
+				on_created = {
+					set_variable = secession_country
+					save_scope_as = scope_ALT					
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_HONDURAS.region_state:UCA
+				s:STATE_HONDURAS.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = HON
+				origin = this
+				state = s:STATE_HONDURAS.region_state:UCA
+				on_created = {
+					save_scope_as = scope_HON	
+					set_variable = secession_country
+				add_primary_culture = cu:honduran
+				remove_primary_culture = cu:central_american
+				s:STATE_HONDURAS = {
+				add_homeland = cu:honduran
+				remove_homeland = cu:central_american
+				
+				}
+				
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_COSTA_RICA.region_state:UCA
+				s:STATE_COSTA_RICA.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = COS
+				origin = this
+				state = s:STATE_COSTA_RICA.region_state:UCA
+				on_created = {
+					save_scope_as = scope_COS	
+					set_variable = secession_country
+				add_primary_culture = cu:costa_rican
+				remove_primary_culture = cu:central_american
+			s:STATE_COSTA_RICA = {
+				add_homeland = cu:costa_rican
+				remove_homeland = cu:central_american			
+				}
+				
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_SAN_SALVADOR.region_state:UCA
+				s:STATE_SAN_SALVADOR.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = ELS
+				origin = this
+				state = s:STATE_SAN_SALVADOR.region_state:UCA
+				on_created = {
+					save_scope_as = scope_ELS	
+					set_variable = secession_country
+				add_primary_culture = cu:el_salvadorian
+				remove_primary_culture = cu:central_american
+				s:STATE_SAN_SALVADOR = {
+				add_homeland = cu:el_salvadorian
+                remove_homeland = cu:central_american
+				
+				}				
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_NICARAGUA.region_state:UCA
+				s:STATE_NICARAGUA.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = NIC
+				origin = this
+				state = s:STATE_NICARAGUA.region_state:UCA
+				on_created = {
+					save_scope_as = scope_NIC	
+					set_variable = secession_country
+			add_primary_culture = cu:nicaraguan
+			remove_primary_culture = cu:central_american
+			s:STATE_NICARAGUA = {
+				add_homeland = cu:nicaraguan
+				remove_homeland = cu:central_american
+				
+			}			
+				}
+			}
+		}
 	}
-	option = {
+
+	option = { #Fine fine
 		name = ca_central_america.13.a
 		default_option = yes
-		# Cambiar tag según la capital
+		# Change tag to whatever is appropriate ro your capital state
 		if = {
 			limit = {
 				NOT = { exists = c:NIC }
@@ -835,12 +1205,85 @@ ca_central_america.13 = {
 			s:STATE_NICARAGUA = {
 				add_homeland = cu:nicaraguan
 				remove_homeland = cu:central_american
+				
 			}
 			add_primary_culture = cu:nicaraguan
-			remove_primary_culture = cu:central_american
+			remove_primary_culture = cu:central_american			
 			change_tag = NIC
 		}
-		# Otros if para otros países...
+		if = {
+			limit = {
+				NOT = { exists = c:ELS }
+				capital = {
+					state_region = s:STATE_SAN_SALVADOR
+				}
+			}
+				s:STATE_SAN_SALVADOR = {
+				add_homeland = cu:el_salvadorian
+                remove_homeland = cu:central_american
+				
+				}
+				add_primary_culture = cu:el_salvadorian
+				remove_primary_culture = cu:central_american				
+			change_tag = ELS
+			
+		}
+		if = {
+			limit = {
+				NOT = { exists = c:COS }
+				capital = {
+					state_region = s:STATE_COSTA_RICA
+				}
+			}
+				s:STATE_COSTA_RICA = {
+				add_homeland = cu:costa_rican
+				remove_homeland = cu:central_american			
+				}
+			change_tag = COS
+		}
+		if = {
+			limit = {
+				NOT = { exists = c:HON }
+				capital = {
+					state_region = s:STATE_HONDURAS
+				}
+			}
+				s:STATE_HONDURAS = {
+				add_homeland = cu:honduran
+				remove_homeland = cu:central_american
+				
+				}
+				add_primary_culture = cu:honduran
+				remove_primary_culture = cu:central_american				
+			change_tag = HON
+		}
+		if = {
+			limit = {
+				NOT = { exists = c:GUA }
+				capital = {
+					state_region = s:STATE_GUATEMALA
+				}
+			}
+				s:STATE_GUATEMALA = {
+				add_homeland = cu:guatemalan
+				remove_homeland = cu:central_american
+				
+				}
+				add_primary_culture = cu:guatemalan
+				remove_primary_culture = cu:central_american				
+			change_tag = GUA
+		}
+		if = {
+			limit = {
+				NOT = { exists = c:ALT }
+				capital = {
+					state_region = s:STATE_GUATEMALA
+				}
+			}
+				add_primary_culture = cu:guatemalan
+				remove_primary_culture = cu:central_american			
+			change_tag = ALT
+		}
 		capital = {
 			add_loyalists_in_state = {
 				value = 0.5
@@ -864,10 +1307,10 @@ ca_central_america.13 = {
 			}
 		}
 	}
-	option = {
+
+	option = { #We fight to the end
 		name = ca_central_america.13.b
 		add_journal_entry = { type = je_reunify_central_america }
-		# Cambiar tag según la capital
 		if = {
 			limit = {
 				NOT = { exists = c:NIC }
@@ -877,7 +1320,43 @@ ca_central_america.13 = {
 			}
 			change_tag = NIC
 		}
-		# Otros if para otros países...
+		if = {
+			limit = {
+				NOT = { exists = c:ELS }
+				capital = {
+					state_region = s:STATE_SAN_SALVADOR
+				}
+			}
+			change_tag = ELS
+		}
+		if = {
+			limit = {
+				NOT = { exists = c:COS }
+				capital = {
+					state_region = s:STATE_COSTA_RICA
+				}
+			}
+			change_tag = COS
+		}
+		if = {
+			limit = {
+				NOT = { exists = c:HON }
+				capital = {
+					state_region = s:STATE_HONDURAS
+				}
+			}
+			change_tag = HON
+		}
+		if = {
+			limit = {
+				NOT = { exists = c:GUA }
+				capital = {
+					state_region = s:STATE_GUATEMALA
+				}
+			}
+			change_tag = GUA
+		}
+		# add claims on any state you just lost
 		every_country = {
 			limit = {
 				has_variable = secession_country
@@ -886,7 +1365,9 @@ ca_central_america.13 = {
 				state_region = {
 					add_claim = ROOT
 					add_devastation = 25
+					
 				}
+				
 			}
 			change_relations = {
 				country = ROOT
@@ -895,81 +1376,101 @@ ca_central_america.13 = {
 		}
 	}
 }
-
+## The Livingston Penal Code
 ca_central_america.14 = {
 	type = country_event
 	placement = ROOT
 	title = ca_central_america.14.t
 	desc = ca_central_america.14.d
-	flavor = ca_central_america.14.f
+	flavor =  ca_central_america.14.f
+
 	duration = 2
+
 	event_image = {
 		video = "europenorthamerica_capitalists_meeting"
 	}
+
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
 	trigger = {
 		this = c:UCA
 	}
+	
 	immediate = {
-		it = {
-			limit = { has_variable = historic_central_american }
-			set_variable = {
-				name = frca_guatemala_peace_var
-				days = 50
-			}
-			set_variable = {
-				name = frca_nicaragua_peace_var
-				days = 90
-			}
-			set_variable = {
-				name = frca_honduras_peace_var
-				days = 130
-			}
+	it = {
+	limit = { has_variable = historic_central_american }
+		set_variable = {
+		name = frca_guatemala_peace_var
+		    days = 50
+		}
+		set_variable = {
+			name = frca_nicaragua_peace_var
+			days = 90
+		}
+		set_variable = {
+			name = frca_honduras_peace_var
+			days = 130
 		}
 	}
-	option = {
+
+	}
+
+	option = { #Adopt it
 		name = ca_central_america.14.a
 		default_option = yes
+		
 		add_modifier = {
 			name = uca_new_penal_code
 			years = 10
 			is_decaying = yes
 		}
+		
 		ai_chance = {
 			base = 50
 		}
 	}
-	option = {
+
+	option = { #Leave it be
 		name = ca_central_america.14.b
+		
 		ai_chance = {
 			base = 50
 		}
 	}
 }
-
+##Cholera Outbreak in Guatemala
 ca_central_america.15 = {
 	type = country_event
 	placement = ROOT
 	title = ca_central_america.15.t
 	desc = ca_central_america.15.d
-	flavor = ca_central_america.15.f
+	flavor =  ca_central_america.15.f
+
 	duration = 30
+
 	event_image = {
 		video = "southamerica_war_civilians"
 	}
+
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
 	trigger = {
 		game_date >= 1837.2.2
 		NOT = { has_variable = uca_cholera_pandemic }
 		s:STATE_GUATEMALA = {
 			any_scope_state = {
-				state_region = { is_homeland = cu:central_american }
-				NOT = { has_variable = ca_cholera_affect }
+			state_region = { is_homeland = cu:central_american }
+			NOT = { has_variable = ca_cholera_affect }
+			s:STATE_GUATEMALA = {
 			}
 		}
+	 }
 	}
+	
 	immediate = {
 		set_variable = uca_cholera_pandemic
 		s:STATE_GUATEMALA = {
@@ -979,9 +1480,10 @@ ca_central_america.15 = {
 			save_scope_as = cholera_affect_state
 		}
 	}
-	option = {
+	
+	option = { #Quarantine the state
 		name = ca_central_america.15.a
-		default_option = yes
+		default_option = yes 
 		scope:cholera_affect_state = {
 			set_variable = ca_cholera_affect
 			add_modifier = {
@@ -993,11 +1495,13 @@ ca_central_america.15 = {
 				days = 370
 			}
 		}
+		
 		ai_chance = {
 			base = 10
 		}
 	}
-	option = {
+	
+	option = { # Let it ravage the country
 		name = ca_central_america.15.b
 		scope:cholera_affect_state = {
 			set_variable = ca_cholera_affect
@@ -1006,24 +1510,31 @@ ca_central_america.15 = {
 				days = 365
 			}
 		}
+		
 		ai_chance = {
 			base = 90
 		}
 	}
-}
 
+}
+##Generic Cholera Outbreak in Central America
 ca_central_america.16 = {
 	type = country_event
 	placement = ROOT
 	title = ca_central_america.16.t
 	desc = ca_central_america.16.d
-	flavor = ca_central_america.16.f
+	flavor =  ca_central_america.16.f
+
 	duration = 30
+
 	event_image = {
 		video = "southamerica_war_civilians"
 	}
+
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
 	trigger = {
 		game_date >= 1837.2.2
 		NOT = { has_variable = uca_cholera_pandemic }
@@ -1032,6 +1543,7 @@ ca_central_america.16 = {
 			NOT = { has_variable = ca_cholera_affect }
 		}
 	}
+	
 	immediate = {
 		set_variable = uca_cholera_pandemic
 		random_scope_state = {
@@ -1041,9 +1553,10 @@ ca_central_america.16 = {
 			save_scope_as = cholera_affect_state
 		}
 	}
-	option = {
+	
+	option = { #Quarantine the state
 		name = ca_central_america.16.a
-		default_option = yes
+		default_option = yes 
 		scope:cholera_affect_state = {
 			set_variable = ca_cholera_affect
 			add_modifier = {
@@ -1055,11 +1568,13 @@ ca_central_america.16 = {
 				days = 370
 			}
 		}
+		
 		ai_chance = {
 			base = 10
 		}
 	}
-	option = {
+	
+	option = { # Let it ravage the country
 		name = ca_central_america.16.b
 		scope:cholera_affect_state = {
 			set_variable = ca_cholera_affect
@@ -1068,25 +1583,33 @@ ca_central_america.16 = {
 				days = 365
 			}
 		}
+		
 		ai_chance = {
 			base = 90
 		}
 	}
-}
 
+}
+## Cholera Outbreak Spreads
 ca_central_america.17 = {
 	type = country_event
 	placement = ROOT
 	title = ca_central_america.17.t
 	desc = ca_central_america.17.d
-	flavor = ca_central_america.17.f
+	flavor =  ca_central_america.17.f
+
 	duration = 2
+
 	event_image = {
 		video = "southamerica_war_civilians"
 	}
+
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
 	cooldown = { months = 4 }
+
 	trigger = {
 		has_variable = uca_cholera_pandemic
 		any_scope_state = {
@@ -1100,6 +1623,7 @@ ca_central_america.17 = {
 			}
 		}
 	}
+	
 	immediate = {
 		random_scope_state = {
 			limit = {
@@ -1126,24 +1650,28 @@ ca_central_america.17 = {
 			}
 		}
 	}
-	option = {
+	
+	option = { #Let it spread
 		name = ca_central_america.17.a
-		default_option = yes
+		default_option = yes 
 		scope:cholera_state_spread_to = {
 			add_modifier = {
-				name = uca_cholera
+				name = uca_cholera 
 				days = 365
 			}
 		}
+		
 		ai_chance = {
 			base = 50
 		}
 	}
-	option = {
+	
+	option = { #Contain it
 		name = ca_central_america.17.b
+		default_option = yes 
 		scope:cholera_state_spread_to = {
 			add_modifier = {
-				name = uca_cholera
+				name = uca_cholera 
 				days = 365
 			}
 			add_modifier = {
@@ -1153,34 +1681,43 @@ ca_central_america.17 = {
 		}
 		every_state = {
 			limit = {
-				has_modifier = uca_cholera
-				NOT = { has_modifier = uca_quarantine }
+				has_modifier = uca_cholera 
+				NOT = { has_modifier = uca_quarantine } 
 			}
 			add_modifier = {
 				name = uca_quarantine
 				days = 370
 			}
 		}
+		
 		ai_chance = {
 			base = 50
 		}
 	}
 }
-
+## Separatism in Costa Rica
 ca_central_america.18 = {
 	type = country_event
 	placement = scope:secession_capital
 	title = ca_central_america.18.t
 	desc = ca_central_america.18.d
-	flavor = ca_central_america.18.f
+	flavor =  ca_central_america.18.f
+
 	duration = 3
+
 	event_image = {
 		video = "gfx/event_pictures/southamerica_election.bk2"
 	}
+
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+
 	icon = "gfx/interface/icons/event_icons/event_fire.dds"
-	trigger = {}
+
+	trigger = {
+
+	}
+	
 	immediate = {
 		random_scope_state = {
 			limit = {
@@ -1196,16 +1733,16 @@ ca_central_america.18 = {
 			state = scope:secession_state
 		}
 		create_diplomatic_pact = {
-			country = c:COS
-			type = ca_autonomous_province
-		}
+            country = c:COS
+            type = ca_autonomous_province
+        }		
 		c:COS = {
 			save_scope_as = scope_COS
 			save_scope_as = secession_country
 			capital = {
 				save_scope_as = secession_capital
 			}
-			create_character = {
+		        create_character = {
 				first_name = braulio
 				last_name = carrillo_colina
 				historical = yes
@@ -1220,37 +1757,44 @@ ca_central_america.18 = {
 				traits = {
 					basic_diplomat
 				}
-			}
-			ig:ig_landowners = {
-				remove_ideology = ideology_paternalistic
-				add_ideology = ideology_central_american_reactionary
-				set_interest_group_name = ig_hacendados
-			}
-			ig:ig_armed_forces = {
-				remove_ideology = ideology_paternalistic
-			}
-			ig:ig_devout = {
-				add_ideology = ideology_central_american_reactionary
-				set_interest_group_name = ig_catholic_church
-			}
+		    }
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_hacendados
+		}
+		
+		ig:ig_armed_forces = {
+			remove_ideology = ideology_paternalistic
+		}
+
+		ig:ig_devout = {
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_catholic_church
+		}
 			activate_law = law_type:law_freedom_of_conscience
-			activate_law = law_type:law_unitary
+			#activate_law = law_type:law_unitary
 			activate_law = law_type:law_mercantilism
 			activate_law = law_type:law_wealth_voting
-			it = {
-				limit = { has_variable = historic_central_american }
+		it = {
+		limit = { has_variable = historic_central_american }
+		#trigger_event = { 
+		#	id = central_america.5 months = 1
+		#}
+		}
+		it = {
+		limit = { has_variable = random_central_american }
+        random_events = {
+			50 = ca_central_america.13
+			50 = ca_central_america.14
 			}
-			it = {
-				limit = { has_variable = random_central_american }
-				random_events = {
-					50 = ca_central_america.13
-					50 = ca_central_america.14
-				}
-			}
+		}	
 		}
 	}
+
+	# Accept secession
 	option = {
-		name = ca_central_america.18.a
+		name = central_america.4.a
 		default_option = yes
 		scope:secession_country = {
 			change_relations = {
@@ -1261,18 +1805,20 @@ ca_central_america.18 = {
 				state_region = {
 					add_devastation = 15
 				}
-				add_loyalists_in_state = {
+				add_loyalists_in_state = { ## is this right? only in capital or intended to be in whole country?
 					value = 0.25
 				}
 			}
 		}
-		trigger_event = {
+		trigger_event = { 
 			id = central_america.3
 			months = 6
 		}
 	}
+
+	# Reject Secession
 	option = {
-		name = ca_central_america.18.b
+		name = central_america.4.b
 		scope:secession_capital = {
 			state_region = {
 				add_claim = ROOT
@@ -1293,29 +1839,39 @@ ca_central_america.18 = {
 			}
 		}
 	}
-	option = {
-		name = journal_flavor_ca_central_america.18.b
+	option = { #Switch tags
+		name = journal_flavor_ca_central_america.6.b
+		
 		play_as = c:COS
+		
 		ai_chance = {
 			base = 0
 		}
 	}
 }
-
+## Separatism in Nicaragua 
 ca_central_america.19 = {
 	type = country_event
 	placement = scope:secession_capital
 	title = ca_central_america.19.t
 	desc = ca_central_america.19.d
-	flavor = ca_central_america.19.f
+	flavor =  ca_central_america.19.f
+
 	duration = 3
+
 	event_image = {
 		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
 	}
+
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+
 	icon = "gfx/interface/icons/event_icons/event_fire.dds"
-	trigger = {}
+
+	trigger = {
+
+	}
+	
 	immediate = {
 		random_scope_state = {
 			limit = {
@@ -1331,17 +1887,17 @@ ca_central_america.19 = {
 			state = scope:secession_state
 		}
 		create_diplomatic_pact = {
-			country = c:NIC
-			type = ca_autonomous_province
-		}
+            country = c:NIC
+            type = ca_autonomous_province
+        }		
 		c:NIC = {
 			save_scope_as = scope_NIC
 			save_scope_as = secession_country
 			capital = {
 				save_scope_as = secession_capital
 			}
-			set_relations = { country = c:UCA value = -50 }
-			create_character = {
+				set_relations = { country = c:UCA value = -50 }
+		        create_character = {
 				first_name = jose
 				last_name = nunez
 				historical = yes
@@ -1356,41 +1912,49 @@ ca_central_america.19 = {
 				traits = {
 					basic_diplomat
 				}
-			}
-			ig:ig_landowners = {
-				remove_ideology = ideology_paternalistic
-				add_ideology = ideology_central_american_reactionary
-				set_interest_group_name = ig_hacendados
-			}
-			ig:ig_armed_forces = {
-				remove_ideology = ideology_paternalistic
-			}
-			ig:ig_devout = {
-				add_ideology = ideology_central_american_reactionary
-				set_interest_group_name = ig_catholic_church
-			}
+		    }
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_hacendados
+		}
+		
+		ig:ig_armed_forces = {
+			remove_ideology = ideology_paternalistic
+		}
+
+		ig:ig_devout = {
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_catholic_church
+		}			
 			activate_law = law_type:law_freedom_of_conscience
 			activate_law = law_type:law_unitary
 			activate_law = law_type:law_mercantilism
 			activate_law = law_type:law_wealth_voting
 			activate_law = law_type:law_censorship
-			it = {
-				limit = { has_variable = historic_central_american }
-			}
-			it = {
-				limit = { has_variable = random_central_american }
-				random_events = {
-					50 = ca_central_america.13
-					50 = ca_central_america.14
-				}
-			}
+		it = {
+		limit = { has_variable = historic_central_american }
+		#trigger_event = { 
+		#	id = central_america.5 months = 1
+		#}
 		}
+		it = {
+		limit = { has_variable = random_central_american }
+        random_events = {
+			50 = ca_central_america.13
+			50 = ca_central_america.14
+			}
+		}				
+		}
+		
 		set_variable = frca_crisis_var
-		trigger_event = {
-			id = ca_central_america.18  # Originalmente ca_central_america.6
+		trigger_event = { 
+			id = ca_central_america.6
 			months = 1
 		}
 	}
+
+	# Accept secession
 	option = {
 		name = ca_central_america.19.a
 		default_option = yes
@@ -1403,16 +1967,18 @@ ca_central_america.19 = {
 				state_region = {
 					add_devastation = 15
 				}
-				add_loyalists_in_state = {
+				add_loyalists_in_state = { ## is this right? only in capital or intended to be in whole country?
 					value = 0.25
 				}
 			}
 		}
-		trigger_event = {
+		trigger_event = { 
 			id = central_america.3
 			months = 6
 		}
 	}
+
+	# Reject Secession
 	option = {
 		name = ca_central_america.19.b
 		scope:secession_capital = {
@@ -1435,29 +2001,39 @@ ca_central_america.19 = {
 			}
 		}
 	}
-	option = {
-		name = journal_flavor_ca_central_america.19.b
+	option = { #Switch tags
+		name = journal_flavor_ca_central_america.6.b
+		
 		play_as = c:NIC
+		
 		ai_chance = {
 			base = 0
 		}
 	}
 }
-
+## Separatism in Guatemala
 ca_central_america.20 = {
 	type = country_event
 	placement = scope:secession_capital
 	title = ca_central_america.20.t
 	desc = ca_central_america.20.d
-	flavor = ca_central_america.20.f
+	flavor =  ca_central_america.20.f
+
 	duration = 3
+
 	event_image = {
 		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
 	}
+
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+
 	icon = "gfx/interface/icons/event_icons/event_fire.dds"
-	trigger = {}
+
+	trigger = {
+
+	}
+	
 	immediate = {
 		random_scope_state = {
 			limit = {
@@ -1473,17 +2049,17 @@ ca_central_america.20 = {
 			state = scope:secession_state
 		}
 		create_diplomatic_pact = {
-			country = c:GUA
-			type = ca_autonomous_province
-		}
+            country = c:GUA
+            type = ca_autonomous_province
+        }		
 		c:GUA = {
 			save_scope_as = scope_GUA
 			save_scope_as = secession_country
 			capital = {
 				save_scope_as = secession_capital
 			}
-			set_relations = { country = c:UCA value = -50 }
-			create_character = {
+					set_relations = { country = c:UCA value = -50 }
+		        create_character = {
 				first_name = jose
 				last_name = nunez
 				historical = yes
@@ -1498,44 +2074,48 @@ ca_central_america.20 = {
 				traits = {
 					basic_diplomat
 				}
-			}
-			ig:ig_landowners = {
-				remove_ideology = ideology_paternalistic
-				add_ideology = ideology_central_american_reactionary
-				set_interest_group_name = ig_hacendados
-			}
-			ig:ig_armed_forces = {
-				remove_ideology = ideology_paternalistic
-			}
-			ig:ig_devout = {
-				add_ideology = ideology_central_american_reactionary
-				set_interest_group_name = ig_catholic_church
-			}
+		    }
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_hacendados
+		}
+		
+		ig:ig_armed_forces = {
+			remove_ideology = ideology_paternalistic
+		}
+
+		ig:ig_devout = {
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_catholic_church
+		}			
 			activate_law = law_type:law_freedom_of_conscience
 			activate_law = law_type:law_unitary
 			activate_law = law_type:law_mercantilism
 			activate_law = law_type:law_wealth_voting
-			activate_law = law_type:law_censorship
-			it = {
-				limit = { has_variable = historic_central_american }
-				trigger_event = {
-					id = central_america.5 months = 1
-				}
-			}
-			it = {
-				limit = { has_variable = random_central_american }
-				random_events = {
-					50 = ca_central_america.13
-					50 = ca_central_america.14
-				}
-			}
-			set_variable = frca_crisis_var
-			trigger_event = {
-				id = central_america.5
-				months = 1
+			activate_law = law_type:law_censorship	
+		it = {
+		limit = { has_variable = historic_central_american }
+		trigger_event = { 
+			id = central_america.5 months = 1
+		}
+		}
+		it = {
+		limit = { has_variable = random_central_american }
+        random_events = {
+			50 = ca_central_america.13
+			50 = ca_central_america.14
 			}
 		}
+		set_variable = frca_crisis_var
+		trigger_event = { 
+			id = central_america.5
+			months = 1
+		}
+	 }
 	}
+
+	# Accept secession
 	option = {
 		name = ca_central_america.20.a
 		default_option = yes
@@ -1548,16 +2128,18 @@ ca_central_america.20 = {
 				state_region = {
 					add_devastation = 15
 				}
-				add_loyalists_in_state = {
+				add_loyalists_in_state = { ## is this right? only in capital or intended to be in whole country?
 					value = 0.25
 				}
 			}
 		}
-		trigger_event = {
+		trigger_event = { 
 			id = central_america.3
 			months = 6
 		}
 	}
+
+	# Reject Secession
 	option = {
 		name = ca_central_america.20.b
 		scope:secession_capital = {
@@ -1580,29 +2162,39 @@ ca_central_america.20 = {
 			}
 		}
 	}
-	option = {
+	option = { #Switch tags
 		name = ca_central_america.20.c
+		
 		play_as = c:GUA
+		
 		ai_chance = {
 			base = 0
 		}
 	}
 }
-
+## Separatism in Honduras  
 ca_central_america.21 = {
 	type = country_event
 	placement = scope:secession_capital
 	title = ca_central_america.21.t
 	desc = ca_central_america.21.d
-	flavor = ca_central_america.21.f
+	flavor =  ca_central_america.21.f
+
 	duration = 3
+
 	event_image = {
 		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
 	}
+
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+
 	icon = "gfx/interface/icons/event_icons/event_fire.dds"
-	trigger = {}
+
+	trigger = {
+
+	}
+	
 	immediate = {
 		random_scope_state = {
 			limit = {
@@ -1618,16 +2210,16 @@ ca_central_america.21 = {
 			state = scope:secession_state
 		}
 		create_diplomatic_pact = {
-			country = c:HON
-			type = ca_autonomous_province
-		}
+            country = c:HON
+            type = ca_autonomous_province
+        }		
 		c:HON = {
 			save_scope_as = scope_HON
 			save_scope_as = secession_country
 			capital = {
 				save_scope_as = secession_capital
 			}
-			set_relations = { country = c:UCA value = -50 }
+				set_relations = { country = c:UCA value = -50 }
 			create_character = {
 				first_name = juan
 				last_name = franscisco_de_molina
@@ -1643,43 +2235,47 @@ ca_central_america.21 = {
 				traits = {
 					basic_diplomat
 				}
-			}
-			ig:ig_landowners = {
-				remove_ideology = ideology_paternalistic
-				add_ideology = ideology_central_american_reactionary
-				set_interest_group_name = ig_hacendados
-			}
-			ig:ig_armed_forces = {
-				remove_ideology = ideology_paternalistic
-			}
-			ig:ig_devout = {
-				add_ideology = ideology_central_american_reactionary
-				set_interest_group_name = ig_catholic_church
-			}
+		    }
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_hacendados
+		}
+		
+		ig:ig_armed_forces = {
+			remove_ideology = ideology_paternalistic
+		}
+
+		ig:ig_devout = {
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_catholic_church
+		}			
 			activate_law = law_type:law_freedom_of_conscience
 			activate_law = law_type:law_unitary
 			activate_law = law_type:law_landed_voting
 			activate_law = law_type:law_mercantilism
-			it = {
-				limit = { has_variable = historic_central_american }
-				trigger_event = {
-					id = central_america.5 months = 1
-				}
+		it = {
+		limit = { has_variable = historic_central_american }
+		trigger_event = { 
+			id = central_america.5 months = 1
+		}
+		}
+		it = {
+		limit = { has_variable = random_central_american }
+        random_events = {
+			50 = ca_central_america.13
+			50 = ca_central_america.14
 			}
-			it = {
-				limit = { has_variable = random_central_american }
-				random_events = {
-					50 = ca_central_america.13
-					50 = ca_central_america.14
-				}
-			}
+		}				
 		}
 		set_variable = frca_crisis_var
-		trigger_event = {
+		trigger_event = { 
 			id = central_america.5
 			months = 1
 		}
 	}
+
+	# Accept secession
 	option = {
 		name = ca_central_america.21.a
 		default_option = yes
@@ -1692,16 +2288,18 @@ ca_central_america.21 = {
 				state_region = {
 					add_devastation = 15
 				}
-				add_loyalists_in_state = {
+				add_loyalists_in_state = { ## is this right? only in capital or intended to be in whole country?
 					value = 0.25
 				}
 			}
 		}
-		trigger_event = {
+		trigger_event = { 
 			id = central_america.3
 			months = 6
 		}
 	}
+
+	# Reject Secession
 	option = {
 		name = ca_central_america.21.b
 		scope:secession_capital = {
@@ -1724,14 +2322,17 @@ ca_central_america.21 = {
 			}
 		}
 	}
-	option = {
+	option = { #Switch tags
 		name = ca_central_america.21.c
+		
 		play_as = c:HON
+		
 		ai_chance = {
 			base = 0
 		}
 	}
 }
+
 ## Separatism in El Salvador
 ca_central_america.22 = {
 	type = country_event
@@ -3933,6 +4534,7 @@ ca_central_america.67 = {
 		}
 	}
 }
+
 ## Honduras declares independence on Arms
 ca_central_america.68 = {
 	type = country_event
@@ -4597,6 +5199,762 @@ ca_central_america.76 = {
 		}
 	}
 }
+
+## Nicaragua Peace Talks
+#ca_central_america.69 = {
+#	type = country_event
+#	placement = s:STATE_NICARAGUA
+#	title = ca_central_america.69.t
+#	desc = ca_central_america.69.d
+#	flavor = ca_central_america.69.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "unspecific_politicians_arguing"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+#
+#	trigger = {
+#		exists = c:NIC
+#		has_variable = nic_civil_peace_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_nicaragua_peace_var
+#	}
+#
+#	option = { #Accept Peace
+#		name = ca_central_america.69.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.27
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Reject Peace
+#		name = ca_central_america.69.b
+#		set_variable = nic_support_var
+#		trigger_event = {
+#			id = ca_central_america.21
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Costa Rica Peace Talks
+#ca_central_america.70 = {
+#	type = country_event
+#	placement = s:STATE_COSTA_RICA
+#	title = ca_central_america.70.t
+#	desc = ca_central_america.70.d
+#	flavor = ca_central_america.70.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "unspecific_politicians_arguing"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+#
+#	trigger = {
+#		exists = c:COS
+#		has_variable = cos_civil_peace_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_costarica_peace_var
+#	}
+#
+#	option = { #Accept Peace
+#		name = ca_central_america.70.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.30
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Reject Peace
+#		name = ca_central_america.70.b
+#		set_variable = cos_support_var
+#		trigger_event = {
+#			id = ca_central_america.22
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Honduras Peace Talks
+#ca_central_america.71 = {
+#	type = country_event
+#	placement = s:STATE_HONDURAS
+#	title = ca_central_america.71.t
+#	desc = ca_central_america.71.d
+#	flavor = ca_central_america.71.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "unspecific_politicians_arguing"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+#
+#	trigger = {
+#		exists = c:HON
+#		has_variable = hon_civil_peace_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_honduras_peace_var
+#	}
+#
+#	option = { #Accept Peace
+#		name = ca_central_america.71.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.33
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Reject Peace
+#		name = ca_central_america.71.b
+#		set_variable = hon_support_var
+#		trigger_event = {
+#			id = ca_central_america.23
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## El Salvador Peace Talks
+#ca_central_america.72 = {
+#	type = country_event
+#	placement = s:STATE_SAN_SALVADOR
+#	title = ca_central_america.72.t
+#	desc = ca_central_america.72.d
+#	flavor = ca_central_america.72.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "unspecific_politicians.arguing"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+#
+#	trigger = {
+#		exists = c:ELS
+#		has_variable = els_civil_peace_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_elsalvador_peace_var
+#	}
+#
+#	option = { #Accept Peace
+#		name = ca_central_america.72.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.36
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Reject Peace
+#		name = ca_central_america.72.b
+#		set_variable = els_support_var
+#		trigger_event = {
+#			id = ca_central_america.24
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Guatemala Peace Talks
+#ca_central_america.73 = {
+#	type = country_event
+#	placement = s:STATE_GUATEMALA
+#	title = ca_central_america.73.t
+#	desc = ca_central_america.73.d
+#	flavor = ca_central_america.73.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "unspecific_politicians.arguing"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+#
+#	trigger = {
+#		exists = c:GUA
+#		has_variable = gua_civil_peace_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_guatemala_peace_var
+#	}
+#
+#	option = { #Accept Peace
+#		name = ca_central_america.73.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.39
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Reject Peace
+#		name = ca_central_america.73.b
+#		set_variable = gua_support_var
+#		trigger_event = {
+#			id = ca_central_america.25
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Panama Peace Talks
+#ca_central_america.74 = {
+#	type = country_event
+#	placement = s:STATE_PANAMA
+#	title = ca_central_america.74.t
+#	desc = ca_central_america.74.d
+#	flavor = ca_central_america.74.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "unspecific_politicians.arguing"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+#
+#	trigger = {
+#		exists = c:PNM
+#		has_variable = pnm_civil_peace_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_panama_peace_var
+#	}
+#
+#	option = { #Accept Peace
+#		name = ca_central_america.74.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.42
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Reject Peace
+#		name = ca_central_america.74.b
+#		set_variable = pnm_support_var
+#		trigger_event = {
+#			id = ca_central_america.26
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Los Altos Peace Talks
+#ca_central_america.75 = {
+#	type = country_event
+#	placement = s:STATE_xMx
+#	title = ca_central_america.75.t
+#	desc = ca_central_america.75.d
+#	flavor = ca_central_america.75.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "unspecific_politicians_arguing"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+#
+#	trigger = {
+#		exists = c:ALT
+#		has_variable = alt_civil_peace_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_losaltos_peace_var
+#	}
+#
+#	option = { #Accept Peace
+#		name = ca_central_america.75.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.45
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Reject Peace
+#		name = ca_central_america.75.b
+#		set_variable = alt_support_var
+#		trigger_event = {
+#			id = ca_central_america.20
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Nicaragua War Escalation
+#ca_central_america.76 = {
+#	type = country_event
+#	placement = s:STATE_NICARAGUA
+#	title = ca_central_america.76.t
+#	desc = ca_central_america.76.d
+#	flavor = ca_central_america.76.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "southamerica_war_civilians"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_war.dds"
+#
+#	trigger = {
+#		exists = c:NIC
+#		has_variable = nic_civil_war_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_nicaragua_war_var
+#	}
+#
+#	option = { #Escalate War
+#		name = ca_central_america.76.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.21
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Seek Peace
+#		name = ca_central_america.76.b
+#		set_variable = nic_civil_peace_var
+#		trigger_event = {
+#			id = ca_central_america.69
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Costa Rica War Escalation
+#ca_central_america.77 = {
+#	type = country_event
+#	placement = s:STATE_COSTA_RICA
+#	title = ca_central_america.77.t
+#	desc = ca_central_america.77.d
+#	flavor = ca_central_america.77.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "southamerica_war_civilians"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_war.dds"
+#
+#	trigger = {
+#		exists = c:COS
+#		has_variable = cos_civil_war_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_costarica_war_var
+#	}
+#
+#	option = { #Escalate War
+#		name = ca_central_america.77.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.22
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Seek Peace
+#		name = ca_central_america.77.b
+#		set_variable = cos_civil_peace_var
+#		trigger_event = {
+#			id = ca_central_america.70
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Honduras War Escalation
+#ca_central_america.78 = {
+#	type = country_event
+#	placement = s:STATE_HONDURAS
+#	title = ca_central_america.78.t
+#	desc = ca_central_america.78.d
+#	flavor = ca_central_america.78.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "southamerica_war_civilians"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_war.dds"
+#
+#	trigger = {
+#		exists = c:HON
+#		has_variable = hon_civil_war_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_honduras_war_var
+#	}
+#
+#	option = { #Escalate War
+#		name = ca_central_america.78.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.23
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Seek Peace
+#		name = ca_central_america.78.b
+#		set_variable = hon_civil_peace_var
+#		trigger_event = {
+#			id = ca_central_america.71
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## El Salvador War Escalation
+#ca_central_america.79 = {
+#	type = country_event
+#	placement = s:STATE_SAN_SALVADOR
+#	title = ca_central_america.79.t
+#	desc = ca_central_america.79.d
+#	flavor = ca_central_america.79.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "southamerica_war_civilians"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_war.dds"
+#
+#	trigger = {
+#		exists = c:ELS
+#		has_variable = els_civil_war_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_elsalvador_war_var
+#	}
+#
+#	option = { #Escalate War
+#		name = ca_central_america.79.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.24
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Seek Peace
+#		name = ca_central_america.79.b
+#		set_variable = els_civil_peace_var
+#		trigger_event = {
+#			id = ca_central_america.72
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Guatemala War Escalation
+#ca_central_america.80 = {
+#	type = country_event
+#	placement = s:STATE_GUATEMALA
+#	title = ca_central_america.80.t
+#	desc = ca_central_america.80.d
+#	flavor = ca_central_america.80.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "southamerica_war_civilians"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_war.dds"
+#
+#	trigger = {
+#		exists = c:GUA
+#		has_variable = gua_civil_war_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_guatemala_war_var
+#	}
+#
+#	option = { #Escalate War
+#		name = ca_central_america.80.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.25
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Seek Peace
+#		name = ca_central_america.80.b
+#		set_variable = gua_civil_peace_var
+#		trigger_event = {
+#			id = ca_central_america.73
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Panama War Escalation
+#ca_central_america.81 = {
+#	type = country_event
+#	placement = s:STATE_PANAMA
+#	title = ca_central_america.81.t
+#	desc = ca_central_america.81.d
+#	flavor = ca_central_america.81.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "southamerica_war_civilians"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_war.dds"
+#
+#	trigger = {
+#		exists = c:PNM
+#		has_variable = pnm_civil_war_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_panama_war_var
+#	}
+#
+#	option = { #Escalate War
+#		name = ca_central_america.81.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.26
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Seek Peace
+#		name = ca_central_america.81.b
+#		set_variable = pnm_civil_peace_var
+#		trigger_event = {
+#			id = ca_central_america.74
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Los Altos War Escalation
+#ca_central_america.82 = {
+#	type = country_event
+#	placement = s:STATE_xMx
+#	title = ca_central_america.82.t
+#	desc = ca_central_america.82.d
+#	flavor = ca_central_america.82.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "southamerica_war_civilians"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_war.dds"
+#
+#	trigger = {
+#		exists = c:ALT
+#		has_variable = alt_civil_war_var
+#	}
+#
+#	immediate = {
+#		set_variable = frca_losaltos_war_var
+#	}
+#
+#	option = { #Escalate War
+#		name = ca_central_america.82.a
+#		default_option = yes
+#		trigger_event = {
+#			id = ca_central_america.20
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#	
+#	option = { #Seek Peace
+#		name = ca_central_america.82.b
+#		set_variable = alt_civil_peace_var
+#		trigger_event = {
+#			id = ca_central_america.75
+#			days = 30
+#		}
+#		ai_chance = {
+#			base = 0
+#		}
+#	}
+#}
+## Central America Collapse
+#ca_central_america.83 = {
+#	type = country_event
+#	placement = s:STATE_GUATEMALA
+#	title = ca_central_america.83.t
+#	desc = ca_central_america.83.d
+#	flavor = ca_central_america.83.f
+#
+#	duration = 2
+#
+#	event_image = {
+#		video = "unspecific_politicians_arguing"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_crisis.dds"
+#
+#	trigger = {
+#		NOT = {
+#			exists = c:UCA
+#		}
+#	}
+#
+#	immediate = {
+#		every_country = {
+#			limit = {
+#				has_variable = central_american_collapse_var
+#			}
+#			remove_variable = central_american_collapse_var
+#		}
+#	}
+#
+#	option = { #Acknowledge Collapse
+#		name = ca_central_america.83.a
+#		default_option = yes
+#		ai_chance = {
+#			base = 100
+#		}
+#	}
+#}
 ## The Federal Republic Collapses
 #central_america.5 = {
 #	type = country_event
