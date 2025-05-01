@@ -1,9 +1,8 @@
-﻿
-# Manufacturing
+﻿# Manufacturing
 
 bg_ca_mines = {
 	category = rural
-    land_usage = rural
+        land_usage = rural
 	always_possible = yes
 	can_use_slaves = yes
 	cash_reserves_max = 25000
@@ -12,8 +11,7 @@ bg_ca_mines = {
 	lens = mine
 	
 	urbanization = 10
-	infrastructure_usage_per_level = 4
+	infrastructure_usage_per_level = 6
 }
 bg_ca_hacienda = {
 	parent_group = bg_owner_buildings
-}
