@@ -1,14 +1,18 @@
-﻿#
+#
 ca_hacienda_generic = {
 	building_group = bg_ca_hacienda
 	icon = "gfx/interface/icons/building_icons/oil_rig.dds"
+	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_oil.dds"
 	city_type = rural
 	levels_per_mesh = 5
+	downsizeable = no
+	ownership_type = other
 	required_construction = construction_cost_medium
 	potential = {
 		owner = { 
-			is_ai = no 
-			#has_technology_researched = pumpjacks
+			is_ai = no
+			has_variable = ca_buildings_on
+
 		}
 		#has_potential_resource = bg_oil_extraction
 	}
@@ -125,10 +129,7 @@ ca_hacienda_generic = {
 			}
 		}		
 	}	
-	downsizeable = no
-	ownership_type = other
 
-	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_oil.dds"
 }
 ca_iron_mine = {
 	building_group = bg_ca_mines
@@ -137,12 +138,12 @@ ca_iron_mine = {
 	levels_per_mesh = 5
 	required_construction = construction_cost_medium
 	terrain_manipulator = mining
+	has_max_level = yes
 	potential = {
 		owner = { 
 			is_ai = no 
-			has_technology_researched = shaft_mining
+			has_variable = ca_buildings_on
 		}
-		has_potential_resource = bg_iron_mining
 	}
 	
 	unlocking_technologies = {
@@ -150,7 +151,8 @@ ca_iron_mine = {
 	}
 
 	production_method_groups = {
-		pmg_mining_equipment_building_iron_mine
+	    pmg_ca_mining_size_building_iron_mine
+		pmg_ca_mining_equipment_building_iron_mine
 		pmg_explosives_building_iron_mine
 		pmg_steam_automation_building_iron_mine
 		pmg_train_automation_building_iron_mine
@@ -166,12 +168,12 @@ ca_coal_mine = {
 	levels_per_mesh = 5
 	required_construction = construction_cost_medium
 	terrain_manipulator = mining
+	has_max_level = yes
 	potential = {
 		owner = { 
 			is_ai = no 
-			has_technology_researched = shaft_mining
+			has_variable = ca_buildings_on
 		}
-		has_potential_resource = bg_coal_mining
 	}
 	
 	unlocking_technologies = {
@@ -179,7 +181,8 @@ ca_coal_mine = {
 	}
 
 	production_method_groups = {
-		pmg_mining_equipment_building_coal_mine
+	    pmg_ca_mining_size_building_coal_mine
+		pmg_ca_mining_equipment_building_coal_mine
 		pmg_explosives_building_coal_mine
 		pmg_steam_automation_building_coal_mine
 		pmg_train_automation_building_coal_mine
@@ -195,12 +198,13 @@ ca_lead_mine = {
 	levels_per_mesh = 5
 	required_construction = construction_cost_medium
 	terrain_manipulator = mining
+	has_max_level = yes
 	potential = {
 		owner = { 
 			is_ai = no 
-			has_technology_researched = shaft_mining
+			has_variable = ca_buildings_on
 		}
-		has_potential_resource = bg_lead_mining
+
 	}
 	
 	unlocking_technologies = {
@@ -208,7 +212,8 @@ ca_lead_mine = {
 	}
 
 	production_method_groups = {
-		pmg_mining_equipment_building_lead_mine
+	    pmg_ca_mining_size_building_lead_mine
+		pmg_ca_mining_equipment_building_lead_mine
 		pmg_explosives_building_lead_mine
 		pmg_steam_automation_building_lead_mine
 		pmg_train_automation_building_lead_mine
@@ -224,23 +229,22 @@ ca_sulfur_mine = {
 	levels_per_mesh = 5
 	required_construction = construction_cost_medium
 	terrain_manipulator = mining
+	has_max_level = yes
 	potential = {
 		owner = { 
 			is_ai = no 
-			has_technology_researched = shaft_mining
+			has_variable = ca_buildings_on
 		}
-		OR = {
-			has_potential_resource = bg_sulfur_mining
-			has_potential_resource = bg_livestock_ranches
-		}
+
 	}
 	
 	unlocking_technologies = {
 		shaft_mining
 	}
 
-	production_method_groups = {
-		pmg_mining_equipment_building_sulfur_mine
+	production_method_groups = 
+	    pmg_ca_mining_size_building_sulfur_mine
+		pmg_ca_mining_equipment_building_sulfur_mine
 		pmg_explosives_building_sulfur_mine
 		pmg_steam_automation_building_sulfur_mine
 		pmg_train_automation_building_sulfur_mine
@@ -249,32 +253,38 @@ ca_sulfur_mine = {
 
 	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_mining.dds"
 }
-ca_rubber_plantation = {
-	building_group = bg_ca_mines
-	icon = "gfx/interface/icons/building_icons/rubber_lodge.dds"
-	city_type = wood
+ca_gold_mine = {
+    building_group = bg_ca_mines
+	icon = "gfx/interface/icons/building_icons/gold_mine.dds"
+	city_type = mine
 	levels_per_mesh = 5
 	required_construction = construction_cost_medium
-	terrain_manipulator = forestry
+	terrain_manipulator = mining
+	has_max_level = yes
 	potential = {
 		owner = { 
 			is_ai = no 
-			has_technology_researched = rubber_mastication
+			has_variable = ca_buildings_on
 		}
-		has_potential_resource = bg_rubber
-	}
 
+	}	
 	unlocking_technologies = {
-		rubber_mastication
+		prospecting
 	}
+	
+	ai_value = 5000 # Gold mines are very nice for minting revenue and guaranteed profits
+	ai_nationalization_desire = 1.0 # AI should be keen on nationalizing these
 
 	production_method_groups = {
-		pmg_base_building_rubber_plantation
-		pmg_train_automation_building_rubber_plantation
+	    pmg_ca_mining_size_building_gold_mine
+		pmg_ca_mining_equipment_building_gold_mine
+		pmg_explosives_building_gold_mine
+		pmg_steam_automation_building_gold_mine
+		pmg_train_automation_building_gold_mine
 	}
 	ownership_type = self
 
-	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_plantations.dds"
+	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_mining.dds"
 }
 ca_oil_rig = {
 	building_group = bg_ca_mines
@@ -282,12 +292,13 @@ ca_oil_rig = {
 	city_type = mine
 	levels_per_mesh = 5
 	required_construction = construction_cost_medium
+	has_max_level = yes
 	potential = {
 		owner = { 
 			is_ai = no 
 			has_technology_researched = pumpjacks
+			has_variable = ca_buildings_on
 		}
-		has_potential_resource = bg_oil_extraction
 	}
 
 	unlocking_technologies = {
