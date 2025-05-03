@@ -1,3 +1,9 @@
+ACCEPTANCE_STATUS
+Definition type: Global promote
+Return type: AcceptanceStatus
+
+-----------------------
+
 AIATTITUDE
 Definition type: Global promote
 Return type: AIAttitude
@@ -418,6 +424,12 @@ Return type: AIStrategy
 
 -----------------------
 
+GetAcceptanceStatus( Arg0 )
+Definition type: Global promote
+Return type: AcceptanceStatus
+
+-----------------------
+
 GetBattleCondition( Arg0 )
 Definition type: Global promote
 Return type: BattleCondition
@@ -427,6 +439,12 @@ Return type: BattleCondition
 GetBuildingType( Arg0 )
 Definition type: Global promote
 Return type: BuildingType
+
+-----------------------
+
+GetCharacterTrait( Arg0 )
+Definition type: Global promote
+Return type: CharacterTrait
 
 -----------------------
 
@@ -517,6 +535,12 @@ Return type: Date
 GetGoods( Arg0 )
 Definition type: Global promote
 Return type: Goods
+
+-----------------------
+
+GetHarvestConditionType( Arg0 )
+Definition type: Global promote
+Return type: HarvestConditionType
 
 -----------------------
 
@@ -616,6 +640,12 @@ Return type: JournalEntry
 
 -----------------------
 
+GetPopNeed( Arg0 )
+Definition type: Global promote
+Return type: PopNeed
+
+-----------------------
+
 GetPopType( Arg0 )
 Definition type: Global promote
 Return type: PopType
@@ -646,9 +676,9 @@ Return type: Religion
 
 -----------------------
 
-GetSelectedMilitaryFormation
+GetStateRegion( Arg0 )
 Definition type: Global promote
-Return type: MilitaryFormation
+Return type: StateRegion
 
 -----------------------
 
@@ -658,15 +688,45 @@ Return type: Modifier
 
 -----------------------
 
+GetStrategicRegion( Arg0 )
+Definition type: Global promote
+Return type: StrategicRegion
+
+-----------------------
+
 GetSubjectType( Arg0 )
 Definition type: Global promote
 Return type: SubjectType
 
 -----------------------
 
+GetTechnology( Arg0 )
+Definition type: Global promote
+Return type: Technology
+
+-----------------------
+
 GetTutorialJournalEntry
 Definition type: Global promote
 Return type: JournalEntry
+
+-----------------------
+
+HARVEST_CONDITION
+Definition type: Global promote
+Return type: HarvestCondition
+
+-----------------------
+
+HARVEST_CONDITION_AREA
+Definition type: Global promote
+Return type: HarvestConditionArea
+
+-----------------------
+
+HARVEST_CONDITION_TYPE
+Definition type: Global promote
+Return type: HarvestConditionType
 
 -----------------------
 
@@ -787,6 +847,12 @@ Return type: LibertyDesireLevel
 LabelingHelper
 Definition type: Global promote
 Return type: LabelingHelper
+
+-----------------------
+
+MAP_MODE
+Definition type: Global promote
+Return type: MapMode
 
 -----------------------
 
@@ -922,6 +988,24 @@ Return type: PoliticalMovement
 
 -----------------------
 
+POLITICAL_MOVEMENT_CATEGORY
+Definition type: Global promote
+Return type: PoliticalMovementCategory
+
+-----------------------
+
+POLITICAL_MOVEMENT_POP_SUPPORT_FACTOR
+Definition type: Global promote
+Return type: PoliticalMovementPopSupportFactor
+
+-----------------------
+
+POLITICAL_MOVEMENT_TYPE
+Definition type: Global promote
+Return type: PoliticalMovementType
+
+-----------------------
+
 POP
 Definition type: Global promote
 Return type: Pop
@@ -1054,6 +1138,12 @@ Return type: Province
 
 -----------------------
 
+PdxAccount
+Definition type: Global promote
+Return type: PdxAccount
+
+-----------------------
+
 PopupManager
 Definition type: Global promote
 Return type: PopupManager
@@ -1099,6 +1189,18 @@ Return type: Market
 SHIPPING_LANE
 Definition type: Global promote
 Return type: ShippingLane
+
+-----------------------
+
+SOCIAL_CLASS
+Definition type: Global promote
+Return type: SocialClass
+
+-----------------------
+
+SOCIAL_HIERARCHY
+Definition type: Global promote
+Return type: SocialHierarchy
 
 -----------------------
 
@@ -1171,6 +1273,12 @@ Return type: SwayOfferType
 SwayCountryPanel
 Definition type: Global promote
 Return type: SwayCountryPanel
+
+-----------------------
+
+TARGET_ACCEPTANCE_STATUS
+Definition type: Global promote
+Return type: AcceptanceStatus
 
 -----------------------
 
@@ -1498,6 +1606,24 @@ Return type: GovernmentType
 
 -----------------------
 
+TARGET_HARVEST_CONDITION
+Definition type: Global promote
+Return type: HarvestCondition
+
+-----------------------
+
+TARGET_HARVEST_CONDITION_AREA
+Definition type: Global promote
+Return type: HarvestConditionArea
+
+-----------------------
+
+TARGET_HARVEST_CONDITION_TYPE
+Definition type: Global promote
+Return type: HarvestConditionType
+
+-----------------------
+
 TARGET_HQ
 Definition type: Global promote
 Return type: Hq
@@ -1585,6 +1711,12 @@ Return type: LegitimacyLevel
 TARGET_LIBERTY_DESIRE_LEVEL
 Definition type: Global promote
 Return type: LibertyDesireLevel
+
+-----------------------
+
+TARGET_MAP_MODE
+Definition type: Global promote
+Return type: MapMode
 
 -----------------------
 
@@ -1687,6 +1819,24 @@ Return type: PoliticalLobbyType
 TARGET_POLITICAL_MOVEMENT
 Definition type: Global promote
 Return type: PoliticalMovement
+
+-----------------------
+
+TARGET_POLITICAL_MOVEMENT_CATEGORY
+Definition type: Global promote
+Return type: PoliticalMovementCategory
+
+-----------------------
+
+TARGET_POLITICAL_MOVEMENT_POP_SUPPORT_FACTOR
+Definition type: Global promote
+Return type: PoliticalMovementPopSupportFactor
+
+-----------------------
+
+TARGET_POLITICAL_MOVEMENT_TYPE
+Definition type: Global promote
+Return type: PoliticalMovementType
 
 -----------------------
 
@@ -1828,6 +1978,18 @@ Return type: ShippingLane
 
 -----------------------
 
+TARGET_SOCIAL_CLASS
+Definition type: Global promote
+Return type: SocialClass
+
+-----------------------
+
+TARGET_SOCIAL_HIERARCHY
+Definition type: Global promote
+Return type: SocialHierarchy
+
+-----------------------
+
 TARGET_STATE
 Definition type: Global promote
 Return type: State
@@ -1900,6 +2062,12 @@ Return type: Theme
 
 -----------------------
 
+TARGET_TIMED_MODIFIER
+Definition type: Global promote
+Return type: TimedModifier
+
+-----------------------
+
 TARGET_TRADE_ROUTE
 Definition type: Global promote
 Return type: TradeRoute
@@ -1945,6 +2113,12 @@ Return type: Theater
 THEME
 Definition type: Global promote
 Return type: Theme
+
+-----------------------
+
+TIMED_MODIFIER
+Definition type: Global promote
+Return type: TimedModifier
 
 -----------------------
 
@@ -2140,7 +2314,19 @@ Return type: [unregistered]
 
 -----------------------
 
+GetAcceptanceStatus( Arg0 )
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
 GetAchievementsAvailableString
+Definition type: Global function
+Return type: CString
+
+-----------------------
+
+GetActivismLabelsDesc
 Definition type: Global function
 Return type: CString
 
@@ -2213,6 +2399,12 @@ Return type: CString
 -----------------------
 
 GetBuildingType( Arg0 )
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+GetCharacterTrait( Arg0 )
 Definition type: Global function
 Return type: [unregistered]
 
@@ -2407,6 +2599,18 @@ Return type: [unregistered]
 GetGuiEntityShaderRenderpass
 Definition type: Global function
 Return type: [unregistered]
+
+-----------------------
+
+GetHarvestConditionType( Arg0 )
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+GetHarvestConditionTypesList
+Definition type: Global function
+Return type: CString
 
 -----------------------
 
@@ -2644,27 +2848,15 @@ Return type: [unregistered]
 
 -----------------------
 
-GetPopType( Arg0 )
+GetPopNeed( Arg0 )
 Definition type: Global function
 Return type: [unregistered]
 
 -----------------------
 
-GetPopTypesInLowerStrataDesc
+GetPopType( Arg0 )
 Definition type: Global function
-Return type: CString
-
------------------------
-
-GetPopTypesInMiddleStrataDesc
-Definition type: Global function
-Return type: CString
-
------------------------
-
-GetPopTypesInUpperStrataDesc
-Definition type: Global function
-Return type: CString
+Return type: [unregistered]
 
 -----------------------
 
@@ -2758,7 +2950,25 @@ Return type: CVector2i
 
 -----------------------
 
+GetStarvationTypes
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+GetStateRegion( Arg0 )
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
 GetStaticModifier( Arg0 )
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+GetStrategicRegion( Arg0 )
 Definition type: Global function
 Return type: [unregistered]
 
@@ -2785,6 +2995,18 @@ Return type: CString
 GetSupplyNetworkColorstring( Arg0 )
 Definition type: Global function
 Return type: CString
+
+-----------------------
+
+GetSupportLabelsDesc
+Definition type: Global function
+Return type: CString
+
+-----------------------
+
+GetTechnology( Arg0 )
+Definition type: Global function
+Return type: [unregistered]
 
 -----------------------
 
@@ -3142,6 +3364,18 @@ Return type: CString
 
 -----------------------
 
+PopCursorOverride
+Definition type: Global function
+Return type: void
+
+-----------------------
+
+PushCursorOverride( Arg0 )
+Definition type: Global function
+Return type: void
+
+-----------------------
+
 ReleaseMode
 Definition type: Global function
 Return type: bool
@@ -3149,6 +3383,12 @@ Return type: bool
 -----------------------
 
 RemoveTempMapMode
+Definition type: Global function
+Return type: void
+
+-----------------------
+
+ResetCursorOverrides
 Definition type: Global function
 Return type: void
 
@@ -3193,6 +3433,12 @@ Return type: void
 ScrollPanelToTop( Arg0 )
 Definition type: Global function
 Return type: void
+
+-----------------------
+
+SelectSound( Arg0, Arg1, Arg2 )
+Definition type: Global function
+Return type: [unregistered]
 
 -----------------------
 
@@ -3388,73 +3634,25 @@ Return type: CVector4f
 
 -----------------------
 
-concept_academics_academic
+concept_acceptance
 Definition type: Global function
 Return type: [unregistered]
 
 -----------------------
 
-concept_academics_academic_desc
+concept_acceptance_desc
 Definition type: Global function
 Return type: [unregistered]
 
 -----------------------
 
-concept_academics_academic_mission
+concept_acceptance_status
 Definition type: Global function
 Return type: [unregistered]
 
 -----------------------
 
-concept_academics_academic_mission_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_academics_experience
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_academics_experience_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_academics_progress
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_academics_progress_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_academics_scientific_society
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_academics_scientific_society_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_academics_university_specialization
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_academics_university_specialization_desc
+concept_acceptance_status_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -3491,6 +3689,18 @@ Return type: [unregistered]
 -----------------------
 
 concept_active_interest_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_activism
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_activism_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -3551,114 +3761,6 @@ Return type: [unregistered]
 -----------------------
 
 concept_advancement_speed_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_age_of_earth
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_age_of_earth_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_geological_knowledge
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_geological_knowledge_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_geological_score
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_geological_score_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_geologist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_geologist_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_geology
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_geology_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_mineral
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_mineral_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_oceanographic_knowledge
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_oceanographic_knowledge_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_rare_mineral
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_rare_mineral_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_volcano
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_agassiz_volcano_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -3791,66 +3893,6 @@ Return type: [unregistered]
 -----------------------
 
 concept_army_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_artistic_progress
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_artistic_progress_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_artists_art_style
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_artists_art_style_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_artists_artist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_artists_artist_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_artists_center_of_arts
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_artists_center_of_arts_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_artists_experience
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_artists_experience_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -4540,6 +4582,18 @@ Return type: [unregistered]
 
 -----------------------
 
+concept_chartered_company
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_chartered_company_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
 concept_civil_war
 Definition type: Global function
 Return type: [unregistered]
@@ -4607,6 +4661,18 @@ Return type: [unregistered]
 -----------------------
 
 concept_colony_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_colony_subject
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_colony_subject_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -4828,6 +4894,18 @@ Return type: [unregistered]
 
 -----------------------
 
+concept_core_movement_ideology
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_core_movement_ideology_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
 concept_countdown_to_war
 Definition type: Global function
 Return type: [unregistered]
@@ -4859,6 +4937,18 @@ Return type: [unregistered]
 -----------------------
 
 concept_country_tier_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_court_intrigue
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_court_intrigue_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -4931,174 +5021,6 @@ Return type: [unregistered]
 -----------------------
 
 concept_culture_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curie_physicist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curie_physicist_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curie_uranium
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curie_uranium_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_airline
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_airline_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_airport
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_airport_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_airspace_convention
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_airspace_convention_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_arctic_expedition
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_arctic_expedition_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_aviation
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_aviation_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_balloonist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_balloonist_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_balloonist_role
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_balloonist_role_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_experienced_balloonist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_experienced_balloonist_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_famous_balloonist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_famous_balloonist_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_pilot
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_pilot_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_schneider_trophy
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_schneider_trophy_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_tourism
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_curtiss_tourism_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -5404,246 +5326,6 @@ Return type: [unregistered]
 
 -----------------------
 
-concept_dubois_botanical_expedition
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_botanical_expedition_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_botanical_licence
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_botanical_licence_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_dinosaur_bone
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_dinosaur_bone_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_dinosaur_skeleton
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_dinosaur_skeleton_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_formation
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_formation_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_fossil
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_fossil_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_habitat
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_habitat_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_mountain
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_mountain_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_mountaineering
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_mountaineering_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_natural_history
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_natural_history_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_naturalist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_naturalist_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_nature_reserve
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_nature_reserve_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_pacific_expedition
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_pacific_expedition_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_paleontological_collection
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_paleontological_collection_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_paleontological_expedition
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_paleontological_expedition_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_paleontological_licence
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_paleontological_licence_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_paleontologist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_paleontologist_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_specimen
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_specimen_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_zoo
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_zoo_animal
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_zoo_animal_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_dubois_zoo_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
 concept_economic_dependence
 Definition type: Global function
 Return type: [unregistered]
@@ -5704,198 +5386,6 @@ Return type: [unregistered]
 
 -----------------------
 
-concept_elgar_architecture
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_architecture_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_art_nouveau
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_art_nouveau_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_composer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_composer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_composer_exhaustion
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_composer_exhaustion_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_composing
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_composing_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_conducting
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_conducting_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_expressionism
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_expressionism_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_great_composer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_great_composer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_impressionism
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_impressionism_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_music
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_music_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_musical_masterwork
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_musical_masterwork_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_musical_tour
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_musical_tour_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_musical_tradition
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_musical_tradition_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_national_composer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_national_composer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_opera
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_opera_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_travelling_composer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_elgar_travelling_composer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
 concept_embargo
 Definition type: Global function
 Return type: [unregistered]
@@ -5903,6 +5393,18 @@ Return type: [unregistered]
 -----------------------
 
 concept_embargo_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_empire_stability
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_empire_stability_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -6076,6 +5578,18 @@ Return type: [unregistered]
 
 -----------------------
 
+concept_famine
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_famine_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
 concept_fleet
 Definition type: Global function
 Return type: [unregistered]
@@ -6095,6 +5609,18 @@ Return type: [unregistered]
 -----------------------
 
 concept_flotilla_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_food_security
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_food_security_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -6155,114 +5681,6 @@ Return type: [unregistered]
 -----------------------
 
 concept_fund_lobbies_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_aeronautical_engineer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_aeronautical_engineer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_architect
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_architect_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_civil_engineer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_civil_engineer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_electrical_engineer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_electrical_engineer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_engineer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_engineer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_engineering
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_engineering_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_mechanical_engineer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_mechanical_engineer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_military_engineer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_military_engineer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_splendid_architecture
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_gaudi_splendid_architecture_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -6508,6 +5926,30 @@ Return type: [unregistered]
 
 -----------------------
 
+concept_harvest_condition
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_harvest_condition_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_harvest_condition_intensity
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_harvest_condition_intensity_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
 concept_head_of_state
 Definition type: Global function
 Return type: [unregistered]
@@ -6748,18 +6190,6 @@ Return type: [unregistered]
 
 -----------------------
 
-concept_input_goods_shortage
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_input_goods_shortage_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
 concept_input_mult
 Definition type: Global function
 Return type: [unregistered]
@@ -6803,6 +6233,18 @@ Return type: [unregistered]
 -----------------------
 
 concept_institution_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_insurrection
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_insurrection_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -6952,102 +6394,6 @@ Return type: [unregistered]
 
 -----------------------
 
-concept_klimt_art_gallery
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_art_gallery_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_art_prize
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_art_prize_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_great_painter
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_great_painter_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_independent_painter
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_independent_painter_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_painter
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_painter_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_painter_trip
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_painter_trip_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_painting_culture
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_painting_culture_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_painting_tradition
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_klimt_painting_tradition_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
 concept_land_trade_capacity
 Definition type: Global function
 Return type: [unregistered]
@@ -7115,174 +6461,6 @@ Return type: [unregistered]
 -----------------------
 
 concept_legitimacy_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_anthropologist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_anthropologist_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_archaeological_team
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_archaeological_team_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_archaeologist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_archaeologist_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_archaeology
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_archaeology_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_artifact
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_artifact_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_cave
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_cave_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_excavation
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_excavation_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_excavation_licence
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_excavation_licence_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_excavation_site
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_excavation_site_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_exhibition
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_exhibition_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_expedition
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_expedition_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_human_fossil
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_human_fossil_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_major_artifact
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_major_artifact_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_museum
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_lepsius_museum_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -7420,150 +6598,6 @@ Return type: [unregistered]
 
 -----------------------
 
-concept_manzoni_bestseller
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_bestseller_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_book_licence
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_book_licence_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_genre
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_genre_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_great_writer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_great_writer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_library
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_library_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_literary_tradition
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_literary_tradition_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_literature
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_literature_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_local_writer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_local_writer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_national_writer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_national_writer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_popular_taste
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_popular_taste_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_publications
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_publications_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_writer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_manzoni_writer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
 concept_marginalized
 Definition type: Global function
 Return type: [unregistered]
@@ -7696,42 +6730,6 @@ Return type: [unregistered]
 
 -----------------------
 
-concept_mendelejew_chemist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_mendelejew_chemist_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_mendelejew_chemistry
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_mendelejew_chemistry_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_mendelejew_element
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_mendelejew_element_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
 concept_message_settings_feed
 Definition type: Global function
 Return type: [unregistered]
@@ -7823,6 +6821,18 @@ Return type: [unregistered]
 -----------------------
 
 concept_migration_target_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_military_assistance
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_military_assistance_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -8003,18 +7013,6 @@ Return type: [unregistered]
 -----------------------
 
 concept_morale_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_morgenroete
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_morgenroete_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -8320,18 +7318,6 @@ Return type: [unregistered]
 
 -----------------------
 
-concept_panum_physician
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_panum_physician_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
 concept_party
 Definition type: Global function
 Return type: [unregistered]
@@ -8387,90 +7373,6 @@ Return type: [unregistered]
 -----------------------
 
 concept_personal_union_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_academics_university_humanities
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_academics_university_humanities_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_academics_university_mathematics
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_academics_university_mathematics_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_academics_university_natural_history
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_academics_university_natural_history_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_artists_academy_conservatory
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_artists_academy_conservatory_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_artists_academy_salon
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_artists_academy_salon_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_artists_academy_specialization
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_artists_academy_specialization_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_artists_academy_studio
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_pm_artists_academy_studio_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -8548,25 +7450,13 @@ Return type: [unregistered]
 
 -----------------------
 
-concept_political_movement_placated
+concept_political_movement_pressure
 Definition type: Global function
 Return type: [unregistered]
 
 -----------------------
 
-concept_political_movement_placated_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_political_movement_radicalism
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_political_movement_radicalism_desc
+concept_political_movement_pressure_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -8956,6 +7846,30 @@ Return type: [unregistered]
 
 -----------------------
 
+concept_presidency
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_presidency_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_presidency_stability
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_presidency_stability_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
 concept_prestige
 Definition type: Global function
 Return type: [unregistered]
@@ -8987,6 +7901,18 @@ Return type: [unregistered]
 -----------------------
 
 concept_primary_demand_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_princely_state
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_princely_state_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -9172,18 +8098,6 @@ Return type: [unregistered]
 
 -----------------------
 
-concept_rapanui_christian_mission
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_rapanui_christian_mission_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
 concept_recognized_power
 Definition type: Global function
 Return type: [unregistered]
@@ -9304,18 +8218,6 @@ Return type: [unregistered]
 
 -----------------------
 
-concept_revolution_progression_speed
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_revolution_progression_speed_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
 concept_rivalry
 Definition type: Global function
 Return type: [unregistered]
@@ -9424,6 +8326,18 @@ Return type: [unregistered]
 
 -----------------------
 
+concept_shortage
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_shortage_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
 concept_slavery
 Definition type: Global function
 Return type: [unregistered]
@@ -9431,6 +8345,30 @@ Return type: [unregistered]
 -----------------------
 
 concept_slavery_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_social_class
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_social_class_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_social_hierarchy
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_social_hierarchy_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -9479,6 +8417,18 @@ Return type: [unregistered]
 -----------------------
 
 concept_split_state_desc
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_starvation
+Definition type: Global function
+Return type: [unregistered]
+
+-----------------------
+
+concept_starvation_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -9635,42 +8585,6 @@ Return type: [unregistered]
 -----------------------
 
 concept_subsistence_output_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_super_power
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_super_power_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_superpower_assistance
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_superpower_assistance_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_superpower_assistance_government
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_superpower_assistance_government_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -9887,18 +8801,6 @@ Return type: [unregistered]
 -----------------------
 
 concept_theater_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_theiler_biologist
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_theiler_biologist_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -10228,114 +9130,6 @@ Return type: [unregistered]
 
 -----------------------
 
-concept_verrier_astronomer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_astronomer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_astronomical_object
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_astronomical_object_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_astronomical_prestige
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_astronomical_prestige_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_astronomy
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_astronomy_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_comet
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_comet_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_meteorite
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_meteorite_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_moon_photo
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_moon_photo_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_observatory
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_observatory_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_satellite
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_verrier_satellite_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
 concept_veterancy_level
 Definition type: Global function
 Return type: [unregistered]
@@ -10343,66 +9137,6 @@ Return type: [unregistered]
 -----------------------
 
 concept_veterancy_level_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_vikelas_car_racing
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_vikelas_car_racing_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_vikelas_ioc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_vikelas_ioc_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_vikelas_olympic_games
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_vikelas_olympic_games_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_vikelas_racer
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_vikelas_racer_desc
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_vikelas_sports
-Definition type: Global function
-Return type: [unregistered]
-
------------------------
-
-concept_vikelas_sports_desc
 Definition type: Global function
 Return type: [unregistered]
 
@@ -10608,6 +9342,13 @@ Definition type: Global macro
 
 -----------------------
 
+Negate( Value )
+Macro replacement: Subtract_CFixedPoint('(CFixedPoint)0', Value)
+Description: Change the sign of the value
+Definition type: Global macro
+
+-----------------------
+
 NotZero( Value )
 Macro replacement: NotEqualTo_int32(Value, '(int32)0')
 Description: Tests if a int32 is zero or not
@@ -10772,6 +9513,196 @@ Return type: CString
 -----------------------
 
 AIStrategy.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+AcceptanceStatus
+Definition type: Type
+
+-----------------------
+
+AcceptanceStatus.GetHigherStatus
+Definition type: Promote
+Return type: AcceptanceStatus
+
+-----------------------
+
+AcceptanceStatus.GetLowerStatus
+Definition type: Promote
+Return type: AcceptanceStatus
+
+-----------------------
+
+AcceptanceStatus.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+AcceptanceStatus.GetBackground
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+AcceptanceStatus.GetColor
+Definition type: Function
+Return type: CVector4f
+
+-----------------------
+
+AcceptanceStatus.GetDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+AcceptanceStatus.GetEffectsDescIn( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+AcceptanceStatus.GetHigherStatus
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+AcceptanceStatus.GetLargeIcon
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+AcceptanceStatus.GetLowerBound
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+AcceptanceStatus.GetLowerStatus
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+AcceptanceStatus.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+AcceptanceStatus.GetNameNoFormatting
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+AcceptanceStatus.GetNameNoIcon
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+AcceptanceStatus.GetOrdinal
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+AcceptanceStatus.GetSmallIcon
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+AcceptanceStatus.GetTextIcon
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+AcceptanceStatus.GetTooltipTag
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+AcceptanceStatus.GetUpperBound
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+AcceptanceStatus.HasHigherStatus
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+AcceptanceStatus.HasLowerStatus
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+AcceptanceStatus.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+AcceptanceStatusSegment
+Definition type: Type
+
+-----------------------
+
+AcceptanceStatusSegment.GetStatus
+Definition type: Promote
+Return type: AcceptanceStatus
+
+-----------------------
+
+AcceptanceStatusSegment.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+AcceptanceStatusSegment.GetColor
+Definition type: Function
+Return type: CVector4f
+
+-----------------------
+
+AcceptanceStatusSegment.GetPopulationDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+AcceptanceStatusSegment.GetStatus
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+AcceptanceStatusSegment.GetTotalPopulation
+Definition type: Function
+Return type: int64
+
+-----------------------
+
+AcceptanceStatusSegment.GetTotalPopulationIncreasingInAcceptance
+Definition type: Function
+Return type: int64
+
+-----------------------
+
+AcceptanceStatusSegment.Self
 Definition type: Function
 Return type: [unregistered]
 
@@ -12503,6 +11434,12 @@ Definition type: Type
 
 -----------------------
 
+BudgetPanel.GetMapModeList
+Definition type: Promote
+Return type: MapModeList
+
+-----------------------
+
 BudgetPanel.AccessSelf
 Definition type: Function
 Return type: [unregistered]
@@ -12601,6 +11538,12 @@ Return type: StateRegion
 Building.GetBuildingType
 Definition type: Promote
 Return type: BuildingType
+
+-----------------------
+
+Building.GetCompany
+Definition type: Promote
+Return type: Company
 
 -----------------------
 
@@ -13049,9 +11992,21 @@ Return type: CString
 
 -----------------------
 
+Building.GetCombatUnitsInFormation( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 Building.GetCombatUnitsProvidedToFormationBreakdown( Arg0 )
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+Building.GetCompany
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -13244,6 +12199,12 @@ Return type: int32
 Building.GetIDString
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+Building.GetIcon
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -13440,6 +12401,12 @@ Return type: int64
 -----------------------
 
 Building.GetNumLevelsCanBeNationalized
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+Building.GetNumOwnedLevels
 Definition type: Function
 Return type: int32
 
@@ -13655,6 +12622,18 @@ Return type: CString
 
 -----------------------
 
+Building.GetSubsistenceOutput
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+Building.GetSubsistenceOutputDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 Building.GetTariffsPaid
 Definition type: Function
 Return type: CFixedPoint
@@ -13670,12 +12649,6 @@ Return type: CFixedPoint
 Building.GetTaxationRevenueTooltip
 Definition type: Function
 Return type: CString
-
------------------------
-
-Building.GetTexture
-Definition type: Function
-Return type: [unregistered]
 
 -----------------------
 
@@ -14122,6 +13095,12 @@ Return type: [unregistered]
 
 -----------------------
 
+BuildingBrowserBuildingTypeItem.CanShowNationalizeBuildingsWindow
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 BuildingBrowserBuildingTypeItem.GetAllSameProductionMethodTexture( Arg0 )
 Definition type: Function
 Return type: [unregistered]
@@ -14155,6 +13134,12 @@ Return type: CString
 BuildingBrowserBuildingTypeItem.GetFilteredAverageProductivity
 Definition type: Function
 Return type: CFixedPoint
+
+-----------------------
+
+BuildingBrowserBuildingTypeItem.GetNationalizeBuildingsButtonTooltip
+Definition type: Function
+Return type: CString
 
 -----------------------
 
@@ -14254,6 +13239,12 @@ Return type: [unregistered]
 
 -----------------------
 
+BuildingBrowserBuildingTypeItem.ShowNationalizeBuildingsWindow
+Definition type: Function
+Return type: void
+
+-----------------------
+
 BuildingBrowserBuildingTypeItem.ToggleAllAutoExpand
 Definition type: Function
 Return type: Command
@@ -14331,6 +13322,12 @@ Return type: void
 
 -----------------------
 
+BuildingBrowserPanel.CanShowNationalizeBuildingsWindow
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 BuildingBrowserPanel.Filter( Arg0 )
 Definition type: Function
 Return type: void
@@ -14364,6 +13361,12 @@ Return type: [unregistered]
 BuildingBrowserPanel.GetFilteredBuildingTypes
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+BuildingBrowserPanel.GetNationalizeBuildingsButtonTooltip
+Definition type: Function
+Return type: CString
 
 -----------------------
 
@@ -14421,6 +13424,12 @@ Return type: bool
 
 -----------------------
 
+BuildingBrowserPanel.IsGroupedByBuildingType
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 BuildingBrowserPanel.ResetAllFilters
 Definition type: Function
 Return type: void
@@ -14434,6 +13443,12 @@ Return type: [unregistered]
 -----------------------
 
 BuildingBrowserPanel.SetFilterMode( Arg0, Arg1 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+BuildingBrowserPanel.ShowNationalizeBuildingsWindow
 Definition type: Function
 Return type: void
 
@@ -14482,6 +13497,12 @@ Return type: bool
 -----------------------
 
 BuildingBrowserPanel.ToggleExpandBuildingType( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+BuildingBrowserPanel.ToggleGroupedByBuildingType
 Definition type: Function
 Return type: void
 
@@ -14961,12 +13982,6 @@ Return type: [unregistered]
 
 -----------------------
 
-BuildingType.GetBreakdownInCountry( Arg0 )
-Definition type: Function
-Return type: CString
-
------------------------
-
 BuildingType.GetBuildingGroupName
 Definition type: Function
 Return type: CString
@@ -15057,15 +14072,15 @@ Return type: CString
 
 -----------------------
 
-BuildingType.GetKey
+BuildingType.GetIcon
 Definition type: Function
-Return type: CString
+Return type: [unregistered]
 
 -----------------------
 
-BuildingType.GetLevelCountInCountry( Arg0 )
+BuildingType.GetKey
 Definition type: Function
-Return type: int32
+Return type: CString
 
 -----------------------
 
@@ -15088,6 +14103,30 @@ Return type: CString
 -----------------------
 
 BuildingType.GetNumAvailableStatesForBuilding
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+BuildingType.GetNumLevelsInCountryFormatted( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+BuildingType.GetNumLevelsInCountryRaw( Arg0 )
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+BuildingType.GetNumLevelsOwnedByCompanyFormatted( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+BuildingType.GetNumLevelsOwnedByCompanyRaw( Arg0 )
 Definition type: Function
 Return type: int32
 
@@ -15129,12 +14168,6 @@ Return type: CString
 
 -----------------------
 
-BuildingType.GetTexture
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
 BuildingType.GetTooltip
 Definition type: Function
 Return type: CString
@@ -15156,12 +14189,6 @@ Return type: CString
 BuildingType.GetTooltipTag
 Definition type: Function
 Return type: CString
-
------------------------
-
-BuildingType.GetUnderConstructionCountInCountry( Arg0 )
-Definition type: Function
-Return type: int32
 
 -----------------------
 
@@ -15285,6 +14312,12 @@ Return type: bool
 
 -----------------------
 
+BuildingType.IsUsingArableLand
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 BuildingType.IssDevelopment
 Definition type: Function
 Return type: bool
@@ -15332,6 +14365,12 @@ Definition type: Type
 
 -----------------------
 
+CanalType.GetBuildingType
+Definition type: Promote
+Return type: BuildingType
+
+-----------------------
+
 CanalType.GetStateRegion
 Definition type: Promote
 Return type: StateRegion
@@ -15350,25 +14389,25 @@ Return type: [unregistered]
 
 -----------------------
 
+CanalType.GetBuildingType
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 CanalType.GetCustom( Arg0 )
 Definition type: Function
 Return type: CString
 
 -----------------------
 
-CanalType.GetDesc
-Definition type: Function
-Return type: CString
-
------------------------
-
-CanalType.GetDescFor( Arg0 )
-Definition type: Function
-Return type: CString
-
------------------------
-
 CanalType.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+CanalType.GetNameNoFormatting
 Definition type: Function
 Return type: CString
 
@@ -15562,6 +14601,18 @@ Return type: Religion
 
 -----------------------
 
+Character.GetAcceptanceStatus
+Definition type: Promote
+Return type: AcceptanceStatus
+
+-----------------------
+
+Character.GetAcceptanceStatusIn( Arg0 )
+Definition type: Promote
+Return type: AcceptanceStatus
+
+-----------------------
+
 Character.GetAssignedState
 Definition type: Promote
 Return type: State
@@ -15676,9 +14727,15 @@ Return type: Scope
 
 -----------------------
 
-Character.PredictLawToAgitate( Arg0 )
+Character.PredictMovementToJoin( Arg0 )
 Definition type: Promote
-Return type: Law
+Return type: PoliticalMovement
+
+-----------------------
+
+Character.PredictMovementTypeToStart( Arg0 )
+Definition type: Promote
+Return type: PoliticalMovementType
 
 -----------------------
 
@@ -15727,6 +14784,42 @@ Return type: [unregistered]
 Character.AccessUnavailableOrders
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+Character.GetAcceptanceStatus
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+Character.GetAcceptanceStatusIn( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+Character.GetAcceptanceValue
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+Character.GetAcceptanceValueDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+Character.GetAcceptanceValueDescIn( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+Character.GetAcceptanceValueIn( Arg0 )
+Definition type: Function
+Return type: int32
 
 -----------------------
 
@@ -16390,7 +15483,13 @@ Return type: void
 
 -----------------------
 
-Character.PredictLawToAgitate( Arg0 )
+Character.PredictMovementToJoin( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+Character.PredictMovementTypeToStart( Arg0 )
 Definition type: Function
 Return type: [unregistered]
 
@@ -16423,6 +15522,18 @@ Return type: Command
 Character.TogglePinInOutliner
 Definition type: Function
 Return type: void
+
+-----------------------
+
+Character.WillJoinMovementIfInvited( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+Character.WillStartMovementIfInvited( Arg0 )
+Definition type: Function
+Return type: bool
 
 -----------------------
 
@@ -16841,12 +15952,6 @@ Definition type: Type
 
 -----------------------
 
-CivilWar.AccessCulture
-Definition type: Promote
-Return type: Culture
-
------------------------
-
 CivilWar.AccessOriginCountry
 Definition type: Promote
 Return type: Country
@@ -16865,9 +15970,9 @@ Return type: Country
 
 -----------------------
 
-CivilWar.GetCulture
+CivilWar.GetLeadingInsurrectionaryIG
 Definition type: Promote
-Return type: Culture
+Return type: InterestGroup
 
 -----------------------
 
@@ -16892,12 +15997,6 @@ Return type: Country
 CivilWar.MakeScope
 Definition type: Promote
 Return type: Scope
-
------------------------
-
-CivilWar.AccessCulture
-Definition type: Function
-Return type: [unregistered]
 
 -----------------------
 
@@ -16949,21 +16048,15 @@ Return type: CFixedPoint
 
 -----------------------
 
-CivilWar.GetCulture
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
 CivilWar.GetCustom( Arg0 )
 Definition type: Function
 Return type: CString
 
 -----------------------
 
-CivilWar.GetExcessTurmoil
+CivilWar.GetLeadingInsurrectionaryIG
 Definition type: Function
-Return type: CFixedPoint
+Return type: [unregistered]
 
 -----------------------
 
@@ -16976,6 +16069,30 @@ Return type: CFixedPoint
 CivilWar.GetMaxProgressDesc
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+CivilWar.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+CivilWar.GetNumUprisingBattalions
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+CivilWar.GetNumUprisingFlotillas
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+CivilWar.GetNumUprisingStates
+Definition type: Function
+Return type: int32
 
 -----------------------
 
@@ -17015,13 +16132,19 @@ Return type: CString
 
 -----------------------
 
+CivilWar.GetUprisingConscriptionRateDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 CivilWar.GetUprisingCountry
 Definition type: Function
 Return type: [unregistered]
 
 -----------------------
 
-CivilWar.GetUprisingNumUnitsString
+CivilWar.GetUprisingNumUnitsDesc
 Definition type: Function
 Return type: CString
 
@@ -17040,12 +16163,6 @@ Return type: bool
 -----------------------
 
 CivilWar.HasPoliticalMovement
-Definition type: Function
-Return type: bool
-
------------------------
-
-CivilWar.HasRevoltTag
 Definition type: Function
 Return type: bool
 
@@ -17070,6 +16187,12 @@ Return type: bool
 -----------------------
 
 CivilWar.IsUprisingCountry( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+CivilWar.IsValid
 Definition type: Function
 Return type: bool
 
@@ -18125,6 +17248,12 @@ Return type: CompanyType
 
 -----------------------
 
+Company.GetBuilding
+Definition type: Promote
+Return type: Building
+
+-----------------------
+
 Company.GetCompanyType
 Definition type: Promote
 Return type: CompanyType
@@ -18140,6 +17269,12 @@ Return type: Country
 Company.GetEstablishmentDate
 Definition type: Promote
 Return type: Date
+
+-----------------------
+
+Company.GetState
+Definition type: Promote
+Return type: State
 
 -----------------------
 
@@ -18164,6 +17299,12 @@ Return type: [unregistered]
 Company.CalcProsperityChange
 Definition type: Function
 Return type: CFixedPoint
+
+-----------------------
+
+Company.GetBuilding
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -18212,6 +17353,12 @@ Return type: CFixedPoint
 Company.GetProsperity
 Definition type: Function
 Return type: CFixedPoint
+
+-----------------------
+
+Company.GetState
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -18315,6 +17462,12 @@ Definition type: Type
 
 -----------------------
 
+CompanyType.GetPotentialState
+Definition type: Promote
+Return type: State
+
+-----------------------
+
 CompanyType.GetProsperityModifier
 Definition type: Promote
 Return type: Modifier
@@ -18384,6 +17537,12 @@ Return type: CString
 CompanyType.GetNumBuildingLevels
 Definition type: Function
 Return type: int32
+
+-----------------------
+
+CompanyType.GetPotentialState
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -19100,12 +18259,6 @@ Return type: PowerBloc
 
 -----------------------
 
-Country.AccessRevolution
-Definition type: Promote
-Return type: PoliticalMovement
-
------------------------
-
 Country.AccessRuler
 Definition type: Promote
 Return type: Character
@@ -19196,6 +18349,12 @@ Return type: CoatOfArms
 
 -----------------------
 
+Country.GetFoodSecurity
+Definition type: Promote
+Return type: FoodSecurity
+
+-----------------------
+
 Country.GetGovernment
 Definition type: Promote
 Return type: GovernmentType
@@ -19205,6 +18364,12 @@ Return type: GovernmentType
 Country.GetGovernmentLegitimacyLevel
 Definition type: Promote
 Return type: LegitimacyLevel
+
+-----------------------
+
+Country.GetGrowingCivilWar
+Definition type: Promote
+Return type: CivilWar
 
 -----------------------
 
@@ -19298,12 +18463,6 @@ Return type: Modifier
 
 -----------------------
 
-Country.GetRevolution
-Definition type: Promote
-Return type: PoliticalMovement
-
------------------------
-
 Country.GetRuler
 Definition type: Promote
 Return type: Character
@@ -19343,6 +18502,18 @@ Return type: Pop
 Country.GetSampleUpperStrataPopForCulture( Arg0 )
 Definition type: Promote
 Return type: Pop
+
+-----------------------
+
+Country.GetSocialHierarchy
+Definition type: Promote
+Return type: SocialHierarchy
+
+-----------------------
+
+Country.GetSpecialSocialHierarchy
+Definition type: Promote
+Return type: SocialHierarchy
 
 -----------------------
 
@@ -19778,12 +18949,6 @@ Return type: [unregistered]
 
 -----------------------
 
-Country.AccessRevolution
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
 Country.AccessRuler
 Definition type: Function
 Return type: [unregistered]
@@ -20129,6 +19294,12 @@ Return type: CString
 Country.GetAdjectiveNoFormatting
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+Country.GetAllAcceptanceStatusSegments
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -20480,6 +19651,12 @@ Return type: CString
 
 -----------------------
 
+Country.GetBolsteringCostDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 Country.GetCapital
 Definition type: Function
 Return type: [unregistered]
@@ -20495,6 +19672,18 @@ Return type: CString
 Country.GetCompanies
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+Country.GetCompanyConstructionEfficiencyBonusFormatted
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+Country.GetCompanyThroughputBonusFormatted
+Definition type: Function
+Return type: CString
 
 -----------------------
 
@@ -21362,9 +20551,9 @@ Return type: [unregistered]
 
 -----------------------
 
-Country.GetGrowingSecessionistsDesc
+Country.GetGrowingCivilWar
 Definition type: Function
-Return type: CString
+Return type: [unregistered]
 
 -----------------------
 
@@ -21572,21 +20761,9 @@ Return type: DataTrend
 
 -----------------------
 
-Country.GetInterestGroupBolsteringCostDesc
-Definition type: Function
-Return type: CString
-
------------------------
-
 Country.GetInterestGroupOfType( Arg0 )
 Definition type: Function
 Return type: [unregistered]
-
------------------------
-
-Country.GetInterestGroupSuppressionCostDesc
-Definition type: Function
-Return type: CString
 
 -----------------------
 
@@ -21825,6 +21002,18 @@ Return type: CString
 -----------------------
 
 Country.GetLoyalistsIncreaseBreakdown
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+Country.GetLoyalistsOrRadicalsGainedFromLegitimacy
+Definition type: Function
+Return type: int64
+
+-----------------------
+
+Country.GetLoyalistsOrRadicalsGainedFromLegitimacyModifierDescription( Arg0 )
 Definition type: Function
 Return type: CString
 
@@ -22712,12 +21901,6 @@ Return type: DataTrend
 
 -----------------------
 
-Country.GetPossibleSecessionistsDesc
-Definition type: Function
-Return type: CString
-
------------------------
-
 Country.GetPotentialBattalionsRaw
 Description: Gets the number of potential Battalions this country could raise if all Conscription Centers were activated and all military buildings were fully employed
 Definition type: Function
@@ -23170,12 +22353,6 @@ Return type: [unregistered]
 
 -----------------------
 
-Country.GetRevolution
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
 Country.GetRuler
 Definition type: Function
 Return type: [unregistered]
@@ -23203,6 +22380,18 @@ Return type: int64
 Country.GetSeaNodesMightBeConvoyRaidedInDesc
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+Country.GetSocialHierarchy
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+Country.GetSpecialSocialHierarchy
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -23311,6 +22500,12 @@ Return type: CString
 Country.GetSupplyNetworkStrength
 Definition type: Function
 Return type: CFixedPoint
+
+-----------------------
+
+Country.GetSuppressionCostDesc
+Definition type: Function
+Return type: CString
 
 -----------------------
 
@@ -23974,7 +23169,19 @@ Return type: bool
 
 -----------------------
 
+Country.HasProgressingLawEnactment
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 Country.HasRuler
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+Country.HasSpecialSocialHierarchy
 Definition type: Function
 Return type: bool
 
@@ -23993,6 +23200,12 @@ Return type: bool
 -----------------------
 
 Country.IsAIOrOtherPlayer
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+Country.IsAlliedInDiploPlayWith( Arg0 )
 Definition type: Function
 Return type: bool
 
@@ -24023,12 +23236,6 @@ Return type: bool
 -----------------------
 
 Country.IsBeingTutorialHighlighted
-Definition type: Function
-Return type: bool
-
------------------------
-
-Country.IsCivilWarCountry
 Definition type: Function
 Return type: bool
 
@@ -24101,6 +23308,12 @@ Return type: bool
 -----------------------
 
 Country.IsInPowerBloc
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+Country.IsInsurrectionary
 Definition type: Function
 Return type: bool
 
@@ -24184,13 +23397,13 @@ Return type: bool
 
 -----------------------
 
-Country.IsRevolutionaryCountry
+Country.IsRevolutionary
 Definition type: Function
 Return type: bool
 
 -----------------------
 
-Country.IsSecessionistCountry
+Country.IsSecessionist
 Definition type: Function
 Return type: bool
 
@@ -24556,6 +23769,12 @@ Return type: void
 
 -----------------------
 
+Country.SortReligions( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
 Country.SortStates( Arg0 )
 Definition type: Function
 Return type: void
@@ -24615,13 +23834,13 @@ Return type: [unregistered]
 
 -----------------------
 
-CountryCreation.CanReleaseCountryAs( Arg0, Arg1 )
+CountryCreation.CanReleaseCountry( Arg0 )
 Definition type: Function
 Return type: bool
 
 -----------------------
 
-CountryCreation.CanReleaseCountryAtAll( Arg0 )
+CountryCreation.CanReleaseCountryAs( Arg0, Arg1 )
 Definition type: Function
 Return type: bool
 
@@ -25328,6 +24547,24 @@ Return type: uint32
 
 -----------------------
 
+CulturalCommunity.GetLocalAcceptanceDifference
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+CulturalCommunity.GetLocalAcceptanceDifferenceDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+CulturalCommunity.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 CulturalCommunity.GetState
 Definition type: Function
 Return type: [unregistered]
@@ -25453,21 +24690,27 @@ Return type: CFixedPoint
 
 -----------------------
 
-Culture.GetChanceForSecessionMovement( Arg0 )
+Culture.GetAcceptanceDescIn( Arg0 )
 Definition type: Function
-Return type: CFixedPoint
+Return type: CString
+
+-----------------------
+
+Culture.GetAcceptanceIn( Arg0 )
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+Culture.GetAllAcceptanceStatusSegments( Arg0 )
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
 Culture.GetColor
 Definition type: Function
 Return type: CVector4f
-
------------------------
-
-Culture.GetCountryDiscriminationStatus( Arg0 )
-Definition type: Function
-Return type: CString
 
 -----------------------
 
@@ -25681,19 +24924,7 @@ Return type: CFixedPoint
 
 -----------------------
 
-Culture.HasChanceForSecessionMovement( Arg0 )
-Definition type: Function
-Return type: bool
-
------------------------
-
 Culture.HasSecessionMovement( Arg0 )
-Definition type: Function
-Return type: bool
-
------------------------
-
-Culture.IsDiscriminatedIn( Arg0 )
 Definition type: Function
 Return type: bool
 
@@ -30520,6 +29751,202 @@ Return type: void
 
 -----------------------
 
+FoodSecurity
+Definition type: Type
+
+-----------------------
+
+FoodSecurity.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+FoodSecurity.GetNumPopsTotal
+Definition type: Function
+Return type: int64
+
+-----------------------
+
+FoodSecurity.GetNumStarvingPops
+Definition type: Function
+Return type: int64
+
+-----------------------
+
+FoodSecurity.GetNumStarvingPopsMild
+Definition type: Function
+Return type: int64
+
+-----------------------
+
+FoodSecurity.GetNumStarvingPopsSevere
+Definition type: Function
+Return type: int64
+
+-----------------------
+
+FoodSecurity.GetNumStatesWithFamineFormatted
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+FoodSecurity.GetNumStatesWithFamineRaw
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+FoodSecurity.GetPercentageStarvingPops
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+FoodSecurity.GetPercentageStarvingPopsMild
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+FoodSecurity.GetPercentageStarvingPopsSevere
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+FoodSecurity.GetStarvationTypePopulation( Arg0 )
+Definition type: Function
+Return type: int64
+
+-----------------------
+
+FoodSecurity.GetStarvationTypePopulationAsFloat( Arg0 )
+Definition type: Function
+Return type: float
+
+-----------------------
+
+FoodSecurity.GetStarvationTypePopulationAsPercentage( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+FoodSecurity.HasFamine
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+FoodSecurity.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+FoodSecurityFilter
+Definition type: Type
+
+-----------------------
+
+FoodSecurityFilter.GetFoodSecurity
+Definition type: Promote
+Return type: FoodSecurity
+
+-----------------------
+
+FoodSecurityFilter.GetFoodSecurityCountryOrMarket
+Definition type: Promote
+Return type: FoodSecurity
+
+-----------------------
+
+FoodSecurityFilter.GetMarket
+Definition type: Promote
+Return type: Market
+
+-----------------------
+
+FoodSecurityFilter.GetSelectedCountry
+Definition type: Promote
+Return type: Country
+
+-----------------------
+
+FoodSecurityFilter.GetSelectedState
+Definition type: Promote
+Return type: State
+
+-----------------------
+
+FoodSecurityFilter.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+FoodSecurityFilter.GetStates
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+FoodSecurityFilter.HasSpecificCountry
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+FoodSecurityFilter.HasSpecificState
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+FoodSecurityFilter.IsCountrySelected( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+FoodSecurityFilter.IsStateSelected( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+FoodSecurityFilter.ResetCountryFilter
+Definition type: Function
+Return type: void
+
+-----------------------
+
+FoodSecurityFilter.ResetStateFilter
+Definition type: Function
+Return type: void
+
+-----------------------
+
+FoodSecurityFilter.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+FoodSecurityFilter.SetCountryFilter( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+FoodSecurityFilter.SetStateFilter( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
 FormationMarker
 Definition type: Type
 
@@ -30681,6 +30108,12 @@ Return type: bool
 
 -----------------------
 
+FormationMarker.OnCtrlClick
+Definition type: Function
+Return type: void
+
+-----------------------
+
 FormationMarker.OnLeftClick
 Definition type: Function
 Return type: void
@@ -30688,6 +30121,12 @@ Return type: void
 -----------------------
 
 FormationMarker.OnRightClick
+Definition type: Function
+Return type: void
+
+-----------------------
+
+FormationMarker.OnShiftClick
 Definition type: Function
 Return type: void
 
@@ -30722,9 +30161,27 @@ Return type: [unregistered]
 
 -----------------------
 
+FormationPanel.GetSelectedFormations
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+FormationPanel.HasSelectionView
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 FormationPanel.Self
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+FormationPanel.SetFormation( Arg0 )
+Definition type: Function
+Return type: void
 
 -----------------------
 
@@ -30980,6 +30437,12 @@ Return type: CString
 Front.GetCustom( Arg0 )
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+Front.GetDeploySelectedFormationsCommand
+Definition type: Function
+Return type: Command
 
 -----------------------
 
@@ -31774,31 +31237,13 @@ Definition type: Type
 
 -----------------------
 
-FrontMarker.AccessFront
-Definition type: Promote
-Return type: Front
-
------------------------
-
 FrontMarker.GetFront
 Definition type: Promote
 Return type: Front
-
------------------------
-
-FrontMarker.AccessFront
-Definition type: Function
-Return type: [unregistered]
 
 -----------------------
 
 FrontMarker.AccessSelf
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
-FrontMarker.GetFront
 Definition type: Function
 Return type: [unregistered]
 
@@ -31817,6 +31262,89 @@ Return type: void
 -----------------------
 
 FrontMarker.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+FrontMovementMarker
+Definition type: Type
+
+-----------------------
+
+FrontMovementMarker.AccessFront
+Definition type: Promote
+Return type: Front
+
+-----------------------
+
+FrontMovementMarker.GetFront
+Definition type: Promote
+Return type: Front
+
+-----------------------
+
+FrontMovementMarker.AccessFront
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+FrontMovementMarker.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+FrontMovementMarker.GetFront
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+FrontMovementMarker.GetPosition
+Definition type: Function
+Return type: CVector2f
+
+-----------------------
+
+FrontMovementMarker.GetPresentFormationsBreakdown
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+FrontMovementMarker.GetTravelTimeBreakdown
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+FrontMovementMarker.IsAllSelectedFormationsLocation
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+FrontMovementMarker.IsAllSelectedFormationsTarget
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+FrontMovementMarker.IsAnySelectedFormationsLocation
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+FrontMovementMarker.IsAnySelectedFormationsTarget
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+FrontMovementMarker.Self
 Definition type: Function
 Return type: [unregistered]
 
@@ -32462,6 +31990,35 @@ Return type: void
 
 -----------------------
 
+GeneralInformationWindow
+Definition type: Type
+
+-----------------------
+
+GeneralInformationWindow.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+GeneralInformationWindow.GetText
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+GeneralInformationWindow.GetTitle
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+GeneralInformationWindow.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 Goods
 Definition type: Type
 
@@ -33007,6 +32564,18 @@ Return type: CString
 
 -----------------------
 
+Goods.GetShortageRatioInMarket
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+Goods.GetShortageRatioInState
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
 Goods.GetState
 Definition type: Function
 Return type: [unregistered]
@@ -33187,6 +32756,18 @@ Return type: bool
 
 -----------------------
 
+Goods.HasShortageInMarket
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+Goods.HasShortageInState
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 Goods.HasStateContext
 Definition type: Function
 Return type: bool
@@ -33321,6 +32902,71 @@ Return type: CFixedPoint
 GoodsExpenseItem.Self
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+GoodsList
+Definition type: Type
+
+-----------------------
+
+GoodsList.GetState
+Definition type: Promote
+Return type: State
+
+-----------------------
+
+GoodsList.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+GoodsList.GetGoods
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+GoodsList.GetPopConsumptionRatio( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+GoodsList.GetPrice( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+GoodsList.HasMarketContext
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+GoodsList.HasStateContext
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+GoodsList.RestoreSort
+Definition type: Function
+Return type: void
+
+-----------------------
+
+GoodsList.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+GoodsList.Sort( Arg0 )
+Definition type: Function
+Return type: void
 
 -----------------------
 
@@ -33502,6 +33148,35 @@ Return type: void
 
 -----------------------
 
+GoodsPanelChildValue
+Definition type: Type
+
+-----------------------
+
+GoodsPanelChildValue.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+GoodsPanelChildValue.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+GoodsPanelChildValue.GetValue
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+GoodsPanelChildValue.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 GoodsPanelValue
 Definition type: Type
 
@@ -33513,9 +33188,15 @@ Return type: Building
 
 -----------------------
 
-GoodsPanelValue.GetTradeRoute
+GoodsPanelValue.GetMarket
 Definition type: Promote
-Return type: TradeRoute
+Return type: Market
+
+-----------------------
+
+GoodsPanelValue.GetState
+Definition type: Promote
+Return type: State
 
 -----------------------
 
@@ -33531,9 +33212,15 @@ Return type: [unregistered]
 
 -----------------------
 
-GoodsPanelValue.GetDesc
+GoodsPanelValue.GetChildren
 Definition type: Function
-Return type: CString
+Return type: [unregistered]
+
+-----------------------
+
+GoodsPanelValue.GetMarket
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -33543,13 +33230,7 @@ Return type: CString
 
 -----------------------
 
-GoodsPanelValue.GetTooltip
-Definition type: Function
-Return type: CString
-
------------------------
-
-GoodsPanelValue.GetTradeRoute
+GoodsPanelValue.GetState
 Definition type: Function
 Return type: [unregistered]
 
@@ -33567,7 +33248,7 @@ Return type: bool
 
 -----------------------
 
-GoodsPanelValue.HasTradeRouteInfo
+GoodsPanelValue.HasMarketContext
 Definition type: Function
 Return type: bool
 
@@ -34003,6 +33684,486 @@ Return type: [unregistered]
 
 -----------------------
 
+HQMovementMarker
+Definition type: Type
+
+-----------------------
+
+HQMovementMarker.GetHQ
+Definition type: Promote
+Return type: Hq
+
+-----------------------
+
+HQMovementMarker.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HQMovementMarker.GetHQ
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HQMovementMarker.GetPosition
+Definition type: Function
+Return type: CVector2f
+
+-----------------------
+
+HQMovementMarker.GetPresentFormationsBreakdown
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HQMovementMarker.GetTravelTimeBreakdown
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HQMovementMarker.IsAllSelectedFormationsLocation
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+HQMovementMarker.IsAllSelectedFormationsTarget
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+HQMovementMarker.IsAnySelectedFormationsLocation
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+HQMovementMarker.IsAnySelectedFormationsTarget
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+HQMovementMarker.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestCondition
+Definition type: Type
+
+-----------------------
+
+HarvestCondition.GetArea
+Definition type: Promote
+Return type: HarvestConditionArea
+
+-----------------------
+
+HarvestCondition.GetState
+Definition type: Promote
+Return type: State
+
+-----------------------
+
+HarvestCondition.GetType
+Definition type: Promote
+Return type: HarvestConditionType
+
+-----------------------
+
+HarvestCondition.MakeScope
+Definition type: Promote
+Return type: Scope
+
+-----------------------
+
+HarvestCondition.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestCondition.GetCustom( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestCondition.GetDurationDays
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+HarvestCondition.GetEffectDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestCondition.GetIntensity
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+HarvestCondition.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestCondition.GetNameNoFormatting
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestCondition.GetNameNoIcon
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestCondition.GetNumStates
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+HarvestCondition.GetRemainingDays
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+HarvestCondition.GetRemainingDuration
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestCondition.GetRemainingDurationLabel
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestCondition.GetRemainingDurationRange
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestCondition.GetTooltipTag
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestCondition.MakeScope
+Definition type: Function
+Return type: Scope
+
+-----------------------
+
+HarvestCondition.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionArea
+Definition type: Type
+
+-----------------------
+
+HarvestConditionArea.GetEpicenter
+Definition type: Promote
+Return type: HarvestCondition
+
+-----------------------
+
+HarvestConditionArea.GetEpicenterRegion
+Definition type: Promote
+Return type: StateRegion
+
+-----------------------
+
+HarvestConditionArea.GetType
+Definition type: Promote
+Return type: HarvestConditionType
+
+-----------------------
+
+HarvestConditionArea.MakeScope
+Definition type: Promote
+Return type: Scope
+
+-----------------------
+
+HarvestConditionArea.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionArea.GetCustom( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionArea.GetEffectDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionArea.GetHarvestConditions
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionArea.GetHarvestConditionsAffecting( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionArea.GetHarvestConditionsNotAffecting( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionArea.GetIntensity
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+HarvestConditionArea.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionArea.GetNameNoFormatting
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionArea.GetNameNoIcon
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionArea.GetNumStates
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+HarvestConditionArea.GetRemainingDays
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+HarvestConditionArea.GetRemainingDuration
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionArea.GetRemainingDurationLabel
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionArea.GetRemainingDurationRange
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionArea.GetTooltipTag
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionArea.MakeScope
+Definition type: Function
+Return type: Scope
+
+-----------------------
+
+HarvestConditionArea.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionList
+Definition type: Type
+
+-----------------------
+
+HarvestConditionList.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionList.GetNumStatesWithType( Arg0 )
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+HarvestConditionList.GetStatesBreakdown( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionList.GetTypes
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionList.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionRegionMarker
+Definition type: Type
+
+-----------------------
+
+HarvestConditionRegionMarker.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionRegionMarker.GetHarvestConditionAreas
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionRegionMarker.GetPosition
+Definition type: Function
+Return type: CVector2f
+
+-----------------------
+
+HarvestConditionRegionMarker.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionType
+Definition type: Type
+
+-----------------------
+
+HarvestConditionType.MakeScope
+Definition type: Promote
+Return type: Scope
+
+-----------------------
+
+HarvestConditionType.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionType.GetColor
+Definition type: Function
+Return type: CVector4f
+
+-----------------------
+
+HarvestConditionType.GetCustom( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionType.GetDescription
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionType.GetEffectDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionType.GetIcon
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+HarvestConditionType.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionType.GetNameNoFormatting
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionType.GetNameNoIcon
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionType.GetTooltipTag
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+HarvestConditionType.MakeScope
+Definition type: Function
+Return type: Scope
+
+-----------------------
+
+HarvestConditionType.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 HighlightManager
 Definition type: Type
 
@@ -34069,6 +34230,18 @@ Return type: void
 -----------------------
 
 HighlightManager.HighlightHQ( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+HighlightManager.HighlightHarvestConditionArea( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+HighlightManager.HighlightHarvestConditionType( Arg0 )
 Definition type: Function
 Return type: void
 
@@ -34234,12 +34407,6 @@ Definition type: Type
 
 -----------------------
 
-HomelandMarker.AccessState
-Definition type: Promote
-Return type: State
-
------------------------
-
 HomelandMarker.GetCulture
 Definition type: Promote
 Return type: Culture
@@ -34253,12 +34420,6 @@ Return type: State
 -----------------------
 
 HomelandMarker.AccessSelf
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
-HomelandMarker.AccessState
 Definition type: Function
 Return type: [unregistered]
 
@@ -34350,6 +34511,12 @@ Return type: CString
 Hq.GetStates
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+Hq.GetStationSelectedFormationsCommand
+Definition type: Function
+Return type: Command
 
 -----------------------
 
@@ -34448,6 +34615,18 @@ Return type: CString
 
 -----------------------
 
+Ideology.GetEndorsedLawsInLawGroup( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+Ideology.GetLawGroups
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 Ideology.GetLawStanceDesc
 Definition type: Function
 Return type: CString
@@ -34466,6 +34645,18 @@ Return type: CString
 
 -----------------------
 
+Ideology.GetNeutralLawsInLawGroup( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+Ideology.GetOpposedLawsInLawGroup( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 Ideology.GetTexture
 Definition type: Function
 Return type: [unregistered]
@@ -34475,12 +34666,6 @@ Return type: [unregistered]
 Ideology.GetTooltipTag
 Definition type: Function
 Return type: CString
-
------------------------
-
-Ideology.HasStanceOnMovement( Arg0 )
-Definition type: Function
-Return type: bool
 
 -----------------------
 
@@ -34998,6 +35183,12 @@ Return type: void
 -----------------------
 
 InformationPanelBar.OpenSeaRegionPanel( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+InformationPanelBar.OpenSeaRegionPanelTab( Arg0, Arg1 )
 Definition type: Function
 Return type: void
 
@@ -35603,12 +35794,6 @@ Return type: Modifier
 
 -----------------------
 
-InterestGroup.AccessPoliticalMovement
-Definition type: Promote
-Return type: PoliticalMovement
-
------------------------
-
 InterestGroup.GetCountry
 Definition type: Promote
 Return type: Country
@@ -35642,12 +35827,6 @@ Return type: Party
 InterestGroup.GetPartyAffiliationHighest
 Definition type: Promote
 Return type: Party
-
------------------------
-
-InterestGroup.GetPoliticalMovement
-Definition type: Promote
-Return type: PoliticalMovement
 
 -----------------------
 
@@ -35694,12 +35873,6 @@ Return type: [unregistered]
 -----------------------
 
 InterestGroup.AccessModifier
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
-InterestGroup.AccessPoliticalMovement
 Definition type: Function
 Return type: [unregistered]
 
@@ -35783,6 +35956,12 @@ Return type: float
 
 -----------------------
 
+InterestGroup.GetCloutSupportingMovement( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
 InterestGroup.GetCloutTrend
 Definition type: Function
 Return type: DataTrend
@@ -35819,6 +35998,12 @@ Return type: CString
 
 -----------------------
 
+InterestGroup.GetFractionOfCloutSupportingMovement( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
 InterestGroup.GetGraphicalLoyalistsRatioInAllInterestGroups
 Definition type: Function
 Return type: float
@@ -35852,6 +36037,12 @@ Return type: CString
 InterestGroup.GetInfluenceReason
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+InterestGroup.GetInfluencingMovements
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -35945,6 +36136,12 @@ Return type: float
 
 -----------------------
 
+InterestGroup.GetNumPossibleLeaderIdeologies
+Definition type: Function
+Return type: int32
+
+-----------------------
+
 InterestGroup.GetNumRadicals
 Definition type: Function
 Return type: int64
@@ -35954,6 +36151,12 @@ Return type: int64
 InterestGroup.GetNumRadicalsRatio
 Definition type: Function
 Return type: float
+
+-----------------------
+
+InterestGroup.GetNumSupportersForMovement( Arg0 )
+Definition type: Function
+Return type: int64
 
 -----------------------
 
@@ -35978,18 +36181,6 @@ Return type: CString
 InterestGroup.GetPoliticalLobbies
 Definition type: Function
 Return type: [unregistered]
-
------------------------
-
-InterestGroup.GetPoliticalMovement
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
-InterestGroup.GetPoliticalMovementDesc
-Definition type: Function
-Return type: CString
 
 -----------------------
 
@@ -36029,12 +36220,6 @@ Return type: int64
 
 -----------------------
 
-InterestGroup.GetPopAttractionReasons
-Definition type: Function
-Return type: CString
-
------------------------
-
 InterestGroup.GetPopPotentialDesc
 Definition type: Function
 Return type: CString
@@ -36068,6 +36253,18 @@ Return type: CFixedPoint
 InterestGroup.GetPopulationInState( Arg0 )
 Definition type: Function
 Return type: int64
+
+-----------------------
+
+InterestGroup.GetPossibleCharacterLeaderIdeologies
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+InterestGroup.GetPossibleRandomLeaderIdeologies
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -36143,13 +36340,13 @@ Return type: bool
 
 -----------------------
 
-InterestGroup.IsBolstered
+InterestGroup.IsInGovernment
 Definition type: Function
 Return type: bool
 
 -----------------------
 
-InterestGroup.IsInGovernment
+InterestGroup.IsInfluencedByMovement( Arg0 )
 Definition type: Function
 Return type: bool
 
@@ -36191,7 +36388,7 @@ Return type: bool
 
 -----------------------
 
-InterestGroup.IsSuppressed
+InterestGroup.IsSecessionist
 Definition type: Function
 Return type: bool
 
@@ -36230,18 +36427,6 @@ Return type: [unregistered]
 InterestGroup.TogglePinInOutliner
 Definition type: Function
 Return type: void
-
------------------------
-
-InterestGroup.TogglePromotion
-Definition type: Function
-Return type: Command
-
------------------------
-
-InterestGroup.ToggleSuppression
-Definition type: Function
-Return type: Command
 
 -----------------------
 
@@ -37017,6 +37202,12 @@ Return type: CString
 
 -----------------------
 
+JournalEntry.GetRemainingProgressValue
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
 JournalEntry.GetScriptedButtons
 Definition type: Function
 Return type: [unregistered]
@@ -37050,6 +37241,12 @@ Return type: [unregistered]
 JournalEntry.GetTimedModifiersTooltip
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+JournalEntry.GetTimeoutDaysLeft
+Definition type: Function
+Return type: int32
 
 -----------------------
 
@@ -37158,6 +37355,24 @@ Return type: Scope
 JournalEntry.Self
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+JournalEntry.ShowProgressbarAsMonths
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+JournalEntry.ShowProgressbarAsTime
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+JournalEntry.ShowProgressbarAsWeeks
+Definition type: Function
+Return type: bool
 
 -----------------------
 
@@ -37509,6 +37724,24 @@ Return type: CString
 
 -----------------------
 
+LabelingHelper.GetMultiTypeGameTimeDifferenceFromDays( Arg0, Arg1, Arg2 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+LabelingHelper.GetMultiTypeGameTimeDifferenceFromMonths( Arg0, Arg1, Arg2 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+LabelingHelper.GetMultiTypeGameTimeDifferenceFromWeeks( Arg0, Arg1, Arg2 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 LabelingHelper.GetPriceCompareDesc( Arg0, Arg1, Arg2 )
 Definition type: Function
 Return type: CString
@@ -37586,6 +37819,12 @@ Return type: LawGroup
 
 -----------------------
 
+Law.GetInstitution
+Definition type: Promote
+Return type: Institution
+
+-----------------------
+
 Law.GetInstitutionModifier
 Definition type: Promote
 Return type: Modifier
@@ -37601,12 +37840,6 @@ Return type: InstitutionType
 Law.GetLawType
 Definition type: Promote
 Return type: LawType
-
------------------------
-
-Law.GetPoliticalMovement
-Definition type: Promote
-Return type: PoliticalMovement
 
 -----------------------
 
@@ -37640,6 +37873,12 @@ Return type: [unregistered]
 
 -----------------------
 
+Law.AppliesTo( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 Law.CannotEnactDesc
 Definition type: Function
 Return type: CString
@@ -37647,6 +37886,18 @@ Return type: CString
 -----------------------
 
 Law.GetActiveGroupLaw
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+Law.GetAffectedMovementsFromCancelEnact
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+Law.GetAffectedMovementsFromStartEnact
 Definition type: Function
 Return type: [unregistered]
 
@@ -37808,6 +38059,12 @@ Return type: CString
 
 -----------------------
 
+Law.GetDailyProgress
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
 Law.GetDesc
 Definition type: Function
 Return type: CString
@@ -37895,6 +38152,12 @@ Return type: CString
 Law.GetIGsUndecidedList
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+Law.GetInstitution
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -38012,27 +38275,33 @@ Return type: CFixedPoint
 
 -----------------------
 
-Law.GetPoliticalMovement
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
-Law.GetPotentialPoliticalMovementFullName
-Definition type: Function
-Return type: CString
-
------------------------
-
-Law.GetPotentialPoliticalMovementName
-Definition type: Function
-Return type: CString
-
------------------------
-
 Law.GetPreviousEnactmentPhaseKey
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+Law.GetRadicalismDriftTargetOnMovementFromCancelEnact( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+Law.GetRadicalismDriftTargetOnMovementFromStartEnact( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+Law.GetRadicalismEffectOnMovementFromCancelEnact( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+Law.GetRadicalismEffectOnMovementFromStartEnact( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
 
 -----------------------
 
@@ -38096,6 +38365,18 @@ Return type: bool
 
 -----------------------
 
+Law.HasNecessaryLaws
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+Law.HasNecessaryTech
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 Law.IsActive
 Definition type: Function
 Return type: bool
@@ -38103,6 +38384,12 @@ Return type: bool
 -----------------------
 
 Law.IsBeingEnacted
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+Law.IsMissingSupport
 Definition type: Function
 Return type: bool
 
@@ -38139,6 +38426,24 @@ Return type: int32
 -----------------------
 
 Law.PredictLegitimacyChangeToEnactDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+Law.PredictMovementLoyalistsFromEnactmentDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+Law.PredictRadicalismChangesFromCancellationDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+Law.PredictRadicalismChangesFromEnactmentDesc
 Definition type: Function
 Return type: CString
 
@@ -38323,18 +38628,6 @@ Return type: CString
 -----------------------
 
 LawType.GetNameNoFormatting
-Definition type: Function
-Return type: CString
-
------------------------
-
-LawType.GetPoliticalMovementFullName( Arg0 )
-Definition type: Function
-Return type: CString
-
------------------------
-
-LawType.GetPoliticalMovementName( Arg0 )
 Definition type: Function
 Return type: CString
 
@@ -39771,6 +40064,52 @@ Return type: [unregistered]
 
 -----------------------
 
+MapListHarvestConditionAreasPanel
+Definition type: Type
+
+-----------------------
+
+MapListHarvestConditionAreasPanel.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+MapListHarvestConditionAreasPanel.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+MapListHarvestConditionOption
+Definition type: Type
+
+-----------------------
+
+MapListHarvestConditionOption.GetArea
+Definition type: Promote
+Return type: HarvestConditionArea
+
+-----------------------
+
+MapListHarvestConditionOption.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+MapListHarvestConditionOption.GetArea
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+MapListHarvestConditionOption.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 MapListInterestGroupOption
 Definition type: Type
 
@@ -40025,6 +40364,12 @@ Return type: MapListDiploActionOption
 MapListOption.GetFrontData
 Definition type: Promote
 Return type: MapListDeployMilitaryFormationToFrontOption
+
+-----------------------
+
+MapListOption.GetHarvestConditionAreaData
+Definition type: Promote
+Return type: MapListHarvestConditionOption
 
 -----------------------
 
@@ -40576,6 +40921,82 @@ Return type: [unregistered]
 
 -----------------------
 
+MapMode
+Definition type: Type
+
+-----------------------
+
+MapMode.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+MapMode.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+MapMode.GetTooltipTag
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+MapMode.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+MapModeList
+Definition type: Type
+
+-----------------------
+
+MapModeList.GetSelectedMapMode
+Definition type: Promote
+Return type: MapMode
+
+-----------------------
+
+MapModeList.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+MapModeList.GetContextName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+MapModeList.GetMapModes
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+MapModeList.IsSelected( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+MapModeList.Select( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+MapModeList.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 MapNotification
 Definition type: Type
 
@@ -40607,6 +41028,18 @@ Definition type: Type
 Market.AccessMarketCapital
 Definition type: Promote
 Return type: State
+
+-----------------------
+
+Market.GetFoodSecurity
+Definition type: Promote
+Return type: FoodSecurity
+
+-----------------------
+
+Market.GetFoodSecurityFilter
+Definition type: Promote
+Return type: FoodSecurityFilter
 
 -----------------------
 
@@ -40880,6 +41313,12 @@ Return type: bool
 
 -----------------------
 
+Market.HasBuildingGoodsShortage( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 Market.HasGoodsShortage( Arg0 )
 Definition type: Function
 Return type: bool
@@ -40911,6 +41350,12 @@ Return type: bool
 -----------------------
 
 Market.HasPlayerImportRoutes
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+Market.HasPopGoodsShortage( Arg0 )
 Definition type: Function
 Return type: bool
 
@@ -41148,21 +41593,21 @@ Definition type: Type
 
 -----------------------
 
-MarketPanel.AccessMarket
+MarketPanel.GetFilteredGoodsList( Arg0 )
 Definition type: Promote
-Return type: Market
+Return type: GoodsList
+
+-----------------------
+
+MarketPanel.GetHarvestConditionList( Arg0 )
+Definition type: Promote
+Return type: HarvestConditionList
 
 -----------------------
 
 MarketPanel.GetMarket
 Definition type: Promote
 Return type: Market
-
------------------------
-
-MarketPanel.AccessMarket
-Definition type: Function
-Return type: [unregistered]
 
 -----------------------
 
@@ -41184,13 +41629,19 @@ Return type: [unregistered]
 
 -----------------------
 
-MarketPanel.GetMarket
+MarketPanel.IsSelected( Arg0 )
 Definition type: Function
-Return type: [unregistered]
+Return type: bool
 
 -----------------------
 
-MarketPanel.IsSelected( Arg0 )
+MarketPanel.IsShowingHarvestConditions
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+MarketPanel.IsShowingStarvation
 Definition type: Function
 Return type: bool
 
@@ -41199,6 +41650,24 @@ Return type: bool
 MarketPanel.Self
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+MarketPanel.ShowHarvestConditions
+Definition type: Function
+Return type: void
+
+-----------------------
+
+MarketPanel.ShowStarvation
+Definition type: Function
+Return type: void
+
+-----------------------
+
+MarketPanel.ShowTrade
+Definition type: Function
+Return type: void
 
 -----------------------
 
@@ -41437,6 +41906,12 @@ Return type: [unregistered]
 
 -----------------------
 
+MessageSettingsWindow.HasPauseOnEvent
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 MessageSettingsWindow.HasSingleShownItem
 Definition type: Function
 Return type: bool
@@ -41492,6 +41967,12 @@ Return type: bool
 -----------------------
 
 MessageSettingsWindow.SortInterestingCountryItemsIfNeeded
+Definition type: Function
+Return type: void
+
+-----------------------
+
+MessageSettingsWindow.TogglePauseOnEvent
 Definition type: Function
 Return type: void
 
@@ -41616,12 +42097,6 @@ Return type: [unregistered]
 
 -----------------------
 
-MilitaryFormation.AllowsBorrowingAndLending
-Definition type: Function
-Return type: bool
-
------------------------
-
 MilitaryFormation.CanAnyUnitBeUpgraded
 Definition type: Function
 Return type: bool
@@ -41679,6 +42154,12 @@ Return type: bool
 MilitaryFormation.Demobilize
 Definition type: Function
 Return type: Command
+
+-----------------------
+
+MilitaryFormation.Deselect
+Definition type: Function
+Return type: void
 
 -----------------------
 
@@ -41745,6 +42226,12 @@ Return type: CFixedPoint
 MilitaryFormation.GetAverageOffenseExcludeUnavailableManpower
 Definition type: Function
 Return type: CFixedPoint
+
+-----------------------
+
+MilitaryFormation.GetBorrowSettings
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -42636,6 +43123,12 @@ Return type: bool
 
 -----------------------
 
+MilitaryFormation.IsSelected
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 MilitaryFormation.IsTargetHQ( Arg0 )
 Definition type: Function
 Return type: bool
@@ -42726,15 +43219,15 @@ Return type: Command
 
 -----------------------
 
-MilitaryFormation.Self
+MilitaryFormation.Select
 Definition type: Function
-Return type: [unregistered]
+Return type: void
 
 -----------------------
 
-MilitaryFormation.ToggleBorrowingAndLending
+MilitaryFormation.Self
 Definition type: Function
-Return type: Command
+Return type: [unregistered]
 
 -----------------------
 
@@ -42744,9 +43237,62 @@ Return type: void
 
 -----------------------
 
+MilitaryFormation.ToggleSelected
+Definition type: Function
+Return type: void
+
+-----------------------
+
 MilitaryFormation.ZoomToMapMarkerPosition
 Definition type: Function
 Return type: void
+
+-----------------------
+
+MilitaryFormationBorrowSetting
+Definition type: Type
+
+-----------------------
+
+MilitaryFormationBorrowSetting.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+MilitaryFormationBorrowSetting.GetBorrowingCommand
+Definition type: Function
+Return type: Command
+
+-----------------------
+
+MilitaryFormationBorrowSetting.GetDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+MilitaryFormationBorrowSetting.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+MilitaryFormationBorrowSetting.IsSelected
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+MilitaryFormationBorrowSetting.OnClicked
+Definition type: Function
+Return type: void
+
+-----------------------
+
+MilitaryFormationBorrowSetting.Self
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -43884,14 +44430,174 @@ Return type: [unregistered]
 
 -----------------------
 
-NationalizeBuildingWindow
+NationalizeBuildingGroup
 Definition type: Type
 
 -----------------------
 
-NationalizeBuildingWindow.GetBuilding
+NationalizeBuildingGroup.GetInvestor
 Definition type: Promote
-Return type: Building
+Return type: Country
+
+-----------------------
+
+NationalizeBuildingGroup.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+NationalizeBuildingGroup.GetColor
+Definition type: Function
+Return type: CVector4f
+
+-----------------------
+
+NationalizeBuildingGroup.GetErrors
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+NationalizeBuildingGroup.GetFilterMaxLevels( Arg0 )
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+NationalizeBuildingGroup.GetFilterNumSelectedLevels( Arg0 )
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+NationalizeBuildingGroup.GetInvestor
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+NationalizeBuildingGroup.GetMaxLevels
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+NationalizeBuildingGroup.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+NationalizeBuildingGroup.GetNumSelectedLevels
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+NationalizeBuildingGroup.GetSelectedLevelsDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+NationalizeBuildingGroup.HasFilter( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+NationalizeBuildingGroup.IsGovernment
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+NationalizeBuildingGroup.IsNationalizable
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+NationalizeBuildingGroup.IsPrivate
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+NationalizeBuildingGroup.OnSelectedLevelsEditboxValueChanged
+Definition type: Function
+Return type: void
+
+-----------------------
+
+NationalizeBuildingGroup.OnSelectedLevelsSliderValueChanged
+Definition type: Function
+Return type: void
+
+-----------------------
+
+NationalizeBuildingGroup.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+NationalizeBuildingGroup.SetFilter( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+NationalizeBuildingTypeGroup
+Definition type: Type
+
+-----------------------
+
+NationalizeBuildingTypeGroup.GetBuildingType
+Definition type: Promote
+Return type: BuildingType
+
+-----------------------
+
+NationalizeBuildingTypeGroup.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+NationalizeBuildingTypeGroup.GetBuildingType
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+NationalizeBuildingTypeGroup.GetCurrentLevels
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+NationalizeBuildingTypeGroup.GetMaxLevels
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+NationalizeBuildingTypeGroup.GetSelectedBuildingsBreakdown
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+NationalizeBuildingTypeGroup.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+NationalizeBuildingWindow
+Definition type: Type
 
 -----------------------
 
@@ -43907,13 +44613,19 @@ Return type: bool
 
 -----------------------
 
-NationalizeBuildingWindow.ChangeLevelsToNationalize( Arg0 )
+NationalizeBuildingWindow.GetBuildingGroups
 Definition type: Function
-Return type: void
+Return type: [unregistered]
 
 -----------------------
 
-NationalizeBuildingWindow.GetBuilding
+NationalizeBuildingWindow.GetBuildingTypeGroups
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+NationalizeBuildingWindow.GetBuildings
 Definition type: Function
 Return type: [unregistered]
 
@@ -43925,21 +44637,93 @@ Return type: CString
 
 -----------------------
 
+NationalizeBuildingWindow.GetCompensationShareToInvestmentPool
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+NationalizeBuildingWindow.GetCompensationShareToPlayerInvestmentPool
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+NationalizeBuildingWindow.GetCompensationTotal
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+NationalizeBuildingWindow.GetDamagedRelationsListDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 NationalizeBuildingWindow.GetNumLevelsToNationalize
 Definition type: Function
 Return type: int32
 
 -----------------------
 
-NationalizeBuildingWindow.NationalizeBuilding
+NationalizeBuildingWindow.GetPopRadicalizationListDesc
 Definition type: Function
-Return type: Command
+Return type: CString
+
+-----------------------
+
+NationalizeBuildingWindow.HasNationalizableGroup
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+NationalizeBuildingWindow.IsNationalizingAll
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+NationalizeBuildingWindow.NationalizeBuildingGroupsConfirm
+Definition type: Function
+Return type: void
+
+-----------------------
+
+NationalizeBuildingWindow.NationalizeBuildingGroupsGetDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+NationalizeBuildingWindow.NationalizeBuildingGroupsIsValid
+Definition type: Function
+Return type: bool
 
 -----------------------
 
 NationalizeBuildingWindow.Self
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+NationalizeBuildingWindow.SetNationalizeToAll
+Definition type: Function
+Return type: void
+
+-----------------------
+
+NationalizeBuildingWindow.SetNationalizeToNone
+Definition type: Function
+Return type: void
+
+-----------------------
+
+NationalizeBuildingWindow.Sort( Arg0 )
+Definition type: Function
+Return type: void
 
 -----------------------
 
@@ -43993,18 +44777,6 @@ Return type: Country
 NavalInvasion.GetInvaderCountry
 Definition type: Promote
 Return type: Country
-
------------------------
-
-NavalInvasion.GetLandBattle
-Definition type: Promote
-Return type: Battle
-
------------------------
-
-NavalInvasion.GetNavalBattle
-Definition type: Promote
-Return type: Battle
 
 -----------------------
 
@@ -44170,12 +44942,6 @@ Return type: CString
 
 -----------------------
 
-NavalInvasion.GetLandBattle
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
 NavalInvasion.GetLandingProgress
 Definition type: Function
 Return type: CFixedPoint
@@ -44194,25 +44960,19 @@ Return type: CString
 
 -----------------------
 
-NavalInvasion.GetNavalBattle
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
 NavalInvasion.GetNonBlockingFleets
 Definition type: Function
 Return type: [unregistered]
 
 -----------------------
 
-NavalInvasion.GetNumBlockingFleetUnits
+NavalInvasion.GetNumBlockingFleets
 Definition type: Function
 Return type: int32
 
 -----------------------
 
-NavalInvasion.GetNumBlockingFleets
+NavalInvasion.GetNumBlockingFleetsUnits
 Definition type: Function
 Return type: int32
 
@@ -44272,13 +45032,13 @@ Return type: int32
 
 -----------------------
 
-NavalInvasion.GetNumNonBlockingFleetUnits
+NavalInvasion.GetNumNonBlockingFleets
 Definition type: Function
 Return type: int32
 
 -----------------------
 
-NavalInvasion.GetNumNonBlockingFleets
+NavalInvasion.GetNumNonBlockingFleetsUnits
 Definition type: Function
 Return type: int32
 
@@ -45209,6 +45969,12 @@ Return type: int32
 -----------------------
 
 OutlinerEntry.GetNumSubEntries
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+OutlinerEntry.GetNumSubEntriesPinned
 Definition type: Function
 Return type: int32
 
@@ -46506,39 +47272,33 @@ Definition type: Type
 
 -----------------------
 
+PoliticalMovement.GetCivilWar
+Definition type: Promote
+Return type: CivilWar
+
+-----------------------
+
+PoliticalMovement.GetCoreIdeology
+Definition type: Promote
+Return type: Ideology
+
+-----------------------
+
 PoliticalMovement.GetCountry
 Definition type: Promote
 Return type: Country
 
 -----------------------
 
-PoliticalMovement.GetLaw
-Definition type: Promote
-Return type: Law
-
------------------------
-
-PoliticalMovement.GetLawType
-Definition type: Promote
-Return type: LawType
-
------------------------
-
-PoliticalMovement.GetPrimaryInterestGroup
-Definition type: Promote
-Return type: InterestGroup
-
------------------------
-
-PoliticalMovement.GetRevolution
-Definition type: Promote
-Return type: CivilWar
-
------------------------
-
 PoliticalMovement.GetSupportingPops
 Definition type: Promote
 Return type: PopList
+
+-----------------------
+
+PoliticalMovement.GetType
+Definition type: Promote
+Return type: PoliticalMovementType
 
 -----------------------
 
@@ -46554,7 +47314,43 @@ Return type: [unregistered]
 
 -----------------------
 
-PoliticalMovement.GetActionName
+PoliticalMovement.GetAffectedLawsStall
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovement.GetAffectedLawsSuccess
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovement.GetAffectedStallPercentageOnLaw( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+PoliticalMovement.GetAffectedSuccessPercentageOnEndorsedLaws
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+PoliticalMovement.GetAffectedSuccessPercentageOnLaw( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+PoliticalMovement.GetAffectedSuccessPercentageOnOpposedLaws
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+PoliticalMovement.GetBolsteringEffectDesc
 Definition type: Function
 Return type: CString
 
@@ -46572,15 +47368,21 @@ Return type: CString
 
 -----------------------
 
-PoliticalMovement.GetCharacterSupport( Arg0 )
+PoliticalMovement.GetCharacterIdeologies
 Definition type: Function
-Return type: CFixedPoint
+Return type: [unregistered]
 
 -----------------------
 
-PoliticalMovement.GetCharacterSupportDesc( Arg0 )
+PoliticalMovement.GetCivilWar
 Definition type: Function
-Return type: CString
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovement.GetCoreIdeology
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -46596,21 +47398,15 @@ Return type: CString
 
 -----------------------
 
-PoliticalMovement.GetFullName
-Definition type: Function
-Return type: CString
-
------------------------
-
-PoliticalMovement.GetLaw
+PoliticalMovement.GetInfluencedInterestGroups
 Definition type: Function
 Return type: [unregistered]
 
 -----------------------
 
-PoliticalMovement.GetLawType
+PoliticalMovement.GetMilitarySupport
 Definition type: Function
-Return type: [unregistered]
+Return type: CFixedPoint
 
 -----------------------
 
@@ -46620,19 +47416,25 @@ Return type: CString
 
 -----------------------
 
-PoliticalMovement.GetNumIGSupporters
+PoliticalMovement.GetNameNoFormatting
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovement.GetNameNoIcon
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovement.GetNumSupportingIndividuals
 Definition type: Function
 Return type: int64
 
 -----------------------
 
-PoliticalMovement.GetNumNonIGSupporters
-Definition type: Function
-Return type: int64
-
------------------------
-
-PoliticalMovement.GetNumSupportingPops
+PoliticalMovement.GetNumSupportingMilitaryIndividuals
 Definition type: Function
 Return type: int64
 
@@ -46644,15 +47446,15 @@ Return type: int64
 
 -----------------------
 
-PoliticalMovement.GetPopSupport
+PoliticalMovement.GetPopSupportFactors
 Definition type: Function
-Return type: CFixedPoint
+Return type: [unregistered]
 
 -----------------------
 
-PoliticalMovement.GetPrimaryInterestGroup
+PoliticalMovement.GetPopularSupport
 Definition type: Function
-Return type: [unregistered]
+Return type: CFixedPoint
 
 -----------------------
 
@@ -46662,21 +47464,9 @@ Return type: CFixedPoint
 
 -----------------------
 
-PoliticalMovement.GetRadicalismDesc
-Definition type: Function
-Return type: CString
-
------------------------
-
 PoliticalMovement.GetRadicalismTrend
 Definition type: Function
 Return type: DataTrend
-
------------------------
-
-PoliticalMovement.GetRevolution
-Definition type: Function
-Return type: [unregistered]
 
 -----------------------
 
@@ -46716,7 +47506,43 @@ Return type: [unregistered]
 
 -----------------------
 
+PoliticalMovement.GetSuppressionEffectDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovement.GetTargetRadicalism
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+PoliticalMovement.GetTargetRadicalismDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovement.GetTargetSupport
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+PoliticalMovement.GetTextIcon
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 PoliticalMovement.GetTexture
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovement.GetTimedModifiers
 Definition type: Function
 Return type: [unregistered]
 
@@ -46734,7 +47560,25 @@ Return type: [unregistered]
 
 -----------------------
 
+PoliticalMovement.GetType
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 PoliticalMovement.IsBeingHighlighted
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PoliticalMovement.IsBolstered
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PoliticalMovement.IsInsurrectionary
 Definition type: Function
 Return type: bool
 
@@ -46746,13 +47590,19 @@ Return type: bool
 
 -----------------------
 
-PoliticalMovement.IsPlacated
+PoliticalMovement.IsRevolutionary
 Definition type: Function
 Return type: bool
 
 -----------------------
 
-PoliticalMovement.IsRevolutionary
+PoliticalMovement.IsSecessionist
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PoliticalMovement.IsSuppressed
 Definition type: Function
 Return type: bool
 
@@ -46770,12 +47620,6 @@ Return type: Scope
 
 -----------------------
 
-PoliticalMovement.PredictNumberOfLoyalistsFromSuccess
-Definition type: Function
-Return type: int64
-
------------------------
-
 PoliticalMovement.PredictNumberOfRadicalsEveryMonth
 Definition type: Function
 Return type: int64
@@ -46788,9 +47632,86 @@ Return type: [unregistered]
 
 -----------------------
 
+PoliticalMovement.ToggleBolstering
+Definition type: Function
+Return type: Command
+
+-----------------------
+
 PoliticalMovement.TogglePinInOutliner
 Definition type: Function
 Return type: void
+
+-----------------------
+
+PoliticalMovement.ToggleSuppression
+Definition type: Function
+Return type: Command
+
+-----------------------
+
+PoliticalMovementCategory
+Definition type: Type
+
+-----------------------
+
+PoliticalMovementCategory.MakeScope
+Definition type: Promote
+Return type: Scope
+
+-----------------------
+
+PoliticalMovementCategory.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovementCategory.GetCustom( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovementCategory.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovementCategory.GetTexture
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovementCategory.GetTooltipTag
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovementCategory.HasCulturalIdentity
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PoliticalMovementCategory.HasReligiousIdentity
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PoliticalMovementCategory.MakeScope
+Definition type: Function
+Return type: Scope
+
+-----------------------
+
+PoliticalMovementCategory.Self
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -46818,6 +47739,106 @@ Return type: [unregistered]
 -----------------------
 
 PoliticalMovementPanel.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovementPopSupportFactor
+Definition type: Type
+
+-----------------------
+
+PoliticalMovementPopSupportFactor.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovementPopSupportFactor.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovementPopSupportFactor.GetTooltipTag
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovementPopSupportFactor.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovementType
+Definition type: Type
+
+-----------------------
+
+PoliticalMovementType.GetCategory
+Definition type: Promote
+Return type: PoliticalMovementCategory
+
+-----------------------
+
+PoliticalMovementType.MakeScope
+Definition type: Promote
+Return type: Scope
+
+-----------------------
+
+PoliticalMovementType.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovementType.GetCategory
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovementType.GetCustom( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovementType.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovementType.GetTexture
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PoliticalMovementType.GetTooltipTag
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PoliticalMovementType.IsValid
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PoliticalMovementType.MakeScope
+Definition type: Function
+Return type: Scope
+
+-----------------------
+
+PoliticalMovementType.Self
 Definition type: Function
 Return type: [unregistered]
 
@@ -46959,6 +47980,12 @@ Return type: State
 
 -----------------------
 
+Pop.GetAcceptanceStatus
+Definition type: Promote
+Return type: AcceptanceStatus
+
+-----------------------
+
 Pop.GetAssimilatingCulture
 Definition type: Promote
 Return type: Culture
@@ -46995,9 +48022,9 @@ Return type: InterestGroup
 
 -----------------------
 
-Pop.GetPoliticalMovementSupportersLargestInterestGroup( Arg0 )
+Pop.GetLargestPoliticalMovement
 Definition type: Promote
-Return type: InterestGroup
+Return type: PoliticalMovement
 
 -----------------------
 
@@ -47010,6 +48037,12 @@ Return type: PopType
 Pop.GetReligion
 Definition type: Promote
 Return type: Religion
+
+-----------------------
+
+Pop.GetSocialClass
+Definition type: Promote
+Return type: SocialClass
 
 -----------------------
 
@@ -47079,6 +48112,24 @@ Return type: CFixedPoint
 
 -----------------------
 
+Pop.GetAcceptanceStatus
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+Pop.GetAcceptanceValue
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+Pop.GetAcceptanceValueDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 Pop.GetAdditionalSOLFactorsDesc
 Definition type: Function
 Return type: CString
@@ -47103,15 +48154,15 @@ Return type: CFixedPoint
 
 -----------------------
 
-Pop.GetConvertingReligion
+Pop.GetConsumptionFactorDesc
 Definition type: Function
-Return type: [unregistered]
+Return type: CString
 
 -----------------------
 
-Pop.GetCulturalDiscriminationDesc
+Pop.GetConvertingReligion
 Definition type: Function
-Return type: CString
+Return type: [unregistered]
 
 -----------------------
 
@@ -47199,18 +48250,6 @@ Return type: int64
 
 -----------------------
 
-Pop.GetDiscriminationDesc
-Definition type: Function
-Return type: CString
-
------------------------
-
-Pop.GetDiscriminationTooltip
-Definition type: Function
-Return type: CString
-
------------------------
-
 Pop.GetEducationAccess
 Definition type: Function
 Return type: CFixedPoint
@@ -47262,6 +48301,24 @@ Return type: CFixedPoint
 Pop.GetExpensesDesc
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+Pop.GetFoodSecurityDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+Pop.GetFoodSecurityLabel
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+Pop.GetFoodSecurityRaw
+Definition type: Function
+Return type: CFixedPoint
 
 -----------------------
 
@@ -47331,6 +48388,12 @@ Return type: [unregistered]
 
 -----------------------
 
+Pop.GetLargestPoliticalMovement
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 Pop.GetLiteracyDesc
 Definition type: Function
 Return type: CString
@@ -47352,6 +48415,12 @@ Return type: CString
 Pop.GetMoney
 Definition type: Function
 Return type: CFixedPoint
+
+-----------------------
+
+Pop.GetMovementMembershipDesc
+Definition type: Function
+Return type: CString
 
 -----------------------
 
@@ -47457,19 +48526,13 @@ Return type: int64
 
 -----------------------
 
-Pop.GetPoliticalMovementSupportersLargestInterestGroup( Arg0 )
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
-Pop.GetPoliticalMovementSupportersPoliticalStrength( Arg0 )
+Pop.GetPoliticalMovementSupportersLoyalists( Arg0 )
 Definition type: Function
 Return type: int64
 
 -----------------------
 
-Pop.GetPoliticalMovementSupportersPoliticallyInactive( Arg0 )
+Pop.GetPoliticalMovementSupportersPoliticalStrength( Arg0 )
 Definition type: Function
 Return type: int64
 
@@ -47488,12 +48551,6 @@ Return type: CFixedPoint
 -----------------------
 
 Pop.GetPoliticalMovementTotalSupportDesc( Arg0 )
-Definition type: Function
-Return type: CString
-
------------------------
-
-Pop.GetPoliticalMovementsDesc
 Definition type: Function
 Return type: CString
 
@@ -47571,12 +48628,6 @@ Return type: [unregistered]
 
 -----------------------
 
-Pop.GetReligiousDiscriminationDesc
-Definition type: Function
-Return type: CString
-
------------------------
-
 Pop.GetSharesDesc
 Definition type: Function
 Return type: CString
@@ -47586,6 +48637,18 @@ Return type: CString
 Pop.GetSizeTrend
 Definition type: Function
 Return type: DataTrend
+
+-----------------------
+
+Pop.GetSocialClass
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+Pop.GetStarvationEffectDesc
+Definition type: Function
+Return type: CString
 
 -----------------------
 
@@ -47628,6 +48691,12 @@ Return type: CString
 Pop.GetTypedPortrait( Arg0, Arg1, Arg2, Arg3, Arg4, Arg5 )
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+Pop.GetWageDiscriminationDesc
+Definition type: Function
+Return type: CString
 
 -----------------------
 
@@ -47697,13 +48766,7 @@ Return type: bool
 
 -----------------------
 
-Pop.IsAcceptedCulturally
-Definition type: Function
-Return type: bool
-
------------------------
-
-Pop.IsAcceptedReligiously
+Pop.IsAcceptanceStatusIncreasing
 Definition type: Function
 Return type: bool
 
@@ -47733,19 +48796,19 @@ Return type: bool
 
 -----------------------
 
-Pop.IsDiscriminated
-Definition type: Function
-Return type: bool
-
------------------------
-
-Pop.IsDiscriminatedDesc
-Definition type: Function
-Return type: bool
-
------------------------
-
 Pop.IsEmployed
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+Pop.IsInSevereStarvation
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+Pop.IsInStarvation
 Definition type: Function
 Return type: bool
 
@@ -47798,31 +48861,79 @@ Return type: Country
 
 -----------------------
 
+PopBrowserPanel.AcceptanceFilterAreNoStatusesShown
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.AcceptanceFilterHideAllStatuses
+Definition type: Function
+Return type: void
+
+-----------------------
+
+PopBrowserPanel.AcceptanceFilterIsStatusShown( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.AcceptanceFilterShowAllStatuses
+Definition type: Function
+Return type: void
+
+-----------------------
+
+PopBrowserPanel.AcceptanceFilterToggleShown( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+PopBrowserPanel.AcceptanceFiltersAreAllStasusesShown
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 PopBrowserPanel.AccessSelf
 Definition type: Function
 Return type: [unregistered]
 
 -----------------------
 
-PopBrowserPanel.ClearCultureFilter
+PopBrowserPanel.CultureFilterAreAllShown
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.CultureFilterAreNoneShown
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.CultureFilterHideAll
 Definition type: Function
 Return type: void
 
 -----------------------
 
-PopBrowserPanel.ClearPopTypeFilter
+PopBrowserPanel.CultureFilterIsShown( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.CultureFilterShowAll
 Definition type: Function
 Return type: void
 
 -----------------------
 
-PopBrowserPanel.ClearReligionFilter
-Definition type: Function
-Return type: void
-
------------------------
-
-PopBrowserPanel.ClearStateFilter
+PopBrowserPanel.CultureFilterToggleShown( Arg0 )
 Definition type: Function
 Return type: void
 
@@ -47831,6 +48942,12 @@ Return type: void
 PopBrowserPanel.Filter( Arg0 )
 Definition type: Function
 Return type: void
+
+-----------------------
+
+PopBrowserPanel.GetAllAcceptanceStatuses
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -47960,7 +49077,7 @@ Return type: [unregistered]
 
 -----------------------
 
-PopBrowserPanel.IsCultureIncludedInFilter( Arg0 )
+PopBrowserPanel.IsAnyFilterActive
 Definition type: Function
 Return type: bool
 
@@ -47984,27 +49101,87 @@ Return type: bool
 
 -----------------------
 
-PopBrowserPanel.IsPopTypeIncludedInFilter( Arg0 )
-Definition type: Function
-Return type: bool
-
------------------------
-
-PopBrowserPanel.IsReligionIncludedInFilter( Arg0 )
-Definition type: Function
-Return type: bool
-
------------------------
-
 PopBrowserPanel.IsSorted( Arg0 )
 Definition type: Function
 Return type: bool
 
 -----------------------
 
-PopBrowserPanel.IsStateIncludedInFilter( Arg0 )
+PopBrowserPanel.PopTypeFilterAreAllShown
 Definition type: Function
 Return type: bool
+
+-----------------------
+
+PopBrowserPanel.PopTypeFilterAreNoneShown
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.PopTypeFilterHideAll
+Definition type: Function
+Return type: void
+
+-----------------------
+
+PopBrowserPanel.PopTypeFilterIsShown( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.PopTypeFilterShowAll
+Definition type: Function
+Return type: void
+
+-----------------------
+
+PopBrowserPanel.PopTypeFilterToggleShown( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+PopBrowserPanel.ReligionFilterAreAllShown
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.ReligionFilterAreNoneShown
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.ReligionFilterHideAll
+Definition type: Function
+Return type: void
+
+-----------------------
+
+PopBrowserPanel.ReligionFilterIsShown( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.ReligionFilterShowAll
+Definition type: Function
+Return type: void
+
+-----------------------
+
+PopBrowserPanel.ReligionFilterToggleShown( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+PopBrowserPanel.ResetAllFilters
+Definition type: Function
+Return type: void
 
 -----------------------
 
@@ -48026,27 +49203,39 @@ Return type: void
 
 -----------------------
 
-PopBrowserPanel.ToggleIncludeCultureInFilter( Arg0 )
+PopBrowserPanel.StateFilterAreNoStatesShown
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.StateFilterHideAllStates
 Definition type: Function
 Return type: void
 
 -----------------------
 
-PopBrowserPanel.ToggleIncludePopTypeInFilter( Arg0 )
+PopBrowserPanel.StateFilterIsStateShown( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PopBrowserPanel.StateFilterShowAllStates
 Definition type: Function
 Return type: void
 
 -----------------------
 
-PopBrowserPanel.ToggleIncludeReligionInFilter( Arg0 )
+PopBrowserPanel.StateFilterToggleShown( Arg0 )
 Definition type: Function
 Return type: void
 
 -----------------------
 
-PopBrowserPanel.ToggleIncludeStateInFilter( Arg0 )
+PopBrowserPanel.StateFiltersAreAllStatesShown
 Definition type: Function
-Return type: void
+Return type: bool
 
 -----------------------
 
@@ -48161,21 +49350,51 @@ Return type: InterestGroup
 
 -----------------------
 
+PopList.GetItem0
+Definition type: Promote
+Return type: PopListItem
+
+-----------------------
+
+PopList.GetItem1
+Definition type: Promote
+Return type: PopListItem
+
+-----------------------
+
+PopList.GetItem2
+Definition type: Promote
+Return type: PopListItem
+
+-----------------------
+
+PopList.GetItem3
+Definition type: Promote
+Return type: PopListItem
+
+-----------------------
+
 PopList.GetPoliticalMovementContext
 Definition type: Promote
 Return type: PoliticalMovement
 
 -----------------------
 
-PopList.AccessPopList
+PopList.AccessSelf
 Definition type: Function
 Return type: [unregistered]
 
 -----------------------
 
-PopList.AccessSelf
+PopList.GetAverageStandardOfLiving
 Definition type: Function
-Return type: [unregistered]
+Return type: CFixedPoint
+
+-----------------------
+
+PopList.GetAverageStandardOfLivingLabel
+Definition type: Function
+Return type: CString
 
 -----------------------
 
@@ -48191,9 +49410,57 @@ Return type: [unregistered]
 
 -----------------------
 
+PopList.GetItem0
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PopList.GetItem1
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PopList.GetItem2
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PopList.GetItem3
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PopList.GetItems
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 PopList.GetPoliticalMovementContext
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+PopList.GetPoliticalStrengthAsPercentage( Arg0 )
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+PopList.GetTotalPoliticalStrength
+Definition type: Function
+Return type: int64
+
+-----------------------
+
+PopList.GetTotalPopulation
+Definition type: Function
+Return type: int64
 
 -----------------------
 
@@ -48417,6 +49684,12 @@ Return type: CFixedPoint
 
 -----------------------
 
+PopNeed.GetConsumptionDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 PopNeed.GetDefaultGoods
 Definition type: Function
 Return type: [unregistered]
@@ -48441,7 +49714,31 @@ Return type: CString
 
 -----------------------
 
+PopNeed.GetGoods
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PopNeed.GetGoodsDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PopNeed.GetGoodsEquivalenceDesc( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 PopNeed.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PopNeed.GetNameNoFormatting
 Definition type: Function
 Return type: CString
 
@@ -48656,13 +49953,7 @@ Return type: CFixedPoint
 
 -----------------------
 
-PopType.GetStrata
-Definition type: Function
-Return type: CString
-
------------------------
-
-PopType.GetStrataBreakdown
+PopType.GetStrataBreakdownInCountry( Arg0 )
 Definition type: Function
 Return type: CString
 
@@ -49048,6 +50339,12 @@ Return type: void
 
 -----------------------
 
+PopupManager.CloseGeneralInformationWindow
+Definition type: Function
+Return type: void
+
+-----------------------
+
 PopupManager.CloseMessage( Arg0 )
 Definition type: Function
 Return type: void
@@ -49108,7 +50405,7 @@ Return type: void
 
 -----------------------
 
-PopupManager.HideNationalizeBuildingConfirmation
+PopupManager.HideNationalizeBuildingWindow
 Definition type: Function
 Return type: void
 
@@ -49162,6 +50459,12 @@ Return type: void
 
 -----------------------
 
+PopupManager.HideStateChangeName
+Definition type: Function
+Return type: void
+
+-----------------------
+
 PopupManager.HideTransferFormation
 Definition type: Function
 Return type: void
@@ -49210,7 +50513,7 @@ Return type: void
 
 -----------------------
 
-PopupManager.ShowNationalizeBuildingConfirmation( Arg0 )
+PopupManager.ShowNationalizeBuildingWindow( Arg0 )
 Definition type: Function
 Return type: void
 
@@ -49235,6 +50538,12 @@ Return type: void
 -----------------------
 
 PopupManager.ShowReleaseCountryConfirmation( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+PopupManager.ShowStateChangeName( Arg0 )
 Definition type: Function
 Return type: void
 
@@ -49273,6 +50582,65 @@ Return type: bool
 PopupManager.ToggleRecruitGeneral( Arg0 )
 Definition type: Function
 Return type: bool
+
+-----------------------
+
+PotentialLeaderIdeology
+Definition type: Type
+
+-----------------------
+
+PotentialLeaderIdeology.GetIdeology
+Definition type: Promote
+Return type: Ideology
+
+-----------------------
+
+PotentialLeaderIdeology.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+PotentialLeaderIdeology.GetChanceBreakdown
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PotentialLeaderIdeology.GetChancePercentage
+Definition type: Function
+Return type: CFixedPoint
+
+-----------------------
+
+PotentialLeaderIdeology.GetCharacterFirstName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PotentialLeaderIdeology.GetCharacterFullName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+PotentialLeaderIdeology.HasCharacter
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PotentialLeaderIdeology.HasMovement
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+PotentialLeaderIdeology.Self
+Definition type: Function
+Return type: [unregistered]
 
 -----------------------
 
@@ -52146,6 +53514,12 @@ Return type: CString
 
 -----------------------
 
+Province.GetDeploySelectedFormationsCommand
+Definition type: Function
+Return type: Command
+
+-----------------------
+
 Province.GetID
 Definition type: Function
 Return type: CString
@@ -52641,15 +54015,27 @@ Return type: [unregistered]
 
 -----------------------
 
-Religion.GetColor
+Religion.GetAcceptanceDescIn( Arg0 )
 Definition type: Function
-Return type: CVector4f
+Return type: CString
 
 -----------------------
 
-Religion.GetCountryDiscriminationStatus( Arg0 )
+Religion.GetAcceptanceIn( Arg0 )
 Definition type: Function
-Return type: CString
+Return type: int32
+
+-----------------------
+
+Religion.GetAcceptanceStatusSegmentsIn( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+Religion.GetColor
+Definition type: Function
+Return type: CVector4f
 
 -----------------------
 
@@ -52830,12 +54216,6 @@ Return type: int64
 Religion.GetWorkforceAsPercentage( Arg0 )
 Definition type: Function
 Return type: CFixedPoint
-
------------------------
-
-Religion.IsDiscriminatedIn( Arg0 )
-Definition type: Function
-Return type: bool
 
 -----------------------
 
@@ -53244,6 +54624,36 @@ Return type: void
 -----------------------
 
 RightClickMenuManager.ToggleImportantActionsList( Arg0, Arg1 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+RightClickMenuManager.ToggleMapModes( Arg0, Arg1 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+RightClickMenuManager.ToggleMarketStarvationCountriesFilter( Arg0, Arg1 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+RightClickMenuManager.ToggleMarketStarvationStatesFilter( Arg0, Arg1 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+RightClickMenuManager.ToggleMilitaryFormation( Arg0, Arg1 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+RightClickMenuManager.ToggleNationalizePrivatelyOwnedFilter( Arg0, Arg1 )
 Definition type: Function
 Return type: void
 
@@ -54592,6 +56002,125 @@ Return type: bool
 
 -----------------------
 
+SeaNodeMovementMarker
+Definition type: Type
+
+-----------------------
+
+SeaNodeMovementMarker.GetSeaNode
+Definition type: Promote
+Return type: Province
+
+-----------------------
+
+SeaNodeMovementMarker.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SeaNodeMovementMarker.GetActiveSupplyNetworkDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SeaNodeMovementMarker.GetConvoyRaidingDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SeaNodeMovementMarker.GetConvoyRaidingEnemyFleetsDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SeaNodeMovementMarker.GetNavalInvasionDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SeaNodeMovementMarker.GetNavalInvasionSeaNodeStatus
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SeaNodeMovementMarker.GetPosition
+Definition type: Function
+Return type: CVector2f
+
+-----------------------
+
+SeaNodeMovementMarker.GetPresentFormationsBreakdown
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SeaNodeMovementMarker.GetSeaNode
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SeaNodeMovementMarker.GetTravelTimeBreakdown
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SeaNodeMovementMarker.HasActiveSupplyNetwork
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+SeaNodeMovementMarker.IsAllSelectedFormationsLocation
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+SeaNodeMovementMarker.IsAllSelectedFormationsTarget
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+SeaNodeMovementMarker.IsAnySelectedFormationsLocation
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+SeaNodeMovementMarker.IsAnySelectedFormationsTarget
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+SeaNodeMovementMarker.IsBeingConvoyRaidedByEnemies
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+SeaNodeMovementMarker.IsBeingNavallyInvadedByEnemies
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+SeaNodeMovementMarker.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 SeaRegionInfraMarker
 Definition type: Type
 
@@ -55029,6 +56558,333 @@ Return type: [unregistered]
 
 -----------------------
 
+SocialClass
+Definition type: Type
+
+-----------------------
+
+SocialClass.GetMaxAllowedStatusIn( Arg0 )
+Definition type: Promote
+Return type: AcceptanceStatus
+
+-----------------------
+
+SocialClass.GetMinAllowedStatusIn( Arg0 )
+Definition type: Promote
+Return type: AcceptanceStatus
+
+-----------------------
+
+SocialClass.GetSocialHierarchy
+Definition type: Promote
+Return type: SocialHierarchy
+
+-----------------------
+
+SocialClass.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocialClass.GetAllowedProfessions
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocialClass.GetAllowedStatusesIn( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocialClass.GetDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialClass.GetEffectsDescIn( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialClass.GetMaxAcceptanceIn( Arg0 )
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+SocialClass.GetMaxAllowedStatusIn( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocialClass.GetMinAcceptanceIn( Arg0 )
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+SocialClass.GetMinAllowedStatusIn( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocialClass.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialClass.GetNameNoFormatting
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialClass.GetPopTriggerDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialClass.GetSocialHierarchy
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocialClass.GetStrataConcept
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialClass.GetTooltipTag
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialClass.GetTotalPopulationIn( Arg0 )
+Definition type: Function
+Return type: int64
+
+-----------------------
+
+SocialClass.HasBoundedAcceptanceIn( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+SocialClass.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocialHierarchy
+Definition type: Type
+
+-----------------------
+
+SocialHierarchy.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocialHierarchy.GetAllSocialClassesDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.GetDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.GetLowerStrataPopTypesDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.GetLowerStrataSocialClasses
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocialHierarchy.GetLowerStrataSocialClassesDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.GetMaxSocialClassesInAnyStrata
+Definition type: Function
+Return type: int32
+
+-----------------------
+
+SocialHierarchy.GetMiddleStrataPopTypesDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.GetMiddleStrataSocialClasses
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocialHierarchy.GetMiddleStrataSocialClassesDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.GetNameNoFormatting
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.GetPopTriggerDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.GetTooltipTag
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.GetTotalPopulationIn( Arg0 )
+Definition type: Function
+Return type: int64
+
+-----------------------
+
+SocialHierarchy.GetUpperStrataPopTypesDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.GetUpperStrataSocialClasses
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocialHierarchy.GetUpperStrataSocialClassesDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+SocialHierarchy.IsDefault
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+SocialHierarchy.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocietyPanel
+Definition type: Type
+
+-----------------------
+
+SocietyPanel.GetPopList
+Definition type: Promote
+Return type: PopList
+
+-----------------------
+
+SocietyPanel.GetSelectedAcceptanceStatus
+Definition type: Promote
+Return type: AcceptanceStatus
+
+-----------------------
+
+SocietyPanel.GetSelectedAcceptanceStatusSegment
+Definition type: Promote
+Return type: AcceptanceStatusSegment
+
+-----------------------
+
+SocietyPanel.AccessRepresentativePops
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocietyPanel.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocietyPanel.GetPopList
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocietyPanel.GetSelectedAcceptanceStatus
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocietyPanel.GetSelectedAcceptanceStatusSegment
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+SocietyPanel.IsAcceptanceStatusSelected( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+SocietyPanel.SelectAcceptanceStatus( Arg0 )
+Definition type: Function
+Return type: void
+
+-----------------------
+
+SocietyPanel.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 StagedCommanderTransfer
 Definition type: Type
 
@@ -55380,6 +57236,53 @@ Return type: void
 
 -----------------------
 
+StarvationType
+Definition type: Type
+
+-----------------------
+
+StarvationType.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+StarvationType.GetColor
+Definition type: Function
+Return type: CVector4f
+
+-----------------------
+
+StarvationType.GetIcon
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+StarvationType.GetName
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+StarvationType.IsMild
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+StarvationType.IsSevere
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+StarvationType.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 State
 Definition type: Type
 
@@ -55442,6 +57345,12 @@ Return type: Country
 State.GetCountry
 Definition type: Promote
 Return type: Country
+
+-----------------------
+
+State.GetFoodSecurity
+Definition type: Promote
+Return type: FoodSecurity
 
 -----------------------
 
@@ -55601,12 +57510,6 @@ Return type: [unregistered]
 
 -----------------------
 
-State.AccessPotentialUrbanBuildings
-Definition type: Function
-Return type: [unregistered]
-
------------------------
-
 State.AccessSelf
 Definition type: Function
 Return type: [unregistered]
@@ -55682,12 +57585,6 @@ Return type: CFixedPoint
 State.CalcTaxCapacityUsage
 Definition type: Function
 Return type: CFixedPoint
-
------------------------
-
-State.CalcTotalUrbanization
-Definition type: Function
-Return type: int32
 
 -----------------------
 
@@ -55807,6 +57704,18 @@ Return type: CString
 -----------------------
 
 State.GetBuilding( Arg0 )
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+State.GetBuildingsWithGovernmentExpenses
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+State.GetBuildingsWithTaxationRevenue
 Definition type: Function
 Return type: [unregistered]
 
@@ -55998,6 +57907,12 @@ Return type: CFixedPoint
 
 -----------------------
 
+State.GetFamineDesc
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 State.GetFarmHubName
 Definition type: Function
 Return type: CString
@@ -56118,9 +58033,9 @@ Return type: CFixedPoint
 
 -----------------------
 
-State.GetGovernmentExpensesTooltip
+State.GetHarvestConditions
 Definition type: Function
-Return type: CString
+Return type: [unregistered]
 
 -----------------------
 
@@ -56694,6 +58609,12 @@ Return type: CString
 
 -----------------------
 
+State.GetPotentialUrbanBuildings
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
 State.GetProductionInfo
 Definition type: Function
 Return type: [unregistered]
@@ -56760,12 +58681,6 @@ Return type: CFixedPoint
 
 -----------------------
 
-State.GetTaxationRevenueTooltip
-Definition type: Function
-Return type: CString
-
------------------------
-
 State.GetTheater( Arg0 )
 Definition type: Function
 Return type: [unregistered]
@@ -56814,12 +58729,6 @@ Return type: int32
 
 -----------------------
 
-State.GetTotalUrbanizationDesc
-Definition type: Function
-Return type: CString
-
------------------------
-
 State.GetTreatyPortMarkets
 Definition type: Function
 Return type: CString
@@ -56838,21 +58747,33 @@ Return type: CString
 
 -----------------------
 
+State.GetUrbanization
+Definition type: Function
+Return type: int32
+
+-----------------------
+
 State.GetUrbanizationBuildingsMaxLevelDesc
 Definition type: Function
 Return type: CString
 
 -----------------------
 
-State.GetUrbanizationBuildingsMaxLevelRaw
+State.GetUrbanizationDesc
 Definition type: Function
-Return type: int32
+Return type: CString
 
 -----------------------
 
-State.GetUrbanizationNeededPerLevel
+State.GetUrbanizationNeededPerLevelFormatted
 Definition type: Function
 Return type: CString
+
+-----------------------
+
+State.GetUrbanizationNeededPerLevelRaw
+Definition type: Function
+Return type: int32
 
 -----------------------
 
@@ -56898,6 +58819,12 @@ Return type: bool
 
 -----------------------
 
+State.HasBuildingGoodsShortage( Arg0 )
+Definition type: Function
+Return type: bool
+
+-----------------------
+
 State.HasClaims
 Definition type: Function
 Return type: bool
@@ -56911,6 +58838,12 @@ Return type: bool
 -----------------------
 
 State.HasDiscoverableResources
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+State.HasFamine
 Definition type: Function
 Return type: bool
 
@@ -56935,6 +58868,12 @@ Return type: bool
 -----------------------
 
 State.HasOccupant
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+State.HasPopGoodsShortage( Arg0 )
 Definition type: Function
 Return type: bool
 
@@ -57361,6 +59300,107 @@ Return type: [unregistered]
 StateMarker.Self
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+StateNameChangePopup
+Definition type: Type
+
+-----------------------
+
+StateNameChangePopup.GetState
+Definition type: Promote
+Return type: State
+
+-----------------------
+
+StateNameChangePopup.AccessSelf
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+StateNameChangePopup.Confirm
+Definition type: Function
+Return type: Command
+
+-----------------------
+
+StateNameChangePopup.GetState
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+StateNameChangePopup.OnEditCityName
+Definition type: Function
+Return type: void
+
+-----------------------
+
+StateNameChangePopup.OnEditFarmName
+Definition type: Function
+Return type: void
+
+-----------------------
+
+StateNameChangePopup.OnEditMineName
+Definition type: Function
+Return type: void
+
+-----------------------
+
+StateNameChangePopup.OnEditName
+Definition type: Function
+Return type: void
+
+-----------------------
+
+StateNameChangePopup.OnEditPortName
+Definition type: Function
+Return type: void
+
+-----------------------
+
+StateNameChangePopup.OnEditWoodName
+Definition type: Function
+Return type: void
+
+-----------------------
+
+StateNameChangePopup.Self
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+StateNameChangePopup.ShouldHaveCityHub
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+StateNameChangePopup.ShouldHaveFarmHub
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+StateNameChangePopup.ShouldHaveMineHub
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+StateNameChangePopup.ShouldHavePortHub
+Definition type: Function
+Return type: bool
+
+-----------------------
+
+StateNameChangePopup.ShouldHaveWoodHub
+Definition type: Function
+Return type: bool
 
 -----------------------
 
@@ -58044,6 +60084,12 @@ Return type: CString
 -----------------------
 
 StrategicRegion.GetNameNoFormatting
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+StrategicRegion.GetStateRegionsDesc
 Definition type: Function
 Return type: CString
 
@@ -60011,6 +62057,12 @@ Return type: CString
 
 -----------------------
 
+TimeKeeper.GetPausedText
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 TimeKeeper.GetProgressOfWeek
 Definition type: Function
 Return type: int32
@@ -60119,6 +62171,12 @@ Return type: CString
 -----------------------
 
 TimedModifier.GetTooltip
+Definition type: Function
+Return type: CString
+
+-----------------------
+
+TimedModifier.GetTooltipTag
 Definition type: Function
 Return type: CString
 
@@ -61498,6 +63556,12 @@ Return type: CString
 
 -----------------------
 
+War.GetTotalDeadWithWarExhaustionTooltip( Arg0 )
+Definition type: Function
+Return type: CString
+
+-----------------------
+
 War.GetWarPtr
 Definition type: Function
 Return type: [unregistered]
@@ -61665,6 +63729,12 @@ Return type: CountryFormation
 
 -----------------------
 
+WarGoal.GetCreator
+Definition type: Promote
+Return type: Country
+
+-----------------------
+
 WarGoal.GetDiplomaticPlay
 Definition type: Promote
 Return type: DiplomaticPlay
@@ -61756,6 +63826,12 @@ Return type: [unregistered]
 -----------------------
 
 WarGoal.GetCountryFormation
+Definition type: Function
+Return type: [unregistered]
+
+-----------------------
+
+WarGoal.GetCreator
 Definition type: Function
 Return type: [unregistered]
 
@@ -62667,6 +64743,12 @@ Return type: CVector2f
 WarParticipant.GetWar
 Definition type: Function
 Return type: [unregistered]
+
+-----------------------
+
+WarParticipant.GetWarExhaustionFromAcceptanceOfDeadDesc
+Definition type: Function
+Return type: CString
 
 -----------------------
 
