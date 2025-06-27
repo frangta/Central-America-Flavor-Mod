@@ -1,17 +1,39 @@
-﻿# Manufacturing
+﻿
+# Manufacturing
 
 bg_ca_mines = {
 	category = rural
-        land_usage = rural
+    land_usage = rural
 	always_possible = yes
 	can_use_slaves = yes
 	cash_reserves_max = 25000
-	economy_of_scale = yes
+	economy_of_scale = no
 	
 	lens = mine
 	
 	urbanization = 10
 	infrastructure_usage_per_level = 6
 }
+
+bg_ca_gold_fields = {
+	parent_group = bg_ca_mines
+
+	auto_place_buildings = yes
+
+	
+	always_self_owning = yes
+	
+	pays_taxes = no
+
+	infrastructure_usage_per_level = 0
+
+	
+	fired_pops_become_radical = no
+}
+
 bg_ca_hacienda = {
 	parent_group = bg_owner_buildings
+}
+bg_ca_factoria = {
+	parent_group = bg_owner_buildings
+}

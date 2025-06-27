@@ -15,6 +15,18 @@
 @sm_fra = 0.16
 @pi = 3.1416
 
+COS_early = {
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 200 40 89 }
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = hsv360 { 200 40 89 }
+	}	
+	textured_emblem = {
+		texture = "te_free_state_of_costa_rica.tga"
+	}
+}
 
 COS_1845_alt = { # Costa Rica
 	# 1845's Costa rican proposed flag
@@ -277,6 +289,50 @@ GUA = { # Guatemala
 		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
 	}
 }
+GUA_colonial = {
+
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 219 91 67 }
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = hsv360 { 219 91 67 }
+	}	
+	textured_emblem = {
+		texture = "te_colonial_guatemala.tga"
+	}
+}
+
+GUA_republic_conservative = {
+
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 219 91 67 }
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = hsv360 { 219 91 67 }
+	}	
+	textured_emblem = {
+		texture = "te_GUA_alt.tga"
+	}
+}
+GUA_liberal = { # Guatemala
+	# Since 1871 
+	
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 205 66 82 }
+
+	colored_emblem = {
+		texture = "ce_tricolor_vertical.dds"
+		color1 = "white"
+		color2 = hsv360 { 205 66 82 }
+	}
+	textured_emblem = {
+		texture = "te_GUA_liberal.tga"
+	}
+}
 GUA_1843 = { # Guatemala
 
 	
@@ -373,7 +429,36 @@ GUA_monarchy = {
 		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
 	}	
 }
-
+GUA_absolute_monarchy = {
+	# more or less the 1851 design
+	
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = hsv360 { 205 66 82 }
+		color2 = hsv360 { 205 66 82 }
+		instance = { scale = { 0.5 @third } position = { 0.75 @[1/6] } }			
+		instance = { scale = { 0.5 @third } position = { 0.75 @[1/6*5] } }		
+	}		
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { 0.5 @third } position = { 0.25 @[1/6*5] } }		
+	}		
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.5 @third } position = { 0.25 @[1/6] } }		
+	}	
+	textured_emblem = {
+		texture = "te_coa_guatemala.dds"
+		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+	}	
+}
 GUA_1858 = {
 	# 1858 design (UCA & SPA combination)
 
@@ -405,6 +490,38 @@ GUA_1858 = {
 		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
 	
 	}	
+}
+GUA_republic = {
+	# 1851
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 219 91 67 }
+	color2 = "white"
+	color3 = "red"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = hsv360 { 219 91 67 }
+		color2 = hsv360 { 219 91 67 }
+		instance = { position = { 0.75 0.5 } scale = { 0.5 1.0 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0.25 0.25 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { position = { 0.25 0.75 } scale = { 0.5 0.5 } }
+	}	
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 @third } }
+	}		
 }
 GUA_subject_UCA = { 
 
@@ -665,6 +782,41 @@ HON_communist = {
 		instance = { scale = { 0.15 0.15 } position = { 0.62 0.58 } }		
 	}	
 }
+
+
+ELS_early = {
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 224 99 100 }
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = hsv360 { 224 99 100 }
+	}
+	textured_emblem = {
+		texture = "te_ELS_contemporary.tga"
+	}
+}
+ELS_contemporary = {
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 216 100 68 }
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = hsv360 { 216 100 68 }
+	}
+	textured_emblem = {
+		texture = "te_ELS_contemporary.tga"
+	}
+}
+ELS_chiapas = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"	
+	textured_emblem = {
+		texture = "te_chiapas_coa.tga"
+	}	
+}
 ELS = {
 	pattern = "pattern_solid.tga"
 	color1 = "light"
@@ -818,6 +970,17 @@ MKT_late = {
 		color2 = color2
 	}
 }
+NIC_early_cons = {
+	pattern = "pattern_solid.tga"
+	color1 = hsv360 { 209	100	78 }
+
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = hsv360 { 209	100	78 }
+	}
+}
+
 
 NIC = { # Nicaragua
 	# design adopted 1838 
@@ -829,6 +992,22 @@ NIC = { # Nicaragua
 		texture = "ce_tricolor_horizontal.dds"
 		color1 = "white"
 		color2 = "blue_light"
+	}	
+	textured_emblem = {
+		texture = "te_coa_nicaragua.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
+	}	
+}
+NIC_oligarchy = { # Nicaragua
+	# design adopted 1838 
+	
+	pattern = "pattern_solid.tga"
+	color1 = "yellow"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "pink"
 	}	
 	textured_emblem = {
 		texture = "te_coa_nicaragua.dds"
@@ -865,6 +1044,17 @@ NIC_communist = {
 		color1 = "white"
 	}	
 }
+NIC_communist2 = { 
+	 
+	
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	
+	colored_emblem = {
+		texture = "ce_bicolor_bottom.dds"
+		color1 = "black"
+	}		
+}
 NIC_monarchy = {
 
 
@@ -879,6 +1069,45 @@ NIC_monarchy = {
 		instance = { position = { 0.5 0.5 } }		
 	}
 }
+NIC_monarchy2 = { 
+	
+	
+	pattern = "pattern_solid.tga"
+	color1 = "pink"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal_thick.dds"
+		color1 = "white"
+		color2 = "yellow"
+	}	
+	colored_emblem = {
+		texture = "ce_lion_rampant_crowned.dds"
+		color1 = "red"
+		color2 = "yellow"
+		color3 = "yellow"
+		instance = { scale = { 0.5 0.5 } position = { 0.5 0.5 } }
+	}	
+}
+
+
+NIC_oligarchy = { # Nicaragua
+	# design adopted 1838 
+	
+	pattern = "pattern_solid.tga"
+	color1 = "yellow"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "pink"
+	}	
+	textured_emblem = {
+		texture = "te_coa_nicaragua.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
+	}	
+}
+
+
 NIC_subject_UCA = { # 
 
 	
@@ -1442,20 +1671,32 @@ CR1_dic_alt = {
 		instance = { scale = { 0.2 1.0 } position = { 0.9 0.5 } }		
 	}
 }
-UCA = { # Central America
-	
-	pattern = "pattern_solid.tga"
+CR1_rep_alt = { 
+
+    pattern = "pattern_tricolore_1.dds"
 	color1 = "blue_light"
+        color2 = "blue"
+	color3 = "white"
 	
-	colored_emblem = {
-		texture = "ce_tricolor_horizontal.dds"
-		color1 = "white"
-		color2 = "blue_light"
-	}	
-	textured_emblem = {
-		texture = "te_coa_central_america.dds"
-		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
-	}	
+
+}
+CR1_rep_alt_2 = { 
+
+    pattern = "pattern_tricolore_1.dds"
+	color1 = "blue_light"
+        color2 = "white"
+	color3 = "blue"
+	
+
+}
+CR1_rep_alt_3 = { 
+
+    pattern = "pattern_tricolore_1.dds"
+	color1 = "blue"
+        color2 = "white"
+	color3 = "blue_light"
+	
+
 }
 UCA = { # Central America
 	
