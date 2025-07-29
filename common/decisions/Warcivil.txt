@@ -26,6 +26,24 @@
 		s:STATE_GUATEMALA = {
 	add_claim = ROOT
 	}
+		s:STATE_SANTO_DOMINGO = {
+	add_claim = ROOT
+	}
+		s:STATE_PUERTO_RICO = {
+	add_claim = ROOT
+	}
+		s:STATE_CUBA = {
+	add_claim = ROOT
+	}
+		s:STATE_ANTIOQUIA = {
+	add_claim = ROOT
+	}
+		s:STATE_CHIAPAS  = {
+	add_claim = ROOT
+	}
+		s:STATE_YUCATAN = {
+	add_claim = ROOT
+	}	
 
 	}
 	ai_chance = {
@@ -52,8 +70,8 @@ Plan_of_Veragua3 = {
 	         	 activate_law = law_type:law_presidential_republic
 	             activate_law = law_type:law_autocracy
 	         	 activate_law = law_type:law_colonial_resettlement
-				 activate_law = law_type:law_state_atheism
-				 activate_law = law_type:law_homesteading
+	         	 activate_law = law_type:law_public_schools
+	         	 activate_law = law_type:law_dedicated_police				 
 	         	add_modifier = {
 				name = age_of_ca_caudillos_modifier
 				multiplier = 2
@@ -68,10 +86,10 @@ Plan_of_Veragua3 = {
 	         	 hidden_effect = {
 
 	         	   create_character = {
-	         	 	is_general = yes
 	         	 	interest_group = ig_armed_forces
 	         	 	ideology = ideology:ideology_despotic_utopian
 	         	 	ruler = yes
+					is_general = yes
 	         	 	ig_leader = yes			
 	         	 	traits = {
 	         	 		reckless honorable innovative brave meticulous firebrand expert_defensive_strategist expert_offensive_planner resupply_commander
@@ -90,7 +108,7 @@ Plan_of_Veragua3 = {
             
                 }
         }   
-         play_as = CR1
+       ROOT = { change_tag = CR1 }
     }
 }
 Plan_of_Veragua4 = {
@@ -107,6 +125,114 @@ Plan_of_Veragua4 = {
   add_investment_pool = 5000000
     }
 }
+Plan_of_Veragua5 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+  set_variable = { name = ca_buildings_on } 
+    }
+}
+Plan_of_Veragua6 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+			capital = {
+			add_modifier = { name = all_stronghold} 
+
+			}
+    }
+}
+Plan_of_Veragua7 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+
+			add_modifier = { name = ca_el_gran_avanse_modifier 
+				is_decaying = yes
+				years = 6
+				}
+			
+    }
+}
+Plan_of_Veragua8 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+
+
+            s:STATE_HONDURAS.region_state:UCA = {
+	         every_scope_pop = {
+
+                     limit = { culture = cu:central_american }
+                     change_pop_culture = { target = cu:honduran               value = 0.33 }
+                     change_pop_culture = { target = cu:lenca                  value = 0.05 }
+                     change_pop_culture = { target = cu:mangue_chorotega       value = 0.05 }
+                     change_pop_culture = { target = cu:garifuna_arawak        value = 0.05 }
+                 
+             }
+	        }
+    }
+}
+Plan_of_Veragua9 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+set_variable = costa_rica_1st_republic
+
+    }
+}
+
+Plan_of_Veragua10 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+set_variable = costa_rica_1st_republic
+
+    }
+}
+
 Costarica = {
 	is_shown = {
 		NOT = { 
@@ -345,6 +471,7 @@ create_country = {
 	province = p:x3D20D1
 	province = p:x600AC6
 	province = p:x907080
+	province = p:x528F3B
 }
 
 create_country = {
