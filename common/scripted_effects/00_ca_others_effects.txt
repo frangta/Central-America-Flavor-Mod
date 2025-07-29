@@ -1,0 +1,113 @@
+﻿ca_history_rail_events	= {
+		#Main Journal Entry Variables
+		set_variable = is_frca_var
+		set_variable = gua_support_var
+		set_variable = je_gua_support_var
+		set_variable = els_support_var
+		set_variable = je_els_support_var
+		set_variable = hon_support_var
+		set_variable = je_hon_support_var
+		set_variable = nic_support_var
+		set_variable = je_nic_support_var
+		set_variable = cos_support_var
+		set_variable = je_cos_support_var
+		set_variable = alt_support_var
+		set_variable = je_alt_support_var		
+		
+		#Journal Entry Scripted Button Variables
+		set_variable = je_central_america_setup_gua_var
+		set_variable = je_central_america_setup_hon_var
+		set_variable = je_central_america_setup_nic_var
+		set_variable = je_central_america_setup_cos_var
+		set_variable = je_central_america_setup_alt_var
+		set_variable = je_central_america_setup_els_var		
+		
+		#Central American Event Variables
+		set_variable = gua_civil_peace_var	
+		set_variable = nic_civil_peace_var	
+		set_variable = hon_civil_peace_var
+		set_variable = cos_civil_peace_var
+		set_variable = els_civil_peace_var	
+		set_variable = alt_civil_peace_var		
+}	
+    ca_sprit_costarica_rail_events	= {
+       PC1 = { save_scope_as = PC1_scope save_scope_as = sprit_costarica_scope  }
+       PC2 = { save_scope_as = PC2_scope save_scope_as = sprit_costarica_scope  }
+       PC3 = { save_scope_as = PC3_scope save_scope_as = sprit_costarica_scope  }
+       PC4 = { save_scope_as = PC4_scope save_scope_as = sprit_costarica_scope  }
+       PC5 = { save_scope_as = PC5_scope save_scope_as = sprit_costarica_scope  }
+       PC6 = { save_scope_as = PC6_scope save_scope_as = sprit_costarica_scope  }
+       PC7 = { save_scope_as = PC7_scope save_scope_as = sprit_costarica_scope  }
+       PC8 = { save_scope_as = PC8_scope save_scope_as = sprit_costarica_scope  }
+
+
+
+    }
+	ca_sprit_nicaragua_rail_events	= {
+       PN1 = { save_scope_as = PN1_scope save_scope_as = sprit_nicaragua_scope  }
+       PN2 = { save_scope_as = PN2_scope save_scope_as = sprit_nicaragua_scope  }
+       PN3 = { save_scope_as = PN3_scope save_scope_as = sprit_nicaragua_scope  }
+       PN4 = { save_scope_as = PN4_scope save_scope_as = sprit_nicaragua_scope  }
+       PN5 = { save_scope_as = PN5_scope save_scope_as = sprit_nicaragua_scope  }
+       PN6 = { save_scope_as = PN6_scope save_scope_as = sprit_nicaragua_scope  }
+
+
+    }
+    ca_sprit_guatemala_rail_events	= {
+       DG1 = { save_scope_as = DG1_scope save_scope_as = sprit_guatemala_scope  }
+       DG2 = { save_scope_as = DG2_scope save_scope_as = sprit_guatemala_scope  }
+       DG3 = { save_scope_as = DG3_scope save_scope_as = sprit_guatemala_scope  }
+       DG4 = { save_scope_as = DG4_scope save_scope_as = sprit_guatemala_scope  }
+       DG5 = { save_scope_as = DG5_scope save_scope_as = sprit_guatemala_scope  }
+       DG6 = { save_scope_as = DG6_scope save_scope_as = sprit_guatemala_scope  }
+       DG7 = { save_scope_as = DG7_scope save_scope_as = sprit_guatemala_scope  }
+       DG8 = { save_scope_as = DG8_scope save_scope_as = sprit_guatemala_scope  }
+
+
+
+    }
+    ca_sprit_elsalvador_rail_events	= {
+       DE1 = { save_scope_as = DE1_scope save_scope_as = sprit_elsalvador_scope  }
+       DE2 = { save_scope_as = DE2_scope save_scope_as = sprit_elsalvador_scope  }
+       DE3 = { save_scope_as = DE3_scope save_scope_as = sprit_elsalvador_scope  }
+       DE4 = { save_scope_as = DE4_scope save_scope_as = sprit_elsalvador_scope  }
+       DE5 = { save_scope_as = DE5_scope save_scope_as = sprit_elsalvador_scope  }
+       DE6 = { save_scope_as = DE6_scope save_scope_as = sprit_elsalvador_scope  }
+       DE7 = { save_scope_as = DE7_scope save_scope_as = sprit_elsalvador_scope  }
+       DE8 = { save_scope_as = DE8_scope save_scope_as = sprit_elsalvador_scope  }
+
+
+
+    }
+    ca_sprit_elsalvador_rail_events	= {
+       DE1 = { save_scope_as = DE1_scope save_scope_as = sprit_elsalvador_scope  }
+       DE2 = { save_scope_as = DE2_scope save_scope_as = sprit_elsalvador_scope  }
+       DE3 = { save_scope_as = DE3_scope save_scope_as = sprit_elsalvador_scope  }
+
+    }
+    ca_sprit_honduras_rail_events	= {
+       DH1 = { save_scope_as = DH1_scope save_scope_as = sprit_honduras_scope  }
+       DH2 = { save_scope_as = DH2_scope save_scope_as = sprit_honduras_scope  }
+       DH3 = { save_scope_as = DH3_scope save_scope_as = sprit_honduras_scope  }
+       DH4 = { save_scope_as = DH4_scope save_scope_as = sprit_honduras_scope  }
+       DH5 = { save_scope_as = DH5_scope save_scope_as = sprit_honduras_scope  }
+       DH6 = { save_scope_as = DH6_scope save_scope_as = sprit_honduras_scope  }
+       DH7 = { save_scope_as = DH7_scope save_scope_as = sprit_honduras_scope  }
+
+
+
+
+    }
+    ca_sprit_panama_rail_events	= {
+       PP1 = { save_scope_as = PP1_scope save_scope_as = sprit_panama_scope  }
+       PP2 = { save_scope_as = PP2_scope save_scope_as = sprit_panama_scope  }
+       PP3 = { save_scope_as = PP3_scope save_scope_as = sprit_panama_scope  }
+       PP4 = { save_scope_as = PP4_scope save_scope_as = sprit_panama_scope  }
+       PP5 = { save_scope_as = PP5_scope save_scope_as = sprit_panama_scope  }
+       PP6 = { save_scope_as = PP6_scope save_scope_as = sprit_panama_scope  }
+       PP7 = { save_scope_as = PP7_scope save_scope_as = sprit_panama_scope  }
+       PP8 = { save_scope_as = PP8_scope save_scope_as = sprit_panama_scope  }
+
+
+
+    }	

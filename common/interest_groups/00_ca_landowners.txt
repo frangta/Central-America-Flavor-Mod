@@ -1,4 +1,4 @@
-﻿ig_landowners = {
+﻿ig_ca_landowners = {
 	color = hsv{ 0.63 0.40 0.69 }
 	texture = "gfx/interface/icons/ig_icons/landowners.dds"
 	layer = "revolution_dynamic_landowners"
@@ -10,8 +10,14 @@
 		ideology_patriarchal
 	}
 
+	character_ideologies = {
+		ideology_moderate
+		ideology_traditionalist
+		ideology_legitimist
+	}
+
 	enable = {
-		always = yes
+		has_variable = ca_landowners_on
 	}
 
 	# Deprecated; use on_enable effect to assign traits instead
@@ -91,7 +97,7 @@
 				set_ig_trait = ig_trait:ig_trait_noblesse_oblige
 			}
 		}
-		
+
 		# Squattocracy
 		if = {
 			limit = {
@@ -156,8 +162,20 @@
 			limit = {
 				c:GBR ?= this
 			}
-			ig:ig_landowners = { 
+			ig:ig_landowners = {
 				set_interest_group_name = ig_landed_gentry
+				remove_ideology = ideology_paternalistic
+				add_ideology = ideology_magnatial
+			}
+		}
+		# Polish Landowners
+		else_if = {
+			limit = {
+				country_has_primary_culture = cu:polish
+			}
+			ig:ig_landowners = {
+				remove_ideology = ideology_paternalistic
+				add_ideology = ideology_magnatial
 			}
 		}
 		# Yangban Officials
@@ -165,7 +183,7 @@
 			limit = {
 				c:KOR ?= this
 			}
-			ig:ig_landowners = { 
+			ig:ig_landowners = {
 				set_interest_group_name = ig_yangban
 			}
 		}
@@ -174,7 +192,7 @@
 			limit = {
 				c:CHI ?= this
 			}
-			ig:ig_landowners = { 
+			ig:ig_landowners = {
 				set_interest_group_name = ig_scholar_officials
 				remove_ideology = ideology_paternalistic
 				add_ideology = ideology_scholar_paternalistic
@@ -215,19 +233,6 @@
 				add_ideology = ideology_republican_paternalistic
 			}
 		}
-		# Central American Caudillos
-		else_if = {
-			limit = {
-				OR = {
-					country_has_primary_culture = cu:central_american
-				}
-			}
-			ig:ig_landowners = {
-				remove_ideology = ideology_paternalistic
-				add_ideology = ideology_ca_criollo_elite
-			}
-		}
-			
 		# South American Caudillos/republicans
 		else_if = {
 			limit = {
@@ -236,7 +241,6 @@
 					has_discrimination_trait = european_heritage
 					NOT = { has_discrimination_trait = iberian_culture_group }
 					NOT = { cu:caribeno = this }
-					NOT = { cu:central_american = this }
 				}
 			}
 			ig:ig_landowners = {
@@ -244,9 +248,47 @@
 				add_ideology = ideology_republican_paternalistic
 			}
 		}
-	
+		# India
+		else_if = {
+			limit = {
+				OR = {
+					c:BIC ?= this
+					any_primary_culture = {
+						has_discrimination_trait = south_asian_heritage
+					}
+				}
+			}
+			ig:ig_landowners = {
+				set_interest_group_name = ig_zamindars
+				if = {
+					limit = {
+						owner = {
+							c:BIC ?= this
+						}
+					}
+					set_ig_trait = ig_trait:ig_trait_summon_no_zamindars
+				}
+				set_ig_trait = ig_trait:ig_trait_famine_reserves
+				set_ig_trait = ig_trait:ig_trait_profitable_estates
+			}
+		}
 	}
 	on_disable = {}
+
+	priority_cultures = { #Country scope
+		rule = {
+			trigger = {
+				c:BIC ?= this
+				any_primary_culture = {
+					cu:british = this
+				}
+			}
+			cultures = {
+				assamese avadhi baluchi bengali bihari gujarati kannada malayalam marathi oriya panjabi pathan rajput sindi tamil telegu hindustani bundeli pahari gondi bageli chhattisgarhi deccani
+			}
+		}
+	}
+
 	on_character_ig_membership = {}
 
 	pop_potential = {
@@ -287,7 +329,7 @@
 				limit = {
 					is_pop_type = officers
 				}
-				value = 50
+				value = 25
 			}
 		}
 
@@ -299,7 +341,7 @@
 				}
 				value = 25
 				add = this.standard_of_living
-				
+
 				if = {
 					limit = { owner = { has_law = law_type:law_homesteading } }
 					multiply = 1.25
@@ -313,6 +355,20 @@
 					}
 					multiply = 4
 				}
+			}
+		}
+
+
+		if = {
+			limit = {
+				c:BIC ?= owner
+				culture = {
+					has_discrimination_trait = european_heritage
+				}
+			}
+			multiply = {
+				desc = "POP_INDIA_COLONIAL_RULE"
+				value = 0.1
 			}
 		}
 
@@ -341,7 +397,7 @@
 				min = 0
 			}
 		}
-		
+
 		if = {
 			limit = {
 				scope:interest_group = {
@@ -442,11 +498,34 @@
 		value = 2.0
 	}
 
+	executive_weight = {
+		value = 0.25
+		
+		# The company owning BIC should not get non-industrialist executives
+		if = {
+			limit = {
+				exists = scope:company
+				exists = c:BIC
+				c:BIC = {
+					exists = owning_company
+					owning_company = scope:company
+				}
+			}
+			multiply = {
+				value = 0
+			}
+		}
+	}
+
 	noble_chance = {
 		value = 1.0
 	}
 
 	female_commander_chance = {
+		value = 0.0
+	}
+
+	female_executive_chance = {
 		value = 0.0
 	}
 
@@ -468,7 +547,7 @@
 
 	female_agitator_chance = {
 		value = 0.01
-		
+
 		if = {
 			limit = {
 				owner = {
@@ -479,8 +558,8 @@
 			add = {
 				value = 0.01
 			}
-		}	
-		
+		}
+
 		if = {
 			limit = {
 				owner = {
@@ -503,22 +582,19 @@
 			add = {
 				value = 0.01
 			}
-		}		
+		}
 	}
 
 	# The chance that a commander belonging to this IG takes over leadership when it changes
 	# scope:character is the most popular commander in the IG
 	commander_leader_chance = {
 		value = 0.5
-		if = {
-			limit = {
-				exists = scope:character
-			}
-			multiply = {
-				value = 1
-				add = scope:character.popularity
-				min = 0
-			}
-		}
+		multiply = ig_commander_leader_chance_mult
+	}
+
+	# The chance that a executive belonging to this IG takes over leadership when it changes
+	# scope:character is the most popular executive in the IG
+	executive_leader_chance = {
+		value = 0.1
 	}
 }

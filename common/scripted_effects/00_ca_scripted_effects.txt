@@ -1,4 +1,4 @@
-﻿
+
 #calculate_federalists_vs_separatistsn_progress = {
 #	set_variable = { name = federalists_vs_separatists_next value = 0 }
 #	if = {
@@ -205,3 +205,126 @@ ca_history_rail_events	= {
 
 
 }	
+ca_pop_size_historical_setup_events = {
+
+    s:STATE_COSTA_RICA.region_state:UCA = { 
+	every_scope_pop = {
+        change_pop_culture = {
+            limit = { culture = cu:central_american }
+            change_pop_culture = { target = cu:costa_rican            value = 0.33 }
+            change_pop_culture = { target = cu:chibchan_central_america value = 0.05 }
+            change_pop_culture = { target = cu:bribri_talamanca       value = 0.10 }
+            change_pop_culture = { target = cu:cabecar                value = 0.08 }
+            change_pop_culture = { target = cu:ngabe_culture          value = 0.05 }
+            change_pop_culture = { target = cu:mangue_chorotega       value = 0.05 }
+        }
+    }}
+
+    s:STATE_PANAMA.region_state:UCA = { 
+	every_scope_pop = {
+        change_pop_culture = {		
+            limit = { culture = cu:central_american }
+            change_pop_culture = { target = cu:panaman               value = 0.33 }
+            change_pop_culture = { target = cu:chibchan_central_america value = 0.05 }
+            change_pop_culture = { target = cu:bribri_talamanca       value = 0.10 }
+            change_pop_culture = { target = cu:ngabe_culture          value = 0.07 }
+            change_pop_culture = { target = cu:embera                 value = 0.05 }
+            change_pop_culture = { target = cu:guna_kuna              value = 0.05 }
+        }
+    }}
+
+    s:STATE_NICARAGUA.region_state:UCA = { 
+	every_scope_pop = {
+         change_pop_culture = {		
+             limit = { culture = cu:central_american }
+             change_pop_culture = { target = cu:nicaraguan             value = 0.33 }
+             change_pop_culture = { target = cu:mangue_chorotega       value = 0.05 }
+             change_pop_culture = { target = cu:garifuna_arawak        value = 0.05 }
+         }
+    }}
+
+    s:STATE_GUATEMALA.region_state:UCA = {
+	every_scope_pop = {
+        change_pop_culture = {
+            limit = { culture = cu:central_american }
+            change_pop_culture = { target = cu:guatemalan             value = 0.33 }
+            change_pop_culture = { target = cu:garifuna_arawak        value = 0.05 }
+        }
+    }}
+
+    s:STATE_SAN_SALVADOR.region_state:UCA = {
+	every_scope_pop = {
+        change_pop_culture = {
+            limit = { culture = cu:central_american }
+            change_pop_culture = { target = cu:el_salvadorian         value = 0.33 }
+            change_pop_culture = { target = cu:ngabe_culture          value = 0.05 }
+            change_pop_culture = { target = cu:lenca                  value = 0.05 }
+        }
+    }}
+
+    s:STATE_HONDURAS.region_state:UCA = {
+	every_scope_pop = {
+        change_pop_culture = {
+            limit = { culture = cu:central_american }
+            change_pop_culture = { target = cu:honduran               value = 0.33 }
+            change_pop_culture = { target = cu:lenca                  value = 0.05 }
+            change_pop_culture = { target = cu:mangue_chorotega       value = 0.05 }
+            change_pop_culture = { target = cu:garifuna_arawak        value = 0.05 }
+        }
+    }
+	}
+
+}
+ca_pop_historcal_setup_events	= {
+#Main 
+s:STATE_COSTA_RICA = {
+add_homeland = cu:chibchan_central_america
+add_homeland = cu:bribri_talamanca
+add_homeland = cu:cabecar
+add_homeland = cu:ngabe_culture
+add_homeland = cu:mangue_chorotega
+
+}
+#Main
+s:STATE_GUATEMALA = {
+
+add_homeland = cu:garifuna_arawak
+
+}
+					
+
+#Main
+s:STATE_HONDURAS = {
+add_homeland = cu:mangue_chorotega 
+add_homeland = cu:lenca 
+add_homeland = cu:garifuna_arawak
+
+}					
+
+
+
+#Main
+s:STATE_PANAMA = {
+add_homeland = cu:chibchan_central_america
+add_homeland = cu:bribri_talamanca
+add_homeland = cu:embera
+add_homeland = cu:ngabe_culture
+add_homeland = cu:guna_kuna
+
+}
+
+#Main
+s:STATE_SAN_SALVADOR = {
+add_homeland = cu:ngabe_culture
+add_homeland = cu:lenca
+
+}
+
+
+#Main 
+s:STATE_NICARAGUA = {
+add_homeland = cu:mangue_chorotega
+add_homeland = cu:garifuna_arawak
+
+}
+}

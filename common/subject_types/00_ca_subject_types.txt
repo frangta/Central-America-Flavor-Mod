@@ -1,12 +1,12 @@
 ﻿subject_type_ca_dependency = {
-	allow_change_country_flag = yes
+	allow_change_country_flag = no
 	use_overlord_map_color = yes
-	use_overlord_ruler = no
+	use_overlord_ruler = yes
 	annex_on_country_formation = no
 	can_start_own_diplomatic_plays = no
 	breaks_if_subject_not_protected = yes
 	join_overlord_wars = yes
-	overlord_must_be_higher_rank = yes
+	overlord_must_be_higher_rank = no
 	overlord_must_be_same_country_type = no
 	use_for_release_country = no
 	gives_prestige_to_overlord = yes
@@ -33,6 +33,8 @@
 		recognized
 		colonial
 		unrecognized
+		native_american_comun
+		decentralized
 	}		
 	
 	valid_overlord_ranks = {
