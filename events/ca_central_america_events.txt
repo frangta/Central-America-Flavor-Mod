@@ -1,4 +1,4 @@
-namespace = ca_central_america
+﻿namespace = ca_central_america
 # The fading Union
 #A local newspaper proposed the formation of a state that would include the regions of Quetzaltenango, Totonicapán, Sololá and Suchitepéquez.
 #Voting of creation for Los altos
@@ -72,7 +72,7 @@ namespace = ca_central_america
 #-# Separatism in Honduras
 #-# Separatism in Panama
 #-# Separatism in Los Altos
-
+### State secedes
 #####################################
 ## The fading Union
 ca_central_america.0 = {
@@ -95,7 +95,6 @@ ca_central_america.0 = {
 
 	trigger = {
 	has_game_started = yes
-	c:UCA = ROOT
 	exists = c:UCA
 	}
 	immediate = {
@@ -119,6 +118,10 @@ ca_central_america.0 = {
 		add_journal_entry = {
 			type = je_historic_central_america_falls_apart
 		}
+		#add_journal_entry = {
+		#	type = je_central_american_fragile_unity
+		#}
+		
 		add_radicals = {
 			value = 0.015
 		}
@@ -151,6 +154,7 @@ ca_central_america.0 = {
 		add_journal_entry = {
 			type = je_central_america_falls_apart
 		}
+		
 		add_radicals = {
 			value = 0.015
 		}
@@ -467,8 +471,7 @@ ca_central_america.5 = {
        }
 	}
 
-	   	set_variable = created_DG6
-		default_option = yes
+
 	
 	
 	option = {
@@ -480,6 +483,8 @@ ca_central_america.5 = {
 		name = ca_central_america.5.c #try to integrate Soconusco into the Quetzaltenango District
         c:UCA = {annex = DG6}		
 	   	set_variable = quetzaltenango_integrate_soconusco
+		set_variable = created_DG6
+		default_option = yes
     }	
 }
 ##English influence in the Caribbean
@@ -996,7 +1001,27 @@ ca_central_america.13 = {
 		capital = {
 			save_scope_as = capital_scope
 		}
-		
+		#Soconusco
+		if = {
+			limit = {
+			    #has_variable = soconusco_inde
+				exists = s:STATE_CHIAPAS.region_state:UCA
+				s:STATE_CHIAPAS.region_state:UCA = {
+					is_capital = no
+				}
+			}			
+			create_country = {
+				tag = CIP
+				origin = this
+				state = s:STATE_CHIAPAS.region_state:UCA
+				on_created = {
+					set_variable = secession_country
+					save_scope_as = scope_CIP
+				
+				}
+
+			}
+        }		
 		# Guatemala without Soconusco
 		if = {
 			limit = {
@@ -1005,6 +1030,10 @@ ca_central_america.13 = {
 					is_capital = no
 				}
 			}
+		s:STATE_GUATEMALA = {
+		add_homeland = cu:guatemalan
+		remove_homeland = cu:central_american	
+		}			
 			create_country = {
 				tag = GUA
 				origin = this
@@ -1014,12 +1043,10 @@ ca_central_america.13 = {
 					save_scope_as = scope_GUA
 				add_primary_culture = cu:guatemalan
 				remove_primary_culture = cu:central_american
-				s:STATE_GUATEMALA = {
-				add_homeland = cu:guatemalan
-				remove_homeland = cu:central_american
+
 				
 				}
-				}
+
 			}
         }
 		#Guatemala With Soconusco
@@ -1074,11 +1101,6 @@ ca_central_america.13 = {
 			limit = {
 			    NOT = { has_variable = quetzaltenango_integrate_soconusco }
 				NOT = { exists = c:ALT }
-				exists = s:STATE_CHIAPAS.region_state:UCA
-
-				s:STATE_CHIAPAS.region_state:UCA = {
-					is_capital = no
-				}
 			}
 			create_country = {
 				tag = ALT
@@ -1099,6 +1121,11 @@ ca_central_america.13 = {
 					is_capital = no
 				}
 			}
+				s:STATE_HONDURAS = {
+				add_homeland = cu:honduran
+				remove_homeland = cu:central_american
+				
+				}			
 			create_country = {
 				tag = HON
 				origin = this
@@ -1108,11 +1135,7 @@ ca_central_america.13 = {
 					set_variable = secession_country
 				add_primary_culture = cu:honduran
 				remove_primary_culture = cu:central_american
-				s:STATE_HONDURAS = {
-				add_homeland = cu:honduran
-				remove_homeland = cu:central_american
-				
-				}
+
 				
 				}
 			}
@@ -1124,6 +1147,10 @@ ca_central_america.13 = {
 					is_capital = no
 				}
 			}
+			s:STATE_COSTA_RICA = {
+				add_homeland = cu:costa_rican
+				remove_homeland = cu:central_american			
+				}			
 			create_country = {
 				tag = COS
 				origin = this
@@ -1133,10 +1160,7 @@ ca_central_america.13 = {
 					set_variable = secession_country
 				add_primary_culture = cu:costa_rican
 				remove_primary_culture = cu:central_american
-			s:STATE_COSTA_RICA = {
-				add_homeland = cu:costa_rican
-				remove_homeland = cu:central_american			
-				}
+
 				
 				}
 			}
@@ -1148,6 +1172,11 @@ ca_central_america.13 = {
 					is_capital = no
 				}
 			}
+				s:STATE_SAN_SALVADOR = {
+				add_homeland = cu:el_salvadorian
+                remove_homeland = cu:central_american
+				
+				}			
 			create_country = {
 				tag = ELS
 				origin = this
@@ -1157,11 +1186,7 @@ ca_central_america.13 = {
 					set_variable = secession_country
 				add_primary_culture = cu:el_salvadorian
 				remove_primary_culture = cu:central_american
-				s:STATE_SAN_SALVADOR = {
-				add_homeland = cu:el_salvadorian
-                remove_homeland = cu:central_american
 				
-				}				
 				}
 			}
 		}
@@ -1172,6 +1197,11 @@ ca_central_america.13 = {
 					is_capital = no
 				}
 			}
+			s:STATE_NICARAGUA = {
+				add_homeland = cu:nicaraguan
+				remove_homeland = cu:central_american
+				
+			}			
 			create_country = {
 				tag = NIC
 				origin = this
@@ -1181,11 +1211,7 @@ ca_central_america.13 = {
 					set_variable = secession_country
 			add_primary_culture = cu:nicaraguan
 			remove_primary_culture = cu:central_american
-			s:STATE_NICARAGUA = {
-				add_homeland = cu:nicaraguan
-				remove_homeland = cu:central_american
-				
-			}			
+			
 				}
 			}
 		}
@@ -1928,7 +1954,7 @@ ca_central_america.19 = {
 			set_interest_group_name = ig_catholic_church
 		}			
 			activate_law = law_type:law_freedom_of_conscience
-			activate_law = law_type:law_unitary
+			#activate_law = law_type:law_unitary
 			activate_law = law_type:law_mercantilism
 			activate_law = law_type:law_wealth_voting
 			activate_law = law_type:law_censorship
@@ -2096,9 +2122,9 @@ ca_central_america.20 = {
 			activate_law = law_type:law_censorship	
 		it = {
 		limit = { has_variable = historic_central_american }
-		trigger_event = { 
-			id = central_america.5 months = 1
-		}
+		#trigger_event = { 
+		#	id = central_america.5 months = 1
+		#}
 		}
 		it = {
 		limit = { has_variable = random_central_american }
@@ -2251,14 +2277,14 @@ ca_central_america.21 = {
 			set_interest_group_name = ig_catholic_church
 		}			
 			activate_law = law_type:law_freedom_of_conscience
-			activate_law = law_type:law_unitary
+			#activate_law = law_type:law_unitary
 			activate_law = law_type:law_landed_voting
 			activate_law = law_type:law_mercantilism
 		it = {
 		limit = { has_variable = historic_central_american }
-		trigger_event = { 
-			id = central_america.5 months = 1
-		}
+		#trigger_event = { 
+		#	id = central_america.5 months = 1
+		#}
 		}
 		it = {
 		limit = { has_variable = random_central_american }
@@ -2399,7 +2425,7 @@ ca_central_america.22 = {
 				set_interest_group_name = ig_catholic_church
 			}
 			activate_law = law_type:law_freedom_of_conscience
-			activate_law = law_type:law_unitary
+			#activate_law = law_type:law_unitary
 			activate_law = law_type:law_landed_voting
 			activate_law = law_type:law_mercantilism
 			activate_law = law_type:law_censorship
@@ -2407,10 +2433,10 @@ ca_central_america.22 = {
 		}
 		it = {
 			limit = { has_variable = historic_central_american }
-			trigger_event = {
-				id = central_america.5
-				months = 1
-			}
+			#trigger_event = {
+			#	id = central_america.5
+			#	months = 1
+			#}
 		}
 		it = {
 			limit = { has_variable = random_central_american }
@@ -2549,7 +2575,7 @@ ca_central_america.23 = {
 				set_interest_group_name = ig_catholic_church
 			}
 			activate_law = law_type:law_freedom_of_conscience
-			activate_law = law_type:law_unitary
+			#activate_law = law_type:law_unitary
 			activate_law = law_type:law_landed_voting
 			activate_law = law_type:law_mercantilism
 			activate_law = law_type:law_censorship
@@ -3373,7 +3399,7 @@ ca_central_america.42 = {
 			remove_claim = ROOT
 		}
 		activate_law = law_type:law_freedom_of_conscience
-		activate_law = law_type:law_unitary
+		#activate_law = law_type:law_unitary
 		activate_law = law_type:law_mercantilism
 		ai_chance = {
 			base = 100
@@ -3471,7 +3497,7 @@ ca_central_america.43 = {
 				remove_claim = ROOT
 			}
 			activate_law = law_type:law_freedom_of_conscience
-			activate_law = law_type:law_unitary
+			#activate_law = law_type:law_unitary
 			activate_law = law_type:law_mercantilism
 			create_character = {
 				first_name = "Juan"
@@ -5952,6 +5978,183 @@ ca_central_america.76 = {
 #		default_option = yes
 #		ai_chance = {
 #			base = 100
+#		}
+#	}
+#}
+# State secedes
+#ca_central_america.84 = { #Generic secedes
+#	type = country_event
+#	placement = scope:secession_capital
+#	title = ca_central_america.84.t
+#	desc = ca_central_america.84.d
+#	flavor =  ca_central_america.84.f
+#
+#	duration = 3
+#
+#	event_image = {
+#		video = "southamerica_aristocrats"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+#
+#	trigger = {
+#	has_variable = vainilla_central_america_events
+#
+#		any_scope_state = {
+#			is_capital = no
+#			OR = {
+#				state_region = s:STATE_GUATEMALA
+#				state_region = s:STATE_HONDURAS
+#				state_region = s:STATE_COSTA_RICA
+#				state_region = s:STATE_SAN_SALVADOR
+#				state_region = s:STATE_NICARAGUA
+#			}
+#			turmoil > 0.2
+#		}
+#	}
+#	
+#	immediate = {
+#		random_scope_state = {
+#			limit = {
+#				is_capital = no
+#				OR = {
+#					state_region = s:STATE_GUATEMALA
+#					state_region = s:STATE_HONDURAS
+#					state_region = s:STATE_COSTA_RICA
+#					state_region = s:STATE_SAN_SALVADOR
+#					state_region = s:STATE_NICARAGUA
+#				}
+#				turmoil > 0.2
+#			}
+#			save_scope_as = secession_state
+#		}
+#		if = {
+#			limit = {
+#				scope:secession_state = {
+#					state_region = s:STATE_GUATEMALA
+#				}
+#			}
+#			create_country = {
+#				tag = GUA
+#				origin = this
+#				state = scope:secession_state
+#			}
+#			c:GUA = {
+#				save_scope_as = secession_country
+#				capital = {
+#					save_scope_as = secession_capital
+#				}
+#			}
+#		}
+#		if = {
+#			limit = {
+#				scope:secession_state = {
+#					state_region = s:STATE_HONDURAS
+#				}
+#			}
+#			create_country = {
+#				tag = HON
+#				origin = this
+#				state = scope:secession_state
+#			}
+#			c:HON = {
+#				save_scope_as = secession_country
+#				capital = {
+#					save_scope_as = secession_capital
+#				}
+#			}
+#		}
+#		if = {
+#			limit = {
+#				scope:secession_state = {
+#					state_region = s:STATE_COSTA_RICA
+#				}
+#			}
+#			create_country = {
+#				tag = COS
+#				origin = this
+#				state = scope:secession_state
+#			}
+#			c:COS = {
+#				save_scope_as = secession_country
+#				capital = {
+#					save_scope_as = secession_capital
+#				}
+#			}
+#		}
+#		if = {
+#			limit = {
+#				scope:secession_state = {
+#					state_region = s:STATE_SAN_SALVADOR
+#				}
+#			}
+#			create_country = {
+#				tag = ELS
+#				origin = this
+#				state = scope:secession_state
+#			}
+#			c:ELS = {
+#				save_scope_as = secession_country
+#				capital = {
+#					save_scope_as = secession_capital
+#				}
+#			}
+#		}
+#		if = {
+#			limit = {
+#				scope:secession_state = {
+#					state_region = s:STATE_NICARAGUA
+#				}
+#			}
+#			create_country = {
+#				tag = NIC
+#				origin = this
+#				state = scope:secession_state
+#			}
+#			c:NIC = {
+#				save_scope_as = secession_country
+#				capital = {
+#					save_scope_as = secession_capital
+#				}
+#			}
+#		}
+#	}
+#
+#	# Accept secession
+#	option = {
+#		name = ca_central_america.84.a
+#		default_option = yes
+#		add_radicals = {
+#			value = large_radicals
+#		}
+#		scope:secession_country = {
+#			change_relations = {
+#				country = ROOT
+#				value = 20
+#			}
+#
+#		}
+#	}
+#
+#	# Reject Secession
+#	option = {
+#		name = ca_central_america.84.b
+#		scope:secession_capital = {
+#			state_region = {
+#				add_claim = ROOT
+#			}
+#		}
+#		add_radicals = {
+#			value = large_radicals
+#		}
+#		scope:secession_country = {
+#			change_relations = {
+#				country = ROOT
+#				value = -50
+#			}
+#
 #		}
 #	}
 #}

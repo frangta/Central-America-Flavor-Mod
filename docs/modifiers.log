@@ -991,7 +991,7 @@ power_bloc_disallow_war_bool:
 power_bloc_income_transfer_to_leader_factor:
   Mask: power_bloc
   Name: Income Transfer to Power Bloc Leader
-  Description: Base percentage of tax income transferred from concept_power_bloc_memembers to the Power Bloc Leader
+  Description: Base percentage of tax income transferred from Power Bloc Members to the Power Bloc Leader
 power_bloc_invite_acceptance_add:
   Mask: power_bloc
   Name: Power Bloc Invitation Acceptance Chance
@@ -1000,10 +1000,22 @@ power_bloc_leader_can_add_wargoal_bool:
   Mask: power_bloc
   Name: Allows free War Goal
   Description: The Power Bloc Leader may add a War Goal of their own even when voluntarily supporting another Power Bloc Member
+power_bloc_leader_can_assistance:
+  Mask: power_bloc
+  Name: Allows Assistance to Power Bloc Member
+  Description: The Power Bloc Leader can provide assistance to impoverished or disaster stricken Power Bloc Member
+power_bloc_leader_can_assistance_to_neutral_countries:
+  Mask: power_bloc
+  Name: Allows Assistance to all countries
+  Description: The Power Bloc Leader can provide assistance to all impoverished or disaster stricken countries
 power_bloc_leader_can_force_state_religion_bool:
   Mask: power_bloc
   Name: Allows Impose State Religion
   Description: The Power Bloc Leader may impose a change of State Religion on a Power Bloc Member whose faith differs from their own
+power_bloc_leader_can_greener_grass_campaign:
+  Mask: power_bloc
+  Name: Allows Promote immigration to Subject
+  Description: The Overlord can facilitate immigration to the Subject. 
 power_bloc_leader_can_make_subjects_bool:
   Mask: power_bloc
   Name: Can Subjugate Power Bloc Member
@@ -1234,8 +1246,12 @@ state_pollution_generation_add:
   Description: An increase or decrease to how much pollution is generated in a state
 state_pollution_reduction_health_mult:
   Mask: state
-  Name: Pollution Effects Reduction
+  Name: Pollution Health Effects Reduction
   Description: An increase of decrease to the effects of Pollution Impact on the health of your population
+state_poor_expected_sol:
+  Mask: state
+  Name: state_poor_expected_sol
+  Description: state_poor_expected_sol_desc
 state_pop_pol_str_add:
   Mask: state
   Name: Universal Pop Political Strength
@@ -1324,6 +1340,10 @@ state_trade_quantity_mult:
   Mask: state
   Name: Traded Quantity
   Description: An increase or decrease to the quantity of Goods traded for each Trade Capacity.
+state_treaty_port_integration_status:
+  Mask: state
+  Name: Treaty Port Integration Progress
+  Description: Treaty port integration progress
 state_turmoil_effects_mult:
   Mask: state
   Name: State Penalties from Turmoil
@@ -1538,6 +1558,10 @@ building_academics_mortality_mult:
   Mask: building
   Name: Mortality of academics! Academics
   Description: An increase or decrease in the Mortality of academics! Academics
+building_academics_shares_add:
+  Mask: building
+  Name: academics! Academics Pop Ownership Shares
+  Description: An increase or decrease in an academics! Academics Pop Ownership Shares
 building_aristocrats_shares_add:
   Mask: building
   Name: aristocrats! Aristocrats Pop Ownership Shares
@@ -1654,6 +1678,10 @@ building_employment_shopkeepers_add:
   Mask: building
   Name: shopkeepers! Shopkeepers Per Level
   Description: Modifies the amount of shopkeepers! Shopkeepers a building can hire per level
+building_employment_slaves_add:
+  Mask: building
+  Name: slaves! Slaves Per Level
+  Description: Modifies the amount of slaves! Slaves a building can hire per level
 building_employment_soldiers_add:
   Mask: building
   Name: soldiers! Servicemen Per Level
@@ -1662,10 +1690,18 @@ building_engineers_mortality_mult:
   Mask: building
   Name: Mortality of engineers! Engineers
   Description: An increase or decrease in the Mortality of engineers! Engineers
+building_engineers_shares_add:
+  Mask: building
+  Name: engineers! Engineers Pop Ownership Shares
+  Description: An increase or decrease in an engineers! Engineers Pop Ownership Shares
 building_explosives_factory_throughput_add:
   Mask: building
   Name: Explosives Factory building Throughput
   Description: A bonus or penalty to both input and output of Explosives Factory
+building_farmers_shares_add:
+  Mask: building
+  Name: farmers! Farmers Pop Ownership Shares
+  Description: An increase or decrease in a farmers! Farmers Pop Ownership Shares
 building_fishing_wharf_throughput_add:
   Mask: building
   Name: Fishing Wharves building Throughput
@@ -2326,6 +2362,10 @@ building_laborers_mortality_mult:
   Mask: building
   Name: Mortality of laborers! Laborers
   Description: An increase or decrease in the Mortality of laborers! Laborers
+building_laborers_shares_add:
+  Mask: building
+  Name: laborers! Laborers Pop Ownership Shares
+  Description: An increase or decrease in a laborers! Laborers Pop Ownership Shares
 building_lead_mine_throughput_add:
   Mask: building
   Name: Lead Mines building Throughput
@@ -2338,6 +2378,10 @@ building_machinists_mortality_mult:
   Mask: building
   Name: Mortality of machinists! Machinists
   Description: An increase or decrease in the Mortality of machinists! Machinists
+building_machinists_shares_add:
+  Mask: building
+  Name: machinists! Machinists Pop Ownership Shares
+  Description: An increase or decrease in a machinists! Machinists Pop Ownership Shares
 building_maize_farm_throughput_add:
   Mask: building
   Name: Maize Farms building Throughput
@@ -2362,6 +2406,10 @@ building_naval_base_throughput_add:
   Mask: building
   Name: Naval Base building Throughput
   Description: A bonus or penalty to both input and output of Naval Base
+building_officers_shares_add:
+  Mask: building
+  Name: officers! Officers Pop Ownership Shares
+  Description: An increase or decrease in an officers! Officers Pop Ownership Shares
 building_opium_plantation_throughput_add:
   Mask: building
   Name: Opium Plantations building Throughput
@@ -2370,6 +2418,10 @@ building_paper_mills_throughput_add:
   Mask: building
   Name: Paper Mills building Throughput
   Description: A bonus or penalty to both input and output of Paper Mills
+building_peasants_shares_add:
+  Mask: building
+  Name: peasants! Peasants Pop Ownership Shares
+  Description: An increase or decrease in a peasants! Peasants Pop Ownership Shares
 building_port_throughput_add:
   Mask: building
   Name: Port building Throughput
@@ -2406,6 +2458,14 @@ building_silk_plantation_throughput_add:
   Mask: building
   Name: Silk Plantations building Throughput
   Description: A bonus or penalty to both input and output of Silk Plantations
+building_slaves_shares_add:
+  Mask: building
+  Name: slaves! Slaves Pop Ownership Shares
+  Description: An increase or decrease in a slaves! Slaves Pop Ownership Shares
+building_soldiers_shares_add:
+  Mask: building
+  Name: soldiers! Servicemen Pop Ownership Shares
+  Description: An increase or decrease in a soldiers! Servicemen Pop Ownership Shares
 building_steel_mills_throughput_add:
   Mask: building
   Name: Steel Mills building Throughput
@@ -2614,6 +2674,10 @@ country_clergymen_voting_power_add:
   Mask: country
   Name: Political Strength from the Votes of clergymen! Clergymen
   Description: An increase or decrease to amount of Political Strength gained from the Votes of clergymen! Clergymen in Elections
+country_clerks_pol_str_mult:
+  Mask: country
+  Name: Political Strength of clerks! Clerks
+  Description: An increase or decrease in the Political Strength of clerks! Clerks
 country_clerks_voting_power_add:
   Mask: country
   Name: Political Strength from the Votes of clerks! Clerks
@@ -2966,6 +3030,10 @@ country_radicalism_increases_violent_hostility_mult:
   Mask: country
   Name: Radicalism increases for the acceptance_status_1! Violent Hostility Status
   Description: A bonus or penalty to increases in Radicalism for Pops in this Status
+country_shopkeepers_pol_str_mult:
+  Mask: country
+  Name: Political Strength of shopkeepers! Shopkeepers
+  Description: An increase or decrease in the Political Strength of shopkeepers! Shopkeepers
 country_shopkeepers_voting_power_add:
   Mask: country
   Name: Political Strength from the Votes of shopkeepers! Shopkeepers
@@ -3006,6 +3074,10 @@ country_shudras_qualification_growth_same_class_mult:
   Mask: country
   Name: Qualification Growth within Shudras Social Class
   Description: A percentage increase or decrease to Qualification Growth for the Shudras Social Class towards Professions in the Shudras Social Class
+country_slaves_pol_str_mult:
+  Mask: country
+  Name: Political Strength of slaves! Slaves
+  Description: An increase or decrease in the Political Strength of slaves! Slaves
 country_slaves_voting_power_add:
   Mask: country
   Name: Political Strength from the Votes of slaves! Slaves
@@ -3414,6 +3486,10 @@ goods_output_fine_art_add:
   Mask: goods
   Name: fine_art! Fine Art output
   Description: The amount of fine_art! Fine Art produced by buildings
+goods_output_fine_art_mult:
+  Mask: goods
+  Name: Buildingfine_art!Fine Artoutput 
+  Description: A bonus or penalty to the amount of fine_art! Fine Art produced by buildings
 goods_output_fish_add:
   Mask: goods
   Name: fish! Fish output
@@ -3794,6 +3870,18 @@ state_aborigine_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Aboriginal
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_academics_dependent_wage_mult:
+  Mask: state
+  Name: academics! Academics Dependents Income
+  Description: An increase or decrease in an academics! Academics Dependents Income
+state_academics_investment_pool_contribution_add:
+  Mask: state
+  Name: academics! Academics Investment Pool contribution
+  Description: How much of their profits academics! Academics will invest
+state_academics_investment_pool_efficiency_mult:
+  Mask: state
+  Name: academics! Academics Investment Pool contribution efficiency
+  Description: An increase or decrease to how much the invested profits from academics! Academics will contribute to the Investment Pool
 state_academics_mortality_mult:
   Mask: state
   Name: Mortality of academics! Academics
@@ -3874,6 +3962,10 @@ state_argentine_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Argentine
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_aristocrats_dependent_wage_mult:
+  Mask: state
+  Name: aristocrats! Aristocrats Dependents Income
+  Description: An increase or decrease in an aristocrats! Aristocrats Dependents Income
 state_aristocrats_investment_pool_contribution_add:
   Mask: state
   Name: aristocrats! Aristocrats Investment Pool contribution
@@ -4046,6 +4138,22 @@ state_bundeli_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Bundeli
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_bureaucrats_dependent_wage_mult:
+  Mask: state
+  Name: bureaucrats! Bureaucrats Dependents Income
+  Description: An increase or decrease in a bureaucrats! Bureaucrats Dependents Income
+state_bureaucrats_investment_pool_contribution_add:
+  Mask: state
+  Name: bureaucrats! Bureaucrats Investment Pool contribution
+  Description: How much of their profits bureaucrats! Bureaucrats will invest
+state_bureaucrats_investment_pool_efficiency_mult:
+  Mask: state
+  Name: bureaucrats! Bureaucrats Investment Pool contribution efficiency
+  Description: An increase or decrease to how much the invested profits from bureaucrats! Bureaucrats will contribute to the Investment Pool
+state_bureaucrats_mortality_mult:
+  Mask: state
+  Name: Mortality of bureaucrats! Bureaucrats
+  Description: An increase or decrease in the Mortality of bureaucrats! Bureaucrats
 state_burmese_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Burmese
@@ -4094,6 +4202,10 @@ state_cajun_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Cajun
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_capitalists_dependent_wage_mult:
+  Mask: state
+  Name: capitalists! Capitalists Dependents Income
+  Description: An increase or decrease in a capitalists! Capitalists Dependents Income
 state_capitalists_investment_pool_contribution_add:
   Mask: state
   Name: capitalists! Capitalists Investment Pool contribution
@@ -4102,6 +4214,10 @@ state_capitalists_investment_pool_efficiency_mult:
   Mask: state
   Name: capitalists! Capitalists Investment Pool contribution efficiency
   Description: An increase or decrease to how much the invested profits from capitalists! Capitalists will contribute to the Investment Pool
+state_capitalists_mortality_mult:
+  Mask: state
+  Name: Mortality of capitalists! Capitalists
+  Description: An increase or decrease in the Mortality of capitalists! Capitalists
 state_cariban_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Cariban
@@ -4150,6 +4266,10 @@ state_circassian_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Circassian
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_clergymen_dependent_wage_mult:
+  Mask: state
+  Name: clergymen! Clergymen Dependents Income
+  Description: An increase or decrease in a clergymen! Clergymen Dependents Income
 state_clergymen_investment_pool_contribution_add:
   Mask: state
   Name: clergymen! Clergymen Investment Pool contribution
@@ -4158,6 +4278,26 @@ state_clergymen_investment_pool_efficiency_mult:
   Mask: state
   Name: clergymen! Clergymen Investment Pool contribution efficiency
   Description: An increase or decrease to how much the invested profits from clergymen! Clergymen will contribute to the Investment Pool
+state_clergymen_mortality_mult:
+  Mask: state
+  Name: Mortality of clergymen! Clergymen
+  Description: An increase or decrease in the Mortality of clergymen! Clergymen
+state_clerks_dependent_wage_mult:
+  Mask: state
+  Name: clerks! Clerks Dependents Income
+  Description: An increase or decrease in a clerks! Clerks Dependents Income
+state_clerks_investment_pool_contribution_add:
+  Mask: state
+  Name: clerks! Clerks Investment Pool contribution
+  Description: How much of their profits clerks! Clerks will invest
+state_clerks_investment_pool_efficiency_mult:
+  Mask: state
+  Name: clerks! Clerks Investment Pool contribution efficiency
+  Description: An increase or decrease to how much the invested profits from clerks! Clerks will contribute to the Investment Pool
+state_clerks_mortality_mult:
+  Mask: state
+  Name: Mortality of clerks! Clerks
+  Description: An increase or decrease in the Mortality of clerks! Clerks
 state_colombian_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Colombian
@@ -4226,6 +4366,22 @@ state_edo_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Edo
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_engineers_dependent_wage_mult:
+  Mask: state
+  Name: engineers! Engineers Dependents Income
+  Description: An increase or decrease in an engineers! Engineers Dependents Income
+state_engineers_investment_pool_contribution_add:
+  Mask: state
+  Name: engineers! Engineers Investment Pool contribution
+  Description: How much of their profits engineers! Engineers will invest
+state_engineers_investment_pool_efficiency_mult:
+  Mask: state
+  Name: engineers! Engineers Investment Pool contribution efficiency
+  Description: An increase or decrease to how much the invested profits from engineers! Engineers will contribute to the Investment Pool
+state_engineers_mortality_mult:
+  Mask: state
+  Name: Mortality of engineers! Engineers
+  Description: An increase or decrease in the Mortality of engineers! Engineers
 state_equatorial_bantu_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Equatorial Bantu
@@ -4242,6 +4398,14 @@ state_fang_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Fang
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_farmers_dependent_wage_mult:
+  Mask: state
+  Name: farmers! Farmers Dependents Income
+  Description: An increase or decrease in a farmers! Farmers Dependents Income
+state_farmers_education_access_add:
+  Mask: state
+  Name: Education Access for farmers! Farmers
+  Description: A bonus or penalty to education access for farmers! Farmers
 state_farmers_investment_pool_contribution_add:
   Mask: state
   Name: farmers! Farmers Investment Pool contribution
@@ -4550,6 +4714,18 @@ state_kurdish_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Kurdish
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_laborers_dependent_wage_mult:
+  Mask: state
+  Name: laborers! Laborers Dependents Income
+  Description: An increase or decrease in a laborers! Laborers Dependents Income
+state_laborers_investment_pool_contribution_add:
+  Mask: state
+  Name: laborers! Laborers Investment Pool contribution
+  Description: How much of their profits laborers! Laborers will invest
+state_laborers_investment_pool_efficiency_mult:
+  Mask: state
+  Name: laborers! Laborers Investment Pool contribution efficiency
+  Description: An increase or decrease to how much the invested profits from laborers! Laborers will contribute to the Investment Pool
 state_laborers_mortality_mult:
   Mask: state
   Name: Mortality of laborers! Laborers
@@ -4618,6 +4794,18 @@ state_maasai_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Maasai
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_machinists_dependent_wage_mult:
+  Mask: state
+  Name: machinists! Machinists Dependents Income
+  Description: An increase or decrease in a machinists! Machinists Dependents Income
+state_machinists_investment_pool_contribution_add:
+  Mask: state
+  Name: machinists! Machinists Investment Pool contribution
+  Description: How much of their profits machinists! Machinists will invest
+state_machinists_investment_pool_efficiency_mult:
+  Mask: state
+  Name: machinists! Machinists Investment Pool contribution efficiency
+  Description: An increase or decrease to how much the invested profits from machinists! Machinists will contribute to the Investment Pool
 state_machinists_mortality_mult:
   Mask: state
   Name: Mortality of machinists! Machinists
@@ -4822,6 +5010,22 @@ state_occitan_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Occitan
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_officers_dependent_wage_mult:
+  Mask: state
+  Name: officers! Officers Dependents Income
+  Description: An increase or decrease in an officers! Officers Dependents Income
+state_officers_investment_pool_contribution_add:
+  Mask: state
+  Name: officers! Officers Investment Pool contribution
+  Description: How much of their profits officers! Officers will invest
+state_officers_investment_pool_efficiency_mult:
+  Mask: state
+  Name: officers! Officers Investment Pool contribution efficiency
+  Description: An increase or decrease to how much the invested profits from officers! Officers will contribute to the Investment Pool
+state_officers_mortality_mult:
+  Mask: state
+  Name: Mortality of officers! Officers
+  Description: An increase or decrease in the Mortality of officers! Officers
 state_oodham_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for O’odham
@@ -4882,6 +5086,10 @@ state_peasants_consumption_multiplier_add:
   Mask: state
   Name: Goods consumption for peasants! Peasants
   Description: A bonus or penalty to goods consumption for peasants! Peasants
+state_peasants_dependent_wage_mult:
+  Mask: state
+  Name: peasants! Peasants Dependents Income
+  Description: An increase or decrease in a peasants! Peasants Dependents Income
 state_peasants_education_access_add:
   Mask: state
   Name: Education Access for peasants! Peasants
@@ -4890,6 +5098,14 @@ state_peasants_internal_migration_disallowed_bool:
   Mask: state
   Name: Disallowed Internal Migration for peasants! Peasants
   Description: peasants! Peasants are prohibited from Migration between States in their Country
+state_peasants_investment_pool_contribution_add:
+  Mask: state
+  Name: peasants! Peasants Investment Pool contribution
+  Description: How much of their profits peasants! Peasants will invest
+state_peasants_investment_pool_efficiency_mult:
+  Mask: state
+  Name: peasants! Peasants Investment Pool contribution efficiency
+  Description: An increase or decrease to how much the invested profits from peasants! Peasants will contribute to the Investment Pool
 state_peasants_mass_migration_disallowed_bool:
   Mask: state
   Name: Disallowed Mass Migration for peasants! Peasants
@@ -5238,6 +5454,10 @@ state_shona_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Shona
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_shopkeepers_dependent_wage_mult:
+  Mask: state
+  Name: shopkeepers! Shopkeepers Dependents Income
+  Description: An increase or decrease in a shopkeepers! Shopkeepers Dependents Income
 state_shopkeepers_investment_pool_contribution_add:
   Mask: state
   Name: shopkeepers! Shopkeepers Investment Pool contribution
@@ -5246,6 +5466,10 @@ state_shopkeepers_investment_pool_efficiency_mult:
   Mask: state
   Name: shopkeepers! Shopkeepers Investment Pool contribution efficiency
   Description: An increase or decrease to how much the invested profits from shopkeepers! Shopkeepers will contribute to the Investment Pool
+state_shopkeepers_mortality_mult:
+  Mask: state
+  Name: Mortality of shopkeepers! Shopkeepers
+  Description: An increase or decrease in the Mortality of shopkeepers! Shopkeepers
 state_siberian_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Siberian
@@ -5270,6 +5494,18 @@ state_siouan_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Siouan
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_slaves_dependent_wage_mult:
+  Mask: state
+  Name: slaves! Slaves Dependents Income
+  Description: An increase or decrease in a slaves! Slaves Dependents Income
+state_slaves_investment_pool_contribution_add:
+  Mask: state
+  Name: slaves! Slaves Investment Pool contribution
+  Description: How much of their profits slaves! Slaves will invest
+state_slaves_investment_pool_efficiency_mult:
+  Mask: state
+  Name: slaves! Slaves Investment Pool contribution efficiency
+  Description: An increase or decrease to how much the invested profits from slaves! Slaves will contribute to the Investment Pool
 state_slaves_mortality_mult:
   Mask: state
   Name: Mortality of slaves! Slaves
@@ -5282,6 +5518,18 @@ state_slovene_standard_of_living_add:
   Mask: state
   Name: [concept_sol] Modifier for Slovene
   Description: A bonus or penalty to a specific culture's [concept_sol]
+state_soldiers_dependent_wage_mult:
+  Mask: state
+  Name: soldiers! Servicemen Dependents Income
+  Description: An increase or decrease in a soldiers! Servicemen Dependents Income
+state_soldiers_investment_pool_contribution_add:
+  Mask: state
+  Name: soldiers! Servicemen Investment Pool contribution
+  Description: How much of their profits soldiers! Servicemen will invest
+state_soldiers_investment_pool_efficiency_mult:
+  Mask: state
+  Name: soldiers! Servicemen Investment Pool contribution efficiency
+  Description: An increase or decrease to how much the invested profits from soldiers! Servicemen will contribute to the Investment Pool
 state_soldiers_mortality_mult:
   Mask: state
   Name: Mortality of soldiers! Servicemen
@@ -5658,8 +5906,6 @@ unit_offense_water_mult:
 --- Potential dynamic modifier types ---
 building_academics_fertility_mult:
   Mask: building
-building_academics_shares_add:
-  Mask: building
 building_academics_shares_mult:
   Mask: building
 building_angkor_wat_throughput_add:
@@ -5746,15 +5992,11 @@ building_employment_peasants_mult:
   Mask: building
 building_employment_shopkeepers_mult:
   Mask: building
-building_employment_slaves_add:
-  Mask: building
 building_employment_slaves_mult:
   Mask: building
 building_employment_soldiers_mult:
   Mask: building
 building_engineers_fertility_mult:
-  Mask: building
-building_engineers_shares_add:
   Mask: building
 building_engineers_shares_mult:
   Mask: building
@@ -5763,8 +6005,6 @@ building_eye_of_sahara_throughput_add:
 building_farmers_fertility_mult:
   Mask: building
 building_farmers_mortality_mult:
-  Mask: building
-building_farmers_shares_add:
   Mask: building
 building_farmers_shares_mult:
   Mask: building
@@ -13018,15 +13258,11 @@ building_khaju_bridge_throughput_add:
   Mask: building
 building_laborers_fertility_mult:
   Mask: building
-building_laborers_shares_add:
-  Mask: building
 building_laborers_shares_mult:
   Mask: building
 building_logging_camp_throughput_add:
   Mask: building
 building_machinists_fertility_mult:
-  Mask: building
-building_machinists_shares_add:
   Mask: building
 building_machinists_shares_mult:
   Mask: building
@@ -13044,8 +13280,6 @@ building_officers_fertility_mult:
   Mask: building
 building_officers_mortality_mult:
   Mask: building
-building_officers_shares_add:
-  Mask: building
 building_officers_shares_mult:
   Mask: building
 building_oil_rig_throughput_add:
@@ -13055,8 +13289,6 @@ building_panama_canal_throughput_add:
 building_peasants_fertility_mult:
   Mask: building
 building_peasants_mortality_mult:
-  Mask: building
-building_peasants_shares_add:
   Mask: building
 building_peasants_shares_mult:
   Mask: building
@@ -13078,15 +13310,11 @@ building_slaves_fertility_mult:
   Mask: building
 building_slaves_mortality_mult:
   Mask: building
-building_slaves_shares_add:
-  Mask: building
 building_slaves_shares_mult:
   Mask: building
 building_soldiers_fertility_mult:
   Mask: building
 building_soldiers_mortality_mult:
-  Mask: building
-building_soldiers_shares_add:
   Mask: building
 building_soldiers_shares_mult:
   Mask: building
@@ -13126,8 +13354,6 @@ ca_gold_fields_throughput_add:
   Mask: 
 ca_gold_mine_throughput_add:
   Mask: 
-ca_hacienda_generic_throughput_add:
-  Mask: 
 ca_iron_mine_throughput_add:
   Mask: 
 ca_lead_mine_throughput_add:
@@ -13136,8 +13362,6 @@ ca_oil_rig_throughput_add:
   Mask: 
 ca_sulfur_mine_throughput_add:
   Mask: 
-country_clerks_pol_str_mult:
-  Mask: country
 country_enactment_success_chance_law_affirmative_action_add:
   Mask: country
 country_enactment_success_chance_law_agrarianism_add:
@@ -13344,10 +13568,6 @@ country_enactment_success_chance_law_womens_suffrage_add:
   Mask: country
 country_enactment_success_chance_law_worker_protections_add:
   Mask: country
-country_shopkeepers_pol_str_mult:
-  Mask: country
-country_slaves_pol_str_mult:
-  Mask: country
 goods_input_aeroplanes_mult:
   Mask: goods
 goods_input_automobiles_mult:
@@ -13473,8 +13693,6 @@ goods_output_dye_mult:
 goods_output_explosives_mult:
   Mask: goods
 goods_output_fertilizer_mult:
-  Mask: goods
-goods_output_fine_art_mult:
   Mask: goods
 goods_output_fish_mult:
   Mask: goods
@@ -13632,6 +13850,60 @@ goods_trade_advantage_wine_mult:
   Mask: goods
 goods_trade_advantage_wood_mult:
   Mask: goods
+interest_group_ig_ca_armed_forces_approval_add:
+  Mask: interest_group
+interest_group_ig_ca_armed_forces_pol_str_mult:
+  Mask: interest_group
+interest_group_ig_ca_armed_forces_pop_attraction_mult:
+  Mask: interest_group
+interest_group_ig_ca_comunes_approval_add:
+  Mask: interest_group
+interest_group_ig_ca_comunes_pol_str_mult:
+  Mask: interest_group
+interest_group_ig_ca_comunes_pop_attraction_mult:
+  Mask: interest_group
+interest_group_ig_ca_devout_approval_add:
+  Mask: interest_group
+interest_group_ig_ca_devout_pol_str_mult:
+  Mask: interest_group
+interest_group_ig_ca_devout_pop_attraction_mult:
+  Mask: interest_group
+interest_group_ig_ca_industrialists_approval_add:
+  Mask: interest_group
+interest_group_ig_ca_industrialists_pol_str_mult:
+  Mask: interest_group
+interest_group_ig_ca_industrialists_pop_attraction_mult:
+  Mask: interest_group
+interest_group_ig_ca_intelligentsia_approval_add:
+  Mask: interest_group
+interest_group_ig_ca_intelligentsia_pol_str_mult:
+  Mask: interest_group
+interest_group_ig_ca_intelligentsia_pop_attraction_mult:
+  Mask: interest_group
+interest_group_ig_ca_landowners_approval_add:
+  Mask: interest_group
+interest_group_ig_ca_landowners_pol_str_mult:
+  Mask: interest_group
+interest_group_ig_ca_landowners_pop_attraction_mult:
+  Mask: interest_group
+interest_group_ig_ca_petty_bourgeoisie_approval_add:
+  Mask: interest_group
+interest_group_ig_ca_petty_bourgeoisie_pol_str_mult:
+  Mask: interest_group
+interest_group_ig_ca_petty_bourgeoisie_pop_attraction_mult:
+  Mask: interest_group
+interest_group_ig_ca_rural_folk_approval_add:
+  Mask: interest_group
+interest_group_ig_ca_rural_folk_pol_str_mult:
+  Mask: interest_group
+interest_group_ig_ca_rural_folk_pop_attraction_mult:
+  Mask: interest_group
+interest_group_ig_ca_trade_unions_approval_add:
+  Mask: interest_group
+interest_group_ig_ca_trade_unions_pol_str_mult:
+  Mask: interest_group
+interest_group_ig_ca_trade_unions_pop_attraction_mult:
+  Mask: interest_group
 power_bloc_invite_acceptance_decentralized_power_add:
   Mask: power_bloc
 power_bloc_invite_acceptance_insignificant_power_add:
@@ -13642,17 +13914,9 @@ power_bloc_mandate_progress_per_decentralized_power_member_add:
   Mask: power_bloc
 power_bloc_mandate_progress_per_decentralized_power_member_mult:
   Mask: power_bloc
-state_academics_dependent_wage_mult:
-  Mask: state
 state_academics_internal_migration_disallowed_bool:
   Mask: state
-state_academics_investment_pool_contribution_add:
-  Mask: state
-state_academics_investment_pool_efficiency_mult:
-  Mask: state
 state_academics_mass_migration_disallowed_bool:
-  Mask: state
-state_aristocrats_dependent_wage_mult:
   Mask: state
 state_aristocrats_internal_migration_disallowed_bool:
   Mask: state
@@ -13660,49 +13924,25 @@ state_aristocrats_mass_migration_disallowed_bool:
   Mask: state
 state_bribri_talamanca_standard_of_living_add:
   Mask: state
-state_bureaucrats_dependent_wage_mult:
-  Mask: state
 state_bureaucrats_internal_migration_disallowed_bool:
-  Mask: state
-state_bureaucrats_investment_pool_contribution_add:
-  Mask: state
-state_bureaucrats_investment_pool_efficiency_mult:
   Mask: state
 state_bureaucrats_mass_migration_disallowed_bool:
   Mask: state
-state_bureaucrats_mortality_mult:
-  Mask: state
 state_cabecar_standard_of_living_add:
-  Mask: state
-state_capitalists_dependent_wage_mult:
   Mask: state
 state_capitalists_internal_migration_disallowed_bool:
   Mask: state
 state_capitalists_mass_migration_disallowed_bool:
   Mask: state
-state_capitalists_mortality_mult:
-  Mask: state
 state_chibchan_central_america_standard_of_living_add:
-  Mask: state
-state_clergymen_dependent_wage_mult:
   Mask: state
 state_clergymen_internal_migration_disallowed_bool:
   Mask: state
 state_clergymen_mass_migration_disallowed_bool:
   Mask: state
-state_clergymen_mortality_mult:
-  Mask: state
-state_clerks_dependent_wage_mult:
-  Mask: state
 state_clerks_internal_migration_disallowed_bool:
   Mask: state
-state_clerks_investment_pool_contribution_add:
-  Mask: state
-state_clerks_investment_pool_efficiency_mult:
-  Mask: state
 state_clerks_mass_migration_disallowed_bool:
-  Mask: state
-state_clerks_mortality_mult:
   Mask: state
 state_costa_rican_standard_of_living_add:
   Mask: state
@@ -13710,19 +13950,9 @@ state_el_salvadorian_standard_of_living_add:
   Mask: state
 state_embera_standard_of_living_add:
   Mask: state
-state_engineers_dependent_wage_mult:
-  Mask: state
 state_engineers_internal_migration_disallowed_bool:
   Mask: state
-state_engineers_investment_pool_contribution_add:
-  Mask: state
-state_engineers_investment_pool_efficiency_mult:
-  Mask: state
 state_engineers_mass_migration_disallowed_bool:
-  Mask: state
-state_engineers_mortality_mult:
-  Mask: state
-state_farmers_dependent_wage_mult:
   Mask: state
 state_farmers_internal_migration_disallowed_bool:
   Mask: state
@@ -13735,8 +13965,6 @@ state_guatemalan_standard_of_living_add:
 state_guna_kuna_standard_of_living_add:
   Mask: state
 state_honduran_standard_of_living_add:
-  Mask: state
-state_immigrant_standard_of_living_add:
   Mask: state
 state_infrastructure_from_aeroplanes_consumption_add:
   Mask: state
@@ -13842,25 +14070,13 @@ state_infrastructure_from_wine_consumption_add:
   Mask: state
 state_infrastructure_from_wood_consumption_add:
   Mask: state
-state_laborers_dependent_wage_mult:
-  Mask: state
 state_laborers_internal_migration_disallowed_bool:
-  Mask: state
-state_laborers_investment_pool_contribution_add:
-  Mask: state
-state_laborers_investment_pool_efficiency_mult:
   Mask: state
 state_laborers_mass_migration_disallowed_bool:
   Mask: state
 state_lenca_standard_of_living_add:
   Mask: state
-state_machinists_dependent_wage_mult:
-  Mask: state
 state_machinists_internal_migration_disallowed_bool:
-  Mask: state
-state_machinists_investment_pool_contribution_add:
-  Mask: state
-state_machinists_investment_pool_efficiency_mult:
   Mask: state
 state_machinists_mass_migration_disallowed_bool:
   Mask: state
@@ -13870,25 +14086,11 @@ state_ngabe_culture_standard_of_living_add:
   Mask: state
 state_nicaraguan_standard_of_living_add:
   Mask: state
-state_officers_dependent_wage_mult:
-  Mask: state
 state_officers_internal_migration_disallowed_bool:
-  Mask: state
-state_officers_investment_pool_contribution_add:
-  Mask: state
-state_officers_investment_pool_efficiency_mult:
   Mask: state
 state_officers_mass_migration_disallowed_bool:
   Mask: state
-state_officers_mortality_mult:
-  Mask: state
 state_panamanian_standard_of_living_add:
-  Mask: state
-state_peasants_dependent_wage_mult:
-  Mask: state
-state_peasants_investment_pool_contribution_add:
-  Mask: state
-state_peasants_investment_pool_efficiency_mult:
   Mask: state
 state_pop_support_movement_hindu_nationalist_add:
   Mask: state
@@ -13902,31 +14104,15 @@ state_pop_support_movement_muslim_nationalist_add:
   Mask: state
 state_pop_support_movement_muslim_nationalist_mult:
   Mask: state
-state_shopkeepers_dependent_wage_mult:
-  Mask: state
 state_shopkeepers_internal_migration_disallowed_bool:
   Mask: state
 state_shopkeepers_mass_migration_disallowed_bool:
   Mask: state
-state_shopkeepers_mortality_mult:
-  Mask: state
-state_slaves_dependent_wage_mult:
-  Mask: state
 state_slaves_internal_migration_disallowed_bool:
-  Mask: state
-state_slaves_investment_pool_contribution_add:
-  Mask: state
-state_slaves_investment_pool_efficiency_mult:
   Mask: state
 state_slaves_mass_migration_disallowed_bool:
   Mask: state
-state_soldiers_dependent_wage_mult:
-  Mask: state
 state_soldiers_internal_migration_disallowed_bool:
-  Mask: state
-state_soldiers_investment_pool_contribution_add:
-  Mask: state
-state_soldiers_investment_pool_efficiency_mult:
   Mask: state
 state_soldiers_mass_migration_disallowed_bool:
   Mask: state

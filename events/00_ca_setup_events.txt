@@ -8,6 +8,7 @@ ca_setup_events.1 = { #
 	}
 
 	immediate = {
+    ca_pop_historcal_setup_events = yes
 
 	s:STATE_COSTA_RICA = {set_owner_of_provinces = { country = c:CLM provinces = {x10EF80} }}
 	
@@ -20,9 +21,70 @@ ca_setup_events.1 = { #
 	
 	s:STATE_PANAMA = { set_owner_of_provinces = { country = c:UCA provinces = {x47C5F8} }}
 	
-	create_country = {
+
+	        
+            s:STATE_PANAMA.region_state:CLM = { 
+	         every_scope_pop = {
+                 		
+                     limit = { culture = cu:central_american }
+                     change_pop_culture = { target = cu:panaman               value = 0.33 }
+                     change_pop_culture = { target = cu:chibchan_central_america value = 0.05 }
+                     change_pop_culture = { target = cu:bribri_talamanca       value = 0.10 }
+                     change_pop_culture = { target = cu:ngabe_culture          value = 0.07 }
+                     change_pop_culture = { target = cu:embera                 value = 0.05 }
+                     change_pop_culture = { target = cu:guna_kuna              value = 0.05 }
+                 
+             }
+	        }
+	        
+            s:STATE_NICARAGUA.region_state:UCA = { 
+	         every_scope_pop = {
+                  		
+                      limit = { culture = cu:central_american }
+                      change_pop_culture = { target = cu:nicaraguan              value = 0.33 }
+                      change_pop_culture = { target = cu:mangue_chorotega       value = 0.05 }
+                      change_pop_culture = { target = cu:garifuna_arawak        value = 0.05 }
+                  
+             }
+	        }
+	        
+            s:STATE_GUATEMALA.region_state:UCA = {
+	         every_scope_pop = {
+                 
+                     limit = { culture = cu:central_american }
+                     change_pop_culture = { target = cu:guatemalan             value = 0.33 }
+                     change_pop_culture = { target = cu:garifuna_arawak        value = 0.05 }
+                 
+             }
+	        }
+	        
+            s:STATE_SAN_SALVADOR.region_state:UCA = {
+	         every_scope_pop = {
+                 
+                     limit = { culture = cu:central_american }
+                     change_pop_culture = { target = cu:el_salvadorian         value = 0.33 }
+                     change_pop_culture = { target = cu:ngabe_culture          value = 0.05 }
+                     change_pop_culture = { target = cu:lenca                  value = 0.05 }
+                 
+             }
+	        }
+	        
+            s:STATE_HONDURAS.region_state:UCA = {
+	         every_scope_pop = {
+
+                     limit = { culture = cu:central_american }
+                     change_pop_culture = { target = cu:honduran               value = 0.33 }
+                     change_pop_culture = { target = cu:lenca                  value = 0.05 }
+                     change_pop_culture = { target = cu:mangue_chorotega       value = 0.05 }
+                     change_pop_culture = { target = cu:garifuna_arawak        value = 0.05 }
+                 
+             }
+	        }	
+	
+
+			create_country = {
 				tag = PP1
-				origin = UCA
+				origin = CLM
 				province = p:x47C5F8
 				on_created = {
 				    set_country_type = decentralized
@@ -39,11 +101,12 @@ ca_setup_events.1 = { #
 			create_country = {
 				tag = DG6
 				origin = this
-				province = p:x1030C0 
-				province = p:x4DBDE9 
-				province = p:xD03040 
-				province = p:xA087F6
+				   
 				province = p:x8E26C5
+				province = p:x1030C0
+				province = p:x4DBDE9
+				province = p:xD03040
+				province = p:xA087F6
 				on_created = {
 					set_variable = ca_soconusco_country
 				c:UCA = {
@@ -54,13 +117,59 @@ ca_setup_events.1 = { #
 				  }
 			    }
 
-	        }			   				   
+	        }
+			
+			create_country = {
+				tag = RDT
+				origin = this
+				province = p:x1A076A
+				on_created = {
+					set_variable = ca_talamanca_country
+ 
+				 c:UCA = {
+				  create_diplomatic_pact = {
+				 	country = c:RDT
+				 	type = ca_dependency
+				    }
+				   }
+
+			    }
+
+	        
+			}
+			s:STATE_COSTA_RICA.region_state:RDT = { 
+	                  every_scope_pop = {
+                 
+                     limit = { culture = cu:central_american }
+                     change_pop_culture = { target = cu:bribri_talamanca       value = 0.64 }
+                     change_pop_culture = { target = cu:chibchan_central_america value = 0.10 }
+                     change_pop_culture = { target = cu:cabecar                value = 0.12 }
+                     change_pop_culture = { target = cu:ngabe_culture          value = 0.07 }
+                     change_pop_culture = { target = cu:mangue_chorotega       value = 0.07 }
+                 
+             }
+	        }
+			s:STATE_COSTA_RICA.region_state:UCA = { 
+	         every_scope_pop = {
+                 
+                     limit = { culture = cu:central_american }
+                     change_pop_culture = { target = cu:costa_rican            value = 0.43 }
+                     change_pop_culture = { target = cu:chibchan_central_america value = 0.04 }
+                     change_pop_culture = { target = cu:bribri_talamanca       value = 0.05 }
+                     change_pop_culture = { target = cu:cabecar                value = 0.03 }
+                     change_pop_culture = { target = cu:ngabe_culture          value = 0.05 }
+                     change_pop_culture = { target = cu:mangue_chorotega       value = 0.05 }
+                 
+             }
+	        }
+	}
 					
 	}
 	
 	option = {
 		name = ca_setup_events.1.a
 		default_option = yes
+		
 	}
 	
 }
@@ -156,49 +265,25 @@ ca_setup_events.1 = { #
 #
 #}
 #
-##central_america_more_events.2 = {
-#    type = country_event
-#	placement = root
-#	
-#	title = central_america_more_events.1.t
-#	desc = central_america_more_events.1.d
-#	flavor = central_america_more_events.1.f
-#	
-#	event_image = {
-#		video = "<media_alias>"
-#	}
-#	
-#	icon = "gfx/interface/icons/event_icons/event_default.dds"
-#	
-#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#	
-#	duration = 3
-#	
-#	trigger = {
-#			#exists = c:UCA
-#		    #c:UCA = ROOT
-#	}
-#	
-#
-#	cooldown = {
-#	}
-#
-#	immediate = {
-#	}
-#	
-#	option = {
-#		name = central_america_more_events.1.a
-#		default_option = yes
-#	}
-#	
-#	option = {
-#		name = central_america_more_events.1.b
-#	}
-#	
-#	after = {
-#	}
-#
-#}
+##situation in Central america (Setup Historical events)
+ca_setup_events.2 = {
+    type = country_event
+	hidden = yes
+	
+	trigger = {
+	}
+	
+
+	immediate = {
+     ca_pop_size_historical_setup_events = yes
+	}
+	option = {
+		name = ca_setup_events.2.a
+		default_option = yes
+	}
+	
+
+}
 #
 #
 #Second_central_american_civil_war.1 = {

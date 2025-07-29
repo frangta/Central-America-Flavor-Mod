@@ -314,12 +314,6 @@ Expected Scope: country
 
 --------------------
 
-ki_on_become_independent:
-From Code: No
-Expected Scope: none
-
---------------------
-
 on_yearly_events:
 From Code: No
 Expected Scope: country
@@ -362,12 +356,6 @@ Expected Scope: country
 
 --------------------
 
-ki_on_state_created:
-From Code: No
-Expected Scope: none
-
---------------------
-
 on_diplomatic_action_third_party_break:
 From Code: Yes
 Expected Scope: none
@@ -375,6 +363,12 @@ Expected Scope: none
 --------------------
 
 on_treaty_entered_into_force:
+From Code: Yes
+Expected Scope: none
+
+--------------------
+
+on_treaty_article_removed:
 From Code: Yes
 Expected Scope: none
 
@@ -401,6 +395,12 @@ Expected Scope: state
 on_our_convoys_raided:
 From Code: Yes
 Expected Scope: none
+
+--------------------
+
+itp_institution_onactions:
+From Code: No
+Expected Scope: state
 
 --------------------
 
@@ -455,6 +455,12 @@ Expected Scope: none
 on_diplomatic_proposal:
 From Code: Yes
 Expected Scope: none
+
+--------------------
+
+colcollapse_onaction:
+From Code: No
+Expected Scope: country
 
 --------------------
 
@@ -866,12 +872,6 @@ Expected Scope: none
 
 --------------------
 
-ki_on_state_owner_change:
-From Code: No
-Expected Scope: none
-
---------------------
-
 on_law_checkpoint_stall:
 From Code: Yes
 Expected Scope: country
@@ -1118,6 +1118,12 @@ Expected Scope: none
 
 --------------------
 
+ite_on_action:
+From Code: No
+Expected Scope: none
+
+--------------------
+
 on_diplo_play_start:
 From Code: Yes
 Expected Scope: none
@@ -1270,12 +1276,6 @@ Expected Scope: country
 
 on_secession_start:
 From Code: Yes
-Expected Scope: none
-
---------------------
-
-ki_on_become_subject:
-From Code: No
 Expected Scope: none
 
 --------------------
