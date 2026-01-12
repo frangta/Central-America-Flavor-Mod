@@ -1,4 +1,4 @@
-
+﻿
 pm_ca_base_building_hacienda = {
 	texture = "gfx/interface/icons/production_method_icons/subsistence_farming.dds"
 	is_default = yes
@@ -12,6 +12,23 @@ pm_ca_base_building_hacienda = {
 		level_scaled = {
 			building_employment_peasants_add = 2000
 			building_employment_aristocrats_add = 500
+		}
+	}
+}
+pm_ca_base_building_subsistence_farms = {
+	texture = "gfx/interface/icons/production_method_icons/ownership_aristocrats.dds"
+
+	building_modifiers = {
+		workforce_scaled = { # 55
+			goods_output_grain_add = 1.0 # 20
+			goods_output_fabric_add = 0.5 # 10
+			goods_output_wood_add = 0.5 # 10
+			goods_output_services_add = 0.5 # 15
+		}
+
+		level_scaled = {
+			building_employment_peasants_add = 5000
+                        building_employment_aristocrats_add = 500
 		}
 	}
 }
