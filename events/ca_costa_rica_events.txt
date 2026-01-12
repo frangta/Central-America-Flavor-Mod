@@ -3,7 +3,7 @@
 ## Costa rica civil war startup event
 #ca_costa_rica_events.1 = {
 #	type = country_event
-#	placement = ROOT
+#	placement = scope:scope_COS
 #	
 #	title = ca_costa_rica_events.1.t
 #	desc = ca_costa_rica_events.1.d
@@ -58,9 +58,9 @@
 #    default_option = yes
 #    }
 #}
-#ca_costa_rica_events.2 = {
+#ca_costa_rica_events.2 = { #Resumen of Costa Rica's History
 #    type = country_event
-#    placement = ROOT
+#    placement = scope:scope_COS
 #    title = ca_costa_rica_events.2.t
 #    desc = ca_costa_rica_events.2.d
 #    flavor = ca_costa_rica_events.2.f

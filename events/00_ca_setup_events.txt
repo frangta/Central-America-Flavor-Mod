@@ -1,202 +1,204 @@
 ﻿namespace = ca_setup_events
 ca_setup_events.1 = { # 
 	type = country_event
-    hidden = yes
+	placement = ROOT
+	title = ca_central_america.setup.t
+	desc = ca_central_america.setup.d
+	flavor =  ca_central_america.setup.f
+	is_triggered_only = yes
+
+	duration = 3
+
+	event_image = {
+		video = "gfx/event_pictures/southamerica_election.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	trigger = {
+	}
+	immediate = {
+	hidden_effect = {
+	  trigger_event = { 
+	  id = ca_setup_events.1
+	  }	  
+			}
+	}
+	option = { #Historic Railway Events
+		name = ca_central_america.setup.a
+		ai_chance = {
+			base = 33.33
+			modifier = {
+				trigger = {
+
+				}
+				add = -100
+			}
+		}		
+		add_journal_entry = {
+			type = je_historic_central_america_falls_apart
+		}
+		change_variable = { name = frca_support add = 60 }
+		#add_journal_entry = {
+		#	type = je_central_american_fragile_unity
+		#}
+		
+		add_radicals = {
+			value = small_radicals
+		}
+		set_variable = historic_central_american
+		set_variable = frca_preserved
+		ca_history_rail_events = yes
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			hidden_effect = {
+				trigger_event = { 
+					id = ca_setup_events.2
+				}			
+				trigger_event = { 
+					id = ca_central_america.1
+					months = 3
+				}
+				trigger_event = { 
+					id = ca_central_america.14
+					days = 5		
+			}
+			
+		}
+	}
+  }  	
+	option = { # Alt-History's Chain Events
+		name = ca_central_america.setup.b
+		ai_chance = {
+			base = 33.33
+			modifier = {
+				trigger = {
+
+				}
+				add = -100
+			}
+		}		
+		add_journal_entry = {
+			type = je_central_america_falls_apart
+		}
+		
+		add_radicals = {
+			value = small_radicals
+		}
+		set_variable = frca_preserved
+		if = {
+			limit = {
+				is_ai = yes
+			}
+
+		}
+	}
+	option = { #Vainilla Events
+		name = ca_central_america.setup.c
+		default_option = yes
+		ai_chance = {
+			base = 33.33
+			modifier = {
+				trigger = {
+
+				}
+				add = -100
+			}
+		}
+		add_journal_entry = {
+			type = central_america_falls_apart
+		}
+		add_radicals = {
+			value = small_radicals
+		}
+		set_variable = frca_preserved
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			hidden_effect = {
+				trigger_event = { 
+					id = central_america.4
+					years = 2
+				}
+			}
+		}
+	}
+	
+}
+#situation in Central america (Setup Historical events)
+ca_setup_events.2 = {
+    type = country_event
+	placement = root
+	
+	title = ca_setup_events.2.t
+	desc = ca_setup_events.2.d
+	flavor = ca_setup_events.2.f
+	
+	event_image = {
+		video = "<media_alias>"
+	}
+	
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
+	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	duration = 3
 	
 	trigger = {
+	        has_game_started = yes
+			exists = c:UCA
+		    c:UCA = ROOT
+			NOT = {
+			has_variable = central_america_falls_variable
+			}
+	}
+	
+	cancellation_trigger = {
+	}
 
+	cooldown = {
 	}
 
 	immediate = {
 
-	s:STATE_COSTA_RICA = {set_owner_of_provinces = { country = c:CLM provinces = {x10EF80} }}
-	
-    s:STATE_CHIAPAS = { set_owner_of_provinces = { country = c:MEX provinces = { xD03040  } } }
-	s:STATE_GUATEMALA = {set_owner_of_provinces = { country = c:MEX provinces = { x30E01C xD176F3 xC67219  } } }
-	
-    s:STATE_CHIAPAS = { set_owner_of_provinces = { country = c:UCA provinces = {x8E26C5 x31E49A} }}
-	
-    s:STATE_HONDURAS = { set_owner_of_provinces = { country = c:MKT provinces = { x528F3B } } }
-	
-	s:STATE_PANAMA = { set_owner_of_provinces = { country = c:UCA provinces = {x47C5F8} }}
-	
-	create_country = {
-				tag = PP1
-				origin = UCA
-				province = p:x47C5F8
-				on_created = {
-				    set_country_type = decentralized
-					set_variable = ca_bocas_de_toro_country
-			     c:UCA = {
-				  create_diplomatic_pact = {
-					country = c:PP1
-					type = ca_dependency
-				    }
-				   }
-				}
-			}
 			
-			create_country = {
-				tag = DG6
-				origin = this
-				province = p:x1030C0 
-				province = p:x4DBDE9 
-				province = p:xD03040 
-				province = p:xA087F6
-				province = p:x8E26C5
-				on_created = {
-					set_variable = ca_soconusco_country
-				c:UCA = {
-				 create_diplomatic_pact = {
-					country = c:DG6
-					type = ca_dependency
-				   }
-				  }
-			    }
-
-	        }			   				   
-					
 	}
-	
 	option = {
-		name = ca_setup_events.1.a
+		name = ca_setup_events.2.a
+
+		set_variable = central_america_falls_variable
 		default_option = yes
 	}
 	
+	
+	after = {
+	}
+
 }
+
 ##situation in Central america (Setup Historical events)
 #ca_setup_events.2 = {
 #    type = country_event
-#	placement = root
-#	
-#	title = ca_setup_events.2.t
-#	desc = ca_setup_events.2.d
-#	flavor = ca_setup_events.2.f
-#	
-#	event_image = {
-#		video = "<media_alias>"
-#	}
-#	
-#	icon = "gfx/interface/icons/event_icons/event_default.dds"
-#	
-#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#	
-#	duration = 3
+#	hidden = yes
 #	
 #	trigger = {
-#	        has_game_started = yes
-#			exists = c:UCA
-#		    c:UCA = ROOT
-#			NOT = {
-#			has_variable = central_america_falls_variable
-#			}
 #	}
 #	
-#	cancellation_trigger = {
-#	}
-#
-#	cooldown = {
-#	}
 #
 #	immediate = {
-#
-#			create_country = {
-#				tag = PP1
-#				origin = CLM
-#				province = p:x47C5F8.region_state:CLM
-#				on_created = {
-#				    set_country_type = decentralized
-#					set_variable = ca_bocas_de_toro_country
-#			     c:CLM = {
-#				  create_diplomatic_pact = {
-#					country = c:PP1
-#					type = puppet
-#				    }
-#					set_owner_of_provinces = { country = c:CLM provinces = {x10EF80} }
-#				   }
-#				}
-#			}
-#			
-#			create_country = {
-#				tag = DG4
-#				origin = this
-#				state = s:STATE_CHIAPAS.region_state:UCA
-#				on_created = {
-#					set_variable = ca_soconusco_country
-#				c:UCA = {
-#				 create_diplomatic_pact = {
-#					country = c:DG4
-#					type = puppet
-#				   }
-#				  }
-#			    }
-#
-#	        }
+#     ca_pop_size_historical_setup_events = yes
 #	}
 #	option = {
 #		name = ca_setup_events.2.a
-#		add_journal_entry = {
-#			type = central_america_falls_apart
-#		}
-#		set_variable = central_america_falls_variable
 #		default_option = yes
 #	}
 #	
-#	option = {
-#		name = ca_setup_events.2.b
-#				
-#		add_journal_entry = {
-#			type = je_central_american_fragile_unity
-#		}
-#		set_variable = central_america_falls_variable
-#	}
-#	
-#	after = {
-#	}
-#
-#}
-#
-##central_america_more_events.2 = {
-#    type = country_event
-#	placement = root
-#	
-#	title = central_america_more_events.1.t
-#	desc = central_america_more_events.1.d
-#	flavor = central_america_more_events.1.f
-#	
-#	event_image = {
-#		video = "<media_alias>"
-#	}
-#	
-#	icon = "gfx/interface/icons/event_icons/event_default.dds"
-#	
-#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#	
-#	duration = 3
-#	
-#	trigger = {
-#			#exists = c:UCA
-#		    #c:UCA = ROOT
-#	}
-#	
-#
-#	cooldown = {
-#	}
-#
-#	immediate = {
-#	}
-#	
-#	option = {
-#		name = central_america_more_events.1.a
-#		default_option = yes
-#	}
-#	
-#	option = {
-#		name = central_america_more_events.1.b
-#	}
-#	
-#	after = {
-#	}
 #
 #}
 #
@@ -247,146 +249,146 @@ ca_setup_events.1 = { #
 #
 #
 #
-ca_setup_events.2. = { #Costa Rica Setup
-	type = country_event
-	placement = root
-	
-	title = ca_setup_events.1_event.t
-	desc = ca_setup_events.1_event.d
-	flavor = ca_setup_events.1_event.f
-	
-	event_image = {
-		video = ""
-	}
-	
-	icon = "gfx/interface/icons/event_icons/event_default.dds"
-	
-	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-	
-	duration = 3
-	
-	trigger = {
-	    is_subject_of = c:UCA
-		exists = c:COS
-		this = c:COS 
-	}
-	
-	immediate = {
-	}
-	
-	option = {
-		 name = ca_setup_events.1.#.a
-		 default_option = yes
-		create_character = {
-		   template = cos_braulio_carrillo
-            ruler = yes
-            save_scope_as = cos_braulio_carrillo_scope		
-		}
-	    create_diplomatic_pact = {
-				country = scope:scope_RDT
-				type = puppet
-			}
-	}
-	
-
-}
-#federalists_vs_separatists
-# Federalists vs Separatists startup event
-ca_setup_events.3 = {
-	type = country_event
-	placement = ROOT
-	
-	title = ca_setup_events.3_event.t
-	desc = ca_setup_events.3_event.d
-	flavor = ca_setup_events.3_event.f
-	
-	event_image = {
-		video = "unspecific_military_parade"
-	}
-
-	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-
-	icon = "gfx/interface/icons/ig_icons/armed_forces.dds"
-	
-	duration = 3
-	
-	trigger = {
-		#
-	}
-
-	immediate = {
-		set_variable = {
-			name = federalists_vs_separatists_var
-			value = 0
-		}
-		set_variable = { 
-			name = federalists_vs_separatists_next
-			value = 0 
-		}
-		#set_global_variable = { # ensures military presidents aren't replaced super early
-		#	name = continuismo_start_var
-		#	months = long_modifier_time
-		#}
-		ig:ig_landowners = {
-			remove_ideology = ideology_paternalistic
-			add_ideology = ideology_central_american_reactionary
-			set_interest_group_name = ig_hacendados
-		}
-		ig:ig_armed_forces = {
-			remove_ideology = ideology_paternalistic
-		}
-		ig:ig_devout = {
-			add_ideology = ideology_central_american_reactionary
-			set_interest_group_name = ig_catholic_church
-		}
-	}
-	option = { 
-		name = ca_setup_events.3.a
-		default_option = yes
-		#add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }
-
-	}
-}
-ca_setup_events.2. = { #Costa Rica Setup
-	type = country_event
-	placement = root
-	
-	title = ca_setup_events.1_event.t
-	desc = ca_setup_events.1_event.d
-	flavor = ca_setup_events.1_event.f
-	
-	event_image = {
-		video = ""
-	}
-	
-	icon = "gfx/interface/icons/event_icons/event_default.dds"
-	
-	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-	
-	duration = 3
-	
-	trigger = {
-	    is_subject_of = c:UCA
-		exists = c:COS
-		this = c:COS 
-	}
-	
-	immediate = {
-	}
-	
-	option = {
-		 name = ca_setup_events.1.#.a
-		 default_option = yes
-		create_character = {
-		   template = cos_braulio_carrillo
-            ruler = yes
-            save_scope_as = cos_braulio_carrillo_scope		
-		}
-	    create_diplomatic_pact = {
-				country = scope:scope_RDT
-				type = puppet
-			}
-	}
-	
-
-}
+#ca_setup_events.2. = { #Costa Rica Setup
+#	type = country_event
+#	placement = root
+#	
+#	title = ca_setup_events.1_event.t
+#	desc = ca_setup_events.1_event.d
+#	flavor = ca_setup_events.1_event.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    is_subject_of = c:UCA
+#		exists = c:COS
+#		this = c:COS 
+#	}
+#	
+#	immediate = {
+#	}
+#	
+#	option = {
+#		 name = ca_setup_events.1.#.a
+#		 default_option = yes
+#		create_character = {
+#		   template = cos_braulio_carrillo
+#            ruler = yes
+#            save_scope_as = cos_braulio_carrillo_scope		
+#		}
+#	    create_diplomatic_pact = {
+#				country = scope:scope_RDT
+#				type = puppet
+#			}
+#	}
+#	
+#
+#}
+##federalists_vs_separatists
+## Federalists vs Separatists startup event
+#ca_setup_events.3 = {
+#	type = country_event
+#	placement = ROOT
+#	
+#	title = ca_setup_events.3_event.t
+#	desc = ca_setup_events.3_event.d
+#	flavor = ca_setup_events.3_event.f
+#	
+#	event_image = {
+#		video = "unspecific_military_parade"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/ig_icons/armed_forces.dds"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#		#
+#	}
+#
+#	immediate = {
+#		set_variable = {
+#			name = federalists_vs_separatists_var
+#			value = 0
+#		}
+#		set_variable = { 
+#			name = federalists_vs_separatists_next
+#			value = 0 
+#		}
+#		#set_global_variable = { # ensures military presidents aren't replaced super early
+#		#	name = continuismo_start_var
+#		#	months = long_modifier_time
+#		#}
+#		ig:ig_landowners = {
+#			remove_ideology = ideology_paternalistic
+#			add_ideology = ideology_central_american_reactionary
+#			set_interest_group_name = ig_hacendados
+#		}
+#		ig:ig_armed_forces = {
+#			remove_ideology = ideology_paternalistic
+#		}
+#		ig:ig_devout = {
+#			add_ideology = ideology_central_american_reactionary
+#			set_interest_group_name = ig_catholic_church
+#		}
+#	}
+#	option = { 
+#		name = ca_setup_events.3.a
+#		default_option = yes
+#		#add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }
+#
+#	}
+#}
+#ca_setup_events.2. = { #Costa Rica Setup
+#	type = country_event
+#	placement = root
+#	
+#	title = ca_setup_events.1_event.t
+#	desc = ca_setup_events.1_event.d
+#	flavor = ca_setup_events.1_event.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    is_subject_of = c:UCA
+#		exists = c:COS
+#		this = c:COS 
+#	}
+#	
+#	immediate = {
+#	}
+#	
+#	option = {
+#		 name = ca_setup_events.1.#.a
+#		 default_option = yes
+#		create_character = {
+#		   template = cos_braulio_carrillo
+#            ruler = yes
+#            save_scope_as = cos_braulio_carrillo_scope		
+#		}
+#	    create_diplomatic_pact = {
+#				country = scope:scope_RDT
+#				type = puppet
+#			}
+#	}
+#	
+#
+#}

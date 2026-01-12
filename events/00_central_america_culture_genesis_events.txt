@@ -1,542 +1,542 @@
 ﻿namespace = culture_central_american
 
-# Birth of a National Identity
-culture_central_american.1 = {
-	type = country_event
-	placement = ROOT
-	
-	title = culture_central_american.1.t
-	desc = culture_central_american.1.d
-	flavor = culture_central_american.1.f
-	
-	event_image = {
-		video = "unspecific_ruler_speaking_to_people"
-	}
-
-	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-
-	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
-	
-	duration = 3
-	
-	trigger = {
-	}
-
-	immediate = {
-		root = { save_scope_as = central_american_nation_scope }
-		if = {
-			limit = {
-				c:GUA ?= this
-			}
-			cu:central_american = {
-				save_scope_as = old_south_american_culture
-			}
-			cu:guatemalan = {
-				save_scope_as = new_national_culture
-			}
-		}
-		if = {
-			limit = {
-				c:ELS ?= this
-			}
-			cu:central_american = {
-				save_scope_as = old_south_american_culture
-			}
-			cu:el_salvadorian = {
-				save_scope_as = new_national_culture
-			}
-		}
-		if = {
-			limit = {
-				c:HON ?= this
-			}
-			cu:central_american = {
-				save_scope_as = old_south_american_culture
-			}
-			cu:honduran = {
-				save_scope_as = new_national_culture
-			}
-		}
-		if = {
-			limit = {
-				c:NIC ?= this
-			}
-			cu:central_american = {
-				save_scope_as = old_south_american_culture
-			}
-			cu:nicaraguan = {
-				save_scope_as = new_national_culture
-			}
-		}
-		if = {
-			limit = {
-				c:COS ?= this
-			}
-			cu:central_american = {
-				save_scope_as = old_south_american_culture
-			}
-			cu:costa_rican = {
-				save_scope_as = new_national_culture
-			}
-		}
-		#if = {
-		#	limit = {
-		#		c:PNM ?= this
-		#	}
-		#	cu:central_american = {
-		#		save_scope_as = old_south_american_culture
-		#	}
-		#	cu:panamanian = {
-		#		save_scope_as = new_national_culture
-		#	}
-		#}
-	}
-
-	option = {
-		name = culture_central_american.1.a
-		default_option = yes
-		ai_chance = {
-			base = 90
-		}
-
-		if = {
-			limit = {
-				c:GUA ?= this
-			}
-			add_primary_culture = cu:guatemalan
-			remove_primary_culture = cu:central_american
-			capital.state_region = {
-				add_homeland = cu:guatemalan
-				remove_homeland = cu:central_american
-			}
-		}
-		if = {
-			limit = {
-				c:ELS ?= this
-			}
-			add_primary_culture = cu:el_salvadorian
-			remove_primary_culture = cu:central_american
-			capital.state_region = {
-				add_homeland = cu:el_salvadorian
-				remove_homeland = cu:central_american
-			}
-		}
-		if = {
-			limit = {
-				c:HON ?= this
-			}
-			add_primary_culture =cu:honduran
-			remove_primary_culture = cu:central_american
-			capital.state_region = {
-				add_homeland = cu:honduran
-				remove_homeland = cu:central_american
-			}
-		}
-		if = {
-			limit = {
-				c:NIC ?= this
-			}
-			add_primary_culture = cu:nicaraguan
-			remove_primary_culture = cu:central_american
-			capital.state_region = {
-				add_homeland = cu:nicaraguan
-				remove_homeland = cu:central_american
-			}
-		}
-		if = {
-			limit = {
-				c:COS ?= this
-			}
-			add_primary_culture = cu:costa_rican
-			remove_primary_culture = cu:central_american
-			capital.state_region = {
-				add_homeland = cu:costa_rican
-				remove_homeland = cu:central_american
-			}
-		}
-		if = {
-			limit = {
-				c:PNM ?= this
-			}
-			add_primary_culture = cu:panamanian
-			remove_primary_culture = cu:central_american
-			capital.state_region = {
-				add_homeland = cu:panamanian
-				remove_homeland = cu:central_american
-			}
-		}
-		
-		add_journal_entry = {
-			type = je_central_american_national_identity
-		}
-		every_country = {
-			limit = {
-				NOT = {
-					THIS = ROOT
-				}
-				has_interest_marker_in_region = root.capital.region
-			}
-			post_notification = sa_culture_genesis
-		}
-	}
-}
-
-culture_central_american.2 = {
-	type = country_event
-	placement = scope:central_american_culture_state
-	
-	title = culture_central_american.2.t
-	desc = culture_central_american.2.d
-	flavor = culture_central_american.2.f
-	
-	event_image = {
-		video = "unspecific_ruler_speaking_to_people"
-	}
-
-	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-
-	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
-	
-	duration = 3
-	
-	trigger = {
-	}
-
-	immediate = {
-		random_scope_state = {
-			limit = {
-				is_incorporated = yes
-				state_region = {
-					is_homeland = scope:old_ca_national_culture
-				}
-				any_neighbouring_state = {
-					state_region = {
-						is_homeland = scope:new_ca_national_culture
-					}
-					OR = {
-						is_capital = yes
-						custom_tooltip = {
-							text = new_culture_has_25_percent_tt
-							culture_percent_state = {
-								target = scope:new_ca_national_culture
-								value >= 0.25
-							}
-						}
-					}
-				}
-				OR = {
-					any_scope_building = {
-						OR = {
-							is_building_type = building_naval_base
-							is_building_type = building_barracks
-						}
-						level >= 15
-					}
-					any_scope_building = {
-						is_building_type = building_university
-						level >= 5
-					}
-					any_scope_building = {
-						is_building_type = building_government_administration
-						level >= 5
-					}
-					any_scope_building = {
-						is_building_type = building_urban_center
-						level >= 5
-					}
-				}
-			}
-			random_neighbouring_state = {
-				limit = {
-					state_region = {
-						is_homeland = scope:new_ca_national_culture
-					}
-					OR = {
-						is_capital = yes
-						custom_tooltip = {
-							text = new_culture_has_25_percent_tt
-							culture_percent_state = {
-								target = scope:new_ca_national_culture
-								value >= 0.25
-							}
-						}
-					}
-					any_neighbouring_state = {
-						state_region = {
-							is_homeland = scope:old_ca_national_culture
-						}
-					}
-				}
-				save_scope_as = central_american_culture_state
-			}
-		}
-	}
-
-	option = {
-		name = culture_central_american.2.a
-		default_option = yes
-		scope:central_american_culture_state = {
-			if = {
-				limit = {
-					any_neighbouring_state = {
-						owner = root
-						state_region = {
-							is_homeland = scope:old_ca_national_culture
-							NOT = {
-								is_homeland = scope:new_ca_national_culture
-							}
-						}
-					}
-				}
-				every_neighbouring_state = {
-					limit = {
-						owner = root
-						state_region = {
-							is_homeland = scope:old_ca_national_culture
-							NOT = {
-								is_homeland = scope:new_ca_national_culture
-							}
-						}
-						is_incorporated = yes
-						OR = {
-							any_scope_building = {
-								OR = {
-									is_building_type = building_naval_base
-									is_building_type = building_barracks
-								}
-								level >= 15
-							}
-							any_scope_building = {
-								is_building_type = building_university
-								level >= 5
-							}
-							any_scope_building = {
-								is_building_type = building_government_administration
-								level >= 5
-							}
-							any_scope_building = {
-								is_building_type = building_urban_center
-								level >= 5
-							}
-						}
-					}
-					state_region = {
-						if = {
-							limit = {
-								c:GUA ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:guatemalan
-						}
-						if = {
-							limit = {
-								c:ELS ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:el_salvadorian
-						}
-						if = {
-							limit = {
-								c:HON ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:honduran
-						}
-						if = {
-							limit = {
-								c:NIC ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:nicaraguan
-						}
-						if = {
-							limit = {
-								c:COS ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:costa_rican
-						}
-						if = {
-							limit = {
-								c:PNM ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:panamanian
-						}
-						
-					}
-				}
-			}
-			else = { #For islands and such
-				random_scope_state = {
-					limit = {
-						owner = root
-						state_region = {
-							is_homeland = scope:old_ca_national_culture
-							NOT = {
-								is_homeland = scope:new_ca_national_culture
-							}
-						}
-						is_incorporated = yes
-						OR = {
-							any_scope_building = {
-								OR = {
-									is_building_type = building_naval_base
-									is_building_type = building_barracks
-								}
-								level >= 15
-							}
-							any_scope_building = {
-								is_building_type = building_university
-								level >= 5
-							}
-							any_scope_building = {
-								is_building_type = building_government_administration
-								level >= 5
-							}
-							any_scope_building = {
-								is_building_type = building_urban_center
-								level >= 5
-							}
-						}
-					}
-					state_region = {
-						if = {
-							limit = {
-								c:GUA ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:guatemalan
-						}
-						if = {
-							limit = {
-								c:ELS ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:el_salvadorian
-						}
-						if = {
-							limit = {
-								c:HON ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:honduran
-						}
-						if = {
-							limit = {
-								c:NIC ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:nicaraguan
-						}
-						if = {
-							limit = {
-								c:COS ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:costa_rican
-						}
-						if = {
-							limit = {
-								c:PNM ?= root
-							}
-							remove_homeland = cu:central_american
-							add_homeland = cu:panamanian
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-culture_central_american.3 = {
-	type = country_event
-	placement = ROOT
-	
-	title = culture_central_american.3.t
-	desc = culture_central_american.3.d
-	flavor = culture_central_american.3.f
-	
-	event_image = {
-		video = "unspecific_ruler_speaking_to_people"
-	}
-
-	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-
-	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
-	
-	duration = 3
-	
-	trigger = {
-	}
-
-	immediate = {
-
-	}
-
-	option = {
-		name = culture_central_american.3.a
-		default_option = yes
-		custom_tooltip = {
-			text = every_pop_converts_tt
-			every_scope_pop = {
-				limit = {
-					culture = scope:old_ca_national_culture
-				}
-				change_pop_culture = {
-					target = scope:new_ca_national_culture
-					value = 1
-				}
-			}
-		}
-	}
-}
-
-culture_central_american.4 = { # Startup for the new phase 1
-	type = country_event
-	placement = ROOT
-	
-	title = culture_central_american.4.t
-	desc = culture_central_american.4.d
-	flavor = culture_central_american.4.f
-	
-	event_image = {
-		video = "rp1_brazilian_city"
-	}
-
-	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-
-	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
-	
-	duration = 3
-	
-	trigger = {
-		# Triggered by JE
-	}
-
-	immediate = {
-	}
-
-	option = {
-		name = culture_central_american.4.a
-		default_option = yes
-		add_loyalists = {
-			value = large_radicals
-			culture = scope:old_ca_national_culture
-		}
-	}
-
-	option = {
-		name = culture_central_american.4.b
-		custom_tooltip = {
-			text = slow_cultural_development_progress_tt
-			set_variable = { name = national_identity_progress_var_add value = -0.25 }
-		}
-		add_radicals = {
-			value = medium_radicals
-			culture = scope:old_ca_national_culture
-			strata = middle
-		}
-	}
-}
+## Birth of a National Identity
+#culture_central_american.1 = {
+#	type = country_event
+#	placement = ROOT
+#	
+#	title = culture_central_american.1.t
+#	desc = culture_central_american.1.d
+#	flavor = culture_central_american.1.f
+#	
+#	event_image = {
+#		video = "unspecific_ruler_speaking_to_people"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	}
+#
+#	immediate = {
+#		root = { save_scope_as = central_american_nation_scope }
+#		if = {
+#			limit = {
+#				c:GUA ?= this
+#			}
+#			cu:central_american = {
+#				save_scope_as = old_south_american_culture
+#			}
+#			cu:guatemalan = {
+#				save_scope_as = new_national_culture
+#			}
+#		}
+#		if = {
+#			limit = {
+#				c:ELS ?= this
+#			}
+#			cu:central_american = {
+#				save_scope_as = old_south_american_culture
+#			}
+#			cu:el_salvadorian = {
+#				save_scope_as = new_national_culture
+#			}
+#		}
+#		if = {
+#			limit = {
+#				c:HON ?= this
+#			}
+#			cu:central_american = {
+#				save_scope_as = old_south_american_culture
+#			}
+#			cu:honduran = {
+#				save_scope_as = new_national_culture
+#			}
+#		}
+#		if = {
+#			limit = {
+#				c:NIC ?= this
+#			}
+#			cu:central_american = {
+#				save_scope_as = old_south_american_culture
+#			}
+#			cu:nicaraguan = {
+#				save_scope_as = new_national_culture
+#			}
+#		}
+#		if = {
+#			limit = {
+#				c:COS ?= this
+#			}
+#			cu:central_american = {
+#				save_scope_as = old_south_american_culture
+#			}
+#			cu:costa_rican = {
+#				save_scope_as = new_national_culture
+#			}
+#		}
+#		#if = {
+#		#	limit = {
+#		#		c:PNM ?= this
+#		#	}
+#		#	cu:central_american = {
+#		#		save_scope_as = old_south_american_culture
+#		#	}
+#		#	cu:panamanian = {
+#		#		save_scope_as = new_national_culture
+#		#	}
+#		#}
+#	}
+#
+#	option = {
+#		name = culture_central_american.1.a
+#		default_option = yes
+#		ai_chance = {
+#			base = 90
+#		}
+#
+#		if = {
+#			limit = {
+#				c:GUA ?= this
+#			}
+#			add_primary_culture = cu:guatemalan
+#			remove_primary_culture = cu:central_american
+#			capital.state_region = {
+#				add_homeland = cu:guatemalan
+#				remove_homeland = cu:central_american
+#			}
+#		}
+#		if = {
+#			limit = {
+#				c:ELS ?= this
+#			}
+#			add_primary_culture = cu:el_salvadorian
+#			remove_primary_culture = cu:central_american
+#			capital.state_region = {
+#				add_homeland = cu:el_salvadorian
+#				remove_homeland = cu:central_american
+#			}
+#		}
+#		if = {
+#			limit = {
+#				c:HON ?= this
+#			}
+#			add_primary_culture =cu:honduran
+#			remove_primary_culture = cu:central_american
+#			capital.state_region = {
+#				add_homeland = cu:honduran
+#				remove_homeland = cu:central_american
+#			}
+#		}
+#		if = {
+#			limit = {
+#				c:NIC ?= this
+#			}
+#			add_primary_culture = cu:nicaraguan
+#			remove_primary_culture = cu:central_american
+#			capital.state_region = {
+#				add_homeland = cu:nicaraguan
+#				remove_homeland = cu:central_american
+#			}
+#		}
+#		if = {
+#			limit = {
+#				c:COS ?= this
+#			}
+#			add_primary_culture = cu:costa_rican
+#			remove_primary_culture = cu:central_american
+#			capital.state_region = {
+#				add_homeland = cu:costa_rican
+#				remove_homeland = cu:central_american
+#			}
+#		}
+#		if = {
+#			limit = {
+#				c:PNM ?= this
+#			}
+#			add_primary_culture = cu:panamanian
+#			remove_primary_culture = cu:central_american
+#			capital.state_region = {
+#				add_homeland = cu:panamanian
+#				remove_homeland = cu:central_american
+#			}
+#		}
+#		
+#		add_journal_entry = {
+#			type = je_central_american_national_identity
+#		}
+#		every_country = {
+#			limit = {
+#				NOT = {
+#					THIS = ROOT
+#				}
+#				has_interest_marker_in_region = root.capital.region
+#			}
+#			post_notification = sa_culture_genesis
+#		}
+#	}
+#}
+#
+#culture_central_american.2 = {
+#	type = country_event
+#	placement = scope:central_american_culture_state
+#	
+#	title = culture_central_american.2.t
+#	desc = culture_central_american.2.d
+#	flavor = culture_central_american.2.f
+#	
+#	event_image = {
+#		video = "unspecific_ruler_speaking_to_people"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	}
+#
+#	immediate = {
+#		random_scope_state = {
+#			limit = {
+#				is_incorporated = yes
+#				state_region = {
+#					is_homeland = scope:old_ca_national_culture
+#				}
+#				any_neighbouring_state = {
+#					state_region = {
+#						is_homeland = scope:new_ca_national_culture
+#					}
+#					OR = {
+#						is_capital = yes
+#						custom_tooltip = {
+#							text = new_culture_has_25_percent_tt
+#							culture_percent_state = {
+#								target = scope:new_ca_national_culture
+#								value >= 0.25
+#							}
+#						}
+#					}
+#				}
+#				OR = {
+#					any_scope_building = {
+#						OR = {
+#							is_building_type = building_naval_base
+#							is_building_type = building_barracks
+#						}
+#						level >= 15
+#					}
+#					any_scope_building = {
+#						is_building_type = building_university
+#						level >= 5
+#					}
+#					any_scope_building = {
+#						is_building_type = building_government_administration
+#						level >= 5
+#					}
+#					any_scope_building = {
+#						is_building_type = building_urban_center
+#						level >= 5
+#					}
+#				}
+#			}
+#			random_neighbouring_state = {
+#				limit = {
+#					state_region = {
+#						is_homeland = scope:new_ca_national_culture
+#					}
+#					OR = {
+#						is_capital = yes
+#						custom_tooltip = {
+#							text = new_culture_has_25_percent_tt
+#							culture_percent_state = {
+#								target = scope:new_ca_national_culture
+#								value >= 0.25
+#							}
+#						}
+#					}
+#					any_neighbouring_state = {
+#						state_region = {
+#							is_homeland = scope:old_ca_national_culture
+#						}
+#					}
+#				}
+#				save_scope_as = central_american_culture_state
+#			}
+#		}
+#	}
+#
+#	option = {
+#		name = culture_central_american.2.a
+#		default_option = yes
+#		scope:central_american_culture_state = {
+#			if = {
+#				limit = {
+#					any_neighbouring_state = {
+#						owner = root
+#						state_region = {
+#							is_homeland = scope:old_ca_national_culture
+#							NOT = {
+#								is_homeland = scope:new_ca_national_culture
+#							}
+#						}
+#					}
+#				}
+#				every_neighbouring_state = {
+#					limit = {
+#						owner = root
+#						state_region = {
+#							is_homeland = scope:old_ca_national_culture
+#							NOT = {
+#								is_homeland = scope:new_ca_national_culture
+#							}
+#						}
+#						is_incorporated = yes
+#						OR = {
+#							any_scope_building = {
+#								OR = {
+#									is_building_type = building_naval_base
+#									is_building_type = building_barracks
+#								}
+#								level >= 15
+#							}
+#							any_scope_building = {
+#								is_building_type = building_university
+#								level >= 5
+#							}
+#							any_scope_building = {
+#								is_building_type = building_government_administration
+#								level >= 5
+#							}
+#							any_scope_building = {
+#								is_building_type = building_urban_center
+#								level >= 5
+#							}
+#						}
+#					}
+#					state_region = {
+#						if = {
+#							limit = {
+#								c:GUA ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:guatemalan
+#						}
+#						if = {
+#							limit = {
+#								c:ELS ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:el_salvadorian
+#						}
+#						if = {
+#							limit = {
+#								c:HON ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:honduran
+#						}
+#						if = {
+#							limit = {
+#								c:NIC ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:nicaraguan
+#						}
+#						if = {
+#							limit = {
+#								c:COS ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:costa_rican
+#						}
+#						if = {
+#							limit = {
+#								c:PNM ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:panamanian
+#						}
+#						
+#					}
+#				}
+#			}
+#			else = { #For islands and such
+#				random_scope_state = {
+#					limit = {
+#						owner = root
+#						state_region = {
+#							is_homeland = scope:old_ca_national_culture
+#							NOT = {
+#								is_homeland = scope:new_ca_national_culture
+#							}
+#						}
+#						is_incorporated = yes
+#						OR = {
+#							any_scope_building = {
+#								OR = {
+#									is_building_type = building_naval_base
+#									is_building_type = building_barracks
+#								}
+#								level >= 15
+#							}
+#							any_scope_building = {
+#								is_building_type = building_university
+#								level >= 5
+#							}
+#							any_scope_building = {
+#								is_building_type = building_government_administration
+#								level >= 5
+#							}
+#							any_scope_building = {
+#								is_building_type = building_urban_center
+#								level >= 5
+#							}
+#						}
+#					}
+#					state_region = {
+#						if = {
+#							limit = {
+#								c:GUA ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:guatemalan
+#						}
+#						if = {
+#							limit = {
+#								c:ELS ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:el_salvadorian
+#						}
+#						if = {
+#							limit = {
+#								c:HON ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:honduran
+#						}
+#						if = {
+#							limit = {
+#								c:NIC ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:nicaraguan
+#						}
+#						if = {
+#							limit = {
+#								c:COS ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:costa_rican
+#						}
+#						if = {
+#							limit = {
+#								c:PNM ?= root
+#							}
+#							remove_homeland = cu:central_american
+#							add_homeland = cu:panamanian
+#						}
+#					}
+#				}
+#			}
+#		}
+#	}
+#}
+#
+#culture_central_american.3 = {
+#	type = country_event
+#	placement = ROOT
+#	
+#	title = culture_central_american.3.t
+#	desc = culture_central_american.3.d
+#	flavor = culture_central_american.3.f
+#	
+#	event_image = {
+#		video = "unspecific_ruler_speaking_to_people"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	}
+#
+#	immediate = {
+#
+#	}
+#
+#	option = {
+#		name = culture_central_american.3.a
+#		default_option = yes
+#		custom_tooltip = {
+#			text = every_pop_converts_tt
+#			every_scope_pop = {
+#				limit = {
+#					culture = scope:old_ca_national_culture
+#				}
+#				change_pop_culture = {
+#					target = scope:new_ca_national_culture
+#					value = 1
+#				}
+#			}
+#		}
+#	}
+#}
+#
+#culture_central_american.4 = { # Startup for the new phase 1
+#	type = country_event
+#	placement = ROOT
+#	
+#	title = culture_central_american.4.t
+#	desc = culture_central_american.4.d
+#	flavor = culture_central_american.4.f
+#	
+#	event_image = {
+#		video = "rp1_brazilian_city"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#		# Triggered by JE
+#	}
+#
+#	immediate = {
+#	}
+#
+#	option = {
+#		name = culture_central_american.4.a
+#		default_option = yes
+#		add_loyalists = {
+#			value = large_radicals
+#			culture = scope:old_ca_national_culture
+#		}
+#	}
+#
+#	option = {
+#		name = culture_central_american.4.b
+#		custom_tooltip = {
+#			text = slow_cultural_development_progress_tt
+#			set_variable = { name = national_identity_progress_var_add value = -0.25 }
+#		}
+#		add_radicals = {
+#			value = medium_radicals
+#			culture = scope:old_ca_national_culture
+#			strata = middle
+#		}
+#	}
+#}
