@@ -1,8 +1,11 @@
 ﻿federal_congress_decree_button = {
 	name = "federal_congress_decree_button"
-	desc = "ffederal_congress_decree_button_desc"
+	desc = "federal_congress_decree_button_desc"
 	
-	visible = { has_valiable  = voting_ca_self_determination}	
+	visible = { 
+	NOT = {
+	has_valiable  = voting_ca_self_determination}
+}	
 	possible = {
 		custom_tooltip = {
 			text = ""

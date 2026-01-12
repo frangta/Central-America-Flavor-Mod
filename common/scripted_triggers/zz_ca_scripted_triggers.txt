@@ -1,0 +1,36 @@
+﻿state_is_in_ca_central_america = {
+	custom_description = {
+		text = state_is_in_ca_central_america_desc
+		subject = this
+
+		OR = {
+			region = sr:region_central_america
+		}
+	}
+}
+state_is_in_ca_caribbean = {
+	custom_description = {
+		text = state_is_in_ca_caribbean_desc
+		subject = this
+
+		OR = {
+			region = sr:region_caribbean
+		}
+	}
+}
+only_centralamericans_cultures = {
+	custom_description = {
+		text = state_is_in_ca_caribbean_desc
+		subject = this
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }
+	}
+
+}

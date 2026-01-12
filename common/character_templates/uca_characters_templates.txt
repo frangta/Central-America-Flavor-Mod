@@ -1,0 +1,42 @@
+﻿UCA_francisco_morazan_v1 = {
+    first_name = "Francisco"
+    last_name = "Morazán"
+    historical = yes
+    culture = primary_culture
+    ig_leader = yes
+    birth_date = 1792.10.3
+    dna = dna_president_francisco_morazan
+    interest_group = ig_armed_forces
+    ideology = ideology_reformer
+    traits = { meticulous }
+}
+UCA_francisco_morazan_v2 = {	
+    # Francisco Morazan
+    first_name = "Francisco"
+	last_name = "Morazan"
+	historical = yes
+	ruler = yes
+	ig_leader = yes
+	birth_date = 1792.10.3
+	dna = dna_president_francisco_morazan
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	traits = {
+		meticulous
+	}
+	on_created = {
+		set_variable = is_morazan
+	}
+}
+UCA_jose_felipe_mariano_galvez = {
+    first_name = "José Felipe Mariano"
+    last_name = "Gálvez"
+    historical = yes
+    culture = primary_culture
+    ruler = yes
+    ig_leader = yes
+    birth_date = 1794.5.26
+    interest_group = ig_intelligentsia
+    ideology = ideology_reformer
+    traits = { meticulous }
+}
