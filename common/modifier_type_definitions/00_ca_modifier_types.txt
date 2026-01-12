@@ -1,40 +1,330 @@
-﻿state_building_ca_iron_mine_max_level_add={
+﻿state_ca_iron_mine_max_level_add={
 	decimals=0
 	color=good
 	game_data={
 		ai_value=0
 	}
 }
-state_building_ca_coal_mine_max_level_add={
+state_ca_coal_mine_max_level_add={
 	decimals=0
 	color=good
 	game_data={
 		ai_value=0
 	}
 }
-state_building_ca_lead_mine_max_level_add={
+state_ca_lead_mine_max_level_add={
 	decimals=0
 	color=good
 	game_data={
 		ai_value=0
 	}
 }
-state_building_ca_sulfur_mine_max_level_add={
+state_ca_sulfur_mine_max_level_add={
 	decimals=0
 	color=good
 	game_data={
 		ai_value=0
 	}
 }
-state_building_ca_gold_mine_max_level_add={
+state_ca_gold_mine_max_level_add={
 	decimals=0
 	color=good
 	game_data={
 		ai_value=0
 	}
 }
-state_building_ca_oil_rig_max_level_add={
+state_ca_oil_rig_max_level_add={
 	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+state_ca_gold_fields_max_level_add={
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+state_pop_support_movement_ca_reactionary_add={
+	decimals=1
+	color=neutral
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_reactionary_mult={
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+state_pop_support_movement_ca_liberal_add={
+	decimals=1
+	color=neutral
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_liberal_mult={
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+state_pop_support_movement_ca_unitarian_add={
+	decimals=1
+	color=bad
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_unitarian_mult={
+	decimals=0
+	color=bad
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+state_pop_support_movement_ca_federalist_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_federalist_mult={
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_ngabe_culture_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_costa_rican_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_panamanian_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_nicaraguan_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_guatemalan_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_el_salvadorian_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_honduran_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_chibchan_central_america_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_bribri_talamanca_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_cabecar_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_embera_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_guna_kuna_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_lenca_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_mangue_chorotega_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_fervor_target_garifuna_arawak_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_ngabe_culture_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_costa_rican_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_panamanian_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_nicaraguan_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_guatemalan_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_el_salvadorian_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_honduran_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_chibchan_central_america_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_bribri_talamanca_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_cabecar_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_embera_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_guna_kuna_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_lenca_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_lenca_cultural_acceptance_cultural_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_mangue_chorotega_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+country_garifuna_arawak_cultural_acceptance_add={
+	decimals=1
 	color=good
 	game_data={
 		ai_value=0

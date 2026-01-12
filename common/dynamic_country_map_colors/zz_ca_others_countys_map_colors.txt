@@ -1,0 +1,643 @@
+﻿#
+# Note: the triggers are checked at certain key points in the code, not all the time
+# color_key = {
+#    color = "black"      # the map color
+#    possible = { ... }   # the trigger to enable this color
+# }
+#
+
+# Example
+#dynamic_map_color_swedish_junta = {
+#    color = "black"
+#
+#	possible = {
+#		exists = c:SWE # you /must/ check that a tag exists before doing anything else
+#		this = c:SWE
+#
+#        exists = ig:ig_armed_forces
+#        ig:ig_armed_forces = {
+#            is_in_government = yes
+#        }
+#	}
+#}
+
+#####Costa Rica's color provinces#####
+1democratic_costarica = {
+	color = "democratic_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_costarica = {
+	color = "parliamentary_republic_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_costarica = {
+	color = "communist_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_costarica = {
+	color = "theocratic_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_costarica = {
+	color = "monarchist_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_costarica = {
+	color = "junta_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_costarica = {
+	color = "junta_council_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_costarica = {
+	color = "technocratic_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_costarica = {
+	color = "corporate_state_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+anarchist_costarica = {
+	color = "anarchist_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_anarchy
+	}
+}
+syndicalist_costarica = {
+	color = "syndicalist_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_council_republic 
+	}
+}
+socialist_costarica = {
+	color = "socialist_costarica"
+	possible = {
+		exists = scope:sprit_costarica_scope
+		THIS = scope:sprit_costarica_scope
+		has_law = law_type:law_council_republic 
+	}
+}
+
+#####Nicaragua's color provinces#####
+1democratic_nicaragua = {
+	color = "democratic_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_nicaragua = {
+	color = "parliamentary_republic_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_nicaragua = {
+	color = "communist_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_nicaragua = {
+	color = "theocratic_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_nicaragua = {
+	color = "monarchist_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_nicaragua = {
+	color = "junta_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_nicaragua = {
+	color = "junta_council_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_nicaragua = {
+	color = "technocratic_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_nicaragua = {
+	color = "corporate_state_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+anarchist_nicaragua = {
+	color = "anarchist_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_anarchy 
+	}
+}
+syndicalist_nicaragua = {
+	color = "syndicalist_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_council_republic 
+	}
+}
+socialist_nicaragua = {
+	color = "socialist_nicaragua"
+	possible = {
+		exists = scope:sprit_nicaragua_scope
+		THIS = scope:sprit_nicaragua_scope
+		has_law = law_type:law_council_republic 
+	}
+}
+
+#####Honduras's color provinces#####
+
+1democratic_honduras = {
+	color = "democratic_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_honduras = {
+	color = "parliamentary_republic_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_honduras = {
+	color = "communist_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_honduras = {
+	color = "theocratic_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_honduras = {
+	color = "monarchist_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_honduras = {
+	color = "junta_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_honduras = {
+	color = "junta_council_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_honduras = {
+	color = "technocratic_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_honduras = {
+	color = "corporate_state_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+anarchist_honduras = {
+	color = "anarchist_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_anarchy 
+	}
+}
+syndicalist_honduras = {
+	color = "syndicalist_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+socialist_honduras = {
+	color = "socialist_honduras"
+	possible = {
+		exists = scope:sprit_honduras_scope
+		THIS = scope:sprit_honduras_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+#####Guatemala's color provinces#####
+1democratic_guatemala = {
+	color = "democratic_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_guatemala = {
+	color = "parliamentary_republic_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_guatemala = {
+	color = "communist_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_guatemala = {
+	color = "theocratic_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_guatemala = {
+	color = "monarchist_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_guatemala = {
+	color = "junta_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_guatemala = {
+	color = "junta_council_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_guatemala = {
+	color = "technocratic_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_guatemala = {
+	color = "corporate_state_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+anarchist_guatemala = {
+	color = "anarchist_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_anarchy 
+	}
+}
+syndicalist_guatemala = {
+	color = "syndicalist_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+socialist_guatemala = {
+	color = "socialist_guatemala"
+	possible = {
+		exists = scope:sprit_guatemala_scope
+		THIS = scope:sprit_guatemala_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+
+#####El Salvador's color provinces#####
+
+1democratic_elsalvador = {
+	color = "democratic_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_elsalvador = {
+	color = "parliamentary_republic_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_elsalvador = {
+	color = "communist_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_elsalvador = {
+	color = "theocratic_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_elsalvador = {
+	color = "monarchist_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_elsalvador = {
+	color = "junta_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_elsalvador = {
+	color = "junta_council_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_elsalvador = {
+	color = "technocratic_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_elsalvador = {
+	color = "corporate_state_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+anarchist_elsalvador = {
+	color = "anarchist_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_anarchy 
+	}
+}
+syndicalist_elsalvador = {
+	color = "syndicalist_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+socialist_elsalvador = {
+	color = "socialist_elsalvador"
+	possible = {
+		exists = scope:sprit_elsalvador_scope
+		THIS = scope:sprit_elsalvador_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+
+#####Panama's color provinces#######
+1democratic_panama = {
+	color = "democratic_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_panama = {
+	color = "parliamentary_republic_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_panama = {
+	color = "communist_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_panama = {
+	color = "theocratic_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_panama = {
+	color = "monarchist_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_panama = {
+	color = "junta_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_panama = {
+	color = "junta_council_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_panama = {
+	color = "technocratic_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_panama = {
+	color = "corporate_state_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+anarchist_panama = {
+	color = "anarchist_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_anarchy 
+	}
+}
+syndicalist_panama = {
+	color = "syndicalist_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+socialist_panama = {
+	color = "socialist_panama"
+	possible = {
+		exists = scope:sprit_panama_scope
+		THIS = scope:sprit_panama_scope
+		has_law = law_type:law_monarchy 
+	}
+}
+
+
+
+#####CR1#######
+
+
+
+

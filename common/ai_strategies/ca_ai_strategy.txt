@@ -1,0 +1,275 @@
+﻿# This is a special strategy that sets the default values for different AI scores
+# All AIs always load data from this strategy, which can then be either added to or overridden by data from its other strategies
+
+ai_strategy_unify_central_america = {
+    icon = "gfx/interface/icons/ai_strategy_icons/unification.dds"
+
+    type = diplomatic
+
+    will_form_power_bloc = {
+        always = yes
+    }
+
+    # Infamy thresholds: más bajos que grandes potencias para forzar cautela regional
+    undesirable_infamy_level = { value = 15 }
+    unacceptable_infamy_level = { value = 40 }
+
+    ideological_opinion_effect_mult = { value = 0.6 }
+
+    # Reserve fraction for wargoal maneuvers
+    wargoal_maneuvers_fraction = { value = 0.12 }
+
+    # diplomatic play style (0 = aggressive diplomacy)
+    diplomatic_play_neutrality = { value = 0 }
+    diplomatic_play_boldness = { value = 50 }
+
+    # Obligation: mayor si target comparte cultura family central_american
+    obligation_value = {
+        value = 0
+        if = {
+            limit = {
+                scope:target_country = {
+                    OR = {
+                        country_has_primary_culture = cu:central_american
+                        country_has_primary_culture = cu:guatemalan
+                        country_has_primary_culture = cu:el_salvadorian
+                        country_has_primary_culture = cu:honduran
+                        country_has_primary_culture = cu:nicaraguan
+                        country_has_primary_culture = cu:costa_rican
+                        country_has_primary_culture = cu:panamanian
+                    }
+                }
+            }
+            add = 20
+        }
+    }
+
+    # How reckless the AI is; increases with military tech
+    recklessness = {
+        value = 0.4
+        if = {
+            limit = { has_technology_researched = enlistment_offices } # placeholder; ajusta si tu mod usa otro tech
+            add = 0.2
+        }
+    }
+
+    # Base aggression and conditional modifiers
+    aggression = {
+        value = -0.6  # comportamiento inicial cauteloso
+
+        # Si el target es candidato de unificación, sube agresividad
+        if = {
+            limit = {
+                scope:target_country = { is_unification_candidate = UCA }
+            }
+            add = 1.5
+        }
+
+        # Si target comparte cultura pero NO es candidato → leve presión diplomática
+        else_if = {
+            limit = {
+                scope:target_country = {
+                    OR = {
+                        country_has_primary_culture = cu:central_american
+                        country_has_primary_culture = cu:guatemalan
+                        country_has_primary_culture = cu:el_salvadorian
+                        country_has_primary_culture = cu:honduran
+                        country_has_primary_culture = cu:nicaraguan
+                        country_has_primary_culture = cu:costa_rican
+                        country_has_primary_culture = cu:panamanian
+                    }
+                    NOT = { is_unification_candidate = UCA }
+                }
+            }
+            add = 0.35
+        }
+
+        # Penaliza agresividad contra países solo "antagonistic"
+        if = {
+            limit = {
+                has_attitude = {
+                    who = scope:target_country
+                    attitude = antagonistic
+                }
+            }
+            multiply = 0.4
+        }
+
+        # Ajuste por opinion ideológica (usa función engine)
+        multiply = {
+            value = "ai_ideological_opinion(scope:target_country)"
+            multiply = -0.1
+            add = 1
+            max = 1.5
+            min = 0.5
+        }
+    }
+
+    # Edificios que prioriza para proyección regional
+    building_group_weights = {
+        bg_army = 1.4
+        bg_infrastructure = 1.2
+        bg_military_industry = 1.1
+    }
+
+    # Estados que son de alto valor para la unificación (lista basada en tus estados)
+    state_value = {
+        if = {
+            limit = {
+                scope:target_state = {
+                    OR = {
+                        state_region = s:STATE_GUATEMALA
+                        state_region = s:STATE_SAN_SALVADOR
+                        state_region = s:STATE_COSTA_RICA
+                        state_region = s:STATE_HONDURAS
+                        state_region = s:STATE_PANAMA
+                        state_region = s:STATE_CHIAPAS
+                        state_region = s:STATE_YUCATAN
+                    }
+                    can_reach_target_state = yes
+                }
+            }
+            add = 90
+        }
+    }
+
+    # Wargoal scoring: prioriza liderazgo en unificación y anexión de candidatos
+    wargoal_scores = {
+        unification_leadership = {
+            value = 4
+            # bonus if some "pan-national" tech/event exists
+            if = {
+                limit = { has_technology_researched = pan_nationalism } # placeholder
+                add = {
+                    value = country_fervor_primary_culture
+                    divide = 3
+                }
+            }
+            else = {
+                add = {
+                    value = country_fervor_primary_culture
+                    divide = 8
+                }
+            }
+
+            # reduce value if subjecthood exists
+            if = {
+                limit = { has_law = law_type:law_subjecthood }
+                multiply = 0.25
+            }
+        }
+
+        annex_country = {
+            value = 0
+            # strong incentive to annex when target is unification candidate and reachable
+            if = {
+                limit = {
+                    scope:target_country = {
+                        is_unification_candidate = UCA
+                    }
+                    can_reach_target_country = yes
+                }
+                add = 250
+            }
+        }
+    }
+
+    # Secret goals (local scale values)
+    secret_goal_scores = {
+        protect = {
+            trigger = {
+                scope:target_country = {
+                    OR = {
+                        country_has_primary_culture = cu:central_american
+                        country_has_primary_culture = cu:guatemalan
+                        country_has_primary_culture = cu:el_salvadorian
+                        country_has_primary_culture = cu:honduran
+                        country_has_primary_culture = cu:nicaraguan
+                        country_has_primary_culture = cu:costa_rican
+                        country_has_primary_culture = cu:panamanian
+                    }
+                    NOT = { is_unification_candidate = UCA }
+                    OR = {
+                        is_supporting_unification_candidate = { who = root country_formation = UCA }
+                        is_subject_of = root
+                        is_in_customs_union_with = root
+                    }
+                }
+            }
+            score = { value = 700 }
+        }
+
+        dominate = {
+            trigger = {
+                scope:target_country = {
+                    OR = {
+                        country_has_primary_culture = cu:central_american
+                        country_has_primary_culture = cu:guatemalan
+                        country_has_primary_culture = cu:el_salvadorian
+                        country_has_primary_culture = cu:honduran
+                        country_has_primary_culture = cu:nicaraguan
+                        country_has_primary_culture = cu:costa_rican
+                        country_has_primary_culture = cu:panamanian
+                    }
+                    NOT = { is_unification_candidate = UCA }
+                    NOR = {
+                        is_supporting_unification_candidate = { who = root country_formation = UCA }
+                        is_subject_of = root
+                        is_in_customs_union_with = root
+                    }
+                }
+            }
+            score = { value = 600 }
+        }
+
+        conquer = {
+            trigger = {
+                scope:target_country = {
+                    is_unification_candidate = UCA
+                }
+            }
+            score = { value = 900 }
+        }
+    }
+
+    # Quién puede elegirla
+    possible = {
+        is_subject = no
+        is_unification_candidate = UCA
+        NOT = { country_tier = empire }
+    }
+
+    # Peso base para elegir la strategy
+    weight = {
+        value = 6
+        if = {
+            limit = { has_technology_researched = pan_nationalism } # placeholder
+            add = {
+                value = country_fervor_primary_culture
+                divide = 3
+            }
+        }
+        else = {
+            add = {
+                value = country_fervor_primary_culture
+                divide = 12
+            }
+        }
+
+        # Increase if there is a regional unity movement (you should define movement type)
+        if = {
+            limit = {
+                any_political_movement ?= {
+                    is_political_movement_type = movement_regional_unity
+                    save_temporary_scope_as = regional_unity_movement
+                }
+            }
+            scope:regional_unity_movement ?= {
+                multiply = {
+                    value = 1
+                    add = this.political_movement_radicalism
+                }
+            }
+        }
+    }
+}

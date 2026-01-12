@@ -1,0 +1,30 @@
+﻿DIPLOMACY = {
+	c:SPA = {
+		create_diplomatic_pact = {
+			country = c:PCO
+			type = colony
+		}
+	}
+	c:GBR = {
+
+		# Mosquito Kingdom
+		create_diplomatic_pact = {
+			country = c:MKT
+			type = protectorate
+		}
+
+		create_diplomatic_pact = {
+			country = c:JAM
+			type = colony
+		}
+
+	}
+	c:UCA ={
+			create_diplomatic_pact = {
+			country = c:RDT
+			type = ca_dependency
+		}
+	
+	
+	}
+}

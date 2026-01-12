@@ -1,0 +1,737 @@
+﻿#
+# Note: the triggers are checked at certain key points in the code, not all the time
+# color_key = {
+#    color = "black"      # the map color
+#    possible = { ... }   # the trigger to enable this color
+# }
+#
+
+# Example
+#dynamic_map_color_swedish_junta = {
+#    color = "black"
+#
+#	possible = {
+#		exists = c:SWE # you /must/ check that a tag exists before doing anything else
+#		this = c:SWE
+#
+#        exists = ig:ig_armed_forces
+#        ig:ig_armed_forces = {
+#            is_in_government = yes
+#        }
+#	}
+#}
+
+#####Costa Rica color's states#####
+
+1democratic_costarica = {
+	color = "democratic_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_costarica = {
+	color = "parliamentary_republic_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_costarica = {
+	color = "communist_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_costarica = {
+	color = "theocratic_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_costarica = {
+	color = "monarchist_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_costarica = {
+	color = "junta_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		#has_law = law_type:law_monarchy 
+	}
+}
+junta_council_costarica = {
+	color = "junta_council_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		#has_law = law_type:law_monarchy 
+	}
+}
+technocratic_costarica = {
+	color = "technocratic_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_costarica = {
+	color = "corporate_state_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		#has_law = law_type:law_corporate_state 
+	}
+}
+anarchist_costarica = {
+	color = "anarchist_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		has_law = law_type:law_anarchy
+	}
+}
+syndicalist_costarica = {
+	color = "syndicalist_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		has_law = law_type:law_council_republic
+	}
+}
+socialist_costarica = {
+	color = "socialist_costarica"
+	possible = {
+		exists = c:COS
+		THIS = c:COS
+		has_law = law_type:law_council_republic 
+	}
+}
+#####nicaragua#####
+
+1democratic_nicaragua = {
+	color = "democratic_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_nicaragua = {
+	color = "parliamentary_republic_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_nicaragua = {
+	color = "communist_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_nicaragua = {
+	color = "theocratic_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_nicaragua = {
+	color = "monarchist_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_nicaragua = {
+	color = "junta_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_nicaragua = {
+	color = "junta_council_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_nicaragua = {
+	color = "technocratic_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_nicaragua = {
+	color = "corporate_state_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_corporate_state 
+	}
+}
+anarchist_nicaragua = {
+	color = "anarchist_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_anarchy
+	}
+}
+syndicalist_nicaragua = {
+	color = "syndicalist_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_council_republic 
+	}
+}
+socialist_nicaragua = {
+	color = "socialist_nicaragua"
+	possible = {
+		exists = c:NIC
+		THIS = c:NIC
+		has_law = law_type:law_council_republic 
+	}
+}
+#####honduras#####
+
+1democratic_honduras = {
+	color = "democratic_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_honduras = {
+	color = "parliamentary_republic_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_honduras = {
+	color = "communist_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_honduras = {
+	color = "theocratic_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_honduras = {
+	color = "monarchist_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_honduras = {
+	color = "junta_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_honduras = {
+	color = "junta_council_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_honduras = {
+	color = "technocratic_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_honduras = {
+	color = "corporate_state_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_corporate_state 
+	}
+}
+anarchist_honduras = {
+	color = "anarchist_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_anarchy
+	}
+}
+syndicalist_honduras = {
+	color = "syndicalist_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_council_republic
+	}
+}
+socialist_honduras = {
+	color = "socialist_honduras"
+	possible = {
+		exists = c:HON
+		THIS = c:HON
+		has_law = law_type:law_council_republic 
+	}
+}
+#####guatemala#####
+
+1democratic_guatemala = {
+	color = "democratic_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_guatemala = {
+	color = "parliamentary_republic_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_guatemala = {
+	color = "communist_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_guatemala = {
+	color = "theocratic_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_guatemala = {
+	color = "monarchist_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_guatemala = {
+	color = "junta_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_guatemala = {
+	color = "junta_council_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_guatemala = {
+	color = "technocratic_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_guatemala = {
+	color = "corporate_state_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_corporate_state
+	}
+}
+anarchist_guatemala = {
+	color = "anarchist_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_anarchy 
+	}
+}
+syndicalist_guatemala = {
+	color = "syndicalist_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_council_republic 
+	}
+}
+socialist_guatemala = {
+	color = "socialist_guatemala"
+	possible = {
+		exists = c:GUA
+		THIS = c:GUA
+		has_law = law_type:law_council_republic 
+	}
+}
+#####miskito#####
+
+1democratic_miskito = {
+	color = "democratic_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_miskito = {
+	color = "parliamentary_republic_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_miskito = {
+	color = "communist_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_miskito = {
+	color = "theocratic_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_miskito = {
+	color = "monarchist_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_miskito = {
+	color = "junta_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_miskito = {
+	color = "junta_council_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_miskito = {
+	color = "technocratic_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_miskito = {
+	color = "corporate_state_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_corporate_state
+	}
+}
+anarchist_miskito = {
+	color = "anarchist_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_anarchy 
+	}
+}
+syndicalist_miskito = {
+	color = "syndicalist_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_council_republic
+	}
+}
+socialist_miskito = {
+	color = "socialist_miskito"
+	possible = {
+		exists = c:MKT
+		THIS = c:MKT
+		has_law = law_type:law_council_republic 
+	}
+}
+#####elsalvador#####
+
+1democratic_elsalvador = {
+	color = "democratic_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_elsalvador = {
+	color = "parliamentary_republic_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_elsalvador = {
+	color = "communist_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_elsalvador = {
+	color = "theocratic_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_elsalvador = {
+	color = "monarchist_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_elsalvador = {
+	color = "junta_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_elsalvador = {
+	color = "junta_council_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_elsalvador = {
+	color = "technocratic_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_elsalvador = {
+	color = "corporate_state_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_corporate_state
+	}
+}
+anarchist_elsalvador = {
+	color = "anarchist_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_anarchy 
+	}
+}
+syndicalist_elsalvador = {
+	color = "syndicalist_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_council_republic
+	}
+}
+socialist_elsalvador = {
+	color = "socialist_elsalvador"
+	possible = {
+		exists = c:ELS
+		THIS = c:ELS
+		has_law = law_type:law_council_republic 
+	}
+}
+#####FRCA#####
+
+democratic_uca = {
+	color = "democratic_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_presidential_republic
+	}
+}
+
+parliamentary_republic_uca = {
+	color = "parliamentary_republic_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_parliamentary_republic
+	}
+}
+
+communist_uca = {
+	color = "communist_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_council_republic
+	}
+}
+
+theocratic_uca = {
+	color = "theocratic_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_theocracy
+	}
+}
+
+monarchist_uca = {
+	color = "monarchist_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_uca = {
+	color = "junta_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_monarchy 
+	}
+}
+junta_council_uca = {
+	color = "junta_council_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_monarchy 
+	}
+}
+technocratic_uca = {
+	color = "technocratic_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_technocracy 
+	}
+}
+corporate_state_uca = {
+	color = "corporate_state_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_corporate_state
+	}
+}
+anarchist_uca = {
+	color = "anarchist_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_anarchy 
+	}
+}
+syndicalist_uca = {
+	color = "syndicalist_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_council_republic
+	}
+}
+socialist_uca = {
+	color = "socialist_uca"
+	possible = {
+		exists = c:UCA
+		THIS = c:UCA
+		has_law = law_type:law_council_republic 
+	}
+}

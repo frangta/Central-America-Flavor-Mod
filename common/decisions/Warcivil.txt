@@ -23,9 +23,39 @@
 		s:STATE_SAN_SALVADOR = {
 	add_claim = ROOT
 	}
+	s:STATE_COSTA_RICA = {
+	add_claim = ROOT
+	}
 		s:STATE_GUATEMALA = {
 	add_claim = ROOT
 	}
+		s:STATE_SANTO_DOMINGO = {
+	add_claim = ROOT
+	}
+		s:STATE_PUERTO_RICO = {
+	add_claim = ROOT
+	}
+		s:STATE_WESTERN_CUBA = {
+	add_claim = ROOT
+	}
+		s:STATE_EASTERN_CUBA = {
+	add_claim = ROOT
+	}
+		s:STATE_CENTRAL_CUBA = {
+	add_claim = ROOT
+	}
+		s:STATE_HAITI = {
+	add_claim = ROOT
+	}
+		s:STATE_ANTIOQUIA = {
+	add_claim = ROOT
+	}
+		s:STATE_CHIAPAS  = {
+	add_claim = ROOT
+	}
+		s:STATE_YUCATAN = {
+	add_claim = ROOT
+	}	
 
 	}
 	ai_chance = {
@@ -49,11 +79,12 @@ Plan_of_Veragua3 = {
 	             state = s:STATE_COSTA_RICA.region_state:UCA
 	           on_created = { 
 	         	 save_scope_as = scope_CR1
-	         	 activate_law = law_type:law_presidential_republic
+	         	 activate_law = law_type:law_law_land_reform_coffee_oligarchy
 	             activate_law = law_type:law_autocracy
 	         	 activate_law = law_type:law_colonial_resettlement
-				 activate_law = law_type:law_state_atheism
-				 activate_law = law_type:law_homesteading
+	         	 activate_law = law_type:law_public_schools
+	         	 activate_law = law_type:law_dedicated_police
+                 activate_law = law_type:law_guaranteed_liberties			 
 	         	add_modifier = {
 				name = age_of_ca_caudillos_modifier
 				multiplier = 2
@@ -68,19 +99,19 @@ Plan_of_Veragua3 = {
 	         	 hidden_effect = {
 
 	         	   create_character = {
-	         	 	is_general = yes
 	         	 	interest_group = ig_armed_forces
-	         	 	ideology = ideology:ideology_despotic_utopian
+	         	 	ideology = ideology:ideology_central_america_caudillo
 	         	 	ruler = yes
+				    is_general = yes
 	         	 	ig_leader = yes			
 	         	 	traits = {
-	         	 		reckless honorable innovative brave meticulous firebrand expert_defensive_strategist expert_offensive_planner resupply_commander
+	         	 		reckless honorable innovative brave meticulous firebrand expert_defensive_strategist expert_offensive_planner resupply_commander expert_artillery_commander
 	         	 	}
 	         	 	}
 	         	    create_character = {
 	         	 	is_general = yes
 	         	 	interest_group = ig_landowners
-	         	 	ideology = ideology:ideology_despotic_utopian
+	         	 	ideology = ideology:ideology_central_america_caudillo
 	         	 	ig_leader = yes			
 	         	 	}			
 				 
@@ -90,7 +121,8 @@ Plan_of_Veragua3 = {
             
                 }
         }   
-         play_as = CR1
+
+       UCA = { change_tag = CR1 }				
     }
 }
 Plan_of_Veragua4 = {
@@ -107,7 +139,651 @@ Plan_of_Veragua4 = {
   add_investment_pool = 5000000
     }
 }
-Costarica = {
+Plan_of_Veragua5 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+  set_variable = { name = ca_buildings_on } 
+    }
+}
+Plan_of_Veragua6 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+			capital = {
+			add_modifier = { name = all_stronghold} 
+
+			}
+    }
+}
+Plan_of_Veragua7 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+
+			add_modifier = { name = ca_el_gran_avanse_modifier 
+				is_decaying = yes
+				years = 10
+				}
+			
+    }
+}
+Plan_of_Veragua8 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+
+	         	    create_character = {
+	         	 	
+                    first_name = Jose_Maria
+                    last_name = Castro
+					historical = yes
+                    culture = cu:central_american
+                    female = no
+                    religion = catholic
+                    ideology = ideology_republican_leader
+                    interest_group = ig_rural_folk
+	                dna = ecchi_dna_jose_maria_castro
+                    birth_date = 1818.9.1
+                    traits = { arrogant expert_political_operator direct }					
+	         	 	ideology = ideology:ideology_ca_unitarian
+	         	 	ig_leader = yes					
+	         	 	}
+					create_character = {
+	         	 	is_general = yes
+	         	 	interest_group = ig_petty_bourgeoisie
+	         	 	ideology = ideology:ideology_ca_leader_autocratic_autonomist
+	         	 	ig_leader = yes			
+	         	 	}
+    }
+}
+Plan_of_Veragua9 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+every_scope_pop = {
+
+				set_pop_qualifications = {
+					pop_type = peasants
+					potential = 0.5
+				}
+				set_pop_qualifications = {
+					pop_type = laborers
+					potential = 0.5
+				}
+	
+		set_pop_literacy = {
+			literacy_rate = {
+				value = 0.1
+				# Professions requiring reading at 75%
+				if = {
+					limit = {
+						OR = {
+							is_pop_type = bureaucrats
+							is_pop_type = academics
+							is_pop_type = clergymen
+							is_pop_type = engineers
+						}
+					}
+					add = 0.65
+				}
+				# Upper Class pops at 50%
+				if = {
+					limit = {
+						strata = upper
+					}
+					add = 0.4
+				}
+				# Professions where reading is important at 20%
+				if = {
+					limit = {
+						OR = {
+							is_pop_type = clerks
+							is_pop_type = shopkeepers
+						}
+					}
+					add = 0.1
+				}
+				# Subsistence farmers at 5% base
+				if = {
+					limit = {
+						OR = {
+							pop_employment_building_group = bg_subsistence_agriculture
+							pop_employment_building_group = bg_subsistence_ranching
+						}
+					}
+					add = 0.05
+				}
+				# People in Unincorporated territories at half
+				if = {
+					limit = {
+						state = { is_incorporated = no }
+					}
+					multiply = 0.5
+				}
+			}
+		}	
+	
+		set_pop_wealth = {
+			wealth_distribution = {
+				value = 11
+				if = {
+					limit = {
+						strata = upper
+					}
+					add = 15
+				}
+				if = {
+					limit = {
+						strata = middle
+					}
+					add = 7
+				}
+				if = {
+					limit = {
+						is_pop_type = laborers
+					}
+					add = 10
+				}
+				if = {
+					limit = {
+						is_pop_type = peasants
+					}
+					add = 10
+				}
+			}
+			update_loyalties = no
+		}
+		effect_reset_wealth_if_slave = yes
+	}
+
+    }
+}
+
+Plan_of_Veragua10 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		if = {
+			limit = {
+				any_scope_state = {
+					NOT = { has_decree = ch_DecisionCheatDecree_MarkState }
+					count = all
+				}
+			}
+			capital = {
+				state_region = {
+					add_arable_land = 100
+				}
+			}
+		}
+		else = {
+			every_scope_state = {
+				limit = {
+					has_decree = ch_DecisionCheatDecree_MarkState
+				}
+				state_region = {
+					add_arable_land = 100
+				}
+			}
+		}
+	}
+}
+Plan_of_Veragua11 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+ 	when_taken = {
+		if = {
+			limit = {
+				any_scope_state = {
+					NOT = { has_decree = ch_DecisionCheatDecree_MarkState }
+					count = all
+				}
+			}
+			capital = {
+				state_region = {
+					add_homeland = cu:costa_rican
+				}
+			}
+		}
+		else = {
+			every_scope_state = {
+				limit = {
+					has_decree = ch_DecisionCheatDecree_MarkState
+				}
+				state_region = {
+					add_homeland = cu:costa_rican
+				}
+			}
+		}
+	}
+}
+Plan_of_Veragua12 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+
+			add_modifier = { name = ca_add_tech_spread 
+				days = 30
+				}
+			
+    }
+}
+Plan_of_Veragua13 = {
+	is_shown = {
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+
+			add_modifier = { name = ca_add_innovation 
+				days = 30
+				}
+			
+    }
+}
+Open_Cheat_Decision1 = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+			        create_character = {
+	         	 	interest_group = ig_armed_forces
+	         	 	
+	         	 	
+				is_general = yes
+	         	 			
+	         	 	traits = {
+	         	 		reckless honorable innovative brave meticulous firebrand expert_defensive_strategist expert_offensive_planner resupply_commander
+	         	 	}
+	         	 	}
+	         	    create_character = {
+	         	 	is_general = yes
+	         	 	interest_group = ig_landowners
+	         	 	
+	         	 				
+	         	 	}
+	}
+}
+Close_Cheat_Decison1 = {
+	is_shown = {
+		has_variable = openCheatDecision_variable1
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		take_on_scaled_debt = {
+ who = c:GBR
+ value = 10000
+}
+	}
+}
+Add_Culture_afro_caribeno = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	    NOT = { has_variable = added_afro_caribeno }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		add_primary_culture = cu:afro_caribeno
+		set_variable = added_afro_caribeno
+	}
+	
+}
+	
+Remove_Culture_afro_caribeno = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+remove_primary_culture = cu:afro_caribeno
+		remove_variable = added_afro_caribeno
+	}
+}
+Add_Culture_muisca = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	    NOT = { has_variable = added_muisca }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		add_primary_culture = cu:muisca
+		set_variable = added_muisca
+	}
+	
+}
+	
+Remove_Culture_muisca = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+remove_primary_culture = cu:muisca
+		remove_variable = added_muisca
+	}
+}
+Add_Culture_mayan = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	    NOT = { has_variable = added_mayan }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		add_primary_culture = cu:mayan
+		set_variable = added_mayan
+	}
+	
+}
+	
+Remove_Culture_mayan = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+remove_primary_culture = cu:mayan
+		remove_variable = added_mayan
+	}
+}
+Add_Culture_miskito = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	    NOT = { has_variable = added_miskito }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		add_primary_culture = cu:miskito
+		set_variable = added_miskito
+	}
+	
+}
+	
+Remove_Culture_miskito = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		remove_primary_culture = cu:miskito
+		remove_variable = added_miskito
+	}
+}
+Add_Culture_melanesian = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	    NOT = { has_variable = added_melanesian }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		add_primary_culture = cu:melanesian
+		set_variable = added_melanesian
+	}
+	
+}
+	
+Remove_Culture_melanesian = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		remove_primary_culture = cu:melanesian
+		remove_variable = added_melanesian
+	}
+}
+add_Cons = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+    s:STATE_PANAMA = {
+		add_homeland = cu:central_american
+		add_homeland = cu:panamanian
+		add_homeland = cu:afro_caribeno
+		add_homeland = cu:chibchan_central_america
+		add_homeland = cu:bribri_talamanca        
+		add_homeland = cu:embera                 
+		add_homeland = cu:ngabe_culture
+		add_homeland = cu:guna_kuna
+	}
+	s:STATE_NICARAGUA = {
+		add_homeland = cu:central_american
+		add_homeland = cu:nicaraguan
+		add_homeland = cu:miskito
+		add_homeland = cu:mangue_chorotega
+		add_homeland = cu:garifuna_arawak 
+	}
+		s:STATE_HONDURAS = {
+		add_homeland = cu:central_american
+		add_homeland = cu:honduran
+		add_homeland = cu:lenca             
+		add_homeland = cu:mangue_chorotega  
+		add_homeland = cu:garifuna_arawak   
+		
+	}
+		s:STATE_SAN_SALVADOR = {
+		add_homeland = cu:central_american
+		add_homeland = cu:el_salvadorian
+		add_homeland = cu:lenca
+		add_homeland = cu:ngabe_culture
+	}
+	s:STATE_COSTA_RICA = {
+		add_homeland = cu:central_american
+		add_homeland = cu:costa_rican
+		add_homeland = cu:chibchan_central_america
+		add_homeland = cu:bribri_talamanca        
+		add_homeland = cu:cabecar                 
+		add_homeland = cu:ngabe_culture           
+		add_homeland = cu:mangue_chorotega  
+	}
+		s:STATE_GUATEMALA = {
+		add_homeland = cu:mayan
+		add_homeland = cu:central_american
+		add_homeland = cu:guatemalan
+		add_homeland = cu:garifuna_arawak 
+	}
+	}
+}
+Remove_Cons = {
+	is_shown = {
+		NOT = { has_variable = openCheatDecision_variable1 }
+	}
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+			capital = {
+
+					start_privately_funded_building_construction = building_port
+					start_privately_funded_building_construction = building_trade_center
+				
+			}
+	}
+}
+Open_GeneralCheat_Decision1 = {
+	is_shown = {
+		has_variable = openCheatDecision_variable1
+		NOT = { has_variable =  Open_ArableLand_Decision_variable }
+
+	}
+
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		set_variable =  Open_ArableLand_Decision_variable
+
+	}
+}
+Close_GeneralCheat_Decision1 = {
+	is_shown = {
+		has_variable = openCheatDecision_variable1
+		has_variable =  Open_ArableLand_Decision_variable
+
+	}
+
+	possible = {
+
+	}
+
+	ai_chance = {
+		base = 0
+    }
+	when_taken = {
+		remove_variable =  Open_ArableLand_Decision_variable
+	}
+}
+ Costarica = {
 	is_shown = {
 		NOT = { 
 		is_ai = yes
@@ -345,6 +1021,7 @@ create_country = {
 	province = p:x3D20D1
 	province = p:x600AC6
 	province = p:x907080
+	province = p:x528F3B
 }
 
 create_country = {

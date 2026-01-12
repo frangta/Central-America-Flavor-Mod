@@ -4,7 +4,19 @@
 	can_use_obligations = yes
 
     selectable = {
-        country_has_primary_culture = cu:central_american
+     country_has_primary_culture = cu:central_american
+
+     country_has_primary_culture = cu:costa_rican
+
+     country_has_primary_culture = cu:panamanian
+
+     country_has_primary_culture = cu:nicaraguan
+
+     country_has_primary_culture = cu:guatemalan
+
+     country_has_primary_culture = cu:el_salvadorian
+
+     country_has_primary_culture = cu:honduran
         NOT = { is_country_type = decentralized }
     }
 	
@@ -33,7 +45,7 @@
 
 	pact = {	
 		cost = 25
-		is_customs_union = yes
+		#is_customs_union = yes
 		has_junior_participant = yes
 		recipient_pays_maintenance = no	
 		
@@ -43,6 +55,8 @@
 		target_requires_approval_to_break = yes	
 		
 		subject_type = subject_type_protectorate	
+		second_modifier = {
+			country_convoy_contribution_to_market_owner_add = 0.25
 		
 		actor_can_break = {
 			is_diplomatic_play_committed_participant = no
@@ -221,20 +235,20 @@
 				}					
 			}			
 
-			if = {
-				limit = {
-					NOT = {
-						has_diplomatic_pact = {
-							who = scope:actor
-							type = customs_union
-						}					
-					}
-				}
-				add = {
-					desc = "DIPLOMATIC_ACCEPTANCE_NO_CUSTOMS_UNION"
-					value = -10
-				}	
-			}					
+			#if = {
+			#	limit = {
+			#		NOT = {
+			#			has_diplomatic_pact = {
+			#				who = scope:actor
+			#				type = customs_union
+			#			}					
+			#		}
+			#	}
+			#	add = {
+			#		desc = "DIPLOMATIC_ACCEPTANCE_NO_CUSTOMS_UNION"
+			#		value = -10
+			#	}	
+			#}					
 			
 			add = {
 				desc = "DIPLOMATIC_ACCEPTANCE_ATTITUDE"
@@ -381,10 +395,10 @@
 								who = root
 								type = alliance
 							}
-							has_diplomatic_pact = {
-								who = root
-								type = customs_union
-							}
+							#has_diplomatic_pact = {
+							#	who = root
+							#	type = customs_union
+							#}
 							has_diplomatic_pact = {
 								who = root
 								type = defensive_pact
@@ -542,10 +556,10 @@
 								who = scope:actor
 								type = alliance
 							}
-							has_diplomatic_pact = {
-								who = scope:actor
-								type = customs_union
-							}
+							#has_diplomatic_pact = {
+							#	who = scope:actor
+							#	type = customs_union
+							#}
 							has_diplomatic_pact = {
 								who = scope:actor
 								type = defensive_pact

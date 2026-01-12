@@ -1,0 +1,298 @@
+﻿POPS = {
+    s:STATE_SAN_SALVADOR = {
+        region_state:UCA = {
+            create_pop = {
+                culture = el_salvadorian
+                size = 107051
+            }
+            create_pop = {
+                culture = ngabe_culture
+                size = 5000
+            }
+            create_pop = {
+                culture = lenca
+                size = 1000
+            }
+        }
+    }
+
+    s:STATE_GUATEMALA = {
+        region_state:UCA = {
+            create_pop = {
+                culture = guatemalan
+                size = 54253
+            }
+            create_pop = {
+                culture = garifuna_arawak
+                size = 8220
+            }
+        }
+        region_state:MEX = {
+            create_pop = {
+                culture = mayan
+                size = 26000
+            }
+        }
+        region_state:JAM = {
+            create_pop = {
+                culture = afro_caribbean
+                size = 7502
+            }
+            create_pop = {
+                culture = afro_caribbean
+                size = 3502
+            }
+            create_pop = {
+                culture = british
+                size = 104
+            }
+            create_pop = {
+                culture = british
+                size = 1507
+            }
+        }
+    }
+
+    s:STATE_HONDURAS = {
+        region_state:UCA = {
+            create_pop = {
+                culture = honduran
+                size = 127117
+            }
+            create_pop = {
+                culture = lenca
+                size = 60000
+            }
+            create_pop = {
+                culture = mangue_chorotega
+                size = 5000
+            }
+            create_pop = {
+                culture = garifuna_arawak
+                size = 5000
+            }
+        }
+        region_state:MKT = {
+            create_pop = {
+                culture = miskito
+                size = 3000
+            }
+            create_pop = {
+                culture = british
+                size = 1000
+            }
+            create_pop = {
+                culture = afro_caribbean
+                size = 1000
+            }
+            create_pop = {
+                culture = afro_caribbean
+                size = 1000
+            }
+        }
+    }
+
+    s:STATE_NICARAGUA = {
+        region_state:UCA = {
+            create_pop = {
+                culture = nicaraguan
+                size = 93720
+            }
+            create_pop = {
+                culture = mangue_chorotega
+                size = 28400
+            }
+            create_pop = {
+                culture = garifuna_arawak
+                size = 5000
+            }
+        }
+        region_state:MKT = {
+            create_pop = {
+                culture = nicaraguan
+                size = 5000
+            }
+            create_pop = {
+                culture = mangue_chorotega
+                size = 1500
+            }
+            create_pop = {
+                culture = garifuna_arawak
+                size = 5000
+            }
+            create_pop = {
+                pop_type = slaves
+                culture = afro_caribeno
+                size = 1000
+            }
+        }
+    }
+
+    s:STATE_YUCATAN = {
+        region_state:UCA = {
+            create_pop = {
+                culture = central_american
+                size = 2100
+            }
+            create_pop = {
+                culture = mayan
+                size = 1100
+            }
+        }
+    }
+
+    s:STATE_COSTA_RICA = {
+        region_state:UCA = {
+            create_pop = {
+                culture = central_american
+                size = 21000
+            }
+            create_pop = {
+                culture = costa_rican
+                size = 34320
+            }
+            create_pop = {
+                culture = bribri_talamanca
+                size = 2100
+            }
+            create_pop = {
+                culture = chibchan_central_america
+                size = 1050
+            }
+            create_pop = {
+                culture = cabecar
+                size = 3150
+            }
+            create_pop = {
+                culture = ngabe_culture
+                size = 700
+            }
+            create_pop = {
+                culture = mangue_chorotega
+                size = 500
+            }
+        }
+        region_state:CLM = {
+            create_pop = {
+                culture = central_american
+                size = 2100
+            }
+            create_pop = {
+                culture = costa_rican
+                size = 300
+            }
+            create_pop = {
+                culture = bribri_talamanca
+                size = 210
+            }
+            create_pop = {
+                culture = chibchan_central_america
+                size = 105
+            }
+            create_pop = {
+                culture = cabecar
+                size = 315
+            }
+            create_pop = {
+                culture = ngabe_culture
+                size = 70
+            }
+            create_pop = {
+                culture = mangue_chorotega
+                size = 50
+            }
+        }
+        region_state:RDT = {
+            create_pop = {
+                culture = bribri_talamanca
+                size = 7450
+            }
+            create_pop = {
+                culture = cabecar
+                size = 4500
+            }
+            create_pop = {
+                culture = cabecar
+                pop_type = laborers
+                size = 900
+            }
+            create_pop = {
+                culture = ngabe_culture
+                size = 1000
+            }
+            create_pop = {
+                culture = mangue_chorotega
+                size = 500
+            }
+        }
+    }
+
+    s:STATE_PANAMA = {
+        region_state:UCA = {
+            create_pop = {
+                culture = central_american
+                size = 8779
+            }
+            create_pop = {
+                culture = afro_caribeno
+                size = 1000
+            }
+            create_pop = {
+                culture = north_andean
+                size = 5000
+            }
+            create_pop = {
+                culture = panamanian
+                size = 289
+            }
+            create_pop = {
+                culture = bribri_talamanca
+                size = 252
+            }
+            create_pop = {
+                culture = ngabe_culture
+                size = 157
+            }
+            create_pop = {
+                culture = embera
+                size = 300
+            }
+        }
+        region_state:CLM = {
+            create_pop = {
+                culture = panamanian
+                size = 28971
+            }
+            create_pop = {
+                culture = bribri_talamanca
+                size = 2520
+            }
+            create_pop = {
+                culture = ngabe_culture
+                size = 1500
+            }
+            create_pop = {
+                culture = embera
+                size = 3780
+            }
+            create_pop = {
+                culture = guna_kuna
+                size = 1000
+            }
+        }
+        region_state:NC3 = {
+            create_pop = {
+                culture = guna_kuna
+                size = 11000
+            }
+        }
+        region_state:NC2 = {
+            create_pop = {
+                culture = ngabe_culture
+                size = 15750
+            }
+        }
+    }
+
+    
+}

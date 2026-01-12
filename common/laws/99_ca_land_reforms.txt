@@ -1,0 +1,180 @@
+﻿# group = this is the law_group a law belongs to
+# icon = graphical icon shown in-game
+# modifier = {} modifier on country for having adopted this law
+
+law_land_reform_coffee_oligarchy = {
+    group = lawgroup_land_reform
+    icon = "gfx/interface/icons/law_icons/land_reform_coffee_oligarchy.dds" # crea este dds o usa uno existente
+    progressiveness = -20
+
+    # Basic AI blocks
+    ai_will_do = { always = no }
+    ai_enact_weight_modifier = {
+        value = 0
+        if = {
+            limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+            add = 750
+        }
+    }
+
+    # Only visible/available if UCA exists AND country primary culture is one of the listed
+    is_visible = {
+        exists = c:UCA
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }
+    }
+
+
+    modifier = {
+
+    interest_group_ig_landowners_pol_str_mult = 0.25
+    goods_output_coffee_mult = 0.35 
+
+    prestige_from_exports_mult = 0.10
+
+    state_peasants_mass_migration_disallowed_bool = yes
+    }
+	
+
+    # (Opcional) texto localizable keys: law_land_reform_coffee_oligarchy, law_land_reform_coffee_oligarchy_desc
+}
+
+law_land_reform_communal_lands = {
+    group = lawgroup_land_reform
+    icon = "gfx/interface/icons/law_icons/land_reform_communal.dds"
+    progressiveness = 10
+
+    ai_will_do = { always = no }
+    ai_enact_weight_modifier = {
+        value = 0
+        if = {
+            limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+            add = 750
+        }
+    }
+
+    is_visible = {
+        exists = c:UCA
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }
+    }
+
+    modifier = {
+   
+    interest_group_ig_landowners_pol_str_mult = -0.30
+
+    
+    interest_group_ig_rural_folk_pop_attraction_mult = 0.40
+     goods_produced_mult = { good = grain value = 0.05 }
+    state_mortality_mult = -0.05
+	state_birth_rate_mult = 0.20
+    pop_militancy_add = -0.05
+    }
+
+    # localización: law_land_reform_communal_lands, law_land_reform_communal_lands_desc
+}
+
+law_land_reform_banana_republic = {
+    group = lawgroup_land_reform
+    icon = "gfx/interface/icons/law_icons/land_reform_banana_republic.dds"
+    progressiveness = -10
+
+    ai_will_do = { always = no }
+    ai_enact_weight_modifier = {
+        value = 0
+        if = {
+            limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+            add = 750
+        }
+    }
+
+    is_visible = {
+        exists = c:UCA
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }
+    }
+
+    modifier = {
+    # +20% banana production / output (plantaciones)
+    goods_produced_mult = { good = banana value = 0.20 }
+
+    # +15% attraction for foreign capital (simulado con menor construction cost para inversión extranjera)
+    building_construction_cost_mult = -0.15
+
+    # Increase Petite Bourgeoisie / Capitalists political strength (el lobby pro-empresa)
+    interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.15
+
+    # Decrease Landowners approval (porque tierras pasan a concesiones)
+    interest_group_ig_landowners_pol_str_mult = -0.10
+    }
+
+    # localización: law_land_reform_banana_republic, law_land_reform_banana_republic_desc
+}
+
+law_land_reform_hacienda_system = {
+    group = lawgroup_land_reform
+    icon = "gfx/interface/icons/law_icons/land_reform_hacienda.dds"
+    progressiveness = -5
+
+    ai_will_do = { always = no }
+    ai_enact_weight_modifier = {
+        value = 0
+        if = {
+            limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+            add = 750
+        }
+    }
+
+    is_visible = {
+        exists = c:UCA
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }
+    }
+
+    modifier = {
+         # Moderate bonus to landowner political clout
+    interest_group_ig_landowners_pol_str_mult = 0.20
+
+    # Increase output of exportable agricultural goods (cacao/tobacco/coffee) a pequeña escala
+    goods_produced_mult = { good = tobacco_fine value = 0.10 }
+    goods_produced_mult = { good = cacao value = 0.08 }
+    goods_produced_mult = { good = coffee value = 0.05 }
+
+    # Increase landlord rent-taking simulated con mayor taxation capacity o minus SOL para arrendatarios:
+    # (usamos bureaucracy/taxation capacity style field — revisar define si está disponible)
+    taxation_capacity_add = 10
+
+    # Slightly increase tenant immobility / reduce rural pop mobility
+    		state_peasants_mass_migration_disallowed_bool = yes
+    }
+
+    # localización: law_land_reform_hacienda_system, law_land_reform_hacienda_system_desc
+}
