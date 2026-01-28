@@ -265,14 +265,21 @@
 				}
 			}
 			else_if = {
-				limit = {
-					is_pop_type = peasants
-				}
-				add = {
-					value = 0
-					desc = "POP_PEASANTS"
-				}
-			}
+    limit = {
+        is_pop_type = peasants
+    }
+    # Base negativa o neutra (los campesinos históricos eran conservadores o apolíticos)
+    add = {
+        value = 0 
+        desc = "POP_PEASANTS"
+    }
+    # SOLO apoyan si están alfabetizados o radicalizados
+    if = {
+        limit = { literacy_rate > 0.4 }
+        add = 2
+    }
+}
+
 			else = {
 				add = {
 					value = 3
