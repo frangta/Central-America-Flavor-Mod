@@ -1,0 +1,62 @@
+﻿on_tech_researched = {
+    effect = {
+        if = {
+            limit = {
+                is_ca_culture_country = yes
+                has_technology_researched = prospecting
+                NOT = { has_variable = ca_survey_progress }
+            }
+            set_variable = {
+                name = ca_survey_progress
+                value = 0
+            }
+        }
+    }
+}
+
+on_game_start_country = {
+    effect = {
+        if = {
+            limit = {
+                is_ca_culture_country = yes
+                has_technology_researched = prospecting
+                NOT = { has_variable = ca_survey_progress }
+            }
+            set_variable = {
+                name = ca_survey_progress
+                value = 0
+            }
+        }
+    }
+}
+
+
+on_yearly_pulse = {
+    events = {
+        ca_central_america.33 
+        ca_central_america.34 
+        ca_central_america.35
+        ca_central_america.36
+        ca_central_america.37
+        ca_central_america.38
+        ca_central_america.39
+        ca_central_america.40
+        ca_central_america.41
+        ca_central_america.43
+        ca_central_america.44
+        ca_central_america.52
+        ca_central_america.55
+        ca_central_america.58
+        ca_central_america.61
+        ca_central_america.64
+        ca_central_america.65
+        ca_central_america.67
+        ca_central_america.68
+        ca_central_america.71
+        ca_central_america.72
+        ca_central_america.73
+        ca_central_america.74
+        ca_central_america.75	
+        ca_central_america.87
+    }
+}

@@ -1,0 +1,93 @@
+﻿# Why do some state entries have quote marks around them, when others don't?
+# It's because of differing methods of editing throughout the production of the game. Quote marks are unnecessary, but harmless if present.
+
+STATES = {
+	s:STATE_GUATEMALA = {
+
+		add_homeland = cu:mayan
+		add_homeland = cu:central_american
+		add_homeland = cu:guatemalan
+		add_homeland = cu:garifuna_arawak 
+	}
+	s:STATE_HONDURAS = {
+		create_state = {
+			country = c:MKT
+			owned_provinces = { x528F3B }
+		}
+	
+		add_homeland = cu:central_american
+		add_homeland = cu:honduran
+		add_homeland = cu:lenca             
+		add_homeland = cu:mangue_chorotega  
+		add_homeland = cu:garifuna_arawak   
+		
+	}
+	s:STATE_NICARAGUA = {
+
+		add_homeland = cu:central_american
+		add_homeland = cu:nicaraguan
+		add_homeland = cu:miskito
+		add_homeland = cu:mangue_chorotega
+		add_homeland = cu:garifuna_arawak 
+		
+		
+	}
+	s:STATE_COSTA_RICA = {
+		create_state = {
+			country = c:RDT
+			owned_provinces = { x1A076A }
+		}
+		create_state = {
+			country = c:CLM
+			owned_provinces = { x10EF80 }
+		}		
+		add_homeland = cu:central_american
+		add_homeland = cu:costa_rican
+		add_homeland = cu:chibchan_central_america
+		add_homeland = cu:bribri_talamanca        
+		add_homeland = cu:cabecar                 
+		add_homeland = cu:ngabe_culture           
+		add_homeland = cu:mangue_chorotega        		
+	}
+	s:STATE_PANAMA = {
+		create_state = {
+			country = c:UCA
+			owned_provinces = { x47C5F8 }
+		}
+		create_state = {
+			country = c:NC3
+			owned_provinces = { xBB820B }
+		} 
+		create_state = {
+			country = c:NC2
+			owned_provinces = { xB0A911 }
+		} 
+		add_claim = c:CLM
+		add_homeland = cu:central_american
+		add_homeland = cu:panamanian
+		add_homeland = cu:afro_caribeno
+		add_homeland = cu:chibchan_central_america
+		add_homeland = cu:bribri_talamanca        
+		add_homeland = cu:embera                 
+		add_homeland = cu:ngabe_culture
+		add_homeland = cu:guna_kuna		
+	}
+
+	s:STATE_CHIAPAS = {
+
+		add_homeland = cu:mexican
+		add_homeland = cu:central_american		
+		add_homeland = cu:mayan
+		add_claim = c:MEX
+	}
+	s:STATE_SAN_SALVADOR = {
+
+		add_homeland = cu:central_american
+		add_homeland = cu:el_salvadorian
+		add_homeland = cu:lenca
+		add_homeland = cu:ngabe_culture
+		
+	}
+
+	
+}

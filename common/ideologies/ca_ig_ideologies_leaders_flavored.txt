@@ -1,35 +1,6 @@
-﻿
-ideology_crucismo = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
-
-	lawgroup_trade_policy = {		
-		law_isolationism = strongly_disapprove
-		law_protectionism = disapprove
-		law_mercantilism = approve
-		law_free_trade = strongly_approve
-	}
-
-	lawgroup_education_system = {
-		law_no_schools = disapprove
-		law_private_schools = approve
-		law_religious_schools = approve	
-		law_public_schools = approve
-	}
-
-	lawgroup_internal_security = {
-		law_national_guard = approve
-		law_no_home_affairs = disapprove
-	}
-
-	lawgroup_citizenship = { #This is so Santa Cruz isn't fine with super racism even tho as far as I know he wasn't a liberalsince it was historically used agaisnt him and he was of extremly recent aimara decent
-		law_ethnostate = strongly_disapprove
-		law_national_supremacy = disapprove
-	}
-}
-
-ideology_liberal_monarchist = {
+﻿ideology_ca_liberal_monarchist = {
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_royalist.dds"
-	
+	   character_ideology = yes
 	lawgroup_governance_principles = {
 		law_theocracy = strongly_disapprove	
 		law_monarchy = strongly_approve
@@ -93,8 +64,10 @@ ideology_liberal_monarchist = {
 	}
 }
 
-ideology_unitarian = {
+ideology_ca_unitarian = {
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
+
+    character_ideology = yes
 
 	lawgroup_bureaucracy = { #This is the best I can do for the moment to simulate the support for decentralized/centralized government 
 		law_hereditary_bureaucrats = strongly_disapprove
@@ -102,17 +75,19 @@ ideology_unitarian = {
 		law_elected_bureaucrats = strongly_disapprove
 	}
 	
-	lawgroup_centralization = {
-		law_decentralized = strongly_disapprove
-		law_confederated = strongly_disapprove
-		law_federal = strongly_disapprove
-		law_devolved = apporve
-		law_unitary = strongly_approve
-	}
+	#lawgroup_centralization = {
+	#	law_decentralized = strongly_disapprove
+	#	law_confederated = strongly_disapprove
+	#	law_federal = strongly_disapprove
+	#	law_devolved = apporve
+	#	law_unitary = strongly_approve
+	#}
 }
 
-ideology_federalist = {
+ideology_ca_federalist = {
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
+
+    character_ideology = yes
 
 	lawgroup_bureaucracy = { #This is the best I can do for the moment to simulate the support for decentralized/centralized government 
 		law_hereditary_bureaucrats = strongly_disapprove
@@ -120,17 +95,17 @@ ideology_federalist = {
 		law_elected_bureaucrats = strongly_approve
 	}
 	
-	lawgroup_centralization = {
-		law_decentralized = neutral
-		law_confederated = strongly_approve
-		law_federal = strongly_approve
-		law_devolved = strongly_disapprove
-		law_unitary = strongly_disapprove
-	}
+	#lawgroup_centralization = {
+	#	law_decentralized = neutral
+	#	law_confederated = strongly_approve
+	#	law_federal = strongly_approve
+	#	law_devolved = strongly_disapprove
+	#	law_unitary = strongly_disapprove
+	#}
 }
 
-ideology_autocratic_autonomist = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/autocratic_autonomist.dds"
+ideology_ca_leader_autocratic_autonomist = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_sovereignist.dds"
 	
 	character_ideology = yes
 
@@ -152,13 +127,13 @@ ideology_autocratic_autonomist = {
 		law_anarchy = strongly_disapprove
 	}
 	
-	lawgroup_centralization = {
-		law_decentralized = neutral
-		law_confederated = strongly_approve
-		law_federal = neutral
-		law_devolved = disapprove
-		law_unitary = strongly_disapprove
-	}
+	#lawgroup_centralization = {
+	#	law_decentralized = neutral
+	#	law_confederated = strongly_approve
+	#	law_federal = neutral
+	#	law_devolved = disapprove
+	#	law_unitary = strongly_disapprove
+	#}
 
 	lawgroup_policing = {
 		law_local_police = approve
@@ -183,7 +158,7 @@ ideology_central_america_caudillo = {
      lawgroup_governance_principles = {
 		law_monarchy = strongly_approve
 		law_presidential_republic = strongly_approve
-		law_parliamentary_republic = strongly_disapprove
+		law_central_american_confederated = strongly_disapprove
 		law_theocracy = strongly_disapprove
 		law_council_republic = strongly_disapprove
 	}
