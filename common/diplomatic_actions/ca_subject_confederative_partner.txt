@@ -7,6 +7,24 @@
 
 	selectable = {
 	    country_has_primary_culture = cu:central_american
+	OR ={
+     country_has_primary_culture = cu:costa_rican
+     }
+     OR ={
+     country_has_primary_culture = cu:panamanian
+     }
+     OR ={
+     country_has_primary_culture = cu:nicaraguan
+     }
+     OR ={
+     country_has_primary_culture = cu:guatemalan
+     }
+     OR ={
+     country_has_primary_culture = cu:el_salvadorian
+     }
+     OR ={
+     country_has_primary_culture = cu:honduran
+     }
 		NOT = { is_country_type = decentralized }
 	}
 	potential = {

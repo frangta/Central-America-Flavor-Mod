@@ -2,17 +2,43 @@
     groups = {
         general
     }
+     texture = "gfx/interface/icons/lens_toolbar_icons/autonomous_province.dds"
     show_in_lens = no
     can_use_obligations = yes
 
     selectable = {
-        country_has_primary_culture = cu:central_american
+     country_has_primary_culture = cu:central_american
+
+     country_has_primary_culture = cu:costa_rican
+
+     country_has_primary_culture = cu:panamanian
+
+     country_has_primary_culture = cu:nicaraguan
+
+     country_has_primary_culture = cu:guatemalan
+
+     country_has_primary_culture = cu:el_salvadorian
+
+     country_has_primary_culture = cu:honduran
+     
         NOT = { is_country_type = decentralized }
     }
 
     potential = {
         scope:target_country = {
-            country_has_primary_culture = cu:central_american
+     #country_has_primary_culture = cu:central_american
+
+     #country_has_primary_culture = cu:costa_rican
+
+     #country_has_primary_culture = cu:panamanian
+
+     #country_has_primary_culture = cu:nicaraguan
+
+     #country_has_primary_culture = cu:guatemalan
+
+     #country_has_primary_culture = cu:el_salvadorian
+
+     #country_has_primary_culture = cu:honduran
             NOT = { is_country_type = decentralized }
             is_revolutionary = no
         }

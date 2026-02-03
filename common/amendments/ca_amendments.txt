@@ -1,0 +1,222 @@
+﻿amendment_vagrancy_laws = {
+    parent = law_commercialized_agriculture  # Se añade a la agricultura comercial
+
+    allowed_laws = {
+        law_commercialized_agriculture
+        law_tenant_farmers
+    }
+
+    modifier = {
+        # Aumenta la eficiencia de plantaciones (Café/Banano)
+        building_group_bg_agriculture_throughput_mult = 0.15
+        
+        # Reduce el nivel de vida de los campesinos/obreros
+        state_standard_of_living_lower_strata_mult = -1.0
+        
+        # Aumenta el poder de los terratenientes
+        interest_group_political_strength_mult_ig_landowners = 0.1
+    }
+
+    possible = {
+        # Solo posible si no hay derechos laborales protegidos
+        NOT = { has_law = law_type:law_regulatory_bodies }
+        NOT = { has_law = law_type:law_worker_protections }
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }		
+    }
+
+    would_sponsor = {
+        # Los terratenientes lo apoyan si son poderosos
+        limit = {
+            is_interest_group_type = ig_landowners
+            is_powerful = yes
+        }
+        add = 50
+    }
+    
+    amendment_activism_multiplier = 1.5 # Genera mucha controversia/activismo
+}
+amendment_communal_ejidos = {
+    parent = law_homesteading # Se añade al "Homesteading" (Patrimonio familiar)
+
+    allowed_laws = {
+        law_homesteading
+        law_traditionalism
+    }
+
+    modifier = {
+        # Aumenta masivamente la producción de subsistencia (vida rural autosuficiente)
+        state_subsistence_output_mult = 0.25
+        
+        # Reduce la migración interna (apego a la tierra)
+        state_migration_pull_mult = -0.1
+        
+        # Aumenta el poder de la Gente del Campo (Rural Folk)
+        interest_group_political_strength_mult_ig_rural_folk = 0.25
+    }
+
+    possible = {
+        # No compatible con la esclavitud
+        NOT = { has_law = law_type:law_slavery_banned }
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }		
+    }
+
+    would_sponsor = {
+        # Apoyado por Rural Folk y la Iglesia (a veces)
+        limit = {
+            OR = {
+                is_interest_group_type = ig_rural_folk
+                is_interest_group_type = ig_devout
+            }
+        }
+        add = 50
+    }
+}
+amendment_filibuster_contract = {
+    parent = law_professional_army
+
+    allowed_laws = {
+        law_professional_army
+        law_national_militia
+    }
+
+    modifier = {
+        # Ejército mucho más fuerte (veteranos de USA/Europa)
+        army_offense_mult = 0.20
+        army_defense_mult = 0.10
+        
+        # Radicalismo por discriminación (la gente odia a los mercenarios)
+        state_radicals_from_discrimination_mult = 0.25
+        
+        # Prestigio cae (es vergonzoso usar mercenarios)
+        country_prestige_mult = -0.20
+    }
+    
+    # Cuesta más dinero mantenerlos (impuestos militares)
+    tax_modifier_medium = {
+        army_power_projection_mult = 0.1
+    }
+
+    possible = {
+        # Solo países pequeños o desesperados
+        rank_value < 30 # No Gran Potencia
+		        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }
+    }
+
+    would_sponsor = {
+        # Apoyado por la Petite Bourgeoisie (si son xenofílicos) o Landowners desesperados
+        limit = {
+            is_interest_group_type = ig_landowners
+            country = { has_variable = sura_wave_color var:sura_wave_color == 4 } # Si es Onda Dorada
+        }
+        add = 100
+    }
+}
+amendment_vatican_concordat = {
+    parent = law_religious_schools 
+
+    allowed_laws = {
+        law_religious_schools
+        law_state_religion
+    }
+    
+    # Se aplica a la institución educativa
+    institution = institution_schools
+
+    institution_modifier = {
+        # Aumenta la conversión religiosa drásticamente
+        state_conversion_mult = 0.5
+        
+        # Da muchísima autoridad al clero
+        interest_group_political_strength_mult_ig_devout = 0.3
+        
+        # Penaliza la investigación tecnológica
+        country_research_speed_mult = -0.10
+    }
+
+    possible = {
+        has_law = law_type:law_state_religion
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }		
+    }
+
+    would_sponsor = {
+        limit = {
+            is_interest_group_type = ig_devout
+        }
+        add = 100
+    }
+}
+amendment_jefes_politicos = {
+    parent = law_appointed_bureaucrats
+
+    allowed_laws = {
+        law_appointed_bureaucrats
+    }
+
+    modifier = {
+        # Mucha más Autoridad
+        country_authority_add = 150
+        
+        # Más corrupción Tax Waste
+        country_tax_waste_add = 0.15
+        
+        # Los militares cuentan como burócratas
+        interest_group_political_strength_mult_ig_armed_forces = 0.2
+    }
+
+    possible = {
+        # Requiere autocracia u oligarquía
+        OR = {
+            has_law = law_autocracy
+            has_law = law_oligarchy
+        }
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }		
+    }
+
+    would_sponsor = {
+        limit = {
+            is_interest_group_type = ig_armed_forces
+            is_powerful = yes
+        }
+        add = 75
+    }
+}

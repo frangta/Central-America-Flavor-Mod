@@ -1,0 +1,375 @@
+﻿ch_DecisionCheatDecree_MarkState = {
+	texture = "gfx/interface/icons/decree/decree_promote_national_values.dds"
+	modifier = {
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+
+
+ch_DecisionCheatDecree_1 = {
+	texture = "gfx/interface/icons/decree/decree_promote_national_values.dds"
+	modifier = { 
+        state_construction_mult = 3
+        state_infrastructure_add = 100
+		
+ 
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+
+ch_DecisionCheatDecree_3 = {
+	texture = "gfx/interface/icons/decree/decree_promote_national_values.dds"
+	modifier = { 
+        building_group_bg_manufacturing_throughput_add = 1
+		building_group_bg_service_throughput_add = 1
+		building_group_bg_agriculture_throughput_add = 1
+		building_group_bg_plantations_throughput_add = 1
+		building_group_bg_ranching_throughput_add = 1
+        building_group_bg_mining_throughput_add = 1
+		building_group_bg_logging_throughput_add = 1
+		building_group_bg_fishing_throughput_add = 1
+		building_group_bg_whaling_throughput_add = 1
+		building_group_bg_oil_extraction_throughput_add = 1
+		building_group_bg_rubber_throughput_add = 1
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+
+ch_DecisionCheatDecree_6 = {
+	texture = "gfx/interface/icons/decree/decree_promote_national_values.dds"
+	modifier = { 
+     state_education_access_add = 1
+
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_DecisionCheatDecree_5 = {
+	texture = "gfx/interface/icons/decree/decree_promote_national_values.dds"
+	modifier = { 
+               building_goods_input_mult = -0.5
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_DecisionColony_MarkState = {
+	texture = "gfx/interface/icons/decree/decree_greener_grass_campaign.dds"
+	modifier = {
+     state_non_homeland_mortality_mult  = -2
+	state_colony_growth_creation_factor  = 3.5
+	state_colony_growth_speed_mult  = 3.5
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_DecisionColony_MarkState2 = {
+	texture = "gfx/interface/icons/decree/decree_greener_grass_campaign.dds"
+	modifier = {
+    state_birth_rate_mult = 2.5
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_DecisionColony_MarkState3 = {
+	texture = "gfx/interface/icons/decree/decree_enlistment_efforts.dds"			
+	modifier = {
+		state_conscription_rate_add = 1
+		building_training_rate_add = 1000
+		building_training_rate_mult = 1
+                state_building_naval_base_max_level_add = 100
+                state_building_barracks_max_level_add = 100
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_DecisionColony_MarkState4 = {
+	texture = "gfx/interface/icons/decree/decree_enlistment_efforts.dds"			
+	modifier = {
+     state_farmers_investment_pool_contribution_add = 0.30
+     state_shopkeepers_investment_pool_contribution_add = 0.30
+     state_clergymen_investment_pool_contribution_add = 0.30
+     state_peasants_investment_pool_contribution_add = 0.30
+     state_laborers_investment_pool_contribution_add = 0.30
+	 state_farmers_investment_pool_efficiency_mult = 0.30
+     state_shopkeepers_investment_pool_efficiency_mult = 0.30
+     state_clergymen_investment_pool_efficiency_mult = 0.30
+     state_peasants_investment_pool_efficiency_mult = 0.30
+     state_laborers_investment_pool_efficiency_mult = 0.30
+	 
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_DecisionCheatDecree_10 = {
+	texture = "gfx/interface/icons/decree/decree_promote_national_values.dds"
+	modifier = { 
+		state_pop_qualifications_mult = 2
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_DecisionCheatDecree_11 = {
+	texture = "gfx/interface/icons/decree/decree_promote_national_values.dds"
+	modifier = { 
+       state_working_adult_ratio_add = 0.75
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_DecisionCheatDecree_12 = {
+	texture = "gfx/interface/icons/decree/decree_promote_national_values.dds"
+	modifier = { 
+         state_assimilation_mult = 3.5
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_Decision_state_birth = {
+	texture = "gfx/interface/icons/decree/decree_greener_grass_campaign.dds"
+	modifier = {
+    state_birth_rate_mult = 5
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_Decision_state_UP = {
+	texture = "gfx/interface/icons/decree/decree_greener_grass_campaign.dds"
+	modifier = {
+    state_standard_of_living_add = 15
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_Decision_state_UP_2 = {
+	texture = "gfx/interface/icons/decree/decree_greener_grass_campaign.dds"
+	modifier = {
+    state_upper_strata_standard_of_living_add = 15
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_Decision_state_UP_3 = {
+	texture = "gfx/interface/icons/decree/decree_greener_grass_campaign.dds"
+	modifier = {
+    state_middle_strata_standard_of_living_add = 15
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_Decision_state_UP_4 = {
+	texture = "gfx/interface/icons/decree/decree_greener_grass_campaign.dds"
+	modifier = {
+    state_lower_strata_standard_of_living_add = 15
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
+ch_decree_emergency_relief = {
+	texture = "gfx/interface/icons/decree/decree_emergency_relief.dds"
+	unlocking_technologies = {
+		centralization
+	}
+	modifier = {
+		state_welfare_payments_add = 0.5
+		state_tax_collection_mult = -0.5
+		state_infrastructure_mult = 0.1
+		state_market_access_price_impact = 0.05
+		state_food_security_add = 0.05
+	}
+	cost = 100
+	
+	ai_weight = {
+		value = 0
+		
+		if = {
+			limit = { 
+				average_sol < average_expected_sol
+			}
+			add = 100
+		}
+		if = {
+			limit = {
+				scope:country = {
+					OR = {
+						has_strategy = ai_strategy_nationalist_agenda
+						has_strategy = ai_strategy_reactionary_agenda
+					}
+				}
+			}
+			multiply = 0.5
+		}	
+	}
+}
+ch_Decision_state_UP_6 = {
+	texture = "gfx/interface/icons/decree/decree_greener_grass_campaign.dds"
+	modifier = {
+    country_tech_spread_add = 5000
+	}
+	unlocking_technologies = { 
+		
+	}
+	valid = {
+		owner = { is_player = yes }
+	}
+	cost = 0
+
+	ai_weight = {
+		value = 0				
+	}
+}
