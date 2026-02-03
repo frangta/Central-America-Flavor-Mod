@@ -1,0 +1,39 @@
+je_national_geological_survey = {
+    icon = "gfx/interface/icons/event_icons/event_map.dds"
+    
+    # CONEXIÓN CON LA BARRA DE PROGRESO
+    progressbar = ca_prospecting_bar
+    
+    # ¿Quién puede ver y activar esto?
+    possible = {
+        is_ca_culture_country = yes # Usamos el trigger del Paso 1
+        has_technology_researched = prospecting # Requiere tecnología de Prospección
+    }
+    
+    # ¿Cuándo se considera activa? (Mismas condiciones)
+    active = {
+        is_ca_culture_country = yes
+    }
+    
+    # CONDICIÓN DE VICTORIA
+    complete = {
+        # Se completa cuando la variable llega a 100
+        has_variable = ca_survey_progress
+        var:ca_survey_progress >= 100
+    }
+    
+    # BOTONES PARA SUBIR LA BARRA (Scripted Buttons dentro del JE)
+    scripted_button = "fund_survey_expedition"
+    scripted_button = "hire_foreign_geologists"
+    
+    # EFECTO AL COMPLETAR
+    on_complete = {
+        # Aquí das el "Permiso Global" o activas el evento para buscar en estados
+        set_variable = ca_can_build_mines_globally # Ejemplo de variable maestra
+        
+        # O disparas un evento de celebración
+        trigger_event = { id = ca_prospecting.100 }
+    }
+    
+    weight = 100
+}
