@@ -4,18 +4,70 @@
 	interest_group_ig_armed_forces_pol_str_mult = 0.6
 	country_officers_pol_str_mult = 0.6
 }
+ca_add_bureaucracy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_bureaucracy_add = 5000
+}
+
+ca_add_authority = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_authority_add = 5000
+}
+
+ca_add_influence = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_influence_add = 5000
+}
+
+ca_add_tech_spread = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_tech_spread_add = 5000
+}
+ca_add_innovation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_weekly_innovation_add = 10000
+	country_weekly_innovation_max_add = 10000
+}
+ca_el_gran_avanse_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+        country_minting_add = 10000.0
+	country_construction_add = 100
+	state_migration_pull_mult = 0.5
+	state_education_access_add = 0.25
+	state_pop_qualifications_mult = 5
+	state_construction_mult = 1
+}
 crisis_in_frca = {
 	country_cannot_start_law_enactment_bool = yes
 	country_cannot_cancel_law_enactment_bool = yes
 	country_disable_investment_pool_bool = yes
     country_disallow_agitator_invites_bool = yes
 }
+uca_new_penal_code = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_intelligentsia_approval_add = 2
+	interest_group_ig_landowners_approval_add = -2
+	country_authority_add = 100
+	country_prestige_mult = 0.05
+}
 
-#construct_conservative_stronghold_modifier = {
-#         icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
-#
-#}
-#
+uca_cholera = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_mortality_mult = 0.2
+}
+
+uca_quarantine = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	building_throughput_add = -0.5
+	state_mortality_mult = -0.15
+}
+
+uca_morazan_presidency = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_authority_add = 100
+	country_legitimacy_base_add = 10
+	interest_group_ig_intelligentsia_approval_add = 2
+}
 #ca_allow_multiple_alliances = {
 #	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
 #    country_allow_multiple_alliances_bool = yes
@@ -27,6 +79,16 @@ crisis_in_frca = {
 federal_stronghold = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
 	 
+}
+all_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+state_ca_iron_mine_max_level_add = 5
+state_ca_coal_mine_max_level_add = 5
+state_ca_lead_mine_max_level_add = 5
+state_ca_sulfur_mine_max_level_add = 5
+state_ca_gold_mine_max_level_add = 5
+state_ca_oil_rig_max_level_add = 5
+state_ca_gold_fields_max_level_add = 5	 
 }
 Removed_federal_stronghold = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
@@ -59,7 +121,12 @@ Removed_separatism_stronghold = {
 separatism_stronghold_small_nation = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
 	 
-}	
+}
+#construct_conservative_stronghold_modifier = {
+#         icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+#
+#}
+#	
 reactionary_stronghold = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
 	 interest_group_ig_petty_bourgeoisie_pop_attraction_mult = 0.50 
@@ -72,6 +139,11 @@ reactionary_stronghold_Small_Nation = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
 	 interest_group_ig_petty_bourgeoisie_pop_attraction_mult = 0.15
 }
+#construct_conservative_stronghold_modifier = {
+#         icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+#
+#}
+#
 conservative_stronghold = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
 	interest_group_ig_landowners_pop_attraction_mult = 0.1
@@ -87,6 +159,11 @@ conservative_stronghold_Small_Nation = {
 	interest_group_ig_landowners_pop_attraction_mult = 0.1
 	interest_group_ig_landowners_pol_str_mult = 0.3
 }
+#construct_conservative_stronghold_modifier = {
+#         icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+#
+#}
+#
 liberal_stronghold = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
 	 interest_group_ig_intelligentsia_pop_attraction_mult = 0.50
@@ -100,6 +177,312 @@ age_of_liberal_stronghold = {
 liberal_stronghold_Small_Nation = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
 		interest_group_ig_intelligentsia_pop_attraction_mult = 0.15 
+}
+costa_rican_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_costa_rican_cultural_acceptance_add = 1
+}
+
+costa_rican_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_costa_rican_cultural_acceptance_add = 1
+}
+
+panamanian_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_panamanian_cultural_acceptance_add = 1
+}
+
+panamanian_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_panamanian_cultural_acceptance_add = 1
+}
+
+nicaraguan_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_nicaraguan_cultural_acceptance_add = 1
+}
+
+nicaraguan_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_nicaraguan_cultural_acceptance_add = 1
+}
+
+guatemalan_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_guatemalan_cultural_acceptance_add = 1
+}
+
+guatemalan_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_guatemalan_cultural_acceptance_add = 1
+}
+
+el_salvadorian_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_el_salvadorian_cultural_acceptance_add = 1
+}
+
+el_salvadorian_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_el_salvadorian_cultural_acceptance_add = 1
+}
+
+honduran_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_honduran_cultural_acceptance_add = 1
+}
+
+honduran_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_honduran_cultural_acceptance_add = 1
+}
+
+chibchan_central_america_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_chibchan_central_america_cultural_acceptance_add = 1
+}
+
+chibchan_central_america_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_chibchan_central_america_cultural_acceptance_add = 1
+}
+
+bribri_talamanca_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_bribri_talamanca_cultural_acceptance_add = 1
+}
+
+bribri_talamanca_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_bribri_talamanca_cultural_acceptance_add = 1
+}
+
+cabecar_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_cabecar_cultural_acceptance_add = 1
+}
+
+cabecar_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_cabecar_cultural_acceptance_add = 1
+}
+
+embera_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_embera_cultural_acceptance_add = 1
+}
+
+embera_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_embera_cultural_acceptance_add = 1
+}
+
+guna_kuna_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_guna_kuna_cultural_acceptance_add = 1
+}
+
+guna_kuna_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_guna_kuna_cultural_acceptance_add = 1
+}
+
+lenca_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_lenca_cultural_acceptance_add = 1
+}
+
+lenca_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_lenca_cultural_acceptance_add = 1
+}
+ngabe_culture_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_ngabe_cultural_acceptance_add = 1
+}
+
+ngabe_culture_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_ngabe_cultural_acceptance_add = 1
+}
+mangue_chorotega_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_mangue_chorotega_cultural_acceptance_add = 1
+}
+
+mangue_chorotega_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_mangue_chorotega_cultural_acceptance_add = 1
+}
+
+garifuna_arawak_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_garifuna_arawak_cultural_acceptance_add = 1
+}
+
+garifuna_arawak_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_garifuna_arawak_cultural_acceptance_add = 1
+}
+
+ngabe_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_ngabe_cultural_acceptance_add = 1
+}
+
+ngabe_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_ngabe_cultural_acceptance_add = 1
+}
+costa_rican_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_costa_rican_add = 1
+}
+
+costa_rican_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_costa_rican_add = 1
+}
+
+panamanian_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_panamanian_add = 1
+}
+
+panamanian_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_panamanian_add = 1
+}
+
+nicaraguan_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_nicaraguan_add = 1
+}
+
+nicaraguan_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_nicaraguan_add = 1
+}
+
+guatemalan_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_guatemalan_add = 1
+}
+
+guatemalan_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_guatemalan_add = 1
+}
+
+el_salvadorian_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_el_salvadorian_add = 1
+}
+
+el_salvadorian_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_el_salvadorian_add = 1
+}
+
+honduran_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_honduran_add = 1
+}
+
+honduran_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_honduran_add = 1
+}
+
+chibchan_central_america_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_chibchan_central_america_add = 1
+}
+
+chibchan_central_america_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_chibchan_central_america_add = 1
+}
+
+bribri_talamanca_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_bribri_talamanca_add = 1
+}
+
+bribri_talamanca_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_bribri_talamanca_add = 1
+}
+
+cabecar_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_cabecar_add = 1
+}
+
+cabecar_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_cabecar_add = 1
+}
+
+embera_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_embera_add = 1
+}
+
+embera_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_embera_add = 1
+}
+
+guna_kuna_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_guna_kuna_add = 1
+}
+
+guna_kuna_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_guna_kuna_add = 1
+}
+
+lenca_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_lenca_add = 1
+}
+
+lenca_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_lenca_add = 1
+}
+
+mangue_chorotega_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_mangue_chorotega_add = 1
+}
+
+mangue_chorotega_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_mangue_chorotega_add = 1
+}
+
+garifuna_arawak_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_garifuna_arawak_add = 1
+}
+
+garifuna_arawak_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_garifuna_arawak_add = 1
+}
+
+ngabe_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_ngabe_add = 1
+}
+
+ngabe_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_ngabe_add = 1
 }
 ######################Soon##########
 #Anarcho-Liberal_stronghold = {
@@ -150,3 +533,4 @@ liberal_stronghold_Small_Nation = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
 	 
 #}
+

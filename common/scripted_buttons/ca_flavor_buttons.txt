@@ -1,8 +1,11 @@
 ﻿federal_congress_decree_button = {
 	name = "federal_congress_decree_button"
-	desc = "ffederal_congress_decree_button_desc"
+	desc = "federal_congress_decree_button_desc"
 	
-	visible = { has_valiable  = voting_ca_self_determination}	
+	visible = { 
+	NOT = {
+	has_valiable  = voting_ca_self_determination}
+}	
 	possible = {
 		custom_tooltip = {
 			text = ""
@@ -553,4 +556,50 @@ je_restore_order_els_button = {
 	ai_chance = {
 		base = 100
 	}
+}
+fund_survey_expedition = {
+    name = "FUND_SURVEY_EXPEDITION"
+    desc = "FUND_SURVEY_EXPEDITION_DESC"
+    
+    possible = {
+        has_variable = ca_survey_progress
+        var:ca_survey_progress < 100
+        gold_reserves >= 2000
+    }
+    
+    effect = {
+        add_treasury = -2000
+        
+        # Sube la barra +10 puntos
+        change_variable = {
+            name = ca_survey_progress
+            add = 10
+        }
+    }
+    
+    ai_chance = { base = 10 }
+}
+
+hire_foreign_geologists = {
+    name = "HIRE_FOREIGN_GEOLOGISTS"
+    desc = "HIRE_FOREIGN_GEOLOGISTS_DESC"
+    
+    possible = {
+        has_variable = ca_survey_progress
+        var:ca_survey_progress < 100
+        gold_reserves >= 5000
+    }
+    
+    effect = {
+        add_treasury = -5000
+        add_radicals = { value = 1000 } # Los locales se enojan un poco
+        
+        # Sube la barra +25 puntos
+        change_variable = {
+            name = ca_survey_progress
+            add = 25
+        }
+    }
+    
+    ai_chance = { base = 5 }
 }
