@@ -48,7 +48,7 @@ calculate_federalists_vs_separatists_progress = {
 	if = {
 		limit = {
 			OR = {
-				has_law = law_type:law_federal
+				has_law = law_type:law_ca_central_american_federal
 			
 			}
 		}
@@ -60,7 +60,7 @@ calculate_federalists_vs_separatists_progress = {
 	if = {
 		limit = {
 			OR = {
-				has_law = law_type:law_devolved
+				has_law = law_type:law_ca_central_american_unitary
 		}
 		change_variable = {
 			name = federalists_vs_separatists_next
@@ -117,130 +117,19 @@ calculate_federalists_vs_separatists_progress = {
 
 
 }
-calculate_frca_support_progress = {
-	
-		if = {
-				limit = {
-					has_variable = gua_support_var
-					NOT = { exists = c:GUA }
-					NOT = { has_variable = je_gua_support_var }
-				}
-				change_variable = { name = frca_support add = 1 }
+ca_out_poli = {
+		random_political_movement = {
+			limit = {
+				is_political_movement_type = movement_liberal
+				is_political_movement_type = movement_cultural_majority
+				is_political_movement_type = movement_religious_majority
 			}
-		if = {
-				limit = {
-					OR = {
-						NOT = { has_variable = gua_support_var }
-						exists = c:GUA
-					}
-					has_variable = je_gua_support_var
-				}
-				change_variable = { name = frca_support add = -1 }
-			}
-		if = {
-				limit = {
-					has_variable = els_support_var
-					NOT = { exists = c:ELS }
-					NOT = { has_variable = je_els_support_var }
-				}
-				change_variable = { name = frca_support add = 1 }
-			}
-		if = {
-				limit = {
-					OR = {
-						NOT = { has_variable = els_support_var }
-						exists = c:ELS
-					}
-					has_variable = je_els_support_var
-				}
-				change_variable = { name = frca_support add = -1 }
-			}
-		if = {
-				limit = {
-					has_variable = hon_support_var
-					NOT = { exists = c:HON }
-					NOT = { has_variable = je_hon_support_var }
-				}
-				change_variable = { name = frca_support add = 1 }
-			}
-		if = {
-				limit = {
-					OR = {
-						NOT = { has_variable = hon_support_var }
-						exists = c:HON
-					}
-					has_variable = je_hon_support_var
-				}
-				change_variable = { name = frca_support add = -1 }
-			}
-		if = {
-				limit = {
-					has_variable = nic_support_var
-					NOT = { exists = c:NIC }
-					NOT = { has_variable = je_nic_support_var }
-				}
-				change_variable = { name = frca_support add = 1 }
-			}
-		if = {
-				limit = {
-					OR = {
-						NOT = { has_variable = nic_support_var }
-						exists = c:NIC
-					}
-					has_variable = je_nic_support_var
-				}
-				change_variable = { name = frca_support add = -1 }
-			}
-		if = {
-				limit = {
-					has_variable = cos_support_var
-					NOT = { exists = c:COS }
-					NOT = { has_variable = je_cos_support_var }
-				}
-				change_variable = { name = frca_support add = 1 }
-			}
-		if = {
-				limit = {
-					OR = {
-						NOT = { has_variable = cos_support_var }
-						exists = c:COS
-					}
-					has_variable = je_cos_support_var
-				}
-				change_variable = { name = frca_support add = -1 }
-			}
-
-
-	    if = {
-	     	limit = {
-	     		exists = c:ELS
-	     		has_variable = frca_elsalvador_peace_var
-	     	}
-	     	change_variable = { name = frca_support add = -5 }
-	     }
-	    if = {
-	     	limit = {
-	     		exists = c:HON
-	     		has_variable = frca_honduras_peace_var
-	     	}
-	     	change_variable = { name = frca_support add = -5 }
-	     }
-	    if = {
-	     	limit = {
-	     		exists = c:NIC
-	     		has_variable = frca_nicaragua_peace_var
-	     	}
-			change_variable = { name = frca_support add = -5 }
-	     }
-	    if = {
-	     	limit = {
-	     		exists = c:COS
-	     		has_variable = frca_costarica_peace_var
-	     	}
-	     	change_variable = { name = frca_support add = -5 }
-	     }
-
-
+			save_scope_as = off_movement_scope
+		add_modifier = {
+			name = ca_modifier_total_debug
+			days = normal_modifier_time
+		}
+		}
 
 }
 #ca_self_determination_decret = {
@@ -295,6 +184,64 @@ calculate_frca_support_progress = {
 #		   }
 #        }
 #}
+ca_on_country_released_as_overlord_subject = {
+	hidden_effect = {
+		if = {
+			limit = {
+				OR = {
+					this = GUA
+					this = ELS
+					this = HON
+					this = NIC
+					this = COS
+					this = ALT
+				}
+			}
+			
+			activate_law = law_type:law_presidential_republic
+			activate_law = law_type:law_wealth_voting
+			
+			
+			c:UCA = {
+				save_scope_as = ca_overlord_scope
+			}
+			
+                        create_diplomatic_pact = {
+				country = scope:ca_overlord_scope
+				type = ca_dependency 
+			}
+
+		}
+
+          if = {
+            limit = {
+               
+                has_dlc_feature = ip4_content
+                                
+                is_historical_spanish_american_colony = yes
+                               
+                NOT = { has_modifier = modifier_not_recognized_by_spain }
+                
+                c:SPA ?= { always = yes }
+
+                
+                NOT = { 
+                    any_overlord_or_above = { c:SPA ?= this }
+                }
+            }
+
+
+            add_modifier = {
+                name = modifier_not_recognized_by_spain
+            }
+
+
+            add_journal_entry = {
+                type = je_spanish_american_independence
+            }
+        }
+	}
+}
 ca_history_rail_events	= {
 		#Main Journal Entry Variables
 		set_variable = is_frca_var
@@ -330,6 +277,221 @@ ca_history_rail_events	= {
 
 
 
+}
+ca_setup_ideological_cha = {
+
+
+create_character = {
+	ig_leader = yes
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+}
+
+create_character = {
+	ig_leader = yes
+	interest_group = ig_rural_folk
+	ideology = ideology_moderate
+}
+
+create_character = {
+	ig_leader = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_moderate
+}
+
+create_character = {
+	ig_leader = yes
+	interest_group = ig_petite_bourgeoisie
+	ideology = ideology_moderate
+}
+}
+ca_setup_ideological_cha_zero = {
+create_character = {
+	ig_leader = yes
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+}
+
+create_character = {
+	ig_leader = yes
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+}
+
+create_character = {
+	ig_leader = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+}
+
+create_character = {
+	ig_leader = yes
+	interest_group = ig_devout
+	ideology = ideology_moderate
+}
+
+create_character = {
+	ig_leader = yes
+	interest_group = ig_industrialists
+	ideology = ideology_moderate
+}
+
+create_character = {
+	ig_leader = yes
+	interest_group = ig_rural_folk
+	ideology = ideology_moderate
+}
+
+create_character = {
+	ig_leader = yes
+	interest_group = ig_trade_unions
+	ideology = ideology_moderate
+}
+
+create_character = {
+	ig_leader = yes
+	interest_group = ig_petite_bourgeoisie
+	ideology = ideology_moderate
+}
+
+
+}
+ca_setup_ideological_strongholds_effect = {
+    # ---------------------------------------------------------
+    # EL SALVADOR: La Capital Federal y Liberal
+    # ---------------------------------------------------------
+    s:STATE_SAN_SALVADOR = { 
+        every_scope_state = { # Transición de State Region a State
+            add_modifier = { name = federal_stronghold }
+            add_modifier = { name = liberal_stronghold }
+        }
+    }
+
+    # ---------------------------------------------------------
+    # GUATEMALA: La Vieja Élite y el Caudillismo
+    # ---------------------------------------------------------
+    s:STATE_GUATEMALA = {
+        every_scope_state = {
+            add_modifier = { name = unitary_stronghold }
+            add_modifier = { name = conservative_stronghold }
+            add_modifier = { name = reactionary_stronghold }
+        }
+    }
+
+    # ---------------------------------------------------------
+    # NICARAGUA: División y Separatismo
+    # ---------------------------------------------------------
+    s:STATE_NICARAGUA = {
+        every_scope_state = {
+            add_modifier = { name = separatism_stronghold }
+            add_modifier = { name = liberal_stronghold_small_nation }
+            add_modifier = { name = conservative_stronghold_small_nation }
+        }
+    }
+
+    # ---------------------------------------------------------
+    # COSTA RICA: Aislacionismo y Orden
+    # ---------------------------------------------------------
+    s:STATE_COSTA_RICA = {
+        every_scope_state = {
+            add_modifier = { name = separatism_stronghold }
+            add_modifier = { name = unitary_stronghold_small_nation }
+        }
+    }
+
+    # ---------------------------------------------------------
+    # HONDURAS: Federalismo en Decadencia
+    # ---------------------------------------------------------
+    s:STATE_HONDURAS = {
+        every_scope_state = {
+            add_modifier = { name = waning_federal_stronghold }
+            add_modifier = { name = conservative_stronghold_small_nation }
+        }
+    }
+}
+
+# ====================================================================
+# MOVIMIENTOS POLÍTICOS INICIALES
+# ====================================================================
+ca_setup_political_movements_effect = {
+    s:STATE_SAN_SALVADOR = {
+        every_scope_state = {
+            add_modifier = { name = ca_liberal_stronghold }
+        }
+    }
+
+    s:STATE_GUATEMALA = {
+        every_scope_state = {
+            add_modifier = { name = ca_conservative_capital }
+        }
+    }
+
+    s:STATE_COSTA_RICA = {
+        every_scope_state = {
+            add_modifier = { name = ca_isolated_autonomists }
+        }
+    }
+
+    s:STATE_HONDURAS = {
+        every_scope_state = {
+            add_modifier = { name = ca_federalist_heartland }
+        }
+    }
+
+    s:STATE_PANAMA = {
+        every_scope_state = {
+            add_modifier = { name = ca_isthmian_liberalism }
+        }
+    }
+
+    s:STATE_NICARAGUA = {
+        every_scope_state = {
+            add_modifier = { name = ca_leones_vs_granadinos }
+        }
+    }
+
+    s:STATE_CHIAPAS = {
+        every_scope_state = {
+            add_modifier = { name = ca_frontier_tensions }
+        }
+    }
+}
+
+# ====================================================================
+# MODIFICADORES DE MINERÍA (Solo si son de rendimiento, NO geográficos)
+# ====================================================================
+ca_setup_state_trait_mining_effect = {
+    s:STATE_SAN_SALVADOR = {
+        add_state_trait = state_trait_mining_els
+    }
+
+    s:STATE_GUATEMALA = {
+        add_state_trait = state_trait_mining_gua
+    }
+
+    s:STATE_COSTA_RICA = {
+        add_state_trait = state_trait_mining_cos
+    }
+
+    s:STATE_HONDURAS = {
+        add_state_trait = state_trait_mining_hon
+    }
+
+    s:STATE_NICARAGUA = {
+        add_state_trait = state_trait_mining_nic
+    }
+}
+ca_initial_game_start_setup = {
+	if = {
+		limit = {
+			NOT = { has_global_variable = ca_setup_done }
+		}
+		ca_setup_political_movements_effect = yes
+		ca_setup_ideological_strongholds_effect = yes
+		ca_setup_state_trait_mining_effect = yes
+		
+		set_global_variable = ca_setup_done
+	}
 }	
 #ca_pop_size_historical_setup_events = {
 #

@@ -27,9 +27,11 @@
 		unit_experience_gain_mult = -0.25
 		state_conscription_rate_add = 0.04
 		country_aristocrats_pol_str_mult = 0.25
+        interest_group_ig_landowners_pol_str_mult = 0.25		
 		country_military_goods_cost_mult = -0.1
-		state_building_barracks_max_level_add = 25
+		state_building_barrack_max_level_add = 25
 		state_building_conscription_center_max_level_add = 25
+	
 	}
 
 	can_impose = {
@@ -47,6 +49,10 @@
 
 	on_enact = {
 		custom_tooltip = QUALIFICATIONS_OFFICERS_PEASANT_LEVIES_DESC
+        if = {
+            limit = { NOT = { has_law_or_variant = law_type:law_peasant_levies } }
+            custom_tooltip = aristocrats_af_ig_shift_effect_tt
+        }		
 		if = {
 			limit = {
 				NOT = {
@@ -104,7 +110,7 @@ law_ca_caudillismo = {
 		state_conscription_rate_add = 0.04
 		country_aristocrats_pol_str_mult = 0.25
 		country_military_goods_cost_mult = -0.1
-		state_building_barracks_max_level_add = 25
+		state_building_barrack_max_level_add = 25
 		state_building_conscription_center_max_level_add = 25
 	}
 
@@ -179,8 +185,9 @@ law_regionalist_militia = {
 		state_conscription_rate_add = 0.05
 		country_leverage_resistance_mult = 0.5
 		country_officers_pol_str_mult = -0.25
-		state_building_barracks_max_level_add = 5
+		state_building_barrack_max_level_add = 5
 		state_building_conscription_center_max_level_add = 100
+		
 	}
 
 	can_enact = {

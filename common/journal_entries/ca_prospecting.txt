@@ -1,0 +1,37 @@
+﻿je_national_geological_survey = {
+    icon = "gfx/interface/icons/event_icons/event_map.dds"
+    
+   
+    progressbar = ca_prospecting_bar
+    
+   
+    possible = {
+        is_ca_culture_country = yes
+        has_technology_researched = prospecting 
+    }
+    
+    
+    active = {
+        is_ca_culture_country = yes
+    }
+    
+    complete = {
+
+        has_variable = ca_survey_progress
+        var:ca_survey_progress >= 100
+    }
+    
+
+    scripted_button = "fund_survey_expedition"
+    scripted_button = "hire_foreign_geologists"
+
+    on_complete = {
+  
+        set_variable = ca_can_build_mines_globally # Ejemplo de variable maestra
+        
+
+        trigger_event = { id = ca_prospecting.100 }
+    }
+    
+    weight = 100
+}

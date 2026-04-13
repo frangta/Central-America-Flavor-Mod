@@ -4,6 +4,7 @@
 	game_data={
 		ai_value=0
 	}
+	
 }
 state_ca_coal_mine_max_level_add={
 	decimals=0
@@ -40,7 +41,7 @@ state_ca_oil_rig_max_level_add={
 		ai_value=0
 	}
 }
-state_ca_gold_fields_max_level_add={
+state_ca_gold_field_max_level_add={
 	decimals=0
 	color=good
 	game_data={
@@ -110,6 +111,36 @@ state_pop_support_movement_ca_federalist_mult={
 	game_data={
 		ai_value=0
 	}
+}
+
+state_political_movement_ca_reactionary_radicalism_add = {
+    decimals = 1
+    color = bad 
+    game_data = { ai_value = 0 }
+	script_only = yes
+}
+
+
+state_political_movement_ca_liberal_radicalism_add = {
+    decimals = 1
+    color = bad
+    game_data = { ai_value = 0 }
+	script_only = yes
+}
+
+state_political_movement_ca_unitarian_radicalism_add = {
+    decimals = 1
+    color = bad
+    game_data = { ai_value = 0 }
+	script_only = yes
+}
+
+
+state_political_movement_ca_federalist_radicalism_add = {
+    decimals = 1
+    color = bad
+    game_data = { ai_value = 0 }
+	script_only = yes
 }
 country_fervor_target_ngabe_culture_add={
 	decimals=1
@@ -217,12 +248,13 @@ country_fervor_target_garifuna_arawak_add={
 		ai_value=0
 	}
 }
-country_ngabe_culture_cultural_acceptance_add={
+country_ngabe_cultural_acceptance_add={
 	decimals=1
 	color=good
 	game_data={
 		ai_value=0
 	}
+	script_only = yes
 }
 country_costa_rican_cultural_acceptance_add={
 	decimals=1
@@ -309,7 +341,7 @@ country_lenca_cultural_acceptance_add={
 	}
 }
 
-country_lenca_cultural_acceptance_cultural_add={
+country_lenca_cultural_acceptance_add={
 	decimals=1
 	color=good
 	game_data={

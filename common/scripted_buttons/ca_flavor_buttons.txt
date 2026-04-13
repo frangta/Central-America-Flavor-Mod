@@ -20,96 +20,96 @@
 	}
 }
 
-fragile_unity_decree_button = {
-	name = "fragile_unity_decree_button2"
-	desc = "fragile_unity_decree_button_desc2"
-
-	visible = { always = yes }
-
-	possible = {
-		ig:ig_armed_forces = {
-			is_in_government = yes
-			is_powerful = yes
-		}
-		NOT = { has_modifier = caudillo_rule_by_decree_modifier }
-	}
-
-	effect = {
-		custom_tooltip = {
-			text = gain_caudillo_points
-			change_variable = {
-				name = fragile_unity_var
-				add = 100
-			}
-		}
-		add_modifier = {
-			name = caudillo_rule_by_decree_modifier
-			months = normal_modifier_time
-		}
-	}
-}
-landowners_unity_decree_button = {
-	name = "fragile_unity_decree_button"
-	desc = "fragile_unity_decree_button_desc"
-
-	visible = { always = yes }
-
-	possible = {
-		ig:ig_armed_forces = {
-			ig:ig_landowners = yes
-			is_powerful = yes
-		}
-		NOT = { has_modifier = construct_conservative_stronghold_modifier }
-	}
-
-	effect = {
-		custom_tooltip = {
-			text = gain_caudillo_points
-			change_variable = {
-				name = fragile_unity_var
-				add = 100
-			}
-		}
-
-		add_modifier = {
-			name = construct_conservative_stronghold_modifier
-			months = normal_modifier_time
-		}
-	}
-}
-intelligentsia_unity_decree_button = {
-	name = "fragile_unity_decree_button"
-	desc = "fragile_unity_decree_button_desc"
-
-	visible = { always = yes }
-
-	possible = {
-		ig:ig_intelligentsia = {
-			is_in_government = yes
-			is_powerful = yes
-		}
-		custom_tooltip = {
-			text = ""
-			NOT = {
-				has_variable = ca_self_determination
-			}
-		}
-	}
-
-	effect = {
-		custom_tooltip = {
-			text = gain_caudillo_points
-			change_variable = {
-				name = fragile_unity_var
-				add = 100
-			}
-		}
-		add_modifier = {
-			name = construct_liberal_stronghold_modifier
-			months = normal_modifier_time
-		}
-	}
-}
+#fragile_unity_decree_button = {
+#	name = "fragile_unity_decree_button2"
+#	desc = "fragile_unity_decree_button_desc2"
+#
+#	visible = { always = yes }
+#
+#	possible = {
+#		ig:ig_armed_forces = {
+#			is_in_government = yes
+#			is_powerful = yes
+#		}
+#		NOT = { has_modifier = caudillo_rule_by_decree_modifier }
+#	}
+#
+#	effect = {
+#		custom_tooltip = {
+#			text = gain_caudillo_points
+#			change_variable = {
+#				name = fragile_unity_var
+#				add = 100
+#			}
+#		}
+#		add_modifier = {
+#			name = caudillo_rule_by_decree_modifier
+#			months = normal_modifier_time
+#		}
+#	}
+#}
+#landowners_unity_decree_button = {
+#	name = "fragile_unity_decree_button"
+#	desc = "fragile_unity_decree_button_desc"
+#
+#	visible = { always = yes }
+#
+#	possible = {
+#		ig:ig_armed_forces = {
+#			ig:ig_landowners = yes
+#			is_powerful = yes
+#		}
+#		NOT = { has_modifier = construct_conservative_stronghold_modifier }
+#	}
+#
+#	effect = {
+#		custom_tooltip = {
+#			text = gain_caudillo_points
+#			change_variable = {
+#				name = fragile_unity_var
+#				add = 100
+#			}
+#		}
+#
+#		add_modifier = {
+#			name = construct_conservative_stronghold_modifier
+#			months = normal_modifier_time
+#		}
+#	}
+#}
+#intelligentsia_unity_decree_button = {
+#	name = "fragile_unity_decree_button"
+#	desc = "fragile_unity_decree_button_desc"
+#
+#	visible = { always = yes }
+#
+#	possible = {
+#		ig:ig_intelligentsia = {
+#			is_in_government = yes
+#			is_powerful = yes
+#		}
+#		custom_tooltip = {
+#			text = ""
+#			NOT = {
+#				has_variable = ca_self_determination
+#			}
+#		}
+#	}
+#
+#	effect = {
+#		custom_tooltip = {
+#			text = gain_caudillo_points
+#			change_variable = {
+#				name = fragile_unity_var
+#				add = 100
+#			}
+#		}
+#		add_modifier = {
+#			name = construct_liberal_stronghold_modifier
+#			months = normal_modifier_time
+#		}
+#	}
+#}
 
 #opposition_crisis_var
 #Historic events##
@@ -253,7 +253,7 @@ je_honduras_intervention_central_america_button = {
 			create_diplomatic_play = {
 				name = hondurasn_intervention
 				type = dp_annex_war
-				escalation = 20
+				escalation = 80
 				target_state = s:STATE_HONDURAS.region_state:HON
 			
 			}
@@ -556,4 +556,50 @@ je_restore_order_els_button = {
 	ai_chance = {
 		base = 100
 	}
+}
+fund_survey_expedition = {
+    name = "FUND_SURVEY_EXPEDITION"
+    desc = "FUND_SURVEY_EXPEDITION_DESC"
+    
+    possible = {
+        has_variable = ca_survey_progress
+        var:ca_survey_progress < 100
+        gold_reserves >= 2000
+    }
+    
+    effect = {
+        add_treasury = -2000
+        
+        # Sube la barra +10 puntos
+        change_variable = {
+            name = ca_survey_progress
+            add = 10
+        }
+    }
+    
+    ai_chance = { base = 10 }
+}
+
+hire_foreign_geologists = {
+    name = "HIRE_FOREIGN_GEOLOGISTS"
+    desc = "HIRE_FOREIGN_GEOLOGISTS_DESC"
+    
+    possible = {
+        has_variable = ca_survey_progress
+        var:ca_survey_progress < 100
+        gold_reserves >= 5000
+    }
+    
+    effect = {
+        add_treasury = -5000
+        add_radicals = { value = 1000 } # Los locales se enojan un poco
+        
+        # Sube la barra +25 puntos
+        change_variable = {
+            name = ca_survey_progress
+            add = 25
+        }
+    }
+    
+    ai_chance = { base = 5 }
 }

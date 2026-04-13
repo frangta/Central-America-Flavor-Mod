@@ -34,12 +34,13 @@ law_land_reform_coffee_oligarchy = {
 
     modifier = {
 
-    interest_group_ig_landowners_pol_str_mult = 0.25
-    goods_output_coffee_mult = 0.35 
-
-    prestige_from_exports_mult = 0.10
-
-    state_peasants_mass_migration_disallowed_bool = yes
+        interest_group_ig_landowners_pol_str_mult = 0.25
+        building_group_bg_coffee_plantations_throughput_add = 0.15
+        building_group_bg_tobacco_plantations_throughput_add = 0.10
+        building_group_bg_tea_plantations_throughput_add = 0.10 
+        state_tax_capacity_add = 10
+        state_peasants_mass_migration_disallowed_bool = yes
+        state_migration_pull_mult = -0.10
     }
 	
 
@@ -75,17 +76,12 @@ law_land_reform_communal_lands = {
 
     modifier = {
    
-    interest_group_ig_landowners_pol_str_mult = -0.30
-
-    
-    interest_group_ig_rural_folk_pop_attraction_mult = 0.40
-     goods_produced_mult = { good = grain value = 0.05 }
-    state_mortality_mult = -0.05
-	state_birth_rate_mult = 0.20
-    pop_militancy_add = -0.05
-    }
-
-    # localización: law_land_reform_communal_lands, law_land_reform_communal_lands_desc
+        interest_group_ig_landowners_pol_str_mult = -0.30
+        interest_group_ig_rural_folk_pop_attraction_mult = 0.40
+        building_group_bg_agriculture_throughput_add = 0.05
+        state_mortality_mult = -0.05
+        state_birth_rate_mult = 0.20
+        political_movement_radicalism_add = -0.05
 }
 
 law_land_reform_banana_republic = {
@@ -116,21 +112,10 @@ law_land_reform_banana_republic = {
     }
 
     modifier = {
-    # +20% banana production / output (plantaciones)
-    goods_produced_mult = { good = banana value = 0.20 }
-
-    # +15% attraction for foreign capital (simulado con menor construction cost para inversión extranjera)
-    building_construction_cost_mult = -0.15
-
-    # Increase Petite Bourgeoisie / Capitalists political strength (el lobby pro-empresa)
-    interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.15
-
-    # Decrease Landowners approval (porque tierras pasan a concesiones)
-    interest_group_ig_landowners_pol_str_mult = -0.10
-    }
-
-    # localización: law_land_reform_banana_republic, law_land_reform_banana_republic_desc
-}
+        building_group_bg_banana_plantations_throughput_add = 0.05
+        country_construction_goods_cost_mult = -0.15
+        interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.15
+        interest_group_ig_landowners_pol_str_mult = -0.10
 
 law_land_reform_hacienda_system = {
     group = lawgroup_land_reform
@@ -160,21 +145,9 @@ law_land_reform_hacienda_system = {
     }
 
     modifier = {
-         # Moderate bonus to landowner political clout
-    interest_group_ig_landowners_pol_str_mult = 0.20
-
-    # Increase output of exportable agricultural goods (cacao/tobacco/coffee) a pequeña escala
-    goods_produced_mult = { good = tobacco_fine value = 0.10 }
-    goods_produced_mult = { good = cacao value = 0.08 }
-    goods_produced_mult = { good = coffee value = 0.05 }
-
-    # Increase landlord rent-taking simulated con mayor taxation capacity o minus SOL para arrendatarios:
-    # (usamos bureaucracy/taxation capacity style field — revisar define si está disponible)
-    taxation_capacity_add = 10
-
-    # Slightly increase tenant immobility / reduce rural pop mobility
-    		state_peasants_mass_migration_disallowed_bool = yes
-    }
-
-    # localización: law_land_reform_hacienda_system, law_land_reform_hacienda_system_desc
+        interest_group_ig_landowners_pol_str_mult = 0.20
+        building_group_bg_coffee_plantations_throughput_add = 0.10
+        building_group_bg_tobacco_plantations_throughput_add = 0.10
+        state_tax_capacity_add = 10
+        state_peasants_mass_migration_disallowed_bool = yes
 }

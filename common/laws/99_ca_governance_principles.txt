@@ -1,24 +1,23 @@
 ﻿# group = this is the law_group a law belongs to
 # icon = graphical icon shown in-game
 # modifier = {} modifier on country for having adopted this law
+# ==============================================
+# LEY FEDERAL (Status Quo / Histórico)
+# Equilibrio: Bonos a la lealtad local, penalización a la autoridad central.
+# ==============================================
+law_ca_central_american_federal = {
+    group = lawgroup_ca_state_structure
+    icon = "gfx/interface/icons/law_icons/placeholder.dds" # Asegúrate de tener este icono o usa uno genérico
+    
+    progressiveness = 50
 
-law_central_american_federation = {
-	group = lawgroup_governance_principles
-	parent = law_parliamentary_republic # Inherits ideological stances from parent
 
-	icon = "gfx/interface/icons/law_icons/parliamentary_republic.dds"
-
-	progressiveness = 100
-	
-	requires_law_or = {
-	law_presidential_republic
-	}
-
-	is_visible = {
-	        exists = c:UCA
-            country_has_primary_culture = cu:central_american
+    is_visible = {
+	    law_ca_valid_trigger = yes
         OR = {
-            
+            OR = {exists = c:UCA}
+
+            country_has_primary_culture = cu:central_american
             country_has_primary_culture = cu:costa_rican
             country_has_primary_culture = cu:panamanian
             country_has_primary_culture = cu:nicaraguan
@@ -26,53 +25,54 @@ law_central_american_federation = {
             country_has_primary_culture = cu:el_salvadorian
             country_has_primary_culture = cu:honduran
         }
+    }
+
+
+    can_enact = {
+        law_ca_valid_trigger = yes
+        NOT = { has_law = law_type:law_theocracy }
+		
+    }
+
+ 	disallowing_laws = {
+		law_autocracy
 	}
-
-
-	can_enact = {
-	this = c:UCA
-	exists = c:UCA
-	}
-
-	modifier = {
-		country_legitimacy_headofstate_add = 10
-		country_legitimacy_govt_total_votes_add = 10
-		country_authority_add = 100
-		political_movement_radicalism_add = -0.25
-		country_economic_dependence_on_overlord_add = 0.6
-		country_allow_enacting_decrees_in_subject_bool = yes
-	}
-
-	ai_enact_weight_modifier = {
-		value = 0
-		if = {
-			limit = {
-				has_journal_entry = je_pedro_republic
-			}
-			add = 100
-		}
-		if = {
-			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
-			add = 750
+	can_impose = {
+		scope:target_country ?= {
+			has_variable = ca_organization_apro
+			is_subject_of = root
 		}
 	}
+    modifier = {
+        country_authority_add = -25 
+        country_legitimacy_base_add = 50
+        state_standard_of_living_add = 0.5
+        political_movement_radicalism_add = -0.10
+    }
+
+    ai_enact_weight_modifier = {
+        value = 50
+        if = {
+            limit = { has_ideology = ideology_ca_federalist }
+            add = 100
+        }
+    }
 }
-law_central_american_confederated = {
-	group = lawgroup_governance_principles
-	parent = law_parliamentary_republic # Inherits ideological stances from parent
 
-	icon = "gfx/interface/icons/law_icons/parliamentary_republic.dds"
+# ==============================================
+# LEY UNITARIA (La meta de los Conservadores/Caudillos)
+# Equilibrio: Mucha autoridad, pero genera radicales en las provincias.
+# ==============================================
+law_ca_central_american_unitary = {
+    group = lawgroup_ca_state_structure
+    icon = "gfx/interface/icons/law_icons/placeholder.dds"
+    
+    progressiveness = 0
 
-	progressiveness = 100
-	
-	requires_law_or = {
-	law_presidential_republic
-	
-	}
-
-	is_visible = {
-	        exists = c:UCA
+    is_visible = {
+	    law_ca_valid_trigger = yes
         OR = {
+            OR = {exists = c:UCA}
             country_has_primary_culture = cu:central_american
             country_has_primary_culture = cu:costa_rican
             country_has_primary_culture = cu:panamanian
@@ -81,53 +81,54 @@ law_central_american_confederated = {
             country_has_primary_culture = cu:el_salvadorian
             country_has_primary_culture = cu:honduran
         }
-	}
+    }
 
-	can_enact = {
-	this = c:UCA
-	exists = c:UCA	
+    can_enact = {
+        NOT = { has_law = law_type:law_theocracy }
+		law_ca_valid_trigger = yes
+    }
+	
+	disallowing_laws = {
+		law_autocracy
 	}
-
-	modifier = {
-		country_legitimacy_headofstate_add = 10
-		country_legitimacy_govt_total_votes_add = 30
-		country_authority_add = 100
-		political_movement_radicalism_add = -0.25
-		country_economic_dependence_on_overlord_add = 0.6
-		country_legitimacy_govt_size_add = 1
-		country_allow_enacting_decrees_in_subject_bool = yes
-	}
-
-	ai_enact_weight_modifier = {
-		value = 0
-		if = {
-			limit = {
-				has_journal_entry = je_pedro_republic
-			}
-			add = 100
-		}
-		if = {
-			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
-			add = 750
+	can_impose = {
+		scope:target_country ?= {
+			has_variable = ca_organization_apro
+			is_subject_of = root
 		}
 	}
+    modifier = {
+
+        country_authority_add = 100
+        country_tax_income_add = 0.10
+        state_turmoil_effects_mult = 0.25 
+        political_movement_radicalism_add = 0.15
+        state_decree_cost_mult = -0.25
+    }
+
+    ai_enact_weight_modifier = {
+        value = 0
+        if = {
+            limit = { has_ideology = ideology_ca_unitarian }
+            add = 200
+        }
+    }
 }
-law_central_american_unitary = {
-	group = lawgroup_governance_principles
-	parent = law_presidential_republic # Inherits ideological stances from parent
 
-	icon = "gfx/interface/icons/law_icons/parliamentary_republic.dds"
+# ==============================================
+# LEY CONFEDERADA (El camino a la disolución)
+# Equilibrio: Autoridad casi nula, preludio a la independencia.
+# ==============================================
+law_ca_central_american_confederated = {
+    group = lawgroup_ca_state_structure
+    icon = "gfx/interface/icons/law_icons/placeholder.dds"
+    
+    progressiveness = 80
 
-	progressiveness = 100
-	
-	requires_law_or = {
-	law_presidential_republic
-	law_national_supremacy
-	}
-
-	is_visible = {
-	        exists = c:UCA
+    is_visible = {
+	    law_ca_valid_trigger = yes
         OR = {
+            OR = {exists = c:UCA}
             country_has_primary_culture = cu:central_american
             country_has_primary_culture = cu:costa_rican
             country_has_primary_culture = cu:panamanian
@@ -135,87 +136,30 @@ law_central_american_unitary = {
             country_has_primary_culture = cu:guatemalan
             country_has_primary_culture = cu:el_salvadorian
             country_has_primary_culture = cu:honduran
-        }
-	}
-
-	can_enact = {
-	this = c:UCA
-	exists = c:UCA	
-	}
-
-	modifier = {
-		country_legitimacy_headofstate_add = 10
-		country_legitimacy_govt_total_votes_add = 10
-		country_authority_add = 100
-		political_movement_radicalism_add = -0.25
-		country_economic_dependence_on_overlord_add = 0.6
-		country_allow_enacting_decrees_in_subject_bool = yes
-	}
-
-	ai_enact_weight_modifier = {
-		value = 0
-		if = {
-			limit = {
-				has_journal_entry = je_pedro_republic
-			}
-			add = 100
-		}
-		if = {
-			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
-			add = 750
-		}
-	}
-}
-law_central_american_federal = {
-	group = lawgroup_governance_principles
-	parent = law_presidential_republicc # Inherits ideological stances from parent
-
-	icon = "gfx/interface/icons/law_icons/parliamentary_republic.dds"
-
-	progressiveness = 100
 	
-	requires_law_or = {
-	law_presidential_republic
-	}
-
-	is_visible = {
-	        exists = c:UCA
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:costa_rican
-            country_has_primary_culture = cu:panamanian
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
         }
-	}
+    }
 
-	can_enact = {
-	this = c:UCA
-	exists = c:UCA	
+    can_enact = {
+        NOT = { has_law = law_type:law_theocracy }
+		law_ca_valid_trigger = yes
+    }
+	
+	disallowing_laws = {
+		law_autocracy
 	}
-
-	modifier = {
-		country_legitimacy_headofstate_add = 10
-		country_legitimacy_govt_total_votes_add = 10
-		country_authority_add = 100
-		political_movement_radicalism_add = -0.25
-		country_economic_dependence_on_overlord_add = 0.6
-		country_allow_enacting_decrees_in_subject_bool = yes
-	}
-
-	ai_enact_weight_modifier = {
-		value = 0
-		if = {
-			limit = {
-				has_journal_entry = je_pedro_republic
-			}
-			add = 100
-		}
-		if = {
-			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
-			add = 750
+	can_impose = {
+		scope:target_country ?= {
+			has_variable = ca_organization_apro
+			is_subject_of = root
 		}
 	}
+    modifier = {
+        country_authority_add = -100
+        country_tax_income_add = -0.50
+        state_turmoil_effects_mult = -0.50
+        country_subject_income_transfer_mult = -0.75
+    }
+    
+
 }

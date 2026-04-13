@@ -30,7 +30,101 @@ only_centralamericans_cultures = {
             country_has_primary_culture = cu:guatemalan
             country_has_primary_culture = cu:el_salvadorian
             country_has_primary_culture = cu:honduran
+	    country_has_primary_culture = cu:chiapanecan
         }
 	}
 
 }
+is_ca_culture_country = {
+    OR = {
+        has_primary_culture = cu:central_american
+        has_primary_culture = cu:costa_rican
+        has_primary_culture = cu:panamanian
+        has_primary_culture = cu:nicaraguan	
+        has_primary_culture = cu:guatemalan
+        has_primary_culture = cu:el_salvadorian
+        has_primary_culture = cu:honduran
+        has_primary_culture = cu:chiapanecan
+        has_primary_culture = cu:ngabe_culture
+        has_primary_culture = cu:miskito
+        
+    }
+}
+law_ca_valid_trigger = {
+    has_variable = ca_organization_apro
+    OR = {
+        country_has_primary_culture = cu:central_american
+        country_has_primary_culture = cu:guatemalan
+        country_has_primary_culture = cu:el_salvadorian
+        country_has_primary_culture = cu:honduran
+        country_has_primary_culture = cu:nicaraguan
+        country_has_primary_culture = cu:costa_rican
+        country_has_primary_culture = cu:panamanian
+    }
+    
+}
+ideology_ca_liberal_monarchist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_trade_unions
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_petty_bourgeoisie
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_industrialists
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_landowners
+		#is_interest_group_type = ig_devout		
+	}
+}
+ideology_ca_unitarian_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_petty_bourgeoisie
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_devout
+		is_interest_group_type = ig_landowners
+	}
+}
+ideology_ca_federalist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_petty_bourgeoisie		
+	}
+}
+ideology_ca_leader_autocratic_autonomist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_petty_bourgeoisie
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_devout
+		is_interest_group_type = ig_landowners		
+	}
+}
+ideology_central_america_caudillo_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_trade_unions
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_petty_bourgeoisie
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_industrialists
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_landowners			
+	}
+}
+#law_ca_valid_trigger = {
+#	OR = {
+#		is_interest_group_type = ig_trade_unions
+#		is_interest_group_type = ig_armed_forces
+#		is_interest_group_type = ig_petty_bourgeoisie
+#		is_interest_group_type = ig_intelligentsia
+#	}
+#}
+#ideology_nihilist_valid_trigger = {
+#	OR = {
+#		is_interest_group_type = ig_trade_unions
+#		is_interest_group_type = ig_armed_forces
+#		is_interest_group_type = ig_petty_bourgeoisie
+#		is_interest_group_type = ig_intelligentsia
+#	}
+#}
