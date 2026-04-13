@@ -1,11 +1,18 @@
 ﻿# This is executed last among all history
 GLOBAL = {
 	
-	#c:UCA = {
-	#	set_variable = {
-	#		name = frca_support
-	#		value = 5
-	#	}
-	#}
-	
+on_game_start = {
+	effect = {
+		# Llamamos al efecto que agrupa tus tres configuraciones
+		ca_initial_game_start_setup = yes
+
+	}
+}
+	REPLACE:c:UCA ?= {
+                ca_setup_ideological_cha = yes
+                ca_out_poli = yes
+		#add_radicals = {
+		#	value = 0.25
+		#}
+	}	
 }

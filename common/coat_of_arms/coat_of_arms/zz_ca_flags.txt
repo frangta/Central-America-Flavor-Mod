@@ -198,7 +198,7 @@ COS_subject_UCA = { #
 		color1 = "yellow"
 		color2 = "blue_light"
 		color3 = "pink"
-		instance = { scale = { 0.3.5 0.3.5 } position = { 0.5 0.8 } }		
+		instance = { scale = { 0.35 0.35 } position = { 0.5 0.8 } }		
 	}	
 
 	textured_emblem = {
@@ -311,7 +311,7 @@ COS_1838_1840 = {
 		color1 = "yellow"
 		color2 = "blue_light"
 		color3 = "white"
-		instance = { scale = { 0.3.5 0.3 } position = { 0.5 0.5 } }		
+		instance = { scale = { 0.35 0.3 } position = { 0.5 0.5 } }		
 	}	
 
 }
@@ -331,7 +331,7 @@ COS_1840_1842_carrilo = {
 		color1 = "yellow"
 		color2 = "blue_light"
 		color3 = "white"
-		instance = { scale = { 0.3.5 0.3.5 } position = { 0.5 0.5 } }		
+		instance = { scale = { 0.35 0.35 } position = { 0.5 0.5 } }		
 	}	
 
 }
@@ -348,7 +348,7 @@ COS_monarchy = {
 	}
 	textured_emblem = {
 		texture = "te_cartago.dds"
-		instance = { scale = { 0.5 0.7 } position = { 0.5 0.4.5 } }		
+		instance = { scale = { 0.5 0.7 } position = { 0.5 0.45 } }		
 	}
 
 }
@@ -2043,7 +2043,7 @@ UCA_republic = { # Greater Republic of Central America/ USCA - Reformed Country 
 }	
 UCA_centralist = { #UPCA / United Provinces of Central America Flag
 	pattern = "pattern_solid.tga"
-	color1 = "azure"
+	color1 = "red"
 			
 	colored_emblem = {
 		texture = "ce_tricolor_horizontal.dds"
@@ -2064,6 +2064,21 @@ UCA_alt = { # Central America
 		texture = "ce_tricolor_horizontal.dds"
 		color1 = "white"
 		color2 = "vivid_blue"
+	}	
+	textured_emblem = {
+		texture = "te_coa_central_america.dds"
+		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
+	}	
+}
+UCA_altv2 = { # Central America
+	
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	
+	colored_emblem = {
+		texture = "ce_tricolor_horizontal.dds"
+		color1 = "white"
+		color2 = "green2"
 	}	
 	textured_emblem = {
 		texture = "te_coa_central_america.dds"
@@ -2223,21 +2238,7 @@ UCA_absolute_monarchy = {
 	}
 }
 
-UCA_alt = { # Central America
-	
-	pattern = "pattern_solid.tga"
-	color1 = "blue_light"
-	
-	colored_emblem = {
-		texture = "ce_tricolor_horizontal.dds"
-		color1 = "white"
-		color2 = "green2"
-	}	
-	textured_emblem = {
-		texture = "te_coa_central_america.dds"
-		instance = { scale = { 0.40 0.40 } position = { 0.5 0.5 } }
-	}	
-}
+
 UCA_dictatorship = {
 	pattern = "pattern_solid.tga"
 	color1 = "blue_light"
@@ -2799,6 +2800,36 @@ ejemplo_3 = {
 	}
 
 }
+ejemplo_4 = {
+	pattern = "pattern_solid.tga"
+	color1 = "yellow"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 1.0 0.2 } position = { 0.5 0.3 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "grey"
+		color2 = "grey"
+		instance = { scale = { 1.0 0.2 } position = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "prussian_blue"
+		color2 = "prussian_blue"
+		instance = { scale = { 1.0 0.2 } position = { 0.5 0.7 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { 1.0 0.2 } position = { 0.5 0.9 } }
+	}
+	
+}
 pro_UCA = {
 	pattern = "pattern_solid.tga"
 	color1 = "white"
@@ -2911,7 +2942,7 @@ PC8 = { #Cartago
 	}
 	textured_emblem = {
 		texture = "te_cartago.dds"
-		instance = { scale = { 0.5 0.7 } position = { 0.5 0.4.5 } }		
+		instance = { scale = { 0.5 0.7 } position = { 0.5 0.45 } }		
 	}
 }
 RDT = { #Talamanca

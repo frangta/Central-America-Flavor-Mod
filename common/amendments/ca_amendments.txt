@@ -1,0 +1,122 @@
+﻿# ==============================================
+# ENMIENDAS CENTROAMERICANAS (CA_AMENDMENTS)
+# ==============================================
+
+# 1. LEYES DE VAGANCIA (Trabajo forzado agrícola)
+# Vinculado a: Agricultura Comercial
+# Efecto: Más producción agrícola, pero destruye el nivel de vida bajo y empodera terratenientes.
+amendment_vagrancy_laws = {
+    parent = law_commercialized_agriculture
+
+    allowed_laws = {
+        law_commercialized_agriculture
+        law_tenant_farmers
+    }
+
+    modifier = {
+
+        building_group_bg_agriculture_throughput_add = 0.15
+        
+
+        state_standard_of_living_lower_strata_add = -1.0
+        
+
+        interest_group_ig_landowners_pol_str_mult = 0.10
+    }
+
+    possible = {
+
+        NOT = { has_law = law_type:law_regulatory_bodies }
+        NOT = { has_law = law_type:law_worker_protections }
+        
+
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }
+    }
+
+
+    would_sponsor = {
+        is_interest_group_type = ig_landowners
+    }
+
+    # La IA lo quitará si tiene leyes laborales avanzadas
+    ai_will_revoke = {
+        OR = {
+            has_law = law_type:law_regulatory_bodies
+            has_law = law_type:law_worker_protections
+        }
+    }
+
+    # Requisitos para quitar la enmienda manualmente
+    can_repeal = {
+        legitimacy >= legitimacy_to_repeal_amendment
+    }
+
+    amendment_activism_multiplier = 0.5
+}
+
+# 2. JEFES POLÍTICOS (Caudillismo Local)
+# Vinculado a: Burócratas Designados
+# Efecto: Mucha autoridad y poder militar, pero corrupción (tax waste).
+amendment_jefes_politicos = {
+    parent = law_appointed_bureaucrats
+
+    allowed_laws = {
+        law_appointed_bureaucrats
+    }
+
+    modifier = {
+        country_authority_add = 150
+        
+
+        country_tax_waste_add = 0.15
+        
+
+        interest_group_ig_armed_forces_pol_str_mult = 0.20
+    }
+
+    possible = {
+
+        OR = {
+            has_law = law_type:law_autocracy
+            has_law = law_type:law_oligarchy
+        }
+        
+        # Restricción Cultural
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }
+    }
+
+
+    would_sponsor = {
+        is_interest_group_type = ig_armed_forces
+    }
+
+
+    ai_will_revoke = {
+        OR = {
+            has_law = law_type:law_universal_suffrage
+            has_law = law_type:law_census_voting
+        }
+    }
+
+    can_repeal = {
+        legitimacy >= legitimacy_to_repeal_amendment
+    }
+
+    amendment_activism_multiplier = 0.75
+}

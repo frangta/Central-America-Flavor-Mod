@@ -1,4 +1,4 @@
-﻿gov_jefe_supremo = {
+﻿gov_ca_jefe_supremo = {
 	transfer_of_power = presidential_elective
 	new_leader_on_reform_government = no
 
@@ -29,7 +29,7 @@
 		post_change_to_dictatorial = yes
 	}
 }
-gov_jefe_estado = {
+gov_ca_jefe_estado = {
 	transfer_of_power = presidential_elective
 	new_leader_on_reform_government = no
 
@@ -59,7 +59,7 @@ gov_jefe_estado = {
 		post_change_to_dictatorial = yes
 	}
 }
-gov_director_supremo = {
+gov_ca_director_supremo = {
 	transfer_of_power = presidential_elective
 	new_leader_on_reform_government = no
 
@@ -86,5 +86,95 @@ gov_director_supremo = {
 	}
 	on_post_government_type_change = {
 		post_change_to_dictatorial = yes
+	}
+}
+gov_ca_junta = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_GENERAL"
+	female_ruler = "RULER_TITLE_GENERAL"
+
+	possible = {
+        this = c:UCA
+ 	has_law_or_variant = law_type:law_presidential_republic
+		OR = {
+			has_law_or_variant = law_type:law_ca_central_american_unitary
+			has_law_or_variant = law_type:law_ca_central_american_federal
+		}
+		country_has_voting_franchise = no
+		OR = {
+			has_law_or_variant = law_type:law_mass_conscription
+			has_law_or_variant = law_type:law_professional_army
+		}
+		ig:ig_armed_forces ?= {
+			is_in_government = yes
+		}
+
+	}
+
+	on_government_type_change = {
+		change_to_dictatorial = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_dictatorial = yes
+	}
+}
+
+gov_ca_presidential_oligarchy = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+weight = {
+        value = 1000
+    }
+
+    possible = {
+        this = c:UCA
+        
+        has_law = law_type:law_presidential_republic
+        OR = {
+            has_law = law_type:law_ca_central_american_unitary
+            has_law = law_type:law_ca_central_american_federal
+        }
+        country_has_voting_franchise = yes
+    }
+
+	on_government_type_change = {
+		change_to_dictatorial = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_dictatorial = yes
+	}
+}
+
+gov_ca_presidential_democracy = {
+	transfer_of_power = presidential_elective
+	new_leader_on_reform_government = no
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+weight = {
+        value = 1000
+    }
+
+    possible = {
+        this = c:UCA
+        
+        has_law = law_type:law_presidential_republic
+        OR = {
+            has_law = law_type:law_ca_central_american_unitary
+            has_law = law_type:law_ca_central_american_federal
+        }
+        country_has_voting_franchise = yes
+    }
+
+	on_government_type_change = {
+		change_to_presidential_elective = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_presidential_elective = yes
 	}
 }

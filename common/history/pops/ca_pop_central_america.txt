@@ -27,30 +27,13 @@
                 size = 8220
             }
         }
-        region_state:MEX = {
-            create_pop = {
-                culture = mayan
-                size = 26000
-            }
-        }
-        region_state:JAM = {
-            create_pop = {
-                culture = afro_caribbean
-                size = 7502
-            }
-            create_pop = {
-                culture = afro_caribbean
-                size = 3502
-            }
-            create_pop = {
-                culture = british
-                size = 104
-            }
-            create_pop = {
-                culture = british
-                size = 1507
-            }
-        }
+        #region_state:MEX = {
+        #    create_pop = {
+        #        culture = mayan
+        #        size = 26000
+        #    }
+        #}
+
     }
 
     s:STATE_HONDURAS = {
@@ -72,24 +55,24 @@
                 size = 5000
             }
         }
-        region_state:MKT = {
-            create_pop = {
-                culture = miskito
-                size = 3000
-            }
-            create_pop = {
-                culture = british
-                size = 1000
-            }
-            create_pop = {
-                culture = afro_caribbean
-                size = 1000
-            }
-            create_pop = {
-                culture = afro_caribbean
-                size = 1000
-            }
-        }
+        #region_state:MKT = {
+        #    create_pop = {
+        #        culture = miskito
+        #        size = 3000
+        #    }
+        #    create_pop = {
+        #        culture = british
+        #        size = 1000
+        #    }
+        #    create_pop = {
+        #        culture = afro_caribbean
+        #        size = 1000
+        #    }
+        #    create_pop = {
+        #        culture = afro_caribbean
+        #        size = 1000
+        #    }
+        #}
     }
 
     s:STATE_NICARAGUA = {
@@ -128,18 +111,18 @@
         }
     }
 
-    s:STATE_YUCATAN = {
-        region_state:UCA = {
-            create_pop = {
-                culture = central_american
-                size = 2100
-            }
-            create_pop = {
-                culture = mayan
-                size = 1100
-            }
-        }
-    }
+    #s:STATE_YUCATAN = {
+    #    region_state:UCA = {
+    #        create_pop = {
+    #            culture = central_american
+    #            size = 2100
+    #        }
+    #        create_pop = {
+    #            culture = mayan
+    #            size = 1100
+    #        }
+    #    }
+    #}
 
     s:STATE_COSTA_RICA = {
         region_state:UCA = {

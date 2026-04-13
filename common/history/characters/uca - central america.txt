@@ -1,7 +1,38 @@
-﻿# history/characters/uca - central america.txt
-CHARACTERS = {
-    c:UCA = {
-        create_character = { template = UCA_jose_felipe_mariano_galvez save_scope_as = scope_mariano_galvez }
-        create_character = { template = UCA_francisco_morazan_v1 save_scope_as = scope_morazan }
+﻿CHARACTERS = {
+	c:UCA ?= {
+		create_character = {
+			template = UCA_francisco_morazan
+		}
+       # --- LÍDER INTELECTUAL ---
+        create_character = {
+            template = gua_mariano_galvez_character_template
+            ig_leader = yes
+        }
+
+        # --- LÍDER IGLESIA ---
+        create_character = {
+            template = uca_ramon_casaus_character_template
+            ig_leader = yes
+        }
+
+        # --- LÍDER PEQUEÑA BURGUESÍA ---
+        create_character = {
+            template = uca_francisco_barrundia_character_template
+            ig_leader = yes
+        }
+
+        # --- LÍDER HACENDADOS ---
+        create_character = {
+            template = gua_mariano_aycinena_character_template
+            ig_leader = yes
+        }
+
+        # --- GENERAL ADICIONAL ---
+        create_character = {
+            template = hon_cabanas_character_template
+
+        }
+        
+
     }
 }

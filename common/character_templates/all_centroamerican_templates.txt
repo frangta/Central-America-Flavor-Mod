@@ -1,1 +1,881 @@
-﻿
+﻿### UCA ###
+TRY_REPLACE:UCA_francisco_morazan = {
+	# Francisco Morazan
+	first_name = "Francisco"
+	last_name = "Morazan"
+	historical = yes
+	culture = cu:honduran
+	ruler = yes
+	ig_leader = yes
+	birth_date = 1792.10.3
+	dna = dna_president_francisco_morazan
+	interest_group = ig_armed_forces
+	ideology = ideology_reformer
+	traits = {
+		experienced_political_operator ambitious meticulous
+	}
+	on_created = {
+		set_variable = is_morazan
+	}
+}
+uca_francisco_morazan_v1 = {
+    first_name = "Francisco"
+    last_name = "Morazan"
+    historical = yes
+    culture = cu:honduran
+    ruler = yes
+    ig_leader = yes
+    birth_date = 1792.10.3
+    dna = dna_president_francisco_morazan
+    interest_group = ig_armed_forces
+    ideology = ideology_ca_federalist
+    traits = { experienced_political_operator ambitious meticulous }
+	on_created = {
+		set_variable = is_morazan
+	}
+}
+uca_francisco_morazan_v2 = {	
+    # Francisco Morazan
+    first_name = "Francisco"
+	last_name = "Morazan"
+	historical = yes
+    culture = cu:honduran
+	ig_leader = yes
+	birth_date = 1792.10.3
+	dna = dna_president_francisco_morazan
+	interest_group = ig_intelligentsia
+	ideology = ideology_radical
+	traits = {
+		 experienced_political_operator ambitious meticulous
+	}
+	on_created = {
+		set_variable = is_morazan
+	}
+}
+UCA_jose_felipe_mariano_galvez = {
+    first_name = "Jose_Felipe_Mariano"
+    last_name = "Galvez"
+    historical = yes
+    culture = primary_culture
+    ig_leader = yes
+    birth_date = 1794.5.26
+    interest_group = ig_intelligentsia
+    ideology = ideology_ca_federalist
+    traits = { meticulous }
+}
+
+uca_ramon_casaus_character_template = {
+    first_name = "Ramon"
+    last_name = "Casaus_y_Torres"
+    historical = yes
+    birth_date = 1765.1.1
+    culture = cu:central_american
+    religion = rel:catholic
+    interest_group = ig_devout
+    ideology = ideology_central_american_reactionary #ideology_traditionalist 
+    traits = { imperious }
+}
+
+
+uca_francisco_barrundia_character_template = {
+    first_name = "Jose_Francisco"
+    last_name = "Barrundia"
+    historical = yes
+    birth_date = 1787.1.1
+    culture = cu:guatemalan
+    religion = rel:catholic
+    interest_group = ig_petty_bourgeoisie
+    ideology = ideology_radical
+    traits = { charismatic }
+}
+# =======================================================
+# NICARAGUA - NIC
+# =======================================================
+
+jose_nunez_character_template = {
+    first_name = "Jose"
+    last_name = "Nunez"
+    historical = yes
+    ig_leader = yes
+    interest_group = ig_landowners
+    ruler = yes
+    birth_date = 1800.02.02
+    female = no
+    culture = cu:nicaraguan
+    ideology = ideology_meritocratic
+    religion = rel:catholic
+    traits = { tactful  }
+}
+
+nic_fruto_chamorro_character_template = {
+    first_name = "Fruto"
+    last_name = "Chamorro"
+    historical = yes
+    female = no
+    birth_date = 1804.10.20
+    ideology = ideology_traditionalist # Conservadurismo y Orden estricto
+    traits = { imperious meticulous defensive_strategist }
+    interest_group = ig_landowners
+    # description = "Primer Presidente de la República. Defensor del orden conservador 'Legitimista' contra los liberales de León."
+}
+
+nic_maximo_jerez_character_template = {
+    first_name = "Maximo"
+    last_name = "Jerez"
+    historical = yes
+    female = no
+    birth_date = 1818.06.08
+    ideology = ideology_market_liberal
+    traits = { ambitious charismatic }
+    interest_group = ig_intelligentsia
+    # description = "Líder liberal de León. Su invitación a mercenarios extranjeros desencadenó la Guerra Nacional."
+}
+
+nic_william_walker_character_template = {
+    first_name = "William"
+    last_name = "Walker"
+    historical = yes
+    female = no
+    birth_date = 1824.05.08
+    culture = cu:dixie # Importante: Cultura extranjera
+    religion = rel:protestant
+    ideology = ideology_jingoist 
+    traits = { ambitious cruel arrogant }
+    interest_group = ig_armed_forces
+    is_general = yes 
+	
+    # description = "El Rey de los Filibusteros. Intentó esclavizar Centroamérica bajo una dictadura personal."
+}
+
+# =======================================================
+# LOS ALTOS - ALT
+# =======================================================
+
+juan_lindo_character_template = {
+    first_name = "Juan"
+    last_name = "Lindo"
+    historical = yes
+    ruler = yes
+    ig_leader = yes
+    birth_date = 1790.05.05
+    female = no
+    culture = cu:central_american
+    interest_group = ig_landowners
+    ideology = ideology_market_liberal
+    traits = { meticulous }
+}
+
+# =======================================================
+# GUATEMALA - GUA
+# =======================================================
+
+gua_mariano_galvez_character_template = {
+    first_name = "Mariano"
+    last_name = "Galvez"
+    historical = yes
+    ig_leader = yes
+    birth_date = 1794.05.26
+    female = no
+    culture = cu:guatemalan
+    interest_group = ig_intelligentsia
+    ideology = ideology_market_liberal
+    traits = { ambitious meticulous innovative }
+
+}
+
+gua_rafael_carrera_character_template = {
+    first_name = "Rafael"
+    last_name = "Carrera"
+    historical = yes
+	ruler = yes
+    ig_leader = no # Liderará luego
+    birth_date = 1814.10.24
+    culture = cu:guatemalan
+    interest_group = ig_armed_forces
+    ideology = ideology_central_america_caudillo
+    traits = { charismatic brave imperious
+        expert_offensive_planner		
+		forest_commander
+		
+		}
+    # dna = ecchi_dna_rafael_carrera # Comentado para evitar crash si falta el archivo
+    on_created = {
+        set_variable = is_carrera
+    }
+}
+
+gua_mariano_rivera_paz_character_template = {
+
+    first_name = "Mariano"
+    last_name = "Rivera_Paz"
+    historical = yes
+    female = no
+    ideology = ideology_traditionalist
+    traits = { meticulous cautious }
+    interest_group = ig_landowners
+}
+gua_mariano_aycinena_character_template = {
+    first_name = "Mariano"
+    last_name = "de_Aycinena_y_Pinol"
+    historical = yes
+    birth_date = 1789.9.16
+    culture = cu:guatemalan
+    religion = rel:catholic
+    interest_group = ig_landowners
+    ideology = ideology_ca_unitarian
+    traits = { arrogant meticulous }
+    noble = yes
+}
+gua_pedro_aycinena_character_template = {
+
+    first_name = "Pedro"
+    last_name = "de_Aycinena_y_Pinol"
+    historical = yes
+    female = no
+    ideology = ideology_traditionalist
+    traits = { imperious tactful }
+    interest_group = ig_landowners
+}
+
+
+gua_vicente_cerna_character_template = {
+
+    first_name = "Vicente"
+    last_name = "Cerna"
+    historical = yes
+    female = no
+    ideology = ideology_traditionalist
+    traits = { imperious  }
+    interest_group = ig_armed_forces
+}
+
+gua_miguel_garcia_granados_character_template = {
+    first_name = "Miguel"
+    last_name = "Garcia_Granados"
+    historical = yes
+    female = no
+    ideology = ideology_liberal
+    traits = { innovative brave }
+    interest_group = ig_intelligentsia
+}
+
+gua_alejandro_sinibaldi_character_template = {
+
+    first_name = "Alejandro"
+    last_name = "M_Sinibaldi"
+    historical = yes
+    female = no
+    ideology = ideology_market_liberal
+    traits = { meticulous cautious }
+    interest_group = ig_intelligentsia
+}
+
+gua_manuel_lisandro_barillas_character_template = {
+
+    first_name = "Manuel_Lisandro"
+    last_name = "Barillas"
+    historical = yes
+    female = no
+    ideology = ideology_market_liberal
+    traits = { experienced_political_operator cautious innovative }
+    interest_group = ig_petty_bourgeoisie
+}
+
+gua_barrios_character_template = {
+    first_name = "Justo_Rufino"
+    last_name = "Barrios"
+    culture = cu:central_american
+    female = no
+    religion = catholic
+    ideology = ideology_radical # Barrios era radicalmente liberal/reformista
+    interest_group = ig_intelligentsia
+    # dna = ecchi_dna_justo_rufino_barrios
+    birth_date = 1835.7.19
+    traits = { ambitious romantic tactful  }
+    interest_group_leader_usage = {
+        country_trigger = {
+            exists = c:GUA
+            this = c:GUA
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            OR = {
+                is_interest_group_type = ig_intelligentsia
+                is_interest_group_type = ig_armed_forces
+            }
+        }
+        earliest_usage_date = 1870.1.1
+        latest_usage_date = 1885.4.2
+        chance = 90
+    }
+}
+
+# =======================================================
+# HONDURAS - HON
+# =======================================================
+
+juan_franscisco_de_molina_character_template = {
+    first_name = "Juan_Francisco"
+    last_name = "de_Molina"
+    historical = yes
+    ig_leader = yes
+    interest_group = ig_landowners
+    ruler = yes
+    birth_date = 1779.04.04
+    female = no
+    culture = cu:honduran
+    ideology = ideology_traditionalist
+    religion = rel:catholic
+    traits = { tactful }
+}
+
+hon_de_herrera_character_template = {
+    first_name = "Dionisio"
+    last_name = "de_Herrera"
+    culture = cu:honduran
+    female = no
+    religion = catholic
+    ideology = ideology_reformer
+    interest_group = ig_intelligentsia
+    # dna = ecchi_dna_dionisio_de_herrera
+    birth_date = 1781.10.9
+    traits = { expert_political_operator charismatic }
+    interest_group_leader_usage = {
+        country_trigger = {
+            OR = {
+                AND = { exists = c:UCA this = c:UCA NOT = { exists = c:HON exists = c:NIC exists = c:ELS } }
+                AND = { exists = c:ELS this = c:ELS NOT = { exists = c:HON exists = c:NIC } }
+                AND = { exists = c:NIC this = c:NIC NOT = { exists = c:HON } }
+                AND = { exists = c:HON this = c:HON }
+            }
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            OR = {
+                is_interest_group_type = ig_intelligentsia
+                is_interest_group_type = ig_landowners
+            }
+        }
+        earliest_usage_date = 1836.1.1
+        latest_usage_date = 1850.6.13
+        chance = 90
+    }
+}
+
+hon_cabanas_character_template = {
+
+    first_name = "Jose_Trinidad"
+    last_name = "Cabanas"
+    culture = cu:honduran
+    female = no
+    religion = catholic
+    historical = yes
+    ideology = ideology_liberal_leader # Unificado con jingoist
+    interest_group = ig_armed_forces
+    # dna = ecchi_dna_jose_trinidad_cabanas
+    birth_date = 1805.6.9
+    traits = { brave romantic tactful expert_offensive_planner}
+    interest_group_leader_usage = {
+        country_trigger = {
+            OR = {
+                AND = { exists = c:UCA this = c:UCA NOT = { exists = c:HON } }
+                AND = { exists = c:HON this = c:HON }
+            }
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            OR = {
+                is_interest_group_type = ig_intelligentsia
+                is_interest_group_type = ig_armed_forces
+            }
+        }
+        earliest_usage_date = 1836.1.1
+        latest_usage_date = 1871.1.8
+        chance = 90
+    }
+}
+
+hon_francisco_ferrera_character_template = {
+
+    first_name = "Francisco"
+    last_name = "Ferrera"
+    culture = cu:honduran
+    historical = yes
+    female = no
+    ig_leader = yes
+    birth_date = 1794.4.4
+    ideology = ideology_central_america_caudillo
+    traits = { imperious cruel }
+    interest_group = ig_armed_forces
+    on_created = {
+        set_variable = is_ferrera
+    }
+}
+
+hon_bogran_character_template = {
+    first_name = "Luis"
+    last_name = "Bogran"
+    culture = cu:honduran
+    female = no
+    religion = catholic
+    ideology = ideology_reformer
+    interest_group = ig_landowners
+    # dna = ecchi_dna_luis_bogran
+    birth_date = 1849.6.3
+    traits = { innovative expensive_tastes }
+    interest_group_leader_usage = {
+        country_trigger = {
+            exists = c:HON
+            this = c:HON
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            OR = {
+                is_interest_group_type = ig_landowners
+                is_interest_group_type = ig_rural_folk
+            }
+        }
+        earliest_usage_date = 1880.1.1
+        latest_usage_date = 1895.7.9
+        chance = 90
+    }
+}
+
+hon_jose_zelaya_character_template = {
+
+    first_name = "Jose_Francisco"
+    last_name = "Zelaya"
+    culture = cu:honduran
+    historical = yes
+    female = no
+    ideology = ideology_traditionalist
+    traits = { imperious }
+    interest_group = ig_landowners
+}
+
+hon_juan_lindo_character_template = {
+
+    first_name = "Juan"
+    last_name = "Lindo"
+    culture = cu:honduran
+    historical = yes
+    female = no
+    ideology = ideology_traditionalist
+    traits = { meticulous innovative } 
+    interest_group = ig_intelligentsia
+}
+
+hon_jose_santos_guardiola_character_template = {
+    first_name = "Jose_Santos"
+    last_name = "Guardiola"
+    culture = cu:honduran
+    historical = yes
+    female = no
+    birth_date = 1816.11.01
+    ideology = ideology_traditionalist
+    traits = { brave arrogant }
+    interest_group = ig_armed_forces # Militar conservador
+    # description = "Presidente conservador que logró la devolución de las Islas de la Bahía e Islas de los Mosquitos."
+}
+
+hon_marco_aurelio_soto_character_template = {
+    first_name = "Marco_Aurelio"
+    last_name = "Soto"
+    historical = yes
+    culture = cu:honduran
+    female = no
+    birth_date = 1846.11.13
+    ideology = ideology_modernizer
+    traits = { innovative meticulous }
+    interest_group = ig_intelligentsia
+    # description = "Líder de la Reforma Liberal en Honduras. Modernizó el estado, correos y telégrafos."
+}
+
+# =======================================================
+# COSTA RICA - COS
+# =======================================================
+
+joaquin_mora_character_template = {
+    first_name = "Joaquin"
+    last_name = "Mora_Fernandez"
+    # dna = dna_joaquin_mora
+    historical = yes
+    female = no
+    culture = cu:costa_rican
+    religion = rel:catholic
+    ideology = ideology_moderate
+    interest_group = ig_intelligentsia
+    birth_date = 1786.01.17
+    traits = { experienced_political_operator }
+}
+
+cos_braulio_carrillo_character_template = {
+    first_name = "Braulio"
+    last_name = "Carrillo"
+    historical = yes
+    ig_leader = yes
+    interest_group = ig_intelligentsia
+    ruler = yes
+    birth_date = 1800.03.03
+    female = no
+    # dna = dna_braulio_carrillo
+    culture = cu:costa_rican
+    ideology = ideology_central_america_caudillo
+    religion = rel:catholic
+    traits = { brave experienced_political_operator blunt }
+    on_created = {
+        set_variable = is_carrillo
+    }
+    interest_group_leader_usage = {
+        country_trigger = {
+            exists = c:COS
+            this = c:COS
+        }
+        interest_group_trigger = {
+            is_interest_group_type = ig_intelligentsia
+        }
+        earliest_usage_date = 1836.1.1
+        latest_usage_date = 1842.4.4
+        chance = 90
+    }
+}
+
+cos_castro_character_template = {
+    first_name = "Jose_Maria"
+    last_name = "Castro"
+    culture = cu:costa_rican
+    female = no
+    religion = catholic
+    ideology = ideology_republican_leader
+    interest_group = ig_intelligentsia
+    # dna = ecchi_dna_jose_maria_castro
+    birth_date = 1818.9.1
+    traits = { arrogant experienced_political_operator blunt }
+    interest_group_leader_usage = {
+        country_trigger = {
+            exists = c:COS
+            this = c:COS
+        }
+        interest_group_trigger = {
+            is_interest_group_type = ig_intelligentsia
+        }
+        earliest_usage_date = 1844.1.1
+        latest_usage_date = 1892.4.4
+        chance = 90
+    }
+}
+
+cos_manuel_aguilar_character_template = {
+
+    first_name = "Manuel"
+    last_name = "Aguilar_Chacon"
+    # dna = dna_
+    culture = cu:costa_rican
+    historical = yes
+    interest_group = ig_intelligentsia
+     ideology = ideology_market_liberal
+    traits = { innovative meticulous }
+}
+
+cos_jose_maria_alfaro_character_template = {
+
+    first_name = "Jose_Maria"
+    last_name = "Alfaro_Zamora"
+    # dna = dna_
+    culture = cu:costa_rican
+    historical = yes
+    interest_group = ig_intelligentsia
+    ideology = ideology_market_liberal
+    traits = { meticulous innovative }
+}
+
+cos_juan_rafael_mora_character_template = {
+
+    first_name = "Juan_Rafael"
+    last_name = "Mora_Porras"
+    interest_group = ig_landowners
+    # dna = dna_
+    culture = cu:costa_rican
+    historical = yes
+    ideology = ideology_market_liberal
+    traits = { charismatic brave innovative }
+}
+
+cos_tomas_guardia_character_template = {
+
+    first_name = "Tomas"
+    last_name = "Guardia_Gutierrez"
+    interest_group = ig_armed_forces
+    # dna = dna_
+    culture = cu:costa_rican
+    historical = yes
+    ideology = ideology_market_liberal
+    traits = { imperious innovative }
+}
+
+cos_prospero_fernandez_character_template = {
+
+    first_name = "Prospero"
+    last_name = "Fernandez_Oreamuno"
+    interest_group = ig_intelligentsia
+    # dna = dna_
+    culture = cu:costa_rican
+    historical = yes
+    ideology = ideology_liberal_anticlerical
+    traits = { innovative tactful }
+}
+
+cos_bernardo_soto_character_template = {
+
+    first_name = "Bernardo"
+    last_name = "Soto_Alfaro"
+    interest_group = ig_intelligentsia
+    # dna = dna_
+    culture = cu:costa_rican
+    historical = yes
+    ideology = ideology_market_liberal
+    traits = { meticulous innovative }
+}
+
+# =======================================================
+# EL SALVADOR - ELS
+# =======================================================
+
+els_diego_vigil_character_template = {
+
+    first_name = "Diego"
+    last_name = "Vigil_y_Cocana"
+    historical = yes
+    female = no
+    ideology = ideology_market_liberal
+    traits = { meticulous tactful }
+    interest_group = ig_intelligentsia
+}
+
+els_francisco_malespin_character_template = {
+
+    first_name = "Francisco"
+    last_name = "Malespin"
+    historical = yes
+    female = no
+    ideology = ideology_reactionary
+    traits = { imperious wrathful }
+    interest_group = ig_armed_forces
+}
+
+els_doroteo_vasconcelos_character_template = {
+
+    first_name = "Doroteo"
+    last_name = "Vasconcelos"
+    historical = yes
+    female = no
+     ideology = ideology_market_liberal
+    traits = { ambitious innovative }
+    interest_group = ig_intelligentsia
+}
+
+els_francisco_duenas_character_template = {
+
+    first_name = "Francisco"
+    last_name = "Duenas"
+    historical = yes
+    female = no
+    ideology = ideology_traditionalist
+    traits = { imperious }
+    interest_group = ig_devout
+}
+
+els_gerardo_barrios_character_template = {
+
+    first_name = "Gerardo"
+    last_name = "Barrios"
+    historical = yes
+    female = no
+    ideology = ideology_market_liberal
+    traits = { innovative ambitious }
+    interest_group = ig_landowners
+}
+
+# =======================================================
+# DOMINICAN REPUBLIC - DOM
+# =======================================================
+
+dom_salcedo_character_template = {
+    first_name = "Jose_Antonio"
+    last_name = "Salcedo"
+    culture = cu:spanish
+    female = no
+    religion = catholic
+    ideology = ideology_moderate
+    interest_group = ig_landowners
+    # dna = ecchi_dna_jose_antonio_salcedo
+    birth_date = 1816.11.5
+    traits = { reckless reserved plains_commander }
+    interest_group_leader_usage = {
+        country_trigger = {
+            exists = c:DOM
+            this = c:DOM
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            OR = {
+                is_interest_group_type = ig_landowners
+                is_interest_group_type = ig_armed_forces
+            }
+        }
+        earliest_usage_date = 1850.1.1
+        latest_usage_date = 1864.11.5
+        chance = 90
+    }
+}
+
+dom_duarte_character_template = {
+    first_name = "Juan_Pablo"
+    last_name = "Duarte"
+    culture = cu:caribeno
+    female = no
+    religion = catholic
+    ideology = ideology_radical
+    interest_group = ig_petty_bourgeoisie
+    # dna = ecchi_dna_juan_pablo_duarte
+    birth_date = 1813.1.26
+    traits = { reckless meticulous charismatic }
+    interest_group_leader_usage = {
+        country_trigger = {
+            exists = c:DOM
+            this = c:DOM
+        }
+        interest_group_trigger = {
+            is_marginal = no
+            OR = {
+                is_interest_group_type = ig_petty_bourgeoisie
+                is_interest_group_type = ig_intelligentsia
+            }
+        }
+        earliest_usage_date = 1838.1.1
+        latest_usage_date = 1876.7.15
+        chance = 90
+    }
+}
+
+dom_polanco_character_template = {
+    first_name = "Gaspar"
+    last_name = "Polanco"
+    culture = cu:caribeno
+    female = no
+    religion = catholic
+    ideology = ideology_moderate
+    interest_group = ig_landowners
+    # dna = ecchi_dna_gaspar_polanco
+    birth_date = 1816.10.10
+    traits = { wrathful meticulous cautious cruel }
+    commander_rank = default
+    commander_usage = {
+        country_trigger = {
+            exists = c:DOM
+            this = c:DOM
+        }
+        role = general
+        earliest_usage_date = 1844.1.1
+        latest_usage_date = 1867.11.28
+        chance = 90
+    }
+}
+
+# =======================================================
+# REP. DOMINICANA - FALTANTES
+# =======================================================
+
+dom_pedro_santana_character_template = {
+    first_name = "Pedro"
+    last_name = "Santana"
+    historical = yes
+    female = no
+    birth_date = 1801.06.29
+    ideology = ideology_ca_enclavist # Quería anexar RD a España o USA
+    traits = { imperious wrathful expert_defensive_planner }
+    interest_group = ig_landowners
+    # description = "Caudillo militar que dominó la política dominicana y orquestó la Anexión a España."
+}
+
+dom_buenaventura_baez_character_template = {
+    first_name = "Buenaventura"
+    last_name = "Baez"
+    historical = yes
+    female = no
+    birth_date = 1812.07.14
+    ideology = ideology_meritocratic # Ojo: Era muy corrupto pero hábil
+    traits = { experienced_political_operator expensive_tastes }
+    interest_group = ig_petty_bourgeoisie
+    # description = "Dominó la política durante décadas (los Rojos). Famoso por sus intentos de vender la Bahía de Samaná."
+}
+
+dom_gregorio_luperon_character_template = {
+    first_name = "Gregorio"
+    last_name = "Luperon"
+    historical = yes
+    female = no
+    birth_date = 1839.09.08
+    ideology = ideology_radical
+    traits = { brave nationalist guerrilla_commander }
+    interest_group = ig_armed_forces # O Rural Folk
+    # description = "La Espada de la Restauración. Líder liberal que luchó contra la anexión española."
+}
+# =======================================================
+# PANAMA - PNM
+# =======================================================
+
+pnm_tomas_de_herrera_character_template = {
+
+    first_name = "Tomas"
+    last_name = "de_Herrera"
+    historical = yes
+    female = no
+    ideology = ideology_liberal_leader
+    traits = { brave meticulous charismatic }
+    interest_group = ig_intelligentsia
+}
+
+pnm_justo_arosemena_character_template = {
+
+    first_name = "Justo"
+    last_name = "Arosemena"
+    historical = yes
+    female = no
+    ideology = ideology_market_liberal
+    traits = { innovative experienced_political_operator }
+    interest_group = ig_intelligentsia
+}
+
+pnm_bartolome_calvo_character_template = {
+
+    first_name = "Bartolome"
+    last_name = "Calvo"
+    historical = yes
+    female = no
+    ideology = ideology_traditionalist
+    traits = { meticulous tactful }
+    interest_group = ig_petty_bourgeoisie
+}
+
+pnm_jose_de_obaldia_character_template = {
+
+    first_name = "Jose"
+    last_name = "de_Obaldia"
+    historical = yes
+    female = no
+    ideology = ideology_market_liberal
+    traits = { meticulous tactful }
+    interest_group = ig_intelligentsia
+}
+
+pnm_santiago_guardia_character_template = {
+
+    first_name = "Santiago"
+    last_name = "de_la_Guardia"
+    historical = yes
+    female = no
+    ideology = ideology_traditionalist
+    traits = { imperious }
+    interest_group = ig_landowners
+}

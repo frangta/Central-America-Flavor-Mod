@@ -1,0 +1,42 @@
+﻿POLITICAL_MOVEMENTS = {
+
+	c:UCA ?= {
+		
+		#create_political_movement = { type = movement_ca_liberal }
+		#create_political_movement = { type = movement_ca_reactionary }
+		create_political_movement = { type = movement_ca_unitarian }
+		create_political_movement = { type = movement_ca_federalist }
+		random_political_movement = {
+			limit = {
+				is_political_movement_type = movement_ca_unitarian
+			}
+			set_suppression = yes
+		}
+                        if = {
+			limit = {
+				any_political_movement = {
+					OR = {
+				is_political_movement_type = movement_liberal
+				is_political_movement_type = movement_cultural_majority
+				is_political_movement_type = movement_religious_majority
+					}
+				}
+			}
+			every_political_movement = {
+				limit = {
+					OR = {
+				is_political_movement_type = movement_liberal
+				is_political_movement_type = movement_cultural_majority
+				is_political_movement_type = movement_religious_majority
+					}
+				}
+				add_modifier = {
+					name = ca_modifier_total_debug
+					days = long_modifier_time
+				}
+			}
+
+
+	}
+
+}

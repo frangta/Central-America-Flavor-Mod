@@ -48,8 +48,8 @@ CR1 = {
 	}
 	
 	flag_definition = {
-		coa = ejemplo_2
-		subject_canton = ejemplo_2
+		coa = ejemplo_4
+		subject_canton = ejemplo_4
 		priority = 100
 		trigger = {
 			coa_def_dictatorship_flag_trigger = yes
@@ -698,10 +698,10 @@ REPLACE:UCA = { # Central America
 			scope:actor ?= {
 				coa_republic_trigger = yes
 				OR = {
-					has_law = law_type:law_central_american_unitary
+					has_law = law_type:law_ca_central_american_unitary
 					AND = {
 						has_variable = is_frca_var
-						has_law = law_type:law_central_american_confederated
+						has_law = law_type:law_ca_central_american_confederated
 					}
 				}
 			}
@@ -712,22 +712,22 @@ REPLACE:UCA = { # Central America
 		priority = 25
 		trigger = { 
 			scope:actor ?= {
-			    has_variable = is_frca_var
+			    has_variable = frca_preserved
 				coa_republic_trigger = yes
-				has_law = law_type:law_central_american_federal
+				has_law = law_type:law_ca_central_american_federal
 			}
 		}
 	}	
-	flag_definition = {
-		coa = UCA_republic
-		priority = 20
-		trigger = { 
-			scope:actor ?= {
-			    NOT = { has_variable = is_frca_var }
-				coa_republic_trigger = yes
-			}
-		}
-	}	
+	#flag_definition = {
+	#	coa = UCA_republic
+	#	priority = 20
+	#	trigger = { 
+	#		scope:actor ?= {
+	#		    NOT = { has_variable = is_frca_var }
+	#			coa_republic_trigger = yes
+	#		}
+	#	}
+	#}	
 	flag_definition = {
 		coa = UCA_absolute_monarchy			
 		priority = 20
@@ -988,7 +988,7 @@ RDT = { #Talamanca
 		subject_canton = RDT	
 		allow_overlord_canton = yes		
 		coa_with_overlord_canton = RDT_subject			
-		priority = 1000
+		priority = 10
 	}
 }
 CCR = { #Confederation of Costa Rica

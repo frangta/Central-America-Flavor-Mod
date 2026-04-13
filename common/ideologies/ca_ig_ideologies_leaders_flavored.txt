@@ -1,190 +1,816 @@
 ﻿ideology_ca_liberal_monarchist = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_royalist.dds"
-	   character_ideology = yes
-	lawgroup_governance_principles = {
-		law_theocracy = strongly_disapprove	
-		law_monarchy = strongly_approve
-		law_presidential_republic = approve
-		law_parliamentary_republic = neutral
-		law_council_republic = strongly_disapprove
-	}
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_royalist.dds"
+    character_ideology = yes
+    
+    lawgroup_governance_principles = {
+        law_theocracy = strongly_disapprove    
+        law_monarchy = strongly_approve
+        law_presidential_republic = strongly_disapprove
+        law_parliamentary_republic = disapprove
+        law_council_republic = strongly_disapprove
+    }
 
-	lawgroup_distribution_of_power = {
-		law_autocracy = strongly_disapprove
-		law_oligarchy = strongly_disapprove
-		law_landed_voting = disapprove
-		law_wealth_voting = neutral
-		law_census_voting = neutral
-		law_universal_suffrage = neutral
-		law_anarchy = strongly_disapprove
-	}
+    lawgroup_distribution_of_power = {
+        law_autocracy = neutral 
+        law_oligarchy = approve
+        law_landed_voting = approve
+        law_wealth_voting = approve
+        law_census_voting = neutral
+        law_universal_suffrage = disapprove
+        law_anarchy = strongly_disapprove
+    }
 
-	lawgroup_free_speech = {
-		law_outlawed_dissent = strongly_disapprove
-		law_censorship = disapprove
-		law_right_of_assembly = approve
-		law_protected_speech = strongly_approve
-	}
+    lawgroup_free_speech = {
+        law_outlawed_dissent = strongly_disapprove
+        law_censorship = disapprove
+        law_right_of_assembly = approve
+        law_protected_speech = strongly_approve
+    }
 
-	lawgroup_slavery = {
-		law_slavery_banned = strongly_approve
-		law_legacy_slavery = disapprove
-		law_debt_slavery = strongly_disapprove
-		law_slave_trade = strongly_disapprove
-	}
+    lawgroup_slavery = {
+        law_slavery_banned = strongly_approve
+        law_legacy_slavery = disapprove
+        law_debt_slavery = strongly_disapprove
+        law_slave_trade = strongly_disapprove
+    }
+    
+    #lawgroup_governance_principles = {
+    #    law_ca_central_american_unitary = approve 
+    #    law_ca_central_american_federal = neutral
+    #    law_ca_central_american_confederated = disapprove
+    #}
+    country_trigger = {
+        # Restringido a culturas centroamericanas
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+        }
+        # Opcional: Solo si existe algún reclamo monárquico o es una monarquía
+        OR = {
+            has_law = law_type:law_monarchy
+            has_technology_researched = egalitarianism # Requiere cierto avance político
+        }
+    }
 
-	lawgroup_land_reform = {
-		law_serfdom = strongly_disapprove
-		law_tenant_farmers = neutral
-		law_homesteading = neutral
-		law_collectivized_agriculture = neutral
-		law_commercialized_agriculture = neutral
-	}
+    interest_group_leader_trigger = {
+        # Típicamente aristócratas ilustrados o intelectuales conservadores
+		ideology_ca_liberal_monarchist_valid_trigger = yes
+        OR = {
+            is_interest_group_type = ig_landowners
+            is_interest_group_type = ig_intelligentsia
+        }
+    }
 
-	lawgroup_citizenship = {
-		law_ethnostate = strongly_disapprove
-		law_national_supremacy = disapprove
-		law_racial_segregation = neutral
-		law_cultural_exclusion = approve
-		law_multicultural = neutral
-	}
+    non_interest_group_leader_trigger = {
+        # Los agitadores no suelen ser monárquicos en repúblicas, salvo excepciones
+        NOT = { has_role = agitator }
+    }
 
-	lawgroup_policing = {
-		law_local_police = disapprove
-		law_dedicated_police = approve
-		law_militarized_police = strongly_disapprove
-		law_no_police = disapprove
-	}
+    interest_group_leader_weight = {
+        value = 10
+        
+        # Más probable si ya hay monarquía
+        if = {
+             owner = { has_law = law_type:law_monarchy } 
+            add = 50
+        }
+        
+        # Menos probable en repúblicas consolidadas
+        if = {
+            limit = { owner = { has_law = law_type:law_presidential_republic } }
+            add = -50
+        }
+    }
 
-	lawgroup_internal_security = {
-		law_no_home_affairs = disapprove
-		law_guaranteed_liberties = strongly_approve
-		law_national_guard = approve
-		law_secret_police = strongly_disapprove
-	}
+    non_interest_group_leader_weight = {
+        value = 5
+    }	
+		
 }
 
 ideology_ca_unitarian = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
-
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
     character_ideology = yes
 
-	lawgroup_bureaucracy = { #This is the best I can do for the moment to simulate the support for decentralized/centralized government 
-		law_hereditary_bureaucrats = strongly_disapprove
-		law_appointed_bureaucrats = strongly_approve
-		law_elected_bureaucrats = strongly_disapprove
-	}
+    lawgroup_ca_state_structure = {
+        law_ca_central_american_unitary = strongly_approve
+        law_ca_central_american_federal = disapprove
+        law_ca_central_american_confederated = strongly_disapprove
+    }
+
+    lawgroup_bureaucracy = { 
+        law_hereditary_bureaucrats = strongly_disapprove
+        law_appointed_bureaucrats = strongly_approve
+        law_elected_bureaucrats = strongly_disapprove
+    }
+   country_trigger = {
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+        }
+    }
+
+    interest_group_leader_trigger = {
+	ideology_ca_unitarian_valid_trigger = yes
+        # Conservadores, Iglesia y Militares suelen preferir el centralismo
+        OR = {
+            is_interest_group_type = ig_landowners
+            is_interest_group_type = ig_devout
+            is_interest_group_type = ig_armed_forces
+        }
+    }
+
+    interest_group_leader_weight = {
+        value = 25 # Base sólida en el siglo XIX
+
+        # Más probable si el país ya es Unitario
+        if = {
+            limit = { owner = { has_law = law_type:law_ca_central_american_unitary } }
+            add = 50
+        }
+
+        # Los Terratenientes aman el control central
+        if = {
+            limit = { is_interest_group_type = ig_landowners }
+            add = 25
+        }
+    }	
 	
-	#lawgroup_centralization = {
-	#	law_decentralized = strongly_disapprove
-	#	law_confederated = strongly_disapprove
-	#	law_federal = strongly_disapprove
-	#	law_devolved = apporve
-	#	law_unitary = strongly_approve
-	#}
 }
 
 ideology_ca_federalist = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
-
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
     character_ideology = yes
 
-	lawgroup_bureaucracy = { #This is the best I can do for the moment to simulate the support for decentralized/centralized government 
-		law_hereditary_bureaucrats = strongly_disapprove
-		law_appointed_bureaucrats = strongly_disapprove
-		law_elected_bureaucrats = strongly_approve
-	}
+    lawgroup_ca_state_structure = {
+        law_ca_central_american_unitary = strongly_disapprove
+        law_ca_central_american_federal = strongly_approve
+        law_ca_central_american_confederated = approve 
+    }
+
+    lawgroup_bureaucracy = { 
+        law_hereditary_bureaucrats = strongly_disapprove
+        law_appointed_bureaucrats = strongly_disapprove
+        law_elected_bureaucrats = strongly_approve 
+    }
+	country_trigger = {
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+        }
+    }
+
+    interest_group_leader_trigger = {
+	ideology_ca_federalist_valid_trigger = yes
+        # Intelectuales liberales y Burguesía comercial
+        OR = {
+            is_interest_group_type = ig_intelligentsia
+            is_interest_group_type = ig_petty_bourgeoisie
+            is_interest_group_type = ig_industrialists
+        }
+    }
+
+    interest_group_leader_weight = {
+        value = 25
+
+        # Más probable si hay leyes federales
+        if = {
+            limit = { owner = { has_law = law_type:law_ca_central_american_federal } }
+            add = 50
+        }
+
+        # Intelectuales prefieren federación
+        if = {
+            limit = { is_interest_group_type = ig_intelligentsia }
+            add = 25
+        }
+    }
 	
-	#lawgroup_centralization = {
-	#	law_decentralized = neutral
-	#	law_confederated = strongly_approve
-	#	law_federal = strongly_approve
-	#	law_devolved = strongly_disapprove
-	#	law_unitary = strongly_disapprove
-	#}
 }
 
 ideology_ca_leader_autocratic_autonomist = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_sovereignist.dds"
-	
-	character_ideology = yes
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_sovereignist.dds"
+    character_ideology = yes
 
-	lawgroup_governance_principles = {
-		law_monarchy = strongly_approve
-		law_presidential_republic = approve
-		law_parliamentary_republic = disapprove
-		law_theocracy = approve
-		law_council_republic = strongly_disapprove
-	}
+    lawgroup_ca_state_structure = {
+        law_ca_central_american_unitary = strongly_disapprove
+        law_ca_central_american_federal = strongly_disapprove
+        law_ca_central_american_confederated = strongly_approve
+    }
 
-	lawgroup_distribution_of_power = {
-		law_autocracy = strongly_approve
-		law_oligarchy = approve
-		law_landed_voting = disapprove
-		law_wealth_voting = strongly_disapprove
-		law_census_voting = strongly_disapprove
-		law_universal_suffrage = strongly_disapprove
-		law_anarchy = strongly_disapprove
-	}
-	
-	#lawgroup_centralization = {
-	#	law_decentralized = neutral
-	#	law_confederated = strongly_approve
-	#	law_federal = neutral
-	#	law_devolved = disapprove
-	#	law_unitary = strongly_disapprove
-	#}
+    lawgroup_governance_principles = {
+        law_monarchy = neutral
+        law_presidential_republic = approve
+        law_parliamentary_republic = disapprove
+        law_theocracy = neutral
+        law_council_republic = strongly_disapprove
+    }
 
-	lawgroup_policing = {
-		law_local_police = approve
-		law_dedicated_police = disapprove
-		law_militarized_police = strongly_disapprove
-		law_no_police = neutral
-	}
+    lawgroup_distribution_of_power = {
+        law_autocracy = strongly_approve
+        law_oligarchy = approve
+        law_landed_voting = disapprove
+        law_wealth_voting = strongly_disapprove
+        law_census_voting = strongly_disapprove
+        law_universal_suffrage = strongly_disapprove
+        law_anarchy = strongly_disapprove
+    }
 
-	lawgroup_army_model = {
-		law_national_militia = strongly_approve
-		law_professional_army = neutral
-		law_mass_conscription = disapprove
-		law_peasant_levies = disapprove
-	}
+    lawgroup_policing = {
+        law_local_police = approve
+        law_dedicated_police = disapprove
+        law_militarized_police = neutral
+        law_no_police = neutral
+    }
+
+    lawgroup_army_model = {
+        law_national_militia = strongly_approve 
+        law_professional_army = neutral
+        law_mass_conscription = disapprove
+        law_peasant_levies = disapprove
+    }
+	country_trigger = {
+        # Restringido a las culturas del mod
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:los_altos # Si usas Los Altos
+        }
+    }
+
+    interest_group_leader_trigger = {
+        # Típico de:
+        # 1. Rural Folk (Líderes campesinos regionalistas)
+        # 2. Armed Forces (Jefes de milicias locales)
+        # 3. Landowners (Patrones locales que no quieren gobierno central)
+
+        OR = {
+            is_interest_group_type = ig_rural_folk
+            is_interest_group_type = ig_armed_forces
+            is_interest_group_type = ig_landowners
+        }
+    }
+
+    non_interest_group_leader_trigger = {
+        # Aceptamos agitadores, ya que un autonomista suele empezar agitando contra el centro
+        ideology_ca_leader_autocratic_autonomist_valid_trigger = yes
+    }
+
+    interest_group_leader_weight = {
+        value = 10
+
+        # --- Lógica de Contexto Histórico ---
+        
+        # Más probable si el país ya es una Confederación (status quo)
+        if = {
+            limit = {
+                owner = { has_law = law_type:law_ca_central_american_confederated }
+            }
+            add = 50
+        }
+
+        ## Más probable si hay caos (Radicalismo alto) -> Surgen hombres fuertes locales
+        #if = {
+        #    limit = {
+        #        owner = { any_political_movement = { ... } }
+        #    }
+        #    add = 25
+        #}
+
+        # Sinergia con Milicias Nacionales
+        if = {
+            limit = {
+                owner = { has_law = law_type:law_national_militia }
+            }
+            add = 25
+        }
+
+        # Rural Folk tienden a ser más autonomistas/conservadores en este contexto (tipo Carrera)
+        if = {
+            limit = { is_interest_group_type = ig_rural_folk }
+            add = 20
+        }
+        
+        # Menos probable si el país es fuertemente Unitario (ya fueron derrotados o integrados)
+        if = {
+            limit = {
+                owner = { has_law = law_type:law_ca_central_american_unitary }
+            }
+            add = -50
+        }
+    }
+
+    non_interest_group_leader_weight = {
+        value = 10
+        
+        # Agitadores autonomistas aparecen si hay descontento regional
+        #if = {
+        #    limit = {
+        #        owner = { radical_fraction > 0.15 }
+        #    }
+        #    add = 50
+        #}
+    }
+
 }
 
 ideology_central_america_caudillo = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
+    character_ideology = yes
+
+
+    lawgroup_governance_principles = {
+        law_monarchy = neutral 
+        law_presidential_republic = strongly_approve
+        law_theocracy = disapprove
+        law_council_republic = strongly_disapprove	
+
+    }
 	
-	character_ideology = yes
-
-     lawgroup_governance_principles = {
-		law_monarchy = strongly_approve
-		law_presidential_republic = strongly_approve
-		law_central_american_confederated = strongly_disapprove
-		law_theocracy = strongly_disapprove
-		law_council_republic = strongly_disapprove
+	lawgroup_ca_state_structure = {
+        law_ca_central_american_unitary = approve
+        law_ca_central_american_federal = neutral 
+        law_ca_central_american_confederated = disapprove	
+	
+	
 	}
 
-	lawgroup_distribution_of_power = {
-		law_autocracy = strongly_approve
-		law_oligarchy = strongly_disapprove
-		law_landed_voting = strongly_disapprove
-		law_wealth_voting = strongly_disapprove
-		law_census_voting = strongly_disapprove
-		law_universal_suffrage = strongly_disapprove
-		law_anarchy = strongly_disapprove
-	}
-	#lawgroup_centralization = {
-	#	law_decentralized = strongly_approve
-	#	law_confederated = approve
-	#	law_federal = strongly_disapprove
-	#	law_devolved = strongly_disapprove
-	#	law_unitary = strongly_disapprove
-	#}
 
-	lawgroup_policing = {
-	    law_militarized_police = strongly_approve
-		law_local_police = strongly_disapprove
-		law_dedicated_police = strongly_disapprove
-		law_no_police = strongly_disapprove
-	}
+    lawgroup_distribution_of_power = {
+        law_autocracy = strongly_approve
+        law_oligarchy = disapprove 
+        law_landed_voting = strongly_disapprove
+        law_wealth_voting = strongly_disapprove
+        law_census_voting = strongly_disapprove
+        law_universal_suffrage = strongly_disapprove
+        law_anarchy = strongly_disapprove
+    }
 
+    lawgroup_policing = {
+        law_militarized_police = strongly_approve
+        law_local_police = strongly_disapprove
+        law_dedicated_police = neutral
+        law_no_police = strongly_disapprove
+    }
+    country_trigger = {
+        # Típico de la era de la anarquía o post-federación
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+        }
+    }
+
+    interest_group_leader_trigger = {
+	ideology_central_america_caudillo_valid_trigger = yes
+        # Casi exclusivo de Militares y Terratenientes
+        OR = {
+            is_interest_group_type = ig_armed_forces
+            is_interest_group_type = ig_landowners
+        }
+    }
+
+    interest_group_leader_weight = {
+        value = 20
+
+        # Muy probable para las Fuerzas Armadas
+        if = {
+            limit = { is_interest_group_type = ig_armed_forces }
+            add = 100
+        }
+
+        # Más probable si hay inestabilidad o autocracia
+        #if = {
+        #    limit = { 
+        #        owner = { 
+        #            has_law = law_type:law_autocracy 
+        #            radical_fraction > 0.2
+        #        } 
+        #    }
+        #    add = 50
+        #}
+    }	
+	
+}
+# ====================================================================
+# IDEOLOGÍAS REGIONALES CENTROAMERICANAS (VIC 3 - 1.12+)
+# ====================================================================
+
+# --------------------------------------------------------------------
+# GUATEMALA
+# --------------------------------------------------------------------
+
+ideology_maya_autonomism = {
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_radical.dds"
+    character_ideology = yes
+
+    lawgroup_governance_principles = {
+        law_monarchy = strongly_disapprove
+        law_theocracy = disapprove
+        law_council_republic = approve
+    }
+    lawgroup_distribution_of_power = {
+        law_oligarchy = strongly_disapprove
+        law_wealth_voting = strongly_disapprove
+        law_universal_suffrage = strongly_approve
+    }
+    lawgroup_citizenship = {
+        law_national_supremacy = strongly_disapprove
+        law_multiculturalism = strongly_approve
+    }
+    lawgroup_land_reform = {
+        law_serfdom = strongly_disapprove
+        law_tenant_farmers = strongly_disapprove
+        law_homesteading = strongly_approve
+        law_collectivized_agriculture = strongly_approve
+    }
+
+    interest_group_leader_weight = {
+        value = 0
+        if = {
+            limit = {
+                owner = { c:GUA ?= this }
+                OR = {
+                    is_interest_group_type = ig_rural_folk
+                    is_interest_group_type = ig_trade_unions
+                }
+            }
+            add = 100
+        }
+    }
+}
+
+# --------------------------------------------------------------------
+# EL SALVADOR
+# --------------------------------------------------------------------
+
+ideology_coffee_liberalism = {
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_market_liberal.dds"
+    character_ideology = yes
+
+    lawgroup_distribution_of_power = {
+        law_autocracy = disapprove
+        law_oligarchy = strongly_approve
+        law_wealth_voting = strongly_approve
+        law_universal_suffrage = strongly_disapprove
+    }
+    lawgroup_economic_system = {
+        law_traditionalism = strongly_disapprove
+        law_laissez_faire = strongly_approve
+        law_interventionism = neutral
+    }
+    lawgroup_trade_policy = {
+        law_isolationism = strongly_disapprove
+        law_free_trade = strongly_approve
+    }
+    lawgroup_land_reform = {
+        law_homesteading = strongly_disapprove
+        law_commercialized_agriculture = strongly_approve
+    }
+
+    interest_group_leader_weight = {
+        value = 0
+        if = {
+            limit = {
+                owner = { c:ELS ?= this }
+                OR = {
+                    is_interest_group_type = ig_landowners
+                    is_interest_group_type = ig_industrialists
+                }
+            }
+            add = 100
+        }
+    }
+}
+
+ideology_cuscatleco_nationalism = {
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_fascist.dds"
+    character_ideology = yes
+
+    lawgroup_distribution_of_power = {
+        law_autocracy = approve
+        law_single_party_state = strongly_approve
+    }
+    lawgroup_citizenship = {
+        law_ethnostate = strongly_approve
+        law_national_supremacy = approve
+        law_multiculturalism = strongly_disapprove
+    }
+    lawgroup_army_model = {
+        law_peasant_levies = strongly_disapprove
+        law_mass_conscription = strongly_approve
+        law_professional_army = approve
+    }
+
+    interest_group_leader_weight = {
+        value = 0
+        if = {
+            limit = {
+                owner = { c:ELS ?= this }
+                OR = {
+                    is_interest_group_type = ig_armed_forces
+                    is_interest_group_type = ig_petty_bourgeoisie
+                }
+            }
+            add = 50
+        }
+    }
+}
+
+# --------------------------------------------------------------------
+# NICARAGUA
+# --------------------------------------------------------------------
+
+ideology_granadine_legitimism = {
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_authoritarian.dds"
+    character_ideology = yes
+
+    lawgroup_governance_principles = {
+        law_presidential_republic = disapprove
+        law_parliamentary_republic = disapprove
+        law_monarchy = approve
+        law_theocracy = approve
+    }
+    lawgroup_distribution_of_power = {
+        law_autocracy = strongly_approve
+        law_landed_voting = approve
+        law_universal_suffrage = strongly_disapprove
+    }
+    lawgroup_church_and_state = {
+        law_state_religion = strongly_approve
+        law_total_separation = strongly_disapprove
+    }
+
+    interest_group_leader_weight = {
+        value = 0
+        if = {
+            limit = {
+                owner = { c:NIC ?= this }
+                OR = {
+                    is_interest_group_type = ig_landowners
+                    is_interest_group_type = ig_devout
+                }
+            }
+            add = 100
+        }
+    }
+}
+
+ideology_anti_imperialist_sovereigntism = {
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_vanguardist.dds"
+    character_ideology = yes
+
+    lawgroup_trade_policy = {
+        law_free_trade = strongly_disapprove
+        law_protectionism = approve
+        law_isolationism = strongly_approve
+    }
+    lawgroup_economic_system = {
+        law_laissez_faire = strongly_disapprove
+        law_agrarianism = approve
+        law_cooperative_ownership = strongly_approve
+    }
+    lawgroup_army_model = {
+        law_national_militia = strongly_approve
+    }
+
+    interest_group_leader_weight = {
+        value = 0
+        if = {
+            limit = {
+                owner = { c:NIC ?= this }
+                is_interest_group_type = ig_rural_folk
+            }
+            add = 50
+        }
+    }
+}
+
+ideology_slaver_filibusterism = {
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_slaver.dds"
+    character_ideology = yes
+
+    lawgroup_slavery = {
+        law_slavery_banned = strongly_disapprove
+        law_slave_trade = strongly_approve
+        law_legacy_slavery = approve
+    }
+    lawgroup_citizenship = {
+        law_racial_segregation = approve
+        law_ethnostate = strongly_approve
+        law_multiculturalism = strongly_disapprove
+    }
+    lawgroup_colonization = {
+        law_no_colonial_affairs = disapprove
+        law_colonial_exploitation = strongly_approve
+    }
+
+    interest_group_leader_weight = {
+        value = 0
+        if = {
+            limit = {
+                owner = { c:NIC ?= this }
+                culture = cu:dixie # Solo aparece si el líder es gringo/sureño
+            }
+            add = 200
+        }
+    }
+}
+
+# --------------------------------------------------------------------
+# COSTA RICA
+# --------------------------------------------------------------------
+
+ideology_carrillismo = {
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_paternalistic.dds"
+    character_ideology = yes
+    lawgroup_ca_state_structure = {        
+       law_ca_central_american_federal = strongly_disapprove
+        law_ca_central_american_unitary = strongly_disapprove
+		}
+    lawgroup_governance_principles = {
+
+        law_presidential_republic = approve
+    }
+    lawgroup_distribution_of_power = {
+        law_autocracy = strongly_approve
+        law_oligarchy = approve
+        law_universal_suffrage = strongly_disapprove
+    }
+    lawgroup_trade_policy = {
+        law_isolationism = approve
+    }
+    lawgroup_bureaucracy = {
+        law_appointed_bureaucrats = strongly_approve
+    }
+
+    interest_group_leader_weight = {
+        value = 0
+        if = {
+            limit = {
+                owner = { c:COS ?= this }
+                OR = {
+                    is_interest_group_type = ig_intelligentsia
+                    is_interest_group_type = ig_armed_forces
+                }
+            }
+            add = 80
+        }
+    }
+}
+
+ideology_olympus_liberalism = {
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_positivist.dds"
+    character_ideology = yes
+
+    lawgroup_church_and_state = {
+        law_state_religion = strongly_disapprove
+        law_freedom_of_conscience = approve
+        law_total_separation = strongly_approve
+    }
+    lawgroup_education_system = {
+        law_no_schools = strongly_disapprove
+        law_religious_schools = strongly_disapprove
+        law_public_schools = strongly_approve
+    }
+    lawgroup_distribution_of_power = {
+        law_census_voting = strongly_approve
+        law_wealth_voting = approve
+        law_universal_suffrage = disapprove
+    }
+
+    interest_group_leader_weight = {
+        value = 0
+        if = {
+            limit = {
+                owner = { c:COS ?= this }
+                is_interest_group_type = ig_intelligentsia
+            }
+            add = 100
+        }
+    }
+}
+
+ideology_chacara_social_democracy = {
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_social_democrat.dds"
+    character_ideology = yes
+
+    lawgroup_land_reform = {
+        law_serfdom = strongly_disapprove
+        law_tenant_farmers = disapprove
+        law_homesteading = strongly_approve
+    }
+    lawgroup_distribution_of_power = {
+        law_oligarchy = strongly_disapprove
+        law_wealth_voting = disapprove
+        law_universal_suffrage = strongly_approve
+    }
+    lawgroup_welfare = {
+        law_no_social_security = strongly_disapprove
+        law_old_age_pensions = strongly_approve
+    }
+    lawgroup_economic_system = {
+        law_laissez_faire = disapprove
+        law_interventionism = strongly_approve
+    }
+
+    interest_group_leader_weight = {
+        value = 0
+        if = {
+            limit = {
+                owner = { c:COS ?= this }
+                OR = {
+                    is_interest_group_type = ig_rural_folk
+                    is_interest_group_type = ig_trade_unions
+                }
+            }
+            add = 80
+        }
+    }
+}
+
+# --------------------------------------------------------------------
+# PANAMÁ
+# --------------------------------------------------------------------
+
+ideology_mercantile_transitism = {
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_free_trade.dds"
+    character_ideology = yes
+
+    lawgroup_trade_policy = {
+        law_isolationism = strongly_disapprove
+        law_protectionism = disapprove
+        law_free_trade = strongly_approve
+    }
+    lawgroup_migration = {
+        law_closed_borders = strongly_disapprove
+        law_migration_controls = disapprove
+        law_no_migration_controls = strongly_approve
+    }
+    lawgroup_economic_system = {
+        law_traditionalism = strongly_disapprove
+        law_laissez_faire = strongly_approve
+    }
+
+    interest_group_leader_weight = {
+        value = 0
+        if = {
+            limit = {
+                owner = { c:PNM ?= this }
+                OR = {
+                    is_interest_group_type = ig_industrialists
+                    is_interest_group_type = ig_petty_bourgeoisie
+                }
+            }
+            add = 100
+        }
+    }
+}
+
+ideology_isthmian_separatism = {
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_rebel.dds"
+    character_ideology = yes
+
+    lawgroup_governance_principles = {
+        law_presidential_republic = approve
+    }
+    lawgroup_army_model = {
+        # Dispuestos a sacrificar ejército a cambio de protección extranjera
+        law_professional_army = disapprove
+        law_national_militia = approve
+    }
+
+    interest_group_leader_weight = {
+        value = 0
+        if = {
+            limit = {
+                owner = { c:PNM ?= this }
+                OR = {
+                    is_interest_group_type = ig_intelligentsia
+                    is_interest_group_type = ig_landowners
+                }
+            }
+            add = 80
+        }
+    }
 }

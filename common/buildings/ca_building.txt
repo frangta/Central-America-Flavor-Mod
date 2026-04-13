@@ -151,14 +151,29 @@ ca_iron_mine = {
         modifier:state_ca_iron_mine_max_level_add > 0
         }
 	potential = {
-		owner = { 
-			is_ai = no 
+		owner = {  
 			has_variable = ca_buildings_on
 		}
 	}
-        can_build = {										# optional custom trigger (state scope) for building requirements
-            # trigger definition
-        }	
+    can_build_government = {
+        has_variable = ca_soil_survey_complete
+        market_access >= 0.50 
+    }
+    can_build_private = {
+														 
+        has_variable = ca_soil_survey_complete
+		
+																  
+																		
+        market_access >= 0.50 
+    }	
+
+possible_desc = {
+        trigger = {
+            NOT = { has_variable = ca_soil_survey_complete }
+        }
+        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
+    }	
 	unlocking_technologies = {
 		shaft_mining
 	}
@@ -187,14 +202,24 @@ ca_coal_mine = {
         }
 	potential = {
 		owner = { 
-			is_player = yes
 			has_variable = ca_buildings_on
 
 		}
 	}
-        can_build = {										# optional custom trigger (state scope) for building requirements
-            # trigger definition
-        }	
+    can_build_government = {
+        has_variable = ca_soil_survey_complete
+        market_access >= 0.50 
+    }
+    can_build_private = {
+        has_variable = ca_soil_survey_complete
+        market_access >= 0.50 
+    }
+possible_desc = {
+        trigger = {
+            NOT = { has_variable = ca_soil_survey_complete }
+        }
+        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
+    }	
 	unlocking_technologies = {
 		shaft_mining
 	}
@@ -223,15 +248,26 @@ ca_lead_mine = {
         }
 	potential = {
 		owner = { 
-			is_player = yes
 			has_variable = ca_buildings_on
 
 		}
 
 	}
-        can_build = {										# optional custom trigger (state scope) for building requirements
-            # trigger definition
-        }	
+    can_build_government = {
+        has_variable = ca_soil_survey_complete
+        market_access >= 0.50 
+    }
+    can_build_private = {
+														 
+        has_variable = ca_soil_survey_complete
+        market_access >= 0.50 
+    }
+possible_desc = {
+        trigger = {
+            NOT = { has_variable = ca_soil_survey_complete }
+        }
+        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
+    }	
 	unlocking_technologies = {
 		shaft_mining
 	}
@@ -260,15 +296,29 @@ ca_sulfur_mine = {
         }
 	potential = {
 		owner = { 
-			is_player = yes
 			has_variable = ca_buildings_on
 
 		}
 
 	}
-        can_build = {										# optional custom trigger (state scope) for building requirements
-            # trigger definition
-        }	
+    can_build_government = {
+        has_variable = ca_soil_survey_complete
+        market_access >= 0.50 
+    }
+    can_build_private = {
+														 
+        has_variable = ca_soil_survey_complete
+		
+																  
+																		
+        market_access >= 0.50 
+    }
+possible_desc = {
+        trigger = {
+            NOT = { has_variable = ca_soil_survey_complete }
+        }
+        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
+    }	
 	unlocking_technologies = {
 		shaft_mining
 	}
@@ -297,16 +347,30 @@ ca_gold_mine = {
         }
 	potential = {
 		owner = { 
-			is_player = yes
 			has_variable = ca_buildings_on
 
 		}
 
 	
 	}
-        can_build = {										# optional custom trigger (state scope) for building requirements
-            # trigger definition
-        }	
+    can_build_government = {
+        has_variable = ca_soil_survey_complete
+        market_access >= 0.50 
+    }
+    can_build_private = {
+														 
+        has_variable = ca_soil_survey_complete
+		
+																  
+																		
+        market_access >= 0.50 
+    }
+	possible_desc = {
+        trigger = {
+            NOT = { has_variable = ca_soil_survey_complete }
+        }
+        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
+    }
 	unlocking_technologies = {
 		prospecting
 	}
@@ -337,15 +401,25 @@ ca_oil_rig = {
         }
 	potential = {
 			owner = { 
-			is_player = yes
 			has_variable = ca_buildings_on
 			has_technology_researched = pumpjacks
 			
 		}
 	}
-        can_build = {										# optional custom trigger (state scope) for building requirements
-            # trigger definition
+   can_build_government = {
+        has_variable = ca_soil_survey_complete
+        market_access >= 0.50 
+    }
+    can_build_private = {
+        has_variable = ca_soil_survey_complete
+        market_access >= 0.50 
+    }
+	possible_desc = {
+        trigger = {
+            NOT = { has_variable = ca_soil_survey_complete }
         }
+        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
+    }
 	unlocking_technologies = {
 		pumpjacks
 	}
@@ -374,7 +448,7 @@ ca_gold_field = {
         }
 	potential = {
 		owner = { 
-			is_player = yes
+
 			has_variable = ca_buildings_on
 
 		}

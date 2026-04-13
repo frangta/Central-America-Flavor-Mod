@@ -7,14 +7,14 @@ REPLACE:COS = {
 	
 	tier = principality
 	
-	cultures = { central_american costa_rican }
+	cultures = { central_american  costa_rican }
 	capital = STATE_COSTA_RICA
 	is_named_from_capital = yes
 }
 PC1 = { #San Jose
 color = { 207 72 60 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -25,7 +25,7 @@ color = { 207 72 60 }
 PC2 = { #Guanacaste
 color = { 187 65 54 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -36,7 +36,7 @@ color = { 187 65 54 }
 PC3 = { #Nicoya
 color = { 227 79 66 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -47,7 +47,7 @@ color = { 227 79 66 }
 PC4 = { #Limon
 color = { 197 69 58 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -58,7 +58,7 @@ color = { 197 69 58 }
 PC5 = { #Heredia
 color = { 217 75 63 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -69,7 +69,7 @@ color = { 217 75 63 }
 PC6 = { #Alaguela
 color = { 197 82 72 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -80,7 +80,7 @@ color = { 197 82 72 }
 PC7 = { #Osa
 color = { 217 85 67 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -91,7 +91,7 @@ color = { 217 85 67 }
 PC8 = { #Cartago
 color = { 207 60 50 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -133,7 +133,7 @@ REPLACE:GUA = {
 	
 	tier = principality
 	
-	cultures = { central_american guatemalan}
+	cultures = {central_american guatemalan }
 	capital = STATE_GUATEMALA
 	is_named_from_capital = yes
 }
@@ -161,7 +161,7 @@ GGA = { #Gran Republic of Guatemala / Kingdom of Guatemala
 DG1 = { #Peten
 color = { 200 180 237 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -172,7 +172,7 @@ color = { 200 180 237 }
 DG2 = { #Izabal
 color = { 245 250 210 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -183,7 +183,7 @@ color = { 245 250 210 }
 DG3 = { #Verapaz
 color = { 230 235 242 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -194,7 +194,7 @@ color = { 230 235 242 }
 DG4 = { #Guatemala,
 color = { 260 225 252 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -205,7 +205,7 @@ color = { 260 225 252 }
 DG5 = { #Quetzaltenango,
 color = { 220 210 237 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -216,7 +216,7 @@ color = { 220 210 237 }
 DG6 = { #Soconusco
 color = { 180 200 200 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -232,7 +232,7 @@ REPLACE:NIC = {
 	
 	tier = principality
 	
-	cultures = { central_american nicaraguan }
+	cultures = {central_american nicaraguan }
 	capital = STATE_NICARAGUA
 	is_named_from_capital = yes
 }
@@ -250,7 +250,7 @@ RNI = {
 PN1 = { #Leon
 color = { 34 98 156 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -261,7 +261,7 @@ color = { 34 98 156 }
 PN2 = { #Managua
 color = { 44 98 196 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -272,7 +272,7 @@ color = { 44 98 196 }
 PN3 = { #Matagalpa
 color = { 54 108 206 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -283,7 +283,7 @@ color = { 54 108 206 }
 PN4 = { #Sur zone
 color = { 64 118 216 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -294,7 +294,7 @@ color = { 64 118 216 }
 PN5 = { #Nort zone
 color = { 54 128 206 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -305,7 +305,7 @@ color = { 54 128 206 }
 PN6 = { #Granada
 color = { 54 158 206 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -321,7 +321,7 @@ REPLACE:ELS = {
 	
 	tier = principality
 	
-	cultures = { central_american el_salvadorian }
+	cultures = {central_american el_salvadorian }
 	capital = STATE_SAN_SALVADOR
 	is_named_from_capital = yes
 }
@@ -339,7 +339,7 @@ UEL = {
 DE1 = { #San Salvador
 color = { 10 57 104  }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -351,7 +351,7 @@ color = { 10 57 104  }
 DE2 = { #Sonsonate
 color = { 20 67 114 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -363,7 +363,7 @@ color = { 20 67 114 }
 DE3 = { #San Miguel
 color = { 0 37 64  }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -380,7 +380,7 @@ REPLACE:HON = {
 	
 	tier = principality
 	
-	cultures = { central_american honduran }
+	cultures = {central_american honduran  }
 	capital = STATE_HONDURAS
 	is_named_from_capital = yes
 }
@@ -411,7 +411,7 @@ UHO = {
 DH1 = { #Olancho
 color = { 235 230 227  }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -422,7 +422,7 @@ color = { 235 230 227  }
 DH2 = { #Yoro
 color = { 225 230 237  }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -433,7 +433,7 @@ color = { 225 230 237  }
 DH3 = { #Santa Barbara
 color = { 230 235 242 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -444,7 +444,7 @@ color = { 230 235 242 }
 DH4 = { #El Salvador
 color = { 240 245 252 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -455,7 +455,7 @@ color = { 240 245 252 }
 DH5 = { #Comayagua
 color = { 220 230 237  }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -466,7 +466,7 @@ color = { 220 230 237  }
 DH6 = { #Tegucigalpa
 color = { 210 220 227  }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -477,7 +477,7 @@ color = { 210 220 227  }
 DH7 = { #San Miguel
 color = { 200 225 237 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -493,14 +493,14 @@ REPLACE:PNM = {
 	
 	tier = principality
 	
-	cultures = { central_american panamanian }
+	cultures = {central_american panamanian }
 	capital = STATE_PANAMA
 	is_named_from_capital = yes
 }
 TLE = { #República de Tule
 	color = { 207 72 60 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = grand_principality
 	
@@ -534,7 +534,7 @@ VGA ={
 PP1 = { #Bocas de toro
 color = { 155 90 70 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -545,7 +545,7 @@ color = { 155 90 70 }
 PP2 = { #Veragua
 color = { 140 75 51 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -556,7 +556,7 @@ color = { 140 75 51 }
 PP3 = { #Dariel
 color = { 160 95 71 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -567,7 +567,7 @@ color = { 160 95 71 }
 PP4 = { #Chiriqui
 color = { 170 105 81 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -578,7 +578,7 @@ color = { 170 105 81 }
 PP5 = { #Azuero
 color = { 130 65 41 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -589,7 +589,7 @@ color = { 130 65 41 }
 PP6 = { #Soto
 color = { 160 85 61 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -600,7 +600,7 @@ color = { 160 85 61 }
 PP7 = { #Colon
 color = { 150 75 51 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -611,7 +611,7 @@ color = { 150 75 51 }
 PP8 = { #Panama
 color = { 140 95 81 }
 	
-	country_type = colonial
+	country_type = unrecognized
 	
 	tier = city_state
 	
@@ -619,7 +619,7 @@ color = { 140 95 81 }
 	capital = STATE_PANAMA
 	is_named_from_capital = yes
 }
-##########Other Countries######
+##########Central america Countries######
 REPLACE:UCA = {
 	color = { 90 175 255 }
 	
@@ -630,6 +630,17 @@ REPLACE:UCA = {
 	capital = STATE_SAN_SALVADOR
 	cultures = { central_american }
 }
+CR1 = { #Union Of Central America
+    color = { 120 71 171 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { costa_rican panamanian nicaraguan guatemalan el_salvadorian honduran }
+	capital = STATE_COSTA_RICA
+}
+##########Other Countries######
 #Caribbean
 REPLACE:CRB = {
 	color = { 140 55 75 }
@@ -904,25 +915,15 @@ VGI = {
 	cultures = { afro_caribbean }
 	capital = STATE_WEST_INDIES
 }
-CR1 = { #Union Of Central America
-    color = { 120 71 171 }
-	
-	country_type = colonial
-	
-	tier = empire
-	
-	cultures = { central_american costa_rican panamanian nicaraguan guatemalan el_salvadorian honduran }
-	capital = STATE_COSTA_RICA
-}
 #Chiapas Republic
-REPLACE:CIP = {
+INJECT_OR_CREATE:CIP = {
 	color = { 192 201 76 }
 	
 	country_type = recognized
 	
 	tier = principality
 	
-	cultures = { central_american mexican }
+	cultures = { chiapanecan central_american mexican }
 	capital = STATE_CHIAPAS
 }
 GCA = { #Great republic of Central America

@@ -1,4 +1,4 @@
-﻿costa_rican = {
+﻿INJECT_OR_CREATE:costa_rican = {
 	color = rgb{ 207 72 60 }
 	religion = catholic
 	heritage = heritage_latin_american_settler
@@ -136,7 +136,7 @@
 	}
 	graphics = european
 }
-panamanian ={
+INJECT_OR_CREATE:panamanian ={
 	color = rgb{ 150  85  61 }
 	religion = catholic
 	heritage = heritage_latin_american_settler
@@ -274,7 +274,7 @@ panamanian ={
 	}
 	graphics = european
 }
-nicaraguan ={
+INJECT_OR_CREATE:nicaraguan ={
 	color= rgb{ 34 88 186 }
 	religion = catholic
 	heritage = heritage_latin_american_settler
@@ -412,7 +412,7 @@ nicaraguan ={
 	}
 	graphics = european
 }
-guatemalan ={
+INJECT_OR_CREATE:guatemalan ={
 	color= rgb{ 115 194 251 }
 	religion = catholic
 	heritage = heritage_latin_american_settler
@@ -550,7 +550,7 @@ guatemalan ={
 	}
 	graphics = european
 }
-el_salvadorian ={
+INJECT_OR_CREATE:el_salvadorian ={
 	color= rgb{ 0 47 94 }
 	religion = catholic
 	heritage = heritage_latin_american_settler
@@ -688,7 +688,7 @@ el_salvadorian ={
 	}
 	graphics = european
 }
-honduran ={
+INJECT_OR_CREATE:honduran ={
 	color= rgb{ 235 240 247 }
 	religion = catholic
 	heritage = heritage_latin_american_settler
@@ -826,7 +826,7 @@ honduran ={
 	}
 	graphics = european
 }
-chibchan_central_america ={
+INJECT_OR_CREATE:chibchan_central_america ={
 	color = rgb {51 42 235}
 	religion = catholic
 	heritage = heritage_andean
@@ -933,7 +933,7 @@ chibchan_central_america ={
 	}
 	graphics = decentralised_americas
 }
-bribri_talamanca ={
+INJECT_OR_CREATE:bribri_talamanca ={
 	color = rgb {201 84 35}
 	religion = catholic
 	heritage = heritage_andean
@@ -1031,7 +1031,7 @@ bribri_talamanca ={
 	}
 	graphics = decentralised_americas
 }
-cabecar = {
+INJECT_OR_CREATE:cabecar = {
 	color = rgb {252 120 0}
 	religion = catholic
 	heritage = heritage_andean
@@ -1125,7 +1125,7 @@ cabecar = {
 		Mexias
 		Nibonri
 		Torres
-		Noanamà 
+		Noanama 
 		Anserma 
 		Sinufana 
 		Caramanta 
@@ -1149,7 +1149,7 @@ cabecar = {
 	}
 	graphics = decentralised_americas
 }
-ngabe_culture ={
+INJECT_OR_CREATE:ngabe_culture ={
 	color = rgb {92 75 218}
 	religion = catholic
 	heritage = heritage_andean
@@ -1249,7 +1249,7 @@ ngabe_culture ={
 	}
 	graphics = decentralised_americas
 }
-embera ={
+INJECT_OR_CREATE:embera ={
 	color = rgb {11 145 172}
 	religion = catholic
 	heritage = heritage_andean
@@ -1349,7 +1349,7 @@ embera ={
 	}
 	graphics = decentralised_americas
 }
-guna_kuna ={
+INJECT_OR_CREATE:guna_kuna ={
 	color = rgb {163 146 69}
 	religion = catholic
 	heritage = heritage_andean
@@ -1444,7 +1444,7 @@ guna_kuna ={
 	}
 	graphics = decentralised_americas
 }
-lenca ={
+INJECT_OR_CREATE:lenca ={
 	color = rgb {35 30 63}
 	religion = catholic
 	heritage = heritage_mesoamerican
@@ -1520,7 +1520,7 @@ lenca ={
 	}
 	graphics = decentralised_americas
 }
-mangue_chorotega ={
+INJECT_OR_CREATE:mangue_chorotega ={
 	color = rgb {182 130 245}
 	religion = catholic
 	heritage = heritage_mesoamerican
@@ -1596,7 +1596,7 @@ mangue_chorotega ={
 	}
 	graphics = decentralised_americas
 }
-garifuna_arawak ={
+INJECT_OR_CREATE:garifuna_arawak ={
 	color = rgb {30 67 241}
 	religion = catholic
 	traits = { african_diaspora_culture_group indigenous_american_heritage }
@@ -1697,7 +1697,145 @@ garifuna_arawak ={
 	}
 	graphics = african
 }
-antillianen={
+INJECT_OR_CREATE:chiapanecan = {
+	color = rgb{ 192 201 76 }
+	religion = catholic
+	heritage = heritage_latin_american_settler
+	language = language_hispanophone
+	obsessions = {
+		coffee
+	}
+	traditions = { }
+	male_common_first_names={
+		Alejandro
+		Andres
+		Aniceto
+		Arturo
+		Bartolome
+		Basilio
+		Benito
+		Benjamin_2
+		Bernardo
+		Carlos
+		Daniel
+		Diego
+		Doroteo
+		Eduardo
+		Eugenio_2
+		Felipe
+		Fermin
+		Fernando
+		Francisco
+		Fruto
+		Felix
+		Jacobo
+		Jesus
+		Joaquin
+		Jorge
+		Jose_Francisco
+		Jose_Maria
+		Juan
+		Juan_Antonio
+		Juan_Pablo
+		Julio
+		Justo
+		Lisandro
+		Lorenzo
+		Manuel
+		Marcelino
+		Maximiliano
+		Maximo
+		Pedro
+		Ponciano
+		Prospero_2
+		Rafael_2
+		Ramon
+		Santiago
+		Sebastian
+		Tiburcio
+		Tomas
+		Toribio
+		Victoriano
+		Oscar_2
+	}
+	female_common_first_names = {
+		Alba
+		Amanda
+		Angela
+		Bertha
+		Clementina
+		Consuelo
+		Graciela
+		Juana
+		Julieta
+		Leticia
+		Lucila
+		Miriam
+		Paula
+		Rigoberta
+	}	
+	noble_last_names = {
+		Barrios
+		Escalon
+		Menendez
+		Morazan
+		Regalado
+	}
+	common_last_names={
+		Aguilar
+		Andino
+		Araujo
+		Arbenz
+		Barahona
+		Barillas
+		Barrios
+		Cabanas
+		Carrera
+		Castellanos
+		Chamorro
+		Chavez
+		Corral
+		Cardenas_2
+		Esquivel
+		Estrada
+		Ezeta
+		Fernandez
+		Ferrera
+		Figueroa
+		Garrigo
+		GU_ell
+		Guzman
+		Hernandez
+		Jerez
+		Jimenez
+		Leiva
+		Lopez
+		Machado
+		Martinez_2
+		Medina
+		Mejia
+		Montes
+		Montiel
+		Palacios
+		Peralta
+		Quiros
+		Rosales
+		Sevilla
+		Sinibaldi
+		Soto
+		Teran
+		Ubico
+		Vasconcelos
+		Vigil
+		Zelaya
+		Zeledon
+	}
+	ethnicities = {
+		1 = south_american
+	}
+	graphics = european
+}
+INJECT_OR_CREATE:antillianen={
 	color = rgb{191 110 38}
 	religion = protestant
     heritage = heritage_african_diaspora
