@@ -5,7 +5,7 @@
 	show_in_lens = no
 
 	selectable = {
-	    country_has_primary_culture = cu:central_american
+	    is_ca_culture_country = yes
 		NOT = { is_country_type = decentralized }
 	}
 	potential = { # Only created through diplomatic plays
