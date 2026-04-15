@@ -410,11 +410,55 @@ federalists_vs_separatists_progress_core_progress_bar = {
 				desc = "separatists_may_30_decree_active"
 				value = -10 
 			}
-		}        
-	}
+		}
+# 1. Boicot por Agitación: Si el jugador (sujeto) sube el Turmoil en su país
+        if = {
+            limit = {
+                any_subject = {
+                    any_owned_state = {
+                        state_region = { is_homeland = cu:central_american }
+                        state_turmoil > 0.25
+                    }
+                }
+            }
+            add = {
+                desc = "separatists_subject_in_turmoil" # "Un estado miembro está en caos"
+                value = -2 # Castigo más fuerte porque es un estado entero rebelándose
+            }
+        }
+
+        # 2. Boicot Político: Si el jugador (sujeto) pone a los Terratenientes en su gobierno local
+        if = {
+            limit = {
+                any_subject = {
+                    ig:ig_landowners = { 
+                        is_in_government = yes 
+                        is_powerful = yes
+                    }
+                }
+            }
+            add = {
+                desc = "separatists_subject_conservative_gov" # "Gobierno conservador en estado miembro"
+                value = -1
+            }
+        }
+
+        # 3. Boicot por Leyes: Si el jugador aprueba una ley que debilite la unión (ej. Milicias Locales)
+        if = {
+            limit = {
+                any_subject = {
+                    has_law = law_type:law_peasant_levies # Reemplaza con la ley separatista de tu mod
+                }
+            }
+            add = {
+                desc = "separatists_subject_autonomous_laws" # "Leyes autonómicas en estado miembro"
+                value = -1
+            }
+        }        
+      }
 }
 
-# CORRECCIÓN FINAL: Barra ca_prospecting_bar reescrita a la sintaxis válida 1.12+
+
 ca_prospecting_bar = {
 	name = "ca_prospecting_bar"
 	desc = "ca_prospecting_bar_desc"
@@ -426,7 +470,7 @@ ca_prospecting_bar = {
 	
 	weekly_progress = {
 		add = {
-			# Se suma/resta directamente o mediante una condición, el motor calcula el progreso semanal.
+			
 			value = -1
 		}
 	}

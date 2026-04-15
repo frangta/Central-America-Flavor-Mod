@@ -356,6 +356,440 @@ create_character = {
 
 
 }
+# ==========================================
+# EFECTOS DE LIBERACIÓN DE CENTROAMÉRICA
+# ==========================================
+
+ca_liberate_guatemala_effect = {
+    add_modifier = { name = ca_starting_guatemala_modifier months = 60 }
+    add_journal_entry = { type = je_ca_historic_situation_in_guatemala }
+    remove_variable = ca_secession_country
+
+    # Líder Histórico
+    create_character = {
+        first_name = "José"
+        last_name = "Núñez" # Nota: Revisa si quieres cambiarlo, ya que Nicaragua también usa a Núñez.
+        historical = yes
+        ig_leader = yes
+        interest_group = ig_landowners
+        ruler = yes
+        birth_date = 1800.02.02
+        culture = cu:central_american
+        ideology = ideology:ideology_meritocratic
+        religion = rel:catholic
+        traits = { basic_diplomat }
+    }
+
+    # Grupos de Interés
+    ig:ig_landowners = {
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_hacendados
+    }
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_republican        
+        add_ideology = ideology_ca_constitutionalist
+    }
+    ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
+    ig:ig_devout = {
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_catholic_church
+    }
+
+    # Leyes Iniciales
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_mercantilism
+    activate_law = law_type:law_wealth_voting
+    activate_law = law_type:law_censorship
+}
+
+ca_liberate_elsalvador_effect = {
+    add_modifier = { name = ca_starting_salvador_modifier months = 60 }
+    add_journal_entry = { type = je_ca_historic_situation_in_elsalvador }
+    remove_variable = ca_secession_country
+
+    create_character = {
+        first_name = "Juan"
+        last_name = "Lindo"
+        historical = yes
+        ruler = yes
+        ig_leader = yes
+        birth_date = 1790.5.5
+        interest_group = ig_landowners
+        ideology = ideology:ideology_reformer
+        traits = { meticulous }
+    }
+
+    ig:ig_landowners = {
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_hacendados
+    }
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_republican        
+        add_ideology = ideology_ca_constitutionalist
+    }
+    ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
+    ig:ig_devout = {
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_catholic_church
+    }
+
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_landed_voting
+    activate_law = law_type:law_mercantilism
+    activate_law = law_type:law_censorship
+    activate_law = law_type:law_religious_schools
+}
+
+ca_liberate_honduras_effect = {
+    add_modifier = { name = ca_starting_honduras_modifier months = 60 }
+    add_journal_entry = { type = je_ca_historic_situation_in_honduras }
+    remove_variable = ca_secession_country
+
+    create_character = {
+        first_name = "Juan"
+        last_name = "Francisco de Molina"
+        historical = yes
+        ig_leader = yes
+        interest_group = ig_landowners
+        ruler = yes
+        birth_date = 1779.04.04
+        culture = cu:central_american
+        ideology = ideology:ideology_traditionalist
+        religion = rel:catholic
+        traits = { basic_diplomat }
+    }
+
+    ig:ig_landowners = {
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_hacendados
+    }
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_republican        
+        add_ideology = ideology_ca_constitutionalist
+    }
+    ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
+    ig:ig_devout = {
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_catholic_church
+    }
+
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_landed_voting
+    activate_law = law_type:law_mercantilism
+}
+
+ca_liberate_nicaragua_effect = {
+    add_modifier = { name = ca_starting_nicaragua_modifier months = 60 }
+    add_journal_entry = { type = je_ca_historic_situation_in_nicaragua }
+    remove_variable = ca_secession_country
+
+    create_character = {
+        first_name = "José"
+        last_name = "Núñez"
+        historical = yes
+        ig_leader = yes
+        interest_group = ig_landowners
+        ruler = yes
+        birth_date = 1800.02.02
+        culture = cu:nicaraguan
+        ideology = ideology:ideology_meritocratic
+        religion = rel:catholic
+        traits = { basic_diplomat }
+    }
+
+    ig:ig_landowners = {
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_nic_convervador
+    }
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_republican        
+        add_ideology = ideology_ca_constitutionalist
+        set_interest_group_name = ig_nic_liberal
+    }        
+    ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
+    ig:ig_devout = {
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_catholic_church
+    }            
+
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_mercantilism
+    activate_law = law_type:law_wealth_voting
+    activate_law = law_type:law_censorship
+}
+
+ca_liberate_costarica_effect = {
+    add_modifier = { name = ca_starting_costarica_modifier months = 60 }
+    add_journal_entry = { type = je_ca_historic_situation_in_costarica }
+    remove_variable = ca_secession_country
+
+    create_character = {
+        template = cos_braulio_carrillo_character_template
+        ruler = yes 
+    }
+
+    ig:ig_landowners = {
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_hacendados
+    }
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_republican        
+        add_ideology = ideology_ca_constitutionalist
+    }
+    ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
+    ig:ig_devout = {
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_catholic_church
+    }
+
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_mercantilism
+    activate_law = law_type:law_wealth_voting
+}
+
+ca_liberate_losaltos_effect = {
+    add_modifier = { name = ca_starting_losaltos_modifier months = 60 }
+    add_journal_entry = { type = je_ca_situation_in_losaltos }
+    remove_variable = ca_secession_country
+
+    create_character = {
+        first_name = "Marcelo" # Inventé un nombre distinto a Juan Lindo para evitar clones, cámbialo a tu gusto
+        last_name = "Molina"
+        historical = yes
+        ruler = yes
+        ig_leader = yes
+        birth_date = 1800.1.1
+        interest_group = ig_intelligentsia
+        ideology = ideology:ideology_reformer
+        traits = { meticulous }
+    }
+
+    ig:ig_landowners = {
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_hacendados
+    }
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_republican        
+        add_ideology = ideology_ca_constitutionalist
+    }
+    ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
+    ig:ig_devout = {
+        add_ideology = ideology_central_american_reactionary
+        set_interest_group_name = ig_catholic_church
+    }
+
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_landed_voting
+    activate_law = law_type:law_mercantilism
+    activate_law = law_type:law_censorship
+    activate_law = law_type:law_religious_schools
+}
+# ==========================================================
+# EFECTOS DE CREACIÓN DE PAÍSES CENTROAMERICANOS
+# Ejecutar siempre desde el Scope del país de origen (ej. UCA)
+# ==========================================================
+
+# --- CREAR GUATEMALA ---
+ca_create_guatemala_effect = {
+    if = {
+        limit = {
+            exists = s:STATE_GUATEMALA.region_state:UCA
+            NOT = { exists = c:GUA }
+        }
+        # Ajuste de Tierras Natales (Homelands)
+        s:STATE_GUATEMALA = {
+            add_homeland = cu:guatemalan
+            remove_homeland = cu:central_american
+        }
+        # Creación del País
+        create_country = {
+            tag = GUA
+            origin = ROOT
+            state = s:STATE_GUATEMALA.region_state:UCA
+            on_created = {
+                set_variable = { name = ca_secession_country }
+                save_scope_as = scope_GUA
+                
+                # Ajuste Cultural
+                add_primary_culture = cu:guatemalan
+                remove_primary_culture = cu:central_american
+                
+                # Llamada al setup político y de personajes
+                ca_liberate_guatemala_effect = yes 
+            }
+        }
+        # Convertir en Dependencia
+        create_diplomatic_pact = {
+            country = scope:scope_GUA
+            type = ca_dependency
+        }
+    }
+}
+
+# --- CREAR EL SALVADOR ---
+ca_create_elsalvador_effect = {
+    if = {
+        limit = {
+            exists = s:STATE_SAN_SALVADOR.region_state:UCA
+            NOT = { exists = c:ELS }
+        }
+        s:STATE_SAN_SALVADOR = {
+            add_homeland = cu:el_salvadorian
+            remove_homeland = cu:central_american
+        }
+        create_country = {
+            tag = ELS
+            origin = ROOT
+            state = s:STATE_SAN_SALVADOR.region_state:UCA
+            on_created = {
+                set_variable = { name = ca_secession_country }
+                save_scope_as = scope_ELS
+                add_primary_culture = cu:el_salvadorian
+                remove_primary_culture = cu:central_american
+                ca_liberate_elsalvador_effect = yes
+            }
+        }
+        # Convertir en Dependencia
+        create_diplomatic_pact = {
+            country = scope:scope_ELS
+            type = ca_dependency
+        }
+    }
+}
+
+# --- CREAR HONDURAS ---
+ca_create_honduras_effect = {
+    if = {
+        limit = {
+            exists = s:STATE_HONDURAS.region_state:UCA
+            NOT = { exists = c:HON }
+        }
+        s:STATE_HONDURAS = {
+            add_homeland = cu:honduran
+            remove_homeland = cu:central_american
+        }
+        create_country = {
+            tag = HON
+            origin = ROOT
+            state = s:STATE_HONDURAS.region_state:UCA
+            on_created = {
+                set_variable = { name = ca_secession_country }
+                save_scope_as = scope_HON
+                add_primary_culture = cu:honduran
+                remove_primary_culture = cu:central_american
+                ca_liberate_honduras_effect = yes
+            }
+        }
+        # Convertir en Dependencia
+        create_diplomatic_pact = {
+            country = scope:scope_HON
+            type = ca_dependency
+        }
+    }
+}
+
+# --- CREAR NICARAGUA ---
+ca_create_nicaragua_effect = {
+    if = {
+        limit = {
+            exists = s:STATE_NICARAGUA.region_state:UCA
+            NOT = { exists = c:NIC }
+        }
+        s:STATE_NICARAGUA = {
+            add_homeland = cu:nicaraguan
+            remove_homeland = cu:central_american
+        }
+        create_country = {
+            tag = NIC
+            origin = ROOT
+            state = s:STATE_NICARAGUA.region_state:UCA
+            on_created = {
+                set_variable = { name = ca_secession_country }
+                save_scope_as = scope_NIC
+                add_primary_culture = cu:nicaraguan
+                remove_primary_culture = cu:central_american
+                ca_liberate_nicaragua_effect = yes
+            }
+        }
+        # Convertir en Dependencia
+        create_diplomatic_pact = {
+            country = scope:scope_NIC
+            type = ca_dependency
+        }
+    }
+}
+
+# --- CREAR COSTA RICA ---
+ca_create_costarica_effect = {
+    if = {
+        limit = {
+            exists = s:STATE_COSTA_RICA.region_state:UCA
+            NOT = { exists = c:COS }
+        }
+        s:STATE_COSTA_RICA = {
+            add_homeland = cu:costa_rican
+            remove_homeland = cu:central_american
+        }
+        create_country = {
+            tag = COS
+            origin = ROOT
+            state = s:STATE_COSTA_RICA.region_state:UCA
+            on_created = {
+                set_variable = { name = ca_secession_country }
+                save_scope_as = scope_COS
+                add_primary_culture = cu:costa_rican
+                remove_primary_culture = cu:central_american
+                ca_liberate_costarica_effect = yes
+            }
+        }
+        # Convertir en Dependencia
+        create_diplomatic_pact = {
+            country = scope:scope_COS
+            type = ca_dependency
+        }
+    }
+}
+
+# --- CREAR ESTADO DE LOS ALTOS ---
+ca_create_losaltos_effect = {
+    if = {
+        limit = {
+            NOT = { exists = c:ALT }
+            exists = s:STATE_CHIAPAS.region_state:UCA
+        }
+        create_country = {
+            tag = ALT
+            origin = ROOT
+            state = s:STATE_CHIAPAS.region_state:UCA
+            province = p:x42124E
+            province = p:x78C465
+            province = p:xD9BEFE
+            province = p:xBD8628                
+            on_created = {
+                set_variable = { name = ca_secession_country }
+                save_scope_as = scope_ALT
+                ca_liberate_losaltos_effect = yes
+            }
+        }
+        # Convertir en Dependencia
+        create_diplomatic_pact = {
+            country = scope:scope_ALT
+            type = ca_dependency
+        }
+    }
+}
 ca_setup_ideological_strongholds_effect = {
     # ---------------------------------------------------------
     # EL SALVADOR: La Capital Federal y Liberal

@@ -1,253 +1,253 @@
 ﻿
-je_historic_central_america_falls_apart = { #
-	icon = "gfx/interface/icons/event_icons/event_military.dds"
-	
-	group = je_group_historical_content	
+je_historic_central_america_falls_apart = { 
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
+    group = je_group_historical_content    
+    should_be_pinned_by_default = yes
 
-	should_be_pinned_by_default = yes
+    # Variables de paz comentadas como referencia
+    # frca_guatemala_peace_var
+    # frca_nicaragua_peace_var
+    # frca_honduras_peace_var
+    # frca_costarica_peace_var
+    # frca_elsalvador_peace_var
+    
+    scripted_button = je_restore_order_gua_button
+    scripted_button = je_restore_order_hon_button
+    scripted_button = je_restore_order_nic_button
+    scripted_button = je_restore_order_cos_button
+    scripted_button = je_restore_order_els_button
+    scripted_button = je_nicaragua_intervention_central_america_button
+    scripted_button = je_costa_rica_intervention_central_america_button
+    scripted_button = je_honduras_intervention_central_america_button
+    scripted_button = je_guatemala_intervention_central_america_button
+    scripted_button = je_el_salvador_intervention_central_america_button
+    scripted_button = federal_congress_decree_button
 
-    #frca_guatemala_peace_var
-    #frca_nicaragua_peace_var
-    #frca_honduras_peace_var
-    #frca_costarica_peace_var
-	#frca_elsalvador_peace_var
-	
-	scripted_button = je_restore_order_gua_button
-	scripted_button = je_restore_order_hon_button
-	scripted_button = je_restore_order_nic_button
-	scripted_button = je_restore_order_cos_button
-	scripted_button = je_restore_order_els_button
-	scripted_button = je_nicaragua_intervention_central_america_button
-	scripted_button = je_costa_rica_intervention_central_america_button
-	scripted_button = je_honduras_intervention_central_america_button
-	scripted_button = je_guatemala_intervention_central_america_button
-	scripted_button = je_el_salvador_intervention_central_america_button
-	scripted_button = federal_congress_decree_button
-	immediate = {
-	set_variable = { name = frca_support value = 0 }
-	#c:UCA = { trigger_event = { id = ca_central_america.14 days = 3 } } 
-	}
-	current_value = {
+    immediate = {
+        set_variable = { 
+            name = frca_support 
+            value = 0 
+        }
+    }
+
+    current_value = {
         value = root.var:frca_support
     }
-	scripted_progress_bar = frca_support_bar
-	progress_desc = je_frca_support_progress_desc
-	progressbar = yes
-	goal_add_value = {
+    
+    scripted_progress_bar = frca_support_bar
+    progress_desc = je_frca_support_progress_desc
+    progressbar = yes
+    
+    goal_add_value = {
         add = 100
     }
-	weight = 100	
-	on_weekly_pulse = {
-		events = {
-			#Civil War Result
-			#Civil War Result
-			#Central American Dissolution -> Confederation via Conservatives in government
-		}
-		effect = {
-			calculate_frca_support_event_progress = yes
-		}
-	}
-	
-	on_monthly_pulse = {
-		events = {
-            ca_central_america.14 #The Livingston Penal Code
-            ca_central_america.1 #A local newspaper proposed the formation of a state that would include the regions of Quetzaltenango, Totonicapán, Sololá and Suchitepéquez.
-            ca_central_america.3 #Establishment of Los Altos 5 de junio de 1838
-			ca_central_america.5 #The Fate of Soconusco
-			ca_central_america.15 #Cholera Pandemic Hits Central America
-            ca_central_america.20 #Separatism in Guatemala
-			ca_central_america.19 #Separatism in Nicaragua  
-			ca_central_america.46 #Nicaragua Declares Independence
-			ca_central_america.79 #Federal Congress authorizes states to reorganize themselves #AI
-			ca_central_america.18 #Separatism in Costa Rica  
-			ca_central_america.45 #Costa Rica declares independence
-			ca_central_america.42 #Union Collapses Into Civil War / #Accept Fate & Become El Salvador			
-			ca_central_america.21 #Separatism in Honduras  
-			ca_central_america.48 #Honduras Declares Independence      
-			ca_central_america.69 #Civil War in Guatemala  
-			ca_central_america.23 #Separatism in Los Altos
-			ca_central_america.85 #Los Altos Declares Independence
-			ca_central_america.47 #Guatemala Declares Independence
-			ca_central_america.63 #Civil War in Nicaragua
-		}
-		random_events = {
-			99 = 0
-			25 = ca_central_america.17 #Cholera Spreads In Central America
-		}
-	 
-	}
-	complete = {
-             custom_tooltip = {
-                 text = frca_support_complete
-                 scope:journal_entry = {
-                     root.var:frca_support >= 100
-                 }
-             }
-		OR = {
-			custom_tooltip = { 
-				text = uca_won_war_tt
-				OR = {
-					has_variable = frca_won_war 
-					AND = {
-						has_variable = second_frca_civil_war_var
-						is_at_war = no
-						is_active_in_diplomatic_play = no
-						NOT = { exists = c:GUA }
-						NOT = { exists = c:HON }
-						NOT = { exists = c:NIC }
-						NOT = { exists = c:COS }
-						NOT = { exists = c:ELS }
-					}
-				}
-			}
-			AND = {
-				custom_tooltip = {
-					text = guatemala_support_tt
-					has_variable = gua_support_var
-					NOT = { exists = c:GUA }
-				}
-				custom_tooltip = {
-					text = el_salvador_support_tt
-					has_variable = els_support_var
-					NOT = { exists = c:ELS }
-				}
-				custom_tooltip = {
-					text = honduras_support_tt
-					has_variable = hon_support_var
-					NOT = { exists = c:HON }
-				}
-				custom_tooltip = {
-					text = nicaragua_support_tt
-					has_variable = nic_support_var
-					NOT = { exists = c:NIC }
-				}
-				custom_tooltip = {
-					text = costa_rica_support_tt
-					has_variable = cos_support_var
-					NOT = { exists = c:COS }
-				}
+    
+    weight = 100    
+    
+    on_weekly_pulse = {
+        effect = {
+            calculate_frca_support_event_progress = yes
+        }
+    }
+    
+    on_monthly_pulse = {
+        events = {
+            ca_central_america.14 # The Livingston Penal Code
+            ca_central_america.1  # A local newspaper proposed the formation...
+            ca_central_america.3  # Establishment of Los Altos
+            ca_central_america.5  # The Fate of Soconusco
+            ca_central_america.15 # Cholera Pandemic Hits Central America
+            ca_central_america.20 # Separatism in Guatemala
+            ca_central_america.19 # Separatism in Nicaragua  
+            ca_central_america.46 # Nicaragua Declares Independence
+            ca_central_america.79 # Federal Congress authorizes states to reorganize themselves
+            ca_central_america.18 # Separatism in Costa Rica  
+            ca_central_america.45 # Costa Rica declares independence
+            ca_central_america.42 # Union Collapses Into Civil War
+            ca_central_america.21 # Separatism in Honduras  
+            ca_central_america.48 # Honduras Declares Independence      
+            ca_central_america.69 # Civil War in Guatemala  
+            ca_central_america.23 # Separatism in Los Altos
+            ca_central_america.85 # Los Altos Declares Independence
+            ca_central_america.47 # Guatemala Declares Independence
+            ca_central_america.63 # Civil War in Nicaragua
+        }
+        random_events = {
+            99 = 0
+            25 = ca_central_america.17 # Cholera Spreads In Central America
+        }
+    }
+
+    complete = {
+        OR = {
+            # Opción 1: Alcanzar el 100% de soporte
+            custom_tooltip = {
+                text = frca_support_complete
+                check_variable = { 
+                    name = frca_support 
+                    value >= 100 
+                }
+            }
+            
+            # Opción 2: Ganar la guerra de unificación/pacificación
+            custom_tooltip = { 
+                text = uca_won_war_tt
+                OR = {
+                    has_variable = frca_won_war 
+                    AND = {
+                        has_variable = second_frca_civil_war_var
+                        is_at_war = no
+                        is_active_in_diplomatic_play = no
+                        NOT = { exists = c:GUA }
+                        NOT = { exists = c:HON }
+                        NOT = { exists = c:NIC }
+                        NOT = { exists = c:COS }
+                        NOT = { exists = c:ELS }
+                    }
+                }
+            }
+            
+            # Opción 3: Consolidar el apoyo en todas las regiones y mantener el control
+            AND = {
+                custom_tooltip = {
+                    text = guatemala_support_tt
+                    has_variable = gua_support_var
+                    NOT = { exists = c:GUA }
+                }
+                custom_tooltip = {
+                    text = el_salvador_support_tt
+                    has_variable = els_support_var
+                    NOT = { exists = c:ELS }
+                }
+                custom_tooltip = {
+                    text = honduras_support_tt
+                    has_variable = hon_support_var
+                    NOT = { exists = c:HON }
+                }
+                custom_tooltip = {
+                    text = nicaragua_support_tt
+                    has_variable = nic_support_var
+                    NOT = { exists = c:NIC }
+                }
+                custom_tooltip = {
+                    text = costa_rica_support_tt
+                    has_variable = cos_support_var
+                    NOT = { exists = c:COS }
+                }
                 any_scope_state = {
-				OR = {
-					state_region = s:STATE_GUATEMALA
-					state_region = s:STATE_SAN_SALVADOR
-					state_region = s:STATE_HONDURAS
-					state_region = s:STATE_NICARAGUA
-					state_region = s:STATE_COSTA_RICA
-				}
-				#count < 5				
-			}
-		}
-      }		
+                    OR = {
+                        state_region = s:STATE_GUATEMALA
+                        state_region = s:STATE_SAN_SALVADOR
+                        state_region = s:STATE_HONDURAS
+                        state_region = s:STATE_NICARAGUA
+                        state_region = s:STATE_COSTA_RICA
+                    }
+                    # Descomenta y ajusta el count según lo que necesites
+                    # count >= 5                
+                }
+            }
+        }
+    }      
 
-					
-	}
-	
-	fail = {
-		custom_tooltip = {
-			text = central_america_fail_tt
-			any_scope_state = {
-				OR = {
-					state_region = s:STATE_GUATEMALA
-					state_region = s:STATE_SAN_SALVADOR
-					state_region = s:STATE_HONDURAS
-					state_region = s:STATE_NICARAGUA
-					state_region = s:STATE_COSTA_RICA
-				}
-				count < 3
-			}
-		}
-		OR = {
-				custom_tooltip = {
-					text = recognized_guatemalan_independence_tt
-					exists = c:GUA
-					c:GUA = {has_variable = recognized_guatemalan_independence}
-					 
-				}
-				custom_tooltip = {
-					text = recognized_el_salvador_independence_tt
-					exists = c:ELS					
-					c:ELS ={has_variable = recognized_el_salvador_independence}
-				}
-				custom_tooltip = {
-					text = recognized_honduran_independence_tt
-					exists = c:HON						
-					c:HON ={has_variable = recognized_honduran_independence}
-				}
-				custom_tooltip = {
-					text = recognized_nicaraguan_independence_tt
-					exists = c:NIC					
-					c:NIC ={has_variable = recognized_nicaraguan_independence}
-				}
-				custom_tooltip = {
-					text = recognized_costa_rican_independence_tt
-					exists = c:COS					
-					c:COS ={has_variable = recognized_costa_rican_independence}
-				}		
+    fail = {
+        # Fracaso por pérdida de control territorial
+        custom_tooltip = {
+            text = central_america_fail_tt
+            any_scope_state = {
+                OR = {
+                    state_region = s:STATE_GUATEMALA
+                    state_region = s:STATE_SAN_SALVADOR
+                    state_region = s:STATE_HONDURAS
+                    state_region = s:STATE_NICARAGUA
+                    state_region = s:STATE_COSTA_RICA
+                }
+                count < 3
+            }
+        }
+        
+        # Fracaso por reconocimiento de independencia de las repúblicas
+        OR = {
+            custom_tooltip = {
+                text = recognized_guatemalan_independence_tt
+                exists = c:GUA
+                c:GUA = { has_variable = recognized_guatemalan_independence }
+            }
+            custom_tooltip = {
+                text = recognized_el_salvador_independence_tt
+                exists = c:ELS                    
+                c:ELS = { has_variable = recognized_el_salvador_independence }
+            }
+            custom_tooltip = {
+                text = recognized_honduran_independence_tt
+                exists = c:HON                        
+                c:HON = { has_variable = recognized_honduran_independence }
+            }
+            custom_tooltip = {
+                text = recognized_nicaraguan_independence_tt
+                exists = c:NIC                    
+                c:NIC = { has_variable = recognized_nicaraguan_independence }
+            }
+            custom_tooltip = {
+                text = recognized_costa_rican_independence_tt
+                exists = c:COS                    
+                c:COS = { has_variable = recognized_costa_rican_independence }
+            }        
+        }
+        
+        # Fracaso por perder la guerra
+        OR = {
+            custom_tooltip = {
+                text = frca_lost_war_tt
+                has_variable = frca_lost_war
+            }
+        }
+    }
+    
+    on_fail = {
+        trigger_event = { id = ca_central_america.13 popup = yes }
+        custom_tooltip = central_america_capital_tt
+        
+        hidden_effect = { 
+            ig:ig_landowners = {
+                remove_ideology = ideology_central_american_reactionary
+                add_ideology = ideology_caudillismo
+            }
+            ig:ig_armed_forces = {
+                remove_ideology = ideology_central_american_reactionary
+            }
+            ig:ig_devout = {
+                add_ideology = ideology_paternalistic
+                remove_ideology = ideology_central_american_reactionary
+            }
+            remove_variable = is_frca_var
+        }
+    }
 
-		
-		}
-		OR = {
-			custom_tooltip = {
-				text = frca_lost_war_tt
-				has_variable = frca_lost_war
-			}
-		}
-		
-	}
-	
-	on_fail = {
-		trigger_event = { id = ca_central_america.13 popup = yes }
-		custom_tooltip = central_america_capital_tt
-	    hidden_effect = { 
-			ig:ig_landowners = {
-				remove_ideology = ideology_central_american_reactionary
-				add_ideology = ideology_caudillismo
-			}
-		
-			ig:ig_armed_forces = {
-				remove_ideology = ideology_central_american_reactionary
-			}
+    on_complete = {
+        remove_variable = uca_cholera_pandemic
+        
+        hidden_effect = { 
+            ig:ig_landowners = {
+                remove_ideology = ideology_central_american_reactionary
+                add_ideology = ideology_caudillismo
+            }
+            ig:ig_armed_forces = {
+                remove_ideology = ideology_central_american_reactionary
+            }
+            ig:ig_devout = {
+                add_ideology = ideology_paternalistic
+                remove_ideology = ideology_central_american_reactionary
+            }
+            # trigger_event = { id = "the_grand_union" } 
+        }
+    }
+    
+    transferable = no
 
-			ig:ig_devout = {
-				add_ideology = ideology_paternalistic
-				remove_ideology = ideology_central_american_reactionary
-			}
-			remove_variable = is_frca_var
-		}
-	}
-
-	on_complete = {
-		
-		remove_variable = uca_cholera_pandemic
-		hidden_effect = { 
-			ig:ig_landowners = {
-				remove_ideology = ideology_central_american_reactionary
-				add_ideology = ideology_caudillismo
-			}
-		
-			ig:ig_armed_forces = {
-				remove_ideology = ideology_central_american_reactionary
-			}
-
-			ig:ig_devout = {
-				add_ideology = ideology_paternalistic
-				remove_ideology = ideology_central_american_reactionary
-			}
-			
-			#trigger_event = { id = "the_grand_union" } 
-		}
-	}
-	
-
-	
-	transferable = no
-
-	invalid = {
-		NOT = { exists = c:UCA }
-	}
-
+    invalid = {
+        NOT = { exists = c:UCA }
+    }
 }
-
 
 #je_reunify_central_america = {
 #	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -285,7 +285,41 @@ je_historic_central_america_falls_apart = { #
 #	}
 #}
 
+je_ca_state_role_in_federation = {
+    icon = "gfx/interface/icons/event_icons/event_protest.dds"
+    group = je_group_historical_content    
+    should_be_pinned_by_default = yes
 
+    # Solo es visible si eres sujeto de la UCA
+    is_visible = {
+        exists = c:UCA
+        is_subject_of = c:UCA
+    }
+
+    # MAGIA: Leemos la variable directamente de nuestro Señor (Overlord)
+    current_value = {
+        value = overlord.var:federalists_vs_separatists_var
+    }    
+    
+    # Usamos la misma barra de progreso que creaste para la UCA
+    scripted_progress_bar = federalists_vs_separatists_progress_core_progress_bar
+    progressbar = yes
+    
+    goal_add_value = {
+        add = 200 # El máximo de tu barra
+    }
+    weight = 100
+
+    # Aquí puedes añadir botones (Decisiones) para que el jugador gaste 
+    # Autoridad o Dinero para boicotear o ayudar a la UCA directamente
+    scripted_button = ca_button_sabotage_federation
+    scripted_button = ca_button_support_federation
+
+    # Si la UCA deja de existir, este diario se completa/falla y desaparece
+    invalid = {
+        NOT = { is_subject_of = c:UCA }
+    }
+}
 je_ca_federalists_vs_separatists_situation = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
 	
@@ -525,14 +559,15 @@ je_ca_federalists_vs_separatists_situation = {
 	}
 	
 }
+# =========================================================
+# 1. ECONÓMICO: EL BOOM AGROEXPORTADOR
+# =========================================================
 je_ca_agro_export_boom = {
     icon = "gfx/interface/icons/goods_icons/coffee.dds"
     group = je_group_economic_development
     should_be_pinned_by_default = yes
 
-    # ACTIVACIÓN
     possible = {
-        # Cualquier país de cultura centroamericana
         OR = {
             country_has_primary_culture = cu:central_american
             country_has_primary_culture = cu:costa_rican
@@ -541,30 +576,34 @@ je_ca_agro_export_boom = {
             country_has_primary_culture = cu:honduran
             country_has_primary_culture = cu:nicaraguan
         }
-        # Que no sea una gran potencia aún
-        rank_value < 50
+        # CORRECCIÓN: En Vic3, el rango se evalúa con 'country_rank' (mayor, menor, etc.)
+        # Si quieres que no sea una Gran Potencia, usamos esto:
+        NOT = { country_rank = rank_value:great_power }
+        # Evitamos que se dispare si ya se completó
+        NOT = { has_variable = ca_agro_export_miracle_completed }
     }
 
-    # CONDICIONES DE COMPLETADO (Objetivos Claros)
     complete = {
-        # 1. Tener una base productiva fuerte
-        # (Suma de niveles de café + fruta + azúcar > 30)
-        calc_building_level_count:building_coffee_plantation >= 15
-        calc_building_level_count:building_fruit_plantation >= 10
-        
-        # 2. Infraestructura para exportar
-        calc_building_level_count:building_port >= 5
-        
-        # 3. Política Comercial: NO Aislacionismo
+        # CORRECCIÓN: La sintaxis correcta para sumar niveles de edificios en todo el país
+        # es usar 'building_levels'. calc_building_level_count no es nativo.
+        building_levels = {
+            type = building_coffee_plantation
+            value >= 15
+        }
+        building_levels = {
+            type = building_fruit_plantation
+            value >= 10
+        }
+        building_levels = {
+            type = building_port
+            value >= 5
+        }
         NOT = { has_law = law_type:law_isolationism }
     }
 
-    # RECOMPENSA
     on_complete = {
-        # Evento de celebración
+        set_variable = ca_agro_export_miracle_completed
         trigger_event = { id = ca_economy.1 }
-        
-        # Modificador permanente de eficiencia comercial
         add_modifier = {
             name = ca_agro_export_miracle_modifier
             months = 180 # 15 años de bonanza
@@ -574,8 +613,6 @@ je_ca_agro_export_boom = {
 
 # =========================================================
 # 2. MILITAR: EL FIN DE LOS CAUDILLOS
-# Objetivo: Crear un ejército nacional organizado.
-# Referencia: Similar a las reformas militares europeas.
 # =========================================================
 je_ca_military_reform = {
     icon = "gfx/interface/icons/law_icons/professional_army.dds"
@@ -590,34 +627,31 @@ je_ca_military_reform = {
             country_has_primary_culture = cu:honduran
             country_has_primary_culture = cu:nicaraguan
         }
-        # Tienen leyes arcaicas
         has_law = law_type:law_peasant_levies
+        NOT = { has_variable = ca_military_reform_completed }
     }
 
     complete = {
-        # 1. Eliminar las levas campesinas
         OR = {
             has_law = law_type:law_professional_army
             has_law = law_type:law_national_militia
             has_law = law_type:law_mass_conscription
         }
-        
-        # 2. Tener una academia militar
-        # (Asumiendo que tienes un edificio de universidad renombrado o usas la tech)
         has_technology_researched = general_staff
         
-        # 3. Tener un ejército decente (para el tamaño de la región)
-        # > 10 batallones regulares
-        calc_regular_battalion_count >= 10
+        # CORRECCIÓN: Para contar batallones regulares, la sintaxis es 'num_regular_battalions'
+        num_regular_battalions >= 10
         
-        # 4. Los militares deben ser leales (no golpistas)
         ig:ig_armed_forces = {
-            approval >= 5
+            ig_approval >= 5 # CORRECCIÓN: Se usa ig_approval, no approval
         }
     }
 
     on_complete = {
+        set_variable = ca_military_reform_completed
         trigger_event = { id = ca_military.1 }
+        # MEJORA: A los modificadores militares permanentes (sin 'months') 
+        # asegúrate de balancearlos bien en tu archivo de modifiers.
         add_modifier = {
             name = ca_professional_army_bonus_modifier
         }
@@ -626,7 +660,6 @@ je_ca_military_reform = {
 
 # =========================================================
 # 3. CULTURAL: ILUSTRACIÓN CENTROAMERICANA
-# Objetivo: Alfabetizar a la población y reducir la influencia clerical.
 # =========================================================
 je_ca_enlightenment = {
     icon = "gfx/interface/icons/jomini/literacy_icon.dds"
@@ -641,21 +674,25 @@ je_ca_enlightenment = {
             country_has_primary_culture = cu:honduran
             country_has_primary_culture = cu:nicaraguan
         }
-        literacy_rate < 0.40 # Solo visible si la alfabetización es baja
+        # Solo visible si aún no han superado el umbral histórico de la región
+        literacy_rate < 0.40 
+        NOT = { has_variable = ca_enlightenment_completed }
     }
 
     complete = {
-        # 1. Meta de Alfabetización (Alta para la región en 1836)
         literacy_rate >= 0.40
         
-        # 2. Institución Educativa activa
         has_institution = institution_schools
-        institution_investment_level:institution_schools >= 3
+        institution_investment_level = {
+            institution = institution_schools
+            level >= 3
+        } # CORRECCIÓN: Sintaxis correcta para evaluar niveles de institución
         
-        # 3. Tener al menos una Universidad
-        calc_building_level_count:building_university >= 1
+        building_levels = {
+            type = building_university
+            value >= 1
+        }
         
-        # 4. Intelectuales influyentes
         ig:ig_intelligentsia = {
             is_powerful = yes
             is_in_government = yes
@@ -663,6 +700,7 @@ je_ca_enlightenment = {
     }
 
     on_complete = {
+        set_variable = ca_enlightenment_completed
         trigger_event = { id = ca_culture.1 }
         add_modifier = {
             name = ca_enlightenment_era_modifier

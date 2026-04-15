@@ -32,7 +32,7 @@ movement_ca_liberal = {
         if = {
             limit = {
                 has_law = law_type:law_monarchy
-                country_has_voting_franchise = no
+                has_voting_franchise = no
             }
             multiply = 0.1
         }
@@ -102,7 +102,7 @@ movement_ca_liberal = {
         state_weight = {
             value = 1
             if = {
-                limit = { owner = { ig:intelligentsia = { is_powerful = yes } } }
+                limit = { owner = { ig:ig_intelligentsia = { is_powerful = yes } } }
                 add = 50
             }
         }
@@ -194,16 +194,22 @@ movement_ca_reactionary = {
     }
 
     # Opción B: Secesión (Independencia local)
-    secession = {
+     secession = {
         possible = {
             political_movement_support >= 0.10
-            scope:clout <= 1 # Si no tienen voz en el gobierno, se van.
+            # Condición: Ningún IG que apoye el movimiento está en el gobierno
+            NOT = {
+                any_supporting_interest_group = {
+                    is_in_government = yes
+                }
+            }
         }
         weight = { value = 1000 }
         state_weight = {
             value = state_urbanization_rate
-            multiply = -1 # Más probable en zonas rurales
+            multiply = -1 
         }
+    
     }
 }
 

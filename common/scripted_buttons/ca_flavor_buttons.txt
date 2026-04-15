@@ -19,7 +19,61 @@
      ca_self_determination_decret = yes
 	}
 }
+ca_button_sabotage_federation = {
+    name = ca_button_sabotage_federation_name
+    desc = ca_button_sabotage_federation_desc
+    is_shown = { always = yes }
+    is_valid = { NOT = { has_variable = ca_federation_interaction_cooldown } }
 
+    effect = {
+        add_modifier = { name = ca_funding_separatists_modifier months = 12 }
+        change_relations = { country = overlord value = -10 }
+        
+        overlord = {
+            change_variable = { name = federalists_vs_separatists_var subtract = 15 }
+        }
+        
+        # --- ¡NUEVA INTERACCIÓN CON EL LOBBY! ---
+        # Alegramos a los separatistas y enojamos a los pro-federales
+        if = {
+            limit = { any_political_lobby = { is_political_lobby_type = lobby_anti_federalist } }
+            random_political_lobby = {
+                limit = { is_political_lobby_type = lobby_anti_federalist }
+                change_appeasement = { amount = 15 factor = appeasement_federal_authority_challenged }
+            }
+        }
+        
+        set_variable = { name = ca_federation_interaction_cooldown months = 12 }
+    }
+}
+
+ca_button_support_federation = {
+    name = ca_button_support_federation_name
+    desc = ca_button_support_federation_desc
+    is_shown = { always = yes }
+    is_valid = { NOT = { has_variable = ca_federation_interaction_cooldown } }
+
+    effect = {
+        add_modifier = { name = ca_funding_federalists_modifier months = 12 }
+        change_relations = { country = overlord value = 15 }
+        
+        overlord = {
+            change_variable = { name = federalists_vs_separatists_var add = 15 }
+        }
+        
+        # --- ¡NUEVA INTERACCIÓN CON EL LOBBY! ---
+        # Alegramos a los pro-federales
+        if = {
+            limit = { any_political_lobby = { is_political_lobby_type = lobby_pro_federalist } }
+            random_political_lobby = {
+                limit = { is_political_lobby_type = lobby_pro_federalist }
+                change_appeasement = { amount = 15 factor = appeasement_federal_aid_received }
+            }
+        }
+
+        set_variable = { name = ca_federation_interaction_cooldown months = 12 }
+    }
+}
 #fragile_unity_decree_button = {
 #	name = "fragile_unity_decree_button2"
 #	desc = "fragile_unity_decree_button_desc2"

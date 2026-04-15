@@ -4,7 +4,10 @@
    
     progressbar = ca_prospecting_bar
     
-   
+
+    current_value = {
+        value = root.var:ca_survey_progress
+    }
     possible = {
         is_ca_culture_country = yes
         has_technology_researched = prospecting 

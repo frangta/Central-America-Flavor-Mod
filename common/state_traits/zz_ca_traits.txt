@@ -8,7 +8,7 @@ icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
         state_ca_sulfur_mine_max_level_add = 2
         state_ca_gold_mine_max_level_add = 6
         state_ca_oil_rig_max_level_add = 2
-        state_ca_gold_fields_max_level_add = 2
+        state_ca_gold_field_max_level_add = 2
 	}
 }
 state_trait_mining_cos ={
@@ -78,7 +78,7 @@ state_trait_coffee_axis = {
 	icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
 
 	modifier = {
-		building_group_bg_coffee_plantations_throughput_add = 0.10
+		building_coffee_plantation_throughput_add = 0.10
 	}
 }
 
@@ -86,7 +86,7 @@ state_trait_coffee_axis_2 = {
 	icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
 
 	modifier = {
-		building_group_bg_coffee_plantations_throughput_add = 0.25
+		building_coffee_plantation_throughput_add = 0.25
 	}
 }
 
@@ -94,7 +94,7 @@ state_trait_coffee_axis_3 = {
 	icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
 
 	modifier = {
-		building_group_bg_coffee_plantations_throughput_add = 0.50
+		building_coffee_plantation_throughput_add = 0.50
 	}
 }
 
@@ -102,7 +102,7 @@ state_trait_coffee_axis_4 = {
 	icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
 
 	modifier = {
-		building_group_bg_coffee_plantations_throughput_add = 1
+		building_coffee_plantation_throughput_add = 1
 	}
 }
 
@@ -126,7 +126,7 @@ state_trait_corn_belt = {
     icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
 	
 	modifier = {
-		building_maize_farm_throughput_add = 0.1
+		building_maize_farm_throughput_mult = 0.1
 	}
 }
 
