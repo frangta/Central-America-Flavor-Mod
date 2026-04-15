@@ -1,0 +1,1863 @@
+﻿namespace = ca_el_salvador_events
+##scope_ELS
+#scope_UEL
+#scope_DE1
+#scope_DE2
+#scope_DE3
+#ca_el_salvador_events.x  = {
+#
+#     type = country_event
+#
+#	
+#	title = ca_el_salvador_events.x.t
+#	desc = ca_el_salvador_events.x.d
+#	flavor = ca_el_salvador_events.x.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.x.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}
+## Play with  El Salvador
+ca_el_salvador_events.01 = {
+	type = country_event
+	placement = scope:secession_capital
+	title = ca_el_salvador_events.01.t
+	desc = ca_el_salvador_events.01.d
+	flavor = ca_el_salvador_events.01.f
+	duration = 3
+	event_image = {
+		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	trigger = {
+      # triggered by je_historic_central_america_falls_apart when the player selected El Salvador to play
+	}
+	
+	immediate = {
+		set_variable = {
+			name = frca_recent_separatism_event_var
+			days = 40
+		}
+		random_scope_state = {
+			limit = {
+				is_capital = no
+				state_region = s:STATE_SAN_SALVADOR
+				turmoil > 0.2
+			}
+			save_scope_as = secession_state
+		}
+		create_country = {
+			tag = ELS
+			origin = this
+			state = scope:secession_state
+		}
+		create_diplomatic_pact = {
+			country = c:ELS
+			type = ca_dependency
+		}
+		c:ELS = {
+			save_scope_as = scope_ELS
+			save_scope_as = secession_country
+		add_journal_entry = {
+			type = je_ca_historic_situation_in_elsalvador
+		}			
+			capital = {
+				save_scope_as = secession_capital
+			}
+			create_character = {
+				first_name = "Juan"
+				last_name = "Lindo"
+				historical = yes
+				ruler = yes
+				ig_leader = yes
+				birth_date = 1790.5.5
+				interest_group = ig_landowners
+				ideology = ideology:ideology_reformer
+				traits = {
+					meticulous
+				}
+			}
+			ig:ig_landowners = {
+				remove_ideology = ideology_paternalistic
+				add_ideology = ideology_central_american_reactionary
+				set_interest_group_name = ig_hacendados
+			}
+		    ig_intelligentsia = {
+		    remove_ideology = ideology_liberal
+            remove_ideology = ideology_republican		
+		    add_ideology = ideology_ca_constitutionalist
+		    
+		    }
+			ig:ig_armed_forces = {
+				remove_ideology = ideology_paternalistic
+			}
+			ig:ig_devout = {
+				add_ideology = ideology_central_american_reactionary
+				set_interest_group_name = ig_catholic_church
+			}
+			activate_law = law_type:law_freedom_of_conscience
+			#activate_law = law_type:law_unitary
+			activate_law = law_type:law_landed_voting
+			activate_law = law_type:law_mercantilism
+			activate_law = law_type:law_censorship
+			activate_law = law_type:law_religious_schools
+		}
+		it = {
+			limit = { has_variable = historic_central_american }
+			#trigger_event = {
+			#	id = central_america.5
+			#	months = 1
+			#}
+		}
+		it = {
+			limit = { has_variable = random_central_american }
+			random_events = {
+				50 = ca_central_america.24
+				50 = ca_central_america.25
+			}
+		}
+		set_variable = frca_crisis_var
+		trigger_event = {
+			id = central_america.5
+			months = 1
+		}
+	}
+	# Accept secession
+	option = {
+		name = ca_el_salvador_events.01.a
+		default_option = yes
+
+	}                                            
+#ca_el_salvador_events.2  = {
+#      type = country_event
+#
+#	
+#	title = ca_el_salvador_events.2.t
+#	desc = ca_el_salvador_events.2.d
+#	flavor = ca_el_salvador_events.2.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                     
+#ca_el_salvador_events.3  = {
+#                    type = country_event
+#
+#	
+#	title = ca_el_salvador_events.3.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}   
+#ca_el_salvador_events.
+#ca_el_salvador_events.4.t
+#ca_el_salvador_events.4.d
+#ca_el_salvador_events.4.f
+#ca_el_salvador_events.1.a
+#ca_el_salvador_events.1.b
+#ca_el_salvador_events.1.c                                  
+#ca_el_salvador_events.4  = {
+#                    type = country_event
+#
+#	
+#	title = ca_el_salvador_events.4.t
+#	desc = ca_el_salvador_events.4.d
+#	flavor = ca_el_salvador_events.4.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                     
+#ca_el_salvador_events.5  = {
+#                    type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                     
+#ca_el_salvador_events.6  = {
+#                    type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                     
+#ca_el_salvador_events.7  = {
+#                    type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                     
+#ca_el_salvador_events.8  = {
+#                    type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                     
+#ca_el_salvador_events.9  = { 
+#                                                 x                                      
+#ca_el_salvador_events.10 = { 
+#                                                 x                                      
+#ca_el_salvador_events.11 = {
+#                    type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                     
+#ca_el_salvador_events.12 = { 
+#                                                 x                                      
+#ca_el_salvador_events.13 = {
+#                    type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                     
+#ca_el_salvador_events.14 = { 
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.1.d
+#	flavor = ca_el_salvador_events.1.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                     
+#ca_el_salvador_events.15 = {
+#    type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                     
+#ca_el_salvador_events.16 = { 
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.17 = { 
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.18 = { 
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.19 = { 
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.20 = { 
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.21 = { 
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.22 = { 
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.23 = {  
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.24 = {  
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.25 = {  
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.26 = {  
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.27 = {  
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.28 = {   
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                       
+#ca_el_salvador_events.29 = {  
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.30 = {   
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                       
+#ca_el_salvador_events.31 = {   
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                       
+#ca_el_salvador_events.32 = {   
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                       
+#ca_el_salvador_events.33 = {   
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                       
+#ca_el_salvador_events.34 = {   
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                       
+#ca_el_salvador_events.35 = {  
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.36 = {   
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                       
+#ca_el_salvador_events.37 = {  
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.38 = {  
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                      
+#ca_el_salvador_events.39 = {   
+#type = country_event
+#
+#	
+#	title = ca_el_salvador_events.1.t
+#	desc = ca_el_salvador_events.3.d
+#	flavor = ca_el_salvador_events.3.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_el_salvador_events.1.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}                                         
+#                     
+#

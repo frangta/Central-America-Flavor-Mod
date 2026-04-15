@@ -1,0 +1,270 @@
+﻿#namespace = ca_costa_rica_events
+###scope_COS
+#scope_PC1
+#scope_PC2
+#scope_PC3
+#scope_PC4
+#scope_PC5
+#scope_PC6
+#scope_PC7
+#scope_PC8
+#scope_RDT
+#scope_CCR
+## Costa rica civil war startup event
+#ca_costa_rica_events.x = {
+#	type = country_event
+#	placement = scope:scope_COS
+#	
+#	title = ca_costa_rica_events.x.t
+#	desc = ca_costa_rica_events.x.d
+#	flavor = ca_costa_rica_events.x.f
+#	
+#	event_image = {
+#		video = "unspecific_military_parade"
+#	}
+#
+#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#
+#	icon = "gfx/interface/icons/ig_icons/armed_forces.dds"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#		NOT = { has_variable = calculate_costa_rica_civil_war_var }
+#
+#	}
+#
+#	immediate = {
+#		set_variable = {
+#			name = calculate_costa_rica_civil_war_var
+#			value = 0
+#		}
+#		set_variable = { 
+#			name = calculate_costa_rica_civil_war_next 
+#			value = 0 
+#		}
+#		capital = {
+#			save_scope_as = capital_scope
+#		}
+#
+#    }
+#    	
+#
+#	
+#	option = { 
+#		name = ca_costa_rica_events.x.a
+#
+#		add_journal_entry = { type = je_first_costa_rica_civil_war }
+#		 create_country = {
+#            tag = COS
+#            origin = ROOT
+#            state = s:STATE_COSTA_RICA.region_state:UCA
+#            on_created = { set_variable = scope_COS }
+#        }
+#        create_diplomatic_pact = {
+#            country = c:COS
+#            type = puppet
+#        }
+#    default_option = yes
+#    }
+#}
+## Play with Costa Rica
+ca_costa_rica_events.01 = {
+	type = country_event
+	placement = s:STATE_COSTA_RICA
+	title = ca_costa_rica_events.01.t
+	desc = ca_costa_rica_events.01.d
+	flavor =  ca_costa_rica_events.01.f
+
+	duration = 3
+
+	event_image = {
+		video = "gfx/event_pictures/southamerica_election.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	trigger = {
+         # triggered by je_historic_central_america_falls_apart when the player selected Costa rica To play
+	}
+	
+	immediate = {
+		set_variable = {
+			name = frca_recent_separatism_event_var
+			days = 40
+		}	
+		random_scope_state = {
+			limit = {
+				is_capital = no
+				state_region = s:STATE_COSTA_RICA
+				turmoil > 0.2
+			}
+			save_scope_as = secession_state
+		}
+		create_country = {
+			tag = COS
+			origin = this
+			state = scope:secession_state
+			
+		}
+		create_diplomatic_pact = {
+            country = c:COS
+            type = ca_dependency
+        }		
+		c:COS = {
+			save_scope_as = scope_COS
+			save_scope_as = secession_country
+		add_journal_entry = {
+		type = je_ca_historic_situation_in_costarica
+		}
+			set_variable = costa_rica_1830s
+			capital = {
+				save_scope_as = secession_capital
+			}
+		    create_character = {
+				first_name = Braulio_Carrillo
+				last_name = ""
+				historical = yes
+				ig_leader = yes
+				interest_group = ig_intelligentsia
+				ruler = yes
+				birth_date = 1800.03.03
+				female = no
+				dna = dna_braulio_carrillo
+				culture = cu:costa_rican
+				ideology = ideology:ideology_moderate
+				religion = rel:catholic
+				traits = {
+					basic_diplomat
+				}
+		    }
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_hacendados
+		}
+		ig_intelligentsia = {
+		remove_ideology = ideology_liberal
+        remove_ideology = ideology_republican		
+		add_ideology = ideology_ca_constitutionalist
+
+		}
+		ig:ig_armed_forces = {
+			remove_ideology = ideology_paternalistic
+		}
+
+		ig:ig_devout = {
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_catholic_church
+		}
+			activate_law = law_type:law_freedom_of_conscience
+			#activate_law = law_type:law_unitary
+			activate_law = law_type:law_mercantilism
+			activate_law = law_type:law_wealth_voting
+		it = {
+		limit = { has_variable = historic_central_american }
+		#trigger_event = { 
+		#	id = central_america.5 months = 1
+		#}
+		}
+		it = {
+		limit = { has_variable = random_central_american }
+        random_events = {
+			50 = ca_central_america.13
+			50 = ca_central_america.14
+			}
+		}
+						 
+        s:STATE_PANAMA = { set_owner_of_provinces = { country = c:COS provinces = {x47C5F8} }}
+		#create_diplomatic_pact = {
+		#country = c:RDT
+		#type = ca_dependency
+		#}		
+		}
+	}
+
+	# Accept secession
+	option = {
+		name = ca_costa_rica_events.01.a
+		default_option = yes
+		play_as = c:COS
+	}
+
+	# Reject Secession
+	option = {
+		name = ca_costa_rica_events.01.b
+
+	}
+	option = { #Switch tags
+		name = ca_costa_rica_events.01.b
+		
+		
+		
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+#
+#ca_costa_rica_events.3 = {
+#    type = country_event
+#    title = ca_costa_rica_events.3.t
+#    desc = ca_costa_rica_events.3.d
+#    flavor = ca_costa_rica_events.3.f
+#
+#    duration = 30
+#
+#    event_image = {
+#        video = "unspecific_military_parade"  # Asegúrate de que el video exista en los archivos del mod
+#    }
+#
+#    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"  # Asegúrate de que el sonido exista en los archivos del mod
+#
+#    icon = "gfx/interface/icons/event_icons/event_default.dds"  # Asegúrate de que el icono exista en los archivos del mod
+#
+#    trigger = {
+#    }
+#
+#    immediate = {
+#    c:UCA = {
+#        create_country = {
+#            tag = COS
+#            origin = this
+#            state = s:STATE_COSTA_RICA.region_state:UCA
+#            on_created = { set_variable = scope_COS }
+#        }
+#        create_diplomatic_pact = {
+#            country = c:COS
+#            type = puppet
+#        }
+#    }
+#			c:COS = {        
+#		 create_character = {
+#		    template = cos_braulio_carrillo_character_template
+#            ruler = yes
+#            save_scope_as = cos_braulio_carrillo_scope
+#         }
+#		}
+#    }
+#
+#    option = {
+#        name = ca_costa_rica_events.3.a  # "Nombrar a Baudilio Carrillo como Presidente"
+#        add_loyalists = {
+#		
+#            value = 0.1  # Ajusta según sea necesario
+#        }
+#			
+#    }
+#
+#    option = {
+#        name = ca_costa_rica_events.3.b  # "Rechazar la Elección de Baudilio Carrillo"
+#        add_modifier = {
+#            name = "costa_rican_presidential_rejection"  
+#            duration = 180  
+#        }
+#    }
+#}
+

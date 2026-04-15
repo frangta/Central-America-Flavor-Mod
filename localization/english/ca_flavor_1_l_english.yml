@@ -262,8 +262,6 @@
  invade_nicaragua_frca_tt: "The Federal Republic prepares military intervention in Nicaragua."
  
  voting_ca_self_determination_complete: "The self-determination vote has concluded and the result has been recorded."
- nicaragua_intervention_central_america_button: "Intervene in Nicaragua"
- nicaragua_intervention_central_america_button_desc: "Launch a federal intervention in Nicaragua to restore authority, suppress separatists, or enforce compliance with the Federation's mandate."
 
  costa_rica_intervention_central_america_button: "Intervene in Costa Rica"
  costa_rica_intervention_central_america_button_desc: "Authorize a federal intervention in Costa Rica. Deploy forces to neutralize separatist influence and reassert Central American unity."
@@ -320,11 +318,139 @@
  federalists_vs_separatists_progress_core_progress_bar_name:0 "Federalists vs Separatists"
  federalists_vs_separatists_progress_core_progress_bar_federalists_desc:0 "Federalist Power"
  federalists_vs_separatists_progress_core_progress_bar_separatists_desc:0 "Separatist Power"
- ca_prospecting_bar:0 "Resource Prospecting"
- ca_prospecting_bar_desc:0 "Progress of the geological survey."
- PROGRESS_BAR_TEXT3:0 "Progress"
  
  movement_ca_federalist: "Federalist Movement"
  movement_ca_unitarian: "Unitarian Movement"
  movement_ca_federalist_desc: "A political movement seeking to grant ultimate sovereignty to the individual states."
  movement_ca_unitarian_desc: "A political movement demanding absolute centralization of power in the capital."
+ 
+
+ # =========================================================
+ # DIARY, BUTTONS & UI / DIARIO, BOTONES E INTERFAZ
+ # =========================================================
+ ca_prospecting_bar: "Survey Progress"
+ ca_prospecting_bar_desc: "Progress of the national geological survey. Upon reaching 100, we will be able to construct modern mines."
+ 
+ ca_button_fund_survey_expedition_name: "Fund Local Expedition"
+ ca_button_fund_survey_expedition_desc: "Allocate state funds to equip and send local prospectors into the wilderness."
+ ca_button_hire_foreign_geologists_name: "Hire Foreign Geologists"
+ ca_button_hire_foreign_geologists_desc: "Contract experienced European or American geologists. It is highly expensive, but guarantees rapid progress."
+ ca_requires_soil_survey_tt: "Requires the completion of the National Geological Survey."
+
+ # =========================================================
+ # EVENTS / EVENTOS
+ # =========================================================
+ ca_prospecting.1.t: "Funding the Geological Survey"
+ ca_prospecting.1.d: "Mapping the rugged terrain of Central America is no small feat. Dense jungles, steep mountains, and tropical diseases stand between us and the wealth beneath our soil. How much of the national treasury are we willing to risk on this endeavor?"
+ ca_prospecting.1.a: "Equip them with the bare minimum."
+ ca_prospecting.1.b: "Provide adequate funding and supplies."
+ ca_prospecting.1.c: "Spare no expense. Bring the best experts!"
+
+ ca_prospecting.2.t: "Disaster in the Highlands"
+ ca_prospecting.2.d: "Tragedy has struck our expedition. Heavy rains triggered a massive mudslide that not only buried our equipment and delayed our survey, but also permanently ruined several fertile terraces cultivated by local farmers."
+ ca_prospecting.2.a: "A terrible setback."
+
+ ca_prospecting.3.t: "Clearing the Path to Progress"
+ ca_prospecting.3.d: "While carving paths through the dense vegetation for our geologists, the expedition has inadvertently cleared large tracts of highly fertile land. Local farmers are already rushing in to plant new crops."
+ ca_prospecting.3.a: "A fortunate side effect!"
+
+ ca_prospecting.4.t: "Local Resistance"
+ ca_prospecting.4.d: "Rural communities have barricaded the roads, fearful that the arrival of state prospectors means the seizure of their ancestral lands for mining operations."
+ ca_prospecting.4.a: "Disperse them! Progress cannot be halted."
+ ca_prospecting.4.b: "Halt the survey. We must negotiate."
+
+ ca_prospecting.5.t: "A Deep Vein Discovered"
+ ca_prospecting.5.d: "Our geologists have struck the motherlode! However, the vein runs deep below the water table. Simple picks and shovels will no longer suffice; we will need industrial pumps to extract this wealth."
+ ca_prospecting.5.a: "Mandate the use of heavy machinery."
+ ca_prospecting.5.b: "Note the location for future exploitation."
+
+ ca_prospecting.6.t: "Local Gold Rush"
+ ca_prospecting.6.d: "News of gold nuggets found in a local river has spread like wildfire. Thousands of peasants are abandoning their harvests, rushing to the hills with pans and pickaxes in hopes of striking it rich."
+ ca_prospecting.6.a: "There's gold in those hills!"
+
+ ca_prospecting.7.t: "The Foreign Consortium"
+ ca_prospecting.7.d: "A wealthy consortium of foreign investors has approached our government. They offer to fully finance the remainder of our geological survey, provided they are granted exclusive tax-exempt rights to the most lucrative mines."
+ ca_prospecting.7.a: "Accept their capital. We need the progress."
+ ca_prospecting.7.b: "Reject them. Our soil belongs to our people."
+
+ ca_prospecting.8.t: "Missing Funds"
+ ca_prospecting.8.d: "A scandalous audit has revealed that a significant portion of the survey's budget has been embezzled by a regional governor and his landowning cronies to buy private estates."
+ ca_prospecting.8.a: "Arrest the thieves and seize the assets!"
+ ca_prospecting.8.b: "We cannot afford a political crisis. Ignore it."
+
+ ca_prospecting.9.t: "The Inaccessible Vein"
+ ca_prospecting.9.d: "An immense deposit of minerals has been mapped, but it sits atop a jagged mountain range surrounded by ravines. Extracting it will be an absolute logistical nightmare."
+ ca_prospecting.9.a: "We will need railways to move this."
+
+ ca_prospecting.10.t: "Jungle Fever"
+ ca_prospecting.10.d: "The expedition has entered the deep rainforests. Malaria and yellow fever are wreaking havoc among our porters, and morale is practically non-existent."
+ ca_prospecting.10.a: "Call them back. It's a death trap."
+ ca_prospecting.10.b: "Push forward! Replace those who fall."
+
+ ca_prospecting.11.t: "Ancient Ruins Discovered"
+ ca_prospecting.11.d: "Instead of mineral wealth, our prospectors have stumbled upon a massive, overgrown complex of ancient Mayan ruins. It holds no economic value, but the academic world is mesmerized."
+ ca_prospecting.11.a: "A testament to our glorious past."
+
+ ca_prospecting.12.t: "Fool's Gold"
+ ca_prospecting.12.d: "What was initially celebrated as the largest gold discovery of the century has turned out to be nothing but iron pyrite. The nation is the laughing stock of the international press."
+ ca_prospecting.12.a: "A humiliating mistake."
+
+ ca_prospecting.13.t: "Porters on Strike"
+ ca_prospecting.13.d: "The local porters carrying the heavy surveying equipment are refusing to move another inch unless their wages are doubled immediately."
+ ca_prospecting.13.a: "Pay them what they ask."
+ ca_prospecting.13.b: "Fire them all! We'll find others."
+
+ ca_prospecting.14.t: "Subsoil Rights Conflict"
+ ca_prospecting.14.d: "Powerful landowners are claiming that the minerals found beneath their haciendas belong entirely to them, challenging the state's authority over the subsoil."
+ ca_prospecting.14.a: "Grant them private mining rights."
+ ca_prospecting.14.b: "The subsoil is the absolute property of the State!"
+
+ ca_prospecting.15.t: "The Church's Blessing"
+ ca_prospecting.15.d: "Local priests have enthusiastically joined the expedition, using their knowledge of the remote parishes to guide our geologists to unexplored caves and riverbeds."
+ ca_prospecting.15.a: "God guides our picks."
+
+ ca_prospecting.16.t: "Geological Innovation"
+ ca_prospecting.16.d: "Necessity is the mother of invention. Our surveyors have developed a brilliant new technique for rapid mineral cataloging in tropical environments."
+ ca_prospecting.16.a: "Publish these findings!"
+
+ ca_prospecting.17.t: "Black Gold"
+ ca_prospecting.17.d: "Excellent news! Massive, highly accessible coal seams have been discovered. This will undoubtedly become the fuel for our future industrialization."
+ ca_prospecting.17.a: "The steam age is upon us."
+
+ ca_prospecting.18.t: "The Geological Spy"
+ ca_prospecting.18.d: "Our guards have caught a man making covert copies of our geological maps. He confesses to being a spy hired by a foreign power eager to know our resource capabilities."
+ ca_prospecting.18.a: "Arrest him quietly."
+ ca_prospecting.18.b: "He escaped before we could secure the maps!"
+
+ # =========================================================
+ # MODIFIERS / MODIFICADORES
+ # =========================================================
+ ca_failed_expedition_modifier: "Devastated Terrain"
+ ca_infrastructure_boom_modifier: "Cleared Paths"
+ ca_deep_vein_modifier: "Deep Mineral Vein"
+ ca_gold_rush_modifier: "Gold Rush"
+ ca_foreign_monopoly_modifier: "Foreign Mining Monopoly"
+ ca_anti_corruption_campaign_modifier: "Anti-Corruption Campaign"
+ ca_state_corruption_modifier: "Rampant Embezzlement"
+ ca_mountain_vein_modifier: "Inaccessible Mountain Vein"
+ ca_jungle_fever_modifier: "Jungle Fever Outbreak"
+ ca_private_mining_rights: "Private Subsoil Rights"
+ ca_state_mining_rights: "Nationalized Subsoil"
+ ca_geological_innovation: "Tropical Surveying Techniques"
+ ca_abundant_coal_modifier: "Abundant Coal Seams"
+ ca_arrested_spy_modifier: "Counter-Espionage Panic"
+ 
+ lobby_pro_federalist: "Pro-Federation Lobby"
+ lobby_pro_federalist_desc: "A political lobby composed of groups that believe the future of our state lies in maintaining a strong, united Central American Republic."
+ lobby_anti_federalist: "Separatist Lobby"
+ lobby_anti_federalist_desc: "A powerful faction of regionalists and conservatives who demand full sovereignty and the immediate dissolution of the Federation."
+
+ # Appeasement Factors (Pro-Federalist)
+ appeasement_laws_harmonized: "Harmonized Laws with the Capital"
+ appeasement_federal_aid_received: "Federal Aid and Support"
+ appeasement_local_autonomy_respected: "Local Autonomy Respected"
+
+ # Appeasement Factors (Anti-Federalist)
+ appeasement_centralization_resisted: "Resisted Federal Centralization"
+ appeasement_federal_authority_challenged: "Challenged Federal Authority"
+ appeasement_federal_incompetence: "Federal Incompetence"

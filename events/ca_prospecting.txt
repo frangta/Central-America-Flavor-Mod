@@ -1,0 +1,602 @@
+﻿namespace = ca_prospecting 
+
+# =================================================================
+# EVENTO 1: Búsqueda de Financiación para la Expedición
+# =================================================================
+ca_prospecting.1 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.1.t
+    desc = ca_prospecting.1.d
+    
+    event_image = { video = "unspecific_research" }
+    icon = "gfx/interface/icons/event_icons/event_coin.dds"
+
+    trigger = {} # Disparado por la decisión (scripted_button)
+
+    # Opción A: Financiación Precaria (Riesgo Alto)
+    option = {
+        name = ca_prospecting.1.a
+        trigger = { treasury >= 1000 }
+        add_treasury = -1000
+        
+        random_list = {
+            50 = { trigger_event = { id = ca_prospecting.2 days = 15 } } 
+            50 = { change_variable = { name = ca_survey_progress add = 10 } }
+        }
+    }
+
+    # Opción B: Financiación Estatal Adecuada (Balanceado)
+    option = {
+        name = ca_prospecting.1.b
+        default_option = yes
+        trigger = { treasury >= 10000 }
+        add_treasury = -10000
+        
+        random_list = {
+            20 = { trigger_event = { id = ca_prospecting.2 days = 15 } } 
+            20 = { trigger_event = { id = ca_prospecting.4 days = 15 } } 
+            60 = { 
+                change_variable = { name = ca_survey_progress add = 20 }
+                trigger_event = { id = ca_prospecting.3 days = 15 } 
+            }
+        }
+    }
+
+    # Opción C: Contratar a los mejores expertos (Caro, Resultados Excelentes)
+    option = {
+        name = ca_prospecting.1.c
+        trigger = { treasury >= 30000 }
+        add_treasury = -30000
+        
+        change_variable = { name = ca_survey_progress add = 35 }
+        
+        random_list = {
+            50 = { trigger_event = { id = ca_prospecting.3 days = 15 } } 
+            50 = { trigger_event = { id = ca_prospecting.5 days = 15 } } 
+        }
+    }
+}
+
+# =================================================================
+# EVENTO 2: Desastre Natural / Fracaso del Estudio
+# =================================================================
+ca_prospecting.2 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.2.t
+    desc = ca_prospecting.2.d
+    
+    event_image = { video = "unspecific_disaster" }
+    icon = "gfx/interface/icons/event_icons/event_fire.dds"
+    trigger = {}
+
+    immediate = {
+        random_owned_state = {
+            limit = { 
+                state_is_in_ca_central_america = yes # ¡Usando tu propio Trigger!
+            }
+            save_scope_as = disaster_state
+        }
+    }
+
+    option = {
+        name = ca_prospecting.2.a
+        change_variable = { name = ca_survey_progress subtract = 5 }
+        
+        scope:disaster_state = {
+            add_arable_land = -2 
+            add_devastation = 10
+            add_modifier = {
+                name = ca_failed_expedition_modifier 
+                months = 24
+            }
+        }
+    }
+}
+
+# =================================================================
+# EVENTO 3: Éxito Rotundo y Nuevos Caminos
+# =================================================================
+ca_prospecting.3 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.3.t
+    
+    event_image = { video = "unspecific_reform" }
+    icon = "gfx/interface/icons/event_icons/event_map.dds"
+    trigger = {}
+
+    immediate = {
+        random_owned_state = {
+            limit = { 
+                state_is_in_ca_central_america = yes
+            } 
+            save_scope_as = success_state
+        }
+    }
+
+    option = {
+        name = ca_prospecting.3.a
+        scope:success_state = {
+            add_arable_land = 2 
+            add_modifier = {
+                name = ca_infrastructure_boom_modifier 
+                months = 36
+            }
+        }
+        add_prestige = 5
+    }
+}
+
+# =================================================================
+# EVENTO 4: Resistencia Local contra la Minería
+# =================================================================
+ca_prospecting.4 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.4.t
+    
+    event_image = { video = "unspecific_protest" }
+    icon = "gfx/interface/icons/event_icons/event_protest.dds"
+    trigger = {}
+
+    immediate = {
+        random_owned_state = {
+            limit = { 
+                state_is_in_ca_central_america = yes
+            }
+            save_scope_as = protest_state
+        }
+    }
+
+    option = {
+        name = ca_prospecting.4.a
+        default_option = yes
+        scope:protest_state = {
+            # Aplicamos un modificador y hacemos que los campesinos se enojen
+            add_modifier = { name = ca_local_protests_modifier months = 12 }
+            every_state_pop = {
+                limit = { is_pop_type = peasants }
+                add_radicals = { value = 0.05 } # 5% se vuelven radicales
+            }
+        }
+        ig:ig_armed_forces = { add_modifier = { name = ca_ig_approval_up months = 24 } }
+        change_variable = { name = ca_survey_progress add = 5 }
+    }
+
+    option = {
+        name = ca_prospecting.4.b
+        change_variable = { name = ca_survey_progress subtract = 10 }
+        ig:ig_rural_folk = { add_modifier = { name = ca_ig_approval_up months = 24 } }
+    }
+}
+
+# =================================================================
+# EVENTO 5: La Calidad de la Veta
+# =================================================================
+ca_prospecting.5 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.5.t
+    
+    event_image = { video = "unspecific_research" }
+    icon = "gfx/interface/icons/event_icons/event_industry.dds"
+    trigger = {}
+
+    immediate = {
+        random_owned_state = {
+            limit = {
+                state_is_in_ca_central_america = yes
+                has_building = building_gold_mine
+            }
+            save_scope_as = veta_state
+        }
+    }
+
+    option = {
+        name = ca_prospecting.5.a
+        trigger = { exists = scope:veta_state }
+        
+        scope:veta_state = {
+            add_modifier = { name = ca_deep_vein_modifier }
+            # Forma correcta de forzar un PM a un edificio en Vic3
+            any_building = {
+                limit = { is_building_type = building_gold_mine }
+                set_production_method = pm_ca_atmospheric_engine_pump_building_gold_mine
+            }
+        }
+    }
+
+    option = {
+        name = ca_prospecting.5.b
+        trigger = { NOT = { exists = scope:veta_state } }
+        change_variable = { name = ca_survey_progress add = 15 }
+    }
+}
+
+# =================================================================
+# EVENTO 6: La Fiebre del Oro Local
+# =================================================================
+ca_prospecting.6 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.6.t
+    desc = ca_prospecting.6.d
+    
+    event_image = { video = "unspecific_miners" }
+    icon = "gfx/interface/icons/event_icons/event_coin.dds"
+    trigger = {}
+
+    immediate = {
+        random_owned_state = {
+            limit = { 
+                state_is_in_ca_central_america = yes
+            }
+            save_scope_as = gold_rush_state
+        }
+    }
+
+    option = {
+        name = ca_prospecting.6.a
+        change_variable = { name = ca_survey_progress add = 15 }
+        
+        scope:gold_rush_state = {
+            add_modifier = {
+                name = ca_gold_rush_modifier 
+                months = 60
+            }
+        }
+        
+        ig:ig_rural_folk = { add_radicals = { value = medium_radicals } }
+        ig:ig_industrialists = { add_loyalists = { value = medium_loyalists } }
+    }
+}
+
+# =================================================================
+# EVENTO 7: El Consorcio Extranjero
+# =================================================================
+ca_prospecting.7 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.7.t
+    desc = ca_prospecting.7.d
+    
+    event_image = { video = "southamerica_aristocrats" }
+    icon = "gfx/interface/icons/event_icons/event_handshake.dds"
+    trigger = {}
+
+    immediate = {
+        random_owned_state = {
+            limit = { 
+                state_is_in_ca_central_america = yes
+            }
+            save_scope_as = foreign_mine_state
+        }
+    }
+
+    option = {
+        name = ca_prospecting.7.a
+        default_option = yes
+        change_variable = { name = ca_survey_progress add = 40 } 
+        
+        scope:foreign_mine_state = {
+            add_modifier = {
+                name = ca_foreign_monopoly_modifier 
+                months = 120 
+            }
+        }
+        ig:ig_industrialists = { add_clout = 0.10 }
+    }
+
+    option = {
+        name = ca_prospecting.7.b
+        change_variable = { name = ca_survey_progress subtract = 5 } 
+        ig:ig_rural_folk = { add_modifier = { name = ca_ig_approval_up months = 24 } }
+        ig:ig_armed_forces = { add_modifier = { name = ca_ig_approval_up months = 24 } }
+        add_prestige = 5
+    }
+}
+
+# =================================================================
+# EVENTO 8: Corrupción en la Expedición
+# =================================================================
+ca_prospecting.8 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.8.t
+    desc = ca_prospecting.8.d
+    
+    event_image = { video = "unspecific_politicians_arguing" }
+    icon = "gfx/interface/icons/event_icons/event_default.dds"
+    trigger = {}
+
+    immediate = {
+        change_variable = { name = ca_survey_progress subtract = 15 }
+    }
+
+    option = {
+        name = ca_prospecting.8.a
+        default_option = yes
+        add_treasury = 5000 
+        
+        ig:ig_landowners = { add_modifier = { name = ca_ig_approval_down months = 36 } }
+        ig:ig_intelligentsia = { add_modifier = { name = ca_ig_approval_up months = 36 } }
+        add_modifier = { name = ca_anti_corruption_campaign_modifier months = 36 }
+    }
+
+    option = {
+        name = ca_prospecting.8.b
+        ig:ig_landowners = { add_modifier = { name = ca_ig_approval_up months = 24 } }
+        ig:ig_petty_bourgeoisie = { add_radicals = { value = medium_radicals } }
+        add_modifier = {
+            name = ca_state_corruption_modifier 
+            months = 24
+        }
+    }
+}
+
+# =================================================================
+# EVENTO 9: La Veta Inaccesible
+# =================================================================
+ca_prospecting.9 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.9.t
+    desc = ca_prospecting.9.d
+    
+    event_image = { video = "unspecific_mountain" }
+    icon = "gfx/interface/icons/event_icons/event_industry.dds"
+    trigger = {}
+
+    immediate = {
+        random_owned_state = {
+            limit = { 
+                state_is_in_ca_central_america = yes
+            }
+            save_scope_as = inaccessible_state
+        }
+    }
+
+    option = {
+        name = ca_prospecting.9.a
+        change_variable = { name = ca_survey_progress add = 10 }
+        
+        scope:inaccessible_state = {
+            add_modifier = {
+                name = ca_mountain_vein_modifier 
+                months = 120
+            }
+        }
+    }
+}
+
+# =================================================================
+# EVENTO 10: Fiebre en la Selva
+# =================================================================
+ca_prospecting.10 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.10.t
+    
+    event_image = { video = "unspecific_health" }
+    icon = "gfx/interface/icons/event_icons/event_fire.dds"
+    trigger = {}
+
+    immediate = {
+        random_owned_state = {
+            limit = { 
+                has_terrain = terrain_jungle 
+                state_is_in_ca_central_america = yes
+            } 
+            save_scope_as = jungle_state
+        }
+    }
+
+    option = {
+        name = ca_prospecting.10.a
+        default_option = yes
+        change_variable = { name = ca_survey_progress subtract = 10 }
+        ig:ig_rural_folk = { add_modifier = { name = ca_ig_approval_up months = 24 } }
+    }
+
+    option = {
+        name = ca_prospecting.10.b
+        change_variable = { name = ca_survey_progress add = 10 }
+        scope:jungle_state = {
+            add_modifier = { name = ca_jungle_fever_modifier months = 12 } 
+            every_state_pop = {
+                limit = { is_pop_type = laborers }
+                add_radicals = { value = 0.05 }
+            }
+        }
+    }
+}
+
+# =================================================================
+# EVENTO 11: Ruinas Antiguas
+# =================================================================
+ca_prospecting.11 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.11.t
+    
+    event_image = { video = "unspecific_research" }
+    icon = "gfx/interface/icons/event_icons/event_documents.dds"
+    trigger = {}
+
+    option = {
+        name = ca_prospecting.11.a
+        add_prestige = 10
+        ig:ig_intelligentsia = { add_modifier = { name = ca_ig_approval_up months = 36 } }
+        change_variable = { name = ca_survey_progress subtract = 5 }
+    }
+}
+
+# =================================================================
+# EVENTO 12: Oro de los Tontos
+# =================================================================
+ca_prospecting.12 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.12.t
+    
+    event_image = { video = "unspecific_miners" }
+    icon = "gfx/interface/icons/event_icons/event_cross.dds"
+    trigger = {}
+
+    option = {
+        name = ca_prospecting.12.a
+        change_variable = { name = ca_survey_progress subtract = 15 }
+        add_prestige = -5
+        ig:ig_industrialists = { add_modifier = { name = ca_ig_approval_down months = 24 } }
+    }
+}
+
+# =================================================================
+# EVENTO 13: Huelga de Porteadores Locales
+# =================================================================
+ca_prospecting.13 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.13.t
+    
+    event_image = { video = "unspecific_protest" }
+    icon = "gfx/interface/icons/event_icons/event_coin.dds"
+    trigger = {}
+
+    option = {
+        name = ca_prospecting.13.a
+        trigger = { treasury >= 2000 }
+        add_treasury = -2000
+        change_variable = { name = ca_survey_progress add = 5 }
+    }
+
+    option = {
+        name = ca_prospecting.13.b
+        default_option = yes
+        change_variable = { name = ca_survey_progress subtract = 15 }
+        ig:ig_rural_folk = { add_radicals = { value = small_radicals } }
+    }
+}
+
+# =================================================================
+# EVENTO 14: Conflicto de Tierras con los Hacendados
+# =================================================================
+ca_prospecting.14 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.14.t
+    
+    event_image = { video = "southamerica_aristocrats" }
+    icon = "gfx/interface/icons/event_icons/event_gavel.dds"
+    trigger = {}
+
+    option = {
+        name = ca_prospecting.14.a
+        default_option = yes
+        change_variable = { name = ca_survey_progress add = 10 }
+        ig:ig_landowners = { add_modifier = { name = ca_ig_approval_up months = 36 } }
+        add_modifier = { name = ca_private_mining_rights months = 60 } 
+    }
+
+    option = {
+        name = ca_prospecting.14.b
+        change_variable = { name = ca_survey_progress add = 10 }
+        ig:ig_landowners = { add_modifier = { name = ca_ig_approval_down months = 36 } }
+        add_modifier = { name = ca_state_mining_rights months = 60 } 
+    }
+}
+
+# =================================================================
+# EVENTO 15: La Bendición de la Iglesia
+# =================================================================
+ca_prospecting.15 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.15.t
+    
+    event_image = { video = "unspecific_church" }
+    icon = "gfx/interface/icons/event_icons/event_flag.dds"
+    trigger = {}
+
+    option = {
+        name = ca_prospecting.15.a
+        change_variable = { name = ca_survey_progress add = 15 }
+        ig:ig_devout = { add_modifier = { name = ca_ig_approval_up months = 24 } }
+    }
+}
+
+# =================================================================
+# EVENTO 16: Innovación Técnica en el Terreno
+# =================================================================
+ca_prospecting.16 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.16.t
+    
+    event_image = { video = "unspecific_research" }
+    icon = "gfx/interface/icons/event_icons/event_lightbulb.dds"
+    trigger = {}
+
+    option = {
+        name = ca_prospecting.16.a
+        change_variable = { name = ca_survey_progress add = 20 }
+        add_modifier = { name = ca_geological_innovation months = 12 } 
+    }
+}
+
+# =================================================================
+# EVENTO 17: Muestras Prometedoras de Carbón
+# =================================================================
+ca_prospecting.17 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.17.t
+    
+    event_image = { video = "unspecific_industry" }
+    icon = "gfx/interface/icons/event_icons/event_industry.dds"
+    trigger = {}
+
+    immediate = {
+        random_owned_state = {
+            limit = { 
+                state_is_in_ca_central_america = yes
+            }
+            save_scope_as = coal_state
+        }
+    }
+
+    option = {
+        name = ca_prospecting.17.a
+        change_variable = { name = ca_survey_progress add = 15 }
+        scope:coal_state = {
+            add_modifier = { name = ca_abundant_coal_modifier months = 120 } 
+        }
+    }
+}
+
+# =================================================================
+# EVENTO 18: El Espía Geológico
+# =================================================================
+ca_prospecting.18 = {
+    type = country_event
+    placement = root
+    title = ca_prospecting.18.t
+    
+    event_image = { video = "unspecific_diplomacy" }
+    icon = "gfx/interface/icons/event_icons/event_spy.dds"
+    trigger = {}
+
+    option = {
+        name = ca_prospecting.18.a
+        default_option = yes
+        add_modifier = { name = ca_arrested_spy_modifier months = 12 } 
+        change_variable = { name = ca_survey_progress add = 5 }
+    }
+
+    option = {
+        name = ca_prospecting.18.b
+        change_variable = { name = ca_survey_progress subtract = 20 }
+    }
+}
