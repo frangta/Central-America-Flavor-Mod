@@ -364,7 +364,12 @@ ca_central_america.4 = {
         name = ca_central_america.4.b 
         
         
-        ROOT = { add_claim = scope:secession_capital.state_region }
+        scope:secession_capital.state_region = {
+    c:UCA = {
+        add_claim = PREV # UCA reclama el estado evaluado previamente
+    }
+    }
+		
 											   
 		 
         
@@ -752,7 +757,7 @@ ca_central_america.7 = {
             c:MKT = {
                 OR = {
                     is_subject_of = root
-                    has_alliance = ROOT
+                    has_diplomatic_pact = { type = alliance }
                 }
             }
         }
@@ -1060,7 +1065,7 @@ ca_central_america.10 = {
         name = ca_central_america.10.b # Reject and crackdown
         
         
-        ROOT = { add_claim = scope:secession_capital_region }
+        scope:secession_capital_region = { add_claim = ROOT }
 							
 		 
         
@@ -1123,48 +1128,48 @@ ca_central_america.11 = {
         
         
         s:STATE_PANAMA = {
-            
-            
-            if = {
-                limit = { exists = c:COS }
-                add_claim = c:COS
-            }
-            
-            
-            if = {
-                limit = {
-                    exists = c:UCA
-                    c:UCA = { NOT = { has_variable = rejects_pp1_uca } }
+            state_region = {
+			
+                if = {
+                    limit = { exists = c:COS }
+                    add_claim = c:COS
                 }
-                add_claim = c:UCA
-            }
-            
-            
-            if = {
-                limit = { 
-                    exists = c:CLM
-                    c:CLM = { NOT = { has_variable = rejects_pp1_clm } } 
+			
+			
+                if = {
+                    limit = {
+                        exists = c:UCA
+                        c:UCA = { NOT = { has_variable = rejects_pp1_uca } }
+                    }
+                    add_claim = c:UCA
                 }
-                add_claim = c:CLM
-            }
-            
-            
-            if = {
-                limit = { 
-                    exists = c:GBR
-                    c:GBR = { NOT = { has_variable = rejects_pp1_gbr } } 
+			
+			
+                if = {
+                    limit = { 
+                        exists = c:CLM
+                        c:CLM = { NOT = { has_variable = rejects_pp1_clm } } 
+                    }
+                    add_claim = c:CLM
                 }
-                add_claim = c:GBR
-            }   
-            
-            
-            #if = {
-            #    limit = { 
-            #        exists = c:USA
-            #        c:USA = { NOT = { has_variable = rejects_pp1_usa } } 
-            #    }
-            #    add_claim = c:USA
-            #}        
+			
+			
+                if = {
+                    limit = { 
+                        exists = c:GBR
+                        c:GBR = { NOT = { has_variable = rejects_pp1_gbr } } 
+                    }
+                    add_claim = c:GBR
+                }   
+			
+			
+				   
+						   
+								   
+																		  
+            }
+								  
+					  
         }
     }
     
@@ -1597,12 +1602,12 @@ ca_central_america.13 = {
         default_option = yes
         
         
-        if = { limit = { scope:capital_region_scope = s:STATE_NICARAGUA } change_tag= c:NIC }
-        if = { limit = { scope:capital_region_scope = s:STATE_SAN_SALVADOR } change_tag= c:ELS }
-        if = { limit = { scope:capital_region_scope = s:STATE_COSTA_RICA } change_tag= c:COS }
-        if = { limit = { scope:capital_region_scope = s:STATE_HONDURAS } change_tag= c:HON }
-        if = { limit = { scope:capital_region_scope = s:STATE_GUATEMALA } change_tag= c:GUA }
-        if = { limit = { NOT = { exists = c:ALT } scope:capital_region_scope = s:STATE_CHIAPAS } change_tag= c:ALT }
+           if = {limit = {NOT = { exists = c:NIC }capital = {state_region = s:STATE_NICARAGUA}}change_tag = NIC}
+           if = {limit = {NOT = { exists = c:ELS }capital = {state_region = s:STATE_SAN_SALVADOR}}change_tag = ELS}
+           if = {limit = {NOT = { exists = c:COS }capital = {state_region = s:STATE_COSTA_RICA}}change_tag = COS}
+           if = {limit = {NOT = { exists = c:HON }capital = {state_region = s:STATE_HONDURAS}}change_tag = HON}
+           if = {limit = {NOT = { exists = c:GUA }capital = {state_region = s:STATE_GUATEMALA}}change_tag = GUA}
+           if = {limit = {NOT = { exists = c:ALT }capital = {state_region = s:STATE_CHIAPAS}}change_tag = ALT}
 
         
         capital = {
@@ -1645,17 +1650,15 @@ ca_central_america.13 = {
         if = { limit = { scope:capital_region_scope = s:STATE_GUATEMALA } change_tag= c:GUA }
         
         # Odio, guerra y reclamos sobre los separatistas
-        every_country = {
-            limit = { has_variable = ca_secession_country }
-            
-            change_relations = { country = ROOT value = -50 }
-            
-            capital = {
-                add_devastation = 25 
-													
+            every_country = {
+                limit = { has_variable = ca_secession_country }
+                change_relations = { country = ROOT value = -50 }
+                capital = {
+                    add_devastation = 25 
+                }
+                # La Región Estatal reclama para la UCA (ROOT)
+                scope:capital_region_scope = { add_claim = ROOT }
             }
-            ROOT = { add_claim = scope:capital_region_scope } 
-        }
     }
 }
 
@@ -2039,7 +2042,11 @@ ca_central_america.18 = {
         
         ca_reduce_support_separatism_effect = yes
 
-        scope:secession_capital = {state_region = { add_claim = ROOT }}
+        scope:secession_capital = {
+            state_region = {
+                add_claim = ROOT
+            }
+        }
 									  
    
         scope:secession_country = {
@@ -2200,8 +2207,11 @@ ca_central_america.19 = {
         
         ca_reduce_support_separatism_effect = yes
 
-        scope:secession_capital = {state_region = { add_claim = ROOT }}
-									  
+         scope:secession_capital = {
+            state_region = {
+                add_claim = ROOT
+            }
+        }
    
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
@@ -2355,8 +2365,11 @@ ca_central_america.20 = {
         
         ca_reduce_support_separatism_effect = yes
 
-        scope:secession_capital = {state_region = { add_claim = ROOT }}
-									  
+        scope:secession_capital = {
+            state_region = {
+                add_claim = ROOT
+            }
+        }	 
    
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
@@ -2509,7 +2522,11 @@ ca_central_america.21 = {
         
         ca_reduce_support_separatism_effect = yes
 
-        scope:secession_capital = {state_region = { add_claim = ROOT }}
+        scope:secession_capital = {
+            state_region = {
+                add_claim = ROOT
+            }
+        }	 
 									  
    
         scope:secession_country = {
@@ -2662,7 +2679,11 @@ ca_central_america.22 = {
         
         ca_reduce_support_separatism_effect = yes
 
-        scope:secession_capital = {state_region = { add_claim = ROOT }}
+        scope:secession_capital = {
+            state_region = {
+                add_claim = ROOT
+            }
+        }		 
 									  
    
         scope:secession_country = {
@@ -2813,7 +2834,11 @@ ca_central_america.23 = {
         
         ca_reduce_support_separatism_effect = yes
 
-        scope:secession_capital = {state_region = { add_claim = ROOT }}
+        scope:secession_capital = {
+            state_region = {
+                add_claim = ROOT
+            }
+        }
 									  
    
         scope:secession_country = {
@@ -2854,7 +2879,7 @@ ca_central_america.24 = {
             save_scope_as = ca_igland_reactionary_character
         }
         add_radicals = {
-            value = medium_radicals
+            value = 0.15
             interest_group = ig:ig_landowners
         }
         set_variable = opposition_crisis_var
@@ -2927,8 +2952,11 @@ ca_central_america.26 = {
     # Reject Secession
     option = {
         name = ca_central_america.26.b
-        scope:secession_capital = {state_region = { add_claim = ROOT }}
-									  
+        scope:secession_capital = {
+            state_region = {
+                add_claim = ROOT
+            }
+        }
    
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
@@ -3422,11 +3450,11 @@ ca_central_america.42 = {
         hidden_effect = {
             if = {
                 limit = { this = c:UCA }
-                s:STATE_CHIAPAS.region_state:UCA = { set_state_owner = c:GUA }
+               s:STATE_CHIAPAS.region_state:UCA = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
             }
             if = {
                 limit = { this = c:ELS }
-                s:STATE_CHIAPAS.region_state:ELS = { set_state_owner = c:GUA }
+                s:STATE_CHIAPAS.region_state:ELS = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
             }
             ruler = { exile_character = yes }
             create_character = {
@@ -3492,7 +3520,7 @@ ca_central_america.43 = {
         create_country = { tag = GUA origin = c:UCA state = s:STATE_GUATEMALA.region_state:UCA }
         create_country = { tag = NIC origin = c:UCA state = s:STATE_NICARAGUA.region_state:UCA }
         create_country = { tag = COS origin = c:UCA state = s:STATE_COSTA_RICA.region_state:UCA }
-        s:STATE_CHIAPAS.region_state:UCA = { set_state_owner = c:GUA }
+       if = { limit = { exists = s:STATE_CHIAPAS.region_state:UCA } s:STATE_CHIAPAS.region_state:UCA = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } } }}
     }
     option = { #Continue as El Salvador
         name = ca_central_america.43.a
@@ -3705,7 +3733,11 @@ ca_central_america.46 = {
 
         if = {
             limit = { exists = scope:secession_country }
-            scope:secession_capital = {state_region = { add_claim = ROOT }}
+            scope:secession_capital = {
+                state_region = {
+                    add_claim = ROOT
+                }
+            }
             scope:secession_country = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
@@ -3787,7 +3819,12 @@ ca_central_america.47 = {
 
         if = {
             limit = { exists = scope:secession_country }
-            scope:secession_capital = {state_region = { add_claim = ROOT }}
+            # CORRECTED SCOPE INTEGRATION FOR CLAIMS
+            scope:secession_capital = {
+                state_region = {
+                    add_claim = ROOT
+                }
+            }
             scope:secession_country = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
@@ -3869,7 +3906,11 @@ ca_central_america.48 = {
 
         if = {
             limit = { exists = scope:secession_country }
-            scope:secession_capital = {state_region = { add_claim = ROOT }}
+            scope:secession_capital = {
+                state_region = {
+                    add_claim = ROOT
+                }
+            }		 
             scope:secession_country = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
@@ -4249,7 +4290,7 @@ ca_central_america.63 = {
     
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
-        ROOT = { add_claim = s:STATE_NICARAGUA }
+        s:STATE_NICARAGUA = { add_claim = root  }
         
         # Cross-scoping hacia el diario federal
         if = {
@@ -4327,7 +4368,11 @@ ca_central_america.64 = {
         
         if = {
             limit = { exists = scope:secession_country }
-            scope:secession_capital = {state_region = { add_claim = ROOT }}
+            scope:secession_capital = {
+                state_region = {
+                    add_claim = ROOT
+                }
+            }
 									   
 	
             custom_tooltip = { text = invade_nicaragua_frca_tt }
@@ -4375,7 +4420,12 @@ ca_central_america.65 = {
     
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
-        ROOT = { add_claim = s:STATE_COSTA_RICA }
+        s:STATE_COSTA_RICA = { add_claim = root }
+        #s:STATE_COSTA_RICA = {
+        #    state_region = {
+        #        add_claim = root 
+        #    }
+        #}							
         
         if = {
             limit = { exists = c:UCA }
@@ -4450,7 +4500,11 @@ ca_central_america.66 = {
         
         if = {
             limit = { exists = scope:secession_country }
-            scope:secession_capital = {state_region = { add_claim = ROOT }}
+             scope:secession_capital = {
+                state_region = {
+                    add_claim = ROOT
+                }
+            }
 									   
 	
             custom_tooltip = { text = invade_costarica_frca_tt }
@@ -4498,7 +4552,12 @@ ca_central_america.67 = {
     
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
-        ROOT = { add_claim = s:STATE_HONDURAS }
+        s:STATE_HONDURAS = { add_claim = root }
+        #s:STATE_HONDURAS = {
+        #    state_region = {
+        #        add_claim = root 
+        #    }
+        #}							
         
         if = {
             limit = { exists = c:UCA }
@@ -4574,7 +4633,11 @@ ca_central_america.68 = {
         
         if = {
             limit = { exists = scope:secession_country }
-            scope:secession_capital = {state_region = { add_claim = ROOT }}
+            scope:secession_capital = {
+                state_region = {
+                    add_claim = ROOT
+                }
+            }
 									   
 	
             custom_tooltip = { text = invade_honduras_frca_tt }
@@ -4622,7 +4685,12 @@ ca_central_america.69 = {
     
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
-        ROOT = { add_claim = s:STATE_GUATEMALA }
+        s:STATE_GUATEMALA = { add_claim = root }
+		#s:STATE_GUATEMALA = {
+        #    state_region = {
+        #        add_claim = root 
+        #    }
+        #}					
         
         if = {
             limit = { exists = c:UCA }
@@ -4698,7 +4766,11 @@ ca_central_america.70 = {
         
         if = {
             limit = { exists = scope:secession_country }
-            scope:secession_capital = {state_region = { add_claim = ROOT }}
+            scope:secession_capital = {
+                state_region = {
+                    add_claim = ROOT
+                }
+            }
 									   
 	
             custom_tooltip = { text = invade_guatemala_frca_tt }
@@ -4746,7 +4818,12 @@ ca_central_america.71 = {
     
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
-        ROOT = { add_claim = s:STATE_SAN_SALVADOR }
+        s:STATE_SAN_SALVADOR = { add_claim = root }
+        #s:STATE_SAN_SALVADOR = {
+        #    state_region = {
+        #        add_claim = root 
+        #    }
+        #}							
         
         if = {
             limit = { exists = c:UCA }
@@ -4822,7 +4899,11 @@ ca_central_america.72 = {
         
         if = {
             limit = { exists = scope:secession_country }
-            scope:secession_capital = {state_region = { add_claim = ROOT }}
+            scope:secession_capital = {
+                state_region = {
+                    add_claim = ROOT
+                }
+            }
 									   
 	
             custom_tooltip = { text = invade_elsalvador_frca_tt }
@@ -4870,7 +4951,12 @@ ca_central_america.73 = {
     
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
-        ROOT = { add_claim = s:STATE_GUATEMALA }
+        s:STATE_GUATEMALA = { add_claim = root }
+        #s:STATE_GUATEMALA = {
+        #    state_region = {
+        #        add_claim = root 
+        #    }
+        #}							
         
         if = {
             limit = { exists = c:UCA }
@@ -4946,7 +5032,11 @@ ca_central_america.74 = {
         
         if = {
             limit = { exists = scope:secession_country }
-            scope:secession_capital = {state_region = { add_claim = ROOT }}
+            scope:secession_capital = {
+                state_region = {
+                    add_claim = ROOT
+                }
+            }
 									   
 	
             custom_tooltip = { text = invade_losaltos_frca_tt }
@@ -4992,7 +5082,12 @@ ca_central_america.75 = {
     }
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
-        ROOT = { add_claim = s:STATE_PANAMA }
+        s:STATE_PANAMA = { add_claim = root }
+        #s:STATE_PANAMA = {
+        #    state_region = {
+        #        add_claim = root 
+        #    }
+        #}							
     }
     option = { #intervene in this popular resurrection
         name = ca_central_america.75.a
@@ -5053,7 +5148,11 @@ ca_central_america.76 = {
     # Reject Secession
     option = {
         name = ca_central_america.76.b
-        scope:secession_capital = {state_region = { add_claim = ROOT }}
+        scope:secession_capital = {
+            state_region = {
+                add_claim = ROOT
+            }
+        }
 									  
    
         custom_tooltip = {
@@ -5067,7 +5166,7 @@ ca_central_america.76 = {
             scope:secession_country = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
-                    state_region = { add_devastation = 25 }
+                     add_devastation = 25 
                     add_loyalists = { value = 0.5 }
                 }
             }
@@ -5114,7 +5213,7 @@ ca_central_america.78 = {
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
             capital = {
-                state_region = { add_devastation = 15 }
+                add_devastation = 15 
                 add_loyalists = { value = 0.25 }
             }
         }
@@ -5127,7 +5226,7 @@ ca_central_america.78 = {
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
             capital = {
-                state_region = { add_devastation = 25 }
+                add_devastation = 25 
                 add_loyalists = { value = 0.5 }
             }
         }
@@ -5203,7 +5302,7 @@ ca_central_america.79 = {
         add_loyalists = { value = small_radicals culture = cu:costa_rican }
    
         
-        every_scope_state = {
+        every_owned_state = {
             limit = {
                 OR = {
                     state_region = s:STATE_HONDURAS
@@ -5246,7 +5345,7 @@ ca_central_america.79 = {
         }
 
         # IDEA 2: Impacto en el Mapa (Agitación masiva en los estados separatistas)
-        every_scope_state = {
+        every_owned_state = {
             limit = {
                 OR = {
                     state_region = s:STATE_HONDURAS
