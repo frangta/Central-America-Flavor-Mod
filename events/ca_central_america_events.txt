@@ -5488,6 +5488,135 @@ ca_central_america.80 = {
     }
 }
 
+## Honduras Beats to secessionists
+ca_central_america.81 = {
+    type = country_event
+    placement = s:STATE_HONDURAS
+    title = ca_central_america.81.t
+    desc = ca_central_america.81.d
+    flavor = ca_central_america.81.f
+    duration = 2
+    event_image = { video = "southamerica_aristocrats" }
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    immediate = {
+        remove_variable = hon_support_var
+    }
+    option = { #Hurray
+        name = ca_central_america.81.a
+        default_option = yes
+        annex = c:HON
+        ai_chance = { base = 100 }
+    }
+}
+
+## Honduras falls to secessionists
+ca_central_america.82 = {
+    type = country_event
+    placement = s:STATE_HONDURAS
+    title = ca_central_america.82.t
+    desc = ca_central_america.82.d
+    flavor = ca_central_america.82.f
+    duration = 2
+    event_image = { video = "southamerica_aristocrats" }
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    immediate = {
+        remove_variable = hon_support_var
+    }
+    option = { #Hurray
+        name = ca_central_america.82.a
+        default_option = yes
+        ai_chance = { base = 100 }
+    }
+}
+
+## Costa Rica Beats to secessionists
+ca_central_america.83 = {
+    type = country_event
+    placement = s:STATE_COSTA_RICA
+    title = ca_central_america.83.t
+    desc = ca_central_america.83.d
+    flavor = ca_central_america.83.f
+    duration = 2
+    event_image = { video = "southamerica_aristocrats" }
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    immediate = {
+        remove_variable = cos_support_var
+    }
+    option = { #Hurray
+        name = ca_central_america.83.a
+        default_option = yes
+        annex = c:COS
+        ai_chance = { base = 100 }
+    }
+}
+
+## Costa Rica falls to secessionists
+ca_central_america.84 = {
+    type = country_event
+    placement = s:STATE_COSTA_RICA
+    title = ca_central_america.84.t
+    desc = ca_central_america.84.d
+    flavor = ca_central_america.84.f
+    duration = 2
+    event_image = { video = "southamerica_aristocrats" }
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    immediate = {
+        remove_variable = cos_support_var
+    }
+    option = { #Hurray
+        name = ca_central_america.84.a
+        default_option = yes
+        ai_chance = { base = 100 }
+    }
+}
+
+## Nicaragua Beats to secessionists
+ca_central_america.86 = {
+    type = country_event
+    placement = s:STATE_NICARAGUA
+    title = ca_central_america.86.t
+    desc = ca_central_america.86.d
+    flavor = ca_central_america.86.f
+    duration = 2
+    event_image = { video = "southamerica_aristocrats" }
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    immediate = {
+        remove_variable = nic_support_var
+    }
+    option = { #Hurray
+        name = ca_central_america.86.a
+        default_option = yes
+        annex = c:NIC
+        ai_chance = { base = 100 }
+    }
+}
+
+## Nicaragua falls to secessionists
+ca_central_america.87 = {
+    type = country_event
+    placement = s:STATE_NICARAGUA
+    title = ca_central_america.87.t
+    desc = ca_central_america.87.d
+    flavor = ca_central_america.87.f
+    duration = 2
+    event_image = { video = "southamerica_aristocrats" }
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    immediate = {
+        remove_variable = nic_support_var
+    }
+    option = { #Hurray
+        name = ca_central_america.87.a
+        default_option = yes
+        ai_chance = { base = 100 }
+    }
+}
+
 # =========================================================
 # CRISIS POLÍTICA Y SEPARATISMO - LA ERA DE LOS CAUDILLOS
 # =========================================================
