@@ -344,7 +344,7 @@ ca_central_america.4 = {
         
         scope:scope_ALT = {
             change_relations = {
-                country = ROOT
+                country = c:UCA
                 value = 50 # Relaciones regulares, pero no perfectas
             }
         }
@@ -366,7 +366,7 @@ ca_central_america.4 = {
         
         scope:secession_capital.state_region = {
     c:UCA = {
-        add_claim = PREV # UCA reclama el estado evaluado previamente
+        add_claim = s:STATE_GUATEMALA # UCA reclama el estado evaluado previamente
     }
     }
 		
@@ -430,7 +430,7 @@ ca_central_america.5 = {
             province = p:x1030C0 
             
             on_created = {
-                save_scope_as = scope_DG6
+                
                 
                 
                 s:STATE_CHIAPAS.region_state:UCA = {
@@ -442,6 +442,7 @@ ca_central_america.5 = {
                 
                 # Le damos un gobierno inicial lógico (Hacendados e Iglesia)
                 set_ruling_interest_groups = { ig_landowners ig_devout }
+				save_scope_as = scope_DG6
             }
         }
     }
@@ -3520,7 +3521,7 @@ ca_central_america.43 = {
         create_country = { tag = GUA origin = c:UCA state = s:STATE_GUATEMALA.region_state:UCA }
         create_country = { tag = NIC origin = c:UCA state = s:STATE_NICARAGUA.region_state:UCA }
         create_country = { tag = COS origin = c:UCA state = s:STATE_COSTA_RICA.region_state:UCA }
-       if = { limit = { exists = s:STATE_CHIAPAS.region_state:UCA } s:STATE_CHIAPAS.region_state:UCA = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } } }}
+       if = { limit = { exists = s:STATE_CHIAPAS.region_state:UCA } s:STATE_CHIAPAS.region_state:UCA = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } } }
     }
     option = { #Continue as El Salvador
         name = ca_central_america.43.a
@@ -5479,5 +5480,841 @@ ca_central_america.80 = {
         name = ca_central_america.80.g
         ai_chance = { base = 100 }
         # Podrías añadir un modificador de "Gobierno de Emergencia" aquí
+    }
+}
+
+# =========================================================
+# CRISIS POLÍTICA Y SEPARATISMO - LA ERA DE LOS CAUDILLOS
+# =========================================================
+
+# 1. Aparición de líderes regionales ("Caudillo Emerges in [State]")
+ca_central_america.100 = {
+    type = country_event
+    placement = scope:caudillo_state
+    
+    title = ca_central_america.100.t
+    desc = ca_central_america.100.d
+    flavor = ca_central_america.100.f
+    
+    event_image = {
+        video = "southamerica_aristocrats"
+    }
+    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    
+    duration = 3
+    
+    trigger = {
+        # Validamos usando tu macro
+        is_ca_culture_country = yes
+        # Buscamos un estado centroamericano con agitación (turmoil) mayor al 20%
+        any_scope_state = {
+            state_is_in_ca_central_america = yes
+            turmoil >= 0.2
+        }
+    }
+
+    immediate = {
+        # Guardamos el estado problemático para que persista en las opciones
+        random_scope_state = {
+            limit = {
+                state_is_in_ca_central_america = yes
+                turmoil >= 0.2
+            }
+            save_scope_as = caudillo_state
+        }
+        
+        # Creamos al Caudillo y lo guardamos en un Scope
+        create_character = {
+            interest_group = ig_armed_forces
+            ideology = ideology_central_america_caudillo
+            save_scope_as = regional_caudillo
+        }
+    }
+
+    # Opción A: Negociar con el Caudillo (Pierdes autoridad central, evitas rebelión)
+    option = {
+        name = ca_central_america.100.a
+        default_option = yes
+        
+        # Reducimos el soporte de la federación usando tu variable
+        if = {
+            limit = { has_variable = frca_support }
+            change_variable = {
+                name = frca_support
+                subtract = 15
+            }
+        }
+        
+        # Añadimos un modificador local al estado (debes crearlo en 00_ca_modifiers.txt)
+        scope:caudillo_state = {
+            add_modifier = {
+                name = ca_autonomous_caudillo_modifier
+                months = 60
+            }
+        }
+        
+        # El personaje se vuelve un agitador o líder
+        scope:regional_caudillo = {
+            make_agitator = yes
+        }
+    }
+
+    # Opción B: Arrestar al Caudillo (Aumenta tensión, mantienes autoridad)
+    option = {
+        name = ca_central_america.100.b
+        
+        if = {
+            limit = { has_variable = frca_support }
+            change_variable = {
+                name = frca_support
+                add = 5
+            }
+        }
+        
+        scope:caudillo_state = {
+            add_radicals = {
+                value = 0.1
+                pop_fraction = yes
+            }
+        }
+        
+        # Matamos al personaje creado para que no consuma memoria
+        scope:regional_caudillo = {
+            kill_character = yes
+        }
+    }
+}
+
+# 2. Intriga Palaciega / Radicalización Política
+ca_central_america.101 = {
+    type = country_event
+    placement = root
+    
+    title = ca_central_america.101.t
+    desc = ca_central_america.101.d
+    flavor = ca_central_america.101.f
+    
+    event_image = {
+        video = "parliament"
+    }
+    icon = "gfx/interface/icons/event_icons/event_default.dds"
+    
+    trigger = {
+        is_ca_culture_country = yes
+        ig:ig_landowners = {
+            is_powerful = yes
+            is_in_government = yes
+        }
+        # Solo ocurre si el soporte es moderado o bajo
+        frca_support < 50
+    }
+
+    immediate = {
+        # Identificamos al líder de los terratenientes
+        ig:ig_landowners = {
+            leader = {
+                save_scope_as = corrupt_politician
+            }
+        }
+    }
+
+    # Opción A: Ceder a la intriga (Los separatistas ganan terreno)
+    option = {
+        name = ca_central_america.101.a
+        
+        ig:ig_landowners = {
+            add_modifier = {
+                name = ig_political_intrigue_success
+                months = 36
+            }
+        }
+        
+        change_variable = {
+            name = frca_support
+            subtract = 10
+        }
+    }
+
+    # Opción B: Purgar el gabinete (El soporte federal sube, pero los terratenientes se enfadan)
+    option = {
+        name = ca_central_america.101.b
+        
+        ig:ig_landowners = {
+            add_modifier = {
+                name = ig_purged_cabinet
+                months = 36
+            }
+        }
+        
+        scope:corrupt_politician = {
+            kill_character = yes
+        }
+        
+        change_variable = {
+            name = frca_support
+            add = 15
+        }
+    }
+}
+
+# 3. Demandas de Autonomía de un Estado
+ca_central_america.102 = {
+    type = country_event
+    placement = scope:demanding_state
+    
+    title = ca_central_america.102.t
+    desc = ca_central_america.102.d
+    
+    event_image = {
+        video = "civil_unrest"
+    }
+    icon = "gfx/interface/icons/event_icons/event_protest.dds"
+    
+    trigger = {
+        is_ca_culture_country = yes
+        any_scope_state = {
+            state_is_in_ca_central_america = yes
+            incorporation_level >= 1
+            has_high_unrest = yes # Macro vanilla de Victoria 3
+        }
+    }
+
+    immediate = {
+        random_scope_state = {
+            limit = {
+                state_is_in_ca_central_america = yes
+                has_high_unrest = yes
+            }
+            save_scope_as = demanding_state
+        }
+    }
+
+    # Opción A: Conceder derechos estatales
+    option = {
+        name = ca_central_america.102.a
+        
+        change_variable = {
+            name = frca_support
+            subtract = 20
+        }
+        scope:demanding_state = {
+            add_loyalists = {
+                value = 0.1
+                pop_fraction = yes
+            }
+        }
+    }
+
+    # Opción B: Imponer la Ley Federal
+    option = {
+        name = ca_central_america.102.b
+        
+        change_variable = {
+            name = frca_support
+            add = 10
+        }
+        scope:demanding_state = {
+            add_turmoil = 0.15
+        }
+    }
+}
+
+# 1. Auge del Café ("Coffee Boom")
+# Evento que dispara el crecimiento en estados con potencial agrícola.
+ca_central_america.200 = {
+    type = country_event
+    placement = scope:boom_state
+    
+    title = ca_central_america.200.t
+    desc = ca_central_america.200.d
+    
+    event_image = {
+        video = "market_busy"
+    }
+    
+    trigger = {
+        is_ca_culture_country = yes
+        any_scope_state = {
+            state_is_in_ca_central_america = yes
+            # El estado debe tener plantaciones de café construidas
+            has_building = building_coffee_plantation
+        }
+    }
+
+    immediate = {
+        random_scope_state = {
+            limit = {
+                state_is_in_ca_central_america = yes
+                has_building = building_coffee_plantation
+            }
+            save_scope_as = boom_state
+        }
+    }
+
+    # Opción A: Fomentar la exportación (Beneficia a Terratenientes y la Unión)
+    option = {
+        name = ca_central_america.200.a
+        
+        scope:boom_state = {
+            add_modifier = {
+                name = ca_coffee_export_boom
+                months = 60
+            }
+        }
+        # Usamos tu efecto de soporte económico
+        ca_increase_support_economic_boom_effect = yes
+        
+        ig:ig_landowners = {
+            add_approval = {
+                value = 2
+                months = 60
+            }
+        }
+    }
+
+    # Opción B: Gravar el café para el Tesoro Federal
+    option = {
+        name = ca_central_america.200.b
+        
+        add_treasury = 5000 # Valor base escalable
+        scope:boom_state = {
+            add_modifier = {
+                name = ca_heavy_coffee_tax
+                months = 60
+            }
+        }
+        # El descontento local resta un poco de soporte federal
+        ca_reduce_support_event_minor_effect = yes
+    }
+}
+
+# 2. Crisis de Deuda ("Debt Crisis")
+# Se dispara si el país tiene un balance negativo o mucha deuda.
+ca_central_america.201 = {
+    type = country_event
+    
+    title = ca_central_america.201.t
+    desc = ca_central_america.201.d
+    
+    event_image = {
+        video = "poverty"
+    }
+
+    trigger = {
+        is_ca_culture_country = yes
+        is_in_deficit = yes
+        # Si la deuda supera el 20% del techo de deuda
+        is_debt_too_high = yes # Macro interna de V3
+    }
+
+    # Opción A: Medidas de austeridad drásticas
+    option = {
+        name = ca_central_america.201.a
+        
+        add_modifier = {
+            name = ca_austerity_measures
+            months = 48
+        }
+        # La crisis reduce drásticamente el apoyo a la federación
+        ca_reduce_support_economic_crisis_effect = yes
+        
+        # Aumenta el radicalismo en toda la federación
+        every_scope_state = {
+            limit = { state_is_in_ca_central_america = yes }
+            add_radicals = {
+                value = 0.05
+                pop_fraction = yes
+            }
+        }
+    }
+
+    # Opción B: Declarar el impago (Default)
+    option = {
+        name = ca_central_america.201.b
+        
+        bankruptcy = yes # Efecto vanilla que limpia parte de la deuda
+        add_prestige = -50
+        
+        # El caos económico desploma la confianza federal
+        ca_reduce_support_civil_war_effect = yes # Impacto muy fuerte (-30)
+    }
+}
+
+# 3. Desarrollo Ferroviario ("Railway Expansion")
+# Evento de infraestructura moderna.
+ca_central_america.202 = {
+    type = country_event
+    placement = scope:rail_state
+    
+    title = ca_central_america.202.t
+    desc = ca_central_america.202.d
+    
+    event_image = {
+        video = "train_travel"
+    }
+
+    trigger = {
+        is_ca_culture_country = yes
+        has_technology_researched = railways
+        any_scope_state = {
+            state_is_in_ca_central_america = yes
+            districts_with_railway_access < 1 # Estados sin trenes
+        }
+    }
+
+    immediate = {
+        random_scope_state = {
+            limit = {
+                state_is_in_ca_central_america = yes
+                districts_with_railway_access < 1
+            }
+            save_scope_as = rail_state
+        }
+    }
+
+    # Opción A: Contrato con capital extranjero (Rápido pero peligroso)
+    option = {
+        name = ca_central_america.202.a
+        
+        scope:rail_state = {
+            # Crea un edificio de ferrocarril instantáneo
+            create_incident = {
+                name = railway_expansion_incident
+            }
+            add_modifier = {
+                name = foreign_railway_influence
+                months = 120
+            }
+        }
+        # La modernización da prestigio y soporte
+        ca_increase_support_intervention_success_effect = yes
+    }
+
+    # Opción B: Proyecto Nacional (Lento pero soberano)
+    option = {
+        name = ca_central_america.202.b
+        
+        scope:rail_state = {
+            add_construction_progress = {
+                type = building_railway
+                progress = 0.5
+            }
+        }
+        add_authority = -100 # Coste administrativo
+    }
+}
+
+# =========================================================
+# SOCIEDAD Y DESASTRES NATURALES - DESAFÍOS INTERNOS
+# =========================================================
+
+# 1. Terremoto en el Istmo (Desastre Natural)
+# Pone a prueba la utilidad de la Federación para ayudar a los estados.
+ca_central_america.300 = {
+    type = country_event
+    placement = scope:earthquake_state
+    
+    title = ca_central_america.300.t
+    desc = ca_central_america.300.d
+    
+    event_image = {
+        video = "earthquake" # Video genérico de desastres en V3
+    }
+    icon = "gfx/interface/icons/event_icons/event_protest.dds"
+    
+    trigger = {
+        is_ca_culture_country = yes
+        # Se necesita al menos un estado incorporado en la región
+        any_scope_state = {
+            state_is_in_ca_central_america = yes
+            is_incorporated = yes
+        }
+    }
+
+    immediate = {
+        # El terremoto golpea un estado aleatorio
+        random_scope_state = {
+            limit = {
+                state_is_in_ca_central_america = yes
+                is_incorporated = yes
+            }
+            save_scope_as = earthquake_state
+        }
+    }
+
+    # Opción A: Enviar ayuda federal (Cuesta dinero y burocracia, pero une al país)
+    option = {
+        name = ca_central_america.300.a
+        
+        add_treasury = -10000 # Coste de reconstrucción
+        add_bureaucracy = -50
+        
+        scope:earthquake_state = {
+            add_devastation = 10
+            add_modifier = {
+                name = ca_federal_reconstruction
+                months = 24
+            }
+        }
+        
+        # La ayuda federal aumenta la fe en la Unión
+        if = {
+            limit = { has_variable = frca_support }
+            change_variable = {
+                name = frca_support
+                add = 10
+            }
+        }
+    }
+
+    # Opción B: Dejar que el estado se recupere solo (Ahorra recursos, destruye la confianza)
+    option = {
+        name = ca_central_america.300.b
+        
+        scope:earthquake_state = {
+            add_devastation = 30
+            add_turmoil = 0.20
+            add_modifier = {
+                name = ca_abandoned_by_federal_gov
+                months = 60
+            }
+        }
+        
+        # El abandono reduce masivamente el soporte a la federación
+        if = {
+            limit = { has_variable = frca_support }
+            change_variable = {
+                name = frca_support
+                subtract = 25
+            }
+        }
+    }
+}
+
+# 2. Campaña de Alfabetización ("Literacy Campaign")
+# Conecta con tu je_ca_enlightenment y fortalece a la Intelligentsia.
+ca_central_america.301 = {
+    type = country_event
+    placement = root
+    
+    title = ca_central_america.301.t
+    desc = ca_central_america.301.d
+    
+    event_image = {
+        video = "school"
+    }
+
+    trigger = {
+        is_ca_culture_country = yes
+        has_journal_entry = je_ca_enlightenment
+        ig:ig_intelligentsia = { is_in_government = yes }
+    }
+
+    # Opción A: Impulsar la educación laica (Potencia a la Intelligentsia)
+    option = {
+        name = ca_central_america.301.a
+        
+        ig:ig_intelligentsia = {
+            add_approval = {
+                value = 3
+                months = 36
+            }
+        }
+        add_modifier = {
+            name = ca_secular_literacy_campaign
+            months = 60
+        }
+        # Progreso hacia los federalistas usando tu efecto matemático
+        if = {
+            limit = { has_variable = federalists_vs_separatists_next }
+            change_variable = {
+                name = federalists_vs_separatists_next
+                add = 5
+            }
+        }
+    }
+
+    # Opción B: Delegar la enseñanza a la Iglesia (Ahorra dinero, potencia a los Devotos)
+    option = {
+        name = ca_central_america.301.b
+        
+        ig:ig_devout = {
+            add_approval = {
+                value = 3
+                months = 36
+            }
+        }
+        add_modifier = {
+            name = ca_religious_education_drive
+            months = 60
+        }
+    }
+}
+
+# 3. Rebelión Campesina ("Peasant Uprising")
+# Conflictos por la tierra en los estados agrícolas.
+ca_central_america.302 = {
+    type = country_event
+    placement = scope:rebellion_state
+    
+    title = ca_central_america.302.t
+    desc = ca_central_america.302.d
+    
+    event_image = {
+        video = "civil_unrest"
+    }
+
+    trigger = {
+        is_ca_culture_country = yes
+        any_scope_state = {
+            state_is_in_ca_central_america = yes
+            turmoil > 0.15
+            # Presencia de campesinos descontentos
+            any_scope_pop = {
+                is_pop_type = peasants
+                is_discriminated = yes
+            }
+        }
+    }
+
+    immediate = {
+        random_scope_state = {
+            limit = {
+                state_is_in_ca_central_america = yes
+                turmoil > 0.15
+            }
+            save_scope_as = rebellion_state
+        }
+    }
+
+    # Opción A: Concesiones agrarias (Enoja a los terratenientes)
+    option = {
+        name = ca_central_america.302.a
+        
+        ig:ig_landowners = {
+            add_approval = { value = -3 months = 60 }
+        }
+        ig:ig_rural_folk = {
+            add_approval = { value = 3 months = 60 }
+        }
+        scope:rebellion_state = {
+            remove_turmoil = 0.10
+        }
+    }
+
+    # Opción B: Represión militar (Sube el poder del ejército, genera víctimas)
+    option = {
+        name = ca_central_america.302.b
+        
+        ig:ig_armed_forces = {
+            add_modifier = {
+                name = ca_military_law_imposed
+                months = 36
+            }
+        }
+        scope:rebellion_state = {
+            add_radicals = {
+                value = 0.05
+                pop_fraction = yes
+            }
+            # Un pequeño golpe a la imagen de la Federación
+            if = {
+                limit = { has_variable = frca_support }
+                change_variable = { name = frca_support subtract = 5 }
+            }
+        }
+    }
+}
+
+# Una Gran Potencia ofrece "ayuda" económica a cambio de concesiones.
+ca_central_america.400 = {
+    type = country_event
+    placement = scope:foreign_power
+    
+    title = ca_central_america.400.t
+    desc = ca_central_america.400.d
+    
+    event_image = {
+        video = "diplomacy"
+    }
+    
+    trigger = {
+        is_ca_culture_country = yes
+        # Verificamos si existe alguna Gran Potencia en el mundo
+        any_country = {
+            country_rank = rank_great_power
+            is_subject = no
+        }
+    }
+
+    immediate = {
+        # Seleccionamos una Gran Potencia aleatoria y la guardamos en memoria
+        random_country = {
+            limit = {
+                country_rank = rank_great_power
+                is_subject = no
+            }
+            save_scope_as = foreign_power
+        }
+    }
+
+    # Opción A: Aceptar la inversión extranjera (Dinero fácil, pero pérdida de soberanía)
+    option = {
+        name = ca_central_america.400.a
+        
+        # El país recibe fondos
+        add_treasury = 25000
+        
+        # La Gran Potencia gana una obligación (deuda diplomática) sobre nosotros
+        reverse_add_obligation = scope:foreign_power
+        
+        # La intromisión extranjera indigna a los nacionalistas y debilita la Unión
+        if = {
+            limit = { has_variable = frca_support }
+            change_variable = { name = frca_support subtract = 15 }
+        }
+        
+        ig:ig_industrialists = { add_approval = { value = 2 months = 60 } }
+    }
+
+    # Opción B: Rechazar la injerencia imperialista (Soberanía y orgullo federal)
+    option = {
+        name = ca_central_america.400.b
+        
+        # Enfada a la potencia extranjera
+        scope:foreign_power = {
+            add_relations = {
+                who = root
+                value = -20
+            }
+        }
+        
+        # Aumenta el prestigio y consolida la autoridad de la Federación
+        add_prestige = 10
+        ca_increase_support_intervention_success_effect = yes
+    }
+}
+
+# 2. Tensiones Diplomáticas Fronterizas ("Border Disputes")
+# Fricciones con vecinos que no son centroamericanos (ej. México o Colombia).
+ca_central_america.401 = {
+    type = country_event
+    placement = scope:border_neighbor
+    
+    title = ca_central_america.401.t
+    desc = ca_central_america.401.d
+    
+    event_image = {
+        video = "military_camp"
+    }
+
+    trigger = {
+        is_ca_culture_country = yes
+        # Debe tener un país vecino que NO sea de cultura centroamericana
+        any_neighboring_country = {
+            NOT = { is_ca_culture_country = yes }
+        }
+    }
+
+    immediate = {
+        random_neighboring_country = {
+            limit = { NOT = { is_ca_culture_country = yes } }
+            save_scope_as = border_neighbor
+        }
+    }
+
+    # Opción A: Movilizar tropas a la frontera (Demuestra fuerza, gusta a los militares)
+    option = {
+        name = ca_central_america.401.a
+        
+        add_treasury = -5000 # Coste logístico
+        
+        ig:ig_armed_forces = {
+            add_approval = { value = 3 months = 60 }
+            add_modifier = {
+                name = ca_border_mobilization
+                months = 36
+            }
+        }
+        
+        scope:border_neighbor = {
+            add_relations = { who = root value = -30 }
+        }
+        
+        ca_increase_support_intervention_success_effect = yes
+    }
+
+    # Opción B: Buscar un tratado de límites pacífico (Pragmático, pero se percibe débil)
+    option = {
+        name = ca_central_america.401.b
+        
+        ig:ig_armed_forces = {
+            add_approval = { value = -2 months = 60 }
+        }
+        
+        scope:border_neighbor = {
+            add_relations = { who = root value = 20 }
+        }
+        
+        if = {
+            limit = { has_variable = frca_support }
+            change_variable = { name = frca_support subtract = 10 }
+        }
+    }
+}
+
+# 3. Modernización del Ejército vs. Caudillismo
+# Decidir entre un ejército profesional federal o ejércitos estatales privados.
+ca_central_america.402 = {
+    type = country_event
+    placement = root
+    
+    title = ca_central_america.402.t
+    desc = ca_central_america.402.d
+    
+    event_image = {
+        video = "generals_tent"
+    }
+
+    trigger = {
+        is_ca_culture_country = yes
+        ig:ig_armed_forces = {
+            is_powerful = yes
+        }
+    }
+
+    # Opción A: Centralizar el mando militar (Fortalece la Unión)
+    option = {
+        name = ca_central_america.402.a
+        
+        add_bureaucracy = -100 # Cuesta administración mantener un ejército federal
+        
+        add_modifier = {
+            name = ca_federal_army_centralized
+            months = 60
+        }
+        
+        # Gran impulso a la Unión, pero puede radicalizar a los caudillos
+        if = {
+            limit = { has_variable = frca_support }
+            change_variable = { name = frca_support add = 20 }
+        }
+    }
+
+    # Opción B: Permitir milicias estatales (Ahorra burocracia, pero desintegra el país)
+    option = {
+        name = ca_central_america.402.b
+        
+        ig:ig_armed_forces = {
+            add_modifier = {
+                name = age_of_ca_caudillos_modifier # Usamos tu modificador existente
+                months = 120
+            }
+        }
+        
+        # Debilita drásticamente el poder federal
+        ca_reduce_support_event_minor_effect = yes
+        ca_reduce_support_event_minor_effect = yes # Se llama doble para un impacto acumulativo o puedes crear uno de impacto medio
     }
 }

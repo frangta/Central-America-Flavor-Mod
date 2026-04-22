@@ -35,7 +35,7 @@ ca_setup_events.1 = { #
 		add_journal_entry = {
 			type = je_historic_central_america_falls_apart
 		}
-		change_variable = { name = frca_support add = 60 }
+		change_variable = { name = frca_support add = 5 }
 	add_radicals = {
 		value = small_radicals
 		culture = cu:guatemalan
@@ -62,8 +62,8 @@ ca_setup_events.1 = { #
 	}
 		
 
-		set_variable = historic_central_american
-		set_variable = frca_preserved
+		set_variable = { name = historic_central_american}
+		set_variable = { name = frca_preserved }
 		#ca_history_rail_events = yes
 
 		if = {
