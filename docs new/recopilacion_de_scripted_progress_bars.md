@@ -1,0 +1,4898 @@
+     example_progress_bar5 = {
+        name = "PROGRESS_BAR_NAME1"
+        desc = "PROGRESS_BAR_TEXT3" #This will be printed on the left side of the progress bar
+       second_desc = "PROGRESS_BAR_TEXT3" #This will be printed on the right side of the progress bar
+    
+        is_inverted = yes #Will treat negative progress as positive meaning that the object is to keep this progress down
+
+        start_value = 50
+        min_value = 0
+        max_value = 100
+        
+       # Use one of these types of progressbars:
+        double_sided_gold = yes
+        default_green = yes
+        default_bad = yes
+        default = yes
+        double_sided_gold = yes
+        double_sided_bad = yes
+    
+       These progress bar weekly/monthly/yearly progress updates executes before the weekly/monthly/yearly JE pulses
+        weekly_progress = {
+            add = {
+                desc = "PROGRESS_BAR_ADD_WEEKLY_DESC2"
+                value = 30
+            }
+        }
+        monthly_progress = {
+            add = {
+                desc = "PROGRESS_BAR_ADD_MONTHLY_DESC1"
+                if = {
+                    limit = {
+                        influence > 100
+                    }
+                    value = 3
+                } 
+            }
+        }
+        yearly_progress = {
+        }
+     }
+	 
+#Others ejems:
+je_cuba_total_bar = {
+ 	name = "je_cuba_independencia_bar"
+ 	desc = {
+ 		first_valid = {
+ 			triggered_desc = {
+ 				trigger = {
+ 					s:STATE_FLORIDA = {
+ 						any_scope_state = {
+ 							owner = { c:CSA ?= this }
+ 						}
+ 					}
+ 				}
+ 				desc = je_cuba_join_csa_bar
+ 			}
+ 			triggered_desc = {
+ 				trigger = {
+ 					s:STATE_FLORIDA = {
+ 						any_scope_state = {
+ 							owner = { c:USA ?= this }
+ 						}
+ 					}
+ 				}
+ 				desc = je_cuba_join_usa_bar
+ 			}
+ 		}
+ 	}
+ 			
+ 	second_desc = "je_cuba_independencia_bar"
+
+ 	double_sided_gold = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				s:STATE_FLORIDA = {
+					any_scope_state = {
+						owner = {
+							OR = {
+								c:USA ?= this
+								c:CSA ?= this
+							}
+						}
+					}
+				}
+				OR = {
+					exists = c:CUB
+					AND = {
+						exists = c:ATL
+						c:ATL = { was_formed_from = CUB }
+					}
+				}
+				owner = {
+					has_journal_entry = je_cuba_independencia
+					has_variable = independencia_target
+					has_variable = independencia_current
+				}
+			}
+			add = {
+				desc = "je_cuba_total_drift_tt"
+				value = owner.var:independencia_target
+				subtract = owner.var:independencia_current
+				multiply = je_cuba_drift_factor 
+			}
+		}
+		else = {
+			add = {
+				add = 1000
+				desc = usa_does_not_exist_tt
+			}
+		}
+	}
+	start_value = 35
+	min_value = 0
+	max_value = 100
+}
+
+# For je_the_first_carlist_war
+
+je_the_first_carlist_war_score_bar = {
+	name = "je_the_first_carlist_war_score_bar"
+	desc = "je_the_first_carlist_war_score_bar_desc"
+	second_desc = "je_the_first_carlist_war_score_bar_second_desc"
+
+	double_sided_two_spains = yes
+
+	start_value = 0
+	min_value = -10
+	max_value = 10
+}
+
+
+grunderzeit_progress_bar = {
+ 	name = "grunderzeit_progress_bar"
+ 	desc = "grunderzeit_progress_bar_desc"
+
+ 	default_green = yes
+
+ 	monthly_progress = {
+	}
+
+ 	start_value = 4
+ 	min_value = 0
+ 	max_value = 4
+}
+bavarocracy_progress_bar = {
+ 	name = "bavarocracy_progress_bar"
+ 	desc = "bavarocracy_progress_bar_desc"
+
+ 	default_bad = yes
+	is_inverted = yes
+
+ 	monthly_progress = {
+  		# Advance
+		if = {
+			limit = {
+				# German IG leaders and Generals
+				any_scope_character = {
+					culture = cu:south_german
+				}
+			}
+			add = {
+				desc = "bavarocracy_german_characters_tt"
+				every_scope_character = {
+					limit = {
+						culture = cu:south_german
+					}
+					add = 1
+				}
+			}
+		}
+		if = {
+			limit = {
+				# King is Catholic
+				ruler = {
+					NOT = {
+						religion = rel:orthodox
+					}
+				}
+			}
+			add = {
+				desc = "bavarocracy_catholic_ruler_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# Not married
+				ruler = {
+					NOT = {
+						has_variable = is_married
+					}
+				}
+			}
+			add = {
+				desc = "bavarocracy_no_wife_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# No heir
+				NOT = {
+					exists = heir
+				}
+			}
+			add = {
+				desc = "bavarocracy_no_heir_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# No democracy
+				country_has_voting_franchise = no
+			}
+			add = {
+				desc = "bavarocracy_no_voting_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# Small army, i.e. unemployed klephts
+				army_size < 10
+			}
+			add = {
+				desc = "bavarocracy_small_army_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# radicalism / high turmoil
+				any_scope_state = {
+					state_region = {
+						is_homeland = cu:greek
+					}
+					turmoil >= 0.10
+				}
+			}
+			add = {
+				desc = "bavarocracy_turmoil_tt"
+				every_scope_state = {
+					limit = {
+						state_region = {
+							is_homeland = cu:greek
+						}
+						turmoil >= 0.10
+					}
+					add = this.turmoil
+				}
+			}
+		}
+		if = {
+			limit = {
+				# losing wars
+				has_variable = recently_lost_war
+			}
+			add = {
+				desc = "bavarocracy_losing_wars_tt"
+				value = 1
+			}
+		}
+  		# Deplete
+		if = {
+			limit = {
+				# Owns Greek homeland states
+				any_scope_state = {
+					state_region = {
+						is_homeland = cu:greek
+					}
+				}
+			}
+			add = {
+				desc = "bavarocracy_greek_homeland_states_tt"
+				every_scope_state = {
+					limit = {
+						state_region = {
+							is_homeland = cu:greek
+						}
+					}
+					add = -1
+				}
+			}
+		}
+		if = {
+			limit = {
+				# loyalists / low turmoil
+				any_scope_state = {
+					state_region = {
+						is_homeland = cu:greek
+					}
+					loyalty >= 0.10
+				}
+			}
+			add = {
+				desc = "bavarocracy_loyalists_tt"
+				every_scope_state = {
+					limit = {
+						state_region = {
+							is_homeland = cu:greek
+						}
+						loyalty >= 0.10
+					}
+					subtract = this.loyalty
+				}
+			}
+		}
+		if = {
+			limit = {
+				# winning wars
+				has_variable = recently_won_war
+			}
+			add = {
+				desc = "bavarocracy_winning_wars_tt"
+				value = -1
+			}
+		}
+		if = {
+			limit = {
+				# having a Greek university
+				any_scope_state = {
+					state_region = {
+						is_homeland = cu:greek
+					}
+					any_scope_building = {
+						is_building_type = building_university
+						level > 0
+					}
+				}
+			}
+			add = {
+				desc = "bavarocracy_university_tt"
+				value = -1
+			}
+		}
+		if = {
+			limit = {
+				# large army, i.e. unemployed klephts
+				army_size > 20
+			}
+			add = {
+				desc = "bavarocracy_large_army_tt"
+				value = -1
+			}
+		}
+	}
+
+ 	start_value = 10
+ 	min_value = 0
+ 	max_value = 100
+}
+great_game_core_progress_bar = {
+ 	name = "great_game_core_progress_bar_name"
+ 	desc = "great_game_core_progress_bar_britain_desc"
+ 	second_desc = "great_game_core_progress_bar_russia_desc"
+
+ 	double_sided_gold = yes
+
+ 	yearly_progress = {
+		if = {
+			limit = {
+				exists = global_var:great_game_balance_passive_var
+				NOT = {
+					global_var:great_game_balance_passive_var = 0
+				}
+			}
+			add = {
+			   desc = "great_game_core_progress_passive_balance"
+			   value = global_var:great_game_balance_passive_var
+		    }
+		}
+ 	}
+
+ 	start_value = 100
+ 	min_value = 0
+ 	max_value = 200
+}
+austrian_neo_absolutism_constitutional_pressure_progress_bar = {
+ 	name = "austrian_neo_absolutism_constitutional_pressure_progress_bar"
+ 	desc = "austrian_neo_absolutism_constitutional_pressure_progress_bar_desc"
+
+ 	default_bad = yes
+
+ 	monthly_progress = {
+ 		# Advance
+		if = {
+			limit = {
+				has_modifier = declared_bankruptcy
+			}
+			add = {
+				desc = "austrian_neo_absolutism_declared_bankruptcy"
+				value = 10
+			}
+		}
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = {
+				desc = "austrian_neo_absolutism_taking_loans"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					turmoil >= 0.10
+				}
+			}
+			add = {
+				desc = "austrian_neo_absolutism_radicals"
+				every_scope_state = {
+					limit = {
+						turmoil >= 0.10
+					}
+					add = this.turmoil
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					law_stance = {
+						law = law_type:law_autocracy
+						value < neutral
+					}
+				}
+			}
+			add = {
+				desc = "austrian_neo_absolutism_interest_groups_opposing"
+				every_interest_group = {
+					limit = {
+						law_stance = {
+							law = law_type:law_autocracy
+							value < neutral
+						}
+					}
+					add = this.ig_clout
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					OR = {
+						movement_is_liberal = yes
+						movement_is_socialist = yes
+						is_political_movement_type = movement_cultural_minority
+					}
+				}
+			}
+			add = {
+				desc = "austrian_neo_absolutism_movement_activism"
+				every_political_movement = {
+					limit = {
+						OR = {
+							movement_is_liberal = yes
+							movement_is_socialist = yes
+							is_political_movement_type = movement_cultural_minority
+						}
+					}
+					add = {
+						value = this.political_movement_radicalism
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				relative_bureaucracy < 0
+			}
+			add = {
+				desc = "austrian_neo_absolutism_bureaucracy_deficit"
+				subtract = {
+					root = {
+						value = this.relative_bureaucracy
+					}
+				}
+			}
+		}
+		# Deplete
+		if = {
+			limit = {
+				net_total_income > 0
+			}
+			add = {
+				desc = "austrian_neo_absolutism_positive_budget_balance"
+				value = -1
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					loyalty >= 0.10
+				}
+			}
+			add = {
+				desc = "austrian_neo_absolutism_loyalists"
+				every_scope_state = {
+					limit = {
+						loyalty >= 0.10
+					}
+					subtract = this.loyalty
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					law_stance = {
+						law = law_type:law_autocracy
+						value > neutral
+					}
+				}
+			}
+			add = {
+				desc = "austrian_neo_absolutism_interest_groups_supporting"
+				every_interest_group = {
+					limit = {
+						law_stance = {
+							law = law_type:law_autocracy
+							value > neutral
+						}
+					}
+					subtract = this.ig_clout
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					OR = {
+						is_political_movement_type = movement_royalist_absolutist
+						is_political_movement_type = movement_cultural_majority
+						is_political_movement_type = movement_religious_majority
+					}
+				}
+			}
+			add = {
+				desc = "austrian_neo_absolutism_movement_activism_2"
+				every_political_movement = {
+					limit = {
+						OR = {
+							is_political_movement_type = movement_royalist_absolutist
+							is_political_movement_type = movement_cultural_majority
+							is_political_movement_type = movement_religious_majority
+						}
+					}
+					subtract = {
+						value = this.political_movement_support
+						multiply = 5
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				relative_bureaucracy > 0
+			}
+			add = {
+				desc = "austrian_neo_absolutism_excess_bureaucracy"
+				subtract = {
+					root = {
+						value = this.relative_bureaucracy
+					}
+				}
+			}
+		}
+	}
+
+ 	start_value = 10
+ 	min_value = 0
+ 	max_value = 100
+}
+ ### For je_divided_monarchists
+
+ divided_monarchists_bonapartist_progress_bar = {
+	name = "divided_monarchists_bonapartist_progress_bar"
+	desc = "divided_monarchists_bonapartist_progress_bar_desc"
+
+	default = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				NOT = {
+					has_variable = fra_divided_monarchists_freeze #This variable stops iteration, and is granted by reaching 360 with one dynasty. It's reset when this JE is completed, or when je_cement_the_rightful_dynasty fails.
+				}
+			}
+			add = {
+				desc = "bonapartist_progress_from_characters"
+				value = owner.var:bonapartist_progress_from_characters
+			}
+			add = {
+				desc = "bonapartist_progress_from_igs"
+				value = owner.var:bonapartist_progress_from_igs
+			}
+			add = {
+				desc = "bonapartist_progress_from_military"
+				value = owner.var:bonapartist_progress_from_military
+			}
+			add = {
+				desc = "bonapartist_progress_from_legitimacy"
+				value = owner.var:bonapartist_progress_from_legitimacy
+			}
+			add = {
+				desc = "bonapartist_progress_from_movements"
+				value = owner.var:bonapartist_progress_from_movements
+			}
+			add = {
+				desc = "bonapartist_progress_from_effects"
+				value = owner.var:bonapartist_progress_from_effects
+			}
+		}
+	}
+
+	start_value = 10
+	min_value = 0
+	max_value = 480 # divided_monarchists_upper_bound
+
+ }
+
+ divided_monarchists_orleanist_progress_bar = {
+	name = "divided_monarchists_orleanist_progress_bar"
+	desc = "divided_monarchists_orleanist_progress_bar_desc"
+
+	default_bad = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				NOT = {
+					has_variable = fra_divided_monarchists_freeze #This variable stops iteration, and is granted by reaching 360 with one dynasty. It's reset when this JE is completed, or when je_cement_the_rightful_dynasty fails.
+				}
+			}
+			add = {
+				desc = "orleanist_progress_from_characters"
+				value = owner.var:orleanist_progress_from_characters
+			}
+			add = {
+				desc = "orleanist_progress_from_igs"
+				value = owner.var:orleanist_progress_from_igs
+			}
+			add = {
+				desc = "orleanist_progress_from_factories"
+				value = owner.var:orleanist_progress_from_factories
+			}
+			add = {
+				desc = "orleanist_progress_from_legitimacy"
+				value = owner.var:orleanist_progress_from_legitimacy
+			}
+			add = {
+				desc = "orleanist_progress_from_movements"
+				value = owner.var:orleanist_progress_from_movements
+			}
+			add = {
+				desc = "orleanist_progress_from_effects"
+				value = owner.var:orleanist_progress_from_effects
+			}
+		}
+	}
+
+	start_value = 25
+	min_value = 0
+	max_value = 480 # divided_monarchists_upper_bound
+
+ }
+
+ divided_monarchists_legitimist_progress_bar = {
+	name = "divided_monarchists_legitimist_progress_bar"
+	desc = "divided_monarchists_legitimist_progress_bar_desc"
+
+	default_green = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				NOT = {
+					has_variable = fra_divided_monarchists_freeze #This variable stops iteration, and is granted by reaching 360 with one dynasty. It's reset when this JE is completed, or when je_cement_the_rightful_dynasty fails.
+				}
+			}
+			add = {
+				desc = "legitimist_progress_from_characters"
+				value = owner.var:legitimist_progress_from_characters
+			}
+			add = {
+				desc = "legitimist_progress_from_igs"
+				value = owner.var:legitimist_progress_from_igs
+			}
+			add = {
+				desc = "legitimist_progress_from_farms"
+				value = owner.var:legitimist_progress_from_farms
+			}
+			add = {
+				desc = "legitimist_progress_from_legitimacy"
+				value = owner.var:legitimist_progress_from_legitimacy
+			}
+			add = {
+				desc = "legitimist_progress_from_movements"
+				value = owner.var:legitimist_progress_from_movements
+			}
+			add = {
+				desc = "legitimist_progress_from_effects"
+				value = owner.var:legitimist_progress_from_effects
+			}
+		}
+	}
+
+	start_value = 10
+	min_value = 0
+	max_value = 480 # divided_monarchists_upper_bound
+
+ }
+
+ ### For je_communism_1
+
+ communism_1_progress_bar = {
+	name = "communism_1_progress_bar"
+	desc = "communism_1_progress_bar_desc"
+
+	default_bad = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				owner = {
+					any_scope_state = {
+						is_incorporated = yes
+						loyalty >= 0.10
+					}
+				}
+			}
+			owner = {
+				subtract = {
+					desc = "communism_progress_from_loyalists_tt"
+					every_scope_state = {
+						limit = {
+							is_incorporated = yes
+							loyalty >= 0.10
+						}
+						add = this.loyalty
+					}
+					divide = num_incorporated_states
+					multiply = 3 # Maxes out at -3
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					movement_is_socialist = yes
+				}
+			}
+			add = {
+				desc = "communism_progress_from_movement_support_tt"
+				every_political_movement = {
+					limit = {
+						movement_is_socialist = yes
+					}
+					add = {
+						value = this.political_movement_support
+						multiply = 10
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					movement_is_socialist = yes
+				}
+			}
+			add = {
+				desc = "communism_progress_from_movement_activism_tt"
+				every_political_movement = {
+					limit = {
+						movement_is_socialist = yes
+					}
+					add = {
+						value = this.political_movement_radicalism
+						multiply = 5
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					any_scope_character = {
+						OR = {
+							has_ideology = ideology:ideology_communist
+							has_ideology = ideology:ideology_vanguardist
+							has_ideology = ideology:ideology_anarchist
+							has_ideology = ideology:ideology_nihilist
+							has_ideology = ideology:ideology_utopian
+						}
+					}
+				}
+			}
+			add = {
+				desc = "communism_progress_from_characters_tt"
+				owner = {
+					every_scope_character = {
+						limit = {
+							OR = {
+								has_ideology = ideology:ideology_communist
+								has_ideology = ideology:ideology_vanguardist
+								has_ideology = ideology:ideology_anarchist
+								has_ideology = ideology:ideology_nihilist
+								has_ideology = ideology:ideology_utopian
+							}
+						}
+						add = this.popularity
+						divide = 100
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					any_interest_group = {
+						OR = {
+							law_stance = {
+								law = law_type:law_council_republic
+								value = approve
+							}
+							law_stance = {
+								law = law_type:law_council_republic
+								value = strongly_approve
+							}
+						}
+					}
+				}
+			}
+			add = {
+				desc = "communism_progress_from_interest_groups_tt"
+				owner = {
+					every_interest_group = {
+						limit = {
+							OR = { # There is a very good reason for this, and that's because of the 'count' value causing problems with a greater-than.
+								law_stance = {
+									law = law_type:law_council_republic
+									value = approve
+								}
+								law_stance = {
+									law = law_type:law_council_republic
+									value = strongly_approve
+								}
+							}
+						}
+						add = this.ig_clout
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = owner.var:communism_progress_from_laws
+			}
+			if = {
+				limit = {
+					owner.var:communism_progress_from_laws = 0
+				}
+				add = {
+					desc = "communism_progress_from_no_laws_tt"
+					value = 0.05
+				}
+			}
+			else ={
+				add = {
+					desc = "communism_progress_from_laws_tt"
+					value = owner.var:communism_progress_from_laws
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = owner.var:communism_progress_var_add
+				NOT = {
+					owner.var:communism_progress_var_add = 0
+				}
+			}
+			add = {
+				desc = "communism_progress_from_events_tt"
+				value = owner.var:communism_progress_var_add
+			}
+		}
+	}
+
+	start_value = 10
+	min_value = 0
+	max_value = 100
+
+ }
+
+
+ ### For je_populist_unrest
+
+ populist_unrest_progress_bar = {
+	name = "populist_unrest_progress_bar"
+	desc = "populist_unrest_progress_bar_desc"
+
+	default = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				owner = {
+					any_scope_state = {
+						is_incorporated = yes
+						loyalty >= 0.10
+					}
+				}
+			}
+			subtract = {
+				desc = "populism_progress_from_loyalists_tt"
+				every_scope_state = {
+					limit = {
+						is_incorporated = yes
+						loyalty >= 0.10
+					}
+					add = this.loyalty
+				}
+				divide = num_incorporated_states
+				multiply = 3 # Maxes out at -3
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					OR = {
+						is_political_movement_type = movement_modernizer
+						is_political_movement_type = movement_liberal
+						is_political_movement_type = movement_positivist
+					}
+				}
+			}
+			add = {
+				desc = "populism_progress_from_movement_support_tt"
+				every_political_movement = {
+					limit = {
+						OR = {
+							is_political_movement_type = movement_modernizer
+							is_political_movement_type = movement_liberal
+							is_political_movement_type = movement_positivist
+						}
+					}
+					add = this.political_movement_support
+					multiply = 10
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					OR = {
+						is_political_movement_type = movement_modernizer
+						is_political_movement_type = movement_liberal
+						is_political_movement_type = movement_positivist
+					}
+				}
+			}
+			add = {
+				desc = "populism_progress_from_movement_activism_tt"
+				every_political_movement = {
+					limit = {
+						OR = {
+							is_political_movement_type = movement_modernizer
+							is_political_movement_type = movement_liberal
+							is_political_movement_type = movement_positivist
+						}
+					}
+					add = this.political_movement_radicalism
+					multiply = 5
+				}
+			}
+		}
+		add = {
+			desc = "populism_progress_from_pb_tt"
+			if = {
+				limit = {
+					owner = {
+						ig:ig_petty_bourgeoisie ?= {
+							ig_counts_as_marginal = yes
+						}
+					}
+				}
+				value = -10
+			}
+			else_if = {
+				limit = {
+					owner = {
+						ig:ig_petty_bourgeoisie ?= {
+							is_powerful = yes
+						}
+					}
+				}
+				value = 3
+			}
+			else = {
+				value = 0
+			}
+		}
+		if = {
+			limit = {
+				exists = owner.var:populism_progress_from_laws
+				NOT = {
+					owner.var:populism_progress_from_laws = 0
+				}
+			}
+			add = {
+				desc = "populism_progress_from_laws_tt"
+				value = owner.var:populism_progress_from_laws
+			}
+		}
+		if = {
+			limit = {
+				exists = owner.var:populism_progress_var_add
+				NOT = {
+					owner.var:populism_progress_var_add = 0
+				}
+			}
+			add = {
+				desc = "populism_progress_from_events_tt"
+				value = owner.var:populism_progress_var_add
+			}
+		}
+	}
+
+	start_value = 10
+	min_value = 0
+	max_value = 100
+
+ }
+
+ ### For je_matter_of_slavery
+
+ matter_of_slavery_progress_bar = {
+	name = "matter_of_slavery_progress_bar"
+	desc = "matter_of_slavery_progress_bar_desc"
+
+	default_green = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				NOT = {
+					is_enacting_law = law_type:law_slavery_banned
+				}
+			}
+			 # Towards Slaveowner Domination
+			if = {
+				limit = {
+					ig:ig_landowners ?= {
+						is_in_government = yes
+					}
+				}
+				subtract = {
+					desc = "slavery_progress_from_landowners_in_gov_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					ig:ig_landowners ?= {
+						is_powerful = yes
+					}
+				}
+				subtract = {
+					desc = "slavery_progress_from_landowners_powerful_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					any_political_movement = {
+						is_political_movement_type = movement_pro_slavery
+					}
+				}
+				subtract = {
+					desc = "slavery_progress_from_pro_slavery_movement_tt"
+					every_political_movement = {
+						limit = {
+							is_political_movement_type = movement_pro_slavery
+						}
+						value = this.political_movement_support
+						multiply = 10
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_gov_regency = yes
+				}
+				subtract = {
+					desc = "slavery_progress_from_regency_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					ruler = {
+						OR = {
+							interest_group = {
+								is_interest_group_type = ig_landowners
+							}
+							has_ideology = ideology:ideology_slaver
+						}
+					}
+				}
+				subtract = {
+					desc = "slavery_progress_from_slaver_ruler_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					any_scope_character = {
+						filter = {
+							OR = {
+								has_role = admiral
+								has_role = general
+							}
+						}
+						OR = {
+							has_ideology = ideology:ideology_slaver
+							interest_group = {
+								is_interest_group_type = ig_landowners
+							}
+						}
+						percent >= 0.5
+					}
+				}
+				subtract = {
+					desc = "slavery_progress_from_slavers_tt"
+					value = 1
+				}
+			}
+			# Away from slaveowner Domination
+			if = {
+				limit = {
+					has_variable = var_slave_trade_suppression_var
+				}
+				add = {
+					desc = "slavery_progress_from_suppression_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					any_political_movement = {
+						is_political_movement_type = movement_anti_slavery
+					}
+				}
+				add = {
+					desc = "slavery_progress_from_abolitionist_movement_tt"
+					every_political_movement = {
+						limit = {
+							is_political_movement_type = movement_anti_slavery
+						}
+						value = this.political_movement_support
+						multiply = 10
+					}
+				}
+			}
+			if = {
+				limit = {
+					ig:ig_landowners ?= {
+						ig_counts_as_marginal = yes
+					}
+				}
+				add = {
+					desc = "slavery_progress_from_marginal_landowners_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					ig:ig_intelligentsia ?= {
+						is_in_government = yes
+					}
+				}
+				add = {
+					desc = "slavery_progress_from_intelligentsia_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_law_or_variant = law_type:law_slave_trade
+					}
+				}
+				add = {
+					desc = "slavery_progress_from_abolished_slave_trade_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_gov_regency = yes
+					}
+				}
+				add = {
+					desc = "slavery_progress_from_ended_regency_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					has_variable = isabel_confirmed_heir_var
+				}
+				add = {
+					desc = "slavery_progress_from_isabel_tt"
+					value = 1
+				}
+			}
+		}
+	}
+
+	start_value = 180
+	min_value = 0
+	max_value = 360
+ }
+
+ # For expeditions
+
+ expedition_progress_bar = {
+	name = "expedition_progress_bar"
+	desc = "expedition_progress_bar_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 8
+ }
+
+ expedition_peril_progress_bar = {
+	name = "expedition_peril_progress_bar"
+	desc = "expedition_peril_progress_bar_desc"
+
+	default_bad = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 8
+ }
+
+ ### For je_earn_recognition
+
+ earn_recognition_progress_bar = {
+	name = "earning_recognition_progress_bar"
+	desc = "earning_recognition_progress_bar_desc"
+
+	default = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				# Your absolute GDP is relatively high
+				gdp_ranking <= 10 # Lower = better
+			}
+			add = {
+				desc = "earning_recognition_progress_gdp_tt"
+				value = 1
+			}
+		}	
+		if = {
+			limit = {
+				# Your GDP per Capita is relatively high
+				gdp_per_capita_ranking <= 20 # Lower = better
+			}
+			add = {
+				desc = "earning_recognition_progress_gdpc_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				country_has_voting_franchise = yes
+			}
+			add = {
+				desc = "earning_recognition_progress_voting_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# Literacy rating is high-isch
+				literacy_rate >= 0.4
+			}
+			add = {
+				desc = "earning_recognition_literacy_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# Your Standard of Living is relatively high
+				sol_ranking <= 20
+			}
+			add = {
+				desc = "AVG_STANDARD_OF_LIVING"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				any_scope_treaty = {
+					any_scope_article = {
+						has_type = offer_embassy
+						target_country = root
+					}
+				}
+			}
+			add = {
+				desc = "offer_embassy"
+				value = {
+					every_scope_treaty = {
+						limit = {
+							any_scope_article = {
+								has_type = offer_embassy
+								target_country = root
+							}
+						}
+						add = 1
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				# Slavery is legal
+				NOT = {
+					has_law_or_variant = law_type:law_slavery_banned
+				}
+			}
+			subtract = {
+				desc = "earning_recognition_slavery_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# Isolationist
+				has_law_or_variant = law_type:law_isolationism
+			}
+			subtract = {
+				desc = "earning_recognition_isolationism_tt"
+				value = 1
+			}
+		}		
+		if = {
+			limit = {
+				# Serfdom is legal
+				has_law_or_variant = law_type:law_serfdom
+			}
+			subtract = {
+				desc = "earning_recognition_serfdom_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# Traditional economic system
+				has_law_or_variant = law_type:law_traditionalism
+			}
+			subtract = {
+				desc = "earning_recognition_traditionalism_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# 'Draconic' law
+				has_law_or_variant = law_type:law_outlawed_dissent
+			}
+			subtract = {
+				desc = "earning_recognition_outlawed_dissent_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# Literacy rating is low
+				literacy_rate < 0.2
+			}
+			subtract = {
+				desc = "earning_recognition_low_literacy_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				# Absolute GDP ranking is low
+				gdp_ranking > 30
+			}
+			subtract = {
+				desc = "earning_recognition_low_gdp_tt"
+				value = 1
+			}
+		}
+	}
+	start_value = 0
+	min_value = 0
+	max_value = 200
+}
+
+fascism_progress_bar = {
+   name = "fascism_progress_bar"
+   desc = "fascism_progress_bar_desc"
+
+   default = yes
+
+   monthly_progress = {
+		### From fascist leaders in government
+		if = {
+			limit = {
+				any_interest_group = {
+					is_in_government = yes
+					leader = {
+						has_variable = var_fascism_1_char_checked # So that you don't get massive progress without being notified
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_integralist
+						}
+					}
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_fascist_leaders_in_government_tt"
+				value = 10
+			}
+		}
+
+		if = {
+			limit = {
+				any_political_movement = {
+					OR = {
+						is_political_movement_type = movement_fascist
+						is_political_movement_type = movement_reactionary
+						is_political_movement_type = movement_corporatist
+					}
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_movement_support_tt"
+				every_political_movement = {
+					limit = {
+						OR = {
+							is_political_movement_type = movement_fascist
+							is_political_movement_type = movement_reactionary
+							is_political_movement_type = movement_corporatist
+						}
+					}
+					add = this.political_movement_support
+					multiply = 10
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					OR = {
+						is_political_movement_type = movement_fascist
+						is_political_movement_type = movement_reactionary
+						is_political_movement_type = movement_corporatist
+					}
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_movement_activism_tt"
+				every_political_movement = {
+					limit = {
+						OR = {
+							is_political_movement_type = movement_fascist
+							is_political_movement_type = movement_reactionary
+							is_political_movement_type = movement_corporatist
+						}
+					}
+					add = this.political_movement_radicalism
+					multiply = 5
+				}
+			}
+		}
+
+		### From IGs
+		if = {
+			limit = {
+				owner = {
+					any_interest_group = {
+						ig_counts_as_marginal = no
+						OR = {
+							leader = {
+								OR = {
+									has_ideology = ideology:ideology_fascist
+									has_ideology = ideology:ideology_integralist
+								}
+							}
+							has_ideology = ideology:ideology_reactionary
+						}
+					}
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_interest_groups_tt"
+				owner = {
+					every_interest_group = {
+						limit = {
+							OR = {
+								leader = {
+									OR = {
+										has_ideology = ideology:ideology_fascist
+										has_ideology = ideology:ideology_integralist
+									}
+								}
+								has_ideology = ideology:ideology_reactionary
+							}
+						}
+						add = this.ig_clout
+					}
+				}
+			}
+		}
+		else = {
+			subtract = {
+				desc = "no_relevant_reactionary_igs_tt"
+				value = 5
+			}
+		}
+
+		### From Characters
+		if = {
+			limit = {
+				owner = {
+					any_scope_character = {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_integralist
+						}
+					}
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_characters_tt"
+				owner = {
+					every_scope_character = {
+						limit = {
+							OR = {
+								has_ideology = ideology:ideology_fascist
+								has_ideology = ideology:ideology_integralist
+							}
+						}
+						add = this.popularity
+						divide = 100
+					}
+				}
+			}
+		}
+		else = {
+			subtract = {
+				desc = "fascism_progress_no_fascist_characters_tt"
+				value = 5
+			}
+		}
+
+		### From Revanchism
+		if = {
+			limit = {
+				any_state = {
+					OR = {
+						has_claim_by = ROOT
+						is_homeland_of_country_cultures = ROOT
+					}
+					NOT = { owner = ROOT }
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_state_claims_tt"
+				owner = {
+					every_state = {
+						limit = {
+							OR = {
+								has_claim_by = ROOT
+								is_homeland_of_country_cultures = ROOT
+							}
+							NOT = { owner = ROOT }
+						}
+						add = 0.1
+					}
+				}
+			}
+		}
+	}
+
+	start_value = 25
+	min_value = 0
+	max_value = 100
+ }
+
+ ### For je_india_home_rule
+
+ je_india_home_rule_progressbar = {
+	name = "je_india_home_rule_progressbar"
+	desc = "je_india_home_rule_progressbar_desc"
+
+	default = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				exists = c:BIC
+			}
+			if = {
+				limit = {
+					c:BIC ?= {
+						any_interest_group = {
+							is_in_government = yes
+							NOR = {
+								is_interest_group_type = ig_industrialists
+								is_interest_group_type = ig_armed_forces
+							}
+						}
+					}
+				}
+				add = {
+					desc = "home_rule_progress_from_reformist_government"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					c:BIC.top_overlord ?= {
+						any_interest_group = {
+							is_in_government = yes
+							OR = {
+								has_ideology = ideology:ideology_jingoist
+								leader = {
+									OR = {
+										has_ideology = ideology:ideology_jingoist_leader
+										has_ideology = ideology:ideology_fascist
+										has_ideology = ideology:ideology_ethno_nationalist
+									}
+								}
+							}
+						}
+						NOT = {
+							any_interest_group = {
+								is_in_government = yes
+								leader = {
+									has_ideology = ideology:ideology_pacifist
+								}
+							}
+						}
+					}
+				}
+				add = {
+					desc = "home_rule_progress_from_imperialist_government"
+					value = -1
+				}
+			}
+			if = {
+				limit = {
+					c:BIC.top_overlord ?= {
+						any_interest_group = {
+							is_in_government = yes
+							leader = {
+								has_ideology = ideology:ideology_jingoist_leader
+							}
+						}
+						NOT = {
+							any_interest_group = {
+								is_in_government = yes
+								OR = {
+									has_ideology = ideology:ideology_jingoist
+									leader = {
+										OR = {
+											has_ideology = ideology:ideology_jingoist_leader
+											has_ideology = ideology:ideology_fascist
+											has_ideology = ideology:ideology_ethno_nationalist
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				add = {
+					desc = "home_rule_progress_from_pacifist_government"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						"c:BIC.relations(c:BIC.top_overlord)" = 0
+					}
+				}
+				add = {
+					desc = "home_rule_progress_from_relations"
+					value = "c:BIC.relations(c:BIC.top_overlord)"
+					divide = 50
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						c:BIC.liberty_desire = 0
+					}
+				}
+				add = {
+					desc = "home_rule_progress_from_liberty_desire"
+					value = c:BIC.liberty_desire
+					subtract = 50
+					divide = 50
+				}
+			}
+			if = {
+				limit = {
+					c:BIC ?= {
+						has_journal_entry = je_indian_famines
+					}
+				}
+				add = {
+					desc = "presidencies_je_indian_famines_tt"
+					add = -1
+				}
+			}
+		}
+	}
+
+	start_value = 25
+	min_value = 0
+	max_value = 100
+
+ }
+
+# For je_sikh_sovereignty
+
+sikh_empire_progress_bar = {
+	name = "sikh_empire_progress_bar"
+	desc = "sikh_empire_progress_bar_desc"
+
+	default_green = yes
+
+	monthly_progress = { # To advance progress bar
+		if = {
+			limit = {
+				legitimacy >= 50
+			}
+			if = {
+				limit = {
+					ig:ig_armed_forces ={
+						is_in_government = yes
+					}
+				}
+				add = {
+					desc = "progress_from_khalsaji_in_government_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					ig:ig_armed_forces ={
+						is_powerful = yes
+					}
+				}
+				add = {
+					desc = "progress_from_khalsaji_is_powerful_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					country_has_state_religion = rel:sikh
+				}
+				add = {
+					desc = "progress_from_sikh_state_religion_tt"
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					has_law_or_variant = law_type:law_freedom_of_conscience
+				}
+				add = {
+					desc = "progress_from_law_freedom_of_conscience_tt"
+					value = 1
+				}
+			}
+
+			if = {
+				limit = {
+					ig:ig_armed_forces ={
+						is_in_government = no
+					}
+				}
+				add = {
+					desc = "progress_from_khalsaji_not_in_government_tt"
+					value = -1
+				}
+			}
+		}
+	}
+
+	start_value = 5
+	min_value = 0
+	max_value = 300
+
+}
+
+sikh_empire_intrigue_bar = {
+	name = "sikh_empire_intrigue_bar"
+	desc = "sikh_empire_intrigue_bar_desc"
+
+	default_bad = yes
+	is_inverted = yes
+
+	monthly_progress = { # To advance progress bar
+		if = {
+			limit = {
+				ruler = {
+					has_template = pan_ranjit_singh
+				}
+			}
+			add = {
+				desc = "intrigue_from_ranjit_singh_tt"
+				value = -5
+			}
+		}
+		if = {
+			limit = {
+				ruler = {
+					has_trait = reckless
+				}
+			}
+			add = {
+				desc = "intrigue_from_reckless_tt"
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				ruler = {
+					popularity <= 0
+				}
+			}
+			add = {
+				desc = "intrigue_from_low_popularity_tt"
+				value = ruler.popularity
+				multiply = -1
+				divide = 50
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					ig_approval < 0
+					ig_counts_as_marginal = no
+					leader = {
+						has_trait = ruthless
+					}
+					is_in_government = yes
+				}
+			}
+			add = {
+				desc = "intrigue_from_upset_government_ruthless_igs_tt"
+				every_interest_group = {
+					limit = {
+						ig_approval < 0
+						ig_counts_as_marginal = no
+						leader = {
+							has_trait = ruthless
+						}
+						is_in_government = yes
+					}
+					add = 2
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					ig_approval < 0
+					ig_counts_as_marginal = no
+					leader = {
+						has_trait = ruthless
+					}
+					is_in_government = no
+				}
+			}
+			add = {
+				desc = "intrigue_from_upset_opposition_ruthless_igs_tt"
+				every_interest_group = {
+					limit = {
+						ig_approval < 0
+						ig_counts_as_marginal = no
+						leader = {
+							has_trait = ruthless
+						}
+						is_in_government = no
+					}
+					add = 1
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					ig_approval < 0
+					ig_counts_as_marginal = no
+					leader = {
+						has_trait = ambitious
+					}
+					is_in_government = yes
+				}
+			}
+			add = {
+				desc = "intrigue_from_upset_government_ambitious_igs_tt"
+				every_interest_group = {
+					limit = {
+						ig_approval < 0
+						ig_counts_as_marginal = no
+						leader = {
+							has_trait = ambitious
+						}
+						is_in_government = yes
+					}
+					add = 2
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					ig_approval < 0
+					ig_counts_as_marginal = no
+					leader = {
+						has_trait = ambitious
+					}
+					is_in_government = no
+				}
+			}
+			add = {
+				desc = "intrigue_from_upset_opposition_ambitious_igs_tt"
+				every_interest_group = {
+					limit = {
+						ig_approval < 0
+						ig_counts_as_marginal = no
+						leader = {
+							has_trait = ambitious
+						}
+						is_in_government = no
+					}
+					add = 1
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					ig_approval >= 5
+					ig_counts_as_marginal = no
+					leader = {
+						has_trait = ruthless
+					}
+					is_in_government = yes
+				}
+			}
+			subtract = {
+				desc = "intrigue_from_happy_government_ruthless_igs_tt"
+				every_interest_group = {
+					limit = {
+						ig_approval >= 5
+						ig_counts_as_marginal = no
+						leader = {
+							has_trait = ruthless
+						}
+						is_in_government = yes
+					}
+					add = 1
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					leader = {
+						has_trait = compliant
+					}
+					is_in_government = yes
+				}
+			}
+			subtract = {
+				desc = "intrigue_from_compliant_igs_tt"
+				every_interest_group = {
+					limit = {
+						leader = {
+							has_trait = compliant
+						}
+						is_in_government = yes
+					}
+					add = 1
+				}
+			}
+		}
+		if = {
+			limit = {
+				ruler.interest_group = {
+					is_powerful = yes
+				}
+			}
+			subtract = {
+				desc = "ruler_interest_group_powerful_tt"
+				value = 1
+			}
+		}
+		else_if = {
+			limit = {
+				ruler.interest_group = {
+					ig_counts_as_marginal = yes
+				}
+			}
+			add = {
+				desc = "ruler_interest_group_marginal_tt"
+				value = 1
+			}
+		}
+		add = {
+			desc = "intrigue_legitimacy_tt"
+			value = 50
+			subtract = legitimacy
+			divide = 25
+		}
+	}
+
+	start_value = 1
+	min_value = 0
+	max_value = 60
+
+}
+
+positivist_progress_bar = {
+	name = "positivist_progress_bar"
+	desc = "positivist_progress_bar_desc"
+
+	default = yes
+
+	monthly_progress = { # To advance progress bar
+		if = {
+			limit = {
+				any_political_movement = {
+					is_political_movement_type = movement_positivist
+				}
+			}
+			add = {
+				desc = "positivism_progress_from_movement_support_tt"
+				every_political_movement = {
+					limit = {
+						is_political_movement_type = movement_positivist
+					}
+					add = this.political_movement_support
+					multiply = 10
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					is_political_movement_type = movement_positivist
+				}
+			}
+			add = {
+				desc = "positivism_progress_from_movement_activism_tt"
+				every_political_movement = {
+					limit = {
+						is_political_movement_type = movement_positivist
+					}
+					add = this.political_movement_radicalism
+					multiply = 5
+				}
+			}
+		}
+	}
+
+	start_value = 1
+	min_value = 0
+	max_value = 100
+
+}
+
+serbian_dethrone_bar = {
+	name = "serbian_dethrone_progress_bar"
+	desc = "serbian_dethrone_progress_bar_desc"
+
+	default = yes
+
+	monthly_progress = { # To advance progress bar
+
+			 # COMPLETE CHEAT
+			 # add = 100
+			 # FAIL CHEAT
+		# subtract = 1000
+
+			# Ruler popularity
+		if = {
+			limit = {
+				OR = {
+				ruler.popularity < 0
+				ruler.popularity > 0
+				}
+			}
+			add = {
+				desc = "serbian_dethrone_ruler_popularity_tt"
+				value = ruler.popularity
+				divide = 50
+			}
+		}
+
+		# Opposition popularity
+		if = {
+			limit = {
+				ruler = {
+					has_variable = house_obrenovic
+				}
+				any_scope_character = {
+					has_variable = house_karadordevic
+					OR = {
+					this.popularity < 0
+					this.popularity > 0
+					}
+				}
+			}
+			add = {
+				desc = "serbian_dethrone_karadordevic_popularity_tt"
+				owner = {
+					every_scope_character = {
+						limit = {
+							has_variable = house_karadordevic
+						}
+						add = this.popularity
+						divide = -100
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				ruler = {
+					has_variable = house_karadordevic
+				}
+				any_scope_character = {
+					has_variable = house_obrenovic
+					OR = {
+						this.popularity < 0
+						this.popularity > 0
+					}
+				}
+			}
+			add = {
+				desc = "serbian_dethrone_karadordevic_popularity_tt"
+				owner = {
+					every_scope_character = {
+						limit = {
+							has_variable = house_obrenovic
+						}
+						add = this.popularity
+						divide = -100
+					}
+				}
+			}
+		}
+
+			# Major or Great Powers support our independence
+		if = {
+			limit = {
+				any_diplomatically_relevant_country = {
+					country_rank >= rank_value:major_power
+					any_scope_treaty = {
+						binds = ROOT
+						any_scope_article = {
+							has_type = support_independence
+						}
+					}
+				}
+			}
+			add = {
+				desc = "serbian_dethrone_greatpower_supports_independence_tt"
+				every_diplomatically_relevant_country = {
+					limit = {
+						country_rank >= rank_value:major_power
+						any_scope_treaty = {
+							binds = ROOT
+							any_scope_article = {
+								has_type = support_independence
+							}
+						}
+					}
+				}
+				add = 0.3
+			}
+		}
+
+			# Overlord positive relations
+		if = {
+			limit = {
+				is_subject = yes
+				top_overlord.relations:root > 0
+			}
+			subtract = {
+				desc = "serbian_dethrone_overlord_relations_tt"
+				value = "top_overlord.relations(root)"
+				divide = 50
+			}
+		}
+
+			# Radicals
+			subtract = {
+				desc = "serbian_dethrone_radical_fraction_tt"
+				value = radical_fraction
+			multiply = 10
+			}
+
+			# Loyalists
+			add = {
+				desc = "serbian_dethrone_loyalist_fraction_tt"
+				value = loyalist_fraction
+			multiply = 10
+			}
+
+			# Stopping hajduk lootings (serbian_throne.4)
+		if = {
+			limit = {
+				any_country = {
+					has_modifier = serbia_stopped_hajduks_armed_penalty
+				}
+			}
+			add = {
+				desc = "serbian_dethrone_stopped_hajduks_tt"
+				value = 0.4
+			}
+		}
+
+			# Clerical publicity (serbian_throne.1.b)
+		if = {
+			limit = {
+				any_country = {
+					has_modifier = serbia_clerical_publicity_mod
+				}
+			}
+			add = {
+				desc = "serbia_clerical_publicity_tt"
+				value = 0.75
+			}
+		}
+
+			# Clerical publicity (serbian_throne.1.a)
+		if = {
+			limit = {
+				any_country = {
+					has_modifier = serbia_funded_clerical_publicity_mod
+				}
+			}
+			add = {
+				desc = "serbia_clerical_publicity_tt"
+				value = 0.40
+			}
+		}
+			# Clerical publicity (serbian_throne.1.c)
+		if = {
+			limit = {
+				any_country = {
+					has_modifier = serbia_forced_clerical_publicity_mod
+				}
+			}
+			add = {
+				desc = "serbia_clerical_publicity_tt"
+				value = 0.40
+			}
+		}
+
+			# Having one less hypocrite politician (serbian_throne.3.a)
+		if = {
+			limit = {
+				any_country = {
+					has_modifier = serbia_exposing_hypocrite_mod
+				}
+			}
+			add = {
+				desc = "serbian_dethrone_exposing_hypocrite_mod_tt"
+				value = 0.40
+			}
+		}
+			# Coecred politician (serbian_throne.3.b)
+		if = {
+			limit = {
+				any_country = {
+					has_modifier = serbia_exposing_hypocrite_forcing_to_work_mod
+				}
+			}
+			add = {
+				desc = "serbian_dethrone_exposing_hypocrite_forcing_to_work_mod_tt"
+				value = 0.40
+			}
+		}
+			# Failed assassination attempt (serbian_throne.3.a)
+		if = {
+			limit = {
+				any_country = {
+					has_modifier = serbia_exposing_hypocrite_fail_mod
+				}
+			}
+			subtract = {
+				desc = "serbian_dethrone_exposing_hypocrite_fail_mod_tt"
+				value = 0.40
+			}
+		}
+			# Slander pamphlet production (serbian_throne.2.a/b)
+		if = {
+			limit = {
+				OR = {
+					any_country = {
+						has_modifier = serbia_pamphlet_money_mod
+					}
+					any_country = {
+						has_modifier = serbia_pamphlet_auth_mod
+					}
+				}
+			}
+			add = {
+				desc = "serbian_dethrone_pamphlet_tt"
+				value = 3
+				multiply = {
+					value = literacy_rate
+				}
+			}
+		}
+		# Quashed urban rebels (serbian_throne.5.a/c)
+		if = {
+			limit = {
+				OR = {
+					any_country = {
+						has_modifier = serbia_urban_rebels_killed_by_armed_forces_mod
+					}
+					any_country = {
+						has_modifier = serbia_urban_rebels_bribed_mod
+					}
+				}
+			}
+			add = {
+				desc = "serbia_quashed_urban_rebels_tt"
+				value = 0.35
+			}
+		}
+
+		# Quashed urban rebels (serbian_throne.5.b)
+		if = {
+			limit = {
+				any_country = {
+					has_modifier = serbia_urban_rebels_killed_by_loyalists_mod
+				}
+			}
+			add = {
+				desc = "serbia_quashed_urban_rebels_tt"
+				value = 0.60
+			}
+		}
+
+		# Aided Maygarized Serbs (serbian_throne.6.a)
+		if = {
+			limit = {
+				any_country = {
+					has_modifier = serbia_aided_magyarized_serbs_mod
+				}
+			}
+			add = {
+				desc = "serbia_aided_magyarized_serbs_tt"
+				value = 0.25
+			}
+		}
+
+		# Aided Maygarized Serbs (serbian_throne.6.b)
+		if = {
+			limit = {
+				any_country = {
+					has_modifier = serbia_greatly_aided_magyarized_serbs_mod
+				}
+			}
+			add = {
+				desc = "serbia_greatly_aided_magyarized_serbs_tt"
+				value = 0.75
+			}
+		}
+
+			# + If SOL is higher than 7.5
+			add = {
+				desc = "serbian_dethrone_sol_tt"
+				value = average_sol
+				subtract = 10
+				divide = 1.5
+			}
+
+			# Negative bureaucracy
+		if = {
+			limit = {
+					bureaucracy < 0
+			}
+			add = {
+				desc = "serbian_dethrone_negative_bureaucracy_tt"
+				value = -1
+			}
+		}
+
+			# Negative authority
+		if = {
+			limit = {
+					authority < 0
+			}
+			add = {
+				desc = "serbian_dethrone_negative_authority_tt"
+				value = -1
+			}
+		}
+
+			# Legitimacy below 90
+			add = {
+				desc = "serbian_dethrone_legitimacy_tt"
+				value = legitimacy
+				subtract = 80
+				divide = 30
+			}
+
+			# Each disapproving, non marginal opposition ig
+		if = {
+			limit = {
+				owner = {
+					any_interest_group = {
+						ig_approval < -4
+						is_in_government = no
+						ig_counts_as_marginal = no
+					}
+				}
+			}
+			subtract = {
+				desc = "serbian_dethrone_low_ig_approval_tt"
+				owner = {
+					every_interest_group = {
+						limit = {
+							ig_approval < -4
+							is_in_government = no
+							ig_counts_as_marginal = no
+						}
+						add = this.ig_clout
+						multiply = 1.5
+					}
+				}
+			}
+		}
+
+			# Each approving, non marginal opposition ig
+		if = {
+			limit = {
+				owner = {
+					any_interest_group = {
+						ig_approval > 4
+						is_in_government = no
+						ig_counts_as_marginal = no
+					}
+				}
+			}
+			add = {
+				desc = "serbian_dethrone_ig_approval_getting_better_tt"
+				owner = {
+					every_interest_group = {
+						limit = {
+							ig_approval > 4
+							is_in_government = no
+							ig_counts_as_marginal = no
+						}
+						add = this.ig_clout
+					}
+				}
+			}
+		}
+
+			# Not a subject
+		if  = {
+			limit = {
+				is_subject = no
+			}
+			add = {
+				desc = "serbian_dethrone_independence_tt"
+				value = 1.5
+			}
+		}
+
+			# Has Censorship law
+		if  = {
+			limit = {
+				OR = {
+					has_law_or_variant = law_type:law_censorship
+					has_law_or_variant = law_type:law_outlawed_dissent
+				}
+			}
+			add = {
+				desc = "serbian_dethrone_censorship_or_outlawed_tt"
+				value = 0.75
+			}
+		}
+	}
+
+	start_value = 250
+	min_value = 0
+	max_value = 500
+}
+
+red_summer_progress_bar = {
+	name = "red_summer_progress_bar"
+	desc = "red_summer_progress_bar_desc"
+
+	default_green = yes
+
+	monthly_progress = {
+		add = {
+			desc = "red_summer_legitimacy_tt"
+			value = legitimacy
+			subtract = 50
+			divide = 25
+		}
+
+		if = {
+			limit = {
+				any_political_movement = {
+					OR = {
+						is_political_movement_type = movement_liberal
+						is_political_movement_type = movement_modernizer
+					}
+				}
+			}
+			add = {
+				desc = "red_summer_liberal_movements_tt"
+				every_political_movement = {
+					limit = {
+						OR = {
+							is_political_movement_type = movement_liberal
+							is_political_movement_type = movement_modernizer
+						}
+					}
+					add = this.political_movement_support
+					multiply = 10
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				ig:ig_intelligentsia ?= {
+					ig_counts_as_marginal = no
+				}
+			}
+			add = {
+				desc = "red_summer_intelligentsia_tt"
+				value = ig:ig_intelligentsia.ig_clout
+				multiply = 10
+			}
+		}
+
+		if = {
+			limit = {
+				ig:ig_landowners ?= {
+					ig_counts_as_marginal = yes
+				}
+			}
+			add = {
+				desc = "red_summer_marginal_landowners_tt"
+				value = 1
+			}
+		}
+
+		if = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					ig_counts_as_marginal = yes
+				}
+			}
+			add = {
+				desc = "red_summer_marginal_armed_forces_tt"
+				value = 1
+			}
+		}
+
+		if = {
+			limit = {
+				has_law = law_type:law_monarchy
+				ruler.popularity < 0
+			}
+			add = {
+				desc = "red_summer_unpopular_monarch_tt"
+				value = ruler.popularity
+				multiply = -1
+				divide = 50
+			}
+		}
+	}
+
+	start_value = 10
+	min_value = 0
+	max_value = 100
+
+ }
+
+red_summer_counter_revolution_progress_bar = {
+	name = "red_summer_counter_revolution_progress_bar"
+	desc = "red_summer_counter_revolution_progress_bar_desc"
+
+	default_bad = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_monarchy
+				}
+			}
+			add = {
+				desc = "red_summer_monarchy_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_landowners ?= {
+					ig_counts_as_marginal = no
+				}
+			}
+			add = {
+				desc = "red_summer_landowners_tt"
+				value = ig:ig_landowners.ig_clout
+				multiply = 10
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					ig_counts_as_marginal = no
+					leader = {
+						NOR = {
+							has_liberal_ideology = yes
+							has_progressive_ideology = yes
+							has_socialist_ideology = yes
+						}
+					}
+				}
+			}
+			add = {
+				desc = "red_summer_armed_forces_tt"
+				value = ig:ig_armed_forces.ig_clout
+				multiply = 10
+			}
+		}
+		if = {
+			limit = {
+				in_election_campaign = no
+				NOT = {
+					any_interest_group = {
+						is_in_government = yes
+						OR = {
+							has_ideology = ideology:ideology_liberal
+							has_ideology = ideology:ideology_proletarian
+							leader = {
+								OR = {
+									has_liberal_ideology = yes
+									has_progressive_ideology = yes
+									has_socialist_ideology = yes
+								}
+							}
+						}
+					}
+				}
+			}
+			add = {
+				desc = "red_summer_no_liberal_igs_in_government_tt"
+				value = 25
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					is_insurrectionary = yes
+					OR = {
+						movement_is_liberal = yes
+						movement_is_socialist = yes
+					}
+				}
+			}
+			add = {
+				desc = "red_summer_active_insurrection_tt"
+				value = 5
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					is_insurrectionary = yes
+					movement_is_conservative = yes
+				}
+			}
+			add = {
+				desc = "red_summer_conservative_insurrection_tt"
+				value = -5
+			}
+		}
+		if = {
+			limit = {
+				any_subject_or_below = {
+					is_diplomatic_play_enemy_of = ROOT
+				}
+			}
+			add = {
+				desc = "red_summer_subject_rebellion_tt"
+				value = 5
+			}
+		}
+		if = {
+			limit = {
+				has_variable = var_counter_revolution_bonus
+			}
+			add = {
+				desc = "red_summer_events_and_effects_tt"
+				value = var:var_counter_revolution_bonus
+			}
+		}
+	}
+
+	start_value = 10
+	min_value = 0
+	max_value = 100
+ }
+
+ je_technocracy_progress_bar = {
+	name = "je_technocracy_progress_bar"
+	desc = "je_technocracy_progress_bar_desc"
+
+	default = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				owner = {
+					NOT = {
+						any_political_movement = {
+							is_insurrectionary = yes
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					owner.legitimacy >= 60
+				}
+				add = {
+					desc = "technocracy_legitimacy_tt"
+					value = owner.legitimacy
+					divide = 50
+				}
+			}
+			if = {
+				limit = {
+					owner = {
+						has_law_or_variant = law_type:law_command_economy
+					}
+				}
+				add = {
+					desc = "technocracy_command_economy_tt"
+					value = 2
+				}
+			}
+			else_if = {
+				limit = {
+					owner = {
+						has_law_or_variant = law_type:law_interventionism # TODO make this state capitalism
+					}
+				}
+				add = {
+					desc = "technocracy_state_capitalism_tt"
+					value = 1
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						owner = {
+							OR = {
+								has_law_or_variant = law_type:law_traditionalism
+								has_law_or_variant = law_type:law_industry_banned
+							}
+						}
+					}
+					add = {
+						desc = "technocracy_economy_laws_tt"
+						value = -1
+					}
+				}
+				else = {
+					add = {
+						desc = "technocracy_economy_laws_tt"
+						value = -0.5
+					}
+				}
+			}
+			if = {
+				limit = {
+					owner.loyalist_fraction > 0.05
+				}
+				add = {
+					desc = "technocracy_loyalists_tt"
+					value = owner.loyalist_fraction
+					multiply = 5
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						owner = {
+							any_interest_group = {
+								is_in_government = yes
+								law_stance = {
+									law = law_type:law_technocracy
+									value > neutral
+								}
+							}
+						}
+					}
+				}
+				add = {
+					desc = "technocracy_no_supporting_igs_tt"
+					value = -5
+				}
+			}
+		}
+		else = {
+			add = {
+				desc = "technocracy_insurrection_tt"
+				value = -1
+			}
+		}
+	}
+
+	start_value = 24
+	min_value = 0
+	max_value = 144 # Tied to technocracy_upper_bound
+ }
+
+ # for je_great_eastern_crisis
+ control_eastern_crisis_bar = {
+	name = "control_eastern_crisis_bar"
+	desc = "control_eastern_crisis_bar_desc"
+
+	default_green = yes
+
+	monthly_progress = { # To advance progress bar
+		c:TUR ?= {
+			if = {
+				limit = {
+					# No relevant movement can be >= 75 for the progress bar to advance
+					NOT = {
+						any_political_movement = {
+							AND  = {
+								is_secessionist = yes
+								NOT = {
+									political_movement_radicalism > define:NPolitics|MIN_RADICALISM_FOR_CIVIL_WAR_PROGRESSION
+								}
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						legitimacy >= control_eastern_crisis_legitimacy_min
+					}
+					add = {
+						desc = "progress_from_ottoman_legitimacy_tt"
+						value = 1
+					}
+				}
+				if = {
+					limit = {
+						is_at_war = no
+					}
+					add = {
+						desc = "progress_from_being_at_peace_tt"
+						value = 1
+					}
+				}
+				else = {
+					add = {
+						desc = "progress_from_being_at_war_tt"
+						value = -3
+					}
+				}
+				if = {
+					limit = {
+						has_any_secessionists_growing = no
+					}
+					add = {
+						desc = "progress_from_no_secessionists_growing"
+						value = 1
+					}
+				}
+				if = {
+					limit = {
+						has_variable = ottoman_crushed_secession
+					}
+					add = {
+						desc = "progress_from_crushed_secession"
+						value = 2
+					}
+				}
+			}
+		}
+	}
+
+	start_value = 1
+	min_value = 0
+	max_value = 250 # Tied to control_eastern_crisis_upper_bound
+
+}
+
+# for je_caudillo
+ je_caudillo_progress_bar = {
+	name = "je_caudillo_progress_bar"
+	desc = "je_caudillo_progress_bar_desc"
+
+	default_bad = yes
+	is_inverted = yes
+
+	default = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					is_powerful = yes
+				}
+			}
+			add = {
+				desc = "je_caudillo_progress_from_armed_forces_powerful"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					is_in_government = yes
+				}
+			}
+			add = {
+				desc = "je_caudillo_progress_from_armed_forces_in_government"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					has_law_or_variant = law_type:law_autocracy
+					has_law_or_variant = law_type:law_technocracy
+					has_law_or_variant = law_type:law_oligarchy
+					has_law_or_variant = law_type:law_single_party_state
+				}
+			}
+			add = {
+				desc = "je_caudillo_progress_autocratic_laws"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					ig_counts_as_marginal = yes
+				}
+			}
+			add = {
+				desc = "je_caudillo_progress_from_marginalised_armed_forces"
+				value = -1
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					is_in_government = no
+				}
+			}
+			add = {
+				desc = "je_caudillo_progress_from_armed_forces_in_opposition"
+				value = -1
+			}
+		}
+		if = {
+			limit = {
+				any_scope_character = {
+					OR = {
+						has_role = general
+						has_role = admiral
+					}
+					popularity >= 50 # Loved
+				}
+			}
+			add = {
+				desc = "je_caudillo_progress_from_loved_military_figure"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				any_scope_character = {
+					has_role = politician
+					NOR = {
+						has_role = general
+						has_role = admiral
+					}
+					popularity >= 50 # Loved
+					AND = {
+						law_stance = {
+							law = law_type:law_autocracy
+							value <= neutral
+						}
+						law_stance = {
+							law = law_type:law_technocracy
+							value <= neutral
+						}
+						law_stance = {
+							law = law_type:law_oligarchy
+							value <= neutral
+						}
+						law_stance = {
+							law = law_type:law_single_party_state
+							value <= neutral
+						}
+					}
+				}
+			}
+			add = {
+				desc = "je_caudillo_progress_from_loved_politician"
+				value = -1
+			}
+		}
+		if = {
+			limit = {
+				any_scope_character = {
+					is_ruler = yes
+					has_ideology = ideology:ideology_authoritarian
+				}
+			}
+			add = {
+				desc = "je_caudillo_progress_from_authoritarian_ruler"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					has_law_or_variant = law_type:law_census_voting
+					has_law_or_variant = law_type:law_universal_suffrage
+				}
+			}
+			add = {
+				desc = "je_caudillo_progress_from_democracy"
+				value = -1
+			}
+		}
+	}
+
+	start_value = 600
+	min_value = 0
+	max_value = 1200
+
+ }
+sepoy_mutiny_progress_bar_bengal = {
+ 	name = "sepoy_mutiny_progress_bar_bengal_name"
+ 	desc = "sepoy_mutiny_progress_bar_bengal_desc"
+
+ 	default_green = yes
+
+ 	monthly_progress = {
+		c:BIC ?= {
+			if = {
+				limit = {
+					has_global_variable = bengal_presidency_stability
+				}
+				add = {
+					desc = "bengal_progress_bar_moderating_factor_tt"
+					value = indian_uprising_baseline_drift_target
+					subtract = global_var:bengal_presidency_stability
+					multiply = 0.01
+					min = -0.25
+				}
+			}
+			if = {
+				limit = {
+					any_scope_state = {
+						OR = {
+							region = sr:region_bengal
+							region = sr:region_central_india
+							region = sr:region_punjab
+						}
+						turmoil >= 0.10
+					}
+				}
+				add = {
+					desc = "bengal_progress_from_radicals_tt"
+					every_scope_state = {
+						limit = {
+							OR = {
+								region = sr:region_bengal
+								region = sr:region_central_india
+								region = sr:region_punjab
+							}
+							turmoil >= 0.10
+						}
+						subtract = this.turmoil
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_scope_state = {
+						OR = {
+							region = sr:region_bengal
+							region = sr:region_central_india
+							region = sr:region_punjab
+						}
+						loyalty >= 0.10
+					}
+				}
+				subtract = {
+					desc = "bengal_progress_from_loyalists_tt"
+					every_scope_state = {
+						limit = {
+							OR = {
+								region = sr:region_bengal
+								region = sr:region_central_india
+								region = sr:region_punjab
+							}
+							loyalty >= 0.10
+						}
+						subtract = this.loyalty
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_or_below = {
+						capital = {
+							OR = {
+								region = sr:region_bengal
+								region = sr:region_central_india
+								region = sr:region_punjab
+							}
+						}
+						liberty_desire >= 75
+					}
+				}
+				add = {
+					desc = "bengal_progress_from_high_liberty_desire_tt"
+					every_subject_or_below = {
+						limit = {
+							capital = {
+								OR = {
+									region = sr:region_bengal
+									region = sr:region_central_india
+									region = sr:region_punjab
+								}
+							}
+							liberty_desire >= 75
+						}
+						subtract = this.liberty_desire
+						divide = 100
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_or_below = {
+						capital = {
+							OR = {
+								region = sr:region_bengal
+								region = sr:region_central_india
+								region = sr:region_punjab
+							}
+						}
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				add = {
+					desc = "bengal_progress_from_low_liberty_desire_tt"
+					every_subject_or_below = {
+						limit = {
+							capital = {
+								OR = {
+									region = sr:region_bengal
+									region = sr:region_central_india
+									region = sr:region_punjab
+								}
+							}
+							liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+						}
+						add = {
+							value = 0.25
+							subtract = {
+								value = liberty_desire
+								multiply = 0.01
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_interest_group = {
+						is_indian_interest_group = yes
+						is_in_government = yes
+					}
+				}
+				add = {
+					desc = "presidencies_progress_from_indian_igs_in_government_tt"
+					value = 1
+				}
+			}
+			add = {
+				desc = "presidencies_progress_from_zamindars_tt"
+				if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval <= angry
+						}
+					}
+					value = -2
+				}
+				else_if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval <= unhappy
+						}
+					}
+					value = -1
+				}
+				else_if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval >= happy
+						}
+					}
+					value = 1
+				}
+				else_if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval >= loyal
+						}
+					}
+					value = 2
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:bengal_progress_from_events_var_add_1
+					NOT = {
+						c:BIC.var:bengal_progress_from_events_var_add_1 = 0
+					}
+				}
+				add = {
+					desc = "sepoy_mutiny_events_6_result_tt"
+					value = c:BIC.var:bengal_progress_from_events_var_add_1
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:bengal_progress_from_events_var_add_2
+					NOT = {
+						c:BIC.var:bengal_progress_from_events_var_add_2 = 0
+					}
+				}
+				add = {
+					desc = "sepoy_mutiny_events_8_result_tt"
+					value = c:BIC.var:bengal_progress_from_events_var_add_2
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:bengal_progress_from_events_var_add_3
+					NOT = {
+						c:BIC.var:bengal_progress_from_events_var_add_3 = 0
+					}
+				}
+				add = {
+					desc = "sepoy_mutiny_events_9_result_tt"
+					value = c:BIC.var:bengal_progress_from_events_var_add_3
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:bengal_progress_from_events_var_add_4
+					NOT = {
+						c:BIC.var:bengal_progress_from_events_var_add_4 = 0
+					}
+				}
+				add = {
+					desc = "sepoy_mutiny_events_10_result_tt"
+					value = c:BIC.var:bengal_progress_from_events_var_add_4
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:bengal_progress_from_events_var_add_5
+					NOT = {
+						c:BIC.var:bengal_progress_from_events_var_add_5 = 0
+					}
+				}
+				add = {
+					desc = "raj_4_result_tt"
+					value = c:BIC.var:bengal_progress_from_events_var_add_5
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:bengal_progress_from_events_var_add_6
+					NOT = {
+						c:BIC.var:bengal_progress_from_events_var_add_6 = 0
+					}
+				}
+				add = {
+					desc = "raj_5_result_tt"
+					value = c:BIC.var:bengal_progress_from_events_var_add_6
+				}
+			}
+			# Military Wages
+			if = {
+				limit = { military_wage_level = very_low }
+				add = {
+					desc = "presidencies_very_low_military_wages_tt"
+					subtract = 1
+				}
+			}
+			if = {
+				limit = { military_wage_level = low }
+				add = {
+					desc = "presidencies_low_military_wages_tt"
+					subtract = 0.5
+				}
+			}
+			if = {
+				limit = { military_wage_level = high }
+				add = {
+					desc = "presidencies_high_military_wages_tt"
+					add = 0.5
+				}
+			}
+			if = {
+				limit = { military_wage_level = very_high }
+				add = {
+					desc = "presidencies_very_high_military_wages_tt"
+					add = 1
+				}
+			}
+			# Taxation
+			if = {
+				limit = { tax_level = very_low }
+				add = {
+					desc = "presidencies_very_low_taxation_tt"
+					add = 1
+				}
+			}
+			if = {
+				limit = { tax_level = low }
+				add = {
+					desc = "presidencies_low_taxation_tt"
+					add = 0.5
+				}
+			}
+			if = {
+				limit = { tax_level = high }
+				add = {
+					desc = "presidencies_high_taxation_tt"
+					subtract = 0.5
+				}
+			}
+			if = {
+				limit = { tax_level = very_high }
+				add = {
+					desc = "presidencies_very_high_taxation_tt"
+					subtract = 1
+				}
+			}
+			# Utilitarian Leaders in government
+			if = {
+				limit = {
+					any_interest_group = {
+						is_in_government = yes
+						leader = {
+							has_ideology = ideology:ideology_utilitarian_leader
+						}
+					}
+				}
+				add = {
+					desc = "presidencies_utilitarian_leaders_tt"
+					subtract = 1
+				}
+			}
+			# Religious laws
+			if = {
+				limit = {
+					NOT = {
+						has_law_or_variant = law_type:law_total_separation
+					}
+				}
+				add = {
+					desc = "presidencies_religious_laws_tt"
+					subtract = 2
+				}
+			}
+			# Military laws
+			if = {
+				limit = {
+					NOT = {
+						has_law_or_variant = law_type:law_professional_army
+					}
+				}
+				add = {
+					desc = "presidencies_military_laws_tt"
+					subtract = 1
+				}
+			}
+			# Famine
+			if = {
+				limit = {
+					has_journal_entry = je_indian_famines
+				}
+				add = {
+					desc = "presidencies_je_indian_famines_tt"
+					subtract = 1
+				}
+			}
+		}
+ 	}
+
+	start_value = 250
+	min_value = 0
+	max_value = 300
+}
+
+sepoy_mutiny_progress_bar_bombay = {
+ 	name = "sepoy_mutiny_progress_bar_bombay_name"
+ 	desc = "sepoy_mutiny_progress_bar_bombay_desc"
+
+ 	monthly_progress = {
+		c:BIC ?= {
+			if = {
+				limit = {
+					has_global_variable = bombay_presidency_stability
+				}
+				add = {
+					desc = "bombay_progress_bar_moderating_factor_tt"
+					value = indian_uprising_baseline_drift_target
+					subtract = global_var:bombay_presidency_stability
+					multiply = 0.01
+					min = -0.25
+				}
+			}
+			if = {
+				limit = {
+					any_scope_state = {
+						region = sr:region_bombay
+						turmoil >= 0.10
+					}
+				}
+				add = {
+					desc = "bombay_progress_from_radicals_tt"
+					every_scope_state = {
+						limit = {
+							OR = {
+								region = sr:region_bombay
+							}
+							turmoil >= 0.10
+						}
+						subtract = this.turmoil
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_scope_state = {
+						region = sr:region_bombay
+						loyalty >= 0.10
+					}
+				}
+				subtract = {
+					desc = "bombay_progress_from_loyalists_tt"
+					every_scope_state = {
+						limit = {
+							region = sr:region_bombay
+							loyalty >= 0.10
+						}
+						subtract = this.loyalty
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_or_below = {
+						capital = {
+							region = sr:region_bombay
+						}
+						liberty_desire >= 75
+					}
+				}
+				add = {
+					desc = "bombay_progress_from_high_liberty_desire_tt"
+					every_subject_or_below = {
+						limit = {
+							capital = {
+								region = sr:region_bombay
+							}
+							liberty_desire >= 75
+						}
+						subtract = this.liberty_desire
+						divide = 100
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_or_below = {
+						capital = {
+							region = sr:region_bombay
+						}
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				add = {
+					desc = "bombay_progress_from_low_liberty_desire_tt"
+					every_subject_or_below = {
+						limit = {
+							capital = {
+								region = sr:region_bombay
+							}
+							liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+						}
+						add = {
+							value = 0.25
+							subtract = {
+								value = liberty_desire
+								multiply = 0.01
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_interest_group = {
+						is_indian_interest_group = yes
+						is_in_government = yes
+					}
+				}
+				add = {
+					desc = "presidencies_progress_from_indian_igs_in_government_tt"
+					value = 1
+				}
+			}
+			add = {
+				desc = "presidencies_progress_from_zamindars_tt"
+				if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval <= angry
+						}
+					}
+					value = -2
+				}
+				else_if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval <= unhappy
+						}
+					}
+					value = -1
+				}
+				else_if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval >= happy
+						}
+					}
+					value = 1
+				}
+				else_if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval >= loyal
+						}
+					}
+					value = 2
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:bombay_progress_from_events_var_add_1
+					NOT = {
+						c:BIC.var:bombay_progress_from_events_var_add_1 = 0
+					}
+				}
+				add = {
+					desc = "sepoy_mutiny_events_6_result_tt"
+					value = c:BIC.var:bombay_progress_from_events_var_add_1
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:bombay_progress_from_events_var_add_3
+					NOT = {
+						c:BIC.var:bombay_progress_from_events_var_add_3 = 0
+					}
+				}
+				add = {
+					desc = "sepoy_mutiny_events_9_result_tt"
+					value = c:BIC.var:bombay_progress_from_events_var_add_3
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:bombay_progress_from_events_var_add_4
+					NOT = {
+						c:BIC.var:bombay_progress_from_events_var_add_4 = 0
+					}
+				}
+				add = {
+					desc = "sepoy_mutiny_events_10_result_tt"
+					value = c:BIC.var:bombay_progress_from_events_var_add_4
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:bombay_progress_from_events_var_add_5
+					NOT = {
+						c:BIC.var:bombay_progress_from_events_var_add_5 = 0
+					}
+				}
+				add = {
+					desc = "raj_4_result_tt"
+					value = c:BIC.var:bombay_progress_from_events_var_add_5
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:bombay_progress_from_events_var_add_6
+					NOT = {
+						c:BIC.var:bombay_progress_from_events_var_add_6 = 0
+					}
+				}
+				add = {
+					desc = "raj_5_result_tt"
+					value = c:BIC.var:bombay_progress_from_events_var_add_6
+				}
+			}
+			# Military Wages
+			if = {
+				limit = { military_wage_level = very_low }
+				add = {
+					desc = "presidencies_very_low_military_wages_tt"
+					subtract = 1
+				}
+			}
+			if = {
+				limit = { military_wage_level = low }
+				add = {
+					desc = "presidencies_low_military_wages_tt"
+					subtract = 0.5
+				}
+			}
+			if = {
+				limit = { military_wage_level = high }
+				add = {
+					desc = "presidencies_high_military_wages_tt"
+					add = 0.5
+				}
+			}
+			if = {
+				limit = { military_wage_level = very_high }
+				add = {
+					desc = "presidencies_very_high_military_wages_tt"
+					add = 1
+				}
+			}
+			# Taxation
+			if = {
+				limit = { tax_level = very_low }
+				add = {
+					desc = "presidencies_very_low_taxation_tt"
+					add = 1
+				}
+			}
+			if = {
+				limit = { tax_level = low }
+				add = {
+					desc = "presidencies_low_taxation_tt"
+					add = 0.5
+				}
+			}
+			if = {
+				limit = { tax_level = high }
+				add = {
+					desc = "presidencies_high_taxation_tt"
+					subtract = 0.5
+				}
+			}
+			if = {
+				limit = { tax_level = very_high }
+				add = {
+					desc = "presidencies_very_high_taxation_tt"
+					subtract = 1
+				}
+			}
+			# Utilitarian Leaders in government
+			if = {
+				limit = {
+					any_interest_group = {
+						is_in_government = yes
+						leader = {
+							has_ideology = ideology:ideology_utilitarian_leader
+						}
+					}
+				}
+				add = {
+					desc = "presidencies_utilitarian_leaders_tt"
+					subtract = 1
+				}
+			}
+			# Religious laws
+			if = {
+				limit = {
+					NOT = {
+						has_law_or_variant = law_type:law_total_separation
+					}
+				}
+				add = {
+					desc = "presidencies_religious_laws_tt"
+					subtract = 2
+				}
+			}
+			# Military laws
+			if = {
+				limit = {
+					NOT = {
+						has_law_or_variant = law_type:law_professional_army
+					}
+				}
+				add = {
+					desc = "presidencies_military_laws_tt"
+					subtract = 1
+				}
+			}
+			# Famine
+			if = {
+				limit = {
+					has_journal_entry = je_indian_famines
+				}
+				add = {
+					desc = "presidencies_je_indian_famines_tt"
+					subtract = 1
+				}
+			}
+		}
+ 	}
+
+ 	default_green = yes
+
+	start_value = 285
+	min_value = 0
+	max_value = 300
+}
+
+sepoy_mutiny_progress_bar_madras = {
+ 	name = "sepoy_mutiny_progress_bar_madras_name"
+ 	desc = "sepoy_mutiny_progress_bar_madras_desc"
+
+ 	monthly_progress = {
+		c:BIC ?= {
+			if = {
+				limit = {
+					has_global_variable = madras_presidency_stability
+				}
+				add = {
+					desc = "madras_progress_bar_moderating_factor_tt"
+					value = indian_uprising_baseline_drift_target
+					subtract = global_var:madras_presidency_stability
+					multiply = 0.01
+					min = -0.25
+				}
+			}
+			if = {
+				limit = {
+					any_scope_state = {
+						region = sr:region_madras
+						turmoil >= 0.10
+					}
+				}
+				add = {
+					desc = "madras_progress_from_radicals_tt"
+					every_scope_state = {
+						limit = {
+							OR = {
+								region = sr:region_madras
+							}
+							turmoil >= 0.10
+						}
+						subtract = this.turmoil
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_scope_state = {
+						region = sr:region_madras
+						loyalty >= 0.10
+					}
+				}
+				subtract = {
+					desc = "madras_progress_from_loyalists_tt"
+					every_scope_state = {
+						limit = {
+							region = sr:region_madras
+							loyalty >= 0.10
+						}
+						subtract = this.loyalty
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_or_below = {
+						capital = {
+							region = sr:region_madras
+						}
+						liberty_desire >= 75
+					}
+				}
+				add = {
+					desc = "madras_progress_from_high_liberty_desire_tt"
+					every_subject_or_below = {
+						limit = {
+							capital = {
+								region = sr:region_madras
+							}
+							liberty_desire >= 75
+						}
+						subtract = this.liberty_desire
+						divide = 100
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_subject_or_below = {
+						capital = {
+							region = sr:region_madras
+						}
+						liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+					}
+				}
+				add = {
+					desc = "madras_progress_from_low_liberty_desire_tt"
+					every_subject_or_below = {
+						limit = {
+							capital = {
+								region = sr:region_madras
+							}
+							liberty_desire < define:NDiplomacy|WAR_GOAL_INFAMY_LOW_LIBERTY_DESIRE_THRESHOLD
+						}
+						add = {
+							value = 0.25
+							subtract = {
+								value = liberty_desire
+								multiply = 0.01
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_interest_group = {
+						is_indian_interest_group = yes
+						is_in_government = yes
+					}
+				}
+				add = {
+					desc = "presidencies_progress_from_indian_igs_in_government_tt"
+					value = 1
+				}
+			}
+			add = {
+				desc = "presidencies_progress_from_zamindars_tt"
+				if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval <= angry
+						}
+					}
+					value = -2
+				}
+				else_if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval <= unhappy
+						}
+					}
+					value = -1
+				}
+				else_if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval >= happy
+						}
+					}
+					value = 1
+				}
+				else_if = {
+					limit = {
+						ig:ig_landowners ?= {
+							ig_approval >= loyal
+						}
+					}
+					value = 2
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:madras_progress_from_events_var_add_1
+					NOT = {
+						c:BIC.var:madras_progress_from_events_var_add_1 = 0
+					}
+				}
+				add = {
+					desc = "sepoy_mutiny_events_6_result_tt"
+					value = c:BIC.var:madras_progress_from_events_var_add_1
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:madras_progress_from_events_var_add_3
+					NOT = {
+						c:BIC.var:madras_progress_from_events_var_add_3 = 0
+					}
+				}
+				add = {
+					desc = "sepoy_mutiny_events_9_result_tt"
+					value = c:BIC.var:madras_progress_from_events_var_add_3
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:madras_progress_from_events_var_add_4
+					NOT = {
+						c:BIC.var:madras_progress_from_events_var_add_4 = 0
+					}
+				}
+				add = {
+					desc = "sepoy_mutiny_events_10_result_tt"
+					value = c:BIC.var:madras_progress_from_events_var_add_4
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:madras_progress_from_events_var_add_5
+					NOT = {
+						c:BIC.var:madras_progress_from_events_var_add_5 = 0
+					}
+				}
+				add = {
+					desc = "raj_4_result_tt"
+					value = c:BIC.var:madras_progress_from_events_var_add_5
+				}
+			}
+			if = {
+				limit = {
+					exists = c:BIC.var:madras_progress_from_events_var_add_6
+					NOT = {
+						c:BIC.var:madras_progress_from_events_var_add_6 = 0
+					}
+				}
+				add = {
+					desc = "raj_5_result_tt"
+					value = c:BIC.var:madras_progress_from_events_var_add_6
+				}
+			}
+			# Military Wages
+			if = {
+				limit = { military_wage_level = very_low }
+				add = {
+					desc = "presidencies_very_low_military_wages_tt"
+					subtract = 1
+				}
+			}
+			if = {
+				limit = { military_wage_level = low }
+				add = {
+					desc = "presidencies_low_military_wages_tt"
+					subtract = 0.5
+				}
+			}
+			if = {
+				limit = { military_wage_level = high }
+				add = {
+					desc = "presidencies_high_military_wages_tt"
+					add = 0.5
+				}
+			}
+			if = {
+				limit = { military_wage_level = very_high }
+				add = {
+					desc = "presidencies_very_high_military_wages_tt"
+					add = 1
+				}
+			}
+			# Taxation
+			if = {
+				limit = { tax_level = very_low }
+				add = {
+					desc = "presidencies_very_low_taxation_tt"
+					add = 1
+				}
+			}
+			if = {
+				limit = { tax_level = low }
+				add = {
+					desc = "presidencies_low_taxation_tt"
+					add = 0.5
+				}
+			}
+			if = {
+				limit = { tax_level = high }
+				add = {
+					desc = "presidencies_high_taxation_tt"
+					subtract = 0.5
+				}
+			}
+			if = {
+				limit = { tax_level = very_high }
+				add = {
+					desc = "presidencies_very_high_taxation_tt"
+					subtract = 1
+				}
+			}
+			# Utilitarian Leaders in government
+			if = {
+				limit = {
+					any_interest_group = {
+						is_in_government = yes
+						leader = {
+							has_ideology = ideology:ideology_utilitarian_leader
+						}
+					}
+				}
+				add = {
+					desc = "presidencies_utilitarian_leaders_tt"
+					subtract = 1
+				}
+			}
+			# Religious laws
+			if = {
+				limit = {
+					NOT = {
+						has_law_or_variant = law_type:law_total_separation
+					}
+				}
+				add = {
+					desc = "presidencies_religious_laws_tt"
+					subtract = 2
+				}
+			}
+			# Military laws
+			if = {
+				limit = {
+					NOT = {
+						has_law_or_variant = law_type:law_professional_army
+					}
+				}
+				add = {
+					desc = "presidencies_military_laws_tt"
+					subtract = 1
+				}
+			}
+			# Famine
+			if = {
+				limit = {
+					has_journal_entry = je_indian_famines
+				}
+				add = {
+					desc = "presidencies_je_indian_famines_tt"
+					subtract = 1
+				}
+			}
+		}
+ 	}
+
+ 	default_green = yes
+
+	start_value = 270
+	min_value = 0
+	max_value = 300
+}
+je_krakatoa_thermometer_progress_bar = {
+	name = "je_krakatoa_thermometer_progress_bar_name"
+	desc = "je_krakatoa_thermometer_progress_bar_desc"
+
+	default_bad = yes
+
+	start_value = 150
+	min_value = 0
+	max_value = 150 # equals 1.5 °C and should line up with krakatoa_temperature_drop_roll_max
+
+	monthly_progress = {
+		add = {
+			desc = "KRAKATOA_THERMOMETER_MONTHLY_ADD"
+			value = {
+				add = global_var:krakatoa_temperature_recovery_rate
+				multiply = 100
+			}
+		}
+	}
+}
+ ### For Montenegro
+
+ montenegrin_raiding_progress_bar = {
+	name = "montenegrin_raiding_progress_bar"
+	desc = "montenegrin_raiding_progress_bar_desc"
+
+	default_green = yes
+
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+
+ balkan_league_timeout_bar = {
+	name = "balkan_league_timeout_bar"
+	desc = "balkan_league_timeout_bar_desc"
+
+	default_green = yes
+
+	start_value = 125
+	min_value = 0
+	max_value = 125
+
+	monthly_progress = {
+		value = {
+			value = -1
+			desc = "balkan_window_of_opportunity_closing"
+		}
+	}
+}
+
+
+ ### For Bulgaria
+
+bulgaria_military_progress_bar = {
+	name = "bularia_military_progress_bar"
+	desc = "bularia_military_progress_bar_desc"
+
+	default_green = yes
+
+	start_value = 50
+	min_value = 0
+	max_value = 1000
+}
+# For je_ip4_coup
+
+je_ip4_coup_progress_bar = {
+	name = "je_ip4_coup_progress_bar"
+	desc = "je_ip4_coup_progress_bar_desc"
+
+	default = yes
+
+	weekly_progress = {
+		owner = {
+			if = { # Does the general actually want to coup the government?
+				limit = {
+					any_interest_group = {
+						has_variable = golpista_ig_var
+						ig_approval > 0
+					}
+				}
+				subtract = {
+					desc = "appeased_golpista_igs_tt"
+					every_interest_group = {
+						limit = {
+							has_variable = golpista_ig_var
+							ig_approval > 0
+						}
+						value = ig_approval
+					}
+				}
+			}
+			add = {
+				desc = "commander_coup_strength_tt"
+				every_scope_character = {
+					limit = {
+						has_variable = golpista_var
+					}
+					value = commander_coup_strength
+				}
+			}
+			subtract = {
+				desc = "country_coup_resistance_tt"
+				value = owner.country_coup_resistance
+			}
+		}
+	}
+	start_value = 10
+	min_value = 0
+	max_value = 120
+}
+
+je_two_spains_progress_bar = { # Drift factors are defined in ip4_je_values.txt
+	name = "je_two_spains_progress_bar"
+	desc = "je_two_spains_progress_bar_left_desc"
+ 	second_desc = "je_two_spains_progress_bar_right_desc"
+
+	double_sided_two_spains = yes
+
+	monthly_progress = { # 1 = 1%
+		if = {
+			limit = {
+				owner = {
+					has_variable = two_spains_pivot_var
+					has_variable = two_spains_current_var
+				}
+			}
+			add = {
+				desc = "two_spains_progress_bar_moderating_factor_tt"
+				value = owner.var:two_spains_pivot_var
+				subtract = owner.var:two_spains_current_var
+				multiply = 0.05 # How aggressively this will chase the pivot value. Higher = more aggressive.
+			}
+		}
+	}
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+
+je_two_spains_tension_bar = {  # Drift factors are defined in ip4_je_values.txt
+	name = "je_two_spains_tension_bar"
+	desc = "je_two_spains_tension_bar_desc"
+
+	default_bad = yes
+	is_inverted = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				owner = {
+					exists = two_spains_tension_pivot
+					has_variable = two_spains_tension_current_var
+				}
+			}
+			add = {
+				desc = "two_spains_tension_bar_moderating_factor_tt"
+				value = owner.two_spains_tension_pivot
+				multiply = 100 # The pivot value is a percentage
+				subtract = owner.var:two_spains_tension_current_var
+				multiply = 0.10 # How aggressively this will chase the pivot value. Higher = more aggressive.
+			}
+		}
+	}
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+#Cutting this bar for now, but might reuse for something else.
+
+neg_taxes_progress_bar = {
+ 	name = "neg_taxes_progress_bar"
+ 	desc = "neg_taxes_progress_bar_desc"
+
+ 	default = yes
+
+	monthly_progress = {
+        if = {
+        	limit = {
+		       	NOT = {
+			       	trigger_if = {
+			            limit = {
+			                owner.var:promise_quest_degree_country <= 2
+			            }
+			            tax_level > low
+			        }
+			        trigger_else = {
+			            tax_level > very_low
+			        }
+		       	}
+        	}
+        	add = {
+        		add = 1
+	    	    if = { #easier promises are only 5 years
+	    			limit = {
+	    				owner.var:promise_quest_degree_country <= 1
+	    			}
+	    			multiply = 2
+	    		}
+    			desc = "neg_tax_bar_lowering_desc"
+    		}
+        }
+		else = { #will fail anyway, but this could warn a player inspecting the bar on pause.
+			subtract = 10
+		}
+	}
+	
+	start_value = 0
+	min_value = 0
+	max_value = 48 # Connected to max of neg_taxes_progress_bar, neg_taxes_remaining_months, and neg_que afailure_degree. Adjust to flexible value after PRCAL-42055
+}
+
+
+#May use this later to make bars out of 100
+        	# divide = { #Should reach 100 and complete before timeout. So timeout is 3650, and completion happens after 120 months x 30 days is 3600.
+        	# 	add = je_negotiate_taxes_timeout
+        	# 	subtract = 50
+        	# 	##3600
+        	# 	if = { #easier promises are only 5 years
+        	# 		limit = {
+        	# 			owner.var:promise_quest_degree_country <= 1
+        	# 		}
+        	# 		multiply = 0.5 ##1800
+        	# 	}
+        	# 	divide = 30 ##120 / 60 , the months to complete.
+        	# }
+
+# For Morocco Makhzen content
+
+lands_of_anarchy_tribes_of_marrakech_bar = {
+	name = "lands_of_anarchy_tribes_of_marrakech_bar"
+	desc = "lands_of_anarchy_tribes_of_marrakech_bar_desc"
+
+	default_bad = yes
+
+	monthly_progress = {
+		owner = {
+			# Ruler popularity
+			if = {
+				limit = {
+					OR = {
+					ruler.popularity < 0
+					ruler.popularity > 0
+					}
+				}
+				add = {
+					desc = "lands_of_anarchy_ruler_popularity_tt"
+					value = ruler.popularity
+					divide = 50
+				}
+			}
+			# +each Marrakech barracks level
+			add = {
+				desc = "lands_of_anarchy_barracks_level_tt"
+				s:STATE_MARRAKECH.region_state:MOR ?= {
+					every_scope_building = {
+						limit = {
+							is_building_type = building_barrack
+						}
+		  				add = this.level
+		  				divide = 10
+		 			}
+				}
+			}
+			# +each Marrakech government administration level
+			add = {
+				desc = "lands_of_anarchy_government_administration_level_tt"
+				s:STATE_MARRAKECH.region_state:MOR ?= {
+					every_scope_building = {
+		  				limit = {
+		   					is_building_type = building_government_administration
+		  				}
+		  				add = this.level
+		  				divide = 2
+		 			}
+				}
+			}
+			# Urbanization rate
+			add = {
+				desc = "lands_of_anarchy_urbanization_rate_tt"
+				s:STATE_MARRAKECH.region_state:MOR ?= {
+					add = this.state_urbanization_rate
+					multiply = 10
+					subtract = 1
+				}
+			}
+			# Average SOL threshold in state
+			add = {
+				desc = "lands_of_anarchy_average_sol_tt"
+				s:STATE_MARRAKECH.region_state:MOR ?= {
+					value = average_sol
+					subtract = 10
+					divide = 2
+				}
+			}
+			# Radicals in state
+			add = {
+				desc = "lands_of_anarchy_state_radicals_tt"
+				s:STATE_MARRAKECH.region_state:MOR ?= {
+					value = radical_fraction
+					multiply = -50
+				}
+			}
+			# Legitimacy below 75
+			add = {
+				desc = "lands_of_anarchy_legitimacy_tt"
+				value = legitimacy
+				subtract = 75
+				divide = 30
+			}
+			# Fez education access
+			add = {
+				desc = "lands_of_anarchy_fez_education_access_tt"
+				owner.capital ?= {
+					value = literacy_rate
+					multiply = 5
+					subtract = 1
+					max = 0.5
+				}
+			}
+			# Fez Infrastructure
+			add = {
+				desc = "lands_of_anarchy_fez_infrastructure_tt"
+				owner.capital ?= {
+					value = infrastructure
+					divide = 4.5
+					subtract = 9
+					max = 0.5
+				}
+			}
+			# On Harka
+			if = {
+				limit = {
+					has_modifier = lands_of_anarchy_harka_mod
+				}
+				add = {
+					desc = "lands_of_anarchy_harka_popularity_mod"
+					value = 1
+				}
+			}
+			# lands_of_anarchy.4 - appointed IG tribe leader
+			if = {
+				limit = {
+					owner = {
+						any_scope_character = {
+							has_modifier = lands_of_anarchy_tribal_marrakech_leader_mod
+						}
+					}
+				}
+				add = {
+					desc = "lands_of_anarchy_tribe_leader_tt"
+					value = 1.5
+				}
+			}
+			# lands_of_anarchy.4 - rejected IG tribe leader
+			if = {
+				limit = {
+					has_variable = tribal_leader_appointment_rejected
+				}
+				subtract = {
+					desc = "lands_of_anarchy_tribe_leader_rejected_tt"
+					value = 0.3
+				}
+			}
+			# lands_of_anarchy.5 - sent medicine
+			if = {
+				limit = {
+					s:STATE_MARRAKECH.region_state:MOR ?= {
+						has_modifier = lands_of_anarchy_tribe_recieved_medicine_mod
+					}
+				}
+				add = {
+					desc = "lands_of_anarchy_sent_medicine_to_tribes_tt"
+					value = 1
+				}
+			}
+			# lands_of_anarchy.5 - refused to send medicine
+			if = {
+				limit = {
+					s:STATE_MARRAKECH.region_state:MOR ?= {
+						has_modifier = lands_of_anarchy_refused_medicine_mod
+					}
+				}
+				subtract = {
+					desc = "lands_of_anarchy_refused_medicine_tt"
+					value = 0.5
+				}
+			}
+			# The state is not ours anymore
+			if = {
+				limit = {
+					s:STATE_MARRAKECH = {
+						NOT = {
+							any_scope_state = {
+								owner = root.owner
+							}
+						}
+					}
+				}
+				subtract = {
+					desc = "lands_of_anarchy_lost_state_tt"
+					value = 50
+				}
+			}
+		}
+	}
+	start_value = 260
+	min_value = 1
+	max_value = 500
+}
+
+lands_of_anarchy_tribes_of_al_rif_bar = {
+	name = "lands_of_anarchy_tribes_of_al_rif_bar"
+	desc = "lands_of_anarchy_tribes_of_al_rif_bar_desc"
+
+	default_green = yes
+
+	monthly_progress = {
+		owner = {
+			if = {
+				limit = {
+					OR = {
+					ruler.popularity < 0
+					ruler.popularity > 0
+					}
+				}
+				add = {
+					desc = "lands_of_anarchy_ruler_popularity_tt"
+					value = ruler.popularity
+					divide = 50
+				}
+			}
+			# +each al Rif barracks level
+			add = {
+				desc = "lands_of_anarchy_barracks_level_tt"
+				s:STATE_AL_RIF.region_state:MOR ?= {
+					every_scope_building = {
+		  				limit = {
+		   					is_building_type = building_barrack
+		  				}
+		  			add = this.level
+		  			divide = 10
+		 			}
+				}
+			}
+			# +each al Rif government administration level
+			add = {
+				desc = "lands_of_anarchy_government_administration_level_tt"
+				s:STATE_AL_RIF.region_state:MOR ?= {
+					every_scope_building = {
+		  				limit = {
+		   					is_building_type = building_government_administration
+		  				}
+		  			add = this.level
+		 			}
+				}
+			}
+			# Urbanization rate
+			add = {
+				desc = "lands_of_anarchy_urbanization_rate_tt"
+				s:STATE_AL_RIF.region_state:MOR ?= {
+					add = this.state_urbanization_rate
+					multiply = 10
+					subtract = 1
+				}
+			}
+			# Average SOL threshold in state
+			add = {
+				desc = "lands_of_anarchy_average_sol_tt"
+				s:STATE_AL_RIF.region_state:MOR ?= {
+					value = average_sol
+					subtract = 10
+					divide = 2
+				}
+			}
+			# Radicals in state
+			add = {
+				desc = "lands_of_anarchy_state_radicals_tt"
+				s:STATE_AL_RIF.region_state:MOR ?= {
+					value = radical_fraction
+					multiply = -50
+				}
+			}
+			# Negative authority
+			if = {
+				limit = {
+						authority < 0
+				}
+				add = {
+					desc = "lands_of_anarchy_negative_authority_tt"
+					value = -1
+				}
+			}
+			# Legitimacy below 75
+			add = {
+				desc = "lands_of_anarchy_legitimacy_tt"
+				value = legitimacy
+				subtract = 75
+				divide = 30
+			}
+			# Fez education access
+			add = {
+				desc = "lands_of_anarchy_fez_education_access_tt"
+				owner.capital ?= {
+					value = literacy_rate
+					multiply = 5
+					subtract = 1
+					max = 0.5
+				}
+			}
+			# Fez Infrastructure
+			add = {
+				desc = "lands_of_anarchy_fez_infrastructure_tt"
+				owner.capital ?= {
+					value = infrastructure
+					divide = 4.5
+					subtract = 9
+					max = 0.5
+				}
+			}
+			# On Harka
+			if = {
+				limit = {
+					has_modifier = lands_of_anarchy_harka_mod
+				}
+				add = {
+					desc = "lands_of_anarchy_harka_popularity_mod"
+					value = 1
+				}
+			}
+			# lands_of_anarchy.4 - appointed IG tribe leader
+			if = {
+				limit = {
+					owner = {
+						any_scope_character = {
+							has_modifier = lands_of_anarchy_tribal_al_rif_leader_mod
+						}
+					}
+				}
+				add = {
+					desc = "lands_of_anarchy_tribe_leader_tt"
+					value = 1.5
+				}
+			}
+			# lands_of_anarchy.4 - rejected IG tribe leader
+			if = {
+				limit = {
+					has_variable = tribal_leader_appointment_rejected
+				}
+				subtract = {
+					desc = "lands_of_anarchy_tribe_leader_rejected_tt"
+					value = 0.3
+				}
+			}
+			# lands_of_anarchy.5 - sent medicine
+			if = {
+				limit = {
+					s:STATE_AL_RIF.region_state:MOR ?= {
+						has_modifier = lands_of_anarchy_tribe_recieved_medicine_mod
+					}
+				}
+				add = {
+					desc = "lands_of_anarchy_sent_medicine_to_tribes_tt"
+					value = 1
+				}
+			}
+			# lands_of_anarchy.5 - refused to send medicine
+			if = {
+				limit = {
+					s:STATE_AL_RIF.region_state:MOR ?= {
+						has_modifier = lands_of_anarchy_refused_medicine_mod
+					}
+				}
+				subtract = {
+					desc = "lands_of_anarchy_refused_medicine_tt"
+					value = 0.5
+				}
+			}
+			# The state is not ours anymore
+			if = {
+				limit = {
+					s:STATE_AL_RIF = {
+						NOT = {
+							any_scope_state = {
+								owner = root
+							}
+						}
+					}
+				}
+				subtract = {
+					desc = "lands_of_anarchy_lost_state_tt"
+					value = 50
+				}
+			}
+		}
+	}
+	start_value = 260
+	min_value = 1
+	max_value = 500
+}
+
+lands_of_anarchy_tribes_of_inner_morocco_bar = {
+	name = "lands_of_anarchy_tribes_of_inner_morocco_bar"
+	desc = "lands_of_anarchy_tribes_of_inner_morocco_bar_desc"
+
+	default = yes
+
+	monthly_progress = {
+		owner = {
+			if = {
+				limit = {
+					OR = {
+					ruler.popularity < 0
+					ruler.popularity > 0
+					}
+				}
+				add = {
+					desc = "lands_of_anarchy_ruler_popularity_tt"
+					value = ruler.popularity
+					divide = 50
+				}
+			}
+			# +each Inner Morocco barracks level
+			add = {
+				desc = "lands_of_anarchy_barracks_level_tt"
+				s:STATE_INNER_MOROCCO.region_state:MOR ?= {
+					every_scope_building = {
+		  				limit = {
+		   					is_building_type = building_barrack
+		  				}
+			  			add = this.level
+			  			divide = 10
+		 			}
+				}
+			}
+			# +each Inner Morocco government administration level
+			add = {
+				desc = "lands_of_anarchy_government_administration_level_tt"
+				s:STATE_INNER_MOROCCO.region_state:MOR ?= {
+					every_scope_building = {
+		  				limit = {
+		   					is_building_type = building_government_administration
+		  				}
+		  				add = this.level
+		 			}
+				}
+			}
+			# Urbanization rate
+			add = {
+				desc = "lands_of_anarchy_urbanization_rate_tt"
+				s:STATE_INNER_MOROCCO.region_state:MOR ?= {
+					add = this.state_urbanization_rate
+					multiply = 10
+					subtract = 1
+				}
+			}
+			# Average SOL threshold in state
+			add = {
+				desc = "lands_of_anarchy_average_sol_tt"
+				s:STATE_INNER_MOROCCO.region_state:MOR ?= {
+					value = average_sol
+					subtract = 10
+					divide = 2
+				}
+			}
+			# Radicals in state
+			add = {
+				desc = "lands_of_anarchy_state_radicals_tt"
+				s:STATE_INNER_MOROCCO.region_state:MOR ?= {
+					value = radical_fraction
+					multiply = -50
+				}
+			}
+			# Legitimacy below 75
+			add = {
+				desc = "lands_of_anarchy_legitimacy_tt"
+				value = legitimacy
+				subtract = 75
+				divide = 30
+			}
+			# Fez education access
+			add = {
+				desc = "lands_of_anarchy_fez_education_access_tt"
+				owner.capital ?= {
+					value = literacy_rate
+					multiply = 5
+					subtract = 1
+					max = 0.5
+				}
+			}
+			# Fez Infrastructure
+			add = {
+				desc = "lands_of_anarchy_fez_infrastructure_tt"
+				owner.capital ?= {
+					value = infrastructure
+					divide = 4.5
+					subtract = 9
+					max = 0.5
+				}
+			}
+			# On Harka
+			if = {
+				limit = {
+					has_modifier = lands_of_anarchy_harka_mod
+				}
+				add = {
+					desc = "lands_of_anarchy_on_harka_tt"
+					value = 1
+				}
+			}
+			# lands_of_anarchy.4 - appointed IG tribe leader
+			if = {
+				limit = {
+					owner = {
+						any_scope_character = {
+							has_modifier = lands_of_anarchy_tribal_inner_morocco_leader_mod
+						}
+					}
+				}
+				add = {
+					desc = "lands_of_anarchy_tribe_leader_tt"
+					value = 1.5
+				}
+			}
+			# lands_of_anarchy.4 - rejected IG tribe leader
+			if = {
+				limit = {
+					has_variable = tribal_leader_appointment_rejected
+				}
+				subtract = {
+					desc = "lands_of_anarchy_tribe_leader_rejected_tt"
+					value = 0.3
+				}
+			}
+			# lands_of_anarchy.5 - sent medicine
+			if = {
+				limit = {
+					s:STATE_INNER_MOROCCO.region_state:MOR ?= {
+						has_modifier = lands_of_anarchy_tribe_recieved_medicine_mod
+					}
+				}
+				add = {
+					desc = "lands_of_anarchy_sent_medicine_to_tribes_tt"
+					value = 1
+				}
+			}
+			# lands_of_anarchy.5 - refused to send medicine
+			if = {
+				limit = {
+					s:STATE_INNER_MOROCCO.region_state:MOR ?= {
+						has_modifier = lands_of_anarchy_refused_medicine_mod
+					}
+				}
+				subtract = {
+					desc = "lands_of_anarchy_refused_medicine_tt"
+					value = 0.5
+				}
+			}
+			# The state is not ours anymore
+			if = {
+				limit = {
+					s:STATE_INNER_MOROCCO = {
+						NOT = {
+							any_scope_state = {
+								owner = root
+							}
+						}
+					}
+				}
+				subtract = {
+					desc = "lands_of_anarchy_lost_state_tt"
+					value = 50
+				}
+			}
+		}
+	}
+	start_value = 260
+	min_value = 1
+	max_value = 500
+}
+	 

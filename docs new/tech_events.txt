@@ -1,0 +1,3840 @@
+﻿namespace = aviation
+aviation.1 = {
+ 	type = country_event
+ 	placement = ROOT
+
+ 	title = aviation.1.t
+ 	desc = aviation.1.d
+ 	flavor = aviation.1.f
+
+ 	event_image = {
+ 		video = "unspecific_airplane"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+ 	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+ 	trigger = {
+		army_mobilization_option_fraction = {
+			target = mobilization_option:mobilization_option_aerial_recon
+			value >= 0.2
+		}
+ 		any_scope_war = {
+ 			any_scope_front = {
+				any_scope_general = {
+					owner = ROOT
+					this.commander_military_formation ?= {
+						has_mobilization_option = mobilization_option:mobilization_option_aerial_recon
+					}
+				}
+ 			}
+ 		}
+ 	}
+
+ 	immediate = {
+ 		ROOT = { save_scope_as = flying_circus_home }
+ 		random_scope_war = {
+ 			limit = {
+                any_scope_front = {
+					any_scope_general = {
+						owner = ROOT
+						this.commander_military_formation ?= {
+							has_mobilization_option = mobilization_option:mobilization_option_aerial_recon
+						}
+					}
+				}
+ 			}
+ 			save_scope_as = flying_circus_war
+ 			random_scope_front = {
+                limit = {
+					any_scope_general = {
+						owner = ROOT
+						this.commander_military_formation ?= {
+							has_mobilization_option = mobilization_option:mobilization_option_aerial_recon
+						}
+					}
+				}
+                random_scope_general = {
+					limit = {
+						owner = ROOT
+						this.commander_military_formation ?= {
+							has_mobilization_option = mobilization_option:mobilization_option_aerial_recon
+						}
+					}
+					save_scope_as = flying_circus_general
+				}
+ 				random_scope_state = {
+ 					save_scope_as = flying_circus_state
+ 				}
+ 			}
+ 		}
+ 	}
+
+ 	option = { # A cult of hero-worship will help domestically
+ 		name = aviation.1.a
+ 		default_option = yes
+ 		scope:flying_circus_war = {
+ 			add_war_war_support = {
+ 				target = scope:flying_circus_home
+ 				value = 10
+ 			}
+ 		}
+ 		scope:flying_circus_general = {
+ 			add_modifier = { # popularity
+ 				name = war_hero_cult
+ 			}
+ 		}
+ 	}
+ 	option = { # Give him all he needs at the front!
+ 		name = aviation.1.b
+
+ 		scope:flying_circus_general = {
+ 			add_modifier = { # combat
+ 				name = war_hero_fighter
+ 			}
+ 		}
+ 	}
+}
+﻿namespace = camera_film_pm_events
+
+camera_film_pm_events.1 = {
+	type = country_event
+	placement = scope:arts_academy_state
+
+	event_image = {
+		video = "unspecific_world_fair"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	title = camera_film_pm_events.1.t
+	desc = camera_film_pm_events.1.d
+	flavor = camera_film_pm_events.1.f
+
+	trigger = {
+		# Triggered by je_camera
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_art_academy
+					has_active_production_method = pm_photographic_art
+				}
+			}
+			save_scope_as = arts_academy_state
+		}
+	}
+
+	option = {
+		name = camera_film_pm_events.1.a
+		default_option = yes
+		add_modifier = {
+			name = newspaper_photography
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = camera_film_pm_events.1.b
+		add_modifier = {
+			name = landscape_photography
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = camera_film_pm_events.1.c
+		trigger = {
+			NOT = { has_technology_researched = film }
+			can_research = film
+		}
+		add_technology_progress = { progress = 6000 technology = film }
+	}
+}
+
+camera_film_pm_events.2 = {
+	type = country_event
+	placement = scope:arts_academy_state
+
+	event_image = {
+		video = "unspecific_trains"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	title = camera_film_pm_events.2.t
+	desc = camera_film_pm_events.2.d
+	flavor = camera_film_pm_events.2.f
+
+	trigger = {
+		# Triggered by je_film
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_art_academy
+					has_active_production_method = pm_film_art
+				}
+			}
+			save_scope_as = arts_academy_state
+		}
+	}
+
+	option = {
+		name = camera_film_pm_events.2.a
+		default_option = yes
+		ig:ig_trade_unions ?= {
+			add_modifier = {
+				name = actuality_films
+				days = normal_modifier_time
+			}
+		}
+		ig:ig_rural_folk ?= {
+			add_modifier = {
+				name = actuality_films
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = camera_film_pm_events.2.b
+		ig:ig_intelligentsia ?= {
+			add_modifier = {
+				name = dramatic_films
+				days = normal_modifier_time
+			}
+		}
+		ig:ig_petty_bourgeoisie ?= {
+			add_modifier = {
+				name = dramatic_films
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = camera_film_pm_events.2.c
+		default_option = yes
+		trigger = {
+			NOT = { has_technology_researched = mass_propaganda }
+			can_research = mass_propaganda
+		}
+		add_technology_progress = { progress = 5850 technology = mass_propaganda }
+	}
+}
+﻿namespace = flamethrowers_event
+flamethrowers_event.1 = {
+ 	type = country_event
+ 	placement = root
+
+ 	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+ 	event_image = {
+ 		video = "unspecific_fire"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+ 	title = flamethrowers_event.1.t
+ 	desc = flamethrowers_event.1.d
+ 	flavor = flamethrowers_event.1.f
+
+ 	trigger = {
+		is_at_war = yes
+		army_mobilization_option_fraction = {
+		   target = mobilization_option:mobilization_option_flamethrowers
+		   value >= 0.2
+	    }
+		any_scope_war = {
+		   any_scope_front = {
+			  any_scope_general = {
+				  owner = ROOT
+				  this.commander_military_formation ?= {
+					  has_mobilization_option = mobilization_option:mobilization_option_flamethrowers
+				  }
+			  }
+		   }
+	   }
+ 	}
+
+ 	immediate = {
+ 		random_scope_war = {
+ 			limit = {
+                any_scope_front = {
+                    any_scope_general = {
+                        owner = ROOT
+                        this.commander_military_formation ?= {
+                            has_mobilization_option = mobilization_option:mobilization_option_flamethrowers
+                        }
+                    }
+                 }
+ 			}
+ 			save_scope_as = flamethrowers_event_war
+ 		}
+ 	}
+
+ 	option = {
+ 		name = flamethrowers_event.1.a
+ 		add_modifier = {
+ 			name = instrument_of_fear
+ 			days = normal_modifier_time
+ 		}
+ 	}
+
+ 	option = {
+ 		name = flamethrowers_event.1.b
+ 		default_option = yes
+ 		add_modifier = {
+ 			name = instrument_of_death
+ 			days = normal_modifier_time
+ 		}
+ 	}
+}
+﻿namespace = military_tech_events
+
+military_tech_events.401 = {
+	type = country_event
+	placement = scope:rifle_state
+
+	title = military_tech_events.401.t
+	desc = military_tech_events.401.d
+	flavor = military_tech_events.401.f
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	event_image = {
+		video = "unspecific_gears_pistons"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	trigger = {
+		any_scope_state = {
+			any_scope_building = {
+				is_building_type = building_arms_industry
+				level >= 3
+				occupancy >= 0.75
+				OR = {
+					has_active_production_method = pm_rifles
+					has_active_production_method = pm_repeaters
+					has_active_production_method = pm_bolt_action_rifles
+				}
+			}
+		}
+		can_research = repeaters
+	}
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_arms_industry
+            		level >= 3
+            		occupancy >= 0.75
+           		    OR = {
+              			has_active_production_method = pm_rifles
+                		has_active_production_method = pm_repeaters
+                		has_active_production_method = pm_bolt_action_rifles
+            		}
+				}
+			}
+			save_scope_as = rifle_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_arms_industry
+					level >= 3
+					occupancy >= 0.75
+		            OR = {
+              			has_active_production_method = pm_rifles
+                		has_active_production_method = pm_repeaters
+                		has_active_production_method = pm_bolt_action_rifles
+            		}
+				}
+				save_scope_as = rifle_factory
+			}
+		}
+		g:small_arms = {
+			save_scope_as = small_arms_good
+		}
+	}
+
+	option = { #
+		name = military_tech_events.401.a
+		default_option = yes
+		scope:rifle_state = {
+			add_modifier = {
+				name = modern_rifle_arsenal
+				days = long_modifier_time
+			}
+		}
+	}
+	option = { #
+		name = military_tech_events.401.b
+		add_technology_progress = {
+			progress = 4150 technology = repeaters
+		}
+		scope:rifle_state = {
+			add_modifier = {
+				name = arsenal_proving_ground
+				days = long_modifier_time
+			}
+		}
+	}
+}
+
+military_tech_events.402 = {
+	type = country_event
+	placement = ROOT
+
+	title = military_tech_events.402.t
+	desc = military_tech_events.402.d
+	flavor = military_tech_events.402.f
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		army_mobilization_option_fraction = {
+			target = mobilization_option:mobilization_option_machinegunners
+			value >= 0.2
+		}
+		any_scope_war = {
+			any_scope_front = {
+				any_scope_general = {
+					owner = ROOT
+					this.commander_military_formation ?= {
+						has_mobilization_option = mobilization_option:mobilization_option_machinegunners
+					}
+				}
+			}
+		}
+	}
+	immediate = {
+		random_scope_war = {
+			limit = {
+				any_scope_front = {
+					any_scope_general = {
+						owner = ROOT
+						this.commander_military_formation ?= {
+							has_mobilization_option = mobilization_option:mobilization_option_machinegunners
+						}
+					}
+				}
+			}
+			save_scope_as = machine_gun_war
+			random_scope_front = {
+				limit = {
+					any_scope_general = {
+						owner = ROOT
+						this.commander_military_formation ?= {
+							has_mobilization_option = mobilization_option:mobilization_option_machinegunners
+						}
+					}
+				}
+				random_scope_general = {
+					limit = {
+						owner = ROOT
+						this.commander_military_formation ?= {
+							has_mobilization_option = mobilization_option:mobilization_option_machinegunners
+						}
+					}
+					save_scope_as = machine_gun_general
+				}
+			}
+			random_country = {
+				limit = {
+					has_war_with = ROOT
+				}
+				save_scope_as = machine_gun_enemy
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		NOR = {
+			exists = scope:machine_gun_war
+			exists = scope:machine_gun_general
+			exists = scope:machine_gun_enemy
+		}
+	}
+
+	option = { # the enemy does have machine guns
+		name = military_tech_events.402.a
+		default_option = yes
+		trigger = {	# This event is available if the enemy has machine guns researched
+			scope:machine_gun_enemy = {
+				has_technology_researched = automatic_machine_guns
+			}
+		}
+		scope:machine_gun_general = {
+			add_modifier = {
+				name = machine_gun_expertise_low
+				days = short_modifier_time
+			}
+		}
+	}
+	option = { # the enemy does not have machine guns
+		name = military_tech_events.402.b
+		trigger = {	# This event is available if the enemy does not have machine guns researched
+			scope:machine_gun_enemy = {
+				NOT = {
+					has_technology_researched = automatic_machine_guns
+				}
+			}
+		}
+		scope:machine_gun_general = {
+			add_modifier = {
+				name = machine_gun_expertise_high
+				days = short_modifier_time
+			}
+		}
+	}
+	option = { # the general becomes adept at defensive warfare
+		name = military_tech_events.402.c
+		trigger = {
+			scope:machine_gun_general = {
+				OR = {
+					NOT = { has_trait = trench_rat }
+					NOT = { has_trait = stalwart_defender }
+				}
+			}
+		}
+		if = {
+			limit ={
+				scope:machine_gun_general = {
+					has_trait = stalwart_defender
+				}
+			}
+			scope:machine_gun_general = {
+				add_trait = trench_rat
+			}
+		}
+		else = {
+			scope:machine_gun_general = {
+				add_trait = stalwart_defender
+			}
+		}
+	}
+}
+
+# Ironclads
+military_tech_events.403 = {
+	type = country_event
+	placement = ROOT
+
+	title = military_tech_events.403.t
+	desc = military_tech_events.403.d
+	flavor = military_tech_events.403.f
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	event_image = {
+		video = "unspecific_naval_battle"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		country_navy_unit_type_fraction = {
+            target = unit_type:combat_unit_type_ironclad
+            value >= 0.2
+        }
+        any_military_formation = {
+            filter = {
+                is_fleet = yes
+            }
+            any_scope_character = {
+                has_role = admiral
+                commander_military_formation ?= {
+                    formation_navy_unit_type_fraction = {
+                        target = unit_type:combat_unit_type_ironclad
+                        value >= 0.2
+                    }
+                }
+            }
+            percent >= 0.25
+        }
+	}
+	immediate = {
+		random_scope_character = {
+			limit = {
+				has_role = admiral
+				commander_military_formation ?= {
+				   formation_navy_unit_type_fraction = {
+					   target = unit_type:combat_unit_type_ironclad
+					   value >= 0.2
+				   }
+			   }
+			}
+			save_scope_as = ironclad_admiral
+		}
+	}
+
+	option = { #
+		name = military_tech_events.403.a
+		add_modifier = {
+			name = armoured_doctrine
+			days = long_modifier_time
+		}
+	}
+	option = { #
+		name = military_tech_events.403.b
+		add_modifier = {
+			name = ramming_doctrine
+			days = long_modifier_time
+		}
+	}
+	option = { #
+		name = military_tech_events.403.c
+		default_option = yes
+		add_modifier = {
+			name = armoured_high_seas_fleet
+			days = long_modifier_time
+		}
+	}
+}
+
+# Monitors
+military_tech_events.404 = {
+	type = country_event
+	placement = ROOT
+
+	title = military_tech_events.404.t
+	desc = military_tech_events.404.d
+	flavor = military_tech_events.404.f
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	event_image = {
+		video = "unspecific_naval_battle"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		country_navy_unit_type_fraction = {
+            target = unit_type:combat_unit_type_monitor
+            value >= 0.2
+        }
+        any_military_formation = {
+            filter = {
+                is_fleet = yes
+            }
+            any_scope_character = {
+                has_role = admiral
+                commander_military_formation ?= {
+                    formation_navy_unit_type_fraction = {
+                        target = unit_type:combat_unit_type_monitor
+                        value >= 0.2
+                    }
+                }
+            }
+            percent >= 0.25
+        }
+	}
+	immediate = {
+		random_scope_character = {
+			limit = {
+				has_role = admiral
+				commander_military_formation ?= {
+				   formation_navy_unit_type_fraction = {
+					   target = unit_type:combat_unit_type_monitor
+					   value >= 0.2
+				   }
+			   }
+			}
+			save_scope_as = monitor_admiral
+		}
+	}
+	option = { #
+		name = military_tech_events.404.a
+		default_option = yes
+		add_modifier = {
+			name = safer_shores
+			days = long_modifier_time
+		}
+	}
+	option = { #
+		name = military_tech_events.404.b
+		add_modifier = {
+			name = defensive_doctrine
+			days = long_modifier_time
+		}
+	}
+	option = { #
+		name = military_tech_events.404.c
+		add_modifier = {
+			name = quantity_over_quality
+			days = long_modifier_time
+		}
+	}
+}
+﻿namespace = naval_tech_events
+ naval_tech_events.1 = {
+ 	type = country_event
+ 	placement = root
+
+ 	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+ 	event_image = {
+ 		video = "unspecific_naval_battle"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+ 	title = naval_tech_events.1.t
+ 	desc = naval_tech_events.1.d
+ 	flavor = naval_tech_events.1.f
+
+ 	trigger = {
+		is_at_war = yes
+        country_navy_unit_type_fraction = {
+            target = unit_type:combat_unit_type_dreadnought
+            value >= 0.2
+        }
+        any_military_formation = {
+            filter = {
+                is_fleet = yes
+            }
+            any_scope_character = {
+                has_role = admiral
+               commander_military_formation ?= {
+                   formation_navy_unit_type_fraction = {
+                       target = unit_type:combat_unit_type_dreadnought
+                       value >= 0.2
+                   }
+               }
+            }
+			percent >= 0.25
+        }
+ 	}
+
+ 	immediate = {
+ 		random_scope_character = {
+ 			limit = {
+ 				has_role = admiral
+ 				commander_military_formation ?= {
+                    formation_navy_unit_type_fraction = {
+                        target = unit_type:combat_unit_type_dreadnought
+                        value >= 0.2
+                    }
+                }
+ 			}
+ 			save_scope_as = dreadnought_tech_commander
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.1.a
+ 		add_modifier = {
+ 			name = fearless_navy # country_prestige_mult
+ 			days = normal_modifier_time
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.1.b
+ 		default_option = yes
+ 		add_modifier = {
+ 			name = not_just_for_show # country_navy_power_projection_mult
+ 			days = normal_modifier_time
+ 		}
+ 	}
+ }
+
+ naval_tech_events.2 = {
+ 	type = country_event
+ 	placement = root
+
+ 	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+ 	event_image = {
+ 		video = "unspecific_naval_battle"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+ 	title = naval_tech_events.2.t
+ 	desc = naval_tech_events.2.d
+ 	flavor = naval_tech_events.2.f
+
+ 	trigger = {
+		is_at_war = yes
+		country_navy_unit_type_fraction = {
+		   target = unit_type:combat_unit_type_destroyer
+		   value >= 0.2
+	    }
+		any_military_formation = {
+		   filter = {
+			   is_fleet = yes
+		   }
+		   any_scope_character = {
+			   has_role = admiral
+			  commander_military_formation ?= {
+				  formation_navy_unit_type_fraction = {
+					  target = unit_type:combat_unit_type_destroyer
+					  value >= 0.2
+				  }
+			  }
+		   }
+		   percent >= 0.25
+	   }
+ 	}
+
+ 	immediate = {
+ 		random_scope_character = {
+ 			limit = {
+ 				has_role = admiral
+ 				commander_military_formation ?= {
+                    formation_navy_unit_type_fraction = {
+                        target = unit_type:combat_unit_type_destroyer
+                        value >= 0.2
+                    }
+                }
+ 			}
+ 			save_scope_as = destroyer_tech_commander
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.2.a
+ 		add_modifier = {
+ 			name = safer_convoys # unit_convoy_requirements_mult
+ 			days = normal_modifier_time
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.2.b
+ 		default_option = yes
+ 		add_modifier = {
+ 			name = safer_fleets # unit_navy_defense_mult
+ 			days = normal_modifier_time
+ 		}
+ 	}
+ }
+
+ naval_tech_events.3 = {
+ 	type = country_event
+ 	placement = root
+
+ 	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+ 	event_image = {
+ 		video = "unspecific_naval_battle"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+ 	title = naval_tech_events.3.t
+ 	desc = naval_tech_events.3.d
+ 	flavor = naval_tech_events.3.f
+
+ 	trigger = {
+		is_at_war = yes
+		country_navy_unit_type_fraction = {
+		   target = unit_type:combat_unit_type_battleship
+		   value >= 0.2
+	   	}
+		# for these JE's we would want this to be true for X months, but excluding that for the sake of readability
+		any_military_formation = {
+			filter = {
+				is_fleet = yes
+			}
+			any_scope_character = {
+				has_role = admiral
+				commander_military_formation ?= {
+					formation_navy_unit_type_fraction = {
+						target = unit_type:combat_unit_type_battleship
+						value >= 0.2
+					}
+				}
+			}
+			percent >= 0.25
+		}
+ 	}
+
+ 	immediate = {
+ 		random_scope_character = {
+ 			limit = {
+ 				has_role = admiral
+ 				commander_military_formation ?= {
+                    formation_navy_unit_type_fraction = {
+                        target = unit_type:combat_unit_type_battleship
+                        value >= 0.2
+                    }
+                }
+ 			}
+ 			save_scope_as = battleship_tech_commander
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.3.a
+ 		add_modifier = {
+ 			name = gunship_diplomacy # country_influence_mult
+ 			days = normal_modifier_time
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.3.b
+ 		default_option = yes
+ 		add_modifier = {
+ 			name = mighty_navy # country_navy_power_projection_mult
+ 			days = normal_modifier_time
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.3.c
+ 		default_option = yes
+ 		trigger = {
+ 			has_technology_researched = sea_lane_strategies
+ 			NOT = { has_technology_researched = battlefleet_tactics }
+ 			can_research = battlefleet_tactics
+ 		}
+ 		add_technology_progress = { progress = 5850 technology = battlefleet_tactics }
+ 	}
+ }
+
+ naval_tech_events.4 = {
+ 	type = country_event
+ 	placement = root
+
+ 	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+ 	event_image = {
+ 		video = "unspecific_steam_ship"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+ 	title = naval_tech_events.4.t
+ 	desc = naval_tech_events.4.d
+ 	flavor = naval_tech_events.4.f
+
+ 	trigger = {
+		country_navy_unit_type_fraction = {
+            target = unit_type:combat_unit_type_submarine
+            value >= 0.2
+        }
+        any_military_formation = {
+            filter = {
+                is_fleet = yes
+            }
+            any_scope_character = {
+                has_role = admiral
+               commander_military_formation ?= {
+                   formation_navy_unit_type_fraction = {
+                       target = unit_type:combat_unit_type_submarine
+                       value >= 0.2
+                   }
+               }
+            }
+			percent >= 0.25
+        }
+ 	}
+
+ 	immediate = {
+ 		random_scope_character = {
+ 			limit = {
+ 				has_role = admiral
+ 				commander_military_formation ?= {
+                    formation_navy_unit_type_fraction = {
+                        target = unit_type:combat_unit_type_submarine
+                        value >= 0.2
+                    }
+                }
+ 			}
+ 			save_scope_as = submarine_commander
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.4.a
+ 		default_option = yes
+
+ 		add_modifier = {
+ 			name = unrestricted_submarine_warfare
+ 			days = normal_modifier_time
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.4.b
+ 		trigger = {
+ 			NOT = { has_technology_researched = destroyer }
+ 			can_research = destroyer
+ 		}
+ 		add_technology_progress = { progress = 6250 technology = destroyer } # half of total cost
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.4.c
+
+ 		trigger = {
+ 			scope:submarine_commander = {
+ 				NOT = { has_trait = expert_convoy_raider }
+ 			}
+ 		}
+
+ 		scope:submarine_commander = {
+ 			if = {
+ 				limit = {
+ 					has_trait = experienced_convoy_raider
+ 				}
+ 				remove_trait = experienced_convoy_raider
+ 				add_trait = expert_convoy_raider
+ 			}
+ 			else_if = {
+ 				limit = {
+ 					has_trait = convoy_raider_commander
+ 				}
+ 				remove_trait = convoy_raider_commander
+ 				add_trait = experienced_convoy_raider
+ 			}
+ 			else = {
+ 				add_trait = convoy_raider_commander
+ 			}
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.4.e
+
+ 		trigger = {
+ 			scope:submarine_commander = {
+ 				NOT = { has_trait = celebrity_commander }
+ 			}
+ 		}
+
+ 		scope:submarine_commander = {
+ 			if = {
+ 				limit = {
+ 					has_trait = popular_commander
+ 				}
+ 				remove_trait = popular_commander
+ 				add_trait = celebrity_commander
+ 			}
+ 			else = {
+ 				add_trait = popular_commander
+ 			}
+ 		}
+ 	}
+ }
+
+ naval_tech_events.5 = {
+ 	type = country_event
+ 	placement = root
+
+ 	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+ 	event_image = {
+ 		video = "unspecific_airplane"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+ 	title = naval_tech_events.5.t
+ 	desc = naval_tech_events.5.d
+ 	flavor = naval_tech_events.5.f
+
+ 	trigger = {
+		country_navy_unit_type_fraction = {
+            target = unit_type:combat_unit_type_carrier
+            value >= 0.2
+        }
+        any_military_formation = {
+            filter = {
+                is_fleet = yes
+            }
+            any_scope_character = {
+                has_role = admiral
+                commander_military_formation ?= {
+                   formation_navy_unit_type_fraction = {
+                       target = unit_type:combat_unit_type_carrier
+                       value >= 0.2
+                   }
+                }
+            }
+			percent >= 0.25
+        }
+ 	}
+
+ 	immediate = {
+ 		random_scope_character = {
+ 			limit = {
+ 				has_role = admiral
+ 				commander_military_formation ?= {
+                    formation_navy_unit_type_fraction = {
+                        target = unit_type:combat_unit_type_carrier
+                        value >= 0.2
+                    }
+                }
+ 			}
+ 			save_scope_as = aviator_commander
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.5.a
+ 		default_option = yes
+
+ 		add_modifier = {
+ 			name = the_navy_of_tomorrow
+ 			days = normal_modifier_time
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.5.b
+
+ 		trigger = {
+ 			any_interest_group = {
+ 				leader = {
+ 					has_role = admiral
+ 				}
+ 			}
+ 			scope:aviator_commander = {
+ 				NOT = { has_role = politician }
+				is_immortal = no
+ 			}
+ 		}
+
+ 		scope:aviator_commander = { kill_character = yes }
+
+ 		every_interest_group = {
+ 			limit = {
+ 				leader = {
+ 					has_role = admiral
+ 				}
+ 			}
+ 			add_modifier = {
+ 				name = naval_traditions_upheld
+ 				days = normal_modifier_time
+ 			}
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.5.c
+
+ 		trigger = {
+ 			scope:aviator_commander = {
+ 				NOT = { has_role = politician }
+ 			}
+ 		}
+
+ 		scope:aviator_commander = {
+ 			add_character_role = politician
+ 			set_as_interest_group_leader = yes
+ 		}
+ 	}
+
+ 	option = {
+ 		name = naval_tech_events.5.e
+ 		trigger = {
+ 			can_research = military_aviation
+ 		}
+
+ 		add_technology_progress = { progress = 7500 technology = military_aviation } # half of total cost
+ 	}
+ }
+﻿namespace = nursing_events
+ nursing_events.1 = { #Bad conditions
+ 	type = country_event
+ 	placement = scope:ongoing_war_state
+
+ 	duration = 3
+
+    #Fired once, by je_war_nursing
+
+ 	event_image = {
+ 		video = "unspecific_sick_in_hospital"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+ 	title = nursing_events.1.t
+ 	desc = nursing_events.1.d
+ 	flavor = nursing_events.1.f
+
+ 	trigger = {
+ 		any_scope_war = {
+            any_scope_front = {
+                any_scope_general = {
+                    owner = ROOT
+                    this.commander_military_formation ?= {
+                        NOR = {
+                            has_mobilization_option = mobilization_option:mobilization_option_first_aid
+                            has_mobilization_option = mobilization_option:mobilization_option_field_hospitals
+                        }
+                    }
+                }
+            }
+ 		}
+ 	}
+
+ 	immediate = {
+ 		set_variable = {
+ 			name = nursing_cooldown
+ 			months = 6
+ 		}
+ 		random_scope_war = {
+ 			random_scope_front = {
+ 				random_scope_state = { save_scope_as = ongoing_war_state }
+ 			}
+ 		}
+ 	}
+
+ 	option = {
+ 		name = nursing_events.1.a
+ 		default_option = yes
+        custom_tooltip = {
+            text = for_duration_of_war_tt
+        }
+ 		add_modifier = {
+ 			name = war_wounded_disease
+ 			days = long_modifier_time
+ 		}
+ 	}
+
+ 	option = {
+ 		name = nursing_events.1.b
+ 		 custom_tooltip = {
+            text = for_duration_of_war_tt
+        }
+ 		add_modifier = {
+ 			name = war_wounded_civilian_assistance
+ 			days = long_modifier_time
+ 		}
+ 	}
+ }
+
+ nursing_events.2 = { #Handwashing
+ 	type = country_event
+ 	placement = scope:ongoing_war_state
+
+ 	duration = 3
+
+    cooldown = { days = very_long_modifier_time } #For this event specifically. Nursing cooldown is a shared cooldown.
+
+ 	event_image = {
+ 		video = "unspecific_sick_in_hospital"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+ 	title = nursing_events.2.t
+ 	desc = nursing_events.2.d
+ 	flavor = nursing_events.2.f
+
+ 	trigger = {
+ 		is_at_war = yes
+ 		any_scope_war = {
+ 			num_country_dead = {
+ 				target = root
+ 				value > 1000
+ 			}
+ 			any_scope_front = {
+                any_scope_general = {
+                    owner = ROOT
+                    this.commander_military_formation ?= {
+                        OR = {
+                            has_mobilization_option = mobilization_option:mobilization_option_first_aid
+                            has_mobilization_option = mobilization_option:mobilization_option_field_hospitals
+                        }
+                    }
+                }
+                any_scope_state = {	owner = root }
+            }
+ 		}
+ 		NOT = {
+ 			has_variable = nursing_cooldown
+ 		}
+ 	}
+
+ 	immediate = {
+ 		ordered_scope_war = {
+ 			order_by = "num_country_dead(root)"
+			position = 0
+			check_range_bounds = no
+ 			save_scope_as = ongoing_war
+ 			random_scope_front = {
+ 				limit = {
+ 					any_scope_state = {	owner = root }
+ 				}
+ 				random_scope_state = {
+ 					limit = { owner = root }
+ 					save_scope_as = ongoing_war_state
+ 				}
+ 			}
+ 		}
+ 		set_variable = {
+ 			name = nursing_cooldown
+ 			months = 6
+ 		}
+ 	}
+
+ 	option = { #Do it
+ 		default_option = yes
+ 		name = nursing_events.2.a
+ 		scope:ongoing_war_state = {
+ 			add_modifier = {
+ 				name = medical_hygiene_local
+ 				days = very_long_modifier_time
+ 			}
+ 		}
+ 	}
+
+ 	option = { #This should be taught everywhere
+ 		name = nursing_events.2.b
+ 		add_modifier = {
+ 			name = medical_hygiene
+ 			days = very_long_modifier_time
+ 		}
+ 	}
+ }
+
+ nursing_events.3 = { #Prefab hospital
+ 	type = country_event
+ 	placement = scope:ongoing_war_state
+
+ 	duration = 3
+
+    cooldown = { days = very_long_modifier_time } #For this event specifically. Nursing cooldown is a shared cooldown.
+
+ 	event_image = {
+ 		video = "unspecific_sick_in_hospital"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+ 	title = nursing_events.3.t
+ 	desc = nursing_events.3.d
+ 	flavor = nursing_events.3.f
+
+ 	trigger = {
+ 		is_at_war = yes
+ 		any_scope_war = {
+ 			num_country_dead = {
+ 				target = root
+ 				value > 1000
+ 			}
+ 			any_scope_front = {
+                any_scope_general = {
+                    owner = ROOT
+                    this.commander_military_formation ?= {
+                        has_mobilization_option = mobilization_option:mobilization_option_field_hospitals
+                    }
+                }
+            }
+ 		}
+ 		NOT = {
+ 			has_variable = nursing_cooldown
+ 		}
+ 	}
+
+ 	immediate = {
+ 		ordered_scope_war = {
+ 			order_by = "num_country_dead(root)"
+			position = 0
+			check_range_bounds = no
+ 			save_scope_as = ongoing_war
+ 			random_scope_front = {
+ 				random_scope_state = { save_scope_as = ongoing_war_state }
+ 			}
+ 		}
+ 		set_variable = {
+ 			name = nursing_cooldown
+ 			months = 6
+ 		}
+ 	}
+ 	option = { #Do it
+ 		name = nursing_events.3.a
+ 		default_option = yes
+ 		add_modifier = {
+ 			name = prefab_hospital
+ 			days = short_modifier_time
+            multiplier = 2
+ 		}
+ 	}
+
+ 	option = { #the time and knowledge is better spent on research
+ 		name = nursing_events.3.b
+ 		trigger = {
+ 			OR = {
+ 				can_research = medical_degrees
+ 				can_research = quinine
+ 				can_research = malaria_prevention
+ 				can_research = antibiotics
+ 			}
+ 		}
+ 		if = {
+ 			limit = {
+ 				can_research = medical_degrees
+ 			}
+ 			add_technology_progress = { progress = 2500 technology = medical_degrees }
+ 		}
+ 		else_if = {
+ 			limit = {
+ 				can_research = quinine
+ 			}
+ 			add_technology_progress = { progress = 3500 technology = quinine }
+ 		}
+ 		else_if = {
+ 			limit = {
+ 				can_research = malaria_prevention
+ 			}
+ 			add_technology_progress = { progress = 6000 technology = malaria_prevention }
+ 		}
+ 		else_if = {
+ 			limit = {
+ 				can_research = antibiotics
+ 			}
+ 			add_technology_progress = { progress = 5850 technology = antibiotics }
+ 		}
+ 	}
+ }
+
+ nursing_events.4 = {
+ 	type = country_event
+ 	placement = scope:ongoing_war_state
+
+ 	duration = 3
+
+    #Fired once.
+
+ 	event_image = {
+ 		video = "unspecific_sick_in_hospital"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+ 	title = nursing_events.4.t
+ 	desc = nursing_events.4.d
+ 	flavor = nursing_events.4.f
+
+ 	trigger = {
+ 		# Triggered by completing je_war_nursing
+ 	}
+
+ 	immediate = {
+ 		random_scope_war = {
+ 			limit = {
+                any_scope_front = {
+                    any_scope_general = {
+                        owner = ROOT
+                        this.commander_military_formation ?= {
+                            has_mobilization_option = mobilization_option:mobilization_option_field_hospitals
+                        }
+                    }
+                 }
+ 			}
+ 			save_scope_as = complete_nursing_war
+ 			random_scope_front = {
+ 				random_scope_state = { save_scope_as = ongoing_war_state }
+ 			}
+ 		}
+ 	}
+
+ 	option = { #Do it
+ 		name = nursing_events.4.a
+ 		add_modifier = {
+ 			name = modern_nursing
+ 			days = long_modifier_time
+ 		}
+        remove_war_disease_modifier = yes # This is also visible on the JE's on_complete, but putting it here too makes it even clearer to the player.
+ 	}
+ }
+﻿ namespace = production_tech_events
+
+production_tech_events.1 = {
+	type = country_event
+
+	trigger = {
+		any_scope_building = {
+			is_building_type = building_rubber_plantation
+			cash_reserves_ratio > 0.25
+			weekly_profit > 0
+			occupancy >= 0.5
+			level >= 5
+		}
+	}
+
+	event_image = {
+		video = "southamerica_factory_opening"
+	}
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	placement = scope:rubber_state
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	title = production_tech_events.1.t
+	desc = production_tech_events.1.d
+	flavor = production_tech_events.1.f
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_rubber_plantation
+					occupancy >= 0.5
+					level >= 5
+				}
+			}
+			save_scope_as = rubber_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_rubber_plantation
+					occupancy >= 0.5
+					level >= 5
+				}
+				save_scope_as = rubber_building
+			}
+		}
+	}
+
+	option = {
+		name = production_tech_events.1.a
+		default_option = yes
+		scope:rubber_state = {
+			add_modifier = {
+				name = rubber_production_modifier
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = production_tech_events.1.b
+		trigger = {
+			NOT = { has_technology_researched = vulcanization }
+			can_research = vulcanization
+		}
+		add_technology_progress = { progress = 4150 technology = vulcanization }
+	}
+}
+
+production_tech_events.102 = {
+	type = country_event
+
+	trigger = {
+		has_technology_researched = dynamite
+		any_scope_building = {
+			OR = {
+				is_building_type = building_munition_plant
+				is_building_type = building_iron_mine
+				is_building_type = building_coal_mine
+				is_building_type = building_lead_mine
+				is_building_type = building_sulfur_mine
+			}
+		}
+		any_scope_building = {
+			is_building_type = building_explosives_factory
+		}
+		market_capital.market = {
+			mg:explosives = {
+				market_goods_pricier > 0.15
+			}
+		}
+	}
+
+	event_image = {
+		video = "southamerica_factory_opening"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	placement = ROOT
+
+	title = production_tech_events.102.t
+	desc = production_tech_events.102.d
+	flavor = production_tech_events.102.f
+
+	immediate = {
+		g:explosives = {
+			save_scope_as = explosives_goods
+		}
+	}
+
+	option = { # Make national to effect explosives plants to produce more explosives.
+		name = production_tech_events.102.a
+		default_option = yes
+		add_modifier = {
+			name = dynamite_production_modifier
+			days = normal_modifier_time
+		}
+	}
+
+	option = { # Make national to effect mining industries
+		name = production_tech_events.102.b
+		add_modifier = {
+			name = mining_production_modifier
+			days = normal_modifier_time
+		}
+	}
+
+	option = { # Make national to effect munitions plants
+		name = production_tech_events.102.c
+		add_modifier = {
+			name = munitions_production_modifier
+			days = normal_modifier_time
+		}
+	}
+}
+
+production_tech_events.103 = {
+	type = country_event
+
+	trigger = {
+		OR = {
+			any_scope_building = {
+				filter = {
+					is_building_type = building_urban_center
+				}
+				percent > 0.75
+				has_active_production_method = pm_public_motor_carriages
+				cash_reserves_ratio >= 0.25
+				weekly_profit > 0
+				occupancy >= 0.75
+			}
+			any_scope_building = {
+				filter = {
+					is_building_type = building_motor_industry
+				}
+				percent > 0.75
+				has_active_production_method = pm_automobile_production
+				cash_reserves_ratio >= 0.25
+				weekly_profit > 0
+				occupancy >= 0.75
+			}
+		}
+	}
+
+	event_image = {
+		video = "southamerica_factory_opening"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	placement = ROOT
+
+	title = production_tech_events.103.t
+	desc = production_tech_events.103.d
+	flavor = production_tech_events.103.f
+
+	immediate = {
+	}
+
+	option = {
+		name = production_tech_events.103.a
+		default_option = yes
+		add_modifier = {
+			name = motor_industry_production_modifier
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = production_tech_events.103.b
+		add_modifier = {
+			name = public_trasportation_modifier
+			days = normal_modifier_time
+		}
+	}
+}
+
+production_tech_events.200 = {
+	event_image = {
+		video = "unspecific_gears_pistons"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	placement = ROOT
+
+	title = production_tech_events.200.t
+	desc = production_tech_events.200.d
+	flavor = production_tech_events.200.f
+
+	trigger = {
+		any_scope_building = {
+			filter = {
+				is_building_type = building_glassworks
+			}
+
+			percent >= 0.5
+
+			occupancy > 0.75
+			weekly_profit > 10
+			cash_reserves_ratio > 0.25
+			weekly_profit > 0
+			level >= 5
+			has_active_production_method = pm_houseware_plastics
+		}
+	}
+
+	immediate = {
+		random_scope_building = {
+				limit = {
+					is_building_type = building_glassworks
+				}
+				save_scope_as = plastic_building
+		}
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					NOT = { has_technology_researched = plastics }
+					has_technology_researched = reinforced_concrete
+				}
+
+			}
+			owner = {
+				save_scope_as = plastic_neighbor
+			}
+		}
+		save_scope_as = plastic_origin
+	}
+
+	option = {
+		name = production_tech_events.200.a
+		default_option = yes
+		add_modifier = {
+			name = plastic_production_modifier
+			days = normal_modifier_time
+		}
+	}
+	option = {
+		name = production_tech_events.200.b
+		trigger = {
+			exists = scope:plastic_neighbor
+			scope:plastic_neighbor = {
+				NOT = { has_technology_researched = plastics }
+				is_player = no
+			}
+		}
+
+		scope:plastic_neighbor = {
+			hidden_effect = { post_notification = country_shared_plastics_tech }
+			if = {
+				limit = { can_research = plastics }
+				add_technology_progress = { progress = 6000 technology = plastics }
+			}
+			change_relations = {
+				country = ROOT
+				value = 20
+			}
+		}
+	}
+}
+
+production_tech_events.210 = {
+	placement = ROOT
+
+	title = production_tech_events.210.t
+	desc = production_tech_events.210.d
+	flavor = production_tech_events.210.f
+
+	event_image = {
+		video = "unspecific_gears_pistons"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	trigger = {
+		any_scope_building = {
+			filter = {
+				is_building_type = building_electrics_industry
+			}
+
+			percent >= 0.5
+			occupancy > 0.75
+			cash_reserves_ratio > 0.25
+			weekly_profit > 0
+			level >= 5
+			has_active_production_method = pm_radios
+		}
+	}
+
+	immediate = {
+		random_scope_building = {
+				limit = {
+					is_building_type = building_glassworks
+				}
+				save_scope_as = radio_production_building
+		}
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					NOT = { has_technology_researched = radio }
+					has_technology_researched = telephone
+				}
+			}
+			owner = {
+				save_scope_as = radio_production_neighbor
+			}
+		}
+		save_scope_as = radio_production_origin
+	}
+
+	option = {
+		name = production_tech_events.210.a
+		default_option = yes
+		add_modifier = {
+			name = radio_production_modifier
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = production_tech_events.210.b
+		trigger = {
+			exists = scope:radio_production_neighbor
+			scope:radio_production_neighbor = {
+				NOT = { has_technology_researched = radio }
+			}
+		}
+		scope:radio_production_neighbor = {
+			hidden_effect = { post_notification = country_shared_radio_tech }
+			if = {
+				limit = { can_research = radio }
+				add_technology_progress = { progress = 6000 technology = radio }
+			}
+			change_relations = {
+				country = ROOT
+				value = 20
+			}
+		}
+	}
+}
+
+production_tech_events.300 = { #telephone
+	type = country_event
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+	placement = scope:electrics_state
+
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	title = production_tech_events.300.t
+	desc = production_tech_events.300.d
+	flavor = production_tech_events.300.f
+
+	trigger = {
+		any_scope_building = {
+			is_building_type = building_electrics_industry
+			cash_reserves_ratio > 0.25
+			weekly_profit > 0
+			occupancy > 0.75
+			level >= 5
+		}
+		NOT = { has_technology_researched = radio }
+		can_research = radio
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_electrics_industry
+					weekly_profit > 0
+					occupancy > 0.75
+					level >= 5
+					has_active_production_method = pm_telephones
+				}
+			}
+			save_scope_as = electrics_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_electrics_industry
+					weekly_profit > 0
+					occupancy > 0.75
+					level >= 5
+					has_active_production_method = pm_telephones
+				}
+				save_scope_as = electrics_building
+			}
+		}
+	}
+
+	option = { #communications
+		name = production_tech_events.300.a
+		default_option = yes
+		if = {
+			limit = { can_research = radio }
+			add_technology_progress = { progress = 6000 technology = radio }
+		}
+	}
+
+	option = { #industry!
+		name = production_tech_events.300.b
+		scope:electrics_state = {
+			add_modifier = {
+				name = electrics_building_modifier
+				days = normal_modifier_time
+			}
+		}
+	}
+}
+
+production_tech_events.301 = { #whaling
+	type = country_event
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+	placement = scope:whaling_state
+
+	event_image = {
+		video = "unspecific_whaling"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	title = production_tech_events.301.t
+	desc = production_tech_events.301.d
+	flavor = production_tech_events.301.f
+
+	trigger = {
+		any_scope_building = {
+			is_building_type = building_whaling_station
+			cash_reserves_ratio > 0.25
+			weekly_profit > 0
+			occupancy > 0.75
+			level >= 3
+		}
+		any_scope_character = {
+			has_role = admiral
+			is_busy = no
+			is_ruler = no
+		}
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_whaling_station
+					cash_reserves_ratio > 0.25
+					weekly_profit > 0
+					occupancy > 0.75
+					level >= 3
+				}
+			}
+			save_scope_as = whaling_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_whaling_station
+					cash_reserves_ratio > 0.25
+					weekly_profit > 0
+					occupancy > 0.75
+					level >= 3
+				}
+				save_scope_as = whaling_building
+			}
+		}
+		random_scope_character = {
+			limit = {
+				has_role = admiral
+				is_busy = no
+				is_ruler = no
+			}
+			save_scope_as = whaling_admiral_character
+		}
+	}
+
+	option = { #ensure the safety of the workers
+		name = production_tech_events.301.a
+		default_option = yes
+		scope:whaling_admiral_character = {
+			add_modifier = {
+				name = whaling_admiral_modifier
+				days = normal_modifier_time
+			}
+		}
+		scope:whaling_state = {
+			add_modifier = {
+				name = whaling_state_mortality_modifier
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = { #industry!
+		name = production_tech_events.301.b
+		scope:whaling_state = {
+			add_modifier = {
+				name = whaling_state_modifier
+				days = normal_modifier_time
+			}
+		}
+	}
+}
+
+production_tech_events.401 = {
+	type = country_event
+	placement = scope:oil_rig_state
+
+	event_image = {
+		video = "middleeast_oil_derricks"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	title = production_tech_events.401.t
+	desc = production_tech_events.401.d
+	flavor = production_tech_events.401.f
+
+	trigger = {
+		any_scope_building = {
+			is_building_type = building_oil_rig
+			occupancy > 0.75
+			cash_reserves_ratio > 0.25
+			weekly_profit > 0
+			level >= 5
+		}
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_oil_rig
+					occupancy > 0.75
+					cash_reserves_ratio > 0.25
+					level >= 5
+				}
+			}
+			save_scope_as = oil_rig_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_oil_rig
+					occupancy > 0.75
+					cash_reserves_ratio > 0.25
+					level >= 5
+				}
+				save_scope_as = oil_rig_building
+			}
+		}
+	}
+
+	option = {
+		name = production_tech_events.401.a
+		default_option = yes
+		scope:oil_rig_state = {
+			add_modifier = {
+				name = oil_production_modifier
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = production_tech_events.401.b
+		trigger = {
+			NOT = { has_technology_researched = combustion_engine }
+			has_technology_researched = rotary_valve_engine
+		}
+		add_technology_progress = { progress = 5850 technology = combustion_engine }
+	}
+}
+
+production_tech_events.402 = {
+	type = country_event
+	placement = scope:power_plant_state
+
+	event_image = {
+		video = "unspecific_gears_pistons"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	title = production_tech_events.402.t
+	desc = production_tech_events.402.d
+	flavor = production_tech_events.402.f
+
+	trigger = {
+		any_scope_building = {
+			is_building_type = building_power_plant
+			occupancy > 0.75
+			cash_reserves_ratio > 0.25
+			weekly_profit > 0
+			level >= 5
+		}
+		OR = {
+			can_research = electric_railway
+			can_research = steam_turbine
+			can_research = shift_work
+		}
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_power_plant
+					occupancy > 0.75
+					cash_reserves_ratio > 0.25
+					level >= 5
+				}
+			}
+			save_scope_as = power_plant_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_power_plant
+					occupancy > 0.75
+					cash_reserves_ratio > 0.25
+					level >= 5
+				}
+				save_scope_as = power_plant_building
+			}
+		}
+	}
+
+	option = {
+		name = production_tech_events.402.a
+		default_option = yes
+		scope:power_plant_state = {
+			add_modifier = {
+				name = electrical_power_production_modifier
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = production_tech_events.402.b
+		trigger = {
+			NOT = { has_technology_researched = electric_railway }
+			has_technology_researched = steel_railway_cars
+			can_research = electric_railway
+		}
+		add_technology_progress = { progress = 6000 technology = electric_railway }
+	}
+
+	option = {
+		name = production_tech_events.402.c
+		trigger = {
+			NOT = { has_technology_researched = steam_turbine }
+			can_research = steam_turbine
+		}
+		add_technology_progress = { progress = 6000 technology = steam_turbine }
+	}
+
+	option = {
+		name = production_tech_events.402.e
+		trigger = {
+			NOT = { has_technology_researched = shift_work }
+			can_research = shift_work
+		}
+		add_technology_progress = { progress = 4150 technology = shift_work }
+	}
+}
+
+# ALL ABOARD THE RAILROAD TECHS
+production_tech_events.501 = {
+	type = country_event
+
+	event_image = {
+		video = "unspecific_trains"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	placement = scope:railway_state
+
+	title = production_tech_events.501.t
+	desc = production_tech_events.501.d
+	flavor = production_tech_events.501.f
+
+	trigger = {
+		any_scope_state = {
+			has_building = building_motor_industry
+		}
+		any_scope_state = {
+			has_building = building_railway
+		}
+		trigger_if = {
+			limit = {
+				any_scope_building = {
+					OR = {
+						is_building_type = building_coal_mine
+						is_building_type = building_iron_mine
+						is_building_type = building_lead_mine
+						is_building_type = building_sulfur_mine
+						is_building_type = building_logging_camp
+						is_building_type = building_oil_rig
+					}
+				}
+			}
+			any_scope_building = {
+				filter = {
+					OR = {
+						is_building_type = building_coal_mine
+						is_building_type = building_iron_mine
+						is_building_type = building_lead_mine
+						is_building_type = building_sulfur_mine
+						is_building_type = building_logging_camp
+						is_building_type = building_oil_rig
+					}
+				}
+				percent > 0.2
+				OR = {
+				    has_active_production_method = pm_rail_transport_mine
+				    has_active_production_method = pm_rail_transport_building_logging_camp
+				    has_active_production_method = pm_rail_transport_building_oil_rig
+                }
+				occupancy >= 0.75
+			}
+		}
+		trigger_if = {
+			limit = {
+				any_scope_building = {
+					OR = {
+						is_building_type = building_coffee_plantation
+						is_building_type = building_cotton_plantation
+						is_building_type = building_dye_plantation
+						is_building_type = building_opium_plantation
+						is_building_type = building_tea_plantation
+						is_building_type = building_tobacco_plantation
+						is_building_type = building_sugar_plantation
+						is_building_type = building_rubber_plantation
+						is_building_type = building_banana_plantation
+					}
+				}
+			}
+			any_scope_building = {
+				filter = {
+					OR = {
+						is_building_type = building_coffee_plantation
+						is_building_type = building_cotton_plantation
+						is_building_type = building_dye_plantation
+						is_building_type = building_opium_plantation
+						is_building_type = building_tea_plantation
+						is_building_type = building_tobacco_plantation
+						is_building_type = building_sugar_plantation
+						is_building_type = building_rubber_plantation
+						is_building_type = building_banana_plantation
+					}
+				}
+				percent > 0.2
+				has_active_production_method = pm_steam_rail_transport
+				occupancy >= 0.75
+			}
+		}
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				has_building = building_motor_industry
+			}
+			save_scope_as = engine_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_motor_industry
+				}
+				save_scope_as = engine_building
+			}
+		}
+		random_scope_state = {
+			limit = {
+				has_building = building_railway
+			}
+			save_scope_as = railway_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_railway
+				}
+				save_scope_as = railway_building
+			}
+		}
+	}
+
+	option = {
+		name = production_tech_events.501.a
+		default_option = yes
+		scope:railway_state = {
+			add_modifier = {
+				name = railway_production_modifier
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = production_tech_events.501.b
+		trigger = {
+			any_scope_state = {
+				has_building = building_motor_industry
+			}
+		}
+		scope:engine_state = {
+			add_modifier = {
+				name = engine_production_modifier
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = production_tech_events.501.c
+		trigger = {
+			NOT = { has_technology_researched = steel_railway_cars }
+			can_research = steel_railway_cars
+		}
+		add_technology_progress = { progress = 4150 technology = steel_railway_cars }
+	}
+}
+
+production_tech_events.600 = {
+
+	type = country_event
+
+	trigger = {
+		any_scope_building = {
+			filter = {
+				OR = {
+					is_building_type = building_rye_farm
+					is_building_type = building_wheat_farm
+					is_building_type = building_maize_farm
+					is_building_type = building_millet_farm
+				}
+			}
+			percent >= 0.75
+			trigger_if = {
+				limit = {
+					owner = {
+						has_technology_researched = compression_ignition
+					}
+				}
+				OR = {
+					has_active_production_method = pm_tractors
+					has_active_production_method = pm_compression_ignition_tractors
+				}
+			}
+			trigger_else = {
+				OR = {
+					has_active_production_method = pm_tractors
+                }
+			}
+			cash_reserves_ratio > 0.25
+			weekly_profit > 0
+			occupancy > 0.75
+		}
+	}
+
+	event_image = {
+		video = "southamerica_factory_opening"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+	placement = root
+
+	title = production_tech_events.600.t
+	desc = production_tech_events.600.d
+	flavor = production_tech_events.600.f
+
+	immediate = {
+	}
+
+	option = {
+		name = production_tech_events.600.a
+		default_option = yes
+		add_modifier = {
+			name = tractor_food_for_the_poor
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = production_tech_events.600.b
+		add_modifier = {
+			name = tractor_production
+			days = normal_modifier_time
+		}
+	}
+}
+
+production_tech_events.601 = {
+	type = country_event
+
+	placement = scope:atmospheric_engine_state
+
+	title = production_tech_events.601.t
+	desc = production_tech_events.601.d
+	flavor = production_tech_events.601.f
+
+	trigger = {
+		has_technology_researched = atmospheric_engine
+		any_scope_building = {
+			OR = {
+				is_building_type = building_coal_mine
+				is_building_type = building_iron_mine
+				is_building_type = building_sulfur_mine
+				is_building_type = building_lead_mine
+			}
+			level >= 3
+		}
+	}
+
+	event_image = {
+		video = "unspecific_gears_pistons"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	immediate = {
+		random_scope_state = {
+			random_scope_building = {
+				limit = {
+					OR = {
+						is_building_type = building_coal_mine
+						is_building_type = building_iron_mine
+						is_building_type = building_sulfur_mine
+						is_building_type = building_lead_mine
+					}
+					has_active_production_method = pm_atmospheric_engine_pump_building_coal_mine
+				}
+			}
+			save_scope_as = atmospheric_engine_state
+		}
+	}
+
+	option = { # mine production
+		name = production_tech_events.601.a
+		default_option = yes
+		add_modifier = {
+			name = atmospheric_engine_mining
+			days = normal_modifier_time
+		}
+	}
+
+	option = { # railway tech
+		name = production_tech_events.601.b
+		trigger = {
+			NOT = { has_technology_researched = railways }
+			has_technology_researched = mechanical_tools
+		}
+		add_technology_progress = { progress = 3500 technology = railways }
+	}
+
+	option = { # boiler tech
+		name = production_tech_events.601.c
+		trigger = {
+			NOT = { has_technology_researched = watertube_boiler }
+		}
+		add_technology_progress = { progress = 3500 technology = watertube_boiler }
+	}
+}
+
+# Steam Engines
+production_tech_events.700 = {
+	type = country_event
+
+	placement = scope:steam_engine_state
+
+	title = production_tech_events.700.t
+	desc = production_tech_events.700.d
+	flavor = production_tech_events.700.f
+
+	trigger = {
+		any_scope_building = {
+			is_building_type = building_motor_industry
+			occupancy > 0.75
+			cash_reserves_ratio > 0.25
+			weekly_profit > 0
+			level >= 3
+		}
+		any_scope_state = {
+			any_scope_building = {
+				is_building_type = building_railway
+				occupancy > 0.75
+			}
+			custom_tooltip = {
+				text = has_adjacent_railway_tt
+				any_neighbouring_state = {
+					owner = ROOT
+					any_scope_building = {
+						is_building_type = building_railway
+						occupancy > 0.75
+					}
+				}
+			}
+		}
+	}
+
+	event_image = {
+		video = "unspecific_trains"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_motor_industry
+					occupancy > 0.75
+					cash_reserves_ratio > 0.25
+					weekly_profit > 0
+					level >= 3
+				}
+			}
+			save_scope_as = steam_engine_state
+		}
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_railway
+					occupancy > 0.75
+				}
+				any_neighbouring_state = {
+					owner = ROOT
+					any_scope_building = {
+						is_building_type = building_railway
+						occupancy > 0.75
+					}
+				}
+			}
+			save_scope_as = first_railway_state
+			random_neighbouring_state = {
+				limit = {
+					owner = ROOT
+					any_scope_building = {
+						is_building_type = building_railway
+						occupancy > 0.75
+					}
+				}
+				save_scope_as = second_railway_state
+			}
+		}
+	}
+
+	option = { # railway throughput
+		name = production_tech_events.700.a
+		default_option = yes
+		add_modifier = {
+			name = first_railway_modifier
+			days = normal_modifier_time
+		}
+	}
+
+	option = { # motor industry throughput
+		name = production_tech_events.700.b
+		scope:steam_engine_state = {
+			add_modifier = {
+				name = steam_engine_production
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = { # railway car tech
+		name = production_tech_events.700.c
+		trigger = {
+			NOT = { has_technology_researched = steel_railway_cars }
+			can_research = steel_railway_cars
+		}
+		add_technology_progress = { progress = 4150 technology = steel_railway_cars }
+	}
+}
+﻿namespace = rubber_events
+
+# You move rubber to a new state
+rubber_events.1 = {
+	type = state_event
+	placement = ROOT
+
+	event_image = {
+		video = "rp1_amazon_exploitation"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	title = rubber_events.1.t
+	desc = rubber_events.1.d
+	flavor = rubber_events.1.f
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time } #cooldown for state. Rubber can only be transplanted "for the first time" once.
+	trigger = {
+		has_potential_resource = building_rubber_plantation
+		NOT = { region = sr:region_brazil }
+		state_region = {
+			remaining_undepleted = {
+				type = building_rubber_plantation
+				amount > 1
+			}
+		}
+		owner = {
+			NOT = { #cooldown
+				has_variable = rubber_rush_event_var
+			}
+			NOR = { #auto-fire event triggers
+					has_variable = rubber_always_spread
+					has_variable = rubber_always_concentrate
+			}
+		}
+	}
+
+	immediate = {
+		save_scope_as = rubber_state
+		owner = {
+			set_variable = { name = rubber_rush_event_var days = very_long_modifier_time } #national cooldown. Rubber rushes are no longer so frequent.
+		}
+		owner = {
+			ordered_scope_state = {
+				limit = {
+					has_building = building_rubber_plantation
+				}
+				order_by = b:building_rubber_plantation.level
+				position = 0
+				check_range_bounds = no
+				save_scope_as = rubber_centre
+				b:building_rubber_plantation = {
+					save_scope_as = rubber_plantation
+				}
+			}
+		}
+	}
+
+	option = { #plant more rubber here
+		name = rubber_events.1.a
+		default_option = yes
+		scope:rubber_state = {
+			force_resource_discovery = building_rubber_plantation
+		}
+		add_modifier = {
+			name = state_rubber_modifier
+			days = long_modifier_time
+		}
+	}
+
+	option = { #focus on the existing rubber nexus
+		name = rubber_events.1.b
+		trigger = {
+			owner = {
+				exists = scope:rubber_centre
+				scope:rubber_centre = {
+					has_building = building_rubber_plantation
+				}
+			}
+		}
+		scope:rubber_state = {
+			force_resource_discovery = building_rubber_plantation
+		}
+		owner = {
+			scope:rubber_centre = {
+				add_modifier = {
+					name = state_rubber_nexus_modifier
+					days = long_modifier_time
+				}
+			}
+		}
+	}
+
+	option = { #always spread rubber
+		name = rubber_events.1.c
+		trigger = { #Only available if both options are visible or else player may not realise what choice they're making.
+			owner = {
+				exists = scope:rubber_centre
+				scope:rubber_centre = {
+					has_building = building_rubber_plantation
+				}
+			}
+		}
+		scope:rubber_state = {
+			force_resource_discovery = building_rubber_plantation
+		}
+		add_modifier = {
+			name = state_rubber_modifier
+			days = long_modifier_time
+		}
+		custom_tooltip = {
+			text = rubber_always_spread_tt
+			owner = {
+				set_variable = rubber_always_spread
+			}
+		}
+	}
+
+	option = { #Always focus on the existing rubber nexus
+		name = rubber_events.1.e
+		trigger = {
+			owner = {
+				exists = scope:rubber_centre
+				scope:rubber_centre = {
+					has_building = building_rubber_plantation
+				}
+			}
+		}
+		scope:rubber_state = {
+			force_resource_discovery = building_rubber_plantation
+		}
+		owner = {
+			scope:rubber_centre = {
+				add_modifier = {
+					name = state_rubber_nexus_modifier
+					days = long_modifier_time
+				}
+			}
+		}
+		custom_tooltip = {
+			text = rubber_always_concentrate_tt
+			owner = {
+				set_variable = rubber_always_concentrate
+			}
+		}
+	}
+}
+
+rubber_events.2 = { #hidden event that does the effects if the player chooses option c or d
+	type = state_event
+	hidden = yes
+
+	cooldown = { days = never_fire_again_modifier_time } #state cooldown
+
+	trigger = {
+		has_potential_resource = building_rubber_plantation
+		NOT = { region = sr:region_brazil }
+		state_region = {
+			remaining_undepleted = {
+				type = building_rubber_plantation
+				amount > 1
+			}
+		}
+		owner = {
+			OR = {
+				has_variable = rubber_always_spread
+				has_variable = rubber_always_concentrate
+			}
+			NOT = {
+				has_variable = rubber_rush_event_var
+			}
+		}
+	}
+
+	immediate = {
+		save_scope_as = rubber_state
+		#Notification on on-action or in code.
+		owner = {
+			set_variable = { name = rubber_rush_event_var days = very_long_modifier_time } #national cooldown. Rubber rushes are no longer so frequent.
+		}
+		if = {
+			limit = {
+				owner = {
+					has_variable = rubber_always_spread
+				}
+			}
+			force_resource_discovery = building_rubber_plantation
+			add_modifier = {
+				name = state_rubber_modifier
+				days = long_modifier_time
+			}
+		}
+		else = {
+			force_resource_discovery = building_rubber_plantation
+			owner = {
+				ordered_scope_state = {
+					limit = {
+						has_building = building_rubber_plantation
+					}
+					order_by = b:building_rubber_plantation.level
+					position = 0
+					check_range_bounds = no
+					add_modifier = {
+						name = state_rubber_nexus_modifier
+						days = long_modifier_time
+					}
+				}
+			}
+		}
+	}
+}
+﻿namespace = dt_society_events
+
+dt_society_events.1 = {
+	type = country_event
+
+	trigger = {
+		any_scope_building = {
+			is_building_type = building_university
+			occupancy > 0.9
+			level >= 5
+			has_active_production_method = pm_philosophy_department
+		}
+		any_scope_building = {
+			filter = {
+				is_building_type = building_university
+			}
+			percent > 0.9
+			occupancy > 0.9
+			has_active_production_method = pm_philosophy_department
+		}
+	}
+
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	placement = scope:university_state
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	title = dt_society_events.1.t
+	desc = dt_society_events.1.d
+	flavor = dt_society_events.1.f
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_university
+					occupancy > 0.9
+					level >= 3
+					has_active_production_method = pm_philosophy_department
+				}
+			}
+			save_scope_as = university_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_university
+					occupancy > 0.9
+					level >= 3
+					has_active_production_method = pm_philosophy_department
+				}
+				save_scope_as = philosophy_department
+			}
+		}
+	}
+
+	option = {
+		name = dt_society_events.1.a
+		default_option = yes
+		add_modifier = { # university throughput
+			name = synthesis_modifier
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = dt_society_events.1.b # investigate dialectical materialism
+		trigger = {
+			has_technology_researched = labor_movement
+			NOT = { has_technology_researched = socialism }
+		}
+		add_technology_progress = { progress = 4150 technology = socialism }
+	}
+	option = {
+		name = dt_society_events.1.c # we need a more pragmatic approach
+		trigger = {
+			has_technology_researched = psychiatry
+			NOT = { has_technology_researched = philosophical_pragmatism }
+		}
+		add_technology_progress = { progress = 4150 technology = philosophical_pragmatism }
+	}
+}
+
+dt_society_events.2 = {
+	type = country_event
+
+	trigger = {
+	}
+
+	event_image = {
+		video = "votp_realist_household"
+	}
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	placement = scope:art_state
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	title = dt_society_events.2.t
+	desc = dt_society_events.2.d
+	flavor = dt_society_events.2.f
+
+	immediate = {
+		ordered_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_art_academy
+					occupancy >= 0.9
+					has_active_production_method = pm_realist_art
+				}
+			}
+			order_by = b:building_art_academy.level
+			position = 0
+			check_range_bounds = no
+			save_scope_as = art_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_art_academy
+					occupancy >= 0.9
+					has_active_production_method = pm_realist_art
+				}
+				save_scope_as = art_building
+			}
+		}
+	}
+
+	option = {
+		name = dt_society_events.2.a
+		default_option = yes
+		add_modifier = {
+			name = realist_art
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = dt_society_events.2.b
+		trigger = {
+			NOT = { has_technology_researched = camera }
+			can_research = camera
+		}
+		add_technology_progress = { progress = 4150 technology = camera }
+	}
+
+	option = {
+		name = dt_society_events.2.c
+		add_modifier = {
+			name = grim_realism
+			days = normal_modifier_time
+		}
+	}
+}
+
+dt_society_events.3 = {
+	type = country_event
+
+	trigger = {
+		any_scope_building = {
+			is_building_type = building_university
+			occupancy >= 0.9
+			level >= 2
+		}
+	}
+
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	placement = scope:university_state
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	title = dt_society_events.3.t
+	desc = dt_society_events.3.d
+	flavor = dt_society_events.3.f
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_university
+					occupancy >= 0.9
+					level >= 2
+				}
+			}
+			save_scope_as = university_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_university
+					occupancy >= 0.9
+					level >= 2
+				}
+				save_scope_as = university_building
+			}
+		}
+	}
+
+	option = {
+		name = dt_society_events.3.a
+		default_option = yes
+		add_modifier = {
+			name = new_academia
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = dt_society_events.3.b # empiricism
+		trigger = {
+			NOT = { has_technology_researched = empiricism }
+		}
+		add_technology_progress = { progress = 2500 technology = empiricism }
+	}
+	option = {
+		name = dt_society_events.3.c # fund medical research
+		trigger = {
+			NOT = { has_technology_researched = medical_degrees }
+		}
+		add_technology_progress = { progress = 2500 technology = medical_degrees }
+	}
+}
+﻿namespace = society_tech_events
+
+society_tech_events.301 = { #airships
+	type = country_event
+	placement = ROOT
+
+	event_image = {
+		video = "unspecific_airship"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	title = society_tech_events.301.t
+	desc = society_tech_events.301.d
+	flavor = society_tech_events.301.f
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	trigger = {
+		has_technology_researched = zeppelins
+	}
+
+
+	immediate = {
+	}
+
+	option = { #military focus
+		name = society_tech_events.301.a
+		default_option = yes
+		add_modifier = {
+			name = zeppelins_military_modifier
+			days = short_modifier_time
+		}
+	}
+
+	option = { #society focus
+		name = society_tech_events.301.b
+		every_interest_group = {
+			limit = {
+				law_stance = {
+					law = law_type:law_per_capita_based_taxation
+					value > neutral
+				}
+				NOT = { is_interest_group_type = ig_armed_forces }
+			}
+			add_modifier = {
+				name = zeppelins_society_modifier
+				days = short_modifier_time
+			}
+		}
+	}
+
+	option = { #trading focus
+		name = society_tech_events.301.c
+		add_modifier = {
+			name = zeppelins_trading_modifier
+			days = short_modifier_time
+		}
+	}
+}
+
+society_tech_events.302 = { #romanticism
+	type = country_event
+	placement = scope:academy_state
+
+	event_image = {
+		video = "europenorthamerica_art_gallery"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	title = society_tech_events.302.t
+	desc = society_tech_events.302.d
+	flavor = society_tech_events.302.f
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	trigger = {
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_art_academy
+					occupancy >= 0.9
+					level >= 2
+				}
+			}
+			save_scope_as = academy_state
+			random_scope_building = {
+				limit = {
+					is_building_type = building_art_academy
+					has_active_production_method = pm_traditional_art
+					occupancy >= 0.9
+					level >=2
+				}
+				save_scope_as = academy_building
+			}
+		}
+	}
+
+	option = { #build a great building
+		name = society_tech_events.302.a
+		default_option = yes
+		scope:academy_state = {
+			add_modifier = {
+				name = romantic_building_modifier
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = { #this is garbage I want some Realism
+		name = society_tech_events.302.c
+		trigger = {
+			NOT = { has_technology_researched = realism }
+			can_research = realism
+		}
+		add_technology_progress = { progress = 3500 technology = realism }
+	}
+}
+﻿namespace = dan_society_tech_events
+
+dan_society_tech_events.1 = {
+	placement = ROOT
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	title = dan_society_tech_events.1.t
+	desc = dan_society_tech_events.1.d
+	flavor = dan_society_tech_events.1.f
+
+	event_image = {
+		video = "unspecific_gears_pistons"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	trigger = {
+		any_scope_building = {
+			is_building_type = building_government_administration
+			level >= 10
+			occupancy > 0.9
+			has_active_production_method = pm_vertical_filing_cabinets
+		}
+		any_scope_building = {
+			filter = {
+				is_building_type = building_government_administration
+			}
+			percent > 0.75
+			occupancy > 0.9
+			has_active_production_method = pm_vertical_filing_cabinets
+		}
+	}
+
+
+	immediate = {
+		random_scope_building = {
+			limit = {
+				is_building_type = building_government_administration
+				level >= 10
+				occupancy > 0.9
+				has_active_production_method = pm_vertical_filing_cabinets
+			}
+			save_scope_as = government_building
+		}
+
+	}
+
+	option = {
+		name = dan_society_tech_events.1.a
+		default_option = yes
+		add_modifier = {
+			name = horizontal_filing_cabinets_modifier
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = dan_society_tech_events.1.b
+		trigger = {
+			NOT = { has_technology_researched = identification_documents }
+			can_research = identification_documents
+		}
+		add_technology_progress = { progress = 4150 technology = identification_documents }
+	}
+
+}
+﻿namespace = society_tech_events
+
+society_tech_events.104 = { #Evelators
+	type = country_event
+
+	trigger = {
+		any_scope_building = {
+			is_building_type = building_steel_mill
+		}
+		any_scope_building = {
+			is_building_type = building_glassworks
+		}
+		any_scope_building = {
+			filter = {
+				is_building_type = building_urban_center
+			}
+			is_building_type = building_urban_center
+			percent > 0.75
+			has_active_production_method = pm_arcades
+			cash_reserves_ratio >= 0.25
+			weekly_profit > 0
+			occupancy >= 0.75
+		}
+	}
+
+	event_image = {
+		video = "southamerica_factory_opening"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	placement = ROOT
+
+	title = society_tech_events.104.t
+	desc = society_tech_events.104.d
+	flavor = society_tech_events.104.f
+
+	immediate = {
+	}
+
+	option = { #Gives bonus for steel and glass industries
+		name = society_tech_events.104.a
+		default_option = yes
+		add_modifier = {
+			name = elevator_goods_production_modifier
+			days = normal_modifier_time
+		}
+	}
+
+	option = { #Gives bonus for urban centers
+		name = society_tech_events.104.b
+		add_modifier = {
+			name = elevator_services_production_modifier
+			days = normal_modifier_time
+		}
+	}
+}
+
+society_tech_events.105 = { #Mutual Funds
+	type = country_event
+
+	trigger = {
+		any_scope_building = {
+			filter = {
+				is_building_type = building_financial_district
+			}
+			percent >= 0.5
+			has_active_production_method = pm_financial_district_publicly_traded
+			cash_reserves_ratio >= 0.5
+			weekly_profit > 0
+			occupancy >= 0.75
+		}
+	}
+
+	event_image = {
+		video = "southamerica_factory_opening"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	placement = ROOT
+
+	title = society_tech_events.105.t
+	desc = society_tech_events.105.d
+	flavor = society_tech_events.105.f
+
+	immediate = {
+	}
+
+	option = {
+		name = society_tech_events.105.a
+		default_option = yes
+		ig:ig_industrialists ?= {
+			add_modifier = {
+				name = mutual_funds_pop_attaction_modifier
+				days = normal_modifier_time
+			}
+		}
+		ig:ig_trade_unions ?= {
+			add_modifier = {
+				name = mutual_funds_pop_attaction_modifier
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = society_tech_events.105.b
+		trigger = {
+			NOT = { has_technology_researched = international_exchange_standards }
+			can_research = international_exchange_standards
+		}
+		add_technology_progress = { progress = 6000 technology = international_exchange_standards }
+	}
+}
+﻿namespace = trench_warfare
+
+trench_warfare.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = trench_warfare.1.t
+	desc = trench_warfare.1.d
+	flavor = trench_warfare.1.f
+
+	event_image = {
+		video = "middleeast_battlefield_trenches"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	duration = 3
+
+	trigger = {
+		any_scope_war = {
+			any_scope_front = {
+				any_military_formation = {
+					owner = ROOT
+					formation_army_unit_type_fraction = {
+						target = unit_type:combat_unit_type_trench_infantry
+						value >= 0.25
+					}
+				}
+			}
+		}
+	}
+
+	immediate = {
+		ROOT = { save_scope_as = trench_warfare_home }
+		random_scope_war = {
+			limit = {
+				any_scope_front = {
+					any_military_formation = {
+						owner = ROOT
+						OR = {
+							formation_army_unit_type_fraction = {
+								target = unit_type:combat_unit_type_trench_infantry
+								value >= 0.25
+							}
+							formation_army_unit_type_fraction = {
+								target = unit_type:combat_unit_type_squad_infantry
+								value >= 0.25
+							}
+						}
+					}
+				}
+			}
+			save_scope_as = trench_warfare_war
+			random_scope_front = {
+				limit = {
+					any_military_formation = {
+						owner = ROOT
+						OR = {
+							formation_army_unit_type_fraction = {
+								target = unit_type:combat_unit_type_trench_infantry
+								value >= 0.25
+							}
+							formation_army_unit_type_fraction = {
+								target = unit_type:combat_unit_type_squad_infantry
+								value >= 0.25
+							}
+						}
+					}
+				}
+				random_scope_general = {
+					limit = {
+						owner = ROOT
+						NOT = { has_trait = trench_rat }
+						commander_military_formation ?= {
+							owner = ROOT
+							OR = {
+								formation_army_unit_type_fraction = {
+									target = unit_type:combat_unit_type_trench_infantry
+									value >= 0.25
+								}
+								formation_army_unit_type_fraction = {
+									target = unit_type:combat_unit_type_squad_infantry
+									value >= 0.25
+								}
+							}
+						}
+					}
+					save_scope_as = trench_warfare_general
+				}
+				random_scope_state = {
+					save_scope_as = trench_warfare_state
+				}
+			}
+		}
+	}
+
+	option = { # We must entrench, entrench, and entrench some more!
+		name = trench_warfare.1.a
+		default_option = yes
+
+		scope:trench_warfare_general  = {
+			add_trait = trench_rat
+		}
+		scope:trench_warfare_state = {
+			add_modifier = { # mortality and reduction in outputs
+				name = zone_rouge
+				days = long_modifier_time
+			}
+			state_region = {
+				add_devastation = 10
+			}
+		}
+	}
+	option = { # We can't let our defenses stagnate.
+		name = trench_warfare.1.b
+
+		trigger = {
+			NOT = { has_technology_researched = defense_in_depth }
+		}
+
+		if = {
+			limit = {
+				can_research = defense_in_depth
+			}
+			add_technology_progress = {
+				progress = 6000
+				technology = defense_in_depth
+			}
+		}
+
+		scope:trench_warfare_state = {
+			add_modifier = { # smaller negative modifier because the front isn't static
+				name = zone_rouge
+				days = long_modifier_time
+				multiplier = 0.75
+			}
+			state_region = {
+				add_devastation = 5
+			}
+		}
+	}
+
+	option = { # We need a breakthrough.
+		name = trench_warfare.1.c
+
+		trigger = {
+			has_technology_researched = wargaming
+			NOT = { has_technology_researched = stormtroopers }
+		}
+
+		if = {
+			limit = {
+				can_research = stormtroopers
+			}
+			add_technology_progress = {
+				progress = 8000
+				technology = stormtroopers
+			}
+		}
+
+		scope:trench_warfare_state = {
+			add_modifier = { # smaller negative modifier because the front is moving more
+				name = zone_rouge
+				days = long_modifier_time
+				multiplier = 0.75
+			}
+			state_region = {
+				add_devastation = 5
+			}
+		}
+	}
+}
+﻿namespace = war_crimes
+war_crimes.1 = {
+ 	type = country_event
+ 	placement = ROOT
+
+ 	title = war_crimes.1.t
+ 	desc = war_crimes.1.d
+ 	flavor = war_crimes.1.f
+
+ 	event_image = {
+ 		video = "middleeast_battlefield_trenches"
+ 	}
+
+ 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+ 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+ 	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+ 	trigger = {
+		army_mobilization_option_fraction = {
+			target = mobilization_option:mobilization_option_chemical_weapons
+			value >= 0.2
+		}
+		any_scope_war = {
+			any_scope_front = {
+				any_scope_general = {
+					owner = ROOT
+					this.commander_military_formation ?= {
+						has_mobilization_option = mobilization_option:mobilization_option_chemical_weapons
+					}
+				}
+				any_scope_state = {
+					NOT = { owner = ROOT }
+				}
+			}
+		}
+ 	}
+
+ 	immediate = {
+ 		random_scope_war = {
+ 			limit = {
+				any_scope_front = {
+					any_scope_general = {
+						owner = ROOT
+						this.commander_military_formation ?= {
+							has_mobilization_option = mobilization_option:mobilization_option_chemical_weapons
+						}
+					}
+					any_scope_state = {
+						NOT = { owner = ROOT }
+					}
+				}
+ 			}
+ 			random_scope_front = {
+ 				limit = {
+					any_scope_general = {
+						owner = ROOT
+						this.commander_military_formation ?= {
+							has_mobilization_option = mobilization_option:mobilization_option_chemical_weapons
+						}
+					}
+					any_scope_state = {
+						NOT = { owner = ROOT }
+					}
+ 				}
+ 				random_scope_general = {
+ 					limit = {
+						owner = ROOT
+						this.commander_military_formation ?= {
+							has_mobilization_option = mobilization_option:mobilization_option_chemical_weapons
+						}
+ 					}
+ 					save_scope_as = war_crimes_perpetrator
+ 				}
+ 				random_scope_state = {
+ 					limit = {
+ 						NOT = { owner = ROOT }
+ 					}
+ 					save_scope_as = war_crimes_state
+ 				}
+ 			}
+ 		}
+ 	}
+
+ 	option = {  #we will win by any means necessary
+ 		name = war_crimes.1.a
+ 		default_option = yes
+ 		scope:war_crimes_perpetrator = {
+ 			add_trait = war_criminal
+ 		}
+ 		scope:war_crimes_state = {
+ 			add_modifier = {  #mortality, welfare
+ 				name = mustard_gas
+ 				days = normal_modifier_time
+ 				multiplier = 2
+ 			}
+ 		}
+ 	}
+ 	option = {  #try the general for war crimes
+ 		name = war_crimes.1.b
+		 scope:war_crimes_perpetrator = {
+			kill_character = {
+			   hidden = yes
+		   }
+		}
+ 		scope:war_crimes_state = {
+ 			add_modifier = {  #mortality, welfare
+ 				name = mustard_gas
+ 				days = normal_modifier_time
+ 			}
+ 		}
+ 		add_modifier = {  #reduced kill rate
+ 			name = laws_against_war_crimes
+ 			days = long_modifier_time
+ 		}
+ 	}
+}
+
+# Munitions Plants
+war_crimes.2 = {
+	type = country_event
+	placement = scope:munitions_state
+
+	title = war_crimes.2.t
+	desc = war_crimes.2.d
+	flavor = war_crimes.2.f
+
+	event_image = {
+		video = "unspecific_gears_pistons"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	duration = 3
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	trigger = {
+		any_scope_building = {
+			is_building_type = building_munition_plant
+			cash_reserves_ratio > 0.25
+			weekly_profit > 0
+			occupancy >= 0.5
+			level >= 5
+		}
+	}
+
+	immediate = {
+		random_scope_building = {
+			limit = {
+				is_building_type = building_munition_plant
+				cash_reserves_ratio > 0.25
+				weekly_profit > 0
+				occupancy >= 0.5
+				level >= 5
+			}
+			save_scope_as = munitions_building
+			state = {
+				save_scope_as = munitions_state
+			}
+		}
+		g:ammunition = {
+			save_scope_as = ammo_scope
+		}
+	}
+
+	option = {
+		name = war_crimes.2.a
+		default_option = yes
+		scope:munitions_state = {
+			add_modifier = { # munitions plants throughput
+				name = munitions_modifier
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = war_crimes.2.b
+		trigger = {
+			can_research = rifling
+		}
+		add_technology_progress = { progress = 3500 technology = rifling }
+	}
+}
+

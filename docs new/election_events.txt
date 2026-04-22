@@ -1,0 +1,4725 @@
+﻿namespace = communist_elections
+namespace = cable_street
+
+# The Red Scare
+communist_elections.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = communist_elections.1.t
+	desc = communist_elections.1.d1
+	flavor = communist_elections.1.f
+
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = mute_election_events }
+		NOT = { has_law_or_variant = law_type:law_council_republic }
+		NOT = { has_variable = red_scare_var }
+		# Leftists are running in the election but aren't in government
+		any_interest_group = {
+			is_in_government = no
+			has_party = yes
+			party = {
+				OR = {
+					is_party_type = communist_party
+					is_party_type = social_democrat_party
+					is_party_type = anarchist_party
+				}
+			}
+		}
+		# Any government IG is in a non-leftist party
+		any_interest_group = {
+			is_in_government = yes
+			has_party = yes
+			party = {
+				NOR = {
+					is_party_type = communist_party
+					is_party_type = social_democrat_party
+					is_party_type = anarchist_party
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = red_scare_var
+			days = short_modifier_time
+		}
+		random_interest_group = {
+			limit = {
+				is_in_government = no
+				has_party = yes
+				party = {
+					OR = {
+						is_party_type = communist_party
+						is_party_type = social_democrat_party
+						is_party_type = anarchist_party
+					}
+				}
+			}
+			party = {
+				save_scope_as = leftist_party
+			}
+		}
+		random_interest_group = {
+			limit = {
+				is_in_government = yes
+				has_party = yes
+				party = {
+					NOR = {
+						is_party_type = communist_party
+						is_party_type = social_democrat_party
+						is_party_type = anarchist_party
+					}
+				}
+			}
+			party = {
+				save_scope_as = anti_leftist_party
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # These leftists are traitors to [country]
+		name = communist_elections.1.a
+		scope:leftist_party = {
+			add_momentum = momentum_large_decrease
+		}
+	}
+
+	option = { # This rhetoric is needlessly alarmist
+		name = communist_elections.1.b
+		default_option = yes
+		scope:leftist_party = {
+			add_momentum = momentum_medium_decrease
+		}
+		add_modifier = { # reduced government opinion
+			name = red_scare_minimized
+			days = short_modifier_time
+		}
+	}
+
+	option = { # Ban communist literature
+		name = communist_elections.1.c
+		highlighted_option = yes
+		trigger = {
+			OR = {
+				has_law_or_variant = law_type:law_outlawed_dissent
+				has_law_or_variant = law_type:law_censorship
+			}
+		}
+		scope:leftist_party = {
+			add_momentum = momentum_very_large_decrease
+			every_member = {
+				add_modifier = {
+					name = red_scare_communists_annoyed
+					days = short_modifier_time
+				}
+			}
+		}
+	}
+
+	option = { # Infiltrate and arrest the leadership
+		name = communist_elections.1.d
+		highlighted_option = yes
+		trigger = {
+			has_law_or_variant = law_type:law_secret_police
+		}
+		scope:leftist_party = {
+			add_momentum = momentum_very_large_decrease
+		}
+		add_modifier = { # costs some authority
+			name = infiltrating_communist_parties
+			days = short_modifier_time
+		}
+	}
+
+	option = { # They have every right to spread their ideas
+		name = communist_elections.1.e
+		highlighted_option = yes
+		trigger = {
+			OR = {
+				has_law_or_variant = law_type:law_right_of_assembly
+				has_law_or_variant = law_type:law_protected_speech
+			}
+		}
+		scope:leftist_party = {
+			add_momentum = momentum_small
+		}
+		scope:anti_leftist_party = {
+			every_member = {
+				add_modifier = {
+					name = red_scare_minimized
+					days = short_modifier_time
+				}
+			}
+		}
+	}
+}
+
+# Workers vote in the Council Republic. Trade Union party strongly preferred.
+communist_elections.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = communist_elections.2.t
+	desc = communist_elections.2.d
+	flavor = communist_elections.2.f
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = mute_election_events }
+		NOT = { has_variable = council_elections_var }
+		has_law_or_variant = law_type:law_council_republic
+		ig:ig_trade_unions ?= {
+			has_party = yes
+		}
+		any_active_party = {
+			party_has_members = yes
+			NOT = {
+				any_member = { is_interest_group_type = ig_trade_unions }
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = council_elections_var
+			days = short_modifier_time
+		}
+		ig:ig_trade_unions ?= {
+			save_scope_as = unions_ig
+			party = {
+				save_scope_as = unions_party
+			}
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				NOT = { this = scope:unions_party }
+			}
+			save_scope_as = anti_union_party
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # The workers are always right
+		name = communist_elections.2.a
+		default_option = yes
+		scope:unions_party = {
+			add_momentum = momentum_very_large
+		}
+	}
+	option = { # voting for the worker's party is mandatory
+		name = communist_elections.2.b
+		highlighted_option = yes
+		trigger = {
+			custom_tooltip = {
+				text = communist_elections.2.tt
+				scope:unions_ig = {
+					is_in_government = yes
+				}
+			}
+			OR = {
+				has_law_or_variant = law_type:law_outlawed_dissent
+				has_law_or_variant = law_type:law_censorship
+			}
+		}
+		scope:unions_party = {
+			add_momentum = momentum_very_large
+		}
+		add_modifier = { # authority
+			name = mandatory_communist_support
+			days = short_modifier_time
+		}
+	}
+	option = { # other voices should also be heard
+		name = communist_elections.2.c
+		highlighted_option = yes
+		trigger = {
+			OR = {
+				has_law_or_variant = law_type:law_right_of_assembly
+				has_law_or_variant = law_type:law_protected_speech
+			}
+			custom_tooltip = {
+				text = communist_elections.2.c.tt
+				any_interest_group = {
+					has_party = yes
+					party = {
+						NOT = { THIS = scope:unions_party }
+					}
+				}
+			}
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				party = {
+					NOT = { THIS = scope:unions_party }
+				}
+			}
+			party = {
+				add_momentum = momentum_large
+			}
+		}
+	}
+}
+
+# International Socialism
+communist_elections.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = communist_elections.3.t
+	desc = communist_elections.3.d
+	flavor = communist_elections.3.f
+
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = mute_election_events }
+		NOT = { has_variable = international_socialism_var }
+		any_country = {
+			NOT = { has_war_with = ROOT }
+			NOT = { THIS = ROOT }
+			country_rank >= rank_value:major_power
+			any_interest_group = {
+				ig_counts_as_marginal = no
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_anarchist
+						has_ideology = ideology:ideology_communist
+						has_ideology = ideology:ideology_vanguardist
+					}
+				}
+			}
+		}
+		any_active_party = {
+			party_has_members = yes
+			OR = {
+				is_party_type = communist_party
+				is_party_type = social_democrat_party
+				is_party_type = anarchist_party
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = international_socialism_var
+			days = short_modifier_time
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				party = {
+					OR = {
+						is_party_type = communist_party
+						is_party_type = social_democrat_party
+						is_party_type = anarchist_party
+					}
+				}
+			}
+			party = {
+				save_scope_as = socialist_party
+			}
+		}
+		random_country = {
+			limit = {
+				NOT = { has_war_with = ROOT }
+				NOT = { THIS = ROOT }
+				country_rank >= rank_value:major_power
+				any_interest_group = {
+					ig_counts_as_marginal = no
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_anarchist
+							has_ideology = ideology:ideology_communist
+							has_ideology = ideology:ideology_vanguardist
+						}
+					}
+				}
+			}
+			save_scope_as = socialist_country
+			random_interest_group = {
+				limit = {
+					ig_counts_as_marginal = no
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_anarchist
+							has_ideology = ideology:ideology_communist
+							has_ideology = ideology:ideology_vanguardist
+						}
+					}
+				}
+				save_scope_as = foreign_socialist_ig
+				leader = {
+					save_scope_as = foreign_socialist_leader
+				}
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # welcome international support
+		name = communist_elections.3.a
+		default_option = yes
+		scope:socialist_party = {
+			add_momentum = momentum_large
+		}
+		# improve relations with socialist country if the socialists are in power
+		if = {
+			limit = {
+				scope:foreign_socialist_ig = {
+					is_in_government = yes
+				}
+			}
+			scope:socialist_country = {
+				change_relations = {
+					country = ROOT
+					value = 20
+				}
+			}
+		}
+		# owe a favor to the socialist country if you both have socialist governments
+		if = {
+			limit = {
+				NOT = { owes_obligation_to = scope:socialist_country }
+				scope:foreign_socialist_ig = {
+					is_in_government = yes
+				}
+				scope:socialist_party = {
+					any_member = {
+						is_in_government = yes
+					}
+				}
+			}
+			set_owes_obligation_to = {
+				country = scope:socialist_country
+				setting = yes
+			}
+		}
+		# These variables increase the chances of generating new leaders with each ideology
+		if = {
+			limit = {
+				scope:foreign_socialist_leader = {
+					has_ideology = ideology:ideology_vanguardist
+				}
+			}
+			set_variable = {
+				name = election_vanguardist_support
+				days = long_modifier_time
+			}
+			custom_tooltip = election_socialist_support_tt
+		}
+		else_if = {
+			limit = {
+				scope:foreign_socialist_leader = {
+					has_ideology = ideology:ideology_anarchist
+				}
+			}
+			set_variable = {
+				name = election_anarchist_support
+				days = long_modifier_time
+			}
+			custom_tooltip = election_socialist_support_tt
+		}
+		else_if = {
+			limit = {
+				scope:foreign_socialist_leader = {
+					has_ideology = ideology:ideology_communist
+				}
+			}
+			set_variable = {
+				name = election_communist_support
+				days = long_modifier_time
+			}
+			custom_tooltip = election_socialist_support_tt
+		}
+	}
+
+	option = { # Limit foreign influence
+		name = communist_elections.3.b
+		scope:socialist_party = {
+			add_momentum = momentum_small
+		}
+	}
+
+	option = { # expel foreign infiltrators
+		name = communist_elections.3.c
+		trigger = {
+			scope:socialist_party = {
+				NOT = {
+					any_member = {
+						is_in_government = yes
+					}
+				}
+			}
+			OR = {
+				has_law_or_variant = law_type:law_closed_borders
+				has_law_or_variant = law_type:law_outlawed_dissent
+				has_law_or_variant = law_type:law_secret_police
+			}
+		}
+		scope:socialist_party = {
+			add_momentum = momentum_large_decrease
+		}
+		# harm relations with socialist country if they have a socialist government
+		if = {
+			limit = {
+				scope:foreign_socialist_ig = {
+					is_in_government = yes
+				}
+			}
+			scope:socialist_country = {
+				change_relations = {
+					country = ROOT
+					value = -20
+				}
+			}
+		}
+	}
+}
+
+# Fascist paramilitaries intimidate voters
+communist_elections.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = communist_elections.4.t
+	desc = communist_elections.4.desc
+	flavor = communist_elections.4.f
+
+	event_image = {
+		video = "unspecific_vandalized_storefront"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = mute_election_events }
+		NOT = { has_variable = blackshirts_var }
+		any_interest_group = {
+			has_party = yes
+			leader = {
+				OR = {
+					has_ideology = ideology:ideology_fascist
+					has_ideology = ideology:ideology_ethno_nationalist
+				}
+			}
+			party = {
+				is_party_type = fascist_party
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = blackshirts_var
+			days = short_modifier_time
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_ethno_nationalist
+					}
+				}
+				party = {
+					is_party_type = fascist_party
+				}
+			}
+			save_scope_as = fascist_ig
+			leader = {
+				save_scope_as = fascist_leader
+			}
+			party = {
+				save_scope_as = fascist_party_scope
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # allow paramilitaries
+		name = communist_elections.4.a
+		default_option = yes
+		scope:fascist_party_scope = {
+			add_momentum = momentum_large
+		}
+		every_active_party = {
+			limit = {
+				party_has_members = yes
+				NOT = { is_party_type = fascist_party }
+			}
+			add_momentum = momentum_small_decrease
+		}
+	}
+
+	option = { # Support paramilitaries with the army and police
+		name = communist_elections.4.b
+		default_option = yes
+		highlighted_option = yes
+		trigger = {
+			custom_tooltip = {
+				text = communist_elections.4.tt
+				scope:fascist_ig = {
+					is_in_government = yes
+				}
+			}
+			OR = {
+				ig:ig_armed_forces ?= {
+					is_powerful = yes
+				}
+				institution_investment_level = {
+					institution = institution_police
+					value >= 3
+				}
+				has_law_or_variant = law_type:law_militarized_police
+			}
+		}
+		scope:fascist_party_scope = {
+			add_momentum = momentum_very_large
+			# increase opinion
+		}
+		every_active_party = {
+			limit = {
+				party_has_members = yes
+				NOT = { is_party_type = fascist_party }
+			}
+			add_momentum = momentum_medium_decrease
+		}
+		if = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					law_stance = {
+						law = law_type:law_militarized_police
+						value > neutral
+					}
+				}
+			}
+			add_modifier = {
+				name = state_sanctioned_paramilitaries
+				days = short_modifier_time
+			}
+		}
+		else_if = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					law_stance = {
+						law = law_type:law_militarized_police
+						value < neutral
+					}
+				}
+			}
+			add_modifier = {
+				name = state_sanctioned_paramilitaries
+				days = short_modifier_time
+				multiplier = -1
+			}
+		}
+	}
+
+	option = { # Discourage paramilitaries
+		name = communist_elections.4.c
+		scope:fascist_party_scope = {
+			add_momentum = momentum_small
+		}
+		scope:fascist_ig = {
+			add_modifier = {
+				name = paramilitaries_opposed
+				days = short_modifier_time
+			}
+		}
+		every_active_party = {
+			limit = {
+				party_has_members = yes
+				NOT = { is_party_type = fascist_party }
+			}
+			add_momentum = momentum_small_decrease
+		}
+	}
+
+	option = { # Crack down on paramilitaries
+		name = communist_elections.4.d
+		highlighted_option = yes
+		trigger = {
+			OR = {
+				has_law_or_variant = law_type:law_protected_speech
+				has_law_or_variant = law_type:law_guaranteed_liberties
+				institution_investment_level = {
+					institution = institution_police
+					value >= 3
+				}
+			}
+		}
+		scope:fascist_party_scope = {
+			add_momentum = momentum_medium_decrease
+		}
+		scope:fascist_ig = {
+			add_modifier = {
+				name = paramilitaries_opposed
+				days = short_modifier_time
+				multiplier = -2
+			}
+		}
+	}
+}
+
+# Battle of Cable Street
+cable_street.1 = {
+	type = country_event
+	placement = scope:fascist_rally_state
+	title = cable_street.1.t
+	desc = cable_street.1.d
+	flavor = cable_street.1.f
+
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	duration = 3
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = mute_election_events }
+		NOT = { has_variable = cable_street_var }
+		any_interest_group = {
+			has_party = yes
+			party = {
+				is_party_type = fascist_party
+			}
+			leader = {
+				OR = {
+					has_ideology = ideology:ideology_fascist
+					has_ideology = ideology:ideology_ethno_nationalist
+				}
+			}
+		}
+		any_interest_group = {
+			leader = {
+				OR = {
+					has_ideology = ideology:ideology_anarchist
+					has_ideology = ideology:ideology_communist
+					has_ideology = ideology:ideology_vanguardist
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = cable_street_var
+			days = short_modifier_time
+		}
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+			}
+			save_scope_as = fascist_rally_state
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				party = {
+					is_party_type = fascist_party
+				}
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_ethno_nationalist
+					}
+				}
+			}
+			save_scope_as = fascist_ig
+			leader = {
+				save_scope_as = fascist_leader
+			}
+			party = {
+				save_scope_as = fascist_party
+			}
+		}
+		random_interest_group = {
+			limit = {
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_anarchist
+						has_ideology = ideology:ideology_communist
+						has_ideology = ideology:ideology_vanguardist
+					}
+				}
+			}
+			save_scope_as = antifa_ig
+			leader = {
+				save_scope_as = antifa_leader
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # protect fascists right to march
+		name = cable_street.1.a
+		default_option = yes
+		# outcome weighted in favor of fascists
+		random_list = {
+			2 = {
+				scope:fascist_party = {
+					add_momentum = momentum_very_large
+				}
+				scope:fascist_rally_state = {
+					state_region = {
+						add_devastation = 10
+					}
+				}
+			}
+			2 = {
+				scope:fascist_party = {
+					add_momentum = momentum_large
+				}
+			}
+			1 = {
+				scope:fascist_party = {
+					add_momentum = momentum_large_decrease
+				}
+			}
+			1 = {
+				scope:fascist_party = {
+					add_momentum = momentum_very_large_decrease
+				}
+				scope:fascist_rally_state = {
+					state_region = {
+						add_devastation = 10
+					}
+				}
+			}
+		}
+		scope:antifa_ig = {
+			add_modifier = {
+				name = protected_fascist_rally_antifa
+				days = normal_modifier_time
+			}
+		}
+	}
+	option = { # keep the police out of it
+		name = cable_street.1.b
+		# outcome is entirely random
+		random_list = {
+			1 = {
+				scope:fascist_party = {
+					add_momentum = momentum_very_large
+				}
+				scope:fascist_rally_state = {
+					state_region = {
+						add_devastation = 10
+					}
+				}
+			}
+			1 = {
+				scope:fascist_party = {
+					add_momentum = momentum_large
+				}
+			}
+			1 = {
+				scope:fascist_party = {
+					add_momentum = momentum_large_decrease
+				}
+			}
+			1 = {
+				scope:fascist_party = {
+					add_momentum = momentum_very_large_decrease
+				}
+				scope:fascist_rally_state = {
+					state_region = {
+						add_devastation = 10
+					}
+				}
+			}
+		}
+	}
+	option = { # ban the rally
+		name = cable_street.1.c
+		# outcome weighted against fascists
+		random_list = {
+			1 = {
+				scope:fascist_party = {
+					add_momentum = momentum_very_large
+				}
+				scope:fascist_rally_state = {
+					state_region = {
+						add_devastation = 10
+					}
+				}
+			}
+			1 = {
+				scope:fascist_party = {
+					add_momentum = momentum_large
+				}
+			}
+			2 = {
+				scope:fascist_party = {
+					add_momentum = momentum_large_decrease
+				}
+			}
+			2 = {
+				scope:fascist_party = {
+					add_momentum = momentum_very_large_decrease
+				}
+				scope:fascist_rally_state = {
+					state_region = {
+						add_devastation = 10
+					}
+				}
+			}
+		}
+		scope:fascist_ig = {
+			add_modifier = {
+				name = banned_fascist_rally
+				days = normal_modifier_time
+			}
+		}
+	}
+}
+
+﻿namespace = election_conservative_events
+
+# Faithless Leaders
+# If the Liberal Party has an Atheist leader, the conservatives (or Religious Party) can call into question whether such a politician can be trusted.
+election_conservative_events.1 = {
+	type = country_event
+	placement = root
+	title = election_conservative_events.1.t
+	desc = election_conservative_events.1.d
+	flavor = election_conservative_events.1.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = conservative_party
+		}
+		any_interest_group = {
+			leader = {
+				has_ideology = ideology:ideology_nihilist
+			}
+			has_party = yes
+			party = {
+				is_party_type = liberal_party
+			}
+		}
+		any_scope_pop = {
+			state = {
+				state_average_culture_pop_acceptance = {
+					culture = PREV.culture
+					value < acceptance_status_4
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				is_party_type = conservative_party
+			}
+			save_scope_as = conservative_party
+		}
+		random_interest_group = {
+			limit = {
+				leader = {
+					has_ideology = ideology:ideology_nihilist
+				}
+				has_party = yes
+				party = {
+					is_party_type = liberal_party
+				}
+			}
+			leader = { save_scope_as = atheist_leader }
+			party = { save_scope_as = liberal_party }
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	# Accept the argument, giving momentum to the conservative party and a negative popularity modifier to the atheist leader.
+	option = {
+		name = election_conservative_events.1.a
+		py:liberal_party = {
+			add_momentum = momentum_large_decrease
+
+		}
+	}
+
+	# Argue that the atheist might in fact be more impartial not being bound to religious doctrine, giving a small popularity boost to the leader but angering the Devout.
+	option = {
+		name = election_conservative_events.1.b
+		default_option = yes
+
+		scope:atheist_leader = {
+			add_modifier = {
+				name = voice_of_reason # character_popularity_add
+				days = normal_modifier_time
+			}
+		}
+
+		ig:ig_devout ?= {
+			add_modifier = {
+				name = godless_politician_praised # interest_group_approval_add
+				days = normal_modifier_time
+			}
+		}
+	}
+}
+
+# Unity in Tradition
+# If the country is suffering from devastation, the conservatives can make a call for uniting behind traditional values during this time to crisis.
+election_conservative_events.2 = {
+	type = country_event
+	placement = root
+	title = election_conservative_events.2.t
+	desc = election_conservative_events.2.d
+	flavor = election_conservative_events.2.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = conservative_party
+		}
+		any_scope_state = {
+			devastation > 0.05
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				is_party_type = conservative_party
+			}
+			save_scope_as = conservative_party
+		}
+		random_scope_state = {
+			limit = { devastation > 0.05 }
+			save_scope_as = devastation_state
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	# Accept the argument, giving momentum to the conservative party.
+	option = {
+		name = election_conservative_events.2.a
+		py:conservative_party = {
+			add_momentum = momentum_large
+		}
+	}
+
+	# Criticize the argument as opportunistic, creating radicals in high-devastation states.
+	option = {
+		name = election_conservative_events.2.b
+		default_option = yes
+		every_scope_state = {
+			limit = { devastation > 0.05 }
+			add_radicals_in_state = {
+				value = medium_radicals
+			}
+		}
+	}
+}
+
+# Law and Order
+# If a state has high turmoil but the country has a low level of the Police institution, conservatives can campaign on a law & order platform.
+election_conservative_events.3 = {
+	type = country_event
+	placement = root
+	title = election_conservative_events.3.t
+	desc = election_conservative_events.3.d
+	flavor = election_conservative_events.3.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = conservative_party
+		}
+		any_scope_state = {
+			turmoil > 0.2
+		}
+		institution_investment_level = {
+			institution = institution_police
+			value < 5
+		}
+		any_interest_group = {
+			has_party = yes
+			NOT = {
+				party = { is_party_type = conservative_party }
+			}
+			law_stance = {
+				law = law_type:law_old_age_pension
+				value > neutral
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				is_party_type = conservative_party
+			}
+			save_scope_as = conservative_party
+		}
+		random_scope_state = {
+			limit = { turmoil > 0.2 }
+			save_scope_as = turmoil_state
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	# Accept the argument, giving momentum to the conservative party.
+	option = {
+		name = election_conservative_events.3.a
+		py:conservative_party = {
+			add_momentum = momentum_large
+		}
+	}
+
+	# Suggest that the unrest can be resolved by improving other public services, giving a smaller momentum a party in favor of generous welfare policies.
+	option = {
+		name = election_conservative_events.3.b
+		default_option = yes
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				NOT = {
+					party = { is_party_type = conservative_party }
+				}
+				law_stance = {
+					law = law_type:law_old_age_pension
+					value > neutral
+				}
+			}
+			party = { add_momentum = momentum_small }
+		}
+	}
+}
+
+# The Best Defense
+# If a neighboring country has bad relations and high infamy, the conservatives (or Military Party) can campaign on a more hawkish foreign policy to deter attacks.
+election_conservative_events.4 = {
+	type = country_event
+	placement = root
+	title = election_conservative_events.4.t
+	desc = election_conservative_events.4.d
+	flavor = election_conservative_events.4.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			OR = {
+				is_party_type = conservative_party
+				is_party_type = military_party
+			}
+		}
+		any_neighbouring_state = {
+			owner = {
+				infamy >= infamy_threshold:infamous
+				relations:root <= relations_threshold:poor
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		if = {
+			limit = { exists = py:military_party }
+			py:military_party = { save_scope_as = hawk_campaign_party }
+		}
+		else = {
+			py:conservative_party = { save_scope_as = hawk_campaign_party }
+		}
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					infamy >= infamy_threshold:infamous
+					relations:root <= relations_threshold:poor
+				}
+			}
+			owner = { save_scope_as = election_threatening_neighbor }
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	# Accept the argument, giving momentum to the conservative party and worsening relations with the neighboring country.
+	option = {
+		name = election_conservative_events.4.a
+		scope:hawk_campaign_party = {
+			add_momentum = momentum_large
+		}
+		change_relations = {
+			country = scope:election_threatening_neighbor
+			value = -15
+		}
+	}
+
+	# Downplay the threat, angering the Armed Forces.
+	option = {
+		name = election_conservative_events.4.b
+		default_option = yes
+
+		ig:ig_armed_forces ?= {
+			add_modifier = {
+				name = weak_and_trusting # interest_group_approval_add
+				days = normal_modifier_time
+			}
+		}
+	}
+}
+﻿namespace = election_contextual_events
+
+# Bread, Butter, Ballot
+# Basic foodstuffs are expensive, people are displeased with the sitting government
+election_contextual_events.1 = {
+	type = country_event
+	placement = ROOT
+	title = election_contextual_events.1.t
+	desc = election_contextual_events.1.d
+	flavor = election_contextual_events.1.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "europenorthamerica_rich_and_poor"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_interest_group = {
+			has_party = yes
+			is_in_government = yes
+		}
+		market_capital.market = {
+			OR = {
+				mg:grain = {
+					market_goods_pricier > 0.25
+				}
+				mg:fish = {
+					market_goods_pricier > 0.25
+				}
+				mg:meat = {
+					market_goods_pricier > 0.25
+				}
+				mg:groceries = {
+					market_goods_pricier > 0.25
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = yes
+			}
+			party = {
+				save_scope_as = high_food_price_party
+			}
+		}
+		if = {
+			limit = {
+				market_capital.market = {
+					mg:grain = {
+						market_goods_pricier > 0.25
+					}
+				}
+			}
+			g:grain = {
+				save_scope_as = basic_foodstuff
+			}
+		}
+		else_if = {
+			limit = {
+				market_capital.market = {
+					mg:groceries = {
+						market_goods_pricier > 0.25
+					}
+				}
+			}
+			g:groceries = {
+				save_scope_as = basic_foodstuff
+			}
+		}
+		else_if = {
+			limit = {
+				market_capital.market = {
+					mg:fish = {
+						market_goods_pricier > 0.25
+					}
+				}
+			}
+			g:fish = {
+				save_scope_as = basic_foodstuff
+			}
+		}
+		else_if = {
+			limit = {
+				market_capital.market = {
+					mg:meat = {
+						market_goods_pricier > 0.25
+					}
+				}
+			}
+			g:meat = {
+				save_scope_as = basic_foodstuff
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # They will have to rely on alms
+		name = election_contextual_events.1.a
+		default_option = yes
+		scope:high_food_price_party = {
+			add_momentum = momentum_medium_decrease
+		}
+	}
+
+	option = { # Fund some soup kitchens
+		name = election_contextual_events.1.b
+		add_modifier = {
+			name = alms_for_the_poor
+			days = short_modifier_time
+			multiplier = money_amount_multiplier_small
+		}
+	}
+}
+
+# Swindling Futurity
+# The country has a high national debt, people are displeased with the sitting government
+election_contextual_events.2 = {
+	type = country_event
+	placement = ROOT
+	title = election_contextual_events.2.t
+	desc = election_contextual_events.2.d
+	flavor = election_contextual_events.2.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "africa_leader_arguing"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		scaled_debt > 0.5
+		any_interest_group = {
+			has_party = yes
+			is_in_government = yes
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = yes
+			}
+			leader = {
+				save_scope_as = public_debt_scapegoat
+			}
+			party = {
+				save_scope_as = public_debt_party
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # Loans are a cornerstone of any healthy economy!
+		name = election_contextual_events.2.a
+		default_option = yes
+		scope:public_debt_party = {
+			add_momentum = momentum_medium_decrease
+		}
+	}
+
+	option = { # Find a scapegoat
+		name = election_contextual_events.2.b
+		scope:public_debt_party = {
+			add_momentum = momentum_small_decrease
+		}
+		scope:public_debt_scapegoat = {
+			add_modifier = {
+				name = fiscally_irresponsible
+				days = normal_modifier_time
+			}
+		}
+	}
+}
+
+# Pacifist Condemns the War
+# The country is leading a costly war of aggression, and a pacifist leader of the opposition comes out
+election_contextual_events.3 = {
+	type = country_event
+	placement = ROOT
+	title = election_contextual_events.3.t
+	desc = election_contextual_events.3.d
+	flavor = election_contextual_events.3.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_interest_group = {
+			has_party = yes
+			is_in_government = no
+			leader = {
+				has_ideology = ideology:ideology_pacifist
+			}
+		}
+		any_interest_group = {
+			has_party = yes
+			is_in_government = yes
+		}
+		any_scope_war = {
+			attacker_warleader = ROOT
+		    has_war_exhaustion = {
+		        target = ROOT
+		        value > 10
+		    }
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = no
+				leader = {
+					has_ideology = ideology:ideology_pacifist
+				}
+			}
+			save_scope_as = opposition_pacifist_ig
+			party = {
+				save_scope_as = opposition_pacifist_party
+			}
+			leader = {
+				save_scope_as = pacifist_ig_leader
+			}
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = yes
+			}
+			save_scope_as = government_war_ig
+			party = {
+				save_scope_as = government_war_party
+			}
+		}
+		random_scope_war = {
+			limit = {
+				attacker_warleader = ROOT
+			    has_war_exhaustion = {
+			        target = ROOT
+			        value > 10
+			    }
+			}
+			save_scope_as = pacifist_war
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # The man speaks
+		name = election_contextual_events.3.a
+		default_option = yes
+		scope:government_war_party = {
+			add_momentum = momentum_medium_decrease
+		}
+		scope:pacifist_ig_leader = {
+			add_modifier = {
+				name = principled_pacifist
+				days = normal_modifier_time
+			}
+		}
+	}
+	option = { # Censor it
+		name = election_contextual_events.3.b
+		trigger = {
+			NOT = {
+				has_law_or_variant = law_type:law_protected_speech
+			}
+		}
+		random_list = {
+			25 = {
+				custom_tooltip = election_contextual_events.3.tt.2
+				scope:government_war_party = {
+					add_momentum = momentum_large_decrease
+				}
+				scope:pacifist_ig_leader = {
+					add_modifier = {
+						name = martyrized_pacifist
+						days = normal_modifier_time
+					}
+				}
+			}
+			25 = {
+				custom_tooltip = election_contextual_events.3.tt.2
+				scope:government_war_party = {
+					add_momentum = momentum_medium_decrease
+				}
+				scope:pacifist_ig_leader = {
+					add_modifier = {
+						name = martyrized_pacifist
+						days = normal_modifier_time
+						multiplier = 0.75
+					}
+				}
+			}
+			50 = {
+				custom_tooltip = election_contextual_events.3.tt.1
+				scope:government_war_party = {
+					add_momentum = momentum_small
+				}
+			}
+		}
+	}
+	option = { # Censor it, but worse.
+		name = election_contextual_events.3.c
+		trigger = {
+			has_law_or_variant = law_type:law_protected_speech
+		}
+		random_list = {
+			25 = {
+				custom_tooltip = election_contextual_events.3.tt.2
+				scope:government_war_party = {
+					add_momentum = momentum_large_decrease
+				}
+				scope:pacifist_ig_leader = {
+					add_modifier = {
+						name = martyrized_pacifist
+						days = normal_modifier_time
+					}
+				}
+			}
+			50 = {
+				custom_tooltip = election_contextual_events.3.tt.2
+				scope:government_war_party = {
+					add_momentum = momentum_medium_decrease
+				}
+				scope:pacifist_ig_leader = {
+					add_modifier = {
+						name = martyrized_pacifist
+						days = normal_modifier_time
+						multiplier = 0.75
+					}
+				}
+			}
+			25 = {
+				custom_tooltip = election_contextual_events.3.tt.1
+				scope:government_war_party = {
+					add_momentum = momentum_small
+				}
+			}
+		}
+	}
+}
+
+# For Whom the Bell Tolls
+# Old IG leader dies, damaging the unity of his political party. Who will replace him?
+election_contextual_events.4 = {
+	type = country_event
+	placement = ROOT
+	title = election_contextual_events.4.t
+	desc = election_contextual_events.4.d
+	flavor = election_contextual_events.4.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		NOT = {
+			has_variable = election_leader_death_cooldown
+		}
+		any_interest_group = {
+			has_party = yes
+			leader = {
+				age > define:NCharacters|OLD_AGE
+				is_busy = no
+				is_immortal = no
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				leader = {
+					age > define:NCharacters|OLD_AGE
+					is_busy = no
+					is_immortal = no
+				}
+			}
+			leader = {
+				save_scope_as = decrepit_leader
+			}
+			save_scope_as = decrepit_leader_ig
+			party = {
+				save_scope_as = decrepit_leader_party
+			}
+		}
+		set_variable = {
+			name = election_leader_death_cooldown
+			days = long_modifier_time
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # Popular, but useless replacement
+		name = election_contextual_events.4.a
+		default_option = yes
+		scope:decrepit_leader = {
+			kill_character = yes
+		}
+		scope:decrepit_leader_party = {
+			add_momentum = momentum_small
+		}
+		create_character = {
+			ig_leader = yes
+			interest_group = scope:decrepit_leader_ig
+			age = 48
+			traits = {
+				expensive_tastes
+				arrogant
+				hedonist
+			}
+			on_created = {
+				add_modifier = {
+					name = well_connected
+					days = normal_modifier_time
+				}
+			}
+		}
+	}
+	option = { # Unpopular, but skilled replacement
+		name = election_contextual_events.4.b
+		scope:decrepit_leader = {
+			kill_character = yes
+		}
+		create_character = {
+			ig_leader = yes
+			interest_group = scope:decrepit_leader_ig
+			age = 24
+			traits = {
+				ambitious
+				charismatic
+				imperious
+			}
+			on_created = {
+				add_modifier = {
+					name = imperious_upstart
+					days = normal_modifier_time
+				}
+			}
+		}
+	}
+}
+
+# A Land of Want
+# SoL is low, putting the ruling lads in a bad light.
+election_contextual_events.5 = {
+	type = country_event
+	placement = ROOT
+	title = election_contextual_events.5.t
+	desc = election_contextual_events.5.d
+	flavor = election_contextual_events.5.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "europenorthamerica_rich_and_poor"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		average_sol < 10
+		any_interest_group = {
+			has_party = yes
+			is_in_government = yes
+		}
+		any_interest_group = {
+			has_party = yes
+			is_in_government = no
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = yes
+			}
+			party = {
+				save_scope_as = low_sol_party
+			}
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = no
+			}
+			leader = {
+				save_scope_as = low_sol_opposition_leader
+			}
+			party = {
+				save_scope_as = low_sol_opposition_party
+			}
+			save_scope_as = low_sol_opposition_ig
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # Harm party election chance
+		name = election_contextual_events.5.a
+		default_option = yes
+		scope:low_sol_party = {
+			add_momentum = momentum_medium_decrease
+		}
+		scope:low_sol_opposition_party = {
+			add_momentum = momentum_small
+		}
+		scope:low_sol_opposition_leader = {
+			add_modifier = {
+				name = defender_of_the_downtrodden
+				days = normal_modifier_time
+			}
+		}
+	}
+	option = { # Harm government IG opinion
+		name = election_contextual_events.5.b
+		scope:low_sol_opposition_party = {
+			add_momentum = momentum_small
+		}
+		add_modifier = {
+			name = indifferent_to_destitution
+			days = short_modifier_time
+		}
+	}
+}
+
+# A Land of Plenty
+# SoL is high, putting the ruling lads in a good light.
+election_contextual_events.6 = {
+	type = country_event
+	placement = ROOT
+	title = election_contextual_events.6.t
+	desc = election_contextual_events.6.d
+	flavor = election_contextual_events.6.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "southamerica_factory_opening"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		average_sol > 15
+		any_interest_group = {
+			has_party = yes
+			is_in_government = yes
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = yes
+			}
+			save_scope_as = high_sol_ig
+			leader = {
+				save_scope_as = high_sol_leader
+			}
+			party = {
+				save_scope_as = high_sol_party
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # Gain momentum for election
+		name = election_contextual_events.6.a
+		default_option = yes
+		scope:high_sol_party = {
+			add_momentum = momentum_medium
+		}
+	}
+
+	option = { # Shine some light on the IG and IG leader
+		name = election_contextual_events.6.b
+		scope:high_sol_ig = {
+			add_modifier = {
+				name = patrons_of_prosperity
+				days = normal_modifier_time
+			}
+		}
+		scope:high_sol_leader = {
+			add_modifier = {
+				name = champion_of_prosperity
+				days = long_modifier_time
+			}
+		}
+	}
+}
+
+# Coalition Coupons
+# Government IGs gain Momentum due to winning a war. Pacifists condemned as unpatriotic
+election_contextual_events.7 = {
+	type = country_event
+	placement = ROOT
+	title = election_contextual_events.7.t
+	desc = election_contextual_events.7.d
+	flavor = election_contextual_events.7.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		NOT = {
+			has_variable = coalition_coupons_cooldown
+		}
+		any_interest_group = {
+			has_party = yes
+			is_in_government = yes
+		}
+		any_scope_war = {
+		    has_war_support = {
+		        target = ROOT
+		        value > 70
+		    }
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_scope_war = {
+			limit = {
+			    has_war_support = {
+			        target = ROOT
+			        value > 70
+			    }
+			}
+			save_scope_as = ongoing_election_war
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = yes
+			}
+			party = {
+				save_scope_as = ongoing_election_war_party
+			}
+		}
+		set_variable = {
+			name = coalition_coupons_cooldown
+			days = long_modifier_time
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # Use this to win the election
+		name = election_contextual_events.7.a
+		default_option = yes
+		scope:ongoing_election_war_party = {
+			add_momentum = momentum_medium
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					leader = {
+						has_ideology = ideology:ideology_pacifist
+					}
+				}
+			}
+			every_interest_group = {
+				limit = {
+					leader = {
+						has_ideology = ideology:ideology_pacifist
+					}
+				}
+				leader = {
+					add_modifier = {
+					name = dove_of_peace_in_time_of_war
+					days = short_modifier_time
+					}
+				}
+			}
+		}
+	}
+
+	option = { # Polarise society with jingoist rhetoric
+		name = election_contextual_events.7.b
+		add_modifier = {
+			name = jingoist_rhetoric
+			days = normal_modifier_time
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					leader = {
+						has_ideology = ideology:ideology_pacifist
+					}
+				}
+			}
+			every_interest_group = {
+				limit = {
+					leader = {
+						has_ideology = ideology:ideology_pacifist
+					}
+				}
+				leader = {
+					add_modifier = {
+					name = dove_of_peace_in_time_of_war
+					days = short_modifier_time
+					}
+				}
+			}
+		}
+	}
+}
+
+# A Torrent of Gin and Beer
+# The government is pursuing anti-liquor policies, and people get (understandably) angry.
+election_contextual_events.8 = {
+	type = country_event
+	placement = ROOT
+	title = election_contextual_events.8.t
+	desc = election_contextual_events.8.d
+	flavor = election_contextual_events.8.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "unspecific_temperance_movement"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		OR = {
+			is_banning_goods = g:liquor
+			has_consumption_tax = g:liquor
+		}
+		any_interest_group = {
+			has_party = yes
+			is_in_government = no
+			party = {
+				save_temporary_scope_as = anti_temperance_party
+			}
+		}
+		any_interest_group = {
+			has_party = yes
+			is_in_government = yes
+			party = {
+				NOT = {
+					scope:anti_temperance_party ?= this
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = no
+			}
+			save_scope_as = liquor_ig
+			party = {
+				save_scope_as = anti_temperance_party
+			}
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = yes
+				party = {
+					NOT = {
+						scope:anti_temperance_party ?= this
+					}
+				}
+			}
+			save_scope_as = liquor_gov_ig
+			party = {
+				save_scope_as = temperance_party
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # Anti temperance party soars in popularity
+		name = election_contextual_events.8.a
+		default_option = yes
+		scope:anti_temperance_party = {
+			add_momentum = momentum_large
+		}
+	}
+
+	option = { # Run a smear campaign
+		name = election_contextual_events.8.b
+		scope:anti_temperance_party = {
+			add_momentum = momentum_small
+		}
+		scope:temperance_party = {
+			add_momentum = momentum_small_decrease
+		}
+	}
+}
+
+﻿namespace = election_generic
+
+election_generic.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = election_generic.1.t
+	desc = election_generic.1.d
+	flavor = election_generic.1.f
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	cooldown = { days = short_modifier_time } # Intended to be able to fire every election
+
+	trigger = {
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		any_active_party = {
+			party_has_members = yes
+			count > 1
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+			}
+			save_scope_as = party_1_scope
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				NOT = {
+					scope:party_1_scope ?= this
+				}
+			}
+			save_scope_as = party_2_scope
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				NOR = {
+					scope:party_1_scope ?= this
+					scope:party_2_scope ?= this
+				}
+			}
+			save_scope_as = party_3_scope
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				NOR = {
+					scope:party_1_scope ?= this
+					scope:party_2_scope ?= this
+					scope:party_3_scope ?= this
+				}
+			}
+			save_scope_as = party_4_scope
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = {
+		name = election_generic.1.a
+		default_option = yes
+		scope:party_1_scope ?= {
+			add_momentum = momentum_large
+		}
+	}
+
+	option = {
+		name = election_generic.1.b
+		trigger = {
+			exists = scope:party_2_scope
+		}
+		scope:party_2_scope ?= {
+			add_momentum = momentum_large
+		}
+	}
+
+	option = {
+		name = election_generic.1.c
+		trigger = {
+			exists = scope:party_3_scope
+		}
+		scope:party_3_scope ?= {
+			add_momentum = momentum_large
+		}
+	}
+
+	option = {
+		name = election_generic.1.e
+		trigger = {
+			exists = scope:party_4_scope
+		}
+		scope:party_4_scope ?= {
+			add_momentum = momentum_large
+		}
+	}
+}
+
+election_generic.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = election_generic.2.t
+	desc = election_generic.2.d
+	flavor = election_generic.2.f
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	cooldown = { days = short_modifier_time } # Intended to be able to fire every election
+
+	trigger = {
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		any_active_party = {
+			party_has_members = yes
+			count > 1
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+			}
+			save_scope_as = party_1_scope
+			ordered_member = {
+				order_by = ig_clout
+				position = 0
+				check_range_bounds = no
+				save_scope_as = party_1_ig_scope
+			}
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				NOT = {
+					scope:party_1_scope ?= this
+				}
+			}
+			ordered_member = {
+				order_by = ig_clout
+				position = 0
+				check_range_bounds = no
+				save_scope_as = party_2_ig_scope
+			}
+			save_scope_as = party_2_scope
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				NOR = {
+					scope:party_1_scope ?= this
+					scope:party_2_scope ?= this
+				}
+			}
+			ordered_member = {
+				order_by = ig_clout
+				position = 0
+				check_range_bounds = no
+				save_scope_as = party_3_ig_scope
+			}
+			save_scope_as = party_3_scope
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				NOR = {
+					scope:party_1_scope ?= this
+					scope:party_2_scope ?= this
+					scope:party_3_scope ?= this
+				}
+			}
+			ordered_member = {
+				order_by = ig_clout
+				position = 0
+				check_range_bounds = no
+				save_scope_as = party_4_ig_scope
+			}
+			save_scope_as = party_4_scope
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = {
+		name = election_generic.2.a
+		default_option = yes
+		scope:party_1_scope ?= {
+			add_momentum = momentum_large
+		}
+		scope:party_1_ig_scope.leader = {
+			add_modifier = {
+				name = modifier_election_popularity_boost
+				days = short_modifier_time
+				is_decaying = yes
+			}
+		}
+	}
+
+	option = {
+		name = election_generic.2.b
+		trigger = {
+			exists = scope:party_2_scope
+		}
+		scope:party_2_scope ?= {
+			add_momentum = momentum_large
+		}
+		scope:party_2_ig_scope.leader = {
+			add_modifier = {
+				name = modifier_election_popularity_boost
+				days = short_modifier_time
+				is_decaying = yes
+			}
+		}
+	}
+
+	option = {
+		name = election_generic.2.c
+		trigger = {
+			exists = scope:party_3_scope
+		}
+		scope:party_3_scope ?= {
+			add_momentum = momentum_large
+		}
+		scope:party_3_ig_scope.leader = {
+			add_modifier = {
+				name = modifier_election_popularity_boost
+				days = short_modifier_time
+				is_decaying = yes
+			}
+		}
+	}
+
+	option = {
+		name = election_generic.2.e
+		trigger = {
+			exists = scope:party_4_scope
+		}
+		scope:party_4_scope ?= {
+			add_momentum = momentum_large
+		}
+		scope:party_4_ig_scope.leader = {
+			add_modifier = {
+				name = modifier_election_popularity_boost
+				days = short_modifier_time
+				is_decaying = yes
+			}
+		}
+	}
+}
+﻿namespace = election_liberal_events
+
+# An Extreme Reaction
+# If there are fascists or ethno-nationalist leaders within the conservative party, the liberals can question their supposedly moderate image.
+election_liberal_events.1 = {
+	type = country_event
+	placement = root
+	title = election_liberal_events.1.t
+	desc = election_liberal_events.1.d
+	flavor = election_liberal_events.1.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		in_election_campaign = yes
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = liberal_party
+		}
+		any_interest_group = {
+			leader = {
+				OR = {
+					has_ideology = ideology:ideology_fascist
+					has_ideology = ideology:ideology_ethno_nationalist
+				}
+			}
+			has_party = yes
+			party = {
+				is_party_type = conservative_party
+			}
+		}
+		any_scope_pop = {
+			state = {
+				state_average_culture_pop_acceptance = {
+					culture = PREV.culture
+					value < acceptance_status_4
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				is_party_type = liberal_party
+			}
+			save_scope_as = liberal_party
+		}
+		random_interest_group = {
+			limit = {
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_ethno_nationalist
+					}
+				}
+				has_party = yes
+				party = {
+					is_party_type = conservative_party
+				}
+			}
+			leader = { save_scope_as = extremist_leader }
+			party = { save_scope_as = conservative_party }
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	# Accept the argument, giving momentum to the liberal party.
+	option = {
+		name = election_liberal_events.1.a
+		py:liberal_party = {
+			add_momentum = momentum_large
+		}
+	}
+
+	# Suggest that these are simply dedicated patriots, giving a smaller momentum to the conservative party, but creating radicalism among discriminated pops.
+	option = {
+		name = election_liberal_events.1.b
+		default_option = yes
+
+		py:conservative_party = {
+			add_momentum = momentum_small
+		}
+
+		add_modifier = {
+			name = downplaying_fascism
+			days = normal_modifier_time
+		}
+	}
+}
+
+# Liberty Without Anarchy
+# If there is an anarchist party, the liberals can position themselves as the path of liberty through reform, avoiding radical change or revolution.
+election_liberal_events.2 = {
+	type = country_event
+	placement = root
+	title = election_liberal_events.2.t
+	desc = election_liberal_events.2.d
+	flavor = election_liberal_events.2.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = liberal_party
+		}
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = anarchist_party
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				is_party_type = liberal_party
+			}
+			save_scope_as = liberal_party
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				is_party_type = anarchist_party
+			}
+			save_scope_as = anarchist_party
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	# Accept the argument, giving momentum to the liberal party.
+	option = {
+		name = election_liberal_events.2.a
+		py:liberal_party = {
+			add_momentum = momentum_large
+		}
+	}
+
+	# Argue that the system itself must be overthrown, giving momentum to the anarchist party.
+	option = {
+		name = election_liberal_events.2.b
+		default_option = yes
+
+		py:anarchist_party = {
+			add_momentum = momentum_large
+		}
+	}
+}
+
+# A Gentler [ROOT.GetCountry.GetName]
+# If there is a pacifist leader in the liberal party and the country has high infamy, they can campaign on improving the country's image with a softer foreign policy.
+election_liberal_events.3 = {
+	type = country_event
+	placement = root
+	title = election_liberal_events.3.t
+	desc = election_liberal_events.3.d
+	flavor = election_liberal_events.3.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "unspecific_ruler_speaking_to_people"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_interest_group = {
+			leader = {
+				has_ideology = ideology:ideology_pacifist
+			}
+			has_party = yes
+			party = {
+				is_party_type = liberal_party
+			}
+		}
+		infamy >= infamy_threshold:infamous
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				is_party_type = liberal_party
+			}
+			save_scope_as = liberal_party
+		}
+		random_scope_character = {
+			limit = {
+				has_ideology = ideology:ideology_pacifist
+				interest_group.party = {
+					is_party_type = liberal_party
+				}
+			}
+			save_scope_as = pacifist_leader
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	# Accept the argument, giving momentum to the liberal party and some popularity to the pacifist.
+	option = {
+		name = election_liberal_events.3.a
+		py:liberal_party = {
+			add_momentum = momentum_medium
+		}
+		scope:pacifist_leader = {
+			add_modifier = {
+				name = dove_of_reconciliation # character_popularity_add
+				days = normal_modifier_time
+			}
+		}
+		change_infamy = -5
+	}
+
+	# Argue that it is good to be feared, gaining a modifier that slows infamy decay.
+	option = {
+		name = election_liberal_events.3.b
+		default_option = yes
+
+		add_modifier = {
+			name = better_to_be_feared # country_infamy_decay_mult / negative
+			days = normal_modifier_time
+		}
+	}
+}
+
+# Open Markets
+# If there are shortages of consumer goods and the country does not have Free Trade, the liberals (or Free Trade Party) can campaign on easing trade restrictions.
+election_liberal_events.4 = {
+	type = country_event
+	placement = root
+	title = election_liberal_events.4.t
+	desc = election_liberal_events.4.d
+	flavor = election_liberal_events.4.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		NOT = { has_law_or_variant = law_type:law_free_trade }
+		any_active_party = {
+			party_has_members = yes
+			OR = {
+				is_party_type = liberal_party
+				is_party_type = free_trade_party
+			}
+		}
+		any_interest_group = {
+			is_in_government = yes
+			law_stance = {
+				law = law_type:law_free_trade
+				value < neutral
+			}
+			has_party = yes
+			party = {
+				NOT = { is_party_type = liberal_party }
+				NOT = { is_party_type = free_trade_party }
+			}
+		}
+		market_capital.market = {
+			OR = {
+				mg:grain = { market_goods_pricier > 0.25 }
+				mg:fish = { market_goods_pricier > 0.25 }
+				mg:fabric = { market_goods_pricier > 0.25 }
+				mg:wood = { market_goods_pricier > 0.25 }
+				mg:groceries = { market_goods_pricier > 0.25 }
+				mg:clothes = { market_goods_pricier > 0.25 }
+				mg:furniture = { market_goods_pricier > 0.25 }
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		if = {
+			limit = { exists = py:free_trade_party }
+			py:free_trade_party = { save_scope_as = free_trade_campaign_party }
+		}
+		else = {
+			py:liberal_party = { save_scope_as = free_trade_campaign_party }
+		}
+		if = {
+			limit = {
+				market_capital.market = {
+					mg:grain = { market_goods_pricier > 0.25 }
+				}
+			}
+			g:grain = { save_scope_as = expensive_good }
+		}
+		else_if = {
+			limit = {
+				market_capital.market = {
+					mg:fish = { market_goods_pricier > 0.25 }
+				}
+			}
+			g:fish = { save_scope_as = expensive_good }
+		}
+		else_if = {
+			limit = {
+				market_capital.market = {
+					mg:fabric = { market_goods_pricier > 0.25 }
+				}
+			}
+			g:fabric = { save_scope_as = expensive_good }
+		}
+		else_if = {
+			limit = {
+				market_capital.market = {
+					mg:wood = { market_goods_pricier > 0.25 }
+				}
+			}
+			g:wood = { save_scope_as = expensive_good }
+		}
+		else_if = {
+			limit = {
+				market_capital.market = {
+					mg:groceries = { market_goods_pricier > 0.25 }
+				}
+			}
+			g:groceries = { save_scope_as = expensive_good }
+		}
+		else_if = {
+			limit = {
+				market_capital.market = {
+					mg:clothes = { market_goods_pricier > 0.25 }
+				}
+			}
+			g:clothes = { save_scope_as = expensive_good }
+		}
+		else_if = {
+			limit = {
+				market_capital.market = {
+					mg:furniture = { market_goods_pricier > 0.25 }
+				}
+			}
+			g:furniture = { save_scope_as = expensive_good }
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	# Accept the argument, giving momentum to the liberal (or Free Trade) party.
+	option = {
+		name = election_liberal_events.4.a
+		scope:free_trade_campaign_party = {
+			add_momentum = momentum_large
+		}
+	}
+
+	# Argue that the current policy is necessary to keep prices stable, giving a smaller amount of momentum to a government party who oppose free trade.
+	option = {
+		name = election_liberal_events.4.b
+		default_option = yes
+		random_interest_group = {
+			limit = {
+				is_in_government = yes
+				law_stance = {
+					law = law_type:law_free_trade
+					value < neutral
+				}
+				has_party = yes
+				party = {
+					NOT = { is_party_type = liberal_party }
+					NOT = { is_party_type = free_trade_party }
+				}
+			}
+			party = {
+				add_momentum = momentum_small
+			}
+		}
+	}
+}
+﻿namespace = election_moderate_events
+
+# [ROOT.GetCountry.GetGovernment.GetName] of Conscience
+# If the country has both communist and fascist parties, both Liberals and Conservatives can campaign as the moderate alternative to the two extremes.
+election_moderate_events.1 = {
+	type = country_event
+	placement = root
+	title = election_moderate_events.1.t
+	desc = election_moderate_events.1.d
+	flavor = election_moderate_events.1.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			OR = {
+				is_party_type = conservative_party
+				is_party_type = liberal_party
+			}
+		}
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = fascist_party
+		}
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = communist_party
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				OR = {
+					is_party_type = conservative_party
+					is_party_type = liberal_party
+				}
+			}
+			save_scope_as = moderate_party
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	# Accept the argument, giving momentum to the party making it.
+	option = {
+		name = election_moderate_events.1.a
+		scope:moderate_party = {
+			add_momentum = momentum_large
+		}
+		add_electoral_confidence = 0.03
+	}
+
+	# Suggest the political system needs some shaking up, adding momentum to communist, fascist and anarchist parties.
+	option = {
+		name = election_moderate_events.1.b
+		default_option = yes
+		if = {
+			limit = { exists = py:fascist_party }
+			py:fascist_party = { add_momentum = momentum_medium }
+		}
+		if = {
+			limit = { exists = py:communist_party }
+			py:communist_party = { add_momentum = momentum_medium }
+		}
+		if = {
+			limit = { exists = py:anarchist_party }
+			py:anarchist_party = { add_momentum = momentum_medium }
+		}
+		if = {
+			limit = { exists = py:radical_party }
+			py:radical_party = { add_momentum = momentum_medium }
+		}
+		add_electoral_confidence = -0.03
+	}
+}
+
+# The Red Menace
+# If powerful other countries have communist parties in power and there is a domestic communist or social democratic party, both Liberals and Conservatives can campaign on shielding the country from becoming swept up in an international revolution.
+election_moderate_events.2 = {
+	type = country_event
+	placement = root
+	title = election_moderate_events.2.t
+	desc = election_moderate_events.2.d
+	flavor = election_moderate_events.2.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			OR = {
+				is_party_type = conservative_party
+				is_party_type = liberal_party
+			}
+		}
+		any_active_party = {
+			party_has_members = yes
+			OR = {
+				is_party_type = communist_party
+				is_party_type = social_democrat_party
+			}
+		}
+		any_country = {
+			NOT = { this = ROOT }
+			country_rank >= rank_value:major_power
+			any_interest_group = {
+				is_in_government = yes
+				has_party = yes
+				party = {
+					is_party_type = communist_party
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				OR = {
+					is_party_type = conservative_party
+					is_party_type = liberal_party
+				}
+			}
+			save_scope_as = moderate_party
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				OR = {
+					is_party_type = communist_party
+					is_party_type = social_democrat_party
+				}
+			}
+			save_scope_as = socialist_party
+		}
+		random_country = {
+			limit = {
+				NOT = { this = ROOT }
+				country_rank >= rank_value:major_power
+				any_interest_group = {
+					is_in_government = yes
+					party ?= {
+						is_party_type = communist_party
+					}
+				}
+			}
+			save_scope_as = communist_country
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	# Accept the argument, giving momentum to the party making it.
+	option = {
+		name = election_moderate_events.2.a
+		scope:moderate_party = {
+			add_momentum = momentum_large
+		}
+	}
+
+	# Welcome the revolution, improving relations with the other country and giving smaller momentum to the communist party.
+	option = {
+		name = election_moderate_events.2.b
+		default_option = yes
+		change_relations = {
+			country = scope:communist_country
+			value = 20
+		}
+		scope:socialist_party = {
+			add_momentum = momentum_small
+		}
+	}
+}
+﻿namespace = election_neutral
+
+# Kindly Burn This Letter
+election_neutral.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = election_neutral.1.t
+	desc = election_neutral.1.d
+	flavor = election_neutral.1.f
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			any_member = {
+				leader = {
+					NOT = { has_modifier = tarred_by_mulligan_letters }
+					OR = {
+						has_trait = reckless
+						has_trait = ambitious
+						has_trait = hedonist
+						has_trait = alcoholic
+						has_trait = opium_addiction
+						has_trait = expensive_tastes
+						has_trait = cocaine_addiction
+						has_trait = grifter
+					}
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				any_member = {
+					leader = {
+						NOT = { has_modifier = tarred_by_mulligan_letters }
+						OR = {
+							has_trait = reckless
+							has_trait = ambitious
+							has_trait = hedonist
+							has_trait = alcoholic
+							has_trait = opium_addiction
+							has_trait = expensive_tastes
+							has_trait = cocaine_addiction
+							has_trait = grifter
+						}
+					}
+				}
+			}
+			random_member = {
+				limit = {
+					leader = {
+						NOT = { has_modifier = tarred_by_mulligan_letters }
+						OR = {
+							has_trait = reckless
+							has_trait = ambitious
+							has_trait = hedonist
+							has_trait = alcoholic
+							has_trait = opium_addiction
+							has_trait = expensive_tastes
+							has_trait = cocaine_addiction
+							has_trait = grifter
+						}
+					}
+				}
+				save_scope_as = mulligan_letters_ig
+				leader = {
+					save_scope_as = mulligan_letters_leader
+				}
+			}
+			save_scope_as = mulligan_letters_party
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { # Deny, Deny, Deny
+		name = election_neutral.1.a
+		default_option = yes
+
+		scope:mulligan_letters_party = {
+			add_momentum = momentum_medium_decrease
+		}
+	}
+
+	option = { # Leave the leader out to hang
+		name = election_neutral.1.b
+		scope:mulligan_letters_leader = {
+			add_modifier = {
+				name = tarred_by_mulligan_letters
+				days = short_modifier_time
+			}
+		}
+	}
+
+	option = { # Charismatic IG partner saves the day
+		name = election_neutral.1.c
+		highlighted_option = yes
+		trigger = {
+			custom_tooltip = election_neutral.1.c.tt
+			scope:mulligan_letters_party = {
+				any_member = {
+					any_scope_character = {
+						OR = {
+							has_role = agitator
+							has_role = politician
+						}
+						has_trait = charismatic
+					}
+				}
+			}
+		}
+
+		scope:mulligan_letters_party = {
+			add_momentum = momentum_small_decrease
+		}
+	}
+}
+
+# General speaks in favor of party
+election_neutral.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = election_neutral.2.t
+	desc = election_neutral.2.d
+	flavor = election_neutral.2.f
+
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_scope_character = {
+			OR = {
+				has_role = general
+				has_role = admiral
+			}
+			is_ruler = no
+			interest_group = {
+				has_party = yes
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_scope_character = {
+			limit = {
+				OR = {
+					has_role = general
+					has_role = admiral
+				}
+				is_ruler = no
+				interest_group = {
+					has_party = yes
+				}
+			}
+			save_scope_as = electioneering_commander
+			interest_group = {
+				save_scope_as = electioneering_commander_ig
+				party = {
+					save_scope_as = electioneering_commander_party
+				}
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = {
+		name = election_neutral.2.a
+		default_option = yes
+
+		scope:electioneering_commander_party = {
+			add_momentum = momentum_medium
+		}
+	}
+
+	option = { # Reprimand the commander
+		name = election_neutral.2.b
+		add_radicals = {
+			value = medium_radicals
+			pop_type = officers
+		}
+	}
+
+	option = { # If he likes politics so much, why doesn't he...
+		name = election_neutral.2.c
+		highlighted_option = yes
+		trigger = {
+			custom_tooltip = election_neutral.2.c.tt
+			scope:electioneering_commander = {
+				NOT = { has_role = politician }
+			}
+		}
+
+		scope:electioneering_commander = {
+			add_character_role = politician
+			set_as_interest_group_leader = yes
+		}
+	}
+}
+
+# Whistle-Stop Tour
+election_neutral.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = election_neutral.3.t
+	desc = election_neutral.3.d
+	flavor = election_neutral.3.f
+
+	event_image = {
+		video = "unspecific_trains"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		has_technology_researched  = railways
+		any_scope_state = {
+			has_building = building_railway
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+			}
+			save_scope_as = whistle_stop_ig
+			leader = {
+				save_scope_as = whistle_stop_leader
+			}
+			party = {
+				save_scope_as = whistle_stop_party
+			}
+		}
+		random_scope_state = {
+			limit = {
+				has_building = building_railway
+			}
+			save_scope_as = whistle_stop_state
+		}
+	}
+
+	cancellation_trigger = {
+		OR = {
+			in_election_campaign = no
+			NOT = {
+				exists = scope:whistle_stop_party
+			}
+		}
+	}
+
+	option = {
+		name = election_neutral.3.a
+		default_option = yes
+
+		scope:whistle_stop_party ?= {
+			add_momentum = momentum_small
+		}
+		scope:whistle_stop_state = {
+			add_modifier = {
+				name = stressed_rail_network
+				days = short_modifier_time
+			}
+		}
+	}
+
+
+	option = { # Sure would be a shame if that train kept being misdirected
+		name = election_neutral.3.b
+		highlighted_option = yes
+
+		trigger = {
+			custom_tooltip = election_neutral.3.b.tt
+			scope:whistle_stop_party ?= {
+				NOT = {
+					any_member = {
+						is_in_government = yes
+					}
+				}
+			}
+		}
+
+		scope:whistle_stop_party = {
+			add_momentum = momentum_small_decrease
+		}
+		scope:whistle_stop_state = {
+			add_modifier = {
+				name = mysteriously_mismanaged_rail_network
+				days = short_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = election_neutral.3.c
+		highlighted_option = yes
+
+		trigger = {
+			scope:whistle_stop_party ?= {
+				any_member = {
+					is_in_government = yes
+				}
+			}
+		}
+
+		scope:whistle_stop_party ?= {
+			add_momentum = momentum_medium
+		}
+		scope:whistle_stop_state = {
+			add_modifier = {
+				name = surprisingly_efficient_rail_network
+				days = short_modifier_time
+			}
+		}
+	}
+}
+
+# The [State]/Midlothian Campaign
+election_neutral.4 = {
+	type = country_event
+	placement = scope:midlothian_campaign_state
+
+	title = election_neutral.4.t
+	desc = election_neutral.4.d
+	flavor = election_neutral.4.f
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_interest_group = {
+			has_party = yes
+			is_in_government = yes
+		}
+		any_scope_ally = {
+			infamy >= infamy_threshold:infamous
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = yes
+			}
+			party = {
+				save_scope_as = government_party
+			}
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = no
+			}
+			party = {
+				save_scope_as = opposition_party
+			}
+		}
+		random_scope_state = {
+			save_scope_as = midlothian_campaign_state
+		}
+		random_scope_ally = {
+			limit = {
+				infamy >= infamy_threshold:infamous
+			}
+			save_scope_as = midlothian_campaign_ally_country
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = {
+		name = election_neutral.4.a
+		default_option = yes
+
+		scope:government_party = {
+			add_momentum = momentum_small_decrease
+		}
+		scope:opposition_party = {
+			add_momentum = momentum_small
+		}
+	}
+
+	option = {
+		name = election_neutral.4.b
+
+		change_relations = {
+			country = scope:midlothian_campaign_ally_country
+			value = -30
+		}
+	}
+}
+
+# Overly-Enthusiastic Partisans
+election_neutral.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = election_neutral.5.t
+	desc = election_neutral.5.d
+	flavor = election_neutral.5.f
+
+	event_image = {
+		video = "unspecific_vandalized_storefront"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			count >= 2
+		}
+		any_interest_group = {
+			has_party = yes
+		}
+		NOT = { has_variable = partisans_cooldown_var }
+	}
+
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+			}
+			party = {
+				save_scope_as = campaign_club_party
+			}
+		}
+		set_variable = {
+			name = partisans_cooldown_var
+			days = normal_modifier_time
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = {
+		name = election_neutral.5.a
+		default_option = yes
+
+		scope:campaign_club_party = {
+			add_momentum = momentum_small_decrease
+		}
+	}
+
+	option = {
+		name = election_neutral.5.b
+
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				NOT = { is_member_of_party = scope:campaign_club_party }
+			}
+			add_modifier = {
+				name = harassed_by_political_partisans
+				days = short_modifier_time
+			}
+		}
+	}
+
+	# Encourage them!
+	option = {
+		name = election_neutral.5.c
+		highlighted_option = yes
+
+		trigger = {
+			custom_tooltip = election_neutral.5.c.tt
+			any_interest_group = {
+				is_member_of_party = scope:campaign_club_party
+				leader = {
+					OR = {
+						has_trait = wrathful
+						has_trait = cruel
+					}
+				}
+			}
+		}
+
+		scope:campaign_club_party = {
+			add_momentum = momentum_medium
+		}
+
+		every_interest_group = {
+			limit = {
+				has_party = yes
+				NOT = { is_member_of_party = scope:campaign_club_party }
+			}
+			add_modifier = {
+				name = harassed_by_political_partisans
+				days = short_modifier_time
+			}
+		}
+	}
+}
+
+# Partisan Papers
+election_neutral.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = election_neutral.6.t
+	desc = election_neutral.6.d
+	flavor = election_neutral.6.f
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		NOT = { has_law_or_variant = law_type:law_outlawed_dissent }
+		any_interest_group = {
+			has_party = yes
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+			}
+			party = {
+				save_scope_as = newspaper_party
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = {
+		name = election_neutral.6.a
+		default_option = yes
+
+		scope:newspaper_party = {
+			add_momentum = momentum_small
+		}
+	}
+
+	option = {
+		name = election_neutral.6.b
+
+		add_modifier = {
+			name = high_distribution_news_cycle
+			days = short_modifier_time
+		}
+	}
+
+	option = {
+		name = election_neutral.6.c1
+		highlighted_option = yes
+
+		trigger = {
+			has_law_or_variant = law_type:law_censorship
+			scope:newspaper_party = {
+				any_member = {
+					is_in_government = yes
+				}
+			}
+		}
+
+		scope:newspaper_party = {
+			add_momentum = momentum_medium
+		}
+	}
+
+	option = {
+		name = election_neutral.6.c2
+		highlighted_option = yes
+
+		trigger = {
+			has_law_or_variant = law_type:law_censorship
+			scope:newspaper_party = {
+				NOT = {
+					any_member = {
+						is_in_government = yes
+					}
+				}
+			}
+		}
+
+		scope:newspaper_party = {
+			add_momentum = momentum_small_decrease
+		}
+	}
+}
+
+# Campaign Financing
+election_neutral.7 = {
+	type = country_event
+	placement = ROOT
+
+	title = election_neutral.7.t
+	desc = election_neutral.7.d
+	flavor = election_neutral.7.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_interest_group = {
+			has_party = yes
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		save_scope_as = campaign_financing_country
+		random_interest_group = {
+			limit = {
+				has_party = yes
+			}
+			party = {
+				save_scope_as = campaign_financing_party
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = {
+		name = election_neutral.7.a
+		default_option = yes
+		add_modifier = {
+			name = state_funding_for_campaigns_expenses
+			multiplier = money_amount_multiplier_very_small
+			days = short_modifier_time
+		}
+		scope:campaign_financing_party = {
+			add_momentum = momentum_small
+		}
+	}
+
+	option = {
+		name = election_neutral.7.b
+		add_modifier = {
+			name = state_funding_for_campaigns_expenses
+			multiplier = money_amount_multiplier_small
+			days = short_modifier_time
+		}
+		add_modifier = {
+			name = state_funding_for_campaigns_approval
+			days = short_modifier_time
+		}
+	}
+
+	option = {
+		name = election_neutral.7.c
+		scope:campaign_financing_party = {
+			add_momentum = momentum_small_decrease
+		}
+	}
+}
+
+# Crusade for Change
+election_neutral.8 = {
+	type = country_event
+	placement = ROOT
+
+	title = election_neutral.8.t
+	desc = election_neutral.8.d
+	flavor = election_neutral.8.f
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		enacting_any_law = yes
+		any_interest_group = {
+			has_party = yes
+			law_stance = {
+				law = owner.currently_enacting_law.type
+				value > neutral
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		currently_enacting_law = {
+			save_scope_as = changing_policies_law
+		}
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				law_stance = {
+					law = owner.currently_enacting_law.type
+					value > neutral
+				}
+			}
+			party = {
+				save_scope_as = changing_policies_favorable_party
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	# Champions of Change!
+	option = {
+		name = election_neutral.8.a
+		default_option = yes
+		scope:changing_policies_favorable_party = {
+			add_momentum = momentum_small
+		}
+	}
+
+	# The People Speak!
+	option = {
+		name = election_neutral.8.b
+		add_enactment_modifier = {
+			name = changing_policies_electoral_support
+		}
+	}
+}
+﻿namespace = election_other_parties_events
+
+# Man Over Machine
+# The Agrarian Party complains about factories and blames the capitalists/industrialists for making them lose momentum
+election_other_parties_events.1 = {
+	type = country_event
+	placement = ROOT
+	title = election_other_parties_events.1.t
+	desc = election_other_parties_events.1.d
+	flavor = election_other_parties_events.1.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "asia_farmers_market"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = agrarian_party
+		}
+		any_scope_state = {
+			OR = {
+				any_scope_building = {
+					is_industry_building = yes
+					level >= 5
+				}
+				any_scope_building = {
+					is_heavy_industry_building = yes
+					level >= 5
+				}
+			}
+		}
+		ig:ig_industrialists ?= {
+			ig_counts_as_marginal = no
+		}
+		has_technology_researched = intensive_agriculture
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				is_party_type = agrarian_party
+			}
+			save_scope_as = agrarian_party
+		}
+		random_scope_state = {
+			limit = {
+				any_scope_building = {
+					OR = {
+						is_industry_building = yes
+						is_heavy_industry_building = yes
+					}
+					level >= 5
+				}
+
+			}
+			save_scope_as = industrial_state
+		}
+		ig:ig_industrialists ?= {
+			save_scope_as = ig_industrialists
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { #factories could never replace men
+		name = election_other_parties_events.1.a
+		py:agrarian_party = {
+			add_momentum = momentum_medium
+		}
+		ig:ig_rural_folk ?= { #rural folk agrees
+			add_modifier = {
+				name = anti_industrial_party_modifier # interest_group_approval_add
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = { #progress always finds a way
+		name = election_other_parties_events.1.b
+		default_option = yes
+		py:agrarian_party = {
+			add_momentum = momentum_medium_decrease
+		}
+	}
+}
+
+# God's Will
+# Religious Party leader preaches that God wants them to win
+election_other_parties_events.2 = {
+	type = country_event
+	placement = ROOT
+	title = election_other_parties_events.2.t
+	desc = election_other_parties_events.2.d
+	flavor = election_other_parties_events.2.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		trigger = {
+			religion = rel:jewish
+		}
+		video = "europenorthamerica_judaism"
+
+		on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	}
+	event_image = {
+		trigger = {
+			OR = {
+				religion = rel:protestant
+				religion = rel:catholic
+				religion = rel:orthodox
+				religion = rel:oriental_orthodox
+			}
+		}
+		video = "southamerica_christianity"
+
+		on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	}
+	event_image = {
+		trigger = {
+			OR = {
+				religion = rel:hindu
+				religion = rel:sikh
+			}
+		}
+		video = "asia_hinduism_sikhism"
+
+		on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	}
+	event_image = {
+		trigger = {
+			OR = {
+				religion = rel:shinto
+				religion = rel:confucian
+			}
+		}
+		video = "asia_confucianism_shinto"
+
+		on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	}
+	event_image = {
+		trigger = {
+			OR = {
+				religion = rel:mahayana
+				religion = rel:gelugpa
+				religion = rel:theravada
+			}
+		}
+		video = "asia_buddhism"
+
+		on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	}
+	event_image = {
+		trigger = {
+			OR = {
+				religion = rel:sunni
+				religion = rel:shiite
+			}
+		}
+		video = "middleeast_islam"
+
+		on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	}
+	event_image = {
+		trigger = {
+			NOR = {
+				religion = rel:jewish
+				religion = rel:protestant
+				religion = rel:catholic
+				religion = rel:orthodox
+				religion = rel:oriental_orthodox
+				religion = rel:mahayana
+				religion = rel:gelugpa
+				religion = rel:theravada
+				religion = rel:shinto
+				religion = rel:hindu
+				religion = rel:sikh
+				religion = rel:sunni
+				religion = rel:shiite
+			}
+		}
+		video = "africa_animism"
+
+		on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		ig:ig_devout ?= {
+			has_party = yes
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		ig:ig_devout ?= {
+			party = {
+				save_scope_as = religious_party
+			}
+		}
+		ig:ig_devout ?= {
+			save_scope_as = ig_devout
+			leader = {
+				save_scope_as = religious_leader
+			}
+		}
+		if = {
+			limit = {
+				any_active_party = {
+					party_has_members = yes
+					NOT = { THIS = scope:religious_party }
+				}
+			}
+			random_active_party = {
+				limit = {
+					party_has_members = yes
+					NOT = { THIS = scope:religious_party }
+				}
+				save_scope_as = other_party
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { #and who are we to go against God's will
+		name = election_other_parties_events.2.a
+		ig:ig_devout ?= { #wahooo
+			add_modifier = {
+				name = gods_will_modifier # interest_group_pol
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = { #we didn't get the memo
+		name = election_other_parties_events.2.b
+		default_option = yes
+		scope:religious_leader = { #we ruin this guy's life
+			add_modifier = {
+				name = gods_wont_modifier #hehe
+				days = normal_modifier_time
+			}
+		}
+	}
+
+	option = { #no, God wants THEM to win
+		name = election_other_parties_events.2.c
+		trigger = {
+			exists = scope:other_party
+		}
+		scope:other_party = {
+			add_momentum = momentum_small
+		}
+	}
+}
+
+# Ordo Naturalis
+# The Military Party gains momentum when you're at war
+election_other_parties_events.3 = {
+	type = country_event
+	placement = ROOT
+	title = election_other_parties_events.3.t
+	desc = election_other_parties_events.3.d
+	flavor = election_other_parties_events.3.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = military_party
+		}
+		is_at_war = yes
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				is_party_type = military_party
+			}
+			save_scope_as = military_party
+		}
+		random_scope_war = {
+			save_scope_as = ongoing_war
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { #these people are our only option
+		name = election_other_parties_events.3.a
+		py:military_party = {
+			add_momentum = momentum_medium
+		}
+		ig:ig_armed_forces ?= { #armed forces like this
+			add_modifier = {
+				name = supported_war_politics_modifier # interest_group_approval_add
+				days = normal_modifier_time
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					leader = {
+						has_ideology = ideology:ideology_pacifist
+					}
+				}
+			}
+			every_interest_group = {
+				limit = {
+					leader = {
+						has_ideology = ideology:ideology_pacifist
+					}
+				}
+				add_modifier = {
+					name = supported_war_leaders_modifier
+					days = short_modifier_time
+				}
+			}
+		}
+	}
+
+	option = { #they need to stop being populists
+		name = election_other_parties_events.3.b
+		default_option = yes
+		py:military_party = {
+			add_momentum = momentum_large_decrease
+		}
+		add_loyalists = {
+			value = large_radicals
+			pop_type = academics
+		}
+		add_radicals = {
+			value = medium_radicals
+			pop_type = officers
+		}
+		add_radicals = {
+			value = medium_radicals
+			pop_type = soldiers
+		}
+	}
+}
+
+# Lagom
+# Social Democrats say "hey, at least we're not THAT guy" (communists/radicals/anarchists)
+election_other_parties_events.4 = {
+	type = country_event
+	placement = ROOT
+	title = election_other_parties_events.4.t
+	desc = election_other_parties_events.4.d
+	flavor = election_other_parties_events.4.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = social_democrat_party
+		}
+		OR = {
+			any_active_party = {
+				party_has_members = yes
+				is_party_type = communist_party
+			}
+			any_active_party = {
+				party_has_members = yes
+				is_party_type = anarchist_party
+			}
+			any_active_party = {
+				party_has_members = yes
+				is_party_type = radical_party
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				is_party_type = social_democrat_party
+			}
+			save_scope_as = social_democrat_party
+		}
+		if = {
+			limit = {
+				any_active_party = {
+					party_has_members = yes
+					is_party_type = communist_party
+				}
+			}
+			random_active_party = {
+				limit = {
+					party_has_members = yes
+					is_party_type = communist_party
+				}
+				save_scope_as = leftist_party
+			}
+		}
+		else_if = {
+			limit = {
+				any_active_party = {
+					party_has_members = yes
+					is_party_type = anarchist_party
+				}
+			}
+			random_active_party = {
+				limit = {
+					party_has_members = yes
+					is_party_type = anarchist_party
+				}
+				save_scope_as = leftist_party
+			}
+		}
+		else_if = {
+			limit = {
+				any_active_party = {
+					party_has_members = yes
+					is_party_type = radical_party
+				}
+			}
+			random_active_party = {
+				limit = {
+					party_has_members = yes
+					is_party_type = radical_party
+				}
+				save_scope_as = leftist_party
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { #well, maybe we WANT you to be
+		name = election_other_parties_events.4.a
+		scope:leftist_party = {
+			add_momentum = momentum_medium
+		}
+	}
+
+	option = { #and thank God for that
+		name = election_other_parties_events.4.b
+		default_option = yes
+		py:social_democrat_party = {
+			add_momentum = momentum_small
+		}
+	}
+}
+
+# Radical!
+# Radicals are radicalising around
+election_other_parties_events.5 = {
+	type = country_event
+	placement = ROOT
+	title = election_other_parties_events.5.t
+	desc = election_other_parties_events.5.d
+	flavor = election_other_parties_events.5.f
+
+	duration = 3
+
+	cooldown = { days = very_long_modifier_time }
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+		in_election_campaign = yes
+		NOT = { has_variable = election_event_cooldown }
+		NOT = { has_variable = mute_election_events }
+		any_active_party = {
+			party_has_members = yes
+			is_party_type = radical_party
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = election_event_cooldown
+			months = election_event_cooldown_months
+		}
+		random_active_party = {
+			limit = {
+				party_has_members = yes
+				is_party_type = radical_party
+			}
+			save_scope_as = radical_party
+		}
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+			}
+			save_scope_as = radicals_state
+		}
+	}
+
+	cancellation_trigger = {
+		in_election_campaign = no
+	}
+
+	option = { #keep up with the good work
+		name = election_other_parties_events.5.a
+		py:radical_party = { #you give them momentum
+			add_momentum = momentum_medium
+		}
+		scope:radicals_state = {
+			add_radicals_in_state = {
+				value = small_radicals
+			}
+		}
+	}
+
+	option = { #pls stop
+		name = election_other_parties_events.5.b
+		default_option = yes
+		py:radical_party = {
+			add_momentum = momentum_medium_decrease
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					leader = {
+						has_ideology = ideology:ideology_radical
+					}
+				}
+			}
+			every_interest_group = {
+				limit = {
+					leader = {
+						has_ideology = ideology:ideology_radical
+					}
+				}
+				add_modifier = {
+					name = stopped_radicals_modifier
+					days = short_modifier_time
+				}
+			}
+		}
+	}
+
+	option = { #pls stop harder
+		name = election_other_parties_events.5.c
+		trigger = {
+			OR = {
+				institution_investment_level = {
+					institution = institution_police
+					value >= 5
+				}
+				has_law_or_variant = law_type:law_outlawed_dissent
+			}
+		}
+		py:radical_party = {
+			add_momentum = momentum_large_decrease
+		}
+		scope:radicals_state = {
+			add_radicals_in_state = {
+				value = medium_radicals
+			}
+		}
+	}
+}
+
