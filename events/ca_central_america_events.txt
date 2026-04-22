@@ -3395,9 +3395,14 @@ ca_central_america.42 = {
     event_image = { video = "europenorthamerica_before_the_battle" }
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     icon = "gfx/interface/icons/event_icons/event_fire.dds"
-    trigger = {
+   
+
+
+
+trigger = {
         this = c:UCA
-        AND = {
+frca_support <= 10
+        Or = {
             exists = c:GUA
             exists = c:HON
             exists = c:NIC
