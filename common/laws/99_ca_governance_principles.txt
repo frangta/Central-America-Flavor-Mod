@@ -13,6 +13,7 @@ law_ca_central_american_federal = {
 
 
     is_visible = {
+	C:UCA?= this
 	    law_ca_valid_trigger = yes
         OR = {
             OR = {exists = c:UCA}
@@ -70,6 +71,7 @@ law_ca_central_american_unitary = {
     progressiveness = 0
 
     is_visible = {
+	C:UCA?= this
 	    law_ca_valid_trigger = yes
         OR = {
             OR = {exists = c:UCA}
@@ -126,6 +128,7 @@ law_ca_central_american_confederated = {
     progressiveness = 80
 
     is_visible = {
+	C:UCA? = this
 	    law_ca_valid_trigger = yes
         OR = {
             OR = {exists = c:UCA}

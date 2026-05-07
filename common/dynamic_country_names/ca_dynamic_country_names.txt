@@ -53,7 +53,11 @@ ALT = {
 
 #### Costa Rica ####
 COS = {
-    dynamic_country_name = { name = dyn_c_COS_puppet_FRA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
+    
+	dynamic_country_name = { name = dyn_c_costarica_free_state adjective = COS_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_variable = costa_rica_1830s } } }
+ 
+    
+	dynamic_country_name = { name = dyn_c_COS_puppet_FRA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
     dynamic_country_name = { name = dyn_c_costarica_puppet_UCA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
     dynamic_country_name = { name = dyn_c_COS_puppet_GBR adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
     dynamic_country_name = { name = dyn_c_COS_puppet_USA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }

@@ -76,6 +76,47 @@ je_ca_historic_situation_in_costarica = {
 	}
 	
 }
+#je_ca_pacificacion_norte = {
+#    icon = "gfx/interface/icons/event_icons/event_military.dds"
+#    group = je_group_historical_content    
+#    should_be_pinned_by_default = yes
+#
+#    # Solo visible si Costa Rica tiene la variable que activa la crisis
+#    is_shown_when_inactive = {
+#        has_variable = ca_crisis_guanacaste_active
+#    }
+#
+#    # Configuramos la barra de progreso
+#    progressbar = yes
+#    current_value = { value = root.var:ca_pacificacion_progress }
+#    goal_add_value = { add = 100 } # Llenar hasta 100 para ganar
+#    weight = 150
+#
+#    # Condición de Éxito: Llenar la barra
+#    complete = {
+#        root.var:ca_pacificacion_progress >= 100
+#    }
+#
+#    # Condición de Fracaso: Si pasa demasiado tiempo (ej. fin de 1836) y no lo lograste
+#    fail = {
+#        game_date >= 1837.1.1
+#        root.var:ca_pacificacion_progress < 100
+#    }
+#
+#    on_complete = {
+#        remove_variable = ca_crisis_guanacaste_active
+#        # Aquí dispararemos la FASE 3 (El Desenlace) más adelante
+#        trigger_event = { id = ca_costa_rica_events.9 days = 2 }
+#    }
+#
+#    on_fail = {
+#        remove_variable = ca_crisis_guanacaste_active
+#        # EL EFECTO DOMINÓ (Fracaso)
+#        # 1. Guanacaste (PC2) se independiza y declara la guerra
+#        # 2. Nicaragua interviene (Esto lo manejaremos con un evento de castigo)
+#        trigger_event = { id = ca_costa_rica_events.99 popup = yes } # Evento oculto de derrota total
+#    }
+#}
 je_ca_historic_situation_in_talamanca = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
 	

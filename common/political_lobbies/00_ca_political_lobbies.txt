@@ -4,30 +4,25 @@
     
     can_create = {
         only_centralamericans_cultures = yes 
-        
-
         scope:target_country = { c:UCA ?= this }
-        
-
         is_subject_of = scope:target_country
- 
-        is_subject_type = ca_dependency 
-        
+        is_subject_type = subject_type_ca_dependency 
         is_revolutionary = no
     }
     
-    # FACTORES DE FELICIDAD
+    
     appeasement_factors_pro = {
-        appeasement_factors_pro_federalist
+        appeasement_laws_harmonized
+		appeasement_federal_aid_received
+		appeasement_local_autonomy_respected 
     }
     
     appeasement_factors_anti = {
         appeasement_factors_anti_federalist
     }
     
-    
     join_weight = {
-       
+        
         if = {
             limit = { 
                 exists = scope:political_lobby
@@ -39,28 +34,25 @@
         
         if = {
             limit = {
-                has_ideology = ideology_ca_federalist_movement # O tu ideología de líder federalista
+                has_ideology = ideology_ca_federalist_movement 
             }
             add = { value = 100 desc = "ideologically_federalist" }
         }
 
         
-        scope:target_country = {
-            add = {
-                every_active_law = {
-                    if = {
-                        limit = { ROOT = { law_stance = { law = PREV.type value >= approve } } }
-                        add = 5
-                    }
+        if = {
+            limit = {
+                scope:target_country = {
+                    has_law = law_type:law_ca_central_american_federal
                 }
-                desc = "shared_values_with_uca"
             }
+            add = { value = 30 desc = "uca_is_federalist_desc" }
         }
         
         
         if = {
             limit = {
-                is_interest_group_type = ig_landowners # A veces los hacendados exportadores quieren federalismo
+                is_interest_group_type = ig_landowners 
             }
             add = {
                 desc = "economic_dependence_on_federation"
@@ -71,7 +63,6 @@
             }
         }
     }
-    
     
     on_created = {
         save_temporary_scope_as = lobby_country
@@ -84,30 +75,31 @@
         }
     }
 }
+
 lobby_anti_federalist = {
     category = foreign_anti_country
     texture = "gfx/interface/icons/political_lobby_icons/lobby_anti.dds"
     
-
     can_create = {
         only_centralamericans_cultures = yes
-        
-
         scope:target_country = { c:UCA ?= this }
-        is_subject_type = ca_dependency
+        is_subject_type = subject_type_ca_dependency
         is_revolutionary = no
     }
     
-
+    
     appeasement_factors_pro = {
         appeasement_factors_anti_federalist 
-    
-    appeasement_factors_anti = {
-        appeasement_factors_pro_federalist 
     }
     
-
+    appeasement_factors_anti = {
+        appeasement_centralization_resisted 
+        appeasement_federal_authority_challenged
+        appeasement_federal_incompetence 
+    }
+    
     join_weight = {
+        
         if = {
             limit = { 
                 exists = scope:political_lobby
@@ -116,6 +108,7 @@ lobby_anti_federalist = {
             add = { value = 50 desc = "member_of_lobby" }
         }  
 
+        
         if = {
             limit = {
                 OR = {
@@ -126,17 +119,17 @@ lobby_anti_federalist = {
             add = { value = 100 desc = "ideologically_separatist" }
         }
 
-
+        
         if = {
             limit = {
                 is_interest_group_type = ig_devout
-                owner = { has_law = law_state_religion } # Nosotros somos religiosos
-                scope:target_country = { has_law = law_total_separation } # La UCA es atea/secular
+                owner = { has_law = law_type:law_state_religion } 
+                scope:target_country = { has_law = law_type:law_total_separation } 
             }
             add = { value = 75 desc = "religious_incompatibility" }
         }
 
-
+        
         if = {
             limit = { is_interest_group_type = ig_petty_bourgeoisie }
             add = { value = 25 desc = "local_nationalism" }

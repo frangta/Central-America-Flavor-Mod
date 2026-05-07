@@ -310,6 +310,21 @@ REPLACE:ELS = { # El Salvador
 		overlord_canton_scale = { 0.334 0.558 }				
 	}
 	flag_definition = {
+		coa = ELS_early
+		subject_canton = ELS_early
+		allow_overlord_canton = yes			
+		priority = 1
+		overlord_canton_scale = { 0.334 0.558 }
+		trigger = { 
+				scope:actor ?= {
+				has_variable = el_salvador_early
+			}
+
+		}											
+		priority = 20		
+	}
+	ELS_early
+	flag_definition = {
 		coa = ELS_1865
 		subject_canton = ELS_1865	
 		allow_overlord_canton = yes		
@@ -391,6 +406,19 @@ REPLACE:NIC = { # Nicaragua
 		priority = 20
 	}
 	flag_definition = {
+		coa = NIC_early_cons
+		subject_canton = NIC_early_cons	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = NIC_subject				
+        trigger = { 
+		scope:actor ?= {
+				has_variable = nicaragua_early_cons
+				}
+		
+	    }
+		priority = 30   	
+    }	
+	flag_definition = {
 		coa = nicaragua_1854
 		subject_canton = nicaragua_1854	
 		allow_overlord_canton = yes		
@@ -450,6 +478,12 @@ REPLACE:HON = {  # Honduras
 		allow_overlord_canton = yes		
 		coa_with_overlord_canton = HON_subject			
 		priority = 2
+		trigger = { 
+				scope:actor ?= {
+				has_variable = honduras_1838_event
+				}
+		
+	    }		
 	}
 	flag_definition = {
 		coa = HON_monarchy

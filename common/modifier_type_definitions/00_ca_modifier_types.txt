@@ -248,7 +248,32 @@ country_fervor_target_garifuna_arawak_add={
 		ai_value=0
 	}
 }
-country_ngabe_cultural_acceptance_add={
+
+country_fervor_target_embera_fervor_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_chiapanecan_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_antillianen_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_ngabe_culture_cultural_acceptance_add={
 	decimals=1
 	color=good
 	game_data={
@@ -341,13 +366,6 @@ country_lenca_cultural_acceptance_add={
 	}
 }
 
-country_lenca_cultural_acceptance_add={
-	decimals=1
-	color=good
-	game_data={
-		ai_value=0
-	}
-}
 country_mangue_chorotega_cultural_acceptance_add={
 	decimals=1
 	color=good
@@ -362,3 +380,71 @@ country_garifuna_arawak_cultural_acceptance_add={
 		ai_value=0
 	}
 }
+state_peasants_investment_pool_contribution_add={
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+} 
+
+state_peasants_investment_pool_efficiency_mult={
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+state_costa_rican_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_panamanian_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_nicaraguan_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_guatemalan_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_el_salvadorian_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_honduran_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_chibchan_central_america_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_bribri_talamanca_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_cabecar_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_ngabe_culture_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_embera_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_guna_kuna_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_lenca_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_mangue_chorotega_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_garifuna_arawak_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+
+state_chiapanecan_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+country_chiapanecan_cultural_acceptance_add = { decimals=1 color=good game_data = { ai_value=0 } }
+
+state_antillianen_standard_of_living_add = { decimals=1 color=good game_data = { ai_value=0 } }
+country_antillianen_cultural_acceptance_add = { decimals=1 color=good game_data = { ai_value=0 } }

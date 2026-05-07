@@ -6,6 +6,17 @@
 
 #####Costa Rica#####
 
+historic_costarica_1 = {
+    color = "democratic_costarica"
+    possible = {
+        exists = c:COS
+        THIS = c:COS
+		has_variable = costa_rica_1830s
+        has_law = law_type:law_presidential_republic
+    }
+}
+
+
 1democratic_costarica = {
     color = "democratic_costarica"
     possible = {
@@ -108,7 +119,15 @@ socialist_costarica = {
 }
 
 #####nicaragua#####
-
+historic_nicaragua_1 = {
+    color = "dnicaragua_early_cons"
+    possible = {
+        exists = c:NIC
+        THIS = c:NIC
+		has_variable = nicaragua_early_cons
+        has_law = law_type:law_presidential_republic
+    }
+}
 1democratic_nicaragua = {
     color = "democratic_nicaragua"
     possible = {

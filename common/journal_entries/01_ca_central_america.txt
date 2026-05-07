@@ -1,15 +1,52 @@
-﻿
-je_historic_central_america_falls_apart = { 
+﻿je_historic_central_america_falls_apart = { 
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     group = je_group_historical_content    
-    should_be_pinned_by_default = yes
+     
+	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = no
+ 	is_shown_in_lobby = {
+		c:UCA ?= THIS
+	}
 
-    # Variables de paz comentadas como referencia
-    # frca_guatemala_peace_var
-    # frca_nicaragua_peace_var
-    # frca_honduras_peace_var
-    # frca_costarica_peace_var
-    # frca_elsalvador_peace_var
+    #is_shown_when_inactive = {
+    #    c:UCA ?= THIS
+    #}
+	#
+    #should_be_involved = {
+	#    is_ca_culture_country = yes
+    #    c:UCA ?= THIS
+    #}
+    possible = {
+        c:UCA ?= THIS
+    }
+    #should_show_when_not_involved = {
+    #    # Potencias extranjeras (ej. EE.UU., Gran Bretaña) pueden verlo si tienen interés en la región
+    #    has_interest_in_region = sr:region_central_america
+    #}
+    
+
+    #widget = {
+    #    
+    #    gui = "gui/ca_frca_custom_widgets.gui"
+    #    name = "ca_frca_support_widget"
+    #    container = "custom_widget_container_1"
+    #}
+
+    status_desc = {
+        first_valid = {
+            triggered_desc = {
+                desc = ca_status_critical_desc # "¡La Federación se desmorona!"
+                trigger = { check_variable = { name = frca_support value <= 50 } }
+            }
+            triggered_desc = {
+                desc = ca_status_stable_desc # "El gobierno federal mantiene el orden."
+                trigger = { check_variable = { name = frca_support value >= 150 } }
+            }
+            triggered_desc = {
+                desc = ca_status_default_desc # "La República pende de un hilo."
+            }
+        }
+    }
     
     scripted_button = je_restore_order_gua_button
     scripted_button = je_restore_order_hon_button
@@ -24,90 +61,60 @@ je_historic_central_america_falls_apart = {
     scripted_button = federal_congress_decree_button
 
     immediate = {
-        set_variable = { 
-            name = frca_support 
-            value = 0 
+        if = {
+            limit = { NOT = { has_variable = frca_support } }
+            set_variable = { name = frca_support value = 100 }
         }
     }
 
-    current_value = {
-        value = root.var:frca_support
-    }
     
+    #immediate_all_involved = {
+    #    # Marca a los países como involucrados en el colapso
+    #    set_variable = involved_in_frca_collapse
+    #    # Agrega tensión política mientras dure la crisis (usando tu modificador existente)
+    #    add_modifier = { name = ca_funding_separatists_flag months = 120 } 
+    #}
+
+    current_value = { value = root.var:frca_support }
+    goal_add_value = { add = 200 }
     scripted_progress_bar = frca_support_bar
     progress_desc = je_frca_support_progress_desc
-    progressbar = yes
-    
-    goal_add_value = {
-        add = 100
-    }
-    
-    weight = 100    
-    
-    on_weekly_pulse = {
-        effect = {
-            calculate_frca_support_event_progress = yes
-        }
-    }
+    weight = 200    
     
     on_monthly_pulse = {
         events = {
-            ca_central_america.14 # The Livingston Penal Code
-            ca_central_america.1  # A local newspaper proposed the formation...
-            ca_central_america.3  # Establishment of Los Altos
-            ca_central_america.5  # The Fate of Soconusco
-            ca_central_america.15 # Cholera Pandemic Hits Central America
-            ca_central_america.20 # Separatism in Guatemala
-            ca_central_america.19 # Separatism in Nicaragua  
-            ca_central_america.46 # Nicaragua Declares Independence
-            ca_central_america.79 # Federal Congress authorizes states to reorganize themselves
-            ca_central_america.18 # Separatism in Costa Rica  
-            ca_central_america.45 # Costa Rica declares independence
-            ca_central_america.42 # Union Collapses Into Civil War
-            ca_central_america.21 # Separatism in Honduras  
-            ca_central_america.48 # Honduras Declares Independence      
-            ca_central_america.69 # Civil War in Guatemala  
-            ca_central_america.23 # Separatism in Los Altos
-            ca_central_america.85 # Los Altos Declares Independence
-            ca_central_america.47 # Guatemala Declares Independence
-            ca_central_america.63 # Civil War in Nicaragua
+            ca_central_america.14
+            ca_central_america.1  
+            ca_central_america.3  
+            ca_central_america.5  
+            ca_central_america.15
+            ca_central_america.20
+            ca_central_america.19  
+            ca_central_america.46
+            ca_central_america.79
+            ca_central_america.18  
+            ca_central_america.45
+            ca_central_america.42
+            ca_central_america.21  
+            ca_central_america.48      
+            ca_central_america.69  
+            ca_central_america.23
+            ca_central_america.85
+            ca_central_america.47
+            ca_central_america.63
         }
         random_events = {
-            99 = 0
-            25 = ca_central_america.17 # Cholera Spreads In Central America
+            90 = 0
+            25 = ca_central_america.17
         }
     }
 
     complete = {
         OR = {
-            # Opción 1: Alcanzar el 100% de soporte
-            custom_tooltip = {
-                text = frca_support_complete
-                check_variable = { 
-                    name = frca_support 
-                    value >= 100 
-                }
+            AND = {
+                custom_tooltip = { text = frca_support_complete scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" = 200 } }                
+                NOT = { exists = c:GUA } NOT = { exists = c:ELS } NOT = { exists = c:HON } NOT = { exists = c:NIC } NOT = { exists = c:COS }
             }
-            
-            # Opción 2: Ganar la guerra de unificación/pacificación
-            custom_tooltip = { 
-                text = uca_won_war_tt
-                OR = {
-                    has_variable = frca_won_war 
-                    AND = {
-                        has_variable = second_frca_civil_war_var
-                        is_at_war = no
-                        is_active_in_diplomatic_play = no
-                        NOT = { exists = c:GUA }
-                        NOT = { exists = c:HON }
-                        NOT = { exists = c:NIC }
-                        NOT = { exists = c:COS }
-                        NOT = { exists = c:ELS }
-                    }
-                }
-            }
-            
-            # Opción 3: Consolidar el apoyo en todas las regiones y mantener el control
             AND = {
                 custom_tooltip = {
                     text = guatemala_support_tt
@@ -134,6 +141,7 @@ je_historic_central_america_falls_apart = {
                     has_variable = cos_support_var
                     NOT = { exists = c:COS }
                 }
+                #Se Verifica que posees físicamente las 5 regiones (México no te robó nada)									   
                 any_scope_state = {
                     OR = {
                         state_region = s:STATE_GUATEMALA
@@ -142,31 +150,57 @@ je_historic_central_america_falls_apart = {
                         state_region = s:STATE_NICARAGUA
                         state_region = s:STATE_COSTA_RICA
                     }
-                    # Descomenta y ajusta el count según lo que necesites
-                    # count >= 5                
+                    count >= 5                
                 }
+				custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
+            }
+            AND = {
+                custom_tooltip = { 
+                    text = uca_won_war_tt # "Victoria total en la Guerra Civil"
+                    has_variable = frca_won_war
+                    NOT = { exists = c:GUA }
+                    NOT = { exists = c:HON }
+                    NOT = { exists = c:NIC }
+                    NOT = { exists = c:COS }
+                    NOT = { exists = c:ELS }
+                }
+                is_at_war = no
             }
         }
     }      
 
     fail = {
-        # Fracaso por pérdida de control territorial
-        custom_tooltip = {
-            text = central_america_fail_tt
-            any_scope_state = {
-                OR = {
-                    state_region = s:STATE_GUATEMALA
-                    state_region = s:STATE_SAN_SALVADOR
-                    state_region = s:STATE_HONDURAS
-                    state_region = s:STATE_NICARAGUA
-                    state_region = s:STATE_COSTA_RICA
-                }
-                count < 3
-            }
-        }
-        
-        # Fracaso por reconocimiento de independencia de las repúblicas
         OR = {
+            # El soporte llega a cero absoluto (Colapso político)		  
+            custom_tooltip = {
+                text = frca_support_failed_tt # "El Soporte Federal ha colapsado a 0" 
+                scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" = 0 }
+            }
+            # Pérdida de control de 3 o más regiones núcleo							   
+            custom_tooltip = {
+                text = central_america_fail_tt
+                any_scope_state = {
+                    OR = {
+                        state_region = s:STATE_GUATEMALA
+                        state_region = s:STATE_SAN_SALVADOR
+                        state_region = s:STATE_HONDURAS
+                        state_region = s:STATE_NICARAGUA
+                        state_region = s:STATE_COSTA_RICA
+                    }
+                    count < 3
+                }
+            }
+            # Reconocimiento formal de independencia
+            #custom_tooltip = {
+            #    text = recognized_any_independence_tt # "Has reconocido la independencia de un estado"
+            #    OR = {
+            #        c:GUA = { has_variable = recognized_guatemalan_independence }
+            #        c:ELS = { has_variable = recognized_el_salvador_independence }
+            #        c:HON = { has_variable = recognized_honduran_independence }
+            #        c:NIC = { has_variable = recognized_nicaraguan_independence }
+            #        c:COS = { has_variable = recognized_costa_rican_independence }
+            #    }
+            #}			
             custom_tooltip = {
                 text = recognized_guatemalan_independence_tt
                 exists = c:GUA
@@ -192,10 +226,7 @@ je_historic_central_america_falls_apart = {
                 exists = c:COS                    
                 c:COS = { has_variable = recognized_costa_rican_independence }
             }        
-        }
-        
-        # Fracaso por perder la guerra
-        OR = {
+			# Fracaso militar				 
             custom_tooltip = {
                 text = frca_lost_war_tt
                 has_variable = frca_lost_war
@@ -222,7 +253,14 @@ je_historic_central_america_falls_apart = {
             remove_variable = is_frca_var
         }
     }
-
+	
+    #on_fail_all_involved = {
+    #    # Si fracasa, limpia la crisis pero deja la región con parálisis federal
+    #    remove_variable = involved_in_frca_collapse
+    #    remove_modifier = ca_funding_separatists_flag
+    #    add_modifier = { name = ca_federal_paralysis years = 5 }
+    #}
+	
     on_complete = {
         remove_variable = uca_cholera_pandemic
         
@@ -238,15 +276,89 @@ je_historic_central_america_falls_apart = {
                 add_ideology = ideology_paternalistic
                 remove_ideology = ideology_central_american_reactionary
             }
-            # trigger_event = { id = "the_grand_union" } 
+			#trigger_event = { id = "the_grand_union" }											 
         }
     }
+
+    
+    #on_complete_all_involved = {
+    #    # Si la Federación sobrevive, limpia la variable y recompensa a todos con estabilidad
+    #    remove_variable = involved_in_frca_collapse
+    #    remove_modifier = ca_funding_separatists_flag
+    #    add_modifier = { name = ca_el_gran_avanse_modifier years = 10 }
+    #}
+	#
+	#
+    #on_become_involved_after_activation = {
+    #    # Si un nuevo país (ej. Los Altos) se separa mientras el diario está activo, lo mete al conflicto
+    #    set_variable = involved_in_frca_collapse
+    #    add_modifier = { name = ca_funding_separatists_flag months = 120 }
+    #}    
+    #
+    #on_no_longer_involved = {
+    #    # Si un país deja de cumplir las reglas, se le limpian las penalizaciones
+    #    remove_variable = involved_in_frca_collapse
+    #    remove_modifier = ca_funding_separatists_flag
+    #}
+    # ----------------------------------------------------
     
     transferable = no
 
     invalid = {
         NOT = { exists = c:UCA }
     }
+    #on_invalid_all_involved = {
+    #    # Limpieza de seguridad por si el diario se invalida abruptamente
+    #    remove_variable = involved_in_frca_collapse
+    #    remove_modifier = ca_funding_separatists_flag
+    #}	
+}
+je_ca_coffee_boom = {
+	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
+	group = je_group_internal_affairs
+
+	# Solo se muestra si tienes plantaciones y la oligarquía no ha sido destruida
+	is_shown_when_inactive = {
+		NOT = { has_variable = ca_coffee_boom_consolidated }
+		ig:ig_landowners ?= {
+			ig_counts_as_marginal = no
+		}
+		any_scope_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+
+	# Condición de Activación: El café está muy caro en tu mercado (>25% del precio base)
+	possible = {
+		market_capital.market = {
+			mg:coffee = {
+				market_goods_pricier > 0.25
+			}
+		}
+		ig:ig_landowners ?= {
+			is_powerful = yes
+		}
+	}
+
+	# Pulso Mensual: Intentará disparar el evento del líder criollo
+	on_monthly_pulse = {
+		random_events = {
+			90 = 0
+			10 = ca_coffee_events.1 # El surgimiento de la Élite Criolla
+		}
+	}
+
+	# Condición de Éxito: Aprobar tu ley de Oligarquía Cafetalera
+	complete = {
+		has_law = law_type:law_land_reform_coffee_oligarchy
+	}
+
+	on_complete = {
+		set_variable = ca_coffee_boom_consolidated
+		trigger_event = { id = ca_coffee_events.2 popup = yes } # Evento de victoria
+	}
+    
+    weight = 100
 }
 
 #je_reunify_central_america = {
@@ -254,7 +366,7 @@ je_historic_central_america_falls_apart = {
 #
 #	group = je_group_foreign_affairs
 #
-#	should_be_pinned_by_default = yes
+#	 
 #
 #	complete = {
 #		any_scope_state = {
@@ -284,11 +396,86 @@ je_historic_central_america_falls_apart = {
 #		trigger_event = { id = central_america.1 popup = yes }
 #	}
 #}
-
+#je_ca_central_american_fragile_unity = { #events 1836 - 1842
+#	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+#
+#	group = je_group_historical_content
+#
+#	 
+#    scripted_progress_bar = ca_core_progress_bar
+#	complete = {
+#	
+#		
+#	}
+#	on_complete = {
+#	trigger_event = { id = xxx popup = yes }
+#	}	
+#	on_monthly_pulse = {
+#	    ca_core_progress_bar = yes
+#
+#		}
+#
+#	
+#	fail = {
+#	    text = "central_america_fail_tt"
+#		custom_tooltip = {
+#			text = "ca_gain_fragile_unity_points"
+#			scope:journal_entry = {
+#				"scripted_bar_progress(ca_core_progress_bar)" <= 0
+#			}
+#		}
+#    AND = {		
+#	    any_scope_state = {
+#				OR = {
+#					state_region = s:STATE_GUATEMALA
+#					state_region = s:STATE_HONDURAS
+#					state_region = s:STATE_COSTA_RICA
+#					state_region = s:STATE_SAN_SALVADOR
+#					state_region = s:STATE_NICARAGUA
+#
+#				}
+#				count < 5
+#		}	
+#	}
+#	
+#	}
+#	on_fail = {
+#	trigger_event = { id = central_america.2 popup = yes }
+#	}	
+#
+#	transferable = no
+#	invalid = {
+#	NOT = { exists = c:UCA }
+#	}
+#}
 je_ca_state_role_in_federation = {
     icon = "gfx/interface/icons/event_icons/event_protest.dds"
     group = je_group_historical_content    
-    should_be_pinned_by_default = yes
+     
+
+    
+    is_shown_when_inactive = {
+        exists = c:UCA
+        is_subject_of = c:UCA
+    }
+
+    #should_be_involved = {
+    #    # Involucra a todos los países que sean sujetos de la UCA
+    #    exists = c:UCA
+    #    is_subject_of = c:UCA
+    #}
+	#
+    #should_show_when_not_involved = {
+    #    
+    #    c:UCA ?= this
+    #}
+
+    # --- NUEVO BLOQUE DE WIDGET (INTERFAZ) ---
+    #widget = {
+    #    gui = "gui/ca_subject_role_widgets.gui"
+    #    name = "ca_subject_role_widget"
+    #    container = "custom_widget_container_2"
+    #}
 
     # Solo es visible si eres sujeto de la UCA
     is_visible = {
@@ -296,13 +483,13 @@ je_ca_state_role_in_federation = {
         is_subject_of = c:UCA
     }
 
-    # MAGIA: Leemos la variable directamente de nuestro Señor (Overlord)
-    current_value = {
-        value = overlord.var:federalists_vs_separatists_var
-    }    
+    ## MAGIA: Leemos la variable directamente de nuestro Señor (Overlord)
+    #current_value = {
+    #    value = overlord.var:federalists_vs_separatists_var
+    #}    
     
     # Usamos la misma barra de progreso que creaste para la UCA
-    scripted_progress_bar = federalists_vs_separatists_progress_core_progress_bar
+    #scripted_progress_bar = federalists_vs_separatists_progress_core_progress_bar
     progressbar = yes
     
     goal_add_value = {
@@ -310,254 +497,320 @@ je_ca_state_role_in_federation = {
     }
     weight = 100
 
+    
+    immediate_all_involved = {
+        # Marca que el estado está actualmente definiendo su rol
+        set_variable = ca_defining_role_in_federation
+    }
+
     # Aquí puedes añadir botones (Decisiones) para que el jugador gaste 
     # Autoridad o Dinero para boicotear o ayudar a la UCA directamente
     scripted_button = ca_button_sabotage_federation
     scripted_button = ca_button_support_federation
+
+    
+    #on_complete_all_involved = {
+    #    remove_variable = ca_defining_role_in_federation
+    #    
+    #    #add_modifier = { name = ca_state_rights_approval months = 60 }
+    #}
+	#
+    #on_fail_all_involved = {
+    #    remove_variable = ca_defining_role_in_federation
+    #    
+    #    #add_modifier = { name = ca_federal_betrayal_disapproval months = 60 }
+    #}
+	#
+    #on_invalid_all_involved = {
+    #    remove_variable = ca_defining_role_in_federation
+    #}
+	#
+    #on_become_involved_after_activation = {
+    #    set_variable = ca_defining_role_in_federation
+    #}    
+    #
+    #on_no_longer_involved = {
+    #    remove_variable = ca_defining_role_in_federation
+    #}
 
     # Si la UCA deja de existir, este diario se completa/falla y desaparece
     invalid = {
         NOT = { is_subject_of = c:UCA }
     }
 }
+
+
 je_ca_federalists_vs_separatists_situation = {
-	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
-	
-	group = je_group_historical_content	
+    icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
+    group = je_group_historical_content    
+     
 
-	should_be_pinned_by_default = yes
-	current_value = {
-		value = root.var:federalists_vs_separatists_var
-	}	
-   weight = 100
+    #is_shown_when_inactive = {
+    #    is_ca_culture_country = yes
+    #}
+	#
+    #should_be_involved = {
+    #    is_ca_culture_country = yes
+    #}
+	#
+    #should_show_when_not_involved = {
+    #    # Naciones extranjeras con interés en la región pueden observarlo
+    #    has_interest_in_region = sr:region_central_america
+    #}
+	#
+    #widget = {
+    #    gui = "gui/ca_fed_vs_sep_widgets.gui"
+    #    name = "ca_fed_vs_sep_widget"
+    #    container = "custom_widget_container_3"
+    #}
 
-	calculate_federalists_vs_separatists_progress = yes
-	immediate = {
-	set_variable = { name = federalists_vs_separatists_next value = 0 scope:journal_entry = root }
-	#c:UCA = { trigger_event = { id = ca_central_america.14 days = 3 } } 
-	}
-	
-	complete = { #Federalists Win , The Play and AI Chosing
-		ig:ig_intelligentsia = {
-			is_in_government = yes
-		}
-		custom_tooltip = {
-			text = je_federalists_vs_separatists_goal_tt
-			scope:journal_entry = {
-				is_goal_complete = yes
-			}
-		}
-		custom_tooltip = {
-			text = federalists_vs_separatists_complete
-			root.var:federalists_vs_separatists_var >= 100
-		}
-		
-	}
-	on_weekly_pulse = {
-		effect = {
-            
+    current_value = {
+        value = root.var:federalists_vs_separatists_var
+    }    
+    weight = 100
+
+    calculate_federalists_vs_separatists_progress = yes
+    
+    immediate = {
+        set_variable = { name = federalists_vs_separatists_next value = 0 scope:journal_entry = root }
+        #c:UCA = { trigger_event = { id = ca_central_america.14 days = 3 } } 
+    }
+
+    immediate_all_involved = {
+        set_variable = involved_in_fed_vs_sep_conflict
+        add_modifier = { name = state_separatist_unrest months = 60 }
+    }
+    
+    complete = { #Federalists Win , The Play and AI Chosing
+        ig:ig_intelligentsia = {
+            is_in_government = yes
         }
-	}
-	on_monthly_pulse = {
-		events = {
-			
-		}
-	}
+        custom_tooltip = {
+            text = je_federalists_vs_separatists_goal_tt
+            scope:journal_entry = {
+                is_goal_complete = yes
+            }
+        }
+        custom_tooltip = {
+            text = federalists_vs_separatists_complete
+            root.var:federalists_vs_separatists_var >= 100
+        }
+    }
+    
+    on_weekly_pulse = {
+        effect = {
+        }
+    }
+    
+    on_monthly_pulse = {
+        events = {
+        }
+    }
 
-	on_yearly_pulse = {
-		effect = {
+    on_yearly_pulse = {
+        effect = {
+        }
+    }    
+    
+    on_complete = {
+        ig:ig_landowners = {
+            remove_ideology = ideology_central_american_reactionary
+            add_ideology = ideology_caudillismo
+        }
+        
+        ig:ig_armed_forces = {
+            remove_ideology = ideology_central_american_reactionary
+        }
 
-		}
-	}	
-	on_complete = {
-			ig:ig_landowners = {
-				remove_ideology = ideology_central_american_reactionary
-				add_ideology = ideology_caudillismo
-			}
-		
-			ig:ig_armed_forces = {
-				remove_ideology = ideology_central_american_reactionary
-			}
+        ig:ig_devout = {
+            add_ideology = ideology_paternalistic
+            remove_ideology = ideology_central_american_reactionary
+        }
+        
+        if = {  #Nicaragua Beats to secessionists
+            limit = {
+                c:NIC ?= this
+                NOR = { 
+                    has_journal_entry = je_ca_state_role_in_federation
+                    has_variable = nic_support_var
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.47 days = 3 }}
+        }
+        if = {  #Costa rica Beats to secessionists
+            limit = {
+                c:COS ?= this
+                NOR = { 
+                    has_journal_entry = je_ca_state_role_in_federation
+                    has_variable = cos_support_var
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.50 days = 3 }}
+        }
+        if = {  #Honduras Beats to secessionists
+            limit = {
+                c:HON ?= this
+                NOR = { 
+                    has_journal_entry = je_ca_state_role_in_federation
+                    has_variable = hon_support_var
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.53 days = 3 }}
+        }
+        if = {  #Guatemala Beats to secessionists
+            limit = {
+                c:GUA ?= this
+                NOR = { 
+                    has_journal_entry = je_ca_state_role_in_federation
+                    has_variable = gua_support_var
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.59 days = 3 }}
+        }
+        if = {  #Los Altos Beats to secessionists
+            limit = {
+                c:ALT ?= this
+                NOR = { 
+                    has_journal_entry = je_ca_state_role_in_federation
+                    has_variable = gua_support_var
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.62 days = 3 }}
+        }
+        if = {  #El Salvador Beats to secessionists
+            limit = {
+                c:ELS ?= this
+                NOR = { 
+                    has_journal_entry = je_ca_state_role_in_federation
+                    has_variable = els_support_var
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.56 days = 3 }}
+        }
+        show_as_tooltip = {
+            remove_modifier = age_of_caudillos_modifier
+        }    
+    }
+    
+    fail = { #Separatists Win, The Play and AI Chosing
+        ig:ig_landowners = {
+            is_in_government = yes
+        }
+        custom_tooltip = {
+            text = federalists_vs_separatists_complete_fail
+            root.var:federalists_vs_separatists_var <= 0
+        }        
+    }
+    
+    on_fail = {
+        ig:ig_landowners = {
+            remove_ideology = ideology_central_american_reactionary
+            add_ideology = ideology_caudillismo
+        }
+        
+        ig:ig_devout = {
+            add_ideology = ideology_paternalistic
+        }
+        
+        if = {  #Nicaragua falls to secessionists
+            limit = {
+                c:NIC ?= this
+                OR = { 
+                    has_journal_entry = je_ca_state_role_in_federation
+					has_modifier = ca_separatists_win_flag
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.48 days = 3 }}
+        }
+        if = {  #Costa rica falls to secessionists
+            limit = {
+                c:COS ?= this
+                OR = { 
+                    has_journal_entry = je_ca_state_role_in_federation
+					has_modifier = ca_separatists_win_flag
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.51 days = 3 }}
+        }
+        if = {  #Honduras falls to secessionists
+            limit = {
+                c:HON ?= this
+                OR = { 
+                    has_journal_entry = je_ca_state_role_in_federation
+					has_modifier = ca_separatists_win_flag
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.54 days = 3 }}
+        }
+        if = {  #Guatemala falls to secessionists
+            limit = {
+                c:GUA ?= this
+                OR = { 
+                    has_journal_entry = je_ca_state_role_in_federation
+					has_modifier = ca_separatists_win_flag
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.60 days = 3 }}
+        }
+        if = {  #Los Altos falls to secessionists
+            limit = {
+                c:ALT ?= this
+                OR = { 
+                    has_journal_entry = je_ca_state_role_in_federation2
+					has_modifier = ca_separatists_win_flag
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.63 days = 3 }}
+        }
+        if = {  #El Salvador  falls to secessionists
+            limit = {
+                c:ELS ?= this
+                OR = { 
+                    has_journal_entry = je_ca_state_role_in_federation
+					has_modifier = ca_separatists_win_flag
+                }
+            }
+            c:UCA = {trigger_event = { id = ca_central_america.57 days = 3 }}
+        }
+        show_as_tooltip = {
+            add_modifier = {
+                name = age_of_caudillos_modifier
+                multiplier = 2
+            }
+        }
+    }
 
-			ig:ig_devout = {
-				add_ideology = ideology_paternalistic
-				remove_ideology = ideology_central_american_reactionary
-			}
-		if = {  #Nicaragua Beats to secessionists
-			limit = {
-				c:NIC ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia
-					has_variable = death_of_francia_var
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.47 days = 3 }}
+    #on_complete_all_involved = {
+    #    remove_modifier = involved_in_fed_vs_sep_conflict
+    #    remove_modifier = state_separatist_unrest
+    #    
+    #}
+	#
+    #on_fail_all_involved = {
+    #    remove_modifier = involved_in_fed_vs_sep_conflict
+    #    remove_modifier = state_separatist_unrest
+    #}
+	#
+    #on_invalid_all_involved = {
+    #    remove_variable = involved_in_fed_vs_sep_conflict
+    #    remove_modifier = state_separatist_unrest
+    #}
+	#
+    #on_become_involved_after_activation = {
+    #    add_modifier = { name = state_separatist_unrest involved_in_fed_vs_sep_conflict}
+    #    add_modifier = { name = state_separatist_unrest months = 60 }
+    #}    
+    #
+    #on_no_longer_involved = {
+    #    remove_variable = involved_in_fed_vs_sep_conflict
+    #    remove_modifier = state_separatist_unrest
+    #}
 
-		}
-		if = {  #Costa rica Beats to secessionists
-			limit = {
-				c:COS ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia
-					has_variable = death_of_francia_var
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.50 days = 3 }}
+    transferable = no
 
-		}
-
-		if = {  #Honduras Beats to secessionists
-			limit = {
-				c:HON ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia
-					has_variable = death_of_francia_var
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.53 days = 3 }}
-
-		}
-
-		if = {  #Guatemala Beats to secessionists
-			limit = {
-				c:GUA ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia
-					has_variable = death_of_francia_var
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.59 days = 3 }}
-
-		}
-
-		if = {  #Los Altos Beats to secessionists
-			limit = {
-				c:ALT ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia
-					has_variable = death_of_francia_var
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.62 days = 3 }}
-
-		}
-
-		if = {  #El Salvador Beats to secessionists
-			limit = {
-				c:ELS ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia
-					has_variable = death_of_francia_var
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.56 days = 3 }}
-
-		}
-		show_as_tooltip = {
-			remove_modifier = age_of_caudillos_modifier
-		}	
-	}
-	
-	fail = { #Separatists Win, The Play and AI Chosing
-		ig:ig_landowners = {
-			is_in_government = yes
-		}
-		custom_tooltip = {
-			text = federalists_vs_separatists_complete_fail
-			root.var:federalists_vs_separatists_var <= 0
-		}		
-	}
-	
-	on_fail = {
-       	ig:ig_landowners = {
-				remove_ideology = ideology_central_american_reactionary
-				add_ideology = ideology_caudillismo
-			}
-		
-			ig:ig_devout = {
-				add_ideology = ideology_paternalistic
-			}
-		if = {  #Nicaragua falls to secessionists
-			limit = {
-				c:NIC ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia2
-					has_variable = death_of_francia_var2
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.48 days = 3 }}
-
-		}
-		if = {  #Costa rica falls to secessionists
-			limit = {
-				c:COS ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia2
-					has_variable = death_of_francia_var2
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.51 days = 3 }}
-
-		}
-		if = {  #Honduras falls to secessionists
-			limit = {
-				c:HON ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia2
-					has_variable = death_of_francia_var2
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.54 days = 3 }}
-
-		}
-		if = {  #Guatemala falls to secessionists
-			limit = {
-				c:GUA ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia2
-					has_variable = death_of_francia_var2
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.60 days = 3 }}
-
-		}
-		if = {  #Los Altos falls to secessionists
-			limit = {
-				c:ALT ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia2
-					has_variable = death_of_francia_var2
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.63 days = 3 }}
-
-		}
-		if = {  #El Salvador  falls to secessionists
-			limit = {
-				c:ELS ?= this
-				NOR = { 
-					has_journal_entry = je_francocracia2
-					has_variable = death_of_francia_var2
-				}
-			}
-			c:UCA = {trigger_event = { id = ca_central_america.57 days = 3 }}
-
-		}
-		show_as_tooltip = {
-			add_modifier = {
-				name = age_of_caudillos_modifier
-				multiplier = 2
-			}
-		}
-		
-	}
-
-	transferable = no
-
-	invalid = {
-		NOT = { exists = c:UCA }
-	}
-	
+    invalid = {
+        NOT = { exists = c:UCA }
+    }
 }
 # =========================================================
 # 1. ECONÓMICO: EL BOOM AGROEXPORTADOR
@@ -565,7 +818,7 @@ je_ca_federalists_vs_separatists_situation = {
 je_ca_agro_export_boom = {
     icon = "gfx/interface/icons/goods_icons/coffee.dds"
     group = je_group_economic_development
-    should_be_pinned_by_default = yes
+     
 
     possible = {
         OR = {

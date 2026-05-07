@@ -134,7 +134,7 @@ ideology_ca_constitutionalist = {
 }
 
 ideology_central_american_federal = {
-    icon = "gfx/interface/icons/ideology_icons/unused/nationalism.dds"
+    icon = "gfx/interface/icons/ideology_icons/unused/no_ideology.dds"
 
     lawgroup_ca_state_structure = {
         law_ca_central_american_unitary = strongly_disapprove
@@ -144,7 +144,7 @@ ideology_central_american_federal = {
     
     lawgroup_church_and_state = {
         law_state_religion = strongly_disapprove
-        law_denominational_exclusion = strongly_disapprove
+        law_cultural_exclusion = strongly_disapprove
         law_freedom_of_conscience = approve
         law_total_separation = strongly_approve
         law_state_atheism = strongly_disapprove
@@ -152,7 +152,7 @@ ideology_central_american_federal = {
 }
 
 ideology_central_american_reactionary = {
-    icon = "gfx/interface/icons/ideology_icons/unused/nationalism.dds"
+    icon = "gfx/interface/icons/ideology_icons/reactionary.dds"
 
     lawgroup_ca_state_structure = {
         law_ca_central_american_unitary = strongly_disapprove 
@@ -169,7 +169,6 @@ ideology_central_american_reactionary = {
     
     lawgroup_church_and_state = {
         law_state_religion = approve
-        law_denominational_exclusion = neutral
         law_freedom_of_conscience = neutral
         law_total_separation = strongly_disapprove
         law_state_atheism = strongly_disapprove
@@ -195,7 +194,7 @@ ideology_central_american_reactionary_2 = {
     
     lawgroup_church_and_state = {
         law_state_religion = approve
-        law_denominational_exclusion = neutral
+
         law_freedom_of_conscience = neutral
         law_total_separation = strongly_disapprove
         law_state_atheism = strongly_disapprove
@@ -247,7 +246,7 @@ ideology_ca_guilds = {
 }
 
 ideology_ca_communalist = {
-    icon = "gfx/interface/icons/ideology_icons/unused/communist.dds"
+    icon = "gfx/interface/icons/ideology_icons/communist.dds"
 
     lawgroup_policing = {
         law_local_police = approve
@@ -653,10 +652,10 @@ ideology_ca_radical_enclavist = { #Nacional Enclavist
 }
 
 ideology_ca_autocratic_autonomist = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/autocratic_autonomist.dds"
+    icon = "gfx/interface/icons/ideology_icons/no_ideology.dds"
     
 
-    lawgroup_governance_principles = {
+    lawgroup_ca_state_structure = {
         law_ca_central_american_unitary = strongly_disapprove
         law_ca_central_american_federal = strongly_disapprove
         law_ca_central_american_confederated = strongly_approve
@@ -693,4 +692,130 @@ ideology_ca_autocratic_autonomist = {
         law_mass_conscription = disapprove
         law_peasant_levies = disapprove
     }
+}
+ideology_ca_servile = {
+	icon = "gfx/interface/icons/ideology_icons/paternalistic.dds"
+
+	lawgroup_distribution_of_power = {
+		law_oligarchy = strongly_approve
+		law_autocracy = approve
+		law_universal_suffrage = strongly_disapprove
+	}
+
+	lawgroup_church_and_state = {
+		law_state_religion = strongly_approve
+		law_total_separation = strongly_disapprove
+	}
+
+	lawgroup_trade_policy = {
+		law_mercantilism = strongly_approve
+		law_protectionism = approve
+		law_free_trade = disapprove
+	}
+}
+
+
+
+#Liberalismo Cafetalero (Positivismo Autoritario)
+ideology_ca_coffee_liberal = {
+	icon = "gfx/interface/icons/ideology_icons/market_liberal.dds"
+
+	lawgroup_economic_system = {
+		law_laissez_faire = approve
+		law_interventionism = neutral
+		law_traditionalism = strongly_disapprove
+	}
+
+	lawgroup_trade_policy = {
+		law_free_trade = strongly_approve
+		law_protectionism = disapprove
+	}
+
+	lawgroup_army_model = {
+		law_professional_army = strongly_approve
+		law_national_militia = strongly_disapprove
+	}
+
+	lawgroup_policing = {
+		law_dedicated_police = strongly_approve
+		law_militarized_police = approve
+		law_local_police = disapprove
+	}
+	
+	lawgroup_land_reform = {
+		law_commercialized_agriculture = strongly_approve
+		law_homesteading = disapprove
+	}
+	
+	lawgroup_labor_rights = {
+		law_worker_protections = strongly_disapprove
+	}
+}
+
+#Indigenismo Comunal (Levantamientos Nativos)
+ideology_ca_indigenous_communalism = {
+	icon = "gfx/interface/icons/ideology_icons/agrarian.dds"
+
+	lawgroup_land_reform = {
+		law_homesteading = strongly_approve
+		law_collectivized_agriculture = approve
+		law_commercialized_agriculture = strongly_disapprove
+		law_serfdom = strongly_disapprove
+	}
+
+	lawgroup_citizenship = {
+		law_multicultural = strongly_approve
+		law_national_supremacy = strongly_disapprove
+		law_racial_segregation = disapprove
+	}
+
+	lawgroup_policing = {
+		law_dedicated_police = strongly_disapprove
+	}
+}
+
+
+
+#Separatismo Soberano (Localismo Radical)
+ideology_ca_separatist = {
+	icon = "gfx/interface/icons/ideology_icons/ethno_nationalist.dds"
+
+	lawgroup_army_model = {
+		law_national_militia = strongly_approve
+		law_professional_army = disapprove
+	}
+
+	lawgroup_migration = {
+		law_closed_borders = strongly_approve
+		law_migration_controls = approve
+		law_open_borders = strongly_disapprove
+	}
+
+	lawgroup_trade_policy = {
+		law_isolationism = strongly_approve
+	}
+}
+
+#Colaboracionismo Enclavista ("Vende-Patrias")
+ideology_ca_enclavist = {
+	icon = "gfx/interface/icons/ideology_icons/capitalist.dds"
+
+	lawgroup_economic_system = {
+		law_laissez_faire = strongly_approve
+		law_interventionism = disapprove
+	}
+
+	lawgroup_trade_policy = {
+		law_free_trade = strongly_approve
+		law_isolationism = strongly_disapprove
+		law_protectionism = strongly_disapprove
+	}
+
+	lawgroup_migration = {
+		law_open_borders = strongly_approve
+	}
+	
+	lawgroup_taxation = {
+		law_graduated_taxation = strongly_disapprove
+	}
 }
