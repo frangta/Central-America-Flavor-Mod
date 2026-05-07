@@ -11,6 +11,7 @@ TRY_REPLACE:UCA_francisco_morazan = {
 	dna = dna_president_francisco_morazan
 	interest_group = ig_armed_forces
 	ideology = ideology_reformer
+	home_region = STATE_HONDURAS
 	traits = {
 		experienced_political_operator ambitious meticulous
 	}
@@ -30,6 +31,7 @@ uca_francisco_morazan_v1 = {
     interest_group = ig_armed_forces
     ideology = ideology_ca_federalist
     traits = { experienced_political_operator ambitious meticulous }
+	home_region = STATE_HONDURAS
 	on_created = {
 		set_variable = is_morazan
 	}
@@ -45,6 +47,7 @@ uca_francisco_morazan_v2 = {
 	dna = dna_president_francisco_morazan
 	interest_group = ig_intelligentsia
 	ideology = ideology_radical
+	home_region = STATE_HONDURAS
 	traits = {
 		 experienced_political_operator ambitious meticulous
 	}
@@ -62,6 +65,7 @@ UCA_jose_felipe_mariano_galvez = {
     interest_group = ig_intelligentsia
     ideology = ideology_ca_federalist
     traits = { meticulous }
+	home_region = STATE_GUATEMALA
 }
 
 uca_ramon_casaus_character_template = {
@@ -69,11 +73,12 @@ uca_ramon_casaus_character_template = {
     last_name = "Casaus_y_Torres"
     historical = yes
     birth_date = 1765.1.1
-    culture = cu:central_american
+    culture = cu:spanish
     religion = rel:catholic
     interest_group = ig_devout
     ideology = ideology_central_american_reactionary #ideology_traditionalist 
     traits = { imperious }
+	home_region = STATE_VALENCIA
 }
 
 
@@ -87,11 +92,25 @@ uca_francisco_barrundia_character_template = {
     interest_group = ig_petty_bourgeoisie
     ideology = ideology_radical
     traits = { charismatic }
+	home_region = STATE_GUATEMALA
 }
 # =======================================================
 # NICARAGUA - NIC
 # =======================================================
-
+nic_jose_zepeda_character_template = {
+    first_name = "Jose"
+    last_name = "ca_Zepeda"
+    historical = yes
+    ruler = yes
+    ig_leader = yes
+    birth_date = 1784.01.01 # Año de nacimiento histórico
+    female = no
+    culture = cu:nicaraguan
+    interest_group = ig_armed_forces
+    ideology = ideology_reformer
+    traits = { innovative tactful }
+	home_region = STATE_NICARAGUA
+}
 jose_nunez_character_template = {
     first_name = "Jose"
     last_name = "Nunez"
@@ -105,6 +124,7 @@ jose_nunez_character_template = {
     ideology = ideology_meritocratic
     religion = rel:catholic
     traits = { tactful  }
+	home_region = STATE_NICARAGUA
 }
 
 nic_fruto_chamorro_character_template = {
@@ -116,6 +136,7 @@ nic_fruto_chamorro_character_template = {
     ideology = ideology_traditionalist # Conservadurismo y Orden estricto
     traits = { imperious meticulous defensive_strategist }
     interest_group = ig_landowners
+	home_region = STATE_NICARAGUA
     # description = "Primer Presidente de la República. Defensor del orden conservador 'Legitimista' contra los liberales de León."
 }
 
@@ -128,6 +149,7 @@ nic_maximo_jerez_character_template = {
     ideology = ideology_market_liberal
     traits = { ambitious charismatic }
     interest_group = ig_intelligentsia
+	home_region = STATE_NICARAGUA
     # description = "Líder liberal de León. Su invitación a mercenarios extranjeros desencadenó la Guerra Nacional."
 }
 
@@ -142,7 +164,8 @@ nic_william_walker_character_template = {
     ideology = ideology_jingoist 
     traits = { ambitious cruel arrogant }
     interest_group = ig_armed_forces
-    is_general = yes 
+    is_general = yes
+	
 	
     # description = "El Rey de los Filibusteros. Intentó esclavizar Centroamérica bajo una dictadura personal."
 }
@@ -163,6 +186,7 @@ juan_lindo_character_template = {
     interest_group = ig_landowners
     ideology = ideology_market_liberal
     traits = { meticulous }
+	home_region = STATE_GUATEMALA
 }
 
 # =======================================================
@@ -180,6 +204,7 @@ gua_mariano_galvez_character_template = {
     interest_group = ig_intelligentsia
     ideology = ideology_market_liberal
     traits = { ambitious meticulous innovative }
+	home_region = STATE_GUATEMALA
 
 }
 
@@ -198,6 +223,7 @@ gua_rafael_carrera_character_template = {
 		forest_commander
 		
 		}
+	home_region = STATE_GUATEMALA
     # dna = ecchi_dna_rafael_carrera # Comentado para evitar crash si falta el archivo
     on_created = {
         set_variable = is_carrera
@@ -213,6 +239,7 @@ gua_mariano_rivera_paz_character_template = {
     ideology = ideology_traditionalist
     traits = { meticulous cautious }
     interest_group = ig_landowners
+	home_region = STATE_GUATEMALA
 }
 gua_mariano_aycinena_character_template = {
     first_name = "Mariano"
@@ -225,6 +252,7 @@ gua_mariano_aycinena_character_template = {
     ideology = ideology_ca_unitarian
     traits = { arrogant meticulous }
     noble = yes
+	home_region = STATE_GUATEMALA
 }
 gua_pedro_aycinena_character_template = {
 
@@ -235,6 +263,7 @@ gua_pedro_aycinena_character_template = {
     ideology = ideology_traditionalist
     traits = { imperious tactful }
     interest_group = ig_landowners
+	home_region = STATE_GUATEMALA
 }
 
 
@@ -247,6 +276,7 @@ gua_vicente_cerna_character_template = {
     ideology = ideology_traditionalist
     traits = { imperious  }
     interest_group = ig_armed_forces
+	home_region = STATE_GUATEMALA
 }
 
 gua_miguel_garcia_granados_character_template = {
@@ -257,6 +287,7 @@ gua_miguel_garcia_granados_character_template = {
     ideology = ideology_liberal
     traits = { innovative brave }
     interest_group = ig_intelligentsia
+	home_region = STATE_GUATEMALA
 }
 
 gua_alejandro_sinibaldi_character_template = {
@@ -268,6 +299,7 @@ gua_alejandro_sinibaldi_character_template = {
     ideology = ideology_market_liberal
     traits = { meticulous cautious }
     interest_group = ig_intelligentsia
+	home_region = STATE_GUATEMALA
 }
 
 gua_manuel_lisandro_barillas_character_template = {
@@ -279,6 +311,7 @@ gua_manuel_lisandro_barillas_character_template = {
     ideology = ideology_market_liberal
     traits = { experienced_political_operator cautious innovative }
     interest_group = ig_petty_bourgeoisie
+	home_region = STATE_GUATEMALA
 }
 
 gua_barrios_character_template = {
@@ -292,6 +325,7 @@ gua_barrios_character_template = {
     # dna = ecchi_dna_justo_rufino_barrios
     birth_date = 1835.7.19
     traits = { ambitious romantic tactful  }
+	home_region = STATE_GUATEMALA
     interest_group_leader_usage = {
         country_trigger = {
             exists = c:GUA
@@ -313,6 +347,32 @@ gua_barrios_character_template = {
 # =======================================================
 # HONDURAS - HON
 # =======================================================
+hon_joaquin_rivera_character_template = {
+    first_name = "Joaquin"
+    last_name = "Rivera_Bragas"
+    historical = yes
+    ruler = yes
+    ig_leader = yes
+    birth_date = 1795.10.20 # Fecha histórica aproximada/real
+    female = no
+    culture = cu:honduran
+    interest_group = ig_armed_forces
+    ideology = ideology_reformer
+    traits = { brave meticulous }
+	home_region = STATE_HONDURAS
+}
+
+hon_jose_maria_martinez_character_template = {
+    first_name = "Jose_Maria"
+    last_name = "Martinez_Salinas"
+    historical = yes
+    female = no
+    culture = cu:honduran
+    interest_group = ig_intelligentsia
+    ideology = ideology_market_liberal
+    traits = { experienced_political_operator }
+	home_region = STATE_HONDURAS
+}
 
 juan_franscisco_de_molina_character_template = {
     first_name = "Juan_Francisco"
@@ -327,6 +387,7 @@ juan_franscisco_de_molina_character_template = {
     ideology = ideology_traditionalist
     religion = rel:catholic
     traits = { tactful }
+	home_region = STATE_HONDURAS
 }
 
 hon_de_herrera_character_template = {
@@ -340,6 +401,7 @@ hon_de_herrera_character_template = {
     # dna = ecchi_dna_dionisio_de_herrera
     birth_date = 1781.10.9
     traits = { expert_political_operator charismatic }
+	home_region = STATE_HONDURAS
     interest_group_leader_usage = {
         country_trigger = {
             OR = {
@@ -375,6 +437,7 @@ hon_cabanas_character_template = {
     # dna = ecchi_dna_jose_trinidad_cabanas
     birth_date = 1805.6.9
     traits = { brave romantic tactful expert_offensive_planner}
+	home_region = STATE_HONDURAS
     interest_group_leader_usage = {
         country_trigger = {
             OR = {
@@ -407,6 +470,7 @@ hon_francisco_ferrera_character_template = {
     ideology = ideology_central_america_caudillo
     traits = { imperious cruel }
     interest_group = ig_armed_forces
+	home_region = STATE_HONDURAS
     on_created = {
         set_variable = is_ferrera
     }
@@ -423,6 +487,7 @@ hon_bogran_character_template = {
     # dna = ecchi_dna_luis_bogran
     birth_date = 1849.6.3
     traits = { innovative expensive_tastes }
+	home_region = STATE_HONDURAS
     interest_group_leader_usage = {
         country_trigger = {
             exists = c:HON
@@ -451,6 +516,7 @@ hon_jose_zelaya_character_template = {
     ideology = ideology_traditionalist
     traits = { imperious }
     interest_group = ig_landowners
+	home_region = STATE_HONDURAS
 }
 
 hon_juan_lindo_character_template = {
@@ -463,6 +529,7 @@ hon_juan_lindo_character_template = {
     ideology = ideology_traditionalist
     traits = { meticulous innovative } 
     interest_group = ig_intelligentsia
+	home_region = STATE_HONDURAS
 }
 
 hon_jose_santos_guardiola_character_template = {
@@ -475,6 +542,7 @@ hon_jose_santos_guardiola_character_template = {
     ideology = ideology_traditionalist
     traits = { brave arrogant }
     interest_group = ig_armed_forces # Militar conservador
+	home_region = STATE_HONDURAS
     # description = "Presidente conservador que logró la devolución de las Islas de la Bahía e Islas de los Mosquitos."
 }
 
@@ -488,6 +556,7 @@ hon_marco_aurelio_soto_character_template = {
     ideology = ideology_modernizer
     traits = { innovative meticulous }
     interest_group = ig_intelligentsia
+	home_region = STATE_HONDURAS
     # description = "Líder de la Reforma Liberal en Honduras. Modernizó el estado, correos y telégrafos."
 }
 
@@ -507,6 +576,7 @@ joaquin_mora_character_template = {
     interest_group = ig_intelligentsia
     birth_date = 1786.01.17
     traits = { experienced_political_operator }
+	home_region = STATE_COSTA_RICA
 }
 
 cos_braulio_carrillo_character_template = {
@@ -522,7 +592,8 @@ cos_braulio_carrillo_character_template = {
     culture = cu:costa_rican
     ideology = ideology_central_america_caudillo
     religion = rel:catholic
-    traits = { brave experienced_political_operator blunt }
+    traits = { brave experienced_political_operator direct }
+	home_region = STATE_COSTA_RICA
     on_created = {
         set_variable = is_carrillo
     }
@@ -550,7 +621,8 @@ cos_castro_character_template = {
     interest_group = ig_intelligentsia
     # dna = ecchi_dna_jose_maria_castro
     birth_date = 1818.9.1
-    traits = { arrogant experienced_political_operator blunt }
+    traits = { arrogant experienced_political_operator direct }
+	home_region = STATE_COSTA_RICA
     interest_group_leader_usage = {
         country_trigger = {
             exists = c:COS
@@ -575,6 +647,7 @@ cos_manuel_aguilar_character_template = {
     interest_group = ig_intelligentsia
      ideology = ideology_market_liberal
     traits = { innovative meticulous }
+	home_region = STATE_COSTA_RICA
 }
 
 cos_jose_maria_alfaro_character_template = {
@@ -587,6 +660,7 @@ cos_jose_maria_alfaro_character_template = {
     interest_group = ig_intelligentsia
     ideology = ideology_market_liberal
     traits = { meticulous innovative }
+	home_region = STATE_COSTA_RICA
 }
 
 cos_juan_rafael_mora_character_template = {
@@ -599,18 +673,31 @@ cos_juan_rafael_mora_character_template = {
     historical = yes
     ideology = ideology_market_liberal
     traits = { charismatic brave innovative }
+	home_region = STATE_COSTA_RICA
 }
 
 cos_tomas_guardia_character_template = {
-
     first_name = "Tomas"
     last_name = "Guardia_Gutierrez"
     interest_group = ig_armed_forces
-    # dna = dna_
     culture = cu:costa_rican
     historical = yes
     ideology = ideology_market_liberal
     traits = { imperious innovative }
+    birth_date = 1831.12.16
+	home_region = STATE_COSTA_RICA
+    interest_group_leader_usage = {
+        country_trigger = {
+            exists = c:COS
+            this = c:COS
+        }
+        interest_group_trigger = {
+            is_interest_group_type = ig_armed_forces
+        }
+        earliest_usage_date = 1870.4.27 
+        latest_usage_date = 1882.7.6   
+        chance = 100
+    }
 }
 
 cos_prospero_fernandez_character_template = {
@@ -623,6 +710,7 @@ cos_prospero_fernandez_character_template = {
     historical = yes
     ideology = ideology_liberal_anticlerical
     traits = { innovative tactful }
+	home_region = STATE_COSTA_RICA
 }
 
 cos_bernardo_soto_character_template = {
@@ -635,12 +723,23 @@ cos_bernardo_soto_character_template = {
     historical = yes
     ideology = ideology_market_liberal
     traits = { meticulous innovative }
+	home_region = STATE_COSTA_RICA
 }
 
 # =======================================================
 # EL SALVADOR - ELS
 # =======================================================
-
+els_francisco_gomez_character_template = {
+    first_name = "Francisco"
+    last_name = "Gomez"
+    historical = yes
+    female = no
+    culture = cu:central_american # Cambia a salvadoran si creaste esa cultura
+    ideology = ideology_moderate
+    traits = { cautious tactful }
+    interest_group = ig_intelligentsia
+	home_region = STATE_SAN_SALVADOR
+}
 els_diego_vigil_character_template = {
 
     first_name = "Diego"
@@ -650,6 +749,7 @@ els_diego_vigil_character_template = {
     ideology = ideology_market_liberal
     traits = { meticulous tactful }
     interest_group = ig_intelligentsia
+	home_region = STATE_SAN_SALVADOR
 }
 
 els_francisco_malespin_character_template = {
@@ -661,6 +761,7 @@ els_francisco_malespin_character_template = {
     ideology = ideology_reactionary
     traits = { imperious wrathful }
     interest_group = ig_armed_forces
+	home_region = STATE_SAN_SALVADOR
 }
 
 els_doroteo_vasconcelos_character_template = {
@@ -672,6 +773,7 @@ els_doroteo_vasconcelos_character_template = {
      ideology = ideology_market_liberal
     traits = { ambitious innovative }
     interest_group = ig_intelligentsia
+	home_region = STATE_SAN_SALVADOR
 }
 
 els_francisco_duenas_character_template = {
@@ -683,6 +785,7 @@ els_francisco_duenas_character_template = {
     ideology = ideology_traditionalist
     traits = { imperious }
     interest_group = ig_devout
+	home_region = STATE_SAN_SALVADOR
 }
 
 els_gerardo_barrios_character_template = {
@@ -694,6 +797,7 @@ els_gerardo_barrios_character_template = {
     ideology = ideology_market_liberal
     traits = { innovative ambitious }
     interest_group = ig_landowners
+	home_region = STATE_SAN_SALVADOR
 }
 
 # =======================================================

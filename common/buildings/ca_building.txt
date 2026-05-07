@@ -134,7 +134,7 @@
 #	}	
 #
 #}
-ca_iron_mine = {
+building_ca_iron_mine = {
 	building_group = bg_ca_mine
 	icon = "gfx/interface/icons/building_icons/iron_mine.dds"
 	city_type = mine
@@ -148,7 +148,7 @@ ca_iron_mine = {
 			has_variable = ca_buildings_on
 
 		}
-        modifier:state_ca_iron_mine_max_level_add > 0
+        #modifier:state_ca_iron_mine_max_level_add > 0
         }
 	potential = {
 		owner = {  
@@ -156,24 +156,19 @@ ca_iron_mine = {
 		}
 	}
     can_build_government = {
-        has_variable = ca_soil_survey_complete
-        market_access >= 0.50 
+        #has_variable = ca_soil_survey_complete
+        #market_access >= 0.50 
     }
     can_build_private = {
 														 
-        has_variable = ca_soil_survey_complete
+        #has_variable = ca_soil_survey_complete
 		
 																  
 																		
-        market_access >= 0.50 
+        #market_access >= 0.50 
     }	
 
-possible_desc = {
-        trigger = {
-            NOT = { has_variable = ca_soil_survey_complete }
-        }
-        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
-    }	
+	
 	unlocking_technologies = {
 		shaft_mining
 	}
@@ -189,7 +184,7 @@ possible_desc = {
 
 	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_mining.dds"
 }
-ca_coal_mine = {
+building_ca_coal_mine = {
 	building_group = bg_ca_mine
 	icon = "gfx/interface/icons/building_icons/coal_mine.dds"
 	city_type = mine
@@ -214,12 +209,7 @@ ca_coal_mine = {
         has_variable = ca_soil_survey_complete
         market_access >= 0.50 
     }
-possible_desc = {
-        trigger = {
-            NOT = { has_variable = ca_soil_survey_complete }
-        }
-        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
-    }	
+	
 	unlocking_technologies = {
 		shaft_mining
 	}
@@ -235,7 +225,7 @@ possible_desc = {
 
 	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_mining.dds"
 }
-ca_lead_mine = {
+building_ca_lead_mine = {
 	building_group = bg_ca_mine
 	icon = "gfx/interface/icons/building_icons/lead_mine.dds"
 	city_type = mine
@@ -262,12 +252,7 @@ ca_lead_mine = {
         has_variable = ca_soil_survey_complete
         market_access >= 0.50 
     }
-possible_desc = {
-        trigger = {
-            NOT = { has_variable = ca_soil_survey_complete }
-        }
-        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
-    }	
+
 	unlocking_technologies = {
 		shaft_mining
 	}
@@ -283,7 +268,7 @@ possible_desc = {
 
 	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_mining.dds"
 }
-ca_sulfur_mine = {
+building_ca_sulfur_mine = {
 	building_group = bg_ca_mine
 	icon = "gfx/interface/icons/building_icons/sulfur_mine.dds"
 	city_type = mine
@@ -313,12 +298,7 @@ ca_sulfur_mine = {
 																		
         market_access >= 0.50 
     }
-possible_desc = {
-        trigger = {
-            NOT = { has_variable = ca_soil_survey_complete }
-        }
-        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
-    }	
+
 	unlocking_technologies = {
 		shaft_mining
 	}
@@ -334,92 +314,80 @@ possible_desc = {
 
 	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_mining.dds"
 }
-ca_gold_mine = {
-    building_group = bg_ca_mine
+building_ca_gold_mine = {
+	building_group = bg_mining
 	icon = "gfx/interface/icons/building_icons/gold_mine.dds"
+	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_mining.dds"
+	
 	city_type = mine
 	levels_per_mesh = 5
 	required_construction = construction_cost_medium
 	terrain_manipulator = mining
-	has_max_level = yes
-        possible = {
-        modifier:state_ca_gold_mine_max_level_add > 0
-        }
-	potential = {
-		owner = { 
+	
+	has_max_level = yes 
+	
+	# Deseo de la IA de nacionalizar las minas de oro
+	ai_nationalization_desire = 1.0 
+
+	possible = {
+		modifier:state_ca_gold_mine_max_level_add > 0 
+	} 
+	
+	potential = { 
+		owner = {
 			has_variable = ca_buildings_on
-
 		}
+	}
 
-	
+    # IA Valora mucho el oro
+	ai_value = { value = 5000 }
+
+	unlocking_technologies = { 
+		prospecting 
 	}
-    can_build_government = {
-        has_variable = ca_soil_survey_complete
-        market_access >= 0.50 
-    }
-    can_build_private = {
-														 
-        has_variable = ca_soil_survey_complete
-		
-																  
-																		
-        market_access >= 0.50 
-    }
-	possible_desc = {
-        trigger = {
-            NOT = { has_variable = ca_soil_survey_complete }
-        }
-        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
-    }
-	unlocking_technologies = {
-		prospecting
-	}
-	
-	ai_value = 5000 # Gold mines are very nice for minting revenue and guaranteed profits
-	ai_nationalization_desire = 1.0 # AI should be keen on nationalizing these
 
 	production_method_groups = {
-	    pmg_ca_mining_size_building_gold_mine
-		pmg_ca_mining_equipment_building_gold_mine
+		pmg_mining_equipment_building_gold_mine
 		pmg_explosives_building_gold_mine
 		pmg_steam_automation_building_gold_mine
 		pmg_train_automation_building_gold_mine
 	}
+	
 	ownership_type = self
-
-	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_mining.dds"
 }
-ca_oil_rig = {
-	building_group = bg_ca_mine
-	icon = "gfx/interface/icons/building_icons/oil_rig.dds"
+building_ca_oil_rig = { 
+	building_group = bg_oil_extraction 
+	icon = "gfx/interface/icons/building_icons/oil_rig.dds" 
+	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_oil.dds"
+	
 	city_type = mine
-	levels_per_mesh = 5
+	levels_per_mesh = 5 
 	required_construction = construction_cost_medium
-	has_max_level = yes
-        possible = {
-        modifier:state_ca_oil_rig_max_level_add > 0
-        }
+	
+	has_max_level = yes 
+	
+	possible = { 
+		modifier:state_ca_oil_rig_max_level_add > 0 
+	}
+
 	potential = {
-			owner = { 
+		owner = { 
 			has_variable = ca_buildings_on
-			has_technology_researched = pumpjacks
-			
 		}
 	}
-   can_build_government = {
-        has_variable = ca_soil_survey_complete
-        market_access >= 0.50 
-    }
-    can_build_private = {
-        has_variable = ca_soil_survey_complete
-        market_access >= 0.50 
-    }
-	possible_desc = {
-        trigger = {
-            NOT = { has_variable = ca_soil_survey_complete }
-        }
-        text = "ca_requires_soil_survey_tt" # "Requiere Estudio de Suelo"
-    }
+	
+    # Reglas de construcción avanzadas (1.13)
+	can_build_government = {
+		has_variable = ca_soil_survey_complete
+		market_access >= 0.50 
+	}
+	can_build_private = {
+		has_variable = ca_soil_survey_complete
+		market_access >= 0.50 
+	}
+	
+
+	
 	unlocking_technologies = {
 		pumpjacks
 	}
@@ -428,40 +396,41 @@ ca_oil_rig = {
 		pmg_base_building_oil_rig
 		pmg_transportation_building_oil_rig
 	}
+	
 	ownership_type = self
-
-	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_oil.dds"
 }
-ca_gold_field = {
-	building_group = bg_ca_gold_field
+building_ca_gold_field = {
+	building_group = bg_gold_fields
 	icon = "gfx/interface/icons/building_icons/gold_fields.dds"
+	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_mining.dds"
+	
 	city_type = mine
 	levels_per_mesh = 5
+	
 	buildable = no
 	expandable = no
 	downsizeable = no
 	can_switch_owner = no
+	
 	terrain_manipulator = mining
-    has_max_level = yes
-        possible = {
-        modifier:state_ca_gold_fields_max_level_add > 0
-        }
-	potential = {
-		owner = { 
-
+	
+	has_max_level = yes 
+	
+	possible = {
+		modifier:state_ca_gold_field_max_level_add > 0 
+	} 
+	
+	potential = { 
+		owner = {
 			has_variable = ca_buildings_on
-
 		}
-
-	}		
-	unlocking_technologies = {
-		prospecting
 	}
+
+	ai_value = { value = 5000 }
 
 	production_method_groups = {
 		pmg_base_building_gold_field
 	}
+	
 	ownership_type = self
-
-	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_mining.dds"
 }

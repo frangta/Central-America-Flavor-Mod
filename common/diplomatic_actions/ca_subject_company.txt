@@ -23,7 +23,7 @@
 		cost = 25
 	
 		has_junior_participant = yes
-		recipient_pays_maintenance = no
+		maintenance_paid_by = first_country
 		income_transfer = 0.3
 		second_country_gets_income_transfer = no
 		income_transfer_based_on_second_country = yes
@@ -44,18 +44,14 @@
 		target_can_break = {
 			is_diplomatic_play_committed_participant = no
 			custom_tooltip = {
-				text = chartered_company_demand_independence_tt
+				text = ca_chartered_company_demand_independence_tt
 				always = no
 			}
 		}
 		
-		manual_break_effect = {
-			create_bidirectional_truce = { country = scope:target_country months = 36 }
-		}
-		
-		auto_break_effect = {
-			create_bidirectional_truce = { country = scope:target_country months = 36 }
-		}		
+		manual_break_effect = { create_bidirectional_truce = { country = scope:target_country months = 12 } }
+        auto_break_effect = { create_bidirectional_truce = { country = scope:target_country months = 12 } }	
+	
 	}
 	
 	ai = {

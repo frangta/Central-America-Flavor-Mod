@@ -2,9 +2,10 @@
 # ENMIENDAS CENTROAMERICANAS (CA_AMENDMENTS)
 # ==============================================
 
+
 # 1. LEYES DE VAGANCIA (Trabajo forzado agrícola)
-# Vinculado a: Agricultura Comercial
-# Efecto: Más producción agrícola, pero destruye el nivel de vida bajo y empodera terratenientes.
+# Vinculado a: Agricultura Comercial o Arrendatarios
+# Efecto: Aumenta la producción a costa de los derechos de los estratos bajos.
 amendment_vagrancy_laws = {
     parent = law_commercialized_agriculture
 
@@ -14,22 +15,22 @@ amendment_vagrancy_laws = {
     }
 
     modifier = {
-
+        # Aumenta el rendimiento de todas las granjas y plantaciones
         building_group_bg_agriculture_throughput_add = 0.15
         
-
-        country_standard_of_living_lower_strata_add = -1.0
+        # Penalización severa al nivel de vida de los trabajadores forzados
+        state_lower_strata_standard_of_living_add = -1.0
         
-
+        # Empodera a los terratenientes que se benefician del sistema
         interest_group_ig_landowners_pol_str_mult = 0.10
     }
 
     possible = {
-
+        # No se puede tener si hay protecciones laborales o sindicatos fuertes
         NOT = { has_law = law_type:law_regulatory_bodies }
         NOT = { has_law = law_type:law_worker_protections }
         
-
+        # Restricción Cultural Regional
         OR = {
             country_has_primary_culture = cu:central_american
             country_has_primary_culture = cu:costa_rican
@@ -41,30 +42,33 @@ amendment_vagrancy_laws = {
         }
     }
 
-
+    # Los Terratenientes siempre intentarán incluir esto en las negociaciones
     would_sponsor = {
         is_interest_group_type = ig_landowners
     }
 
-    # La IA lo quitará si tiene leyes laborales avanzadas
+    # La IA la revocará si los grupos progresistas o sindicatos toman el poder
     ai_will_revoke = {
-        OR = {
-            has_law = law_type:law_regulatory_bodies
-            has_law = law_type:law_worker_protections
+        any_interest_group = {
+            is_in_government = yes
+            OR = {
+                is_interest_group_type = ig_trade_unions
+                is_interest_group_type = ig_intelligentsia
+            }
         }
     }
 
-    # Requisitos para quitar la enmienda manualmente
     can_repeal = {
         legitimacy >= legitimacy_to_repeal_amendment
     }
 
+    # Es relativamente fácil de agitar en contra por su crueldad
     amendment_activism_multiplier = 0.5
 }
 
 # 2. JEFES POLÍTICOS (Caudillismo Local)
 # Vinculado a: Burócratas Designados
-# Efecto: Mucha autoridad y poder militar, pero corrupción (tax waste).
+# Efecto: Mucha autoridad y control militar, pero con corrupción institucional.
 amendment_jefes_politicos = {
     parent = law_appointed_bureaucrats
 
@@ -73,17 +77,22 @@ amendment_jefes_politicos = {
     }
 
     modifier = {
+        # Representa el control férreo del Ejecutivo en las provincias
         country_authority_add = 150
         
-
-        country_tax_waste_mult = 0.15
+        # El precio de la corrupción local y el desvío de fondos
+        state_tax_waste_add = 0.15
         
-
+        # Fortalece el poder político del estamento militar
         interest_group_ig_armed_forces_pol_str_mult = 0.20
+
+        # NUEVO 1.13: Facilita la supresión de disturbios locales
+        country_suppression_cost_mult = -0.25
+		country_suppression_attraction_factor = -0.10
     }
 
     possible = {
-
+        # Requiere un sistema de poder concentrado
         OR = {
             has_law = law_type:law_autocracy
             has_law = law_type:law_oligarchy
@@ -101,16 +110,20 @@ amendment_jefes_politicos = {
         }
     }
 
-
+    # Los Militares patrocinan esta enmienda para controlar el territorio
     would_sponsor = {
         is_interest_group_type = ig_armed_forces
     }
 
-
+    # La IA la quitará si se democratiza el país o si la Intelligentsia quiere limpiar el estado
     ai_will_revoke = {
         OR = {
-            has_law = law_type:law_universal_suffrage
-            has_law = law_type:law_census_voting
+            NOT = { has_law = law_type:law_autocracy }
+            NOT = { has_law = law_type:law_oligarchy }
+            any_interest_group = {
+                is_in_government = yes
+                is_interest_group_type = ig_intelligentsia
+            }
         }
     }
 
@@ -118,5 +131,6 @@ amendment_jefes_politicos = {
         legitimacy >= legitimacy_to_repeal_amendment
     }
 
-    amendment_activism_multiplier = 0.75
+    # Es difícil de quitar porque los jefes políticos suelen resistirse
+    amendment_activism_multiplier = 0.25
 }

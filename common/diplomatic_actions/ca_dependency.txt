@@ -2,11 +2,12 @@
     groups = {
         general
     }
-     texture = "gfx/interface/icons/lens_toolbar_icons/autonomous_province.dds"
+    # Se cambió el icono a uno vainilla para que no tire el error VFSOpen
+    texture = "gfx/interface/icons/lens_toolbar_icons/protectorate.dds"
     show_in_lens = no
     can_use_obligations = yes
 
-     selectable = {
+    selectable = {
         is_ca_culture_country = yes
         NOT = { is_country_type = decentralized }
     }
@@ -22,7 +23,7 @@
     pact = {
         cost = 25
         has_junior_participant = yes
-        recipient_pays_maintenance = no
+        maintenance_paid_by = first_country # ARREGLADO: Reemplaza al viejo recipient_pays_maintenance
         income_transfer = 0.2
         second_country_gets_income_transfer = no
         income_transfer_based_on_second_country = yes
@@ -38,6 +39,7 @@
             country_convoy_contribution_to_market_owner_add = 0.5
         }
 
+        # ARREGLADO: Ahora las treguas son bidireccionales
         manual_break_effect = {
             create_bidirectional_truce = { country = scope:target_country months = 36 }
         }
@@ -57,17 +59,5 @@
 
     ai = {
         check_acceptance_for_will_break = yes
-
-        will_break = {
-            is_subject_of = scope:target_country
-            has_attitude = {
-                who = scope:target_country
-                attitude = rebellious
-            }
-        }
-
-        propose_break_score = {
-            value = 10
-        }
     }
 }
