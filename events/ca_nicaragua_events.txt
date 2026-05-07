@@ -1,5 +1,61 @@
 ﻿namespace = ca_nicaragua_events
 ##scope_NIC
+#scope_RNI
+#scope_PN1
+#scope_PN2
+#scope_PN3
+#scope_PN4
+#scope_PN5
+#scope_PN6
+#ca_nicaragua_events.x  = {
+#
+#     type = country_event
+#
+#	
+#	title = ca_nicaragua_events.x.t
+#	desc = ca_nicaragua_events.x.d
+#	flavor = ca_nicaragua_events.x.f
+#	
+#	event_image = {
+#		video = ""
+#	}
+#	
+#	icon = "gfx/interface/icons/event_icons/event_default.dds"
+#	
+#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#	
+#	duration = 3
+#	
+#	trigger = {
+#	    game_date < 1838.5.30
+#		exists = c:COS
+#		this = c:COS
+#	}
+#	
+#	#cancellation_trigger = {
+#	#}
+#
+#	cooldown = {
+#	}
+#
+#	immediate = {
+#	
+#	}
+#	
+#	option = {
+#		name = ca_nicaragua_events.x.a
+#		default_option = yes
+#		set_variable = voting_ca_self_determination
+#	}
+#	
+#	option = {
+#		name = ca_nicaragua_events.x.b
+#	}
+#	
+#	#after = {
+#	#}
+#
+#}
 ca_nicaragua_events.1  = { #setup
 
     type = country_event
@@ -70,7 +126,7 @@ ca_nicaragua_events.1  = { #setup
 	option = {
 		name = ca_nicaragua_events.1.a
 			create_character = {
-			first_name = "José"			
+			first_name = "Jose"			
 			last_name = "Zepeda"
 			historical = yes
 			is_general = yes
@@ -85,7 +141,7 @@ ca_nicaragua_events.1  = { #setup
 			base = 1
 		}
 		default_option = yes
-		set_variable = 
+		#set_variable = 
 	}
 	
 	
@@ -177,7 +233,8 @@ ca_nicaragua_events.3  = { #Proposal for agrarian reform in Leon
 #ca_nicaragua_events.4.f
 #ca_nicaragua_events.1.a
 #ca_nicaragua_events.1.b
-#ca_nicaragua_events.1.c                                  
+#ca_nicaragua_events.1.c 
+                                 
 ca_nicaragua_events.4  = { #Reforma Judicial de Granada
    type = country_event
 
@@ -355,6 +412,148 @@ ca_nicaragua_events.6  = { #Cholera Spreads in Nicaragua
 	#after = {
 	#}
 
+}
+## Play with Nicaragua 
+ca_nicaragua_events.7 = {
+	type = country_event
+	placement = scope:secession_capital
+	title = ca_nicaragua_events.7.t
+	desc = ca_nicaragua_events.7.d
+	flavor =  ca_nicaragua_events.7.f
+
+	duration = 3
+
+	event_image = {
+		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	trigger = {
+         # triggered by je_historic_central_america_falls_apart when the player selected Nicaragua to play
+	}
+	
+	immediate = {
+		set_variable = {
+			name = frca_recent_separatism_event_var
+			days = 40
+		}	
+		random_scope_state = {
+			limit = {
+				is_capital = no
+				state_region = s:STATE_NICARAGUA
+				turmoil > 0.2
+			}
+			save_scope_as = secession_state
+		}
+		create_country = {
+			tag = NIC
+			origin = this
+			state = scope:secession_state
+		}
+		create_diplomatic_pact = {
+            country = c:NIC
+            type = ca_dependency
+        }		
+		c:NIC = {
+			save_scope_as = scope_NIC
+			save_scope_as = secession_country
+			capital = {
+				save_scope_as = secession_capital
+			}
+		  add_journal_entry = {
+		  type = je_ca_historic_situation_in_nicaragua
+		   }
+		   set_variable = {}
+			set_relations = { country = c:UCA value = -50 }
+		    create_character = {
+				first_name = Jose
+				last_name = Nunez
+				historical = yes
+				ig_leader = yes
+				interest_group = ig_landowners
+				ruler = yes
+				birth_date = 1800.02.02
+				female = no
+				culture = cu:nicaraguan
+				ideology = ideology:ideology_meritocratic
+				religion = rel:catholic
+				traits = {
+					basic_diplomat
+			}
+		    }
+		ig:ig_landowners = {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_nic_convervador
+		}
+		ig:ig_intelligentsia = {
+		remove_ideology = ideology_liberal
+        remove_ideology = ideology_republican		
+		add_ideology = ideology_ca_constitutionalist
+        set_interest_group_name = ig_nic_liberal
+
+		}		
+		ig:ig_armed_forces = {
+			remove_ideology = ideology_paternalistic
+		}
+
+		ig:ig_devout = {
+			add_ideology = ideology_central_american_reactionary
+			set_interest_group_name = ig_catholic_church
+		}			
+			activate_law = law_type:law_freedom_of_conscience
+			#activate_law = law_type:law_unitary
+			activate_law = law_type:law_mercantilism
+			activate_law = law_type:law_wealth_voting
+			activate_law = law_type:law_censorship
+		it = {
+		limit = { has_variable = historic_central_american }
+	
+		    trigger_event = { 
+		    	id = ca_nicaragua_events.1 
+		    }
+		}
+		it = {
+		limit = { has_variable = random_central_american }
+        random_events = {
+			50 = ca_central_america.13
+			50 = ca_central_america.14
+			}
+		}				
+		}
+		
+		set_variable = frca_crisis_var
+		trigger_event = { 
+			id = ca_central_america.6
+			months = 1
+		}
+	}
+
+	# Accept secession
+	option = {
+		name = ca_nicaragua_events.7.a
+		default_option = yes
+
+	}
+
+	# Reject Secession
+	option = {
+		name = ca_nicaragua_events.7.b
+
+	}
+	option = { #Switch tags
+		name = ca_nicaragua_events.7.c
+		
+		play_as = c:NIC
+		
+		ai_chance = {
+			base = 0
+		}
+	}
 }                                     
 #ca_nicaragua_events.7  = {
 #                    type = country_event

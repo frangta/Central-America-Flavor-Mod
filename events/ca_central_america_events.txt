@@ -1,5 +1,538 @@
 ﻿namespace = ca_central_america
-
+#Culturas del mod :
+#cu:central_american
+#cu:guatemalan
+#cu:el_salvadorian
+#cu:honduran
+#cu:nicaraguan
+#cu:costa_rican
+#cu:panamanian
+#cu:bribri_talamanca 
+#cu:cabecar 
+#cu:chibchan_central_america 
+#cu:ngabe_culture 
+#cu:embera 
+#cu:guna_kuna 
+#cu:mangue_chorotega 
+#cu: lenca  
+#cu:garifuna_arawak
+#Estados :
+#s:STATE_SAN_SALVADOR
+#s:STATE_GUATEMALA
+#s:STATE_COSTA_RICA
+#s:STATE_HONDURAS
+#s:STATE_PANAMA
+#s:STATE_CHIAPAS
+#s:STATE_YUCATAN
+#Ideologías:
+#ideology_ca_liberal_monarchist (Monarquismo Liberal)
+#ideology_ca_unitarian (Unitarismo / Centralismo)
+#ideology_ca_federalist (Federalismo)
+#ideology_ca_leader_autocratic_autonomist (Autonomismo Autocrático)
+#ideology_central_america_caudillo (Caudillismo Centroamericano)
+#ideology_maya_autonomism (Autonomismo Maya)
+#ideology_coffee_liberalism (Liberalismo Cafetalero)
+#ideology_cuscatleco_nationalism (Nacionalismo Cuscatleco)
+#ideology_granadine_legitimism (Legitimismo Granadino)
+#ideology_anti_imperialist_sovereigntism (Soberanismo Antiimperialista)
+#ideology_slaver_filibusterism (Filibusterismo Esclavista)
+#ideology_carrillismo (Carrillismo)
+#ideology_olympus_liberalism (Liberalismo del Olimpo)
+#ideology_chacara_social_democracy (Socialdemocracia Chácara)
+#ideology_mercantile_transitism (Transistismo Mercantil)
+#ideology_isthmian_separatism (Separatismo Istmeño)
+#ideology_ca_morazanista (Morazanismo / Liberalismo Radical / Federalismo)
+#ideology_ca_filibuster (Filibusterismo Esclavista / Destino Manifiesto Anglo)
+#ideology_ca_imperial_monarchist (Pan-Hispanismo Imperial / Monarquismo)
+#ideology_ca_banana_socialism (Socialismo Bananero / Comunismo Tropical)
+#ideology_ca_jesuit_theocracy (Teocracia Jesuita Inquisitorial)
+#ideology_ca_miskito_hegemony (Imperio Marítimo Miskito)
+#ideology_ca_neo_mayan_restoration (Restauración Neo-Maya / Supremacía Indígena)
+#ideology_ca_hermit_isolationism (Aislacionismo Supremo / Modelo "Dr. Francia")
+#ideology_ca_tropical_bonapartism (Bonapartismo Tropical)
+#ideology_ca_tropical_utopian (Utopismo Selvático / Falansterios)
+#ideology_ca_canal_company_rule (Dictadura Corporativa de la "Compañía del Canal")
+#ideology_ca_syncretic_cult (Culto Sincretista / Milenarismo)
+#ideology_ca_bolivarian_integration (Panamericanismo Bolivariano)
+#ideology_ca_corsair_republic (República Corsaria del Caribe)
+#ideology_ca_agrarian_luddism (Ludismo Agrario / Destructores de Máquinas)
+#ideology_ca_cientifico_technocracy (Tecnocracia de los "Científicos")
+#ideology_ca_late_unionist (Unionismo Tardío / Diplomático)
+#ideology_ca_peasant_caudillismo (Caudillismo Campesino / Conservadurismo Popular)
+#ideology_ca_coffee_liberal (Liberalismo Cafetalero / Positivismo Autoritario)
+#ideology_ca_indigenous_communalism (Indigenismo Comunal)
+#ideology_ca_separatist (Separatismo Soberano)
+#ideology_ca_enclavist (Colaboracionismo Enclavista / "Vende-Patrias")
+#ideology_ca_criollo_elite
+#ideology_ca_liberal
+#ideology_ca_constitutionalist
+#ideology_central_american_federal
+#ideology_central_american_reactionary (y su variante _2)
+#ideology_ca_isolationist_expansionism
+#ideology_ca_guilds
+#ideology_ca_communalist
+#ideology_ca_secularist
+#ideology_ca_soberania_aristocratica
+#ideology_ca_criollo_liberal
+#ideology_ca_criollo_paternalistic
+#ideology_ca_criollo_stratocratic
+#ideology_ca_artesanado
+#ideology_ca_agroexportadores
+#ideology_ca_colonialist
+#ideology_ca_radical_enclavist (Nacional Enclavista)
+#ideology_ca_servile
+##ideology_movement
+#ideology_ca_unitarian_movement
+#ideology_ca_federalist_movement
+#ideology_ca_autocratic_autonomist_movement
+#ideology_ca_guilds_movement
+#ideology_ca_communalist_movement
+#ideology_ca_secularist_movement
+#ideology_ca_criollo_liberal_movement
+#ideology_central_american_reactionary_movement
+#ideology_ca_agroexportadores_movement
+#ideology_ca_enclavist_movement
+#ideology_ca_radical_enclavist_movement #Nacional Enclavista
+#ideology_ca_colonialist_movement
+#ideology_ca_liberal_movement
+#ideology_ca_constitutionalist_movement
+#Leyes
+#Army model:
+#law_ca_comunal_milicia
+#law_ca_caudillismo
+#law_regionalist_militia
+#ca_economic_system:
+#law_central_american_agrarianism #Agroexportadores
+#lawgroup_ca_state_structure:
+#law_central_american_confederated
+#law_central_american_unitary #Centralismo
+#law_central_american_federal #Federal suave
+#ca_land_reforms:
+#law_land_reform_coffee_oligarchy
+#law_land_reform_communal_lands
+#law_land_reform_banana_republic
+#law_land_reform_hacienda_system
+#TAGS:
+#Costa Rica
+#Tags principales y formaciones:
+#COS – Costa Rica
+#CCR – Confederation of Costa Rica
+#
+#
+#Provincias / entidades internas:
+#PC1 – San José
+#PC2 – Guanacaste
+#PC3 – Nicoya
+#PC4 – Limón
+#PC5 – Heredia
+#PC6 – Alajuela
+#PC7 – Osa
+#PC8 – Cartago
+#
+#
+#Indígenas / especiales:
+#RDT – Talamanca
+#
+#
+#Guatemala
+#Tags principales y formaciones:
+#GUA – Guatemala
+#ALT – Los Altos
+#GGA – Gran República / Reino de Guatemala
+#
+#
+#Departamentos:
+#DG1 – Petén
+#DG2 – Izabal
+#DG3 – Verapaz
+#DG4 – Guatemala
+#DG5 – Quetzaltenango
+#DG6 – Soconusco
+#
+#
+#Nicaragua
+#Tags principales y formaciones:
+#NIC – Nicaragua
+#RNI – República de Nicaragua
+#
+#
+#Provincias:
+#PN1 – León
+#PN2 – Managua
+#PN3 – Matagalpa
+#PN4 – Zona Sur
+#PN5 – Zona Norte
+#PN6 – Granada
+#
+#
+#El Salvador
+#Tags principales y formaciones:
+#ELS – El Salvador
+#UEL – Unión / Estado ampliado de El Salvador
+#
+#
+#Departamentos:
+#DE1 – San Salvador
+#DE2 – Sonsonate
+#DE3 – San Miguel
+#
+#
+#
+#Honduras
+#Tags principales y formaciones:
+#HON – Honduras
+#UHO – Unión / Gran Honduras
+#
+#
+#Indígenas:
+#GIG – Garífuna
+#
+#
+#Departamentos:
+#DH1 – Olancho
+#DH2 – Yoro
+#DH3 – Santa Bárbara
+#DH4 – (zona El Salvador)
+#DH5 – Comayagua
+#DH6 – Tegucigalpa
+#DH7 – San Miguel
+#Panamá
+#Tags principales y formaciones:
+#PNM – Panamá
+#UPN – Unión de Panamá
+#VGA – Gran Panamá
+#TLE – República de Tule
+#
+#
+#Provincias:
+#PP1 – Bocas del Toro
+#PP2 – Veraguas
+#PP3 – Darién
+#PP4 – Chiriquí
+#PP5 – Azuero
+#PP6 – Soto
+#PP7 – Colón
+#PP8 – Panamá
+#
+#
+#Centroamérica (Uniones)
+#UCA – Federación de Centroamericana
+#CR1 – Unión de Centroamérica
+#GCA – Gran República de Centroamérica
+#CCA – Confederación Centroamericana
+#
+#
+#
+#Caribe
+#CRB – Caribe
+#UCB – Caribe Unido
+#ACF – Confederación Antillana
+#JAM – Jamaica
+#BAH – Bahamas
+#PCO – Puerto Rico
+#SRM – Surinam
+#GYA – Guyana
+#GIA – Guayana
+#TNT – Trinidad y Tobago
+#GDA – Granada
+#SVT – San Vicente
+#SLC – Santa Lucía
+#BBS – Barbados
+#MTQ – Martinica
+#DMC – Dominica
+#GDL – Guadalupe
+#MTS – Montserrat
+#AGB – Antigua y Barbuda
+#SKN – San Cristóbal y Nieves
+#SMN – San Martín
+#SBY – San Bartolomé
+#VGI – Islas Vírgenes
+#
+#
+#México / Frontera
+#CIP – Chiapas
+#MAY – Reino Maya
+#YUC – Yucatán
+#SNR – Sonora
+#BAJ – Baja California
+#
+#
+#Nativos Centroamericanos
+#NC1 – Ngäbe
+#NC2 – Emberá
+#NC3 – Guna Kuna
+#NC4 – Lenca
+#NC5 – Mangue / Chorotega
+#NC6 – Garífuna
+#Costa Rica
+#scope_COS
+#scope_PC1
+#scope_PC2
+#scope_PC3
+#scope_PC4
+#scope_PC5
+#scope_PC6
+#scope_PC7
+#scope_PC8
+#scope_RDT
+#scope_CCR
+#Guatemala
+#scope_GUA
+#scope_ALT
+#scope_GGA
+#scope_DG1
+#scope_DG2
+#scope_DG3
+#scope_DG4
+#scope_DG5
+#scope_DG6
+#Nicaragua
+#scope_NIC
+#scope_RNI
+#scope_PN1
+#scope_PN2
+#scope_PN3
+#scope_PN4
+#scope_PN5
+#scope_PN6
+#El Salvador
+#scope_ELS
+#scope_UEL
+#scope_DE1
+#scope_DE2
+#scope_DE3
+#Honduras
+#scope_HON
+#scope_GIG
+#scope_UHO
+#scope_DH1
+#scope_DH2
+#scope_DH3
+#scope_DH4
+#scope_DH5
+#scope_DH6
+#scope_DH7
+#Panamá
+#scope_PNM
+#scope_TLE
+#scope_UPN
+#scope_VGA
+#scope_PP1
+#scope_PP2
+#scope_PP3
+#scope_PP4
+#scope_PP5
+#scope_PP6
+#scope_PP7
+#scope_PP8
+#Centroamérica / Regional
+#scope_UCA
+#scope_CR1
+#scope_GCA
+#scope_CCA
+#scope_CIP
+#Caribe
+#scope_CRB
+#scope_UCB
+#scope_ACF
+#scope_JAM
+#scope_BAH
+#scope_PCO
+#scope_TNT
+#scope_GDA
+#scope_SVT
+#scope_SLC
+#scope_BBS
+#scope_MTQ
+#scope_DMC
+#scope_GDL
+#scope_MTS
+#scope_AGB
+#scope_SKN
+#scope_SMN
+#scope_SBY
+#scope_VGI
+#Guayanas
+#scope_SRM
+#scope_GYA
+#scope_GIA
+#México / Región Maya
+#scope_MAY
+#scope_YUC
+#scope_SNR
+#scope_BAJ
+#Nativos / Descentralizados
+#scope_NC1
+#scope_NC2
+#scope_NC3
+#scope_NC4
+#scope_NC5
+#scope_NC6
+#variables
+#ca_armed_forces_on
+#ca_autocracy
+#ca_autocracy2
+#ca_bocas_de_toro_country
+#ca_carrilo_decret
+#ca_comunes_on
+#ca_corporate_state
+#ca_corporate_state_authoritarian
+#ca_corporate_state_democratic
+#ca_devout_on
+#ca_industrialists_on
+#ca_intelligentsia_on
+#ca_junta
+#ca_junta_council
+#ca_landowners_on
+#ca_oligarchy
+#ca_oligarchy2
+#ca_petty_bourgeoisie_on
+#ca_rural_folk_on
+#ca_self_determination
+#ca_single_party_state
+#ca_single_party_state2
+#ca_syndicalist_in_gov
+#ca_technocracy
+#ca_technocracy_authoritarian
+#ca_technocracy_capitalist:
+#ca_technocracy_democratic
+#ca_technocracy_socialist
+#ca_trade_unions_on
+#censorship_liked_ALT
+#costa_rica_alt_republic
+#costarica_independence_event_var
+#created_DG6
+#creation_pp1_gbr
+#death_of_francia_var2
+#els_civil_peace_var
+#els_support_var
+#gua_civil_peace_var
+#gua_support_var
+#cos_civil_peace_var
+#cos_support_var
+#alt_civil_peace_var
+#alt_support_var
+#nic_civil_peace_var
+#nic_support_var
+#hon_civil_peace_var
+#hon_support_var
+#pnm_civil_peace_var
+#pnm_support_var
+#federalists_vs_separatists_complete_var
+#federalists_vs_separatists_var
+#fragile_unity_var
+#frca_preserved
+#frca_support
+#historic_central_american
+#hon_civil_peace_var
+#hon_support_var
+#ignore_ALT
+#intervene_pp1
+#is_frca_var
+#je_alt_support_var
+#je_central_america_setup_alt_var
+#je_central_america_setup_cos_var
+#je_central_america_setup_els_var
+#je_central_america_setup_gua_var
+#je_central_america_setup_hon_var
+#je_cos_support_var
+#je_els_support_var
+#je_gua_support_var
+#je_hon_support_var
+#je_nic_support_var
+#more_liked_ALT
+#nic_civil_peace_var
+#nicaragua_independence_event_var
+#only_valid_party
+#proclaim_pp1_uca
+#recognized_costa_rican_independence
+#recognized_el_salvador_independence
+#recognized_guatemalan_independence
+#recognized_honduran_independence
+#recognized_nicaraguan_independence
+#rejects_ALT
+#rejects_pp1_clm
+#rejects_pp1_gbr
+#voting_ca_self_determination
+#costa_rican panamanian nicaraguan guatemalan el_salvadorian honduran
+#ca_central_america.1: A local newspaper proposed the formation of a state...
+#ca_central_america.2: Voting of creation for Los altos (Votación en el Congreso Federal)
+#ca_central_america.3: Establishment of Los Altos 5 de junio de 1838
+#ca_central_america.4: The vote on the creation of the new state was missed
+#ca_central_america.5: The Fate of Soconusco
+#ca_central_america.6: English influence in the Caribbean
+#ca_central_america.7: Costa Rica / UCA Abandon ambitions in Bocas del Toro GBR Version
+#ca_central_america.8: Costa Rica / UCA Abandon ambitions in Bocas del Toro CLN Version
+#ca_central_america.9: Costa Rica / UCA CLN military intervention
+#ca_central_america.10: In Bocas de Toro on the creation of the independence new state
+#ca_central_america.11: The Fate of Bocas de Toro
+#ca_central_america.12: New Granada usurpation of Boca de Toro
+#ca_central_america.13: Dissolution of Central America (El evento masivo de fragmentación que crea GUA, HON, NIC, COS, ELS, ALT y CIP).
+#ca_central_america.14: The Livingston Penal Code
+#ca_central_america.15: Cholera Outbreak in Guatemala
+#ca_central_america.16: Generic Cholera Outbreak in Central America
+#ca_central_america.17: Cholera Outbreak Spreads
+#ca_central_america.18: Separatism in Costa Rica
+#ca_central_america.19: Separatism in Nicaragua
+#ca_central_america.20: Separatism in Guatemala
+#ca_central_america.21: Separatism in Honduras
+#ca_central_america.22: Separatism in El Salvador
+#ca_central_america.23: Separatism in Los Altos
+#ca_central_america.24: Opposition to secession
+#ca_central_america.25: Acceptance of secession
+#ca_central_america.26: Nicaragua declares independence on Arms
+#ca_central_america.27: Nicaragua declares independence Peaceful
+#ca_central_america.28: Nicaragua apply intervention
+#ca_central_america.29: Costa Rica apply intervention
+#ca_central_america.30: Honduras apply intervention
+#ca_central_america.31: El Salvador apply intervention
+#ca_central_america.32: Guatemala apply intervention
+#ca_central_america.33: Los Altos apply intervention
+#ca_central_america.34: Panama apply intervention
+#ca_central_america.35: UCA Accept the intervention in Costa Rica
+#ca_central_america.36: UCA Accept the intervention in Honduras
+#ca_central_america.37: UCA Accept the intervention in Nicaragua
+#ca_central_america.38: UCA Accept the intervention in El Salvador
+#ca_central_america.39: UCA Accept the intervention in Guatemala
+#ca_central_america.40: UCA Accept the intervention in Los Altos
+#ca_central_america.41: UCA Do not accept the intervention
+#ca_central_america.42: Historic Second Central American Civil War/ End of the Union?
+#ca_central_america.43: Defeat in the Second Civil War
+#ca_central_america.44: Victory in the Second Civil War
+#ca_central_america.45: Costa Rica declares independence 15 November de 1838
+#ca_central_america.46: Nicaragua declares independence 30 de abril de 1838
+#ca_central_america.47: Guatemala declares independence 17 de abril de 1839
+#ca_central_america.48: Honduras declares independence 5 de noviembre de 1839
+#ca_central_america.49: Honduras declares independence Peaceful
+#ca_central_america.50: El Salvador Beats to secessionists
+#ca_central_america.51: El Salvador falls to secessionists
+#ca_central_america.52: El Salvador declares independence Peaceful
+#ca_central_america.53: Guatemala Beats to secessionists
+#ca_central_america.54: Guatemala falls to secessionists
+#ca_central_america.55: Guatemala declares independence Peaceful
+#ca_central_america.56: Los Altos Beats to secessionists
+#ca_central_america.57: Los Altos falls to secessionists
+#ca_central_america.58: Los Altos declares independence Peaceful
+#ca_central_america.59: Panama Beats to secessionists
+#ca_central_america.60: Panama falls to secessionists
+#ca_central_america.61: Panama declares independence Peaceful
+#ca_central_america.62: UCA's Panama declares independence Peaceful
+#ca_central_america.63: Civil war in Nicaragua
+#ca_central_america.64: Nicaragua declares independence on Arms
+#ca_central_america.65: Civil war in Costa Rica
+#ca_central_america.66: Costa Rica declares independence on Arms
+#ca_central_america.67: Civil war in Honduras
+#ca_central_america.68: Honduras declares independence on Arms
+#ca_central_america.69: Civil war in Guatemala
+#ca_central_america.70: Guatemala declares independence on Arms
+#ca_central_america.71: Civil war in El Salvador
+#ca_central_america.72: El Salvador declares independence on Arms
+#ca_central_america.73: Civil war in Los Altos
+#ca_central_america.74: Los Altos declares independence on Arms
+#ca_central_america.75: Civil war in Panama
+#ca_central_america.76: Panama declares independence on Arms
+#ca_central_america.78: Los Altos declares independence 31 de mayo de 1839
+#ca_central_america.79: Federal Congress authorizes states to reorganize themselves (May 30, 1838
 ca_central_america.1 = { 
     type = country_event
     placement = scope:guatemala_state # Ahora apunta al scope correcto    
@@ -51,13 +584,13 @@ ca_central_america.1 = {
         
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support add = 2 }
+            custom_tooltip = { text = frca_support_1a set_bar_progress = { value = 2 name = frca_support_bar } }
         }
         
        
         scope:guatemala_state = {
-							   
-													 
+                                
+                                                     
             add_loyalists = {
                 value = 0.1
                 culture = cu:central_american
@@ -99,13 +632,13 @@ ca_central_america.1 = {
         
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support subtract = 5 }
+            custom_tooltip = { text = frca_support_1c set_bar_progress = { value = -5 name = frca_support_bar } }
         }
         
         
         scope:guatemala_state = {
-							   
-													 
+                                
+                                                     
             add_radicals = {
                 value = 0.15
                 culture = cu:central_american
@@ -157,10 +690,8 @@ ca_central_america.2 = {
         name = ca_central_america.2.a 
         default_option = yes
         
-        change_variable = { 
-            name = frca_support 
-            subtract = 10 
-        }
+        custom_tooltip = { text = frca_support_2a set_bar_progress = { value = -10 name = frca_support_bar } }
+
         set_variable = { name = los_altos_autonomy_approved_and_granted value = 1 }
         
         
@@ -178,7 +709,8 @@ ca_central_america.2 = {
         name = ca_central_america.2.b 
         
         set_variable = rejects_ALT
-        change_variable = { name = frca_support add = 10 }
+        
+        custom_tooltip = { text = frca_support_2b set_bar_progress = { value = 10 name = frca_support_bar } }
         
         
         scope:guatemala_state = {
@@ -353,7 +885,7 @@ ca_central_america.4 = {
         add_modifier = { name = ca_humiliated_federation_modifier months = 12 }
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support subtract = 15 }
+            custom_tooltip = { text = frca_support_4a set_bar_progress = { value = -15 name = frca_support_bar } }
         }
         
         ai_chance = { base = 50 }
@@ -369,14 +901,14 @@ ca_central_america.4 = {
         add_claim = s:STATE_GUATEMALA # UCA reclama el estado evaluado previamente
     }
     }
-		
-											   
-		 
+        
+                                                       
+         
         
         
         scope:rebellion_state = {
-							   
-													 
+                                
+                                                     
             add_radicals = {
                 value = 0.25
                 culture = cu:central_american
@@ -442,7 +974,7 @@ ca_central_america.5 = {
                 
                 # Le damos un gobierno inicial lógico (Hacendados e Iglesia)
                 set_ruling_interest_groups = { ig_landowners ig_devout }
-				save_scope_as = scope_DG6
+                save_scope_as = scope_DG6
             }
         }
     }
@@ -459,10 +991,9 @@ ca_central_america.5 = {
             type = ca_dependency
         }
         
-        custom_tooltip = frca_support_soconusco
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support add = 10 }
+            custom_tooltip = { text = frca_support_5a set_bar_progress = { value = 10 name = frca_support_bar } }
         }
         
         ai_chance = { base = 40 }
@@ -478,10 +1009,9 @@ ca_central_america.5 = {
             type = ca_dependency
         }
         
-        custom_tooltip = frca_support_soconusco
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support add = 10 }
+            custom_tooltip = { text = frca_support_5b set_bar_progress = { value = 10 name = frca_support_bar } }
         }
         
         play_as = c:DG6
@@ -496,10 +1026,9 @@ ca_central_america.5 = {
         c:GUA = { annex = scope:scope_DG6 } 
         
         set_variable = guatemala_integrate_soconusco 
-        custom_tooltip = frca_support_guatemala_integrate_soconusco 
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support subtract = 10 }
+            custom_tooltip = { text = frca_support_5c set_bar_progress = { value = -10 name = frca_support_bar } }
         }
         
         ai_chance = { base = 30 }
@@ -515,10 +1044,9 @@ ca_central_america.5 = {
         set_variable = quetzaltenango_integrate_soconusco
         set_variable = created_DG6
         
-        custom_tooltip = frca_support_quetzaltenango_integrate_soconusco
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support subtract = 10 }
+            custom_tooltip = { text = frca_support_5d set_bar_progress = { value = -10 name = frca_support_bar } }
         }
         
         ai_chance = { base = 30 }
@@ -758,7 +1286,7 @@ ca_central_america.7 = {
             c:MKT = {
                 OR = {
                     is_subject_of = root
-                    has_diplomatic_pact = { type = alliance }
+                    has_diplomatic_pact = { who = ROOT type = alliance }
                 }
             }
         }
@@ -783,7 +1311,7 @@ ca_central_america.7 = {
         set_variable = rejects_pp1_gbr
         
         create_incident = { country = ROOT value = 3 }
-					  
+                      
         
         
         scope:bocas_state = {
@@ -904,8 +1432,8 @@ ca_central_america.8 = {
         
         
         scope:bocas_state = {
-							   
-													 
+                                
+                                                     
             add_radicals = {
                 value = 0.10
                 culture = cu:central_american
@@ -1052,10 +1580,9 @@ ca_central_america.10 = {
             }
         }
         
-        
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support add = 5 }
+            custom_tooltip = { text = frca_support_10a set_bar_progress = { value = 5 name = frca_support_bar } }
         }
         
         ai_chance = { base = 50 }
@@ -1067,13 +1594,13 @@ ca_central_america.10 = {
         
         
         scope:secession_capital_region = { add_claim = ROOT }
-							
-		 
+                            
+         
         
         
         scope:bocas_state = {
-							   
-													 
+                                
+                                                     
             add_radicals = {
                 value = 0.20
                 culture = cu:central_american
@@ -1093,7 +1620,7 @@ ca_central_america.10 = {
         
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support subtract = 5 }
+            custom_tooltip = { text = frca_support_10b set_bar_progress = { value = -5 name = frca_support_bar } }
         }
         
         ai_chance = { base = 50 }
@@ -1130,13 +1657,13 @@ ca_central_america.11 = {
         
         s:STATE_PANAMA = {
             state_region = {
-			
+            
                 if = {
                     limit = { exists = c:COS }
                     add_claim = c:COS
                 }
-			
-			
+            
+            
                 if = {
                     limit = {
                         exists = c:UCA
@@ -1144,8 +1671,8 @@ ca_central_america.11 = {
                     }
                     add_claim = c:UCA
                 }
-			
-			
+            
+            
                 if = {
                     limit = { 
                         exists = c:CLM
@@ -1153,8 +1680,8 @@ ca_central_america.11 = {
                     }
                     add_claim = c:CLM
                 }
-			
-			
+            
+            
                 if = {
                     limit = { 
                         exists = c:GBR
@@ -1162,15 +1689,15 @@ ca_central_america.11 = {
                     }
                     add_claim = c:GBR
                 }   
-			
-			
-				   
-						   
-								   
-																		  
+            
+            
+                    
+                            
+                                   
+                                                                             
             }
-								  
-					  
+                                  
+                      
         }
     }
     
@@ -1270,10 +1797,9 @@ ca_central_america.12 = {
                 value = 20 
             }
             
-            
             if = {
                 limit = { this = c:UCA has_variable = frca_support }
-                change_variable = { name = frca_support subtract = 15 }
+                custom_tooltip = { text = frca_support_12a set_bar_progress = { value = -15 name = frca_support_bar } }
             }
         }
         
@@ -1297,7 +1823,7 @@ ca_central_america.12 = {
            
             if = {
                 limit = { this = c:UCA has_variable = frca_support }
-                change_variable = { name = frca_support add = 10 }
+                custom_tooltip = { text = frca_support_12b set_bar_progress = { value = 10 name = frca_support_bar } }
             }
         }
         
@@ -1377,6 +1903,7 @@ ca_central_america.13 = {
                     save_scope_as = scope_GUA
                     add_primary_culture = cu:guatemalan
                     remove_primary_culture = cu:central_american
+                    ca_liberate_guatemala_effect = yes
                 }
             }
         }
@@ -1401,6 +1928,7 @@ ca_central_america.13 = {
                     save_scope_as = scope_GUA
                     add_primary_culture = cu:guatemalan
                     remove_primary_culture = cu:central_american
+                    ca_liberate_guatemala_effect = yes
                 }
             }
             # Traspaso oficial de Soconusco a GUA
@@ -1434,6 +1962,7 @@ ca_central_america.13 = {
                 on_created = {
                     set_variable = { name = ca_secession_country }
                     save_scope_as = scope_ALT
+                    ca_liberate_losaltos_effect = yes
                 }
             }
         }
@@ -1455,6 +1984,7 @@ ca_central_america.13 = {
                 on_created = {
                     set_variable = { name = ca_secession_country }
                     save_scope_as = scope_ALT
+                    ca_liberate_losaltos_effect = yes
                 }
             }
         }
@@ -1478,6 +2008,7 @@ ca_central_america.13 = {
                     set_variable = { name = ca_secession_country }
                     add_primary_culture = cu:honduran
                     remove_primary_culture = cu:central_american
+                    ca_liberate_honduras_effect = yes
                 }
             }
         }
@@ -1501,6 +2032,7 @@ ca_central_america.13 = {
                     set_variable = { name = ca_secession_country }
                     add_primary_culture = cu:costa_rican
                     remove_primary_culture = cu:central_american
+                    ca_liberate_costarica_effect = yes
                 }
             }
         }
@@ -1524,6 +2056,7 @@ ca_central_america.13 = {
                     set_variable = { name = ca_secession_country }
                     add_primary_culture = cu:el_salvadorian
                     remove_primary_culture = cu:central_american
+                    ca_liberate_elsalvador_effect = yes
                 }
             }
         }
@@ -1547,6 +2080,7 @@ ca_central_america.13 = {
                     set_variable = { name = ca_secession_country }
                     add_primary_culture = cu:nicaraguan
                     remove_primary_culture = cu:central_american
+                    ca_liberate_nicaragua_effect = yes
                 }
             }
         }
@@ -1612,22 +2146,22 @@ ca_central_america.13 = {
 
         
         capital = {
-							   
-													 
+                                
+                                                     
             add_loyalists = {
                 value = 0.5
                 culture = cu:central_american
             }
         }
-        
+        ca_remove_ideological_strongholds_effect = yes
         
         every_country = {
             limit = { has_variable = ca_secession_country }
             change_relations = { country = ROOT value = 20 }
             capital = {
                 add_devastation = 15 
-								   
-														 
+                                   
+                                                         
                 add_loyalists = {
                     value = 0.5
                     culture = cu:central_american
@@ -1644,11 +2178,11 @@ ca_central_america.13 = {
         add_journal_entry = { type = je_reunify_central_america }
         
         
-        if = { limit = { scope:capital_region_scope = s:STATE_NICARAGUA } change_tag= c:NIC }
-        if = { limit = { scope:capital_region_scope = s:STATE_SAN_SALVADOR } change_tag= c:ELS }
-        if = { limit = { scope:capital_region_scope = s:STATE_COSTA_RICA } change_tag= c:COS }
-        if = { limit = { scope:capital_region_scope = s:STATE_HONDURAS } change_tag= c:HON }
-        if = { limit = { scope:capital_region_scope = s:STATE_GUATEMALA } change_tag= c:GUA }
+        if = { limit = { scope:capital_region_scope = s:STATE_NICARAGUA } change_tag= NIC }
+        if = { limit = { scope:capital_region_scope = s:STATE_SAN_SALVADOR } change_tag= ELS }
+        if = { limit = { scope:capital_region_scope = s:STATE_COSTA_RICA } change_tag= COS }
+        if = { limit = { scope:capital_region_scope = s:STATE_HONDURAS } change_tag= HON }
+        if = { limit = { scope:capital_region_scope = s:STATE_GUATEMALA } change_tag= GUA }
         
         # Odio, guerra y reclamos sobre los separatistas
             every_country = {
@@ -1662,7 +2196,6 @@ ca_central_america.13 = {
             }
     }
 }
-
 ## The Livingston Penal Code
 ca_central_america.14 = {
     type = country_event
@@ -2026,13 +2559,14 @@ ca_central_america.18 = {
         name = ca_central_america.18.a
         default_option = yes
         
+        # Efecto genérico original mantenido si no modifica variables
         ca_reduce_support_separatism_effect = yes
 
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
             capital = {
                 add_devastation = 15
-                add_loyalists = { value = 0.25 }
+                add_loyalists_in_state = { value = 0.25 }
             }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
@@ -2041,6 +2575,7 @@ ca_central_america.18 = {
     option = {
         name = ca_central_america.18.b
         
+        # Efecto genérico original mantenido si no modifica variables
         ca_reduce_support_separatism_effect = yes
 
         scope:secession_capital = {
@@ -2048,13 +2583,13 @@ ca_central_america.18 = {
                 add_claim = ROOT
             }
         }
-									  
+                                              
    
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
             capital = {
                 add_devastation = 25
-                add_loyalists = { value = 0.5 }
+                add_loyalists_in_state = { value = 0.5 }
             }
         }
         trigger_event = { id = ca_central_america.66 months = 1 }
@@ -2197,7 +2732,7 @@ ca_central_america.19 = {
             change_relations = { country = ROOT value = 20 }
             capital = {
                 add_devastation = 15
-                add_loyalists = { value = 0.25 }
+                add_loyalists_in_state = { value = 0.25 }
             }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
@@ -2218,7 +2753,7 @@ ca_central_america.19 = {
             change_relations = { country = ROOT value = -50 }
             capital = {
                 add_devastation = 25
-                add_loyalists = { value = 0.5 }
+                add_loyalists_in_state = { value = 0.5 }
             }
         }
     }
@@ -2288,7 +2823,7 @@ ca_central_america.20 = {
                     
                     create_character = {
                         first_name = "José"
-                        last_name = "Núñez" # Posible conflicto histórico detectado (Mismo nombre que NIC). Auditoría sugerida por el usuario de mod.
+                        last_name = "Núñez" 
                         historical = yes
                         ig_leader = yes
                         interest_group = ig_landowners
@@ -2322,7 +2857,7 @@ ca_central_america.20 = {
                     activate_law = law_type:law_freedom_of_conscience
                     activate_law = law_type:law_mercantilism
                     activate_law = law_type:law_wealth_voting
-                    activate_law = law_type:law_censorship    
+                    activate_law = law_type:law_censorship  
                     
                     if = {
                         limit = { ROOT = { has_variable = random_central_american } }
@@ -2355,7 +2890,7 @@ ca_central_america.20 = {
             change_relations = { country = ROOT value = 20 }
             capital = {
                 add_devastation = 15
-                add_loyalists = { value = 0.25 }
+                add_loyalists_in_state = { value = 0.25 }
             }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
@@ -2370,13 +2905,13 @@ ca_central_america.20 = {
             state_region = {
                 add_claim = ROOT
             }
-        }	 
+        }     
    
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
             capital = {
                 add_devastation = 25
-                add_loyalists = { value = 0.5 }
+                add_loyalists_in_state = { value = 0.5 }
             }
         }
     }
@@ -2512,7 +3047,7 @@ ca_central_america.21 = {
             change_relations = { country = ROOT value = 20 }
             capital = {
                 add_devastation = 15
-                add_loyalists = { value = 0.25 }
+                add_loyalists_in_state = { value = 0.25 }
             }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
@@ -2527,14 +3062,14 @@ ca_central_america.21 = {
             state_region = {
                 add_claim = ROOT
             }
-        }	 
-									  
+        }     
+                                              
    
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
             capital = {
                 add_devastation = 25
-                add_loyalists = { value = 0.5 }
+                add_loyalists_in_state = { value = 0.5 }
             }
         }
     }
@@ -2669,7 +3204,7 @@ ca_central_america.22 = {
             change_relations = { country = ROOT value = 20 }
             capital = {
                 add_devastation = 15
-                add_loyalists = { value = 0.25 }
+                add_loyalists_in_state = { value = 0.25 }
             }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
@@ -2684,14 +3219,14 @@ ca_central_america.22 = {
             state_region = {
                 add_claim = ROOT
             }
-        }		 
-									  
+        }         
+                                              
    
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
             capital = {
                 add_devastation = 25
-                add_loyalists = { value = 0.5 }
+                add_loyalists_in_state = { value = 0.5 }
             }
         }
     }
@@ -2759,7 +3294,7 @@ ca_central_america.23 = {
                     
                     create_character = {
                         first_name = "Juan"
-                        last_name = "Lindo" # Mismo caso detectado: Juan Lindo es asignado a ELS y ALT.
+                        last_name = "Lindo" 
                         historical = yes
                         ruler = yes
                         ig_leader = yes
@@ -2824,7 +3359,7 @@ ca_central_america.23 = {
             change_relations = { country = ROOT value = 20 }
             capital = {
                 add_devastation = 15
-                add_loyalists = { value = 0.25 }
+                add_loyalists_in_state = { value = 0.25 }
             }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
@@ -2840,13 +3375,13 @@ ca_central_america.23 = {
                 add_claim = ROOT
             }
         }
-									  
+                                              
    
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
             capital = {
                 add_devastation = 25
-                add_loyalists = { value = 0.5 }
+                add_loyalists_in_state = { value = 0.5 }
             }
         }
     }
@@ -2945,7 +3480,7 @@ ca_central_america.26 = {
             change_relations = { country = ROOT value = 20 }
             capital = {
                 state_region = { add_devastation = 15 }
-                add_loyalists = { value = 0.25 }
+                add_loyalists_in_state = { value = 0.25 }
             }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
@@ -2963,7 +3498,7 @@ ca_central_america.26 = {
             change_relations = { country = ROOT value = -50 }
             capital = {
                 state_region = { add_devastation = 25 }
-                add_loyalists = { value = 0.5 }
+                add_loyalists_in_state = { value = 0.5 }
             }
         }
         ai_chance = { base = 0 }
@@ -2997,7 +3532,7 @@ ca_central_america.27 = {
             change_relations = { country = ROOT value = 20 }
             capital = {
                 state_region = { add_devastation = 15 }
-                add_loyalists = { value = 0.25 }
+                add_loyalists_in_state = { value = 0.25 }
             }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
@@ -3009,7 +3544,7 @@ ca_central_america.27 = {
             change_relations = { country = ROOT value = -50 }
             capital = {
                 state_region = { add_devastation = 25 }
-                add_loyalists = { value = 0.5 }
+                add_loyalists_in_state = { value = 0.5 }
             }
         }
     }
@@ -3223,7 +3758,6 @@ ca_central_america.34 = {
         if = { limit = { exists = c:UCA } c:UCA = { ca_reduce_support_intervention_fail_effect = yes } }
     }
 }
-
 ## UCA Accept the intervention in Costa Rica
 ca_central_america.35 = {
     type = country_event
@@ -3241,7 +3775,11 @@ ca_central_america.35 = {
         default_option = yes
         
         set_variable = { name = cos_support_var }
-        ca_increase_support_intervention_success_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_35a set_bar_progress = { value = 15 name = frca_support_bar } }
+        }
         
         ai_chance = { base = 100 }
     }
@@ -3264,7 +3802,11 @@ ca_central_america.36 = {
         default_option = yes
         
         set_variable = { name = hon_support_var }
-        ca_increase_support_intervention_success_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_36a set_bar_progress = { value = 15 name = frca_support_bar } }
+        }
         
         ai_chance = { base = 100 }
     }
@@ -3287,7 +3829,11 @@ ca_central_america.37 = {
         default_option = yes
         
         set_variable = { name = nic_support_var }
-        ca_increase_support_intervention_success_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_37a set_bar_progress = { value = 15 name = frca_support_bar } }
+        }
         
         ai_chance = { base = 100 }
     }
@@ -3310,7 +3856,11 @@ ca_central_america.38 = {
         default_option = yes
         
         set_variable = { name = els_support_var }
-        ca_increase_support_intervention_success_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_38a set_bar_progress = { value = 15 name = frca_support_bar } }
+        }
         
         ai_chance = { base = 100 }
     }
@@ -3333,7 +3883,11 @@ ca_central_america.39 = {
         default_option = yes
         
         set_variable = { name = gua_support_var }
-        ca_increase_support_intervention_success_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_39a set_bar_progress = { value = 15 name = frca_support_bar } }
+        }
         
         ai_chance = { base = 100 }
     }
@@ -3356,7 +3910,11 @@ ca_central_america.40 = {
         default_option = yes
         
         set_variable = { name = alt_support_var }
-        ca_increase_support_intervention_success_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_40a set_bar_progress = { value = 15 name = frca_support_bar } }
+        }
         
         ai_chance = { base = 100 }
     }
@@ -3378,7 +3936,10 @@ ca_central_america.41 = {
         name = ca_central_america.41.a
         default_option = yes
         
-        ca_reduce_support_intervention_fail_effect = yes
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_41a set_bar_progress = { value = -15 name = frca_support_bar } }
+        }
         
         ai_chance = { base = 100 }
     }
@@ -3395,14 +3956,13 @@ ca_central_america.42 = {
     event_image = { video = "europenorthamerica_before_the_battle" }
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     icon = "gfx/interface/icons/event_icons/event_fire.dds"
-   
-
-
-
-trigger = {
+    trigger = {
         this = c:UCA
-frca_support <= 10
-        Or = {
+        
+        has_variable = frca_support
+        var:frca_support <= 10
+        
+        OR = {
             exists = c:GUA
             exists = c:HON
             exists = c:NIC
@@ -3471,7 +4031,7 @@ frca_support <= 10
                 ig_leader = yes
                 birth_date = 1790.5.5
                 interest_group = ig_landowners
-                ideology = ideology_reformer
+                ideology = ideology:ideology_reformer
                 traits = { meticulous }
             }
         }
@@ -3548,7 +4108,7 @@ ca_central_america.43 = {
                 ig_leader = yes
                 birth_date = 1790.5.5
                 interest_group = ig_landowners
-                ideology = ideology_reformer
+                ideology = ideology:ideology_reformer
                 traits = { meticulous }
             }
         }
@@ -3634,7 +4194,11 @@ ca_central_america.45 = {
         default_option = yes
         
         set_variable = { name = recognized_in_cos }
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_45a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
 
         if = {
             limit = { exists = scope:secession_country }
@@ -3642,7 +4206,7 @@ ca_central_america.45 = {
                 change_relations = { country = ROOT value = 20 }
                 capital = {
                     add_devastation = 15
-                    add_loyalists = { value = 0.25 }
+                    add_loyalists_in_state = { value = 0.25 }
                 }
             }
         }
@@ -3654,7 +4218,11 @@ ca_central_america.45 = {
         name = ca_central_america.45.b
         
         set_variable = { name = restore_order_in_cos }
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_45b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
 
         if = {
             limit = { exists = scope:secession_country }
@@ -3662,7 +4230,7 @@ ca_central_america.45 = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
                     add_devastation = 25
-                    add_loyalists = { value = 0.5 }
+                    add_loyalists_in_state = { value = 0.5 }
                 }
             }
         }
@@ -3715,7 +4283,11 @@ ca_central_america.46 = {
         default_option = yes
         
         set_variable = { name = recognized_in_nic }
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_46a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
 
         if = {
             limit = { exists = scope:secession_country }
@@ -3723,7 +4295,7 @@ ca_central_america.46 = {
                 change_relations = { country = ROOT value = 20 }
                 capital = {
                     add_devastation = 15
-                    add_loyalists = { value = 0.25 }
+                    add_loyalists_in_state = { value = 0.25 }
                 }
             }
         }
@@ -3735,7 +4307,11 @@ ca_central_america.46 = {
         name = ca_central_america.46.b
         
         set_variable = { name = restore_order_in_nic }
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_46b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
 
         if = {
             limit = { exists = scope:secession_country }
@@ -3748,7 +4324,7 @@ ca_central_america.46 = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
                     add_devastation = 25
-                    add_loyalists = { value = 0.5 }
+                    add_loyalists_in_state = { value = 0.5 }
                 }
             }
         }
@@ -3801,7 +4377,11 @@ ca_central_america.47 = {
         default_option = yes
         
         set_variable = { name = recognized_in_gua }
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_47a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
 
         if = {
             limit = { exists = scope:secession_country }
@@ -3809,7 +4389,7 @@ ca_central_america.47 = {
                 change_relations = { country = ROOT value = 20 }
                 capital = {
                     add_devastation = 15
-                    add_loyalists = { value = 0.25 }
+                    add_loyalists_in_state = { value = 0.25 }
                 }
             }
         }
@@ -3821,7 +4401,11 @@ ca_central_america.47 = {
         name = ca_central_america.47.b
         
         set_variable = { name = restore_order_in_gua }
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_47b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
 
         if = {
             limit = { exists = scope:secession_country }
@@ -3835,7 +4419,7 @@ ca_central_america.47 = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
                     add_devastation = 25
-                    add_loyalists = { value = 0.5 }
+                    add_loyalists_in_state = { value = 0.5 }
                 }
             }
         }
@@ -3888,7 +4472,11 @@ ca_central_america.48 = {
         default_option = yes
         
         set_variable = { name = recognized_in_hon }
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_48a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
 
         if = {
             limit = { exists = scope:secession_country }
@@ -3896,7 +4484,7 @@ ca_central_america.48 = {
                 change_relations = { country = ROOT value = 20 }
                 capital = {
                     add_devastation = 15
-                    add_loyalists = { value = 0.25 }
+                    add_loyalists_in_state = { value = 0.25 }
                 }
             }
         }
@@ -3908,7 +4496,11 @@ ca_central_america.48 = {
         name = ca_central_america.48.b
         
         set_variable = { name = restore_order_in_hon }
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_48b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
 
         if = {
             limit = { exists = scope:secession_country }
@@ -3916,12 +4508,12 @@ ca_central_america.48 = {
                 state_region = {
                     add_claim = ROOT
                 }
-            }		 
+            }         
             scope:secession_country = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
                     add_devastation = 25
-                    add_loyalists = { value = 0.5 }
+                    add_loyalists_in_state = { value = 0.5 }
                 }
             }
         }
@@ -4301,7 +4893,12 @@ ca_central_america.63 = {
         # Cross-scoping hacia el diario federal
         if = {
             limit = { exists = c:UCA }
-            c:UCA = { ca_reduce_support_civil_war_effect = yes }
+            c:UCA = { 
+                if = {
+                    limit = { has_variable = frca_support }
+                    custom_tooltip = { text = frca_support_63_civil_war set_bar_progress = { value = -30 name = frca_support_bar } }
+                }
+            }
         }
     }
     
@@ -4353,7 +4950,11 @@ ca_central_america.64 = {
     option = {
         name = ca_central_america.64.a
         default_option = yes
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_64a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -4361,7 +4962,7 @@ ca_central_america.64 = {
                 change_relations = { country = ROOT value = 20 }
                 capital = {
                     add_devastation = 15
-                    add_loyalists = { value = 0.25 }
+                    add_loyalists_in_state = { value = 0.25 }
                 }
             }
         }
@@ -4370,7 +4971,11 @@ ca_central_america.64 = {
     
     option = {
         name = ca_central_america.64.b
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_64b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -4379,8 +4984,8 @@ ca_central_america.64 = {
                     add_claim = ROOT
                 }
             }
-									   
-	
+                                                       
+    
             custom_tooltip = { text = invade_nicaragua_frca_tt }
             create_diplomatic_play = {
                 name = nicaraguan_intervention
@@ -4392,7 +4997,7 @@ ca_central_america.64 = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
                     add_devastation = 25
-                    add_loyalists = { value = 0.5 }
+                    add_loyalists_in_state = { value = 0.5 }
                 }
             }
         }
@@ -4427,15 +5032,15 @@ ca_central_america.65 = {
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_COSTA_RICA = { add_claim = root }
-        #s:STATE_COSTA_RICA = {
-        #    state_region = {
-        #        add_claim = root 
-        #    }
-        #}							
         
         if = {
             limit = { exists = c:UCA }
-            c:UCA = { ca_reduce_support_civil_war_effect = yes }
+            c:UCA = { 
+                if = {
+                    limit = { has_variable = frca_support }
+                    custom_tooltip = { text = frca_support_65_civil_war set_bar_progress = { value = -30 name = frca_support_bar } }
+                }
+            }
         }
     }
     
@@ -4485,7 +5090,11 @@ ca_central_america.66 = {
     option = {
         name = ca_central_america.66.a
         default_option = yes
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_66a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -4493,7 +5102,7 @@ ca_central_america.66 = {
                 change_relations = { country = ROOT value = 20 }
                 capital = {
                     add_devastation = 15
-                    add_loyalists = { value = 0.25 }
+                    add_loyalists_in_state = { value = 0.25 }
                 }
             }
         }
@@ -4502,7 +5111,11 @@ ca_central_america.66 = {
     
     option = {
         name = ca_central_america.66.b
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_66b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -4511,8 +5124,8 @@ ca_central_america.66 = {
                     add_claim = ROOT
                 }
             }
-									   
-	
+                                                       
+    
             custom_tooltip = { text = invade_costarica_frca_tt }
             create_diplomatic_play = {
                 name = costarican_intervention
@@ -4524,7 +5137,7 @@ ca_central_america.66 = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
                     add_devastation = 25
-                    add_loyalists = { value = 0.5 }
+                    add_loyalists_in_state = { value = 0.5 }
                 }
             }
         }
@@ -4559,15 +5172,15 @@ ca_central_america.67 = {
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_HONDURAS = { add_claim = root }
-        #s:STATE_HONDURAS = {
-        #    state_region = {
-        #        add_claim = root 
-        #    }
-        #}							
         
         if = {
             limit = { exists = c:UCA }
-            c:UCA = { ca_reduce_support_civil_war_effect = yes }
+            c:UCA = { 
+                if = {
+                    limit = { has_variable = frca_support }
+                    custom_tooltip = { text = frca_support_67_civil_war set_bar_progress = { value = -30 name = frca_support_bar } }
+                }
+            }
         }
     }
     
@@ -4618,7 +5231,11 @@ ca_central_america.68 = {
     option = {
         name = ca_central_america.68.a
         default_option = yes
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_68a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -4626,7 +5243,7 @@ ca_central_america.68 = {
                 change_relations = { country = ROOT value = 20 }
                 capital = {
                     add_devastation = 15
-                    add_loyalists = { value = 0.25 }
+                    add_loyalists_in_state = { value = 0.25 }
                 }
             }
         }
@@ -4635,7 +5252,11 @@ ca_central_america.68 = {
     
     option = {
         name = ca_central_america.68.b
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_68b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -4644,8 +5265,8 @@ ca_central_america.68 = {
                     add_claim = ROOT
                 }
             }
-									   
-	
+                                                       
+    
             custom_tooltip = { text = invade_honduras_frca_tt }
             create_diplomatic_play = {
                 name = honduran_intervention
@@ -4657,7 +5278,7 @@ ca_central_america.68 = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
                     add_devastation = 25
-                    add_loyalists = { value = 0.5 }
+                    add_loyalists_in_state = { value = 0.5 }
                 }
             }
         }
@@ -4692,15 +5313,15 @@ ca_central_america.69 = {
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_GUATEMALA = { add_claim = root }
-		#s:STATE_GUATEMALA = {
-        #    state_region = {
-        #        add_claim = root 
-        #    }
-        #}					
         
         if = {
             limit = { exists = c:UCA }
-            c:UCA = { ca_reduce_support_civil_war_effect = yes }
+            c:UCA = { 
+                if = {
+                    limit = { has_variable = frca_support }
+                    custom_tooltip = { text = frca_support_69_civil_war set_bar_progress = { value = -30 name = frca_support_bar } }
+                }
+            }
         }
     }
     
@@ -4751,7 +5372,11 @@ ca_central_america.70 = {
     option = {
         name = ca_central_america.70.a
         default_option = yes
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_70a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -4759,7 +5384,7 @@ ca_central_america.70 = {
                 change_relations = { country = ROOT value = 20 }
                 capital = {
                     add_devastation = 15
-                    add_loyalists = { value = 0.25 }
+                    add_loyalists_in_state = { value = 0.25 }
                 }
             }
         }
@@ -4768,7 +5393,11 @@ ca_central_america.70 = {
     
     option = {
         name = ca_central_america.70.b
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_70b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -4777,8 +5406,8 @@ ca_central_america.70 = {
                     add_claim = ROOT
                 }
             }
-									   
-	
+                                                       
+    
             custom_tooltip = { text = invade_guatemala_frca_tt }
             create_diplomatic_play = {
                 name = guatemalan_intervention
@@ -4790,7 +5419,7 @@ ca_central_america.70 = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
                     add_devastation = 25
-                    add_loyalists = { value = 0.5 }
+                    add_loyalists_in_state = { value = 0.5 }
                 }
             }
         }
@@ -4825,15 +5454,15 @@ ca_central_america.71 = {
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_SAN_SALVADOR = { add_claim = root }
-        #s:STATE_SAN_SALVADOR = {
-        #    state_region = {
-        #        add_claim = root 
-        #    }
-        #}							
         
         if = {
             limit = { exists = c:UCA }
-            c:UCA = { ca_reduce_support_civil_war_effect = yes }
+            c:UCA = { 
+                if = {
+                    limit = { has_variable = frca_support }
+                    custom_tooltip = { text = frca_support_71_civil_war set_bar_progress = { value = -30 name = frca_support_bar } }
+                }
+            }
         }
     }
     
@@ -4884,7 +5513,11 @@ ca_central_america.72 = {
     option = {
         name = ca_central_america.72.a
         default_option = yes
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_72a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -4892,7 +5525,7 @@ ca_central_america.72 = {
                 change_relations = { country = ROOT value = 20 }
                 capital = {
                     add_devastation = 15
-                    add_loyalists = { value = 0.25 }
+                    add_loyalists_in_state = { value = 0.25 }
                 }
             }
         }
@@ -4901,7 +5534,11 @@ ca_central_america.72 = {
     
     option = {
         name = ca_central_america.72.b
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_72b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -4910,8 +5547,8 @@ ca_central_america.72 = {
                     add_claim = ROOT
                 }
             }
-									   
-	
+                                                       
+    
             custom_tooltip = { text = invade_elsalvador_frca_tt }
             create_diplomatic_play = {
                 name = elsalvador_intervention
@@ -4923,7 +5560,7 @@ ca_central_america.72 = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
                     add_devastation = 25
-                    add_loyalists = { value = 0.5 }
+                    add_loyalists_in_state = { value = 0.5 }
                 }
             }
         }
@@ -4958,15 +5595,15 @@ ca_central_america.73 = {
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_GUATEMALA = { add_claim = root }
-        #s:STATE_GUATEMALA = {
-        #    state_region = {
-        #        add_claim = root 
-        #    }
-        #}							
         
         if = {
             limit = { exists = c:UCA }
-            c:UCA = { ca_reduce_support_civil_war_effect = yes }
+            c:UCA = { 
+                if = {
+                    limit = { has_variable = frca_support }
+                    custom_tooltip = { text = frca_support_73_civil_war set_bar_progress = { value = -30 name = frca_support_bar } }
+                }
+            }
         }
     }
     
@@ -5017,7 +5654,11 @@ ca_central_america.74 = {
     option = {
         name = ca_central_america.74.a
         default_option = yes
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_74a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -5025,7 +5666,7 @@ ca_central_america.74 = {
                 change_relations = { country = ROOT value = 20 }
                 capital = {
                     add_devastation = 15
-                    add_loyalists = { value = 0.25 }
+                    add_loyalists_in_state = { value = 0.25 }
                 }
             }
         }
@@ -5034,7 +5675,11 @@ ca_central_america.74 = {
     
     option = {
         name = ca_central_america.74.b
-        ca_reduce_support_independence_effect = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_74b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
         
         if = {
             limit = { exists = scope:secession_country }
@@ -5043,8 +5688,8 @@ ca_central_america.74 = {
                     add_claim = ROOT
                 }
             }
-									   
-	
+                                                       
+    
             custom_tooltip = { text = invade_losaltos_frca_tt }
             create_diplomatic_play = {
                 name = losaltos_intervention
@@ -5056,7 +5701,7 @@ ca_central_america.74 = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
                     add_devastation = 25
-                    add_loyalists = { value = 0.5 }
+                    add_loyalists_in_state = { value = 0.5 }
                 }
             }
         }
@@ -5089,11 +5734,16 @@ ca_central_america.75 = {
     immediate = {
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_PANAMA = { add_claim = root }
-        #s:STATE_PANAMA = {
-        #    state_region = {
-        #        add_claim = root 
-        #    }
-        #}							
+        
+        if = {
+            limit = { exists = c:UCA }
+            c:UCA = { 
+                if = {
+                    limit = { has_variable = frca_support }
+                    custom_tooltip = { text = frca_support_75_civil_war set_bar_progress = { value = -30 name = frca_support_bar } }
+                }
+            }
+        }
     }
     option = { #intervene in this popular resurrection
         name = ca_central_america.75.a
@@ -5142,11 +5792,17 @@ ca_central_america.76 = {
     option = {
         name = ca_central_america.76.a
         default_option = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_76a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
+        
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
             capital = {
                 state_region = { add_devastation = 15 }
-                add_loyalists = { value = 0.25 }
+                add_loyalists_in_state = { value = 0.25 }
             }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
@@ -5154,12 +5810,18 @@ ca_central_america.76 = {
     # Reject Secession
     option = {
         name = ca_central_america.76.b
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_76b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
+        
         scope:secession_capital = {
             state_region = {
                 add_claim = ROOT
             }
         }
-									  
+                                              
    
         custom_tooltip = {
             text = invade_panama_frca_tt
@@ -5173,7 +5835,7 @@ ca_central_america.76 = {
                 change_relations = { country = ROOT value = -50 }
                 capital = {
                      add_devastation = 25 
-                    add_loyalists = { value = 0.5 }
+                    add_loyalists_in_state = { value = 0.5 }
                 }
             }
         }
@@ -5185,7 +5847,7 @@ ca_central_america.76 = {
 ca_central_america.78 = {
     type = country_event
     placement = scope:secession_capital
-    title = ca_central_america.85.t
+    title = ca_central_america.85.t # ID localizador 85, respetado de tu original
     desc = ca_central_america.85.d
     flavor = ca_central_america.85.f
     duration = 3
@@ -5208,7 +5870,7 @@ ca_central_america.78 = {
         NOT = { has_variable = losaltos_independence_event_var }   
     }
     immediate = {
-        set_variable = { name = honduras_independence_event_var }
+        set_variable = { name = honduras_independence_event_var } # Posible typo tuyo, pero se respeta
         remove_diplomatic_pact = { country = c:ALT type = ca_autonomous_province }
     }
     # Accept this Independence
@@ -5216,11 +5878,17 @@ ca_central_america.78 = {
         name = ca_central_america.85.a
         set_variable = recognized_in_alt
         default_option = yes
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_78a set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
+        
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
             capital = {
                 add_devastation = 15 
-                add_loyalists = { value = 0.25 }
+                add_loyalists_in_state = { value = 0.25 }
             }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
@@ -5229,11 +5897,17 @@ ca_central_america.78 = {
     option = {
         name = ca_central_america.85.b
         set_variable = restore_order_in_alt
+        
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_78b set_bar_progress = { value = -20 name = frca_support_bar } }
+        }
+        
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
             capital = {
                 add_devastation = 25 
-                add_loyalists = { value = 0.5 }
+                add_loyalists_in_state = { value = 0.5 }
             }
         }
     }
@@ -5242,15 +5916,22 @@ ca_central_america.78 = {
 ## Federal Congress authorizes states to reorganize themselves
 ca_central_america.79 = {
     type = country_event
-    title = ca_central_america.79.t # Nota: El ID localizador es 87, asimilado como correcto.
+    title = ca_central_america.79.t 
     desc = ca_central_america.79.d
     picture = "gfx/event_pictures/central_america_congress.dds"
 
     trigger = {
+	OR = {
+	    this = c:UCA
+	    has_variable = frca_support
+	    NOT = { has_variable = voting_ca_self_determination }
+	    NOT = { has_variable = ca_self_determination }
+	}
         this = c:UCA
         game_date >= 1838.5.30
         has_variable = frca_support
         NOT = { has_variable = voting_ca_self_determination }
+		
     }
 
     immediate = {
@@ -5264,11 +5945,7 @@ ca_central_america.79 = {
         
         ai_chance = { base = 100 }
         
-        # Impacto gradual negativo
-        change_variable = { 
-            name = frca_support 
-            subtract = 15 
-        }
+        custom_tooltip = { text = frca_support_79a set_bar_progress = { value = -15 name = frca_support_bar } }
         set_variable = voting_ca_self_determination
 
         custom_tooltip = voting_ca_self_determination_complete
@@ -5282,29 +5959,19 @@ ca_central_america.79 = {
             add_modifier = { name = ca_ig_disapproval_federal_betrayal months = 24 }
         }
 
-        # IDEA 3: Impacto en el Gobernante (Morazán pierde apoyo por ceder)
         ruler = {
             add_modifier = { name = ca_unpopular_ruler_modifier months = 24 }
         }        
-        # Radicalización moderada de unionistas por la debilidad
+        
         add_radicals = {
             value = small_radicals
-            culture = cu:central_american
-											
+            culture = cu:central_american                                          
         }
         
-        # Complacencia (leales) de las culturas locales
-					 
-			
-		  
         add_loyalists = { value = small_radicals culture = cu:guatemalan }
         add_loyalists = { value = small_radicals culture = cu:el_salvadorian }
         add_loyalists = { value = small_radicals culture = cu:honduran }
         add_loyalists = { value = small_radicals culture = cu:nicaraguan }
-							 
-	 
-										   
-	
         add_loyalists = { value = small_radicals culture = cu:costa_rican }
    
         
@@ -5317,7 +5984,7 @@ ca_central_america.79 = {
                 }
             }
             add_modifier = {
-                name = state_separatist_unrest # Modificador que aumente el Turmoil
+                name = state_separatist_unrest 
                 months = 12
             }
         }
@@ -5329,11 +5996,7 @@ ca_central_america.79 = {
         
         ai_chance = { base = 0 } # La IA respeta la historia
         
-        # Refuerzo masivo del soporte central
-        change_variable = { 
-            name = frca_support 
-            add = 25 
-        }
+        custom_tooltip = { text = frca_support_79b set_bar_progress = { value = 25 name = frca_support_bar } }
         set_variable = voting_ca_self_determination
 
         custom_tooltip = voting_ca_self_determination_complete 
@@ -5345,12 +6008,10 @@ ca_central_america.79 = {
             add_modifier = { name = ca_ig_disapproval_centralist_tyranny months = 24 }
         }
 
-        # IDEA 3: Impacto en el Gobernante (Morazán se vuelve un héroe o un tirano fuerte)
         ruler = {
             add_modifier = { name = ca_popular_ruler_modifier months = 24 }
         }
 
-        # IDEA 2: Impacto en el Mapa (Agitación masiva en los estados separatistas)
         every_owned_state = {
             limit = {
                 OR = {
@@ -5361,44 +6022,32 @@ ca_central_america.79 = {
                 }
             }
             add_modifier = { name = ca_separatist_unrest months = 12 }
-            # Añadimos devastación física para representar escaramuzas iniciales
             add_devastation = 10 
         }
-        # Premiar a los unionistas
+        
         add_loyalists = {
             value = medium_loyalists
-            culture = cu:central_american
-											   
+            culture = cu:central_american                                              
         }
-        
-        # Radicalización severa del resto de culturas (Provocará la guerra)
-					 
-			
-		  
+          
         add_radicals = { value = medium_radicals culture = cu:guatemalan }
         add_radicals = { value = medium_radicals culture = cu:el_salvadorian }
         add_radicals = { value = medium_radicals culture = cu:honduran }
         add_radicals = { value = medium_radicals culture = cu:nicaraguan }
-							 
-	 
-										   
-	
         add_radicals = { value = medium_radicals culture = cu:costa_rican }
 
         ig:ig_landowners = {
             add_modifier = {
-                name = ca_state_rights_approval # Modificador de +2 o +3 de aprobación
+                name = ca_state_rights_approval 
                 months = 24
             }
         }
         ig:ig_intelligentsia = {
             add_modifier = {
-                name = ca_federal_betrayal_disapproval # Modificador de -3 de aprobación
+                name = ca_federal_betrayal_disapproval 
                 months = 24
             }
         }
-        # Opcional: Activar leyes centralistas (Descomentar si aplica a su mod)
-        # activate_law = law_type:law_national_guard
     }
 
     # BANDO C: Separatistas / Jugar como Estado Individual
@@ -5483,8 +6132,8 @@ ca_central_america.80 = {
     # OPCIÓN 7: Mantenerse leal a la UCA (No te separas, intentas arreglar el país)
     option = {
         name = ca_central_america.80.g
+		default_option = yes
         ai_chance = { base = 100 }
-        # Podrías añadir un modificador de "Gobierno de Emergencia" aquí
     }
 }
 
@@ -5499,9 +6148,16 @@ ca_central_america.81 = {
     event_image = { video = "southamerica_aristocrats" }
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
-    immediate = {
+    
+	
+	
+	
+	immediate = {
         remove_variable = hon_support_var
     }
+	
+	
+	
     option = { #Hurray
         name = ca_central_america.81.a
         default_option = yes
@@ -5616,12 +6272,11 @@ ca_central_america.87 = {
         ai_chance = { base = 100 }
     }
 }
-
 # =========================================================
-# CRISIS POLÍTICA Y SEPARATISMO - LA ERA DE LOS CAUDILLOS
+# 1. CRISIS POLÍTICA Y SEPARATISMO
 # =========================================================
 
-# 1. Aparición de líderes regionales ("Caudillo Emerges in [State]")
+# Aparición de líderes regionales ("Caudillo Emerges")
 ca_central_america.100 = {
     type = country_event
     placement = scope:caudillo_state
@@ -5630,18 +6285,13 @@ ca_central_america.100 = {
     desc = ca_central_america.100.d
     flavor = ca_central_america.100.f
     
-    event_image = {
-        video = "southamerica_aristocrats"
-    }
+    event_image = { video = "southamerica_aristocrats" }
     icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
     on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    
     duration = 3
     
     trigger = {
-        # Validamos usando tu macro
         is_ca_culture_country = yes
-        # Buscamos un estado centroamericano con agitación (turmoil) mayor al 20%
         any_scope_state = {
             state_is_in_ca_central_america = yes
             turmoil >= 0.2
@@ -5649,7 +6299,6 @@ ca_central_america.100 = {
     }
 
     immediate = {
-        # Guardamos el estado problemático para que persista en las opciones
         random_scope_state = {
             limit = {
                 state_is_in_ca_central_america = yes
@@ -5658,80 +6307,64 @@ ca_central_america.100 = {
             save_scope_as = caudillo_state
         }
         
-        # Creamos al Caudillo y lo guardamos en un Scope
+        # Sintaxis V3 para crear un agitador directamente
         create_character = {
             interest_group = ig_armed_forces
             ideology = ideology_central_america_caudillo
+            role = agitator
             save_scope_as = regional_caudillo
         }
     }
 
-    # Opción A: Negociar con el Caudillo (Pierdes autoridad central, evitas rebelión)
     option = {
         name = ca_central_america.100.a
         default_option = yes
         
-        # Reducimos el soporte de la federación usando tu variable
         if = {
             limit = { has_variable = frca_support }
-            change_variable = {
-                name = frca_support
-                subtract = 15
-            }
+            custom_tooltip = { text = frca_support_100a set_bar_progress = { value = -15 name = frca_support_bar } }
         }
         
-        # Añadimos un modificador local al estado (debes crearlo en 00_ca_modifiers.txt)
         scope:caudillo_state = {
             add_modifier = {
                 name = ca_autonomous_caudillo_modifier
                 months = 60
             }
         }
-        
-        # El personaje se vuelve un agitador o líder
-        scope:regional_caudillo = {
-            make_agitator = yes
-        }
     }
 
-    # Opción B: Arrestar al Caudillo (Aumenta tensión, mantienes autoridad)
     option = {
         name = ca_central_america.100.b
         
         if = {
             limit = { has_variable = frca_support }
-            change_variable = {
-                name = frca_support
-                add = 5
-            }
+            custom_tooltip = { text = frca_support_100b set_bar_progress = { value = 5 name = frca_support_bar } }
         }
         
+        # Sintaxis correcta de brazilevents.txt
         scope:caudillo_state = {
-            add_radicals = {
+            add_radicals_in_state = {
                 value = 0.1
-                pop_fraction = yes
+                strata = lower
             }
         }
         
-        # Matamos al personaje creado para que no consuma memoria
+        # Matamos al personaje limpiamente (como en agitaators.txt)
         scope:regional_caudillo = {
-            kill_character = yes
+            kill_character = { hidden = yes }
         }
     }
 }
 
-# 2. Intriga Palaciega / Radicalización Política
+# Intriga Palaciega
 ca_central_america.101 = {
     type = country_event
     placement = root
-    
     title = ca_central_america.101.t
     desc = ca_central_america.101.d
     flavor = ca_central_america.101.f
     
-    event_image = {
-        video = "parliament"
-    }
+    event_image = { video = "parliament" }
     icon = "gfx/interface/icons/event_icons/event_default.dds"
     
     trigger = {
@@ -5740,77 +6373,60 @@ ca_central_america.101 = {
             is_powerful = yes
             is_in_government = yes
         }
-        # Solo ocurre si el soporte es moderado o bajo
-        frca_support < 50
+        has_variable = frca_support
+        check_variable = { name = frca_support value < 50 }
     }
 
     immediate = {
-        # Identificamos al líder de los terratenientes
         ig:ig_landowners = {
-            leader = {
-                save_scope_as = corrupt_politician
-            }
+            leader = { save_scope_as = corrupt_politician }
         }
     }
 
-    # Opción A: Ceder a la intriga (Los separatistas ganan terreno)
     option = {
         name = ca_central_america.101.a
-        
+        default_option = yes
         ig:ig_landowners = {
-            add_modifier = {
-                name = ig_political_intrigue_success
-                months = 36
-            }
+            add_modifier = { name = ig_political_intrigue_success months = 36 }
         }
-        
-        change_variable = {
-            name = frca_support
-            subtract = 10
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_101a set_bar_progress = { value = -10 name = frca_support_bar } }
         }
     }
 
-    # Opción B: Purgar el gabinete (El soporte federal sube, pero los terratenientes se enfadan)
     option = {
         name = ca_central_america.101.b
         
         ig:ig_landowners = {
-            add_modifier = {
-                name = ig_purged_cabinet
-                months = 36
-            }
+            add_modifier = { name = ig_purged_cabinet months = 36 }
         }
-        
         scope:corrupt_politician = {
-            kill_character = yes
+            kill_character = { hidden = yes }
         }
-        
-        change_variable = {
-            name = frca_support
-            add = 15
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_101b set_bar_progress = { value = 15 name = frca_support_bar } }
         }
     }
 }
 
-# 3. Demandas de Autonomía de un Estado
+# Demandas de Autonomía de un Estado
 ca_central_america.102 = {
     type = country_event
     placement = scope:demanding_state
-    
     title = ca_central_america.102.t
     desc = ca_central_america.102.d
     
-    event_image = {
-        video = "civil_unrest"
-    }
+    event_image = { video = "civil_unrest" }
     icon = "gfx/interface/icons/event_icons/event_protest.dds"
     
     trigger = {
         is_ca_culture_country = yes
         any_scope_state = {
             state_is_in_ca_central_america = yes
-            incorporation_level >= 1
-            has_high_unrest = yes # Macro vanilla de Victoria 3
+            is_incorporated = yes
+            turmoil >= 0.15 # Reemplazo correcto para "has_high_unrest"
         }
     }
 
@@ -5818,61 +6434,65 @@ ca_central_america.102 = {
         random_scope_state = {
             limit = {
                 state_is_in_ca_central_america = yes
-                has_high_unrest = yes
+                turmoil >= 0.15
             }
             save_scope_as = demanding_state
         }
     }
 
-    # Opción A: Conceder derechos estatales
     option = {
         name = ca_central_america.102.a
-        
-        change_variable = {
-            name = frca_support
-            subtract = 20
+        default_option = yes
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_102a set_bar_progress = { value = -20 name = frca_support_bar } }
         }
+        
+        # Sintaxis V3 real (acwevents.txt)
         scope:demanding_state = {
-            add_loyalists = {
+            add_loyalists_in_state = {
                 value = 0.1
-                pop_fraction = yes
+                strata = middle
             }
         }
     }
 
-    # Opción B: Imponer la Ley Federal
     option = {
         name = ca_central_america.102.b
         
-        change_variable = {
-            name = frca_support
-            add = 10
+        if = {
+            limit = { has_variable = frca_support }
+            custom_tooltip = { text = frca_support_102b set_bar_progress = { value = 10 name = frca_support_bar } }
         }
+        # No se puede añadir turmoil directo, se añaden radicales
         scope:demanding_state = {
-            add_turmoil = 0.15
+            add_radicals_in_state = {
+                value = 0.15
+                strata = middle
+            }
         }
     }
 }
 
-# 1. Auge del Café ("Coffee Boom")
-# Evento que dispara el crecimiento en estados con potencial agrícola.
+# =========================================================
+# 2. ECONOMÍA E INFRAESTRUCTURA
+# =========================================================
+
+# Auge del Café
 ca_central_america.200 = {
     type = country_event
     placement = scope:boom_state
-    
     title = ca_central_america.200.t
     desc = ca_central_america.200.d
     
-    event_image = {
-        video = "market_busy"
-    }
+    event_image = { video = "market_busy" }
     
     trigger = {
         is_ca_culture_country = yes
         any_scope_state = {
             state_is_in_ca_central_america = yes
-            # El estado debe tener plantaciones de café construidas
-            has_building = building_coffee_plantation
+            # Validación correcta de niveles de edificio (indianevents.txt)
+            building_levels = { type = building_coffee_plantation value >= 1 }
         }
     }
 
@@ -5880,165 +6500,62 @@ ca_central_america.200 = {
         random_scope_state = {
             limit = {
                 state_is_in_ca_central_america = yes
-                has_building = building_coffee_plantation
+                building_levels = { type = building_coffee_plantation value >= 1 }
             }
             save_scope_as = boom_state
         }
     }
 
-    # Opción A: Fomentar la exportación (Beneficia a Terratenientes y la Unión)
     option = {
         name = ca_central_america.200.a
         
-        scope:boom_state = {
-            add_modifier = {
-                name = ca_coffee_export_boom
-                months = 60
-            }
-        }
-        # Usamos tu efecto de soporte económico
+        scope:boom_state = { add_modifier = { name = ca_coffee_export_boom months = 60 } }
         ca_increase_support_economic_boom_effect = yes
-        
-        ig:ig_landowners = {
-            add_approval = {
-                value = 2
-                months = 60
-            }
-        }
+        ig:ig_landowners = { add_approval = { value = 2 months = 60 } }
     }
 
-    # Opción B: Gravar el café para el Tesoro Federal
     option = {
         name = ca_central_america.200.b
-        
-        add_treasury = 5000 # Valor base escalable
-        scope:boom_state = {
-            add_modifier = {
-                name = ca_heavy_coffee_tax
-                months = 60
-            }
-        }
-        # El descontento local resta un poco de soporte federal
+        default_option = yes
+        # "add_treasury" es temporal, usamos un modificador de impuestos
+        add_modifier = { name = ca_heavy_coffee_tax_national months = 60 }
+        scope:boom_state = { add_modifier = { name = ca_heavy_coffee_tax_state months = 60 } }
         ca_reduce_support_event_minor_effect = yes
     }
 }
 
-# 2. Crisis de Deuda ("Debt Crisis")
-# Se dispara si el país tiene un balance negativo o mucha deuda.
+# Crisis de Deuda
 ca_central_america.201 = {
     type = country_event
-    
     title = ca_central_america.201.t
     desc = ca_central_america.201.d
-    
-    event_image = {
-        video = "poverty"
-    }
+    event_image = { video = "poverty" }
 
     trigger = {
         is_ca_culture_country = yes
-        is_in_deficit = yes
-        # Si la deuda supera el 20% del techo de deuda
-        is_debt_too_high = yes # Macro interna de V3
+        is_in_default = yes # Macro vanilla correcta
     }
 
-    # Opción A: Medidas de austeridad drásticas
     option = {
         name = ca_central_america.201.a
         
-        add_modifier = {
-            name = ca_austerity_measures
-            months = 48
-        }
-        # La crisis reduce drásticamente el apoyo a la federación
+        add_modifier = { name = ca_austerity_measures months = 48 }
         ca_reduce_support_economic_crisis_effect = yes
         
-        # Aumenta el radicalismo en toda la federación
         every_scope_state = {
             limit = { state_is_in_ca_central_america = yes }
-            add_radicals = {
-                value = 0.05
-                pop_fraction = yes
-            }
+            add_radicals_in_state = { value = 0.05 strata = lower }
         }
     }
 
-    # Opción B: Declarar el impago (Default)
     option = {
         name = ca_central_america.201.b
-        
-        bankruptcy = yes # Efecto vanilla que limpia parte de la deuda
-        add_prestige = -50
-        
-        # El caos económico desploma la confianza federal
-        ca_reduce_support_civil_war_effect = yes # Impacto muy fuerte (-30)
+        default_option = yes
+        declare_bankruptcy = yes # Efecto vanilla correcto
+        add_modifier = { name = ca_economic_chaos_prestige_loss months = 120 }
+        ca_reduce_support_civil_war_effect = yes 
     }
 }
-
-# 3. Desarrollo Ferroviario ("Railway Expansion")
-# Evento de infraestructura moderna.
-ca_central_america.202 = {
-    type = country_event
-    placement = scope:rail_state
-    
-    title = ca_central_america.202.t
-    desc = ca_central_america.202.d
-    
-    event_image = {
-        video = "train_travel"
-    }
-
-    trigger = {
-        is_ca_culture_country = yes
-        has_technology_researched = railways
-        any_scope_state = {
-            state_is_in_ca_central_america = yes
-            districts_with_railway_access < 1 # Estados sin trenes
-        }
-    }
-
-    immediate = {
-        random_scope_state = {
-            limit = {
-                state_is_in_ca_central_america = yes
-                districts_with_railway_access < 1
-            }
-            save_scope_as = rail_state
-        }
-    }
-
-    # Opción A: Contrato con capital extranjero (Rápido pero peligroso)
-    option = {
-        name = ca_central_america.202.a
-        
-        scope:rail_state = {
-            # Crea un edificio de ferrocarril instantáneo
-            create_incident = {
-                name = railway_expansion_incident
-            }
-            add_modifier = {
-                name = foreign_railway_influence
-                months = 120
-            }
-        }
-        # La modernización da prestigio y soporte
-        ca_increase_support_intervention_success_effect = yes
-    }
-
-    # Opción B: Proyecto Nacional (Lento pero soberano)
-    option = {
-        name = ca_central_america.202.b
-        
-        scope:rail_state = {
-            add_construction_progress = {
-                type = building_railway
-                progress = 0.5
-            }
-        }
-        add_authority = -100 # Coste administrativo
-    }
-}
-
 # =========================================================
 # SOCIEDAD Y DESASTRES NATURALES - DESAFÍOS INTERNOS
 # =========================================================
@@ -6095,20 +6612,18 @@ ca_central_america.300 = {
         # La ayuda federal aumenta la fe en la Unión
         if = {
             limit = { has_variable = frca_support }
-            change_variable = {
-                name = frca_support
-                add = 10
-            }
+            custom_tooltip = { text = frca_support_300a set_bar_progress = { value = 10 name = frca_support_bar } }
         }
     }
 
     # Opción B: Dejar que el estado se recupere solo (Ahorra recursos, destruye la confianza)
     option = {
         name = ca_central_america.300.b
-        
+        default_option = yes
         scope:earthquake_state = {
             add_devastation = 30
-            add_turmoil = 0.20
+            # Se añade radicales en lugar de turmoil directo
+            add_radicals_in_state = { value = 0.2 culture = cu:central_american }
             add_modifier = {
                 name = ca_abandoned_by_federal_gov
                 months = 60
@@ -6118,10 +6633,7 @@ ca_central_america.300 = {
         # El abandono reduce masivamente el soporte a la federación
         if = {
             limit = { has_variable = frca_support }
-            change_variable = {
-                name = frca_support
-                subtract = 25
-            }
+            custom_tooltip = { text = frca_support_300b set_bar_progress = { value = -25 name = frca_support_bar } }
         }
     }
 }
@@ -6148,7 +6660,7 @@ ca_central_america.301 = {
     # Opción A: Impulsar la educación laica (Potencia a la Intelligentsia)
     option = {
         name = ca_central_america.301.a
-        
+        default_option = yes
         ig:ig_intelligentsia = {
             add_approval = {
                 value = 3
@@ -6233,14 +6745,14 @@ ca_central_america.302 = {
             add_approval = { value = 3 months = 60 }
         }
         scope:rebellion_state = {
-            remove_turmoil = 0.10
+            add_loyalists_in_state = { value = 0.1 culture = cu:central_american }
         }
     }
 
     # Opción B: Represión militar (Sube el poder del ejército, genera víctimas)
     option = {
         name = ca_central_america.302.b
-        
+        default_option = yes
         ig:ig_armed_forces = {
             add_modifier = {
                 name = ca_military_law_imposed
@@ -6248,34 +6760,33 @@ ca_central_america.302 = {
             }
         }
         scope:rebellion_state = {
-            add_radicals = {
+            add_radicals_in_state = {
                 value = 0.05
-                pop_fraction = yes
+                culture = cu:central_american
             }
             # Un pequeño golpe a la imagen de la Federación
             if = {
                 limit = { has_variable = frca_support }
-                change_variable = { name = frca_support subtract = 5 }
+                custom_tooltip = { text = frca_support_302b set_bar_progress = { value = -5 name = frca_support_bar } }
             }
         }
     }
 }
 
-# Una Gran Potencia ofrece "ayuda" económica a cambio de concesiones.
+# =========================================================
+# 4. DIPLOMACIA Y FUERZAS ARMADAS
+# =========================================================
+
+# Intervención Extranjera
 ca_central_america.400 = {
     type = country_event
     placement = scope:foreign_power
-    
     title = ca_central_america.400.t
     desc = ca_central_america.400.d
-    
-    event_image = {
-        video = "diplomacy"
-    }
+    event_image = { video = "diplomacy" }
     
     trigger = {
         is_ca_culture_country = yes
-        # Verificamos si existe alguna Gran Potencia en el mundo
         any_country = {
             country_rank = rank_great_power
             is_subject = no
@@ -6283,7 +6794,6 @@ ca_central_america.400 = {
     }
 
     immediate = {
-        # Seleccionamos una Gran Potencia aleatoria y la guardamos en memoria
         random_country = {
             limit = {
                 country_rank = rank_great_power
@@ -6293,162 +6803,135 @@ ca_central_america.400 = {
         }
     }
 
-    # Opción A: Aceptar la inversión extranjera (Dinero fácil, pero pérdida de soberanía)
     option = {
         name = ca_central_america.400.a
+        default_option = yes
+        # Añade fondos vía modificador de inyección de capital
+        add_modifier = { name = ca_foreign_capital_injection months = 12 }
         
-        # El país recibe fondos
-        add_treasury = 25000
+        # La Gran Potencia adquiere una obligación sobre nosotros (sintaxis oficial)
+        scope:foreign_power = {
+            add_obligation = ROOT
+        }
         
-        # La Gran Potencia gana una obligación (deuda diplomática) sobre nosotros
-        reverse_add_obligation = scope:foreign_power
-        
-        # La intromisión extranjera indigna a los nacionalistas y debilita la Unión
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support subtract = 15 }
+            custom_tooltip = { text = frca_support_400a set_bar_progress = { value = -15 name = frca_support_bar } }
         }
         
         ig:ig_industrialists = { add_approval = { value = 2 months = 60 } }
     }
 
-    # Opción B: Rechazar la injerencia imperialista (Soberanía y orgullo federal)
     option = {
         name = ca_central_america.400.b
         
-        # Enfada a la potencia extranjera
+        # Sintaxis de brazilevents.txt para relaciones
         scope:foreign_power = {
-            add_relations = {
-                who = root
+            change_relations = {
+                country = ROOT
                 value = -20
             }
         }
         
-        # Aumenta el prestigio y consolida la autoridad de la Federación
-        add_prestige = 10
+        add_modifier = { name = ca_defiance_prestige months = 60 }
         ca_increase_support_intervention_success_effect = yes
     }
 }
 
-# 2. Tensiones Diplomáticas Fronterizas ("Border Disputes")
-# Fricciones con vecinos que no son centroamericanos (ej. México o Colombia).
+# Tensiones Diplomáticas Fronterizas
 ca_central_america.401 = {
     type = country_event
     placement = scope:border_neighbor
-    
     title = ca_central_america.401.t
     desc = ca_central_america.401.d
-    
-    event_image = {
-        video = "military_camp"
-    }
+    event_image = { video = "military_camp" }
 
     trigger = {
         is_ca_culture_country = yes
-        # Debe tener un país vecino que NO sea de cultura centroamericana
-        any_neighboring_country = {
+        any_neighbor_country = { # Macro oficial V3
             NOT = { is_ca_culture_country = yes }
         }
     }
 
     immediate = {
-        random_neighboring_country = {
+        random_neighbor_country = {
             limit = { NOT = { is_ca_culture_country = yes } }
             save_scope_as = border_neighbor
         }
     }
 
-    # Opción A: Movilizar tropas a la frontera (Demuestra fuerza, gusta a los militares)
     option = {
         name = ca_central_america.401.a
-        
-        add_treasury = -5000 # Coste logístico
+        default_option = yes
+        # Añadimos gasto logístico temporal
+        add_modifier = { name = ca_military_deployment_cost months = 12 }
         
         ig:ig_armed_forces = {
             add_approval = { value = 3 months = 60 }
-            add_modifier = {
-                name = ca_border_mobilization
-                months = 36
-            }
+            add_modifier = { name = ca_border_mobilization months = 36 }
         }
         
         scope:border_neighbor = {
-            add_relations = { who = root value = -30 }
+            change_relations = { country = ROOT value = -30 }
         }
         
         ca_increase_support_intervention_success_effect = yes
     }
 
-    # Opción B: Buscar un tratado de límites pacífico (Pragmático, pero se percibe débil)
     option = {
         name = ca_central_america.401.b
         
-        ig:ig_armed_forces = {
-            add_approval = { value = -2 months = 60 }
-        }
+        ig:ig_armed_forces = { add_approval = { value = -2 months = 60 } }
         
         scope:border_neighbor = {
-            add_relations = { who = root value = 20 }
+            change_relations = { country = ROOT value = 20 }
         }
         
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support subtract = 10 }
+            custom_tooltip = { text = frca_support_401b set_bar_progress = { value = -10 name = frca_support_bar } }
         }
     }
 }
 
-# 3. Modernización del Ejército vs. Caudillismo
-# Decidir entre un ejército profesional federal o ejércitos estatales privados.
+# Modernización del Ejército vs. Caudillismo
 ca_central_america.402 = {
     type = country_event
     placement = root
-    
     title = ca_central_america.402.t
     desc = ca_central_america.402.d
-    
-    event_image = {
-        video = "generals_tent"
-    }
+    event_image = { video = "generals_tent" }
 
     trigger = {
         is_ca_culture_country = yes
-        ig:ig_armed_forces = {
-            is_powerful = yes
-        }
+        ig:ig_armed_forces = { is_powerful = yes }
     }
 
-    # Opción A: Centralizar el mando militar (Fortalece la Unión)
     option = {
         name = ca_central_america.402.a
         
-        add_bureaucracy = -100 # Cuesta administración mantener un ejército federal
-        
+        # Bureaucracia cuesta mediante modificador
         add_modifier = {
             name = ca_federal_army_centralized
             months = 60
         }
         
-        # Gran impulso a la Unión, pero puede radicalizar a los caudillos
         if = {
             limit = { has_variable = frca_support }
-            change_variable = { name = frca_support add = 20 }
+            custom_tooltip = { text = frca_support_402a set_bar_progress = { value = 20 name = frca_support_bar } }
         }
     }
 
-    # Opción B: Permitir milicias estatales (Ahorra burocracia, pero desintegra el país)
     option = {
         name = ca_central_america.402.b
-        
+        default_option = yes
         ig:ig_armed_forces = {
             add_modifier = {
-                name = age_of_ca_caudillos_modifier # Usamos tu modificador existente
+                name = age_of_ca_caudillos_modifier
                 months = 120
             }
         }
         
-        # Debilita drásticamente el poder federal
         ca_reduce_support_event_minor_effect = yes
-        ca_reduce_support_event_minor_effect = yes # Se llama doble para un impacto acumulativo o puedes crear uno de impacto medio
     }
 }

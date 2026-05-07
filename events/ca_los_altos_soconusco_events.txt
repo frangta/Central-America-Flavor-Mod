@@ -3,14 +3,14 @@
 
 ##scope_DG6
 
-#ca_los_altos_soconusco_events.1  = {
+#ca_los_altos_soconusco_events.x  = {
 #
 #     type = country_event
 #
 #	
-#	title = ca_los_altos_soconusco_events.1.t
-#	desc = ca_los_altos_soconusco_events.1.d
-#	flavor = ca_los_altos_soconusco_events.1.f
+#	title = ca_los_altos_soconusco_events.x.t
+#	desc = ca_los_altos_soconusco_events.x.d
+#	flavor = ca_los_altos_soconusco_events.x.f
 #	
 #	event_image = {
 #		video = ""
@@ -39,19 +39,140 @@
 #	}
 #	
 #	option = {
-#		name = ca_los_altos_soconusco_events.1.a
+#		name = ca_los_altos_soconusco_events.x.a
 #		default_option = yes
 #		set_variable = voting_ca_self_determination
 #	}
 #	
 #	option = {
-#		name = ca_los_altos_soconusco_events.1.b
+#		name = ca_los_altos_soconusco_events.x.b
 #	}
 #	
 #	#after = {
 #	#}
 #
-#}                                            
+#}
+## Play with Los Altos
+ca_los_altos_soconusco_events.01 = {
+	type = country_event
+	placement = scope:secession_capital
+	title = ca_los_altos_soconusco_events.01.t
+	desc = ca_los_altos_soconusco_events.01.d
+	flavor = ca_los_altos_soconusco_events.01.f
+	duration = 3
+	event_image = {
+		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	trigger = {
+     # triggered by je_historic_central_america_falls_apart when the player selected Los Altos to play
+	}
+	
+	immediate = {
+		set_variable = {
+			name = frca_recent_separatism_event_var
+			days = 40
+		}
+		random_scope_state = {
+			limit = {
+				is_capital = no
+				state_region = s:STATE_SAN_SALVADOR
+				turmoil > 0.2
+			}
+			save_scope_as = secession_state
+		}
+		create_country = {
+			tag = ALT
+			origin = this
+			province = p:x42124E
+			province = p:x78C465
+			province = p:xD9BEFE
+            province = p:xBD8628			
+		}
+		create_diplomatic_pact = {
+			country = c:ALT
+			type = ca_dependency
+		}
+		c:ALT = {
+			save_scope_as = scope_ALT
+			save_scope_as = secession_country
+		add_journal_entry = {
+			type = je_ca_situation_in_losaltos
+		}			
+			capital = {
+				save_scope_as = secession_capital
+			}
+			create_character = {
+				first_name = "Juan"
+				last_name = "Lindo"
+				historical = yes
+				ruler = yes
+				ig_leader = yes
+				birth_date = 1790.5.5
+				interest_group = ig_landowners
+				ideology = ideology:ideology_reformer
+				traits = {
+					meticulous
+				}
+			}
+			ig:ig_landowners = {
+				remove_ideology = ideology_paternalistic
+				add_ideology = ideology_central_american_reactionary
+				set_interest_group_name = ig_hacendados
+			}
+		    ig_intelligentsia = {
+		    remove_ideology = ideology_liberal
+            remove_ideology = ideology_republican		
+		    add_ideology = ideology_ca_constitutionalist
+		    
+		    }			
+			ig:ig_armed_forces = {
+				remove_ideology = ideology_paternalistic
+			}
+			ig:ig_devout = {
+				add_ideology = ideology_central_american_reactionary
+				set_interest_group_name = ig_catholic_church
+			}
+			activate_law = law_type:law_freedom_of_conscience
+			#activate_law = law_type:law_unitary
+			activate_law = law_type:law_landed_voting
+			activate_law = law_type:law_mercantilism
+			activate_law = law_type:law_censorship
+			activate_law = law_type:law_religious_schools
+		}
+		it = {
+			limit = { has_variable = historic_central_american }
+			trigger_event = {
+				id = central_america.5
+				months = 1
+			}
+		}
+		it = {
+			limit = { has_variable = random_central_american }
+			random_events = {
+				50 = ca_central_america.24
+				50 = ca_central_america.25
+			}
+		}
+		set_variable = frca_crisis_var
+		random_events = {
+			50 = ca_central_america.24
+			50 = ca_central_america.25
+		}
+	}
+	# Accept secession
+	option = {
+		name = ca_los_altos_soconusco_events.01.a
+		default_option = yes
+		
+		play_as = c:ALT
+		ai_chance = {
+			base = 0
+		}
+	}
+}                                            
 #ca_los_altos_soconusco_events.2  = {
 #      type = country_event
 #
