@@ -189,12 +189,12 @@ ca_on_country_released_as_overlord_subject = {
 		if = {
 			limit = {
 				OR = {
-					this = GUA
-					this = ELS
-					this = HON
-					this = NIC
-					this = COS
-					this = ALT
+					this = c:GUA
+					this = c:ELS
+					this = c:HON
+					this = c:NIC
+					this = c:COS
+					this = c:ALT
 				}
 			}
 			
@@ -242,21 +242,35 @@ ca_on_country_released_as_overlord_subject = {
         }
 	}
 }
+ca_history_rail_civil = {		
+
+
+		set_variable = je_gua_support_var
+		set_variable = je_els_support_var
+		set_variable = je_hon_support_var
+		set_variable = je_nic_support_var
+	    set_variable = je_cos_support_var
+
+		#Central American Event Variables
+		set_variable = gua_civil_peace_var	
+		set_variable = nic_civil_peace_var	
+		set_variable = hon_civil_peace_var
+		set_variable = cos_civil_peace_var
+		set_variable = els_civil_peace_var	
+		set_variable = alt_civil_peace_var	}
+	
+
+
 ca_history_rail_events	= {
 		#Main Journal Entry Variables
-		set_variable = is_frca_var
-		set_variable = gua_support_var
-		set_variable = je_gua_support_var
-		set_variable = els_support_var
-		set_variable = je_els_support_var
+        set_variable = is_frca_var		
+	    set_variable = je_alt_support_var	
+        set_variable = gua_support_var
+        set_variable = els_support_var
 		set_variable = hon_support_var
-		set_variable = je_hon_support_var
 		set_variable = nic_support_var
-		set_variable = je_nic_support_var
 		set_variable = cos_support_var
-		set_variable = je_cos_support_var
 		set_variable = alt_support_var
-		set_variable = je_alt_support_var		
 		
 		#Journal Entry Scripted Button Variables
 		set_variable = je_central_america_setup_gua_var
@@ -266,13 +280,7 @@ ca_history_rail_events	= {
 		set_variable = je_central_america_setup_alt_var
 		set_variable = je_central_america_setup_els_var		
 		
-		#Central American Event Variables
-		set_variable = gua_civil_peace_var	
-		set_variable = nic_civil_peace_var	
-		set_variable = hon_civil_peace_var
-		set_variable = cos_civil_peace_var
-		set_variable = els_civil_peace_var	
-		set_variable = alt_civil_peace_var		
+
 
 
 
@@ -301,7 +309,7 @@ create_character = {
 
 create_character = {
 	ig_leader = yes
-	interest_group = ig_petite_bourgeoisie
+	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_moderate
 }
 }
@@ -350,7 +358,7 @@ create_character = {
 
 create_character = {
 	ig_leader = yes
-	interest_group = ig_petite_bourgeoisie
+	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_moderate
 }
 
@@ -361,23 +369,16 @@ create_character = {
 # ==========================================
 
 ca_liberate_guatemala_effect = {
-    add_modifier = { name = ca_starting_guatemala_modifier months = 60 }
-    add_journal_entry = { type = je_ca_historic_situation_in_guatemala }
-    remove_variable = ca_secession_country
+    #add_modifier = { name = ca_starting_guatemala_modifier months = 60 }
+    #add_journal_entry = { type = je_ca_historic_situation_in_guatemala }
+    add_journal_entry = { type = je_ca_state_role_in_federation }
+    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
+    #remove_variable = ca_secession_country
 
     # Líder Histórico
     create_character = {
-        first_name = "José"
-        last_name = "Núñez" # Nota: Revisa si quieres cambiarlo, ya que Nicaragua también usa a Núñez.
-        historical = yes
-        ig_leader = yes
-        interest_group = ig_landowners
-        ruler = yes
-        birth_date = 1800.02.02
-        culture = cu:central_american
-        ideology = ideology:ideology_meritocratic
-        religion = rel:catholic
-        traits = { basic_diplomat }
+	template = gua_mariano_galvez_character_template
+    ruler = yes       
     }
 
     # Grupos de Interés
@@ -390,6 +391,7 @@ ca_liberate_guatemala_effect = {
         remove_ideology = ideology_liberal
         remove_ideology = ideology_republican        
         add_ideology = ideology_ca_constitutionalist
+		set_interest_group_name = ig_gua_liberal
     }
     ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
     ig:ig_devout = {
@@ -405,20 +407,15 @@ ca_liberate_guatemala_effect = {
 }
 
 ca_liberate_elsalvador_effect = {
-    add_modifier = { name = ca_starting_salvador_modifier months = 60 }
-    add_journal_entry = { type = je_ca_historic_situation_in_elsalvador }
-    remove_variable = ca_secession_country
-
+    #add_modifier = { name = ca_starting_salvador_modifier months = 60 }
+    #add_journal_entry = { type = je_ca_historic_situation_in_elsalvador }
+    add_journal_entry = { type = je_ca_state_role_in_federation }
+    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
+    #remove_variable = ca_secession_country
+    set_variable = { name = el_salvador_early }
     create_character = {
-        first_name = "Juan"
-        last_name = "Lindo"
-        historical = yes
-        ruler = yes
-        ig_leader = yes
-        birth_date = 1790.5.5
-        interest_group = ig_landowners
-        ideology = ideology:ideology_reformer
-        traits = { meticulous }
+        template = els_francisco_gomez_character_template
+        ruler = yes        
     }
 
     ig:ig_landowners = {
@@ -430,6 +427,7 @@ ca_liberate_elsalvador_effect = {
         remove_ideology = ideology_liberal
         remove_ideology = ideology_republican        
         add_ideology = ideology_ca_constitutionalist
+		set_interest_group_name = ig_els_liberal
     }
     ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
     ig:ig_devout = {
@@ -445,22 +443,15 @@ ca_liberate_elsalvador_effect = {
 }
 
 ca_liberate_honduras_effect = {
-    add_modifier = { name = ca_starting_honduras_modifier months = 60 }
-    add_journal_entry = { type = je_ca_historic_situation_in_honduras }
-    remove_variable = ca_secession_country
+    #add_modifier = { name = ca_starting_honduras_modifier months = 60 }
+    #add_journal_entry = { type = je_ca_historic_situation_in_honduras }
+    add_journal_entry = { type = je_ca_state_role_in_federation }
+    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
+    #remove_variable = ca_secession_country
 
     create_character = {
-        first_name = "Juan"
-        last_name = "Francisco de Molina"
-        historical = yes
-        ig_leader = yes
-        interest_group = ig_landowners
+        template = hon_joaquin_rivera_character_template
         ruler = yes
-        birth_date = 1779.04.04
-        culture = cu:central_american
-        ideology = ideology:ideology_traditionalist
-        religion = rel:catholic
-        traits = { basic_diplomat }
     }
 
     ig:ig_landowners = {
@@ -472,6 +463,7 @@ ca_liberate_honduras_effect = {
         remove_ideology = ideology_liberal
         remove_ideology = ideology_republican        
         add_ideology = ideology_ca_constitutionalist
+		set_interest_group_name = ig_hon_liberal
     }
     ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
     ig:ig_devout = {
@@ -485,22 +477,15 @@ ca_liberate_honduras_effect = {
 }
 
 ca_liberate_nicaragua_effect = {
-    add_modifier = { name = ca_starting_nicaragua_modifier months = 60 }
-    add_journal_entry = { type = je_ca_historic_situation_in_nicaragua }
-    remove_variable = ca_secession_country
-
+    #add_modifier = { name = ca_starting_nicaragua_modifier months = 60 }
+    #add_journal_entry = { type = je_ca_historic_situation_in_nicaragua }
+    add_journal_entry = { type = je_ca_state_role_in_federation }
+    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
+    #remove_variable = ca_secession_country
+    set_variable = { name = nicaragua_early_cons }
     create_character = {
-        first_name = "José"
-        last_name = "Núñez"
-        historical = yes
-        ig_leader = yes
-        interest_group = ig_landowners
+        first_name = nic_jose_zepeda_character_template
         ruler = yes
-        birth_date = 1800.02.02
-        culture = cu:nicaraguan
-        ideology = ideology:ideology_meritocratic
-        religion = rel:catholic
-        traits = { basic_diplomat }
     }
 
     ig:ig_landowners = {
@@ -527,10 +512,12 @@ ca_liberate_nicaragua_effect = {
 }
 
 ca_liberate_costarica_effect = {
-    add_modifier = { name = ca_starting_costarica_modifier months = 60 }
-    add_journal_entry = { type = je_ca_historic_situation_in_costarica }
-    remove_variable = ca_secession_country
-
+    #add_modifier = { name = ca_starting_costarica_modifier months = 60 }
+    #add_journal_entry = { type = je_ca_historic_situation_in_costarica }
+    add_journal_entry = { type = je_ca_state_role_in_federation }
+    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
+    #remove_variable = ca_secession_country
+     set_variable = { name = costa_rica_1830s }
     create_character = {
         template = cos_braulio_carrillo_character_template
         ruler = yes 
@@ -545,6 +532,7 @@ ca_liberate_costarica_effect = {
         remove_ideology = ideology_liberal
         remove_ideology = ideology_republican        
         add_ideology = ideology_ca_constitutionalist
+		set_interest_group_name = ig_cos_convervador3
     }
     ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
     ig:ig_devout = {
@@ -558,10 +546,11 @@ ca_liberate_costarica_effect = {
 }
 
 ca_liberate_losaltos_effect = {
-    add_modifier = { name = ca_starting_losaltos_modifier months = 60 }
-    add_journal_entry = { type = je_ca_situation_in_losaltos }
-    remove_variable = ca_secession_country
-
+    #add_modifier = { name = ca_starting_losaltos_modifier months = 60 }
+    #add_journal_entry = { type = je_ca_situation_in_losaltos }
+    #remove_variable = ca_secession_country
+    add_journal_entry = { type = je_ca_state_role_in_federation }
+    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }
     create_character = {
         first_name = "Marcelo" # Inventé un nombre distinto a Juan Lindo para evitar clones, cámbialo a tu gusto
         last_name = "Molina"
@@ -583,6 +572,7 @@ ca_liberate_losaltos_effect = {
         remove_ideology = ideology_liberal
         remove_ideology = ideology_republican        
         add_ideology = ideology_ca_constitutionalist
+		set_interest_group_name = ig_alt_liberal
     }
     ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
     ig:ig_devout = {
@@ -631,10 +621,12 @@ ca_create_guatemala_effect = {
             }
         }
         # Convertir en Dependencia
-        create_diplomatic_pact = {
-            country = scope:scope_GUA
-            type = ca_dependency
-        }
+		c:UCA? ={
+			create_diplomatic_pact = {
+			country = scope:scope_GUA
+			type = ca_dependency
+		}
+ 
     }
 }
 
@@ -662,10 +654,11 @@ ca_create_elsalvador_effect = {
             }
         }
         # Convertir en Dependencia
-        create_diplomatic_pact = {
-            country = scope:scope_ELS
-            type = ca_dependency
-        }
+		c:UCA? ={
+			create_diplomatic_pact = {
+			country = scope:scope_ELS
+			type = ca_dependency
+		}
     }
 }
 
@@ -693,10 +686,11 @@ ca_create_honduras_effect = {
             }
         }
         # Convertir en Dependencia
-        create_diplomatic_pact = {
-            country = scope:scope_HON
-            type = ca_dependency
-        }
+		c:UCA? ={
+			create_diplomatic_pact = {
+			country = scope:scope_HON
+			type = ca_dependency
+		}
     }
 }
 
@@ -724,10 +718,11 @@ ca_create_nicaragua_effect = {
             }
         }
         # Convertir en Dependencia
-        create_diplomatic_pact = {
-            country = scope:scope_NIC
-            type = ca_dependency
-        }
+		c:UCA? ={
+			create_diplomatic_pact = {
+			country = scope:scope_NIC
+			type = ca_dependency
+		}
     }
 }
 
@@ -755,10 +750,11 @@ ca_create_costarica_effect = {
             }
         }
         # Convertir en Dependencia
-        create_diplomatic_pact = {
-            country = scope:scope_COS
-            type = ca_dependency
-        }
+		c:UCA? ={
+			create_diplomatic_pact = {
+			country = scope:scope_COS
+			type = ca_dependency
+		}
     }
 }
 
@@ -784,10 +780,11 @@ ca_create_losaltos_effect = {
             }
         }
         # Convertir en Dependencia
-        create_diplomatic_pact = {
-            country = scope:scope_ALT
-            type = ca_dependency
-        }
+		c:UCA? ={
+			create_diplomatic_pact = {
+			country = scope:scope_ALT
+			type = ca_dependency
+		}
     }
 }
 ca_setup_ideological_strongholds_effect = {
@@ -843,7 +840,59 @@ ca_setup_ideological_strongholds_effect = {
         }
     }
 }
+ca_remove_ideological_strongholds_effect = {
+    # ---------------------------------------------------------
+    # EL SALVADOR: La Capital Federal y Liberal
+    # ---------------------------------------------------------
+    s:STATE_SAN_SALVADOR = { 
+        every_scope_state = { # Transición de State Region a State
+            
+            remove_modifier = liberal_stronghold 
+        }
+    }
 
+    # ---------------------------------------------------------
+    # GUATEMALA: La Vieja Élite y el Caudillismo
+    # ---------------------------------------------------------
+    s:STATE_GUATEMALA = {
+        every_scope_state = {
+            remove_modifier = unitary_stronghold 
+            remove_modifier = conservative_stronghold 
+            remove_modifier = reactionary_stronghold 
+        }
+    }
+
+    # ---------------------------------------------------------
+    # NICARAGUA: División y Separatismo
+    # ---------------------------------------------------------
+    s:STATE_NICARAGUA = {
+        every_scope_state = {
+            remove_modifier = separatism_stronghold 
+            remove_modifier = liberal_stronghold_small_nation 
+            remove_modifier = conservative_stronghold_small_nation 
+        }
+    }
+
+    # ---------------------------------------------------------
+    # COSTA RICA: Aislacionismo y Orden
+    # ---------------------------------------------------------
+    s:STATE_COSTA_RICA = {
+        every_scope_state = {
+            remove_modifier = separatism_stronghold 
+            remove_modifier = unitary_stronghold_small_nation 
+        }
+    }
+
+    # ---------------------------------------------------------
+    # HONDURAS: Federalismo en Decadencia
+    # ---------------------------------------------------------
+    s:STATE_HONDURAS = {
+        every_scope_state = {
+            remove_modifier = waning_federal_stronghold 
+            remove_modifier = conservative_stronghold_small_nation 
+        }
+    }
+}
 # ====================================================================
 # MOVIMIENTOS POLÍTICOS INICIALES
 # ====================================================================
@@ -1093,87 +1142,87 @@ ca_initial_game_start_setup = {
 #}
 
 
-    ca_sprit_costarica_rail_events	= {
-       c:PC1 = { save_scope_as = PC1_scope save_scope_as = sprit_costarica_scope  }
-       c:PC2 = { save_scope_as = PC2_scope save_scope_as = sprit_costarica_scope  }
-       c:PC3 = { save_scope_as = PC3_scope save_scope_as = sprit_costarica_scope  }
-       c:PC4 = { save_scope_as = PC4_scope save_scope_as = sprit_costarica_scope  }
-       c:PC5 = { save_scope_as = PC5_scope save_scope_as = sprit_costarica_scope  }
-       c:PC6 = { save_scope_as = PC6_scope save_scope_as = sprit_costarica_scope  }
-       c:PC7 = { save_scope_as = PC7_scope save_scope_as = sprit_costarica_scope  }
-       c:PC8 = { save_scope_as = PC8_scope save_scope_as = sprit_costarica_scope  }
-
-
-
-    }
-	ca_sprit_nicaragua_rail_events	= {
-       c:PN1 = { save_scope_as = PN1_scope save_scope_as = sprit_nicaragua_scope  }
-       c:PN2 = { save_scope_as = PN2_scope save_scope_as = sprit_nicaragua_scope  }
-       c:PN3 = { save_scope_as = PN3_scope save_scope_as = sprit_nicaragua_scope  }
-       c:PN4 = { save_scope_as = PN4_scope save_scope_as = sprit_nicaragua_scope  }
-       c:PN5 = { save_scope_as = PN5_scope save_scope_as = sprit_nicaragua_scope  }
-       c:PN6 = { save_scope_as = PN6_scope save_scope_as = sprit_nicaragua_scope  }
-
-
-    }
-    ca_sprit_guatemala_rail_events	= {
-       c:DG1 = { save_scope_as = DG1_scope save_scope_as = sprit_guatemala_scope  }
-       c:DG2 = { save_scope_as = DG2_scope save_scope_as = sprit_guatemala_scope  }
-       c:DG3 = { save_scope_as = DG3_scope save_scope_as = sprit_guatemala_scope  }
-       c:DG4 = { save_scope_as = DG4_scope save_scope_as = sprit_guatemala_scope  }
-       c:DG5 = { save_scope_as = DG5_scope save_scope_as = sprit_guatemala_scope  }
-       c:DG6 = { save_scope_as = DG6_scope save_scope_as = sprit_guatemala_scope  }
-       c:DG7 = { save_scope_as = DG7_scope save_scope_as = sprit_guatemala_scope  }
-       c:DG8 = { save_scope_as = DG8_scope save_scope_as = sprit_guatemala_scope  }
-
-
-
-    }
-    ca_sprit_elsalvador_rail_events	= {
-       c:DE1 = { save_scope_as = DE1_scope save_scope_as = sprit_elsalvador_scope  }
-       c:DE2 = { save_scope_as = DE2_scope save_scope_as = sprit_elsalvador_scope  }
-       c:DE3 = { save_scope_as = DE3_scope save_scope_as = sprit_elsalvador_scope  }
-       c:DE4 = { save_scope_as = DE4_scope save_scope_as = sprit_elsalvador_scope  }
-       c:DE5 = { save_scope_as = DE5_scope save_scope_as = sprit_elsalvador_scope  }
-       c:DE6 = { save_scope_as = DE6_scope save_scope_as = sprit_elsalvador_scope  }
-       c:DE7 = { save_scope_as = DE7_scope save_scope_as = sprit_elsalvador_scope  }
-       c:DE8 = { save_scope_as = DE8_scope save_scope_as = sprit_elsalvador_scope  }
-
-
-
-    }
-    ca_sprit_elsalvador_rail_events	= {
-       c:DE1 = { save_scope_as = DE1_scope save_scope_as = sprit_elsalvador_scope  }
-       c:DE2 = { save_scope_as = DE2_scope save_scope_as = sprit_elsalvador_scope  }
-       c:DE3 = { save_scope_as = DE3_scope save_scope_as = sprit_elsalvador_scope  }
-
-    }
-    ca_sprit_honduras_rail_events	= {
-       c:DH1 = { save_scope_as = DH1_scope save_scope_as = sprit_honduras_scope  }
-       c:DH2 = { save_scope_as = DH2_scope save_scope_as = sprit_honduras_scope  }
-       c:DH3 = { save_scope_as = DH3_scope save_scope_as = sprit_honduras_scope  }
-       c:DH4 = { save_scope_as = DH4_scope save_scope_as = sprit_honduras_scope  }
-       c:DH5 = { save_scope_as = DH5_scope save_scope_as = sprit_honduras_scope  }
-       c:DH6 = { save_scope_as = DH6_scope save_scope_as = sprit_honduras_scope  }
-       c:DH7 = { save_scope_as = DH7_scope save_scope_as = sprit_honduras_scope  }
-
-
-
-
-    }
-    ca_sprit_panama_rail_events	= {
-       c:PP1 = { save_scope_as = PP1_scope save_scope_as = sprit_panama_scope  }
-       c:PP2 = { save_scope_as = PP2_scope save_scope_as = sprit_panama_scope  }
-       c:PP3 = { save_scope_as = PP3_scope save_scope_as = sprit_panama_scope  }
-       c:PP4 = { save_scope_as = PP4_scope save_scope_as = sprit_panama_scope  }
-       c:PP5 = { save_scope_as = PP5_scope save_scope_as = sprit_panama_scope  }
-       c:PP6 = { save_scope_as = PP6_scope save_scope_as = sprit_panama_scope  }
-       c:PP7 = { save_scope_as = PP7_scope save_scope_as = sprit_panama_scope  }
-       c:PP8 = { save_scope_as = PP8_scope save_scope_as = sprit_panama_scope  }
-
-
-
-    }
+   #ca_sprit_costarica_rail_events	= {
+   #   c:PC1 = { save_scope_as = PC1_scope save_scope_as = sprit_costarica_scope  }
+   #   c:PC2 = { save_scope_as = PC2_scope save_scope_as = sprit_costarica_scope  }
+   #   c:PC3 = { save_scope_as = PC3_scope save_scope_as = sprit_costarica_scope  }
+   #   c:PC4 = { save_scope_as = PC4_scope save_scope_as = sprit_costarica_scope  }
+   #   c:PC5 = { save_scope_as = PC5_scope save_scope_as = sprit_costarica_scope  }
+   #   c:PC6 = { save_scope_as = PC6_scope save_scope_as = sprit_costarica_scope  }
+   #   c:PC7 = { save_scope_as = PC7_scope save_scope_as = sprit_costarica_scope  }
+   #   c:PC8 = { save_scope_as = PC8_scope save_scope_as = sprit_costarica_scope  }
+   #
+   #
+   #
+   #}
+	#ca_sprit_nicaragua_rail_events	= {
+   #   c:PN1 = { save_scope_as = PN1_scope save_scope_as = sprit_nicaragua_scope  }
+   #   c:PN2 = { save_scope_as = PN2_scope save_scope_as = sprit_nicaragua_scope  }
+   #   c:PN3 = { save_scope_as = PN3_scope save_scope_as = sprit_nicaragua_scope  }
+   #   c:PN4 = { save_scope_as = PN4_scope save_scope_as = sprit_nicaragua_scope  }
+   #   c:PN5 = { save_scope_as = PN5_scope save_scope_as = sprit_nicaragua_scope  }
+   #   c:PN6 = { save_scope_as = PN6_scope save_scope_as = sprit_nicaragua_scope  }
+   #
+   #
+   #}
+   #ca_sprit_guatemala_rail_events	= {
+   #   c:DG1 = { save_scope_as = DG1_scope save_scope_as = sprit_guatemala_scope  }
+   #   c:DG2 = { save_scope_as = DG2_scope save_scope_as = sprit_guatemala_scope  }
+   #   c:DG3 = { save_scope_as = DG3_scope save_scope_as = sprit_guatemala_scope  }
+   #   c:DG4 = { save_scope_as = DG4_scope save_scope_as = sprit_guatemala_scope  }
+   #   c:DG5 = { save_scope_as = DG5_scope save_scope_as = sprit_guatemala_scope  }
+   #   c:DG6 = { save_scope_as = DG6_scope save_scope_as = sprit_guatemala_scope  }
+   #   c:DG7 = { save_scope_as = DG7_scope save_scope_as = sprit_guatemala_scope  }
+   #   c:DG8 = { save_scope_as = DG8_scope save_scope_as = sprit_guatemala_scope  }
+   #
+   #
+   #
+   #}
+   #ca_sprit_elsalvador_rail_events	= {
+   #   c:DE1 = { save_scope_as = DE1_scope save_scope_as = sprit_elsalvador_scope  }
+   #   c:DE2 = { save_scope_as = DE2_scope save_scope_as = sprit_elsalvador_scope  }
+   #   c:DE3 = { save_scope_as = DE3_scope save_scope_as = sprit_elsalvador_scope  }
+   #   c:DE4 = { save_scope_as = DE4_scope save_scope_as = sprit_elsalvador_scope  }
+   #   c:DE5 = { save_scope_as = DE5_scope save_scope_as = sprit_elsalvador_scope  }
+   #   c:DE6 = { save_scope_as = DE6_scope save_scope_as = sprit_elsalvador_scope  }
+   #   c:DE7 = { save_scope_as = DE7_scope save_scope_as = sprit_elsalvador_scope  }
+   #   c:DE8 = { save_scope_as = DE8_scope save_scope_as = sprit_elsalvador_scope  }
+   #
+   #
+   #
+   #}
+   #ca_sprit_elsalvador_rail_events	= {
+   #   c:DE1 = { save_scope_as = DE1_scope save_scope_as = sprit_elsalvador_scope  }
+   #   c:DE2 = { save_scope_as = DE2_scope save_scope_as = sprit_elsalvador_scope  }
+   #   c:DE3 = { save_scope_as = DE3_scope save_scope_as = sprit_elsalvador_scope  }
+   #
+   #}
+   #ca_sprit_honduras_rail_events	= {
+   #   c:DH1 = { save_scope_as = DH1_scope save_scope_as = sprit_honduras_scope  }
+   #   c:DH2 = { save_scope_as = DH2_scope save_scope_as = sprit_honduras_scope  }
+   #   c:DH3 = { save_scope_as = DH3_scope save_scope_as = sprit_honduras_scope  }
+   #   c:DH4 = { save_scope_as = DH4_scope save_scope_as = sprit_honduras_scope  }
+   #   c:DH5 = { save_scope_as = DH5_scope save_scope_as = sprit_honduras_scope  }
+   #   c:DH6 = { save_scope_as = DH6_scope save_scope_as = sprit_honduras_scope  }
+   #   c:DH7 = { save_scope_as = DH7_scope save_scope_as = sprit_honduras_scope  }
+   #
+   #
+   #
+   #
+   #}
+   #ca_sprit_panama_rail_events	= {
+   #   c:PP1 = { save_scope_as = PP1_scope save_scope_as = sprit_panama_scope  }
+   #   c:PP2 = { save_scope_as = PP2_scope save_scope_as = sprit_panama_scope  }
+   #   c:PP3 = { save_scope_as = PP3_scope save_scope_as = sprit_panama_scope  }
+   #   c:PP4 = { save_scope_as = PP4_scope save_scope_as = sprit_panama_scope  }
+   #   c:PP5 = { save_scope_as = PP5_scope save_scope_as = sprit_panama_scope  }
+   #   c:PP6 = { save_scope_as = PP6_scope save_scope_as = sprit_panama_scope  }
+   #   c:PP7 = { save_scope_as = PP7_scope save_scope_as = sprit_panama_scope  }
+   #   c:PP8 = { save_scope_as = PP8_scope save_scope_as = sprit_panama_scope  }
+   #
+   #
+   #
+   #}
 #effect_ca_starting_pop_wealth_and = {
 #			create_pop = {
 #				pop_type = aristocrats

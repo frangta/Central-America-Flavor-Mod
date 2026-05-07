@@ -1,0 +1,691 @@
+﻿age_of_ca_caudillos_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_armed_forces_pop_attraction_mult = 0.3
+	interest_group_ig_armed_forces_pol_str_mult = 0.6
+	country_officers_pol_str_mult = 0.6
+}
+ca_add_bureaucracy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_bureaucracy_add = 5000
+}
+
+ca_add_authority = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_authority_add = 5000
+}
+
+ca_add_influence = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_influence_add = 5000
+}
+
+ca_add_tech_spread = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_tech_spread_add = 5000
+}
+ca_add_innovation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_weekly_innovation_add = 10000
+	country_weekly_innovation_max_add = 10000
+}
+ca_el_gran_avanse_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+        country_minting_add = 20000.0
+	country_construction_add = 200
+	country_ship_construction_add = 1000
+	country_ship_construction_progress_max_add = 100
+	country_ship_construction_efficiency_add = 10
+	state_migration_pull_mult = 0.5
+	state_education_access_add = 0.25
+	state_pop_qualifications_mult = 5
+	state_construction_mult = 1
+}
+ca_federal_paralysis = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_negative.dds"
+    
+    country_cannot_start_law_enactment_bool = yes
+    country_cannot_cancel_law_enactment_bool = yes
+    country_disallow_agitator_invites_bool = yes
+    country_authority_add = -250 
+    	state_pop_support_movement_liberal_mult = -0.90
+	state_pop_support_movement_radical_mult = -0.90
+	state_pop_support_movement_modernizer_mult = -0.90
+    country_legitimacy_govt_size_add = -1
+    political_movement_radicalism_add = 0.30 
+}
+
+ca_funding_separatists_modifier = {
+    icon = "gfx/interface/icons/modifier_icons/modifier_taxes_down.dds"
+    country_authority_add = -50
+    state_tax_capacity_mult = -0.10 # Desvías impuestos para comprar armas
+}
+
+
+ca_funding_federalists_modifier = {
+    icon = "gfx/interface/icons/modifier_icons/modifier_bureaucracy_down.dds"
+    country_bureaucracy_add = -50 # Gastas tu burocracia ayudando a la capital
+}
+ca_modifier_pop_attraction_low = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	political_movement_pop_attraction_mult = 0.25
+}
+ca_modifier_pop_attraction_mid = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	political_movement_pop_attraction_mult = 0.50
+}
+ca_modifier_pop_attraction_high = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	political_movement_pop_attraction_mult = 0.75
+}
+ca_modifier_total = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_negative.dds
+	political_movement_radicalism_add = 0.90
+}
+ca_modifier_total_debug = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_negative.dds
+	political_movement_radicalism_add = -2
+	political_movement_pop_attraction_mult = -2
+}
+ca_modifier_radicalism_low = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	political_movement_radicalism_add = 0.15
+}
+ca_modifier_radicalism_mid = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	political_movement_radicalism_add = 0.30
+}
+ca_modifier_radicalism_high = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	political_movement_radicalism_add = 0.60
+}
+ca_british_debt_crisis = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+country_disable_investment_pool_bool = yes
+    country_prestige_add = -5
+    state_tax_waste_add = 0.25
+}
+ca_military_disarray = {
+    icon = "gfx/interface/icons/timed_modifier_icons/bureaucracy_negative.dds"
+    character_command_limit_mult = -0.25
+    military_formation_organization_gain_mult = -0.25
+}
+ca_separatist_agitation_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_unrest_negative.dds
+	state_turmoil_effects_mult = 0.20
+	state_radicals_and_loyalists_from_sol_change_mult = 0.15
+}
+
+ca_mountain_vein_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gold_positive.dds
+	building_gold_mine_throughput_add = 0.30
+	building_group_bg_extraction_construction_efficiency_add = 0.20
+}
+
+ca_radical_agitation_modifier = {
+	state_radicals_from_political_movements_mult = 0.25
+}
+ca_ig_approval_up = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_generic_positive.dds
+	interest_group_approval_add = 2
+}
+
+ca_ig_approval_down = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_generic_negative.dds
+	interest_group_approval_add = -2
+}
+ca_ig_approval_states_rights = {
+    icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_up.dds"
+    interest_group_approval_add = 3
+}
+
+ca_ig_disapproval_federal_betrayal = {
+    icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_down.dds"
+    interest_group_approval_add = -3
+}
+
+ca_ig_approval_strong_republic = {
+    icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_up.dds"
+    interest_group_approval_add = 4
+}
+
+ca_ig_disapproval_centralist_tyranny = {
+    icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_down.dds"
+    interest_group_approval_add = -4
+}
+ca_newspaper_censored_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	state_education_access_add = -0.5
+	country_weekly_innovation_add = -5
+}
+
+
+ca_humiliated_federation_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_prestige_negative.dds
+	country_prestige_add = -20
+	country_influence_add = -50
+}
+
+ca_reasserted_sovereignty_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_prestige_positive.dds
+	country_prestige_add = 15
+	country_authority_add = 100
+}
+
+ca_direct_administration_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_tax_capacity_add = 20
+	country_bureaucracy_add = -25
+}
+
+ca_british_outpost_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_wood_positive.dds
+	building_throughput_add = 0.15
+	building_throughput_add = 0.10
+}
+ca_funding_low_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds
+	country_expenses_add = 0.05
+}
+
+ca_funding_med_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds
+	country_expenses_add = 0.10
+}
+
+ca_funding_high_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds
+	country_expenses_add = 0.20
+}
+
+ca_recovered_funds_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_positive.dds
+	country_minting_add = 0.10
+}
+
+ca_failed_expedition_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	state_construction_mult = -0.25
+}
+
+ca_infrastructure_boom_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_road_positive.dds
+	state_infrastructure_add = 10
+	state_construction_mult = 0.15
+}
+
+ca_deep_vein_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gold_positive.dds
+	building_gold_mine_throughput_add = 0.20
+}
+
+ca_gold_rush_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gold_positive.dds
+	state_migration_pull_add = 25
+	state_turmoil_effects_mult = 0.10
+}
+
+ca_foreign_monopoly_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_diplomacy_negative.dds
+	building_gold_mine_throughput_add = 0.10
+	state_capitalists_investment_pool_contribution_add = 10
+	state_aristocrats_investment_pool_contribution_add = 10
+	#country_investment_pool_contribution_mult = -0.05
+}
+
+ca_anti_corruption_campaign_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_scales_positive.dds
+	country_bureaucracy_mult = 0.10
+}
+
+ca_state_corruption_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_scales_negative.dds
+	country_bureaucracy_mult = -0.15
+}
+
+ca_jungle_fever_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	state_mortality_mult = 0.25
+}
+
+ca_archaeological_find_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_prestige_positive.dds
+	country_prestige_add = 10
+}
+
+ca_geological_innovation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_weekly_innovation_add = 25
+}
+
+ca_abundant_coal_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coal_positive.dds
+	building_coal_mine_throughput_add = 0.20
+}
+
+ca_private_mining_rights = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_positive.dds
+	building_gold_mine_throughput_add = 0.05
+	interest_group_ig_industrialists_approval_add = 2
+}
+
+ca_state_mining_rights = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_minting_add = 0.05
+	interest_group_ig_industrialists_approval_add = -2
+
+}
+# === GRUPOS DE INTERÉS E INTRIGA ===
+
+
+ca_state_rights_approval = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+ca_federal_betrayal_disapproval = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds" }
+ig_political_intrigue_success = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+ig_purged_cabinet = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds" }
+
+# === GOBERNANTES Y CAUDILLOS ===
+ca_unpopular_ruler_modifier = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds" }
+ca_popular_ruler_modifier = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+ca_autonomous_caudillo_modifier = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+
+# === SEPARATISMO ===
+state_separatist_unrest = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds" }
+
+
+# === ECONOMÍA E INFRAESTRUCTURA ===
+
+ca_coffee_export_boom = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+ca_heavy_coffee_tax_national = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds" }
+ca_heavy_coffee_tax_state = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds" }
+ca_austerity_measures = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds" }
+ca_economic_chaos_prestige_loss = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds" }
+ca_foreign_capital_injection = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+
+# === DIPLOMACIA Y SOBERANÍA ===
+
+ca_defiance_prestige = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+
+# === MILITAR Y ORDEN ===
+ca_military_law_imposed = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+ca_military_deployment_cost = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds" }
+ca_border_mobilization = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+ca_federal_army_centralized = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+
+
+
+# === ENFERMEDADES Y SOCIEDAD ===
+
+ca_federal_reconstruction = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+ca_abandoned_by_federal_gov = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds" }
+ca_secular_literacy_campaign = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+ca_religious_education_drive = { icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds" }
+# --- Modificadores de Estado (Map Impact - Event 79) ---
+
+ca_separatist_unrest = {
+    icon = "gfx/interface/icons/modifier_icons/modifier_devastation.dds"
+    state_turmoil_effects_mult = 0.25 # Añade 25% de agitación directa al estado
+    state_tax_capacity_mult = -0.20 # Reduce la recaudación por la rebeldía
+}
+
+# Recompensa Económica: Auge Exportador
+ca_agro_export_miracle_modifier = {
+    icon = "gfx/interface/icons/goods_icons/coffee.dds"
+    building_group_bg_agriculture_throughput_add = 0.15
+    building_port_throughput_add = 0.20
+    country_prestige_add = 10    
+
+}
+
+# Recompensa Militar: Ejército Profesional
+ca_professional_army_bonus_modifier = {
+    icon = "gfx/interface/icons/law_icons/professional_army.dds"
+
+    unit_army_offense_mult = 0.10
+    unit_defense_add = 0.10
+    unit_morale_recovery_mult = 0.15
+    political_movement_radicalism_add = -0.10
+}
+
+# Recompensa Cultural: Era de la Ilustración
+ca_enlightenment_era_modifier = {
+    icon = "gfx/interface/icons/jomini/literacy_icon.dds"
+    
+    state_education_access_add = 0.10
+    state_assimilation_mult = 0.25
+    country_tech_spread_mult = 0.15
+    state_migration_pull_mult = 0.10
+}
+coffee_oligarchy_boom_modifier = {
+    icon = "gfx/interface/icons/goods_icons/coffee.dds"
+    building_coffee_plantation_throughput_add = 0.25
+    country_prestige_add = 20
+    interest_group_ig_landowners_pol_str_mult = 0.25
+    state_migration_pull_mult = 0.10
+}
+uca_new_penal_code = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_intelligentsia_approval_add = 2
+	interest_group_ig_landowners_approval_add = -2
+	country_authority_add = 100
+	country_prestige_mult = 0.05
+}
+
+uca_cholera = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_mortality_mult = 0.2
+}
+
+uca_quarantine = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	building_throughput_add = -0.5
+	state_mortality_mult = -0.15
+}
+
+uca_morazan_presidency = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_authority_add = 100
+	country_legitimacy_base_add = 10
+	interest_group_ig_intelligentsia_approval_add = 2
+}
+#ca_allow_multiple_alliances = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+#    country_allow_multiple_alliances_bool = yes
+#	
+#}
+
+
+ca_liberal_stronghold = {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# El Salvador es el motor del liberalismo y el federalismo morazanista
+		state_pop_support_movement_ca_liberal_add = 25
+		state_pop_support_movement_ca_federalist_add = 20
+		state_pop_support_movement_ca_unitarian_add = -50
+		state_radicals_from_political_movements_mult = 0.15
+		state_loyalists_from_political_movements_mult = -0.10
+}
+
+	
+
+
+
+ca_conservative_capital= {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Núcleo del poder unitario y de los "Serviles" (reaccionarios)
+		state_pop_support_movement_ca_reactionary_add = 30
+		state_pop_support_movement_ca_unitarian_add = 25
+		state_pop_support_movement_ca_liberal_add = -20
+		state_pop_support_movement_ca_federalist_add = -30
+		state_loyalists_from_political_movements_mult = 0.20
+	
+}
+
+ca_leones_vs_granadinos = {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Representa la rivalidad extrema entre León (Liberal/Federal) y Granada (Conservadora/Unitaria)
+		state_pop_support_movement_ca_liberal_add = 20
+		state_pop_support_movement_ca_unitarian_add = 20
+		state_pop_support_movement_ca_federalist_add = 15
+		state_pop_support_movement_ca_reactionary_add = 10
+		
+		# Nicaragua era el estado con mayor guerra civil interna, por lo que la radicalización es máxima
+		state_radicals_from_political_movements_mult = 0.40
+		state_loyalists_from_political_movements_mult = -0.30
+}
+
+ca_isolated_autonomists= {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Históricamente pragmática, con apoyo al orden interno y autonomía (federalismo suave)
+		state_pop_support_movement_ca_federalist_add = 15
+		state_pop_support_movement_ca_liberal_add = 10
+		state_pop_support_movement_ca_reactionary_add = 15
+		state_radicals_from_political_movements_mult = -0.25
+		state_loyalists_from_political_movements_mult = 0.30
+}
+
+	
+
+
+
+ca_federalist_heartland= {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Apoyo sólido al modelo federal pero con inestabilidad por caudillos locales
+		state_pop_support_movement_ca_federalist_add = 20
+		state_pop_support_movement_ca_liberal_add = 15
+		state_pop_support_movement_ca_unitarian_add = 25
+		state_radicals_from_political_movements_mult = 10
+}
+
+
+
+
+ca_isthmian_liberalism= {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Tendencias separatistas de la Gran Colombia y liberalismo comercial
+		state_pop_support_movement_ca_liberal_add = 15
+		state_pop_support_movement_ca_federalist_add = 20
+		state_pop_support_movement_ca_unitarian_add = -40
+		state_radicals_from_political_movements_mult = 0.05
+}
+
+
+
+
+ca_frontier_tensions = {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Región en disputa ideológica entre el centralismo mexicano y raíces centroamericanas
+		state_pop_support_movement_ca_reactionary_add = 15
+		state_pop_support_movement_ca_unitarian_add = 10
+		state_pop_support_movement_ca_federalist_add = 20
+		state_radicals_from_political_movements_mult = 0.20
+		state_loyalists_from_political_movements_mult = -0.15
+}
+
+ca_regional_resentment_modifier = {
+	icon = "gfx/interface/icons/modifiers/turmoil_icon.dds"
+	political_movement_radicalism_add = 0.1
+	state_turmoil_effects_mult = 5
+}
+
+# Stronghold Events
+
+
+all_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+state_ca_iron_mine_max_level_add = 5
+state_ca_coal_mine_max_level_add = 5
+state_ca_lead_mine_max_level_add = 5
+state_ca_sulfur_mine_max_level_add = 5
+state_ca_gold_mine_max_level_add = 5
+state_ca_oil_rig_max_level_add = 5
+state_ca_gold_field_max_level_add = 5	 
+}
+
+
+# --- FEDERALISTAS ---
+federal_stronghold = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+    
+    country_legitimacy_govt_size_add = 10
+    interest_group_ig_intelligentsia_pol_str_mult = 0.10
+    state_pop_support_movement_ca_federalist_add = 25
+   
+}
+
+federal_stronghold_small_nation = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+    country_legitimacy_govt_size_add = 5
+    state_bureaucracy_population_base_cost_factor_mult = -0.05
+    state_pop_support_movement_ca_federalist_add = 10
+}
+
+waning_federal_stronghold = { 
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
+    country_legitimacy_govt_size_add = -5
+    state_radicals_and_loyalists_from_sol_change_mult = 0.10
+    state_pop_support_movement_ca_federalist_add = -10
+}
+
+# --- UNITARIOS ---
+unitary_stronghold = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds"
+    
+    country_authority_add = 25
+    state_radicals_and_loyalists_from_sol_change_mult = 0.05
+    state_pop_support_movement_ca_unitarian_add = 25
+
+}
+
+unitary_stronghold_small_nation = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds"
+    country_authority_add = 10
+    state_decree_cost_mult = -0.10
+    
+    state_pop_support_movement_ca_unitarian_add = 10
+}
+
+waning_unitary_stronghold = { 
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_negative.dds"
+    # Caos por falta de autoridad
+    country_authority_add = -20
+    state_radicals_and_loyalists_from_sol_change_mult = 0.15
+    state_pop_support_movement_ca_unitarian_add = -10
+    state_political_movement_ca_unitarian_radicalism_add = 20
+}
+
+# --- SEPARATISTAS ---
+separatism_stronghold = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+    
+    state_bureaucracy_population_base_cost_factor_mult = 0.25
+    #state_defense_mult = 0.20
+    state_tax_waste_add = 0.15
+    #state_radicals_from_discrimination_add = 0.25
+}
+
+separatism_stronghold_small_nation = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+    unit_defense_mult = 0.10
+    state_migration_pull_mult = 0.1
+}
+
+suppressed_separatism_stronghold = { 
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+    #state_radicals_from_discrimination_add = 0.10
+    state_radicals_and_loyalists_from_sol_change_mult = 0.05
+    #state_defense_mult = -0.10
+}
+# --- REACCIONARIOS/ 
+reactionary_stronghold = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_neutral.dds"
+    state_pop_support_movement_ca_reactionary_add = 30   
+    interest_group_ig_petty_bourgeoisie_pop_attraction_mult = 0.25
+    interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.20
+}
+
+reactionary_stronghold_small_nation = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_speech_positive.dds"
+    state_pop_support_movement_ca_reactionary_add = 30   
+	interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.15
+}
+
+fading_reactionary_stronghold = { 
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_speech_negative.dds"
+    # La gente abandona las ideas reaccionarias
+    state_pop_support_movement_ca_reactionary_add = -30	
+    interest_group_ig_petty_bourgeoisie_pop_attraction_mult = -0.25
+}
+
+# --- CONSERVADORES
+conservative_stronghold = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+    
+    interest_group_ig_landowners_pop_attraction_mult = 0.20
+    interest_group_ig_landowners_pol_str_mult = 0.25
+}
+
+age_of_conservative_stronghold = { # La "Era" conservadora (Efecto mayor)
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+    
+    interest_group_ig_landowners_pop_attraction_mult = 0.35
+    interest_group_ig_landowners_pol_str_mult = 0.40
+    interest_group_ig_devout_pol_str_mult = 0.10
+}
+
+conservative_stronghold_small_nation = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+    interest_group_ig_landowners_pop_attraction_mult = 0.10
+    interest_group_ig_landowners_pol_str_mult = 0.15
+}
+
+# --- LIBERALES
+liberal_stronghold = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_tech_positive.dds"
+    state_pop_support_movement_ca_liberal_add = 30
+    interest_group_ig_intelligentsia_pop_attraction_mult = 0.25
+    interest_group_ig_intelligentsia_pol_str_mult = 0.20
+}
+
+age_of_liberal_stronghold = { 
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_tech_positive.dds"
+    state_pop_support_movement_ca_liberal_add = 50
+    interest_group_ig_intelligentsia_pop_attraction_mult = 0.40
+    interest_group_ig_intelligentsia_pol_str_mult = 0.30
+    country_mass_migration_attraction_mult = 0.10
+}
+
+liberal_stronghold_small_nation = {
+    icon = "gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_neutral.dds"
+    state_pop_support_movement_ca_liberal_add = 10
+    interest_group_ig_intelligentsia_pop_attraction_mult = 0.15
+    interest_group_ig_intelligentsia_pol_str_mult = 0.10
+}
+
+######################Soon##########
+##Anarcho-Liberal_stronghold = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+##Removed_Anarcho-Liberal_stronghold = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+##Anarcho-Liberal_stronghold_Small_Nation = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+##Socialist_stronghold = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+##Removed_Socialist_stronghold = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+##Socialist_stronghold_Small_Nation = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+##Communist_stronghold = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+##Removed_Communist_stronghold = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+##Communist_stronghold_Small_Nation = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+##Fascist_stronghold = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+##Removed_Fascist_stronghold = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+##Fascist_stronghold_Small_Nation = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+#	 
+##}
+

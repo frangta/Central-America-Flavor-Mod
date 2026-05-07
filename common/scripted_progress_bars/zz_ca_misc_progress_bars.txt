@@ -1,0 +1,963 @@
+﻿##ca_core_progress_bar = {
+## 	name = ""
+## 	desc = ""
+## 	second_desc = ""
+## 	
+##	start_value = 100
+## 	min_value = 0
+## 	max_value = 200
+##	
+##	default_bad = yes
+##
+##    monthly_progress = {
+##	add = {
+## 			desc = ""
+## 			 if = {
+##		limit = {
+##			ig:ig_intelligentsia = {
+##				is_powerful = yes
+##			}
+##		}
+##    value = -10		
+##		}
+##
+##		
+##	}
+##	add = {
+##	    desc = ""
+##		if = {
+##		limit = {
+##			ig:ig_intelligentsia = {
+##				is_in_government = yes
+##			}
+##		}
+##     value = 1
+##		
+##	}
+##	}
+##	add = {
+## 			desc = ""
+## 			 if = {
+##		limit = {
+##			ig:ig_intelligentsia  = {
+##				is_marginal = yes
+##			}
+##		}
+##    value = -10		
+##		}
+##
+##		
+##	} 
+##
+##	add = {
+## 			desc = ""
+## 		if = {
+##		        limit = {
+##			OR = {
+##				has_law = law_type:law_total_separation 
+##				has_law = law_type:law_cultural_exclusion 
+##				has_law = law_type:law_census_voting 
+##				has_law = law_type:law_universal_suffrage
+##                has_law = law_type:law_homesteading 
+##				has_law = law_type:law_right_of_assembly  
+##				has_law = law_type:law_elected_bureaucrats 
+##				}
+##
+##		
+##	            } 
+##    value = -5
+## 		}
+##    }
+##	add = {
+## 		desc = ""
+## 		   if = {
+##		    limit = {
+##			OR = {
+##				has_law = law_type:law_autocracy
+##				has_law = law_type:law_oligarchy
+##				has_law = law_type:law_single_party_state
+##				has_law = law_type:law_state_religion 
+##                has_law = law_type:law_national_supremacy 	
+##				has_law = law_type:law_traditionalism 
+##                has_law = law_type:law_hereditary_bureaucrats
+##                has_law = law_type:law_tenant_farmers 
+##                has_law = law_type:law_censorship 				
+##			}
+##		}
+##    value = 10
+##		
+##	         } 
+## 	}
+##	add = {
+## 			desc = ""
+## 			 if = {
+##		       limit = {
+##			     ig:ig_landowners = {
+##				  is_powerful = yes
+##			     }
+##		       }
+##              value = 10
+##		
+##	         } 
+## 	}
+##	add = {
+## 			desc = ""
+## 			 if = {
+##		        limit = {
+##			    ig:ig_landowners = {
+##				is_in_government = yes
+##			}
+##		        }       
+##    value = 10
+##		
+##	         } 
+## 	}
+##	add = {
+## 			desc = ""
+## 			 if = {
+##		        		limit = {
+##			ig:ig_landowners  = {
+##				is_marginal = yes
+##			}
+##		}
+##    value = -10
+##		
+##	         } 
+## 	}
+##
+## 	}
+##	add = {
+## 			desc = ""
+## 			 if = {
+##		        limit = {
+##				any_scope_state = {
+##				OR = {
+##					state_region = s:STATE_GUATEMALA
+##					state_region = s:STATE_HONDURAS
+##					state_region = s:STATE_COSTA_RICA
+##					state_region = s:STATE_SAN_SALVADOR
+##					state_region = s:STATE_NICARAGUA
+##
+##				}
+##				count < 5
+##		        }    
+##		}
+##			   
+##		               
+##    value = -15
+##		
+##	         } 
+## 	}
+##	add = {
+## 			desc = ""
+## 			 if = {
+##		        limit = {
+##				any_scope_state = {
+##				OR = {
+##					state_region = s:STATE_GUATEMALA
+##					state_region = s:STATE_HONDURAS
+##					state_region = s:STATE_COSTA_RICA
+##					state_region = s:STATE_SAN_SALVADOR
+##					state_region = s:STATE_NICARAGUA
+##
+##				}
+##				count < 4
+##		        }    
+##		}
+##			   
+##		               
+##    value = -10
+##		
+##	         } 
+## 	}
+##	add = {
+## 			desc = ""
+## 			 if = {
+##		        limit = {
+##				any_scope_state = {
+##				OR = {
+##					state_region = s:STATE_GUATEMALA
+##					state_region = s:STATE_HONDURAS
+##					state_region = s:STATE_COSTA_RICA
+##					state_region = s:STATE_SAN_SALVADOR
+##					state_region = s:STATE_NICARAGUA
+##
+##				}
+##				count < 3
+##		        }    
+##		}
+##			   
+##		               
+##    value = -5
+##		
+##	         } 
+## 	}	
+##	add = {
+## 			desc = ""
+## 			 if = {
+##		        limit = {}
+##				any_scope_state = {
+##				OR = {
+##					state_region = s:STATE_GUATEMALA
+##					state_region = s:STATE_HONDURAS
+##					state_region = s:STATE_COSTA_RICA
+##					state_region = s:STATE_SAN_SALVADOR
+##					state_region = s:STATE_NICARAGUA
+##
+##				}
+##				count < 3
+##		        }    
+##		
+##    value = 20
+##		
+##	         } 
+## 	}
+##	add = {
+## 			desc = ""
+## 			 if = {
+##		        limit = {
+##				any_scope_state = {
+##				OR = {
+##					state_region = s:STATE_GUATEMALA
+##					state_region = s:STATE_HONDURAS
+##					state_region = s:STATE_COSTA_RICA
+##					state_region = s:STATE_SAN_SALVADOR
+##					state_region = s:STATE_NICARAGUA
+##
+##				}
+##				count < 2
+##		        }    
+##		}
+##			   
+##		               
+##    value = 25
+##		
+##	         } 
+## 	}
+##	add = {
+## 			desc = ""
+## 			 if = {
+##		        limit = {
+##				any_scope_state = {
+##				OR = {
+##					state_region = s:STATE_GUATEMALA
+##					state_region = s:STATE_HONDURAS
+##					state_region = s:STATE_COSTA_RICA
+##					state_region = s:STATE_SAN_SALVADOR
+##					state_region = s:STATE_NICARAGUA
+##
+##				}
+##				count < 1
+##		        }    
+##		}
+##			   
+##		               
+##    value = 30
+##		
+##	         } 
+## 	}	
+## 	
+##
+##
+##}
+##frca_support_bar = {
+##    name = my_frca_support_bar_name
+##    desc = my_frca_support_bar_desc
+##	second_desc = "PROGRESS_BAR_TEXT3"
+##    start_value = 0
+##    min_value = 0
+##    max_value = 200
+##    double_sided_gold = yes
+##    monthly_progress = {
+##    
+##        if = {
+##            limit = {
+##                has_variable = gua_support_var
+##                NOT = { exists = c:GUA }
+##            }
+##            add = {
+##                desc = "gua_support_DESC1"
+##                value = 1
+##            }
+##        }
+##        if = {
+##            limit = {
+##                OR = {
+##                    NOT = { has_variable = gua_support_var }
+##                    exists = c:GUA
+##                }
+##            }
+##            add = {
+##                desc = "gua_support_DESC2"
+##                value = -1
+##            }
+##        }
+##
+##        if = {
+##            limit = {
+##                has_variable = els_support_var
+##                NOT = { exists = c:ELS }
+##            }
+##            add = {
+##                desc = "els_support_var_DESC1"
+##                value = 1
+##            }
+##        }
+##        if = {
+##            limit = {
+##                OR = {
+##                    NOT = { has_variable = els_support_var }
+##                    exists = c:ELS
+##                }
+##            }
+##            add = {
+##                desc = "els_support_var_DESC2"
+##                value = -1
+##            }
+##        }
+##
+##        if = {
+##            limit = {
+##                has_variable = hon_support_var
+##                NOT = { exists = c:HON }
+##            }
+##            add = {
+##                desc = "hon_support_var_DESC1"
+##                value = 1
+##            }
+##        }
+##        if = {
+##            limit = {
+##                OR = {
+##                    NOT = { has_variable = hon_support_var }
+##                    exists = c:HON
+##                }
+##            }
+##            add = {
+##                desc = "hon_support_var_DESC2"
+##                value = -1
+##            }
+##        }
+##
+##        if = {
+##            limit = {
+##                has_variable = nic_support_var
+##                NOT = { exists = c:NIC }
+##            }
+##            add = {
+##                desc = "nic_support_var_DESC1"
+##                value = 1
+##            }
+##        }
+##        if = {
+##            limit = {
+##                OR = {
+##                    NOT = { has_variable = nic_support_var }
+##                    exists = c:NIC
+##                }
+##            }
+##            add = {
+##                desc = "nic_support_var_DESC2"
+##                value = -1
+##            }
+##        }
+##
+##        if = {
+##            limit = {
+##                has_variable = cos_support_var
+##                NOT = { exists = c:COS }
+##            }
+##            add = {
+##                desc = "cos_support_var_DESC1"
+##                value = 1
+##            }
+##        }
+##        if = {
+##            limit = {
+##                OR = {
+##                    NOT = { has_variable = cos_support_var }
+##                    exists = c:COS
+##                }
+##            }
+##            add = {
+##                desc = "cos_support_var_DESC12"
+##                value = -1
+##            }
+##        }
+##
+##        if = {
+##            limit = {
+##                exists = c:ELS
+##                has_variable = frca_elsalvador_peace_var
+##            }
+##            add = {
+##                desc = "frca_elsalvador_peace_DESC1"
+##                value = -5
+##            }
+##        }
+##
+##        if = {
+##            limit = {
+##                exists = c:HON
+##                has_variable = frca_honduras_peace_var
+##            }
+##            add = {
+##                desc = "frca_honduras_peace_DESC1"
+##                value = -5
+##            }
+##        }
+##
+##        if = {
+##            limit = {
+##                exists = c:NIC
+##                has_variable = frca_nicaragua_peace_var
+##            }
+##            add = {
+##                desc = "frca_nicaragua_peace_DESC1"
+##                value = -5
+##            }
+##        }
+##
+##        if = {
+##            limit = {
+##                exists = c:COS
+##                has_variable = frca_costarica_peace_var
+##            }
+##            add = {
+##                desc = "frca_costarica_peace_DESC1"
+##                value = -5
+##            }
+##        }
+##	
+##
+##		 
+##    }
+##
+##
+##}
+#frca_support_bar = {
+#    name = my_frca_support_bar_name
+#    desc = my_frca_support_bar_desc
+#    second_desc = "PROGRESS_BAR_TEXT3"
+#    
+#    start_value = 60
+#    min_value = 0
+#    max_value = 100
+#    
+#    double_sided_bad = yes
+#
+#    monthly_progress = {
+#    
+#        # ==========================
+#        # GUATEMALA
+#        # ==========================
+#        # Suma 1 si apoyan y no son independientes
+#        add = {
+#            desc = "gua_support_DESC1"
+#            value = 1
+#            trigger = {
+#                has_variable = gua_support_var
+#                NOT = { exists = c:GUA }
+#                NOT = { has_variable = je_gua_support_var }
+#            }
+#        }
+#        # Resta 1 si NO apoyan o son independientes
+#        add = {
+#            desc = "gua_support_DESC2"
+#            value = -1
+#            trigger = {
+#                OR = {
+#                    NOT = { has_variable = gua_support_var }
+#                    exists = c:GUA
+#                }
+#                has_variable = je_gua_support_var
+#            }
+#        }
+#
+#        # ==========================
+#        # EL SALVADOR
+#        # ==========================
+#        add = {
+#            desc = "els_support_var_DESC1"
+#            value = 1
+#            trigger = {
+#                has_variable = els_support_var
+#                NOT = { exists = c:ELS }
+#                NOT = { has_variable = je_els_support_var }
+#            }
+#        }
+#        add = {
+#            desc = "els_support_var_DESC2"
+#            value = -1
+#            trigger = {
+#                OR = {
+#                    NOT = { has_variable = els_support_var }
+#                    exists = c:ELS
+#                }
+#                has_variable = je_els_support_var
+#            }
+#        }
+#
+#        # ==========================
+#        # HONDURAS
+#        # ==========================
+#        add = {
+#            desc = "hon_support_var_DESC1"
+#            value = 1
+#            trigger = {
+#                has_variable = hon_support_var
+#                NOT = { exists = c:HON }
+#                NOT = { has_variable = je_hon_support_var }
+#            }
+#        }
+#        add = {
+#            desc = "hon_support_var_DESC2"
+#            value = -1
+#            trigger = {
+#                OR = {
+#                    NOT = { has_variable = hon_support_var }
+#                    exists = c:HON
+#                }
+#                has_variable = je_hon_support_var
+#            }
+#        }
+#
+#        # ==========================
+#        # NICARAGUA
+#        # ==========================
+#        add = {
+#            desc = "nic_support_var_DESC1"
+#            value = 1
+#            trigger = {
+#                has_variable = nic_support_var
+#                NOT = { exists = c:NIC }
+#                NOT = { has_variable = je_nic_support_var }
+#            }
+#        }
+#        add = {
+#            desc = "nic_support_var_DESC2"
+#            value = -1
+#            trigger = {
+#                OR = {
+#                    NOT = { has_variable = nic_support_var }
+#                    exists = c:NIC
+#                }
+#                has_variable = je_nic_support_var
+#            }
+#        }
+#
+#        # ==========================
+#        # COSTA RICA
+#        # ==========================
+#        add = {
+#            desc = "cos_support_var_DESC1"
+#            value = 1
+#            trigger = {
+#                has_variable = cos_support_var
+#                NOT = { exists = c:COS }
+#                NOT = { has_variable = je_cos_support_var }
+#            }
+#        }
+#        add = {
+#            desc = "cos_support_var_DESC12"
+#            value = -1
+#            trigger = {
+#                OR = {
+#                    NOT = { has_variable = cos_support_var }
+#                    exists = c:COS
+#                }
+#                has_variable = je_cos_support_var
+#            }
+#        }
+#
+#        # ==========================
+#        # PENALIZACIONES DE PAZ (CIVIL WARS)
+#        # ==========================
+#        add = {
+#            desc = "frca_elsalvador_peace_DESC1"
+#            value = -5
+#            trigger = {
+#                exists = c:ELS
+#                has_variable = frca_elsalvador_peace_var
+#            }
+#        }
+#        
+#        add = {
+#            desc = "frca_honduras_peace_DESC1"
+#            value = -5
+#            trigger = {
+#                exists = c:HON
+#                has_variable = frca_honduras_peace_var
+#            }
+#        }
+#
+#        add = {
+#            desc = "frca_nicaragua_peace_DESC1"
+#            value = -5
+#            trigger = {
+#                exists = c:NIC
+#                has_variable = frca_nicaragua_peace_var
+#            }
+#        }
+#
+#        add = {
+#            desc = "frca_costarica_peace_DESC1"
+#            value = -5
+#            trigger = {
+#                exists = c:COS
+#                has_variable = frca_costarica_peace_var
+#            }
+#        }
+#    }
+#}
+#ca_golden_grain_bar = {
+#    name = "ca_golden_grain_bar_name"
+#    desc = "ca_golden_grain_bar_desc"
+#    
+#    default_green = yes # Barra verde estándar de progreso
+#
+#    start_value = 0
+#    min_value = 0
+#    max_value = 100
+#
+#    monthly_progress = {
+#        
+#        # 1. Producción Base (Nivel de Plantaciones)
+#        # Si tienes más de 10 plantaciones en total
+#        if = {
+#            limit = {
+#                has_building_type = building_coffee_plantation
+#                bg:bg_coffee_plantations = {
+#                    level > 10
+#                }
+#            }
+#            add = {
+#                desc = "golden_grain_production_base"
+#                value = 1
+#            }
+#        }
+#
+#        # 2. Infraestructura (Ferrocarriles)
+#        # Esencial para sacar el café al puerto
+#        if = {
+#            limit = {
+#                has_technology_researched = railways
+#                any_scope_state = {
+#                    has_building_type = building_coffee_plantation
+#                    has_building_type = building_railway
+#                }
+#            }
+#            add = {
+#                desc = "golden_grain_infrastructure"
+#                value = 1
+#            }
+#        }
+#
+#        # 3. Exportaciones (Mercantilismo o Libre Mercado)
+#        # El café es para vender, no para guardar
+#        if = {
+#            limit = {
+#                OR = {
+#                    has_law = law_type:law_free_trade
+#                    has_law = law_type:law_mercantilism
+#                }
+#                # Chequea si el precio del café es bueno (rentable)
+#                market = {
+#                    market_goods = {
+#                        limit = { type = g:coffee }
+#                        price < base_price # Precio bajo significa oferta abundante y competitiva
+#                    }
+#                }
+#            }
+#            add = {
+#                desc = "golden_grain_exports"
+#                value = 1
+#            }
+#        }
+#
+#        # 4. Poder de la Oligarquía (Terratenientes Felices)
+#        if = {
+#            limit = {
+#                ig:ig_landowners = {
+#                    is_powerful = yes
+#                    approval > 5
+#                }
+#            }
+#            add = {
+#                desc = "golden_grain_oligarchy_support"
+#                value = 0.5
+#            }
+#        }
+#
+#        # 5. Penalización: Falta de Mano de Obra (Esclavitud o Servidumbre abolida sin reemplazo)
+#        # Si tienes plantaciones pero no hay gente
+#        if = {
+#            limit = {
+#                bg:bg_coffee_plantations = {
+#                    occupancy < 0.75 # Menos del 75% de empleo
+#                }
+#            }
+#            add = {
+#                desc = "golden_grain_labor_shortage"
+#                value = -2
+#            }
+#        }
+#    }
+#}
+#federalists_vs_separatists_progress_core_progress_bar = {
+# 	name = "federalists_vs_separatists_progress_core_progress_bar_name"
+# 	desc = "federalists_vs_separatists_progress_core_progress_bar_federalists_desc"
+# 	second_desc = "federalists_vs_separatists_progress_core_progress_bar_separatists_desc"
+#
+# 	double_sided_gold = yes
+#
+#monthly_progress = {
+#        
+#        # ===============================================
+#        # FACTORES FEDERALISTAS (Mueven la barra a la derecha +)
+#        # ===============================================
+#
+#
+#        if = {
+#            limit = {
+#                ig:ig_intelligentsia = { is_in_government = yes }
+#            }
+#            add = {
+#                desc = "federalists_intelligentsia_in_gov"
+#                value = 1
+#            }
+#        }
+#
+#
+#        if = {
+#            limit = {
+#                has_law = law_type:law_ca_central_american_federal
+#            }
+#            add = {
+#                desc = "federalists_law_active"
+#                value = 0.5
+#            }
+#        }
+#
+#
+#        if = {
+#            limit = {
+#                legitimacy >= 90
+#            }
+#            add = {
+#                desc = "federalists_high_legitimacy"
+#                value = 0.5
+#            }
+#        }
+#		if = {
+#            limit = {
+#                any_interest_group = {
+#                    leader = {
+#                        has_ideology = ideology_ca_federalist
+#                    }
+#                }
+#            }
+#            add = {
+#                desc = "federalist_ig_leader_bonus"
+#                value = 3
+#            }
+#        }
+#
+#        # ===============================================
+#        # FACTORES SEPARATISTAS (Mueven la barra a la izquierda -)
+#        # ===============================================
+#
+#        # 1. Terratenientes Poderosos y Enfadados
+#        if = {
+#            limit = {
+#                ig:ig_landowners = { 
+#                    is_powerful = yes
+#                    approval < -5
+#                }
+#            }
+#            add = {
+#                desc = "separatists_angry_landowners"
+#                value = -2 # Tiran fuerte hacia el separatismo
+#            }
+#        }
+#
+#        # 2. Iglesia Enfadada (Si son influyentes)
+#        if = {
+#            limit = {
+#                ig:ig_devout = {
+#                    is_powerful = yes
+#                    approval < -5
+#                }
+#            }
+#            add = {
+#                desc = "separatists_angry_church"
+#                value = -1
+#            }
+#        }
+#
+#        # 3. Baja Legitimidad (Caos ayuda al separatismo)
+#        if = {
+#            limit = {
+#                legitimacy < 25
+#            }
+#            add = {
+#                desc = "separatists_low_legitimacy"
+#                value = -1
+#            }
+#        }
+#
+#        # 4. Disturbios en estados clave (Guatemala/El Salvador)
+#        if = {
+#            limit = {
+#                any_scope_state = {
+#                    is_homeland = cu:central_american
+#                    turmoil > 0.25
+#                }
+#            }
+#            add = {
+#                desc = "separatists_local_turmoil"
+#                value = -1
+#            }
+#        }
+#        if = {
+#            limit = {
+#                has_variable = voting_ca_self_determination
+#            }
+#            add = {
+#                desc = "separatists_may_30_decree_active"
+#                value = -10 
+#            }
+#        }		
+#    }
+#
+# 	start_value = 100
+# 	min_value = 0
+# 	max_value = 200
+#}
+#calculate_costa_rica_civil_war = {
+#	set_variable = { name = costa_rica_civil_war_next value = 0 }
+#
+#}
+#ca_prospecting_bar = {
+#    name = "ca_prospecting_bar"
+#    desc = "ca_prospecting_bar_desc"
+#    
+#    type = default 
+#    
+#    
+#    value = root.var:ca_survey_progress
+#    
+#    min = 0
+#    max = 100
+#    
+#    
+#    weekly_change = {
+#       value = -1
+#    }
+#}
+### Barra 1: Estabilidad de la Unión (Suma de apoyos)
+##frca_stability_bar = {
+##    name = "frca_stability_bar_name"
+##    desc = "frca_stability_bar_desc"
+##    
+##    start_value = 100
+##    min_value = 0
+##    max_value = 100
+##    
+##    # Esta barra recalcula su valor cada vez que la miras basada en la realidad actual
+##    # Asumimos 5 estados clave, cada uno vale 20 puntos.
+##    
+##    add = {
+##        value = 20
+##        desc = "gua_support_active" # Tooltip: "Apoyo de Guatemala"
+##        trigger = {
+##            exists = c:GUA
+##            c:GUA = { is_subject_of = c:UCA } # O tu variable de lealtad
+##            # c:GUA = { NOT = { has_variable = separatist_revolt } }
+##        }
+##    }
+##    
+##    add = {
+##        value = 20
+##        desc = "els_support_active"
+##        trigger = {
+##            exists = c:ELS
+##            c:ELS = { is_subject_of = c:UCA }
+##        }
+##    }
+##    
+##    add = {
+##        value = 20
+##        desc = "hon_support_active"
+##        trigger = {
+##            exists = c:HON
+##            c:HON = { is_subject_of = c:UCA }
+##        }
+##    }
+##    
+##    add = {
+##        value = 20
+##        desc = "nic_support_active"
+##        trigger = {
+##            exists = c:NIC
+##            c:NIC = { is_subject_of = c:UCA }
+##        }
+##    }
+##    
+##    add = {
+##        value = 20
+##        desc = "cos_support_active"
+##        trigger = {
+##            exists = c:COS
+##            c:COS = { is_subject_of = c:UCA }
+##        }
+##    }
+##    
+##    # Si quieres restar por guerras civiles activas
+##    add = {
+##        value = -10
+##        desc = "active_civil_war_penalty"
+##        trigger = {
+##            any_scope_state = { is_in_civil_war = yes }
+##        }
+##    }
+##}
+##
+##
+##frca_ideology_bar = {
+##    name = "frca_ideology_bar_name"
+##    desc = "frca_federalists_desc"      # Lado Izquierdo (0)
+##    second_desc = "frca_separatists_desc" # Lado Derecho (200)
+##    
+##    double_sided_gold = yes # Estilo visual "Gran Juego"
+##    
+##    min_value = 0
+##    max_value = 200
+##    start_value = 100 # Empieza equilibrado
+##    
+##    # Esta barra SÍ usa una variable que cambia mes a mes
+##    value = {
+##        value = root.var:frca_ideological_balance_var
+##    }
+##}
+##ca_political_instability = {
+##
+##
+##
+##
+##
+##
+##
+##
+##
+##
+##
+##
+##
+##
+##
+##
+##
+##
+##
+##}

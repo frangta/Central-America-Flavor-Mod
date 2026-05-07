@@ -5,15 +5,9 @@
 frca_support_bar = {
 	name = "my_frca_support_bar_name"
 	desc = "my_frca_support_bar_desc"
-	second_desc = "PROGRESS_BAR_TEXT3"
+	second_desc = "my_frca_support_bar_desc2"
 	
-	start_value = 60
-	min_value = 0
-	max_value = 100
-	
-	double_sided_bad = yes
-
-	monthly_progress = {
+    monthly_progress = {
 		# ==========================
 		# GUATEMALA
 		# ==========================
@@ -197,7 +191,61 @@ frca_support_bar = {
 				value = -5
 			}
 		}
+# ==========================
+        # IMPACTO DE LEYES (Idea 1)
+        # ==========================
+        if = {
+            limit = {
+                has_law = law_type:law_ca_central_american_unitary
+            }
+            add = {
+                desc = "ca_unitary_law_support_desc"
+                value = 1
+            }
+        }
+        if = {
+            limit = {
+                has_law = law_type:law_ca_central_american_confederated
+            }
+            add = {
+                desc = "ca_confederated_law_penalty_desc"
+                value = -2 # Castigo por ceder autonomía
+            }
+        }
+
+        # ==========================
+        # IMPACTO DEL LOBBY (Idea 1)
+        # ==========================
+        if = {
+            limit = {
+                any_political_lobby = {
+                    is_political_lobby_type = lobby_pro_federalist
+                    lobby_appeasement >= 25 
+                }
+            }
+            add = {
+                desc = "ca_lobby_pro_federalist_happy_desc"
+                value = 1
+            }
+        }
+        if = {
+            limit = {
+                any_political_lobby = {
+                    is_political_lobby_type = lobby_pro_federalist
+                    lobby_appeasement <= -25 
+                }
+            }
+            add = {
+                desc = "ca_lobby_pro_federalist_angry_desc"
+                value = -2 # Castigo severo si los ignoras
+            }
+        }
 	}
+    start_value = 60
+	min_value = 0
+	max_value = 200
+	
+	double_sided_bad = yes
 }
 
 ca_golden_grain_bar = {

@@ -111,10 +111,10 @@ state_trait_central_american_tropical = {
 	
 	modifier = {
 		goods_output_hardwood_mult = 0.25
-		building_group_bg_plantations_throughput_add = 0.10
+		building_group_bg_plantation_throughput_add = 0.10
 	}
 }
-state_trait_central_american_cordilleras = {
+TRY_REPLACE:state_trait_central_american_cordilleras = {
 	icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
 	
 	modifier = {
@@ -126,7 +126,7 @@ state_trait_corn_belt = {
     icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
 	
 	modifier = {
-		building_maize_farm_throughput_mult = 0.1
+		building_maize_farm_throughput_add = 0.1
 	}
 }
 
@@ -136,7 +136,6 @@ state_trait_cagway_bay = { #jamaica
 	icon = "gfx/interface/icons/state_trait_icons/natural_harbors.dds"
 	
 	modifier = {
-		#state_building_port_max_level_add = 1
-		state_building_naval_base_max_level_add = 5
+
 	}
 }

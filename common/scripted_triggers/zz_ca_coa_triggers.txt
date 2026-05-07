@@ -1,24 +1,4 @@
-﻿#            | existing country | releasing a country | country formation |
-# |==========|==================|=====================|===================|
-# |root      | definition       | definition          | definition        |
-# |----------|------------------|---------------------|-------------------|
-# |target    | country          | N/A                 | N/A               |
-# |----------|------------------|---------------------|-------------------|
-# |initiator | N/A              | player              | player            |
-# |----------|------------------|---------------------|-------------------|
-# |actor     | country          | player              | player            |
-# |----------|------------------|---------------------|-------------------|
-# |          | country's        |                     | player's          |
-# |overlord  | direct overlord  | player              | direct overlord   |
-# |          | if it exists     |                     | if it exists      |
-# |----------|------------------|---------------------|-------------------|
-
-### scope is COUNTRY ###
-
-# Government
-
-
-coa_def_central_american_ensign_trigger = {
+﻿coa_def_central_american_ensign_trigger = {
 	exists = c:UCA
 	c:UCA ?= { save_temporary_scope_as = custom_overlord }
 	coa_def_ensign_trigger = yes

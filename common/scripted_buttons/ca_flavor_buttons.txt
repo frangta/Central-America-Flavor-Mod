@@ -1,14 +1,16 @@
 ﻿federal_congress_decree_button = {
 	name = "federal_congress_decree_button"
 	desc = "federal_congress_decree_button_desc"
-	
+          ai_chance = {
+              base = 0
+          }	
 	visible = { 
 	NOT = {
 	has_valiable  = voting_ca_self_determination}
-}	
+    }	
 	possible = {
 		custom_tooltip = {
-			text = ""
+			text = "federal_congress_decree_tt"
 			NOT = {
 				has_variable = ca_self_determination
 			}
@@ -16,7 +18,10 @@
 
 	}
 	effect = {
-     ca_self_determination_decret = yes
+     trigger_event = { 
+					id = ca_central_america.79 popup = yes
+				}
+	 set_variable = ca_self_determination
 	}
 }
 ca_button_sabotage_federation = {
