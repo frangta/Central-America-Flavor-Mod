@@ -10,55 +10,6 @@
 #scope_DH5
 #scope_DH6
 #scope_DH7
-#ca_honduras_events.x  = {
-#
-#     type = country_event
-#
-#	
-#	title = ca_honduras_events.x.t
-#	desc = ca_honduras_events.x.d
-#	flavor = ca_honduras_events.x.f
-#	
-#	event_image = {
-#		video = ""
-#	}
-#	
-#	icon = "gfx/interface/icons/event_icons/event_default.dds"
-#	
-#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#	
-#	duration = 3
-#	
-#	trigger = {
-#	    game_date < 1838.5.30
-#		exists = c:COS
-#		this = c:COS
-#	}
-#	
-#	#cancellation_trigger = {
-#	#}
-#
-#	cooldown = {
-#	}
-#
-#	immediate = {
-#	
-#	}
-#	
-#	option = {
-#		name = ca_honduras_events.x.a
-#		default_option = yes
-#		set_variable = voting_ca_self_determination
-#	}
-#	
-#	option = {
-#		name = ca_honduras_events.x.b
-#	}
-#	
-#	#after = {
-#	#}
-#
-#}
 ## Play with Honduras  
 ca_honduras_events.01 = {
 	type = country_event

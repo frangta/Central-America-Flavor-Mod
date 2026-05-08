@@ -88,9 +88,9 @@ ca_setup_events.1 = { #
 	option = { # Alt-History's Chain Events
 		name = ca_central_america.setup.b
 		
-		add_journal_entry = {
-			type = je_central_america_falls_apart
-		}
+		#add_journal_entry = {
+		#	type = je_central_america_falls_apart
+		#}
 		
 		add_radicals = {
 			value = small_radicals
