@@ -1,16 +1,10 @@
-﻿# ==========================================================
-# BARRAS DE PROGRESO - CENTROAMÉRICA (v1.12+)
-# ==========================================================
-
-frca_support_bar = {
+﻿frca_support_bar = {
 	name = "my_frca_support_bar_name"
 	desc = "my_frca_support_bar_desc"
 	second_desc = "my_frca_support_bar_desc2"
-	
+	double_sided_bad = yes
     monthly_progress = {
-		# ==========================
-		# GUATEMALA
-		# ==========================
+
 		if = {
 			limit = {
 				has_variable = gua_support_var
@@ -36,9 +30,7 @@ frca_support_bar = {
 			}
 		}
 
-		# ==========================
-		# EL SALVADOR
-		# ==========================
+
 		if = {
 			limit = {
 				has_variable = els_support_var
@@ -64,9 +56,7 @@ frca_support_bar = {
 			}
 		}
 
-		# ==========================
-		# HONDURAS
-		# ==========================
+
 		if = {
 			limit = {
 				has_variable = hon_support_var
@@ -92,9 +82,7 @@ frca_support_bar = {
 			}
 		}
 
-		# ==========================
-		# NICARAGUA
-		# ==========================
+
 		if = {
 			limit = {
 				has_variable = nic_support_var
@@ -120,9 +108,6 @@ frca_support_bar = {
 			}
 		}
 
-		# ==========================
-		# COSTA RICA
-		# ==========================
 		if = {
 			limit = {
 				has_variable = cos_support_var
@@ -148,9 +133,6 @@ frca_support_bar = {
 			}
 		}
 
-		# ==========================
-		# PENALIZACIONES DE PAZ
-		# ==========================
 		if = {
 			limit = {
 				exists = c:ELS
@@ -191,9 +173,7 @@ frca_support_bar = {
 				value = -5
 			}
 		}
-# ==========================
-        # IMPACTO DE LEYES (Idea 1)
-        # ==========================
+
         if = {
             limit = {
                 has_law = law_type:law_ca_central_american_unitary
@@ -213,14 +193,12 @@ frca_support_bar = {
             }
         }
 
-        # ==========================
-        # IMPACTO DEL LOBBY (Idea 1)
-        # ==========================
+
         if = {
             limit = {
                 any_political_lobby = {
                     is_political_lobby_type = lobby_pro_federalist
-                    lobby_appeasement >= 25 
+                    lobby_clout >= 25 
                 }
             }
             add = {
@@ -232,7 +210,7 @@ frca_support_bar = {
             limit = {
                 any_political_lobby = {
                     is_political_lobby_type = lobby_pro_federalist
-                    lobby_appeasement <= -25 
+                    lobby_clout <= -25 
                 }
             }
             add = {
@@ -245,7 +223,6 @@ frca_support_bar = {
 	min_value = 0
 	max_value = 200
 	
-	double_sided_bad = yes
 }
 
 ca_golden_grain_bar = {
@@ -261,10 +238,10 @@ ca_golden_grain_bar = {
 		# 1. Producción Base
 		if = {
 			limit = {
-				# CORRECCIÓN: Para medir niveles, verificamos que en algún estado haya café nivel > 10
-				any_owned_state = {
-					state_building_level = {
-						building = building_coffee_plantation
+				
+				any_scope_state = {
+					state_has_building_type_levels = {
+						target = bt:building_coffee_plantation
 						value >= 10
 					}
 				}
@@ -279,7 +256,7 @@ ca_golden_grain_bar = {
 		if = {
 			limit = {
 				has_technology_researched = railways
-				any_owned_state = {
+				any_scope_state = {
 					has_building = building_coffee_plantation
 					has_building = building_railway
 				}
@@ -321,12 +298,12 @@ ca_golden_grain_bar = {
 		# 5. Penalización: Falta de Mano de Obra
 		if = {
 			limit = {
-				# CORRECCIÓN: Evaluamos la ocupación del edificio específico, no del grupo.
-				any_owned_state = {
+				
+				any_scope_state = {
 					has_building = building_coffee_plantation
-					building_employment_fraction = {
+					pop_employment_building = {
 						building = building_coffee_plantation
-						value < 0.75
+						
 					}
 				}
 			}
@@ -439,9 +416,9 @@ federalists_vs_separatists_progress_core_progress_bar = {
 		if = {
 			limit = {
 				# CORRECCIÓN: Separamos la validación de región de la de estado
-				any_owned_state = {
+				any_scope_state = {
 					state_region = { is_homeland = cu:central_american }
-					state_turmoil > 0.25
+					turmoil > 0.25
 				}
 			}
 			add = {
@@ -462,10 +439,10 @@ federalists_vs_separatists_progress_core_progress_bar = {
 # 1. Boicot por Agitación: Si el jugador (sujeto) sube el Turmoil en su país
         if = {
             limit = {
-                any_subject = {
-                    any_owned_state = {
+                any_direct_subject = {
+                    any_scope_state = {
                         state_region = { is_homeland = cu:central_american }
-                        state_turmoil > 0.25
+                        turmoil > 0.25
                     }
                 }
             }
@@ -478,7 +455,7 @@ federalists_vs_separatists_progress_core_progress_bar = {
         # 2. Boicot Político: Si el jugador (sujeto) pone a los Terratenientes en su gobierno local
         if = {
             limit = {
-                any_subject = {
+                any_direct_subject = {
                     ig:ig_landowners = { 
                         is_in_government = yes 
                         is_powerful = yes
@@ -494,7 +471,7 @@ federalists_vs_separatists_progress_core_progress_bar = {
         # 3. Boicot por Leyes: Si el jugador aprueba una ley que debilite la unión (ej. Milicias Locales)
         if = {
             limit = {
-                any_subject = {
+                any_direct_subject = {
                     has_law = law_type:law_peasant_levies # Reemplaza con la ley separatista de tu mod
                 }
             }

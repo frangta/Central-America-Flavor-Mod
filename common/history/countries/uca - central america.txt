@@ -28,18 +28,18 @@
         trigger_event = { id = ca_setup_events.1 }
 			
 		ig:ig_intelligentsia = {
-			add_ruling_interest_group = yes
-                        remove_ideology = ideology_liberal
-						remove_ideology = ideology_anti_clerical
-						remove_ideology = ideology_republican
-                        add_ideology = ideology_ca_liberal
-                        add_ideology = ideology_ca_secularist
-                        add_ideology = ideology_central_american_federal							
+	        add_ruling_interest_group = yes
+            remove_ideology = ideology_liberal
+	        remove_ideology = ideology_anti_clerical
+	        remove_ideology = ideology_republican
+            add_ideology = ideology_ca_liberal
+            add_ideology = ideology_ca_secularist
+            add_ideology = ideology_central_american_federal							
 		}
 		
 		
 		ig:ig_armed_forces = {
-                        add_ruling_interest_group = yes
+            add_ruling_interest_group = yes
 			remove_ideology = ideology_paternalistic
 			add_ideology = ideology_central_american_federal
 		}

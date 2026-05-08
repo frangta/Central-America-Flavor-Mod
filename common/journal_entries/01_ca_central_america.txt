@@ -3,7 +3,7 @@
     group = je_group_historical_content    
      
 	should_be_pinned_by_default_involved = yes
-	should_be_pinned_by_default_uninvolved_or_context = no
+	#should_be_pinned_by_default_uninvolved_or_context = no
  	is_shown_in_lobby = {
 		c:UCA ?= THIS
 	}
@@ -111,11 +111,13 @@
 
     complete = {
         OR = {
+		
             AND = {
                 custom_tooltip = { text = frca_support_complete scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" = 200 } }                
                 NOT = { exists = c:GUA } NOT = { exists = c:ELS } NOT = { exists = c:HON } NOT = { exists = c:NIC } NOT = { exists = c:COS }
             }
             AND = {
+			    custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
                 custom_tooltip = {
                     text = guatemala_support_tt
                     has_variable = gua_support_var
@@ -152,7 +154,7 @@
                     }
                     count >= 5                
                 }
-				custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
+				
             }
             AND = {
                 custom_tooltip = { 
