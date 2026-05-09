@@ -1,0 +1,57 @@
+﻿# Bastion of the Intelligenstia, also appeals to Industrialists
+# Can sometimes sway PB and Rural Folk when they have common interests
+
+TRY_INJECT:liberal_party = {
+
+	name = {
+		first_valid = {
+			
+			}
+		}
+	}
+
+
+
+	# Root - IG considering joining
+	# scope:number - the number of IGs that would join this party before the root IG
+	join_weight = {
+
+		if = { # Líderes liberales/reformistas apoyan al Partido Liberal
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_federalist
+						has_ideology = ideology:ideology_coffee_liberalism
+						has_ideology = ideology:ideology_olympus_liberalism
+						has_ideology = ideology:ideology_mercantile_transitism
+						has_ideology = ideology:ideology_ca_morazanista
+						has_ideology = ideology:ideology_ca_tropical_bonapartism
+						has_ideology = ideology:ideology_ca_canal_company_rule
+						has_ideology = ideology:ideology_ca_late_unionist
+					}
+				}
+			}
+			add = {
+				value = 5
+				desc = "from_liberal_leader"
+			}
+		}
+		if = { # Grupos de Interés (IG) liberales apoyan al Partido Liberal
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_liberal
+					has_ideology = ideology:ideology_ca_constitutionalist
+					has_ideology = ideology:ideology_central_american_federal
+					has_ideology = ideology:ideology_ca_secularist
+					has_ideology = ideology:ideology_ca_criollo_liberal
+					has_ideology = ideology:ideology_ca_coffee_liberal
+					has_ideology = ideology:ideology_ca_enclavist_pick
+				}
+			}
+			add = {
+				value = 5
+				desc = "from_liberal_ig"
+			}
+		}
+	}
+}

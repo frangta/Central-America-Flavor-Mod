@@ -1,0 +1,70 @@
+﻿# Social democrats extremely attracted to this ideology
+# Attracts weak leftists and liberals
+# Available for Trade Unions pre-Socialism
+
+TRY_INJECT:social_democrat_party = {
+	color = { 241 24 138 }
+	name = {
+		first_valid = {
+			
+		}
+	}
+
+	icon = {
+		default = "/gfx/interface/icons/political_parties/social_democrats.dds"
+	}
+	unlocking_technologies = {
+		labor_movement
+	}
+	# THIS IS RUN ONLY ONCE AT GAME START
+	valid_for_country = {
+		always = yes
+	}
+	available_for_interest_group = {
+		#owner = {
+		#	country_has_voting_franchise = yes
+		#	OR = {
+		#		py:social_democrat_party ?= {
+		#			any_member = {}
+		#		}
+		#		any_interest_group = {
+		#			ig_counts_as_marginal = no
+		#			leader ?= {
+		#				has_ideology = ideology:ideology_social_democrat
+		#			}
+		#		}
+		#		ig:ig_trade_unions ?= {
+		#			ig_counts_as_marginal = no
+		#		}
+		#	}
+		#}
+		#NOT = { # these ig's are inherently anti-worker
+		#	is_interest_group_type = ig_landowners
+		#	is_interest_group_type = ig_industrialists
+		#}
+		#leader ?= { # fascists and conservatives hate social democracy
+		#	NOT = {
+		#		has_ideology = ideology:ideology_fascist
+		#		has_ideology = ideology:ideology_integralist
+		#		has_ideology = ideology:ideology_ethno_nationalist
+		#		has_ideology = ideology:ideology_traditionalist
+		#		character_has_carlist_ideology = yes
+		#		has_ideology = ideology:ideology_royalist
+		#		has_ideology = ideology:ideology_orleanist
+		#		has_ideology = ideology:ideology_bonapartist
+		#		has_ideology = ideology:ideology_legitimist
+		#		has_ideology = ideology:ideology_theocrat
+		#	}
+		#}
+	}
+
+	# Root - IG considering joining
+	# scope:number - the number of IGs that would join this party before the root IG
+	join_weight = {
+		value = {
+			value = -5
+			desc = "base_value"
+		}
+		
+	}
+}

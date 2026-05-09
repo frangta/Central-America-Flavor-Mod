@@ -1,0 +1,42 @@
+﻿
+
+TRY_INJECT:revolutionary_party = {
+	color = { 128 128 128 }
+	name = {
+		first_valid = {
+			
+		}
+	}
+
+	icon = {
+		default = "/gfx/interface/icons/political_parties/revolutionary.dds"
+	}
+
+	valid_for_country = {
+		always = yes
+	}
+	available_for_interest_group = {
+		owner = {
+			is_revolutionary = yes
+		}
+		is_revolutionary = yes
+	}
+
+	join_weight = {
+		value = 0
+
+		if = {
+			limit = {
+				owner = {
+					is_revolutionary = yes
+				}
+				is_revolutionary = yes
+			}
+
+			add = {
+				value = 10000
+				desc = "base_value"
+			}
+		}
+	}
+}

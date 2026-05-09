@@ -1,0 +1,50 @@
+﻿# Party for IG's that want free trade when it is not passed yet
+# Should usually only appear when the Landowners want Free Trade
+
+TRY_INJECT:free_trade_party = {
+	color = { 150 20 20 }
+	name = {
+		first_valid = {
+			
+		}
+	}
+	icon = {
+		default = "/gfx/interface/icons/political_parties/free_trade.dds"
+	}
+	unlocking_technologies = {
+		stock_exchange
+	}
+	# THIS IS RUN ONLY ONCE AT GAME START
+	valid_for_country = {
+		always = yes
+	}
+	available_for_interest_group = {
+		owner = {
+			country_has_voting_franchise = yes
+			OR = {
+				py:free_trade_party ?= {
+					any_member = {}
+				}			
+				any_interest_group = {
+					ig_counts_as_marginal = no
+					OR = {
+						is_interest_group_type = ig_industrialists
+						leader ?= {
+							has_ideology = ideology:ideology_market_liberal
+						}
+					}
+				}
+			}
+		}
+	}
+
+	# Root - IG considering joining
+	# scope:number - the number of IGs that would join this party before the root IG
+	join_weight = {
+		value = {
+			value = -5
+			desc = "base_value"
+		}
+		
+	}
+}

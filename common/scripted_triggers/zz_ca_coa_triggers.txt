@@ -21,12 +21,9 @@ coa_def_soconosco_uca_trigger = {
 
 coa_def_soconosco_trigger = {
 	exists = c:CIP
+        has_variable = is_soconosco
 	c:CIP = { 
 		NOT = { owns_entire_state_region = STATE_CHIAPAS } 
-	}
-	OR = {
-		c:CIP = { is_subject_of = c:ALT }
-		c:CIP = { is_subject_of = c:GUA }
 	}
 }
 coa_def_guatemalan_ensign_trigger = {

@@ -1,0 +1,45 @@
+﻿TRY_INJECT:fascist_party = {
+	color = { 50 60 198 }
+	name = {
+		first_valid = {
+			
+		}
+	}
+
+	icon = {
+		default = "/gfx/interface/icons/political_parties/fascists.dds"
+	}
+	unlocking_technologies = {
+		mass_propaganda
+	}
+	available_for_interest_group = {
+		owner = {
+			country_has_voting_franchise = yes
+			OR = {
+				py:fascist_party ?= {
+					any_member = {}
+				}			
+				any_interest_group = {
+					leader ?= {
+						OR = { # PB shouldn't instantly become fascist without fascism being relevant
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_integralist
+							has_ideology = ideology:ideology_corporatist_leader
+							has_ideology = ideology:ideology_ethno_nationalist
+						}
+					}
+				}
+			}
+		}
+	}
+
+	# Root - IG considering joining
+	# scope:number - the number of IGs that would join this party before the root IG
+	join_weight = {
+		value = {
+			value = -5
+			desc = "base_value"
+		}
+		
+	}
+}

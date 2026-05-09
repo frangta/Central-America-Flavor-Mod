@@ -1,0 +1,48 @@
+﻿# Fallback party for Armed Forces
+
+TRY_INJECT:military_party = {
+
+	name = {
+		first_valid = {
+			
+			}
+		}
+	}
+
+
+	# Root - IG considering joining
+	# scope:number - the number of IGs that would join this party before the root IG
+	join_weight = {
+        if = { # Caudillos y líderes autoritarios/militares apoyan al Partido Militar
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_unitarian
+						has_ideology = ideology:ideology_central_america_caudillo
+						has_ideology = ideology:ideology_carrillismo
+						has_ideology = ideology:ideology_cuscatleco_nationalism
+						has_ideology = ideology:ideology_ca_cientifico_technocracy
+						has_ideology = ideology:ideology_ca_leader_autocratic_autonomist
+					}
+				}
+			}
+			add = {
+				value = 5
+				desc = "from_military_leader"
+			}
+		}
+		if = { # Grupos de Interés (IG) estratocráticos/caudillistas apoyan al Partido Militar
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_criollo_stratocratic
+					has_ideology = ideology:ideology_central_american_reactionary
+					has_ideology = ideology:ideology_ca_autocratic_autonomist
+				}
+			}
+			add = {
+				value = 5
+				desc = "from_military_ig"
+			}
+		}
+	}
+}
