@@ -919,9 +919,7 @@ ca_central_america.5 = {
     desc = ca_central_america.5.d
     flavor = ca_central_america.5.f
     
-    event_image = {
-        video = "unspecific_diplomacy"
-    }
+    event_image = { video = "ep1_transfer_of_authority" }
     icon = "gfx/interface/icons/event_icons/event_map.dds"
     on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     duration = 3
@@ -935,19 +933,20 @@ ca_central_america.5 = {
         set_variable = ca_fate_soconusco
         
         create_country = {
-            tag = DG6
+            tag = CIP
             origin = this
             province = p:x1030C0 
             
             on_created = {
-                s:STATE_CHIAPAS.region_state:UCA = {
+                s:STATE_CHIAPAS = {
                     set_owner_of_provinces = {
-                        country = c:DG6
+                        country = c:CIP
                         provinces = { x4DBDE9 xD03040 xA087F6 }
                     }
                 }
                 
                 set_ruling_interest_groups = { ig_landowners ig_devout }
+				set_variable = is_soconosco
                 save_scope_as = scope_DG6
             }
         }
@@ -958,10 +957,12 @@ ca_central_america.5 = {
         name = ca_central_america.5.a 
         default_option = yes
         
+       ROOT = {
         create_diplomatic_pact = {
-            country = scope:scope_DG6
-            type = ca_dependency
-        }
+             country = c:CIP
+             type = ca_dependency
+         }
+       } 
         
         if = {
             limit = { has_variable = frca_support }
@@ -980,10 +981,12 @@ ca_central_america.5 = {
     option = { 
         name = ca_central_america.5.b
         
+       ROOT = {
         create_diplomatic_pact = {
-            country = scope:scope_PP1
-            type = ca_dependency
-        }
+             country = c:CIP
+             type = ca_dependency
+         }
+       } 
         
         if = {
             limit = { has_variable = frca_support }
@@ -995,7 +998,7 @@ ca_central_america.5 = {
             }
         }
         
-        play_as = c:DG6
+        play_as = c:CIP
         ai_chance = { base = 0 }
     }   
     
@@ -1004,7 +1007,7 @@ ca_central_america.5 = {
         name = ca_central_america.5.c 
         trigger = { exists = c:GUA } 
         
-        c:GUA = { annex = scope:scope_DG6 } 
+        c:GUA = { annex = c:CIP } 
         
         set_variable = guatemala_integrate_soconusco 
         if = {
@@ -1025,7 +1028,7 @@ ca_central_america.5 = {
         name = ca_central_america.5.d 
         trigger = { exists = c:ALT } 
         
-        c:ALT = { annex = scope:scope_DG6 } 
+        c:ALT = { annex = c:CIP } 
         
         set_variable = quetzaltenango_integrate_soconusco
         set_variable = created_DG6
