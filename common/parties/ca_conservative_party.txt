@@ -3,24 +3,24 @@
 
 TRY_INJECT:conservative_party = {
 	name = {
-		first_valid = {
-			triggered_desc = {
-				desc = party_fatherland_front
-				trigger = {
-					exists = c:AUS
-					c:AUS ?= THIS
-					any_interest_group = {
-						is_in_government = yes
-						party ?= {
-							is_party_type = conservative_party
-						}
-					}
-					has_law_or_variant = law_type:law_single_party_state
-					has_variable = fatherland_front_var
-				}
-			}
-			
-		}
+		#first_valid = {
+		#	triggered_desc = {
+		#		desc = party_fatherland_front
+		#		trigger = {
+		#			exists = c:AUS
+		#			c:AUS ?= THIS
+		#			any_interest_group = {
+		#				is_in_government = yes
+		#				party ?= {
+		#					is_party_type = conservative_party
+		#				}
+		#			}
+		#			has_law_or_variant = law_type:law_single_party_state
+		#			has_variable = fatherland_front_var
+		#		}
+		#	}
+		#	
+		#}
 	}
 
 
@@ -34,16 +34,11 @@ TRY_INJECT:conservative_party = {
 					OR = {
 						has_ideology = ideology:ideology_ca_unitarian
 						has_ideology = ideology:ideology_ca_liberal_monarchist
-						has_ideology = ideology:ideology_orleanist
-						has_ideology = ideology:ideology_bonapartist
-						has_ideology = ideology:ideology_legitimist
-						has_ideology = ideology:ideology_theocrat
-						has_ideology = ideology:ideology_slaver
-						has_ideology = ideology:ideology_corporatist_leader
-						# Ideologías personalizadas de líderes conservadores/imperialistas:
+                        # Ideologías personalizadas de líderes conservadores/imperialistas:
 						has_ideology = ideology:ideology_ca_imperial_monarchist
 						has_ideology = ideology:ideology_ca_jesuit_theocracy
 						has_ideology = ideology:ideology_granadine_legitimism
+						has_ideology = ideology:ideology_ca_peasant_caudillismo
 						has_ideology = ideology:ideology_slaver_filibusterism
 						has_ideology = ideology:ideology_ca_hermit_isolationism
 						has_ideology = ideology:ideology_ca_syncretic_cult
@@ -60,16 +55,6 @@ TRY_INJECT:conservative_party = {
 				OR = {
 					has_paternalist_ideology = yes
 					has_hierarchic_ideology = yes
-					has_ideology = ideology:ideology_ca_liberal_monarchist
-					has_ideology = ideology:ideology_cuscatleco_nationalism
-					has_ideology = ideology:ideology_granadine_legitimism
-					has_ideology = ideology:ideology_slaver_filibusterism
-					has_ideology = ideology:ideology_ca_imperial_monarchist
-					has_ideology = ideology:ideology_ca_jesuit_theocracy
-					has_ideology = ideology:ideology_ca_neo_mayan_restoration
-					has_ideology = ideology:ideology_ca_hermit_isolationism
-					has_ideology = ideology:ideology_slaver
-					has_ideology = ideology:ideology_corporatist_leader
 					# Ideologías personalizadas de los IG criollos y terratenientes:
 					has_ideology = ideology:ideology_central_american_reactionary
 					has_ideology = ideology:ideology_central_american_reactionary_2

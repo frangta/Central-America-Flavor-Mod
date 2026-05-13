@@ -621,10 +621,11 @@ ca_create_guatemala_effect = {
             }
         }
         # Convertir en Dependencia
-		c:UCA? ={
+		c:UCA ?= {
 			create_diplomatic_pact = {
 			country = scope:scope_GUA
 			type = ca_dependency
+			}
 		}
  
     }
@@ -654,10 +655,11 @@ ca_create_elsalvador_effect = {
             }
         }
         # Convertir en Dependencia
-		c:UCA? ={
+		c:UCA ?= {
 			create_diplomatic_pact = {
 			country = scope:scope_ELS
 			type = ca_dependency
+			}
 		}
     }
 }
@@ -686,10 +688,11 @@ ca_create_honduras_effect = {
             }
         }
         # Convertir en Dependencia
-		c:UCA? ={
+		c:UCA ?= {
 			create_diplomatic_pact = {
 			country = scope:scope_HON
 			type = ca_dependency
+			}
 		}
     }
 }
@@ -718,10 +721,11 @@ ca_create_nicaragua_effect = {
             }
         }
         # Convertir en Dependencia
-		c:UCA? ={
+		c:UCA ?= {
 			create_diplomatic_pact = {
 			country = scope:scope_NIC
 			type = ca_dependency
+			}
 		}
     }
 }
@@ -750,10 +754,11 @@ ca_create_costarica_effect = {
             }
         }
         # Convertir en Dependencia
-		c:UCA? ={
+		c:UCA ?= {
 			create_diplomatic_pact = {
 			country = scope:scope_COS
 			type = ca_dependency
+			}
 		}
     }
 }
@@ -780,10 +785,11 @@ ca_create_losaltos_effect = {
             }
         }
         # Convertir en Dependencia
-		c:UCA? ={
+		c:UCA ?= {
 			create_diplomatic_pact = {
 			country = scope:scope_ALT
 			type = ca_dependency
+			}
 		}
     }
 }
@@ -975,6 +981,113 @@ ca_initial_game_start_setup = {
 		
 		set_global_variable = ca_setup_done
 	}
+}
+ca_dissolution_vainilla = {
+if = {
+			limit = {
+				exists = s:STATE_GUATEMALA.region_state:UCA
+				s:STATE_GUATEMALA.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = GUA
+				origin = this
+				state = s:STATE_GUATEMALA.region_state:UCA
+				on_created = {
+					set_variable = ca_secession_country
+				}
+			}
+			c:GUA ?= { save_scope_as = scope_GUA }
+			#if = {
+			#	limit = { exists = s:STATE_CHIAPAS.region_state:UCA }
+			#	s:STATE_CHIAPAS.region_state:UCA = { set_state_owner = c:GUA }
+			#}
+		}
+		# Los Altos, greatest of all central american nations
+		if = {
+			limit = {
+				NOT = { exists = c:ALT }
+				exists = s:STATE_CHIAPAS.region_state:UCA
+				s:STATE_CHIAPAS.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = ALT
+				origin = this
+				state = s:STATE_CHIAPAS.region_state:UCA
+				on_created = {
+					set_variable = ca_secession_country
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_HONDURAS.region_state:UCA
+				s:STATE_HONDURAS.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = HON
+				origin = this
+				state = s:STATE_HONDURAS.region_state:UCA
+				on_created = {
+					set_variable = ca_secession_country
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_COSTA_RICA.region_state:UCA
+				s:STATE_COSTA_RICA.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = COS
+				origin = this
+				state = s:STATE_COSTA_RICA.region_state:UCA
+				on_created = {
+					set_variable = ca_secession_country
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_SAN_SALVADOR.region_state:UCA
+				s:STATE_SAN_SALVADOR.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = ELS
+				origin = this
+				state = s:STATE_SAN_SALVADOR.region_state:UCA
+				on_created = {
+					set_variable = ca_secession_country
+				}
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_NICARAGUA.region_state:UCA
+				s:STATE_NICARAGUA.region_state:UCA = {
+					is_capital = no
+				}
+			}
+			create_country = {
+				tag = NIC
+				origin = this
+				state = s:STATE_NICARAGUA.region_state:UCA
+				on_created = {
+					set_variable = ca_secession_country
+				}
+			}
+		}
+
+
 }	
 #ca_pop_size_historical_setup_events = {
 #
