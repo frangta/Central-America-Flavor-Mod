@@ -146,30 +146,7 @@ Plan_of_Veragua4 = {
 		value = 0
     }
 	when_taken = {
-			if = {
-			limit = {
-				any_political_movement = {
-					OR = {
-				is_political_movement_type = movement_liberal
-				is_political_movement_type = movement_cultural_majority
-				is_political_movement_type = movement_religious_majority
-					}
-				}
-			}
-			every_political_movement = {
-				limit = {
-					OR = {
-				is_political_movement_type = movement_liberal
-				is_political_movement_type = movement_cultural_majority
-				is_political_movement_type = movement_religious_majority
-					}
-				}
-				add_modifier = {
-					name = ca_modifier_total_debug
-					days = long_modifier_time
-				}
-			}
-		}
+  set_variable = { name = ca_soil_survey_complete } 
   #add_investment_pool = 5000000
     }
 }
@@ -283,22 +260,8 @@ Plan_of_Veragua9 = {
 		value = 0
     }
 	when_taken = {
-	
-			if = {
-			limit = {
-				exists = c:CR1
-			}
-			create_character = {
-	         	 	interest_group = ig_rural_folk
-	         	 	ideology = ideology:ideology_liberal_leader
-	         	 	ruler = yes
-				    is_general = yes
-	         	 	ig_leader = yes			
-	         	 	traits = {
-	         	 		reckless 
-	         	 	}
-	         	 	}
-		}
+ca_dissolution_vainilla = ýes
+}
 
 
     }

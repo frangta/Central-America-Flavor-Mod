@@ -323,7 +323,6 @@ REPLACE:ELS = { # El Salvador
 		}											
 		priority = 20		
 	}
-	ELS_early
 	flag_definition = {
 		coa = ELS_1865
 		subject_canton = ELS_1865	
@@ -810,7 +809,7 @@ REPLACE:UCA = { # Central America
 	}		
 }
 #Yucatan
-REPLACE:YUC = {
+YUC = {
 	flag_definition = {
 		coa = YUC
 		subject_canton = YUC	
@@ -864,7 +863,7 @@ WNG = {
 }
 
 # Chiapas
-REPLACE:CIP = {
+CIP = {
 	flag_definition = {
 		coa = CIP
 		subject_canton = CIP
@@ -1333,7 +1332,7 @@ PP8 = { #Panama
 }
 
 #################################
-REPLACE:GYA = { # Guyana
+GYA = { # Guyana
 	flag_definition = {
 		coa = GYA
 		subject_canton = GYA
@@ -1351,7 +1350,7 @@ REPLACE:GYA = { # Guyana
 	}	
 }
 
-REPLACE:SRM = { # Suriname
+SRM = { # Suriname
 	flag_definition = {
 		coa = SRM
 		subject_canton = SRM
@@ -1368,7 +1367,7 @@ REPLACE:SRM = { # Suriname
 	}	
 }
 
-REPLACE:GIA = { # French Guiana 
+GIA = { # French Guiana 
 	flag_definition = {
 		coa = GIA
 		subject_canton = GIA
@@ -1385,7 +1384,7 @@ REPLACE:GIA = { # French Guiana
 	}	
 }
 #Sonora
-REPLACE:SNR = {
+SNR = {
 	flag_definition = {
 		coa = FRA
 		subject_canton = FRA
@@ -1395,7 +1394,7 @@ REPLACE:SNR = {
 	}
 }
 #Baja
-REPLACE:BAJ = {
+BAJ = {
 	flag_definition = {
 		coa = BAJ
 		subject_canton = BAJ

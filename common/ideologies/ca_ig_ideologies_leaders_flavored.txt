@@ -413,7 +413,7 @@ ideology_central_america_caudillo = {
 	
 }
 # ====================================================================
-# IDEOLOGÍAS REGIONALES CENTROAMERICANAS (VIC 3 - 1.12+)
+# IDEOLOGÍAS REGIONALES CENTROAMERICANAS
 # ====================================================================
 
 # --------------------------------------------------------------------
@@ -441,7 +441,7 @@ ideology_maya_autonomism = {
     lawgroup_land_reform = {
         law_serfdom = strongly_disapprove
         law_tenant_farmers = strongly_disapprove
-        law_homesteading = strongly_approve
+        law_peasant_proprietorship = strongly_approve
         law_collectivized_agriculture = strongly_approve
     }
 
@@ -484,7 +484,7 @@ ideology_coffee_liberalism = {
         law_free_trade = strongly_approve
     }
     lawgroup_land_reform = {
-        law_homesteading = strongly_disapprove
+        law_peasant_proprietorship = strongly_disapprove
         law_commercialized_agriculture = strongly_approve
     }
 
@@ -718,7 +718,7 @@ ideology_chacara_social_democracy = {
     lawgroup_land_reform = {
         law_serfdom = strongly_disapprove
         law_tenant_farmers = disapprove
-        law_homesteading = strongly_approve
+        law_peasant_proprietorship = strongly_approve
     }
     lawgroup_distribution_of_power = {
         law_oligarchy = strongly_disapprove
@@ -918,7 +918,7 @@ ideology_ca_banana_socialism = {
 	}
 }
 
-#Teocracia Jesuita Inquisitorial
+#Teocracia Jesuita
 ideology_ca_jesuit_theocracy = {
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_theocrat.dds"
 	character_ideology = yes
@@ -993,7 +993,7 @@ ideology_ca_hermit_isolationism = {
 
 	lawgroup_migration = {
 		law_closed_borders = strongly_approve
-		law_open_borders = strongly_disapprove
+		law_no_migration_controls = strongly_disapprove
 	}
 
 	lawgroup_distribution_of_power = {
@@ -1049,7 +1049,7 @@ ideology_ca_tropical_utopian = {
 	}
 
 	lawgroup_migration = {
-		law_open_borders = strongly_approve
+		law_no_migration_controls = strongly_approve
 	}
 
 	lawgroup_army_model = {

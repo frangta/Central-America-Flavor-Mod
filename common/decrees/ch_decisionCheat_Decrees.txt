@@ -40,17 +40,7 @@ ch_DecisionCheatDecree_1 = {
 ch_DecisionCheatDecree_3 = {
 	texture = "gfx/interface/icons/decree/decree_promote_national_values.dds"
 	modifier = { 
-        building_group_bg_manufacturing_throughput_add = 1
-		building_group_bg_service_throughput_add = 1
-		building_group_bg_agriculture_throughput_add = 1
-		building_group_bg_plantations_throughput_add = 1
-		building_group_bg_ranching_throughput_add = 1
-        building_group_bg_mining_throughput_add = 1
-		building_group_bg_logging_throughput_add = 1
-		building_group_bg_fishing_throughput_add = 1
-		building_group_bg_whaling_throughput_add = 1
-		building_group_bg_oil_extraction_throughput_add = 1
-		building_group_bg_rubber_throughput_add = 1
+
 	}
 	unlocking_technologies = { 
 		
@@ -142,8 +132,7 @@ ch_DecisionColony_MarkState3 = {
 		state_conscription_rate_add = 1
 		building_training_rate_add = 1000
 		building_training_rate_mult = 1
-                state_building_naval_base_max_level_add = 100
-                state_building_barracks_max_level_add = 100
+
 	}
 	unlocking_technologies = { 
 		
@@ -164,11 +153,11 @@ ch_DecisionColony_MarkState4 = {
      state_shopkeepers_investment_pool_contribution_add = 0.30
      state_clergymen_investment_pool_contribution_add = 0.30
      state_peasants_investment_pool_contribution_add = 0.30
+	 state_peasants_investment_pool_efficiency_mult = 0.30
      state_laborers_investment_pool_contribution_add = 0.30
 	 state_farmers_investment_pool_efficiency_mult = 0.30
      state_shopkeepers_investment_pool_efficiency_mult = 0.30
      state_clergymen_investment_pool_efficiency_mult = 0.30
-     state_peasants_investment_pool_efficiency_mult = 0.30
      state_laborers_investment_pool_efficiency_mult = 0.30
 	 
 	}

@@ -1338,7 +1338,7 @@ ai_strategy_uca_desperate_survival = {
     possible = {
         c:UCA ?= THIS
         # Se activa especialmente si el apoyo federal es bajo
-        var:frca_support < 100
+        "scripted_bar_progress(frca_support_bar)" < 100
     }
 
     weight = {

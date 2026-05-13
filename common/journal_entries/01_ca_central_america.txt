@@ -657,7 +657,7 @@ je_ca_federalists_vs_separatists_situation = {
                     has_variable = hon_support_var
                 }
             }
-            c:UCA = {trigger_event = { id = ca_central_america.53 days = 3 }}
+            c:UCA = { trigger_event = { id = ca_central_america.53 days = 3 }}
         }
         if = {  #Guatemala Beats to secessionists
             limit = {
@@ -677,7 +677,7 @@ je_ca_federalists_vs_separatists_situation = {
                     has_variable = gua_support_var
                 }
             }
-            c:UCA = {trigger_event = { id = ca_central_america.62 days = 3 }}
+            c:UCA = { trigger_event = { id = ca_central_america.62 days = 3 }}
         }
         if = {  #El Salvador Beats to secessionists
             limit = {
@@ -687,7 +687,7 @@ je_ca_federalists_vs_separatists_situation = {
                     has_variable = els_support_var
                 }
             }
-            c:UCA = {trigger_event = { id = ca_central_america.56 days = 3 }}
+            c:UCA = { trigger_event = { id = ca_central_america.56 days = 3 }}
         }
         show_as_tooltip = {
             remove_modifier = age_of_caudillos_modifier
@@ -722,7 +722,7 @@ je_ca_federalists_vs_separatists_situation = {
 					has_modifier = ca_separatists_win_flag
                 }
             }
-            c:UCA = {trigger_event = { id = ca_central_america.48 days = 3 }}
+            c:UCA = { trigger_event = { id = ca_central_america.48 days = 3 }}
         }
         if = {  #Costa rica falls to secessionists
             limit = {
@@ -732,7 +732,7 @@ je_ca_federalists_vs_separatists_situation = {
 					has_modifier = ca_separatists_win_flag
                 }
             }
-            c:UCA = {trigger_event = { id = ca_central_america.51 days = 3 }}
+            c:UCA = { trigger_event = { id = ca_central_america.51 days = 3 }}
         }
         if = {  #Honduras falls to secessionists
             limit = {
@@ -742,7 +742,7 @@ je_ca_federalists_vs_separatists_situation = {
 					has_modifier = ca_separatists_win_flag
                 }
             }
-            c:UCA = {trigger_event = { id = ca_central_america.54 days = 3 }}
+            c:UCA = { trigger_event = { id = ca_central_america.54 days = 3 }}
         }
         if = {  #Guatemala falls to secessionists
             limit = {
@@ -758,7 +758,7 @@ je_ca_federalists_vs_separatists_situation = {
             limit = {
                 c:ALT ?= this
                 OR = { 
-                    has_journal_entry = je_ca_state_role_in_federation2
+                    has_journal_entry = je_ca_state_role_in_federation
 					has_modifier = ca_separatists_win_flag
                 }
             }

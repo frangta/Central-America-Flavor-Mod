@@ -184,7 +184,7 @@ ideology_ca_liberal_movement = {
     
     lawgroup_land_reform = {    
         law_commercialized_agriculture = strongly_approve 
-        law_homesteading = approve 
+        law_peasant_proprietorship = approve 
         law_collectivized_agriculture = neutral 
         law_tenant_farmers = disapprove 
         law_serfdom = strongly_disapprove 
@@ -358,7 +358,7 @@ ideology_ca_agroexportadores_movement = {
         law_tenant_farmers = disapprove
         law_commercialized_agriculture = neutral
         law_collectivized_agriculture = neutral
-        law_homesteading = approve
+        law_peasant_proprietorship = approve
     }        
 
     lawgroup_taxation = {
@@ -408,7 +408,7 @@ ideology_ca_colonialist_movement = {
         law_collectivized_agriculture = strongly_disapprove
         law_serfdom = disapprove
         law_tenant_farmers = neutral
-        law_homesteading = disapprove
+        law_peasant_proprietorship = disapprove
         law_commercialized_agriculture = approve
     }
 }
@@ -508,7 +508,6 @@ ideology_ca_radical_enclavist_movement = { #Nacional Enclavist
         law_no_colonial_affairs = strongly_disapprove
         law_colonial_resettlement = strongly_disapprove
         law_colonial_exploitation = strongly_approve
-        law_colonial_administration = strongly_disapprove
         law_frontier_colonization = strongly_disapprove
     }
 }
