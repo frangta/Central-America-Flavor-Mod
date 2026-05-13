@@ -581,8 +581,8 @@ ca_central_america.1 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_1a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = 2 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 20 name = frca_support_bar } 
                 }
             }
         }
@@ -627,8 +627,8 @@ ca_central_america.1 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_1c 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -5 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -5 name = frca_support_bar } 
                 }
             }
         }
@@ -683,8 +683,8 @@ ca_central_america.2 = {
         
         custom_tooltip = { 
             text = frca_support_2a 
-            je_historic_central_america_falls_apart = {
-                set_bar_progress = { value = -10 name = frca_support_bar } 
+            je:je_historic_central_america_falls_apart = {
+                add_progress = { value = -10 name = frca_support_bar } 
             }
         }
 
@@ -705,8 +705,8 @@ ca_central_america.2 = {
         
         custom_tooltip = { 
             text = frca_support_2b 
-            je_historic_central_america_falls_apart = {
-                set_bar_progress = { value = 10 name = frca_support_bar } 
+            je:je_historic_central_america_falls_apart = {
+                add_progress = { value = 10 name = frca_support_bar } 
             }
         }
         
@@ -872,8 +872,8 @@ ca_central_america.4 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_4a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -15 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -15 name = frca_support_bar } 
                 }
             }
         }
@@ -885,8 +885,8 @@ ca_central_america.4 = {
         name = ca_central_america.4.b 
         
         scope:secession_capital.state_region = {
-            c:UCA = {
-                add_claim = s:STATE_GUATEMALA 
+            s:STATE_GUATEMALA = {
+                add_claim = c:UCA  
             }
         }
         
@@ -968,8 +968,8 @@ ca_central_america.5 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_5a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = 10 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 10 name = frca_support_bar } 
                 }
             }
         }
@@ -992,8 +992,8 @@ ca_central_america.5 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_5b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = 10 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 10 name = frca_support_bar } 
                 }
             }
         }
@@ -1014,8 +1014,8 @@ ca_central_america.5 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_5c 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -10 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -10 name = frca_support_bar } 
                 }
             }
         }
@@ -1037,8 +1037,8 @@ ca_central_america.5 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_5d 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -10 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -10 name = frca_support_bar } 
                 }
             }
         }
@@ -1198,126 +1198,126 @@ ca_central_america.6 = {
 }
 
 
-## Costa Rica / UCA Abandon ambitions in Bocas del Toro (GBR Version) 
-ca_central_america.7 = {
-    type = country_event
-    placement = root
-    title = ca_central_america.7.t
-    desc = ca_central_america.7.d
-    flavor = ca_central_america.7.f
-    
-
-    event_image = { video = "europenorthamerica_colonial_outpost" }
-    icon = "gfx/interface/icons/event_icons/event_map.dds"
-    on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    duration = 3
-    
-    trigger = {
-        this = c:GBR
-    }
-
-    immediate = {
-        p:x47C5F8 = {
-            state = { save_scope_as = bocas_state }
-        }
-    }
-
-
-    option = {
-        name = ca_central_america.7.a # Reclaim Bocas del Toro for a local company
-        default_option = yes
-        
-        set_variable = creation_pp1_gbr
-        
-        create_country = {
-            tag = PP1
-            origin = this 
-            province = p:x47C5F8
-            on_created = {
-                save_scope_as = scope_PP1
-                
-
-                scope:bocas_state = {
-                    set_owner_of_provinces = {
-                        country = c:PP1
-                        provinces = { x47C5F8 }
-                    }
-                }
-                
-
-                set_ruling_interest_groups = { ig_armed_forces ig_industrialists }
-                
-                create_character = {
-
-                    culture = cu:british 
-
-                    is_general = yes
-                    interest_group = ig_armed_forces
-                    ideology = ideology:ideology_jingoist_leader
-                    ruler = yes
-                    ig_leader = yes            
-                    traits = { explorer }
-                }
-            }   
-        }
-        
-        
-        create_diplomatic_pact = {
-            country = scope:scope_PP1
-            type = puppet
-        }
-        
-        ai_chance = { base = 40 }
-    }
-    
-    
-    option = {
-        name = ca_central_america.7.b 
-        
-        
-        trigger = {
-            exists = c:MKT
-            c:MKT = {
-                OR = {
-                    is_subject_of = root
-                    has_diplomatic_pact = { who = ROOT type = alliance }
-                }
-            }
-        }
-        
-        
-        scope:bocas_state = {
-            set_owner_of_provinces = {
-                country = c:MKT
-                provinces = { x47C5F8 }
-            }
-        }
-        
-        change_relations = { country = c:MKT value = 50 }
-        
-        ai_chance = { base = 30 }
-    }
-
-    
-    option = {
-        name = ca_central_america.7.c # Direct Crown Administration
-        
-        set_variable = rejects_pp1_gbr
-        
-        create_incident = { country = ROOT value = 3 }
-                      
-        
-        
-        scope:bocas_state = {
-            add_modifier = {
-                name = ca_british_outpost_modifier # Puedes crearlo con +10% producción de madera
-                months = 120
-            }
-        }
-        
-        ai_chance = { base = 30 }
-    }
-}
+### Costa Rica / UCA Abandon ambitions in Bocas del Toro (GBR Version) 
+#ca_central_america.7 = {
+#    type = country_event
+#    placement = root
+#    title = ca_central_america.7.t
+#    desc = ca_central_america.7.d
+#    flavor = ca_central_america.7.f
+#    
+#
+#    event_image = { video = "europenorthamerica_colonial_outpost" }
+#    icon = "gfx/interface/icons/event_icons/event_map.dds"
+#    on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#    duration = 3
+#    
+#    trigger = {
+#        this = c:GBR
+#    }
+#
+#    immediate = {
+#        p:x47C5F8 = {
+#            state = { save_scope_as = bocas_state }
+#        }
+#    }
+#
+#
+#    option = {
+#        name = ca_central_america.7.a # Reclaim Bocas del Toro for a local company
+#        default_option = yes
+#        
+#        set_variable = creation_pp1_gbr
+#        
+#        create_country = {
+#            tag = PP1
+#            origin = this 
+#            province = p:x47C5F8
+#            on_created = {
+#                save_scope_as = scope_PP1
+#                
+#
+#                scope:bocas_state = {
+#                    set_owner_of_provinces = {
+#                        country = c:PP1
+#                        provinces = { x47C5F8 }
+#                    }
+#                }
+#                
+#
+#                set_ruling_interest_groups = { ig_armed_forces ig_industrialists }
+#                
+#                create_character = {
+#
+#                    culture = cu:british 
+#
+#                    is_general = yes
+#                    interest_group = ig_armed_forces
+#                    ideology = ideology:ideology_jingoist_leader
+#                    ruler = yes
+#                    ig_leader = yes            
+#                    traits = { explorer }
+#                }
+#            }   
+#        }
+#        
+#        
+#        create_diplomatic_pact = {
+#            country = scope:scope_PP1
+#            type = puppet
+#        }
+#        
+#        ai_chance = { base = 40 }
+#    }
+#    
+#    
+#    option = {
+#        name = ca_central_america.7.b 
+#        
+#        
+#        trigger = {
+#            exists = c:MKT
+#            c:MKT = {
+#                OR = {
+#                    is_subject_of = root
+#                    
+#                }
+#            }
+#        }
+#        
+#        
+#        scope:bocas_state = {
+#            set_owner_of_provinces = {
+#                country = c:MKT
+#                provinces = { x47C5F8 }
+#            }
+#        }
+#        
+#        change_relations = { country = c:MKT value = 50 }
+#        
+#        ai_chance = { base = 30 }
+#    }
+#
+#    
+#    option = {
+#        name = ca_central_america.7.c # Direct Crown Administration
+#        
+#        set_variable = rejects_pp1_gbr
+#        
+#        create_incident = { country = ROOT value = 3 }
+#                      
+#        
+#        
+#        scope:bocas_state = {
+#            add_modifier = {
+#                name = ca_british_outpost_modifier # Puedes crearlo con +10% producción de madera
+#                months = 120
+#            }
+#        }
+#        
+#        ai_chance = { base = 30 }
+#    }
+#}
 
 ## Costa Rica / UCA Abandon ambitions in Bocas del Toro (CLM Version) 
 ca_central_america.8 = { 
@@ -1574,8 +1574,8 @@ ca_central_america.10 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_10a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = 5 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 5 name = frca_support_bar } 
                 }
             }
         }
@@ -1609,8 +1609,8 @@ ca_central_america.10 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_10b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -5 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -5 name = frca_support_bar } 
                 }
             }
         }
@@ -1648,7 +1648,7 @@ ca_central_america.11 = {
         
         
         s:STATE_PANAMA = {
-            state_region = {
+            
             
                 if = {
                     limit = { exists = c:COS }
@@ -1682,14 +1682,7 @@ ca_central_america.11 = {
                     add_claim = c:GBR
                 }   
             
-            
-                    
-                            
-                                   
-                                                                             
-            }
-                                  
-                      
+         
         }
     }
     
@@ -1784,8 +1777,8 @@ ca_central_america.12 = {
                 limit = { this = c:UCA has_variable = frca_support }
                 custom_tooltip = { 
                     text = frca_support_12a 
-                    je_historic_central_america_falls_apart = {
-                        set_bar_progress = { value = -15 name = frca_support_bar } 
+                    je:je_historic_central_america_falls_apart = {
+                        add_progress = { value = -15 name = frca_support_bar } 
                     }
                 }
             }
@@ -1809,8 +1802,8 @@ ca_central_america.12 = {
                 limit = { this = c:UCA has_variable = frca_support }
                 custom_tooltip = { 
                     text = frca_support_12b 
-                    je_historic_central_america_falls_apart = {
-                        set_bar_progress = { value = 10 name = frca_support_bar } 
+                    je:je_historic_central_america_falls_apart = {
+                        add_progress = { value = 10 name = frca_support_bar } 
                     }
                 }
             }
@@ -1849,7 +1842,10 @@ ca_central_america.13 = {
         # ==========================================
         # FASE 1: SECESIÓN DE LOS DEMÁS ESTADOS
         # ==========================================
-
+        if = {
+		limit = { has_journal_entry = central_america_falls_apart}
+		ca_dissolution_vainilla = ýes
+		}
         # --- SOCONUSCO (CIP) ---
         if = {
             limit = {
@@ -1923,7 +1919,7 @@ ca_central_america.13 = {
             # Traspaso oficial de Soconusco a GUA
             if = {
                 limit = { exists = s:STATE_CHIAPAS.region_state:UCA }
-                s:STATE_CHIAPAS.region_state:UCA = { 
+                s:STATE_CHIAPAS = { 
                     set_owner_of_provinces = {
                         country = scope:scope_GUA
                         provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 }
@@ -2133,11 +2129,16 @@ ca_central_america.13 = {
            if = {limit = {NOT = { exists = c:GUA }capital = {state_region = s:STATE_GUATEMALA}}change_tag = GUA}
            if = {limit = {NOT = { exists = c:ALT }capital = {state_region = s:STATE_CHIAPAS}}change_tag = ALT}
 
-        
+		capital = {
+			add_radicals_in_state = {
+				value = medium_radicals
+				pop_type = laborers
+			}
+		}        
         capital = {
                                 
                                                      
-            add_loyalists = {
+            add_loyalists_in_state = {
                 value = 0.5
                 culture = cu:central_american
             }
@@ -2146,12 +2147,15 @@ ca_central_america.13 = {
         
         every_country = {
             limit = { has_variable = ca_secession_country }
-            change_relations = { country = ROOT value = 20 }
+            scope:secession_country = {
+			     change_relations = {
+			     	country = ROOT
+			     	value = 20
+			     }
+			}	 
             capital = {
                 add_devastation = 15 
-                                   
-                                                         
-                add_loyalists = {
+                add_loyalists_in_state = {
                     value = 0.5
                     culture = cu:central_american
                 }
@@ -2241,11 +2245,10 @@ ca_central_america.15 = {
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     icon = "gfx/interface/icons/event_icons/event_skull.dds"
 
-trigger = {
+     trigger = {
         game_date >= 1837.2.2
         NOT = { has_variable = uca_cholera_pandemic }
         s:STATE_GUATEMALA = {
-            state_region = { is_homeland = cu:central_american }
             NOT = { has_variable = ca_cholera_affect }
         }
     }
@@ -2253,8 +2256,11 @@ trigger = {
     immediate = {
         set_variable = uca_cholera_pandemic
         if = {
-            limit = { s:STATE_GUATEMALA = { NOT = { has_variable = ca_cholera_affect } } }
-            s:STATE_GUATEMALA = { save_scope_as = cholera_affect_state }
+            limit = { 
+			state_region = s:STATE_GUATEMALA 
+			NOT = { has_variable = ca_cholera_affect }  
+           }
+		s:STATE_GUATEMALA = { save_scope_as = cholera_affect_state }
         }
     }
     
@@ -2302,7 +2308,7 @@ ca_central_america.16 = {
 
     trigger = {
         game_date >= 1837.2.2
-        NOT = { has_variable = uca_cholera_pandemic }
+        #NOT = { has_variable = uca_cholera_pandemic }
         any_scope_state = {
             state_region = { is_homeland = cu:central_american }
             NOT = { has_variable = ca_cholera_affect }
@@ -2363,8 +2369,8 @@ ca_central_america.17 = {
     trigger = {
         has_variable = uca_cholera_pandemic
         any_scope_state = {
-            has_modifier = uca_cholera
-            NOT = { has_modifier = uca_quarantine }
+            NOT = { has_modifier = uca_quarantine }           
+			has_modifier = uca_cholera
             any_neighbouring_state = {
                 owner = ROOT
                 NOT = { has_variable = cholera_affect }
@@ -2516,7 +2522,13 @@ ca_central_america.18 = {
                     activate_law = law_type:law_freedom_of_conscience
                     activate_law = law_type:law_mercantilism
                     activate_law = law_type:law_wealth_voting
-                    
+                       s:STATE_COSTA_RICA = {
+					   		set_owner_of_provinces = { 
+                            country = COS 
+                            provinces = { x47C5F8 } 
+                        }
+					   }
+
                     if = {
                         limit = { ROOT = { has_variable = random_central_american } }
                         random_list = {
@@ -2525,13 +2537,10 @@ ca_central_america.18 = {
                         }
                     }
                     
-                    if = {
-                        limit = { p:x47C5F8 = { owner = ROOT } }
-                        set_owner_of_provinces = { 
-                            country = this 
-                            provinces = { x47C5F8 } 
-                        }
-                    }
+                    #if = {
+                    #    #limit = { p:x47C5F8 = { owner = ROOT } }
+					#
+                    #}
                 }
             }
 
@@ -3766,8 +3775,8 @@ ca_central_america.35 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_35a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = 15 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
         } 
@@ -3794,8 +3803,8 @@ ca_central_america.36 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_36a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = 15 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
         } 
@@ -3822,8 +3831,8 @@ ca_central_america.37 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_37a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = 15 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
         } 
@@ -3850,8 +3859,8 @@ ca_central_america.38 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_38a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = 15 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
         } 
@@ -3878,8 +3887,8 @@ ca_central_america.39 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_39a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = 15 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
         } 
@@ -3906,8 +3915,8 @@ ca_central_america.40 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_40a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = 15 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
         } 
@@ -3933,8 +3942,8 @@ ca_central_america.41 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_41a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -15 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -15 name = frca_support_bar } 
                 }
             } 
         } 
@@ -3986,25 +3995,25 @@ ca_central_america.42 = {
             name = guatemala_intervention
             type = dp_annex_war
             escalation = 80
-            target_state = s:STATE_GUATEMALA.region_state:GUA
+
         }
         create_diplomatic_play = {
             name = honduras_intervention
             type = dp_annex_war
             escalation = 60
-            target_state = s:STATE_HONDURAS.region_state:HON
+
         }
         create_diplomatic_play = {
             name = nicaraguan_intervention
             type = dp_annex_war
             escalation = 40
-            target_state = s:STATE_NICARAGUA.region_state:NIC
+
         }
         create_diplomatic_play = {
             name = costa_rica_intervention
             type = dp_annex_war
             escalation = 20
-            target_state = s:STATE_COSTA_RICA.region_state:COS
+
         }
         ai_chance = { base = 0 }
     }
@@ -4193,8 +4202,8 @@ ca_central_america.45 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_45a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             } 
         }
@@ -4219,8 +4228,8 @@ ca_central_america.45 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_45b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             } 
         }
@@ -4288,8 +4297,8 @@ ca_central_america.46 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_46a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             } 
         }
@@ -4314,8 +4323,8 @@ ca_central_america.46 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_46b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             } 
         }
@@ -4383,8 +4392,8 @@ ca_central_america.47 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_47a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             } 
         }
@@ -4409,8 +4418,8 @@ ca_central_america.47 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_47b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             } 
         }
@@ -4478,8 +4487,8 @@ ca_central_america.48 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_48a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             } 
         }
@@ -4504,8 +4513,8 @@ ca_central_america.48 = {
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_48b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             } 
         }
@@ -4903,8 +4912,8 @@ ca_central_america.63 = {
                     limit = { has_variable = frca_support }
                     custom_tooltip = { 
                         text = frca_support_63_civil_war 
-                        je_historic_central_america_falls_apart = {
-                            set_bar_progress = { value = -30 name = frca_support_bar } 
+                        je:je_historic_central_america_falls_apart = {
+                            add_progress = { value = -30 name = frca_support_bar } 
                         }
                     }
                 }
@@ -4954,7 +4963,7 @@ ca_central_america.64 = {
         }
         set_variable = { name = frca_nicaragua_peace_var }
         set_variable = { name = frca_crisis_var }
-        trigger_event = { id = ca_central_america.5 months = 1 }
+        trigger_event = { id = ca_central_america.5 months = 1 popup = yes }
     }
     
     option = {
@@ -4965,8 +4974,8 @@ ca_central_america.64 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_64a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -4981,7 +4990,7 @@ ca_central_america.64 = {
                 }
             }
         }
-        trigger_event = { id = ca_central_america.3 months = 6 }
+        trigger_event = { id = ca_central_america.3 months = 6 popup = yes }
     }
     
     option = {
@@ -4991,8 +5000,8 @@ ca_central_america.64 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_64b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5058,8 +5067,8 @@ ca_central_america.65 = {
                     limit = { has_variable = frca_support }
                     custom_tooltip = { 
                         text = frca_support_65_civil_war 
-                        je_historic_central_america_falls_apart = {
-                            set_bar_progress = { value = -30 name = frca_support_bar } 
+                        je:je_historic_central_america_falls_apart = {
+                            add_progress = { value = -30 name = frca_support_bar } 
                         }
                     }
                 }
@@ -5118,8 +5127,8 @@ ca_central_america.66 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_66a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5134,7 +5143,7 @@ ca_central_america.66 = {
                 }
             }
         }
-        trigger_event = { id = ca_central_america.3 months = 6 }
+        trigger_event = { id = ca_central_america.3 months = 6 popup = yes }
     }
     
     option = {
@@ -5144,8 +5153,8 @@ ca_central_america.66 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_66b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5211,8 +5220,8 @@ ca_central_america.67 = {
                     limit = { has_variable = frca_support }
                     custom_tooltip = { 
                         text = frca_support_67_civil_war 
-                        je_historic_central_america_falls_apart = {
-                            set_bar_progress = { value = -30 name = frca_support_bar } 
+                        je:je_historic_central_america_falls_apart = {
+                            add_progress = { value = -30 name = frca_support_bar } 
                         }
                     }
                 }
@@ -5261,7 +5270,7 @@ ca_central_america.68 = {
         }
         set_variable = { name = frca_honduras_peace_var }
         set_variable = { name = frca_crisis_var }
-        trigger_event = { id = ca_central_america.5 months = 1 }
+        trigger_event = { id = ca_central_america.5 months = 1 popup = yes }
     }
     
     option = {
@@ -5272,8 +5281,8 @@ ca_central_america.68 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_68a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5288,7 +5297,7 @@ ca_central_america.68 = {
                 }
             }
         }
-        trigger_event = { id = ca_central_america.3 months = 6 }
+        trigger_event = { id = ca_central_america.3 months = 6 popup = yes }
     }
     
     option = {
@@ -5298,8 +5307,8 @@ ca_central_america.68 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_68b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5365,8 +5374,8 @@ ca_central_america.69 = {
                     limit = { has_variable = frca_support }
                     custom_tooltip = { 
                         text = frca_support_69_civil_war 
-                        je_historic_central_america_falls_apart = {
-                            set_bar_progress = { value = -30 name = frca_support_bar } 
+                        je:je_historic_central_america_falls_apart = {
+                            add_progress = { value = -30 name = frca_support_bar } 
                         }
                     }
                 }
@@ -5415,7 +5424,7 @@ ca_central_america.70 = {
         }
         set_variable = { name = frca_guatemala_peace_var }
         set_variable = { name = frca_crisis_var }
-        trigger_event = { id = ca_central_america.5 months = 1 }
+        trigger_event = { id = ca_central_america.5 months = 1 popup = yes }
     }
     
     option = {
@@ -5426,8 +5435,8 @@ ca_central_america.70 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_70a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5442,7 +5451,7 @@ ca_central_america.70 = {
                 }
             }
         }
-        trigger_event = { id = ca_central_america.3 months = 6 }
+        trigger_event = { id = ca_central_america.3 months = 6 popup = yes }
     }
     
     option = {
@@ -5452,8 +5461,8 @@ ca_central_america.70 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_70b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5519,8 +5528,8 @@ ca_central_america.71 = {
                     limit = { has_variable = frca_support }
                     custom_tooltip = { 
                         text = frca_support_71_civil_war 
-                        je_historic_central_america_falls_apart = {
-                            set_bar_progress = { value = -30 name = frca_support_bar } 
+                        je:je_historic_central_america_falls_apart = {
+                            add_progress = { value = -30 name = frca_support_bar } 
                         }
                     }
                 }
@@ -5569,7 +5578,7 @@ ca_central_america.72 = {
         }
         set_variable = { name = frca_elsalvador_peace_var }
         set_variable = { name = frca_crisis_var }
-        trigger_event = { id = ca_central_america.5 months = 1 }
+        trigger_event = { id = ca_central_america.5 months = 1 popup = yes }
     }
     
     option = {
@@ -5580,8 +5589,8 @@ ca_central_america.72 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_72a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5596,7 +5605,7 @@ ca_central_america.72 = {
                 }
             }
         }
-        trigger_event = { id = ca_central_america.3 months = 6 }
+        trigger_event = { id = ca_central_america.3 months = 6 popup = yes }
     }
     
     option = {
@@ -5606,8 +5615,8 @@ ca_central_america.72 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_72b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5673,8 +5682,8 @@ ca_central_america.73 = {
                     limit = { has_variable = frca_support }
                     custom_tooltip = { 
                         text = frca_support_73_civil_war 
-                        je_historic_central_america_falls_apart = {
-                            set_bar_progress = { value = -30 name = frca_support_bar } 
+                        je:je_historic_central_america_falls_apart = {
+                            add_progress = { value = -30 name = frca_support_bar } 
                         }
                     }
                 }
@@ -5723,7 +5732,7 @@ ca_central_america.74 = {
         }
         set_variable = { name = frca_losaltos_peace_var }
         set_variable = { name = frca_crisis_var }
-        trigger_event = { id = ca_central_america.5 months = 1 }
+        trigger_event = { id = ca_central_america.5 months = 1 popup = yes }
     }
     
     option = {
@@ -5734,8 +5743,8 @@ ca_central_america.74 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_74a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5750,7 +5759,7 @@ ca_central_america.74 = {
                 }
             }
         }
-        trigger_event = { id = ca_central_america.3 months = 6 }
+        trigger_event = { id = ca_central_america.3 months = 6 popup = yes }
     }
     
     option = {
@@ -5760,8 +5769,8 @@ ca_central_america.74 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_74b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5825,8 +5834,8 @@ ca_central_america.75 = {
                     limit = { has_variable = frca_support }
                     custom_tooltip = { 
                         text = frca_support_75_civil_war 
-                        je_historic_central_america_falls_apart = {
-                            set_bar_progress = { value = -30 name = frca_support_bar } 
+                        je:je_historic_central_america_falls_apart = {
+                            add_progress = { value = -30 name = frca_support_bar } 
                         }
                     }
                 }
@@ -5874,7 +5883,7 @@ ca_central_america.76 = {
         }
         set_variable = frca_panama_peace_var
         set_variable = frca_crisis_var
-        trigger_event = { id = ca_central_america.5 months = 1 }
+        trigger_event = { id = ca_central_america.5 months = 1 popup = yes }
     }
     # Accept secession
     option = {
@@ -5885,8 +5894,8 @@ ca_central_america.76 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_76a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5908,8 +5917,8 @@ ca_central_america.76 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_76b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -5979,8 +5988,8 @@ ca_central_america.78 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_78a 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -6003,8 +6012,8 @@ ca_central_america.78 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_78b 
-                je_historic_central_america_falls_apart = {
-                    set_bar_progress = { value = -20 name = frca_support_bar } 
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } 
                 }
             }
         }
@@ -6051,7 +6060,7 @@ ca_central_america.79 = {
         
         ai_chance = { base = 100 }
         
-        custom_tooltip = { text = frca_support_79a set_bar_progress = { value = -15 name = frca_support_bar } }
+        custom_tooltip = { text = frca_support_79a je:je_historic_central_america_falls_apart = { add_progress = { value = -15 name = frca_support_bar } } }
         set_variable = voting_ca_self_determination
 
         custom_tooltip = voting_ca_self_determination_complete
@@ -6102,7 +6111,7 @@ ca_central_america.79 = {
         
         ai_chance = { base = 0 } # La IA respeta la historia
         
-        custom_tooltip = { text = frca_support_79b set_bar_progress = { value = 25 name = frca_support_bar } }
+        custom_tooltip = { text = frca_support_79b je:je_historic_central_america_falls_apart = {add_progress = { value = 25 name = frca_support_bar } } }
         set_variable = voting_ca_self_determination
 
         custom_tooltip = voting_ca_self_determination_complete 
@@ -6163,13 +6172,12 @@ ca_central_america.79 = {
         ai_chance = { base = 0 } # Exclusivo para el jugador
         
         # Destrucción absoluta del soporte federal
-        set_variable = { 
-            name = frca_support 
-            value = 20 
-        }
+
+		je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 20 name = frca_support_bar } }
         
         # Dispara inmediatamente la selección de país
-        trigger_event = { id = ca_central_america.80 }
+        trigger_event = { id = ca_central_america.80 popup = yes }
     }
 }
 
@@ -6428,7 +6436,8 @@ ca_central_america.100 = {
         
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_100a set_bar_progress = { value = -15 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_100a je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -15 name = frca_support_bar } }
         }
         
         scope:caudillo_state = {
@@ -6444,7 +6453,8 @@ ca_central_america.100 = {
         
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_100b set_bar_progress = { value = 5 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_100b je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 5 name = frca_support_bar } }
         }
         
         # Sintaxis correcta de brazilevents.txt
@@ -6480,7 +6490,7 @@ ca_central_america.101 = {
             is_in_government = yes
         }
         has_variable = frca_support
-        check_variable = { name = frca_support value < 50 }
+        #check_variable = { name = frca_support value < 50 }
     }
 
     immediate = {
@@ -6497,7 +6507,8 @@ ca_central_america.101 = {
         }
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_101a set_bar_progress = { value = -10 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_101a je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -10 name = frca_support_bar } }
         }
     }
 
@@ -6512,7 +6523,8 @@ ca_central_america.101 = {
         }
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_101b set_bar_progress = { value = 15 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_101b je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 15 name = frca_support_bar } }
         }
     }
 }
@@ -6532,7 +6544,7 @@ ca_central_america.102 = {
         any_scope_state = {
             state_is_in_ca_central_america = yes
             is_incorporated = yes
-            turmoil >= 0.15 # Reemplazo correcto para "has_high_unrest"
+            turmoil >= 0.15 
         }
     }
 
@@ -6551,10 +6563,11 @@ ca_central_america.102 = {
         default_option = yes
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_102a set_bar_progress = { value = -20 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_102a je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -20 name = frca_support_bar } }
         }
         
-        # Sintaxis V3 real (acwevents.txt)
+        
         scope:demanding_state = {
             add_loyalists_in_state = {
                 value = 0.1
@@ -6568,9 +6581,10 @@ ca_central_america.102 = {
         
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_102b set_bar_progress = { value = 10 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_102b je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 10 name = frca_support_bar } }
         }
-        # No se puede añadir turmoil directo, se añaden radicales
+        
         scope:demanding_state = {
             add_radicals_in_state = {
                 value = 0.15
@@ -6718,7 +6732,7 @@ ca_central_america.300 = {
         # La ayuda federal aumenta la fe en la Unión
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_300a set_bar_progress = { value = 10 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_300a add_progress = { value = 10 name = frca_support_bar } }
         }
     }
 
@@ -6739,7 +6753,7 @@ ca_central_america.300 = {
         # El abandono reduce masivamente el soporte a la federación
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_300b set_bar_progress = { value = -25 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_300b add_progress = { value = -25 name = frca_support_bar } }
         }
     }
 }
@@ -6873,7 +6887,8 @@ ca_central_america.302 = {
             # Un pequeño golpe a la imagen de la Federación
             if = {
                 limit = { has_variable = frca_support }
-                custom_tooltip = { text = frca_support_302b set_bar_progress = { value = -5 name = frca_support_bar } }
+                custom_tooltip = { text = frca_support_302b je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -5 name = frca_support_bar } }
             }
         }
     }
@@ -6894,7 +6909,7 @@ ca_central_america.400 = {
     trigger = {
         is_ca_culture_country = yes
         any_country = {
-            country_rank = rank_great_power
+            country_rank >= rank_value:great_power
             is_subject = no
         }
     }
@@ -6902,7 +6917,7 @@ ca_central_america.400 = {
     immediate = {
         random_country = {
             limit = {
-                country_rank = rank_great_power
+                country_rank >= rank_value:great_power
                 is_subject = no
             }
             save_scope_as = foreign_power
@@ -6922,7 +6937,7 @@ ca_central_america.400 = {
         
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_400a set_bar_progress = { value = -15 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_400a add_progress = { value = -15 name = frca_support_bar } }
         }
         
         ig:ig_industrialists = { add_approval = { value = 2 months = 60 } }
@@ -6995,7 +7010,7 @@ ca_central_america.401 = {
         
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_401b set_bar_progress = { value = -10 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_401b add_progress = { value = -10 name = frca_support_bar } }
         }
     }
 }
@@ -7024,7 +7039,7 @@ ca_central_america.402 = {
         
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_402a set_bar_progress = { value = 20 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_402a add_progress = { value = 20 name = frca_support_bar } }
         }
     }
 
