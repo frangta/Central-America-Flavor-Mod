@@ -37,16 +37,16 @@ only_centralamericans_cultures = {
 }
 is_ca_culture_country = {
     OR = {
-        has_primary_culture = cu:central_american
-        has_primary_culture = cu:costa_rican
-        has_primary_culture = cu:panamanian
-        has_primary_culture = cu:nicaraguan	
-        has_primary_culture = cu:guatemalan
-        has_primary_culture = cu:el_salvadorian
-        has_primary_culture = cu:honduran
-        has_primary_culture = cu:chiapanecan
-        has_primary_culture = cu:ngabe_culture
-        has_primary_culture = cu:miskito
+        country_has_primary_culture = cu:central_american
+        country_has_primary_culture = cu:costa_rican
+        country_has_primary_culture = cu:panamanian
+        country_has_primary_culture = cu:nicaraguan	
+        country_has_primary_culture = cu:guatemalan
+        country_has_primary_culture = cu:el_salvadorian
+        country_has_primary_culture = cu:honduran
+        country_has_primary_culture = cu:chiapanecan
+        country_has_primary_culture = cu:ngabe_culture
+        country_has_primary_culture = cu:miskito
         
     }
 }

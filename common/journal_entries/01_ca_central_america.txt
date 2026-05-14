@@ -454,12 +454,23 @@ je_ca_state_role_in_federation = {
     icon = "gfx/interface/icons/event_icons/event_protest.dds"
     group = je_group_historical_content    
      
-
+     scripted_button = ca_button_support_federation
+     scripted_button = ca_button_sabotage_federation
     
-    is_shown_when_inactive = {
+	scripted_progress_bar = ca_core_progress_bar
+	is_shown_when_inactive = {
         exists = c:UCA
         is_subject_of = c:UCA
     }
+	complete = {
+	scope:journal_entry = { "scripted_bar_progress(ca_core_progress_bar)" = 200 }
+	
+		
+	}
+	fail = {
+	scope:journal_entry = { "scripted_bar_progress(ca_core_progress_bar)" = 0 }
+	}	
+
 
     #should_be_involved = {
     #    # Involucra a todos los países que sean sujetos de la UCA
@@ -489,28 +500,12 @@ je_ca_state_role_in_federation = {
     #current_value = {
     #    value = overlord.var:federalists_vs_separatists_var
     #}    
-    
-    # Usamos la misma barra de progreso que creaste para la UCA
-    #scripted_progress_bar = federalists_vs_separatists_progress_core_progress_bar
-    progressbar = yes
-    
-    goal_add_value = {
-        add = 200 # El máximo de tu barra
-    }
-    weight = 100
 
-    
     immediate_all_involved = {
         # Marca que el estado está actualmente definiendo su rol
         set_variable = ca_defining_role_in_federation
     }
-
-    # Aquí puedes añadir botones (Decisiones) para que el jugador gaste 
-    # Autoridad o Dinero para boicotear o ayudar a la UCA directamente
-    scripted_button = ca_button_sabotage_federation
-    scripted_button = ca_button_support_federation
-
-    
+  
     #on_complete_all_involved = {
     #    remove_variable = ca_defining_role_in_federation
     #    
@@ -571,7 +566,6 @@ je_ca_federalists_vs_separatists_situation = {
     }    
     weight = 100
 
-    calculate_federalists_vs_separatists_progress = yes
     
     immediate = {
         set_variable = { name = federalists_vs_separatists_next value = 0 scope:journal_entry = root }

@@ -176,7 +176,7 @@
 
         if = {
             limit = {
-                has_law = law_type:law_ca_central_american_unitary
+                has_law_or_variant = law_type:law_ca_central_american_unitary
             }
             add = {
                 desc = "ca_unitary_law_support_desc"
@@ -185,7 +185,7 @@
         }
         if = {
             limit = {
-                has_law = law_type:law_ca_central_american_confederated
+                has_law_or_variant = law_type:law_ca_central_american_confederated
             }
             add = {
                 desc = "ca_confederated_law_penalty_desc"
@@ -227,7 +227,6 @@
 ca_core_progress_bar = {
     name = "great_game_core_progress_bar_name"
     desc = "great_game_core_progress_bar_britain_desc"
-    second_desc = "great_game_core_progress_bar_russia_desc"
     
     start_value = 100
     min_value = 0
@@ -244,7 +243,7 @@ ca_core_progress_bar = {
                         is_powerful = yes
                     }
                 }
-                value = -10
+                value = -20
             }
         }
         add = {
@@ -255,7 +254,7 @@ ca_core_progress_bar = {
                         is_in_government = yes
                     }
                 }
-                value = 1
+                value = -1
             }
         }
         add = {
@@ -274,13 +273,13 @@ ca_core_progress_bar = {
             if = {
                 limit = {
                     OR = {
-                        has_law = law_type:law_total_separation
-                        has_law = law_type:law_cultural_exclusion
-                        has_law = law_type:law_census_voting
-                        has_law = law_type:law_universal_suffrage
-                        has_law = law_type:law_peasant_proprietorship
-                        has_law = law_type:law_right_of_assembly
-                        has_law = law_type:law_elected_bureaucrats
+                        has_law_or_variant = law_type:law_total_separation
+                        has_law_or_variant = law_type:law_cultural_exclusion
+                        has_law_or_variant = law_type:law_census_voting
+                        has_law_or_variant = law_type:law_universal_suffrage
+                        has_law_or_variant = law_type:law_peasant_proprietorship
+                        has_law_or_variant = law_type:law_right_of_assembly
+                        has_law_or_variant = law_type:law_elected_bureaucrats
                     }
                 }
                 value = -5
@@ -291,15 +290,15 @@ ca_core_progress_bar = {
             if = {
                 limit = {
                     OR = {
-                        has_law = law_type:law_autocracy
-                        has_law = law_type:law_oligarchy
-                        has_law = law_type:law_single_party_state
-                        has_law = law_type:law_state_religion
-                        has_law = law_type:law_national_supremacy
-                        has_law = law_type:law_traditionalism
-                        has_law = law_type:law_hereditary_bureaucrats
-                        has_law = law_type:law_tenant_farmers
-                        has_law = law_type:law_censorship
+                        has_law_or_variant = law_type:law_autocracy
+                        has_law_or_variant = law_type:law_oligarchy
+                        has_law_or_variant = law_type:law_single_party_state
+                        has_law_or_variant = law_type:law_state_religion
+                        has_law_or_variant = law_type:law_national_supremacy
+                        has_law_or_variant = law_type:law_traditionalism
+                        has_law_or_variant = law_type:law_hereditary_bureaucrats
+                        has_law_or_variant = law_type:law_tenant_farmers
+                        has_law_or_variant = law_type:law_censorship
                     }
                 }
                 value = 10
@@ -338,116 +337,10 @@ ca_core_progress_bar = {
                 value = -10
             }
         }
-        add = {
-            desc = "Decrease if fewer than 5 specified states are present"
-            if = {
-                limit = {
-                    any_scope_state = {
-                        OR = {
-                            state_region = s:STATE_GUATEMALA
-                            state_region = s:STATE_HONDURAS
-                            state_region = s:STATE_COSTA_RICA
-                            state_region = s:STATE_SAN_SALVADOR
-                            state_region = s:STATE_NICARAGUA
-                        }
-                        count < 5
-                    }
-                }
-                value = -15
-            }
-        }
-        add = {
-            desc = "Decrease if fewer than 4 specified states are present"
-            if = {
-                limit = {
-                    any_scope_state = {
-                        OR = {
-                            state_region = s:STATE_GUATEMALA
-                            state_region = s:STATE_HONDURAS
-                            state_region = s:STATE_COSTA_RICA
-                            state_region = s:STATE_SAN_SALVADOR
-                            state_region = s:STATE_NICARAGUA
-                        }
-                        count < 4
-                    }
-                }
-                value = -10
-            }
-        }
-        add = {
-            desc = "Decrease if fewer than 3 specified states are present"
-            if = {
-                limit = {
-                    any_scope_state = {
-                        OR = {
-                            state_region = s:STATE_GUATEMALA
-                            state_region = s:STATE_HONDURAS
-                            state_region = s:STATE_COSTA_RICA
-                            state_region = s:STATE_SAN_SALVADOR
-                            state_region = s:STATE_NICARAGUA
-                        }
-                        count < 3
-                    }
-                }
-                value = -5
-            }
-        }
-        add = {
-            desc = "Increase if fewer than 3 specified states are present"
-            if = {
-                limit = {
-                    any_scope_state = {
-                        OR = {
-                            state_region = s:STATE_GUATEMALA
-                            state_region = s:STATE_HONDURAS
-                            state_region = s:STATE_COSTA_RICA
-                            state_region = s:STATE_SAN_SALVADOR
-                            state_region = s:STATE_NICARAGUA
-                        }
-                        count < 3
-                    }
-                }
-                value = 20
-            }
-        }
-        add = {
-            desc = "Increase if fewer than 2 specified states are present"
-            if = {
-                limit = {
-                    any_scope_state = {
-                        OR = {
-                            state_region = s:STATE_GUATEMALA
-                            state_region = s:STATE_HONDURAS
-                            state_region = s:STATE_COSTA_RICA
-                            state_region = s:STATE_SAN_SALVADOR
-                            state_region = s:STATE_NICARAGUA
-                        }
-                        count < 2
-                    }
-                }
-                value = 25
-            }
-        }
-        add = {
-            desc = "Increase if fewer than 1 specified state is present"
-            if = {
-                limit = {
-                    any_scope_state = {
-                        OR = {
-                            state_region = s:STATE_GUATEMALA
-                            state_region = s:STATE_HONDURAS
-                            state_region = s:STATE_COSTA_RICA
-                            state_region = s:STATE_SAN_SALVADOR
-                            state_region = s:STATE_NICARAGUA
-                        }
-                        count < 1
-                    }
-                }
-                value = 30
-            }
-        }
+        
     }
 }
+
 ca_golden_grain_bar = {
 	name = "ca_golden_grain_bar_name"
 	desc = "ca_golden_grain_bar_desc"
@@ -494,8 +387,8 @@ ca_golden_grain_bar = {
 		if = {
 			limit = {
 				OR = {
-					has_law = law_type:law_free_trade
-					has_law = law_type:law_mercantilism
+					has_law_or_variant = law_type:law_free_trade
+					has_law_or_variant = law_type:law_mercantilism
 				}
 			}
 			add = {
@@ -565,7 +458,7 @@ federalists_vs_separatists_progress_core_progress_bar = {
 
 		if = {
 			limit = {
-				has_law = law_type:law_ca_central_american_federal
+				has_law_or_variant = law_type:law_ca_central_american_federal
 			}
 			add = {
 				desc = "federalists_law_active"
@@ -659,7 +552,7 @@ federalists_vs_separatists_progress_core_progress_bar = {
 				value = -10 
 			}
 		}
-# 1. Boicot por Agitación: Si el jugador (sujeto) sube el Turmoil en su país
+
         if = {
             limit = {
                 any_direct_subject = {
@@ -675,7 +568,7 @@ federalists_vs_separatists_progress_core_progress_bar = {
             }
         }
 
-        # 2. Boicot Político: Si el jugador (sujeto) pone a los Terratenientes en su gobierno local
+
         if = {
             limit = {
                 any_direct_subject = {
@@ -691,11 +584,11 @@ federalists_vs_separatists_progress_core_progress_bar = {
             }
         }
 
-        # 3. Boicot por Leyes: Si el jugador aprueba una ley que debilite la unión (ej. Milicias Locales)
+
         if = {
             limit = {
                 any_direct_subject = {
-                    has_law = law_type:law_peasant_levies # Reemplaza con la ley separatista de tu mod
+                    has_law_or_variant = law_type:law_peasant_levies # Reemplaza con la ley separatista de tu mod
                 }
             }
             add = {

@@ -130,10 +130,9 @@
 ca_reduce_support_separatism_effect = {
 	if = {
 		limit = { has_variable = frca_support }
-		change_variable = {
-			name = frca_support
-			subtract = 10
-		}
+		        je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -10 name = frca_support_bar } 
+                }
 	}
 }
 
@@ -142,10 +141,9 @@ ca_reduce_support_separatism_effect = {
 ca_reduce_support_independence_effect = {
 	if = {
 		limit = { has_variable = frca_support }
-		change_variable = {
-			name = frca_support
-			subtract = 20
-		}
+		            je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 20 name = frca_support_bar } 
+                }
 	}
 }
 
@@ -154,10 +152,9 @@ ca_reduce_support_independence_effect = {
 ca_reduce_support_civil_war_effect = {
 	if = {
 		limit = { has_variable = frca_support }
-		change_variable = {
-			name = frca_support
-			subtract = 30
-		}
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -30 name = frca_support_bar } 
+                }
 	}
 }
 
@@ -166,10 +163,9 @@ ca_reduce_support_civil_war_effect = {
 ca_increase_support_intervention_success_effect = {
 	if = {
 		limit = { has_variable = frca_support }
-		change_variable = {
-			name = frca_support
-			add = 15
-		}
+        je:je_historic_central_america_falls_apart = {
+            add_progress = { value = 15 name = frca_support_bar } 
+        }
 	}
 }
 
@@ -178,10 +174,9 @@ ca_increase_support_intervention_success_effect = {
 ca_reduce_support_intervention_fail_effect = {
 	if = {
 		limit = { has_variable = frca_support }
-		change_variable = {
-			name = frca_support
-			subtract = 15
-		}
+		    je:je_historic_central_america_falls_apart = {
+            add_progress = { value = 15 name = frca_support_bar } 
+            }
 	}
 }
 

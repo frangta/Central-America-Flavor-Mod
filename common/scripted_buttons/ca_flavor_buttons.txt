@@ -25,8 +25,8 @@
 	}
 }
 ca_button_sabotage_federation = {
-    name = ca_button_sabotage_federation_name
-    desc = ca_button_sabotage_federation_desc
+    name = "ca_button_sabotage_federation_name"
+    desc = "ca_button_sabotage_federation_desc"
     is_shown = { always = yes }
     is_valid = { NOT = { has_variable = ca_federation_interaction_cooldown } }
 
@@ -53,8 +53,8 @@ ca_button_sabotage_federation = {
 }
 
 ca_button_support_federation = {
-    name = ca_button_support_federation_name
-    desc = ca_button_support_federation_desc
+    name = "ca_button_support_federation_name"
+    desc = "ca_button_support_federation_desc"
     is_shown = { always = yes }
     is_valid = { NOT = { has_variable = ca_federation_interaction_cooldown } }
 
@@ -66,8 +66,6 @@ ca_button_support_federation = {
             change_variable = { name = federalists_vs_separatists_var add = 15 }
         }
         
-        # --- ¡NUEVA INTERACCIÓN CON EL LOBBY! ---
-        # Alegramos a los pro-federales
         if = {
             limit = { any_political_lobby = { is_political_lobby_type = lobby_pro_federalist } }
             random_political_lobby = {
@@ -173,8 +171,8 @@ ca_button_support_federation = {
 #opposition_crisis_var
 #Historic events##
 je_nicaragua_intervention_central_america_button = {
-	name = nicaragua_intervention_central_america_button
-	desc = nicaragua_intervention_central_america_button_desc
+	name = "nicaragua_intervention_central_america_button"
+	desc = "nicaragua_intervention_central_america_button_desc"
 
 	visible = { 
 		NOT = { has_variable = je_central_america_setup_nic_var }
@@ -223,8 +221,8 @@ je_nicaragua_intervention_central_america_button = {
 	}
 }
 je_costa_rica_intervention_central_america_button = {
-	name = costa_rica_intervention_central_america_button
-	desc = costa_rica_intervention_central_america_button_desc
+	name = "costa_rica_intervention_central_america_button"
+	desc = "costa_rica_intervention_central_america_button_desc"
 
 	visible = { 
 		NOT = { has_variable = je_central_america_setup_cos_var }
@@ -273,8 +271,8 @@ je_costa_rica_intervention_central_america_button = {
 	}
 }
 je_honduras_intervention_central_america_button = {
-	name = honduras_intervention_central_america_button
-	desc = honduras_intervention_central_america_button_desc
+	name = "honduras_intervention_central_america_button"
+	desc = "honduras_intervention_central_america_button_desc"
 
 	visible = { 
 		NOT = { has_variable = je_central_america_setup_HON_var }
@@ -323,8 +321,8 @@ je_honduras_intervention_central_america_button = {
 	}
 }
 je_guatemala_intervention_central_america_button = {
-	name = guatemala_intervention_central_america_button
-	desc = guatemala_intervention_central_america_button_desc
+	name = "guatemala_intervention_central_america_button"
+	desc = "guatemala_intervention_central_america_button_desc"
 
 	visible = { 
 		NOT = { has_variable = je_central_america_setup_GUA_var }
@@ -373,8 +371,8 @@ je_guatemala_intervention_central_america_button = {
 	}
 }
 je_el_salvador_intervention_central_america_button = {
-	name = el_salvador_intervention_central_america_button
-	desc = el_salvador_intervention_central_america_button_desc
+	name = "el_salvador_intervention_central_america_button"
+	desc = "el_salvador_intervention_central_america_button_desc"
 
 	visible = { 
 		NOT = { has_variable = je_central_america_setup_ELS_var }
@@ -425,8 +423,8 @@ je_el_salvador_intervention_central_america_button = {
 
 #Generic events##
 je_restore_order_gua_button = {
-	name = restore_order_gua_button
-	desc = restore_order_gua_button_desc
+	name = "restore_order_gua_button"
+	desc = "restore_order_gua_button_desc"
 
 	visible = {
 		NOT = { has_variable = je_central_america_setup_gua_var }
@@ -464,8 +462,8 @@ je_restore_order_gua_button = {
 }
 
 je_restore_order_hon_button = {
-	name = restore_order_hon_button
-	desc = restore_order_hon_button_desc
+	name = "restore_order_hon_button"
+	desc = "restore_order_hon_button_desc"
 
 	visible = {
 		NOT = { has_variable = je_central_america_setup_hon_var }
@@ -502,8 +500,8 @@ je_restore_order_hon_button = {
 }
 
 je_restore_order_nic_button = {
-	name = restore_order_nic_button
-	desc = restore_order_nic_button_desc
+	name = "restore_order_nic_button"
+	desc = "restore_order_nic_button_desc"
 
 	visible = {
 		OR = {
@@ -543,8 +541,8 @@ je_restore_order_nic_button = {
 }
 
 je_restore_order_cos_button = {
-	name = restore_order_cos_button
-	desc = restore_order_cos_button_desc
+	name = "restore_order_cos_button"
+	desc = "restore_order_cos_button_desc"
 
 	visible = { 
 		NOT = { has_variable = je_central_america_setup_cos_var }
@@ -580,8 +578,8 @@ je_restore_order_cos_button = {
 	}
 }
 je_restore_order_els_button = {
-	name = restore_order_cos_button
-	desc = restore_order_cos_button_desc
+	name = "restore_order_cos_button"
+	desc = "restore_order_cos_button_desc"
 
 	visible = { 
 		NOT = { has_variable = je_central_america_setup_cos_var }
