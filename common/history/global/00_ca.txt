@@ -1,13 +1,13 @@
 ﻿# This is executed last among all history
 GLOBAL = {
 	
-on_game_start = {
-	effect = {
-		# Llamamos al efecto que agrupa tus tres configuraciones
-		ca_initial_game_start_setup = yes
-
-	}
-}
+#on_game_start = {
+#	effect = {
+#		# Llamamos al efecto que agrupa tus tres configuraciones
+#		ca_initial_game_start_setup = yes
+#
+#	}
+#}
 	c:UCA ?= {
                 ca_setup_ideological_cha = yes
                 ca_out_poli = yes
