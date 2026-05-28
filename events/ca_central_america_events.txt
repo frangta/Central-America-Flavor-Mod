@@ -45,7 +45,7 @@
 #ideology_ca_filibuster (Filibusterismo Esclavista / Destino Manifiesto Anglo)
 #ideology_ca_imperial_monarchist (Pan-Hispanismo Imperial / Monarquismo)
 #ideology_ca_banana_socialism (Socialismo Bananero / Comunismo Tropical)
-#ideology_ca_jesuit_theocracy (Teocracia Jesuita Inquisitorial)
+#ideology_ca_jesuit_theocracy (Teocracia Jesuita)
 #ideology_ca_miskito_hegemony (Imperio Marítimo Miskito)
 #ideology_ca_neo_mayan_restoration (Restauración Neo-Maya / Supremacía Indígena)
 #ideology_ca_hermit_isolationism (Aislacionismo Supremo / Modelo "Dr. Francia")
@@ -62,7 +62,7 @@
 #ideology_ca_coffee_liberal (Liberalismo Cafetalero / Positivismo Autoritario)
 #ideology_ca_indigenous_communalism (Indigenismo Comunal)
 #ideology_ca_separatist (Separatismo Soberano)
-#ideology_ca_enclavist (Colaboracionismo Enclavista / "Vende-Patrias")
+#ideology_ca_enclavist (Enclavista)
 #ideology_ca_criollo_elite
 #ideology_ca_liberal
 #ideology_ca_constitutionalist
@@ -111,7 +111,31 @@
 #law_land_reform_coffee_oligarchy
 #law_land_reform_communal_lands
 #law_land_reform_banana_republic
-#law_land_reform_hacienda_system
+#law_land_reform_hacienda_syste
+#Jounals:
+#je_historic_central_america_falls_apart *Este diario es exclusivo para UCA,Contiene los eventos historicos de Centroamerica 
+#je_ca_coffee_boom *Diario sobre el auge del cafe en los paises centroamericanosm,requisitos para disparo que tenga como minimo 5 builds de plantacion de cafe en el estado
+#je_reunify_central_america *diario para reunificacion de centroamerica, se dispara por medio de una desicion de jugador/ia le da reclamaciones sobre centroamerica por poco tiempo.
+#je_ca_central_american_fragile_unity *diario para la selecion de la faccion que eliga el jugador y en caso del IA;"en este tiene un random_list con en siguente modo: 85% a los federales (historico),15% a los centralistas".
+#je_ca_state_role_in_federation *diario sobre la selecion del estado a la faccion que eliga;"federal,centralista,separatista." , este tiene dos modos ; Historico y dinamico.
+#je_ca_federalists_vs_separatists_situation *diario exclusivo para GUA,HON,ELS,COS,NIC , en este diario genera un una pelea interna entre federalistas y separatistas, y depende de la selección que hizo en jugador en el diario "je_ca_state_role_in_federation" se dispara eventos historicos/dinamicos sobre esa situacion.
+#je_ca_agro_export_boom *diario para el desarrollo economico del estado, de dispara gracias de un evento "aun sin definir".
+#je_ca_military_reform *diario para la reforma militar,ya que los paises centroamericanos durante la union federal,tenian un tipo de ley "law_federal_militia" y durante el separatismo "law_regionalist_militia",necesita completar los requisitos para poder reformar la ley,sino cuanto este activo el diario se dispara eventos sobre caudillos,y si falla se cambia la ley a "law_ca_caudillismo". 
+#je_ca_enlightenment *diario para desarrollo social y cultural.
+#je_ca_company_independence *diario para las companias
+#je_ca_company_autonomy *diario para las companias
+#je_ca_company_bankruptcy *diario para las companias
+#je_ca_national_geological_survey *Con este Diario se podra agregar Minas de hierro,oro,asufre,plumo,oil en los estados de centroamerica,pero tiene un limite "state_trait_mining_gua,state_trait_mining_cos,state_trait_mining_hon,state_trait_mining_els,state_trait_mining_nic,state_trait_mining_pnm",Requisitos: tienes que elegir la decicion de prospeccion para activar este diario, y cuanto este activo se disparara evetos sobre el estudio de los suelos.
+#je_ca_historic_situation_in_nicaragua *diario historico para nicaragua,en este se le va la sitiacion al jugador del estado del pais,cuanto este activo se disparara los eventos historicos de nicaragua.
+#je_ca_historic_situation_in_costarica *diario historico para costa rica,en este se le va la sitiacion al jugador del estado del pais,cuanto este activo se disparara los eventos historicos de costa rica.
+#je_ca_historic_situation_in_talamanca *diario historico para talamanca,en este se le va la sitiacion al jugador del estado del pais,cuanto este activo se disparara los eventos historicos de talamanca.
+#je_ca_historic_situation_in_elsalvador *diario historico para el salvador,en este se le va la sitiacion al jugador del estado del pais,cuanto este activo se disparara los eventos historicos de el salvador.
+#je_ca_historic_situation_in_guatemala *diario historico para guatemala,en este se le va la sitiacion al jugador del estado del pais,cuanto este activo se disparara los eventos historicos de guatemala.
+#je_ca_situation_in_losaltos *diario para los altos.
+#je_ca_historic_situation_in_panama *diario historico para panama,en este se le va la sitiacion al jugador del estado del pais,cuanto este activo se disparara los eventos historicos de panama.
+#je_ca_historic_situation_in_honduras *diario historico para honduras,en este se le va la sitiacion al jugador del estado del pais,cuanto este activo se disparara los eventos historicos de honduras.
+#je_3ter_costa_rica_civil_war *diario para la tercera guerra civil de costa rica 
+#je_ca_morazan_situation *Diario sobre Morazan despues de su exilio.
 #TAGS:
 #Costa Rica
 #Tags principales y formaciones:
@@ -480,59 +504,80 @@
 #ca_central_america.23: Separatism in Los Altos
 #ca_central_america.24: Opposition to secession
 #ca_central_america.25: Acceptance of secession
-#ca_central_america.26: Nicaragua declares independence on Arms
-#ca_central_america.27: Nicaragua declares independence Peaceful
-#ca_central_america.28: Nicaragua apply intervention
-#ca_central_america.29: Costa Rica apply intervention
-#ca_central_america.30: Honduras apply intervention
-#ca_central_america.31: El Salvador apply intervention
-#ca_central_america.32: Guatemala apply intervention
-#ca_central_america.33: Los Altos apply intervention
-#ca_central_america.34: Panama apply intervention
-#ca_central_america.35: UCA Accept the intervention in Costa Rica
-#ca_central_america.36: UCA Accept the intervention in Honduras
-#ca_central_america.37: UCA Accept the intervention in Nicaragua
-#ca_central_america.38: UCA Accept the intervention in El Salvador
-#ca_central_america.39: UCA Accept the intervention in Guatemala
-#ca_central_america.40: UCA Accept the intervention in Los Altos
-#ca_central_america.41: UCA Do not accept the intervention
-#ca_central_america.42: Historic Second Central American Civil War/ End of the Union?
-#ca_central_america.43: Defeat in the Second Civil War
-#ca_central_america.44: Victory in the Second Civil War
-#ca_central_america.45: Costa Rica declares independence 15 November de 1838
-#ca_central_america.46: Nicaragua declares independence 30 de abril de 1838
-#ca_central_america.47: Guatemala declares independence 17 de abril de 1839
-#ca_central_america.48: Honduras declares independence 5 de noviembre de 1839
-#ca_central_america.49: Honduras declares independence Peaceful
-#ca_central_america.50: El Salvador Beats to secessionists
-#ca_central_america.51: El Salvador falls to secessionists
-#ca_central_america.52: El Salvador declares independence Peaceful
-#ca_central_america.53: Guatemala Beats to secessionists
-#ca_central_america.54: Guatemala falls to secessionists
-#ca_central_america.55: Guatemala declares independence Peaceful
-#ca_central_america.56: Los Altos Beats to secessionists
-#ca_central_america.57: Los Altos falls to secessionists
-#ca_central_america.58: Los Altos declares independence Peaceful
-#ca_central_america.59: Panama Beats to secessionists
-#ca_central_america.60: Panama falls to secessionists
-#ca_central_america.61: Panama declares independence Peaceful
-#ca_central_america.62: UCA's Panama declares independence Peaceful
-#ca_central_america.63: Civil war in Nicaragua
-#ca_central_america.64: Nicaragua declares independence on Arms
-#ca_central_america.65: Civil war in Costa Rica
-#ca_central_america.66: Costa Rica declares independence on Arms
-#ca_central_america.67: Civil war in Honduras
-#ca_central_america.68: Honduras declares independence on Arms
-#ca_central_america.69: Civil war in Guatemala
-#ca_central_america.70: Guatemala declares independence on Arms
-#ca_central_america.71: Civil war in El Salvador
-#ca_central_america.72: El Salvador declares independence on Arms
-#ca_central_america.73: Civil war in Los Altos
-#ca_central_america.74: Los Altos declares independence on Arms
-#ca_central_america.75: Civil war in Panama
-#ca_central_america.76: Panama declares independence on Arms
-#ca_central_america.78: Los Altos declares independence 31 de mayo de 1839
-#ca_central_america.79: Federal Congress authorizes states to reorganize themselves (May 30, 1838
+#ca_central_america.26: Nicaragua declares independence on Arms * Conecta con je_ca_federalists_vs_separatists_situation
+#ca_central_america.27: Nicaragua declares independence Peaceful *Conecta con je_ca_federalists_vs_separatists_situation
+#ca_central_america.28: Nicaragua apply intervention *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.29: Costa Rica apply intervention *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.30: Honduras apply intervention *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.31: El Salvador apply intervention *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.32: Guatemala apply intervention *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.33: Los Altos apply intervention *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.34: Panama apply intervention 
+#ca_central_america.35: UCA Accept the intervention in Costa Rica *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.36: UCA Accept the intervention in Honduras *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.37: UCA Accept the intervention in Nicaragua *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.38: UCA Accept the intervention in El Salvador *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.39: UCA Accept the intervention in Guatemala *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.40: UCA Accept the intervention in Los Altos *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.41: UCA Do not accept the intervention *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.42: Historic Second Central American Civil War/ End of the Union? *Conecta con je_historic_central_america_falls_apart
+#ca_central_america.43: Defeat in the Second Civil War *Conecta con je_historic_central_america_falls_apart
+#ca_central_america.44: Victory in the Second Civil War *Conecta con je_historic_central_america_falls_apart
+#ca_central_america.45: Costa Rica declares independence 15 November de 1838 *Conecta con je_historic_central_america_falls_apart y afecta frca_support_bar de UCA
+#ca_central_america.46: Nicaragua declares independence 30 de abril de 1838 *Conecta con je_historic_central_america_falls_apart y afecta frca_support_bar de UCA
+#ca_central_america.47: Guatemala declares independence 17 de abril de 1839 *Conecta con je_historic_central_america_falls_apart y afecta frca_support_bar de UCA
+#ca_central_america.48: Honduras declares independence 5 de noviembre de 1839 *Conecta con je_historic_central_america_falls_apart y afecta frca_support_bar de UCA
+#ca_central_america.49: Honduras declares independence Peaceful Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+####ca_central_america.50: El Salvador Beats to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.51: El Salvador falls to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.52: El Salvador declares independence Peaceful *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.53: Guatemala Beats to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.54: Guatemala falls to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.55: Guatemala declares independence Peaceful *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.56: Los Altos Beats to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.57: Los Altos falls to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.58: Los Altos declares independence Peaceful *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.59: Panama Beats to secessionists *Conecta con
+#ca_central_america.60: Panama falls to secessionists *Conecta con
+#ca_central_america.61: Panama declares independence Peaceful *Conecta con
+#ca_central_america.62: UCA's Panama declares independence Peaceful *Conecta con
+#ca_central_america.63: Civil war in Nicaragua *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.64: Nicaragua declares independence on Arms *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.65: Civil war in Costa Rica *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.66: Costa Rica declares independence on Arms *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.67: Civil war in Honduras *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.68: Honduras declares independence on Arms *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.69: Civil war in Guatemala *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.70: Guatemala declares independence on Arms *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.71: Civil war in El Salvador *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.72: El Salvador declares independence on Arms *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.73: Civil war in Los Altos *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.74: Los Altos declares independence on Arms *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.75: Civil war in Panama *Conecta con 
+#ca_central_america.76: Panama declares independence on Arms *Conecta con 
+#ca_central_america.78: Los Altos declares independence 31 de mayo de 1839 *Conecta con je_historic_central_america_falls_apart y afecta frca_support_bar de UCA
+#ca_central_america.79: Federal Congress authorizes states to reorganize themselves (May 30, 1838)
+#ca_central_america.80: Selection for playing with GUA , ELS , HON , NIC , COS
+#ca_central_america.81: Honduras Beats to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.82: Honduras falls to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.83: Costa Rica Beats to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.84: Costa Rica falls to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.85: Nicaragua Beats to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.86: Nicaragua falls to secessionists *Conecta con je_ca_federalists_vs_separatists_situation y afecta frca_support_bar de UCA
+#ca_central_america.87: "Vacio sin contenido"
+#ca_central_america.88: Aparición de líderes regionales ("Caudillo Emerges")
+#ca_central_america.89: Intriga Palaciega
+#ca_central_america.90: Demandas de Autonomía de un Estado
+#ca_central_america.91: Auge del Café
+#ca_central_america.92: Crisis de Deuda
+#ca_central_america.93: Terremoto en el Istmo historico/dinamico (Desastre Natural) *Pone a prueba la utilidad de la Federación para ayudar a los estados.  
+#ca_central_america.94: Campaña de Alfabetización ("Literacy Campaign") *Conecta con tu je_ca_enlightenment y fortalece a la Intelligentsia.
+#ca_central_america.95: Conflictos por la tierra en los estados agrícolas. *Rebelión Campesina ("Peasant Uprising")
+#ca_central_america.96: Intervención Extranjera
+#ca_central_america.97: Tensiones Diplomáticas Fronterizas
+#ca_central_america.98: Modernización del Ejército vs. Caudillismo
+#ca_central_america.99:
+#ca_central_america.100:
 ca_central_america.1 = { 
     type = country_event
     placement = scope:guatemala_state    
@@ -2144,7 +2189,7 @@ ca_central_america.13 = {
             }
         }
         ca_remove_ideological_strongholds_effect = yes
-        
+        ca_post_uca_game_setup = yes
         every_country = {
             limit = { has_variable = ca_secession_country }
             scope:secession_country = {
@@ -3122,7 +3167,7 @@ ca_central_america.25 = {
 ## Nicaragua declares independence on Arms
 ca_central_america.26 = {
     type = country_event
-    placement = scope:secession_capital
+    placement = s:STATE_NICARAGUA
     title = ca_central_america.26.t
     desc = ca_central_america.26.d
     flavor = ca_central_america.26.f
@@ -3131,20 +3176,44 @@ ca_central_america.26 = {
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
     icon = "gfx/interface/icons/event_icons/event_fire.dds"
-    trigger = { }
-    immediate = { }
+    is_triggered_only = yes   
     # Accept secession
     option = {
         name = ca_central_america.26.a
         default_option = yes
-        scope:secession_country = {
-            change_relations = { country = ROOT value = 20 }
-            capital = {
-                state_region = { add_devastation = 15 }
-                add_loyalists_in_state = { value = 0.25 }
+      # Conexión con el Diario: Golpe fuerte por ser guerra civil
+        custom_tooltip = { 
+            text = frca_support_26a 
+            je:je_historic_central_america_falls_apart = {
+                add_progress = { value = -30 name = frca_support_bar } 
             }
         }
-        trigger_event = { id = ca_central_america.3 months = 6 }
+
+        # Efecto: Iniciar la guerra (Activamos el estado de guerra civil)
+        c:NIC = {
+            set_variable = ca_nicaragua_war_started
+			}
+		c:UCA ?= {
+			create_diplomatic_play = {
+				name = hungarian_revolution
+				escalation = 80 
+				type = dp_hungarian_revolution
+				target_state = c:NIC.capital
+				
+                handle_annexation_as_civil_war = yes
+			add_war_goal = {
+				holder = c:UCA
+				type = return_state
+				target_state = s:STATE_NICARAGUA.region_state:NIC
+			}
+				add_war_goal = {
+					holder = c:NIC
+					type = independence
+					target_country = c:UCA
+					primary_demand = yes
+				}
+			}
+		}  
     }
     # Reject Secession
     option = {
@@ -3183,8 +3252,7 @@ ca_central_america.27 = {
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
     icon = "gfx/interface/icons/event_icons/event_fire.dds"
-    trigger = { }
-    immediate = { }
+    is_triggered_only = yes
     # Accept secession
     option = {
         name = ca_central_america.27.a
@@ -3196,7 +3264,15 @@ ca_central_america.27 = {
                 add_loyalists_in_state = { value = 0.25 }
             }
         }
-        trigger_event = { id = ca_central_america.3 months = 6 }
+        custom_tooltip = { 
+            text = frca_support_27a 
+            je:je_historic_central_america_falls_apart = {
+                add_progress = { value = -15 name = frca_support_bar } 
+            }
+        }
+		c:NIC = {
+            make_independent = yes
+        }
     }
     # Reject Secession
     option = {
@@ -3216,178 +3292,247 @@ ca_central_america.27 = {
     }
 }
 
-## Nicaragua apply intervention
+#Nicaragua apply intervention
 ca_central_america.28 = {
     type = country_event
-    placement = s:STATE_NICARAGUA
+    placement = root
     title = ca_central_america.28.t
     desc = ca_central_america.28.d
     flavor = ca_central_america.28.f
-    duration = 2
-    event_image = { video = "unspecific_military_parade" }
-    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
     
+    is_triggered_only = yes
+
+    # Limpiamos la variable para que el botón desaparezca
     immediate = {
-        set_variable = { name = nic_support_var }
+        c:NIC = { remove_variable = ca_intervention_request_active }
     }
-    
-    option = { # Send the apply
-        name = ca_central_america.28.a
-        default_option = yes
-        ai_chance = { base = 50 }
-        # SUGERENCIA DE ENLACE: Aquí debe ir el trigger que notifique a la UCA.
-    }
-    option = { # We are not going to intervene
-        name = ca_central_america.28.b
-        ai_chance = { base = 50 }
+
+    option = {
+        name = ca_central_america.28.a # Intervenir (Éxito inicial, cuesta recursos)
         
-        if = { limit = { exists = c:UCA } c:UCA = { ca_reduce_support_intervention_fail_effect = yes } }
+        custom_tooltip = { 
+            text = frca_support_28a 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = 15 name = frca_support_bar } 
+            }
+        }
+        
+        # Efecto de la intervención (Ejemplo: Gastar dinero y dar bono a los leales)
+        add_treasury = -15000
+        c:NIC = {
+            add_modifier = {
+                name = ca_federal_intervention_boost
+                months = 12
+            }
+        }
+    }
+
+    option = {
+        name = ca_central_america.28.b # Ignorar petición
+        
+        custom_tooltip = { 
+            text = frca_support_28b 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = -15 name = frca_support_bar } 
+            }
+        }
+        add_prestige = -5
     }
 }
 
-## Costa Rica apply intervention
+#Costa Rica apply intervention
 ca_central_america.29 = {
     type = country_event
-    placement = s:STATE_COSTA_RICA
+    placement = root
     title = ca_central_america.29.t
     desc = ca_central_america.29.d
     flavor = ca_central_america.29.f
-    duration = 2
-    event_image = { video = "unspecific_military_parade" }
-    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
     
+    is_triggered_only = yes
+
     immediate = {
-        set_variable = { name = cos_support_var }
+        c:COS = { remove_variable = ca_intervention_request_active }
     }
-    
-    option = { # Hurray
-        name = ca_central_america.29.a
-        default_option = yes
-        ai_chance = { base = 50 }
+
+    option = {
+        name = ca_central_america.29.a # Intervenir
+        custom_tooltip = { 
+            text = frca_support_29a 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = 15 name = frca_support_bar } 
+            }
+        }
+        add_treasury = -15000
+        c:COS = { add_modifier = { name = ca_federal_intervention_boost months = 12 } }
     }
-    option = { # We are not going to intervene
-        name = ca_central_america.29.b
-        ai_chance = { base = 50 }
-        
-        if = { limit = { exists = c:UCA } c:UCA = { ca_reduce_support_intervention_fail_effect = yes } }
+
+    option = {
+        name = ca_central_america.29.b # Ignorar
+        custom_tooltip = { 
+            text = frca_support_29b 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = -15 name = frca_support_bar } 
+            }
+        }
+        add_prestige = -5
     }
 }
 
-## Honduras apply intervention
+#Honduras apply intervention
 ca_central_america.30 = {
     type = country_event
-    placement = s:STATE_HONDURAS
+    placement = root
     title = ca_central_america.30.t
     desc = ca_central_america.30.d
     flavor = ca_central_america.30.f
-    duration = 2
-    event_image = { video = "unspecific_military_parade" }
-    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
     
+    is_triggered_only = yes
+
     immediate = {
-        set_variable = { name = hon_support_var }
+        c:HON = { remove_variable = ca_intervention_request_active }
     }
-    
-    option = { # Hurray
-        name = ca_central_america.30.a
-        default_option = yes
-        ai_chance = { base = 50 }
+
+    option = {
+        name = ca_central_america.30.a # Intervenir
+        custom_tooltip = { 
+            text = frca_support_30a 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = 15 name = frca_support_bar } 
+            }
+        }
+        add_treasury = -15000
+        c:HON = { add_modifier = { name = ca_federal_intervention_boost months = 12 } }
     }
-    option = { # We are not going to intervene
-        name = ca_central_america.30.b
-        ai_chance = { base = 50 }
-        
-        if = { limit = { exists = c:UCA } c:UCA = { ca_reduce_support_intervention_fail_effect = yes } }
+
+    option = {
+        name = ca_central_america.30.b # Ignorar
+        custom_tooltip = { 
+            text = frca_support_30b 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = -15 name = frca_support_bar } 
+            }
+        }
+        add_prestige = -5
     }
 }
 
-## El Salvador apply intervention
+#El Salvador apply intervention
 ca_central_america.31 = {
     type = country_event
-    placement = s:STATE_SAN_SALVADOR
+    placement = root
     title = ca_central_america.31.t
     desc = ca_central_america.31.d
     flavor = ca_central_america.31.f
-    duration = 2
-    event_image = { video = "unspecific_military_parade" }
-    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
     
+    is_triggered_only = yes
+
     immediate = {
-        set_variable = { name = els_support_var }
+        c:ELS = { remove_variable = ca_intervention_request_active }
     }
-    
-    option = { # Hurray
-        name = ca_central_america.31.a
-        default_option = yes
-        ai_chance = { base = 50 }
+
+    option = {
+        name = ca_central_america.31.a # Intervenir
+        custom_tooltip = { 
+            text = frca_support_31a 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = 15 name = frca_support_bar } 
+            }
+        }
+        add_treasury = -15000
+        c:ELS = { add_modifier = { name = ca_federal_intervention_boost months = 12 } }
     }
-    option = { # We are not going to intervene
-        name = ca_central_america.31.b
-        ai_chance = { base = 50 }
-        
-        if = { limit = { exists = c:UCA } c:UCA = { ca_reduce_support_intervention_fail_effect = yes } }
+
+    option = {
+        name = ca_central_america.31.b # Ignorar
+        custom_tooltip = { 
+            text = frca_support_31b 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = -15 name = frca_support_bar } 
+            }
+        }
+        add_prestige = -5
     }
 }
 
-## Guatemala apply intervention
+#Guatemala apply intervention
 ca_central_america.32 = {
     type = country_event
-    placement = s:STATE_GUATEMALA
+    placement = root
     title = ca_central_america.32.t
     desc = ca_central_america.32.d
     flavor = ca_central_america.32.f
-    duration = 2
-    event_image = { video = "unspecific_military_parade" }
-    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
     
+    is_triggered_only = yes
+
     immediate = {
-        set_variable = { name = gua_support_var }
+        c:GUA = { remove_variable = ca_intervention_request_active }
     }
-    
-    option = { # Hurray
-        name = ca_central_america.32.a
-        default_option = yes
-        ai_chance = { base = 50 }
+
+    option = {
+        name = ca_central_america.32.a # Intervenir
+        custom_tooltip = { 
+            text = frca_support_32a 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = 15 name = frca_support_bar } 
+            }
+        }
+        add_treasury = -15000
+        c:GUA = { add_modifier = { name = ca_federal_intervention_boost months = 12 } }
     }
-    option = { # We are not going to intervene
-        name = ca_central_america.32.b
-        ai_chance = { base = 50 }
-        
-        if = { limit = { exists = c:UCA } c:UCA = { ca_reduce_support_intervention_fail_effect = yes } }
+
+    option = {
+        name = ca_central_america.32.b # Ignorar
+        custom_tooltip = { 
+            text = frca_support_32b 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = -15 name = frca_support_bar } 
+            }
+        }
+        add_prestige = -5
     }
 }
 
-## Los Altos apply intervention
+#Los Altos apply intervention
 ca_central_america.33 = {
     type = country_event
-    placement = s:STATE_GUATEMALA # UCA usa el estado de Guatemala como referencia general para Los Altos
+    placement = root
     title = ca_central_america.33.t
     desc = ca_central_america.33.d
     flavor = ca_central_america.33.f
-    duration = 2
-    event_image = { video = "unspecific_military_parade" }
-    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
     
-    immediate = { 
-        set_variable = { name = alt_support_var }
+    is_triggered_only = yes
+
+    immediate = {
+        c:ALT = { remove_variable = ca_intervention_request_active }
     }
-    
-    option = { # Hurray
-        name = ca_central_america.33.a
-        default_option = yes
-        ai_chance = { base = 50 }
+
+    option = {
+        name = ca_central_america.33.a # Intervenir
+        custom_tooltip = { 
+            text = frca_support_33a 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = 15 name = frca_support_bar } 
+            }
+        }
+        add_treasury = -15000
+        c:ALT = { add_modifier = { name = ca_federal_intervention_boost months = 12 } }
     }
-    option = { # We are not going to intervene
-        name = ca_central_america.33.b
-        ai_chance = { base = 50 }
-        
-        if = { limit = { exists = c:UCA } c:UCA = { ca_reduce_support_intervention_fail_effect = yes } }
+
+    option = {
+        name = ca_central_america.33.b # Ignorar
+        custom_tooltip = { 
+            text = frca_support_33b 
+            je:je_ca_federalists_vs_separatists_situation = {
+                add_progress = { value = -15 name = frca_support_bar } 
+            }
+        }
+        add_prestige = -5
     }
 }
 
@@ -3586,144 +3731,198 @@ ca_central_america.40 = {
         ai_chance = { base = 100 } 
     } 
 }
+#UCA Do not accept the intervention (Genérico)
+ca_central_america.41 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.41.t
+	desc = ca_central_america.41.d
+	flavor = ca_central_america.41.f
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	
+	is_triggered_only = yes
 
-## UCA Do not accept the intervention 
-ca_central_america.41 = { 
-    type = country_event 
-    placement = s:STATE_GUATEMALA # General capital logic 
-    title = ca_central_america.41.t 
-    desc = ca_central_america.41.d 
-    flavor = ca_central_america.41.f 
-    duration = 2 
-    event_image = { video = "unspecific_military_parade" } 
-    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 
-    icon = "gfx/interface/icons/event_icons/event_newspaper.dds" 
-    option = { 
-        name = ca_central_america.41.a 
-        default_option = yes 
-        if = { 
-            limit = { has_variable = frca_support } 
-            custom_tooltip = { 
-                text = frca_support_41a 
-                je:je_historic_central_america_falls_apart = {
-                    add_progress = { value = -15 name = frca_support_bar } 
-                }
-            } 
-        } 
-        ai_chance = { base = 100 } 
-    } 
-}
-
-## Historic Second Central American Civil War/ End of the Union?
-ca_central_america.42 = {
-    type = country_event
-    placement = ROOT
-    title = ca_central_america.42.t
-    desc = ca_central_america.42.d
-    flavor = ca_central_america.42.f
-    duration = 2
-    event_image = { video = "europenorthamerica_before_the_battle" }
-    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    icon = "gfx/interface/icons/event_icons/event_fire.dds"
-    trigger = {
-        this = c:UCA
-        
-        has_variable = frca_support
-        var:frca_support <= 10
-        
-        OR = {
-            exists = c:GUA
-            exists = c:HON
-            exists = c:NIC
-            exists = c:COS
-        }
-    }
-    immediate = {
-        remove_diplomatic_pact = { country = c:COS type = ca_autonomous_province }
-        remove_diplomatic_pact = { country = c:NIC type = ca_autonomous_province }
-        remove_diplomatic_pact = { country = c:HON type = ca_autonomous_province }
-        remove_diplomatic_pact = { country = c:GUA type = ca_autonomous_province }
-        remove_diplomatic_pact = { country = c:ALT type = ca_autonomous_province }
-        remove_diplomatic_pact = { country = c:COS type = puppet }
-        remove_diplomatic_pact = { country = c:NIC type = puppet }
-        remove_diplomatic_pact = { country = c:HON type = puppet }
-        remove_diplomatic_pact = { country = c:GUA type = puppet }
-        remove_diplomatic_pact = { country = c:ALT type = puppet }
-    }
-    option = { #Fight for the Federation!
-        name = ca_central_america.42.a
-        default_option = yes
-        set_variable = second_frca_civil_war_var
-        create_diplomatic_play = {
-            name = guatemala_intervention
-			target_country = c:GUA
-            type = dp_annex_war
-            escalation = 80
-
-        }
-        create_diplomatic_play = {
-            name = honduras_intervention
-			target_country = c:HON
-            type = dp_annex_war
-            escalation = 60
-
-        }
-        create_diplomatic_play = {
-            name = nicaraguan_intervention
-			target_country = c:NIC
-            type = dp_annex_war
-            escalation = 40
-
-        }
-		it = {
-		limit = {c:COS = {exists = c:COS }}
-		create_diplomatic_play = {
-            name = costa_rica_intervention
-			target_country = c:COS
-            type = dp_annex_war
-            escalation = 20
-
-        }
+	option = {
+		name = ca_central_america.41.a # "Nuestros recursos son demasiado escasos..."
+		
+		# NUEVO: Aplica la variable temporal para bloquear el botón por 6 meses
+		set_variable = {
+			name = ca_intervention_cooldown_var
+			days = 180
 		}
 
-        ai_chance = { base = 0 }
-    }
-    option = { #Continue as El Salvador
-        name = ca_central_america.42.b
-        hidden_effect = {
-            if = {
-                limit = { this = c:UCA }
-               s:STATE_CHIAPAS.region_state:UCA = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
+		custom_tooltip = { 
+			text = frca_support_41a 
+			je:je_ca_federalists_vs_separatists_situation = {
+				add_progress = { value = -15 name = frca_support_bar } 
+			}
+		}
+		
+		add_prestige = -5
+		
+		# Genera un poco de descontento entre los militares por la inacción
+		ig:ig_armed_forces = {
+			add_loyalists = {
+				value = -0.05
+			}
+		}
+	}
+}
+## Historic Second Central American Civil War/ End of the Union?
+ca_central_america.42 = {
+	type = country_event
+	placement = ROOT
+	title = ca_central_america.42.t
+	desc = ca_central_america.42.d
+	flavor = ca_central_america.42.f
+	duration = 2
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	
+	trigger = {
+		this = c:UCA
+
+		scripted_bar_progress = { name = frca_support_bar value <= 10 }
+
+		OR = {
+			exists = c:GUA
+			exists = c:HON
+			exists = c:NIC
+			exists = c:COS
+		}
+	}
+
+	immediate = {
+		# Liberamos a todos los estados para que dejen de ser súbditos
+		every_subject = {
+			limit = {
+				OR = {
+					this = c:GUA
+					this = c:HON
+					this = c:NIC
+					this = c:COS
+					this = c:ALT
+				}
+			}
+			free_subject = yes
+		}
+	}
+
+	option = { 
+		name = ca_central_america.42.a # "¡Lucharemos por la Federación hasta el final!"
+		default_option = yes
+		set_variable = second_frca_civil_war_var
+		
+		c:UCA ?= {
+           create_diplomatic_play = {
+            name = second_frca_civil_war_var_key
+            escalation = 90
+            target_country = c:GUA
+            type = diplomatic play type
+            annex_as_civil_war = yes/no
+            add_initiator_backers = { list of country scopes/tags }
+                add_target_backers = { 
+                  c:HON 
+                  c:NIC 
+                }
+
+ 				add_war_goal = {
+					holder = c:NIC
+					war_goal = independence
+					target_country = c:UCA
+					primary_demand = yes
+				}
+				add_war_goal = {
+					holder = c:HON
+					war_goal = independence
+					target_country = c:UCA
+					primary_demand = yes
+				}
+				add_war_goal = {
+					holder = c:GUA
+					war_goal = independence
+					target_country = c:UCA
+					primary_demand = yes
+				}
+            }
+		}
+		
+		#if = {
+		#	limit = { exists = c:GUA }
+		#	create_diplomatic_play = {
+		#		name = guatemala_intervention
+		#		target_country = c:GUA
+		#		war_goal = unification # Asegúrate de que esta meta de guerra sea válida o usa dp_return_state
+		#	}
+		#}
+		#if = {
+		#	limit = { exists = c:HON }
+		#	create_diplomatic_play = {
+		#		name = honduras_intervention
+		#		target_country = c:HON
+		#		war_goal = unification
+		#	}
+		#}
+		#if = {
+		#	limit = { exists = c:NIC }
+		#	create_diplomatic_play = {
+		#		name = nicaraguan_intervention
+		#		target_country = c:NIC
+		#		war_goal = unification
+		#	}
+		#}
+		#if = {
+		#	limit = { exists = c:COS }
+		#	create_diplomatic_play = {
+		#		name = costa_rica_intervention
+		#		target_country = c:COS
+		#		war_goal = unification
+		#	}
+		#}
+
+		ai_chance = { base = 0 } # La IA siempre colapsa, el jugador puede decidir luchar
+	}
+
+	option = { 
+		name = ca_central_america.42.b # "Aceptemos el fracaso. Continuaremos como El Salvador."
+		
+		# Retiramos los reclamos sobre los otros estados
+		s:STATE_GUATEMALA = { remove_claim = ROOT }
+		s:STATE_HONDURAS = { remove_claim = ROOT }
+		s:STATE_NICARAGUA = { remove_claim = ROOT }
+		s:STATE_COSTA_RICA = { remove_claim = ROOT }
+		s:STATE_CHIAPAS = { remove_claim = ROOT }
+		
+		hidden_effect = {
+			# Transferencia correcta de provincias de Chiapas a Guatemala
+			if = {
+				limit = { exists = c:GUA }
+                s:STATE_CHIAPAS.region_state:UCA = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
             }
             if = {
                 limit = { this = c:ELS }
                 s:STATE_CHIAPAS.region_state:ELS = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
             }
-            ruler = { exile_character = yes }
-            create_character = {
-                first_name = "Juan"
-                last_name = "Lindo"
-                historical = yes
-                ruler = yes
-                ig_leader = yes
-                birth_date = 1790.5.5
-                interest_group = ig_landowners
-                ideology = ideology:ideology_reformer
-                traits = { meticulous }
-            }
-        }
-        change_tag = ELS
-        s:STATE_CHIAPAS = { remove_claim = ROOT }
-        s:STATE_GUATEMALA = { remove_claim = ROOT }
-        s:STATE_HONDURAS = { remove_claim = ROOT }
-        s:STATE_NICARAGUA = { remove_claim = ROOT }
-        s:STATE_COSTA_RICA = { remove_claim = ROOT }
-        activate_law = law_type:law_freedom_of_conscience
-        activate_law = law_type:law_mercantilism
-        ai_chance = { base = 100 }
-    }
-}
+			# Exiliamos al actual gobernante (Morazán)
+			ruler = { exile_character = yes }
+			
+			# Creamos y asignamos a Juan Lindo correctamente
+			create_character = {
+				template = juan_lindo_character_template
+				save_scope_as = juan_lindo_scope
+			}
 
+		}
+		
+		activate_law = law_type:law_freedom_of_conscience
+		activate_law = law_type:law_mercantilism
+		
+		change_tag = ELS
+		
+		ai_chance = { base = 100 }
+	}
+}
 ## Defeat in the Second Civil War
 ca_central_america.43 = {
     type = country_event
@@ -3758,12 +3957,15 @@ ca_central_america.43 = {
     }
     immediate = {
         set_variable = frca_lost_war
-        ruler = { kill_character = yes }
-        create_country = { tag = HON origin = c:UCA state = s:STATE_HONDURAS.region_state:UCA }
-        create_country = { tag = GUA origin = c:UCA state = s:STATE_GUATEMALA.region_state:UCA }
-        create_country = { tag = NIC origin = c:UCA state = s:STATE_NICARAGUA.region_state:UCA }
-        create_country = { tag = COS origin = c:UCA state = s:STATE_COSTA_RICA.region_state:UCA }
-       if = { limit = { exists = s:STATE_CHIAPAS.region_state:UCA } s:STATE_CHIAPAS.region_state:UCA = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } } }
+        ruler = { exile_character = yes }
+            if = {
+				limit = { exists = c:GUA }
+                s:STATE_CHIAPAS.region_state:UCA = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
+            }
+            if = {
+                limit = { this = c:ELS }
+                s:STATE_CHIAPAS.region_state:ELS = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
+            }
     }
     option = { #Continue as El Salvador
         name = ca_central_america.43.a
@@ -3777,17 +3979,10 @@ ca_central_america.43 = {
             s:STATE_COSTA_RICA = { remove_claim = ROOT }
             activate_law = law_type:law_freedom_of_conscience
             activate_law = law_type:law_mercantilism
-            create_character = {
-                first_name = "Juan"
-                last_name = "Lindo"
-                historical = yes
-                ruler = yes
-                ig_leader = yes
-                birth_date = 1790.5.5
-                interest_group = ig_landowners
-                ideology = ideology:ideology_reformer
-                traits = { meticulous }
-            }
+			create_character = {
+				template = juan_lindo_character_template
+				save_scope_as = juan_lindo_scope
+			}
         }
         ai_chance = { base = 100 }
     }
@@ -4610,97 +4805,7 @@ ca_central_america.63 = {
     }
 }
 
-## Nicaragua declares independence on Arms
-ca_central_america.64 = {
-    type = country_event
-    placement = s:STATE_NICARAGUA
-    title = ca_central_america.64.t
-    desc = ca_central_america.64.d
-    flavor = ca_central_america.64.f
-    duration = 3
-    event_image = { video = "gfx/event_pictures/southamerica_aristocrats.bk2" }
-    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
-    icon = "gfx/interface/icons/event_icons/event_fire.dds"
-    
-    immediate = {
-        # Rehidratación de Scopes
-        if = {
-            limit = { exists = c:NIC }
-            c:NIC = {
-                save_scope_as = secession_country
-                capital = { save_scope_as = secession_capital }
-            }
-        }
-        set_variable = { name = frca_nicaragua_peace_var }
-        set_variable = { name = frca_crisis_var }
-        trigger_event = { id = ca_central_america.5 months = 1 popup = yes }
-    }
-    
-    option = {
-        name = ca_central_america.64.a
-        default_option = yes
-        
-        if = {
-            limit = { has_variable = frca_support }
-            custom_tooltip = { 
-                text = frca_support_64a 
-                je:je_historic_central_america_falls_apart = {
-                    add_progress = { value = -20 name = frca_support_bar } 
-                }
-            }
-        }
-        
-        if = {
-            limit = { exists = scope:secession_country }
-            scope:secession_country = {
-                change_relations = { country = ROOT value = 20 }
-                capital = {
-                    add_devastation = 15
-                    add_loyalists_in_state = { value = 0.25 }
-                }
-            }
-        }
-        trigger_event = { id = ca_central_america.3 months = 6 popup = yes }
-    }
-    
-    option = {
-        name = ca_central_america.64.b
-        
-        if = {
-            limit = { has_variable = frca_support }
-            custom_tooltip = { 
-                text = frca_support_64b 
-                je:je_historic_central_america_falls_apart = {
-                    add_progress = { value = -20 name = frca_support_bar } 
-                }
-            }
-        }
-        
-        if = {
-            limit = { exists = scope:secession_country }
-            ROOT = {
-                add_claim = scope:secession_capita
-            }
-                                                                
-    
-            custom_tooltip = { text = invade_nicaragua_frca_tt }
-            create_diplomatic_play = {
-                name = nicaraguan_intervention
-                type = dp_annex_war
-                escalation = 20
-                target_state = s:STATE_NICARAGUA.region_state:NIC
-            }
-            scope:secession_country = {
-                change_relations = { country = ROOT value = -50 }
-                capital = {
-                    add_devastation = 25
-                    add_loyalists_in_state = { value = 0.5 }
-                }
-            }
-        }
-    }
-}
+#ca_central_america.64
 
 ## Civil war in Costa Rica
 ca_central_america.65 = {
@@ -6016,12 +6121,12 @@ ca_central_america.84 = {
 }
 
 ## Nicaragua Beats to secessionists
-ca_central_america.86 = {
+ca_central_america.85 = {
     type = country_event
     placement = s:STATE_NICARAGUA
-    title = ca_central_america.86.t
-    desc = ca_central_america.86.d
-    flavor = ca_central_america.86.f
+    title = ca_central_america.85.t
+    desc = ca_central_america.85.d
+    flavor = ca_central_america.85.f
     duration = 2
     event_image = { video = "southamerica_aristocrats" }
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -6030,7 +6135,7 @@ ca_central_america.86 = {
         remove_variable = nic_support_var
     }
     option = { #Hurray
-        name = ca_central_america.86.a
+        name = ca_central_america.85.a
         default_option = yes
         annex = c:NIC
         ai_chance = { base = 100 }
@@ -6038,12 +6143,12 @@ ca_central_america.86 = {
 }
 
 ## Nicaragua falls to secessionists
-ca_central_america.87 = {
+ca_central_america.86 = {
     type = country_event
     placement = s:STATE_NICARAGUA
-    title = ca_central_america.87.t
-    desc = ca_central_america.87.d
-    flavor = ca_central_america.87.f
+    title = ca_central_america.86.t
+    desc = ca_central_america.86.d
+    flavor = ca_central_america.86.f
     duration = 2
     event_image = { video = "southamerica_aristocrats" }
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -6062,13 +6167,13 @@ ca_central_america.87 = {
 # =========================================================
 
 # Aparición de líderes regionales ("Caudillo Emerges")
-ca_central_america.100 = {
+ca_central_america.88 = {
     type = country_event
     placement = scope:caudillo_state
     
-    title = ca_central_america.100.t
-    desc = ca_central_america.100.d
-    flavor = ca_central_america.100.f
+    title = ca_central_america.88.t
+    desc = ca_central_america.88.d
+    flavor = ca_central_america.88.f
     
     event_image = { video = "southamerica_aristocrats" }
     icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
@@ -6102,7 +6207,7 @@ ca_central_america.100 = {
     }
 
     option = {
-        name = ca_central_america.100.a
+        name = ca_central_america.88.a
         default_option = yes
         
         if = {
@@ -6120,7 +6225,7 @@ ca_central_america.100 = {
     }
 
     option = {
-        name = ca_central_america.100.b
+        name = ca_central_america.88.b
         
         if = {
             limit = { has_variable = frca_support }
@@ -6144,12 +6249,12 @@ ca_central_america.100 = {
 }
 
 # Intriga Palaciega
-ca_central_america.101 = {
+ca_central_america.89 = {
     type = country_event
     placement = root
-    title = ca_central_america.101.t
-    desc = ca_central_america.101.d
-    flavor = ca_central_america.101.f
+    title = ca_central_america.89.t
+    desc = ca_central_america.89.d
+    flavor = ca_central_america.89.f
     
     event_image = { video = "parliament" }
     icon = "gfx/interface/icons/event_icons/event_default.dds"
@@ -6171,7 +6276,7 @@ ca_central_america.101 = {
     }
 
     option = {
-        name = ca_central_america.101.a
+        name = ca_central_america.89.a
         default_option = yes
         ig:ig_landowners = {
             add_modifier = { name = ig_political_intrigue_success months = 36 }
@@ -6184,7 +6289,7 @@ ca_central_america.101 = {
     }
 
     option = {
-        name = ca_central_america.101.b
+        name = ca_central_america.89.b
         
         ig:ig_landowners = {
             add_modifier = { name = ig_purged_cabinet months = 36 }
@@ -6201,11 +6306,11 @@ ca_central_america.101 = {
 }
 
 # Demandas de Autonomía de un Estado
-ca_central_america.102 = {
+ca_central_america.90 = {
     type = country_event
     placement = scope:demanding_state
-    title = ca_central_america.102.t
-    desc = ca_central_america.102.d
+    title = ca_central_america.90.t
+    desc = ca_central_america.90.d
     
     event_image = { video = "civil_unrest" }
     icon = "gfx/interface/icons/event_icons/event_protest.dds"
@@ -6230,7 +6335,7 @@ ca_central_america.102 = {
     }
 
     option = {
-        name = ca_central_america.102.a
+        name = ca_central_america.90.a
         default_option = yes
         if = {
             limit = { has_variable = frca_support }
@@ -6248,7 +6353,7 @@ ca_central_america.102 = {
     }
 
     option = {
-        name = ca_central_america.102.b
+        name = ca_central_america.90.b
         
         if = {
             limit = { has_variable = frca_support }
@@ -6270,11 +6375,11 @@ ca_central_america.102 = {
 # =========================================================
 
 # Auge del Café
-ca_central_america.200 = {
+ca_central_america.91 = {
     type = country_event
     placement = scope:boom_state
-    title = ca_central_america.200.t
-    desc = ca_central_america.200.d
+    title = ca_central_america.91.t
+    desc = ca_central_america.91.d
     
     event_image = { video = "market_busy" }
     
@@ -6298,7 +6403,7 @@ ca_central_america.200 = {
     }
 
     option = {
-        name = ca_central_america.200.a
+        name = ca_central_america.91.a
         
         scope:boom_state = { add_modifier = { name = ca_coffee_export_boom months = 60 } }
         ca_increase_support_economic_boom_effect = yes
@@ -6306,7 +6411,7 @@ ca_central_america.200 = {
     }
 
     option = {
-        name = ca_central_america.200.b
+        name = ca_central_america.91.b
         default_option = yes
         # "add_treasury" es temporal, usamos un modificador de impuestos
         add_modifier = { name = ca_heavy_coffee_tax_national months = 60 }
@@ -6316,10 +6421,10 @@ ca_central_america.200 = {
 }
 
 # Crisis de Deuda
-ca_central_america.201 = {
+ca_central_america.92 = {
     type = country_event
-    title = ca_central_america.201.t
-    desc = ca_central_america.201.d
+    title = ca_central_america.92.t
+    desc = ca_central_america.92.d
     event_image = { video = "poverty" }
 
     trigger = {
@@ -6328,7 +6433,7 @@ ca_central_america.201 = {
     }
 
     option = {
-        name = ca_central_america.201.a
+        name = ca_central_america.92.a
         
         add_modifier = { name = ca_austerity_measures months = 48 }
         ca_reduce_support_economic_crisis_effect = yes
@@ -6340,7 +6445,7 @@ ca_central_america.201 = {
     }
 
     option = {
-        name = ca_central_america.201.b
+        name = ca_central_america.92.b
         default_option = yes
         declare_bankruptcy = yes # Efecto vanilla correcto
         add_modifier = { name = ca_economic_chaos_prestige_loss months = 120 }
@@ -6353,12 +6458,12 @@ ca_central_america.201 = {
 
 # 1. Terremoto en el Istmo (Desastre Natural)
 # Pone a prueba la utilidad de la Federación para ayudar a los estados.
-ca_central_america.300 = {
+ca_central_america.93 = {
     type = country_event
     placement = scope:earthquake_state
     
-    title = ca_central_america.300.t
-    desc = ca_central_america.300.d
+    title = ca_central_america.93.t
+    desc = ca_central_america.93.d
     
     event_image = {
         video = "earthquake" # Video genérico de desastres en V3
@@ -6387,7 +6492,7 @@ ca_central_america.300 = {
 
     # Opción A: Enviar ayuda federal (Cuesta dinero y burocracia, pero une al país)
     option = {
-        name = ca_central_america.300.a
+        name = ca_central_america.93.a
         
         add_treasury = -10000 # Coste de reconstrucción
         add_bureaucracy = -50
@@ -6409,7 +6514,7 @@ ca_central_america.300 = {
 
     # Opción B: Dejar que el estado se recupere solo (Ahorra recursos, destruye la confianza)
     option = {
-        name = ca_central_america.300.b
+        name = ca_central_america.93.b
         default_option = yes
         scope:earthquake_state = {
             add_devastation = 30
@@ -6431,12 +6536,12 @@ ca_central_america.300 = {
 
 # 2. Campaña de Alfabetización ("Literacy Campaign")
 # Conecta con tu je_ca_enlightenment y fortalece a la Intelligentsia.
-ca_central_america.301 = {
+ca_central_america.94 = {
     type = country_event
     placement = root
     
-    title = ca_central_america.301.t
-    desc = ca_central_america.301.d
+    title = ca_central_america.94.t
+    desc = ca_central_america.94.d
     
     event_image = {
         video = "school"
@@ -6450,7 +6555,7 @@ ca_central_america.301 = {
 
     # Opción A: Impulsar la educación laica (Potencia a la Intelligentsia)
     option = {
-        name = ca_central_america.301.a
+        name = ca_central_america.94.a
         default_option = yes
         ig:ig_intelligentsia = {
             add_approval = {
@@ -6474,7 +6579,7 @@ ca_central_america.301 = {
 
     # Opción B: Delegar la enseñanza a la Iglesia (Ahorra dinero, potencia a los Devotos)
     option = {
-        name = ca_central_america.301.b
+        name = ca_central_america.94.b
         
         ig:ig_devout = {
             add_approval = {
@@ -6491,12 +6596,12 @@ ca_central_america.301 = {
 
 # 3. Rebelión Campesina ("Peasant Uprising")
 # Conflictos por la tierra en los estados agrícolas.
-ca_central_america.302 = {
+ca_central_america.95 = {
     type = country_event
     placement = scope:rebellion_state
     
-    title = ca_central_america.302.t
-    desc = ca_central_america.302.d
+    title = ca_central_america.95.t
+    desc = ca_central_america.95.d
     
     event_image = {
         video = "civil_unrest"
@@ -6527,7 +6632,7 @@ ca_central_america.302 = {
 
     # Opción A: Concesiones agrarias (Enoja a los terratenientes)
     option = {
-        name = ca_central_america.302.a
+        name = ca_central_america.95.a
         
         ig:ig_landowners = {
             add_approval = { value = -3 months = 60 }
@@ -6542,7 +6647,7 @@ ca_central_america.302 = {
 
     # Opción B: Represión militar (Sube el poder del ejército, genera víctimas)
     option = {
-        name = ca_central_america.302.b
+        name = ca_central_america.95.b
         default_option = yes
         ig:ig_armed_forces = {
             add_modifier = {
@@ -6570,11 +6675,11 @@ ca_central_america.302 = {
 # =========================================================
 
 # Intervención Extranjera
-ca_central_america.400 = {
+ca_central_america.96 = {
     type = country_event
     placement = scope:foreign_power
-    title = ca_central_america.400.t
-    desc = ca_central_america.400.d
+    title = ca_central_america.96.t
+    desc = ca_central_america.96.d
     event_image = { video = "diplomacy" }
     
     trigger = {
@@ -6596,7 +6701,7 @@ ca_central_america.400 = {
     }
 
     option = {
-        name = ca_central_america.400.a
+        name = ca_central_america.96.a
         default_option = yes
         # Añade fondos vía modificador de inyección de capital
         add_modifier = { name = ca_foreign_capital_injection months = 12 }
@@ -6615,7 +6720,7 @@ ca_central_america.400 = {
     }
 
     option = {
-        name = ca_central_america.400.b
+        name = ca_central_america.96.b
         
         # Sintaxis de brazilevents.txt para relaciones
         scope:foreign_power = {
@@ -6631,11 +6736,11 @@ ca_central_america.400 = {
 }
 
 # Tensiones Diplomáticas Fronterizas
-ca_central_america.401 = {
+ca_central_america.97 = {
     type = country_event
     placement = scope:border_neighbor
-    title = ca_central_america.401.t
-    desc = ca_central_america.401.d
+    title = ca_central_america.97.t
+    desc = ca_central_america.97.d
     event_image = { video = "military_camp" }
 
     trigger = {
@@ -6653,7 +6758,7 @@ ca_central_america.401 = {
     }
 
     option = {
-        name = ca_central_america.401.a
+        name = ca_central_america.97.a
         default_option = yes
         # Añadimos gasto logístico temporal
         add_modifier = { name = ca_military_deployment_cost months = 12 }
@@ -6671,7 +6776,7 @@ ca_central_america.401 = {
     }
 
     option = {
-        name = ca_central_america.401.b
+        name = ca_central_america.97.b
         
         ig:ig_armed_forces = { add_approval = { value = -2 months = 60 } }
         
@@ -6687,11 +6792,11 @@ ca_central_america.401 = {
 }
 
 # Modernización del Ejército vs. Caudillismo
-ca_central_america.402 = {
+ca_central_america.98 = {
     type = country_event
     placement = root
-    title = ca_central_america.402.t
-    desc = ca_central_america.402.d
+    title = ca_central_america.98.t
+    desc = ca_central_america.98.d
     event_image = { video = "generals_tent" }
 
     trigger = {
@@ -6700,7 +6805,7 @@ ca_central_america.402 = {
     }
 
     option = {
-        name = ca_central_america.402.a
+        name = ca_central_america.98.a
         
         # Bureaucracia cuesta mediante modificador
         add_modifier = {
@@ -6715,7 +6820,7 @@ ca_central_america.402 = {
     }
 
     option = {
-        name = ca_central_america.402.b
+        name = ca_central_america.98.b
         default_option = yes
         ig:ig_armed_forces = {
             add_modifier = {
@@ -6726,4 +6831,752 @@ ca_central_america.402 = {
         
         ca_reduce_support_event_minor_effect = yes
     }
+}
+# ==============================================================================
+# CAPÍTULO 1: NICARAGUA (101 - 103)
+# ==============================================================================
+
+# Inserto A: El Eco de Granada
+ca_central_america.101 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.101.t
+	desc = ca_central_america.101.d
+	flavor = ca_central_america.101.f
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.101.a # "Malditos traidores..."
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_101a 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -15 name = frca_support_bar } 
+				}
+			}
+		}
+	}
+
+	option = {
+		name = ca_central_america.101.b # "Debemos censurar la prensa para evitar pánico"
+		add_radicals = {
+			value = 0.05
+			pop_type = all
+		}
+		add_modifier = {
+			name = ca_censorship_panic_modifier
+			months = 12
+		}
+	}
+}
+
+# Inserto B: El Dilema en la Capital
+ca_central_america.102 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.102.t
+	desc = ca_central_america.102.d
+	flavor = ca_central_america.102.f
+	icon = "gfx/interface/icons/event_icons/event_coin.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.102.a # "Abran las arcas del tesoro"
+		add_treasury = -20000
+		set_variable = ca_uca_funded_nicaragua_loyalists # Variable para amor futuro
+	}
+
+	option = {
+		name = ca_central_america.102.b # "Nuestras reservas están vacías"
+		add_prestige = -10
+		c:NIC = {
+			ig:ig_landowners = {
+				add_modifier = {
+					name = ca_ig_strength_boost_modifier
+					months = 36
+				}
+			}
+		}
+	}
+}
+
+# Inserto C: Lágrimas en el Lago Cocibolca (Resolución)
+ca_central_america.103 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.103.t
+	desc = ca_central_america.103.d
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	
+	is_triggered_only = yes
+
+	# Opción si ganó Nicaragua/UCA (Se dispara desde el 85)
+	option = {
+		name = ca_central_america.103.a # "El orden ha sido restaurado en el Istmo"
+		trigger = { has_variable = ca_nicaragua_loyalists_won }
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_103a 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = 20 name = frca_support_bar } 
+				}
+			}
+		}
+	}
+
+	# Opción si ganaron los separatistas (Se dispara desde el 86)
+	option = {
+		name = ca_central_america.103.b # "Nicaragua se ha perdido para siempre..."
+		trigger = { has_variable = ca_nicaragua_separatists_won }
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_103b 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -30 name = frca_support_bar } 
+				}
+			}
+		}
+		add_modifier = {
+			name = ca_fear_of_dissolution_modifier
+			months = 60
+		}
+	}
+}
+
+# ==============================================================================
+# CAPÍTULO 2: COSTA RICA (104 - 106)
+# ==============================================================================
+
+# Inserto A: El Silencio de San José
+ca_central_america.104 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.104.t
+	desc = ca_central_america.104.d
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.104.a # "Son unos desagradecidos"
+		add_prestige = -15
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_104a 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -15 name = frca_support_bar } 
+				}
+			}
+		}
+	}
+
+	option = {
+		name = ca_central_america.104.b # "Confisquen sus exportaciones..."
+		c:COS = {
+			trigger_event = { id = ca_costa_rica_events.99 } # Define un evento de crisis económica en COS
+		}
+		ig:ig_industrialists = {
+			add_loyalists = {
+				value = -0.1
+			}
+		}
+	}
+}
+
+# Inserto B: El Aroma de la Traición
+ca_central_america.105 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.105.t
+	desc = ca_central_america.105.d
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.105.a # "Aceptamos el oro extranjero"
+		add_treasury = 30000
+		ig:ig_landowners = {
+			add_modifier = {
+				name = ca_ig_betrayal_anger_modifier
+				months = 24
+			}
+		}
+	}
+
+	option = {
+		name = ca_central_america.105.b # "Centroamérica no está en venta"
+		add_modifier = {
+			name = ca_nationalist_fervor_military_modifier
+			months = 12
+		}
+	}
+}
+
+# Inserto C: El Destino del Pacto (Resolución)
+ca_central_america.106 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.106.t
+	desc = ca_central_america.106.d
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	
+	is_triggered_only = yes
+
+	# Si Costa Rica cae (Evento 84)
+	option = {
+		name = ca_central_america.106.a # "Carrillo ha consolidado su tiranía..."
+		trigger = { has_variable = ca_costa_rica_separatists_won }
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_106a 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -30 name = frca_support_bar } 
+				}
+			}
+		}
+		if = {
+			limit = { has_variable = is_morazan }
+			set_variable = ca_morazan_costa_rica_invasion_prep
+		}
+	}
+
+	# Si Costa Rica vence a separatistas (Evento 83)
+	option = {
+		name = ca_central_america.106.b # "El sur vuelve al redil"
+		trigger = { has_variable = ca_costa_rica_loyalists_won }
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_106b 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = 25 name = frca_support_bar } 
+				}
+			}
+		}
+		c:COS = {
+			add_modifier = {
+				name = ca_el_cafe_federal_modifier
+				months = 60
+			}
+		}
+	}
+}
+
+# ==============================================================================
+# CAPÍTULO 3: HONDURAS (107 - 109)
+# ==============================================================================
+
+# Inserto A: La Puñalada en Comayagua
+ca_central_america.107 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.107.t
+	desc = ca_central_america.107.d
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.107.a # "¡Es una traición imperdonable!"
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_107a 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -25 name = frca_support_bar } 
+				}
+			}
+		}
+	}
+
+	option = {
+		name = ca_central_america.107.b # "Debemos negociar con Ferrera..."
+		ig:ig_armed_forces = {
+			add_loyalists = {
+				value = -0.15
+			}
+		}
+	}
+}
+
+# Inserto B: Sangre en el Río Ulúa
+ca_central_america.108 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.108.t
+	desc = ca_central_america.108.d
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.108.a # "Envíen oficiales para disciplinar a las milicias"
+		add_modifier = {
+			name = ca_officer_discipline_bureaucracy_cost
+			months = 12
+		}
+		# Bono a tropas
+		add_modifier = {
+			name = ca_loyalist_militia_morale_buff
+			months = 12
+		}
+	}
+
+	option = {
+		name = ca_central_america.108.b # "Que se maten entre ellos"
+		c:HON = {
+			any_scope_state = {
+				limit = { state_is_in_ca_central_america = yes }
+				add_devastation = 30
+			}
+		}
+	}
+}
+
+# Inserto C: El Destino del General Ferrera (Resolución)
+ca_central_america.109 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.109.t
+	desc = ca_central_america.109.d
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	
+	is_triggered_only = yes
+
+	# Si Honduras cae (Evento 82)
+	option = {
+		name = ca_central_america.109.a # "Ferrera ha triunfado..."
+		trigger = { has_variable = ca_honduras_separatists_won }
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_109a 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -25 name = frca_support_bar } 
+				}
+			}
+		}
+		add_modifier = {
+			name = ca_triunfo_caudillismo_modifier
+			months = 36
+		}
+	}
+
+	# Si Honduras vence (Evento 81)
+	option = {
+		name = ca_central_america.109.b # "La patria chica de Morazán es libre"
+		trigger = { has_variable = ca_honduras_loyalists_won }
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_109b 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = 30 name = frca_support_bar } 
+				}
+			}
+		}
+		ig:ig_armed_forces = {
+			add_loyalists = {
+				value = 0.2
+			}
+		}
+	}
+}
+
+# ==============================================================================
+# CAPÍTULO 4: GUATEMALA (110 - 112)
+# ==============================================================================
+
+# Inserto A: El Rugido de la Montaña
+ca_central_america.110 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.110.t
+	desc = ca_central_america.110.d
+	icon = "gfx/interface/icons/event_icons/event_religion.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.110.a # "La ignorancia es nuestro peor enemigo"
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_110a 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -20 name = frca_support_bar } 
+				}
+			}
+		}
+		ig:ig_devout = {
+			add_modifier = {
+				name = ca_ig_strength_boost_modifier
+				months = 60
+			}
+		}
+	}
+
+	option = {
+		name = ca_central_america.110.b # "¡Envíen a los médicos y al ejército!"
+		add_modifier = {
+			name = ca_rural_pacification_cost_modifier
+			months = 12
+		}
+	}
+}
+
+# Inserto B: El Pánico de Gálvez
+ca_central_america.111 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.111.t
+	desc = ca_central_america.111.d
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.111.a # "Morazán marchará a Guatemala"
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = ca_ig_strength_boost_modifier
+				months = 24
+			}
+		}
+		add_modifier = {
+			name = ca_total_intervention_economy_penalty
+			months = 12
+		}
+	}
+
+	option = {
+		name = ca_central_america.111.b # "Gálvez cavó su propia tumba..."
+		ig:ig_intelligentsia = {
+			add_loyalists = {
+				value = -0.15
+			}
+		}
+	}
+}
+
+# Inserto C: El Destino del Caudillo (Resolución)
+ca_central_america.112 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.112.t
+	desc = ca_central_america.112.d
+	icon = "gfx/interface/icons/event_icons/event_death.dds"
+	
+	is_triggered_only = yes
+
+	# Si Guatemala cae (Evento 54)
+	option = {
+		name = ca_central_america.112.a # "La República Conservadora ha nacido"
+		trigger = { has_variable = ca_guatemala_separatists_won }
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_112a 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -40 name = frca_support_bar } 
+				}
+			}
+		}
+		c:GUA = {
+			add_modifier = {
+				name = ca_ejercito_montana_modifier
+				months = 60
+			}
+		}
+	}
+
+	# Si Guatemala vence (Evento 53)
+	option = {
+		name = ca_central_america.112.b # "La Hidra ha sido decapitada"
+		trigger = { has_variable = ca_guatemala_loyalists_won }
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_112b 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = 40 name = frca_support_bar } 
+				}
+			}
+		}
+		# Avanza la Journal Entry de la UCA
+		add_journal_entry_progress = {
+			journal_entry = je_ca_federalists_vs_separatists_situation
+			value = 50
+		}
+	}
+}
+
+# ==============================================================================
+# CAPÍTULO 5: EL SALVADOR (113 - 115)
+# ==============================================================================
+
+# Inserto A: El Enemigo en Casa
+ca_central_america.113 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.113.t
+	desc = ca_central_america.113.d
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.113.a # "¡Protejan la capital a toda costa!"
+		add_modifier = {
+			name = ca_capital_under_siege_defense_modifier
+			months = 12
+		}
+		add_modifier = {
+			name = ca_capital_tax_collapse_modifier
+			months = 12
+		}
+	}
+
+	option = {
+		name = ca_central_america.113.b # "Evacuemos a los funcionarios"
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_113b 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -35 name = frca_support_bar } 
+				}
+			}
+		}
+	}
+}
+
+# Inserto B: La Leva Suprema
+ca_central_america.114 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.114.t
+	desc = ca_central_america.114.d
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.114.a # "Armen a los artesanos y campesinos"
+		add_modifier = {
+			name = ca_loyalist_militia_morale_buff
+			months = 12
+		}
+		random_list = {
+			50 = { ig:ig_trade_unions = { add_modifier = { name = ca_ig_strength_boost_modifier months = 24 } } }
+			50 = { ig:ig_rural_folk = { add_modifier = { name = ca_ig_strength_boost_modifier months = 24 } } }
+		}
+	}
+
+	option = {
+		name = ca_central_america.114.b # "Solo confío en mis veteranos"
+		ig:ig_armed_forces = {
+			add_loyalists = {
+				value = 0.1
+			}
+			add_modifier = {
+				name = ca_ig_strength_boost_modifier
+				months = 12
+			}
+		}
+	}
+}
+
+# Inserto C: El Fin de la Utopía (Resolución)
+ca_central_america.115 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.115.t
+	desc = ca_central_america.115.d
+	icon = "gfx/interface/icons/event_icons/event_death.dds"
+	
+	is_triggered_only = yes
+
+	# Si El Salvador cae (Evento 51)
+	option = {
+		name = ca_central_america.115.a # "El exilio del Director Supremo..."
+		trigger = { has_variable = ca_el_salvador_separatists_won }
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_115a
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -100 name = frca_support_bar } 
+				}
+			}
+		}
+		set_variable = ca_morazan_is_coming # Prepara su retorno
+	}
+
+	# Si El Salvador vence (Evento 50)
+	option = {
+		name = ca_central_america.115.b # "¡La Federación Aún Vive!"
+		trigger = { has_variable = ca_el_salvador_loyalists_won }
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_115b 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = 50 name = frca_support_bar } 
+				}
+			}
+		}
+		add_modifier = {
+			name = ca_heroes_federacion_modifier
+			months = 120 # 10 años!
+		}
+	}
+}
+
+# ==============================================================================
+# CAPÍTULO 6: LOS ALTOS (116 - 118)
+# ==============================================================================
+
+# Inserto A: El Reconocimiento del Sexto Estado
+ca_central_america.116 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.116.t
+	desc = ca_central_america.116.d
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.116.a # "¡Bienvenidos a la Federación!"
+		ig:ig_intelligentsia = {
+			add_loyalists = {
+				value = 0.2
+			}
+		}
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_116a 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = 15 name = frca_support_bar } 
+				}
+			}
+		}
+		c:GUA = {
+			change_relations = {
+				country = root
+				value = -50
+			}
+		}
+	}
+
+	option = {
+		name = ca_central_america.116.b # "No podemos dividir el territorio guatemalteco"
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_116b 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -15 name = frca_support_bar } 
+				}
+			}
+		}
+	}
+}
+
+# Inserto B: La Sombra de Carrera
+ca_central_america.117 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.117.t
+	desc = ca_central_america.117.d
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = ca_central_america.117.a # "Desvíen armas hacia el norte"
+		add_treasury = -10000
+		# Asumiendo que ALT es el tag de Los Altos
+		c:ALT = {
+			add_modifier = {
+				name = ca_loyalist_militia_defense_buff
+				months = 12
+			}
+		}
+	}
+
+	option = {
+		name = ca_central_america.117.b # "Solo podemos ofrecerles asilo"
+		add_prestige = -10
+		add_modifier = {
+			name = ca_refugee_bureaucracy_cost
+			months = 12
+		}
+	}
+}
+
+# Inserto C: Los Mártires de Quetzaltenango (Resolución)
+ca_central_america.118 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.118.t
+	desc = ca_central_america.118.d
+	icon = "gfx/interface/icons/event_icons/event_death.dds"
+	
+	is_triggered_only = yes
+
+	# Si Los Altos cae (Evento 57)
+	option = {
+		name = ca_central_america.118.a # "Una masacre imperdonable..."
+		trigger = { has_variable = ca_los_altos_separatists_won } # En este contexto los separatistas son Guatemala aplastando a ALT
+		ig:ig_intelligentsia = {
+			add_radicals = {
+				value = 0.2
+			}
+		}
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_118a 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = -25 name = frca_support_bar } 
+				}
+			}
+		}
+		s:STATE_LOS_ALTOS = { # Asegúrate de que este es el scope correcto de tu estado
+			add_modifier = {
+				name = ca_tierra_arrasada_modifier
+				months = 60
+			}
+		}
+	}
+
+	# Si Los Altos sobrevive (Evento 56)
+	option = {
+		name = ca_central_america.118.b # "¡El baluarte del norte resiste!"
+		trigger = { has_variable = ca_los_altos_loyalists_won }
+		if = {
+			limit = { has_variable = frca_support }
+			custom_tooltip = { 
+				text = frca_support_118b 
+				je:je_historic_central_america_falls_apart = {
+					add_progress = { value = 30 name = frca_support_bar } 
+				}
+			}
+		}
+		c:ALT = {
+			trigger_event = { id = ca_los_altos_soconusco_events.1 } # Dispara la anexión de Soconusco
+		}
+	}
 }
