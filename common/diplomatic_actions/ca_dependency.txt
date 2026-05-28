@@ -17,19 +17,20 @@
             is_ca_culture_country = yes
             NOT = { is_country_type = decentralized }
             is_revolutionary = no
+			
         }
     }
 
     pact = {
         cost = 25
         has_junior_participant = yes
-        maintenance_paid_by = first_country # ARREGLADO: Reemplaza al viejo recipient_pays_maintenance
+        maintenance_paid_by = first_country 
         income_transfer = 0.2
         second_country_gets_income_transfer = no
         income_transfer_based_on_second_country = yes
 
         relations_progress_per_day = 1
-        relations_improvement_max = 50
+        relations_improvement_max = 200
 
         target_requires_approval_to_break = yes
 
@@ -39,7 +40,7 @@
             country_convoy_contribution_to_market_owner_add = 0.5
         }
 
-        # ARREGLADO: Ahora las treguas son bidireccionales
+        
         manual_break_effect = {
             create_bidirectional_truce = { country = scope:target_country months = 36 }
         }

@@ -1,0 +1,193 @@
+﻿# ==========================================================
+# ÁFRICA DEL SUR Y ORIENTAL
+# ==========================================================
+
+# 1. CASA - Central American South Africa Company
+establish_casa_company = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_ZAMBEZI state_region = s:STATE_KAZEMBE } } NOT = { exists = c:CASA } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = {
+            tag = CASA origin = this
+            every_scope_state = { limit = { OR = { state_region = s:STATE_ZAMBEZI state_region = s:STATE_KAZEMBE } } set_state_owner = c:CASA add_claim = ROOT }
+            on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization set_institution_investment_level = { institution = institution_colonial_affairs level = 2 } }
+        }
+        hidden_effect = {
+            create_diplomatic_pact = { country = c:CASA type = chartered_company }
+            c:CASA = { add_journal_entry = { type = je_company_independence } top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion }
+        }
+    }
+}
+
+# 2. CARHO - Central American Rhodesia
+establish_carho_colony = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_MATABELELAND state_region = s:STATE_MASHONALAND } } NOT = { exists = c:CARHO } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = {
+            tag = CARHO origin = this
+            every_scope_state = { limit = { OR = { state_region = s:STATE_MATABELELAND state_region = s:STATE_MASHONALAND } } set_state_owner = c:CARHO add_claim = ROOT }
+            on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization }
+        }
+        hidden_effect = {
+            create_diplomatic_pact = { country = c:CARHO type = puppet }
+            c:CARHO = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion }
+        }
+    }
+}
+
+# 3. CAZAM - Central American Zambia
+establish_cazam_colony = {
+    is_shown = { any_scope_state = { state_region = s:STATE_ZAMBIA } NOT = { exists = c:CAZAM } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CAZAM origin = this every_scope_state = { limit = { state_region = s:STATE_ZAMBIA } set_state_owner = c:CAZAM add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CAZAM type = puppet } c:CAZAM = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 4. CAEA - Central American East Africa
+establish_caea_colony = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_LINDI state_region = s:STATE_ZANZIBAR state_region = s:STATE_TANGANYIKA } } NOT = { exists = c:CAEA } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CAEA origin = this every_scope_state = { limit = { OR = { state_region = s:STATE_LINDI state_region = s:STATE_ZANZIBAR state_region = s:STATE_TANGANYIKA } } set_state_owner = c:CAEA add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CAEA type = puppet } c:CAEA = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 5. CAAC - Central American East Africa Company
+establish_caac_company = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_KENYA state_region = s:STATE_UGANDA state_region = s:STATE_RIFT_VALLEY } } NOT = { exists = c:CAAC } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CAAC origin = this every_scope_state = { limit = { OR = { state_region = s:STATE_KENYA state_region = s:STATE_UGANDA state_region = s:STATE_RIFT_VALLEY } } set_state_owner = c:CAAC add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization set_institution_investment_level = { institution = institution_colonial_affairs level = 2 } } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CAAC type = chartered_company } c:CAAC = { add_journal_entry = { type = je_company_independence } top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+# ==========================================================
+# ÁFRICA OCCIDENTAL Y ECUATORIAL
+# ==========================================================
+
+# 6. CANC - Central American Niger Company
+establish_canc_company = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_NIGER_DELTA state_region = s:STATE_NIGERIA } } NOT = { exists = c:CANC } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CANC origin = this every_scope_state = { limit = { OR = { state_region = s:STATE_NIGER_DELTA state_region = s:STATE_NIGERIA } } set_state_owner = c:CANC add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization set_institution_investment_level = { institution = institution_colonial_affairs level = 2 } } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CANC type = chartered_company } c:CANC = { add_journal_entry = { type = je_company_independence } top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 7. CANNI - Northern Nigeria
+establish_canni_colony = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_HAUSALAND state_region = s:STATE_EAST_HAUSALAND state_region = s:STATE_BORNU } } NOT = { exists = c:CANNI } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CANNI origin = this every_scope_state = { limit = { OR = { state_region = s:STATE_HAUSALAND state_region = s:STATE_EAST_HAUSALAND state_region = s:STATE_BORNU } } set_state_owner = c:CANNI add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CANNI type = puppet } c:CANNI = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 8. CASNI - Southern Nigeria
+establish_casni_colony = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_YORUBA_STATES state_region = s:STATE_BENIN } } NOT = { exists = c:CASNI } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CASNI origin = this every_scope_state = { limit = { OR = { state_region = s:STATE_YORUBA_STATES state_region = s:STATE_BENIN } } set_state_owner = c:CASNI add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CASNI type = puppet } c:CASNI = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 9. CAGAB - Gabón
+establish_cagab_colony = {
+    is_shown = { any_scope_state = { state_region = s:STATE_GABON } NOT = { exists = c:CAGAB } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CAGAB origin = this every_scope_state = { limit = { state_region = s:STATE_GABON } set_state_owner = c:CAGAB add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CAGAB type = puppet } c:CAGAB = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 10. CABSC - Bas-Congo
+establish_cabsc_colony = {
+    is_shown = { any_scope_state = { state_region = s:STATE_BAS_CONGO } NOT = { exists = c:CABSC } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CABSC origin = this every_scope_state = { limit = { state_region = s:STATE_BAS_CONGO } set_state_owner = c:CABSC add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CABSC type = puppet } c:CABSC = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 11. CACOE - El Congo
+establish_cacoe_colony = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_CONGO_ORIENTALE state_region = s:STATE_EQUATEUR state_region = s:STATE_KASAI state_region = s:STATE_CONGO } } NOT = { exists = c:CACOE } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CACOE origin = this every_scope_state = { limit = { OR = { state_region = s:STATE_CONGO_ORIENTALE state_region = s:STATE_EQUATEUR state_region = s:STATE_KASAI state_region = s:STATE_CONGO } } set_state_owner = c:CACOE add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CACOE type = puppet } c:CACOE = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 12. CACMN - Camerún del Norte
+establish_cacmn_colony = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_NORTH_CAMEROON state_region = s:STATE_CHAD } } NOT = { exists = c:CACMN } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CACMN origin = this every_scope_state = { limit = { OR = { state_region = s:STATE_NORTH_CAMEROON state_region = s:STATE_CHAD } } set_state_owner = c:CACMN add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CACMN type = puppet } c:CACMN = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 13. CACMS - Camerún del Sur
+establish_cacms_colony = {
+    is_shown = { any_scope_state = { state_region = s:STATE_SOUTH_CAMEROON } NOT = { exists = c:CACMS } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CACMS origin = this every_scope_state = { limit = { state_region = s:STATE_SOUTH_CAMEROON } set_state_owner = c:CACMS add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CACMS type = puppet } c:CACMS = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 14. CABEN - Benín
+establish_caben_colony = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_DAHOMEY state_region = s:STATE_TOGO } } NOT = { exists = c:CABEN } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = african_heritage } } }
+    when_taken = {
+        create_country = { tag = CABEN origin = this every_scope_state = { limit = { OR = { state_region = s:STATE_DAHOMEY state_region = s:STATE_TOGO } } set_state_owner = c:CABEN add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CABEN type = puppet } c:CABEN = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+# ==========================================================
+# ASIA Y OCEANÍA
+# ==========================================================
+
+# 15. CAPAC - Central American Pacific Company
+establish_capac_company = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_FIJI state_region = s:STATE_SAMOA state_region = s:STATE_HAWAII state_region = s:STATE_MICRONESIA } } NOT = { exists = c:CAPAC } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = oceanian_heritage } } }
+    when_taken = {
+        create_country = { tag = CAPAC origin = this every_scope_state = { limit = { OR = { state_region = s:STATE_FIJI state_region = s:STATE_SAMOA state_region = s:STATE_HAWAII state_region = s:STATE_MICRONESIA } } set_state_owner = c:CAPAC add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization set_institution_investment_level = { institution = institution_colonial_affairs level = 2 } } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CAPAC type = chartered_company } c:CAPAC = { add_journal_entry = { type = je_company_independence } top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 16. CANGU - Central American New Guinea Territory
+establish_cangu_colony = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_WESTERN_NEW_GUINEA state_region = s:STATE_EASTERN_NEW_GUINEA state_region = s:STATE_PAPUA } } NOT = { exists = c:CANGU } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = oceanian_heritage } } }
+    when_taken = {
+        create_country = { tag = CANGU origin = this every_scope_state = { limit = { OR = { state_region = s:STATE_WESTERN_NEW_GUINEA state_region = s:STATE_EASTERN_NEW_GUINEA state_region = s:STATE_PAPUA } } set_state_owner = c:CANGU add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CANGU type = puppet } c:CANGU = { top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}
+
+# 17. CABOR - Central American Borneo
+establish_cabor_company = {
+    is_shown = { any_scope_state = { OR = { state_region = s:STATE_NORTH_BORNEO state_region = s:STATE_SOUTH_BORNEO state_region = s:STATE_EAST_BORNEO state_region = s:STATE_CELEBES } } NOT = { exists = c:CABOR } }
+    possible = { is_subject = no NOT = { any_primary_culture = { has_discrimination_trait = southeast_asian_heritage } } }
+    when_taken = {
+        create_country = { tag = CABOR origin = this every_scope_state = { limit = { OR = { state_region = s:STATE_NORTH_BORNEO state_region = s:STATE_SOUTH_BORNEO state_region = s:STATE_EAST_BORNEO state_region = s:STATE_CELEBES } } set_state_owner = c:CABOR add_claim = ROOT } on_created = { activate_law = law_type:law_presidential_republic activate_law = law_type:law_autocracy activate_law = law_type:law_frontier_colonization set_institution_investment_level = { institution = institution_colonial_affairs level = 2 } } }
+        hidden_effect = { create_diplomatic_pact = { country = c:CABOR type = chartered_company } c:CABOR = { add_journal_entry = { type = je_company_independence } top_overlord = { random_primary_culture = { save_scope_as = new_primary } root.religion = { save_scope_as = overlord_religion } } random_primary_culture = { save_scope_as = old_primary } add_primary_culture = scope:new_primary remove_primary_culture = scope:old_primary set_state_religion = scope:overlord_religion } }
+    }
+}

@@ -640,6 +640,168 @@ CR1 = { #Union Of Central America
 	cultures = { costa_rican panamanian nicaraguan guatemalan el_salvadorian honduran }
 	capital = STATE_COSTA_RICA
 }
+GCA = { #Great republic of Central America
+	color = { 90 175 255 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	capital = STATE_SAN_SALVADOR
+	cultures = { central_american costa_rican panamanian nicaraguan guatemalan el_salvadorian honduran }
+}
+##########Colonias###########
+# Central American South Africa Company
+CASA = {
+    color = { 236 236 104 }
+    country_type = colonial
+    tier = kingdom
+    cultures = { central_american }
+    capital = STATE_ZAMBEZI
+}
+
+# Central American Rhodesia and South Rhodesia
+CARHO = {
+    color = { 44 160 70 }
+    country_type = colonial
+    tier = kingdom
+    cultures = { central_american }
+    capital = STATE_ZAMBEZI
+}
+
+# Central American Zambia and Northern Rhodesia
+CAZAM = {
+    color = { 64 124 157 }
+    country_type = unrecognized
+    tier = kingdom
+    cultures = { central_american kavango_bantu lunda chewa }
+    capital = STATE_ZAMBIA
+}
+
+# Central American East Africa
+CAEA = {
+    color = { 139  138  160 }
+    country_type = colonial
+    tier = kingdom
+    cultures = { central_american }
+    capital = STATE_ZANZIBAR
+}
+
+# Central American Niger Company
+CANC = {
+    color = { 150 0 25 }
+    country_type = company
+    tier = kingdom
+    cultures = { central_american }
+    capital = STATE_NIGER_DELTA
+}
+
+# Central American East Africa Company
+CAAC = {
+    color = { 118  229  215 }
+    country_type = company
+    tier = kingdom
+    cultures = { central_american }
+    capital = STATE_KENYA
+}
+
+#Northern Nigeria
+CANNI = {
+    color = { 20 20 20 }
+    country_type = unrecognized
+    tier = kingdom
+    cultures = { central_american }
+    capital = STATE_HAUSALAND
+}
+
+#Southern Nigeria
+CASNI = {
+    color = { 20 20 20 }
+    country_type = unrecognized
+    tier = kingdom
+    cultures = { central_american }
+    capital = STATE_NIGER_DELTA
+}
+
+# Central American Pacific Company (Base en Fiji o islas cercanas)
+CAPAC = {
+    color = { 0 100 200 }
+    country_type = company
+    tier = principality
+    cultures = { central_american }
+    capital = STATE_FIJI
+}
+
+# Central American New Guinea Territory
+CANGU = {
+    color = { 100 150 50 }
+    country_type = colonial
+    tier = kingdom
+    cultures = { central_american }
+    capital = STATE_WESTERN_NEW_GUINEA
+}
+
+# Central American Borneo/Sulawesi Exploration
+CABOR = {
+    color = { 150 100 20 }
+    country_type = company
+    tier = principality
+    cultures = { central_american }
+    capital = STATE_NORTH_BORNEO
+}
+# Gabón
+CAGAB = {
+    color = { 100 150 50 }
+    country_type = colonial
+    tier = principality
+    cultures = { central_american fang }
+    capital = STATE_GABON
+}
+
+# Bas-Congo
+CABSC = {
+    color = { 60 140 180 }
+    country_type = colonial
+    tier = principality
+    cultures = {  central_americanbakongo }
+    capital = STATE_BAS_CONGO
+}
+
+# El Congo (Congo Oriental)
+CACOE = {
+    color = { 80 190 120 }
+    country_type = colonial
+    tier = kingdom
+    cultures = {  central_american mongo luba }
+    capital = STATE_CONGO_ORIENTALE
+}
+
+# Camerún del Norte
+CACMN = {
+    color = { 220 180 60 }
+    country_type = colonial
+    tier = principality
+    cultures = { central_american fulani hausala }
+    capital = STATE_NORTH_CAMEROON
+}
+
+# Camerún del Sur
+CACMS = {
+    color = { 200 100 40 }
+    country_type = colonial
+    tier = principality
+    cultures = { central_american fang bassa }
+    capital = STATE_SOUTH_CAMEROON
+}
+
+# Benín
+CABEN = {
+    color = { 160 50 50 }
+    country_type = colonial
+    tier = kingdom
+    cultures = { central_american fon yoruba }
+    capital = STATE_BENIN
+}
 ##########Other Countries######
 #Caribbean
 CRB = {
@@ -926,16 +1088,7 @@ INJECT_OR_CREATE:CIP = {
 	cultures = { chiapanecan central_american mexican }
 	capital = STATE_CHIAPAS
 }
-GCA = { #Great republic of Central America
-	color = { 90 175 255 }
-	
-	country_type = recognized
-	
-	tier = empire
-	
-	capital = STATE_SAN_SALVADOR
-	cultures = { central_american }
-}
+
 CCA = {
 	color = { 90 175 255 }
 	
@@ -946,7 +1099,7 @@ CCA = {
 	capital = STATE_SAN_SALVADOR
 	cultures = { central_american }
 }
-MAY = {
+REPLACE:MAY = {
 	color = { 98 88 142 }
 	
 	country_type = unrecognized

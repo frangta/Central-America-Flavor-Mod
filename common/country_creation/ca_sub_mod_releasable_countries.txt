@@ -1,0 +1,948 @@
+﻿#ZMB = {
+#	states = {
+#		STATE_ZAMBIA
+#		STATE_KAZEMBE
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#ZAR = {
+#	states = {
+#		STATE_CONGO
+#		STATE_SOUTH_CAMEROON
+#		STATE_UBANGI_SHARI
+#		STATE_CONGO_ORIENTALE
+#		STATE_KASAI
+#		STATE_BAS_CONGO
+#		STATE_EQUATEUR
+#		STATE_GABON
+#	}
+#	
+#	required_num_states = 6
+#
+#	ai_will_do = { always = yes }
+#}
+#LST = {
+#	provinces = { x8C39B6 x6DB7E8 xE1EAA4 xF06050 x3B4B19 xB6892A xD121F1
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#BOT = {
+#	states = {
+#	    STATE_BOTSWANA
+#		STATE_HEREROLAND
+#		STATE_NAMAQUALAND
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#NMB = {
+#	states = {
+#		STATE_HEREROLAND
+#		STATE_NAMAQUALAND
+#	}
+#
+#	required_num_states = 2
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#MOZ = {
+#	states = {
+#		STATE_MOCAMBIQUE
+#		STATE_ZAMBEZIA
+#		STATE_LOURENCO_MARQUES
+#	}
+#
+#	required_num_states = 2
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#MLW = {
+#	provinces = { x806329 x82E9A5 x276350 x52BDB8 x8EF620 x2160B0 x4E5483 x701744 x83B741 x23CB5A x644F6A xC139EB xA6DBA7 x2C40DE x4C7393 xF7617F x694CF9 x6421B0 xFDAF31 xEFAC92
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#ESW = {
+#	provinces = { xA30505 x90A090 x884936
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#ANG = {
+#	states = {
+#	    STATE_EAST_ANGOLA
+#		STATE_SOUTH_ANGOLA
+#		STATE_NORTH_ANGOLA
+#		STATE_KATANGA
+#	}
+#
+#	required_num_states = 3
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#ZUL = { #ZULULAND
+#    
+#	states = {
+#	    STATE_ZULULAND
+#		STATE_EASTERN_CAPE
+#		STATE_TRANSVAAL
+#		STATE_VRYSTAAT
+#	}
+#	
+#	required_num_states = 4
+#	
+#	ai_will_do = { always = yes }
+#	
+#}
+#DRC = {
+#	states = {
+#		STATE_BAS_CONGO
+#		STATE_KASAI
+#		STATE_KATANGA
+#		STATE_CONGO_ORIENTALE
+#		STATE_EQUATEUR
+#	}
+#
+#	required_num_states = 3
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#CKS = {
+#	states = {
+#		STATE_CONGO
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#STP = {
+#	provinces = { xC02050 }
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#EQG = {
+#	provinces = { x902089 x3DD6EF x402090 x3BD4AD }
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#GAB = {
+#	states = {
+#		STATE_GABON
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#RWD = {
+#	provinces = { x34EFF0 x5954AA x662B31 x80DF50 }
+#	
+#	ai_will_do = { always = no }
+#}
+#
+#BRD = {
+#	provinces = { x16915A xD8B2ED x5093DF }
+#	
+#	ai_will_do = { always = no }
+#}
+#
+#TGR = {
+#	provinces = { x962CFC xF090A0 x5A5824 x5B5305 x68239C xDF15B2 x57AA00 x793499 x7E83AE x5CAB2B }
+#	
+#	ai_will_do = { always = no }
+#}
+#
+#UGA = {
+#	states = {
+#		STATE_UGANDA
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#TNZ = {
+#	states = {
+#		STATE_ZANZIBAR
+#		STATE_TANGANYIKA
+#		STATE_LINDI
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#KNY = {
+#	states = {
+#		STATE_KENYA
+#		STATE_RIFT_VALLEY
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#SSD = {
+#	states = {
+#		STATE_EQUATORIA
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#CNT = {
+#	states = {
+#		STATE_UBANGI_SHARI
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#DJI = {
+#	provinces = { x9E8FDD x3EE4D1 x9B6C39 x40E050 }
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#SLL = {
+#	provinces = { xDDAC33 x20E090 xD6084C xCA0AFC x678D0D x3BB51B x7D4764 x8AA210 x395C77 x2FB806 xDF951C xD3EE2E x284319 xAE76D1 x184064 xCCC39F x089FE7 xF2A924 x524E91 x0CE1C7 x5C2622 x2C4BFE x48FFF1 xC6A5CB x9DA796 xF9565C x12FDBA x7FBAFA x4A6DFD xE19C5A x9ACA9E x85FD85 xDEFB4F xD85A85 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#SOM = {
+#	states = {
+#		STATE_SOMALILAND
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#ERI = {
+#	states = {
+#		STATE_ERITREA
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#CMR = {
+#	provinces = { x606CE0 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#SEY = {
+#	provinces = { x60E0B0 }
+#
+#	ai_will_do = { always = no }
+#}
+#
+#REU = {
+#	provinces = { xD690E0 }
+#
+#	ai_will_do = { always = no }
+#}
+#
+#MAU = {
+#	provinces = { xD0E090 }
+#
+#	ai_will_do = { always = no }
+#}
+#
+#CMN = {
+#	states = {
+#		STATE_SOUTH_CAMEROON
+#		STATE_NORTH_CAMEROON
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#CHD = {
+#	states = {
+#		STATE_WADDAI
+#		STATE_CHAD
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#NMY = {
+#	states = {
+#		STATE_OUTER_HAUSALAND
+#		STATE_NIGER
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#MLI = {
+#	states = {
+#		STATE_WESTERN_MALI
+#		STATE_EASTERN_MALI
+#		STATE_TIMBUKTU
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#EAF = { #East Afrikan Federation
+#		
+#	states = {
+#		STATE_KENYA 
+#		STATE_RIFT_VALLEY
+#		STATE_ZANZIBAR
+#		STATE_LINDI
+#		STATE_TANGANYIKA
+#		STATE_UGANDA
+#		STATE_MOCAMBIQUE
+#		STATE_KAZEMBE
+#	}
+#	
+#	required_states_fraction = 0.75	
+#	
+#	ai_will_do = { always = yes }
+#}
+#LAG = {
+#	states = {
+#		STATE_EAST_HAUSALAND
+#		STATE_HAUSALAND
+#		STATE_BORNU
+#		STATE_NIGERIA
+#		STATE_YORUBA_STATES
+#		STATE_BENIN
+#		STATE_NIGER_DELTA
+#	}
+#	
+#	required_num_states = 4
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#TOG = {
+#	states = {
+#		STATE_TOGO
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#WTG = {
+#	provinces = { xD6D784 x51AD34 x778011 x162D0C }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#BRK = {
+#	states = {
+#		STATE_VOLTA
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#COI = {
+#	states = {
+#		STATE_WINDWARD_COAST
+#		STATE_IVORY_COAST
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#GUN = {
+#	states = {
+#		STATE_GUINEA
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#SIL = {
+#	states = {
+#		STATE_SIERRA_LEONE
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#GIB = {
+#	provinces = { x9933B7 x04FDE5 x7486F1 x146701 x97F797 x5A627D x6D295A x7B55A9 xEB469A }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#TGB = {
+#	provinces = { xB07040 x7B561C }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#SGL = {
+#	states = {
+#		STATE_SENEGAL
+#		STATE_GAMBIA
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#CBV = {
+#	states = {
+#		STATE_CAPE_VERDE
+#	}
+#
+#	ai_will_do = { always = no }
+#}
+#
+#MRT = {
+#	states = {
+#		STATE_MAURITANIA
+#		STATE_INNER_MAURITANIA
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#SRW = {
+#	states = {
+#		STATE_WEST_SAHARA
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#CAB = {
+#	provinces = { x406070 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#KTN = {
+#	states = {
+#		STATE_KATANGA
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#ZNZ = {
+#	provinces = { x414325 xE020B0 }
+#	
+#	ai_will_do = { always = no }
+#}
+#
+#BFR = {
+#	provinces = { x255D8A x8B459B x938816 x01A050 x93634A xA8A592 x80A090 x90B6CB xD16652 xD8056B x016090 xC0E090 x6F99BE x337660 x4D3C3A }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#AZW = {
+#	states = {
+#		STATE_TIMBUKTU
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#TGK = {
+#	states = {
+#		STATE_ZANZIBAR
+#		STATE_TANGANYIKA
+#		STATE_LINDI
+#	}
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#OGD = {
+#	provinces = { x939EDA x1E8D53 x107FA1 xA51575 x318256 x0BB3A0 x8CA5FB x84C294 xDFB76F x3D8E7B x489C2A xD25F58 xD20B42 xB41950 xD68922 x19A599 xCCBD1F x0D5E96 x721216 xD26E35 x75E6F0 x6075E2 x82F3F6 x02BFCD x28B782 xAA8CB0 x8F6EB2 xD1CB36 xFC0BCC x9D4A30 x560028 xAF0800 xBEDF90 x1527DC x206111 xFD0A16 xE1D0E7 x7FCE33 x5C59E3 xB56BDC x582778 x396D03 x6E8CCA x6E7998 x4AD726 x0E0BF3 x3286BD x14A492 xE156F9 x7A2004 xC060D0 x507381 xAA7799 x366C12 xB0D911 xB789A5 xD7A4AF x67C506 x45C93A x35477F }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#MRO = {
+#	provinces = { x907D63 x915193 xD7D808 x16B5EB x3A28C0 xD17974 x105589 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#UPN = {
+#	provinces = { xF7B5CB x6A5420 xD42E9B xEE4B02 xFAD09B xC0D1A9 xD07ADF x16A922 x4AB4A0 x8CA984 xC356F5 x51CD3D xE0A090 x225C9E xEF7C3C x68ED3B x8060D0 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#HLB = {
+#	provinces = { xA09909 x20F9A6 xF09021 x324CD5 x76A5E2 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#CPR = {
+#	provinces = { x0DDFB8 x4401C5 x3D4350 x6001D0 x773A13 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#KWL = {
+#	provinces = { xC52E48 xC53497 x35554F x21A090 x22D39E xE23000 x941594 x9E9F57 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#ABZ = {
+#	provinces = { x802050 xF24DEA x361F6A x342080 x09FC06 x47CD3B x7ECE9E }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#ARF = {
+#	provinces = { xCA9F75 xDFB040 xFA1C92 xE6D43C xA0B0C0 x20B0C0 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#RWZ = {
+#	provinces = { xCE3CD0 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#TOO = {
+#	provinces = { xE1A791 x1D4C32 }
+#
+#	ai_will_do = { always = no }
+#}
+#
+#BNY = {
+#	provinces = { x1DDAD8 xA09C30 xCD8D63 x7CE297 x5C340A }
+#
+#	ai_will_do = { always = no }
+#}
+#
+#BUG = {
+#	provinces = { xE0A010 xFB4215 xEA2372 x42EDCA xD13A93 x55FC3E }
+#
+#	ai_will_do = { always = no }
+#}
+#
+#BSG = {
+#	provinces = { xF9C916 x357FAC }
+#
+#	ai_will_do = { always = no }
+#}
+#
+#ANK = {
+#	provinces = { x7183C4 x7183F2 x6530A0 }
+#
+#	ai_will_do = { always = no }
+#}
+#
+#LOZ = {
+#	provinces = { x036962 x0D2021 x0F41AA x0FC828 x19D221 x1A3936 x1B9E38 x1EE306 x23B4BE x28FEA8 x30DEE0 x319C47 x339A57 x38F842 x3F3C71 x4060F0 x42585D x46BE86 x48173A x484D42 x4BCC5E x4E7E66 x55D19D x5A1BF2 x60E9CD x62BBF1 x69FA4E x6D63E8 x6EBF71 x6F3B8C x6FBDD5 x70FA3C x71875F x78FFDC x7A1B83 x7A1E23 x7DE1CA x7F247F x81481F x828F71 x84DDAA x87B33F x887742 x8C26BF x8D503A x8F6688 x8F9EE5 x923EAF x93D445 xA430E0 xA4660F xA63EB3 xA9339C xC05572 xC1847A xC29ED3 xCCB8E0 xCEF8D6 xCF60FE xD79E7A xD8DF07 xD9353E xDD006D xDE6D00 xE24009 xE7EAB5 xEBD5BC xF4B66F xFB17EB }
+#
+#	ai_will_do = { always = no }
+#}
+#
+#ORM = {
+#	provinces = { x47D35E xEE8BD1 x7F7614 xE57DDA xE77D4B x462918 xD031CA x19FA60 xFE53F8 x85562A x5A8BBB x36A83C x1F0F14 x5F19EC xA6F2C6 x62BE5B x29C3A2 xB332F3 xDFF064 xE071B6 x92412C xB88334 x5D4889 x2AC215 x40BCE0 x3503EC x2D40BF x0FB7D1 x7A6C4F xD61F68 x0FA741 xCE40EE x156474 xC74C78 xB9A342 x055C75 x1A441F x5FDD08 x4CE17E x435967 x41E0D0 x9D5DFC xE7D29C xD033B3 xA8A20B x35C9A6 xC77DDF x513574 x74C88E x98DC27 x0FBF6B x91C70C xB480F1 x6AEDF6 x516EB2 x9B2CD2 x20EBC8 x077343 x4160D0 xDBA052 x869C8E xE04093 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#CSM = {
+#	provinces = { xD633FE x30EF40 xCD9D60 xF8E5E2 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#SDR = {
+#	provinces = { x10D446 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#SKS = {
+#	provinces = { xE392E2 xE27079 x354D3E x908070 xB5E777 xF49831 xFF070B x3F2E16 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#AWS = {
+#	provinces = { x9FA061 x939EDA x107FA1 x3D8E7B x84C294 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#CYC = {
+#	provinces = { xE2D391 x34A20C xA645B8 xE123F5 xAD6337 xB0EEAE xD7040F x13063D x99D6C9 x2B40DE xBCB1A5 x574B81 x55361C x800FBB x4FB39B x1898D8 xA01020 x04DAA1 xC74D58 x8D408F xDF191B x025170 x209020 x40D0E0 x97E206 xBDFE7F x229F5B xECDEFD x76EA2F x5B2B26 x3066D1 xFA182C x683423 xC11122 x60A81D xF9980E xC5601C x8F71C6 x148330 x180269 xC75D31 x372EB1 xACA5B1 xA17BD6 xCC14A4 xAD746A xA79085 xF1D2C1 xE799AA x6F8DE9 xB10316 x53ECCE x991766 x72A54B xDBD075 x017863 x90D060 x9F6FBD xE51BCB x3E5E19 x27737E x4588F1 xAB9F90 x650312 xA09020 x6C635A x91EB7D x874CD9 x81B59F xA247FB x1189D2 xEEE9E6 xFA4247 x31EA8A xE19FB8 x0CA694 xDC498E xF1DFCE x592D88 x4BC650 x33B3DE x485A40 x057978 x0BD882 xC1CA86 x11A0DD x9D205C x738052 x14A3E1 xAF2968 x1EDF65 xAA6BA0 x51AB2C xF9D0BC xD3CCA8 xDEFE00 x1425EF x87B84F x735D47 xF2B6E0 xAD3D64 xB24990 x194AE7 x83E15C x6A6A85 x14F1BF x3D9D25 xF46E3D x5E16B6 x950042 x4E6542 xE6081F x29E30B x0A58C9 xCA9364 x47B6FA x6ED70F x827DC0 x144435 x099FFF xDEF5CF xCF807F x39A829 x0008B1 x73B161 x29E247 xA5C57A x28A6A1 x3572F7 xDCBC26 xDB1CEA x0198EA x3BF817 x093E94 x2A53E1 x61A415 x165542 x799B7E x2C08E8 x3E00B9 x47B014 x68430F x0BD921 xE39CED xF00DCD x164ED1 x1BE626 x8B21BC x56AEEC xD1395D x395873 x79DCF4 x7B0D2E x6890D4 xB93A62 x6B2BEF x9953AB x550DB9 x6794AD x231277 xA519D6 x48316F x475810 x9F22F2 x662644 x0F16C7 x152867 xB46A16 x61F166 x95E863 xC6DA6A x2B96BF }
+#
+#	ai_will_do = { always = no }
+#
+#}
+#
+#FZA = {
+#	provinces = { x4EF9F0 xC88B2A xEBD8DF x8DAD0A xC0E7D7 xC5B660 xDAC20A x524EEC xBFB9A9 x0ECBC0 xE32053 x4F29FF x7CED48 x8A160E x7F2FCD xD61033 x8967B5 x671156 x522D29 x281051 x26FEF6 xA14DC8 xD9A89D x1845BE x1C2606 x285F4f xACD89C x463A7E xAAD5CC x348703 x2A751D xBABA5F xD7FFBE x11D0A0 x3F1904 xF88C6A x070399 x0190E0 x5F28EB x8C63E2 x4508B3 x2129BE xFAB14C xBCDCC0 x8C8E28 x1A8994 xE7AF8B x371B26 xCFEDA1 x281F7D x78D114 x24837D x34CD9D xC63569 x2EB0FE x155988 x6B945A xE6E84C x477A67 x5272B1 x60D659 xF8B255 x3B68A8 x92D93F x7DEA64 x731E96 x23AE97 x8D5F6C xEE1748 x77A44D xE5E228 x0F6CA8 x827E73 x5816E1 x5B3233 xA48E9C x460BB7 x0B1422 xD4F032 xDA9E29 x202929 x72AD6F x587B0B x5F830E x86E434 xF65A12 xA3FFD3 xDA32A4 x0C5EBE x98E67F x8855E0 x756DFD x41FEF5 x8ADB51 xAA6A72 xA4B02B xCA4E6B x2B86F4 xC4D8ED x0479EF x886CFB x87476F xD2D69C xEB8E58 x5B7280 x801060 x2BBB9C x4B9EB1 x6EA444 x7CFB8C xA06BA4 x725A37 x7C0DA3 xA3E261 x0A5735 x617DC1 x009F47 xA95E42 xF3329A x65294E xFFED82 xCB3322 xB89482 x9A4E88 xB11A98 xE6917C x81C7D9 xFCE120 xC724C8 x5B44AB xBFA1D6 x8207BC x1F3EAA x1F8886 xD8876F x3A9EC5 }
+#
+#	ai_will_do = { always = no }
+#
+#}
+#
+#RDA = {
+#	states = {
+#		STATE_ZAMBEZI
+#	}
+#
+#	required_num_states = 1
+#	
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#TKI = {
+#	provinces = { x706050 xA3B602 x9DBF3E x37E0C8 xFEA452 xE60DC5 x2282A0 x7524D4 x678D6E }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#
+#}
+#
+#BPT = {
+#	provinces = { x6CF2A2 x8491F7 x642DA4 x8E325C x4D517F xD76CB9 xA494F8 x4AFDFD x3B06D4 x8B4610 xA8089A }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#
+#}
+#
+#VDA = {
+#	provinces = { x5C4C78 xC9D165 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#
+#}
+#
+#CKI = {
+#	provinces = { xA66043 x3073EF x7CEA40 }
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#
+#}
+#
+#SHL = {
+#	provinces = { xB5760C x0CB556 }
+#
+#	ai_will_do = { always = no
+#	}
+#
+#}
+#
+#UVL = {
+#	states = {
+#		STATE_VOLTA
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#}
+#
+#LME = {
+#	provinces = { x802111 }
+#
+#	ai_will_do = { always = no
+#	}
+#
+#	possible = {
+#		has_technology_researched = nationalism
+#	}
+#
+#}
+#
+#SUD = {
+#	states = {
+#		STATE_KORDOFAN
+#		STATE_DONGOLA
+#		STATE_BLUE_NILE
+#		STATE_DARFUR
+#		STATE_EQUATORIA
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#}
+#
+#LYA = {
+#	states = {
+#		STATE_LIBYA
+#		STATE_TRIPOLI
+#		STATE_LIBYAN_DESERT
+#	}
+#
+#	ai_will_do = { always = no }
+#
+#	possible = {
+#		has_technology_researched = pan-nationalism
+#	}
+#
+#}

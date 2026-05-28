@@ -83,25 +83,25 @@
     
     on_monthly_pulse = {
         events = {
-            ca_central_america.14
-            ca_central_america.1  
-            ca_central_america.3  
-            ca_central_america.5  
-            ca_central_america.15
-            ca_central_america.20
-            ca_central_america.19  
-            ca_central_america.46
-            ca_central_america.79
-            ca_central_america.18  
-            ca_central_america.45
-            ca_central_america.42
-            ca_central_america.21  
-            ca_central_america.48      
-            ca_central_america.69  
-            ca_central_america.23
-            ca_central_america.85
-            ca_central_america.47
-            ca_central_america.63
+            ca_central_america.14 #The Livingston Penal Code
+            ca_central_america.1 #A local newspaper proposed the formation of a state that would include the regions of Quetzaltenango, Totonicapán, Sololá and Suchitepéquez.
+            ca_central_america.3 #Establishment of Los Altos 5 de junio de 1838
+			ca_central_america.5 #The Fate of Soconusco
+			ca_central_america.15 #Cholera Pandemic Hits Central America
+            ca_central_america.20 #Separatism in Guatemala
+			ca_central_america.19 #Separatism in Nicaragua  
+			ca_central_america.46 #Nicaragua Declares Independence
+			ca_central_america.18 #Separatism in Costa Rica  
+			ca_central_america.45 #Costa Rica declares independence
+			ca_central_america.42 #Union Collapses Into Civil War / #Accept Fate & Become El Salvador			
+			ca_central_america.21 #Separatism in Honduras  
+			ca_central_america.48 #Honduras Declares Independence      
+			ca_central_america.69 #Civil War in Guatemala  
+			ca_central_america.23 #Separatism in Los Altos
+			ca_central_america.85 #Los Altos Declares Independence
+			ca_central_america.47 #Guatemala Declares Independence
+			ca_central_america.63 #Civil War in Nicaragua
+
         }
         random_events = {
             90 = 0
@@ -600,7 +600,110 @@ je_ca_federalists_vs_separatists_situation = {
     
     on_monthly_pulse = {
         events = {
+     #NIC
+     #LA CHISPA INICIAL (Declaraciones de Independencia)
+     ca_central_america.27: #Nicaragua declares independence Peaceful
+     ca_central_america.26: #Nicaragua declares independence on Arms (Opción 1)
+     ca_central_america.64: #Nicaragua declares independence on Arms (Opción 2)
+     #INSERTO DINÁMICO A: "El Eco de Granada" (Evento de Sabor para la UCA)
+     ca_central_america.101: #Reacción inmediata en la capital federal tras la noticia.
+     #EL ESTALLIDO 
+     ca_central_america.63: #Civil war in Nicaragua (Inicia la guerra civil)
+     #LA PETICIÓN DE AUXILIO
+     ca_central_america.28: #Nicaragua apply intervention (Petición enviada a la UCA)
+     #INSERTO DINÁMICO B: "El Dilema en la Capital" (Evento de Sabor para la UCA)
+     ca_central_america.102: #Delegados nicaragüenses piden armas antes de la respuesta oficial.
+     # EL DESENLACE DE LA GUERRA
+     ca_central_america.85: #Nicaragua Beats to secessionists (Ganan los Federalistas)
+     ca_central_america.86: #Nicaragua falls to secessionists (Ganan los Separatistas)
+     #INSERTO DINÁMICO C: "Lágrimas en el Lago Cocibolca" (Evento de Cierre)
+     ca_central_america.103: #Consecuencias finales para la UCA basadas en quién ganó.
+     #COS
+     #LA SEPARACIÓN (Declaraciones de Independencia)
+     ca_central_america.66: #Costa Rica declares independence on Arms
+     #INSERTO DINÁMICO A: "El Silencio de San José" (Evento de Sabor para la UCA)
+     ca_central_america.104: #Costa Rica cierra sus fronteras y retiene sus impuestos federales.
+     #EL ESTALLIDO (Si la diplomacia falla)
+     ca_central_america.65: Civil war in Costa Rica 
+     #LA PETICIÓN DE AUXILIO
+     ca_central_america.29: #Costa Rica apply intervention (Petición enviada a la UCA)
+     #INSERTO DINÁMICO B: "El Aroma de la Traición" (Evento de Sabor para la UCA)
+     ca_central_america.105: Embajadores europeos y cafetaleros presionan a la UCA.
+     #EL DESENLACE DE LA GUERRA
+     ca_central_america.83: #Costa Rica Beats to secessionists (Ganan los Federalistas)
+     ca_central_america.84: #Costa Rica falls to secessionists (Ganan los Separatistas)
+     #INSERTO DINÁMICO C: "El Destino del Pacto de Concordia" (Evento de Cierre)
+     ca_central_america.106: Consecuencias finales para la UCA basadas en quién ganó en Costa Rica.
+     #GUA
+     #LA RUPTURA (Declaraciones de Independencia)
+     ca_central_america.55: #Guatemala declares independence Peaceful
+     ca_central_america.70: #Guatemala declares independence on Arms
+     #INSERTO DINÁMICO A: "El Rugido de la Montaña" (Evento de Sabor para la UCA)
+     ca_central_america.110: #La UCA se entera del masivo levantamiento campesino de Carrera.
+     #EL ESTALLIDO 
+     ca_central_america.69: #Civil war in Guatemala 
+     #LA PETICIÓN DE AUXILIO
+     ca_central_america.32: #Guatemala apply intervention (Petición enviada a la UCA)
+     #INSERTO DINÁMICO B: "El Pánico de Gálvez" (Evento de Sabor para la UCA)
+     ca_central_america.111: #El gobierno liberal guatemalteco ruega por tropas federales.
+     #EL DESENLACE DE LA GUERRA
+     ca_central_america.53: #Guatemala Beats to secessionists (Ganan los Federalistas)
+     ca_central_america.54: #Guatemala falls to secessionists (Ganan los Separatistas)
+     #INSERTO DINÁMICO C: "El Destino del Caudillo" (Evento de Cierre)
+     ca_central_america.112: #Consecuencias finales para la UCA y el choque ideológico.
+     #ALT
+     #EL CILMA DE LA RUPTURA (Declaraciones de Independencia)
+     ca_central_america.58: #Los Altos declares independence Peaceful
+     ca_central_america.74: 3Los Altos declares independence on Arms
+     #INSERTO DINÁMICO A: "El Reconocimiento del Sexto Estado" (Evento de Sabor para la UCA)
+     ca_central_america.116: #La UCA decide si acepta a Los Altos como estado legítimo.
+     #EL ESTALLIDO 
+     ca_central_america.73: #Civil war in Los Altos 
+     #LA PETICIÓN DE AUXILIO
+     ca_central_america.33: #Los Altos apply intervention (Petición enviada a la UCA)
+     #INSERTO DINÁMICO B: "La Sombra de Carrera" (Evento de Sabor para la UCA)
+     ca_central_america.117: 3El terror invade a los liberales mientras el ejército conservador avanza.
+     #EL DESENLACE DE LA GUERRA
+     ca_central_america.56: #Los Altos Beats to secessionists (Triunfa Los Altos / Federalistas)
+     ca_central_america.57: #Los Altos falls to secessionists (Guatemala aplasta a Los Altos)
+     #INSERTO DINÁMICO C: "Los Mártires de Quetzaltenango" (Evento de Cierre)
+     ca_central_america.118: #Consecuencias finales del choque entre Carrera y el Sexto Estado.
+     #HON
+     #LA SEPARACIÓN (Declaraciones de Independencia)
+     ca_central_america.49: #Honduras declares independence Peaceful
+     ca_central_america.68: #Honduras declares independence on Arms
+     #INSERTO DINÁMICO A: "La Puñalada en Comayagua" (Evento de Sabor para la UCA)
+     ca_central_america.107: #La UCA reacciona a la traición en la tierra natal de Morazán.
+     #EL ESTALLIDO (Si la diplomacia falla)
+     ca_central_america.67: #Civil war in Honduras 
+     #LA PETICIÓN DE AUXILIO
+     ca_central_america.30: #Honduras apply intervention (Petición enviada a la UCA)
+     #INSERTO DINÁMICO B: "Sangre en el Río Ulúa" (Evento de Sabor para la UCA)
+     ca_central_america.108: #Milicias campesinas e indígenas toman partido en la guerra.
+     #EL DESENLACE DE LA GUERRA
+     ca_central_america.81: #Honduras Beats to secessionists (Ganan los Federalistas)
+     ca_central_america.82: #Honduras falls to secessionists (Ganan los Separatistas)
+     #INSERTO DINÁMICO C: "El Destino del General Ferrera" (Evento de Cierre)
+     ca_central_america.109: #Consecuencias finales para la UCA y el diario de la crisis.
+     #ELS
+     #LA RUPTURA FINAL (El colapso llega a la capital)
+     ca_central_america.52: #El Salvador declares independence Peaceful
+     ca_central_america.72: #El Salvador declares independence on Arms
+     #INSERTO DINÁMICO A: "El Enemigo en Casa" (Evento de Sabor para la UCA)
+     ca_central_america.113: #Los separatistas atacan la sede del gobierno federal.
+     #EL ESTALLIDO 
+     ca_central_america.71: #Civil war in El Salvador 
+     #lA PETICIÓN DE AUXILIO
+     ca_central_america.31: #El Salvador apply intervention (Petición enviada a la UCA)
+     #INSERTO DINÁMICO B: "La Leva Suprema" (Evento de Sabor para la UCA)
+     ca_central_america.114: #Morazán y el gobierno de la UCA recurren a medidas extremas.
+     # EL DESENLACE DE LA GUERRA
+     ca_central_america.50: #El Salvador Beats to secessionists (Ganan los Federalistas)
+     ca_central_america.51: #El Salvador falls to secessionists (Ganan los Separatistas)
+     #INSERTO DINÁMICO C: "El Fin de la Utopía" (Evento de Cierre)
+     ca_central_america.115: #El destino final de Francisco Morazán y la Federación.
         }
+		
     }
 
     on_yearly_pulse = {

@@ -1,0 +1,381 @@
+﻿je_ca_company_independence = {
+	icon = "gfx/interface/icons/event_icons/event_colonial.dds"
+    group = je_group_internal_affairs
+	is_shown_when_inactive = {
+		is_subject_type = subject_type_chartered_company
+	}
+
+	possible = {
+		is_subject_type = subject_type_chartered_company
+	}
+
+    invalid = {	
+		is_subject = yes
+		NOT = { is_subject_type = subject_type_chartered_company }
+	}
+
+	fail = {
+		is_subject = no
+	}
+
+	on_fail = {
+		custom_tooltip = {
+			text = company_collapse_tt
+		
+			if = {
+				limit = {
+					c:RAC ?= ROOT
+				}
+
+				every_in_list = {
+					variable = past_overlord 
+					trigger_event = { id = journal_flavor_company_collapse.4 }
+				}
+
+			 
+
+			}
+			else_if = {
+				limit = {
+					c:NWT ?= ROOT
+				}
+
+				every_in_list = {
+					variable = past_overlord 
+					trigger_event = { id = journal_flavor_company_collapse.2 }
+				}
+
+			}
+			else_if = {
+				limit = {
+					c:COL ?= ROOT
+				}
+					every_in_list = {
+					variable = past_overlord 
+					trigger_event = { id = journal_flavor_company_collapse.3 }
+				}
+
+			}
+			else_if = {
+				limit = {
+					c:HBC ?= ROOT
+				}
+
+				every_in_list = {
+					variable = past_overlord 
+					trigger_event = { id = journal_flavor_company_collapse.1 }
+				}
+				
+			}
+			else_if = {
+				limit = {
+					c:CANC ?= ROOT
+				}
+				
+				every_in_list = {
+					variable = past_overlord 
+					trigger_event = { id = journal_flavor_company_collapse.5 }
+				}
+
+
+			}
+			else_if = {
+				limit = {
+					c:CAAC ?= ROOT
+				}
+
+				every_in_list = {
+					variable = past_overlord 
+					trigger_event = { id = journal_flavor_company_collapse.7 }
+				}
+
+			}
+			else_if = {
+				limit = {
+					c:CAEA ?= ROOT
+				}
+				every_in_list = {
+					variable = past_overlord 
+					trigger_event = { id = journal_flavor_company_collapse.8 }
+				}
+			}
+			else_if = {
+				limit = {
+					c:CASA ?= ROOT
+				}
+				every_in_list = {
+					variable = past_overlord 
+					trigger_event = { id = journal_flavor_company_collapse.6 }
+				}
+			}
+
+
+		
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			clear_variable_list = past_overlord
+			add_to_variable_list = { name = past_overlord target = top_overlord }
+		}
+	}
+
+	weight = 1000 
+}
+
+je_ca_company_autonomy = {
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+    group = je_group_internal_affairs
+	is_shown_when_inactive = {
+		is_subject_type = subject_type_chartered_company
+		NOT = {
+			OR = {
+				c:BIC ?= ROOT
+				AND = {
+					c:MPR ?= ROOT
+					c:MPR ?= {
+						overlord = c:BIC
+					}
+				}
+				AND = {
+					c:BPR ?= ROOT
+					c:BPR ?= {
+						overlord = c:BIC
+					}
+				}	
+			}
+		}
+	}
+
+    possible = {
+		custom_tooltip = {
+			text = gdp_per_capita_2
+			
+			gdp_per_capita >= 2
+		}
+	}
+
+	fail = {
+		in_default = yes
+	}
+
+    complete = {	
+		NOT = {has_law = law_type:law_autocracy}
+		any_scope_pop = {
+			standard_of_living > 15
+			strata = poor
+		}
+	}
+
+	invalid = {
+		NOT = { is_subject_type = subject_type_chartered_company }
+	}
+
+    on_complete = {
+		top_overlord = {
+			create_diplomatic_pact = {
+				country = root
+				type = dominion
+			}
+		}
+		if = {
+			limit = {
+				c:RAC ?= ROOT
+			}
+			change_tag = AKA
+		}
+		#else_if = {
+		#	limit = {
+		#		c:HBC = ROOT
+		#	}
+		#	change_tag = CAN
+		#}	
+		else_if = {
+			limit = {
+				c:RNC ?= ROOT
+			}
+			change_tag = NGR
+		}
+		else_if = {
+			limit = {
+				c:GEA ?= ROOT
+			}
+			change_tag = TZN
+		}
+		#else_if = {
+		#	limit = {
+		#		c:COL = ROOT
+		#	}
+		#	change_tag = ORG
+		#}
+		else_if = {
+			limit = {
+				c:RGT ?= ROOT
+			}
+			change_tag = GRN
+		}
+	}
+
+    should_be_pinned_by_default = yes
+	weight = 1000
+}
+je_ca_company_bankruptcy = {
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+    
+	group = je_group_crises
+	
+	is_shown_when_inactive = {
+		is_subject_type = subject_type_chartered_company
+	}
+
+    possible = {
+		taking_loans = yes
+	}
+
+	fail = {
+		in_default = yes
+	}
+
+	invalid = {
+		NOT = { is_subject_type = subject_type_chartered_company }
+	}
+
+    on_fail = {
+		top_overlord = {
+#			create_diplomatic_pact = {
+#				country = root
+#				type = dependency
+#			}
+			create_diplomatic_pact = {
+				country = root
+				type = puppet
+			}
+		}
+		if = {
+			limit = {
+				c:RAC ?= ROOT
+			}
+			change_tag = AKA
+		}	
+		else_if = {
+			limit = {
+				c:BIC ?= ROOT
+			}
+			top_overlord = {
+				trigger_event = { id = raj.1 }
+			}
+		}
+		else_if = {
+			limit = {
+				c:HBC ?= ROOT
+			}
+
+			if = {
+				limit = { exists = c:ONT }
+				random_scope_state = {
+					limit = {
+						state_region = s:STATE_ONTARIO
+					}
+					set_state_owner = c:ONT
+				}
+			}
+			if = {
+				limit = { exists = c:QUE }
+				random_scope_state = {
+					limit = {
+						state_region = s:STATE_QUEBEC
+					}
+					set_state_owner = c:QUE
+				}
+			}
+
+		}	
+		else_if = {
+			limit = {
+				c:RNC ?= ROOT
+			}
+			change_tag = NGR
+		}
+		else_if = {
+			limit = {
+				c:RGT ?= ROOT
+			}
+			change_tag = GRN
+		}
+		else_if = {
+			limit = {
+				c:BSA ?= ROOT
+			}
+
+			if = { 
+				limit = {
+					NOT = {
+						any_scope_state = {
+							OR = {
+								state_region = s:STATE_ZAMBIA
+								state_region = s:STATE_KAZEMBE
+							}
+						}	
+					}
+				}
+				change_tag = RHO
+			}
+			else = {
+				change_tag = ZAM
+
+				if = {
+					limit = {
+						any_scope_state = {
+							state_region = s:STATE_ZAMBEZI
+						}	
+					}
+					create_country = {
+						tag = RHO
+						origin = this
+						state = s:STATE_ZAMBEZI.region_state:ZAM
+					}
+					top_overlord = {
+						create_diplomatic_pact = {
+						country = c:RHO
+						type = puppet
+						}
+					}
+				}
+			}
+
+
+
+		}
+		else_if = {
+			limit = {
+				c:IAC ?= ROOT
+			}
+			change_tag = KNY
+
+			if = {
+				limit = {
+					any_scope_state = {
+						state_region = s:STATE_UGANDA
+					}	
+				}
+				create_country = {
+					tag = UGA
+					origin = this
+					state = s:STATE_UGANDA.region_state:KNY
+				}
+				top_overlord = {
+					create_diplomatic_pact = {
+					country = c:UGA
+					type = puppet
+					}
+				}
+			}
+
+		}
+
+	}
+
+    should_be_pinned_by_default = yes
+	weight = 1000
+}

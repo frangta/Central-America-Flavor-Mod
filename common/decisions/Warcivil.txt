@@ -211,42 +211,24 @@ Plan_of_Veragua8 = {
 		value = 0
     }
 	when_taken = {
-   limit = {
-                          
-            OR = {
-             country_has_primary_culture = cu:central_american
-             country_has_primary_culture = cu:costa_rican
-             country_has_primary_culture = cu:panamanian
-             country_has_primary_culture = cu:nicaraguan
-             country_has_primary_culture = cu:guatemalan
-             country_has_primary_culture = cu:el_salvadorian
-             country_has_primary_culture = cu:honduran
-            }
-   			NOT = {
-   				has_modifier = modifier_not_recognized_by_spain
-   			}
-                           
-                           primary_culture = {
-                               has_discrimination_trait = language_hispanophone
-                           }
-   
-                           
-                           has_dlc_feature = ip4_content
-                           is_historical_spanish_american_colony = yes
-   
-                          
-                           NOT = {
-   				              any_overlord_or_above = {
-   				              	c:SPA ?= this
-   				              }
-                           }
-           }
-			     add_modifier = { # Spain does not formally recognize her former colonies in America at game-start
-			     	name = modifier_not_recognized_by_spain
-			     }
-				  add_journal_entry = {
-                        type = je_spanish_american_independence
-                   }
+    capital = {
+change_resource_potential = {  
+	type = building_lead_mine  
+	amount = 5  
+}
+change_resource_potential = {  
+	type = building_sulfur_mine  
+	amount = 5  
+}
+change_resource_potential = {  
+	type = building_gold_mine  
+	amount = 5  
+}
+	}
+				
+
+
+
     }
 }
 Plan_of_Veragua9 = {
@@ -260,7 +242,7 @@ Plan_of_Veragua9 = {
 		value = 0
     }
 	when_taken = {
-ca_dissolution_vainilla = ýes
+add_era_researched = era_2
 }
 
 

@@ -1,78 +1,88 @@
 ﻿COUNTRIES = {
-	c:UCA ?= {
-		set_next_election_date = 1837.4.9
-		set_variable = ca_organization_apro		
-		effect_starting_technology_tier_2_tech = yes
-		effect_starting_politics_conservative = yes		
-		add_technology_researched = empiricism
-		activate_law = law_type:law_presidential_republic
-		activate_law = law_type:law_ca_central_american_federal
-		activate_law = law_type:law_tenant_farmers
-		activate_law = law_type:law_census_voting
-		activate_law = law_type:law_cultural_exclusion
-		activate_law = law_type:law_mercantilism
-		activate_law = law_type:law_interventionism									 
-		activate_law = law_type:law_right_of_assembly
-		activate_law = law_type:law_per_capita_based_taxation
-        activate_law = law_type:law_charitable_health_system		
-		activate_law = law_type:law_religious_schools
-		activate_law = law_type:law_no_police
-		activate_law = law_type:law_freedom_of_conscience
+    c:UCA ?= {
+        set_next_election_date = 1837.4.9
 
-
-		set_institution_investment_level = {
-			institution = institution_schools
-			level = 1
-		}
-		set_tax_level = high
+        set_variable = ca_organization_apro
         
-			
-		ig:ig_intelligentsia ?= {
-	        add_ruling_interest_group = yes
+        effect_starting_technology_tier_2_tech = yes
+        effect_starting_politics_conservative = yes        
+        
+        add_technology_researched = empiricism
+        
+        
+        activate_law = law_type:law_presidential_republic
+        activate_law = law_type:law_ca_central_american_federal
+        activate_law = law_type:law_tenant_farmers
+        activate_law = law_type:law_census_voting
+        activate_law = law_type:law_cultural_exclusion
+        activate_law = law_type:law_mercantilism
+        activate_law = law_type:law_interventionism                                        
+        activate_law = law_type:law_right_of_assembly
+        activate_law = law_type:law_per_capita_based_taxation
+        activate_law = law_type:law_charitable_health_system        
+        activate_law = law_type:law_religious_schools
+        activate_law = law_type:law_no_police
+        activate_law = law_type:law_freedom_of_conscience
+
+        set_institution_investment_level = {
+            institution = institution_schools
+            level = 1
+        }
+        set_tax_level = high
+        
+        
+            
+        ig:ig_intelligentsia ?= {
+            add_ruling_interest_group = yes
             remove_ideology = ideology_liberal
-	        remove_ideology = ideology_anti_clerical
-	        remove_ideology = ideology_republican
+            remove_ideology = ideology_anti_clerical
+            remove_ideology = ideology_republican
             add_ideology = ideology_ca_liberal
             add_ideology = ideology_ca_secularist
-            add_ideology = ideology_central_american_federal							
-		}
-		
-		
-		ig:ig_armed_forces ?= {
+            add_ideology = ideology_central_american_federal                            
+        }
+        
+        ig:ig_armed_forces ?= {
             add_ruling_interest_group = yes
-			remove_ideology = ideology_paternalistic
-			add_ideology = ideology_central_american_federal
-		}
+            remove_ideology = ideology_paternalistic
+            add_ideology = ideology_central_american_federal
+        }
 
-
-		ig:ig_landowners ?= {			
-
+        ig:ig_landowners ?= {            
+            
+            remove_ruling_interest_group = yes
+            
             remove_ideology = ideology_republican_paternalistic
-			remove_ideology = ideology_hierarchic
+            remove_ideology = ideology_hierarchic
             add_ideology = ideology_ca_criollo_paternalistic
-            add_ideology = ideology_ca_criollo_stratocratic			
-			add_ideology = ideology_central_american_reactionary_2
-			set_interest_group_name = ig_hacendados
-		}
+            add_ideology = ideology_ca_criollo_stratocratic            
+            add_ideology = ideology_central_american_reactionary_2
+            set_interest_group_name = ig_hacendados
+        }
 
-		ig:ig_devout ?= {
-			add_ideology = ideology_central_american_reactionary_2
-			set_interest_group_name = ig_catholic_church
-		}
-		trigger_event = { id = ca_setup_events.1 }
-		add_modifier = {
-			name = age_of_caudillos_modifier
-		}
-		add_modifier = {
-			name = ca_federal_paralysis
-		}
-		add_modifier = {
-			name = ca_british_debt_crisis
-		}		
+        ig:ig_devout ?= {
+            
+            remove_ruling_interest_group = yes
+            
+            add_ideology = ideology_central_american_reactionary_2
+            set_interest_group_name = ig_catholic_church
+        }
+
+        # --- EVENTOS Y MODIFICADORES ---
+        trigger_event = { id = ca_setup_events.1 }
+        
+        add_modifier = {
+            name = age_of_caudillos_modifier
+        }
+        add_modifier = {
+            name = ca_federal_paralysis
+        }
+        add_modifier = {
+            name = ca_british_debt_crisis
+        }        
         add_modifier = {
             name = ca_military_disarray
             days = 1825 # 5 años
-        }				
+        }                
+        
         initialise_caciquismo_effect = yes
-	}
-}
