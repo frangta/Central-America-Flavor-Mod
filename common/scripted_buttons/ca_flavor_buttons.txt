@@ -660,3 +660,61 @@ hire_foreign_geologists = {
     
     ai_chance = { base = 5 }
 }
+ca_request_intervention_button = {
+    name = "ca_request_intervention_button_name"
+    desc = "ca_request_intervention_button_desc"
+
+    # El botón solo aparece si algún país de Centroamérica pide ayuda
+    visible = {
+	    NOT = {
+		c:UCA ?= has_variable = ca_not_accept_intervention_request
+		
+		}
+        OR = {
+            c:NIC = { has_variable = ca_intervention_request_active }
+            c:COS = { has_variable = ca_intervention_request_active }
+            c:HON = { has_variable = ca_intervention_request_active }
+            c:ELS = { has_variable = ca_intervention_request_active }
+            c:GUA = { has_variable = ca_intervention_request_active }
+            c:ALT = { has_variable = ca_intervention_request_active }
+        }
+    }
+
+    possible = {
+        # El jugador (UCA) debe tener al menos algo de dinero o poder militar para intervenir
+        treasury > 5000
+        custom_tooltip = {
+            text = ca_intervention_cooldown_tt
+            NOT = { has_variable = ca_intervention_cooldown_var }
+        }
+        is_at_war = no 
+    }
+
+    effect = {
+        # Evaluamos quién tiene la variable activa y disparamos su evento de intervención
+        if = {
+            limit = { c:NIC = { has_variable = ca_intervention_request_active } }
+            trigger_event = { id = ca_central_america.28 }
+        }
+        else_if = {
+            limit = { c:COS = { has_variable = ca_intervention_request_active } }
+            trigger_event = { id = ca_central_america.29 }
+        }
+        else_if = {
+            limit = { c:HON = { has_variable = ca_intervention_request_active } }
+            trigger_event = { id = ca_central_america.30 }
+        }
+        else_if = {
+            limit = { c:ELS = { has_variable = ca_intervention_request_active } }
+            trigger_event = { id = ca_central_america.31 }
+        }
+        else_if = {
+            limit = { c:GUA = { has_variable = ca_intervention_request_active } }
+            trigger_event = { id = ca_central_america.32 }
+        }
+        else_if = {
+            limit = { c:ALT = { has_variable = ca_intervention_request_active } }
+            trigger_event = { id = ca_central_america.33 }
+        }
+    }
+}

@@ -852,8 +852,8 @@ ca_remove_ideological_strongholds_effect = {
     # ---------------------------------------------------------
     s:STATE_SAN_SALVADOR = { 
         every_scope_state = { # Transición de State Region a State
+            remove_modifier = ca_uca_liberal_stronghold
             
-            remove_modifier = liberal_stronghold 
         }
     }
 
@@ -862,6 +862,7 @@ ca_remove_ideological_strongholds_effect = {
     # ---------------------------------------------------------
     s:STATE_GUATEMALA = {
         every_scope_state = {
+		    remove_modifier = ca_uca_conservative_capital
             remove_modifier = unitary_stronghold 
             remove_modifier = conservative_stronghold 
             remove_modifier = reactionary_stronghold 
@@ -873,6 +874,7 @@ ca_remove_ideological_strongholds_effect = {
     # ---------------------------------------------------------
     s:STATE_NICARAGUA = {
         every_scope_state = {
+		    remove_modifier = ca_uca_leones_vs_granadinos
             remove_modifier = separatism_stronghold 
             remove_modifier = liberal_stronghold_small_nation 
             remove_modifier = conservative_stronghold_small_nation 
@@ -884,6 +886,7 @@ ca_remove_ideological_strongholds_effect = {
     # ---------------------------------------------------------
     s:STATE_COSTA_RICA = {
         every_scope_state = {
+		    remove_modifier = ca_uca_isolated_autonomists
             remove_modifier = separatism_stronghold 
             remove_modifier = unitary_stronghold_small_nation 
         }
@@ -894,6 +897,7 @@ ca_remove_ideological_strongholds_effect = {
     # ---------------------------------------------------------
     s:STATE_HONDURAS = {
         every_scope_state = {
+		    remove_modifier = ca_uca_federalist_heartland
             remove_modifier = waning_federal_stronghold 
             remove_modifier = conservative_stronghold_small_nation 
         }
@@ -903,6 +907,49 @@ ca_remove_ideological_strongholds_effect = {
 # MOVIMIENTOS POLÍTICOS INICIALES
 # ====================================================================
 ca_setup_political_movements_effect = {
+    s:STATE_SAN_SALVADOR = {
+        every_scope_state = {
+            add_modifier = { name = ca_uca_liberal_stronghold }
+        }
+    }
+
+    s:STATE_GUATEMALA = {
+        every_scope_state = {
+            add_modifier = { name = ca_uca_conservative_capital }
+        }
+    }
+
+    s:STATE_COSTA_RICA = {
+        every_scope_state = {
+            add_modifier = { name = ca_uca_isolated_autonomists }
+        }
+    }
+
+    s:STATE_HONDURAS = {
+        every_scope_state = {
+            add_modifier = { name = ca_uca_federalist_heartland }
+        }
+    }
+
+    s:STATE_PANAMA = {
+        every_scope_state = {
+            add_modifier = { name = ca_uca_isthmian_liberalism }
+        }
+    }
+
+    s:STATE_NICARAGUA = {
+        every_scope_state = {
+            add_modifier = { name = ca_uca_leones_vs_granadinos }
+        }
+    }
+
+    s:STATE_CHIAPAS = {
+        every_scope_state = {
+            add_modifier = { name = ca_uca_frontier_tensions }
+        }
+    }
+}
+ca_setup_post_uca_political_movements_effect = {
     s:STATE_SAN_SALVADOR = {
         every_scope_state = {
             add_modifier = { name = ca_liberal_stronghold }
@@ -945,7 +992,6 @@ ca_setup_political_movements_effect = {
         }
     }
 }
-
 # ====================================================================
 # MODIFICADORES DE MINERÍA (Solo si son de rendimiento, NO geográficos)
 # ====================================================================
@@ -980,6 +1026,16 @@ ca_initial_game_start_setup = {
 		ca_setup_state_trait_mining_effect = yes
 		
 		set_global_variable = ca_setup_done
+	}
+}
+ca_post_uca_game_setup = {
+	if = {
+		limit = {
+			NOT = { has_global_variable = ca_post_setup_done }
+		}
+		ca_setup_post_uca_political_movements_effect = yes
+		
+		set_global_variable = ca_post_setup_done
 	}
 }
 ca_dissolution_vainilla = {

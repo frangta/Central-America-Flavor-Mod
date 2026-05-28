@@ -10,7 +10,16 @@ coa_def_frca_ensign_trigger = {
 	c:UCA ?= { save_temporary_scope_as = custom_overlord }
 	coa_def_ensign_trigger = yes
 }
-
+coa_def_great_central_american_ensign_trigger = {
+	exists = c:GCA
+	c:GCA ?= { save_temporary_scope_as = custom_overlord }
+	coa_def_ensign_trigger = yes
+}
+coa_def_union_central_american_ensign_trigger = {
+	exists = c:CR1
+	c:CR1 ?= { save_temporary_scope_as = custom_overlord }
+	coa_def_ensign_trigger = yes
+}
 coa_def_soconosco_uca_trigger = {
 	exists = c:CIP
 	c:CIP = { 

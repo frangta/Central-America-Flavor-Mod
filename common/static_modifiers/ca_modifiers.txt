@@ -100,9 +100,10 @@ ca_modifier_radicalism_high = {
 }
 ca_british_debt_crisis = {
     icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
-country_disable_investment_pool_bool = yes
+    country_disable_investment_pool_bool = yes
     country_prestige_add = -5
     state_tax_waste_add = 0.25
+    country_gold_reserve_limit_mult = -0.25
 }
 ca_military_disarray = {
     icon = "gfx/interface/icons/timed_modifier_icons/bureaucracy_negative.dds"
@@ -392,9 +393,54 @@ uca_morazan_presidency = {
 #    country_allow_multiple_alliances_bool = yes
 #	
 #}
-
-
 ca_liberal_stronghold = {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# El Salvador es el motor del liberalismo y el federalismo morazanista
+
+}
+
+ca_conservative_capital= {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Núcleo del poder unitario y de los "Serviles" (reaccionarios)
+
+	
+}
+
+ca_leones_vs_granadinos = {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Representa la rivalidad extrema entre León (Liberal/Federal) y Granada (Conservadora/Unitaria)
+
+		
+		# Nicaragua era el estado con mayor guerra civil interna, por lo que la radicalización es máxima
+
+}
+
+ca_isolated_autonomists= {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Históricamente pragmática, con apoyo al orden interno y autonomía (federalismo suave)
+
+}
+
+ca_federalist_heartland= {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Apoyo sólido al modelo federal pero con inestabilidad por caudillos locales
+
+}
+
+
+
+
+ca_isthmian_liberalism= {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Tendencias separatistas de la Gran Colombia y liberalismo comercial
+}
+
+ca_frontier_tensions = {
+icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
+		# Región en disputa ideológica entre el centralismo mexicano y raíces centroamericanas
+}
+
+ca_uca_liberal_stronghold = {
 icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 		# El Salvador es el motor del liberalismo y el federalismo morazanista
 		state_pop_support_movement_ca_liberal_add = 25
@@ -408,7 +454,7 @@ icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 
 
 
-ca_conservative_capital= {
+ca_uca_conservative_capital= {
 icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 		# Núcleo del poder unitario y de los "Serviles" (reaccionarios)
 		state_pop_support_movement_ca_reactionary_add = 30
@@ -419,7 +465,7 @@ icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 	
 }
 
-ca_leones_vs_granadinos = {
+ca_uca_leones_vs_granadinos = {
 icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 		# Representa la rivalidad extrema entre León (Liberal/Federal) y Granada (Conservadora/Unitaria)
 		state_pop_support_movement_ca_liberal_add = 20
@@ -432,7 +478,7 @@ icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 		state_loyalists_from_political_movements_mult = -0.30
 }
 
-ca_isolated_autonomists= {
+ca_uca_isolated_autonomists= {
 icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 		# Históricamente pragmática, con apoyo al orden interno y autonomía (federalismo suave)
 		state_pop_support_movement_ca_federalist_add = 15
@@ -446,7 +492,7 @@ icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 
 
 
-ca_federalist_heartland= {
+ca_uca_federalist_heartland= {
 icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 		# Apoyo sólido al modelo federal pero con inestabilidad por caudillos locales
 		state_pop_support_movement_ca_federalist_add = 20
@@ -458,7 +504,7 @@ icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 
 
 
-ca_isthmian_liberalism= {
+ca_uca_isthmian_liberalism= {
 icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 		# Tendencias separatistas de la Gran Colombia y liberalismo comercial
 		state_pop_support_movement_ca_liberal_add = 15
@@ -470,7 +516,7 @@ icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 
 
 
-ca_frontier_tensions = {
+ca_uca_frontier_tensions = {
 icon = "gfx/interface/icons/timed_modifier_icons/Blanked/anarchy.dds"
 		# Región en disputa ideológica entre el centralismo mexicano y raíces centroamericanas
 		state_pop_support_movement_ca_reactionary_add = 15
