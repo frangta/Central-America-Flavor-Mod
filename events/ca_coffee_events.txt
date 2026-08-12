@@ -1,0 +1,46 @@
+﻿namespace = ca_coffee_events
+
+## Evento 1: El líder de los Terratenientes adopta la Ideología Criolla
+#ca_coffee_events.1 = {
+#	type = country_event
+#	title = ca_coffee_events.1.t
+#	desc = ca_coffee_events.1.d
+#	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+#
+#	trigger = {
+#		is_involved_in_journal_entry = je_ca_coffee_boom
+#		ig:ig_landowners = {
+#			leader = {
+#				NOT = { has_ideology = ideology:ideology_ca_criollo_elite }
+#			}
+#		}
+#	}
+#
+#	option = {
+#		name = ca_coffee_events.1.a
+#        # Cambiamos la ideología usando la que creaste en ca_ig_ideologies_flavored.txt
+#		ig:ig_landowners = {
+#			leader = {
+#				add_ideology = ideology:ideology_ca_criollo_elite
+#			}
+#		}
+#        # Tensión social: los campesinos sufren la expropiación de tierras
+#		add_radicals = { value = medium_radicals culture = cu:central_american } 
+#	}
+#}
+#
+## Evento 2: Consolidación Final (Completar el Diario)
+#ca_coffee_events.2 = {
+#	type = country_event
+#	title = ca_coffee_events.2.t
+#	desc = ca_coffee_events.2.d
+#	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+#
+#	trigger = { always = no } # Disparado estrictamente por el on_complete del JE
+#
+#	option = {
+#		name = ca_coffee_events.2.a
+#		add_modifier = { name = ca_coffee_republic_modifier years = 10 }
+#		add_loyalists = { value = medium_loyalists ig = ig_landowners }
+#	}
+#}
