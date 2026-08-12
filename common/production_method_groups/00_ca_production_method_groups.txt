@@ -1,0 +1,135 @@
+﻿pmg_base_building_hacienda = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+		pm_ca_base_building_hacienda
+                pm_ca_colonial_hacienda
+	}
+}
+pmg_internal_market_hacienda = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+	    pm_ca_no_internal_market_hacienda
+		pm_ca_base_internal_market_hacienda
+		pm_ca_colonial_exploitation_market_hacienda
+		pm_ca_regulated_internal_market_hacienda
+	}
+}
+pmg_ownership_capital_building_hacienda  = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_ownership.dds"
+	production_methods = {
+		pm_ca_merchant_guilds_building_hacienda 
+		pm_ca_privately_owned_building_hacienda 
+		pm_ca_publicly_traded_building_hacienda 
+		pm_ca_government_run_building_hacienda 
+		pm_ca_worker_cooperative_building_arms_hacienda 
+	}
+}
+pmg_ownership_building_hacienda  = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_ownership.dds"
+	production_methods = {
+        pm_ca_worker_cooperative_farm_hacienda
+        pm_ca_government_run_hacienda
+        pm_ca_homesteading_hacienda
+        pm_ca_privately_owned_hacienda
+        pm_ca_publicly_traded_hacienda
+	}
+
+}
+pmg_base_building_hacienda = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+		pm_ca_base_building_hacienda
+	}
+}
+pmg_ca_mining_equipment_building_coal_mine = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+		pm_ca_picks_and_shovels_building_coal_mine
+		pm_ca_atmospheric_engine_pump_building_coal_mine
+		pm_ca_condensing_engine_pump_building_coal_mine
+		pm_ca_diesel_pump_building_coal_mine
+	}
+}
+pmg_ca_mining_equipment_building_iron_mine = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+		pm_ca_picks_and_shovels_building_iron_mine
+		pm_ca_atmospheric_engine_pump_building_iron_mine
+		pm_ca_condensing_engine_pump_building_iron_mine
+		pm_ca_diesel_pump_building_iron_mine
+	}
+}
+pmg_ca_mining_equipment_building_lead_mine = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+		pm_ca_picks_and_shovels_building_lead_mine
+		pm_ca_atmospheric_engine_pump_building_lead_mine
+		pm_ca_condensing_engine_pump_building_lead_mine
+		pm_ca_diesel_pump_building_lead_mine
+	}
+}
+pmg_ca_mining_equipment_building_sulfur_mine = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+		pm_ca_picks_and_shovels_building_sulfur_mine
+		pm_ca_atmospheric_engine_pump_building_sulfur_mine
+		pm_ca_condensing_engine_pump_building_sulfur_mine
+		pm_ca_diesel_pump_building_sulfur_mine
+	}
+}
+pmg_ca_mining_equipment_building_gold_mine = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+		pm_ca_picks_and_shovels_building_gold_mine
+		pm_ca_atmospheric_engine_pump_building_gold_mine
+		pm_ca_condensing_engine_pump_building_gold_mine
+		pm_ca_diesel_pump_building_gold_mine
+	}
+}
+
+pmg_ca_mining_size_building_coal_mine = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+	     pmg_ca_mining_no_size_building_coal_mine
+         pmg_ca_mining_size_small_building_coal_mine
+         pmg_ca_mining_size_mid_building_coal_mine
+         pmg_ca_mining_size_tiny_building_coal_mine
+	}
+}
+pmg_ca_mining_size_building_iron_mine = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+	    pmg_ca_mining_no_size_building_iron_mine
+         pmg_ca_mining_size_small_building_iron_mine
+         pmg_ca_mining_size_mid_building_iron_mine
+         pmg_ca_mining_size_tiny_building_iron_mine
+	}
+}
+pmg_ca_mining_size_building_lead_mine = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+	     pmg_ca_mining_no_size_building_lead_mine
+         pmg_ca_mining_size_small_building_lead_mine
+         pmg_ca_mining_size_mid_building_lead_mine
+         pmg_ca_mining_size_tiny_building_lead_mine
+	}
+}
+pmg_ca_mining_size_building_sulfur_mine = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+         pmg_ca_mining_no_size_building_sulfur_mine	
+         pmg_ca_mining_size_small_building_sulfur_mine
+         pmg_ca_mining_size_mid_building_sulfur_mine
+         pmg_ca_mining_size_tiny_building_sulfur_mine
+	}
+}
+pmg_ca_mining_size_building_gold_mine = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	production_methods = {
+         pmg_ca_mining_no_size_building_gold_mine	
+         pmg_ca_mining_size_small_building_gold_mine
+         pmg_ca_mining_size_mid_building_gold_mine
+         pmg_ca_mining_size_tiny_building_gold_mine
+	}
+}
+

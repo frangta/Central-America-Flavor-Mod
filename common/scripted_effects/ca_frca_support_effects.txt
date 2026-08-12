@@ -1,0 +1,215 @@
+﻿calculate_frca_support_event_progress = {
+	
+		if = {
+				limit = {
+					has_variable = gua_support_var
+					NOT = { exists = c:GUA }
+					NOT = { has_variable = je_gua_support_var }
+				}
+				change_variable = { name = frca_support add = 1 }
+			}
+		if = {
+				limit = {
+					OR = {
+						NOT = { has_variable = gua_support_var }
+						exists = c:GUA
+					}
+					has_variable = je_gua_support_var
+				}
+				change_variable = { name = frca_support add = -1 }
+			}
+		if = {
+				limit = {
+					has_variable = els_support_var
+					NOT = { exists = c:ELS }
+					NOT = { has_variable = je_els_support_var }
+				}
+				change_variable = { name = frca_support add = 1 }
+			}
+		if = {
+				limit = {
+					OR = {
+						NOT = { has_variable = els_support_var }
+						exists = c:ELS
+					}
+					has_variable = je_els_support_var
+				}
+				change_variable = { name = frca_support add = -1 }
+			}
+		if = {
+				limit = {
+					has_variable = hon_support_var
+					NOT = { exists = c:HON }
+					NOT = { has_variable = je_hon_support_var }
+				}
+				change_variable = { name = frca_support add = 1 }
+			}
+		if = {
+				limit = {
+					OR = {
+						NOT = { has_variable = hon_support_var }
+						exists = c:HON
+					}
+					has_variable = je_hon_support_var
+				}
+				change_variable = { name = frca_support add = -1 }
+			}
+		if = {
+				limit = {
+					has_variable = nic_support_var
+					NOT = { exists = c:NIC }
+					NOT = { has_variable = je_nic_support_var }
+				}
+				change_variable = { name = frca_support add = 1 }
+			}
+		if = {
+				limit = {
+					OR = {
+						NOT = { has_variable = nic_support_var }
+						exists = c:NIC
+					}
+					has_variable = je_nic_support_var
+				}
+				change_variable = { name = frca_support add = -1 }
+			}
+		if = {
+				limit = {
+					has_variable = cos_support_var
+					NOT = { exists = c:COS }
+					NOT = { has_variable = je_cos_support_var }
+				}
+				change_variable = { name = frca_support add = 1 }
+			}
+		if = {
+				limit = {
+					OR = {
+						NOT = { has_variable = cos_support_var }
+						exists = c:COS
+					}
+					has_variable = je_cos_support_var
+				}
+				change_variable = { name = frca_support add = -1 }
+			}
+
+
+	    if = {
+	     	limit = {
+	     		exists = c:ELS
+	     		has_variable = frca_elsalvador_peace_var
+	     	}
+	     	change_variable = { name = frca_support add = -5 }
+	     }
+	    if = {
+	     	limit = {
+	     		exists = c:HON
+	     		has_variable = frca_honduras_peace_var
+	     	}
+	     	change_variable = { name = frca_support add = -5 }
+	     }
+	    if = {
+	     	limit = {
+	     		exists = c:NIC
+	     		has_variable = frca_nicaragua_peace_var
+	     	}
+			change_variable = { name = frca_support add = -5 }
+	     }
+	    if = {
+	     	limit = {
+	     		exists = c:COS
+	     		has_variable = frca_costarica_peace_var
+	     	}
+	     	change_variable = { name = frca_support add = -5 }
+	     }
+
+
+
+}
+
+# 1. EVENTOS DE SEPARATISMO (18 al 23)
+# Impacto: Reducción moderada
+ca_reduce_support_separatism_effect = {
+	if = {
+		limit = { has_variable = frca_support }
+		        je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -10 name = frca_support_bar } 
+                }
+	}
+}
+
+# 2. DECLARACIONES DE INDEPENDENCIA (45-48, 64-78)
+# Impacto: Reducción severa
+ca_reduce_support_independence_effect = {
+	if = {
+		limit = { has_variable = frca_support }
+		            je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = 20 name = frca_support_bar } 
+                }
+	}
+}
+
+# 3. GUERRAS CIVILES (63, 65, 67, 69, 71, 73, 75)
+# Impacto: Reducción drástica
+ca_reduce_support_civil_war_effect = {
+	if = {
+		limit = { has_variable = frca_support }
+                je:je_historic_central_america_falls_apart = {
+                    add_progress = { value = -30 name = frca_support_bar } 
+                }
+	}
+}
+
+# 4. INTERVENCIONES: ÉXITO (28-40)
+# Impacto: Aumento de autoridad central
+ca_increase_support_intervention_success_effect = {
+	if = {
+		limit = { has_variable = frca_support }
+        je:je_historic_central_america_falls_apart = {
+            add_progress = { value = 15 name = frca_support_bar } 
+        }
+	}
+}
+
+# 5. INTERVENCIONES: FRACASO (28-40)
+# Impacto: Pérdida de autoridad
+ca_reduce_support_intervention_fail_effect = {
+	if = {
+		limit = { has_variable = frca_support }
+		    je:je_historic_central_america_falls_apart = {
+            add_progress = { value = 15 name = frca_support_bar } 
+            }
+	}
+}
+
+
+## Uso: country_event
+#ca_reduce_support_separatism_effect = {
+#	if = {
+#		limit = { has_variable = frca_support }
+#		change_variable = {
+#			name = frca_support
+#			subtract = 10 # Balanceable desde un solo archivo
+#		}
+#	}
+#}
+#
+## Uso: country_event
+#ca_reduce_support_drastic_effect = {
+#	if = {
+#		limit = { has_variable = frca_support }
+#		change_variable = {
+#			name = frca_support
+#			subtract = 25
+#		}
+#	}
+#}
+#
+## Uso: country_event
+#ca_increase_support_intervention_effect = {
+#	if = {
+#		limit = { has_variable = frca_support }
+#		change_variable = {
+#			name = frca_support
+#			add = 15
+#		}
+#	}
+#}

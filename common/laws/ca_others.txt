@@ -1,0 +1,580 @@
+﻿
+
+
+## 1. Ley Fundamental del Estado Libre de Costa Rica
+#law_costa_rica_1830s = {
+#    group = lawgroup_governance_principles
+#    parent = law_presidential_republic
+#
+#    icon = "gfx/interface/icons/law_icons/presidential_republic.dds"
+#    progressiveness = 15
+#
+#    is_visible = {
+#        c:COS ?= this
+#        NOT = { has_law_or_variant = law_type:law_autocracy }
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#
+#     
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#
+#     
+#    }
+#
+#    modifier = {
+#        country_legitimacy_base_add = 10
+#        country_authority_add = 50
+#    }
+#}
+#
+## 2. Decreto de Bases y Garantías (Braulio Carrillo)
+#law_ca_carrilo_decret = {
+#    group = lawgroup_distribution_of_power
+#    parent = law_autocracy
+#
+#    icon = "gfx/interface/icons/law_icons/autocracy.dds"
+#    progressiveness = -50
+#
+#    is_visible = {
+#        c:COS ?= this
+#        NOT = { has_law_or_variant = law_type:law_autocracy }
+#    }
+#
+#    on_activate = {
+#        set_variable = ca_carrilo_decret
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = ca_carrilo_decret
+#    }
+#
+#    modifier = {
+#        country_authority_add = 200
+#        country_legitimacy_base_add = 20
+#        interest_group_ig_armed_forces_pol_str_mult = 0.15
+#        interest_group_ig_intelligentsia_pol_str_mult = -0.20
+#        state_radicals_from_sol_change_mult = 0.25
+#    }
+#}
+#
+## 3. Constitución Política del Estado Libre de Costa Rica (1844)
+#law_free_costa_rica_reform = {
+#    group = lawgroup_distribution_of_power
+#    parent = law_oligarchy
+#
+#    icon = "gfx/interface/icons/law_icons/oligarchy.dds"
+#    progressiveness = 10
+#
+#    is_visible = {
+#        c:COS ?= this
+#        NOT = { has_law_or_variant = law_type:law_oligarchy }
+#    }
+#
+#    on_activate = {
+#        set_variable = free_costa_rica_reform
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = free_costa_rica_reform
+#    }
+#
+#    modifier = {
+#        country_legitimacy_base_add = 15
+#        interest_group_ig_intelligentsia_pol_str_mult = 0.15
+#        country_authority_add = -25
+#    }
+#}
+#
+## 4. Constitución Política de Costa Rica de 1847 (1ra República)
+#law_costa_rica_1st_republic = {
+#    group = lawgroup_governance_principles
+#    parent = law_parliamentary_republic
+#
+#    icon = "gfx/interface/icons/law_icons/parliamentary_republic.dds"
+#    progressiveness = 35
+#
+#    is_visible = {
+#        c:COS ?= this
+#        NOT = { has_law_or_variant = law_type:law_parliamentary_republic }
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1st_republic
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1st_republic
+#    }
+#
+#    modifier = {
+#        country_legitimacy_base_add = 25
+#        country_institution_size_max_add = 1
+#        interest_group_ig_industrialists_pol_str_mult = 0.10
+#    }
+#}
+#
+## 5. Pacto Nacional de los Obreros (Socialismo)
+#law_costa_rica_socialist_republic = {
+#    group = lawgroup_governance_principles
+#    parent = law_council_republic
+#
+#    icon = "gfx/interface/icons/law_icons/council_republic.dds"
+#    progressiveness = 90
+#
+#    is_visible = {
+#        c:COS ?= this
+#        NOT = { has_law_or_variant = law_type:law_council_republic }
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_socialist_republic
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_socialist_republic
+#    }
+#
+#    modifier = {
+#        country_legitimacy_base_add = 10
+#        interest_group_ig_trade_unions_pol_str_mult = 0.30
+#        interest_group_ig_rural_folk_pol_str_mult = 0.20
+#        interest_group_ig_landowners_pol_str_mult = -0.50
+#    }
+#}
+#
+## ==========================================
+## NICARAGUA
+## ==========================================
+#
+#law_nicaragua_1826 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 40
+#
+#    modifier = {
+#        country_legitimacy_base_add = 10
+#        ig_intelligentsia_pol_str_mult = 0.10
+#        state_bureaucracy_population_base_cost_mult = 0.05
+#    }
+#    
+#	on_activate = {
+#        set_variable = nicaragua_early_cons
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = nicaragua_early_cons
+#		
+#    }
+#	
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: Fue la primera constitución del Estado de Nicaragua dentro de la República Federal de Centroamérica. Muy influenciada por las cortes de Cádiz.
+#    # Ideas de implementación: Debería permitir leyes de libre comercio y dar un ligero bono a los liberales (Intelligentsia). Al ser un estado federado, la autoridad central es baja. Genera fricción constante entre León (liberal) y Granada (conservadora).
+#}
+#
+#law_nicaragua_1838 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 20
+#
+#    modifier = {
+#        country_authority_add = 20
+#        ig_landowners_pol_str_mult = 0.15
+#        ig_devout_pol_str_mult = 0.10
+#    }
+#
+#	on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#
+#
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: Marca la separación definitiva de Nicaragua de la Federación. Es una constitución soberana y de corte conservador-oligárquico.
+#    # Ideas de implementación: Quita cualquier dependencia o "subject_type" de la Federación. Sube el poder político de los Terratenientes (Landowners). Podrías añadir un evento que dispare tensiones bélicas con Francisco Morazán si sigue vivo.
+#}
+#
+#law_nicaragua_1858 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 30
+#
+#    modifier = {
+#        country_legitimacy_base_add = 20
+#        country_authority_add = 10
+#        institution_law_enforcement_max_investment_add = 1
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#	
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: Surgió tras la Guerra Nacional contra William Walker. Inicia los "30 años de gobierno conservador". Estableció orden, sufragio censitario y un sistema bicameral equilibrado.
+#    # Ideas de implementación: Excelente para estabilizar el país tras una guerra civil o expulsión de extranjeros. Reduce radicalismo. Permite invertir más en la institución de policía. Los liberales quedan marginados mecánicamente.
+#}
+#
+#law_nicaragua_1893 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 70
+#
+#    modifier = {
+#        ig_devout_pol_str_mult = -0.30
+#        ig_intelligentsia_pol_str_mult = 0.25
+#        country_education_access_add = 0.10
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#	
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: Conocida como "La Libérrima", impulsada por José Santos Zelaya. Separó la Iglesia del Estado, instituyó educación laica, matrimonio civil y el Habeas Corpus.
+#    # Ideas de implementación: Obliga a cambiar leyes de educación a "Escuelas Públicas" y religión a "Separación Total". Enfurece enormemente a la Iglesia (Devout) y genera revueltas conservadoras, pero dispara la alfabetización y el crecimiento.
+#}
+#
+#law_nicaragua_1905 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 40
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#    modifier = {
+#        country_authority_add = 50
+#        ig_armed_forces_pol_str_mult = 0.20
+#        interest_group_approval_add = -2
+#    }
+#
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: Zelaya modifica su propia constitución para centralizar el poder, permitiendo la reelección y gobernar casi como dictador.
+#    # Ideas de implementación: Cambia el sistema a algo similar a "Autocracia" o "Oligarquía". Sube drásticamente la autoridad para suprimir oposición, pero da penalizaciones base a la aprobación de casi todos los grupos, simbolizando el desgaste de su gobierno.
+#}
+#
+#law_nicaragua_1911 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 20
+#
+#    modifier = {
+#        ig_landowners_pol_str_mult = 0.20
+#        country_influence_add = -25
+#        country_diplomatic_play_maneuvers_add = -5
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: Constitución conservadora promulgada tras la caída de Zelaya, fuertemente auspiciada por Estados Unidos (Diplomacia del Dólar y Pactos Dawson).
+#    # Ideas de implementación: Mecánicamente debería ser muy difícil de aprobar sin estar en la esfera de influencia de una Gran Potencia (EEUU). Disminuye la maniobra diplomática (dependencia externa) y devuelve tierras y poder a los conservadores.
+#}
+#
+## ==========================================
+## HONDURAS
+## ==========================================
+#
+#law_honduras_1839 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 20
+#
+#    modifier = {
+#        country_authority_add = 10
+#        ig_rural_folk_pol_str_mult = 0.10
+#        state_turmoil_mult = 0.15
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#	
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: Primera tras separarse de la Federación. Declaró a Honduras como estado libre y soberano, pero estuvo marcada por constante inestabilidad y guerras caudillistas.
+#    # Ideas de implementación: Debería tener penalizaciones a la estabilidad (Turmoil) para reflejar la debilidad institucional. Podría habilitar un evento recurrente de "Levantamiento Caudillista" en los estados.
+#}
+#
+#law_honduras_1880 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 60
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#	
+#    modifier = {
+#        building_group_bg_mining_throughput_mult = 0.10
+#        ig_intelligentsia_pol_str_mult = 0.15
+#        ig_capitalists_pol_str_mult = 0.10
+#    }
+#
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: La Reforma Liberal de Marco Aurelio Soto. Fomentó la minería (Rosario Mining Co.), la agricultura de exportación y la secularización del estado.
+#    # Ideas de implementación: Excelente para atraer inversión extranjera y buffear la producción de minas de oro/plata. Ideal para transicionar a Honduras hacia una "Banana Republic" a finales de siglo.
+#}
+#
+## ==========================================
+## EL SALVADOR
+## ==========================================
+#
+#law_el_salvador_1824 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 25
+#
+#    modifier = {
+#        ig_armed_forces_pol_str_mult = 0.15
+#        country_authority_add = 15
+#    }
+#
+#    on_activate = {
+#        set_variable = el_salvador_early
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = el_salvador_early
+#		
+#    }
+#	
+#
+#}
+#law_el_salvador_1841 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 25
+#
+#    modifier = {
+#        ig_armed_forces_pol_str_mult = 0.15
+#        country_authority_add = 15
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#	
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: Separación oficial bajo la influencia del caudillo Francisco Malespín. Mucha influencia militar y roces constantes con Guatemala.
+#    # Ideas de implementación: Debería fomentar la militarización temprana. Permite leyes de ejército profesional o conscripción más fácilmente.
+#}
+#
+#law_el_salvador_1886 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 50
+#
+#    modifier = {
+#        building_group_bg_agriculture_throughput_mult = 0.15
+#        ig_landowners_pol_str_mult = 0.25
+#        ig_rural_folk_pol_str_mult = -0.30
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#	
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: Impulsada por Francisco Menéndez/Zaldívar. Consolidó la República Cafetalera ("La República de los 14"). Abolió las tierras comunales y ejidos.
+#    # Ideas de implementación: Es crucial que esta ley elimine mecánicamente (mediante un event/decision) los terrenos comunales. Destruye el poder de los campesinos (Rural Folk) y le da un poder inmenso a los oligarcas cafetaleros (Landowners/Capitalists).
+#}
+#
+## ==========================================
+## GUATEMALA
+## ==========================================
+#
+#law_guatemala_1825 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 10
+#
+#    modifier = {
+#        ig_devout_pol_str_mult = 0.30
+#        ig_landowners_pol_str_mult = 0.20
+#        country_legitimacy_base_add = 15
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#	
+#
+#}
+#law_guatemala_1851 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 10
+#
+#    modifier = {
+#        ig_devout_pol_str_mult = 0.30
+#        ig_landowners_pol_str_mult = 0.20
+#        country_legitimacy_base_add = 15
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#	
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: "Acta Constitutiva de la República". Creada a la medida para Rafael Carrera (quien luego sería presidente vitalicio). Alianza absoluta con la Iglesia y restitución del poder eclesiástico.
+#    # Ideas de implementación: La ley definitiva del conservadurismo centroamericano. Permite cambiar el país a "Presidencia Vitalicia". Otorga muchísima legitimidad si los grupos conservadores están en el gobierno, pero paraliza el desarrollo tecnológico.
+#}
+#
+#law_guatemala_1879 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 60
+#
+#    modifier = {
+#        ig_devout_pol_str_mult = -0.25
+#        building_group_bg_infrastructure_throughput_mult = 0.10
+#        country_authority_add = 30
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#	
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: La Reforma Liberal de Justo Rufino Barrios. Altamente anticlerical, expropió tierras eclesiásticas, impulsó el ferrocarril, pero bajo una férrea dictadura.
+#    # Ideas de implementación: Autoritarismo + Liberalismo. Sirve para industrializar a la fuerza. Una buena mecánica sería que promulgar esta ley desencadene eventos para invadir El Salvador o intentar unificar Centroamérica por la fuerza (Campaña Nacional).
+#}
+#
+## ==========================================
+## LOS ALTOS
+## ==========================================
+#
+#law_los_altos_1838 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 55
+#
+#    modifier = {
+#        ig_intelligentsia_pol_str_mult = 0.20
+#        ig_capitalists_pol_str_mult = 0.10
+#        state_incorporation_speed_mult = -0.20
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#	
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: El Estado de Los Altos (Quetzaltenango) se separa de Guatemala impulsado por las élites criollas locales buscando modernidad y apoyo de la Federación.
+#    # Ideas de implementación: Representa el deseo de las élites locales de autogobernarse. Muy progresista para la época, pero con un grave problema: la población indígena (muy numerosa allí) odiaba a estas élites. Esto debe generar radicales entre las culturas mayas.
+#}
+#
+## ==========================================
+## CHIAPAS
+## ==========================================
+#
+#law_chiapas_1826 = {
+#    group = lawgroup_governance_principles
+#    icon = "gfx/interface/icons/law_icons/constitution.dds"
+#    progressiveness = 30
+#
+#    modifier = {
+#        state_loyalty_add = 10
+#        ig_landowners_pol_str_mult = 0.15
+#        country_bureaucracy_add = 10
+#    }
+#
+#    on_activate = {
+#        set_variable = costa_rica_1830s
+#		
+#    }
+#
+#    on_deactivate = {
+#        remove_variable = costa_rica_1830s
+#		
+#    }
+#	
+#    # NOTAS PARA MODDERS:
+#    # Históricamente: Primera constitución del estado de Chiapas tras decidir unirse formalmente a los Estados Unidos Mexicanos (rechazando unirse a Centroamérica).
+#    # Ideas de implementación: Debe anclar a Chiapas a México. Puede dar un bono de "Lealtad al Estado" para dificultar que los centroamericanos generen movimientos separatistas allí. Consolida a la aristocracia local que votó por la anexión a México.
+#}

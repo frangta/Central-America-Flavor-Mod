@@ -1,0 +1,355 @@
+﻿# ==============================================
+# MOVIMIENTO LIBERAL (Reformistas / Modernizadores)
+# ==============================================
+movement_ca_liberal = {
+    category = movement_category_ideological
+    ideology = ideology_ca_liberal_movement
+
+    character_ideologies = {
+        ideology_market_liberal
+        ideology_liberal_leader
+        ideology_republican_leader
+        ideology_radical
+        ideology_humanitarian
+        ideology_ca_liberal_monarchist
+        ideology_ca_secularist
+        ideology_ca_criollo_liberal
+        ideology_ca_criollo_elite
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = {
+                is_political_movement_type = movement_ca_liberal
+            }
+        }
+        only_centralamericans_cultures = yes
+    }
+
+    creation_weight = {
+        value = 100
+
+        if = {
+            limit = {
+                has_law_or_variant = law_type:law_monarchy
+                has_voting_franchise = no
+            }
+            multiply = 0.1
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+ 
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_liberal_monarchist 
+            has_ideology = ideology:ideology_ca_secularist 
+            has_ideology = ideology:ideology_ca_criollo_liberal 
+            has_ideology = ideology:ideology_ca_criollo_elite 
+            
+
+            scope:interest_group ?= {
+                OR = {
+                    has_ideology = ideology:ideology_liberal
+                    has_ideology = ideology:ideology_liberal_modern
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 200
+
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_republican_leader
+                    has_ideology = ideology:ideology_liberal_leader
+                    has_ideology = ideology:ideology_market_liberal
+                    has_ideology = ideology:ideology_radical
+                }
+            }
+            multiply = 5
+        }
+
+        else_if = {
+            limit = { has_ideology = ideology:ideology_modernizer_leader }
+            multiply = 2
+        }
+    }
+
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_high_urbanization
+        movement_support_high_literacy
+        movement_support_capitalists
+        movement_support_academics
+        movement_support_bureaucrats
+        movement_support_clerks
+    }
+
+
+    revolution = {
+        possible = { political_movement_support >= 0.05 }
+        weight = { value = 100 }
+        state_weight = {
+            value = 1
+            if = {
+                limit = { owner = { ig:ig_intelligentsia = { is_powerful = yes } } }
+                add = 50
+            }
+        }
+        target_fraction_of_states = { value = 0.35 }
+    }
+    
+
+}
+
+# ==============================================
+# MOVIMIENTO REACCIONARIO (Tradicionalistas)
+# Objetivo: Revolución (si fuertes) o Secesión (si ignorados)
+# ==============================================
+movement_ca_reactionary = {
+    category = movement_category_ideological
+    ideology = ideology_central_american_reactionary_movement 
+
+    character_ideologies = {
+        ideology_traditionalist
+        ideology_protectionist
+        ideology_authoritarian
+        ideology_luddite
+        ideology_central_american_reactionary
+        ideology_central_american_reactionary_2
+        ideology_ca_criollo_paternalistic
+        ideology_ca_criollo_stratocratic
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_reactionary }
+        }
+                OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+        }
+    }
+
+    creation_weight = { value = 100 }
+    on_created = { add_movement_enthusiasm_modifier = yes }
+
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_traditionalist
+            has_ideology = ideology:ideology_protectionist
+            has_ideology = ideology:ideology_authoritarian
+            has_ideology = ideology:ideology_central_american_reactionary
+            has_ideology = ideology:ideology_central_american_reactionary_2
+            
+            scope:interest_group ?= {
+                OR = {
+                    has_ideology = ideology:ideology_reactionary
+                    has_ideology = ideology:ideology_patriarchal
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 200
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_traditionalist
+                    has_ideology = ideology:ideology_central_american_reactionary
+                }
+            }
+            multiply = 5
+        }
+    }
+
+    pop_support_factors = {
+        movement_support_aristocrats
+        movement_support_clergymen
+        movement_support_farmers
+        movement_support_peasants # Base campesina fuerte (tipo Carrera)
+    }
+
+    
+    # Opción A: Guerra Civil para tomar el poder
+    revolution = {
+        possible = { political_movement_support >= 0.10 }
+        weight = { value = 100 }
+    }
+
+    # Opción B: Secesión (Independencia local)
+     secession = {
+        possible = {
+            political_movement_support >= 0.10
+            # Condición: Ningún IG que apoye el movimiento está en el gobierno
+            NOT = {
+                any_supporting_interest_group = {
+                    is_in_government = yes
+                }
+            }
+        }
+        weight = { value = 1000 }
+        state_weight = {
+            value = state_urbanization_rate
+            multiply = -1 
+        }
+    
+    }
+}
+
+# ==============================================
+# MOVIMIENTO UNITARIO (Centralistas Autoritarios)
+# ==============================================
+movement_ca_unitarian = {
+    category = movement_category_ideological
+    ideology = ideology_ca_unitarian_movement 
+
+    character_ideologies = {
+        ideology_ca_unitarian
+        ideology_authoritarian
+        ideology_ca_autocratic_autonomist
+        ideology_ca_criollo_paternalistic
+        ideology_central_america_caudillo
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_unitarian }
+        }
+                OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+        }
+    }
+
+    creation_weight = { value = 100 }
+    on_created = { add_movement_enthusiasm_modifier = yes }
+
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_unitarian
+            has_ideology = ideology:ideology_central_america_caudillo
+            has_ideology = ideology:ideology_authoritarian
+            has_ideology = ideology:ideology_ca_criollo_paternalistic
+        }
+    }
+
+    character_support_weight = {
+        value = 200
+        if = {
+            limit = { has_ideology = ideology:ideology_ca_unitarian }
+            multiply = 5
+        }
+        else_if = {
+            limit = { has_ideology = ideology:ideology_central_america_caudillo }
+            multiply = 3
+        }
+    }
+    
+
+    pop_support_factors = {
+        movement_support_soldiers
+        movement_support_officers
+        movement_support_bureaucrats
+        movement_support_aristocrats
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.05 }
+        weight = { value = 150 } # Son agresivos
+    }
+}
+
+# ==============================================
+# MOVIMIENTO FEDERALISTA (Legalistas / Unionistas)
+# ==============================================
+movement_ca_federalist = {
+    category = movement_category_ideological
+    ideology = ideology_ca_federalist_movement 
+
+    character_ideologies = {
+        ideology_ca_federalist
+        ideology_ca_liberal
+        ideology_republican_leader
+        ideology_liberal_leader
+        ideology_ca_constitutionalist
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_federalist }
+        }
+                OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+        }
+    }
+
+    creation_weight = { value = 100 }
+    on_created = { add_movement_enthusiasm_modifier = yes }
+
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_federalist
+            has_ideology = ideology:ideology_ca_constitutionalist
+            
+            scope:interest_group ?= {
+                OR = {
+                    has_ideology = ideology:ideology_liberal
+                    has_ideology = ideology:ideology_republican
+                    is_interest_group_type = ig_intelligentsia
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 200
+        if = {
+            limit = { has_ideology = ideology:ideology_ca_federalist }
+            multiply = 5
+        }
+        else_if = {
+            limit = { has_ideology = ideology:ideology_republican_leader }
+            multiply = 2
+        }
+    }
+    
+    pop_support_factors = {
+        movement_support_academics
+        movement_support_clerks
+        movement_support_shopkeepers # Clase media urbana
+    }
+
+
+    revolution = {
+        possible = { political_movement_support >= 0.05 }
+        weight = { value = 100 }
+    }
+}
