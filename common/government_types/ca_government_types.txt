@@ -1,0 +1,377 @@
+﻿# 1. Director Supremo (Histórico para estados de la Federación antes de 1847)
+gov_ca_director_supremo = {
+	transfer_of_power = presidential_elective
+	new_leader_on_reform_government = no
+
+	male_ruler = "RULER_TITLE_SUPREME_DIRECTOR"
+	female_ruler = "RULER_TITLE_SUPREME_DIRECTOR"
+
+
+
+	possible = {
+		OR = {
+		
+			country_has_primary_culture = cu:central_american
+			country_has_primary_culture = cu:costa_rican
+			country_has_primary_culture = cu:panamanian
+			country_has_primary_culture = cu:nicaraguan
+			country_has_primary_culture = cu:guatemalan
+			country_has_primary_culture = cu:el_salvadorian
+			country_has_primary_culture = cu:honduran
+		}
+	
+	    OR = {
+	    	this = c:UCA
+	    	has_law_or_variant = law_type:law_presidential_republic
+	    	OR = {
+	    		has_law_or_variant = law_type:law_ca_central_american_confederated
+	    		has_law_or_variant = law_type:law_ca_central_american_federal
+	    	}		
+	    }
+
+	}
+}
+
+# 2. Jefe de Estado (Histórico para estados libres, ej. Estado Libre de Costa Rica)
+gov_ca_jefe_estado = {
+	transfer_of_power = presidential_elective
+	new_leader_on_reform_government = no
+
+	male_ruler = "RULER_TITLE_JEFE_DE_ESTADO"
+	female_ruler = "RULER_TITLE_JEFE_DE_ESTADO"
+
+
+
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		
+		has_variable = costa_rica_1830s
+	}
+}
+
+# 3. Jefe Supremo / Dictador Perpetuo (Caudillismo Fuerte)
+gov_ca_jefe_supremo = {
+	transfer_of_power = dictatorial
+	new_leader_on_reform_government = no
+
+	male_ruler = "RULER_TITLE_PERPETUAL_DICTATOR"
+	female_ruler = "RULER_TITLE_PERPETUAL_DICTATOR"
+
+
+
+	possible = {
+		has_law_or_variant = law_type:law_autocracy
+		has_variable = jefe_supremo_var
+		OR = {
+			country_has_primary_culture = cu:central_american
+			country_has_primary_culture = cu:costa_rican
+			country_has_primary_culture = cu:panamanian
+			country_has_primary_culture = cu:nicaraguan
+			country_has_primary_culture = cu:guatemalan
+			country_has_primary_culture = cu:el_salvadorian
+			country_has_primary_culture = cu:honduran
+		}
+	}
+	
+	on_government_type_change = { change_to_dictatorial = yes }
+	on_post_government_type_change = { post_change_to_dictatorial = yes }
+}
+
+# 4. República Cafetalera 
+gov_ca_republica_cafetalera = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	
+	possible = {
+		# Integración con tus leyes de reforma agraria
+		has_law_or_variant = law_type:law_land_reform_coffee_oligarchy
+		OR = {
+			has_law_or_variant = law_type:law_oligarchy
+			has_law_or_variant = law_type:law_wealth_voting
+		}
+	}
+}
+
+# 5. República Bananera (Estado Enclavista / Corporativo)
+gov_ca_republica_bananera = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	
+
+	possible = {
+		# Integración con tus leyes de reforma agraria
+		has_law_or_variant = law_type:law_land_reform_banana_republic
+	}
+}
+
+# 6. Junta Militar Centroamericana
+gov_ca_junta = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_GENERAL"
+	female_ruler = "RULER_TITLE_GENERAL"
+
+	
+
+	possible = {
+		has_law_or_variant = law_type:law_autocracy
+		ig:ig_armed_forces = { is_in_government = yes }
+	}
+	
+	on_government_type_change = { change_to_dictatorial = yes }
+	on_post_government_type_change = { post_change_to_dictatorial = yes }
+}
+
+# 7. República Presidencial Democrática (Genérica post-Caudillos)
+gov_ca_presidential_democracy = {
+	transfer_of_power = presidential_elective
+	new_leader_on_reform_government = no
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	
+
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		country_has_voting_franchise = yes
+		NOT = { has_law_or_variant = law_type:law_land_reform_coffee_oligarchy }
+		NOT = { has_law_or_variant = law_type:law_land_reform_banana_republic }
+	}
+}
+
+# 8. República Presidencial Oligárquica
+gov_ca_presidential_oligarchy = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	
+
+	possible = {
+		has_law_or_variant = law_type:law_presidential_republic
+		has_law_or_variant = law_type:law_oligarchy
+	}
+
+	on_government_type_change = { change_to_dictatorial = yes }
+	on_post_government_type_change = { post_change_to_dictatorial = yes }
+}
+# --- TALAMANCA (RDT) ---
+#gov_ca_talamanca_theocracy = {
+#	transfer_of_power = dictatorial
+#	male_ruler = "ruler_title_rdt_theocratic"
+#	female_ruler = "ruler_title_rdt_theocratic"
+#	
+#	possible = {
+#		this = c:RDT
+#		has_law_or_variant = law_type:law_theocracy
+#	}
+#}
+#
+#gov_ca_talamanca_cacique = {
+#	transfer_of_power = hereditary
+#	male_ruler = "ruler_title_rdt_absolutist_monarchy"
+#	female_ruler = "ruler_title_rdt_absolutist_monarchy"
+#	
+#	possible = {
+#		this = c:RDT
+#		OR = {
+#			has_law_or_variant = law_type:law_monarchy
+#			has_law_or_variant = law_type:law_autocracy
+#		}
+#	}
+#}
+#
+#gov_ca_talamanca_awa_council = {
+#	transfer_of_power = dictatorial
+#	male_ruler = "ruler_title_rdt_elder_council"
+#	female_ruler = "ruler_title_rdt_elder_council"
+#	
+#	possible = {
+#		this = c:RDT
+#		has_law_or_variant = law_type:law_oligarchy
+#		ig:ig_rural_folk = { is_in_government = yes }
+#	}
+#}
+#
+## --- LA MOSQUITIA (MISKITO) ---
+#gov_ca_miskito_king = {
+#	transfer_of_power = hereditary
+#	male_ruler = "ruler_title_miskito_monarchy"
+#	female_ruler = "ruler_title_miskito_monarchy"
+#	
+#	possible = {
+#		OR = {
+#			this = c:MKT
+#			country_has_primary_culture = cu:miskito
+#		}
+#		has_law_or_variant = law_type:law_monarchy
+#	}
+#}
+#
+#gov_ca_miskito_supreme_chief = {
+#	transfer_of_power = dictatorial
+#	male_ruler = "ruler_title_miskito_dictatorship"
+#	female_ruler = "ruler_title_miskito_dictatorship"
+#	
+#	possible = {
+#		OR = {
+#			this = c:MKT
+#			country_has_primary_culture = cu:miskito
+#		}
+#		has_law_or_variant = law_type:law_autocracy
+#	}
+#}
+#
+## --- PANAMÁ (PNM) ---
+#gov_ca_panama_canal_admin = {
+#	transfer_of_power = dictatorial
+#	male_ruler = "ruler_title_pnm_technocracy"
+#	female_ruler = "ruler_title_pnm_technocracy"
+#	
+#	possible = {
+#		this = c:PNM
+#		OR = {
+#			has_law_or_variant = law_type:law_technocracy
+#			has_law_or_variant = law_type:law_land_reform_banana_republic # Conexión con tu ley de enclaves
+#		}
+#	}
+#}
+#
+## --- GUATEMALA (GUA) ---
+#gov_ca_guatemala_vitalicio = {
+#	transfer_of_power = dictatorial
+#	male_ruler = "ruler_title_guatemala_dictatorship"
+#	female_ruler = "ruler_title_guatemala_dictatorship"
+#	
+#	possible = {
+#		this = c:GUA
+#		has_law_or_variant = law_type:law_autocracy
+#	}
+#}
+#
+#gov_ca_guatemala_capitan_general = {
+#	transfer_of_power = dictatorial
+#	male_ruler = "ruler_title_guatemala_puppet"
+#	female_ruler = "ruler_title_guatemala_puppet"
+#	 # Prioridad máxima si es títere
+#	possible = {
+#		this = c:GUA
+#		is_subject = yes
+#	}
+#}
+#
+## --- EL SALVADOR (ELS) ---
+#gov_ca_elsalvador_junta = {
+#	transfer_of_power = dictatorial
+#	male_ruler = "ruler_title_elsalvador_junta_council"
+#	female_ruler = "ruler_title_elsalvador_junta_council"
+#	
+#	possible = {
+#		this = c:ELS
+#		has_law_or_variant = law_type:law_autocracy
+#		ig:ig_armed_forces = { is_in_government = yes }
+#	}
+#}
+#
+#gov_ca_elsalvador_jefe_politico = {
+#	transfer_of_power = dictatorial
+#	male_ruler = "ruler_title_elsalvador_puppet"
+#	female_ruler = "ruler_title_elsalvador_puppet"
+#	
+#	possible = {
+#		this = c:ELS
+#		is_subject = yes
+#	}
+#}
+#
+## --- NICARAGUA (NIC) ---
+#gov_ca_nicaragua_revolution = {
+#	transfer_of_power = presidential_elective
+#	male_ruler = "ruler_title_nicaragua_communist"
+#	female_ruler = "ruler_title_nicaragua_communist"
+#	
+#	possible = {
+#		this = c:NIC
+#		has_law_or_variant = law_type:law_council_republic
+#	}
+#}
+#
+## --- COSTA RICA (COS) ---
+#gov_ca_costarica_noocracy = {
+#	transfer_of_power = dictatorial
+#	male_ruler = "ruler_title_costarica_noocracy"
+#	female_ruler = "ruler_title_costarica_noocracy"
+#	
+#	possible = {
+#		this = c:COS
+#		has_law_or_variant = law_type:law_oligarchy
+#		ig:ig_intelligentsia = { is_in_government = yes }
+#	}
+#}
+#
+## --- HONDURAS (HON) ---
+#gov_ca_honduras_caudillo_protector = {
+#	transfer_of_power = dictatorial
+#	male_ruler = "ruler_title_honduras_autocracy"
+#	female_ruler = "ruler_title_honduras_autocracy"
+#	
+#	possible = {
+#		this = c:HON
+#		has_law_or_variant = law_type:law_autocracy
+#		NOT = { ig:ig_armed_forces = { is_in_government = yes } } # Si no es Junta, es Caudillo civil/terrateniente
+#	}
+#}
+#
+## --- LOS ALTOS (ALT) ---
+#gov_ca_losaltos_parliamentary = {
+#	transfer_of_power = parliamentary_elective
+#	male_ruler = "ruler_title_alt_parliamentary_republic"
+#	female_ruler = "ruler_title_alt_parliamentary_republic"
+#	
+#	possible = {
+#		this = c:ALT
+#		has_law_or_variant = law_type:law_parliamentary_republic
+#	}
+#}
+#
+#gov_ca_losaltos_corregidor = {
+#	transfer_of_power = dictatorial
+#	male_ruler = "ruler_title_alt_oligarchy"
+#	female_ruler = "ruler_title_alt_oligarchy"
+#	
+#	possible = {
+#		this = c:ALT
+#		has_law_or_variant = law_type:law_oligarchy
+#	}
+#}
+#
+## --- UCA / FEDERACIÓN CENTROAMERICANA ---
+#gov_ca_uca_republic = {
+#	transfer_of_power = presidential_elective
+#	male_ruler = "ruler_title_uca_republic"
+#	female_ruler = "ruler_title_uca_republic"
+#	
+#	possible = {
+#		this = c:UCA
+#		has_law_or_variant = law_type:law_presidential_republic
+#	}
+#}
+#
+#gov_ca_uca_empire = {
+#	transfer_of_power = hereditary
+#	male_ruler = "ruler_title_uca_absolutist_monarchy"
+#	female_ruler = "ruler_title_uca_absolutist_monarchy"
+#	
+#	possible = {
+#		this = c:UCA
+#		has_law_or_variant = law_type:law_monarchy
+#	}
+#}

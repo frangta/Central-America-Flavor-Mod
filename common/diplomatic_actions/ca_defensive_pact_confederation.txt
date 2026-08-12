@@ -1,0 +1,39 @@
+﻿ca_defensive_pact_confederation = {
+	groups= {
+		general
+	}
+	show_in_lens = no
+	can_use_obligations = yes
+
+	selectable = {
+	    is_ca_culture_country = yes
+		NOT = { is_country_type = decentralized }
+	}
+	potential = {
+			scope:target_country = {
+			NOT = { is_country_type = decentralized }
+			is_revolutionary = no
+		}
+	}
+	
+	pact = {
+        # is_defensive_pact = yes y should_invalidate eliminados (ahora se gestionan desde common/subject_types)
+		
+		relations_progress_per_day = 1
+		relations_improvement_max = 80		
+
+		actor_can_break = {
+			custom_tooltip = {
+				text = ca_confederation_break_defensive_pact_tt
+				always = no
+			}
+		}
+
+		target_can_break = {
+			custom_tooltip = {
+				text = ca_confederation_break_defensive_pact_tt
+				always = no
+			}
+		}
+	}
+}

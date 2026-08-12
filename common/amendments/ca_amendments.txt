@@ -1,0 +1,794 @@
+﻿# ==============================================
+# ENMIENDAS CENTROAMERICANAS (CA_AMENDMENTS)
+# ==============================================
+
+
+# 1. LEYES DE VAGANCIA (Trabajo forzado agrícola)
+# Vinculado a: Agricultura Comercial o Arrendatarios
+# Efecto: Aumenta la producción a costa de los derechos de los estratos bajos.
+amendment_vagrancy_laws = {
+    parent = law_commercialized_agriculture
+
+    allowed_laws = {
+        law_commercialized_agriculture
+        law_tenant_farmers
+    }
+
+    modifier = {
+        # Aumenta el rendimiento de todas las granjas y plantaciones
+        building_group_bg_agriculture_throughput_add = 0.15
+        
+        # Penalización severa al nivel de vida de los trabajadores forzados
+        state_lower_strata_standard_of_living_add = -1.0
+        
+        # Empodera a los terratenientes que se benefician del sistema
+        interest_group_ig_landowners_pol_str_mult = 0.10
+    }
+
+    possible = {
+        # No se puede tener si hay protecciones laborales o sindicatos fuertes
+        NOT = { has_law_or_variant = law_type:law_regulatory_bodies }
+        NOT = { has_law_or_variant = law_type:law_worker_protections }
+        
+        # Restricción Cultural Regional
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }
+    }
+
+    # Los Terratenientes siempre intentarán incluir esto en las negociaciones
+    would_sponsor = {
+        is_interest_group_type = ig_landowners
+    }
+
+    # La IA la revocará si los grupos progresistas o sindicatos toman el poder
+    ai_will_revoke = {
+        any_interest_group = {
+            is_in_government = yes
+            OR = {
+                is_interest_group_type = ig_trade_unions
+                is_interest_group_type = ig_intelligentsia
+            }
+        }
+    }
+
+    can_repeal = {
+        legitimacy >= legitimacy_to_repeal_amendment
+    }
+
+    # Es relativamente fácil de agitar en contra por su crueldad
+    amendment_activism_multiplier = 0.5
+}
+
+# 2. JEFES POLÍTICOS (Caudillismo Local)
+# Vinculado a: Burócratas Designados
+# Efecto: Mucha autoridad y control militar, pero con corrupción institucional.
+amendment_jefes_politicos = {
+    parent = law_appointed_bureaucrats
+
+    allowed_laws = {
+        law_appointed_bureaucrats
+    }
+
+    modifier = {
+        # Representa el control férreo del Ejecutivo en las provincias
+        country_authority_add = 150
+        
+        # El precio de la corrupción local y el desvío de fondos
+        state_tax_waste_add = 0.15
+        
+        # Fortalece el poder político del estamento militar
+        interest_group_ig_armed_forces_pol_str_mult = 0.20
+
+        # NUEVO 1.13: Facilita la supresión de disturbios locales
+        country_suppression_cost_mult = -0.25
+		country_suppression_attraction_factor = -0.10
+    }
+
+    possible = {
+        # Requiere un sistema de poder concentrado
+        OR = {
+            has_law_or_variant = law_type:law_autocracy
+            has_law_or_variant = law_type:law_oligarchy
+        }
+        
+        # Restricción Cultural
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+        }
+    }
+
+    # Los Militares patrocinan esta enmienda para controlar el territorio
+    would_sponsor = {
+        is_interest_group_type = ig_armed_forces
+    }
+
+    # La IA la quitará si se democratiza el país o si la Intelligentsia quiere limpiar el estado
+    ai_will_revoke = {
+        OR = {
+            NOT = { has_law_or_variant = law_type:law_autocracy }
+            NOT = { has_law_or_variant = law_type:law_oligarchy }
+            any_interest_group = {
+                is_in_government = yes
+                is_interest_group_type = ig_intelligentsia
+            }
+        }
+    }
+
+    can_repeal = {
+        legitimacy >= legitimacy_to_repeal_amendment
+    }
+
+    # Es difícil de quitar porque los jefes políticos suelen resistirse
+    amendment_activism_multiplier = 0.25
+}
+
+# ==========================================
+# COSTA RICA
+# ==========================================
+
+# 1. Ley Fundamental del Estado Libre de Costa Rica
+amendment_costa_rica_1830s = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+		law_parliamentary_republic
+	}
+
+	modifier = {
+		country_legitimacy_base_add = 10
+		country_authority_add = 50
+	}
+
+	possible = {
+		c:COS ?= this
+		NOT = { has_law = law_type:law_autocracy }
+	}
+
+	on_activate = {
+		set_variable = costa_rica_1830s
+	}
+
+	on_deactivate = {
+		remove_variable = costa_rica_1830s
+	}
+}
+
+# 2. Decreto de Bases y Garantías (Braulio Carrillo)
+amendment_ca_carrilo_decret = {
+	parent = law_autocracy
+
+	allowed_laws = {
+		law_autocracy
+		law_oligarchy
+		law_presidential_republic
+	}
+
+	modifier = {
+		country_authority_add = 200
+		country_legitimacy_base_add = 20
+		interest_group_ig_armed_forces_pol_str_mult = 0.15
+		interest_group_ig_intelligentsia_pol_str_mult = -0.20
+		state_radicals_from_sol_change_mult = 0.25
+	}
+
+	possible = {
+		c:COS ?= this
+		NOT = { has_law = law_type:law_autocracy }
+	}
+
+	on_activate = {
+		set_variable = ca_carrilo_decret
+	}
+
+	on_deactivate = {
+		remove_variable = ca_carrilo_decret
+	}
+}
+
+# 3. Constitución Política del Estado Libre de Costa Rica (1844)
+amendment_free_costa_rica_reform = {
+	parent = law_oligarchy
+
+	allowed_laws = {
+		law_oligarchy
+		law_wealth_voting
+		law_census_voting
+		law_presidential_republic
+	}
+
+	modifier = {
+		country_legitimacy_base_add = 15
+		interest_group_ig_intelligentsia_pol_str_mult = 0.15
+		country_authority_add = -25
+	}
+
+	possible = {
+		c:COS ?= this
+		NOT = { has_law = law_type:law_oligarchy }
+	}
+
+	on_activate = {
+		set_variable = free_costa_rica_reform
+	}
+
+	on_deactivate = {
+		remove_variable = free_costa_rica_reform
+	}
+}
+
+# 4. Constitución Política de Costa Rica de 1847 (1ra República)
+amendment_costa_rica_1st_republic = {
+	parent = law_parliamentary_republic
+
+	allowed_laws = {
+		law_parliamentary_republic
+		law_presidential_republic
+	}
+
+	modifier = {
+		country_legitimacy_base_add = 25
+		country_institution_size_max_add = 1
+		interest_group_ig_industrialists_pol_str_mult = 0.10
+	}
+
+	possible = {
+		c:COS ?= this
+		NOT = { has_law = law_type:law_parliamentary_republic }
+	}
+
+	on_activate = {
+		set_variable = costa_rica_1st_republic
+	}
+
+	on_deactivate = {
+		remove_variable = costa_rica_1st_republic
+	}
+}
+
+# 5. Pacto Nacional de los Obreros (Socialismo)
+amendment_costa_rica_socialist_republic = {
+	parent = law_council_republic
+
+	allowed_laws = {
+		law_council_republic
+	}
+
+	modifier = {
+		country_legitimacy_base_add = 10
+		interest_group_ig_trade_unions_pol_str_mult = 0.30
+		interest_group_ig_rural_folk_pol_str_mult = 0.20
+		interest_group_ig_landowners_pol_str_mult = -0.50
+	}
+
+	possible = {
+		c:COS ?= this
+		NOT = { has_law = law_type:law_council_republic }
+	}
+
+	on_activate = {
+		set_variable = costa_rica_socialist_republic
+	}
+
+	on_deactivate = {
+		remove_variable = costa_rica_socialist_republic
+	}
+}
+
+
+# ==========================================
+# NICARAGUA
+# ==========================================
+
+amendment_nicaragua_1826 = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+		law_parliamentary_republic
+	}
+
+	modifier = {
+		country_legitimacy_base_add = 10
+		interest_group_ig_intelligentsia_pol_str_mult = 0.10
+		state_bureaucracy_population_base_cost_mult = 0.05
+	}
+
+	possible = {
+		c:NIC ?= this
+	}
+
+	on_activate = {
+		set_variable = nicaragua_1826_cons
+	}
+
+	on_deactivate = {
+		remove_variable = nicaragua_1826_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Primera constitución del Estado de Nicaragua dentro de la República Federal de Centroamérica. Influenciada por Cádiz.
+}
+
+amendment_nicaragua_1838 = {
+	parent = law_oligarchy
+
+	allowed_laws = {
+		law_presidential_republic
+		law_oligarchy
+	}
+
+	modifier = {
+		country_authority_add = 20
+		interest_group_ig_landowners_pol_str_mult = 0.15
+		interest_group_ig_devout_pol_str_mult = 0.10
+	}
+
+	possible = {
+		c:NIC ?= this
+	}
+
+	on_activate = {
+		set_variable = nicaragua_1838_cons
+	}
+
+	on_deactivate = {
+		remove_variable = nicaragua_1838_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Separa definitivamente a Nicaragua de la Federación. Conservadora y oligárquica.
+}
+
+amendment_nicaragua_1858 = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+		law_oligarchy
+		law_census_voting
+	}
+
+	modifier = {
+		country_legitimacy_base_add = 20
+		country_authority_add = 10
+		institution_law_enforcement_max_investment_add = 1
+	}
+
+	possible = {
+		c:NIC ?= this
+	}
+
+	on_activate = {
+		set_variable = nicaragua_1858_cons
+	}
+
+	on_deactivate = {
+		remove_variable = nicaragua_1858_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Tras la Guerra Nacional. Inicia los "30 años conservadores".
+}
+
+amendment_nicaragua_1893 = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+		law_parliamentary_republic
+	}
+
+	modifier = {
+		interest_group_ig_devout_pol_str_mult = -0.30
+		interest_group_ig_intelligentsia_pol_str_mult = 0.25
+		country_education_access_add = 0.10
+	}
+
+	possible = {
+		c:NIC ?= this
+	}
+
+	on_activate = {
+		set_variable = nicaragua_1893_cons
+	}
+
+	on_deactivate = {
+		remove_variable = nicaragua_1893_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: "La Libérrima" (José Santos Zelaya). Secularización y reforma liberal.
+}
+
+amendment_nicaragua_1905 = {
+	parent = law_autocracy
+
+	allowed_laws = {
+		law_autocracy
+		law_presidential_republic
+		law_oligarchy
+	}
+
+	modifier = {
+		country_authority_add = 50
+		interest_group_ig_armed_forces_pol_str_mult = 0.20
+		interest_group_approval_add = -2
+	}
+
+	possible = {
+		c:NIC ?= this
+	}
+
+	on_activate = {
+		set_variable = nicaragua_1905_cons
+	}
+
+	on_deactivate = {
+		remove_variable = nicaragua_1905_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Reforma dictatorial de Zelaya para mantenerse en el poder.
+}
+
+amendment_nicaragua_1911 = {
+	parent = law_oligarchy
+
+	allowed_laws = {
+		law_oligarchy
+		law_presidential_republic
+	}
+
+	modifier = {
+		interest_group_ig_landowners_pol_str_mult = 0.20
+		country_influence_add = -25
+		country_diplomatic_play_maneuvers_add = -5
+	}
+
+	possible = {
+		c:NIC ?= this
+	}
+
+	on_activate = {
+		set_variable = nicaragua_1911_cons
+	}
+
+	on_deactivate = {
+		remove_variable = nicaragua_1911_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Restauración conservadora respaldada por EE. UU.
+}
+
+
+# ==========================================
+# HONDURAS
+# ==========================================
+
+amendment_honduras_1839 = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+		law_oligarchy
+	}
+
+	modifier = {
+		country_authority_add = 10
+		interest_group_ig_rural_folk_pol_str_mult = 0.10
+		state_turmoil_mult = 0.15
+	}
+
+	possible = {
+		c:HON ?= this
+	}
+
+	on_activate = {
+		set_variable = honduras_1839_cons
+	}
+
+	on_deactivate = {
+		remove_variable = honduras_1839_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Primera tras separarse de la Federación. Marcada por inestabilidad.
+}
+
+amendment_honduras_1880 = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+		law_parliamentary_republic
+	}
+
+	modifier = {
+		building_group_bg_mining_throughput_mult = 0.10
+		interest_group_ig_intelligentsia_pol_str_mult = 0.15
+		interest_group_ig_capitalists_pol_str_mult = 0.10
+	}
+
+	possible = {
+		c:HON ?= this
+	}
+
+	on_activate = {
+		set_variable = honduras_1880_cons
+	}
+
+	on_deactivate = {
+		remove_variable = honduras_1880_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Reforma Liberal de Marco Aurelio Soto. Fomento minero y modernización.
+}
+
+
+# ==========================================
+# EL SALVADOR
+# ==========================================
+
+amendment_el_salvador_1824 = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+	}
+
+	modifier = {
+		interest_group_ig_armed_forces_pol_str_mult = 0.15
+		country_authority_add = 15
+	}
+
+	possible = {
+		c:ELS ?= this
+	}
+
+	on_activate = {
+		set_variable = el_salvador_1824_cons
+	}
+
+	on_deactivate = {
+		remove_variable = el_salvador_1824_cons
+	}
+}
+
+amendment_el_salvador_1841 = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+		law_oligarchy
+	}
+
+	modifier = {
+		interest_group_ig_armed_forces_pol_str_mult = 0.15
+		country_authority_add = 15
+	}
+
+	possible = {
+		c:ELS ?= this
+	}
+
+	on_activate = {
+		set_variable = el_salvador_1841_cons
+	}
+
+	on_deactivate = {
+		remove_variable = el_salvador_1841_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Separación oficial bajo la influencia de Francisco Malespín.
+}
+
+amendment_el_salvador_1886 = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+		law_oligarchy
+	}
+
+	modifier = {
+		building_group_bg_agriculture_throughput_mult = 0.15
+		interest_group_ig_landowners_pol_str_mult = 0.25
+		interest_group_ig_rural_folk_pol_str_mult = -0.30
+	}
+
+	possible = {
+		c:ELS ?= this
+	}
+
+	on_activate = {
+		set_variable = el_salvador_1886_cons
+	}
+
+	on_deactivate = {
+		remove_variable = el_salvador_1886_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Consolidación de la República Cafetalera ("La República de los 14").
+}
+
+
+# ==========================================
+# GUATEMALA
+# ==========================================
+
+amendment_guatemala_1825 = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+		law_oligarchy
+	}
+
+	modifier = {
+		interest_group_ig_devout_pol_str_mult = 0.30
+		interest_group_ig_landowners_pol_str_mult = 0.20
+		country_legitimacy_base_add = 15
+	}
+
+	possible = {
+		c:GUA ?= this
+	}
+
+	on_activate = {
+		set_variable = guatemala_1825_cons
+	}
+
+	on_deactivate = {
+		remove_variable = guatemala_1825_cons
+	}
+}
+
+amendment_guatemala_1851 = {
+	parent = law_autocracy
+
+	allowed_laws = {
+		law_autocracy
+		law_oligarchy
+		law_presidential_republic
+	}
+
+	modifier = {
+		interest_group_ig_devout_pol_str_mult = 0.30
+		interest_group_ig_landowners_pol_str_mult = 0.20
+		country_legitimacy_base_add = 15
+	}
+
+	possible = {
+		c:GUA ?= this
+	}
+
+	on_activate = {
+		set_variable = guatemala_1851_cons
+	}
+
+	on_deactivate = {
+		remove_variable = guatemala_1851_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: "Acta Constitutiva de la República". Régimen conservador de Rafael Carrera.
+}
+
+amendment_guatemala_1879 = {
+	parent = law_autocracy
+
+	allowed_laws = {
+		law_autocracy
+		law_presidential_republic
+		law_oligarchy
+	}
+
+	modifier = {
+		interest_group_ig_devout_pol_str_mult = -0.25
+		building_group_bg_infrastructure_throughput_mult = 0.10
+		country_authority_add = 30
+	}
+
+	possible = {
+		c:GUA ?= this
+	}
+
+	on_activate = {
+		set_variable = guatemala_1879_cons
+	}
+
+	on_deactivate = {
+		remove_variable = guatemala_1879_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Reforma Liberal de Justo Rufino Barrios. Anticlericalismo e infraestructura.
+}
+
+
+# ==========================================
+# LOS ALTOS
+# ==========================================
+
+amendment_los_altos_1838 = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+		law_parliamentary_republic
+	}
+
+	modifier = {
+		interest_group_ig_intelligentsia_pol_str_mult = 0.20
+		interest_group_ig_capitalists_pol_str_mult = 0.10
+		state_incorporation_speed_mult = -0.20
+	}
+
+	possible = {
+		c:LOS ?= this
+	}
+
+	on_activate = {
+		set_variable = los_altos_1838_cons
+	}
+
+	on_deactivate = {
+		remove_variable = los_altos_1838_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Separación del Estado de Los Altos (Quetzaltenango) de Guatemala.
+}
+
+
+# ==========================================
+# CHIAPAS
+# ==========================================
+
+amendment_chiapas_1826 = {
+	parent = law_presidential_republic
+
+	allowed_laws = {
+		law_presidential_republic
+		law_oligarchy
+	}
+
+	modifier = {
+		state_loyalty_add = 10
+		interest_group_ig_landowners_pol_str_mult = 0.15
+		country_bureaucracy_add = 10
+	}
+
+	possible = {
+		c:CHP ?= this
+	}
+
+	on_activate = {
+		set_variable = chiapas_1826_cons
+	}
+
+	on_deactivate = {
+		remove_variable = chiapas_1826_cons
+	}
+
+	# NOTAS PARA MODDERS:
+	# Históricamente: Primera constitución de Chiapas tras unirse formalmente a México.
+}

@@ -1,0 +1,59 @@
+﻿#
+ca_unrecognized = {
+	is_colonizable = no
+	is_unrecognized = yes
+	uses_prestige = yes 
+	
+	has_events = yes
+	
+	has_military = yes
+	has_economy = yes
+	has_politics = yes
+	can_research = yes	
+	
+	default_rank = unrecognized_power
+	default_subject_type = subject_type_ca_dependency
+}
+city_state = {
+	is_colonizable = no	
+	is_unrecognized = yes	
+	uses_prestige = yes 
+	
+	has_events = yes
+
+	has_military = yes
+	has_economy = yes
+	has_politics = no
+	can_research = no
+	
+	default_rank = unrecognized_power
+}
+confederative_partner = {
+	is_colonizable = no	
+	is_unrecognized = yes	
+	uses_prestige = yes 
+	
+	has_events = yes
+
+	has_military = yes
+	has_economy = yes
+	has_politics = yes
+	can_research = no
+	
+	default_rank = unrecognized_power
+}
+native_american_comun = {
+	is_colonizable = no	
+	is_unrecognized = yes	
+	uses_prestige = no 
+	
+	has_events = yes
+
+	has_military = yes
+	has_economy = no
+	has_politics = yes
+	can_research = no
+	
+	default_rank = unrecognized_power
+	default_subject_type = subject_type_ca_dependency
+}

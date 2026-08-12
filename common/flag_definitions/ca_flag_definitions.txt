@@ -1,0 +1,1405 @@
+﻿# FLAG_DEFINITION_LIST = {		# countries search for a list with the same name as their tag, the DEFAULT list is always included, if no flag definition is applicable for a country then its tag is used a COA_KEY
+# 	includes = ANOTHER_LIST		# includes another list in this list, can be repeated
+# 
+# 	flag_definition = {			# the flag definitions that make up this list, can be repeated
+# 		coa = [list] COA_KEY	# main flag, optional list keyword denotes a coa template
+# 		allow_overlord_canton = yes				# default no
+# 		coa_with_overlord_canton = <[list] coa>	# flag where a canton can be placed, optional list keyword same as above, defaults to coa
+# 		overlord_canton_offset = { x y }		# canton placement offset, default { 0 0 }
+# 		overlord_canton_scale = { x y }			# canton placement scale, default { 0.5 0.5 }
+# 		subject_canton = [list] COA_KEY	# canton applied to subjects by this country, optional list keyword same as above
+# 
+# 		priority = value		# valid flag definition with the highest priority applies
+# 		trigger = {}			# a trigger that determines if this flag definition is valid, see below for scope
+#        allow_revolutionary_indicator = no      # Default = yes. If yes, a temporary revolutionary indicator will appear while the country is revolutionary
+#       revolutionary_canton = [list] COA_KEY   # Optional. Default = default_revolutionary_canton. Defines which flag should be used as canton while   this   country is revolutionary
+# 	}
+# }
+#            | existing country | releasing a country | country formation |
+# |==========|==================|=====================|===================|
+# |root      | definition       | definition          | definition        |
+# |----------|------------------|---------------------|-------------------|
+# |target    | country          | N/A                 | N/A               |
+# |----------|------------------|---------------------|-------------------|
+# |initiator | N/A              | player              | player            |
+# |----------|------------------|---------------------|-------------------|
+# |actor     | country          | player              | player            |
+# |----------|------------------|---------------------|-------------------|
+# |          | country's        |                     | player's          |
+# |overlord  | direct overlord  | player              | direct overlord   |
+# |          | if it exists     |                     | if it exists      |
+# |----------|------------------|---------------------|-------------------|
+# common variables
+@coa_width = 768
+@coa_height = 512
+
+@third = @[1/3]
+
+CR1 = {
+
+	flag_definition = {
+		coa = CR1
+		subject_canton = CR1	
+		allow_overlord_canton = yes			
+		priority = 1
+		trigger = {
+			coa_def_republic_flag_trigger  = yes
+		}
+	}
+	
+	flag_definition = {
+		coa = ca_pentra_cos
+		subject_canton = ca_pentra_cos
+		priority = 100
+		trigger = {
+			coa_def_dictatorship_flag_trigger = yes
+		}
+
+    }
+    flag_definition = {
+		coa = CR1_dic_6 
+		allow_overlord_canton = yes
+		subject_canton = CR1_dic_6 
+		priority = 50
+		trigger = { 
+			exists = c:CR1
+			c:CR1 = {
+				any_scope_state = {
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_NICARAGUA
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_PANAMA					
+					is_incorporated = yes
+					count <= 6
+				}
+			}
+		}
+	}	
+    flag_definition = {
+		coa = CR1_dic_5
+		allow_overlord_canton = yes
+		subject_canton = CR1_dic_5
+		priority = 50
+		trigger = { 
+			exists = c:CR1
+			c:CR1 = {
+				any_scope_state = {
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_NICARAGUA
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_SAN_SALVADOR
+					is_incorporated = yes
+					count <= 5
+				}
+			}
+		}
+	}
+	flag_definition = {
+		coa = CR1_dic_4
+		allow_overlord_canton = yes
+		subject_canton = CR1_dic_4
+		priority = 50
+		trigger = { 
+			exists = c:CR1
+			c:CR1 = {
+				any_scope_state = {
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_NICARAGUA
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_SAN_SALVADOR
+					is_incorporated = yes
+					count <= 4
+				}
+			}
+		}
+	}
+	    flag_definition = {
+		coa = CR1_dic_3
+		allow_overlord_canton = yes
+		subject_canton = CR1_dic_3
+		priority = 50
+		trigger = { 
+			exists = c:CR1
+			c:CR1 = {
+				any_scope_state = {
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_NICARAGUA
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_SAN_SALVADOR
+					is_incorporated = yes
+					count <= 3
+				}
+			}
+		}
+	}
+	   flag_definition = {
+		coa = CR1_dic_2
+		allow_overlord_canton = yes
+		subject_canton = CR1_dic_2
+		priority = 50
+		trigger = { 
+			exists = c:CR1
+			c:CR1 = {
+				any_scope_state = {
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_NICARAGUA
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_SAN_SALVADOR
+					is_incorporated = yes
+					count <= 2
+				}
+			}
+		}
+	}
+	flag_definition = {
+		coa = CR1_dic
+		allow_overlord_canton = yes
+		subject_canton = CR1_dic
+		priority = 50
+		trigger = { 
+			exists = c:CR1
+			c:CR1 = {
+				any_scope_state = {
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_NICARAGUA
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_SAN_SALVADOR
+					is_incorporated = yes
+					count <= 1
+				}
+			}
+		}
+	}
+
+
+}
+
+REPLACE:COS = { # Costa Rica
+	flag_definition = {
+		coa = COS
+		subject_canton = COS	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = COS_subject			
+		priority = 1
+	}
+	flag_definition = {
+		coa = COS_1838_1840
+		subject_canton = COS_1838_1840	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = COS_subject			
+		priority = 20  
+        trigger = { 
+		scope:actor ?= {
+				has_variable = costa_rica_1830s
+				}
+		
+	    }	
+    }
+	flag_definition = {
+		coa = COS_1840_1842_carrilo
+		subject_canton = COS_1840_1842_carrilo	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = COS_subject
+		priority = 20
+		trigger = { 
+			scope:actor ?= {
+				has_variable = ca_carrilo_decret
+			}
+				
+           }
+	}	
+	#flag_definition = {
+	#	coa = COS_1845_alt
+	#	subject_canton = COS_1845_alt	
+	#	allow_overlord_canton = yes		
+	#	coa_with_overlord_canton = COS_subject
+	#	priority = 20
+	#	trigger = { 
+	#		scope:actor ?= {
+	#			has_variable = costa_rica_alt_republic
+	#		}
+	#			
+    #       }
+	#}
+	flag_definition = {
+		coa = COS_monarchy
+		subject_canton = COS_monarchy	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = COS_monarchy
+		trigger = { 
+			coa_def_monarchy_flag_trigger = yes
+		}		
+		priority = 20
+	}
+	
+	flag_definition = {
+		coa = COS_1848
+		subject_canton = COS_1848	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = COS_subject
+		priority = 20
+		trigger = { 
+				scope:actor ?= {
+				has_variable = costa_rica_1st_republic
+			}
+
+		}											
+
+	}
+	flag_definition = {
+		coa = COS_subject_MEX
+		priority = 100
+		trigger = { 
+			coa_def_mexican_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = COS_subject_SPA
+		priority = 100
+		trigger = { 
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = COS_subject_UCA
+		priority = 1000
+		trigger = { 
+			coa_def_central_american_ensign_trigger = yes
+		}
+	}
+	
+	flag_definition = {
+		coa = COS_subject_CLM
+		priority = 100
+		trigger = { 
+			coa_def_colombian_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = COS_communist2
+		priority = 1500
+		trigger = { 
+			coa_def_communist_flag_trigger = yes
+		}
+		}
+	flag_definition = {
+		coa = COS_communist1
+		priority = 1500
+		trigger = { 
+			coa_def_communist_flag_trigger = yes
+			scope:actor ?= {
+				has_variable = costa_rica_socialist_republic
+			}			
+		}
+}		
+}
+
+REPLACE:ELS = { # El Salvador
+	flag_definition = {
+		coa = ELS
+		subject_canton = ELS
+		allow_overlord_canton = yes			
+		priority = 1
+		overlord_canton_scale = { 0.334 0.558 }				
+	}
+	flag_definition = {
+		coa = ELS_early
+		subject_canton = ELS_early
+		allow_overlord_canton = yes			
+		priority = 1
+		overlord_canton_scale = { 0.334 0.558 }
+		trigger = { 
+				scope:actor ?= {
+				has_variable = el_salvador_early
+			}
+
+		}											
+		priority = 20		
+	}
+	flag_definition = {
+		coa = ELS_1865
+		subject_canton = ELS_1865	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = ELS_subject
+		trigger = { 
+				scope:actor ?= {
+				has_variable = el_salvador_1865_event
+			}
+
+		}											
+		priority = 20
+	}	
+	flag_definition = {
+		coa = ELS_monarchy
+		subject_canton = ELS_monarchy	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = ELS_monarchy
+		trigger = { 
+			coa_def_monarchy_flag_trigger = yes
+		}		
+		priority = 20
+	}	
+
+	flag_definition = {
+		coa = ELS_subject_UCA
+		priority = 1000
+		trigger = { 
+			coa_def_central_american_ensign_trigger = yes
+		}
+	}		
+	flag_definition = {
+		coa = ELS_subject_SPA
+		priority = 30
+		trigger = { 
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+}
+REPLACE:ALT = { # Los Altos
+	flag_definition = {
+		coa = ALT
+		allow_overlord_canton = yes	
+		coa_with_overlord_canton = ALT_subject	
+		overlord_canton_scale = { 0.337 0.5 }		
+		subject_canton = ALT
+		priority = 1
+	}
+	flag_definition = {
+		coa = ALT_subject_MEX
+		priority = 30
+		trigger = { 
+			coa_def_mexican_ensign_trigger = yes
+		}
+	}		
+	flag_definition = {
+		coa = ALT_subject_UCA
+		priority = 1000
+		trigger = { 
+			coa_def_frca_ensign_trigger = yes
+		}
+	}
+}
+REPLACE:NIC = { # Nicaragua
+	flag_definition = {
+		coa = NIC
+		subject_canton = NIC	
+		coa_with_overlord_canton = NIC_subject	
+		allow_overlord_canton = yes		
+		priority = 1
+	}
+	flag_definition = {
+		coa = NIC_monarchy
+		subject_canton = NIC_monarchy	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = NIC_monarchy
+		trigger = { 
+			coa_def_monarchy_flag_trigger = yes
+		}		
+		priority = 20
+	}
+	flag_definition = {
+		coa = NIC_early_cons
+		subject_canton = NIC_early_cons	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = NIC_subject				
+        trigger = { 
+		scope:actor ?= {
+				has_variable = nicaragua_early_cons
+				}
+		
+	    }
+		priority = 30   	
+    }	
+	flag_definition = {
+		coa = nicaragua_1854
+		subject_canton = nicaragua_1854	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = NIC_subject				
+        trigger = { 
+		scope:actor ?= {
+				has_variable = nicaragua_1854_event
+				}
+		
+	    }
+		priority = 30   	
+    }	
+
+	flag_definition = {
+		coa = NIC_subject_MEX
+		priority = 30
+		trigger = { 
+			coa_def_mexican_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = NIC_subject_UCA
+		priority = 1000
+		trigger = { 
+			coa_def_central_american_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = NIC_subject_SPA
+		priority = 30
+		trigger = { 
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = NIC_early_cons
+		priority = 30
+        trigger = { 
+		scope:actor ?= {
+				has_variable = nicaragua_independence_event_var
+				}
+		
+	    }
+	}	
+}
+REPLACE:HON = {  # Honduras
+	flag_definition = {
+		coa = HON
+		subject_canton = HON
+		allow_overlord_canton = yes
+		coa_with_overlord_canton = HON_subject
+		priority = 1
+	}
+    flag_definition = {
+		coa = HON_1838
+		subject_canton = HON_1838	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = HON_subject			
+		priority = 2
+		trigger = { 
+				scope:actor ?= {
+				has_variable = honduras_1838_event
+				}
+		
+	    }		
+	}
+	flag_definition = {
+		coa = HON_monarchy
+		subject_canton = HON_monarchy	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = HON_monarchy
+		trigger = { 
+			coa_def_monarchy_flag_trigger = yes
+		}		
+		priority = 30
+	}
+	
+	flag_definition = {
+		coa = HON
+		subject_canton = HON	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = HON_subject			
+		priority = 10
+		trigger = { 
+				scope:actor ?= {
+				has_variable = honduras_1866_event
+				}
+		
+	    }
+	}
+		
+	
+	flag_definition = {
+		coa = HON_communist
+		priority = 1500
+		trigger = { 
+			coa_def_communist_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = HON_subject_SPA
+		priority = 50
+		trigger = { 
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = HON_subject_UCA
+		priority = 1000
+		trigger = { 
+			coa_def_central_american_ensign_trigger = yes
+		}
+	}	
+	flag_definition = {
+		coa = HON_subject_MEX
+		priority = 30
+		trigger = { 
+			coa_def_mexican_ensign_trigger = yes
+		}
+	}
+}
+		
+
+REPLACE:GUA = { # Guatemala
+
+	flag_definition = {
+		coa = GUA
+		allow_overlord_canton = yes	
+		overlord_canton_scale = { 0.337 0.5 }		
+		subject_canton = GUA_subject
+		priority = 1
+	}
+	flag_definition = {
+		coa = GUA_monarchy
+		subject_canton = GUA_monarchy	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = GUA_monarchy
+		trigger = { 
+			coa_def_monarchy_flag_trigger = yes
+		}		
+		priority = 30
+	}	
+	flag_definition = {
+		coa = GUA_1871
+		allow_overlord_canton = yes		
+		overlord_canton_scale = { 0.337 0.5 }		
+		subject_canton = GUA_1871
+		coa_with_overlord_canton = GUA_subject_republic	
+
+		trigger = {
+		scope:actor ?= {
+				has_variable = guatemala_1871_event
+				}
+		
+	    }
+		priority = 20
+	}
+	flag_definition = {
+		coa = GUA_1858
+		allow_overlord_canton = yes		
+		overlord_canton_scale = { 0.337 0.5 }		
+		subject_canton = GUA_1858
+		coa_with_overlord_canton = GUA_subject_republic	
+
+		trigger = {
+		scope:actor ?= {
+				has_variable = guatemala_1858_event
+				}
+		
+	    }
+		priority = 20
+	}
+	flag_definition = {
+		coa = GUA_1843
+		allow_overlord_canton = yes		
+		overlord_canton_scale = { 0.337 0.5 }		
+		subject_canton = GUA_1843
+		coa_with_overlord_canton = GUA_subject_republic	
+
+		trigger = {
+		scope:actor ?= {
+				has_variable = guatemala_1843_event
+				}
+		
+	    }
+		priority = 20
+	}
+	flag_definition = {
+		coa = GUA_prospain
+		allow_overlord_canton = yes		
+		overlord_canton_scale = { 0.337 0.5 }		
+		subject_canton = GUA_prospain
+		coa_with_overlord_canton = GUA_subject_republic	
+
+		trigger = {
+		scope:actor ?= {
+				has_variable = guatemala_prospain_event
+				}
+		
+	    }
+		priority = 30
+	}	
+
+	flag_definition = {
+		coa = GUA_PRO_SPA 
+		priority = 10
+		trigger = { 
+			coa_def_absolute_monarchy_flag_trigger = yes
+		}
+	}	
+
+	flag_definition = {
+		coa = GUA_absolute_monarchy
+		priority = 10
+		trigger = { 
+			coa_def_absolute_monarchy_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = GUA_subject_UCA
+		priority = 1000
+		trigger = { 
+			coa_def_central_american_ensign_trigger = yes
+		}
+	}	
+	flag_definition = {
+		coa = GUA_prospain
+		priority = 50
+		trigger = { 
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}	
+	flag_definition = {
+		coa = GUA_subject_MEX
+		priority = 30
+		trigger = { 
+			coa_def_mexican_ensign_trigger = yes
+		}
+	}		
+}
+REPLACE:PNM = { # Panama
+	flag_definition = {
+		coa = PNM
+		subject_canton = PNM	
+		coa_with_overlord_canton = PNM_subject	
+		allow_overlord_canton = yes	
+		priority = 1
+	}
+	flag_definition = {
+		coa = PNM_monarchy
+		subject_canton = PNM_monarchy	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PNM_monarchy
+		trigger = { 
+			coa_def_monarchy_flag_trigger = yes
+		}		
+		priority = 10
+	}	
+	#flag_definition = {
+	#	coa = PNM_altenative_flag_v1
+	#	subject_canton = PNM_altenative_flag_v1	
+	#	coa_with_overlord_canton = PNM_subject	
+	#	allow_overlord_canton = yes	
+	#	priority = 1
+	#	trigger = { 
+	#		other_way_pnm_trigger = yes
+	#	}
+	#}
+	flag_definition = {
+		coa = PNM_subject_MEX
+		priority = 30
+		trigger = { 
+			coa_def_mexican_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = PNM_subject_SPA
+		priority = 30
+		trigger = { 
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = PNM_subject_UCA
+		priority = 1000
+		trigger = { 
+			coa_def_central_american_ensign_trigger = yes
+		}
+	}	
+	flag_definition = {
+		coa = PNM_subject_CLM
+		priority = 1000
+		trigger = { 
+			coa_def_colombian_ensign_trigger = yes
+		}
+	}	
+}
+REPLACE:UCA = { # Central America
+	flag_definition = {
+		coa = UCA
+		subject_canton = UCA
+		coa_with_overlord_canton = UCA_subject
+		allow_overlord_canton = yes				
+		priority = 1
+	}
+    flag_definition = {
+		coa = UCA_centralist
+		subject_canton = UCA_centralist
+		priority = 25
+		trigger = {
+			scope:actor ?= {
+				coa_republic_trigger = yes
+				OR = {
+					has_law_or_variant = law_type:law_ca_central_american_unitary
+					AND = {
+						has_variable = is_frca_var
+						has_law_or_variant = law_type:law_ca_central_american_confederated
+					}
+				}
+			}
+		}
+	}	
+	flag_definition = {
+		coa = UCA_1836_federal
+		priority = 25
+		trigger = { 
+			scope:actor ?= {
+			    has_variable = frca_preserved
+				coa_republic_trigger = yes
+				has_law_or_variant = law_type:law_ca_central_american_federal
+			}
+		}
+	}	
+	#flag_definition = {
+	#	coa = UCA_republic
+	#	priority = 20
+	#	trigger = { 
+	#		scope:actor ?= {
+	#		    NOT = { has_variable = is_frca_var }
+	#			coa_republic_trigger = yes
+	#		}
+	#	}
+	#}	
+	flag_definition = {
+		coa = UCA_absolute_monarchy			
+		priority = 20
+		trigger = { 
+			coa_def_absolute_monarchy_flag_trigger = yes
+		}
+	}	
+	flag_definition = {
+		coa = UCA_monarchy
+		subject_canton = UCA_monarchy	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = UCA_monarchy
+		trigger = { 
+			coa_def_monarchy_flag_trigger = yes
+		}		
+		priority = 10
+	}	
+	flag_definition = {
+		coa = UCA_dictatorship
+		subject_canton = UCA_dictatorship
+		priority = 20
+		trigger = {
+			coa_def_dictatorship_flag_trigger = yes
+		}
+	}	
+	flag_definition = {
+		coa = UCA_subject_SPA
+		priority = 30
+		trigger = { 
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}	
+	flag_definition = {
+		coa = UCA_communist
+		priority = 1500
+		trigger = { 
+			coa_def_communist_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = UCA_subject_USA
+		priority = 50
+		trigger = { 
+			coa_def_american_ensign_trigger = yes
+		}
+	}		
+}
+#Yucatan
+YUC = {
+	flag_definition = {
+		coa = YUC
+		subject_canton = YUC	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = YUC_subject			
+		priority = 1
+	}
+    flag_definition = {
+		coa = YUC_subject_MEX
+		priority = 100
+		trigger = { 
+			coa_def_mexican_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = YUC_subject_SPA
+		priority = 100
+		trigger = { 
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = YUC_subject_UCA
+		priority = 1000
+		trigger = { 
+			coa_def_central_american_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = YUC_monarchy
+		subject_canton = YUC_monarchy	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = YUC_monarchy
+		trigger = { 
+			coa_def_monarchy_flag_trigger = yes
+		}		
+		priority = 20
+	}	
+}	
+	
+
+#Walker's Countries
+WNG = {
+	flag_definition = {
+		coa = WNG
+		subject_canton = WNG
+		allow_overlord_canton = yes
+		coa_with_overlord_canton = WNG_subject				
+		priority = 1
+	}
+}
+
+# Chiapas
+CIP = {
+	flag_definition = {
+		coa = CIP
+		subject_canton = CIP
+		coa_with_overlord_canton = CIP_subject	
+		allow_overlord_canton = yes		
+		priority = 1
+	}
+	flag_definition = {
+		coa = CIP_subject_MEX
+		priority = 30
+		trigger = { 
+			coa_def_mexican_ensign_trigger = yes
+		}
+	}	
+	flag_definition = {
+		coa = CIP_subject_frca
+		priority = 30
+		trigger = { 
+			coa_def_frca_ensign_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = CIP_soconosco_frca
+		priority = 40
+		trigger = { 
+			coa_def_soconosco_uca_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = CIP_soconosco	
+		priority = 40
+		trigger = { 
+			coa_def_soconosco_trigger = yes
+		}
+	}	
+	flag_definition = {
+		coa = CIP_absolute_monarchy			
+		priority = 20
+		trigger = { 
+			coa_def_absolute_monarchy_flag_trigger = yes
+		}
+	}	
+	flag_definition = {
+		coa = CIP_dictatorship	
+		priority = 20
+		trigger = { 
+			coa_def_dictatorship_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = CIP_theocracy		
+		priority = 20
+		trigger = { 
+			coa_def_theocracy_flag_trigger = yes
+		}
+	}	
+	flag_definition = {
+		coa = CIP_republic			
+		priority = 20
+		trigger = { 
+			coa_def_republic_flag_trigger = yes
+		}
+	}
+	flag_definition = {
+		coa = CIP_communist
+		priority = 1500
+		trigger = { 
+			coa_def_communist_flag_trigger = yes
+		}
+	}
+}
+
+
+
+
+
+########Costa Rica#####tags:
+##PC1 - Provinces of Costa rica 1 - 10 ##
+
+PC1 = { #San Jose
+	flag_definition = {
+		coa = PC1
+		subject_canton = PC1	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PC1_subject			
+		priority = 10
+	}
+}
+PC2 = { #Guanacaste
+	flag_definition = {
+		coa = PC2
+		subject_canton = PC2	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PC2_subject			
+		priority = 10
+	}
+}
+PC3 = { #Nicoya
+	flag_definition = {
+		coa = PC3
+		subject_canton = PC3	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PC3_subject			
+		priority = 10
+	}
+}
+PC4 = { #Limon
+	flag_definition = {
+		coa = PC4
+		subject_canton = PC4	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PC4_subject			
+		priority = 10
+	}
+}
+PC5 = { #Heredia
+	flag_definition = {
+		coa = PC5
+		subject_canton = PC5	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PC5_subject			
+		priority = 10
+	}
+}
+PC6 = { #Alaguela
+	flag_definition = {
+		coa = PC6
+		subject_canton = PC6	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PC6_subject			
+		priority = 10
+	}
+}
+PC7 = { #Osa
+	flag_definition = {
+		coa = PC7
+		subject_canton = PC7	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PC7_subject			
+		priority = 10
+	}
+}
+PC8 = { #Cartago
+	flag_definition = {
+		coa = PC8
+		subject_canton = PC8	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PC8_subject			
+		priority = 10
+	}
+}
+RDT = { #Talamanca
+	flag_definition = {
+		coa = RDT
+		subject_canton = RDT	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = RDT_subject			
+		priority = 10
+	}
+}
+CCR = { #Confederation of Costa Rica
+
+}
+
+
+###########Guatemala###tags:
+##DG1-Depataments_Guatemala 1-10 
+
+GGA = { #Gran Republic of Guatemala
+
+}
+DG1 = { #Peten
+	flag_definition = {
+		coa = DG1
+		subject_canton = DG1	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DG1_subject			
+		priority = 10
+	}
+}
+DG2 = { #Izabal
+	flag_definition = {
+		coa = DG2
+		subject_canton = DG2	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DG2_subject			
+		priority = 10
+	}
+}
+DG3 = { #Verapaz
+	flag_definition = {
+		coa = DG3
+		subject_canton = DG3	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DG3_subject			
+		priority = 10
+	}
+}
+DG4 = { #Soconusco,
+	flag_definition = {
+		coa = DG4
+		subject_canton = DG4	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DG4_subject			
+		priority = 10
+	}
+}
+
+###########Nicaragua#####tags:PN1 - 10
+
+RNI = {
+	flag_definition = {
+		coa = RNI
+		subject_canton = RNI	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = RNI_subject			
+		priority = 10
+	}
+}
+PN1 = { #Leon
+	flag_definition = {
+		coa = PN1
+		subject_canton = PN1	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PN1_subject			
+		priority = 10
+	}
+}
+PN2 = { #Managua
+	flag_definition = {
+		coa = PN2
+		subject_canton = PN2	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PN2_subject			
+		priority = 10
+	}
+}
+PN3 = { #Matagalpa
+	flag_definition = {
+		coa = PN3
+		subject_canton = PN3	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PN3_subject			
+		priority = 10
+	}
+}
+PN4 = { #Sur zone
+	flag_definition = {
+		coa = PN4
+		subject_canton = PN4	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PN4_subject			
+		priority = 10
+	}
+}
+PN5 = { #Nort zone
+	flag_definition = {
+		coa = PN5
+		subject_canton = PN5	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PN5_subject			
+		priority = 10
+	}
+}
+###########El Salvador#####tags:DE
+
+UEL = {
+	flag_definition = {
+		coa = UEL
+		subject_canton = UEL	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = UEL_subject			
+		priority = 10
+	}
+}
+DE1 = { #San Salvador
+	flag_definition = {
+		coa = DE1
+		subject_canton = DE1	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DE1_subject			
+		priority = 10
+	}
+}
+
+DE2 = { #Sonsonate
+	flag_definition = {
+		coa = DE2
+		subject_canton = DE2	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DE2_subject			
+		priority = 10
+	}
+}
+
+DE3 = { #San Miguel
+	flag_definition = {
+		coa = DE3
+		subject_canton = DE3	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DE3_subject			
+		priority = 10
+	}
+}
+
+###########Honduras#####tags:DH1 - 10
+
+UHO = {
+
+}
+
+DH1 = { #Olancho
+	flag_definition = {
+		coa = DH1
+		subject_canton = DH1	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DH1_subject			
+		priority = 10
+	}
+}
+DH2 = { #Yoro
+	flag_definition = {
+		coa = DH2
+		subject_canton = DH2	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DH2_subject			
+		priority = 10
+	}
+}
+DH3 = { #Santa Barbara
+	flag_definition = {
+		coa = DH3
+		subject_canton = DH3	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DH3_subject			
+		priority = 10
+	}
+}
+DH4 = { #El Salvador
+	flag_definition = {
+		coa = DH4
+		subject_canton = DH4	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DH4_subject			
+		priority = 10
+	}
+}
+DH5 = { #Comayagua
+	flag_definition = {
+		coa = DH5
+		subject_canton = DH5	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DH5_subject			
+		priority = 10
+	}
+}
+DH6 = { #Tegucigalpa
+	flag_definition = {
+		coa = DH6
+		subject_canton = DH6	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DH6_subject			
+		priority = 10
+	}
+}
+DH7 = { #San Miguel
+	flag_definition = {
+		coa = DH7
+		subject_canton = DH7	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = DH7_subject			
+		priority = 10
+	}
+}
+###########Panama#####tags:PP1 - 10 Provinces of Panama
+
+UPN = {
+	flag_definition = {
+		coa = UPN
+		subject_canton = UPN	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = UPN_subject			
+		priority = 10
+	}
+}
+VGA ={
+	flag_definition = {
+		coa = VGA
+		subject_canton = VGA	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = VGA_subject			
+		priority = 10
+	}
+}
+PP1 = { #Bocas de toro
+	flag_definition = {
+		coa = PP1
+		subject_canton = PP1	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PP1_subject			
+		priority = 10
+	}
+}
+PP2 = { #Veragua
+	flag_definition = {
+		coa = PP2
+		subject_canton = PP2	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PP2_subject			
+		priority = 10
+	}
+}
+PP3 = { #Dariel
+	flag_definition = {
+		coa = PP3
+		subject_canton = PP3	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PP3_subject			
+		priority = 10
+	}
+}
+PP4 = { #Chiriqui
+	flag_definition = {
+		coa = PP4
+		subject_canton = PP4	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PP4_subject			
+		priority = 10
+	}
+}
+PP5 = { #Azuero
+	flag_definition = {
+		coa = PP5
+		subject_canton = PP5	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PP5_subject			
+		priority = 10
+	}
+}
+PP6 = { #Soto
+	flag_definition = {
+		coa = PP6
+		subject_canton = PP6	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PP6_subject			
+		priority = 10
+	}
+}
+PP7 = { #Colon
+	flag_definition = {
+		coa = PP7
+		subject_canton = PP7	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PP7_subject			
+		priority = 10
+	}
+}
+PP8 = { #Panama
+	flag_definition = {
+		coa = PP8
+		subject_canton = PP8	
+		allow_overlord_canton = yes		
+		coa_with_overlord_canton = PP8_subject			
+		priority = 10
+	}
+}
+
+#################################
+GYA = { # Guyana
+	flag_definition = {
+		coa = GYA
+		subject_canton = GYA
+		coa_with_overlord_canton = GYA_subject
+		allow_overlord_canton = yes				
+		priority = 1
+	}
+	flag_definition = {
+		coa = GYA_subject_GBR
+		allow_overlord_canton = yes	
+		priority = 30
+		trigger = { 
+			coa_def_british_ensign_trigger = yes
+		}
+	}	
+}
+
+SRM = { # Suriname
+	flag_definition = {
+		coa = SRM
+		subject_canton = SRM
+		coa_with_overlord_canton = SRM_subject
+		allow_overlord_canton = yes				
+		priority = 1
+	}
+	flag_definition = {
+		coa = SRM_subject_NET
+		priority = 30
+		trigger = { 
+			coa_def_netherlands_ensign_trigger = yes
+		}
+	}	
+}
+
+GIA = { # French Guiana 
+	flag_definition = {
+		coa = GIA
+		subject_canton = GIA
+		coa_with_overlord_canton = GIA_subject
+		allow_overlord_canton = yes				
+		priority = 1
+	}
+	flag_definition = {
+		coa = GIA_subject_FRA
+		priority = 30
+		trigger = { 
+			coa_def_french_ensign_trigger = yes
+		}
+	}	
+}
+#Sonora
+SNR = {
+	flag_definition = {
+		coa = FRA
+		subject_canton = FRA
+		allow_overlord_canton = yes
+		coa_with_overlord_canton = FRA_subject		
+		priority = 1
+	}
+}
+#Baja
+BAJ = {
+	flag_definition = {
+		coa = BAJ
+		subject_canton = BAJ
+		allow_overlord_canton = yes
+		coa_with_overlord_canton = BJA_subject				
+		priority = 1
+	}
+}
