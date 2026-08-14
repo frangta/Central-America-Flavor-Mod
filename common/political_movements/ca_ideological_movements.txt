@@ -28,7 +28,6 @@ movement_ca_liberal = {
 
     creation_weight = {
         value = 100
-
         if = {
             limit = {
                 has_law_or_variant = law_type:law_monarchy
@@ -42,15 +41,12 @@ movement_ca_liberal = {
         add_movement_enthusiasm_modifier = yes
     }
 
- 
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_ca_liberal_monarchist 
             has_ideology = ideology:ideology_ca_secularist 
             has_ideology = ideology:ideology_ca_criollo_liberal 
             has_ideology = ideology:ideology_ca_criollo_elite 
-            
-
             scope:interest_group ?= {
                 OR = {
                     has_ideology = ideology:ideology_liberal
@@ -62,7 +58,6 @@ movement_ca_liberal = {
 
     character_support_weight = {
         value = 200
-
         if = {
             limit = {
                 OR = {
@@ -74,16 +69,15 @@ movement_ca_liberal = {
             }
             multiply = 5
         }
-
         else_if = {
             limit = { has_ideology = ideology:ideology_modernizer_leader }
             multiply = 2
         }
     }
 
-
+    # -- REGLAS DE APOYO DE LA POBLACIÓN --
     pop_support_trigger = {
-        NOT = { is_pop_type = slaves }
+        NOT = { is_pop_type = slaves } # Los esclavos no participan en este movimiento
     }
 
     pop_support_factors = {
@@ -95,6 +89,73 @@ movement_ca_liberal = {
         movement_support_clerks
     }
 
+    pop_support_weight = {
+        # 1. Lógica de Supresión/Fomento (Estándar de Victoria 3)
+        if = {
+            limit = {
+                exists = scope:political_movement
+                scope:political_movement ?= {
+                    OR = {
+                        is_being_suppressed = yes
+                        is_being_bolstered = yes
+                    }
+                }
+            }
+            if = {
+                limit = { scope:political_movement = { is_being_suppressed = yes } }
+                add = {
+                    value = suppression_base_value
+                    multiply = { value = -0.5 add = owner.modifier:country_suppression_attraction_factor }
+                }
+            }
+            else = {
+                add = {
+                    value bolstering_base_value
+                    multiply = { value = 0.5 add = owner.modifier:country_bolster_attraction_factor }
+                }
+            }
+        }
+
+        # 2. Bono por Urbanización (Movimiento urbano)
+        add = {
+            value = 10
+            multiply = state.state_urbanization_rate
+        }
+
+        # 3. Preferencias por Profesión
+        if = {
+            limit = { is_pop_type = capitalists }
+            add = 30
+        }
+        else_if = {
+            limit = { is_pop_type = academics }
+            add = 40
+        }
+        else_if = {
+            limit = { is_pop_type = bureaucrats }
+            add = 20
+        }
+        else_if = {
+            limit = { is_pop_type = clerks }
+            add = 15
+        }
+        else_if = {
+            limit = { is_pop_type = shopkeepers }
+            add = 10
+        }
+
+        # 4. Multiplicador por Alfabetización (Pops más educados se unen más)
+        multiply = {
+            value = literacy_rate
+            add = 0.10
+        }
+
+        # 5. Multiplicador por Radicalismo
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
 
     revolution = {
         possible = { political_movement_support >= 0.05 }
@@ -108,13 +169,10 @@ movement_ca_liberal = {
         }
         target_fraction_of_states = { value = 0.35 }
     }
-    
-
 }
 
 # ==============================================
 # MOVIMIENTO REACCIONARIO (Tradicionalistas)
-# Objetivo: Revolución (si fuertes) o Secesión (si ignorados)
 # ==============================================
 movement_ca_reactionary = {
     category = movement_category_ideological
@@ -135,7 +193,7 @@ movement_ca_reactionary = {
         NOT = {
             any_political_movement = { is_political_movement_type = movement_ca_reactionary }
         }
-                OR = {
+        OR = {
             country_has_primary_culture = cu:central_american
             country_has_primary_culture = cu:guatemalan
             country_has_primary_culture = cu:el_salvadorian
@@ -148,7 +206,6 @@ movement_ca_reactionary = {
     creation_weight = { value = 100 }
     on_created = { add_movement_enthusiasm_modifier = yes }
 
-
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_traditionalist
@@ -156,7 +213,6 @@ movement_ca_reactionary = {
             has_ideology = ideology:ideology_authoritarian
             has_ideology = ideology:ideology_central_american_reactionary
             has_ideology = ideology:ideology_central_american_reactionary_2
-            
             scope:interest_group ?= {
                 OR = {
                     has_ideology = ideology:ideology_reactionary
@@ -179,25 +235,82 @@ movement_ca_reactionary = {
         }
     }
 
+    # -- REGLAS DE APOYO DE LA POBLACIÓN --
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
     pop_support_factors = {
         movement_support_aristocrats
         movement_support_clergymen
         movement_support_farmers
-        movement_support_peasants # Base campesina fuerte (tipo Carrera)
+        movement_support_peasants
     }
 
+    pop_support_weight = {
+        # 1. Supresión/Fomento
+        if = {
+            limit = {
+                exists = scope:political_movement
+                scope:political_movement ?= {
+                    OR = { is_being_suppressed = yes is_being_bolstered = yes }
+                }
+            }
+            if = {
+                limit = { scope:political_movement = { is_being_suppressed = yes } }
+                add = {
+                    value = suppression_base_value
+                    multiply = { value = -0.5 add = owner.modifier:country_suppression_attraction_factor }
+                }
+            }
+            else = {
+                add = {
+                    value = bolstering_base_value
+                    multiply = { value = 0.5 add = owner.modifier:country_bolster_attraction_factor }
+                }
+            }
+        }
+
+        # 2. Bono Rural (Fuerte en el campo, débil en ciudades)
+        add = {
+            value = 0.5
+            subtract = state.state_urbanization_rate
+            multiply = 10
+        }
+
+        # 3. Preferencias por Profesión
+        if = {
+            limit = { is_pop_type = aristocrats }
+            add = 40
+        }
+        else_if = {
+            limit = { is_pop_type = clergymen }
+            add = 35
+        }
+        else_if = {
+            limit = { is_pop_type = farmers }
+            add = 25
+        }
+        else_if = {
+            limit = { is_pop_type = peasants }
+            add = 20
+        }
+
+        # 4. Multiplicadores
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
     
-    # Opción A: Guerra Civil para tomar el poder
     revolution = {
         possible = { political_movement_support >= 0.10 }
         weight = { value = 100 }
     }
 
-    # Opción B: Secesión (Independencia local)
-     secession = {
+    secession = {
         possible = {
             political_movement_support >= 0.10
-            # Condición: Ningún IG que apoye el movimiento está en el gobierno
             NOT = {
                 any_supporting_interest_group = {
                     is_in_government = yes
@@ -209,7 +322,6 @@ movement_ca_reactionary = {
             value = state_urbanization_rate
             multiply = -1 
         }
-    
     }
 }
 
@@ -232,7 +344,7 @@ movement_ca_unitarian = {
         NOT = {
             any_political_movement = { is_political_movement_type = movement_ca_unitarian }
         }
-                OR = {
+        OR = {
             country_has_primary_culture = cu:central_american
             country_has_primary_culture = cu:guatemalan
             country_has_primary_culture = cu:el_salvadorian
@@ -244,7 +356,6 @@ movement_ca_unitarian = {
 
     creation_weight = { value = 100 }
     on_created = { add_movement_enthusiasm_modifier = yes }
-
 
     character_support_trigger = {
         OR = {
@@ -267,6 +378,10 @@ movement_ca_unitarian = {
         }
     }
     
+    # -- REGLAS DE APOYO DE LA POBLACIÓN --
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
 
     pop_support_factors = {
         movement_support_soldiers
@@ -275,9 +390,63 @@ movement_ca_unitarian = {
         movement_support_aristocrats
     }
 
+    pop_support_weight = {
+        # 1. Supresión/Fomento
+        if = {
+            limit = {
+                exists = scope:political_movement
+                scope:political_movement ?= {
+                    OR = { is_being_suppressed = yes is_being_bolstered = yes }
+                }
+            }
+            if = {
+                limit = { scope:political_movement = { is_being_suppressed = yes } }
+                add = {
+                    value = suppression_base_value
+                    multiply = { value = -0.5 add = owner.modifier:country_suppression_attraction_factor }
+                }
+            }
+            else = {
+                add = {
+                    value = bolstering_base_value
+                    multiply = { value = 0.5 add = owner.modifier:country_bolster_attraction_factor }
+                }
+            }
+        }
+
+        # 2. Preferencias Profesionales (Fuerza del Estado y Militares)
+        if = {
+            limit = { is_pop_type = officers }
+            add = 35
+        }
+        else_if = {
+            limit = { is_pop_type = bureaucrats }
+            add = 30
+        }
+        else_if = {
+            limit = { is_pop_type = soldiers }
+            add = 25
+        }
+        else_if = {
+            limit = { is_pop_type = aristocrats }
+            add = 20
+        }
+
+        # 3. Fuerte en la capital
+        if = {
+            limit = { state = { is_capital = yes } }
+            multiply = 1.5
+        }
+
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
     revolution = {
         possible = { political_movement_support >= 0.05 }
-        weight = { value = 150 } # Son agresivos
+        weight = { value = 150 }
     }
 }
 
@@ -300,7 +469,7 @@ movement_ca_federalist = {
         NOT = {
             any_political_movement = { is_political_movement_type = movement_ca_federalist }
         }
-                OR = {
+        OR = {
             country_has_primary_culture = cu:central_american
             country_has_primary_culture = cu:guatemalan
             country_has_primary_culture = cu:el_salvadorian
@@ -313,12 +482,10 @@ movement_ca_federalist = {
     creation_weight = { value = 100 }
     on_created = { add_movement_enthusiasm_modifier = yes }
 
-
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_ca_federalist
             has_ideology = ideology:ideology_ca_constitutionalist
-            
             scope:interest_group ?= {
                 OR = {
                     has_ideology = ideology:ideology_liberal
@@ -341,15 +508,184 @@ movement_ca_federalist = {
         }
     }
     
+    # -- REGLAS DE APOYO DE LA POBLACIÓN --
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
     pop_support_factors = {
         movement_support_academics
         movement_support_clerks
-        movement_support_shopkeepers # Clase media urbana
+        movement_support_shopkeepers 
     }
 
+    pop_support_weight = {
+        # 1. Supresión/Fomento
+        if = {
+            limit = {
+                exists = scope:political_movement
+                scope:political_movement ?= {
+                    OR = { is_being_suppressed = yes is_being_bolstered = yes }
+                }
+            }
+            if = {
+                limit = { scope:political_movement = { is_being_suppressed = yes } }
+                add = {
+                    value = suppression_base_value
+                    multiply = { value = -0.5 add = owner.modifier:country_suppression_attraction_factor }
+                }
+            }
+            else = {
+                add = {
+                    value = bolstering_base_value
+                    multiply = { value = 0.5 add = owner.modifier:country_bolster_attraction_factor }
+                }
+            }
+        }
+
+        # 2. Bono Urbano
+        add = {
+            value = 10
+            multiply = state.state_urbanization_rate
+        }
+
+        # 3. Apoyo Profesional
+        if = {
+            limit = { is_pop_type = academics }
+            add = 35
+        }
+        else_if = {
+            limit = { is_pop_type = shopkeepers }
+            add = 25
+        }
+        else_if = {
+            limit = { is_pop_type = clerks }
+            add = 20
+        }
+        else_if = {
+            limit = { is_pop_type = bureaucrats }
+            add = 15
+        }
+
+        # 4. Multiplicador de Alfabetización
+        multiply = {
+            value = literacy_rate
+            add = 0.15
+        }
+
+        # 5. Multiplicador de Radicalismo
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
 
     revolution = {
         possible = { political_movement_support >= 0.05 }
         weight = { value = 100 }
+    }
+}
+# ==============================================
+# MOVIMIENTO CARRILLISTA (Autocracia Aislacionista de Costa Rica)
+# Objetivo: Autocracia, Burocracia Designada y Aislamiento del caos federal
+# ==============================================
+movement_ca_carrillista = {
+    category = movement_category_ideological
+    ideology = ideology_carrillismo 
+
+    character_ideologies = {
+        ideology_carrillismo
+        ideology_authoritarian
+        ideology_ca_criollo_paternalistic
+        ideology_central_america_caudillo
+    }
+
+    creation_trigger = {
+        # Restringido estrictamente a Costa Rica
+        c:COS ?= this
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_carrillista }
+        }
+    }
+
+    creation_weight = { 
+        value = 100 
+        
+        # Surge con mucha más fuerza si Costa Rica todavía está atrapada en la caótica Federación
+        if = {
+            limit = { is_subject_of = c:UCA }
+            multiply = 2 
+        }
+    }
+    
+    on_created = { 
+        add_movement_enthusiasm_modifier = yes 
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_carrillismo
+            has_ideology = ideology:ideology_authoritarian
+            has_ideology = ideology:ideology_ca_criollo_paternalistic
+            
+            # Grupos pragmáticos y oligarcas que buscan estabilidad por encima de todo
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_armed_forces
+                    is_interest_group_type = ig_landowners
+                    is_interest_group_type = ig_intelligentsia
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 150
+        if = {
+            limit = { has_ideology = ideology:ideology_carrillismo }
+            multiply = 5
+        }
+        else_if = {
+            limit = { has_ideology = ideology:ideology_ca_criollo_paternalistic }
+            multiply = 2
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+        culture = cu:costa_rican
+    }
+
+    # Atraen a las élites y a la burocracia estatal, ignoran a las bases campesinas
+    pop_support_factors = {
+        movement_support_aristocrats
+        movement_support_bureaucrats
+        movement_support_officers
+        movement_support_capitalists
+    }
+
+    # Si Costa Rica es independiente, buscarán dar un Golpe de Estado Autoritario
+    revolution = {
+        possible = { political_movement_support >= 0.05 }
+        weight = { value = 150 }
+        state_weight = {
+            value = 1
+            if = {
+                limit = { owner = { ig:ig_armed_forces = { is_powerful = yes } } }
+                add = 50
+            }
+        }
+    }
+
+    # Si Costa Rica es súbdito de la UCA, buscarán la Independencia Absoluta
+    secession = {
+        possible = {
+            political_movement_support >= 0.05
+            owner ?= { is_subject_of = c:UCA }
+        }
+        weight = { value = 1000 }
+        state_weight = {
+            value = 1
+        }
     }
 }
