@@ -2089,7 +2089,7 @@ INJECT_OR_CREATE:ca_pipil = {
     color = rgb { 200 80 80 }
     religion = catholic
     heritage = heritage_mesoamerican
-    language = language_nahuat
+    language = language_nahuan
     obsessions = { }
     male_common_first_names = {
         Anastasio Feliciano Petronilo
@@ -2108,7 +2108,7 @@ INJECT_OR_CREATE:ca_kiche = {
     color = rgb { 220 140 40 }
     religion = catholic
     heritage = heritage_mesoamerican
-    language = language_kiche
+    language = language_mayan
     obsessions = { }
     male_common_first_names = {
         Atanasio Manuel Tomas
@@ -2145,11 +2145,11 @@ INJECT_OR_CREATE:latinoafricano = {
 	}
 	
 	ethnicities = {
-		10 = caucasian
+		1 = south_american
 		3 = african
 		2 = indigenous_american
 	}
-	graphics = latin_american
+	graphics = european
 }
 INJECT_OR_CREATE:coreano_latino = {
 	color = rgb{ 150 150 200 }
@@ -2170,11 +2170,21 @@ INJECT_OR_CREATE:coreano_latino = {
 		Ana Beatriz Carmen Catalina Elena Flor Gabriela Ines Lucia Margarita Maria Paula Rosa Teresa
 	}
 	common_last_names = {
-		Ahn Baek Cho Choi Han Hwang Jang Jung Kang Kim Kwon Lee Lim Moon Oh Park Ryu Seo Shin Song Yoon
+		Ahn Baek Cho Choi Han Hwang Jang Jung Kang Kim Kwon Lee Lim Moon Oh Park Ryu Seo Shin Song Yoon 		Bo
+		Ch_ok Chung
+		Guk Gyu
+		Haung Hu Hwan Hyong
+		Im
+		Jip
+		Mok
+		Seo Seon
+		Shinjong Si Sun
+		Taek
+		Yong
 	}
 	
-	ethnicities = { 10 = asian }
-	graphics = asian
+	ethnicities = { 1 = asian }
+	graphics = east_asian
 }
 
 INJECT_OR_CREATE:vietnamita_latino = {

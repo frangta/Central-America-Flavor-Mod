@@ -9,12 +9,13 @@ ca_hacienda_generic = {
 
 	buildable = no
 
-	expandable = no
+	expandable = yes
 	
 	ownership_type = other
         lens = infrastructure
 	potential = {
-	always = yes	
+	always = yes
+    has_variable = ca_buildings_on	
 	}
         	possible = {
 		owner ?= {
