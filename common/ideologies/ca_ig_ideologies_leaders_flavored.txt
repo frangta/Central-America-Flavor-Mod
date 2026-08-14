@@ -330,7 +330,191 @@ ideology_ca_leader_autocratic_autonomist = {
     }
 
 }
+ideology_ca_reformer = { 
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_reformer.dds"
 
+	character_ideology = yes
+    # Average Progressiveness - 10
+	lawgroup_citizenship = {
+		law_multicultural = disapprove
+		law_ethnostate = disapprove
+		law_national_supremacy = disapprove
+		law_subjecthood = disapprove
+		law_racial_segregation = neutral
+		law_cultural_exclusion = approve
+	}
+
+	lawgroup_rights_of_women = {
+		law_no_womens_rights = neutral
+		law_women_own_property = approve
+		law_women_in_the_workplace = neutral
+		law_womens_suffrage = neutral
+	}
+
+	lawgroup_childrens_rights = {
+		law_child_labor_allowed = disapprove
+		law_restricted_child_labor = neutral
+		law_compulsory_primary_school = approve
+	}
+
+	lawgroup_labour_associations = {
+		law_combination_acts = disapprove
+		law_guild_system = disapprove
+		law_anti_strike_laws = neutral
+		law_corporatized_unions = neutral
+		law_right_to_associate = approve
+		law_factory_councils = strongly_disapprove
+	}
+
+
+	country_trigger = {
+	    only_latin_centralamericans_cultures = yes
+		has_technology_researched = egalitarianism
+		NOT = {
+			has_technology_researched = feminism
+		}
+	}
+
+	non_interest_group_leader_trigger = {
+		# Agitators should have an ideology at odds with current laws
+		NAND = {
+			has_role_of_type = agitator
+			owner = {
+				has_law_or_variant = law_type:law_cultural_exclusion
+				has_law_or_variant = law_type:law_compulsory_primary_school
+			}
+		}
+	}
+
+	interest_group_leader_weight = {
+		value = {
+			add = 100
+			desc = "base_value"
+		}
+
+		# More likely if issues are relevant
+		if = {
+			limit = {
+				owner.ideology_reformer_disfavoured_laws > 0
+			}
+			add = {
+				value = owner.ideology_reformer_disfavoured_laws
+				multiply = 12
+				desc = "DISFAVORED_LAWS"
+			}
+		}
+		# Less likely if issues are not relevant
+		if = {
+			limit = {
+				owner.ideology_reformer_favoured_laws > 0
+			}
+			subtract = {
+				value = owner.ideology_reformer_favoured_laws
+				multiply = 12
+				desc = "FAVORED_LAWS"
+			}
+		}
+
+		# less likely among more progressive IG's if they're angry and socialism is researched
+		if = {
+			limit = {
+				owner = {
+					has_technology_researched = socialism
+				}
+				OR = {
+					is_interest_group_type = ig_intelligentsia
+					is_interest_group_type = ig_trade_unions
+				}
+				ig_approval < 0
+			}
+			add = {
+				value = ig_approval
+				multiply = 5
+				desc = "UNHAPPY_INTELLIGENTSIA_OR_TU"
+			}
+		}
+
+
+		#if = {
+		#	limit = {
+		#		OR = {
+		#			has_variable = communist_ig_var
+		#			has_variable = chose_vanguardism
+		#			has_variable = chose_anarchism
+		#			has_variable = chose_communism
+		#			has_variable = chose_ethno_nationalism
+		#			has_variable = chose_conservatism
+		#			has_variable = chose_fascism
+		#		}
+		#	}
+		#	multiply = {
+		#		value = 0.1
+		#		desc = "CHOSE_A_DIFFERENT_PATH"
+		#	}
+		#}
+	}
+
+	non_interest_group_leader_weight = {
+		value = 100
+
+		# More likely if issues are relevant
+		if = {
+			limit = {
+				owner.ideology_reformer_disfavoured_laws > 0
+			}
+			add = {
+				value = owner.ideology_reformer_disfavoured_laws
+				multiply = 12
+			}
+		}
+		# Less likely if issues are not relevant
+		if = {
+			limit = {
+				owner.ideology_reformer_favoured_laws > 0
+			}
+			subtract = {
+				value = owner.ideology_reformer_favoured_laws
+				multiply = 12
+			}
+		}
+
+
+		# less likely among more progressive IG's if they're angry and socialism is researched
+		if = {
+			limit = {
+				owner = {
+					has_technology_researched = socialism
+				}
+				OR = {
+					is_interest_group_type = ig_intelligentsia
+					is_interest_group_type = ig_trade_unions
+				}
+				interest_group.ig_approval < 0
+			}
+			add = {
+				value = interest_group.ig_approval
+				multiply = 5
+			}
+		}
+
+		#if = {
+		#	limit = {
+		#		interest_group ?= {
+		#			OR = {
+		#				has_variable = communist_ig_var
+		#				has_variable = chose_vanguardism
+		#				has_variable = chose_anarchism
+		#				has_variable = chose_communism
+		#				has_variable = chose_ethno_nationalism
+		#				has_variable = chose_conservatism
+		#				has_variable = chose_fascism
+		#			}
+		#		}
+		#	}
+		#	multiply = 0.1
+		#}
+	}
+}
 ideology_central_america_caudillo = {
     icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
     character_ideology = yes
