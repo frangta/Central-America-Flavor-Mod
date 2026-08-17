@@ -830,3 +830,143 @@ amendment_chiapas_1826 = {
 	# NOTAS PARA MODDERS:
 	# Históricamente: Primera constitución de Chiapas tras unirse formalmente a México.
 }
+
+# ====================================================================
+# ENMIENDAS: COFFEACRACIA
+# ====================================================================
+
+amendment_ca_libretas_jornaleros = {
+    parent = law_ca_republica_cafetalera
+    modifier = {
+        state_working_adult_ratio_add = 0.10 # Obligan a más gente a trabajar
+        state_lower_strata_standard_of_living_add = -1 # Explotación
+    }
+}
+
+amendment_ca_exencion_fiscal = {
+    parent = law_ca_republica_cafetalera
+    modifier = {
+        state_aristocrats_investment_pool_efficiency_mult = 0.20
+        state_tax_capacity_mult = -0.15 # El estado no recauda de los ricos
+    }
+}
+
+amendment_ca_inversion_barones = {
+    parent = law_ca_republica_cafetalera
+    modifier = {
+        state_infrastructure_from_population_add = 0.10
+        interest_group_ig_landowners_pol_str_mult = 0.10
+    }
+}
+
+# ====================================================================
+# ENMIENDAS: TECNOCRACIA
+# ====================================================================
+
+amendment_ca_darwinismo_social = {
+    parent = law_ca_tecnocracy
+    modifier = {
+        state_migration_pull_mult = 0.20
+        country_radicals_from_discrimination_mult = 0.30 # Indígenas muy enojados
+    }
+}
+
+amendment_ca_educacion_positivista = {
+    parent = law_ca_tecnocracy
+    modifier = {
+        state_education_access_add = 0.10
+        interest_group_ig_devout_approval_add = -5 # La Iglesia lo odia
+    }
+}
+
+amendment_ca_fomento_cientifico = {
+    parent = law_ca_tecnocracy
+    modifier = {
+        building_group_bg_manufacturing_throughput_add = 0.10
+        building_group_bg_mining_throughput_add = 0.10
+        country_bureaucracy_mult = 0.10 # Requiere más burócratas
+    }
+}
+
+# ====================================================================
+# ENMIENDAS: JUNTA MILITAR
+# ====================================================================
+
+amendment_ca_tribunales_militares = {
+    parent = law_ca_junta
+    modifier = {
+        state_turmoil_effects_mult = -0.30 # Represión brutal del disenso
+        country_prestige_mult = -0.10 # Mal visto internacionalmente
+    }
+}
+
+amendment_ca_presupuesto_negro = {
+    parent = law_ca_junta
+    modifier = {
+        interest_group_ig_armed_forces_approval_add = 5
+        country_officers_pol_str_mult = 0.20
+        country_tax_wastes_add = 0.10 # Corrupción
+    }
+}
+
+amendment_ca_leva_suprema = {
+    parent = law_ca_junta
+    modifier = {
+        country_conscription_rate_add = 0.05
+        state_mortality_mult = 0.05 # La gente muere más por las levas
+    }
+}
+
+# ====================================================================
+# ENMIENDAS: CONSEJO DE JUNTA
+# ====================================================================
+
+amendment_ca_gabinete_transicion = {
+    parent = law_ca_consejo_junta
+    modifier = {
+        country_radicals_from_law_enactment_mult = -0.30 # Calma las protestas
+    }
+}
+
+amendment_ca_pacto_generales = {
+    parent = law_ca_consejo_junta
+    modifier = {
+        country_military_wages_mult = 0.20 # Se les paga para que no den otro golpe
+        interest_group_ig_armed_forces_approval_add = 3
+    }
+}
+
+amendment_ca_amnistia_politica = {
+    parent = law_ca_consejo_junta
+    modifier = {
+        country_radicals_fraction_add = -0.05
+        interest_group_ig_trade_unions_pol_str_mult = 0.10 # Regresan del exilio
+    }
+}
+
+# ====================================================================
+# ENMIENDAS: POLICÍA COMUNAL
+# ====================================================================
+
+amendment_ca_justicia_consuetudinaria = {
+    parent = law_ca_policia_comunal
+    modifier = {
+        country_radicals_from_sol_change_mult = -0.10
+        interest_group_ig_landowners_approval_add = -3 # Terratenientes odian esto
+    }
+}
+
+amendment_ca_milicias_autodefensa = {
+    parent = law_ca_policia_comunal
+    modifier = {
+        state_defense_add = 0.10
+        country_institution_police_max_investment_add = -1
+    }
+}
+
+amendment_ca_patrullajes_agricolas = {
+    parent = law_ca_policia_comunal
+    modifier = {
+        building_group_bg_subsistence_agriculture_throughput_add = 0.15
+    }
+}
