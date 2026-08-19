@@ -9,3 +9,50 @@
 #scope_DG4
 #scope_DG5
 #scope_DG6
+## introduccion de Guatemala
+ca_guatemala_events.1 = {
+	type = country_event
+	placement = s:STATE_GUATEMALA
+	title = ca_guatemala_events.1.t
+	desc = ca_guatemala_events.1.d
+	flavor = ca_guatemala_events.1.f
+	duration = 3
+	event_image = {
+		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	trigger = {
+        exists = c:UCA
+        this = c:UCA 
+        game_date <= 1836.1.15
+	}
+	
+	immediate = {
+        s:STATE_GUATEMALA = {
+        add_state_trait = state_trait_mining_gua
+		add_modifier = { name = ca_uca_conservative_capital }
+        add_modifier = { name = unitary_stronghold }
+        add_modifier = { name = conservative_stronghold }
+        add_modifier = { name = reactionary_stronghold }
+        }
+	}
+
+	option = {
+		name = ca_guatemala_events.1.a
+		default_option = yes
+
+	}
+	option = {
+		name = ca_guatemala_events.2.a
+		trigger = {
+			c:UCA ?= {
+			has_variable = ca_state_selection_to_playing
+			}
+		}
+       ca_create_guatemala_effect = yes
+	ca_play_guatemala_effect = yes 
+    play_as = c:GUA
+	}
+} 

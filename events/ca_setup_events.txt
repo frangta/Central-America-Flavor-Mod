@@ -1,5 +1,5 @@
 ﻿namespace = ca_setup_events
-ca_setup_events.1 = { # 
+ca_setup_events.1 = { #elecion de la cadena de eventos para la ia
 	type = country_event
 	placement = ROOT
 	title = ca_central_america.setup.t
@@ -32,10 +32,8 @@ ca_setup_events.1 = { #
 				add = -100
 			}
 		}		
-		add_journal_entry = {
-			type = je_historic_central_america_falls_apart
-		}
-		set_bar_progress = { value = 50 name = frca_support_bar }
+
+
 	add_radicals = {
 		value = small_radicals
 		culture = cu:guatemalan
@@ -62,8 +60,7 @@ ca_setup_events.1 = { #
 	}
 		
 
-		set_variable = { name = historic_central_american}
-		set_variable = { name = frca_preserved }
+
 		ca_history_rail_events = yes
 
 		if = {

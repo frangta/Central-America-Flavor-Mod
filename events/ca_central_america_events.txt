@@ -6037,6 +6037,7 @@ ca_central_america.80 = {
     option = {
         name = ca_central_america.80.a 
         ca_create_guatemala_effect = yes
+		ca_play_guatemala_effect = yes 
         play_as = c:GUA
     }
 
@@ -6044,6 +6045,7 @@ ca_central_america.80 = {
     option = {
         name = ca_central_america.80.b
         ca_create_elsalvador_effect = yes 
+        ca_play_elsalvador_effect = yes		
         play_as = c:ELS
     }
 
@@ -6051,6 +6053,7 @@ ca_central_america.80 = {
     option = {
         name = ca_central_america.80.c
         ca_create_honduras_effect = yes 
+		ca_play_honduras_effect = yes
         play_as = c:HON
     }
 
@@ -6058,13 +6061,15 @@ ca_central_america.80 = {
     option = {
         name = ca_central_america.80.d
         ca_create_nicaragua_effect = yes 
+		ca_play_nicaragua_effect = yes
         play_as = c:NIC
     }
 
     # OPCIÓN 5: Jugar como Costa Rica
     option = {
         name = ca_central_america.80.e
-        ca_create_costarica_effect = yes 
+        ca_create_costarica_effect = yes
+		ca_play_costarica_effect = yes
         play_as = c:COS
     }
     
@@ -6072,7 +6077,8 @@ ca_central_america.80 = {
     option = {
         name = ca_central_america.80.f
         trigger = { exists = s:STATE_CHIAPAS.region_state:UCA }
-        ca_create_losaltos_effect = yes 
+        ca_create_losaltos_effect = yes
+		ca_play_losaltos_effect = yes
         play_as = c:ALT
     }
     
@@ -6907,7 +6913,7 @@ ca_central_america.101 = {
 	flavor = ca_central_america.101.f
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.101.a # "Malditos traidores..."
@@ -6944,7 +6950,7 @@ ca_central_america.102 = {
 	flavor = ca_central_america.102.f
 	icon = "gfx/interface/icons/event_icons/event_coin.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.102.a # "Abran las arcas del tesoro"
@@ -6974,7 +6980,7 @@ ca_central_america.103 = {
 	desc = ca_central_america.103.d
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	
-	is_triggered_only = yes
+	 
 
 	# Opción si ganó Nicaragua/UCA (Se dispara desde el 85)
 	option = {
@@ -7023,7 +7029,7 @@ ca_central_america.104 = {
 	desc = ca_central_america.104.d
 	icon = "gfx/interface/icons/event_icons/event_protest.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.104.a # "Son unos desagradecidos"
@@ -7060,7 +7066,7 @@ ca_central_america.105 = {
 	desc = ca_central_america.105.d
 	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.105.a # "Aceptamos el oro extranjero"
@@ -7090,7 +7096,7 @@ ca_central_america.106 = {
 	desc = ca_central_america.106.d
 	icon = "gfx/interface/icons/event_icons/event_default.dds"
 	
-	is_triggered_only = yes
+	 
 
 	# Si Costa Rica cae (Evento 84)
 	option = {
@@ -7145,7 +7151,7 @@ ca_central_america.107 = {
 	desc = ca_central_america.107.d
 	icon = "gfx/interface/icons/event_icons/event_fire.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.107.a # "¡Es una traición imperdonable!"
@@ -7178,7 +7184,7 @@ ca_central_america.108 = {
 	desc = ca_central_america.108.d
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.108.a # "Envíen oficiales para disciplinar a las milicias"
@@ -7212,7 +7218,7 @@ ca_central_america.109 = {
 	desc = ca_central_america.109.d
 	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
 	
-	is_triggered_only = yes
+	 
 
 	# Si Honduras cae (Evento 82)
 	option = {
@@ -7266,7 +7272,7 @@ ca_central_america.110 = {
 	desc = ca_central_america.110.d
 	icon = "gfx/interface/icons/event_icons/event_religion.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.110.a # "La ignorancia es nuestro peor enemigo"
@@ -7304,7 +7310,7 @@ ca_central_america.111 = {
 	desc = ca_central_america.111.d
 	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.111.a # "Morazán marchará a Guatemala"
@@ -7338,7 +7344,7 @@ ca_central_america.112 = {
 	desc = ca_central_america.112.d
 	icon = "gfx/interface/icons/event_icons/event_death.dds"
 	
-	is_triggered_only = yes
+	 
 
 	# Si Guatemala cae (Evento 54)
 	option = {
@@ -7394,7 +7400,7 @@ ca_central_america.113 = {
 	desc = ca_central_america.113.d
 	icon = "gfx/interface/icons/event_icons/event_protest.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.113.a # "¡Protejan la capital a toda costa!"
@@ -7430,7 +7436,7 @@ ca_central_america.114 = {
 	desc = ca_central_america.114.d
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.114.a # "Armen a los artesanos y campesinos"
@@ -7466,7 +7472,7 @@ ca_central_america.115 = {
 	desc = ca_central_america.115.d
 	icon = "gfx/interface/icons/event_icons/event_death.dds"
 	
-	is_triggered_only = yes
+	 
 
 	# Si El Salvador cae (Evento 51)
 	option = {
@@ -7516,7 +7522,7 @@ ca_central_america.116 = {
 	desc = ca_central_america.116.d
 	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.116.a # "¡Bienvenidos a la Federación!"
@@ -7564,7 +7570,7 @@ ca_central_america.117 = {
 	desc = ca_central_america.117.d
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	
-	is_triggered_only = yes
+	 
 
 	option = {
 		name = ca_central_america.117.a # "Desvíen armas hacia el norte"
@@ -7596,7 +7602,7 @@ ca_central_america.118 = {
 	desc = ca_central_america.118.d
 	icon = "gfx/interface/icons/event_icons/event_death.dds"
 	
-	is_triggered_only = yes
+	 
 
 	# Si Los Altos cae (Evento 57)
 	option = {
@@ -7647,4 +7653,157 @@ ca_central_america.118 = {
 			trigger_event = { id = ca_los_altos_soconusco_events.1 } # Dispara la anexión de Soconusco
 		}
 	}
+}
+ca_central_america.119 = { 
+    type = country_event
+    placement = root # Es mejor usar 'root' para eventos globales de inicio de partida
+    
+    title = ca_central_america.119.t
+    desc = ca_central_america.119.d
+    flavor = ca_central_america.119.f
+    
+    event_image = {
+        video = "southamerica_aristocrats"
+    }
+    
+    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    duration = 3
+    
+    trigger = {
+        exists = c:UCA
+        this = c:UCA 
+        game_date <= 1836.1.15 # Buena práctica para que salte justo al iniciar la campaña
+        NOT = { has_global_variable = ca_fired }
+    }
+
+    immediate = {
+        set_global_variable = ca_fired
+    }
+    
+    # BANDO A: Federalistas (Histórico - La IA siempre elige esto)
+    option = { 
+        name = ca_central_america.119.a 
+        default_option = yes
+        
+        custom_tooltip = { 
+            text = frca_support_79a 
+            je:je_historic_central_america_falls_apart = { 
+                add_progress = { value = -15 name = frca_support_bar } 
+            } 
+        }
+
+        #ig:ig_landowners = {
+        #    add_modifier = { name = ca_ig_approval_states_rights months = 24 }
+        #}
+        #ig:ig_devout = {
+        #    add_modifier = { name = ca_ig_approval_states_rights months = 24 }
+        #}
+        #ig:ig_intelligentsia = {
+        #    add_modifier = { name = ca_ig_disapproval_federal_betrayal months = 24 }
+        #}
+
+        #ruler = {
+        #    add_modifier = { name = ca_unpopular_ruler_modifier months = 24 }
+        #}        
+        #
+        add_radicals = {
+            value = small_radicals
+            culture = cu:central_american                                          
+        }
+        
+        add_radicals = { value = small_radicals culture = cu:guatemalan }
+        add_radicals = { value = small_radicals culture = cu:el_salvadorian }
+        add_radicals = { value = small_radicals culture = cu:honduran }
+        add_radicals = { value = small_radicals culture = cu:nicaraguan }
+        add_radicals = { value = small_radicals culture = cu:costa_rican }
+   
+        every_scope_state = {
+            limit = {
+                OR = {
+                    state_region = s:STATE_HONDURAS
+                    state_region = s:STATE_NICARAGUA
+                    state_region = s:STATE_COSTA_RICA
+                }
+            }
+            add_modifier = {
+                name = state_separatist_unrest 
+                months = 12
+            }
+        }
+        
+        ai_chance = { base = 100 } # Aseguramos que la IA tome este camino
+    }
+
+    # BANDO B: Centralistas (Ahistórico - Imposición por la fuerza)
+    option = { 
+        name = ca_central_america.119.b 
+        
+        custom_tooltip = { 
+            text = frca_support_79b 
+            je:je_historic_central_america_falls_apart = {
+                add_progress = { value = 25 name = frca_support_bar } 
+            } 
+        }
+        
+        add_modifier = { name = unitary_stronghold }
+        
+        ig:ig_armed_forces = {
+            add_modifier = { name = ca_ig_approval_strong_republic months = 24 }
+        }
+        ig:ig_landowners = {
+            add_modifier = { name = ca_ig_disapproval_centralist_tyranny months = 24 }
+            add_modifier = { name = ca_state_rights_approval months = 24 }
+        }
+        ig:ig_intelligentsia = {
+            add_modifier = { name = ca_federal_betrayal_disapproval months = 24 }
+        }
+
+        ruler = {
+            add_modifier = { name = ca_popular_ruler_modifier months = 24 }
+        }
+
+        every_scope_state = {
+            limit = {
+                OR = {
+                    state_region = s:STATE_HONDURAS
+                    state_region = s:STATE_NICARAGUA
+                    state_region = s:STATE_COSTA_RICA
+                    state_region = s:STATE_SAN_SALVADOR
+                }
+            }
+            add_modifier = { name = ca_separatist_unrest months = 12 }
+            add_devastation = 10 
+        }
+        
+        add_loyalists = {
+            value = medium_loyalists
+            culture = cu:central_american                                              
+        }
+          
+        add_radicals = { value = medium_radicals culture = cu:guatemalan }
+        add_radicals = { value = medium_radicals culture = cu:el_salvadorian }
+        add_radicals = { value = medium_radicals culture = cu:honduran }
+        add_radicals = { value = medium_radicals culture = cu:nicaraguan }
+        add_radicals = { value = medium_radicals culture = cu:costa_rican }
+
+        ai_chance = { base = 0 } 
+    }   
+
+    # BANDO C: Separatistas / Jugar como Estado Individual
+    option = { 
+        name = ca_central_america.119.c 
+        
+        ai_chance = { base = 0 } # Exclusivo para el jugador
+        
+        # Le indicamos al juego que el jugador quiere separarse
+        set_variable = ca_state_selection_to_playing
+
+        custom_tooltip = {
+            text = frca_support_79c # Opcional: Define este texto en tu archivo de localización
+            je:je_historic_central_america_falls_apart = {
+                add_progress = { value = 20 name = frca_support_bar } 
+            }        
+        }
+    }
 }

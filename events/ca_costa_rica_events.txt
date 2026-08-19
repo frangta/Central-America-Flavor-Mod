@@ -15,35 +15,52 @@
 # =========================================================================
 
 ## Evento 1: Ecos de la Federación
-#ca_costa_rica_events.1 = {
-#    type = country_event
-#    placement = root
-#    
-#    title = ca_costa_rica_events.1.t
-#    desc = ca_costa_rica_events.1.d
-#    flavor = ca_costa_rica_events.1.f
-#    
-#    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
-#    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#    
-#    trigger = {
-#        this = c:COS
-#        game_date >= 1836.1.1
-#        game_date <= 1836.2.1
-#        NOT = { has_variable = ca_ecos_federacion_fired }
-#    }
-#    
-#    immediate = {
-#        set_variable = ca_ecos_federacion_fired
-#    }
-#    
-#    option = {
-#        name = ca_costa_rica_events.1.a
-#        # "Nuestro propio camino."
-#        add_prestige = 5
-#    }
-#}
-#
+## introduccion de Costa Rica
+ca_costa_rica_events.01 = {
+	type = country_event
+	placement = s:STATE_COSTA_RICA
+	title = ca_costa_rica_events.01.t
+	desc = ca_costa_rica_events.01.d
+	flavor = ca_costa_rica_events.01.f
+	duration = 3
+	event_image = {
+		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	trigger = {
+        exists = c:UCA
+        this = c:UCA 
+        game_date <= 1836.1.15
+	}
+	
+	immediate = {
+        s:STATE_COSTA_RICA = {
+        add_state_trait = state_trait_mining_cos
+		add_modifier = { name = ca_uca_isolated_autonomists }
+        add_modifier = { name = separatism_stronghold }
+        add_modifier = { name = unitary_stronghold_small_nation }
+        }
+	}
+
+	option = {
+		name = ca_costa_rica_events.01.a
+		default_option = yes
+
+	}
+	option = {
+		name = ca_costa_rica_events.02.a
+		trigger = {
+			c:UCA ?= {
+			has_variable = ca_state_selection_to_playing
+			}
+		}
+        ca_create_costarica_effect = yes
+		ca_play_costarica_effect = yes
+        play_as = c:COS
+	}
+} 
 ## Evento 2: Las Cicatrices de la Ley de la Ambulancia
 #ca_costa_rica_events.2 = {
 #    type = country_event

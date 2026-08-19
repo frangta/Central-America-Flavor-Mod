@@ -7,97 +7,53 @@
 #scope_PN4
 #scope_PN5
 #scope_PN6
-#ca_nicaragua_events.1  = { #setup
-#
-#    type = country_event
-#
-#	
-#	title = ca_nicaragua_events.1.t
-#	desc = ca_nicaragua_events.1.d
-#	flavor = ca_nicaragua_events.1.f
-#	
-#	event_image = {
-#		video = "southamerica_aristocrats.bk2"
-#	}
-#	
-#	icon = "gfx/interface/icons/event_icons/event_default.dds"
-#	
-#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#	
-#	duration = 3
-#	
-#	trigger = {
-#	    has_journal_entry = je_ca_historic_situation_in_nicaragua
-#		exists = c:NIC
-#		this = c:NIC
-#	}
-#	
-#
-#
-#	immediate = {
-#   create_country = {
-#   	tag = PN1
-#   	origin = NIC
-#   	province = p:x68E7F3
-#		on_created = {
-#			add_modifier = {
-#		name = liberal_stronghold
-#		   }				
-#		 set_ruling_interest_groups = { 				
-#          ig_intelligentsia
-#	        }
-#		save_scope_as = scope_PN1
-#		}		
-#   }
-#   create_country = {
-#   	tag = PN6
-#   	origin = NIC
-#   	province = p:x9070C0
-#		on_created = {
-#		add_modifier = {
-#		name = conservative_stronghold
-#		   }				
-#		 set_ruling_interest_groups = { 
-#          ig_landowners 				
-#          
-#	        }
-#		save_scope_as = scope_PN6
-#		}		
-#   }
-#		create_diplomatic_pact = {
-#          country = c:PN1
-#          type = ca_dependency
-#      }
-#		create_diplomatic_pact = {
-#          country = c:PN6
-#          type = ca_dependency
-#      }	   
-#	}
-#	
-#	option = {
-#		name = ca_nicaragua_events.1.a
-#			create_character = {
-#			first_name = "Jose"			
-#			last_name = "Zepeda"
-#			historical = yes
-#			is_general = yes
-#	         	 interest_group = ig_intelligentsia
-#	         	 ideology = ideology:ideology_liberal_leader
-#	         	 ig_leader = yes			
-#	         	 traits = {
-#	         	 	reckless
-#	         	 	}
-#	         	 	}
-#		ai_chance = {
-#			base = 1
-#		}
-#		default_option = yes
-#		#set_variable = 
-#	}
-#	
-#	
-#
-#}                                            
+## introduccion de NICARAGUA
+ca_nicaragua_events.01 = {
+	type = country_event
+	placement = s:STATE_NICARAGUA
+	title = ca_nicaragua_events.01.t
+	desc = ca_nicaragua_events.01.d
+	flavor = ca_nicaragua_events.01.f
+	duration = 3
+	event_image = {
+		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	trigger = {
+        exists = c:UCA
+        this = c:UCA 
+        game_date <= 1836.1.15
+	}
+	
+	immediate = {
+        s:STATE_NICARAGUA = {
+        add_state_trait = state_trait_mining_nic
+		add_modifier = { name = ca_uca_leones_vs_granadinos }
+        add_modifier = { name = separatism_stronghold }
+        add_modifier = { name = liberal_stronghold_small_nation }
+        add_modifier = { name = conservative_stronghold_small_nation }
+        }
+	}
+
+	option = {
+		name = ca_nicaragua_events.01.a
+		default_option = yes
+
+	}
+	option = {
+		name = ca_nicaragua_events.02.a
+		trigger = {
+			c:UCA ?= {
+			has_variable = ca_state_selection_to_playing
+			}
+		}
+        ca_create_nicaragua_effect = yes 
+		ca_play_nicaragua_effect = yes
+        play_as = c:NIC
+	}
+}                                            
 #ca_nicaragua_events.2  = { #Rivalry between cities
 #      type = country_event
 #

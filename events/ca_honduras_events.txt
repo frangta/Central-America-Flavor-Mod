@@ -10,3 +10,49 @@
 #scope_DH5
 #scope_DH6
 #scope_DH7
+## introduccion de HONDURAS
+ca_honduras_events.1 = {
+	type = country_event
+	placement = s:STATE_HONDURAS
+	title = ca_honduras_events.1.t
+	desc = ca_honduras_events.1.d
+	flavor = ca_honduras_events.1.f
+	duration = 3
+	event_image = {
+		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	trigger = {
+        exists = c:UCA
+        this = c:UCA 
+        game_date <= 1836.1.15
+	}
+	
+	immediate = {
+        s:STATE_HONDURAS = {
+        add_state_trait = state_trait_mining_hon
+		add_modifier = { name = ca_uca_federalist_heartland }
+        add_modifier = { name = waning_federal_stronghold }
+        add_modifier = { name = conservative_stronghold_small_nation }
+        }
+	}
+
+	option = {
+		name = ca_honduras_events.1.a
+		default_option = yes
+
+	}
+	option = {
+		name = ca_honduras_events.2.a
+		trigger = {
+			c:UCA ?= {
+			has_variable = ca_state_selection_to_playing
+			}
+		}
+        ca_create_honduras_effect = yes 
+		ca_play_honduras_effect = yes
+        play_as = c:HON
+	}
+}
