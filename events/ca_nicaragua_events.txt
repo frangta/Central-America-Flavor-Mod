@@ -455,3 +455,261 @@ ca_nicaragua_events.01 = {
 #	}
 #}                                     
 
+
+# 1. 1837: José Núñez y el fin de la Federación
+ca_historical_elections.19 = {
+    type = country_event
+    placement = ROOT
+    title = ca_historical_elections.19.t
+    desc = ca_historical_elections.19.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:NIC ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = nic_elec_1837_fired }
+        game_date >= 1837.1.1
+        game_date <= 1838.1.1
+    }
+    
+    immediate = { 
+        set_variable = { name = nic_elec_1837_fired value = yes } 
+    }
+
+    # Opción A (Histórica): José Núñez asume como moderado de León
+    option = {
+        name = ca_historical_elections.19.a
+        default_option = yes
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_medium } }
+        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_medium } }
+    }
+
+    # Opción B (Alternativa): Los conservadores de Granada imponen su fuerza
+    option = {
+        name = ca_historical_elections.19.b
+        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
+        add_radicals = { value = small_radicals pop_type = academics }
+    }
+}
+
+# 2. 1839: Primeras Elecciones Constitucionales (Patricio Rivas)
+ca_historical_elections.20 = {
+    type = country_event
+    placement = ROOT
+    title = ca_historical_elections.20.t
+    desc = ca_historical_elections.20.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:NIC ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = nic_elec_1839_fired }
+        game_date >= 1839.4.1
+        game_date <= 1840.1.1
+    }
+    
+    immediate = { 
+        set_variable = { name = nic_elec_1839_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Patricio Rivas (Conservador de Granada)
+    option = {
+        name = ca_historical_elections.20.a
+        default_option = yes
+        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
+        ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
+    }
+
+    # Opción B (Alternativa): Los Leoneses rechazan a Rivas
+    option = {
+        name = ca_historical_elections.20.b
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+        add_radicals = { value = medium_radicals pop_type = aristocrats }
+    }
+}
+
+# 3. 1841: Pablo Buitrago y el retorno Liberal
+ca_historical_elections.21 = {
+    type = country_event
+    placement = ROOT
+    title = ca_historical_elections.21.t
+    desc = ca_historical_elections.21.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:NIC ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = nic_elec_1841_fired }
+        game_date >= 1841.3.1
+        game_date <= 1842.1.1
+    }
+    
+    immediate = { 
+        set_variable = { name = nic_elec_1841_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Pablo Buitrago asume por León
+    option = {
+        name = ca_historical_elections.21.a
+        default_option = yes
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+    }
+
+    # Opción B (Alternativa): Boicot desde Granada
+    option = {
+        name = ca_historical_elections.21.b
+        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_medium_decrease } }
+    }
+}
+
+# 4. 1843: Manuel Pérez
+ca_historical_elections.22 = {
+    type = country_event
+    placement = ROOT
+    title = ca_historical_elections.22.t
+    desc = ca_historical_elections.22.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:NIC ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = nic_elec_1843_fired }
+        game_date >= 1843.3.1
+        game_date <= 1844.1.1
+    }
+    
+    immediate = { 
+        set_variable = { name = nic_elec_1843_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Manuel Pérez asume el poder
+    option = {
+        name = ca_historical_elections.22.a
+        default_option = yes
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_medium } }
+        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_medium } }
+    }
+
+    # Opción B (Alternativa): Caudillos militares exigen el control
+    option = {
+        name = ca_historical_elections.22.b
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
+    }
+}
+
+# 5. 1845: Las Ruinas de León y José León Sandoval
+ca_historical_elections.23 = {
+    type = country_event
+    placement = ROOT
+    title = ca_historical_elections.23.t
+    desc = ca_historical_elections.23.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:NIC ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = nic_elec_1845_fired }
+        game_date >= 1845.3.1
+        game_date <= 1846.1.1
+    }
+    
+    immediate = { 
+        set_variable = { name = nic_elec_1845_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Tras el saqueo militar de León, el conservador Sandoval asume
+    option = {
+        name = ca_historical_elections.23.a 
+        default_option = yes
+        ig:ig_landowners ?= { party = { add_momentum = momentum_very_large } }
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
+    }
+
+    # Opción B (Alternativa): Los sobrevivientes de León inician la resistencia armada
+    option = {
+        name = ca_historical_elections.23.b
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+        add_radicals = { value = large_radicals pop_type = academics }
+        add_radicals = { value = medium_radicals pop_type = clerks }
+    }
+}
+
+# 6. 1847: José María Guerrero de Arcos (Crisis con Gran Bretaña)
+ca_historical_elections.24 = {
+    type = country_event
+    placement = ROOT
+    title = ca_historical_elections.24.t
+    desc = ca_historical_elections.24.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:NIC ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = nic_elec_1847_fired }
+        game_date >= 1847.4.1
+        game_date <= 1848.1.1
+    }
+    
+    immediate = { 
+        set_variable = { name = nic_elec_1847_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Guerrero asume en medio de tensiones por la Mosquitia
+    option = {
+        name = ca_historical_elections.24.a
+        default_option = yes
+        ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium } }
+    }
+
+    # Opción B (Alternativa): Los liberales capitalizan la debilidad diplomática
+    option = {
+        name = ca_historical_elections.24.b
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+    }
+}
+
+# 7. 1849: Norberto Ramírez (Transición y Tratados Extranjeros)
+ca_historical_elections.25 = {
+    type = country_event
+    placement = ROOT
+    title = ca_historical_elections.25.t
+    desc = ca_historical_elections.25.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:NIC ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = nic_elec_1849_fired }
+        game_date >= 1849.3.1
+        game_date <= 1850.1.1
+    }
+    
+    immediate = { 
+        set_variable = { name = nic_elec_1849_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Norberto Ramírez (Moderado de León) inicia los tratados de canal
+    option = {
+        name = ca_historical_elections.25.a
+        default_option = yes
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_medium } }
+        ig:ig_industrialists ?= { party = { add_momentum = momentum_large } }
+    }
+
+    # Opción B (Alternativa): Los radicales rechazan los pactos extranjeros
+    option = {
+        name = ca_historical_elections.25.b
+        ig:ig_rural_folk ?= { party = { add_momentum = momentum_large } }
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium } }
+        add_radicals = { value = small_radicals pop_type = peasants }
+    }
+}
