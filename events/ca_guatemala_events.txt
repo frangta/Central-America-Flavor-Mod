@@ -56,3 +56,167 @@ ca_guatemala_events.1 = {
     play_as = c:GUA
 	}
 } 
+
+# 1. 1837-1838: La Crisis de Gálvez y la Rebelión de la Montaña
+ca_historical_elections.5 = {
+    type = country_event
+    placement = ROOT
+    title = ca_historical_elections.5.t
+    desc = ca_historical_elections.5.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:GUA ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = gua_elec_1837_fired }
+        game_date >= 1837.1.1
+        game_date <= 1838.12.31
+    }
+    
+    immediate = { 
+        set_variable = { name = gua_elec_1837_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Los conservadores designan a Pedro José Valenzuela / Rivera Paz
+    option = {
+        name = ca_historical_elections.5.a
+        default_option = yes
+        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
+        ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large_decrease } }
+    }
+
+    # Opción B (Alternativa): Mariano Gálvez resiste en el poder (Liberales)
+    option = {
+        name = ca_historical_elections.5.b
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+        # Retener a Gálvez causa furia en el campo
+        add_radicals = { value = large_radicals pop_type = peasants }
+    }
+
+    # Opción C (Alternativa): Rafael Carrera toma el poder tempranamente
+    option = {
+        name = ca_historical_elections.5.c
+        ig:ig_rural_folk ?= { party = { add_momentum = momentum_large } }
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium } }
+    }
+}
+
+# 2. 1842: Ratificación Institucional
+ca_historical_elections.6 = {
+    type = country_event
+    placement = ROOT
+    title = ca_historical_elections.6.t
+    desc = ca_historical_elections.6.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:GUA ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = gua_elec_1842_fired }
+        game_date >= 1842.12.14
+        game_date <= 1843.12.31
+    }
+    
+    immediate = { 
+        set_variable = { name = gua_elec_1842_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Mariano Rivera Paz es ratificado por la Asamblea
+    option = {
+        name = ca_historical_elections.6.a
+        default_option = yes
+        ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
+        ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
+    }
+
+    # Opción B (Alternativa): Oposición Liberal intenta retomar el congreso
+    option = {
+        name = ca_historical_elections.6.b
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+        ig:ig_landowners ?= { party = { add_momentum = momentum_small_decrease } }
+    }
+}
+
+# 3. 1844: El Ascenso Oficial de Rafael Carrera
+ca_historical_elections.7 = {
+    type = country_event
+    placement = ROOT
+    title = ca_historical_elections.7.t
+    desc = ca_historical_elections.7.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:GUA ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = gua_elec_1844_fired }
+        game_date >= 1844.12.11
+        game_date <= 1845.12.31
+    }
+    
+    immediate = { 
+        set_variable = { name = gua_elec_1844_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Rafael Carrera es elegido Jefe de Estado
+    option = {
+        name = ca_historical_elections.7.a
+        default_option = yes
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_very_large } }
+        ig:ig_rural_folk ?= { party = { add_momentum = momentum_large } }
+    }
+
+    # Opción B (Alternativa): Las élites conservadoras tratan de mantener a un civil (Rivera Paz)
+    option = {
+        name = ca_historical_elections.7.b
+        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
+        # Ignorar al caudillo militar enfurece a las tropas
+        add_radicals = { value = medium_radicals pop_type = soldiers }
+        add_radicals = { value = medium_radicals pop_type = officers }
+    }
+}
+
+# 4. 1848-1849: La Renuncia de Carrera y el Caos de Sucesión
+ca_historical_elections.8 = {
+    type = country_event
+    placement = ROOT
+    title = ca_historical_elections.8.t
+    desc = ca_historical_elections.8.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:GUA ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = gua_elec_1848_fired }
+        game_date >= 1848.8.1
+        game_date <= 1849.12.31
+    }
+    
+    immediate = { 
+        set_variable = { name = gua_elec_1848_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Juan Antonio Martínez (Civil / Comerciante) es elegido
+    option = {
+        name = ca_historical_elections.8.a
+        default_option = yes
+        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
+        ig:ig_industrialists ?= { party = { add_momentum = momentum_medium } }
+    }
+
+    # Opción B (Histórica Tardía): El General Mariano Paredes toma el control
+    option = {
+        name = ca_historical_elections.8.b
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
+    }
+
+    # Opción C (Alternativa): Los Liberales aprovechan el exilio de Carrera
+    option = {
+        name = ca_historical_elections.8.c
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+    }
+}
