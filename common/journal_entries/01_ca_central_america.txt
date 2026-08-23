@@ -494,11 +494,6 @@ je_ca_state_role_in_federation = {
     #    container = "custom_widget_container_2"
     #}
 
-    # Solo es visible si eres sujeto de la UCA
-    is_visible = {
-        exists = c:UCA
-        is_subject_of = c:UCA
-    }
 
     ## MAGIA: Leemos la variable directamente de nuestro Señor (Overlord)
     #current_value = {
@@ -604,109 +599,54 @@ je_ca_federalists_vs_separatists_situation = {
     
     on_monthly_pulse = {
         events = {
-     #NIC
-     #LA CHISPA INICIAL (Declaraciones de Independencia)
-     ca_central_america.27 #Nicaragua declares independence Peaceful
-     ca_central_america.26 #Nicaragua declares independence on Arms (Opción 1)
-     ca_central_america.64 #Nicaragua declares independence on Arms (Opción 2)
-     #INSERTO DINÁMICO A: "El Eco de Granada" (Evento de Sabor para la UCA)
-     ca_central_america.101 #Reacción inmediata en la capital federal tras la noticia
-     #EL ESTALLIDO 
-     ca_central_america.63 #Civil war in Nicaragua (Inicia la guerra civil)
-     #LA PETICIÓN DE AUXILIO
-     ca_central_america.28 #Nicaragua apply intervention (Petición enviada a la UCA)
-     #INSERTO DINÁMICO B: "El Dilema en la Capital" (Evento de Sabor para la UCA)
-     ca_central_america.102 #Delegados nicaragüenses piden armas antes de la respuesta oficial
-     # EL DESENLACE DE LA GUERRA
-     ca_central_america.85 #Nicaragua Beats to secessionists (Ganan los Federalistas)
-     ca_central_america.86 #Nicaragua falls to secessionists (Ganan los Separatistas)
-     #INSERTO DINÁMICO C: "Lágrimas en el Lago Cocibolca" (Evento de Cierre)
-     ca_central_america.103 #Consecuencias finales para la UCA basadas en quién ganó
-     #COS
-     #LA SEPARACIÓN (Declaraciones de Independencia)
-     ca_central_america.66 #Costa Rica declares independence on Arms
-     #INSERTO DINÁMICO A: "El Silencio de San José" (Evento de Sabor para la UCA)
-     ca_central_america.104 #Costa Rica cierra sus fronteras y retiene sus impuestos federales
-     #EL ESTALLIDO (Si la diplomacia falla)
-     ca_central_america.65 #Civil war in Costa Rica 
-     #LA PETICIÓN DE AUXILIO
-     ca_central_america.29 #Costa Rica apply intervention (Petición enviada a la UCA)
-     #INSERTO DINÁMICO B "El Aroma de la Traición" (Evento de Sabor para la UCA)
-     ca_central_america.105 #Embajadores europeos y cafetaleros presionan a la UCA
-     #EL DESENLACE DE LA GUERRA
-     ca_central_america.83 #Costa Rica Beats to secessionists (Ganan los Federalistas)
-     ca_central_america.84 #Costa Rica falls to secessionists (Ganan los Separatistas)
-     #INSERTO DINÁMICO C: "El Destino del Pacto de Concordia" (Evento de Cierre)
-     ca_central_america.106 #Consecuencias finales para la UCA basadas en quién ganó en Costa Rica
-     #GUA
-     #LA RUPTURA (Declaraciones de Independencia)
-     ca_central_america.55 #Guatemala declares independence Peaceful
-     ca_central_america.70 #Guatemala declares independence on Arms
-     #INSERTO DINÁMICO A: "El Rugido de la Montaña" (Evento de Sabor para la UCA)
-     ca_central_america.110 #La UCA se entera del masivo levantamiento campesino de Carrera
-     #EL ESTALLIDO 
-     ca_central_america.69 #Civil war in Guatemala 
-     #LA PETICIÓN DE AUXILIO
-     ca_central_america.32 #Guatemala apply intervention (Petición enviada a la UCA)
-     #INSERTO DINÁMICO B: "El Pánico de Gálvez" (Evento de Sabor para la UCA)
-     ca_central_america.111 #El gobierno liberal guatemalteco ruega por tropas federales
-     #EL DESENLACE DE LA GUERRA
-     ca_central_america.53 #Guatemala Beats to secessionists (Ganan los Federalistas)
-     ca_central_america.54 #Guatemala falls to secessionists (Ganan los Separatistas)
-     #INSERTO DINÁMICO C: "El Destino del Caudillo" (Evento de Cierre)
-     ca_central_america.112 #Consecuencias finales para la UCA y el choque ideológico
-     #ALT #EL CILMA DE LA RUPTURA (Declaraciones de Independencia)
-     ca_central_america.58 #Los Altos declares independence Peaceful
-     ca_central_america.74 #Los Altos declares independence on Arms
-     #INSERTO DINÁMICO A: "El Reconocimiento del Sexto Estado" (Evento de Sabor para la UCA)
-     ca_central_america.116 #La UCA decide si acepta a Los Altos como estado legítimo
-     #EL ESTALLIDO 
-     ca_central_america.73 #Civil war in Los Altos 
-     #LA PETICIÓN DE AUXILIO
-     ca_central_america.33 #Los Altos apply intervention (Petición enviada a la UCA)
-     #INSERTO DINÁMICO B: "La Sombra de Carrera" (Evento de Sabor para la UCA)
-     ca_central_america.117 #El terror invade a los liberales mientras el ejército conservador avanza
-     #EL DESENLACE DE LA GUERRA
-     ca_central_america.56 #Los Altos Beats to secessionists (Triunfa Los Altos / Federalistas)
-     ca_central_america.57 #Los Altos falls to secessionists (Guatemala aplasta a Los Altos)
-     #INSERTO DINÁMICO C: "Los Mártires de Quetzaltenango" (Evento de Cierre)
-     ca_central_america.118 #Consecuencias finales del choque entre Carrera y el Sexto Estado
-     #HON
-     #LA SEPARACIÓN (Declaraciones de Independencia)
-     ca_central_america.49 #Honduras declares independence Peaceful
-     ca_central_america.68 #Honduras declares independence on Arms
-     #INSERTO DINÁMICO A: "La Puñalada en Comayagua" (Evento de Sabor para la UCA)
-     ca_central_america.107 #La UCA reacciona a la traición en la tierra natal de Morazán
-     #EL ESTALLIDO (Si la diplomacia falla)
-     ca_central_america.67 #Civil war in Honduras 
-     #LA PETICIÓN DE AUXILIO
-     ca_central_america.30 #Honduras apply intervention (Petición enviada a la UCA)
-     #INSERTO DINÁMICO B: "Sangre en el Río Ulúa" (Evento de Sabor para la UCA)
-     ca_central_america.108 #Milicias campesinas e indígenas toman partido en la guerra
-     #EL DESENLACE DE LA GUERRA
-     ca_central_america.81 #Honduras Beats to secessionists (Ganan los Federalistas)
-     ca_central_america.82 #Honduras falls to secessionists (Ganan los Separatistas)
-     #INSERTO DINÁMICO C: "El Destino del General Ferrera" (Evento de Cierre)
-     ca_central_america.109 #Consecuencias finales para la UCA y el diario de la crisis
-     #ELS
-     #LA RUPTURA FINAL (El colapso llega a la capital)
-     ca_central_america.52 #El Salvador declares independence Peaceful
-     ca_central_america.72 #El Salvador declares independence on Arms
-     #INSERTO DINÁMICO A: "El Enemigo en Casa" (Evento de Sabor para la UCA)
-     ca_central_america.113 #Los separatistas atacan la sede del gobierno federal
-     #EL ESTALLIDO 
-     ca_central_america.71 #Civil war in El Salvador 
-     #lA PETICIÓN DE AUXILIO
-     ca_central_america.31 #El Salvador apply intervention (Petición enviada a la UCA)
-     #INSERTO DINÁMICO B: "La Leva Suprema" (Evento de Sabor para la UCA)
-     ca_central_america.114 #Morazán y el gobierno de la UCA recurren a medidas extremas
-     # EL DESENLACE DE LA GUERRA
-     ca_central_america.50 #El Salvador Beats to secessionists (Ganan los Federalistas)
-     ca_central_america.51 #El Salvador falls to secessionists (Ganan los Separatistas)
-     #INSERTO DINÁMICO C: "El Fin de la Utopía" (Evento de Cierre)
-     ca_central_america.115 #El destino final de Francisco Morazán y la Federación
+            # --- NICARAGUA ---
+            ca_central_america.26 # Declaración en armas
+            ca_central_america.27 # Declaración pacífica
+            ca_central_america.64 # Declaración armada (Segunda vía)
+            ca_central_america.63 # Guerra civil
+            ca_central_america.28 # Petición de intervención
+            ca_central_america.85 # Victoria federalista
+            ca_central_america.86 # Victoria separatista
+
+            # --- COSTA RICA ---
+            ca_central_america.66 # Declaración en armas
+            ca_central_america.65 # Guerra civil
+            ca_central_america.29 # Petición de intervención
+            ca_central_america.83 # Victoria federalista
+            ca_central_america.84 # Victoria separatista
+
+            # --- GUATEMALA ---
+            ca_central_america.55 # Declaración pacífica
+            ca_central_america.70 # Declaración en armas
+            ca_central_america.69 # Guerra civil
+            ca_central_america.32 # Petición de intervención
+            ca_central_america.53 # Victoria federalista
+            ca_central_america.54 # Victoria separatista
+
+            # --- LOS ALTOS ---
+            ca_central_america.58 # Declaración pacífica
+            ca_central_america.74 # Declaración en armas
+            ca_central_america.73 # Guerra civil
+            ca_central_america.33 # Petición de intervención
+            ca_central_america.56 # Victoria Los Altos / Federalistas
+            ca_central_america.57 # Victoria Guatemala / Separatistas
+
+            # --- HONDURAS ---
+            ca_central_america.49 # Declaración pacífica
+            ca_central_america.68 # Declaración en armas
+            ca_central_america.67 # Guerra civil
+            ca_central_america.30 # Petición de intervención
+            ca_central_america.81 # Victoria federalista
+            ca_central_america.82 # Victoria separatista
+
+            # --- EL SALVADOR ---
+            ca_central_america.52 # Declaración pacífica
+            ca_central_america.72 # Declaración en armas
+            ca_central_america.71 # Guerra civil
+            ca_central_america.31 # Petición de intervención
+            ca_central_america.50 # Victoria federalista
+            ca_central_america.51 # Victoria separatista
         }
-		
     }
 
     on_yearly_pulse = {
@@ -819,7 +759,7 @@ je_ca_federalists_vs_separatists_situation = {
                 c:NIC ?= this
                 OR = { 
                     has_journal_entry = je_ca_state_role_in_federation
-					has_modifier = ca_separatists_win_flag
+					has_variable = ca_separatists_win_flag
                 }
             }
             c:UCA = { trigger_event = { id = ca_central_america.48 days = 3 }}
@@ -829,7 +769,7 @@ je_ca_federalists_vs_separatists_situation = {
                 c:COS ?= this
                 OR = { 
                     has_journal_entry = je_ca_state_role_in_federation
-					has_modifier = ca_separatists_win_flag
+					has_variable = ca_separatists_win_flag
                 }
             }
             c:UCA = { trigger_event = { id = ca_central_america.51 days = 3 }}
@@ -839,7 +779,7 @@ je_ca_federalists_vs_separatists_situation = {
                 c:HON ?= this
                 OR = { 
                     has_journal_entry = je_ca_state_role_in_federation
-					has_modifier = ca_separatists_win_flag
+					has_variable = ca_separatists_win_flag
                 }
             }
             c:UCA = { trigger_event = { id = ca_central_america.54 days = 3 }}
@@ -849,7 +789,7 @@ je_ca_federalists_vs_separatists_situation = {
                 c:GUA ?= this
                 OR = { 
                     has_journal_entry = je_ca_state_role_in_federation
-					has_modifier = ca_separatists_win_flag
+					has_variable = ca_separatists_win_flag
                 }
             }
             c:UCA = {trigger_event = { id = ca_central_america.60 days = 3 }}
@@ -859,7 +799,7 @@ je_ca_federalists_vs_separatists_situation = {
                 c:ALT ?= this
                 OR = { 
                     has_journal_entry = je_ca_state_role_in_federation
-					has_modifier = ca_separatists_win_flag
+					has_variable = ca_separatists_win_flag
                 }
             }
             c:UCA = {trigger_event = { id = ca_central_america.63 days = 3 }}
@@ -869,7 +809,7 @@ je_ca_federalists_vs_separatists_situation = {
                 c:ELS ?= this
                 OR = { 
                     has_journal_entry = je_ca_state_role_in_federation
-					has_modifier = ca_separatists_win_flag
+					has_variable = ca_separatists_win_flag
                 }
             }
             c:UCA = {trigger_event = { id = ca_central_america.57 days = 3 }}
@@ -981,7 +921,7 @@ je_ca_military_reform = {
             country_has_primary_culture = cu:honduran
             country_has_primary_culture = cu:nicaraguan
         }
-        has_law_or_variant = law_type:law_peasant_levies
+        has_law_or_variant = law_type:law_regionalist_militia
         NOT = { has_variable = ca_military_reform_completed }
     }
 
@@ -993,11 +933,11 @@ je_ca_military_reform = {
         }
         has_technology_researched = general_staff
         
-        # CORRECCIÓN: Para contar batallones regulares, la sintaxis es 'num_regular_battalions'
+        
         num_regular_battalions >= 10
         
         ig:ig_armed_forces = {
-            ig_approval >= 5 # CORRECCIÓN: Se usa ig_approval, no approval
+            ig_approval >= 5 
         }
     }
 
@@ -1005,7 +945,6 @@ je_ca_military_reform = {
         set_variable = ca_military_reform_completed
         trigger_event = { id = ca_military.1 }
         # MEJORA: A los modificadores militares permanentes (sin 'months') 
-        # asegúrate de balancearlos bien en tu archivo de modifiers.
         add_modifier = {
             name = ca_professional_army_bonus_modifier
         }
@@ -1034,7 +973,7 @@ je_ca_enlightenment = {
     }
 
     complete = {
-        literacy_rate >= 0.40
+        literacy_rate >= 0.60
         
         has_institution = institution_schools
         institution_investment_level = {
@@ -1044,7 +983,7 @@ je_ca_enlightenment = {
         
         building_levels = {
             type = building_university
-            value >= 1
+            value >= 8
         }
         
         ig:ig_intelligentsia = {

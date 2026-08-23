@@ -30,8 +30,10 @@ ca_liberate_guatemala_effect = {
     }
     ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
     ig:ig_devout = {
-        add_ideology = ideology_central_american_reactionary
-        set_interest_group_name = ig_catholic_church
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
     }
 
     # Leyes Iniciales
@@ -66,8 +68,10 @@ ca_liberate_elsalvador_effect = {
     }
     ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
     ig:ig_devout = {
-        add_ideology = ideology_central_american_reactionary
-        set_interest_group_name = ig_catholic_church
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
     }
 
     activate_law = law_type:law_freedom_of_conscience
@@ -102,8 +106,10 @@ ca_liberate_honduras_effect = {
     }
     ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
     ig:ig_devout = {
-        add_ideology = ideology_central_american_reactionary
-        set_interest_group_name = ig_catholic_church
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
     }
 
     activate_law = law_type:law_freedom_of_conscience
@@ -136,9 +142,11 @@ ca_liberate_nicaragua_effect = {
     }        
     ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
     ig:ig_devout = {
-        add_ideology = ideology_central_american_reactionary
-        set_interest_group_name = ig_catholic_church
-    }            
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
+    }         
 
     activate_law = law_type:law_freedom_of_conscience
     activate_law = law_type:law_mercantilism
@@ -171,8 +179,10 @@ ca_liberate_costarica_effect = {
     }
     ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
     ig:ig_devout = {
-        add_ideology = ideology_central_american_reactionary
-        set_interest_group_name = ig_catholic_church
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
     }
 
     activate_law = law_type:law_freedom_of_conscience
@@ -211,8 +221,10 @@ ca_liberate_losaltos_effect = {
     }
     ig:ig_armed_forces = { remove_ideology = ideology_paternalistic }
     ig:ig_devout = {
-        add_ideology = ideology_central_american_reactionary
-        set_interest_group_name = ig_catholic_church
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
     }
 
     activate_law = law_type:law_freedom_of_conscience
@@ -229,7 +241,7 @@ ca_liberate_losaltos_effect = {
 # ==========================================================
 
 # --- CREAR GUATEMALA ---
-ca_create_guatemala_effect = {
+ca_create_post_guatemala_effect = {
     if = {
         limit = {
             exists = s:STATE_GUATEMALA.region_state:UCA
@@ -263,7 +275,7 @@ ca_create_guatemala_effect = {
 }
 
 # --- CREAR EL SALVADOR ---
-ca_create_elsalvador_effect = {
+ca_create_post_elsalvador_effect = {
     if = {
         limit = {
             exists = s:STATE_SAN_SALVADOR.region_state:UCA
@@ -291,7 +303,7 @@ ca_create_elsalvador_effect = {
 }
 
 # --- CREAR HONDURAS ---
-ca_create_honduras_effect = {
+ca_create_post_honduras_effect = {
     if = {
         limit = {
             exists = s:STATE_HONDURAS.region_state:UCA
@@ -319,7 +331,7 @@ ca_create_honduras_effect = {
 }
 
 # --- CREAR NICARAGUA ---
-ca_create_nicaragua_effect = {
+ca_create_post_nicaragua_effect = {
     if = {
         limit = {
             exists = s:STATE_NICARAGUA.region_state:UCA
@@ -347,7 +359,7 @@ ca_create_nicaragua_effect = {
 }
 
 # --- CREAR COSTA RICA ---
-ca_create_costarica_effect = {
+ca_create_post_costarica_effect = {
     if = {
         limit = {
             exists = s:STATE_COSTA_RICA.region_state:UCA
@@ -375,7 +387,7 @@ ca_create_costarica_effect = {
 }
 
 # --- CREAR ESTADO DE LOS ALTOS SIN SOCONISCO ---
-ca_create_losaltoswithoutsoconusco_effect = {
+ca_create_post_losaltoswithoutsoconusco_effect = {
     if = {
         limit = {
             NOT = { exists = c:ALT }
@@ -398,7 +410,7 @@ ca_create_losaltoswithoutsoconusco_effect = {
     }
 }
 # --- CREAR ESTADO DE LOS ALTOS CON SOCONUSCO ---
-ca_create_losaltoswithsoconusco_effect = {
+ca_create_post_losaltoswithsoconusco_effect = {
     if = {
         limit = {
             NOT = { exists = c:ALT }

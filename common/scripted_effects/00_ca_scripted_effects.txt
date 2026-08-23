@@ -156,7 +156,10 @@ create_character = {
 	ideology = ideology_moderate
 }
 }
+
+
 ca_setup_ideological_cha_zero = {
+
 create_character = {
 	ig_leader = yes
 	interest_group = ig_landowners
@@ -204,7 +207,7 @@ create_character = {
 	interest_group = ig_petty_bourgeoisie
 	ideology = ideology_moderate
 }
-
+}
 
 # ==========================================================
 # 
@@ -723,8 +726,115 @@ if = {
 
 
 }	
+ca_add_setup_ig_ideologies = {
+ig:ig_armed_forces = {
+    remove_ideology = ideology_caudillismo
+    remove_ideology = ideology_paternalistic
+}
+ig:ig_petty_bourgeoisie = {
+    remove_ideology = ideology_patriotic
+    add_ideology = ideology_central_american_federal
+    add_ideology = ideology_ca_artesanado
+    set_interest_group_name = ig_artesanos_urbanos
+}
+ig:ig_intelligentsia = { #La ig_intelligentsia tiene opcion que elegir la constitution depende del lider del grupo y del movimiento politico/agitador
+	remove_ideology = ideology_liberal
+    remove_ideology = ideology_republican        
+    add_ideology = ideology_ca_constitutionalist
+}
+ig:ig_industrialists = {
+    remove_ideology = ideology_mercantilist
+    remove_ideology = ideology_protectionist
+    remove_ideology = ideology_laissez_faire
+    add_ideology = ideology_ca_agroexportadores
+    add_ideology = ideology_ca_liberal     
+    set_interest_group_name = ig_elite_comercial
+}
+ig:ig_rural_folk = {
+    remove_ideology = ideology_isolationist
+    remove_ideology = ideology_agrarian
+    remove_ideology = ideology_particularist
+    add_ideology = ideology_ca_guilds
+    set_interest_group_name = ig_pequenos_campesinos
+}
+
+ig:ig_landowners = {
+    remove_ideology = ideology_republican_paternalistic
+    remove_ideology = ideology_hierarchic
+    remove_ideology = ideology_paternalistic
+    add_ideology = ideology_ca_criollo_paternalistic
+    add_ideology = ideology_ca_criollo_stratocratic            
+    add_ideology = ideology_central_american_reactionary_2
+    set_interest_group_name = ig_hacendados
+}
+ig:ig_devout = {
+    remove_ideology = ideology_moralist
+    add_ideology = ideology_ca_moralist	
+    add_ideology = ideology_central_american_reactionary_2
+    set_interest_group_name = ig_catholic_church
+}
 
 
+
+}
+ca_remove_setup_ig_ideologies_post_uca = {
+ig:ig_armed_forces = {
+    add_ideology = ideology_caudillismo
+    add_ideology = ideology_paternalistic
+}
+
+ig:ig_petty_bourgeoisie = {
+    add_ideology = ideology_patriotic
+    remove_ideology = ideology_central_american_federal
+    remove_ideology = ideology_ca_artesanado
+}
+ig:ig_intelligentsia = { #La ig_intelligentsia tiene opcion que elegir la constitution depende del lider del grupo y del movimiento politico/agitador
+	remove_ideology = ideology_liberal
+    remove_ideology = ideology_republican        
+    add_ideology = ideology_ca_constitutionalist
+}
+
+ig:ig_intelligentsia = { 
+    remove_ideology = ideology_ca_constitutionalist
+	add_ideology = ideology_liberal
+    add_ideology = ideology_republican        
+
+}
+
+ig:ig_industrialists = {
+    add_ideology = ideology_mercantilist
+    add_ideology = ideology_protectionist
+    add_ideology = ideology_laissez_faire
+    remove_ideology = ideology_ca_agroexportadores
+    remove_ideology = ideology_ca_liberal     
+}
+
+ig:ig_rural_folk = {
+    add_ideology = ideology_isolationist
+    add_ideology = ideology_agrarian
+    add_ideology = ideology_particularist
+    remove_ideology = ideology_ca_guilds
+}
+
+ig:ig_landowners = {
+    add_ideology = ideology_republican_paternalistic
+    add_ideology = ideology_hierarchic
+    add_ideology = ideology_paternalistic
+    remove_ideology = ideology_ca_criollo_paternalistic
+    remove_ideology = ideology_ca_criollo_stratocratic            
+    remove_ideology = ideology_central_american_reactionary_2
+}
+
+
+ig:ig_devout = {
+    remove_ideology = ideology_ca_moralist
+    add_ideology = ideology_pious
+    add_ideology = ideology_moralist
+    remove_ideology = ideology_central_american_reactionary_2
+    set_interest_group_name = ig_catholic_church
+}
+
+}
    #ca_sprit_costarica_rail_events	= {
    #   c:PC1 = { save_scope_as = PC1_scope save_scope_as = sprit_costarica_scope  }
    #   c:PC2 = { save_scope_as = PC2_scope save_scope_as = sprit_costarica_scope  }

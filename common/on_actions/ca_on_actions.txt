@@ -29,11 +29,11 @@ on_game_start_country = {
         }
     }
 }
-on_game_started = {
-    effect = {
-         ca_initial_game_start_setup = yes
-    }
-}
+#on_game_started = {
+#    effect = {
+#         ca_initial_game_start_setup = yes
+#    }
+#}
 
 on_yearly_pulse = {
     events = {

@@ -2,7 +2,7 @@
 	name = "federal_congress_decree_button"
 	desc = "federal_congress_decree_button_desc"
           ai_chance = {
-              base = 0
+              value = 0
           }	
 	visible = { 
 	NOT = {
@@ -27,9 +27,9 @@
 ca_button_sabotage_federation = {
     name = "ca_button_sabotage_federation_name"
     desc = "ca_button_sabotage_federation_desc"
-    is_shown = { always = yes }
-    is_valid = { NOT = { has_variable = ca_federation_interaction_cooldown } }
+    visible = { always = yes }
 
+    possible = { NOT = { has_variable = ca_federation_interaction_cooldown } }
     effect = {
         add_modifier = { name = ca_funding_separatists_modifier months = 12 }
         change_relations = { country = overlord value = -10 }
@@ -55,8 +55,8 @@ ca_button_sabotage_federation = {
 ca_button_support_federation = {
     name = "ca_button_support_federation_name"
     desc = "ca_button_support_federation_desc"
-    is_shown = { always = yes }
-    is_valid = { NOT = { has_variable = ca_federation_interaction_cooldown } }
+    visible = { always = yes }
+    possible = { NOT = { has_variable = ca_federation_interaction_cooldown } }
 
     effect = {
         add_modifier = { name = ca_funding_federalists_modifier months = 12 }
@@ -212,12 +212,12 @@ je_nicaragua_intervention_central_america_button = {
 				type = dp_annex_war
 				escalation = 20
 				target_state = s:STATE_NICARAGUA.region_state:NIC
-			
 			}
+		}
 	}
 
 	ai_chance = {
-		base = 0
+		value = 0
 	}
 }
 je_costa_rica_intervention_central_america_button = {
@@ -262,12 +262,12 @@ je_costa_rica_intervention_central_america_button = {
 				type = dp_annex_war
 				escalation = 20
 				target_state = s:STATE_COSTA_RICA.region_state:COS
-			
 			}
+		}
 	}
 
 	ai_chance = {
-		base = 0
+		value = 0
 	}
 }
 je_honduras_intervention_central_america_button = {
@@ -312,12 +312,12 @@ je_honduras_intervention_central_america_button = {
 				type = dp_annex_war
 				escalation = 80
 				target_state = s:STATE_HONDURAS.region_state:HON
-			
+			}
 			}
 	}
 
 	ai_chance = {
-		base = 0
+		value = 0
 	}
 }
 je_guatemala_intervention_central_america_button = {
@@ -362,12 +362,12 @@ je_guatemala_intervention_central_america_button = {
 				type = dp_annex_war
 				escalation = 20
 				target_state = s:STATE_GUATEMALA.region_state:GUA
-			
+			}
 			}
 	}
 
 	ai_chance = {
-		base = 0
+		value = 0
 	}
 }
 je_el_salvador_intervention_central_america_button = {
@@ -412,12 +412,12 @@ je_el_salvador_intervention_central_america_button = {
 				type = dp_annex_war
 				escalation = 20
 				target_state = s:STATE_SAN_SALVADOR.region_state:ELS
-			
+			}
 			}
 	}
 
 	ai_chance = {
-		base = 0
+		value = 0
 	}
 }
 
@@ -457,7 +457,7 @@ je_restore_order_gua_button = {
 	}
 
 	ai_chance = {
-		base = 100
+		value = 100
 	}
 }
 
@@ -495,7 +495,7 @@ je_restore_order_hon_button = {
 	}
 
 	ai_chance = {
-		base = 100
+		value = 100
 	}
 }
 
@@ -536,7 +536,7 @@ je_restore_order_nic_button = {
 	}
 
 	ai_chance = {
-		base = 100
+		value = 100
 	}
 }
 
@@ -574,7 +574,7 @@ je_restore_order_cos_button = {
 	}
 
 	ai_chance = {
-		base = 100
+		value = 100
 	}
 }
 je_restore_order_els_button = {
@@ -611,7 +611,7 @@ je_restore_order_els_button = {
 	}
 
 	ai_chance = {
-		base = 100
+		value = 100
 	}
 }
 fund_survey_expedition = {
@@ -634,7 +634,7 @@ fund_survey_expedition = {
         }
     }
     
-    ai_chance = { base = 10 }
+    ai_chance = { value = 10 }
 }
 
 hire_foreign_geologists = {
@@ -658,7 +658,7 @@ hire_foreign_geologists = {
         }
     }
     
-    ai_chance = { base = 5 }
+    ai_chance = { value = 5 }
 }
 ca_request_intervention_button = {
     name = "ca_request_intervention_button_name"
@@ -667,7 +667,7 @@ ca_request_intervention_button = {
     # El botón solo aparece si algún país de Centroamérica pide ayuda
     visible = {
 	    NOT = {
-		c:UCA ?= has_variable = ca_not_accept_intervention_request
+		c:UCA ?= {has_variable = ca_not_accept_intervention_request}
 		
 		}
         OR = {

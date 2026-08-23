@@ -246,13 +246,13 @@ law_ca_autonomous_state = {
 		}
 	}
     modifier = {
-        country_authority_add = -100
-        country_tax_income_add = -0.50
+        #country_authority_add = -50
+        #country_tax_income_add = -0.50
         state_turmoil_effects_mult = -0.50
-        country_subject_income_transfer_mult = -0.75
+        #country_subject_income_transfer_mult = -0.75
     }
     
 	ai_will_do = {
-		always = no
+		
 	}
 }

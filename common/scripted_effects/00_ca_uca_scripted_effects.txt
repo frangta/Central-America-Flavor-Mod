@@ -25,10 +25,10 @@ ca_play_guatemala_effect = {
         }
 
     ig:ig_devout = {
-        remove_ideology = ideology_pious
-        remove_ideology = ideology_moralist
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_catholic_church
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
     }
     
     ig:ig_landowners = {            
@@ -101,10 +101,10 @@ ca_play_elsalvador_effect = {
         }
 
     ig:ig_devout = {
-        remove_ideology = ideology_pious
-        remove_ideology = ideology_moralist
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_catholic_church
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
     }
     
     ig:ig_landowners = {            
@@ -179,10 +179,10 @@ ca_play_honduras_effect = {
         }
 
     ig:ig_devout = {
-        remove_ideology = ideology_pious
-        remove_ideology = ideology_moralist
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_catholic_church
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
     }
     
     ig:ig_landowners = {            
@@ -253,10 +253,10 @@ ca_play_nicaragua_effect = {
         }
 
     ig:ig_devout = {
-        remove_ideology = ideology_pious
-        remove_ideology = ideology_moralist
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_catholic_church
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
     }
     
     ig:ig_landowners = {            
@@ -328,10 +328,10 @@ ca_play_costarica_effect = {
         }
 
     ig:ig_devout = {
-        remove_ideology = ideology_pious
-        remove_ideology = ideology_moralist
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_catholic_church
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
     }
     
     ig:ig_landowners = {            
@@ -408,10 +408,10 @@ ca_play_losaltos_effect = {
         }
 
     ig:ig_devout = {
-        remove_ideology = ideology_pious
-        remove_ideology = ideology_moralist
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_catholic_church
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
     }
     
     ig:ig_landowners = {            
@@ -467,7 +467,7 @@ ca_play_losaltos_effect = {
 
 # ==========================================================
 # EFECTOS DE CREACIÓN DE PAÍSES CENTROAMERICANOS
-# Ejecutar siempre desde el Scope del país de origen (ej. UCA)
+# Ejecutar siempre desde el Scope del país de origen {ej. UCA}
 # ==========================================================
 
 # --- CREAR GUATEMALA ---
@@ -477,7 +477,7 @@ ca_create_guatemala_effect = {
             exists = s:STATE_GUATEMALA.region_state:UCA
             NOT = { exists = c:GUA }
         }
-        # Ajuste de Tierras Natales (Homelands)
+        # Ajuste de Tierras Natales {Homelands}
         s:STATE_GUATEMALA = {
             add_homeland = cu:guatemalan
 
@@ -488,22 +488,15 @@ ca_create_guatemala_effect = {
             origin = ROOT
             state = s:STATE_GUATEMALA.region_state:UCA
             on_created = {
-                #set_variable = { name = ca_secession_country }
-				save_scope_as = ca_secession_country
+                set_variable = { name = ca_secession_country }
+		save_scope_as = ca_secession_country
                 save_scope_as = scope_GUA
-                
-                # Ajuste Cultural
-                add_primary_culture = cu:guatemalan
-
-                
-                # Llamada al setup político y de personajes
-                ca_play_guatemala_effect = yes 
             }
         }
         # Convertir en Dependencia
 		c:UCA ?= {
 			create_diplomatic_pact = {
-			country = scope:scope_GUA
+			country = c:GUA
 			type = ca_dependency
 			}
 		}
@@ -527,17 +520,16 @@ ca_create_elsalvador_effect = {
             origin = ROOT
             state = s:STATE_SAN_SALVADOR.region_state:UCA
             on_created = {
-                #set_variable = { name = ca_secession_country }
-				save_scope_as = ca_secession_country
+                set_variable = { name = ca_secession_country }
+		save_scope_as = ca_secession_country
                 save_scope_as = scope_ELS
-                add_primary_culture = cu:el_salvadorian
-                ca_play_elsalvador_effect = yes
+
             }
         }
         # Convertir en Dependencia
 		c:UCA ?= {
 			create_diplomatic_pact = {
-			country = scope:scope_ELS
+			country = c:ELS
 			type = ca_dependency
 			}
 		}
@@ -553,25 +545,22 @@ ca_create_honduras_effect = {
         }
         s:STATE_HONDURAS = {
             add_homeland = cu:honduran
-            remove_homeland = cu:central_american
         }
         create_country = {
             tag = HON
             origin = ROOT
             state = s:STATE_HONDURAS.region_state:UCA
             on_created = {
-                #set_variable = { name = ca_secession_country }
-				save_scope_as = ca_secession_country
+                set_variable = { name = ca_secession_country }
+		save_scope_as = ca_secession_country
                 save_scope_as = scope_HON
-                add_primary_culture = cu:honduran
-                remove_primary_culture = cu:central_american
-                ca_play_honduras_effect = yes
+               
             }
         }
         # Convertir en Dependencia
 		c:UCA ?= {
 			create_diplomatic_pact = {
-			country = scope:scope_HON
+			country = c:HON
 			type = ca_dependency
 			}
 		}
@@ -587,25 +576,23 @@ ca_create_nicaragua_effect = {
         }
         s:STATE_NICARAGUA = {
             add_homeland = cu:nicaraguan
-            remove_homeland = cu:central_american
+
         }
         create_country = {
             tag = NIC
             origin = ROOT
             state = s:STATE_NICARAGUA.region_state:UCA
             on_created = {
-                #set_variable = { name = ca_secession_country }
-				save_scope_as = ca_secession_country
+                set_variable = { name = ca_secession_country }
+		save_scope_as = ca_secession_country
                 save_scope_as = scope_NIC
-                add_primary_culture = cu:nicaraguan
-                remove_primary_culture = cu:central_american
-                ca_play_nicaragua_effect = yes
+                
             }
         }
         # Convertir en Dependencia
 		c:UCA ?= {
 			create_diplomatic_pact = {
-			country = scope:scope_NIC
+			country = c:NIC
 			type = ca_dependency
 			}
 		}
@@ -621,25 +608,23 @@ ca_create_costarica_effect = {
         }
         s:STATE_COSTA_RICA = {
             add_homeland = cu:costa_rican
-            remove_homeland = cu:central_american
+
         }
         create_country = {
             tag = COS
             origin = ROOT
             state = s:STATE_COSTA_RICA.region_state:UCA
             on_created = {
-                #set_variable = { name = ca_secession_country }
-				save_scope_as = ca_secession_country
+                set_variable = { name = ca_secession_country }
+		save_scope_as = ca_secession_country
                 save_scope_as = scope_COS
-                add_primary_culture = cu:costa_rican
-                remove_primary_culture = cu:central_american
-                ca_play_costarica_effect = yes
+                
             }
         }
         # Convertir en Dependencia
 		c:UCA ?= {
 			create_diplomatic_pact = {
-			country = scope:scope_COS
+			country = c:COS
 			type = ca_dependency
 			}
 		}
@@ -660,16 +645,16 @@ ca_create_losaltoswithoutsoconusco_effect = {
             province = p:xD9BEFE
             province = p:xBD8628                
             on_created = {
-                #set_variable = { name = ca_secession_country }
-				save_scope_as = ca_secession_country
+                set_variable = { name = ca_secession_country }
+		save_scope_as = ca_secession_country
                 save_scope_as = scope_ALT
-                ca_play_losaltos_effect = yes
+                
             }
         }
         # Convertir en Dependencia
 		c:UCA ?= {
 			create_diplomatic_pact = {
-			country = scope:scope_ALT
+			country = c:ALT
 			type = ca_dependency
 			}
 		}
@@ -691,16 +676,15 @@ ca_create_losaltoswithsoconusco_effect = {
             province = p:xD9BEFE
             province = p:xBD8628                
             on_created = {
-                #set_variable = { name = ca_secession_country }
-				save_scope_as = ca_secession_country
+                set_variable = { name = ca_secession_country }
+		save_scope_as = ca_secession_country
                 save_scope_as = scope_ALT
-                ca_play_losaltos_effect = yes
             }
         }
         # Convertir en Dependencia
 		c:UCA ?= {
 			create_diplomatic_pact = {
-			country = scope:scope_ALT
+			country = c:ALT
 			type = ca_dependency
 			}
 		}

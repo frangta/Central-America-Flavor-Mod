@@ -1,29 +1,72 @@
-# ====================================================================
+﻿# ====================================================================
 # LEYES: PRINCIPIOS DE GOBIERNO Y SEGURIDAD CENTROAMERICANA
 # ====================================================================
 
-# 1. COFFEACRACIA (República Cafetalera)
-law_ca_republica_cafetalera = {
+#COFFEACRACIA (República Cafetalera)
+law_ca_coffeacracia = {
     group = lawgroup_governance_principles
     icon = "gfx/interface/icons/law_icons/oligarchy.dds"
     progressiveness = -30
 
+	can_enact = {
+		is_country_type = decentralized
+	}
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
+	
     modifier = {
         # Otorga un poder descomunal a los terratenientes
         interest_group_ig_landowners_pol_str_mult = 0.50
         # Beneficia enormemente a las plantaciones
-        building_group_bg_plantation_throughput_add = 0.15
+        building_group_bg_plantations_throughput_add = 0.15
         # Penaliza la educación y la burocracia civil
-        country_institution_education_max_investment_add = -1
+        country_institution_schools_max_investment_add = -1
         country_bureaucracy_mult = -0.10
     }
+	
+	on_activate = {
+		
+	}
+
+	on_deactivate = {
+		
+	}	
+
+     #on_enact = {
+     #		custom_tooltip = 
+     #		if = {
+     #			limit = {
+     #				NOT = {
+     #					has_law_or_variant = law_type:law_peasant_levies
+     #				}
+     #			}
+     #			custom_tooltip = aristocrats_af_ig_shift_effect_tt
+     #		}
+     #		if = {
+     #			limit = {
+     #				has_law_or_variant = law_type:law_professional_army
+     #			}
+     #			custom_tooltip = military_pops_af_ig_shift_effect_negative_tt
+     #			custom_tooltip = non_military_pops_af_ig_shift_effect_negative_tt
+     #		}
+     #	}	
 }
 
-# 2. TECNOCRACIA CENTROAMERICANA ("Los Científicos")
+#TECNOCRACIA CENTROAMERICANA ("Los Científicos")
 law_ca_tecnocracy = {
     group = lawgroup_governance_principles
     icon = "gfx/interface/icons/law_icons/technocracy.dds"
     progressiveness = 40
+
+	can_enact = {
+		is_country_type = decentralized
+	}
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
 
     modifier = {
         # Empodera a la Inteligencia y a los Militares
@@ -35,13 +78,32 @@ law_ca_tecnocracy = {
         # Gobiernan desde arriba, legitimidad base alta pero sufragio nulo
         country_legitimacy_base_add = 30
     }
+	
+	
+	on_activate = {
+		
+	}
+
+	on_deactivate = {
+		
+	}	
+	
+	
 }
 
-# 3. JUNTA MILITAR ABSOLUTA
+#JUNTA MILITAR ABSOLUTA
 law_ca_junta = {
     group = lawgroup_governance_principles
     icon = "gfx/interface/icons/law_icons/autocracy.dds"
     progressiveness = -50
+
+	can_enact = {
+		is_country_type = decentralized
+	}
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
 
     modifier = {
         # Poder militar absoluto
@@ -50,13 +112,31 @@ law_ca_junta = {
         # Régimen basado en el miedo, la legitimidad base es muy baja
         country_legitimacy_base_add = -20
     }
+	
+		
+	on_activate = {
+		
+	}
+
+	on_deactivate = {
+		
+	}	
+
 }
 
-# 4. CONSEJO DE JUNTA (Transición Cívico-Militar)
+ #CONSEJO DE JUNTA (Transición Cívico-Militar)
 law_ca_consejo_junta = {
     group = lawgroup_governance_principles
     icon = "gfx/interface/icons/law_icons/presidential_republic.dds"
     progressiveness = 10
+
+	can_enact = {
+		is_country_type = decentralized
+	}
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
 
     modifier = {
         # Equilibra a varios grupos
@@ -65,21 +145,15 @@ law_ca_consejo_junta = {
         interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.20
         # Estabilidad, pero lentitud al pasar leyes por el debate interno
         country_legitimacy_base_add = 10
-        country_law_enactment_time_mult = 0.25 
+        country_law_enactment_speed_mult = 0.25 
     }
-}
+		
+	on_activate = {
+		
+	}
 
-# 5. POLICÍA COMUNAL (Usos y costumbres locales)
-law_ca_policia_comunal = {
-    group = lawgroup_policing
-    icon = "gfx/interface/icons/law_icons/local_police.dds"
-    progressiveness = 0
+	on_deactivate = {
+		
+	}	
 
-    modifier = {
-        # Empodera al campesinado local
-        interest_group_ig_rural_folk_pol_str_mult = 0.25
-        # Calma el tumulto en las zonas rurales, pero no protege a los capitalistas
-        state_turmoil_mult = -0.15
-        country_institution_cost_institution_police_mult = -0.20
-    }
 }
