@@ -111,6 +111,43 @@ nic_jose_zepeda_character_template = {
     traits = { innovative tactful }
 	home_region = STATE_NICARAGUA
 }
+TRY_REPLACE:NIC_braulio_mendieta = {
+	# --- DATOS BÁSICOS ---
+	first_name = "Braulio"
+	last_name = "Mendieta"
+	historical = yes
+	female = no
+	birth_date = 1795.5.10
+	culture = cu:nicaraguan
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+	role = agitator
+	is_general = yes
+	is_agitator = yes
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_central_american_reactionary
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_2
+	hq = region_central_america
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		ambitious
+		cruel
+		bandit
+	}
+	
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = is_mendieta_conspirator
+	}
+}
 jose_nunez_character_template = {
     first_name = "Jose"
     last_name = "Nunez"
