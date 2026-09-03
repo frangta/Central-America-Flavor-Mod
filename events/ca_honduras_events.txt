@@ -56,14 +56,12 @@ ca_honduras_events.1 = {
         play_as = c:HON
 	}
 }
-
-
 # 1. 1837: La elección de Justo José de Herrera
-ca_historical_elections.14 = {
+ca_honduras_events.14 = {
     type = country_event
     placement = ROOT
-    title = ca_historical_elections.14.t
-    desc = ca_historical_elections.14.d
+    title = ca_honduras_events.14.t
+    desc = ca_honduras_events.14.d
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
 
@@ -81,7 +79,7 @@ ca_historical_elections.14 = {
 
     # Opción A (Histórica): Justo José de Herrera asume como civil moderado
     option = {
-        name = ca_historical_elections.14.a
+        name = ca_honduras_events.14.a
         default_option = yes
         ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_medium } }
@@ -89,25 +87,25 @@ ca_historical_elections.14 = {
 
     # Opción B (Alternativa): Los militares exigen un líder de armas
     option = {
-        name = ca_historical_elections.14.b
+        name = ca_honduras_events.14.b
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
         add_radicals = { value = small_radicals pop_type = academics }
     }
 
     # Opción C (Alternativa): Los liberales radicales intentan tomar la Asamblea
     option = {
-        name = ca_historical_elections.14.c
+        name = ca_honduras_events.14.c
         ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
         ig:ig_landowners ?= { party = { add_momentum = momentum_small_decrease } }
     }
 }
 
 # 2. 1840-1841: El Ascenso del General Francisco Ferrera
-ca_historical_elections.15 = {
+ca_honduras_events.15 = {
     type = country_event
     placement = ROOT
-    title = ca_historical_elections.15.t
-    desc = ca_historical_elections.15.d
+    title = ca_honduras_events.15.t
+    desc = ca_honduras_events.15.d
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
 
@@ -125,7 +123,7 @@ ca_historical_elections.15 = {
 
     # Opción A (Histórica): Francisco Ferrera (El "Mulatillo") consolida el estado conservador
     option = {
-        name = ca_historical_elections.15.a
+        name = ca_honduras_events.15.a
         default_option = yes
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_very_large } }
         ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
@@ -133,18 +131,18 @@ ca_historical_elections.15 = {
 
     # Opción B (Alternativa): Resistencia civil liberal contra Ferrera
     option = {
-        name = ca_historical_elections.15.b
+        name = ca_honduras_events.15.b
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
         add_radicals = { value = medium_radicals pop_type = soldiers } # El ejército no acepta perder
     }
 }
 
 # 3. 1844: La Reelección de Francisco Ferrera
-ca_historical_elections.16 = {
+ca_honduras_events.16 = {
     type = country_event
     placement = ROOT
-    title = ca_historical_elections.16.t
-    desc = ca_historical_elections.16.d
+    title = ca_honduras_events.16.t
+    desc = ca_honduras_events.16.d
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
 
@@ -162,21 +160,21 @@ ca_historical_elections.16 = {
 
     # Opción A (Histórica): Ferrera domina la Cámara y es reelecto
     option = {
-        name = ca_historical_elections.16.a
+        name = ca_honduras_events.16.a
         default_option = yes
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
     }
 
     # Opción B (Alternativa): Los hacendados se cansan del militarismo y buscan un civil
     option = {
-        name = ca_historical_elections.16.b
+        name = ca_honduras_events.16.b
         ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium_decrease } }
     }
 
     # Opción C (Alternativa): Levantamiento urbano contra la dictadura
     option = {
-        name = ca_historical_elections.16.c
+        name = ca_honduras_events.16.c
         ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
         add_radicals = { value = large_radicals pop_type = clerks }
         add_radicals = { value = medium_radicals pop_type = shopkeepers }
@@ -184,11 +182,11 @@ ca_historical_elections.16 = {
 }
 
 # 4. 1847: El Triunfo de Juan Lindo
-ca_historical_elections.17 = {
+ca_honduras_events.17 = {
     type = country_event
     placement = ROOT
-    title = ca_historical_elections.17.t
-    desc = ca_historical_elections.17.d
+    title = ca_honduras_events.17.t
+    desc = ca_honduras_events.17.d
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
 
@@ -206,7 +204,7 @@ ca_historical_elections.17 = {
 
     # Opción A (Histórica): El estadista Juan Lindo promete educación e institucionalidad
     option = {
-        name = ca_historical_elections.17.a
+        name = ca_honduras_events.17.a
         default_option = yes
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_very_large } }
         ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
@@ -214,18 +212,18 @@ ca_historical_elections.17 = {
 
     # Opción B (Alternativa): Ferrera intenta sabotear a Lindo desde las sombras
     option = {
-        name = ca_historical_elections.17.b
+        name = ca_honduras_events.17.b
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
         add_radicals = { value = medium_radicals pop_type = academics }
     }
 }
 
 # 5. 1848: La Constitución de 1848 y la Ratificación
-ca_historical_elections.18 = {
+ca_honduras_events.18 = {
     type = country_event
     placement = ROOT
-    title = ca_historical_elections.18.t
-    desc = ca_historical_elections.18.d
+    title = ca_honduras_events.18.t
+    desc = ca_honduras_events.18.d
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
 
@@ -243,7 +241,7 @@ ca_historical_elections.18 = {
 
     # Opción A (Histórica): Juan Lindo ratificado bajo la nueva constitución civil
     option = {
-        name = ca_historical_elections.18.a
+        name = ca_honduras_events.18.a
         default_option = yes
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
         ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_medium } }
@@ -251,10 +249,9 @@ ca_historical_elections.18 = {
 
     # Opción B (Alternativa): Los militares se rebelan contra la nueva constitución
     option = {
-        name = ca_historical_elections.18.b
+        name = ca_honduras_events.18.b
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_very_large } }
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large_decrease } }
         add_radicals = { value = medium_radicals pop_type = officers }
     }
 }
-

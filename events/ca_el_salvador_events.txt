@@ -49,19 +49,17 @@ ca_el_salvador_events.01 = {
         ca_play_elsalvador_effect = yes		
         play_as = c:ELS
 	}
-} 
-namespace = ca_historical_elections
-
+}
 # ==========================================================
-# EL SALVADOR (c:ELS) - 5 Eventos Electorales con Múltiples Candidatos
+# EL SALVADOR (c:ELS) - 5 Eventos Electorales
 # ==========================================================
 
 # 1. 1838: La salida de Silva y la elección de Menéndez
-ca_historical_elections.9 = {
+ca_el_salvador_events.9 = {
     type = country_event
     placement = ROOT
-    title = ca_historical_elections.9.t
-    desc = ca_historical_elections.9.d
+    title = ca_el_salvador_events.9.t
+    desc = ca_el_salvador_events.9.d
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
 
@@ -79,7 +77,7 @@ ca_historical_elections.9 = {
 
     # Opción A (Histórica): Timoteo Menéndez (Liberal Moderado)
     option = {
-        name = ca_historical_elections.9.a
+        name = ca_el_salvador_events.9.a
         default_option = yes
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
         ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_medium } }
@@ -87,25 +85,25 @@ ca_historical_elections.9 = {
 
     # Opción B (Alternativa): Oficiales radicales pro-Morazán exigen el control total
     option = {
-        name = ca_historical_elections.9.b
+        name = ca_el_salvador_events.9.b
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
         add_radicals = { value = small_radicals pop_type = aristocrats }
     }
 
     # Opción C (Alternativa): Los conservadores intentan un golpe político
     option = {
-        name = ca_historical_elections.9.c
+        name = ca_el_salvador_events.9.c
         ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
         ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
     }
 }
 
 # 2. 1842: Primera Elección Constitucional (Juan José Guzmán)
-ca_historical_elections.10 = {
+ca_el_salvador_events.10 = {
     type = country_event
     placement = ROOT
-    title = ca_historical_elections.10.t
-    desc = ca_historical_elections.10.d
+    title = ca_el_salvador_events.10.t
+    desc = ca_el_salvador_events.10.d
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
 
@@ -123,7 +121,7 @@ ca_historical_elections.10 = {
 
     # Opción A (Histórica): Juan José Guzmán, buscando estabilidad
     option = {
-        name = ca_historical_elections.10.a
+        name = ca_el_salvador_events.10.a
         default_option = yes
         ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
         ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
@@ -131,24 +129,24 @@ ca_historical_elections.10 = {
 
     # Opción B (Alternativa): Los liberales puros rechazan el consenso
     option = {
-        name = ca_historical_elections.10.b
+        name = ca_el_salvador_events.10.b
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
     }
 
     # Opción C (Alternativa): Intervención militar preventiva
     option = {
-        name = ca_historical_elections.10.c
+        name = ca_el_salvador_events.10.c
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
         add_radicals = { value = medium_radicals pop_type = clerks }
     }
 }
 
 # 3. 1844: La Dictadura de Francisco Malespín
-ca_historical_elections.11 = {
+ca_el_salvador_events.11 = {
     type = country_event
     placement = ROOT
-    title = ca_historical_elections.11.t
-    desc = ca_historical_elections.11.d
+    title = ca_el_salvador_events.11.t
+    desc = ca_el_salvador_events.11.d
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
 
@@ -166,7 +164,7 @@ ca_historical_elections.11 = {
 
     # Opción A (Histórica): El General Malespín asume el poder absoluto
     option = {
-        name = ca_historical_elections.11.a
+        name = ca_el_salvador_events.11.a
         default_option = yes
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_very_large } }
         ig:ig_devout ?= { party = { add_momentum = momentum_large } }
@@ -174,7 +172,7 @@ ca_historical_elections.11 = {
 
     # Opción B (Alternativa): Resistencia civil contra el caudillo (Altamente radicalizante)
     option = {
-        name = ca_historical_elections.11.b
+        name = ca_el_salvador_events.11.b
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
         ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_medium } }
         add_radicals = { value = large_radicals pop_type = officers }
@@ -183,11 +181,11 @@ ca_historical_elections.11 = {
 }
 
 # 4. 1846: La Caída de Malespín y Eugenio Aguilar
-ca_historical_elections.12 = {
+ca_el_salvador_events.12 = {
     type = country_event
     placement = ROOT
-    title = ca_historical_elections.12.t
-    desc = ca_historical_elections.12.d
+    title = ca_el_salvador_events.12.t
+    desc = ca_el_salvador_events.12.d
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
 
@@ -205,25 +203,25 @@ ca_historical_elections.12 = {
 
     # Opción A (Histórica): Eugenio Aguilar restaura el gobierno civil liberal
     option = {
-        name = ca_historical_elections.12.a
+        name = ca_el_salvador_events.12.a
         default_option = yes
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_very_large } }
     }
 
     # Opción B (Alternativa): Los remanentes leales a Malespín sabotean las elecciones
     option = {
-        name = ca_historical_elections.12.b
+        name = ca_el_salvador_events.12.b
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
         ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
     }
 }
 
 # 5. 1848: Doroteo Vasconcelos y los tambores de guerra
-ca_historical_elections.13 = {
+ca_el_salvador_events.13 = {
     type = country_event
     placement = ROOT
-    title = ca_historical_elections.13.t
-    desc = ca_historical_elections.13.d
+    title = ca_el_salvador_events.13.t
+    desc = ca_el_salvador_events.13.d
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
 
@@ -241,7 +239,7 @@ ca_historical_elections.13 = {
 
     # Opción A (Histórica): Vasconcelos es electo y prepara la guerra contra Guatemala
     option = {
-        name = ca_historical_elections.13.a
+        name = ca_el_salvador_events.13.a
         default_option = yes
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium } } # Los militares lo apoyan por la inminente guerra
@@ -253,14 +251,12 @@ ca_historical_elections.13 = {
 
     # Opción B (Alternativa): Los moderados logran detener la retórica bélica
     option = {
-        name = ca_historical_elections.13.b
+        name = ca_el_salvador_events.13.b
         ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
         ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
         add_radicals = { value = medium_radicals pop_type = officers } # Los oficiales querían la guerra
     }
-}
-
-
+}                                           
 #ca_el_salvador_events.2  = {
 #      type = country_event
 #

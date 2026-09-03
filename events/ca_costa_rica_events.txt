@@ -1224,141 +1224,136 @@ ca_costa_rica_events.01 = {
 #        }
 #    }
 #}
-
-
-#1844: Primer Sufragio Directo Popular (Francisco María Oreamuno Bonilla)
-ca_historical_elections.2 = {
-    type = country_event
-    placement = ROOT
-    title = ca_historical_elections.2.t
-    desc = ca_historical_elections.2.d
-    icon = "gfx/interface/icons/event_icons/event_election.dds"
-    duration = 3
-
-    trigger = {
-        c:COS ?= this
-        in_election_campaign = yes
-        NOT = { has_variable = cos_elec_1844_fired }
-        game_date >= 1844.6.2
-        game_date <= 1845.1.1
-    }
-
-    immediate = { 
-        set_variable = { name = cos_elec_1844_fired value = yes } 
-    }
-
-    # Opción A (Histórica): Elección popular de Francisco María Oreamuno (Civilista Moderado)
-    option = {
-        name = ca_historical_elections.2.a
-        default_option = yes
-        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
-        ig:ig_industrialists ?= { party = { add_momentum = momentum_medium } }
-    }
-
-    # Opción B (Alternativa): Impulso radical-liberal de José María Castro Madriz
-    option = {
-        name = ca_historical_elections.2.b
-        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_very_large } }
-        ig:ig_landowners ?= { party = { add_momentum = momentum_small_decrease } }
-    }
-
-    # Opción C (Alternativa): La facción militar de los cuarteles intenta imponer condiciones
-    option = {
-        name = ca_historical_elections.2.c
-        ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
-        add_radicals = { value = medium_radicals pop_type = shopkeepers }
-    }
-}
-
-#1847: Elecciones Indirectas de Segundo Grado (José María Castro Madriz)
-ca_historical_elections.3 = {
-    type = country_event
-    placement = ROOT
-    title = ca_historical_elections.3.t
-    desc = ca_historical_elections.3.d
-    icon = "gfx/interface/icons/event_icons/event_election.dds"
-    duration = 3
-
-    trigger = {
-        c:COS ?= this
-        in_election_campaign = yes
-        NOT = { has_variable = cos_elec_1847_fired }
-        game_date >= 1847.4.11
-        game_date <= 1848.1.1
-    }
-
-    immediate = { 
-        set_variable = { name = cos_elec_1847_fired value = yes } 
-    }
-
-    # Opción A (Histórica): José María Castro Madriz ("Fundador de la República")
-    option = {
-        name = ca_historical_elections.3.a
-        default_option = yes
-        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_very_large } }
-        ig:ig_industrialists ?= { party = { add_momentum = momentum_medium } }
-        add_modifier = { name = education_reform_boost days = long_modifier_time }
-    }
-
-    # Opción B (Alternativa): Candidatura tradicionalista de José Rafael Gallegos
-    option = {
-        name = ca_historical_elections.3.b
-        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
-        ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
-    }
-
-    # Opción C (Alternativa): La burguesía mercantil de Manuel José Carazo
-    option = {
-        name = ca_historical_elections.3.c
-        ig:ig_industrialists ?= { party = { add_momentum = momentum_large } }
-        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_medium } }
-    }
-}
-
-#1849: Elecciones Extraordinarias (Juan Rafael Mora Porras)
-ca_historical_elections.4 = {
-    type = country_event
-    placement = ROOT
-    title = ca_historical_elections.4.t
-    desc = ca_historical_elections.4.d
-    icon = "gfx/interface/icons/event_icons/event_election.dds"
-    duration = 3
-
-    trigger = {
-        c:COS ?= this
-        in_election_campaign = yes
-        NOT = { has_variable = cos_elec_1849_fired }
-        game_date >= 1849.12.9
-        game_date <= 1850.6.1
-    }
-
-    immediate = { 
-        set_variable = { name = cos_elec_1849_fired value = yes } 
-    }
-
-    # Opción A (Histórica): Juan Rafael Mora Porras y el despegue de la oligarquía cafetalera
-    option = {
-        name = ca_historical_elections.4.a
-        default_option = yes
-        ig:ig_industrialists ?= { party = { add_momentum = momentum_very_large } }
-        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
-        ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium } }
-    }
-
-    # Opción B (Alternativa): Retorno y defensa del modelo civilista de Castro Madriz
-    option = {
-        name = ca_historical_elections.4.b
-        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
-        add_radicals = { value = small_radicals pop_type = aristocrats }
-    }
-
-    # Opción C (Alternativa): Candidatura militar-comercial de Miguel Mora Porras
-    option = {
-        name = ca_historical_elections.4.c
-        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
-        ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium } }
-    }
-}
-
-
-
+##1844: Primer Sufragio Directo Popular (Francisco María Oreamuno Bonilla)
+#ca_costa_rica_events.22 = {
+#    type = country_event
+#    placement = ROOT
+#    title = ca_costa_rica_events.22.t
+#    desc = ca_costa_rica_events.22.d
+#    icon = "gfx/interface/icons/event_icons/event_election.dds"
+#    duration = 3
+#
+#    trigger = {
+#        c:COS ?= this
+#        in_election_campaign = yes
+#        NOT = { has_variable = cos_elec_1844_fired }
+#        game_date >= 1844.6.2
+#        game_date <= 1845.1.1
+#    }
+#
+#    immediate = { 
+#        set_variable = { name = cos_elec_1844_fired value = yes } 
+#    }
+#
+#    # Opción A (Histórica): Elección popular de Francisco María Oreamuno (Civilista Moderado)
+#    option = {
+#        name = ca_costa_rica_events.22.a
+#        default_option = yes
+#        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
+#        ig:ig_industrialists ?= { party = { add_momentum = momentum_medium } }
+#    }
+#
+#    # Opción B (Alternativa): Impulso radical-liberal de José María Castro Madriz
+#    option = {
+#        name = ca_costa_rica_events.22.b
+#        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_very_large } }
+#        ig:ig_landowners ?= { party = { add_momentum = momentum_small_decrease } }
+#    }
+#
+#    # Opción C (Alternativa): La facción militar de los cuarteles intenta imponer condiciones
+#    option = {
+#        name = ca_costa_rica_events.22.c
+#        ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
+#        add_radicals = { value = medium_radicals pop_type = shopkeepers }
+#    }
+#}
+#
+##1847: Elecciones Indirectas de Segundo Grado (José María Castro Madriz)
+#ca_costa_rica_events.23 = {
+#    type = country_event
+#    placement = ROOT
+#    title = ca_costa_rica_events.23.t
+#    desc = ca_costa_rica_events.23.d
+#    icon = "gfx/interface/icons/event_icons/event_election.dds"
+#    duration = 3
+#
+#    trigger = {
+#        c:COS ?= this
+#        in_election_campaign = yes
+#        NOT = { has_variable = cos_elec_1847_fired }
+#        game_date >= 1847.4.11
+#        game_date <= 1848.1.1
+#    }
+#
+#    immediate = { 
+#        set_variable = { name = cos_elec_1847_fired value = yes } 
+#    }
+#
+#    # Opción A (Histórica): José María Castro Madriz ("Fundador de la República")
+#    option = {
+#        name = ca_costa_rica_events.23.a
+#        default_option = yes
+#        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_very_large } }
+#        ig:ig_industrialists ?= { party = { add_momentum = momentum_medium } }
+#        add_modifier = { name = education_reform_boost days = long_modifier_time }
+#    }
+#
+#    # Opción B (Alternativa): Candidatura tradicionalista de José Rafael Gallegos
+#    option = {
+#        name = ca_costa_rica_events.23.b
+#        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
+#        ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
+#    }
+#
+#    # Opción C (Alternativa): La burguesía mercantil de Manuel José Carazo
+#    option = {
+#        name = ca_costa_rica_events.23.c
+#        ig:ig_industrialists ?= { party = { add_momentum = momentum_large } }
+#        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_medium } }
+#    }
+#}
+#
+##1849: Elecciones Extraordinarias (Juan Rafael Mora Porras)
+#ca_costa_rica_events.24 = {
+#    type = country_event
+#    placement = ROOT
+#    title = ca_costa_rica_events.24.t
+#    desc = ca_costa_rica_events.24.d
+#    icon = "gfx/interface/icons/event_icons/event_election.dds"
+#    duration = 3
+#
+#    trigger = {
+#        c:COS ?= this
+#        in_election_campaign = yes
+#        NOT = { has_variable = cos_elec_1849_fired }
+#        game_date >= 1849.12.9
+#        game_date <= 1850.6.1
+#    }
+#
+#    immediate = { 
+#        set_variable = { name = cos_elec_1849_fired value = yes } 
+#    }
+#
+#    # Opción A (Histórica): Juan Rafael Mora Porras y el despegue de la oligarquía cafetalera
+#    option = {
+#        name = ca_costa_rica_events.24.a
+#        default_option = yes
+#        ig:ig_industrialists ?= { party = { add_momentum = momentum_very_large } }
+#        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
+#        ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium } }
+#    }
+#
+#    # Opción B (Alternativa): Retorno y defensa del modelo civilista de Castro Madriz
+#    option = {
+#        name = ca_costa_rica_events.24.b
+#        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+#        add_radicals = { value = small_radicals pop_type = aristocrats }
+#    }
+#
+#    # Opción C (Alternativa): Candidatura militar-comercial de Miguel Mora Porras
+#    option = {
+#        name = ca_costa_rica_events.24.c
+#        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
+#        ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium } }
+#    }
+#}

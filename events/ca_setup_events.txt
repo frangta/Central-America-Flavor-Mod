@@ -164,8 +164,8 @@ ca_setup_events.3 = {
 		set_variable = honduras_1866_event
 		
 		# Inicialización de mecánicas de juego
-		set_variable = ca_soil_survey_complete
-		set_variable = ca_can_build_mines_globally
+		#set_variable = ca_soil_survey_complete
+		#set_variable = ca_can_build_mines_globally
 		set_variable = { name = frca_support value = 55 } # Soporte inicial moderado-bajo
 		set_variable = { name = federalists_vs_separatists_var value = 0 }
 

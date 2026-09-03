@@ -1145,7 +1145,7 @@ ca_central_america.6 = {
             on_created = {
                 save_scope_as = scope_PP1
                 set_country_type = unrecognized 
-                set_variable = ca_bocas_de_toro_country
+                #set_variable = ca_bocas_de_toro_country
                 
                 
                 scope:bocas_state = {
@@ -2257,6 +2257,7 @@ ca_central_america.13 = {
                 }
             }
         }
+		ca_remove_setup_ig_ideologies_post_uca = yes
     }
 
     # ========================================================
@@ -3245,7 +3246,7 @@ ca_central_america.26 = {
 
         # Efecto: Iniciar la guerra (Activamos el estado de guerra civil)
         c:NIC = {
-            set_variable = ca_nicaragua_war_started
+            #set_variable = ca_nicaragua_war_started
 			}
 		c:UCA ?= {
 			create_diplomatic_play = {
