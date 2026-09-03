@@ -13,8 +13,7 @@ movement_ca_liberal = {
         ideology_humanitarian
         ideology_ca_liberal_monarchist
         ideology_ca_secularist
-        ideology_ca_criollo_liberal
-        ideology_ca_criollo_elite
+
     }
 
     creation_trigger = {
@@ -40,6 +39,25 @@ movement_ca_liberal = {
     on_created = {
         add_movement_enthusiasm_modifier = yes
     }
+    #disband_trigger = {
+    #    
+    #    OR = {
+    #        country_has_primary_culture = cu:central_american
+    #        country_has_primary_culture = cu:guatemalan
+    #        country_has_primary_culture = cu:el_salvadorian
+    #        country_has_primary_culture = cu:honduran
+    #        country_has_primary_culture = cu:nicaraguan
+    #        country_has_primary_culture = cu:costa_rican
+    #        country_has_primary_culture = cu:panamanian
+    #    }
+    #    
+    #    NOT = { has_variable = ca_organization_apro }
+    #}
+	#
+    #on_disbanded = {
+    #    
+    #    #hidden_effect = { remove_modifier = fervor_ideologico }
+    #}
 
     character_support_trigger = {
         OR = {
@@ -172,7 +190,7 @@ movement_ca_liberal = {
 }
 
 # ==============================================
-# MOVIMIENTO REACCIONARIO (Tradicionalistas)
+# MOVIMIENTO REACCIONARIO (Tradicionalistas/Conservadurismo)
 # ==============================================
 movement_ca_reactionary = {
     category = movement_category_ideological
@@ -182,17 +200,20 @@ movement_ca_reactionary = {
         ideology_traditionalist
         ideology_protectionist
         ideology_authoritarian
-        ideology_luddite
-        ideology_central_american_reactionary
-        ideology_central_american_reactionary_2
-        ideology_ca_criollo_paternalistic
-        ideology_ca_criollo_stratocratic
+		ideology_central_america_caudillo
+		ideology_maya_autonomism
+		ideology_ca_hermit_isolationism
+		ideology_ca_agrarian_luddism
+		ideology_ca_peasant_caudillismo
     }
 
     creation_trigger = {
         NOT = {
             any_political_movement = { is_political_movement_type = movement_ca_reactionary }
         }
+		country_should_exclusively_focus_on_modernization = no
+		has_law_or_variant = law_type:law_slavery_banned
+		country_has_voting_franchise = yes
         OR = {
             country_has_primary_culture = cu:central_american
             country_has_primary_culture = cu:guatemalan
@@ -206,13 +227,36 @@ movement_ca_reactionary = {
     creation_weight = { value = 100 }
     on_created = { add_movement_enthusiasm_modifier = yes }
 
+    disband_trigger = {
+        
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+        }
+        
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    on_disbanded = {
+        
+        #hidden_effect = { remove_modifier = fervor_ideologico }
+    }
+
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_traditionalist
             has_ideology = ideology:ideology_protectionist
             has_ideology = ideology:ideology_authoritarian
-            has_ideology = ideology:ideology_central_american_reactionary
-            has_ideology = ideology:ideology_central_american_reactionary_2
+            has_ideology = ideology:ideology_central_america_caudillo
+            has_ideology = ideology:ideology_maya_autonomism
+            has_ideology = ideology:ideology_ca_hermit_isolationism
+            has_ideology = ideology:ideology_ca_agrarian_luddism
+            has_ideology = ideology:ideology_ca_peasant_caudillismo
             scope:interest_group ?= {
                 OR = {
                     has_ideology = ideology:ideology_reactionary
@@ -229,10 +273,59 @@ movement_ca_reactionary = {
                 OR = {
                     has_ideology = ideology:ideology_traditionalist
                     has_ideology = ideology:ideology_central_american_reactionary
+					has_ideology = ideology:ideology_protectionist
+                    has_ideology = ideology:ideology_authoritarian
+                    has_ideology = ideology:ideology_central_america_caudillo
+                    has_ideology = ideology:ideology_maya_autonomism
+                    has_ideology = ideology:ideology_ca_hermit_isolationism
+                    has_ideology = ideology:ideology_ca_agrarian_luddism
+                    has_ideology = ideology:ideology_ca_peasant_caudillismo
                 }
             }
             multiply = 5
         }
+		else_if = {
+			limit = {
+				AND = {
+					has_ideology = ideology:ideology_authoritarian
+					scope:interest_group ?= {
+						OR = {
+							is_interest_group_type = ig_intelligentsia
+							is_interest_group_type = ig_trade_unions
+						}
+					}
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				scope:interest_group ?= {
+					OR = {
+						has_ideology = ideology:ideology_reactionary
+						has_ideology = ideology:ideology_patriarchal
+					}
+				}
+			}
+			multiply = {
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					has_ideology = ideology:ideology_reformer
+					scope:interest_group ?= {
+						has_ideology = ideology:ideology_reactionary
+					}
+				}
+			}
+			multiply = {
+				value = 0.10
+			}
+		}
     }
 
     # -- REGLAS DE APOYO DE LA POBLACIÓN --
@@ -326,7 +419,7 @@ movement_ca_reactionary = {
 }
 
 # ==============================================
-# MOVIMIENTO UNITARIO (Centralistas Autoritarios)
+# MOVIMIENTO UNITARIO (Centralistas )
 # ==============================================
 movement_ca_unitarian = {
     category = movement_category_ideological
@@ -336,7 +429,6 @@ movement_ca_unitarian = {
         ideology_ca_unitarian
         ideology_authoritarian
         ideology_ca_autocratic_autonomist
-        ideology_ca_criollo_paternalistic
         ideology_central_america_caudillo
     }
 
@@ -357,12 +449,32 @@ movement_ca_unitarian = {
     creation_weight = { value = 100 }
     on_created = { add_movement_enthusiasm_modifier = yes }
 
+    disband_trigger = {
+        
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+        }
+        
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    on_disbanded = {
+        
+        #hidden_effect = { remove_modifier = fervor_ideologico }
+    }
+	
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_ca_unitarian
             has_ideology = ideology:ideology_central_america_caudillo
             has_ideology = ideology:ideology_authoritarian
-            has_ideology = ideology:ideology_ca_criollo_paternalistic
+
         }
     }
 
@@ -481,7 +593,25 @@ movement_ca_federalist = {
 
     creation_weight = { value = 100 }
     on_created = { add_movement_enthusiasm_modifier = yes }
+    disband_trigger = {
+        
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+        }
+        
+        NOT = { has_variable = ca_organization_apro }
+    }
 
+    on_disbanded = {
+        
+        #hidden_effect = { remove_modifier = fervor_ideologico }
+    }
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_ca_federalist

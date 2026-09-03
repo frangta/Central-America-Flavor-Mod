@@ -1,0 +1,52 @@
+﻿
+TRY_INJECT:military_party = {
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_ca_junta_council
+				trigger = { has_variable = ca_junta_council }
+			}
+			triggered_desc = {
+				desc = party_ca_supreme_junta
+				trigger = { has_variable = ca_junta }
+			}
+			triggered_desc = {
+				desc = party_ca_armed_forces_league
+				trigger = { has_variable = ca_armed_forces_on }
+			}
+			# Nombre por defecto si no se cumple ninguna variable
+			triggered_desc = {
+				desc = party_military
+				trigger = { always = yes }
+			}
+		}
+	}
+	join_weight = {
+		if = { 
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_central_america_caudillo
+						has_ideology = ideology:ideology_ca_criollo_stratocratic
+						has_ideology = ideology:ideology_cuscatleco_nationalism
+						has_ideology = ideology:ideology_ca_tropical_bonapartism
+					}
+				}
+			}
+			add = { value = 30 desc = "from_ca_military_leader" }
+		}
+		if = { 
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_central_america_caudillo
+					has_ideology = ideology:ideology_ca_criollo_stratocratic
+					has_ideology = ideology:ideology_cuscatleco_nationalism
+					has_ideology = ideology:ideology_ca_tropical_bonapartism
+				}
+			}
+			add = { value = 20 desc = "from_ca_military_ig" }
+		}
+	}
+
+}

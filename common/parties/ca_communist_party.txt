@@ -1,0 +1,47 @@
+﻿TRY_INJECT:communist_party = {
+	
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_ca_socialist_technocrats
+				trigger = { has_variable = ca_technocracy_socialist }
+			}
+			triggered_desc = {
+				desc = party_ca_syndicalist_front
+				trigger = { has_variable = ca_syndicalist_in_gov }
+			}
+			triggered_desc = {
+				desc = party_ca_popular_communes
+				trigger = { has_variable = ca_comunes_on }
+			}
+			triggered_desc = {
+				desc = party_communist
+				trigger = { always = yes }
+			}
+		}
+	}
+	
+	join_weight = {
+		if = { 
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_banana_socialism
+						has_ideology = ideology:ideology_anti_imperialist_sovereigntism
+						has_ideology = ideology:ideology_ca_cientifico_technocracy
+					}
+				}
+			}
+			add = { value = 30 desc = "from_ca_communist_leader" }
+		}
+		if = { 
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_banana_socialism
+					has_ideology = ideology:ideology_anti_imperialist_sovereigntism
+				}
+			}
+			add = { value = 20 desc = "from_ca_communist_ig" }
+		}
+	}
+}

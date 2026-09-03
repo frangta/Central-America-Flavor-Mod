@@ -1,0 +1,24 @@
+﻿TRY_INJECT:social_democrat_party = {
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_ca_democratic_corporatists
+				trigger = { has_variable = ca_corporate_state_democratic }
+			}
+			triggered_desc = {
+				desc = party_ca_democratic_technocrats
+				trigger = { has_variable = ca_technocracy_democratic }
+			}
+			triggered_desc = {
+				desc = party_social_democrats
+				trigger = { always = yes }
+			}
+		}
+	}
+	
+	join_weight = {
+		
+	}
+
+}

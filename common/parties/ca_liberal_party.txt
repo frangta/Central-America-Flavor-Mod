@@ -1,0 +1,47 @@
+﻿TRY_INJECT:liberal_party = {
+
+	name = {
+	
+            triggered_desc = {
+                desc = party_democratic_nicaragua # "Partido Democrático"
+                trigger = { c:NIC ?= THIS }
+            }
+            triggered_desc = {
+                desc = party_fiebres_guatemala # "Los Fiebres"
+                trigger = { c:GUA ?= THIS }
+            }
+	
+	}
+	
+	join_weight = {
+		if = { 
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_morazanista
+						has_ideology = ideology:ideology_olympus_liberalism
+						has_ideology = ideology:ideology_ca_constitutionalist
+						has_ideology = ideology:ideology_ca_secularist
+						has_ideology = ideology:ideology_ca_criollo_liberal
+						has_ideology = ideology:ideology_ca_liberal
+					}
+				}
+			}
+			add = { value = 30 desc = "from_ca_liberal_leader" }
+		}
+		if = { 
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_morazanista
+					has_ideology = ideology:ideology_olympus_liberalism
+					has_ideology = ideology:ideology_ca_constitutionalist
+					has_ideology = ideology:ideology_ca_secularist
+					has_ideology = ideology:ideology_ca_criollo_liberal
+					has_ideology = ideology:ideology_ca_liberal
+				}
+			}
+			add = { value = 20 desc = "from_ca_liberal_ig" }
+		}
+	}
+
+}

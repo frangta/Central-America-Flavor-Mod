@@ -1,0 +1,38 @@
+﻿TRY_INJECT:anarchist_party = {
+	
+    name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_ca_self_determination_front
+				trigger = { has_variable = ca_self_determination }
+			}
+			triggered_desc = {
+				desc = party_anarchist
+				trigger = { always = yes }
+			}
+		}
+	}
+	
+	join_weight = {
+		if = { 
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_tropical_utopian
+						has_ideology = ideology:ideology_ca_communalist
+					}
+				}
+			}
+			add = { value = 30 desc = "from_ca_anarchist_leader" }
+		}
+		if = { 
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_tropical_utopian
+					has_ideology = ideology:ideology_ca_communalist
+				}
+			}
+			add = { value = 20 desc = "from_ca_anarchist_ig" }
+		}
+	}
+}

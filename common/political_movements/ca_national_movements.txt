@@ -18,9 +18,17 @@ movement_ca_guatemala_national = {
 	creation_weight = { value = 100 }
 	on_created = { add_movement_enthusiasm_modifier = yes }
 
-	disband_trigger = {
-		NOT = { any_scope_state = { state_region = s:STATE_GUATEMALA } }
-	}
+    disband_trigger = {
+        OR = {
+            NOT = { any_scope_state = { state_region = s:STATE_GUATEMALA } }
+            
+            cu:guatemalan = { culture_current_fervor < 20 }
+        }
+    }
+
+    on_disbanded = {
+        
+    }
 
 	character_support_trigger = { culture = cu:guatemalan }
 	character_support_weight = { value = 100 }
@@ -34,9 +42,15 @@ movement_ca_guatemala_national = {
 		movement_support_national_awakening
 		movement_support_cultural_fervor
 		movement_support_academics
-		movement_support_clerks
+		movement_support_shopkeepers
 		movement_support_officers
+		movement_support_farmers
+		movement_support_clerks
 		movement_support_soldiers
+		movement_support_peasants
+		movement_support_colonial_settlers
+		movement_support_nationalism_tech
+		movement_support_pan_nationalism_tech
 	}
 
 	pop_support_weight = {
@@ -73,7 +87,14 @@ movement_ca_elsalvador_national = {
 	creation_weight = { value = 100 }
 	on_created = { add_movement_enthusiasm_modifier = yes }
 
-	disband_trigger = { NOT = { any_scope_state = { state_region = s:STATE_SAN_SALVADOR } } }
+	disband_trigger = {
+        OR = {
+            NOT = { any_scope_state = { state_region = s:STATE_SAN_SALVADOR } }
+            cu:el_salvadorian = { culture_current_fervor < 20 }
+        }
+    }
+
+    on_disbanded = { }
 	character_support_trigger = { culture = cu:el_salvadorian }
 	character_support_weight = { value = 100 }
 
@@ -81,7 +102,20 @@ movement_ca_elsalvador_national = {
 		culture = cu:el_salvadorian
 		state = { state_region = s:STATE_SAN_SALVADOR }
 	}
-	pop_support_factors = { movement_support_cultural_fervor }
+	pop_support_factors = {
+		movement_support_national_awakening
+		movement_support_cultural_fervor
+		movement_support_academics
+		movement_support_shopkeepers
+		movement_support_officers
+		movement_support_farmers
+		movement_support_clerks
+		movement_support_soldiers
+		movement_support_peasants
+		movement_support_colonial_settlers
+		movement_support_nationalism_tech
+		movement_support_pan_nationalism_tech 
+	}
 	pop_support_weight = {
 		add = { value = 10 desc = "POP_BASE_SUPPORT" }
 		multiply = { value = culture.culture_current_fervor subtract = 15 multiply = 0.015 add = 1 }
@@ -116,7 +150,14 @@ movement_ca_honduras_national = {
 	creation_weight = { value = 100 }
 	on_created = { add_movement_enthusiasm_modifier = yes }
 
-	disband_trigger = { NOT = { any_scope_state = { state_region = s:STATE_HONDURAS } } }
+	disband_trigger = {
+        OR = {
+            NOT = { any_scope_state = { state_region = s:STATE_HONDURAS } }
+            cu:honduran = { culture_current_fervor < 20 }
+        }
+    }
+
+    on_disbanded = { }
 	character_support_trigger = { culture = cu:honduran }
 	character_support_weight = { value = 100 }
 
@@ -124,7 +165,20 @@ movement_ca_honduras_national = {
 		culture = cu:honduran
 		state = { state_region = s:STATE_HONDURAS }
 	}
-	pop_support_factors = { movement_support_cultural_fervor }
+	pop_support_factors = {
+		movement_support_national_awakening
+		movement_support_cultural_fervor
+		movement_support_academics
+		movement_support_shopkeepers
+		movement_support_officers
+		movement_support_farmers
+		movement_support_clerks
+		movement_support_soldiers
+		movement_support_peasants
+		movement_support_colonial_settlers
+		movement_support_nationalism_tech
+		movement_support_pan_nationalism_tech 
+	}
 	pop_support_weight = {
 		add = { value = 10 desc = "POP_BASE_SUPPORT" }
 		multiply = { value = culture.culture_current_fervor subtract = 15 multiply = 0.015 add = 1 }
@@ -159,7 +213,14 @@ movement_ca_nicaragua_national = {
 	creation_weight = { value = 100 }
 	on_created = { add_movement_enthusiasm_modifier = yes }
 
-	disband_trigger = { NOT = { any_scope_state = { state_region = s:STATE_NICARAGUA } } }
+	disband_trigger = {
+        OR = {
+            NOT = { any_scope_state = { state_region = s:STATE_NICARAGUA } }
+            cu:nicaraguan = { culture_current_fervor < 20 }
+        }
+    }
+
+    on_disbanded = { }
 	character_support_trigger = { culture = cu:nicaraguan }
 	character_support_weight = { value = 100 }
 
@@ -167,7 +228,20 @@ movement_ca_nicaragua_national = {
 		culture = cu:nicaraguan
 		state = { state_region = s:STATE_NICARAGUA }
 	}
-	pop_support_factors = { movement_support_cultural_fervor }
+	pop_support_factors = {
+		movement_support_national_awakening
+		movement_support_cultural_fervor
+		movement_support_academics
+		movement_support_shopkeepers
+		movement_support_officers
+		movement_support_farmers
+		movement_support_clerks
+		movement_support_soldiers
+		movement_support_peasants
+		movement_support_colonial_settlers
+		movement_support_nationalism_tech
+		movement_support_pan_nationalism_tech 
+	}
 	pop_support_weight = {
 		add = { value = 10 desc = "POP_BASE_SUPPORT" }
 		multiply = { value = culture.culture_current_fervor subtract = 15 multiply = 0.015 add = 1 }
@@ -202,7 +276,14 @@ movement_ca_costarica_national = {
 	creation_weight = { value = 100 }
 	on_created = { add_movement_enthusiasm_modifier = yes }
 
-	disband_trigger = { NOT = { any_scope_state = { state_region = s:STATE_COSTA_RICA } } }
+	disband_trigger = {
+        OR = {
+            NOT = { any_scope_state = { state_region = s:STATE_COSTA_RICA } }
+            cu:costa_rican = { culture_current_fervor < 20 }
+        }
+    }
+
+    on_disbanded = { }
 	character_support_trigger = { culture = cu:costa_rican }
 	character_support_weight = { value = 100 }
 
@@ -210,7 +291,20 @@ movement_ca_costarica_national = {
 		culture = cu:costa_rican
 		state = { state_region = s:STATE_COSTA_RICA }
 	}
-	pop_support_factors = { movement_support_cultural_fervor }
+	pop_support_factors = {
+		movement_support_national_awakening
+		movement_support_cultural_fervor
+		movement_support_academics
+		movement_support_shopkeepers
+		movement_support_officers
+		movement_support_farmers
+		movement_support_clerks
+		movement_support_soldiers
+		movement_support_peasants
+		movement_support_colonial_settlers
+		movement_support_nationalism_tech
+		movement_support_pan_nationalism_tech 
+	}
 	pop_support_weight = {
 		add = { value = 10 desc = "POP_BASE_SUPPORT" }
 		multiply = { value = culture.culture_current_fervor subtract = 15 multiply = 0.015 add = 1 }
@@ -245,7 +339,14 @@ movement_ca_panama_national = {
 	creation_weight = { value = 100 }
 	on_created = { add_movement_enthusiasm_modifier = yes }
 
-	disband_trigger = { NOT = { any_scope_state = { state_region = s:STATE_PANAMA } } }
+	disband_trigger = {
+        OR = {
+            NOT = { any_scope_state = { state_region = s:STATE_PANAMA } }
+            cu:panamanian = { culture_current_fervor < 20 }
+        }
+    }
+
+    on_disbanded = { }
 	character_support_trigger = { culture = cu:panamanian }
 	character_support_weight = { value = 100 }
 
@@ -253,7 +354,20 @@ movement_ca_panama_national = {
 		culture = cu:panamanian
 		state = { state_region = s:STATE_PANAMA }
 	}
-	pop_support_factors = { movement_support_cultural_fervor }
+	pop_support_factors = {
+		movement_support_national_awakening
+		movement_support_cultural_fervor
+		movement_support_academics
+		movement_support_shopkeepers
+		movement_support_officers
+		movement_support_farmers
+		movement_support_clerks
+		movement_support_soldiers
+		movement_support_peasants
+		movement_support_colonial_settlers
+		movement_support_nationalism_tech
+		movement_support_pan_nationalism_tech 
+	}
 	pop_support_weight = {
 		add = { value = 10 desc = "POP_BASE_SUPPORT" }
 		multiply = { value = culture.culture_current_fervor subtract = 15 multiply = 0.015 add = 1 }
@@ -288,7 +402,14 @@ movement_ca_chiapas_national = {
 	creation_weight = { value = 100 }
 	on_created = { add_movement_enthusiasm_modifier = yes }
 
-	disband_trigger = { NOT = { any_scope_state = { state_region = s:STATE_CHIAPAS } } }
+	disband_trigger = {
+        OR = {
+            NOT = { any_scope_state = { state_region = s:STATE_CHIAPAS } }
+            cu:chiapanecan = { culture_current_fervor < 20 }
+        }
+    }
+
+    on_disbanded = { }
 	character_support_trigger = { culture = cu:chiapanecan }
 	character_support_weight = { value = 100 }
 
@@ -296,7 +417,20 @@ movement_ca_chiapas_national = {
 		culture = cu:chiapanecan
 		state = { state_region = s:STATE_CHIAPAS }
 	}
-	pop_support_factors = { movement_support_cultural_fervor }
+	pop_support_factors = {
+		movement_support_national_awakening
+		movement_support_cultural_fervor
+		movement_support_academics
+		movement_support_shopkeepers
+		movement_support_officers
+		movement_support_farmers
+		movement_support_clerks
+		movement_support_soldiers
+		movement_support_peasants
+		movement_support_colonial_settlers
+		movement_support_nationalism_tech
+		movement_support_pan_nationalism_tech 
+	}
 	pop_support_weight = {
 		add = { value = 10 desc = "POP_BASE_SUPPORT" }
 		multiply = { value = culture.culture_current_fervor subtract = 15 multiply = 0.015 add = 1 }
@@ -333,7 +467,15 @@ movement_ca_los_altos_national = {
 	creation_weight = { value = 100 }
 	on_created = { add_movement_enthusiasm_modifier = yes }
 
-	disband_trigger = { exists = c:ALT }
+	
+	disband_trigger = {
+        OR = {
+            exists = c:ALT
+            cu:central_american = { culture_current_fervor < 20 }
+        }
+    }
+
+    on_disbanded = { }
 	
 	# Los Altos se basaba mucho en los criollos que rechazaban el gobierno central de Guatemala
 	character_support_trigger = { 
@@ -346,7 +488,20 @@ movement_ca_los_altos_national = {
 		culture = cu:central_american
 		state = { state_region = s:STATE_GUATEMALA }
 	}
-	pop_support_factors = { movement_support_cultural_fervor }
+	pop_support_factors = {
+		movement_support_national_awakening
+		movement_support_cultural_fervor
+		movement_support_academics
+		movement_support_shopkeepers
+		movement_support_officers
+		movement_support_farmers
+		movement_support_clerks
+		movement_support_soldiers
+		movement_support_peasants
+		movement_support_colonial_settlers
+		movement_support_nationalism_tech
+		movement_support_pan_nationalism_tech 
+	}
 	pop_support_weight = {
 		add = { value = 10 desc = "POP_BASE_SUPPORT" }
 		multiply = { value = culture.culture_current_fervor subtract = 15 multiply = 0.015 add = 1 }

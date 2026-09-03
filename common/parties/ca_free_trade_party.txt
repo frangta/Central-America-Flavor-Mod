@@ -1,0 +1,48 @@
+﻿TRY_INJECT:free_trade_party = {
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_ca_capitalist_technocrats
+				trigger = { has_variable = ca_technocracy_capitalist }
+			}
+			triggered_desc = {
+				desc = party_ca_industrial_oligarchy
+				trigger = { has_variable = ca_oligarchy2 }
+			}
+			triggered_desc = {
+				desc = party_ca_industrialists_league
+				trigger = { has_variable = ca_industrialists_on }
+			}
+		}
+	}
+	
+	join_weight = {
+		if = { 
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_coffee_liberalism
+						has_ideology = ideology:ideology_ca_canal_company_rule
+						has_ideology = ideology:ideology_ca_enclavist
+						has_ideology = ideology:ideology_ca_criollo_elite
+						has_ideology = ideology:ideology_ca_colonialist
+					}
+				}
+			}
+			add = { value = 30 desc = "from_ca_free_trade_leader" }
+		}
+		if = { 
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_coffee_liberalism
+					has_ideology = ideology:ideology_ca_canal_company_rule
+					has_ideology = ideology:ideology_ca_enclavist
+					has_ideology = ideology:ideology_ca_criollo_elite
+					has_ideology = ideology:ideology_ca_colonialist
+				}
+			}
+			add = { value = 20 desc = "from_ca_free_trade_ig" }
+		}
+	}
+}

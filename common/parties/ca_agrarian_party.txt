@@ -1,0 +1,45 @@
+﻿TRY_INJECT:agrarian_party = {
+
+	name = {
+		    triggered_desc = {
+				desc = party_ligas_campesinas_salvador # "Ligas Campesinas"
+				trigger = { c:ELS ?= THIS }
+			}
+			triggered_desc = {
+				desc = party_agrario_nacional # "Partido Agrario Nacional"
+				trigger = { 
+					OR = { c:GUA ?= THIS c:HON ?= THIS c:COS ?= THIS c:NIC ?= THIS c:UCA ?= THIS }
+				}
+			}
+	}
+	
+	join_weight = {
+		if = { 
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_agrarian_luddism
+						has_ideology = ideology:ideology_ca_peasant_caudillismo
+						has_ideology = ideology:ideology_ca_artesanado
+						has_ideology = ideology:ideology_ca_agroexportadores
+						has_ideology = ideology:ideology_chacara_social_democracy
+					}
+				}
+			}
+			add = { value = 30 desc = "from_ca_agrarian_leader" }
+		}
+		if = { 
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_agrarian_luddism
+					has_ideology = ideology:ideology_ca_peasant_caudillismo
+					has_ideology = ideology:ideology_ca_artesanado
+					has_ideology = ideology:ideology_ca_agroexportadores
+					has_ideology = ideology:ideology_chacara_social_democracy
+				}
+			}
+			add = { value = 20 desc = "from_ca_agrarian_ig" }
+		}
+	}
+
+}

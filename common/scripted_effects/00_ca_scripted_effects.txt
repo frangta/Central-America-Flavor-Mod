@@ -280,115 +280,76 @@ ca_all_indepedient = {
 		 
 		}
 }
-
+# ====================================================================
+# ESTABLECER MODIFICADORES FUERTES
+# ====================================================================
 ca_setup_ideological_strongholds_effect = {
-    # ---------------------------------------------------------
-    # EL SALVADOR: La Capital Federal y Liberal
-    # ---------------------------------------------------------
-    s:STATE_SAN_SALVADOR = { 
-        every_scope_state = { # Transición de State Region a State
+    every_scope_state = { 
+        if = {
+            limit = { state_region = s:STATE_SAN_SALVADOR }
             add_modifier = { name = federal_stronghold }
             add_modifier = { name = liberal_stronghold }
         }
-    }
-
-    # ---------------------------------------------------------
-    # GUATEMALA: La Vieja Élite y el Caudillismo
-    # ---------------------------------------------------------
-    s:STATE_GUATEMALA = {
-        every_scope_state = {
+        else_if = {
+            limit = { state_region = s:STATE_GUATEMALA }
             add_modifier = { name = unitary_stronghold }
             add_modifier = { name = conservative_stronghold }
             add_modifier = { name = reactionary_stronghold }
         }
-    }
-
-    # ---------------------------------------------------------
-    # NICARAGUA: División y Separatismo
-    # ---------------------------------------------------------
-    s:STATE_NICARAGUA = {
-        every_scope_state = {
+        else_if = {
+            limit = { state_region = s:STATE_NICARAGUA }
             add_modifier = { name = separatism_stronghold }
             add_modifier = { name = liberal_stronghold_small_nation }
             add_modifier = { name = conservative_stronghold_small_nation }
         }
-    }
-
-    # ---------------------------------------------------------
-    # COSTA RICA: Aislacionismo y Orden
-    # ---------------------------------------------------------
-    s:STATE_COSTA_RICA = {
-        every_scope_state = {
+        else_if = {
+            limit = { state_region = s:STATE_COSTA_RICA }
             add_modifier = { name = separatism_stronghold }
             add_modifier = { name = unitary_stronghold_small_nation }
         }
-    }
-
-    # ---------------------------------------------------------
-    # HONDURAS: Federalismo en Decadencia
-    # ---------------------------------------------------------
-    s:STATE_HONDURAS = {
-        every_scope_state = {
+        else_if = {
+            limit = { state_region = s:STATE_HONDURAS }
             add_modifier = { name = waning_federal_stronghold }
             add_modifier = { name = conservative_stronghold_small_nation }
         }
     }
 }
-ca_remove_ideological_strongholds_effect = {
-    # ---------------------------------------------------------
-    # EL SALVADOR: La Capital Federal y Liberal
-    # ---------------------------------------------------------
-    s:STATE_SAN_SALVADOR = { 
-        
-            remove_modifier = ca_uca_liberal_stronghold
-            
-        
-    }
 
-    # ---------------------------------------------------------
-    # GUATEMALA: La Vieja Élite y el Caudillismo
-    # ---------------------------------------------------------
-    s:STATE_GUATEMALA = {
-        
-	    remove_modifier = ca_uca_conservative_capital
+# ====================================================================
+# ELIMINAR MODIFICADORES FUERTES
+# ====================================================================
+ca_remove_ideological_strongholds_effect = {
+    every_scope_state = {
+        if = {
+            limit = { state_region = s:STATE_SAN_SALVADOR }
+            remove_modifier = ca_uca_liberal_stronghold
+        }
+        else_if = {
+            limit = { state_region = s:STATE_GUATEMALA }
+            remove_modifier = ca_uca_conservative_capital
             remove_modifier = unitary_stronghold 
             remove_modifier = conservative_stronghold 
             remove_modifier = reactionary_stronghold 
-        
-    }
-
-    # ---------------------------------------------------------
-    # NICARAGUA: División y Separatismo
-    # ---------------------------------------------------------
-    s:STATE_NICARAGUA = {
-        
-		    remove_modifier = ca_uca_leones_vs_granadinos
+        }
+        else_if = {
+            limit = { state_region = s:STATE_NICARAGUA }
+            remove_modifier = ca_uca_leones_vs_granadinos
             remove_modifier = separatism_stronghold 
             remove_modifier = liberal_stronghold_small_nation 
             remove_modifier = conservative_stronghold_small_nation 
-        
-    }
-
-    # ---------------------------------------------------------
-    # COSTA RICA: Aislacionismo y Orden
-    # ---------------------------------------------------------
-    s:STATE_COSTA_RICA = {
-        
-		    remove_modifier = ca_uca_isolated_autonomists
+        }
+        else_if = {
+            limit = { state_region = s:STATE_COSTA_RICA }
+            remove_modifier = ca_uca_isolated_autonomists
             remove_modifier = separatism_stronghold 
             remove_modifier = unitary_stronghold_small_nation 
-        
-    }
-
-    # ---------------------------------------------------------
-    # HONDURAS: Federalismo en Decadencia
-    # ---------------------------------------------------------
-    s:STATE_HONDURAS = {
-        
-		    remove_modifier = ca_uca_federalist_heartland
+        }
+        else_if = {
+            limit = { state_region = s:STATE_HONDURAS }
+            remove_modifier = ca_uca_federalist_heartland
             remove_modifier = waning_federal_stronghold 
             remove_modifier = conservative_stronghold_small_nation 
-        
+        }
     }
 }
 # ====================================================================
@@ -725,11 +686,74 @@ if = {
 		}
 
 
+}
+ca_add_setup_ig_ideologies_active = { #
+ig:ig_armed_forces = {
+            remove_ideology = ideology_caudillismo
+            remove_ideology = ideology_paternalistic
+            add_ideology = ideology_central_american_federal
+            set_interest_group_name = ig_ejercito_federal
+        }
+
+        ig:ig_devout = {
+             remove_ideology = ideology_moralist
+             add_ideology = ideology_ca_moralist	
+             add_ideology = ideology_central_american_reactionary_2
+             set_interest_group_name = ig_catholic_church
+        }
+        
+        ig:ig_landowners = {            
+            remove_ideology = ideology_republican_paternalistic
+            remove_ideology = ideology_hierarchic
+            remove_ideology = ideology_paternalistic
+            add_ideology = ideology_ca_criollo_paternalistic
+            add_ideology = ideology_ca_criollo_stratocratic            
+            add_ideology = ideology_central_american_reactionary_2
+            set_interest_group_name = ig_hacendados
+        }
+        
+        ig:ig_industrialists = {
+            remove_ideology = ideology_mercantilist
+            remove_ideology = ideology_protectionist
+            remove_ideology = ideology_laissez_faire
+            add_ideology = ideology_ca_agroexportadores
+            add_ideology = ideology_ca_liberal     
+            set_interest_group_name = ig_elite_comercial
+        }
+        
+        ig:ig_intelligentsia = {
+            remove_ideology = ideology_liberal
+            remove_ideology = ideology_anti_clerical
+            remove_ideology = ideology_republican
+            add_ideology = ideology_ca_constitutionalist
+            add_ideology = ideology_ca_secularist
+            add_ideology = ideology_central_american_federal
+            set_interest_group_name = ig_liberales_morazanistas            
+        }
+        
+        ig:ig_petty_bourgeoisie = {
+            remove_ideology = ideology_patriotic
+            add_ideology = ideology_central_american_federal
+            add_ideology = ideology_ca_artesanado
+            set_interest_group_name = ig_artesanos_urbanos
+        }
+        
+        ig:ig_rural_folk = {
+            remove_ideology = ideology_isolationist
+            remove_ideology = ideology_agrarian
+            remove_ideology = ideology_particularist
+            add_ideology = ideology_ca_guilds
+            set_interest_group_name = ig_pequenos_campesinos
+        }
+
+
+
 }	
-ca_add_setup_ig_ideologies = {
+ca_add_setup_ig_ideologies = { #
 ig:ig_armed_forces = {
     remove_ideology = ideology_caudillismo
     remove_ideology = ideology_paternalistic
+	add_ideology = ideology_law_regionalist_militia
 }
 ig:ig_petty_bourgeoisie = {
     remove_ideology = ideology_patriotic
@@ -781,23 +805,22 @@ ca_remove_setup_ig_ideologies_post_uca = {
 ig:ig_armed_forces = {
     add_ideology = ideology_caudillismo
     add_ideology = ideology_paternalistic
+	set_interest_group_name = ig_armed_forces
 }
 
 ig:ig_petty_bourgeoisie = {
     add_ideology = ideology_patriotic
     remove_ideology = ideology_central_american_federal
     remove_ideology = ideology_ca_artesanado
+	set_interest_group_name = ig_petty_bourgeoisie
 }
-ig:ig_intelligentsia = { #La ig_intelligentsia tiene opcion que elegir la constitution depende del lider del grupo y del movimiento politico/agitador
-	remove_ideology = ideology_liberal
-    remove_ideology = ideology_republican        
-    add_ideology = ideology_ca_constitutionalist
-}
+
 
 ig:ig_intelligentsia = { 
     remove_ideology = ideology_ca_constitutionalist
 	add_ideology = ideology_liberal
-    add_ideology = ideology_republican        
+    add_ideology = ideology_republican
+    set_interest_group_name = ig_intelligentsia	
 
 }
 
@@ -806,7 +829,8 @@ ig:ig_industrialists = {
     add_ideology = ideology_protectionist
     add_ideology = ideology_laissez_faire
     remove_ideology = ideology_ca_agroexportadores
-    remove_ideology = ideology_ca_liberal     
+    remove_ideology = ideology_ca_liberal
+    set_interest_group_name = ig_industrialists	
 }
 
 ig:ig_rural_folk = {
@@ -814,6 +838,7 @@ ig:ig_rural_folk = {
     add_ideology = ideology_agrarian
     add_ideology = ideology_particularist
     remove_ideology = ideology_ca_guilds
+	set_interest_group_name = ig_rural_folk
 }
 
 ig:ig_landowners = {
@@ -823,6 +848,7 @@ ig:ig_landowners = {
     remove_ideology = ideology_ca_criollo_paternalistic
     remove_ideology = ideology_ca_criollo_stratocratic            
     remove_ideology = ideology_central_american_reactionary_2
+	set_interest_group_name = ig_landowners
 }
 
 

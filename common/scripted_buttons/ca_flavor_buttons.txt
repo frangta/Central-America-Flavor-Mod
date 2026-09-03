@@ -24,57 +24,209 @@
 	 set_variable = ca_self_determination
 	}
 }
-ca_button_sabotage_federation = {
-    name = "ca_button_sabotage_federation_name"
-    desc = "ca_button_sabotage_federation_desc"
-    visible = { always = yes }
+ca_button_centralist_discipline = {
+    name = "ca_button_centralist_discipline"
+    desc = "ca_button_centralist_discipline_desc"
 
-    possible = { NOT = { has_variable = ca_federation_interaction_cooldown } }
+    visible = {
+        has_journal_entry = je_ca_central_american_fragile_unity
+    }
+
+    possible = {
+        # Requiere fuerzas armadas poderosas e influencia del gobierno
+        ig:ig_armed_forces ?= { is_powerful = yes }
+        authority >= 100
+    }
+
     effect = {
-        add_modifier = { name = ca_funding_separatists_modifier months = 12 }
-        change_relations = { country = overlord value = -10 }
+        # Genera radicales en provincias por forzar el centralismo
+        add_radicals = {
+            value = large_radicals
+            strata = middle
+        }
+        add_radicals = {
+            value = large_radicals
+            strata = lower
+        }
+        # Dispara un evento que ajusta la barra de progreso a favor del centralismo
+        trigger_event = { id = ca_centralist.1 popup = yes }
+    }
+
+    ai_chance = {
+        value = 15
+        if = {
+            # Si el líder es caudillista, es muy probable que presione este botón
+            limit = { ruler ?= { has_ideology = ideology:ideology_caudillismo } }
+            add = 50
+        }
+    }
+}
+
+ca_button_federalist_support = {
+    name = "ca_button_federalist_support"
+    desc = "ca_button_federalist_support_desc"
+
+    visible = {
+        has_journal_entry = je_ca_central_american_fragile_unity
+    }
+
+    possible = {
+        # La Inteligentsia debe ser parte integral del gobierno para convocar apoyo
+        ig:ig_intelligentsia ?= {
+            is_in_government = yes
+        }
+    }
+
+    effect = {
+        # Genera leales y apoya la estabilidad de la Federación
+        add_loyalists = {
+            value = medium_radicals
+            strata = middle
+        }
+        add_modifier = {
+            name = ca_federal_propaganda_modifier
+            days = 365
+        }
+    }
+
+    ai_chance = {
+        value = 85 # Comportamiento histórico para la IA
+    }
+}
+ca_button_sabotage_federation = {
+    name = "ca_button_sabotage_federation"
+    desc = "ca_button_sabotage_federation_desc"
+
+    visible = {
+        has_journal_entry = je_ca_state_role_in_federation
+    }
+
+    possible = {
+        var:ca_self_determination >= 50
+        NOT = { has_variable = sabotage_cooldown }
+    }
+
+    effect = {
+        set_variable = { name = sabotage_cooldown days = 180 }
+        set_variable = voting_ca_self_determination
+        change_variable = { name = ca_separatist_influence add = 15 }
         
         overlord = {
-            change_variable = { name = federalists_vs_separatists_var subtract = 15 }
+            change_variable = { name = frca_support_bar add = -10 }
         }
-        
-        # --- ¡NUEVA INTERACCIÓN CON EL LOBBY! ---
-        # Alegramos a los separatistas y enojamos a los pro-federales
+        trigger_event = { id = ca_separatist.1 popup = yes }
+    }
+
+    ai_chance = {
+        value = 10
         if = {
-            limit = { any_political_lobby = { is_political_lobby_type = lobby_anti_federalist } }
-            random_political_lobby = {
-                limit = { is_political_lobby_type = lobby_anti_federalist }
-                change_appeasement = { amount = 15 factor = appeasement_federal_authority_challenged }
-            }
+            limit = { has_variable = ca_carrilo_decret }
+            add = 80
         }
-        
-        set_variable = { name = ca_federation_interaction_cooldown months = 12 }
     }
 }
 
 ca_button_support_federation = {
-    name = "ca_button_support_federation_name"
+    name = "ca_button_support_federation"
     desc = "ca_button_support_federation_desc"
-    visible = { always = yes }
-    possible = { NOT = { has_variable = ca_federation_interaction_cooldown } }
+
+    visible = {
+        has_journal_entry = je_ca_state_role_in_federation
+    }
+
+    possible = {
+        NOT = { has_variable = support_cooldown }
+        var:civil_peace_bar < 50
+    }
 
     effect = {
-        add_modifier = { name = ca_funding_federalists_modifier months = 12 }
-        change_relations = { country = overlord value = 15 }
+        set_variable = { name = support_cooldown days = 365 }
+        change_variable = { name = civil_peace_bar add = 20 }
+        change_variable = { name = ca_federal_influence add = 15 }
         
         overlord = {
-            change_variable = { name = federalists_vs_separatists_var add = 15 }
+            change_variable = { name = frca_support_bar add = -5 }
         }
-        
-        if = {
-            limit = { any_political_lobby = { is_political_lobby_type = lobby_pro_federalist } }
-            random_political_lobby = {
-                limit = { is_political_lobby_type = lobby_pro_federalist }
-                change_appeasement = { amount = 15 factor = appeasement_federal_aid_received }
-            }
+        add_modifier = {
+            name = ca_funding_separatists_modifier
+            days = 365
         }
+    }
 
-        set_variable = { name = ca_federation_interaction_cooldown months = 12 }
+    ai_chance = {
+        value = 50
+        if = {
+            limit = { var:civil_peace_bar < 20 }
+            add = 50
+        }
+    }
+}
+
+ca_button_support_centralistas = {
+    name = "ca_button_support_centralistas"
+    desc = "ca_button_support_centralistas_desc"
+
+    visible = {
+        has_journal_entry = je_ca_state_role_in_federation
+    }
+
+    possible = {
+        ig:ig_armed_forces ?= { is_powerful = yes }
+        authority >= 50
+        NOT = { has_variable = pretorian_cooldown }
+    }
+
+    effect = {
+        set_variable = { name = pretorian_cooldown days = 730 }
+        change_variable = { name = ca_centralist_influence add = 20 }
+        
+        add_radicals = {
+            value = large_radicals
+            strata = lower
+        }
+        add_modifier = {
+            name = age_of_ca_caudillos_modifier
+            days = 730
+        }
+    }
+
+    ai_chance = {
+        value = 5
+        if = {
+            limit = { 
+                overlord.has_law_or_variant = law_type:law_state_religion
+            }
+            add = 40
+        }
+    }
+}
+
+ca_button_support_confederation = {
+    name = "ca_button_support_confederation"
+    desc = "ca_button_support_confederation_desc"
+
+    visible = {
+        has_journal_entry = je_ca_state_role_in_federation
+    }
+
+    possible = {
+        has_technology_researched = nationalism
+        NOT = { has_variable = confederation_cooldown }
+    }
+
+    effect = {
+        set_variable = { name = confederation_cooldown days = 365 }
+        change_variable = { name = ca_separatist_influence add = 10 }
+        change_variable = { name = ca_federal_influence add = 5 }
+
+        add_loyalists = {
+            value = medium_radicals
+            strata = middle
+        }
+    }
+
+    ai_chance = {
+        value = 25
     }
 }
 #fragile_unity_decree_button = {
@@ -213,6 +365,7 @@ je_nicaragua_intervention_central_america_button = {
 				escalation = 20
 				target_state = s:STATE_NICARAGUA.region_state:NIC
 			}
+			set_variable = je_central_america_setup_nic_var
 		}
 	}
 
@@ -263,6 +416,7 @@ je_costa_rica_intervention_central_america_button = {
 				escalation = 20
 				target_state = s:STATE_COSTA_RICA.region_state:COS
 			}
+			set_variable = je_central_america_setup_cos_var
 		}
 	}
 
@@ -275,7 +429,7 @@ je_honduras_intervention_central_america_button = {
 	desc = "honduras_intervention_central_america_button_desc"
 
 	visible = { 
-		NOT = { has_variable = je_central_america_setup_HON_var }
+		NOT = { has_variable = je_central_america_setup_hon_var }
 		exists = c:HON
 		c:HON ?= {
 			is_subject_of = ROOT
@@ -313,7 +467,8 @@ je_honduras_intervention_central_america_button = {
 				escalation = 80
 				target_state = s:STATE_HONDURAS.region_state:HON
 			}
-			}
+			set_variable = je_central_america_setup_hon_var
+		}
 	}
 
 	ai_chance = {
@@ -325,7 +480,7 @@ je_guatemala_intervention_central_america_button = {
 	desc = "guatemala_intervention_central_america_button_desc"
 
 	visible = { 
-		NOT = { has_variable = je_central_america_setup_GUA_var }
+		NOT = { has_variable = je_central_america_setup_gua_var }
 		exists = c:GUA
 		c:GUA ?= {
 			is_subject_of = ROOT
@@ -375,7 +530,7 @@ je_el_salvador_intervention_central_america_button = {
 	desc = "el_salvador_intervention_central_america_button_desc"
 
 	visible = { 
-		NOT = { has_variable = je_central_america_setup_ELS_var }
+		NOT = { has_variable = je_central_america_setup_els_var }
 		exists = c:ELS
 		c:ELS ?= {
 			is_subject_of = ROOT

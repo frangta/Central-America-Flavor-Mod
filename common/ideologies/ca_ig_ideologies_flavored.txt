@@ -53,7 +53,54 @@
         law_collectivized_agriculture = strongly_disapprove  
     }
 }
+ideology_ca_caudillismo_jingoist = {
+	icon = "gfx/interface/icons/ideology_icons/jingoist.dds"
 
+	lawgroup_army_model = {
+	    law_ca_caudillismo = strongly_approve
+		law_professional_army = disapprove
+		law_mass_conscription = disapprove
+		law_national_militia = disapprove
+		law_peasant_levies = disapprove
+		law_regionalist_militia = strongly_disapprove
+		law_ca_comunal_milicia = strongly_disapprove
+	}
+
+	
+}
+ideology_law_regionalist_militia = {
+	icon = "gfx/interface/icons/ideology_icons/jingoist.dds"
+
+	lawgroup_army_model = {
+	    law_regionalist_militia = strongly_approve
+	    law_ca_comunal_milicia = neutral
+		law_professional_army = disapprove
+		law_mass_conscription = disapprove
+		law_national_militia = disapprove
+		law_peasant_levies = disapprove
+		law_ca_caudillismo = strongly_disapprove
+		
+	}
+
+	
+}
+ideology_ca_comunal_milicia = {
+	icon = "gfx/interface/icons/ideology_icons/jingoist.dds"
+
+		lawgroup_army_model = {
+	    
+	    law_ca_comunal_milicia = strongly_approve
+		law_professional_army = disapprove
+		law_mass_conscription = strongly_disapprove
+		law_national_militia = strongly_disapprove
+		law_peasant_levies = strongly_disapprove
+		law_regionalist_militia = strongly_disapprove
+		law_ca_caudillismo = strongly_disapprove
+		
+	}
+
+	
+}
 ideology_ca_liberal = {
     icon = "gfx/interface/icons/ideology_icons/corporatist.dds"
     
@@ -151,6 +198,19 @@ ideology_central_american_federal = {
         law_total_separation = strongly_approve
         law_state_atheism = strongly_disapprove
     }
+	
+	lawgroup_army_model = {
+	    law_ca_federal_army = strongly_approve
+		law_national_militia = approve
+		law_professional_army = neutral
+		law_ca_comunal_milicia = strongly_disapprove
+		law_mass_conscription = strongly_disapprove
+        law_peasant_levies = strongly_disapprove
+		law_regionalist_militia = strongly_disapprove
+		law_ca_caudillismo = strongly_disapprove
+	
+	}
+	
 }
 
 ideology_central_american_reactionary = {
@@ -175,6 +235,10 @@ ideology_central_american_reactionary = {
         law_total_separation = strongly_disapprove
         law_state_atheism = strongly_disapprove
     }
+	
+	lawgroup_army_model = {
+	
+	}
 }
 
 ideology_central_american_reactionary_2 = {
@@ -201,6 +265,10 @@ ideology_central_american_reactionary_2 = {
         law_total_separation = strongly_disapprove
         law_state_atheism = strongly_disapprove
     }
+	
+	lawgroup_army_model = {
+	
+	}
 }
 
 ideology_ca_isolationist_expansionism = {
