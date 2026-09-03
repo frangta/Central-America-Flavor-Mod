@@ -104,7 +104,7 @@
 
 			add = {
 				desc = "DIPLOMATIC_ACCEPTANCE_BASE"
-				value = -30
+				value = -1000
 			}
 			
 			if = {
@@ -122,7 +122,7 @@
 				}
 				add = {
 					desc = "DIPLOMATIC_ACCEPTANCE_NOT_ADJACENT_MARKETS"
-					value = -20
+					value = -200
 				}
 			}			
 
@@ -130,7 +130,7 @@
 				desc = "DIPLOMATIC_ACCEPTANCE_GDP"
 				value = "scope:actor.ai_gdp_comparison(root)"
 				min = -10
-				max = 10
+				max = 100
 			}
 		
 			if = {
@@ -174,7 +174,7 @@
 							}							
 						}
 					}
-					value = 40
+					value = 400
 				}
 				if = {
 					limit = {
@@ -183,7 +183,7 @@
 							attitude = genial
 						}
 					}
-					value = 30
+					value = 1000
 				}				
 				if = {
 					limit = {
@@ -198,7 +198,7 @@
 							}							
 						}
 					}
-					value = 20
+					value = 200
 				}
 				if = {
 					limit = {
@@ -207,7 +207,7 @@
 							attitude = cautious
 						}
 					}
-					value = -50
+					value = -250
 				}
 				if = {
 					limit = {
@@ -269,6 +269,14 @@
 					}
 					value = -50
 				}
+			}
+			add = {
+				desc = "DIPLOMATIC_ACCEPTANCE_ACTOR_LIBERTY_DESIRE"
+				value = "scope:actor.liberty_desire"
+				subtract = 75
+				multiply = 2
+				min = -500
+				max = 500
 			}
 		}
 

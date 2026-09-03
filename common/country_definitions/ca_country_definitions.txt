@@ -620,7 +620,7 @@ color = { 140 95 81 }
 	is_named_from_capital = yes
 }
 ##########Chiapas########################
-#Chiapas Republic
+#Chiapas Republic/Soconusco
 INJECT_OR_CREATE:CIP = {
 	color = { 192 201 76 }
 	
@@ -845,7 +845,7 @@ UCB = {
 	capital = STATE_WESTERN_CUBA
 }
 #Antillean Confederation
-ACF = {
+INJECT_OR_CREATE:ca_ACF = {
 	color = { 130 15 75 }
 	
 	country_type = recognized
@@ -855,7 +855,7 @@ ACF = {
 	cultures = { caribeno }
 	capital = STATE_SANTO_DOMINGO
 }
-REPLACE:JAM = {
+INJECT_OR_CREATE:JAM = {
 	color = hsv360{ 88  87  33 }
 	
 	country_type = colonial
@@ -866,7 +866,7 @@ REPLACE:JAM = {
 	capital = STATE_JAMAICA
 }
 
-REPLACE:BAH = {
+INJECT_OR_CREATE:BAH = {
 	color = hsv360{ 189  100  55 }
 	
 	country_type = colonial
@@ -878,17 +878,6 @@ REPLACE:BAH = {
 	is_named_from_capital = yes
 }
 
-REPLACE:PCO = {
-	color = { 104  92  87 }
-	
-	country_type = colonial
-	
-	tier = principality
-	
-	cultures = { caribeno }
-	capital = STATE_PUERTO_RICO
-	is_named_from_capital = yes
-}
 #Suriname
 SRM = {
 	color = { 255 186 0 }
@@ -1108,27 +1097,27 @@ CCA = {
 	capital = STATE_SAN_SALVADOR
 	cultures = { central_american }
 }
-REPLACE:MAY = {
-	color = { 98 88 142 }
-	
-	country_type = unrecognized
-	
-	tier = kingdom
-	
-	cultures = { mayan }
-	capital = STATE_YUCATAN
-}
-
-REPLACE:YUC = {
-	color = { 20 142 20 }
-	
-	country_type = recognized
-	
-	tier = principality
-	
-	cultures = { mexican }
-	capital = STATE_YUCATAN
-}
+#INJECT_OR_CREATE:MAY = {
+#	color = { 98 88 142 }
+#	
+#	country_type = unrecognized
+#	
+#	tier = kingdom
+#	
+#	cultures = { mayan }
+#	capital = STATE_YUCATAN
+#}
+#
+#INJECT_OR_CREATE:YUC = {
+#	color = { 20 142 20 }
+#	
+#	country_type = recognized
+#	
+#	tier = principality
+#	
+#	cultures = { mexican }
+#	capital = STATE_YUCATAN
+#}
 SNR = { # Sonora
 	color = { 255 201 107 }
 

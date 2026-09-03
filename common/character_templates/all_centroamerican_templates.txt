@@ -16,7 +16,7 @@ TRY_REPLACE:UCA_francisco_morazan = {
 		experienced_political_operator ambitious meticulous
 	}
 	on_created = {
-		set_variable = { = is_morazan }
+		set_variable = is_morazan 
 	}
 }
 uca_francisco_morazan_v1 = {
@@ -33,7 +33,7 @@ uca_francisco_morazan_v1 = {
     traits = { experienced_political_operator ambitious meticulous }
 	home_region = STATE_HONDURAS
 	on_created = {
-		set_variable = { = is_morazan }
+		set_variable = is_morazan 
 	}
 }
 uca_francisco_morazan_v2 = {	
@@ -52,7 +52,7 @@ uca_francisco_morazan_v2 = {
 		 experienced_political_operator ambitious meticulous
 	}
 	on_created = {
-		set_variable = { = is_morazan }
+		set_variable = is_morazan 
 	}
 }
 UCA_jose_felipe_mariano_galvez = {
@@ -112,7 +112,7 @@ nic_jose_zepeda_character_template = {
 	home_region = STATE_NICARAGUA
 }
 TRY_REPLACE:NIC_braulio_mendieta = {
-	# --- DATOS BÁSICOS ---
+
 	first_name = "Braulio"
 	last_name = "Mendieta"
 	historical = yes
@@ -122,28 +122,23 @@ TRY_REPLACE:NIC_braulio_mendieta = {
 	religion = rel:catholic
 	home_region = STATE_NICARAGUA
 
-	# --- ROLES E IDENTIDAD ---
 	role = general
 	role = agitator
 	is_general = yes
 	is_agitator = yes
 
-	# --- POLÍTICA Y RIQUEZA ---
 	interest_group = ig_armed_forces
 	ideology = ideology_central_american_reactionary
 
-	# --- ATRIBUTOS MILITARES ---
 	commander_rank = commander_rank_2
 	hq = region_central_america
 
-	# --- RASGOS (TRAITS) ---
 	traits = {
 		ambitious
 		cruel
 		bandit
 	}
 	
-	# --- EFECTOS AL CREARSE ---
 	on_created = {
 		set_variable = is_mendieta_conspirator
 	}
@@ -263,7 +258,7 @@ gua_rafael_carrera_character_template = {
 	home_region = STATE_GUATEMALA
     # dna = ecchi_dna_rafael_carrera 
 	on_created = {
-		set_variable = { = is_carrera }
+		set_variable = is_carrera 
 	}
 }
 

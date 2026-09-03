@@ -11,7 +11,6 @@
 		activate_law = law_type:law_appointed_bureaucrats
 		activate_law = law_type:law_professional_army
 		activate_law = law_type:law_cultural_exclusion
-		activate_law = law_type:law_protectionism
 		activate_law = law_type:law_interventionism
 		activate_law = law_type:law_right_of_assembly
 		activate_law = law_type:law_per_capita_based_taxation
@@ -19,6 +18,7 @@
 		activate_law = law_type:law_no_police
 		activate_law = law_type:law_total_separation
 
+        set_variable = is_soconosco
 
 	}
 }

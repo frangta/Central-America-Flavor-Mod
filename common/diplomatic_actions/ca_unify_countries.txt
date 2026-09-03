@@ -103,7 +103,57 @@ ca_unify_countries = {
 				}
 			}
 
-			
+			# Shared culture adds weight even when the cultures differ.
+		    if = {
+		    	limit = {
+		    		any_primary_culture = {
+		    			is_primary_culture_of = scope:actor
+		    		}
+		    	}
+		    	add = {
+		    		desc = "DIPLOMATIC_ACCEPTANCE_SAME_CULTURE"
+		    		value = 500
+		    	}
+		    }
+		    else_if = {
+		    	### If you share a cultural discrimination trait
+		    	limit = {
+		    		any_primary_culture = {
+		    			shares_language_trait_with_any_primary_culture = ROOT
+		    		}
+		    	}
+		    	add = {
+		    		desc = "DIPLOMATIC_ACCEPTANCE_CULTURAL_ACCEPTANCE"
+		    		value = 200
+		    	}
+		    }
+		    else_if = {
+		    	### If you share a cultural discrimination trait
+		    	limit = {
+		    		any_primary_culture = {
+		    			shares_language_trait_group_with_any_primary_culture = ROOT
+		    		}
+		    	}
+		    	add = {
+		    		desc = "DIPLOMATIC_ACCEPTANCE_CULTURAL_ACCEPTANCE"
+		    		value = 100
+		    	}
+		    }
+		    else_if = {
+		    	### If you share a cultural discrimination trait
+		    	limit = {
+		    		any_primary_culture = {
+		    			scope:actor = {
+		    				"cultural_acceptance_base(prev)" >= 40
+		    			}
+		    		}
+		    	}
+		    	add = {
+		    		desc = "DIPLOMATIC_ACCEPTANCE_DIFFERENT_CULTURE"
+		    		value = -500
+		    	}
+		    }
+			#DIPLOMATIC ACCEPTANCE RELATIONS
 			add = {
 				desc = "DIPLOMATIC_ACCEPTANCE_RELATIONS"
 				if = {
@@ -117,96 +167,99 @@ ca_unify_countries = {
 						"relations(scope:actor)" >= relations_threshold:neutral
 						"relations(scope:actor)" < relations_threshold:cordial
 					}
-					value = -25
+					value = -250
 				}
 				if = {
 					limit = {
 						"relations(scope:actor)" >= relations_threshold:cordial
 						"relations(scope:actor)" < relations_threshold:amicable
 					}
-					value = 10
+					value = 50
 				}
 				if = {
 					limit = {
 						"relations(scope:actor)" >= relations_threshold:amicable
 						"relations(scope:actor)" < relations_threshold:friendly
 					}
-					value = 35
+					value = 150
 				}
 				if = {
 					limit = {
 						"relations(scope:actor)" >= relations_threshold:friendly
 					}
-					value = 75
+					value = 500
 				}
 			}
 
-			# Attitude
-			if = {
-				limit = {
-					has_attitude = {
-						who = scope:actor
-						attitude = genial
-					}
-				}
-				add = {
-					desc = "DIPLOMATIC_ACCEPTANCE_ATTITUDE"
-					value = 75
-				}
-			}
-			if = {
-				limit = {
-					OR = {
-						has_attitude = {
-							who = scope:actor
-							attitude = cooperative
-						}
-						has_attitude = {
-							who = scope:actor
-							attitude = conciliatory
-						}
-						has_attitude = {
-							who = scope:actor
-							attitude = loyal
-						}
-						has_attitude = {
-							who = scope:actor
-							attitude = protective
+
+            add = {
+				desc = "DIPLOMATIC_ACCEPTANCE_ATTITUDE"
+				if = {
+					limit = {
+						OR = {
+							has_attitude = {
+								who = scope:actor
+								attitude = genial
+							}
+							has_attitude = {
+							    who = scope:actor
+							    attitude = loyal
+						    }
+							has_attitude = {
+								who = scope:actor
+								attitude = protective
+							}
 						}
 					}
+					value = 1000
 				}
-				add = {
-					desc = "DIPLOMATIC_ACCEPTANCE_ATTITUDE"
-					value = 20
-				}
-			}
-			if = {
-				limit = {
-					OR = {
-						has_attitude = {
-							who = scope:actor
-							attitude = antagonistic
+				else_if = {
+					limit = {
+						OR = {
+							has_attitude = {
+								who = scope:actor
+								attitude = cooperative
+							}
+							has_attitude = {
+								who = scope:actor
+								attitude = conciliatory
+							}
 						}
+					}
+					value = 250
+				}
+				else_if = {
+					limit = {
 						has_attitude = {
 							who = scope:actor
 							attitude = domineering
 						}
-						has_attitude = {
-							who = scope:actor
-							attitude = belligerent
+					}
+					value = 25
+				}
+				else_if = {
+					limit = {
+						OR = {
+							has_attitude = {
+								who = scope:actor
+								attitude = antagonistic
+							}
+							has_attitude = {
+								who = scope:actor
+								attitude = belligerent
+							}
+							has_attitude = {
+							    who = scope:actor
+							    attitude = rebellious
 						}
-						has_attitude = {
-							who = scope:actor
-							attitude = rebellious
 						}
 					}
-				}
-				add = {
-					desc = "DIPLOMATIC_ACCEPTANCE_ATTITUDE"
 					value = -1000
 				}
+				else = {
+					value = -25
+				}
 			}
-
 			
 			if = {
 				limit = {
@@ -214,7 +267,7 @@ ca_unify_countries = {
 				}
 				add = {
 					desc = "CA_UNIFY_ACCEPT_SAME_POWER_BLOC"
-					value = 50
+					value = 500
 				}
 			}
 

@@ -38,12 +38,12 @@
             set_interest_group_name = ig_ejercito_federal
         }
 
-        ig:ig_devout = (
+        ig:ig_devout = {
              remove_ideology = ideology_moralist
              add_ideology = ideology_ca_moralist	
              add_ideology = ideology_central_american_reactionary_2
              set_interest_group_name = ig_catholic_church
-        )
+        }
         
         ig:ig_landowners = {            
             remove_ideology = ideology_republican_paternalistic

@@ -76,7 +76,7 @@ Plan_of_Veragua3 = {
     }
 	when_taken = {
         create_country = {  
-	         	tag = COS
+	         	tag = CR1
                 origin = this		
 	             state = s:STATE_COSTA_RICA.region_state:UCA
 				 province = p:x47C5F8
@@ -87,7 +87,7 @@ Plan_of_Veragua3 = {
 	         	 activate_law = law_type:law_land_reform_coffee_oligarchy
 	         	 activate_law = law_type:law_ca_caudillismo			 
                  initialise_caciquismo_effect = yes
-				 c:COS ?= {
+				 c:CR1 ?= {
 			        create_diplomatic_pact = {
 			        country = c:RDT
 			        type = ca_protectorate
@@ -127,7 +127,7 @@ Plan_of_Veragua3 = {
 	         	 	is_general = yes
 					ruler = yes
 	         	 	interest_group = ig_landowners
-	         	 	ideology = ideology_central_america_caudillo
+	         	 	ideology = ideology_ca_leader_autocratic_autonomist
 	         	 	ig_leader = yes			
 	         	 	}			
 				 
@@ -260,6 +260,7 @@ change_resource_potential = {
 	type = building_iron_mine  
 	amount = 5  
 }
+
 add_resource_potential = building_cotton_plantation
 add_resource_potential = building_opium_plantation
 add_resource_potential = building_tea_plantation
@@ -371,8 +372,12 @@ Plan_of_Veragua12 = {
 		value = 0
     }
 	when_taken = {
-
-		ca_remove_political_movements_effect = yes
+capital = {
+		change_resource_potential = {  
+	type = building_gold_field 
+	amount = 5
+}  
+}
 			
     }
 }
@@ -480,7 +485,7 @@ remove_primary_culture = cu:afro_caribeno
 Add_Culture_muisca = {
 	is_shown = {
 		NOT = { has_variable = openCheatDecision_variable1 }
-	    NOT = { has_variable = added_muisca }
+	    NOT = { has_variable = added_centralamericans_cultures }
 	}
 	possible = {
 
