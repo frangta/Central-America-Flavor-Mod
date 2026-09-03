@@ -1,5 +1,12 @@
 ﻿l_english:
-
+ # ==========================================
+ # Play As Options (Initial Game Setup)
+ # ==========================================
+ ca_costa_rica_events.02.a:0 "Play as Costa Rica."
+ ca_el_salvador_events.02.a:0 "Play as El Salvador."
+ ca_guatemala_events.2.a:0 "Play as Guatemala."
+ ca_honduras_events.2.a:0 "Play as Honduras."
+ ca_nicaragua_events.02.a:0 "Play as Nicaragua."
  ###########################
  filibuster.2.f: ""
  filibuster.2.a: "Push the gringos back up north!"
@@ -582,6 +589,11 @@ ca_central_america.8.t:0 "Ambitions in the Caribbean"
  ca_central_america.87.d:0 "The congress has convened to decide the fate of the union."
  ca_central_america.87.a:0 "Preserve the Union!"
  ca_central_america.87.b:0 "Dissolve the Union."
+ ca_central_america.88.t:0 "A Caudillo Emerges"
+ ca_central_america.88.d:0 "Political instability in the provinces has allowed a charismatic and ruthless regional leader to seize control by force of arms."
+ ca_central_america.88.f:0 "His loyalty to the Federation is doubtful, but his control over the local militias is absolute."
+ ca_central_america.88.a:0 "We have no choice but to recognize his authority."
+ ca_central_america.88.b:0 "He is a traitor to the Republic. Suppress him!"
 # ==========================================
  # CAPÍTULO 1: NICARAGUA
  # ==========================================
@@ -1098,6 +1110,146 @@ ca_central_america.8.t:0 "Ambitions in the Caribbean"
  ca_central_america.setup.a:0 "Historical Mode"
  ca_central_america.setup.b:0 "Alternate Mode"
  ca_central_america.setup.c:0 "Sandbox Mode"
+ # ==========================================
+ # El Salvador Electoral Events
+ # ==========================================
+ ca_el_salvador_events.9.t:0 "The Departure of Silva and Election of Menéndez"
+ ca_el_salvador_events.9.d:0 "As political shifts rock El Salvador, Timoteo Menéndez has emerged as the liberal moderate choice for leadership. However, he faces immense pressure from both radical Morazanist officers and conservative schemers looking to shift the balance of power."
+ ca_el_salvador_events.9.a:0 "Timoteo Menéndez assumes office as a moderate."
+ ca_el_salvador_events.9.b:0 "Radical pro-Morazán officers demand total control."
+ ca_el_salvador_events.9.c:0 "Conservatives attempt a political coup."
+
+ ca_el_salvador_events.10.t:0 "The First Constitutional Election"
+ ca_el_salvador_events.10.d:0 "El Salvador holds its first constitutional election. Juan José Guzmán seeks to build a consensus to stabilize the state, but purist factions on all sides are reluctant to compromise their ideals."
+ ca_el_salvador_events.10.a:0 "Juan José Guzmán seeks stability through consensus."
+ ca_el_salvador_events.10.b:0 "Pure liberals reject the consensus."
+ ca_el_salvador_events.10.c:0 "A preemptive military intervention occurs."
+
+ ca_el_salvador_events.11.t:0 "The Dictatorship of Francisco Malespín"
+ ca_el_salvador_events.11.d:0 "General Francisco Malespín has seized absolute power in El Salvador. Relying on military might and conservative backing, his heavy-handed rule is sparking fierce opposition from the intelligentsia and the urban classes."
+ ca_el_salvador_events.11.a:0 "General Malespín assumes absolute power."
+ ca_el_salvador_events.11.b:0 "Civil resistance rises against the caudillo!"
+
+ ca_el_salvador_events.12.t:0 "The Fall of Malespín and Eugenio Aguilar"
+ ca_el_salvador_events.12.d:0 "The dictatorship of Malespín has finally fallen. Eugenio Aguilar steps up to restore a civilian liberal government, but remnants of the old regime are attempting to sabotage the transition."
+ ca_el_salvador_events.12.a:0 "Eugenio Aguilar restores civilian liberal rule."
+ ca_el_salvador_events.12.b:0 "Malespín loyalists sabotage the elections."
+
+ ca_el_salvador_events.13.t:0 "Doroteo Vasconcelos and the Drums of War"
+ ca_el_salvador_events.13.d:0 "Doroteo Vasconcelos has been elected, riding a wave of anti-Guatemalan sentiment. He is rapidly mobilizing the army and preparing for a major conflict against Rafael Carrera's forces in Guatemala."
+ ca_el_salvador_events.13.a:0 "Vasconcelos prepares for war against Guatemala."
+ ca_el_salvador_events.13.b:0 "Moderates manage to halt the martial rhetoric."
+
+ # ==========================================
+ # Guatemala Events
+ # ==========================================
+ ca_guatemala_events.1.t:0 "The Heart of the Federation"
+ ca_guatemala_events.1.d:0 "Guatemala remains the demographic and political core of the Federal Republic. It holds tight to its conservative and unitary traditions, resisting the liberal winds blowing from the surrounding states."
+ ca_guatemala_events.1.f:0 "The old capital of the Captaincy General stands tall."
+ ca_guatemala_events.1.a:0 "We are the true heirs of Central America."
+
+ ca_guatemala_events.5.t:0 "The Gálvez Crisis and the Mountain Rebellion"
+ ca_guatemala_events.5.d:0 "The progressive reforms of Mariano Gálvez have sparked a furious backlash among the conservative peasantry. A rural rebellion, fueled by a cholera outbreak and clergy agitation, threatens to topple the liberal government in Guatemala."
+ ca_guatemala_events.5.a:0 "The Conservatives appoint Pedro José Valenzuela."
+ ca_guatemala_events.5.b:0 "Mariano Gálvez clings to power."
+ ca_guatemala_events.5.c:0 "Rafael Carrera seizes control early!"
+
+ ca_guatemala_events.6.t:0 "Institutional Ratification"
+ ca_guatemala_events.6.d:0 "The dust begins to settle. The assembly must decide whether to formally ratify Mariano Rivera Paz as the head of state, solidifying conservative rule over Guatemala."
+ ca_guatemala_events.6.a:0 "Mariano Rivera Paz is ratified."
+ ca_guatemala_events.6.b:0 "The liberal opposition attempts to retake the assembly."
+
+ ca_guatemala_events.7.t:0 "The Official Rise of Rafael Carrera"
+ ca_guatemala_events.7.d:0 "The illiterate but brilliantly charismatic military commander Rafael Carrera has become the undisputed strongman of Guatemala. The time has come to make his power official."
+ ca_guatemala_events.7.a:0 "Rafael Carrera is elected Head of State."
+ ca_guatemala_events.7.b:0 "The conservative elite tries to retain a civilian leader."
+
+ ca_guatemala_events.8.t:0 "Carrera's Resignation and the Succession Chaos"
+ ca_guatemala_events.8.d:0 "In a surprising move, Rafael Carrera has temporarily stepped down, leaving a power vacuum in Guatemala. The ensuing political chaos sees various factions vying for control over the state."
+ ca_guatemala_events.8.a:0 "Juan Antonio Martínez is elected."
+ ca_guatemala_events.8.b:0 "General Mariano Paredes takes control."
+ ca_guatemala_events.8.c:0 "The Liberals capitalize on Carrera's exile."
+
+ # ==========================================
+ # Honduras Events
+ # ==========================================
+ ca_honduras_events.1.t:0 "The Center of the Republic"
+ ca_honduras_events.1.d:0 "Honduras sits at the geographical heart of Central America. As a strong proponent of the federal ideal, the state finds itself increasingly caught between the radical liberals and growing conservative resistance."
+ ca_honduras_events.1.f:0 "The homeland of Morazán stands firm."
+ ca_honduras_events.1.a:0 "We shall be the glue that holds the Union together."
+
+ ca_honduras_events.14.t:0 "The Election of Justo José de Herrera"
+ ca_honduras_events.14.d:0 "The political climate in Honduras requires a delicate touch. Justo José de Herrera has emerged as a moderate civilian candidate capable of bridging the gap between conflicting factions."
+ ca_honduras_events.14.a:0 "Herrera assumes office as a moderate civilian."
+ ca_honduras_events.14.b:0 "The military demands a man of arms."
+ ca_honduras_events.14.c:0 "Radical liberals attempt to seize the Assembly."
+
+ ca_honduras_events.15.t:0 "The Ascendancy of General Francisco Ferrera"
+ ca_honduras_events.15.d:0 "General Francisco Ferrera, known as 'El Mulatillo', has consolidated his grip on the Honduran state, shifting its allegiance toward a militaristic and conservative path."
+ ca_honduras_events.15.a:0 "Ferrera consolidates the conservative state."
+ ca_honduras_events.15.b:0 "Liberal civilian resistance rises against him."
+
+ ca_honduras_events.16.t:0 "The Re-election of Francisco Ferrera"
+ ca_honduras_events.16.d:0 "Ferrera seeks to extend his rule. While he controls the armed forces, segments of the landowning elite and the urban middle classes are growing tired of his military dictatorship."
+ ca_honduras_events.16.a:0 "Ferrera dominates the Chamber and is re-elected."
+ ca_honduras_events.16.b:0 "The landowners grow tired of militarism."
+ ca_honduras_events.16.c:0 "An urban uprising against the dictatorship!"
+
+ ca_honduras_events.17.t:0 "The Triumph of Juan Lindo"
+ ca_honduras_events.17.d:0 "The statesman Juan Lindo has risen to power in Honduras, promising to restore civilian institutions, promote education, and curb the influence of the caudillos."
+ ca_honduras_events.17.a:0 "Lindo promises education and institutionality."
+ ca_honduras_events.17.b:0 "Ferrera attempts to sabotage Lindo from the shadows."
+
+ ca_honduras_events.18.t:0 "The Constitution of 1848"
+ ca_honduras_events.18.d:0 "A new constitution has been drafted in Honduras to solidify a civilian government and limit the power of the military strongmen. Its ratification will test the ultimate loyalty of the armed forces."
+ ca_honduras_events.18.a:0 "Lindo is ratified under the new civilian constitution."
+ ca_honduras_events.18.b:0 "The military rebels against the new constitution."
+
+ # ==========================================
+ # Nicaragua Events
+ # ==========================================
+ ca_nicaragua_events.01.t:0 "The Divided State"
+ ca_nicaragua_events.01.d:0 "Nicaragua is torn apart by a fierce and bloody rivalry between the liberal city of León and the conservative stronghold of Granada. This internal conflict defines Nicaraguan politics above all else."
+ ca_nicaragua_events.01.f:0 "A house divided against itself cannot stand."
+ ca_nicaragua_events.01.a:0 "We must navigate this bitter rivalry."
+
+ ca_nicaragua_events.19.t:0 "José Núñez and the End of the Federation"
+ ca_nicaragua_events.19.d:0 "As the Federal Republic falters, José Núñez steps forward in Nicaragua. Navigating the treacherous waters between León and Granada, he prepares to steer Nicaragua towards full sovereignty."
+ ca_nicaragua_events.19.a:0 "José Núñez assumes power as a Leonese moderate."
+ ca_nicaragua_events.19.b:0 "The conservatives of Granada impose their strength."
+
+ ca_nicaragua_events.20.t:0 "The First Constitutional Elections"
+ ca_nicaragua_events.20.d:0 "With Nicaragua establishing itself as an independent nation, the first constitutional elections are held. Patricio Rivas, a conservative from Granada, emerges as a leading figure."
+ ca_nicaragua_events.20.a:0 "Patricio Rivas of Granada claims victory."
+ ca_nicaragua_events.20.b:0 "The Leonese reject Rivas's authority."
+
+ ca_nicaragua_events.21.t:0 "Pablo Buitrago and the Liberal Return"
+ ca_nicaragua_events.21.d:0 "The political pendulum swings back towards León as Pablo Buitrago ascends to power, signaling a resurgence of liberal dominance in Nicaragua."
+ ca_nicaragua_events.21.a:0 "Pablo Buitrago assumes power for León."
+ ca_nicaragua_events.21.b:0 "Granada launches a political boycott."
+
+ ca_nicaragua_events.22.t:0 "The Presidency of Manuel Pérez"
+ ca_nicaragua_events.22.d:0 "Manuel Pérez takes the reins of the state in an attempt to stabilize the volatile nation, but ambitious military caudillos remain a constant threat to civilian rule."
+ ca_nicaragua_events.22.a:0 "Manuel Pérez assumes power."
+ ca_nicaragua_events.22.b:0 "Military caudillos demand control."
+
+ ca_nicaragua_events.23.t:0 "The Ruins of León and José León Sandoval"
+ ca_nicaragua_events.23.d:0 "Following a brutal military sacking of León, the conservative José León Sandoval is elevated to power, leaving the liberal factions devastated and yearning for revenge."
+ ca_nicaragua_events.23.a:0 "The conservative Sandoval assumes command."
+ ca_nicaragua_events.23.b:0 "The survivors of León initiate armed resistance."
+
+ ca_nicaragua_events.24.t:0 "José María Guerrero and the British Threat"
+ ca_nicaragua_events.24.d:0 "José María Guerrero de Arcos takes office amidst a severe diplomatic crisis. The British Empire is expanding its influence over the Mosquito Coast, directly threatening Nicaragua's territorial integrity."
+ ca_nicaragua_events.24.a:0 "Guerrero takes office amid tensions over Mosquitia."
+ ca_nicaragua_events.24.b:0 "Liberals capitalize on diplomatic weakness."
+
+ ca_nicaragua_events.25.t:0 "Norberto Ramírez and the Canal Treaties"
+ ca_nicaragua_events.25.d:0 "Norberto Ramírez seeks to secure Nicaragua's future by negotiating treaties with foreign powers for the construction of an interoceanic canal. This move, however, draws the ire of radical nationalists."
+ ca_nicaragua_events.25.a:0 "Ramírez initiates foreign canal treaties."
+ ca_nicaragua_events.25.b:0 "Radicals reject the foreign pacts."
+
+
+
  ##############
  ca_prospecting.1.t: "Funding the Geological Survey"
  ca_prospecting.1.d: "Mapping the rugged terrain of Central America is no small feat. Dense jungles, steep mountains, and tropical diseases stand between us and the wealth beneath our soil. How much of the national treasury are we willing to risk on this endeavor?"
@@ -1198,7 +1350,14 @@ ca_central_america.8.t:0 "Ambitions in the Caribbean"
  frca_support_10b:0 "Repression in Bocas del Toro damages our public image."
  frca_support_12a:0 "New Granada steals territory right before our eyes."
  frca_support_12b:0 "Resisting foreign aggression unites Central Americans."
-
+ #
+ frca_support_26a:0 "A violent uprising in Nicaragua deals a massive blow to the Federation's authority."
+ frca_support_27a:0 "A peaceful secession in Nicaragua weakens the Federal pact."
+ frca_support_28a:0 "Federal intervention in Nicaragua reinforces the Union's authority."
+ frca_support_28b:0 "Ignoring Nicaragua's plea for help undermines the Federation."
+ frca_support_29a:0 "Federal intervention in Costa Rica reinforces the Union's authority."
+ frca_support_29b:0 "Ignoring Costa Rica's plea for help undermines the Federation."
+ frca_support_30a:0 "Federal intervention in Honduras reinforces the Union's authority."
  # Intervention Requests (35 to 41)
  frca_support_35a:0 "Military intervention reaffirms the Republic's supremacy."
  frca_support_36a:0 "Military intervention reaffirms the Republic's supremacy."
@@ -1233,6 +1392,7 @@ ca_central_america.8.t:0 "Ambitions in the Caribbean"
  frca_support_66b:0 "Repressing Costa Rica will require resources we do not have."
  frca_support_68a:0 "Honduras takes up arms; the center of the republic burns."
  frca_support_68b:0 "Internal wars cause the federation to collapse."
+ 
 
  # Local Civil Wars spilling over into the UCA (63, 65, 67, 69, 71, 73, 75)
  frca_support_63_civil_war:0 "The Civil War in Nicaragua terrifies the Nation."

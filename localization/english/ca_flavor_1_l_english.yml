@@ -1,147 +1,6 @@
 ﻿l_english:
-
  # ==========================================
- # 1. INTEREST GROUPS (IGs)
- # ==========================================
- ig_huasos: "Huasos"
- ig_huasos_desc: "Huasos are the Chilean countryman and skilled horseman, generally found in the central valley. Their life is centered in the agricultural activity."
- ig_gauchos: "Gauchos"
- ig_gauchos_desc: "The migratory skilled horsemen experienced in traditional livestock farming. They devote their lives to lassoing and raising cattle and horses."
- ig_boulbon_filibusters: "de Raousset-Boulbon's Filibusters"
- ig_walker_filibusters: "Walker's Filibusters"
- ig_nic_convervador:0 "Serviles"
- ig_nic_liberal:0 "Fiebres"
- ig_nic_convervador2:0 "Timbucos"
- ig_nic_liberal2:0 "Calandracas"
- ig_hon_convervador:0 "Cachurecos"
- ig_hon_liberal:0 "Colorados"
- ig_els_convervador:0 "Clericals"
- ig_els_liberal:0 "Coquimbos"
- ig_gua_convervador:0 "Cachurecos"
- ig_gua_liberal:0 "Fiebres"
- ig_cos_convervador:0 "Imperialistas"
- ig_cos_convervador2:0 "Imperialistas / Cartagos"
- ig_cos_convervador3:0 "Cartagos"
- ig_cos_liberal:0 "Alajuelenses"
- ig_cos_liberal2:0 "Josefinos"
- ig_cos_liberal3:0 "Josefinos / Alajuelenses"
- ig_cos_liberal4:0 "Republicanos"
- ig_uca_convervador:0 "Serviles"
- ig_uca_liberal:0 "Fiebres"
- ig_alt_conservative:0 "Serviles"
- ig_alt_liberal:0 "Fiebres"
- ig_hacendados: "Hacendados"
- ig_unionistas: "Unionistas"
- ig_confederados: "Confederados"
- ig_campesinos: "Campesinos"
- ig_pequenos_campesinos: "Pequeños Campesinos"
- ig_oligarquia_cafedadera: "Coffee Oligarchy"
- ig_artesanos_urbanos: ""
- ig_elite_comercial: ""
-
- # ==========================================
- # 2. IDEOLOGIES
- # ==========================================
- ideology_taiping_moralist: "Taiping Moralism"
- ideology_taiping_king: "Son of Shangdi"
- ideology_guilds: "Economic Traditionalists"
- ideology_guilds_desc: "#lore The Guilds see progressive economical laws as a threat to their existence.#!"
- ideology_communalist: "Communalist"
- ideology_communalist_desc: "This group wants communal autonomy in their work, free from the oppression of the elites."
- ideology_silhak: "Silhak"
- ideology_donghak: "Donghak"
-
- # Central American Ideologies
- ideology_central_american_reactionary: "Regionalist"
- ideology_central_american_reactionary_desc: "This group believes that the government should be reformed into a confederation, or entirely dissolved, and that the individual provinces should become fully independent."
- ideology_central_american_reactionary_2: "Centralistas"
- ideology_central_american_reactionary_2_desc: "This group believes that the government should be reformed into a Unitarian Republic, or entirely dissolved, and that the individual provinces should become fully independent." 
- ideology_central_america_caudillo: "Dissolutionist"
- ideology_central_america_caudillo_desc: "This leader wants the full independence of the individual regions in the country, free from any sort of unequal or federal government."
- ideology_liberalismo: "Liberalismo"
- ideology_liberalismo_desc: "This group opposes a strong centralized government and believes in some level of societal reform in line with European ideologies. They support free trade and restricting the power of corporations."
- ideology_conservadurismo: "Conservadurismo"
- ideology_conservadurismo_desc: "This group supports a strong centralized state with protectionist trade policies and the maintenance of the aristocratic configuration of society. They are anti-foreigners, often falling into xenophobic tendencies and criticize the import of foreign ideologies."
- ideology_soberania_aristocratica: "Soberanía Aristocrática"
- ideology_soberania_aristocratica_desc: "This group has an essentially hierarchical and elitist vision of social organization."
- ideology_crucismo: "Crucismo"
- ideology_crucismo_desc: "Andrés de Santa Cruz seeks to modernize the Andes specially trough education and free trade so that it can outcompete the other South American powers"
- ideology_agroexportadores: "Agroexportadores"
- ideology_agroexportadores_desc: "This group believes the focus of the economic policy should be on agriculture and the interests of farmers who see the adjacent markets as lucrative places to sell their products"
- ideology_artesanado: "Artesanado"
- ideology_artesanado_desc: "This group believes that economic policy should be geared toward the interests of artisans and protect their profits from cheap foreign products"
- ideology_unitarian: "Unitarian"
- ideology_unitarian_desc: "This leader fervently believes that the best form of organization for the nation is a strong general government that can leverage the national potential to the benefit of all its citizens."
- ideology_federalist: "Federalist"
- ideology_federalist_desc: "This leader fervently believes that the best form of organization for the nation is a general government limited by local autonomy."
- ideology_incan_reclaimer: "Incan Reclaimer"
- ideology_incan_reclaimer_desc: "This leader seeks to free the indigenous population from colonial oppression and reclaim their imperial heritage."
- ideology_liberal_monarchist: "Liberal Monarchist"
- ideology_liberal_monarchist_desc: "This leader believes that the best way of achieving stability for a liberal state is to have a monarchy to act as a cohesive figure the nation can rally around."
- ideology_autocratic_autonomist: "Autocratic Autonomist"
- ideology_autocratic_autonomist_desc: "This leader believes in the primacy of having a stable and powerful central government to protect local autonomy from the hands of anarchy and mob rule."
- ideology_ca_leader_autocratic_autonomist: "Autocratic Autonomist"
- ideology_ca_leader_autocratic_autonomist_desc: "This leader believes in the primacy of having a stable and powerful central government to protect local autonomy from the hands of anarchy and mob rule."
- ca_ideology_constitutionalist: "Constitutionalist"
- ca_ideology_constitutionalist_desc: "#lore This group believes in constitutional rule and the role of strong democratic institutions in statecraft.#!"
- 
- # Guatemala Flavor Ideologies
- ideology_maya_autonomism: "Maya Autonomy"
- ideology_maya_autonomism_desc: "This faction rejects the Creole republics, seeking to recover communal lands, protect their native languages, and establish a government of agrarian councils without interference from the capital."
- 
- # El Salvador Flavor Ideologies
- ideology_coffee_liberalism: "Coffee Liberalism"
- ideology_coffee_liberalism_desc: "Driven by the 'Golden Bean' fever, these oligarchs believe that the nation's progress lies in the complete privatization of land, free trade, and a government reserved strictly for the wealthiest."
- ideology_cuscatleco_nationalism:0 "Cuscatleco Nationalism"
- ideology_cuscatleco_nationalism_desc:0 "Convinced that Salvadoran population density and discipline make them superior, this faction promotes territorial expansion through a militarized dictatorship and mass conscription."
- 
- # Nicaragua Flavor Ideologies
- ideology_granadine_legitimism: "Granadan Legitimism"
- ideology_granadine_legitimism_desc: "The conservative elite of Granada abhors the enlightened ideas of their Leonese rivals. They defend a paternalistic, rigidly Catholic, and authoritarian order to save the nation from moral anarchy."
- ideology_anti_imperialist_sovereigntism: "Anti-imperialist Sovereignism"
- ideology_anti_imperialist_sovereigntism_desc: "Forged in the ashes of foreign interventions, they demand the immediate expulsion of imperialist corporate interests. They support a cooperative economy sustained by popular guerrilla movements."
- ideology_slaver_filibusterism: "Slave Filibusterism"
- ideology_slaver_filibusterism_desc: "A dark and rapacious manifest destiny. This foreign faction seeks to subjugate entire republics, reintroduce slave institutions, and govern through an absolute racial hierarchy."
- 
- # Costa Rica Flavor Ideologies
- ideology_carrillismo: "Carrillismo"
- ideology_carrillismo_desc: "Inspired by Braulio Carrillo, they argue that peaceful isolation and a firm institutional hand are the only way to prevent Costa Rica from being dragged into the endless civil wars of the rest of Central America."
- ideology_olympus_liberalism: "Olympian Liberalism"
- ideology_olympus_liberalism_desc: "A generation of thinkers seeking to eradicate the influence of the Church through aggressive public education. They promote scientific advancement but believe that only the educated elite should have the right to vote."
- ideology_chacara_social_democracy: "Chacara Social Democracy"
- ideology_chacara_social_democracy_desc: "Based on the tradition of the independent small farmer (the chacarero), this faction promotes peaceful agrarian reforms, truly universal suffrage, and an early welfare state."
- 
- # Panama Flavor Ideologies
- ideology_mercantile_transitism: "Mercantile Transitism"
- ideology_mercantile_transitism_desc: "The Isthmus of Panama owes its existence to world trade. This faction demands completely open borders and zero tariffs, making the country the ultimate bridge of global capitalism."
- ideology_isthmian_separatism: "Isthmian Separatism"
- ideology_isthmian_separatism_desc: "Fed up with neglect and distant centralism, the separatists seek to sever ties and establish a sovereign republic, even if that means military dependence on foreign naval powers."
-
- # ==========================================
- # 3. LAWS & GOVERNMENT TYPES
- # ==========================================
- law_land_reform_coffee_oligarchy: "Coffee Oligarchy Land Regime"
- law_land_reform_coffee_oligarchy_desc: "Large coffee haciendas keep legal control of land and property; smallholders face high barriers to land ownership."
- law_land_reform_communal_lands: "Communal Lands"
- law_land_reform_communal_lands_desc: "Recognises community/communal land rights and customary tenure; reduces large-scale enclosure."
- law_land_reform_banana_republic: "Banana Export Concessions"
- law_land_reform_banana_republic_desc: "Legal framework that privileges export concessions and foreign companies in plantation agriculture."
- law_land_reform_hacienda_system: "Hacienda Land Regime"
- law_land_reform_hacienda_system_desc: "Large landed estates (haciendas) legally structured to supply regional markets and the export economy."
-
- gov_governorate: "Governorate"
- gov_grand_duchy_posen: "Grand Duchy"
- gov_governor_generalship: "Governor-General"
- gov_governor_generalship_desc: "A type of administration characterized by sweeping executive authority."
- gov_parliamentary_oligarchy_chancellor: "Parliamentary Oligarchy"
- gov_parliamentary_oligarchy_chancellor_desc: "A political system dominated by a wealthy or privileged few through parliamentary mechanisms."
- gov_parliamentary_democracy_chancellor: "Parliamentary Democracy"
- gov_parliamentary_democracy_chancellor_desc: "A democratic system structured around a parliament and a chancellor representing the popular will."
- gov_reservation: "Indian Reservation"
- gov_reservation_desc: "This is a recognized territory managed by indigenous groups with specific treaties."
-
- # ==========================================
- # 4. CONCEPTS & DIPLOMATIC PACTS
+ # 1. CONCEPTS & DIPLOMATIC PACTS
  # ==========================================
  concept_constitution:0 "Constitution"
  concept_constitution_desc:0 "The fundamental principles according to which a state is acknowledged to be governed."
@@ -176,7 +35,7 @@
  ca_confederative_partner_proposal_break_declined_desc:0 "They refused to let us leave."
 
  # ==========================================
- # 5. MOVEMENTS, LOBBIES & MODIFIERS
+ # 2. MOVEMENTS, LOBBIES & MODIFIERS
  # ==========================================
  movement_ca_federalist: "Federalist Movement"
  movement_ca_federalist_desc: "A political movement seeking to grant ultimate sovereignty to the individual states."
@@ -219,7 +78,7 @@
  uca_collapse_penalty_header: "On Collapsing the Union:"
 
  # ==========================================
- # 6. JOURNAL ENTRIES (JEs) & CAUDILLO FLAVOR
+ # 3. JOURNAL ENTRIES (JEs) & CAUDILLO FLAVOR
  # ==========================================
  je_central_america_falls_apart: "The Dissolution of Central America"
  je_central_america_falls_apart_reason: "The past decade has left Central America polarized. Tensions between the liberals and conservatives are growing with every day and unless we manage to restore order in the provinces, the future of the Union seems to be one of uncertainty."
@@ -251,8 +110,48 @@
  je_honduras_intervention_central_america_button: ""
  je_guatemala_intervention_central_america_button: ""
  je_el_salvador_intervention_central_america_button: ""
+ # ==========================================
+ # 3. JOURNAL BUTTONS & INTERACTIONS
+ # ==========================================
+ restore_order_gua_button:0 "Restore Order in Guatemala"
+ restore_order_gua_button_desc:0 "Deploy federal forces to assert control over the territory of Guatemala."
+ restore_order_hon_button:0 "Restore Order in Honduras"
+ restore_order_hon_button_desc:0 "Deploy federal forces to assert control over the territory of Honduras."
+ restore_order_cos_button:0 "Restore Order in Costa Rica"
+ restore_order_cos_button_desc:0 "Deploy federal forces to assert control over the territory of Costa Rica."
+ restore_order_els_button:0 "Restore Order in El Salvador"
+ restore_order_els_button_desc:0 "Deploy federal forces to assert control over the territory of El Salvador."
+ restore_order_nic_button:0 "Restore Order in Nicaragua"
+ restore_order_nic_button_desc:0 "Deploy federal forces to assert control over the territory of Nicaragua."
+ restore_order_gua_tt:0 "Launch a campaign to restore Federal order in Guatemala."
+ restore_order_hon_tt:0 "Launch a campaign to restore Federal order in Honduras."
+ restore_order_nic_tt:0 "Launch a campaign to restore Federal order in Nicaragua."
+ restore_order_cos_tt:0 "Launch a campaign to restore Federal order in Costa Rica."
+ 
+ costa_rica_subject_frca_tt:0 "Costa Rica will become a subject of the Federal Republic."
+ invade_costa_rica_frca_tt:0 "The Federal Republic prepares military intervention in Costa Rica."
+ invade_costa_rica_frca_stab_tt:0 "Invading Costa Rica will impact regional stability."
+ invade_costa_rica_frca_cos_support_tt:0 "Costa Rican support for the Union will change."
 
+ honduras_subject_frca_tt:0 "Honduras will become a subject of the Federal Republic."
+ invade_honduras_frca_stab_tt:0 "Invading Honduras will impact regional stability."
+ invade_honduras_frca_hon_support_tt:0 "Honduran support for the Union will change."
 
+ guatemala_subject_frca_tt:0 "Guatemala will become a subject of the Federal Republic."
+ invade_guatemala_frca_stab_tt:0 "Invading Guatemala will impact regional stability."
+ invade_guatemala_frca_gua_support_tt:0 "Guatemalan support for the Union will change."
+
+ el_salvador_subject_frca_tt:0 "El Salvador will become a subject of the Federal Republic."
+ invade_el_salvador_frca_tt:0 "The Federal Republic prepares military intervention in El Salvador."
+ invade_el_salvador_frca_stab_tt:0 "Invading El Salvador will impact regional stability."
+ invade_el_salvador_frca_els_support_tt:0 "Salvadoran support for the Union will change."
+ 
+ controls_gua_tt:0 "Controls the state of Guatemala."
+ controls_hon_tt:0 "Controls the state of Honduras."
+ controls_nic_tt:0 "Controls the state of Nicaragua."
+ controls_cos_tt:0 "Controls the state of Costa Rica."
+ uca_restore_order_cooldown_tt:0 "Must wait for the current intervention cooldown to expire."
+ ca_intervention_cooldown_tt:0 "The Federal Republic is currently recovering from a recent intervention."
 
  central_america_two_party_system: "Central American Two-Party Dominance"
  ca_continuismo: "Continuismo"
@@ -271,7 +170,7 @@
  ca_caudillo.5.desc: "As leader of the [SCOPE.gsInterestGroup('army_scope').GetName], [SCOPE.sCharacter('army_leader').GetFullName] must decide whether the military will back the [SCOPE.sParty('liberal_party').GetName] or the [SCOPE.sParty('conservative_party').GetName]."
 
  # ==========================================
- # 7. UI, BARS, BUTTONS & TOOLTIPS
+ # 4. UI, BARS, BUTTONS & TOOLTIPS
  # ==========================================
  my_frca_support_bar_name: "FRCA Support"
  my_frca_support_bar_desc: "Federalists"
@@ -283,6 +182,12 @@
  ca_golden_grain_bar_desc:0 "Represents the success in transitioning our economy towards coffee monoculture."
  ca_prospecting_bar: "Survey Progress"
  ca_prospecting_bar_desc: "Progress of the national geological survey. Upon reaching 100, we will be able to construct modern mines."
+ FUND_SURVEY_EXPEDITION:0 "Fund Survey Expedition"
+ FUND_SURVEY_EXPEDITION_DESC:0 "Allocate treasury funds to finance a comprehensive geological survey across the nation."
+ HIRE_FOREIGN_GEOLOGISTS:0 "Hire Foreign Geologists"
+ HIRE_FOREIGN_GEOLOGISTS_DESC:0 "Bring in external experts to accelerate our understanding of local mineral wealth."
+ ca_request_intervention_button_name:0 "Request Central American Intervention"
+ ca_request_intervention_button_desc:0 "Formally request military and political intervention from the federal government to stabilize the state."
 
  ca_button_sabotage_federation_name:0 "Sabotage the Federation"
  ca_button_sabotage_federation_desc:0 "Foment chaos, withhold taxes, and openly defy the authority of the central government in our state."
@@ -366,3 +271,36 @@
  ca_notification_unification_notification_generic_name: "[SCOPE.sCountry('formation_country').GetAdjective] Unification"
  ca_notification_unification_notification_generic_desc: "[SCOPE.sCountry('formation_country').GetName] has emerged as a rising power in [SCOPE.sStrategicRegion('capital_region_scope').GetName]."
  ca_notification_unification_notification_generic_tooltip: "#header $notification_unification_notification_generic_name$#!\n$TOOLTIP_DELIMITER$\n$notification_unification_notification_generic_desc$"
+ 
+ # ==========================================
+ # COUNTRY SELECTION SCREEN FLAVOR TEXT (1836)
+ # ==========================================
+
+ # UCA - United Provinces of Central America
+ UCA_FLAVOR_TEXT:0 "The grand dream of a united Central America is fraying at the edges. Since gaining independence, the Federal Republic has been plagued by bitter struggles between liberal reformers in the capital and conservative strongholds in the provinces. As 1836 dawns, the federal government faces empty coffers, regional rebellions, and the looming shadow of dissolution. Can you hold the fragile union together against the tides of separatism, or will the provinces shatter into independent republics?"
+
+ # RDT - Talamanca (Bribri / Indigenous Autonomy)
+ RDT_FLAVOR_TEXT:0 "Deep within the impenetrable rainforests and rugged mountains of the south, the indigenous peoples of Talamanca have preserved their autonomy and ancient traditions for centuries. Resisting both Spanish conquistadors and the newly formed Central American states, the Bribri and Cabécar tribes stand as fierce defenders of their sovereign lands. In a rapidly industrializing world hungry for resources, you must guide your people to adapt, resist, and survive the encroaching forces of colonialism."
+
+# CIP - Soconusco (Disputed Neutral Territory)
+ CIP_FLAVOR_TEXT:0 "Soconusco lies at the fractured border between the Mexican Republic and the Federal Republic of Central America. Following the collapse of the First Mexican Empire, while Chiapas was annexed by Mexico, the vital and wealthy region of Soconusco bravely declared its absolute neutrality. Now, as a highly disputed territory coveted by both northern and southern powers, this rich agricultural enclave must navigate treacherous diplomatic waters. As 1836 dawns, will Soconusco maintain its precarious autonomy, or will it be forced to choose a side as the isthmus descends into chaos?"
+ 
+ # Faction Titles
+ CA_FACTION_CENTRALISTAS: "Centralists"
+ CA_FACTION_FEDERALISTAS: "Federalists"
+ CA_FACTION_SEPARATISTAS: "Separatists"
+
+ # Centralist Influence Tooltips
+ CENTRALISTA_NIVEL_1_TOOLTIP: "Mild Centralist Influence\nThis faction is beginning to gain traction."
+ CENTRALISTA_NIVEL_2_TOOLTIP: "Moderate Centralist Influence\nThe faction carries considerable weight in the government."
+ CENTRALISTA_NIVEL_3_TOOLTIP: "Dominant Centralist Influence\nThe state aligns completely with centralism."
+
+ # Federalist Influence Tooltips
+ FEDERALISTA_NIVEL_1_TOOLTIP: "Mild Federalist Influence\nThere are voices in favor of state autonomy."
+ FEDERALISTA_NIVEL_2_TOOLTIP: "Moderate Federalist Influence\nFederalism is a major political force."
+ FEDERALISTA_NIVEL_3_TOOLTIP: "Dominant Federalist Influence\nThe state demands a constitution and great autonomy."
+
+ # Separatist Influence Tooltips
+ SEPARATISTA_NIVEL_1_TOOLTIP: "Mild Separatist Influence\nMurmurs of local independence can be heard."
+ SEPARATISTA_NIVEL_2_TOOLTIP: "Moderate Separatist Influence\nThe independence movement is a real threat."
+ SEPARATISTA_NIVEL_3_TOOLTIP: "Dominant Separatist Influence\nThe state is on the verge of total secession."
