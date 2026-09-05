@@ -1,0 +1,256 @@
+nombre_del_personaje_id = {
+	# --- DATOS BÁSICOS ---
+	first_name = "Nombre" 			# Puede ser un texto o "culture" para nombre aleatorio
+	last_name = "Apellido" 			# Puede ser un texto o "culture" para apellido aleatorio
+	historical = yes 			# yes / no
+	female = no 				# yes / no
+	birth_date = 1800.1.1 			# Año.Mes.Día (Alternativa: usar age = X)
+	culture = cu:cultura_id 		# Ej: cu:spanish, primary_culture, etc.
+	religion = rel:religion_id 		# Ej: rel:catholic, rel:protestant
+	dna = dna_personaje 			# Opcional: Define el aspecto 3D exacto
+	home_region = STATE_NOMBRE 		# Región de origen (Ej: STATE_SANTIAGO)
+
+	# --- ROLES E IDENTIDAD ---
+	# Método 1 (Nuevo sistema):
+	role = character_role_politician 	# Ej: politician, magnate, agitator, general, admiral, ruler, heir
+	# Método 2 (Clásico, compatible con el nuevo):
+	ruler = yes
+	heir = yes
+	ig_leader = yes
+	is_general = yes
+	is_admiral = yes
+	is_agitator = yes
+	noble = yes
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_nombre 		# Ej: ig_armed_forces, ig_landowners, ig_intelligentsia
+	ideology = ideology_nombre 		# Ej: ideology_moderate, ideology_radical
+	holding_type = building_type 		# Para magnates (Ej: building_manor_house, building_financial_district)
+	company = company:company_id 		# Para ejecutivos/empresarios (Ej: company_john_cockerill)
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = default 		# Rango militar: default, commander_rank_1, commander_rank_2, etc.
+	hq = region_nombre 			# Cuartel general asignado (Ej: region_russia)
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		# Lista de rasgos iniciales del personaje
+		trait_ejemplo_1
+		trait_ejemplo_2
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = {
+		if = {
+			limit = { age >= 30 }
+			add_random_trait = skill
+		}
+	}
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		# Efectos y variables que se aplican justo al aparecer en el juego
+		set_variable = is_married
+		set_variable = house_bourbon
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	# Solo debes usar UNO de estos bloques dependiendo del rol de tu personaje si quieres que aparezca por evento o fecha en lugar de estar al inicio de la partida.
+
+	# 1. Uso para Generales y Almirantes
+	commander_usage = {
+		country_trigger = {
+			# Condiciones que el país debe cumplir para que aparezca
+			exists = c:TAG
+			c:TAG ?= THIS
+		}
+		role = general # o admiral
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1870.1.1
+	}
+
+	# 2. Uso para Líderes de Grupos de Interés
+	interest_group_leader_usage = {
+		country_trigger = {
+			# Condiciones del país
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1870.1.1
+		chance = 50 # Probabilidad de aparición (Opcional, omitir para 100%)
+	}
+
+	# 3. Uso para Agitadores Políticos
+	agitator_usage = {
+		country_trigger = {
+			# Condiciones del país
+		}
+		interest_group_trigger = {
+			is_interest_group_type = ig_rural_folk
+		}
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1870.1.1
+	}
+
+	# 4. Uso para Ejecutivos de Compañías
+	executive_usage = {
+		country_trigger = {
+			has_dlc_feature = mp1_content
+		}
+		company_trigger = {
+			is_company_type = company_type:company_id
+		}
+		earliest_usage_date = 1850.1.1
+		latest_usage_date = 1870.1.1
+	}
+}
+
+
+plantilla_maestra_ia = {
+    # --- BLOQUES BÁSICOS ---
+    icon = gfx/interface/icons/ai_strategy_icons/default.dds
+    
+    possible = {
+        # Condiciones para que un país pueda usar esta estrategia
+    }
+    
+    weight = {
+        # Probabilidad de que la IA elija esta estrategia
+    }
+
+    will_form_power_bloc = {
+        # Condiciones para formar un bloque de poder
+    }
+
+    desired_tax_level = medium
+    max_tax_level = high
+    min_tax_level = low
+    
+    ideological_opinion_effect_mult = 1.0
+    revolution_aversion = 5
+    min_law_chance_to_pass = 50
+    max_progressiveness = 25
+    max_regressiveness = 25
+    colonial_interest_ratio = 0.0
+    change_law_chance = 1
+    nationalization_desire = 0.0
+
+    pro_interest_groups = {
+        # Grupos de interés a los que apoyar
+    }
+    anti_interest_groups = {
+        # Grupos de interés a los que suprimir
+    }
+    
+    pro_movements = {
+        # Movimientos políticos a apoyar
+    }
+    anti_movements = {
+        # Movimientos políticos a suprimir
+    }
+
+    obligation_value = {
+        # Valoración de las obligaciones de otros países
+    }
+
+    strategic_region_scores = {
+        # Puntuación para regiones estratégicas específicas
+    }
+
+    # --- BLOQUES DIPLOMÁTICOS ---
+    diplomatic_play_support = {
+        # Evaluación para apoyar al iniciador o al objetivo en una jugada
+    }
+
+    wargoal_scores = {
+        # Cuánto valora la IA objetivos de guerra (ej. conquer_state)
+    }
+
+    wargoal_weights = {
+        # Multiplicadores para los valores de los objetivos de guerra
+    }
+
+    secret_goal_scores = {
+        # Postura oculta hacia otros países (ej. conquer, befriend)
+    }
+
+    secret_goal_weights = {
+        # Multiplicadores para los objetivos secretos
+    }
+
+    treaty_category_scores = {
+        # Interés en firmar tratados (economy, military, trade, etc.)
+    }
+
+    undesirable_infamy_level = 50
+    unacceptable_infamy_level = 100
+    diplomatic_play_neutrality = 50
+    diplomatic_play_boldness = 50
+    wargoal_maneuvers_fraction = 0.35
+    recklessness = 1.0
+    aggression = 0.5
+
+    # --- BLOQUES DE CONSTRUCCIÓN ---
+    building_group_weights = {
+        # Prioridad de grupos de edificios (ej. bg_agriculture = 1.25)
+    }
+
+    subsidies = {
+        # Edificios que la IA subsidiará (nice_to_have, must_have...)
+    }
+
+    war_subsidies = {
+        # Edificios a subsidiar durante tiempos de guerra
+    }
+
+    goods_stances = {
+        # Postura comercial sobre bienes (wants_high_supply, wants_export...)
+    }
+
+    # --- BLOQUES DESEADOS (METAS MACROECONÓMICAS) ---
+    wanted_construction_output = {
+        # Capacidad de construcción a la que apuntará la IA
+    }
+
+    wanted_army_size = {
+        # Niveles de cuarteles deseados
+    }
+
+    wanted_navy_size = {
+        # Niveles de bases navales deseadas
+    }
+
+    # --- BLOQUES MILITARES ---
+    combat_unit_group_weights = {
+        # Ratio de unidades (infantería, artillería, barcos, etc.)
+    }
+
+    conscript_battalion_ratio = {
+        # Cuántos conscriptos quiere la IA por cada batallón regular
+    }
+
+    # --- OTROS BLOQUES (INSTITUCIONES Y VALORACIÓN TERRITORIAL) ---
+    institution_scores = {
+        # Preferencia de inversión en instituciones (salud, policía, escuelas...)
+    }
+
+    state_value = {
+        # Cuánto desea la IA conquistar un estado en específico
+    }
+
+    treaty_port_value = {
+        # Cuánto desea la IA tomar un puerto de tratado en un estado
+    }
+
+    subject_value = {
+        # Cuánto valora convertir a otro país en su súbdito
+    }
+
+    become_subject_value = {
+        # Cuánto valora someterse pacíficamente como súbdito de otro
+    }
+}
+
