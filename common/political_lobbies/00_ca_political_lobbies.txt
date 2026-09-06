@@ -21,8 +21,10 @@
         appeasement_factors_anti_federalist
     }
     
-    join_weight = {
-        
+        join_weight = {
+        value = 0
+
+        # 1. Adherencia: Si ya es miembro, tiende a quedarse
         if = {
             limit = { 
                 exists = scope:political_lobby
@@ -31,38 +33,60 @@
             add = { value = 50 desc = "member_of_lobby" }
         }    
 
-        
+        # 2. Ideologías Pro-Federación
         if = {
             limit = {
-                has_ideology = ideology_ca_federalist_movement 
+                OR = {
+                    has_ideology = ideology:ideology_ca_federalist
+                    has_ideology = ideology:ideology_ca_morazanista
+                    has_ideology = ideology:ideology_ca_constitutionalist
+                    has_ideology = ideology:ideology_ca_secularist
+                    has_ideology = ideology:ideology_central_american_federal
+                }
             }
             add = { value = 100 desc = "ideologically_federalist" }
         }
 
-        
-        if = {
-            limit = {
-                scope:target_country = {
-                    has_law_or_variant = law_type:law_ca_central_american_federal
-                }
+        # 3. Postura de Leyes Locales
+        owner = {
+            if = { 
+                limit = { has_law_or_variant = law_type:law_ca_central_american_federal } 
+                add = { value = 25 desc = "supports_federal_law" } 
             }
-            add = { value = 30 desc = "uca_is_federalist_desc" }
         }
-        
-        
-        if = {
-            limit = {
-                is_interest_group_type = ig_landowners 
-            }
-            add = {
-                desc = "economic_dependence_on_federation"
-                owner ?= {
-                    value = "economic_dependence(scope:target_country)"
-                    multiply = 10
+
+        # 4. Modificadores de Estado (Bastión Liberal)
+        owner = {
+            if = {
+                limit = { 
+                    any_scope_state = { 
+                        OR = { 
+                            has_modifier = ca_liberal_stronghold 
+                            has_modifier = ca_federalist_heartland 
+                        } 
+                    } 
                 }
+                add = { value = 30 desc = "liberal_state_modifier" }
+            }
+        }
+
+        # 5. Influencia (Contagio) de Movimientos Vecinos
+        owner = {
+            if = {
+                limit = {
+                    any_scope_state = {
+                        any_neighboring_state = {
+                            owner = { 
+                                any_political_movement = { is_political_movement_type = movement_ca_federalist } 
+                            }
+                        }
+                    }
+                }
+                add = { value = 15 desc = "neighboring_federalist_movement" }
             }
         }
     }
+
     
     on_created = {
         save_temporary_scope_as = lobby_country
@@ -98,43 +122,84 @@ lobby_anti_federalist = {
         appeasement_federal_incompetence 
     }
     
-    join_weight = {
+        join_weight = {
+        value = 0
         
+        # 1. Adherencia al lobby
         if = {
             limit = { 
                 exists = scope:political_lobby
                 scope:political_lobby = { any_lobby_member = { this = root } }
             }    
             add = { value = 50 desc = "member_of_lobby" }
-        }  
+        }
 
-        
+        # 2. Ideologías Anti-Federación (Centralistas, Reaccionarios o Separatistas)
         if = {
             limit = {
                 OR = {
-                    has_ideology = ideology_ca_unitarian_movement
-                    has_ideology = ideology_ca_autocratic_autonomist
+                    has_ideology = ideology:ideology_central_american_reactionary
+                    has_ideology = ideology:ideology_central_american_reactionary_2
+                    has_ideology = ideology:ideology_ca_unitarian
+                    has_ideology = ideology:ideology_ca_autocratic_autonomist
+                    has_ideology = ideology:ideology_ca_separatist
+                    has_ideology = ideology:ideology_central_america_caudillo
+                    has_ideology = ideology:ideology_ca_servile
                 }
             }
-            add = { value = 100 desc = "ideologically_separatist" }
+            add = { value = 100 desc = "ideologically_anti_federalist" }
         }
 
-        
-        if = {
-            limit = {
-                is_interest_group_type = ig_devout
-                owner = { has_law_or_variant = law_type:law_state_religion } 
-                scope:target_country = { has_law_or_variant = law_type:law_total_separation } 
+        # 3. Postura de Leyes Locales (Centralismo o Confederación laxa)
+        owner = {
+            if = {
+                limit = { 
+                    OR = { 
+                        has_law_or_variant = law_type:law_ca_central_american_unitary 
+                        has_law_or_variant = law_type:law_ca_central_american_confederated 
+                    } 
+                }
+                add = { value = 25 desc = "supports_anti_federal_law" }
             }
-            add = { value = 75 desc = "religious_incompatibility" }
         }
 
-        
-        if = {
-            limit = { is_interest_group_type = ig_petty_bourgeoisie }
-            add = { value = 25 desc = "local_nationalism" }
+        # 4. Modificadores de Estado (Capital Conservadora o Autonomismo Aislado)
+        owner = {
+            if = {
+                limit = { 
+                    any_scope_state = { 
+                        OR = { 
+                            has_modifier = ca_conservative_capital 
+                            has_modifier = ca_isolated_autonomists 
+                            has_modifier = ca_regional_resentment_modifier 
+                        } 
+                    } 
+                }
+                add = { value = 30 desc = "conservative_state_modifier" }
+            }
+        }
+
+        # 5. Influencia (Contagio) de Movimientos Vecinos (Separatismo o Unitarismo)
+        owner = {
+            if = {
+                limit = {
+                    any_scope_state = {
+                        any_neighboring_state = {
+                            owner = { 
+                                OR = {
+                                    any_political_movement = { is_political_movement_type = movement_ca_reactionary }
+                                    any_political_movement = { is_political_movement_type = movement_ca_separatist_movement }
+                                    any_political_movement = { is_political_movement_type = movement_ca_unitarian }
+                                }
+                            }
+                        }
+                    }
+                }
+                add = { value = 15 desc = "neighboring_anti_federalist_movement" }
+            }
         }
     }
+
     
     on_created = {
         save_temporary_scope_as = lobby_country
