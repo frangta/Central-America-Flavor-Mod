@@ -1101,6 +1101,35 @@ je_ca_military_reform = {
             name = ca_professional_army_bonus_modifier
         }
     }
+    immediate = {
+    # Guardamos a las Fuerzas Armadas en un "scope" para referenciarlas en futuros eventos
+    ig:ig_armed_forces = {
+        save_scope_as = ca_armed_forces_ig
+    }
+    # Establecemos una variable para indicar que el proceso de reforma está activo
+    set_variable = ca_military_reform_active_var
+     }
+
+    fail = {
+    # El diario fracasa catastróficamente si no se logra eliminar a todos los caudillos del pais 
+    
+    }
+
+    on_fail = {
+    # Limpieza de variables para mantener el código optimizado
+    remove_variable = ca_military_reform_active_var
+
+    # Disparamos el evento de fracaso (deberás definir ca_military.2 en tus eventos)
+    trigger_event = { id = ca_military.2 popup = yes }
+
+    # Consecuencia: Las Fuerzas Armadas ganan muchísimo poder y se atrincheran
+    ig:ig_armed_forces = {
+        add_modifier = {
+            name = age_of_ca_caudillos_modifier
+            months = 120
+        }
+    }
+}	
 }
 
 # =========================================================
