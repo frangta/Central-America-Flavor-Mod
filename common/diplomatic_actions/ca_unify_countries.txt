@@ -82,16 +82,6 @@ ca_unify_countries = {
 				min = -100
 				max = 100
 			}			
-			# Shared culture adds weight even when the cultures differ.
-			if = {
-				limit = {
-					scope:actor.culture = scope:target_country.culture
-				}
-				add = {
-					desc = "CA_UNIFY_ACCEPT_SHARED_RELIGION"
-					value = 50
-				}
-			}
 			# Shared religion adds weight even when the cultures differ.
 			if = {
 				limit = {

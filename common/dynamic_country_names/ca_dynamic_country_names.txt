@@ -4,12 +4,12 @@
 
 #### Los Altos ####
 ALT = {
-    dynamic_country_name = { name = dyn_c_ALT_puppet_FRA adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_losaltos_puppet_UCA adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
-    dynamic_country_name = { name = dyn_c_ALT_puppet_GBR adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_ALT_puppet_USA adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_ALT_puppet_SPA adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_ALT_puppet_BRZ adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
+    dynamic_country_name = { name = dyn_c_ALT_puppet_FRA adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_ALT_puppet_UCA adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } }
+    dynamic_country_name = { name = dyn_c_ALT_puppet_GBR adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_ALT_puppet_USA adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_ALT_puppet_SPA adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_ALT_puppet_BRZ adjective = ALT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
 
     dynamic_country_name = { name = dyn_c_alt_absolutist_monarchy adjective = ALT_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_alt_monarchy adjective = ALT_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_wealth_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
@@ -55,12 +55,12 @@ CIP = {
 
 dynamic_country_name = { name = dyn_c_cip_soconusco adjective = CIP_ADJ_soconusco is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { coa_def_soconosco_trigger = yes } } }
 
-    dynamic_country_name = { name = dyn_c_CIP_puppet_FRA adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_CIP_puppet_UCA adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
-    dynamic_country_name = { name = dyn_c_CIP_puppet_GBR adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_CIP_puppet_USA adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_CIP_puppet_SPA adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_CIP_puppet_BRZ adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
+    dynamic_country_name = { name = dyn_c_CIP_puppet_FRA adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_CIP_puppet_UCA adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } }
+    dynamic_country_name = { name = dyn_c_CIP_puppet_GBR adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_CIP_puppet_USA adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_CIP_puppet_SPA adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_CIP_puppet_BRZ adjective = CIP_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
 
     dynamic_country_name = { name = dyn_c_CIP_absolutist_monarchy adjective = CIP_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_CIP_monarchy adjective = CIP_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_weCIPh_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
@@ -107,12 +107,12 @@ COS = {
 	dynamic_country_name = { name = dyn_c_costarica_free_state adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { has_variable = costa_rica_1830s } } }
  
     
-	dynamic_country_name = { name = dyn_c_COS_puppet_FRA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_costarica_puppet_UCA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
-    dynamic_country_name = { name = dyn_c_COS_puppet_GBR adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_COS_puppet_USA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_COS_puppet_SPA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_COS_puppet_BRZ adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
+	dynamic_country_name = { name = dyn_c_COS_puppet_FRA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_COS_puppet_UCA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } }
+    dynamic_country_name = { name = dyn_c_COS_puppet_GBR adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_COS_puppet_USA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_COS_puppet_SPA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_COS_puppet_BRZ adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
 
     dynamic_country_name = { name = dyn_c_costarica_absolutist_monarchy adjective = COS_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_costarica_monarchy adjective = COS_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_wealth_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
@@ -154,12 +154,12 @@ COS = {
 
 #### CR1 ####
 CR1 = {
-    dynamic_country_name = { name = dyn_c_CR1_puppet_FRA adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_cr1_puppet_UCA adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
-    dynamic_country_name = { name = dyn_c_CR1_puppet_GBR adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_CR1_puppet_USA adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_CR1_puppet_SPA adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_CR1_puppet_BRZ adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
+    dynamic_country_name = { name = dyn_c_CR1_puppet_FRA adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_CR1_puppet_UCA adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } }
+    dynamic_country_name = { name = dyn_c_CR1_puppet_GBR adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_CR1_puppet_USA adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_CR1_puppet_SPA adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_CR1_puppet_BRZ adjective = CR1_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
 
     dynamic_country_name = { name = dyn_c_cr1_absolutist_monarchy adjective = CR1_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_cr1_monarchy adjective = CR1_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_wealth_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
@@ -203,12 +203,12 @@ CR1 = {
 
 #### El Salvador ####
 ELS = {
-    dynamic_country_name = { name = dyn_c_ELS_puppet_FRA adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_elsalvador_puppet_UCA adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
-    dynamic_country_name = { name = dyn_c_ELS_puppet_GBR adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_ELS_puppet_USA adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_ELS_puppet_SPA adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_ELS_puppet_BRZ adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
+    dynamic_country_name = { name = dyn_c_ELS_puppet_FRA adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_ELS_puppet_UCA adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } }
+    dynamic_country_name = { name = dyn_c_ELS_puppet_GBR adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_ELS_puppet_USA adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_ELS_puppet_SPA adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_ELS_puppet_BRZ adjective = ELS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
 
     dynamic_country_name = { name = dyn_c_elsalvador_absolutist_monarchy adjective = ELS_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_elsalvador_monarchy adjective = ELS_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_wealth_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
@@ -250,12 +250,12 @@ ELS = {
 
 #### Guatemala ####
 GUA = {
-    dynamic_country_name = { name = dyn_c_GUA_puppet_FRA adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_guatemala_puppet_UCA adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
-    dynamic_country_name = { name = dyn_c_GUA_puppet_GBR adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_GUA_puppet_USA adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_GUA_puppet_SPA adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_GUA_puppet_BRZ adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
+    dynamic_country_name = { name = dyn_c_GUA_puppet_FRA adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_GUA_puppet_UCA adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } }
+    dynamic_country_name = { name = dyn_c_GUA_puppet_GBR adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_GUA_puppet_USA adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_GUA_puppet_SPA adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_GUA_puppet_BRZ adjective = GUA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
 
     dynamic_country_name = { name = dyn_c_guatemala_absolutist_monarchy adjective = GUA_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_guatemala_monarchy adjective = GUA_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_wealth_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
@@ -297,12 +297,12 @@ GUA = {
 
 #### Honduras ####
 HON = {
-    dynamic_country_name = { name = dyn_c_HON_puppet_FRA adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_honduras_puppet_UCA adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
-    dynamic_country_name = { name = dyn_c_HON_puppet_GBR adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_HON_puppet_USA adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_HON_puppet_SPA adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_HON_puppet_BRZ adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
+    dynamic_country_name = { name = dyn_c_HON_puppet_FRA adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_HON_puppet_UCA adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } }
+    dynamic_country_name = { name = dyn_c_HON_puppet_GBR adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_HON_puppet_USA adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_HON_puppet_SPA adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_HON_puppet_BRZ adjective = HON_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
 
     dynamic_country_name = { name = dyn_c_honduras_absolutist_monarchy adjective = HON_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_honduras_monarchy adjective = HON_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_wealth_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
@@ -344,12 +344,12 @@ HON = {
 
 #### Miskito ####
 MKT = {
-    dynamic_country_name = { name = dyn_c_MKT_puppet_FRA adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_miskito_puppet_UCA adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
-    dynamic_country_name = { name = dyn_c_MKT_puppet_GBR adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_MKT_puppet_USA adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_MKT_puppet_SPA adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_MKT_puppet_BRZ adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
+    dynamic_country_name = { name = dyn_c_MKT_puppet_FRA adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_MKT_puppet_UCA adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } }
+    dynamic_country_name = { name = dyn_c_MKT_puppet_GBR adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_MKT_puppet_USA adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_MKT_puppet_SPA adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_MKT_puppet_BRZ adjective = MKT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
 
     dynamic_country_name = { name = dyn_c_miskito_absolutist_monarchy adjective = MKT_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_miskito_monarchy adjective = MKT_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_wealth_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
@@ -391,12 +391,12 @@ MKT = {
 
 #### Nicaragua ####
 NIC = {
-    dynamic_country_name = { name = dyn_c_NIC_puppet_FRA adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_nicaragua_puppet_UCA adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
-    dynamic_country_name = { name = dyn_c_NIC_puppet_GBR adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_NIC_puppet_USA adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_NIC_puppet_SPA adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_NIC_puppet_BRZ adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
+    dynamic_country_name = { name = dyn_c_NIC_puppet_FRA adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_NIC_puppet_UCA adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } }
+    dynamic_country_name = { name = dyn_c_NIC_puppet_GBR adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_NIC_puppet_USA adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_NIC_puppet_SPA adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_NIC_puppet_BRZ adjective = NIC_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
 
     dynamic_country_name = { name = dyn_c_nicaragua_absolutist_monarchy adjective = NIC_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_nicaragua_monarchy adjective = NIC_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_wealth_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
@@ -438,12 +438,12 @@ NIC = {
 
 #### Panamá ####
 PNM = {
-    dynamic_country_name = { name = dyn_c_PNM_puppet_FRA adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_panama_puppet_UCA adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
-    dynamic_country_name = { name = dyn_c_PNM_puppet_GBR adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_PNM_puppet_USA adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_PNM_puppet_SPA adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_PNM_puppet_BRZ adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
+    dynamic_country_name = { name = dyn_c_PNM_puppet_FRA adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_PNM_puppet_UCA adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } }
+    dynamic_country_name = { name = dyn_c_PNM_puppet_GBR adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_PNM_puppet_USA adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_PNM_puppet_SPA adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_PNM_puppet_BRZ adjective = PNM_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
 
     dynamic_country_name = { name = dyn_c_pnm_absolutist_monarchy adjective = PNM_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_pnm_monarchy adjective = PNM_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_wealth_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
@@ -487,12 +487,12 @@ PNM = {
 
 #### Talamanca ####
 RDT = {
-    dynamic_country_name = { name = dyn_c_RDT_puppet_FRA adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_RDT_puppet_UCA adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } }
-    dynamic_country_name = { name = dyn_c_RDT_puppet_GBR adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_RDT_puppet_USA adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_RDT_puppet_SPA adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_RDT_puppet_BRZ adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
+    dynamic_country_name = { name = dyn_c_RDT_puppet_FRA adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_RDT_puppet_UCA adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } }
+    dynamic_country_name = { name = dyn_c_RDT_puppet_GBR adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_RDT_puppet_USA adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_RDT_puppet_SPA adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_RDT_puppet_BRZ adjective = RDT_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
 
     dynamic_country_name = { name = dyn_c_rdt_absolutist_monarchy adjective = RDT_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_rdt_monarchy adjective = RDT_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_wealth_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
@@ -536,12 +536,12 @@ RDT = {
 
 #### UCA ####
 UCA = {
-    dynamic_country_name = { name = dyn_c_UCA_puppet_FRA adjective = UCA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:FRA } } }
-    dynamic_country_name = { name = dyn_c_UCA_puppet_GBR adjective = UCA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GBR } } }
-    dynamic_country_name = { name = dyn_c_UCA_puppet_USA adjective = UCA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:USA } } }
-    dynamic_country_name = { name = dyn_c_UCA_puppet_SPA adjective = UCA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:SPA } } }
-    dynamic_country_name = { name = dyn_c_UCA_puppet_BRZ adjective = UCA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { is_subject_of = c:BRZ } } }
-
+    dynamic_country_name = { name = dyn_c_UCA_puppet_FRA adjective = UCA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
+    dynamic_country_name = { name = dyn_c_UCA_puppet_GBR adjective = UCA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:GBR scope:actor = { is_subject_of = c:GBR } } }
+    dynamic_country_name = { name = dyn_c_UCA_puppet_USA adjective = UCA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:USA scope:actor = { is_subject_of = c:USA } } }
+    dynamic_country_name = { name = dyn_c_UCA_puppet_SPA adjective = UCA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:SPA scope:actor = { is_subject_of = c:SPA } } }
+    dynamic_country_name = { name = dyn_c_UCA_puppet_BRZ adjective = UCA_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:BRZ scope:actor = { is_subject_of = c:BRZ } } }
+                                                                                                                                                                                               
     dynamic_country_name = { name = dyn_c_uca_absolutist_monarchy adjective = UCA_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy has_law_or_variant = law_type:law_autocracy } } }
     dynamic_country_name = { name = dyn_c_uca_monarchy adjective = UCA_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_law_or_variant = law_type:law_monarchy OR = { has_law_or_variant = law_type:law_oligarchy has_law_or_variant = law_type:law_landed_voting has_law_or_variant = law_type:law_wealth_voting has_law_or_variant = law_type:law_census_voting has_law_or_variant = law_type:law_universal_suffrage has_law_or_variant = law_type:law_single_party_state has_law_or_variant = law_type:law_technocracy } } } }
 
@@ -582,171 +582,171 @@ UCA = {
     dynamic_country_name = { name = dyn_c_uca_single_junta_council adjective = UCA_ADJ is_main_tag_only = yes priority = 20 trigger = { exists = scope:actor scope:actor = { has_variable = ca_junta_council has_law_or_variant = law_type:law_parliamentary_republic has_law_or_variant = law_type:law_oligarchy } } }
 }
 CASA = {
-	dynamic_country_name = { name = dyn_c_CASA_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASA_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASA_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASA_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASA_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASA_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASA_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASA_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASA_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASA_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASA_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASA_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASA_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASA_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CARHO = {
-	dynamic_country_name = { name = dyn_c_CARHO_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CARHO_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CARHO_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CARHO_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CARHO_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CARHO_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CARHO_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CARHO_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CARHO_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CARHO_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CARHO_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CARHO_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CARHO_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CARHO_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CAZAM = {
-	dynamic_country_name = { name = dyn_c_CAZAM_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAZAM_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAZAM_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAZAM_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAZAM_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAZAM_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAZAM_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAZAM_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAZAM_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAZAM_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAZAM_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAZAM_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAZAM_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAZAM_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CAEA = {
-	dynamic_country_name = { name = dyn_c_CAEA_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAEA_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAEA_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAEA_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAEA_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAEA_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAEA_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAEA_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAEA_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAEA_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAEA_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAEA_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAEA_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAEA_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CANC = {
-	dynamic_country_name = { name = dyn_c_CANC_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANC_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANC_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANC_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANC_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANC_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANC_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANC_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANC_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANC_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANC_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANC_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANC_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANC_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CAAC = {
-	dynamic_country_name = { name = dyn_c_CAAC_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAAC_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAAC_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAAC_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAAC_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAAC_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAAC_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAAC_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAAC_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAAC_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAAC_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAAC_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAAC_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAAC_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CANNI = {
-	dynamic_country_name = { name = dyn_c_CANNI_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANNI_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANNI_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANNI_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANNI_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANNI_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANNI_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANNI_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANNI_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANNI_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANNI_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANNI_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANNI_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANNI_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CASNI = {
-	dynamic_country_name = { name = dyn_c_CASNI_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASNI_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASNI_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASNI_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASNI_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASNI_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CASNI_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASNI_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASNI_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASNI_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASNI_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASNI_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASNI_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CASNI_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CAPAC = {
-	dynamic_country_name = { name = dyn_c_CAPAC_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAPAC_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAPAC_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAPAC_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAPAC_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAPAC_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAPAC_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAPAC_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAPAC_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAPAC_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAPAC_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAPAC_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAPAC_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAPAC_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CANGU = {
-	dynamic_country_name = { name = dyn_c_CANGU_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANGU_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANGU_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANGU_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANGU_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANGU_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CANGU_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANGU_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANGU_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANGU_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANGU_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANGU_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANGU_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CANGU_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CABOR = {
-	dynamic_country_name = { name = dyn_c_CABOR_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABOR_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABOR_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABOR_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABOR_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABOR_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABOR_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABOR_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABOR_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABOR_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABOR_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABOR_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABOR_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABOR_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CAGAB = {
-	dynamic_country_name = { name = dyn_c_CAGAB_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAGAB_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAGAB_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAGAB_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAGAB_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAGAB_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CAGAB_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAGAB_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAGAB_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAGAB_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAGAB_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAGAB_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAGAB_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CAGAB_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CABSC = {
-	dynamic_country_name = { name = dyn_c_CABSC_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABSC_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABSC_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABSC_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABSC_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABSC_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABSC_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABSC_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABSC_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABSC_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABSC_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABSC_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABSC_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABSC_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CACOE = {
-	dynamic_country_name = { name = dyn_c_CACOE_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACOE_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACOE_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACOE_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACOE_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACOE_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACOE_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACOE_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACOE_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACOE_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACOE_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACOE_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACOE_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACOE_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CACMN = {
-	dynamic_country_name = { name = dyn_c_CACMN_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMN_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMN_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMN_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMN_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMN_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMN_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMN_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMN_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMN_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMN_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMN_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMN_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMN_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CACMS = {
-	dynamic_country_name = { name = dyn_c_CACMS_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMS_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMS_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMS_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMS_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMS_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CACMS_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMS_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMS_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMS_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMS_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMS_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMS_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CACMS_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }
 
 CABEN = {
-	dynamic_country_name = { name = dyn_c_CABEN_UCA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:UCA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABEN_GUA trigger = { exists = scope:actor scope:actor = { is_subject_of = c:GUA } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABEN_HON trigger = { exists = scope:actor scope:actor = { is_subject_of = c:HON } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABEN_ALT trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ALT } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABEN_ELS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:ELS } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABEN_NIC trigger = { exists = scope:actor scope:actor = { is_subject_of = c:NIC } } priority = 100 }
-	dynamic_country_name = { name = dyn_c_CABEN_COS trigger = { exists = scope:actor scope:actor = { is_subject_of = c:COS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABEN_UCA trigger = { exists = c:UCA scope:actor = { is_subject_of = c:UCA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABEN_GUA trigger = { exists = c:GUA scope:actor = { is_subject_of = c:GUA } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABEN_HON trigger = { exists = c:HON scope:actor = { is_subject_of = c:HON } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABEN_ALT trigger = { exists = c:ALT scope:actor = { is_subject_of = c:ALT } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABEN_ELS trigger = { exists = c:ELS scope:actor = { is_subject_of = c:ELS } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABEN_NIC trigger = { exists = c:NIC scope:actor = { is_subject_of = c:NIC } } priority = 100 }
+	dynamic_country_name = { name = dyn_c_CABEN_COS trigger = { exists = c:COS scope:actor = { is_subject_of = c:COS } } priority = 100 }
 }

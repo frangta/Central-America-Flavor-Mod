@@ -208,6 +208,7 @@ Plan_of_Veragua6 = {
 			add_modifier = { name = ca_small_el_gran_avanse_modifier 
 				is_decaying = yes
 				years = 10
+				multiplier = 0.20
 				} 
 
 			
@@ -340,24 +341,7 @@ Plan_of_Veragua11 = {
     }
  	when_taken = {
 		
-            create_country = {
-                tag = COS
-                origin = ROOT
-                state = s:STATE_COSTA_RICA.region_state:UCA
-				province = p:x47C5F8
-                on_created = {
-                    add_primary_culture = cu:costa_rican
-                    remove_primary_culture = cu:central_american
-                    ca_liberate_costarica_effect = yes
-					set_variable = { name = ca_secession_country }
-				
-			        create_diplomatic_pact = {
-			        country = c:RDT
-			        type = ca_autonomous_province
-			        }
-		            
-                }
-            }
+           ca_add_setup_ig_ideologies = yes
         
 	}                                   
 }
@@ -372,12 +356,18 @@ Plan_of_Veragua12 = {
 		value = 0
     }
 	when_taken = {
-capital = {
-		change_resource_potential = {  
-	type = building_gold_field 
-	amount = 5
-}  
-}
+        add_journal_entry = {
+			type = je_ca_national_geological_survey
+		}
+		add_journal_entry = {
+			type = je_ca_agro_export_boom
+		}
+		add_journal_entry = {
+			type = je_ca_military_reform
+		}
+		add_journal_entry = {
+			type = je_ca_enlightenment
+		}	
 			
     }
 }
@@ -441,10 +431,18 @@ Close_Cheat_Decison1 = {
 		value = 0
     }
 	when_taken = {
-		take_on_scaled_debt = {
- who = c:GBR
- value = 10000
-}
+		add_journal_entry = {
+			type = je_ca_national_geological_survey
+		}
+		add_journal_entry = {
+			type = je_ca_agro_export_boom
+		}
+		add_journal_entry = {
+			type = je_ca_military_reform
+		}
+		add_journal_entry = {
+			type = je_ca_enlightenment
+		}	
 	}
 }
 Add_Culture_afro_caribeno = {
