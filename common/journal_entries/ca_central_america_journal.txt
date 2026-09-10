@@ -1003,19 +1003,22 @@ je_ca_agro_export_boom = {
     }
 
     complete = {
-
-        building_levels = {
-            type = building_coffee_plantation
-            value >= 15
-        }
-        building_levels = {
-            type = building_fruit_plantation
-            value >= 10
-        }
-        building_levels = {
-            type = building_port
-            value >= 5
-        }
+		any_scope_building = {
+			is_building_type = building_coffee_plantation
+			level >= 5
+			occupancy > 0.9
+		}
+		any_scope_building = {
+			is_building_type = building_fruit_plantation
+			level >= 5
+			occupancy > 0.9
+		}
+		any_scope_building = {
+			is_building_type =  building_port
+			level >= 5
+			occupancy > 0.9
+		}
+ 
         NOT = { has_law_or_variant = law_type:law_isolationism }
     }
 
@@ -1045,30 +1048,55 @@ je_ca_military_reform = {
             country_has_primary_culture = cu:honduran
             country_has_primary_culture = cu:nicaraguan
         }
-        has_law_or_variant = law_type:law_regionalist_militia
+        has_law_or_variant = law_type:law_ca_caudillismo
         NOT = { has_variable = ca_military_reform_completed }
     }
 
-    complete = {
+    complete = { 
+        # Leyes e hitos militares requeridos
         OR = {
             has_law_or_variant = law_type:law_professional_army
             has_law_or_variant = law_type:law_national_militia
             has_law_or_variant = law_type:law_mass_conscription
         }
         has_technology_researched = general_staff
-        
-        
         num_regular_battalions >= 10
         
+        # 1. ningun personaje (generales/gobernantes/agitadores) tiene ideologías caudillistas
+        NOT = {
+            any_scope_character = {
+                OR = {
+                    has_ideology = ideology:ideology_central_america_caudillo
+                    has_ideology = ideology:ideology_ca_peasant_caudillismo
+                    has_ideology = ideology:ideology_ca_tropical_bonapartism
+                    has_ideology = ideology:ideology_ca_tropical_utopian
+                }
+            }
+        }
+
+        # 2. ningun ig tiene estas ideologias centralistas/autonomistas
+        NOT = {
+            any_interest_group = {
+                OR = {
+                    has_ideology = ideology:ideology_ca_caudillismo_jingoist
+                    has_ideology = ideology:ideology_ca_autocratic_autonomist
+                }
+            }
+        }
+
+        # 3. Las Fuerzas Armadas están fuera del gobierno, no son poderosas y aprueban al gobierno
         ig:ig_armed_forces = {
-            ig_approval >= 5 
+            is_in_government = no
+            is_powerful = no
+            ig_approval >= 15 
         }
     }
 
     on_complete = {
         set_variable = ca_military_reform_completed
         trigger_event = { id = ca_military.1 }
-        # MEJORA: A los modificadores militares permanentes (sin 'months') 
+        
+        # Modificador permanente al lograr la profesionalización
         add_modifier = {
             name = ca_professional_army_bonus_modifier
         }
@@ -1105,10 +1133,19 @@ je_ca_enlightenment = {
             level >= 3
         } 
         
-        building_levels = {
-            type = building_university
-            value >= 8
-        }
+		OR = {
+			has_law_or_variant = law_type:law_right_of_assembly
+			has_law_or_variant = law_type:law_protected_speech
+		}
+		OR = {
+			has_law_or_variant = law_type:law_freedom_of_conscience
+			has_law_or_variant = law_type:law_total_separation
+		}
+		any_scope_building = {
+			is_building_type = building_university
+			level >= 5
+			occupancy > 0.9
+		}
         
         ig:ig_intelligentsia = {
             is_powerful = yes

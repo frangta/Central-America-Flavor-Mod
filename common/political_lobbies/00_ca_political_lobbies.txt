@@ -21,7 +21,7 @@
         appeasement_factors_anti_federalist
     }
     
-        join_weight = {
+    join_weight = {
         value = 0
 
         # 1. Adherencia: Si ya es miembro, tiende a quedarse
@@ -86,7 +86,6 @@
             }
         }
     }
-
     
     on_created = {
         save_temporary_scope_as = lobby_country
@@ -122,7 +121,7 @@ lobby_anti_federalist = {
         appeasement_federal_incompetence 
     }
     
-        join_weight = {
+    join_weight = {
         value = 0
         
         # 1. Adherencia al lobby
@@ -199,7 +198,6 @@ lobby_anti_federalist = {
             }
         }
     }
-
     
     on_created = {
         save_temporary_scope_as = lobby_country
