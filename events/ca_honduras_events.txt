@@ -13,7 +13,7 @@
 ## introduccion de HONDURAS
 ca_honduras_events.1 = {
 	type = country_event
-	placement = s:STATE_HONDURAS
+	placement = s:STATE_HONDURAS.region_state:UCA
 	title = ca_honduras_events.1.t
 	desc = ca_honduras_events.1.d
 	flavor = ca_honduras_events.1.f
@@ -27,11 +27,11 @@ ca_honduras_events.1 = {
 	trigger = {
         exists = c:UCA
         this = c:UCA 
-        game_date <= 1836.1.15
+        game_date <= 1836.1.1
 	}
 	
 	immediate = {
-        s:STATE_HONDURAS = {
+        s:STATE_HONDURAS.region_state:UCA = {
         add_state_trait = state_trait_mining_hon
 		add_modifier = { name = ca_uca_federalist_heartland }
         add_modifier = { name = waning_federal_stronghold }

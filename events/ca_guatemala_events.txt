@@ -12,7 +12,7 @@
 ## introduccion de Guatemala
 ca_guatemala_events.1 = {
 	type = country_event
-	placement = s:STATE_GUATEMALA
+	placement = s:STATE_GUATEMALA.region_state:UCA
 	title = ca_guatemala_events.1.t
 	desc = ca_guatemala_events.1.d
 	flavor = ca_guatemala_events.1.f
@@ -26,11 +26,11 @@ ca_guatemala_events.1 = {
 	trigger = {
         exists = c:UCA
         this = c:UCA 
-        game_date <= 1836.1.15
+        game_date <= 1836.1.1
 	}
 	
 	immediate = {
-        s:STATE_GUATEMALA = {
+        s:STATE_GUATEMALA.region_state:UCA = {
         add_state_trait = state_trait_mining_gua
 		add_modifier = { name = ca_uca_conservative_capital }
         add_modifier = { name = unitary_stronghold }

@@ -6,12 +6,12 @@
 #scope_DE3
 
 ## introduccion de El Salvador
-ca_el_salvador_events.01 = {
+ca_el_salvador_events.1 = {
 	type = country_event
-	placement = s:STATE_SAN_SALVADOR
-	title = ca_el_salvador_events.01.t
-	desc = ca_el_salvador_events.01.d
-	flavor = ca_el_salvador_events.01.f
+	placement = s:STATE_SAN_SALVADOR.region_state:UCA
+	title = ca_el_salvador_events.1.t
+	desc = ca_el_salvador_events.1.d
+	flavor = ca_el_salvador_events.1.f
 	duration = 3
 	event_image = {
 		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
@@ -22,11 +22,11 @@ ca_el_salvador_events.01 = {
 	trigger = {
         exists = c:UCA
         this = c:UCA 
-        game_date <= 1836.1.15
+        game_date <= 1836.1.1
 	}
 	
 	immediate = {
-        s:STATE_SAN_SALVADOR = {
+        s:STATE_SAN_SALVADOR.region_state:UCA = {
         add_state_trait = state_trait_mining_els
         add_modifier = { name = ca_uca_liberal_stronghold }
         add_modifier = { name = federal_stronghold }
@@ -34,12 +34,12 @@ ca_el_salvador_events.01 = {
 	}
 
 	option = {
-		name = ca_el_salvador_events.01.a
+		name = ca_el_salvador_events.1.a
 		default_option = yes
 
 	}
 	option = {
-		name = ca_el_salvador_events.02.a
+		name = ca_el_salvador_events.1.b
 		trigger = {
 			c:UCA ?= {
 			has_variable = ca_state_selection_to_playing

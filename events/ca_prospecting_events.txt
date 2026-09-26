@@ -1,5 +1,1501 @@
 ﻿namespace = ca_prospecting 
 
+ca_prospecting.1 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.1.t
+	desc = ca_prospecting.1.d
+	flavor = ca_prospecting.1.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.1.a
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_gold_mine
+				amount = 2
+			}
+			every_state_pop = {
+				limit = { is_pop_type = peasants }
+				add_radicals = { value = 0.05 }
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.1.b
+		add_modifier = {
+			name = ca_add_power
+			months = 36
+		}
+		change_variable = {
+			name = ca_survey_progress
+			subtract = 5
+		}
+		ig:ig_industrialists = {
+			add_modifier = {
+				name = ca_ig_approval_down
+				months = 36
+			}
+		}
+		ig:ig_landowners = {
+			add_modifier = {
+				name = ca_ig_approval_down
+				months = 36
+			}
+		}
+	}
+}
+
+ca_prospecting.2 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.2.t
+	desc = ca_prospecting.2.d
+	flavor = ca_prospecting.2.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			has_potential_resource = bg_iron_mining
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				has_potential_resource = bg_iron_mining
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.2.a
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_iron_mine
+				amount = 2
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.2.b
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_iron_mine
+				amount = 2
+			}
+		}
+		ig:ig_rural_folk = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+		}
+		ig:ig_landowners = {
+			add_modifier = {
+				name = ca_ig_approval_down
+				months = 60
+			}
+		}
+	}
+}
+
+ca_prospecting.3 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.3.t
+	desc = ca_prospecting.3.d
+	flavor = ca_prospecting.3.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+	}
+	
+	immediate = {
+		random_owned_state = {
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.3.a
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_sulfur_mine
+				amount = 2
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.3.b
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_sulfur_mine
+				amount = 2
+			}
+			add_devastation = 5
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+		}
+	}
+}
+
+ca_prospecting.4 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.4.t
+	desc = ca_prospecting.4.d
+	flavor = ca_prospecting.4.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			has_potential_resource = bg_lead_mining
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				has_potential_resource = bg_lead_mining
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.4.a
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_lead_mine
+				amount = 1
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.4.b
+		change_variable = {
+			name = ca_survey_progress
+			add = 15
+		}
+	}
+}
+
+ca_prospecting.5 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.5.t
+	desc = ca_prospecting.5.d
+	flavor = ca_prospecting.5.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			OR = {
+				state_region = s:STATE_HONDURAS
+				state_region = s:STATE_NICARAGUA
+			}
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_NICARAGUA
+				}
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.5.a
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_gold_mine
+				amount = 5
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.5.b
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_gold_mine
+				amount = 2
+			}
+		}
+		add_treasury = 100000
+		ig:ig_landowners = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+		}
+	}
+}
+
+ca_prospecting.6 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.6.t
+	desc = ca_prospecting.6.d
+	flavor = ca_prospecting.6.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.6.a
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_gold_mine
+				amount = 1
+			}
+			add_modifier = {
+				name = ca_gold_rush_modifier
+				months = 60
+			}
+		}
+		ig:ig_landowners = {
+			add_radicals = { value = 0.05 }
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.6.b
+		add_treasury = 50000
+		scope:target_state = {
+			add_radicals = { value = 0.10 }
+		}
+		ig:ig_rural_folk = {
+			add_modifier = {
+				name = ca_ig_approval_down
+				months = 60
+			}
+		}
+	}
+}
+
+ca_prospecting.7 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.7.t
+	desc = ca_prospecting.7.d
+	flavor = ca_prospecting.7.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			has_potential_resource = bg_coal_mining
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				has_potential_resource = bg_coal_mining
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.7.a
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_coal_mine
+				amount = 1
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.7.b
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_coal_mine
+				amount = 1
+			}
+		}
+		ig:ig_industrialists = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+			add_clout = 0.05
+		}
+		add_modifier = {
+			name = ca_state_corruption_modifier
+			months = 60
+		}
+	}
+}
+
+ca_prospecting.8 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.8.t
+	desc = ca_prospecting.8.d
+	flavor = ca_prospecting.8.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		has_technology_researched = prospecting
+		any_owned_state = {
+			state_region = s:STATE_PANAMA
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_region = s:STATE_PANAMA
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.8.a
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_oil_rig
+				amount = 1
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.8.b
+		add_treasury = 150000
+		scope:target_state = {
+			add_modifier = {
+				name = ca_foreign_monopoly_modifier
+				months = 120
+			}
+		}
+		ig:ig_intelligentsia = {
+			add_modifier = {
+				name = ca_ig_approval_down
+				months = 60
+			}
+		}
+	}
+}
+
+ca_prospecting.9 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.9.t
+	desc = ca_prospecting.9.d
+	flavor = ca_prospecting.9.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.9.a
+		scope:target_state = {
+			change_resource_potential = {
+				type = building_sulfur_mine
+				amount = 1
+			}
+			add_modifier = {
+				name = ca_infrastructure_boom_modifier
+				months = 36
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.9.b
+		scope:target_state = {
+			add_arable_land = 2
+		}
+		ig:ig_rural_folk = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+		}
+	}
+}
+
+ca_prospecting.10 = {
+	type = country_event
+	placement = root
+	title = ca_prospecting.10.t
+	desc = ca_prospecting.10.d
+	flavor = ca_prospecting.10.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+	}
+	
+	option = {
+		name = ca_prospecting.10.a
+		add_prestige = -10
+		every_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+			}
+			add_radicals = { value = 0.05 }
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.10.b
+		change_variable = {
+			name = ca_survey_progress
+			subtract = 20
+		}
+	}
+}
+
+ca_prospecting.11 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.11.t
+	desc = ca_prospecting.11.d
+	flavor = ca_prospecting.11.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.11.a
+		scope:target_state = {
+			add_arable_land = 5
+			add_modifier = {
+				name = ca_volcanic_soil_modifier
+				months = 120
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.11.b
+		add_treasury = 50000
+		ig:ig_landowners = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+			add_clout = 0.05
+		}
+		scope:target_state = {
+			every_state_pop = {
+				limit = { is_pop_type = peasants }
+				add_radicals = { value = 0.10 }
+			}
+		}
+	}
+}
+
+ca_prospecting.12 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.12.t
+	desc = ca_prospecting.12.d
+	flavor = ca_prospecting.12.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.12.a
+		scope:target_state = {
+			add_resource_potential = building_silk_plantation
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.12.b
+		add_treasury = -25000
+		scope:target_state = {
+			add_resource_potential = building_silk_plantation
+		}
+		ig:ig_intelligentsia = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+		}
+		add_modifier = {
+			name = ca_geological_innovation
+			months = 36
+		}
+	}
+}
+
+ca_prospecting.13 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.13.t
+	desc = ca_prospecting.13.d
+	flavor = ca_prospecting.13.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.13.a
+		scope:target_state = {
+			add_resource_potential = building_tea_plantation
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.13.b
+		change_variable = {
+			name = ca_survey_progress
+			add = 10
+		}
+	}
+}
+
+ca_prospecting.14 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.14.t
+	desc = ca_prospecting.14.d
+	flavor = ca_prospecting.14.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.14.a
+		scope:target_state = {
+			add_resource_potential = building_cotton_plantation
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.14.b
+		scope:target_state = {
+			add_resource_potential = building_cotton_plantation
+		}
+		if = {
+			limit = {
+				exists = c:GBR
+			}
+			c:GBR = {
+				change_relations = {
+					country = ROOT
+					value = 20
+				}
+			}
+		}
+		ig:ig_industrialists = {
+			add_modifier = {
+				name = ca_ig_approval_down
+				months = 60
+			}
+		}
+	}
+}
+
+ca_prospecting.15 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.15.t
+	desc = ca_prospecting.15.d
+	flavor = ca_prospecting.15.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.15.a
+		scope:target_state = {
+			add_resource_potential = building_vineyard
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.15.b
+		ig:ig_devout = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+		}
+	}
+}
+
+
+
+ca_prospecting.16 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.16.t
+	desc = ca_prospecting.16.d
+	flavor = ca_prospecting.16.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = { state_is_in_ca_central_america = yes }
+			save_scope_as = target_state
+		}
+	}
+	
+	
+	option = {
+		name = ca_prospecting.16.a
+		scope:target_state = {
+			add_resource_potential = building_opium_plantation
+		}
+	}
+	
+	
+	option = {
+		name = ca_prospecting.16.b
+		scope:target_state = {
+			
+			add_modifier = {
+				name = ca_reduced_turmoil_modifier
+				months = 36
+			}
+		}
+		ig:ig_devout = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+		}
+	}
+}
+
+
+ca_prospecting.17 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.17.t
+	desc = ca_prospecting.17.d
+	flavor = ca_prospecting.17.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = { state_is_in_ca_central_america = yes }
+			save_scope_as = target_state
+		}
+	}
+	
+	
+	option = {
+		name = ca_prospecting.17.a
+		trigger = { treasury >= 20000 }
+		add_treasury = -20000
+		scope:target_state = {
+			add_arable_land = 10
+		}
+	}
+	
+	
+	option = {
+		name = ca_prospecting.17.b
+		ig:ig_petty_bourgeoisie = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 24
+			}
+		}
+	}
+}
+
+
+ca_prospecting.18 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.18.t
+	desc = ca_prospecting.18.d
+	flavor = ca_prospecting.18.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = { state_is_in_ca_central_america = yes }
+			save_scope_as = target_state
+		}
+	}
+	
+	
+	option = {
+		name = ca_prospecting.18.a
+		scope:target_state = {
+			add_arable_land = 5
+			
+			every_state_pop = {
+				limit = { is_pop_type = peasants }
+				add_radicals = { value = 0.15 } 
+			}
+		}
+	}
+	
+	
+	option = {
+		name = ca_prospecting.18.b
+		change_variable = {
+			name = ca_survey_progress
+			subtract = 10
+		}
+		ig:ig_rural_folk = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+		}
+	}
+}
+
+
+ca_prospecting.19 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.19.t
+	desc = ca_prospecting.19.d
+	flavor = ca_prospecting.19.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = { state_is_in_ca_central_america = yes }
+			save_scope_as = target_state
+		}
+	}
+	
+	
+	option = {
+		name = ca_prospecting.19.a
+		scope:target_state = {
+			add_devastation = 10
+		}
+		change_variable = {
+			name = ca_survey_progress
+			subtract = 5
+		}
+	}
+	
+	
+	option = {
+		name = ca_prospecting.19.b
+		change_variable = {
+			name = ca_survey_progress
+			add = 10
+		}
+		scope:target_state = {
+			add_devastation = 20
+			add_modifier = {
+				name = ca_high_mortality_modifier 
+				months = 12
+			}
+			every_state_pop = {
+				limit = { OR = { is_pop_type = laborers is_pop_type = peasants } }
+				add_radicals = { value = 0.20 }
+			}
+		}
+	}
+}
+
+
+ca_prospecting.20 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.20.t
+	desc = ca_prospecting.20.d
+	flavor = ca_prospecting.20.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		# Este evento solo debe ocurrir donde ya hay minas de azufre construidas
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+			has_building = building_sulfur_mine
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+				has_building = building_sulfur_mine
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	
+	option = {
+		name = ca_prospecting.20.a
+		scope:target_state = {
+			# Victoria 3 maneja la contaminación mayormente por edificios, pero podemos forzarla
+			# mediante un modificador estatal que aumente el "state_pollution_generation_add"
+			add_modifier = {
+				name = ca_high_pollution_modifier
+				months = 60
+			}
+		}
+	}
+	
+	
+	option = {
+		name = ca_prospecting.20.b
+		add_treasury = -30000
+		scope:target_state = {
+			add_modifier = {
+				name = ca_low_pollution_modifier
+				months = 60
+			}
+		}
+	}
+}
+
+ca_prospecting.21 = {
+	type = country_event
+	placement = root
+	title = ca_prospecting.21.t
+	desc = ca_prospecting.21.d
+	flavor = ca_prospecting.21.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+	}
+	
+	option = {
+		name = ca_prospecting.21.a
+		change_variable = {
+			name = ca_survey_progress
+			subtract = 10
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.21.b
+		random_list = {
+			50 = {}
+			50 = {
+				random_owned_state = {
+					limit = { state_is_in_ca_central_america = yes }
+					add_arable_land = 1
+				}
+			}
+		}
+	}
+}
+
+ca_prospecting.22 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.22.t
+	desc = ca_prospecting.22.d
+	flavor = ca_prospecting.22.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+			any_state_pop = {
+				is_discriminated = yes
+			}
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+				any_state_pop = {
+					is_discriminated = yes
+				}
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.22.a
+		scope:target_state = {
+			add_devastation = 20
+			add_arable_land = 2
+			every_state_pop = {
+				limit = { is_discriminated = yes }
+				add_radicals = { value = 0.20 }
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.22.b
+		add_treasury = -25000
+		change_variable = {
+			name = ca_survey_progress
+			subtract = 10
+		}
+		scope:target_state = {
+			add_arable_land = 2
+		}
+	}
+}
+
+ca_prospecting.23 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.23.t
+	desc = ca_prospecting.23.d
+	flavor = ca_prospecting.23.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = { state_is_in_ca_central_america = yes }
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.23.a
+		scope:target_state = {
+			add_devastation = 25
+			add_arable_land = 2
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.23.b
+		add_treasury = -15000
+		scope:target_state = {
+			add_devastation = 5
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 36
+			}
+			add_clout = 0.05
+		}
+	}
+}
+
+ca_prospecting.24 = {
+	type = country_event
+	placement = root
+	title = ca_prospecting.24.t
+	desc = ca_prospecting.24.d
+	flavor = ca_prospecting.24.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+			has_terrain = terrain_jungle
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.24.a
+		add_treasury = -20000
+		change_variable = {
+			name = ca_survey_progress
+			subtract = 10
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.24.b
+		change_variable = {
+			name = ca_survey_progress
+			add = 15
+		}
+		every_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+				has_terrain = terrain_jungle
+			}
+			add_modifier = {
+				name = ca_high_mortality_modifier
+				months = 12
+			}
+			every_state_pop = {
+				limit = { is_pop_type = laborers }
+				add_radicals = { value = 0.15 }
+			}
+		}
+	}
+}
+
+ca_prospecting.25 = {
+	type = country_event
+	placement = root
+	title = ca_prospecting.25.t
+	desc = ca_prospecting.25.d
+	flavor = ca_prospecting.25.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			has_potential_resource = bg_iron_mining
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				has_potential_resource = bg_iron_mining
+			}
+			save_scope_as = iron_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.25.a
+		scope:iron_state = {
+			change_resource_potential = {
+				type = building_iron_mine
+				amount = 2
+			}
+		}
+		ig:ig_industrialists = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+			add_clout = 0.05
+		}
+		add_modifier = {
+			name = ca_foreign_monopoly_modifier
+			months = 120
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.25.b
+		scope:iron_state = {
+			change_resource_potential = {
+				type = building_iron_mine
+				amount = 1
+			}
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 36
+			}
+		}
+		if = {
+			limit = { exists = c:GBR }
+			c:GBR = {
+				change_relations = {
+					country = ROOT
+					value = -20
+				}
+			}
+		}
+		if = {
+			limit = { exists = c:FRA }
+			c:FRA = {
+				change_relations = {
+					country = ROOT
+					value = -20
+				}
+			}
+		}
+		if = {
+			limit = { exists = c:PRU }
+			c:PRU = {
+				change_relations = {
+					country = ROOT
+					value = -20
+				}
+			}
+		}
+	}
+}
+
+ca_prospecting.26 = {
+	type = country_event
+	placement = root
+	title = ca_prospecting.26.t
+	desc = ca_prospecting.26.d
+	flavor = ca_prospecting.26.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+	}
+	
+	option = {
+		name = ca_prospecting.26.a
+		add_treasury = 75000
+		change_variable = {
+			name = ca_survey_progress
+			add = 15
+		}
+		add_modifier = {
+			name = ca_funding_low_modifier
+			months = 120
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.26.b
+		random_list = {
+			30 = {
+				change_variable = {
+					name = ca_survey_progress
+					add = 15
+				}
+			}
+			70 = {
+				add_radicals = { value = 0.05 }
+				every_owned_state = {
+					limit = {
+						state_is_in_ca_central_america = yes
+					}
+					add_modifier = {
+						name = ca_separatist_agitation_modifier
+						months = 60
+					}
+				}
+			}
+		}
+	}
+}
+
+ca_prospecting.27 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.27.t
+	desc = ca_prospecting.27.d
+	flavor = ca_prospecting.27.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+			turmoil >= 0.20
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+				turmoil >= 0.20
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.27.a
+		ig:ig_landowners = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 36
+			}
+		}
+		scope:target_state = {
+			every_state_pop = {
+				limit = { is_pop_type = peasants }
+				add_radicals = { value = 0.20 }
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.27.b
+		scope:target_state = {
+			add_modifier = {
+				name = ca_reduced_turmoil_modifier
+				months = 60
+			}
+		}
+		ig:ig_rural_folk = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 36
+			}
+		}
+		change_variable = {
+			name = ca_survey_progress
+			subtract = 10
+		}
+	}
+}
+
+ca_prospecting.28 = {
+	type = country_event
+	placement = root
+	title = ca_prospecting.28.t
+	desc = ca_prospecting.28.d
+	flavor = ca_prospecting.28.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+	}
+	
+	option = {
+		name = ca_prospecting.28.a
+		add_modifier = {
+			name = ca_arrested_spy_modifier
+			months = 24
+		}
+		change_variable = {
+			name = ca_survey_progress
+			subtract = 5
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.28.b
+		add_treasury = -50000
+		add_modifier = {
+			name = ca_state_corruption_modifier
+			months = 60
+		}
+	}
+}
+
+ca_prospecting.29 = {
+	type = country_event
+	placement = scope:target_state
+	title = ca_prospecting.29.t
+	desc = ca_prospecting.29.d
+	flavor = ca_prospecting.29.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+		any_owned_state = {
+			state_is_in_ca_central_america = yes
+			any_state_pop = {
+				has_pop_culture = cu:mayan
+			}
+		}
+	}
+	
+	immediate = {
+		random_owned_state = {
+			limit = {
+				state_is_in_ca_central_america = yes
+				any_state_pop = {
+					has_pop_culture = cu:mayan
+				}
+			}
+			save_scope_as = target_state
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.29.a
+		add_modifier = {
+			name = ca_archaeological_find_modifier
+			months = 120
+		}
+		ig:ig_intelligentsia = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+		}
+	}
+	
+	option = {
+		name = ca_prospecting.29.b
+		add_treasury = 30000
+		change_variable = {
+			name = ca_survey_progress
+			add = 10
+		}
+		add_prestige = -15
+		ig:ig_intelligentsia = {
+			add_radicals = { value = 0.10 }
+		}
+	}
+}
+
+ca_prospecting.30 = {
+	type = country_event
+	placement = root
+	title = ca_prospecting.30.t
+	desc = ca_prospecting.30.d
+	flavor = ca_prospecting.30.f
+	
+	trigger = {
+		has_journal_entry = je_ca_national_geological_survey
+	}
+	
+	option = {
+		name = ca_prospecting.30.a
+		add_treasury = -25000
+	}
+	
+	option = {
+		name = ca_prospecting.30.b
+		change_variable = {
+			name = ca_survey_progress
+			subtract = 5
+		}
+		ig:ig_armed_forces = {
+			add_modifier = {
+				name = ca_ig_approval_up
+				months = 60
+			}
+			add_clout = 0.05
+		}
+	}
+}
+
 ## =================================================================
 ## EVENTO 1: Búsqueda de Financiación para la Expedición
 ## =================================================================

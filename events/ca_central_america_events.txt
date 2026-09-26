@@ -783,8 +783,24 @@ ca_central_america.3 = {
     duration = 3
     
     trigger = {
+		this = c:UCA
+		has_journal_entry = je_historic_central_america_falls_apart
+		game_date < 1838.1.6
         has_variable = los_altos_autonomy_approved_and_granted
-        NOT = { exists = c:ALT } 
+        NOT = { exists = c:ALT }
+		OR = {
+			s:STATE_GUATEMALA = {
+				turmoil > 0.2
+			}
+			AND = {
+				ig:ig_landowners = {
+					is_powerful = yes
+				}
+				ig:ig_intelligentsia = {
+					is_marginal = yes
+				}
+			}
+		}		
     }
     
     immediate = { 
@@ -970,44 +986,44 @@ ca_central_america.5 = {
     duration = 3
     
     trigger = {
+		trigger = {
+		this = c:UCA
+		exists = c:CIP
+		c:CIP = {
+			is_subject_of = c:UCA
+			is_subject_type = subject_type_ca_dependency
+		}
+		has_journal_entry = je_historic_central_america_falls_apart
+		game_date < 1839.1.1
+	}
         this = c:UCA
         NOT = { has_variable = ca_fate_soconusco }
     }
     
     immediate = {
         set_variable = ca_fate_soconusco
-        
-        create_country = {
-            tag = CIP
-            origin = this
-            province = p:x1030C0 
-            
-            on_created = {
-                s:STATE_CHIAPAS = {
-                    set_owner_of_provinces = {
-                        country = c:CIP
-                        provinces = { x4DBDE9 xD03040 xA087F6 }
-                    }
-                }
-                
-                set_ruling_interest_groups = { ig_landowners ig_devout }
-				set_variable = is_soconosco
-                save_scope_as = scope_DG6
-            }
-        }
+        c:CIP = { save_scope_as = cip_scope }
     }
     
     # OPCIÓN A
     option = {
         name = ca_central_america.5.a 
-        default_option = yes
         
-       ROOT = {
-        create_diplomatic_pact = {
-             country = c:CIP
-             type = ca_dependency
-         }
-       } 
+        scope:cip_scope = {
+			add_modifier = {
+				name = ca_federal_protection_modifier
+				months = 36
+			}
+			ig:ig_intelligentsia = {
+				add_loyalists = { value = 0.15 }
+			}
+		}
+		c:GUA = {
+			ig:ig_landowners = {
+				add_radicals = { value = 0.15 }
+			}
+		}
+       
         
         if = {
             limit = { has_variable = frca_support }
@@ -1026,19 +1042,14 @@ ca_central_america.5 = {
     option = { 
         name = ca_central_america.5.b
         
-       ROOT = {
-        create_diplomatic_pact = {
-             country = c:CIP
-             type = ca_dependency
-         }
-       } 
+       
         
         if = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_5b 
                 je:je_historic_central_america_falls_apart = {
-                    add_progress = { value = 10 name = frca_support_bar } 
+                    add_progress = { value = -10 name = frca_support_bar } 
                 }
             }
         }
@@ -1053,8 +1064,16 @@ ca_central_america.5 = {
         trigger = { exists = c:GUA } 
         
         c:GUA = { annex = c:CIP } 
-        
+        ig:ig_landowners = {
+				add_modifier = {
+					name = ca_ig_approval_up_massive
+					months = 36
+				}
+			}
         set_variable = guatemala_integrate_soconusco 
+		scope:cip_scope = {
+			set_variable = cip_given_to_gua_var
+		}
         if = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
@@ -1070,20 +1089,32 @@ ca_central_america.5 = {
     
     # OPCIÓN D
     option = {
-        name = ca_central_america.5.d 
+        name = ca_central_america.5.d
+        default_option = yes		
         trigger = { exists = c:ALT } 
         
         c:ALT = { annex = c:CIP } 
-        
+        c:ALT = {
+			ig:ig_intelligentsia = {
+				add_loyalists = { value = 0.20 }
+			}
+		}
+		change_relations = {
+			country = c:GUA
+			value = -50
+		}
+		change_relations = {
+			country = scope:cip_scope
+			value = -50
+		}
         set_variable = quetzaltenango_integrate_soconusco
-        set_variable = created_DG6
         
         if = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_5d 
                 je:je_historic_central_america_falls_apart = {
-                    add_progress = { value = -10 name = frca_support_bar } 
+                    add_progress = { value = -15 name = frca_support_bar } 
                 }
             }
         }
@@ -1110,8 +1141,10 @@ ca_central_america.6 = {
     duration = 3
     
     trigger = {
-        game_date >= 1836.1.1
+		has_journal_entry = je_historic_central_america_falls_apart
+		game_date < 1837.1.1
         NOT = { has_global_variable = bocas_del_toro_crisis_fired } # Global para evitar que salte para COS y UCA a la vez
+		
         OR = {        
             AND = {
                 this = c:UCA 
@@ -1128,16 +1161,19 @@ ca_central_america.6 = {
         set_global_variable = bocas_del_toro_crisis_fired
         
         # Encontramos y guardamos el estado al que pertenece Bocas del Toro
-        p:x47C5F8 = {
-            state = { save_scope_as = bocas_state }
-        }
+        s:STATE_PANAMA = { save_scope_as = bocas_state }
     }
     
     
-    option = {
+    option = { #UCA/COS
         name = ca_central_america.6.a 
         default_option = yes
-        
+        scope:bocas_state = {
+			add_modifier = {
+				name = ca_direct_administration_modifier
+				months = 60
+			}
+		}
         create_country = {
             tag = PP1
             origin = ROOT 
@@ -1145,17 +1181,13 @@ ca_central_america.6 = {
             on_created = {
                 save_scope_as = scope_PP1
                 set_country_type = unrecognized 
-                #set_variable = ca_bocas_de_toro_country
-                
-                
-                scope:bocas_state = {
-                    set_owner_of_provinces = {
-                        country = c:PP1
-                        provinces = { x47C5F8 }
-                    }
-                }
-                
-                
+                set_variable = ca_bocas_de_toro_country                                
+                #scope:bocas_state = {
+                #    set_owner_of_provinces = {
+                #        country = c:PP1
+                #        provinces = { x47C5F8 }
+                #    }
+                #}                                
                 create_character = {
                     first_name = "John"
                     last_name = "Gallagher"
@@ -1169,14 +1201,16 @@ ca_central_america.6 = {
                 }
             }   
         }   
-        
-        
-        create_diplomatic_pact = {
+                
+        c:UCA = {
+		create_diplomatic_pact = {
             country = scope:scope_PP1
             type = puppet
         }
+		}
         
         set_variable = proclaim_pp1_uca
+		change_infamy = 5
         
         
         if = {
@@ -1189,180 +1223,162 @@ ca_central_america.6 = {
             }
         }
         
-        
-        if = {
-            limit = { exists = c:GBR }
-            change_relations = { country = c:GBR value = -30 }
-        }
+        change_relations = {
+			country = c:GBR
+			value = -30
+		}
+		change_relations = {
+			country = c:CLM
+			value = -30
+		}
         
         ai_chance = { base = 33 }
     }
     
     
-    option = {
-        name = ca_central_america.6.b 
-        
-        
+    option = { #GBR
+        name = ca_central_america.6.b                 
         scope:bocas_state = {
             set_owner_of_provinces = {
                 country = c:GBR
                 provinces = { x47C5F8 }
             }
-        }
-        
-        
+        }                
         if = {
             limit = { exists = c:GBR }
             change_relations = { country = c:GBR value = 50 } 
             c:GBR ?= { trigger_event = { id = ca_central_america.7 } }
         }
-        
+        je:je_historic_central_america_falls_apart = {
+			add_progress = { value = -20 name = frca_support_bar }			
+		}
+		trigger_event = { id = ca_central_america.18 days = 15 }        
         ai_chance = { base = 33 }
     }   
-    
-    
-    option = {
-        name = ca_central_america.6.c 
         
-        
+    option = { #CLM
+        name = ca_central_america.6.c                		
+        scope:bocas_state = {
+            set_owner_of_provinces = {
+                country = c:CLM
+                provinces = { x47C5F8 }
+            }
+        }
         if = {
             limit = { exists = c:CLM }
-            scope:bocas_state = {
-                set_owner_of_provinces = {
-                    country = c:CLM
-                    provinces = { x47C5F8 }
-                }
-            }
-            change_relations = { country = c:CLM value = 50 } # Se alegran
-        }
-        
+            change_relations = { country = c:CLM value = 50 }
+			c:CLM ?= { trigger_event = { id = ca_central_america.8 } }
+        }        
         add_modifier = { name = ca_humiliated_federation_modifier months = 12 }
-        
+        je:je_historic_central_america_falls_apart = {
+			add_progress = { value = -20 name = frca_support_bar }			
+		}
+		trigger_event = { id = ca_central_america.18 days = 15 }
         ai_chance = { base = 33 }
     }
 }
 
+## Costa Rica / UCA Abandon ambitions in Bocas del Toro (GBR Version) 
+ca_central_america.7 = {
+    type = country_event
+    placement = root
+    title = ca_central_america.7.t
+    desc = ca_central_america.7.d
+    flavor = ca_central_america.7.f
+    
 
-### Costa Rica / UCA Abandon ambitions in Bocas del Toro (GBR Version) 
-#ca_central_america.7 = {
-#    type = country_event
-#    placement = root
-#    title = ca_central_america.7.t
-#    desc = ca_central_america.7.d
-#    flavor = ca_central_america.7.f
-#    
-#
-#    event_image = { video = "europenorthamerica_colonial_outpost" }
-#    icon = "gfx/interface/icons/event_icons/event_map.dds"
-#    on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#    duration = 3
-#    
-#    trigger = {
-#        this = c:GBR
-#    }
-#
-#    immediate = {
-#        p:x47C5F8 = {
-#            state = { save_scope_as = bocas_state }
-#        }
-#    }
-#
-#
-#    option = {
-#        name = ca_central_america.7.a # Reclaim Bocas del Toro for a local company
-#        default_option = yes
-#        
-#        set_variable = creation_pp1_gbr
-#        
-#        create_country = {
-#            tag = PP1
-#            origin = this 
-#            province = p:x47C5F8
-#            on_created = {
-#                save_scope_as = scope_PP1
-#                
-#
-#                scope:bocas_state = {
-#                    set_owner_of_provinces = {
-#                        country = c:PP1
-#                        provinces = { x47C5F8 }
-#                    }
-#                }
-#                
-#
-#                set_ruling_interest_groups = { ig_armed_forces ig_industrialists }
-#                
-#                create_character = {
-#
-#                    culture = cu:british 
-#
-#                    is_general = yes
-#                    interest_group = ig_armed_forces
-#                    ideology = ideology:ideology_jingoist_leader
-#                    ruler = yes
-#                    ig_leader = yes            
-#                    traits = { explorer }
-#                }
-#            }   
-#        }
-#        
-#        
-#        create_diplomatic_pact = {
-#            country = scope:scope_PP1
-#            type = puppet
-#        }
-#        
-#        ai_chance = { base = 40 }
-#    }
-#    
-#    
-#    option = {
-#        name = ca_central_america.7.b 
-#        
-#        
-#        trigger = {
-#            exists = c:MKT
-#            c:MKT = {
-#                OR = {
-#                    is_subject_of = root
-#                    
-#                }
-#            }
-#        }
-#        
-#        
-#        scope:bocas_state = {
-#            set_owner_of_provinces = {
-#                country = c:MKT
-#                provinces = { x47C5F8 }
-#            }
-#        }
-#        
-#        change_relations = { country = c:MKT value = 50 }
-#        
-#        ai_chance = { base = 30 }
-#    }
-#
-#    
-#    option = {
-#        name = ca_central_america.7.c # Direct Crown Administration
-#        
-#        set_variable = rejects_pp1_gbr
-#        
-#        create_incident = { country = ROOT value = 3 }
-#                      
-#        
-#        
-#        scope:bocas_state = {
-#            add_modifier = {
-#                name = ca_british_outpost_modifier # Puedes crearlo con +10% producción de madera
-#                months = 120
-#            }
-#        }
-#        
-#        ai_chance = { base = 30 }
-#    }
-#}
+    event_image = { video = "europenorthamerica_colonial_outpost" }
+    icon = "gfx/interface/icons/event_icons/event_map.dds"
+    on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    duration = 3
+    
+    trigger = {
+        this = c:GBR
+    }
+
+    immediate = {
+        c:GBR = { save_scope_as = britain_scope }
+    }
+    option = {
+        name = ca_central_america.7.a # Reclaim Bocas del Toro for a local company
+        default_option = yes        
+        set_variable = creation_pp1_gbr
+        create_country = {
+            tag = PP1
+            origin = this 
+            province = p:x47C5F8
+            on_created = {
+                save_scope_as = scope_PP1               
+                #scope:bocas_state = {
+                #    set_owner_of_provinces = {
+                #        country = c:PP1
+                #        provinces = { x47C5F8 }
+                #    }
+                #}                
+                set_ruling_interest_groups = { ig_armed_forces ig_industrialists }                
+                create_character = {
+                    culture = cu:british 
+                    is_general = yes
+                    interest_group = ig_armed_forces
+                    ideology = ideology:ideology_jingoist_leader
+                    ruler = yes
+                    ig_leader = yes            
+                    traits = { explorer }
+                }
+            }   
+        }		
+		c:GBR = {
+			create_diplomatic_pact = {
+            country = scope:scope_PP1
+            type = puppet
+            }		
+		}
+		change_relations = {
+			country = scope:britain_scope
+			value = 50
+		}
+		je:je_historic_central_america_falls_apart = {
+			add_progress = { value = -20 name = frca_support_bar }
+		}                
+        ai_chance = { base = 40 }
+    }
+    
+    
+    option = {
+        name = ca_central_america.7.b                 
+        trigger = {
+            exists = c:MKT
+            c:MKT = {
+                OR = {
+                    is_subject_of = root
+                    
+                }
+            }
+        }                
+        scope:bocas_state = {
+            set_owner_of_provinces = {
+                country = c:MKT
+                provinces = { x47C5F8 }
+            }
+        }        
+        change_relations = { country = c:MKT value = 50 }        
+        ai_chance = { base = 30 }
+    }
+
+    
+    option = {
+        name = ca_central_america.7.c # Direct Crown Administration        
+        set_variable = rejects_pp1_gbr        
+        create_incident = { country = ROOT value = 3 }                                      
+        scope:bocas_state = {
+            add_modifier = {
+                name = ca_british_outpost_modifier # Puedes crearlo con +10% producción de madera
+                months = 120
+            }
+        }        
+        ai_chance = { base = 30 }
+    }
+}
 
 ## Costa Rica / UCA Abandon ambitions in Bocas del Toro (CLM Version) 
 ca_central_america.8 = { 
@@ -1381,6 +1397,7 @@ ca_central_america.8 = {
     
     
     trigger = {
+	
         this = c:CLM
     }
 
@@ -1405,12 +1422,12 @@ ca_central_america.8 = {
                 save_scope_as = scope_PP1
                 
                 
-                scope:bocas_state = {
-                    set_owner_of_provinces = {
-                        country = c:PP1
-                        provinces = { x47C5F8 }
-                    }
-                }
+                #scope:bocas_state = {
+                #    set_owner_of_provinces = {
+                #        country = c:PP1
+                #        provinces = { x47C5F8 }
+                #    }
+                #}
                 
                 set_ruling_interest_groups = { ig_armed_forces ig_landowners }
                 
@@ -1464,27 +1481,27 @@ ca_central_america.8 = {
     }
     
     
-    option = {
-        name = ca_central_america.8.c # Do Nothing
-        
-        set_variable = ignores_bocas_clm
-        
-        
-        scope:bocas_state = {
-                                
-                                                     
-            add_radicals = {
-                value = 0.10
-                culture = cu:central_american
-            }
-            add_devastation = 10
-        }
-        
-        ai_chance = { base = 10 }
-    }
+    #option = {
+    #    name = ca_central_america.8.c # Do Nothing
+    #    
+    #    set_variable = ignores_bocas_clm
+    #    
+    #    
+    #    scope:bocas_state = {
+    #                            
+    #                                                 
+    #        add_radicals = {
+    #            value = 0.10
+    #            culture = cu:central_american
+    #        }
+    #        add_devastation = 10
+    #    }
+    #    
+    #    ai_chance = { base = 10 }
+    #}
 }
 
-## Costa Rica / UCA - CLM military intervention (Bocas del Toro)
+## Costa Rica / UCA - CLM military intervention (Bocas del Toro)/
 ca_central_america.9 = { 
     type = country_event
     placement = root
@@ -1501,35 +1518,57 @@ ca_central_america.9 = {
     
     
     trigger = { 
-        this = c:CLM
-        exists = c:PP1
-        c:PP1 = { is_subject = yes } 
+		this = c:UCA
+		exists = c:CLM
+        #c:PP1 = { is_subject = yes } 
     }
 
     immediate = {
-        
+       	c:UCA = { save_scope_as = uca_scope }
+		c:CLM = { save_scope_as = colombia_scope }
+		c:COS = { save_scope_as = costa_rica_scope }
+	} 
         c:PP1 = {
             save_scope_as = bocas_puppet
             overlord = {
                 save_scope_as = puppet_master
             }
         }
-    }
+    
 
     
     option = {
         name = ca_central_america.9.a 
-        default_option = yes
-        
-        set_variable = intervene_pp1_clm
-        
-       
-        annex = scope:bocas_puppet
-        
-       
+        default_option = yes        
+        set_variable = intervene_pp1_clm              
+        annex = scope:bocas_puppet               
         create_incident = { country = ROOT value = 5 }
-        
-        
+		if = {
+            limit = { p:x47C5F8 = { owner = c:UCA } }
+		
+		
+		c:CLM = {
+			create_diplomatic_play = {
+			name = ca_reclaim_bocas
+			type = dp_annex_war
+			target_country = scope:uca_scope
+		}
+		}
+		}
+		if = {
+            limit = { p:x47C5F8 = { owner = c:COS } }
+		
+		
+		c:CLM = {
+			create_diplomatic_play = {
+			name = ca_reclaim_bocas
+			type = dp_annex_war
+			target_country = scope:costa_rica_scope
+		}
+		}
+		}	
+		
+		
         scope:puppet_master = {
             create_incident = {
                 country = root 
@@ -1548,7 +1587,15 @@ ca_central_america.9 = {
     option = {
         name = ca_central_america.9.b 
         set_variable = rejects_pp1_clm
-        
+        je:je_historic_central_america_falls_apart = {
+		add_progress = { value = -25 name = frca_support_bar }
+		}
+		scope:costa_rica_scope = {
+			add_modifier = {
+				name = ca_epifania_tragica
+				months = 60
+			}
+		}
         
         add_modifier = {
             name = ca_humiliated_federation_modifier 
@@ -1581,8 +1628,10 @@ ca_central_america.10 = {
     duration = 3
     
     trigger = {
-        exists = c:PP1
-        c:PP1 = { is_subject_of = root }
+		this = c:UCA
+		has_journal_entry = je_historic_central_america_falls_apart
+		exists = c:PP1
+        c:PP1 = { is_subject_of = c:UCA }
         NOT = { has_variable = bocas_status_resolved }
     }
     
@@ -1743,16 +1792,7 @@ ca_central_america.11 = {
                 origin = c:UCA 
                 province = p:x47C5F8
                 on_created = {
-                    save_scope_as = scope_PP1
-                    
-                    
-                    s:STATE_PANAMA = {
-                        set_owner_of_provinces = {
-                            country = c:PP1
-                            provinces = { x47C5F8 }
-                        }
-                    }
-                    
+                    save_scope_as = scope_PP1                   
                     set_ruling_interest_groups = { ig_armed_forces }
                 }
             }
@@ -1787,18 +1827,51 @@ ca_central_america.12 = {
     duration = 3
     
     trigger = {
-        this = c:CLM
+	   OR = {
+        this = c:UCA
+		this = c:COS
+		}
         exists = c:PP1
+		exists = c:CLM
         c:PP1 = { is_subject = yes }
     }
     
     immediate = {
+	    c:CLM = { save_scope_as = colombia_scope }
+		c:COS = { save_scope_as = costa_rica_scope }
         c:PP1 = {
             save_scope_as = bocas_puppet
             overlord = {
                 save_scope_as = puppet_master
             }
         }
+		if = {
+            limit = { exists = c:PP1 }
+			c:CLM = { annex = c:PP1}
+		}
+		if = {
+            limit = { exists = c:PP1
+              OR = {
+			    c:PP1 = { is_subject_of = c:UCA }
+			    c:PP1 = { is_subject_of = c:COS }
+			  }
+			}
+			c:CLM = { annex = c:PP1}
+		}
+		if = {
+            limit = { p:x47C5F8 = { owner = c:COS } }
+			    set_owner_of_provinces = {
+                country = c:CLM
+                provinces = { x47C5F8 }
+            }
+		}
+		if = {
+            limit = { p:x47C5F8 = { owner = c:UCA } }
+			    set_owner_of_provinces = {
+                country = c:CLM
+                provinces = { x47C5F8 }
+            }
+		}			
     }
     
     option = {
@@ -1807,7 +1880,11 @@ ca_central_america.12 = {
         
         annex = scope:bocas_puppet
         create_incident = { country = ROOT value = 5 }
-        
+        create_diplomatic_play = {
+			name = ca_reclaim_bocas
+			type = dp_annex_war
+			target_country = scope:colombia_scope
+		}
         scope:puppet_master = {
             change_relations = { 
                 country = root 
@@ -1848,7 +1925,7 @@ ca_central_america.12 = {
                 custom_tooltip = { 
                     text = frca_support_12b 
                     je:je_historic_central_america_falls_apart = {
-                        add_progress = { value = 10 name = frca_support_bar } 
+                        add_progress = { value = -120 name = frca_support_bar } 
                     }
                 }
             }
@@ -2314,23 +2391,35 @@ ca_central_america.14 = {
         }
     }
 
-    option = { #Adopt it
+    option = { 
         name = ca_central_america.14.a
         default_option = yes
-        add_modifier = {
-            name = uca_new_penal_code
-            years = 10
-            is_decaying = yes
-        }
-        set_variable = { name = uca_livingston_penal_code }
+		add_modifier = {
+			name = uca_new_penal_code
+			months = 120
+		}
+		set_global_variable = uca_livingston_penal_code
+		ig:ig_landowners = {
+			add_modifier = { name = ca_ig_approval_down_massive months = 60 }
+			add_radicals = { value = 0.2 }
+		}
+		ig:ig_devout = {
+			add_modifier = { name = ca_ig_approval_down_massive months = 60 }
+			add_radicals = { value = 0.2 }
+		}
+	}
+	
+	option = {
+		name = ca_central_america.14.b
+		set_global_variable = uca_livingston_penal_code
+		add_modifier = {
+			name = ca_reforms_stalled
+			months = 24
+		}
+	
         ai_chance = { base = 50 }
     }
 
-    option = { #Leave it be
-        name = ca_central_america.14.b
-        set_variable = { name = uca_livingston_penal_code }
-        ai_chance = { base = 50 }
-    }
 }
 
 ## Cholera Outbreak in Guatemala
@@ -2347,14 +2436,15 @@ ca_central_america.15 = {
 
      trigger = {
         game_date >= 1837.2.2
-        NOT = { has_variable = uca_cholera_pandemic }
-        s:STATE_GUATEMALA = {
-            NOT = { has_variable = ca_cholera_affect }
-        }
+		NOT = { has_global_variable = uca_cholera_pandemic }
+		s:STATE_GUATEMALA = {
+			NOT = { has_variable = ca_cholera_affect }
+		}
     }
     
     immediate = {
-        set_variable = uca_cholera_pandemic
+        set_global_variable = uca_cholera_pandemic
+
         if = {
             limit = { 
 			state_region = s:STATE_GUATEMALA 
@@ -2383,13 +2473,14 @@ ca_central_america.15 = {
     
     option = { # Let it ravage the country
         name = ca_central_america.15.b
-        scope:cholera_affect_state = {
-            set_variable = ca_cholera_affect
-            add_modifier = {
-                name = uca_cholera
-                days = 365
-            }
-        }
+		scope:cholera_affect_state = {
+			set_variable = ca_cholera_affect
+			add_modifier = { name = uca_cholera days = 365 }
+			every_state_pop = {
+				limit = { is_pop_type = peasants }
+				add_radicals = { value = 0.15 }
+			}
+		}
         ai_chance = { base = 90 }
     }
 }
@@ -2408,20 +2499,20 @@ ca_central_america.16 = {
 
     trigger = {
         game_date >= 1837.2.2
-        #NOT = { has_variable = uca_cholera_pandemic }
-        any_scope_state = {
-            state_region = { is_homeland = cu:central_american }
-            NOT = { has_variable = ca_cholera_affect }
-        }
+		any_scope_state = {
+			state_region = { is_homeland = cu:central_american }
+			NOT = { has_variable = ca_cholera_affect }
+		}
+	}
     }
     
     immediate = {
-        set_variable = uca_cholera_pandemic
-        random_scope_state = {
-            limit = { NOT = { has_variable = ca_cholera_affect } }
-            save_scope_as = cholera_affect_state
-        }
-    }
+		set_global_variable = uca_cholera_pandemic
+		random_scope_state = {
+			limit = { NOT = { has_variable = ca_cholera_affect } }
+			save_scope_as = cholera_affect_state
+		}
+	}
     
     option = { #Quarantine the state
         name = ca_central_america.16.a
@@ -2443,12 +2534,13 @@ ca_central_america.16 = {
     option = { # Let it ravage the country
         name = ca_central_america.16.b
         scope:cholera_affect_state = {
-            set_variable = ca_cholera_affect
-            add_modifier = {
-                name = uca_cholera
-                days = 365
-            }
-        }
+			set_variable = ca_cholera_affect
+			add_modifier = { name = uca_cholera days = 365 }
+			every_state_pop = {
+				limit = { is_pop_type = peasants }
+				add_radicals = { value = 0.15 }
+			}
+		}
         ai_chance = { base = 90 }
     }
 }
@@ -2467,75 +2559,62 @@ ca_central_america.17 = {
     cooldown = { months = 4 }
 
     trigger = {
-        has_variable = uca_cholera_pandemic
-        any_scope_state = {
-            NOT = { has_modifier = uca_quarantine }           
+		has_global_variable = uca_cholera_pandemic
+		any_scope_state = {
+			NOT = { has_modifier = uca_quarantine }
 			has_modifier = uca_cholera
-            any_neighbouring_state = {
-                owner = ROOT
-                NOT = { has_variable = cholera_affect }
-            }
-        }
-    }
+			any_neighbouring_state = {
+				owner = root
+				NOT = { has_variable = ca_cholera_affect }
+			}
+		}
+	}
     
     immediate = {
-        random_scope_state = {
-            limit = {
-                has_variable = cholera_affect
-                any_neighbouring_state = {
-                    owner = ROOT
-                    NOT = { has_variable = cholera_affect }
-                }
-            }
-            save_scope_as = cholera_state
-            random_neighbouring_state = {
-                limit = {
-                    owner = ROOT
-                    NOT = { has_variable = cholera_affect }
-                }
-                save_scope_as = cholera_state_spread_to
-                set_variable = { name = cholera_affect }
-            }
-        }
-    }
+		random_scope_state = {
+			limit = {
+				has_modifier = uca_cholera
+				any_neighbouring_state = {
+					owner = root
+					NOT = { has_variable = ca_cholera_affect }
+				}
+			}
+			save_scope_as = cholera_state
+			random_neighbouring_state = {
+				limit = {
+					owner = root
+					NOT = { has_variable = ca_cholera_affect }
+				}
+				save_scope_as = cholera_state_spread_to
+				set_variable = ca_cholera_affect
+			}
+		}
+	}
     
-    option = { #Let it spread
-        name = ca_central_america.17.a
-        default_option = yes 
-        scope:cholera_state_spread_to = {
-            add_modifier = {
-                name = uca_cholera 
-                days = 365
-            }
-        }
-        ai_chance = { base = 50 }
-    }
     
-    option = { #Contain it
-        name = ca_central_america.17.b
-        default_option = yes 
-        scope:cholera_state_spread_to = {
-            add_modifier = {
-                name = uca_cholera 
-                days = 365
-            }
-            add_modifier = {
-                name = uca_quarantine
-                days = 370
-            }
-        }
-        every_state = {
-            limit = {
-                has_modifier = uca_cholera 
-                NOT = { has_modifier = uca_quarantine } 
-            }
-            add_modifier = {
-                name = uca_quarantine
-                days = 370
-            }
-        }
-        ai_chance = { base = 50 }
-    }
+    option = {
+		name = ca_central_america.17.a
+		scope:cholera_state_spread_to = {
+			add_modifier = { name = uca_cholera days = 365 }
+		}
+		ai_chance = { base = 50 }
+	}
+	
+	option = {
+		name = ca_central_america.17.b
+		scope:cholera_state_spread_to = {
+			add_modifier = { name = uca_cholera days = 365 }
+			add_modifier = { name = uca_quarantine days = 370 }
+		}
+		every_state = {
+			limit = {
+				has_modifier = uca_cholera
+				NOT = { has_modifier = uca_quarantine }
+			}
+			add_modifier = { name = uca_quarantine days = 370 }
+		}
+		ai_chance = { base = 50 }
+	}	
 }
 
 
@@ -2569,8 +2648,12 @@ ca_central_america.18 = {
     }
     
     immediate = {
-        set_variable = { name = frca_recent_separatism_event_var days = 40 }
-        
+
+        set_variable = {
+			name = frca_recent_separatism_event_var
+			months = 3
+		}
+		s:STATE_COSTA_RICA = { save_scope_as = costa_rica_state }
         random_scope_state = {
             limit = {
                 is_capital = no
@@ -2603,12 +2686,13 @@ ca_central_america.18 = {
 
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
-            capital = {
-                add_devastation = 15
-                add_loyalists_in_state = { value = 0.25 }
-            }
+            capital = { add_devastation = 15 }
+			every_state_pop = { add_loyalists = { value = 0.1 } }
         }
-        trigger_event = { id = ca_central_america.3 months = 6 }
+        trigger_event = { id = ca_central_america.3 days = 30 }
+		je:je_historic_central_america_falls_apart = {
+			add_progress = { value = -15 name = frca_support_bar }
+		}      
     }
 
     option = {
@@ -2632,6 +2716,9 @@ ca_central_america.18 = {
             }
         }
         trigger_event = { id = ca_central_america.66 months = 1 }
+		je:je_historic_central_america_falls_apart = {
+			add_progress = { value = -15 name = frca_support_bar }
+		}  
     }
 
     option = { 
@@ -2713,6 +2800,9 @@ ca_central_america.19 = {
             }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
+		je:je_historic_central_america_falls_apart = {
+			add_progress = { value = -15 name = frca_support_bar }
+		}  		
     }
 
     option = {
@@ -2728,11 +2818,12 @@ ca_central_america.19 = {
    
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
-            capital = {
-                add_devastation = 25
-                add_loyalists_in_state = { value = 0.5 }
-            }
+            capital = { add_devastation = 15 }
+			every_state_pop = { add_loyalists = { value = 0.1 } }
         }
+		je:je_historic_central_america_falls_apart = {
+			add_progress = { value = -15 name = frca_support_bar }
+		}  		
     }
 
     option = { 
@@ -2808,10 +2899,8 @@ ca_central_america.20 = {
 
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
-            capital = {
-                add_devastation = 15
-                add_loyalists_in_state = { value = 0.25 }
-            }
+            capital = { add_devastation = 15 }
+			every_state_pop = { add_loyalists = { value = 0.1 } }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
     }
@@ -2909,10 +2998,8 @@ ca_central_america.21 = {
 
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
-            capital = {
-                add_devastation = 15
-                add_loyalists_in_state = { value = 0.25 }
-            }
+            capital = { add_devastation = 15 }
+			every_state_pop = { add_loyalists = { value = 0.1 } }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
     }
@@ -3012,10 +3099,8 @@ ca_central_america.22 = {
 
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
-            capital = {
-                add_devastation = 15
-                add_loyalists_in_state = { value = 0.25 }
-            }
+            capital = { add_devastation = 15 }
+			every_state_pop = { add_loyalists = { value = 0.1 } }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
     }
@@ -3118,10 +3203,8 @@ ca_central_america.23 = {
 
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
-            capital = {
-                add_devastation = 15
-                add_loyalists_in_state = { value = 0.25 }
-            }
+            capital = { add_devastation = 15 }
+			every_state_pop = { add_loyalists = { value = 0.1 } }
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
     }
@@ -4380,7 +4463,7 @@ ca_central_america.48 = {
         this = c:UCA
         is_at_war = no
         is_active_in_diplomatic_play = no
-        game_date >= 1838.11.5
+        game_date >= 1839.11.5
         OR = {
             NOT = { has_variable = hon_support_var }
             exists = c:HON
@@ -7807,4 +7890,240 @@ ca_central_america.119 = {
             }        
         }
     }
+}
+ca_central_america.120 = { #El Grito del Sexto Estado (La Crisis de Los Altos)
+	type = country_event
+	placement = root
+	title = ca_central_america.120.t
+	desc = ca_central_america.120.d
+	flavor = ca_central_america.120.f
+	
+	trigger = {
+		this = c:UCA
+		has_journal_entry = je_historic_central_america_falls_apart
+		game_date < 1838.1.1
+		OR = {
+			s:STATE_GUATEMALA = {
+				turmoil > 0.2
+			}
+			AND = {
+				ig:ig_landowners = {
+					is_powerful = yes
+				}
+				ig:ig_intelligentsia = {
+					is_marginal = yes
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		s:STATE_GUATEMALA = {
+			save_scope_as = guatemala_state
+		}
+	}
+	
+	option = {
+		name = ca_central_america.120.a
+		je:je_historic_central_america_falls_apart = {
+			change_variable = {
+				name = frca_support_bar
+				subtract = 10
+			}
+		}
+		create_country = {
+			tag = ALT
+			state = scope:guatemala_state
+		}
+		create_diplomatic_pact = {
+			country = c:ALT
+			type = ca_dependency
+		}
+		scope:guatemala_state = {
+			add_modifier = {
+				name = ca_infrastructure_boom_modifier
+				months = 36
+			}
+		}
+		c:GUA = {
+			ig:ig_landowners = {
+				add_radicals = { value = 0.1 }
+			}
+		}
+		trigger_event = {
+			id = ca_central_america.2
+			days = 15
+		}
+	}
+	
+	option = {
+		name = ca_central_america.120.b
+		trigger = {
+			OR = {
+				has_law_or_variant = law_type:law_censorship
+				has_law_or_variant = law_type:law_autocracy
+			}
+		}
+		add_modifier = {
+			name = ca_authority_boost
+			months = 24
+		}
+		ig:ig_intelligentsia = {
+			add_radicals = { value = 0.15 }
+		}
+		ig:ig_petty_bourgeoisie = {
+			add_radicals = { value = 0.15 }
+		}
+		change_variable = {
+			name = ca_hidden_secession_var
+			add = 1
+		}
+	}
+	
+	option = {
+		name = ca_central_america.120.c
+		scope:guatemala_state = {
+			add_modifier = {
+				name = ca_massive_agitation_modifier
+				months = 12
+			}
+		}
+		trigger_event = {
+			id = ca_central_america.3
+			days = 5
+		}
+	}
+}
+
+ca_central_america.121 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.121.t
+	desc = ca_central_america.121.d
+	flavor = ca_central_america.121.f
+	
+	trigger = {
+		this = c:UCA
+		owns_entire_state_region = s:STATE_GUATEMALA
+	}
+	
+	option = {
+		name = ca_central_america.121.a
+		trigger = {
+			ig:ig_intelligentsia = {
+				is_marginal = no
+			}
+		}
+		change_variable = {
+			name = je_gua_support_var
+			subtract = 20
+		}
+		c:GUA = {
+			ig:ig_landowners = {
+				add_modifier = {
+					name = ca_ig_approval_down_massive
+					months = 36
+				}
+			}
+		}
+		trigger_event = {
+			id = ca_central_america.3
+			days = 2
+		}
+	}
+	
+	option = {
+		name = ca_central_america.121.b
+		trigger = {
+			OR = {
+				ig:ig_landowners = { is_in_government = yes }
+				ig:ig_landowners = { is_powerful = yes }
+			}
+		}
+		add_modifier = {
+			name = ca_fiscal_support_kept
+			months = 24
+		}
+		trigger_event = {
+			id = ca_central_america.4
+			days = 10
+		}
+	}
+	
+	option = {
+		name = ca_central_america.121.c
+		add_modifier = {
+			name = ca_paralisis_federal
+			months = 12
+		}
+		je:je_historic_central_america_falls_apart = {
+			change_variable = {
+				name = frca_support_bar
+				add = 5
+			}
+		}
+	}
+}
+
+ca_central_america.122 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.122.t
+	desc = ca_central_america.122.d
+	flavor = ca_central_america.122.f
+	
+	trigger = {
+		this = c:UCA
+		exists = c:ALT
+	}
+	
+	immediate = {
+		c:ALT = {
+			save_scope_as = secession_country
+		}
+	}
+	
+	option = {
+		name = ca_central_america.122.a
+		change_relations = {
+			country = scope:secession_country
+			value = 20
+		}
+		add_modifier = {
+			name = ca_federacion_humillada
+			months = 36
+		}
+		je:je_historic_central_america_falls_apart = {
+			change_variable = {
+				name = frca_support_bar
+				subtract = 15
+			}
+		}
+		scope:secession_country = {
+			every_owned_state = {
+				add_devastation = 15
+			}
+			every_state_pop = {
+				add_loyalists = { value = 0.1 }
+			}
+		}
+	}
+	
+	option = {
+		name = ca_central_america.122.b
+		change_relations = {
+			country = scope:secession_country
+			value = -50
+		}
+		create_diplomatic_play = {
+			name = ca_secession_war
+			type = dp_annex_war
+			target_country = scope:secession_country
+		}
+		scope:secession_country = {
+			every_owned_state = {
+				add_devastation = 25
+			}
+		}
+	}
 }

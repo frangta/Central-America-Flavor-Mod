@@ -8,12 +8,12 @@
 #scope_PN5
 #scope_PN6
 ## introduccion de NICARAGUA
-ca_nicaragua_events.01 = {
+ca_nicaragua_events.1 = {
 	type = country_event
-	placement = s:STATE_NICARAGUA
-	title = ca_nicaragua_events.01.t
-	desc = ca_nicaragua_events.01.d
-	flavor = ca_nicaragua_events.01.f
+	placement = s:STATE_NICARAGUA.region_state:UCA
+	title = ca_nicaragua_events.1.t
+	desc = ca_nicaragua_events.1.d
+	flavor = ca_nicaragua_events.1.f
 	duration = 3
 	event_image = {
 		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
@@ -24,11 +24,11 @@ ca_nicaragua_events.01 = {
 	trigger = {
         exists = c:UCA
         this = c:UCA 
-        game_date <= 1836.1.15
+        game_date <= 1836.1.1
 	}
 	
 	immediate = {
-        s:STATE_NICARAGUA = {
+        s:STATE_NICARAGUA.region_state:UCA = {
         add_state_trait = state_trait_mining_nic
 		add_modifier = { name = ca_uca_leones_vs_granadinos }
         add_modifier = { name = separatism_stronghold }
@@ -38,12 +38,12 @@ ca_nicaragua_events.01 = {
 	}
 
 	option = {
-		name = ca_nicaragua_events.01.a
+		name = ca_nicaragua_events.1.a
 		default_option = yes
 
 	}
 	option = {
-		name = ca_nicaragua_events.02.a
+		name = ca_nicaragua_events.2.b
 		trigger = {
 			c:UCA ?= {
 			has_variable = ca_state_selection_to_playing
