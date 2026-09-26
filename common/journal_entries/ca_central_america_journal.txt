@@ -322,7 +322,7 @@
 je_ca_coffee_boom = {
 	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
 	group = je_group_internal_affairs
-
+    should_be_pinned_by_default_involved = yes
 	# Solo se muestra si tienes plantaciones y la oligarquía no ha sido destruida
 	is_shown_when_inactive = {
 		NOT = { has_variable = ca_coffee_boom_consolidated }
@@ -406,7 +406,7 @@ je_ca_coffee_boom = {
 je_ca_central_american_fragile_unity = { #events 1836 - 1842
     icon = "gfx/interface/icons/event_icons/waving_flag.dds"
     group = je_group_historical_content
-
+    should_be_pinned_by_default_involved = yes
     # Enlace a los botones interactivos
     scripted_button = ca_button_centralist_discipline
     scripted_button = ca_button_federalist_support
@@ -579,18 +579,40 @@ je_ca_central_american_fragile_unity = { #events 1836 - 1842
 je_ca_state_role_in_federation = {
     icon = "gfx/interface/icons/event_icons/event_protest.dds"
     group = je_group_historical_content    
-     
+    should_be_pinned_by_default_involved = yes 
      scripted_button = ca_button_support_centralistas
      scripted_button = ca_button_support_confederation
      scripted_button = ca_button_support_federation
      scripted_button = ca_button_sabotage_federation
 
-    
+    is_shown_in_lobby = {
+		OR = {
+		c:CIP ?= this
+		c:COS ?= this
+		c:NIC ?= this
+		c:HON ?= this
+		c:ELS ?= this
+		c:GUA ?= this
+		}
+	}
 	scripted_progress_bar = ca_core_progress_bar
 	is_shown_when_inactive = {
         exists = c:UCA
         is_subject_of = c:UCA
     }
+	possible = {
+	    exists = c:UCA
+		c:UCA = { has_variable = is_frca_var }
+		only_latin_centralamericans_cultures = yes
+        OR = {
+		c:CIP ?= this
+		c:COS ?= this
+		c:NIC ?= this
+		c:HON ?= this
+		c:ELS ?= this
+		c:GUA ?= this
+		}	
+	}
 	complete = {
 	scope:journal_entry = { "scripted_bar_progress(ca_core_progress_bar)" = 200 }
 	
@@ -612,12 +634,12 @@ je_ca_state_role_in_federation = {
     #    c:UCA ?= this
     #}
 
-    # --- NUEVO BLOQUE DE WIDGET (INTERFAZ) ---
-    #widget = {
-    #    gui = "gui/ca_subject_role_widgets.gui"
-    #    name = "ca_subject_role_widget"
-    #    container = "custom_widget_container_2"
-    #}
+     #--- NUEVO BLOQUE DE WIDGET (INTERFAZ) ---
+    widget = {
+        gui = "gui/ca_subject_role_widgets.gui"
+        name = "ca_subject_role_widget"
+        container = "custom_widget_container_2"
+    }
 
 
     #current_value = {
@@ -663,7 +685,7 @@ je_ca_state_role_in_federation = {
 je_ca_federalists_vs_separatists_situation = {
     icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
     group = je_group_historical_content    
-     
+    should_be_pinned_by_default_involved = yes 
 
     #is_shown_when_inactive = {
     #    is_ca_culture_country = yes
@@ -984,7 +1006,7 @@ je_ca_federalists_vs_separatists_situation = {
 je_ca_agro_export_boom = {
     icon = "gfx/interface/icons/goods_icons/coffee.dds"
     group = je_group_internal_affairs #je_group_economic_development
-     
+     should_be_pinned_by_default_involved = yes
 
     possible = {
         OR = {
@@ -1038,7 +1060,7 @@ je_ca_agro_export_boom = {
 je_ca_military_reform = {
     icon = "gfx/interface/icons/law_icons/professional_army.dds"
     group = je_group_internal_affairs #je_group_military
-    
+    should_be_pinned_by_default_involved = yes
     possible = {
         OR = {
             country_has_primary_culture = cu:central_american
@@ -1080,6 +1102,7 @@ je_ca_military_reform = {
                 OR = {
                     has_ideology = ideology:ideology_ca_caudillismo_jingoist
                     has_ideology = ideology:ideology_ca_autocratic_autonomist
+					has_ideology = ideology:ideology_caudillismo
                 }
             }
         }
@@ -1138,7 +1161,7 @@ je_ca_military_reform = {
 je_ca_enlightenment = {
     icon = "gfx/interface/icons/jomini/literacy_icon.dds"
     group = je_group_internal_affairs
-    
+    should_be_pinned_by_default_involved = yes
     possible = {
         OR = {
             country_has_primary_culture = cu:central_american

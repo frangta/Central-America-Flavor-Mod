@@ -773,47 +773,72 @@ fund_survey_expedition = {
     name = "FUND_SURVEY_EXPEDITION"
     desc = "FUND_SURVEY_EXPEDITION_DESC"
     
+    visible = {
+        has_journal_entry = je_ca_national_geological_survey
+    }
+
     possible = {
         has_variable = ca_survey_progress
         var:ca_survey_progress < 100
         gold_reserves >= 2000
     }
-    
+
     effect = {
         add_treasury = -2000
-        
-        # Sube la barra +10 puntos
         change_variable = {
             name = ca_survey_progress
             add = 10
         }
     }
-    
-    ai_chance = { value = 10 }
+
+    ai_chance = {
+        base = 10
+        modifier = {
+            trigger = { gold_reserves >= 10000 }
+            add = 40
+        }
+    }
 }
 
 hire_foreign_geologists = {
     name = "HIRE_FOREIGN_GEOLOGISTS"
     desc = "HIRE_FOREIGN_GEOLOGISTS_DESC"
-    
+
+    visible = {
+        has_journal_entry = je_ca_national_geological_survey
+    }
+
     possible = {
         has_variable = ca_survey_progress
         var:ca_survey_progress < 100
         gold_reserves >= 5000
     }
-    
+
     effect = {
         add_treasury = -5000
-        add_radicals = { value = 1000 } # Los locales se enojan un poco
         
-        # Sube la barra +25 puntos
+        # Genera radicales mediante un pop scope
+        every_state_pop = {
+            limit = {
+                is_pop_type = laborers
+            }
+            add_radicals = { value = 0.05 } # Los locales se enojan
+        }
+        
         change_variable = {
             name = ca_survey_progress
             add = 25
         }
     }
-    
-    ai_chance = { value = 5 }
+
+    ai_chance = {
+        base = 5
+        # La IA rara vez tomará esta decisión a menos que tenga muchísimo oro
+        modifier = {
+            trigger = { gold_reserves >= 30000 }
+            add = 20
+        }
+    }
 }
 ca_request_intervention_button = {
     name = "ca_request_intervention_button_name"
@@ -871,5 +896,141 @@ ca_request_intervention_button = {
             limit = { c:ALT = { has_variable = ca_intervention_request_active } }
             trigger_event = { id = ca_central_america.33 }
         }
+    }
+}
+ca_button_sabotage_federation = {
+    name = "ca_button_sabotage_federation"
+    desc = "ca_button_sabotage_federation_desc"
+
+    visible = {
+        has_journal_entry = je_ca_state_role_in_federation
+    }
+
+    possible = {
+        var:ca_self_determination >= 50
+        NOT = { has_variable = sabotage_cooldown }
+    }
+
+    effect = {
+        set_variable = { name = sabotage_cooldown days = 180 }
+        set_variable = voting_ca_self_determination
+        change_variable = { name = ca_separatist_influence add = 15 }
+        
+        overlord = {
+            change_variable = { name = frca_support_bar add = -10 }
+        }
+        trigger_event = { id = ca_separatist.1 popup = yes }
+    }
+
+    ai_chance = {
+        value = 10
+        if = {
+            limit = { has_variable = ca_carrilo_decret }
+            add = 80
+        }
+    }
+}
+
+ca_button_support_federation = {
+    name = "ca_button_support_federation"
+    desc = "ca_button_support_federation_desc"
+
+    visible = {
+        has_journal_entry = je_ca_state_role_in_federation
+    }
+
+    possible = {
+        NOT = { has_variable = support_cooldown }
+        var:civil_peace_bar < 50
+    }
+
+    effect = {
+        set_variable = { name = support_cooldown days = 365 }
+        change_variable = { name = civil_peace_bar add = 20 }
+        change_variable = { name = ca_federal_influence add = 15 }
+        
+        overlord = {
+            change_variable = { name = frca_support_bar add = -5 }
+        }
+        add_modifier = {
+            name = ca_funding_separatists_modifier
+            days = 365
+        }
+    }
+
+    ai_chance = {
+        value = 50
+        if = {
+            limit = { var:civil_peace_bar < 20 }
+            add = 50
+        }
+    }
+}
+
+ca_button_support_centralistas = {
+    name = "ca_button_support_centralistas"
+    desc = "ca_button_support_centralistas_desc"
+
+    visible = {
+        has_journal_entry = je_ca_state_role_in_federation
+    }
+
+    possible = {
+        ig:ig_armed_forces ?= { is_powerful = yes }
+        authority >= 50
+        NOT = { has_variable = pretorian_cooldown }
+    }
+
+    effect = {
+        set_variable = { name = pretorian_cooldown days = 730 }
+        change_variable = { name = ca_centralist_influence add = 20 }
+        
+        add_radicals = {
+            value = large_radicals
+            strata = lower
+        }
+        add_modifier = {
+            name = age_of_ca_caudillos_modifier
+            days = 730
+        }
+    }
+
+    ai_chance = {
+        value = 5
+        if = {
+            limit = { 
+                overlord.has_law_or_variant = law_type:law_state_religion
+            }
+            add = 40
+        }
+    }
+}
+
+ca_button_support_confederation = {
+    name = "ca_button_support_confederation"
+    desc = "ca_button_support_confederation_desc"
+
+    visible = {
+        has_journal_entry = je_ca_state_role_in_federation
+    }
+
+    possible = {
+        has_technology_researched = nationalism
+        NOT = { has_variable = confederation_cooldown }
+    }
+
+    effect = {
+        set_variable = { name = confederation_cooldown days = 365 }
+        change_variable = { name = ca_separatist_influence add = 10 }
+        change_variable = { name = ca_federal_influence add = 5 }
+
+        add_loyalists = {
+            value = medium_radicals
+            strata = middle
+        }
+    }
+
+    ai_chance = {
+        value = 25
     }
 }

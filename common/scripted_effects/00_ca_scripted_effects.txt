@@ -156,7 +156,135 @@ create_character = {
 	ideology = ideology_moderate
 }
 }
+ca_random_creation_of_caudillos = {
+random_list = {
+11.11 = {
+create_character = {
+	
+	
+	role = character_role_agitator
+	
+	interest_group = ig_landowners
+	ideology = ideology_central_america_caudillo
+	on_created = {
+	add_character_role = general
+	
+	}
+}
 
+}
+
+11.11 = {
+
+create_character = {
+	
+	
+	role = character_role_agitator
+		
+	interest_group = ig_intelligentsia
+	ideology = ideology_central_america_caudillo
+		on_created = {
+	add_character_role = general
+	
+	}
+}
+}
+
+11.11 = {
+
+create_character = {
+	
+	
+	role = character_role_agitator
+	
+	interest_group = ig_armed_forces
+	ideology = ideology_central_america_caudillo
+		on_created = {
+	add_character_role = general
+	
+	}
+}
+
+}
+
+11.11 = {
+
+create_character = {
+	
+	role = character_role_agitator
+	
+	interest_group = ig_devout
+	ideology = ideology_central_america_caudillo
+		on_created = {
+	add_character_role = general
+	
+	}
+}
+}
+
+11.11 = {
+create_character = {
+	
+	role = character_role_agitator
+	
+	interest_group = ig_industrialists
+	ideology = ideology_central_america_caudillo
+		on_created = {
+	add_character_role = general
+	
+	}
+}
+
+}
+
+11.11 = {
+create_character = {
+	
+	role = character_role_agitator
+	
+	interest_group = ig_rural_folk
+	ideology = ideology_central_america_caudillo
+		on_created = {
+	add_character_role = general
+	
+	}
+}
+
+}
+
+11.11 = {
+create_character = {
+	
+	role = character_role_agitator
+	
+	interest_group = ig_trade_unions
+	ideology = ideology_central_america_caudillo
+	on_created = {
+	add_character_role = general
+	
+	}
+}
+
+}
+
+11.11 ={
+create_character = {
+	
+	role = character_role_agitator
+	
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_central_america_caudillo
+	on_created = {
+	add_character_role = general
+	
+	}
+}
+}
+
+}
+
+
+}
 
 ca_setup_ideological_cha_zero = {
 
@@ -356,176 +484,176 @@ ca_remove_ideological_strongholds_effect = {
 # MOVIMIENTOS POLÍTICOS INICIALES
 # ====================================================================
 ca_setup_political_movements_effect = {
-    s:STATE_SAN_SALVADOR = {
-        every_scope_state = {
+    s:STATE_SAN_SALVADOR.region_state:UCA = {
+        
             add_modifier = { name = ca_uca_liberal_stronghold }
-        }
+        
     }
 
-    s:STATE_GUATEMALA = {
-        every_scope_state = {
+    s:STATE_GUATEMALA.region_state:UCA = {
+        
             add_modifier = { name = ca_uca_conservative_capital }
-        }
+        
     }
 
-    s:STATE_COSTA_RICA = {
-        every_scope_state = {
+    s:STATE_COSTA_RICA.region_state:UCA = {
+        
             add_modifier = { name = ca_uca_isolated_autonomists }
-        }
+        
     }
 
-    s:STATE_HONDURAS = {
-        every_scope_state = {
+    s:STATE_HONDURAS.region_state:UCA = {
+        
             add_modifier = { name = ca_uca_federalist_heartland }
-        }
+        
     }
 
-    s:STATE_PANAMA = {
-        every_scope_state = {
+    s:STATE_PANAMA.region_state:UCA = {
+        
             add_modifier = { name = ca_uca_isthmian_liberalism }
-        }
+        
     }
 
-    s:STATE_NICARAGUA = {
-        every_scope_state = {
+    s:STATE_NICARAGUA.region_state:UCA = {
+        
             add_modifier = { name = ca_uca_leones_vs_granadinos }
-        }
+        
     }
 
-    s:STATE_CHIAPAS = {
-        every_scope_state = {
+    s:STATE_CHIAPAS.region_state:UCA = {
+        
             add_modifier = { name = ca_uca_frontier_tensions }
-        }
+        
     }
 }
 ca_setup_post_uca_political_movements_effect = {
-    s:STATE_SAN_SALVADOR = {
-        every_scope_state = {
+    s:STATE_SAN_SALVADOR.region_state:UCA = {
+        
             add_modifier = { name = ca_liberal_stronghold }
-        }
+        
     }
 
-    s:STATE_GUATEMALA = {
-        every_scope_state = {
+    s:STATE_GUATEMALA.region_state:UCA = {
+        
             add_modifier = { name = ca_conservative_capital }
-        }
+        
     }
 
-    s:STATE_COSTA_RICA = {
-        every_scope_state = {
+    s:STATE_COSTA_RICA.region_state:UCA = {
+        
             add_modifier = { name = ca_isolated_autonomists }
-        }
+        
     }
 
-    s:STATE_HONDURAS = {
-        every_scope_state = {
+    s:STATE_HONDURAS.region_state:UCA = {
+        
             add_modifier = { name = ca_federalist_heartland }
-        }
+        
     }
 
-    s:STATE_PANAMA = {
-        every_scope_state = {
+    s:STATE_PANAMA.region_state:UCA = {
+        
             add_modifier = { name = ca_isthmian_liberalism }
-        }
+        
     }
 
-    s:STATE_NICARAGUA = {
-        every_scope_state = {
+    s:STATE_NICARAGUA.region_state:UCA = {
+        
             add_modifier = { name = ca_leones_vs_granadinos }
-        }
+        
     }
 
-    s:STATE_CHIAPAS = {
-        every_scope_state = {
+    s:STATE_CHIAPAS.region_state:UCA = {
+        
             add_modifier = { name = ca_frontier_tensions }
-        }
+        
     }
 }
 
 ca_remove_political_movements_effect = {
-    s:STATE_SAN_SALVADOR = {
-        every_scope_state = {
+    s:STATE_SAN_SALVADOR.region_state:UCA = {
+        
             remove_modifier = { name = ca_uca_liberal_stronghold }
-        }
+        
     }
 
-    s:STATE_GUATEMALA = {
-        every_scope_state = {
+    s:STATE_GUATEMALA.region_state:UCA = {
+        
             remove_modifier = { name = ca_uca_conservative_capital }
-        }
+        
     }
 
-    s:STATE_COSTA_RICA = {
-        every_scope_state = {
+    s:STATE_COSTA_RICA.region_state:UCA = {
+        
             remove_modifier = { name = ca_uca_isolated_autonomists }
-        }
+        
     }
 
-    s:STATE_HONDURAS = {
-        every_scope_state = {
+    s:STATE_HONDURAS.region_state:UCA = {
+        
             remove_modifier = { name = ca_uca_federalist_heartland }
-        }
+        
     }
 
-    s:STATE_PANAMA = {
-        every_scope_state = {
+    s:STATE_PANAMA.region_state:UCA = {
+        
             remove_modifier = { name = ca_uca_isthmian_liberalism }
-        }
+        
     }
 
-    s:STATE_NICARAGUA = {
-        every_scope_state = {
+    s:STATE_NICARAGUA.region_state:UCA = {
+        
             remove_modifier = { name = ca_uca_leones_vs_granadinos }
-        }
+        
     }
 
-    s:STATE_CHIAPAS = {
-        every_scope_state = {
+    s:STATE_CHIAPAS.region_state:UCA = {
+        
             remove_modifier = { name = ca_uca_frontier_tensions }
-        }
+        
     }
 }
 ca_remove_post_uca_political_movements_effect = {
-    s:STATE_SAN_SALVADOR = {
-        every_scope_state = {
+    s:STATE_SAN_SALVADOR.region_state:UCA = {
+        
             remove_modifier = { name = ca_liberal_stronghold }
-        }
+        
     }
 
-    s:STATE_GUATEMALA = {
-        every_scope_state = {
+    s:STATE_GUATEMALA.region_state:UCA = {
+        
             remove_modifier = { name = ca_conservative_capital }
-        }
+        
     }
 
-    s:STATE_COSTA_RICA = {
-        every_scope_state = {
+    s:STATE_COSTA_RICA.region_state:UCA = {
+        
             remove_modifier = { name = ca_isolated_autonomists }
-        }
+        
     }
 
-    s:STATE_HONDURAS = {
-        every_scope_state = {
+    s:STATE_HONDURAS.region_state:UCA = {
+        
             remove_modifier = { name = ca_federalist_heartland }
-        }
+        
     }
 
-    s:STATE_PANAMA = {
-        every_scope_state = {
+    s:STATE_PANAMA.region_state:UCA = {
+        
             remove_modifier = { name = ca_isthmian_liberalism }
-        }
+        
     }
 
-    s:STATE_NICARAGUA = {
-        every_scope_state = {
+    s:STATE_NICARAGUA.region_state:UCA = {
+        
             remove_modifier = { name = ca_leones_vs_granadinos }
-        }
+        
     }
 
-    s:STATE_CHIAPAS = {
-        every_scope_state = {
+    s:STATE_CHIAPAS.region_state:UCA = {
+        
             remove_modifier = { name = ca_frontier_tensions }
-        }
+        
     }
 }
 # ====================================================================
@@ -713,8 +841,7 @@ ig:ig_armed_forces = {
         }
         
         ig:ig_industrialists = {
-            remove_ideology = ideology_mercantilist
-            remove_ideology = ideology_protectionist
+            remove_ideology = ideology_plutocratic
             remove_ideology = ideology_laissez_faire
             add_ideology = ideology_ca_agroexportadores
             add_ideology = ideology_ca_liberal     
@@ -767,8 +894,8 @@ ig:ig_intelligentsia = { #La ig_intelligentsia tiene opcion que elegir la consti
     add_ideology = ideology_ca_constitutionalist
 }
 ig:ig_industrialists = {
-    remove_ideology = ideology_mercantilist
-    remove_ideology = ideology_protectionist
+    
+    remove_ideology = ideology_plutocratic
     remove_ideology = ideology_laissez_faire
     add_ideology = ideology_ca_agroexportadores
     add_ideology = ideology_ca_liberal     
@@ -825,8 +952,7 @@ ig:ig_intelligentsia = {
 }
 
 ig:ig_industrialists = {
-    add_ideology = ideology_mercantilist
-    add_ideology = ideology_protectionist
+    add_ideology = ideology_plutocratic
     add_ideology = ideology_laissez_faire
     remove_ideology = ideology_ca_agroexportadores
     remove_ideology = ideology_ca_liberal

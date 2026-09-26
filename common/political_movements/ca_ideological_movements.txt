@@ -128,7 +128,7 @@ movement_ca_liberal = {
             }
             else = {
                 add = {
-                    value bolstering_base_value
+                    value = bolstering_base_value
                     multiply = { value = 0.5 add = owner.modifier:country_bolster_attraction_factor }
                 }
             }
