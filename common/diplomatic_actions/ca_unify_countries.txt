@@ -1,4 +1,4 @@
-ca_unify_countries = {
+﻿ca_unify_countries = {
 	groups = { general }
 	texture = "gfx/interface/icons/lens_toolbar_icons/incorporate_state.dds"
 	requires_approval = yes
@@ -80,7 +80,7 @@ ca_unify_countries = {
 				desc = "DIPLOMATIC_ACCEPTANCE_GDP"
 				value = "scope:actor.ai_gdp_comparison(root)"
 				min = -100
-				max = 100
+				max = 1000
 			}			
 			# Shared religion adds weight even when the cultures differ.
 			if = {
@@ -88,7 +88,7 @@ ca_unify_countries = {
 					scope:actor.religion = scope:target_country.religion
 				}
 				add = {
-					desc = "CA_UNIFY_ACCEPT_SHARED_RELIGION"
+					#desc = "CA_UNIFY_ACCEPT_SHARED_RELIGION"
 					value = 10
 				}
 			}
@@ -126,7 +126,7 @@ ca_unify_countries = {
 		    	}
 		    	add = {
 		    		desc = "DIPLOMATIC_ACCEPTANCE_CULTURAL_ACCEPTANCE"
-		    		value = 100
+		    		value = 250
 		    	}
 		    }
 		    else_if = {
@@ -148,36 +148,41 @@ ca_unify_countries = {
 				desc = "DIPLOMATIC_ACCEPTANCE_RELATIONS"
 				if = {
 					limit = {
-						"relations(scope:actor)" < relations_threshold:cordial
+						"relations(scope:actor)" =< relations_threshold:neutral
 					}
-					value = -75
+					value = -1000
 				}
 				if = {
 					limit = {
 						"relations(scope:actor)" >= relations_threshold:neutral
-						"relations(scope:actor)" < relations_threshold:cordial
 					}
 					value = -250
 				}
 				if = {
 					limit = {
+						"relations(scope:actor)" =  relations_threshold:cordial
+					}
+					value = -75
+				}				
+				if = {
+					limit = {
 						"relations(scope:actor)" >= relations_threshold:cordial
 						"relations(scope:actor)" < relations_threshold:amicable
 					}
-					value = 50
+					value = 100
 				}
 				if = {
 					limit = {
 						"relations(scope:actor)" >= relations_threshold:amicable
 						"relations(scope:actor)" < relations_threshold:friendly
 					}
-					value = 150
+					value = 500
 				}
 				if = {
 					limit = {
 						"relations(scope:actor)" >= relations_threshold:friendly
 					}
-					value = 500
+					value = 750
 				}
 			}
 

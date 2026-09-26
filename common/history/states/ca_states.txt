@@ -89,6 +89,7 @@ STATES = {
 		add_homeland = cu:central_american		
 		add_homeland = cu:mayan
 		add_claim = c:MEX
+                add_claim = c:UCA
 	}
 	s:STATE_SAN_SALVADOR = {
 
@@ -102,17 +103,17 @@ STATES = {
 		
 		set_owner_of_provinces = {
 			country = c:MEX
-			provinces = { x1DB7A7 x23EF68 x2C4E34 x35FEEB x47D122 x4F7405 x5030C0 x51E4B6 x54250B x68F271 x69E5AF x8BE638 x90AC14 x91484C xA59F7B xA8DEBE xB598B9 xCE9FD1 xD1EC91 xDB85B0 xDD8B61 xE280B2 xE31B45 xE3AD92 xE68FD8 xFEE4D4 }
+			provinces = { x1DB7A7 x40B001 xCE98DE x23EF68 x2C4E34 x35FEEB x47D122 x4F7405 x5030C0 x51E4B6 x54250B x68F271 x69E5AF x8BE638 x90AC14 x91484C xA59F7B xA8DEBE xB598B9 xCE9FD1 xD1EC91 xDB85B0 xDD8B61 xE280B2 xE31B45 xE3AD92 xE68FD8 xFEE4D4 }
 		}
-		set_owner_of_provinces = {
-			country = c:UCA
-			provinces = { x40B001 xCE98DE }
-		}
+		#set_owner_of_provinces = {
+		#	country = c:UCA
+		#	provinces = {  }
+		#}
 		
 		add_homeland = cu:mexican
 		add_homeland = cu:mayan
 		add_claim = c:MEX
-        add_claim = c:UCA
+                add_claim = c:UCA
 	}
 	
 }

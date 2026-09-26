@@ -208,7 +208,7 @@ Plan_of_Veragua6 = {
 			add_modifier = { name = ca_small_el_gran_avanse_modifier 
 				is_decaying = yes
 				years = 10
-				multiplier = 0.20
+				multiplier = 0.40
 				} 
 
 			
@@ -226,11 +226,12 @@ Plan_of_Veragua7 = {
     }
 	when_taken = {
 
-			add_modifier = { name = ca_private_gold_reserve_modifier 
-				is_decaying = yes
-				years = 10
-				}
-			
+			s:STATE_COSTA_RICA.region_state:UCA = {
+        add_state_trait = state_trait_mining_cos
+		add_modifier = { name = ca_uca_isolated_autonomists }
+        add_modifier = { name = separatism_stronghold }
+        add_modifier = { name = unitary_stronghold_small_nation }
+        }
     }
 }
 Plan_of_Veragua8 = {
@@ -287,6 +288,7 @@ Plan_of_Veragua9 = {
     }
 	when_taken = {
 add_era_researched = era_2
+
 }
 
 
@@ -341,9 +343,20 @@ Plan_of_Veragua11 = {
     }
  	when_taken = {
 		
-           ca_add_setup_ig_ideologies = yes
+           
+
+
+create_character = {
+	is_agitator = yes
+	interest_group = ig_armed_forces
+	ideology = ideology_liberal_leader
+	on_created = {
+	add_character_role = general
+	
+	}
+}
         
-	}                                   
+}	                                  
 }
 Plan_of_Veragua12 = {
 	is_shown = {

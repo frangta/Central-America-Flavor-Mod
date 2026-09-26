@@ -3,7 +3,7 @@
 		set_next_election_date = 1837.4.9
 		
 		set_variable = ca_organization_apro
-		
+		set_variable = is_frca_var
 		effect_starting_technology_tier_2_tech = yes
 		effect_starting_politics_conservative = yes
 		
@@ -11,6 +11,7 @@
 		
         activate_law = law_type:law_presidential_republic
         activate_law = law_type:law_ca_central_american_federal
+        activate_law = law_type:law_ca_federal_army
         activate_law = law_type:law_tenant_farmers
         activate_law = law_type:law_census_voting
         activate_law = law_type:law_cultural_exclusion
@@ -56,8 +57,7 @@
         }
         
         ig:ig_industrialists = {
-            remove_ideology = ideology_mercantilist
-            remove_ideology = ideology_protectionist
+            remove_ideology = ideology_plutocratic
             remove_ideology = ideology_laissez_faire
             add_ideology = ideology_ca_agroexportadores
             add_ideology = ideology_ca_liberal     
@@ -90,7 +90,12 @@
         }
 
 		
-        trigger_event = { id = ca_central_america.119 }
+        trigger_event = { id = ca_central_america.119  day = 15}
+		trigger_event = { id = ca_el_salvador_events.01 }
+		trigger_event = { id = ca_guatemala_events.1  }
+		trigger_event = { id = ca_honduras_events.1   }
+		trigger_event = { id = ca_nicaragua_events.1  }
+		trigger_event = { id = ca_costa_rica_events.1 }
  
 		set_variable = { name = historic_central_american}
 		set_variable = { name = frca_preserved }
