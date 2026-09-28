@@ -986,7 +986,6 @@ ca_central_america.5 = {
     duration = 3
     
     trigger = {
-		trigger = {
 		this = c:UCA
 		exists = c:CIP
 		c:CIP = {
@@ -994,8 +993,7 @@ ca_central_america.5 = {
 			is_subject_type = subject_type_ca_dependency
 		}
 		has_journal_entry = je_historic_central_america_falls_apart
-		game_date < 1839.1.1
-	}
+		game_date < 1839.1.1	
         this = c:UCA
         NOT = { has_variable = ca_fate_soconusco }
     }
