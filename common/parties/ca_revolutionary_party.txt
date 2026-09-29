@@ -1,27 +1,124 @@
-﻿
+﻿ca_revolutionary_party = {
+	color = { 180 40 40 }
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_ca_revolutionary_uca
+				trigger = { c:UCA ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_revolutionary_gua
+				trigger = { c:GUA ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_revolutionary_els
+				trigger = { c:ELS ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_revolutionary_hon
+				trigger = { c:HON ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_revolutionary_nic
+				trigger = { c:NIC ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_revolutionary_pnm
+				trigger = { c:PNM ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_revolutionary_generic
+				trigger = { always = yes }
+			}
+		}
+	}
+	icon = { default = "gfx/interface/icons/political_parties/revolutionary.dds" }
 
-#TRY_INJECT:ca_revolutionary_party = {
-#	color = { 128 128 128 }
-#	name = {
-#		desc = revolutionary_party_name
-#	}
-#
-#	icon = {
-#		default = "/gfx/interface/icons/political_parties/revolutionary.dds"
-#	}
-#
-#	valid_for_country = {
-#		always = yes
-#	}
-#	available_for_interest_group = {
-#		owner = {
-#			is_revolutionary = yes
-#		}
-#		is_revolutionary = yes
-#	}
-#
-#	join_weight = {
-#
-#		}
-#	}
-#}
+	valid_for_country = { is_ca_culture_country = yes }
+	available_for_interest_group = {
+		owner = { country_has_voting_franchise = yes }
+	}
+
+	join_weight = {
+		value = 0
+		add = { value = -5 desc = "ca_party_join_base" }
+
+		# Ideologías de IG centrales
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_separatist
+				}
+			}
+			add = { value = 12 desc = "ca_party_join_ig_core" }
+		}
+		# Ideologías de IG afines
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_isolationist_expansionism
+					has_ideology = ideology:ideology_ca_indigenous_communalism
+				}
+			}
+			add = { value = 5 desc = "ca_party_join_ig_affinity" }
+		}
+		# Ideologías de IG opuestas
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_servile
+					has_ideology = ideology:ideology_ca_criollo_elite
+				}
+			}
+			add = { value = -10 desc = "ca_party_join_ig_hostile" }
+		}
+		# Ideologías de líder centrales
+		if = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_banana_socialism
+						has_ideology = ideology:ideology_isthmian_separatism
+						has_ideology = ideology:ideology_ca_syncretic_cult
+						has_ideology = ideology:ideology_anti_imperialist_sovereigntism
+						has_ideology = ideology:ideology_ca_tropical_utopian
+						has_ideology = ideology:ideology_crucismo
+					}
+				}
+			}
+			add = { value = 15 desc = "ca_party_join_leader_core" }
+		}
+		# Ideologías de líder afines
+		if = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_reformer
+						has_ideology = ideology:ideology_ca_neo_mayan_restoration
+						has_ideology = ideology:ideology_maya_autonomism
+					}
+				}
+			}
+			add = { value = 6 desc = "ca_party_join_leader_affinity" }
+		}
+		# Ideologías de líder opuestas
+		if = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_imperial_monarchist
+					}
+				}
+			}
+			add = { value = -10 desc = "ca_party_join_leader_hostile" }
+		}
+		# Contexto: los grupos marginados del gobierno y resentidos se radicalizan
+		if = {
+			limit = {
+				is_in_government = no
+				ig_approval < -5
+			}
+			add = { value = 4 desc = "ca_party_join_disaffected" }
+		}
+	}
+}

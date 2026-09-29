@@ -90,7 +90,7 @@ ca_play_guatemala_effect = {
 }
 
 ca_play_elsalvador_effect = {
-	c:ELS = {
+	c:ELS ?= {
     #add_modifier = { name = ca_starting_salvador_modifier months = 60 }
     add_journal_entry = { type = je_ca_historic_situation_in_elsalvador }
     add_journal_entry = { type = je_ca_state_role_in_federation }
@@ -174,7 +174,7 @@ ca_play_elsalvador_effect = {
 }
 
 ca_play_honduras_effect = {
-    c:HON = {
+    c:HON ?= {
     #add_modifier = { name = ca_starting_honduras_modifier months = 60 }
     add_journal_entry = { type = je_ca_historic_situation_in_honduras }
     add_journal_entry = { type = je_ca_state_role_in_federation }
@@ -250,7 +250,7 @@ ca_play_honduras_effect = {
 }
 
 ca_play_nicaragua_effect = {
-	c:NIC = {
+	c:NIC ?= {
     #add_modifier = { name = ca_starting_nicaragua_modifier months = 60 }
     add_journal_entry = { type = je_ca_historic_situation_in_nicaragua }
     add_journal_entry = { type = je_ca_state_role_in_federation }
@@ -332,7 +332,7 @@ ca_play_nicaragua_effect = {
 }
 
 ca_play_costarica_effect = {
-	c:COS = {
+	c:COS ?= {
     #add_modifier = { name = ca_starting_costarica_modifier months = 60 }
     add_journal_entry = { type = je_ca_historic_situation_in_costarica }
     add_journal_entry = { type = je_ca_state_role_in_federation }
@@ -413,7 +413,7 @@ ca_play_costarica_effect = {
 }
 
 ca_play_losaltos_effect = {
-	c:ALT = {
+	c:ALT ?= {
     #add_modifier = { name = ca_starting_losaltos_modifier months = 60 }
     add_journal_entry = { type = je_ca_situation_in_losaltos }
     #remove_variable = ca_secession_country

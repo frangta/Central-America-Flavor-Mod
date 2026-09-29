@@ -1,52 +1,124 @@
-﻿
-TRY_INJECT:military_party = {
-
+﻿ca_military_party = {
+	color = { 132 100 53 }
 	name = {
 		first_valid = {
 			triggered_desc = {
-				desc = party_ca_junta_council
-				trigger = { has_variable = ca_junta_council }
+				desc = party_ca_military_uca
+				trigger = { c:UCA ?= this }
 			}
 			triggered_desc = {
-				desc = party_ca_supreme_junta
-				trigger = { has_variable = ca_junta }
+				desc = party_ca_military_gua
+				trigger = { c:GUA ?= this }
 			}
 			triggered_desc = {
-				desc = party_ca_armed_forces_league
-				trigger = { has_variable = ca_armed_forces_on }
+				desc = party_ca_military_els
+				trigger = { c:ELS ?= this }
 			}
-			# Nombre por defecto si no se cumple ninguna variable
 			triggered_desc = {
-				desc = party_military
+				desc = party_ca_military_hon
+				trigger = { c:HON ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_military_nic
+				trigger = { c:NIC ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_military_generic
 				trigger = { always = yes }
 			}
 		}
 	}
+	icon = { default = "gfx/interface/icons/political_parties/military.dds" }
+
+	valid_for_country = { is_ca_culture_country = yes }
+	available_for_interest_group = {
+		owner = { country_has_voting_franchise = yes }
+	}
+
 	join_weight = {
-		if = { 
+		value = 0
+		add = { value = -5 desc = "ca_party_join_base" }
+
+		# Ideologías de IG centrales
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_caudillismo_jingoist
+				}
+			}
+			add = { value = 12 desc = "ca_party_join_ig_core" }
+		}
+		# Ideologías de IG afines
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_isolationist_expansionism
+					has_ideology = ideology:ideology_ca_criollo_stratocratic
+				}
+			}
+			add = { value = 5 desc = "ca_party_join_ig_affinity" }
+		}
+		# Ideologías de IG opuestas
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_comunal_milicia
+				}
+			}
+			add = { value = -10 desc = "ca_party_join_ig_hostile" }
+		}
+		# Ideologías de líder centrales
+		if = {
 			limit = {
 				leader ?= {
 					OR = {
+						has_ideology = ideology:ideology_ca_filibuster
 						has_ideology = ideology:ideology_central_america_caudillo
-						has_ideology = ideology:ideology_ca_criollo_stratocratic
 						has_ideology = ideology:ideology_cuscatleco_nationalism
+						has_ideology = ideology:ideology_slaver_filibusterism
 						has_ideology = ideology:ideology_ca_tropical_bonapartism
 					}
 				}
 			}
-			add = { value = 30 desc = "from_ca_military_leader" }
+			add = { value = 15 desc = "ca_party_join_leader_core" }
 		}
-		if = { 
+		# Ideologías de líder afines
+		if = {
 			limit = {
-				OR = {
-					has_ideology = ideology:ideology_central_america_caudillo
-					has_ideology = ideology:ideology_ca_criollo_stratocratic
-					has_ideology = ideology:ideology_cuscatleco_nationalism
-					has_ideology = ideology:ideology_ca_tropical_bonapartism
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_leader_autocratic_autonomist
+						has_ideology = ideology:ideology_ca_hermit_isolationism
+						has_ideology = ideology:ideology_ca_peasant_caudillismo
+						has_ideology = ideology:ideology_ca_barrismo
+						has_ideology = ideology:ideology_ca_morismo
+					}
 				}
 			}
-			add = { value = 20 desc = "from_ca_military_ig" }
+			add = { value = 6 desc = "ca_party_join_leader_affinity" }
+		}
+		# Ideologías de líder opuestas
+		if = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_tropical_utopian
+					}
+				}
+			}
+			add = { value = -10 desc = "ca_party_join_leader_hostile" }
+		}
+		if = {
+			limit = { is_interest_group_type = ig_armed_forces }
+			add = { value = 5 desc = "ca_party_join_ig_type" }
+		}
+		# Contexto: el caudillismo como modelo de ejército empuja a los militares a la política
+		if = {
+			limit = {
+				is_interest_group_type = ig_armed_forces
+				owner = { has_law_or_variant = law_type:law_ca_caudillismo }
+			}
+			add = { value = 3 desc = "ca_party_join_caudillo_context" }
 		}
 	}
-
 }
