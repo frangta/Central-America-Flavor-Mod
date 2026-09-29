@@ -1,4 +1,6 @@
-﻿namespace = ca_central_america
+﻿
+namespace = ca_central_america
+
 #Culturas del mod :
 #cu:central_american
 #cu:guatemalan
@@ -839,10 +841,11 @@ ca_central_america.3 = {
         }
         
         
-        create_diplomatic_pact = {
+        c:UCA = {create_diplomatic_pact = {
             country = scope:scope_ALT
             type = ca_dependency
         }
+		}
     }
 
     
@@ -1525,14 +1528,14 @@ ca_central_america.9 = {
        	c:UCA = { save_scope_as = uca_scope }
 		c:CLM = { save_scope_as = colombia_scope }
 		c:COS = { save_scope_as = costa_rica_scope }
-	} 
+	 
         c:PP1 = {
             save_scope_as = bocas_puppet
             overlord = {
                 save_scope_as = puppet_master
             }
         }
-    
+     }
 
     
     option = {
