@@ -616,3 +616,98 @@ ca_prospecting_bar = {
 		}
 	}
 }
+# =========================================================================
+# COSTA RICA - Consolidacion del Estado (je_ca_historic_situation_in_costarica)
+# 0 = el Estado se desmorona | 100 = Costa Rica consolidada
+# Ritmo base: ~0/mes bajo la Federacion, +2/+3 al mes tras la ruptura
+# =========================================================================
+ca_cos_consolidation_bar = {
+	name = "ca_cos_consolidation_bar_name"
+	desc = "ca_cos_consolidation_bar_desc"
+
+	start_value = 30
+	min_value = 0
+	max_value = 100
+
+	monthly_progress = {
+		add = {
+			desc = "ca_cos_bar_carrillo_rules"
+			if = {
+				limit = { ruler ?= { has_variable = is_carrillo } }
+				value = 1
+			}
+		}
+		add = {
+			desc = "ca_cos_bar_bases_y_garantias"
+			if = {
+				limit = { has_variable = ca_carrilo_decret }
+				value = 1
+			}
+		}
+		add = {
+			desc = "ca_cos_bar_sovereign"
+			if = {
+				limit = { is_subject = no }
+				value = 1
+			}
+		}
+		add = {
+			desc = "ca_cos_bar_coffee_elite"
+			if = {
+				limit = { ig:ig_landowners ?= { is_in_government = yes } }
+				value = 1
+			}
+		}
+		add = {
+			desc = "ca_cos_bar_federal_drain"
+			if = {
+				limit = {
+					exists = c:UCA
+					is_subject_of = c:UCA
+				}
+				value = -1
+			}
+		}
+		add = {
+			desc = "ca_cos_bar_northern_crisis"
+			if = {
+				limit = { has_journal_entry = je_ca_pacificacion_norte }
+				value = -2
+			}
+		}
+		add = {
+			desc = "ca_cos_bar_at_war"
+			if = {
+				limit = { is_at_war = yes }
+				value = -1
+			}
+		}
+	}
+}
+
+# =========================================================================
+# COSTA RICA - La Pacificacion del Norte (je_ca_pacificacion_norte)
+# Progreso principal por eventos (5, 6, 7, 81); el goteo mensual es menor
+# =========================================================================
+ca_pacificacion_norte_bar = {
+	name = "ca_pacificacion_norte_bar_name"
+	desc = "ca_pacificacion_norte_bar_desc"
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	monthly_progress = {
+		add = {
+			desc = "ca_pacificacion_bar_rebels_regroup"
+			value = -2
+		}
+		add = {
+			desc = "ca_pacificacion_bar_army_in_government"
+			if = {
+				limit = { ig:ig_armed_forces ?= { is_in_government = yes } }
+				value = 3
+			}
+		}
+	}
+}

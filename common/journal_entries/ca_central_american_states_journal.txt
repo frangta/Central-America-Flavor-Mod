@@ -44,79 +44,171 @@
 	}
 	
 }
+# =========================================================================
+# COSTA RICA - DIARIO HISTORICO PRINCIPAL (1836 - 1850)
+# "El dilema costarricense"
+#
+# Motor de la cadena ca_costa_rica_events:
+#   - Cada mes intenta los eventos fechados de la lista; cada evento se
+#     filtra con su propio trigger (fecha + variable de "ya disparado").
+#   - La barra ca_cos_consolidation_bar mide la consolidacion del Estado
+#     costarricense frente a la Federacion.
+# Resolucion:
+#   - Exito:   barra >= 100 y Costa Rica ya no es subdito de nadie,
+#              o llega 1850 siendo independiente.
+#   - Fracaso: barra <= 0, o llega 1850 y Costa Rica sigue subordinada.
+# =========================================================================
 je_ca_historic_situation_in_costarica = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
-	
-	group = je_group_historical_content	
+	group = je_group_historical_content
 
-	#1
-	
+	scripted_progress_bar = ca_cos_consolidation_bar
+
+	possible = {
+		c:COS ?= this
+		NOT = { has_variable = ca_cos_historic_situation_resolved }
+	}
+
+	immediate = {
+		# El evento 2 (La Ley de la Ambulancia) espera esta variable
+		set_variable = ca_ecos_federacion_fired
+	}
+
+	on_monthly_pulse = {
+		events = {
+			# FASE 1 - El escenario (1836)
+			ca_costa_rica_events.2		# Las cicatrices de la Ley de la Ambulancia
+			ca_costa_rica_events.3		# La dimision de Carrillo (>= 1836.3.2)
+			# FASE 2 - La Pacificacion del Norte (jun - ago 1836)
+			ca_costa_rica_events.4		# El motin de la Villa (>= 1836.6.1) -> abre je_ca_pacificacion_norte
+			ca_costa_rica_events.6		# El saqueo de Bagaces (>= 1836.7.7)
+			ca_costa_rica_events.7		# El desembarco en El Bolson (>= 1836.8.1)
+			# BOCAS DEL TORO (1836 - 1837)
+			ca_costa_rica_events.12		# Subditos de la Corona en el Caribe (1836.2 - 1836.4)
+			# FASE 4 - Elecciones y golpe (1837 - 1838)
+			ca_costa_rica_events.19		# Los electores de 1837
+			ca_costa_rica_events.20		# El golpe josefino (1838.5)
+			# FASE 5 - Morazan en el exilio (1840 - 1841)
+			ca_costa_rica_events.201	# El manifiesto de David
+			ca_costa_rica_events.202	# Sombras y mercenarios en Lima
+			ca_costa_rica_events.203	# La encrucijada andina
+			# FASE 6 - La Republica (1844 - 1849)
+			ca_costa_rica_events.22		# Primer sufragio directo (1844)
+			ca_costa_rica_events.23		# Elecciones de 1847
+			ca_costa_rica_events.24		# Elecciones extraordinarias (1849)
+		}
+	}
+
 	complete = {
-		
-	}
-	
-	fail = {
-		
-	}
-	
-	on_fail = {
-		
+		OR = {
+			AND = {
+				scope:journal_entry = { "scripted_bar_progress(ca_cos_consolidation_bar)" >= 100 }
+				is_subject = no
+			}
+			AND = {
+				game_date >= 1850.1.1
+				is_subject = no
+			}
+		}
 	}
 
 	on_complete = {
-		
+		set_variable = ca_cos_historic_situation_resolved
+		set_variable = ca_cos_state_consolidated
+		add_modifier = { name = ca_el_gran_avanse_modifier years = 10 }
 	}
-	
+
+	fail = {
+		OR = {
+			scope:journal_entry = { "scripted_bar_progress(ca_cos_consolidation_bar)" <= 0 }
+			AND = {
+				game_date >= 1850.1.1
+				is_subject = yes
+			}
+		}
+	}
+
+	on_fail = {
+		set_variable = ca_cos_historic_situation_resolved
+		set_variable = ca_cos_state_collapsed
+		add_modifier = { name = ca_federal_paralysis months = 36 }
+		add_radicals = { value = 0.10 culture = cu:costa_rican }
+	}
+
+	# Deja de tener sentido si Costa Rica pierde su propio territorio
+	invalid = {
+		NOT = { any_scope_state = { state_region = s:STATE_COSTA_RICA } }
+	}
+
+	on_invalid = {
+		set_variable = ca_cos_historic_situation_resolved
+	}
+
 	weight = 100
-	
+	should_be_pinned_by_default = yes
 	transferable = no
+}
+
+# =========================================================================
+# COSTA RICA - CRISIS: LA PACIFICACION DEL NORTE (junio - diciembre 1836)
+#
+# La abre el evento ca_costa_rica_events.4 (El motin de la Villa).
+# Los eventos 5, 6, 7 y 81 suman progreso con:
+#   je:je_ca_pacificacion_norte ?= { add_progress = { value = X name = ca_pacificacion_norte_bar } }
+# Resolucion:
+#   - Exito:   barra >= 100  -> evento 9 (El Informe Jimenez)
+#   - Fracaso: llega 1837.1.1 sin llenar la barra -> evento 99 (El colapso del Norte)
+# =========================================================================
+je_ca_pacificacion_norte = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+
+	scripted_progress_bar = ca_pacificacion_norte_bar
+
+	possible = {
+		c:COS ?= this
+	}
+
+	immediate = {
+		set_variable = ca_crisis_guanacaste_active
+	}
+
+	complete = {
+		scope:journal_entry = { "scripted_bar_progress(ca_pacificacion_norte_bar)" >= 100 }
+	}
+
+	on_complete = {
+		remove_variable = ca_crisis_guanacaste_active
+		trigger_event = { id = ca_costa_rica_events.9 days = 2 }
+		je:je_ca_historic_situation_in_costarica ?= {
+			add_progress = { value = 15 name = ca_cos_consolidation_bar }
+		}
+	}
+
+	fail = {
+		game_date >= 1837.1.1
+	}
+
+	on_fail = {
+		remove_variable = ca_crisis_guanacaste_active
+		trigger_event = { id = ca_costa_rica_events.99 popup = yes }
+		je:je_ca_historic_situation_in_costarica ?= {
+			add_progress = { value = -20 name = ca_cos_consolidation_bar }
+		}
+	}
 
 	invalid = {
-		NOT = { exists = c:UCA }
+		NOT = { any_scope_state = { state_region = s:STATE_COSTA_RICA } }
 	}
-	
+
+	on_invalid = {
+		remove_variable = ca_crisis_guanacaste_active
+	}
+
+	weight = 150
+	should_be_pinned_by_default = yes
+	transferable = no
 }
-#je_ca_pacificacion_norte = {
-#    icon = "gfx/interface/icons/event_icons/event_military.dds"
-#    group = je_group_historical_content    
-#    #1
-#
-#    # Solo visible si Costa Rica tiene la variable que activa la crisis
-#    is_shown_when_inactive = {
-#        has_variable = ca_crisis_guanacaste_active
-#    }
-#
-#    # Configuramos la barra de progreso
-#    progressbar = yes
-#    current_value = { value = root.var:ca_pacificacion_progress }
-#    goal_add_value = { add = 100 } # Llenar hasta 100 para ganar
-#    weight = 150
-#
-#    # Condición de Éxito: Llenar la barra
-#    complete = {
-#        root.var:ca_pacificacion_progress >= 100
-#    }
-#
-#    # Condición de Fracaso: Si pasa demasiado tiempo (ej. fin de 1836) y no lo lograste
-#    fail = {
-#        game_date >= 1837.1.1
-#        root.var:ca_pacificacion_progress < 100
-#    }
-#
-#    on_complete = {
-#        remove_variable = ca_crisis_guanacaste_active
-#        # Aquí dispararemos la FASE 3 (El Desenlace) más adelante
-#        trigger_event = { id = ca_costa_rica_events.9 days = 2 }
-#    }
-#
-#    on_fail = {
-#        remove_variable = ca_crisis_guanacaste_active
-#        # EL EFECTO DOMINÓ (Fracaso)
-#        # 1. Guanacaste (PC2) se independiza y declara la guerra
-#        # 2. Nicaragua interviene (Esto lo manejaremos con un evento de castigo)
-#        trigger_event = { id = ca_costa_rica_events.99 popup = yes } # Evento oculto de derrota total
-#    }
-#}
 je_ca_historic_situation_in_talamanca = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
 	

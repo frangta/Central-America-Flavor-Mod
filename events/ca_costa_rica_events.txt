@@ -179,8 +179,6 @@ ca_costa_rica_events.1 = {
 #        set_variable = ca_motin_villa_fired
 #        # Activamos la variable para que el Diario sea visible
 #        set_variable = ca_crisis_guanacaste_active
-#        # Iniciamos la barra de progreso en 0
-#        set_variable = { name = ca_pacificacion_progress value = 0 }
 #    }
 #    
 #    option = {
@@ -233,7 +231,7 @@ ca_costa_rica_events.1 = {
 #            months = 3
 #        }
 #        # ¡Gran salto en la barra de progreso!
-#        change_variable = { name = ca_pacificacion_progress add = 40 }
+#        je:je_ca_pacificacion_norte ?= { add_progress = { value = 40 name = ca_pacificacion_norte_bar } }
 #    }
 #    
 #    option = {
@@ -282,7 +280,7 @@ ca_costa_rica_events.1 = {
 #            culture = cu:costa_rican 
 #        }
 #        # Avance moderado del diario
-#        change_variable = { name = ca_pacificacion_progress add = 15 }
+#        je:je_ca_pacificacion_norte ?= { add_progress = { value = 15 name = ca_pacificacion_norte_bar } }
 #    }
 #    
 #    option = {
@@ -294,7 +292,7 @@ ca_costa_rica_events.1 = {
 #        }
 #        add_treasury = -1000 # Gasto estatal en ayuda humanitaria temprana
 #        # Gran avance del diario por pacificar a la población
-#        change_variable = { name = ca_pacificacion_progress add = 30 }
+#        je:je_ca_pacificacion_norte ?= { add_progress = { value = 30 name = ca_pacificacion_norte_bar } }
 #    }
 #}
 #
@@ -314,7 +312,7 @@ ca_costa_rica_events.1 = {
 #        has_journal_entry = je_ca_pacificacion_norte
 #        game_date >= 1836.8.1
 #        # Este evento premia haber tomado buenas decisiones antes
-#        check_variable = { name = ca_pacificacion_progress value >= 40 } 
+#        je:je_ca_pacificacion_norte ?= { "scripted_bar_progress(ca_pacificacion_norte_bar)" >= 40 } 
 #        NOT = { has_variable = ca_desembarco_bolson_fired }
 #    }
 #    
@@ -330,7 +328,7 @@ ca_costa_rica_events.1 = {
 #            name = age_of_ca_caudillos_modifier # Un pequeño bono militar tuyo
 #            months = 12
 #        }
-#        change_variable = { name = ca_pacificacion_progress add = 40 }
+#        je:je_ca_pacificacion_norte ?= { add_progress = { value = 40 name = ca_pacificacion_norte_bar } }
 #    }
 #}
 #
@@ -389,7 +387,7 @@ ca_costa_rica_events.1 = {
 #        # "Agradecemos la oferta, pero la situación ha sido resuelta por las armas costarricenses."
 #        add_prestige = 10
 #        # Este último empujón debería llevar la barra al 100 y completar el Diario
-#        change_variable = { name = ca_pacificacion_progress add = 30 }
+#        je:je_ca_pacificacion_norte ?= { add_progress = { value = 30 name = ca_pacificacion_norte_bar } }
 #    }
 #}
 #
