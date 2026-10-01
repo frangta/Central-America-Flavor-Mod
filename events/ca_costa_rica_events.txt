@@ -1,4 +1,5 @@
 ﻿namespace = ca_costa_rica_events
+
 ###scope_COS
 #scope_PC1
 #scope_PC2
@@ -36,8 +37,9 @@ ca_costa_rica_events.1 = {
 	}
 	
 	immediate = {
+         s:STATE_COSTA_RICA = { add_state_trait = state_trait_mining_cos } 
+        c:COS ?= { set_variable = ca_ecos_federacion_fired } 
         s:STATE_COSTA_RICA.region_state:UCA = {
-        add_state_trait = state_trait_mining_cos
 		add_modifier = { name = ca_uca_isolated_autonomists }
         add_modifier = { name = separatism_stronghold }
         add_modifier = { name = unitary_stronghold_small_nation }
@@ -86,7 +88,7 @@ ca_costa_rica_events.2 = {
         name = ca_costa_rica_events.2.a
         # "San José es la capital definitiva."
         add_modifier = {
-            name = ca_add_authority # Usando el modificador que ya tienes creado
+            name = ca_authority_boost
             months = 24
         }
         # Añade radicales simulando el descontento en Cartago, Alajuela y Heredia
@@ -124,14 +126,8 @@ ca_costa_rica_events.3 = {
         name = ca_costa_rica_events.3.a 
         # Opción Histórica: La Asamblea rechaza la renuncia.
         default_option = yes
-        
-        ig:ig_intelligentsia = {
-            add_loyalists = { value = 0.05 }
-        }
-        ig:ig_armed_forces = {
-            add_loyalists = { value = 0.05 }
-        }
-        
+        add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: add_loyalists es efecto de pais
+        add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces }
         # Un pequeño bono de legitimidad o estabilidad temporal
         add_modifier = {
             name = age_of_ca_caudillos_modifier # Reutilizando un modificador tuyo
@@ -179,16 +175,17 @@ ca_costa_rica_events.4 = {
         set_variable = ca_motin_villa_fired
         # Activamos la variable para que el Diario sea visible
         set_variable = ca_crisis_guanacaste_active
-        # Iniciamos la barra de progreso en 0
-        set_variable = { name = ca_pacificacion_progress value = 0 }
+
+        if = {
+            limit = { NOT = { has_variable = ca_pacificacion_progress } }
+            set_variable = { name = ca_pacificacion_progress value = 0 }
+        }
     }
     
     option = {
         name = ca_costa_rica_events.4.a
         # "¡Traición en el Norte!"
         
-        # Añade el Diario al jugador
-        add_journal_entry = { type = je_ca_pacificacion_norte }
         
         # Penalización a Costa Rica (Simula pérdida de ingresos por estancos)
         add_modifier = {
@@ -275,6 +272,7 @@ ca_costa_rica_events.6 = {
     
     option = {
         name = ca_costa_rica_events.6.a 
+		default_option = yes
         # "Proteger el tesoro a toda costa."
         add_treasury = 3300 # Recuperas los fondos
         add_radicals = { 
@@ -314,7 +312,8 @@ ca_costa_rica_events.7 = {
         has_journal_entry = je_ca_pacificacion_norte
         game_date >= 1836.8.1
         # Este evento premia haber tomado buenas decisiones antes
-        check_variable = { name = ca_pacificacion_progress value >= 40 } 
+        has_variable = ca_pacificacion_progress
+        var:ca_pacificacion_progress >= 40 # CAFM fix: check_variable no existe
         NOT = { has_variable = ca_desembarco_bolson_fired }
     }
     
@@ -360,7 +359,7 @@ ca_costa_rica_events.8 = {
     option = {
         name = ca_costa_rica_events.8.a 
         # "Envíen a Juan Mora Fernández a mediar."
-        add_prestige = 5
+        add_modifier = { name = ca_cos_prestige_gain_small months = 60 }
         # Esto dispara el evento de recepción en Costa Rica en 3 días
         c:COS = {
             trigger_event = { id = ca_costa_rica_events.81 days = 3 }
@@ -387,7 +386,7 @@ ca_costa_rica_events.81 = {
     option = {
         name = ca_costa_rica_events.81.a 
         # "Agradecemos la oferta, pero la situación ha sido resuelta por las armas costarricenses."
-        add_prestige = 10
+        add_modifier = { name = ca_cos_prestige_gain months = 60 }
         # Este último empujón debería llevar la barra al 100 y completar el Diario
         change_variable = { name = ca_pacificacion_progress add = 30 }
     }
@@ -421,7 +420,7 @@ ca_costa_rica_events.9 = {
     option = {
         name = ca_costa_rica_events.9.a
         # "Tenemos la excusa perfecta."
-        add_prestige = 5
+        add_modifier = { name = ca_cos_prestige_gain_small months = 60 }
         trigger_event = { id = ca_costa_rica_events.10 days = 2 }
     }
 }
@@ -559,18 +558,22 @@ ca_costa_rica_events.99 = {
                 exists = c:PC2
                 c:PC2 = { is_subject_of = c:COS }
             }
-            c:PC2 = { free_subject = yes }
+            c:PC2 = { make_independent = yes }
             
             # Guanacaste se alía con Nicaragua si existe
             if = {
                 limit = { exists = c:NIC }
-                c:PC2 = { 
-                    create_diplomatic_pact = {
-                        country = c:NIC
-                        type = alliance
+                
+                create_treaty = {
+                    first_country = c:PC2
+                    second_country = c:NIC
+                    is_draft = no
+                    binding_period = { years = 5 }
+                    articles_to_create = {
+                        { article = alliance }
                     }
                 }
-                c:NIC = { add_claim = s:STATE_COSTA_RICA }
+                s:STATE_COSTA_RICA = { add_claim = c:NIC } 
             }
         }
         
@@ -593,7 +596,7 @@ ca_costa_rica_events.12 = {
     desc = ca_costa_rica_events.12.d
     flavor = ca_costa_rica_events.12.f
     
-    icon = "gfx/interface/icons/event_icons/event_ship.dds"
+    icon = "gfx/interface/icons/event_icons/event_trade.dds"
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     
     trigger = {
@@ -672,7 +675,7 @@ ca_costa_rica_events.14 = {
         # "Financiar la expedición. ¡Por la soberanía!" (Opción Histórica)
         default_option = yes
         add_treasury = -3000
-        add_prestige = 10
+        add_modifier = { name = ca_cos_prestige_gain months = 60 }
         # Galindo desembarca en Costa Rica pronto
         c:COS = { trigger_event = { id = ca_costa_rica_events.15 days = 30 } }
     }
@@ -680,11 +683,12 @@ ca_costa_rica_events.14 = {
     option = {
         name = ca_costa_rica_events.14.b 
         # "No tenemos fondos para aventuras en la selva."
-        add_prestige = -5
+        add_modifier = { name = ca_cos_prestige_loss_small months = 60 } 
         # Fracaso temprano: Costa Rica gana resentimiento contra la UCA
         c:COS = {
             change_relations = { country = c:UCA value = -30 }
             add_modifier = { name = ca_federal_betrayal_disapproval months = 60 }
+            set_variable = ca_cos_bocas_rechazo_temprano # CAFM fix: el diario la usa y nadie la creaba
         }
     }
 }
@@ -712,7 +716,7 @@ ca_costa_rica_events.15 = {
         name = ca_costa_rica_events.15.a 
         # "Una jugada audaz."
         # Costa Rica obtiene un reclamo territorial sobre Panamá/Bocas del Toro
-        add_claim = s:STATE_PANAMA 
+        s:STATE_PANAMA = { add_claim = ROOT } 
         
         # Furia de Nueva Granada
         if = {
@@ -741,7 +745,7 @@ ca_costa_rica_events.16 = {
     desc = ca_costa_rica_events.16.d
     flavor = ca_costa_rica_events.16.f
     
-    icon = "gfx/interface/icons/event_icons/event_ship.dds"
+    icon = "gfx/interface/icons/event_icons/event_trade.dds"
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     
     trigger = {
@@ -782,14 +786,14 @@ ca_costa_rica_events.161 = {
         # "Galindo debe huir. Hemos sido humillados."
         
         # Costa Rica pierde el reclamo y prestigio
-        remove_claim = s:STATE_PANAMA
-        add_prestige = -20
+        s:STATE_PANAMA = { remove_claim = ROOT } 
+        add_modifier = { name = ca_cos_prestige_loss months = 60 } 
         
         # Nueva Granada reafirma su control
         if = {
             limit = { exists = c:CLM }
             c:CLM = {
-                add_prestige = 10
+                add_modifier = { name = ca_cos_prestige_gain months = 60 } 
             }
         }
         
@@ -821,7 +825,7 @@ ca_costa_rica_events.17 = {
         name = ca_costa_rica_events.17.a 
         # "¡Exigimos acción inmediata de la Federación!"
         add_modifier = {
-            name = ca_add_authority # Carrillo se fortalece en la indignación
+            name = ca_authority_boost # Carrillo se fortalece en la indignación
             months = 12
         }
         
@@ -882,15 +886,19 @@ ca_costa_rica_events.18 = {
         c:COS = {
             change_relations = { country = c:UCA value = 80 }
             add_loyalists = { value = 0.10 culture = cu:costa_rican }
+            set_variable = ca_cos_bocas_apoyo_federal # CAFM fix: el diario la usa y nadie la creaba
         }
         
         # Declaración automática de guerra (Jugada diplomática) contra Colombia por Panamá
         if = {
-            limit = { exists = c:CLM }
+            limit = {
+                exists = c:CLM
+                exists = s:STATE_PANAMA.region_state:CLM
+            }
             create_diplomatic_play = {
-                name = dp_conquer_state
+                type = dp_conquer_state # CAFM fix: la clave es type, no name
                 target_country = c:CLM
-                target_state = s:STATE_PANAMA
+                target_state = s:STATE_PANAMA.region_state:CLM # CAFM fix: estado, no state_region
             }
         }
     }
@@ -931,7 +939,7 @@ ca_costa_rica_events.19 = {
         set_variable = ca_gobierno_aguilar
         
         # Fortalecemos a la Intelligentsia
-        ig:ig_intelligentsia = { add_loyalists = { value = 0.05 } }
+        add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: efecto de pais
         
         # Bonos temporales a la legitimidad y migración
         add_modifier = { name = ca_el_gran_avanse_modifier months = 16 }
@@ -944,11 +952,11 @@ ca_costa_rica_events.19 = {
         set_variable = ca_gobierno_carrillo_2
         
         # Fortalecemos Fuerzas Armadas y Terratenientes
-        ig:ig_armed_forces = { add_loyalists = { value = 0.05 } }
+        add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces } # CAFM fix: efecto de pais
         
         # Gran aumento de autoridad, pero baja relación con la UCA
-        add_modifier = { name = ca_add_authority months = 36 }
-        ig:ig_intelligentsia = { add_radicals = { value = 0.05 } }
+        add_modifier = { name = ca_authority_boost months = 36 }
+        add_radicals = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: efecto de pais
         
         if = {
             limit = { exists = c:UCA }
@@ -966,9 +974,15 @@ ca_costa_rica_events.19 = {
         if = {
             limit = { exists = c:UCA }
             change_relations = { country = c:UCA value = 80 }
-            create_diplomatic_pact = {
-                country = c:UCA
-                type = alliance
+            # CAFM fix 1.14: la alianza ahora es un articulo de tratado
+            create_treaty = {
+                first_country = ROOT
+                second_country = c:UCA
+                is_draft = no
+                binding_period = { years = 5 }
+                articles_to_create = {
+                    { article = alliance }
+                }
             }
         }
         
@@ -986,7 +1000,7 @@ ca_costa_rica_events.191 = {
     placement = root
     title = ca_costa_rica_events.191.t
     desc = ca_costa_rica_events.191.d
-    icon = "gfx/interface/icons/event_icons/event_death.dds"
+    icon = "gfx/interface/icons/event_icons/event_skull.dds"
     
     trigger = { always = no } # Disparado por la Opción C del Evento 19
     
@@ -1037,12 +1051,12 @@ ca_costa_rica_events.20 = {
                 exists = c:UCA
                 is_subject_of = c:UCA 
             }
-            free_subject = yes # Rompe el vasallaje/sujeción
+            make_independent = yes # CAFM fix: free_subject no existe; rompe la sujecion
             change_relations = { country = c:UCA value = -80 }
         }
         
         # Bono masivo de Autoridad, pero muchos radicales
-        add_modifier = { name = ca_add_authority months = 60 }
+        add_modifier = { name = ca_authority_boost months = 60 }
         add_radicals = { value = 0.15 culture = cu:costa_rican }
         
         # Eventualmente Carrillo hará su Ley de Bases y Garantías (Evento 21)
@@ -1076,6 +1090,7 @@ ca_costa_rica_events.201 = {
         set_variable = ca_manifiesto_david_fired
         # Iniciamos la variable de preparación de la invasión en el país
         set_variable = { name = ca_morazan_invasion_prep value = 0 }
+        trigger_event = { id = ca_costa_rica_events.202 days = 210 } # CAFM fix: 202 estaba huerfano
     }
     
     option = {
@@ -1083,7 +1098,7 @@ ca_costa_rica_events.201 = {
         # "¡Quemen esos panfletos subversivos!" (Conservadora)
         default_option = yes
         add_modifier = { name = ca_federal_paralysis months = 6 } # Cuesta autoridad/recursos
-        ig:ig_intelligentsia = { add_radicals = { value = 0.05 } }
+        add_radicals = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: efecto de pais
         # Evita que el mito crezca (no suma a la invasión)
     }
     
@@ -1112,17 +1127,17 @@ ca_costa_rica_events.202 = {
     trigger = {
         this = c:COS
         has_variable = ca_manifiesto_david_fired
-        game_date >= 1841.1.1
-        game_date <= 1841.8.1
-        NOT = { has_variable = ca_sombras_lima_fired }
+        NOT = { has_variable = ca_sombras_lima_fired } # CAFM fix: sin ventana de fechas, lo encadena el 201
     }
     
     immediate = {
         set_variable = ca_sombras_lima_fired
+        trigger_event = { id = ca_costa_rica_events.203 days = 180 } # CAFM fix: 203 estaba huerfano
     }
     
     option = {
         name = ca_costa_rica_events.202.a 
+        default_option = yes
         # "Exijan su extradición a Lima." (Sabotaje)
         add_modifier = { name = ca_funding_separatists_modifier months = 12 } # Gastas burocracia/dinero
         if = {
@@ -1157,7 +1172,6 @@ ca_costa_rica_events.203 = {
     trigger = {
         this = c:COS
         has_variable = ca_sombras_lima_fired
-        game_date >= 1841.10.1
         NOT = { has_variable = ca_encrucijada_andina_fired }
     }
     
@@ -1167,20 +1181,21 @@ ca_costa_rica_events.203 = {
     
     option = {
         name = ca_costa_rica_events.203.a 
+        default_option = yes
         # Ruta Histórica: "Mi destino está en Centroamérica."
         trigger = {
-            check_variable = { name = ca_morazan_invasion_prep value >= 0 }
+            var:ca_morazan_invasion_prep >= 0 # CAFM fix: check_variable no existe
         }
         # ¡Morazán viene en camino! Esto activa la FASE 5 (Retorno del Águila) en 1842
         set_variable = ca_morazan_is_coming
-        trigger_event = { id = ca_costa_rica_events.22 days = 120 } # Salta a inicios de 1842
+        # CAFM fix: el capitulo D dispara Caldera (.340) por fecha; el .22 ahora sale con las elecciones
     }
     
     option = {
         name = ca_costa_rica_events.203.b 
         # Ruta Alternativa: "Acepto el mando en Perú."
         trigger = {
-            check_variable = { name = ca_morazan_invasion_prep value < 0 } # Solo si el jugador lo saboteó con éxito
+            var:ca_morazan_invasion_prep < 0 # Solo si el jugador lo saboteó con éxito
         }
         # Centroamérica se libra de Morazán para siempre
         add_modifier = { name = ca_el_gran_avanse_modifier years = 5 } # Estabilidad permanente
@@ -1212,10 +1227,10 @@ ca_costa_rica_events.21 = {
         activate_law = law_type:law_interventionism
         
         # Debilita a la Iglesia y a los oligarcas locales, fortalece burocracia
-        ig:ig_devout = { add_modifier = { name = ig_suppressed_modifier months = 60 } }
-        ig:ig_landowners = { add_radicals = { value = 0.05 } }
+        ig:ig_devout = { add_modifier = { name = ca_cos_ig_suppressed months = 60 } }
+        add_radicals = { value = 0.05 interest_group = ig:ig_landowners } # CAFM fix: efecto de pais
         
-        add_modifier = { name = ca_add_authority months = 120 }
+        add_modifier = { name = ca_authority_boost months = 120 }
         
         # Dispara o avanza tu diario del Boom Cafetalero (je_ca_agro_export_boom)
         if = {
@@ -1295,7 +1310,7 @@ ca_costa_rica_events.23 = {
         default_option = yes
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_very_large } }
         ig:ig_industrialists ?= { party = { add_momentum = momentum_medium } }
-        add_modifier = { name = education_reform_boost days = long_modifier_time }
+        add_modifier = { name = ca_cos_education_reform days = long_modifier_time }
     }
 
     # Opción B (Alternativa): Candidatura tradicionalista de José Rafael Gallegos
@@ -1570,7 +1585,7 @@ ca_costa_rica_events.330 = {
 		name = ca_costa_rica_events.330.a
 		default_option = yes
 		# La ley prevalece
-		ig:ig_intelligentsia ?= { add_loyalists = { value = 0.05 } }
+		add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: efecto de pais
 		if = {
 			limit = { exists = c:UCA }
 			change_relations = { country = c:UCA value = 20 }
@@ -1580,8 +1595,8 @@ ca_costa_rica_events.330 = {
 	option = {
 		name = ca_costa_rica_events.330.b
 		# Perdonar a los conspiradores para calmar a los cuarteles
-		ig:ig_armed_forces ?= { add_loyalists = { value = 0.05 } }
-		ig:ig_intelligentsia ?= { add_radicals = { value = 0.05 } }
+		add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces } # CAFM fix: efecto de pais
+		add_radicals = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: efecto de pais
 	}
 }
 

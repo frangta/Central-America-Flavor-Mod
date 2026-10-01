@@ -26,6 +26,7 @@ ca_prospecting.1 = {
 	
 	option = {
 		name = ca_prospecting.1.a
+		default_option = yes
 		scope:target_state = {
 			change_resource_potential = {
 				type = building_gold_mine
@@ -71,14 +72,14 @@ ca_prospecting.2 = {
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
 		any_scope_state = { # CAFM fix
-			has_potential_resource = bg_iron_mining
+			has_potential_resource = building_iron_mine # CAFM fix: espera building_type
 		}
 	}
 	
 	immediate = {
 		random_scope_state = { # CAFM fix
 			limit = {
-				has_potential_resource = bg_iron_mining
+				has_potential_resource = building_iron_mine # CAFM fix: espera building_type
 			}
 			save_scope_as = target_state
 		}
@@ -86,6 +87,7 @@ ca_prospecting.2 = {
 	
 	option = {
 		name = ca_prospecting.2.a
+		default_option = yes
 		scope:target_state = {
 			change_resource_potential = {
 				type = building_iron_mine
@@ -137,6 +139,7 @@ ca_prospecting.3 = {
 	
 	option = {
 		name = ca_prospecting.3.a
+		default_option = yes
 		scope:target_state = {
 			change_resource_potential = {
 				type = building_sulfur_mine
@@ -174,14 +177,14 @@ ca_prospecting.4 = {
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
 		any_scope_state = { # CAFM fix
-			has_potential_resource = bg_lead_mining
+			has_potential_resource = building_lead_mine # CAFM fix: espera building_type
 		}
 	}
 	
 	immediate = {
 		random_scope_state = { # CAFM fix
 			limit = {
-				has_potential_resource = bg_lead_mining
+				has_potential_resource = building_lead_mine # CAFM fix: espera building_type
 			}
 			save_scope_as = target_state
 		}
@@ -189,6 +192,7 @@ ca_prospecting.4 = {
 	
 	option = {
 		name = ca_prospecting.4.a
+		default_option = yes
 		scope:target_state = {
 			change_resource_potential = {
 				type = building_lead_mine
@@ -238,6 +242,7 @@ ca_prospecting.5 = {
 	
 	option = {
 		name = ca_prospecting.5.a
+		default_option = yes
 		scope:target_state = {
 			change_resource_potential = {
 				type = building_gold_mine
@@ -290,6 +295,7 @@ ca_prospecting.6 = {
 	
 	option = {
 		name = ca_prospecting.6.a
+		default_option = yes
 		scope:target_state = {
 			change_resource_potential = {
 				type = building_gold_mine
@@ -307,7 +313,7 @@ ca_prospecting.6 = {
 		name = ca_prospecting.6.b
 		add_treasury = 50000
 		scope:target_state = {
-			add_radicals = { value = 0.10 }
+			add_radicals_in_state = { value = 0.10 } # CAFM fix: add_radicals es efecto de pais
 		}
 		ig:ig_rural_folk = {
 			add_modifier = {
@@ -329,14 +335,14 @@ ca_prospecting.7 = {
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
 		any_scope_state = { # CAFM fix
-			has_potential_resource = bg_coal_mining
+			has_potential_resource = building_coal_mine # CAFM fix: espera building_type
 		}
 	}
 	
 	immediate = {
 		random_scope_state = { # CAFM fix
 			limit = {
-				has_potential_resource = bg_coal_mining
+				has_potential_resource = building_coal_mine # CAFM fix: espera building_type
 			}
 			save_scope_as = target_state
 		}
@@ -344,6 +350,7 @@ ca_prospecting.7 = {
 	
 	option = {
 		name = ca_prospecting.7.a
+		default_option = yes
 		scope:target_state = {
 			change_resource_potential = {
 				type = building_coal_mine
@@ -401,6 +408,7 @@ ca_prospecting.8 = {
 	
 	option = {
 		name = ca_prospecting.8.a
+		default_option = yes
 		scope:target_state = {
 			change_resource_potential = {
 				type = building_oil_rig
@@ -453,6 +461,7 @@ ca_prospecting.9 = {
 	
 	option = {
 		name = ca_prospecting.9.a
+		default_option = yes
 		scope:target_state = {
 			change_resource_potential = {
 				type = building_sulfur_mine
@@ -493,12 +502,13 @@ ca_prospecting.10 = {
 	
 	option = {
 		name = ca_prospecting.10.a
+		default_option = yes
 		add_modifier = { name = ca_prestige_scandal_modifier months = 60 } # CAFM fix: add_prestige no existe
 		every_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 			}
-			add_radicals = { value = 0.05 }
+			add_radicals_in_state = { value = 0.05 } # CAFM fix: add_radicals es efecto de pais
 		}
 	}
 	
@@ -537,6 +547,7 @@ ca_prospecting.11 = {
 	
 	option = {
 		name = ca_prospecting.11.a
+		default_option = yes
 		scope:target_state = {
 			state_region = { add_arable_land = 5 } # CAFM fix: es efecto de state_region
 			add_modifier = {
@@ -588,6 +599,7 @@ ca_prospecting.12 = {
 	
 	option = {
 		name = ca_prospecting.12.a
+		default_option = yes
 		scope:target_state = {
 			add_resource_potential = building_silk_plantation
 		}
@@ -638,6 +650,7 @@ ca_prospecting.13 = {
 	
 	option = {
 		name = ca_prospecting.13.a
+		default_option = yes
 		scope:target_state = {
 			add_resource_potential = building_tea_plantation
 		}
@@ -678,6 +691,7 @@ ca_prospecting.14 = {
 	
 	option = {
 		name = ca_prospecting.14.a
+		default_option = yes
 		scope:target_state = {
 			add_resource_potential = building_cotton_plantation
 		}
@@ -734,6 +748,7 @@ ca_prospecting.15 = {
 	
 	option = {
 		name = ca_prospecting.15.a
+		default_option = yes
 		scope:target_state = {
 			add_resource_potential = building_vineyard
 		}
@@ -777,6 +792,7 @@ ca_prospecting.16 = {
 	
 	option = {
 		name = ca_prospecting.16.a
+		default_option = yes
 		scope:target_state = {
 			add_resource_potential = building_opium_plantation
 		}
@@ -837,6 +853,7 @@ ca_prospecting.17 = {
 	
 	option = {
 		name = ca_prospecting.17.b
+		default_option = yes # CAFM fix: la .a tiene trigger
 		ig:ig_petty_bourgeoisie = {
 			add_modifier = {
 				name = ca_ig_approval_up
@@ -872,6 +889,7 @@ ca_prospecting.18 = {
 	
 	option = {
 		name = ca_prospecting.18.a
+		default_option = yes
 		scope:target_state = {
 			state_region = { add_arable_land = 5 } # CAFM fix: es efecto de state_region
 			
@@ -921,6 +939,7 @@ ca_prospecting.19 = {
 	
 	option = {
 		name = ca_prospecting.19.a
+		default_option = yes
 		scope:target_state = {
 			add_devastation = 10
 		}
@@ -980,6 +999,7 @@ ca_prospecting.20 = {
 	
 	option = {
 		name = ca_prospecting.20.a
+		default_option = yes
 		scope:target_state = {
 			# Victoria 3 maneja la contaminación mayormente por edificios, pero podemos forzarla
 			# mediante un modificador estatal que aumente el "state_pollution_generation_add"
@@ -1017,6 +1037,7 @@ ca_prospecting.21 = {
 	
 	option = {
 		name = ca_prospecting.21.a
+		default_option = yes
 		change_variable = {
 			name = ca_survey_progress
 			subtract = 10
@@ -1069,6 +1090,7 @@ ca_prospecting.22 = {
 	
 	option = {
 		name = ca_prospecting.22.a
+		default_option = yes
 		scope:target_state = {
 			add_devastation = 20
 			state_region = { add_arable_land = 2 } # CAFM fix: es efecto de state_region
@@ -1113,6 +1135,7 @@ ca_prospecting.23 = {
 	
 	option = {
 		name = ca_prospecting.23.a
+		default_option = yes
 		scope:target_state = {
 			add_devastation = 25
 			state_region = { add_arable_land = 2 } # CAFM fix: es efecto de state_region
@@ -1147,12 +1170,18 @@ ca_prospecting.24 = {
 		has_journal_entry = je_ca_national_geological_survey
 		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
-			any_province = { has_terrain = terrain_jungle } # CAFM fix: has_terrain es de provincia
+			OR = { # CAFM fix: any_province no funciona desde un estado; regiones selvaticas de CA
+				state_region = s:STATE_PANAMA
+				state_region = s:STATE_NICARAGUA
+				state_region = s:STATE_HONDURAS
+				state_region = s:STATE_GUATEMALA
+			}
 		}
 	}
 	
 	option = {
 		name = ca_prospecting.24.a
+		default_option = yes
 		add_treasury = -20000
 		change_variable = {
 			name = ca_survey_progress
@@ -1169,7 +1198,12 @@ ca_prospecting.24 = {
 		every_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
-				any_province = { has_terrain = terrain_jungle } # CAFM fix: has_terrain es de provincia
+				OR = { # CAFM fix: any_province no funciona desde un estado; regiones selvaticas de CA
+					state_region = s:STATE_PANAMA
+					state_region = s:STATE_NICARAGUA
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_GUATEMALA
+				}
 			}
 			add_modifier = {
 				name = ca_high_mortality_modifier
@@ -1191,14 +1225,14 @@ ca_prospecting.25 = {
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
 		any_scope_state = { # CAFM fix
-			has_potential_resource = bg_iron_mining
+			has_potential_resource = building_iron_mine # CAFM fix: espera building_type
 		}
 	}
 	
 	immediate = {
 		random_scope_state = { # CAFM fix
 			limit = {
-				has_potential_resource = bg_iron_mining
+				has_potential_resource = building_iron_mine # CAFM fix: espera building_type
 			}
 			save_scope_as = iron_state
 		}
@@ -1206,6 +1240,7 @@ ca_prospecting.25 = {
 	
 	option = {
 		name = ca_prospecting.25.a
+		default_option = yes
 		scope:iron_state = {
 			change_resource_potential = {
 				type = building_iron_mine
@@ -1283,6 +1318,7 @@ ca_prospecting.26 = {
 	
 	option = {
 		name = ca_prospecting.26.a
+		default_option = yes
 		add_treasury = 75000
 		change_variable = {
 			name = ca_survey_progress
@@ -1347,6 +1383,7 @@ ca_prospecting.27 = {
 	
 	option = {
 		name = ca_prospecting.27.a
+		default_option = yes
 		ig:ig_landowners = {
 			add_modifier = {
 				name = ca_ig_approval_up
@@ -1393,6 +1430,7 @@ ca_prospecting.28 = {
 	
 	option = {
 		name = ca_prospecting.28.a
+		default_option = yes
 		add_modifier = {
 			name = ca_arrested_spy_modifier
 			months = 24
@@ -1426,7 +1464,7 @@ ca_prospecting.29 = {
 		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 			any_scope_pop = { # CAFM fix
-				has_pop_culture = cu:mayan
+				has_pop_culture = cu:ca_kiche # CAFM fix: cu:mayan no existe
 			}
 		}
 	}
@@ -1436,7 +1474,7 @@ ca_prospecting.29 = {
 			limit = {
 				state_is_in_ca_central_america = yes
 				any_scope_pop = { # CAFM fix
-					has_pop_culture = cu:mayan
+					has_pop_culture = cu:ca_kiche # CAFM fix: cu:mayan no existe
 				}
 			}
 			save_scope_as = target_state
@@ -1445,6 +1483,7 @@ ca_prospecting.29 = {
 	
 	option = {
 		name = ca_prospecting.29.a
+		default_option = yes
 		add_modifier = {
 			name = ca_archaeological_find_modifier
 			months = 120
@@ -1483,6 +1522,7 @@ ca_prospecting.30 = {
 	
 	option = {
 		name = ca_prospecting.30.a
+		default_option = yes
 		add_treasury = -25000
 	}
 	
