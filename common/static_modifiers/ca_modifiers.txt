@@ -1159,6 +1159,37 @@ ca_ig_betrayal_anger_modifier = { # evento 105.a
 	interest_group_approval_add = -3
 }
 
+ca_cos_prestige_gain_small = { # antes add_prestige = 5
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_prestige_add = 5
+}
+
+ca_cos_prestige_gain = { # antes add_prestige = 10
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_prestige_add = 10
+}
+
+ca_cos_prestige_loss_small = { # antes add_prestige = -5
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_add = -5
+}
+
+ca_cos_prestige_loss = { # antes add_prestige = -20
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_add = -20
+}
+
+ca_cos_ig_suppressed = { # evento 21: Carrillo debilita a la Iglesia (scope interest_group)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	interest_group_approval_add = -3
+	interest_group_pol_str_mult = -0.25
+}
+
+ca_cos_education_reform = { # evento 23: Castro Madriz y la reforma educativa (scope country)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_weekly_innovation_add = 2
+}
+
 ######################Soon##########
 ##Anarcho-Liberal_stronghold = { }
 ##Removed_Anarcho-Liberal_stronghold = { }
