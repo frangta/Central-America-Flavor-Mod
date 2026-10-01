@@ -1,0 +1,1072 @@
+﻿ideology_ca_criollo_elite = {
+    icon = "gfx/interface/icons/ideology_icons/oligarchic.dds"
+    
+    lawgroup_governance_principles = {
+        law_monarchy = neutral  
+        law_presidential_republic = strongly_approve  
+        law_theocracy = neutral  
+        law_parliamentary_republic = strongly_disapprove  
+        law_council_republic = strongly_disapprove  
+    }
+    
+    lawgroup_distribution_of_power = {    
+        law_oligarchy = strongly_approve  
+        law_autocracy = neutral  
+        law_single_party_state = neutral  
+        law_technocracy = neutral  
+        law_anarchy = strongly_disapprove  
+        law_universal_suffrage = strongly_disapprove  
+        law_census_voting = strongly_disapprove  
+        law_wealth_voting = disapprove  
+        law_landed_voting = disapprove  
+    }
+    
+    lawgroup_bureaucracy = {
+        law_hereditary_bureaucrats = strongly_approve  
+        law_appointed_bureaucrats = disapprove  
+        law_elected_bureaucrats = disapprove  
+    }
+    
+    lawgroup_economic_system = {
+        law_agrarianism = strongly_approve  
+        law_traditionalism = neutral  
+        law_industry_banned = neutral  
+        law_laissez_faire = disapprove 
+        law_extraction_economy = neutral		
+        law_interventionism = strongly_disapprove  
+        law_cooperative_ownership = strongly_disapprove  
+        law_command_economy = strongly_disapprove  
+    }
+    
+    lawgroup_trade_policy = {
+        law_mercantilism = strongly_approve  
+        law_isolationism = neutral  
+        law_protectionism = disapprove  
+        law_free_trade = strongly_disapprove  
+    }
+    
+    lawgroup_land_reform = {
+        law_tenant_farmers = strongly_approve  
+        law_commercialized_agriculture = approve  
+        law_serfdom = neutral  
+        law_peasant_proprietorship = strongly_disapprove  
+        law_collectivized_agriculture = strongly_disapprove  
+    }
+}
+ideology_ca_caudillismo_jingoist = {
+	icon = "gfx/interface/icons/ideology_icons/jingoist.dds"
+
+	lawgroup_army_model = {
+	    law_ca_caudillismo = strongly_approve
+		law_professional_army = disapprove
+		law_mass_conscription = disapprove
+		law_national_militia = disapprove
+		law_peasant_levies = disapprove
+		law_regionalist_militia = strongly_disapprove
+		law_ca_comunal_milicia = strongly_disapprove
+	}
+
+	
+}
+ideology_law_regionalist_militia = {
+	icon = "gfx/interface/icons/ideology_icons/jingoist.dds"
+
+	lawgroup_army_model = {
+	    law_regionalist_militia = strongly_approve
+	    law_ca_comunal_milicia = neutral
+		law_professional_army = disapprove
+		law_mass_conscription = disapprove
+		law_national_militia = disapprove
+		law_peasant_levies = disapprove
+		law_ca_caudillismo = strongly_disapprove
+		
+	}
+
+	
+}
+ideology_ca_comunal_milicia = {
+	icon = "gfx/interface/icons/ideology_icons/jingoist.dds"
+
+		lawgroup_army_model = {
+	    
+	    law_ca_comunal_milicia = strongly_approve
+		law_professional_army = disapprove
+		law_mass_conscription = strongly_disapprove
+		law_national_militia = strongly_disapprove
+		law_peasant_levies = strongly_disapprove
+		law_regionalist_militia = strongly_disapprove
+		law_ca_caudillismo = strongly_disapprove
+		
+	}
+
+	
+}
+ideology_ca_liberal = {
+    icon = "gfx/interface/icons/ideology_icons/corporatist.dds"
+    
+    lawgroup_governance_principles = {
+        law_monarchy = strongly_disapprove  
+        law_presidential_republic = approve  
+        law_theocracy = strongly_disapprove  
+        law_parliamentary_republic = strongly_approve  
+        law_council_republic = disapprove  
+    }
+    
+    lawgroup_distribution_of_power = {    
+        law_universal_suffrage = strongly_approve  
+        law_census_voting = approve  
+        law_wealth_voting = disapprove  
+        law_technocracy = neutral  
+        law_single_party_state = strongly_disapprove  
+        law_oligarchy = strongly_disapprove  
+        law_landed_voting = disapprove  
+        law_anarchy = strongly_disapprove  
+        law_autocracy = strongly_disapprove  
+    }
+    
+    lawgroup_bureaucracy = {
+        law_hereditary_bureaucrats = strongly_disapprove  
+        law_appointed_bureaucrats = approve  
+        law_elected_bureaucrats = strongly_approve  
+    }
+    
+    lawgroup_economic_system = {
+        law_laissez_faire = strongly_approve  
+        law_agrarianism = disapprove  
+        law_interventionism = disapprove  
+        law_traditionalism = strongly_disapprove  
+        law_industry_banned = strongly_disapprove  
+        law_cooperative_ownership = neutral
+        law_extraction_economy = neutral		
+        law_command_economy = strongly_disapprove  
+    }
+    
+    lawgroup_trade_policy = {
+        law_free_trade = strongly_approve  
+        law_mercantilism = disapprove  
+        law_isolationism = disapprove  
+        law_protectionism = strongly_disapprove  
+    }
+    
+    lawgroup_land_reform = {    
+        law_commercialized_agriculture = strongly_approve  
+        law_peasant_proprietorship = approve  
+        law_collectivized_agriculture = neutral  
+        law_tenant_farmers = disapprove  
+        law_serfdom = strongly_disapprove  
+    }    
+}
+
+ideology_ca_constitutionalist = {
+    icon = "gfx/interface/icons/ideology_icons/reformer.dds"
+
+    lawgroup_governance_principles = {
+        law_presidential_republic = approve
+        law_parliamentary_republic = approve
+        law_corporate_state = neutral
+        law_monarchy = approve # Constitucional
+        law_theocracy = neutral
+        law_council_republic = disapprove
+    }
+
+    lawgroup_distribution_of_power = {
+        law_universal_suffrage = strongly_approve
+        law_census_voting = strongly_approve
+        law_wealth_voting = approve
+        law_landed_voting = neutral
+        law_single_party_state = neutral
+        law_technocracy = neutral
+        law_oligarchy = disapprove
+        law_autocracy = disapprove
+        law_anarchy = strongly_disapprove
+    }
+}
+
+ideology_central_american_federal = {
+    icon = "gfx/interface/icons/ideology_icons/unused/no_ideology.dds"
+
+    lawgroup_ca_state_structure = {
+        law_ca_central_american_unitary = strongly_disapprove
+        law_ca_central_american_confederated = disapprove
+        law_ca_central_american_federal = strongly_approve
+    }
+    
+    lawgroup_church_and_state = {
+        law_state_religion = strongly_disapprove
+        law_cultural_exclusion = strongly_disapprove
+        law_freedom_of_conscience = approve
+        law_total_separation = strongly_approve
+        law_state_atheism = strongly_disapprove
+    }
+	
+	lawgroup_army_model = {
+	    law_ca_federal_army = strongly_approve
+		law_national_militia = approve
+		law_professional_army = neutral
+		law_ca_comunal_milicia = strongly_disapprove
+		law_mass_conscription = strongly_disapprove
+        law_peasant_levies = strongly_disapprove
+		law_regionalist_militia = strongly_disapprove
+		law_ca_caudillismo = strongly_disapprove
+	
+	}
+	
+}
+
+ideology_central_american_reactionary = {
+    icon = "gfx/interface/icons/ideology_icons/reactionary.dds"
+
+    lawgroup_ca_state_structure = {
+        law_ca_central_american_unitary = strongly_disapprove 
+        law_ca_central_american_confederated = strongly_disapprove
+        law_ca_central_american_federal = strongly_disapprove
+    }
+
+    lawgroup_policing = {
+        law_local_police = strongly_approve
+        law_dedicated_police = strongly_disapprove
+        law_militarized_police = strongly_disapprove
+        law_no_police = neutral
+    }
+    
+    lawgroup_church_and_state = {
+        law_state_religion = approve
+        law_freedom_of_conscience = neutral
+        law_total_separation = strongly_disapprove
+        law_state_atheism = strongly_disapprove
+    }
+	
+	lawgroup_army_model = {
+	
+	}
+}
+
+ideology_central_american_reactionary_2 = {
+    icon = "gfx/interface/icons/ideology_icons/despotic_utopian.dds"
+
+
+    lawgroup_ca_state_structure = {
+        law_ca_central_american_unitary = strongly_approve
+        law_ca_central_american_confederated = strongly_disapprove
+        law_ca_central_american_federal = strongly_disapprove
+    }
+    
+    lawgroup_policing = {
+        law_local_police = strongly_approve
+        law_dedicated_police = strongly_disapprove
+        law_militarized_police = strongly_disapprove
+        law_no_police = neutral
+    }
+    
+    lawgroup_church_and_state = {
+        law_state_religion = approve
+
+        law_freedom_of_conscience = neutral
+        law_total_separation = strongly_disapprove
+        law_state_atheism = strongly_disapprove
+    }
+	
+	lawgroup_army_model = {
+	
+	}
+}
+
+ideology_ca_isolationist_expansionism = {
+    icon = "gfx/interface/icons/ideology_icons/frontier_expansionist.dds"
+    
+    lawgroup_colonization = {
+        law_no_colonial_affairs = disapprove
+        law_colonial_resettlement = approve
+        law_colonial_exploitation = disapprove
+        law_frontier_colonization = strongly_approve
+    }
+    
+    lawgroup_migration = {
+        law_closed_borders = strongly_approve
+        law_migration_controls = approve
+        law_no_migration_controls = disapprove
+    }
+
+    lawgroup_trade_policy = {        
+        law_isolationism = approve
+        law_protectionism = approve
+        law_mercantilism = neutral
+        law_free_trade = disapprove
+    }
+}
+
+ideology_ca_guilds = {
+    icon = "gfx/interface/icons/ideology_icons/traditionalist.dds"
+
+    lawgroup_economic_system = {        
+        law_traditionalism = strongly_approve
+        law_agrarianism = approve
+        law_interventionism = neutral
+        law_laissez_faire = disapprove
+        law_command_economy = strongly_disapprove
+        law_cooperative_ownership = disapprove
+        law_extraction_economy = neutral
+        law_industry_banned = neutral
+    }
+    
+    lawgroup_trade_policy = {        
+        law_isolationism = neutral
+        law_mercantilism = strongly_approve
+        law_protectionism = approve
+        law_free_trade = strongly_disapprove
+    }
+    lawgroup_taxation = {
+		law_consumption_based_taxation = strongly_approve
+		law_per_capita_based_taxation = disapprove
+		law_proportional_taxation = disapprove
+		law_graduated_taxation = disapprove
+		law_land_based_taxation = strongly_disapprove
+	}
+    lawgroup_labour_associations = {
+		law_combination_acts = neutral
+		law_guild_system = strongly_approve
+		law_anti_strike_laws = approve
+		law_corporatized_unions = strongly_approve
+		law_right_to_associate = strongly_disapprove
+		law_factory_councils = strongly_disapprove
+	}
+    lawgroup_welfare = {
+		law_poor_laws = neutral
+		law_no_social_security = disapprove
+		law_wage_subsidies = approve
+		law_old_age_pension = neutral
+	}    
+}
+
+ideology_ca_communalist = {
+    icon = "gfx/interface/icons/ideology_icons/communist.dds"
+
+    lawgroup_policing = {
+        law_local_police = approve
+        law_dedicated_police = disapprove
+        law_militarized_police = strongly_disapprove
+        law_no_police = neutral
+    }
+
+    lawgroup_army_model = {
+        law_national_militia = strongly_approve
+        law_professional_army = disapprove
+        law_mass_conscription = disapprove
+        law_peasant_levies = disapprove
+    }
+
+    lawgroup_slavery = {
+        law_slavery_banned = strongly_approve
+        law_legacy_slavery = strongly_disapprove
+        law_debt_slavery = strongly_disapprove
+        law_slave_trade = strongly_disapprove
+    }
+
+    lawgroup_citizenship = {
+        law_ethnostate = disapprove
+        law_national_supremacy = disapprove
+        law_racial_segregation = neutral
+        law_cultural_exclusion = neutral
+        law_multicultural = neutral
+    }    
+}
+
+ideology_ca_secularist = {
+    icon = "gfx/interface/icons/ideology_icons/liberal.dds"
+
+    lawgroup_church_and_state = {
+        law_state_religion = strongly_disapprove
+        law_freedom_of_conscience = approve
+        law_total_separation = neutral
+    }
+
+    lawgroup_education_system = {
+        law_public_schools = approve
+        law_private_schools = neutral
+        law_religious_schools = neutral    
+        law_no_schools = disapprove    
+    }
+
+    lawgroup_bureaucracy = {
+        law_hereditary_bureaucrats = strongly_disapprove
+        law_appointed_bureaucrats = disapprove
+        law_elected_bureaucrats = strongly_approve
+    }
+}
+
+ideology_ca_soberania_aristocratica = {
+    icon = "gfx/interface/icons/ideology_icons/moralist.dds"
+
+    lawgroup_taxation = {
+        law_consumption_based_taxation = approve
+        law_land_based_taxation = approve
+        law_per_capita_based_taxation = neutral
+        law_proportional_taxation = disapprove
+        law_graduated_taxation = strongly_disapprove
+    }
+
+    lawgroup_welfare = {
+        law_no_social_security = approve
+        law_poor_laws = neutral
+        law_wage_subsidies = disapprove
+        law_old_age_pension = disapprove
+    }
+}
+
+ideology_ca_criollo_liberal = {
+    icon = "gfx/interface/icons/ideology_icons/egalitarian.dds"
+
+    lawgroup_citizenship = {
+        law_multicultural = disapprove
+        law_ethnostate = disapprove
+        law_national_supremacy = disapprove
+        law_racial_segregation = neutral
+        law_cultural_exclusion = approve
+        law_subjecthood = strongly_disapprove    
+    }
+
+    lawgroup_policing = {
+        law_no_police = disapprove
+        law_dedicated_police = approve
+        law_local_police = strongly_disapprove
+        law_militarized_police = strongly_disapprove
+    }
+
+    lawgroup_internal_security = {
+        law_guaranteed_liberties = neutral
+        law_no_home_affairs = disapprove
+        law_national_guard = approve
+        law_secret_police = strongly_disapprove
+    }
+
+    lawgroup_free_speech = {
+        law_protected_speech = neutral
+        law_right_of_assembly = approve
+        law_censorship = neutral
+        law_outlawed_dissent = disapprove
+    }    
+    
+    lawgroup_rights_of_women = {
+        law_no_womens_rights = disapprove
+        law_women_own_property = approve
+        law_women_in_the_workplace = neutral
+        law_womens_suffrage = neutral
+    }
+
+    lawgroup_labor_rights = {
+        law_regulatory_bodies = strongly_approve
+        law_worker_protections = approve
+    }
+}
+
+ideology_ca_criollo_paternalistic = {
+    icon = "gfx/interface/icons/ideology_icons/republican_paternalistic.dds"
+    
+    lawgroup_governance_principles = {
+        law_monarchy = neutral
+        law_theocracy = neutral
+        law_presidential_republic = neutral
+        law_parliamentary_republic = disapprove
+        law_corporate_state = disapprove
+        law_social_monarchy = disapprove
+        law_council_republic = strongly_disapprove
+    }
+    
+    lawgroup_distribution_of_power = {
+        law_single_party_state = neutral
+        law_landed_voting = strongly_approve
+        law_oligarchy = strongly_approve
+        law_autocracy = approve
+        law_wealth_voting = neutral
+        law_census_voting = disapprove
+        law_universal_suffrage = strongly_disapprove
+        law_anarchy = strongly_disapprove
+        law_technocracy = strongly_disapprove
+    }
+
+    lawgroup_policing = {
+        law_local_police = strongly_approve
+        law_dedicated_police = neutral
+        law_militarized_police = neutral
+        law_no_police = disapprove
+    }
+    
+    lawgroup_economic_system = {        
+        law_traditionalism = disapprove
+        law_agrarianism = strongly_approve
+        law_interventionism = approve
+        law_industry_banned = disapprove
+        law_laissez_faire = strongly_disapprove
+        law_cooperative_ownership = strongly_disapprove
+        law_command_economy = disapprove # CORREGIDO TYPO
+        law_extraction_economy = disapprove
+    }
+    
+    lawgroup_trade_policy = {        
+        law_isolationism = disapprove
+        law_mercantilism = approve
+        law_protectionism = strongly_approve
+        law_free_trade = strongly_disapprove
+    }
+}
+
+ideology_ca_criollo_stratocratic = {
+    icon = "gfx/interface/icons/ideology_icons/stratocratic.dds"
+    
+    lawgroup_bureaucracy = {
+        law_hereditary_bureaucrats = approve
+        law_appointed_bureaucrats = neutral
+        law_elected_bureaucrats = disapprove
+    }
+    
+    lawgroup_army_model = {
+        law_peasant_levies = approve
+        law_professional_army = neutral
+        law_national_militia = strongly_disapprove
+        law_mass_conscription = disapprove
+    }
+    
+    lawgroup_land_reform = {
+        law_serfdom = strongly_approve
+        law_tenant_farmers = neutral
+        law_commercialized_agriculture = disapprove
+        law_peasant_proprietorship = strongly_disapprove
+        law_collectivized_agriculture = strongly_disapprove
+    }
+    lawgroup_citizenship = {
+        law_ethnostate = strongly_approve
+        law_national_supremacy = approve
+        law_racial_segregation = approve
+        law_cultural_exclusion = disapprove
+        law_multicultural = strongly_disapprove    
+    }
+
+    lawgroup_labor_rights = {
+        law_no_workers_rights = approve
+        law_regulatory_bodies = disapprove
+        law_worker_protections = disapprove
+    }
+}
+
+ideology_ca_artesanado = {
+    icon = "gfx/interface/icons/ideology_icons/agrarian.dds"
+
+    lawgroup_economic_system = { 
+		
+        
+        
+        law_industry_banned = approve
+        law_laissez_faire = strongly_disapprove
+        law_cooperative_ownership = strongly_disapprove
+        law_extraction_economy = disapprove
+        law_agrarianism = disapprove
+        law_traditionalism = disapprove
+        law_interventionism = approve
+        law_command_economy = strongly_disapprove
+    }
+
+    lawgroup_trade_policy = {        
+        law_isolationism = disapprove
+        law_protectionism = strongly_approve
+        law_mercantilism = disapprove
+        law_free_trade = strongly_disapprove
+    }    
+}
+
+ideology_ca_agroexportadores = {
+    icon = "gfx/interface/icons/ideology_icons/agrarian.dds"
+
+    lawgroup_economic_system = {        
+        law_agrarianism = approve
+        law_industry_banned = neutral
+        law_traditionalism = neutral
+        law_interventionism = neutral
+        law_cooperative_ownership = neutral
+		law_extraction_economy = disapprove
+        law_laissez_faire = strongly_disapprove
+        law_command_economy = strongly_disapprove
+    }
+
+    lawgroup_trade_policy = {        
+        law_isolationism = strongly_disapprove
+        law_protectionism = strongly_disapprove
+        law_mercantilism = disapprove
+        law_free_trade = strongly_approve
+    }
+
+    lawgroup_land_reform = {
+        law_serfdom = strongly_disapprove
+        law_tenant_farmers = disapprove
+        law_commercialized_agriculture = neutral
+        law_collectivized_agriculture = neutral
+        law_peasant_proprietorship = approve
+    }        
+
+    lawgroup_taxation = {
+        law_consumption_based_taxation = approve
+        law_per_capita_based_taxation = neutral
+        law_proportional_taxation = neutral
+        law_graduated_taxation = neutral
+        law_land_based_taxation = disapprove
+    }    
+}
+
+ideology_ca_colonialist = {
+    icon = "gfx/interface/icons/ideology_icons/colonialist.dds"
+    lawgroup_economic_system = {
+        law_laissez_faire = disapprove
+        law_interventionism = neutral
+        law_agrarianism = approve
+        law_traditionalism = disapprove
+        law_cooperative_ownership = strongly_disapprove
+        law_command_economy = strongly_disapprove
+        law_industry_banned = approve
+        law_extraction_economy = strongly_approve
+    }
+
+    lawgroup_trade_policy = {
+        law_free_trade = approve
+        law_mercantilism = neutral
+        law_protectionism = disapprove
+        law_isolationism = strongly_disapprove
+    }
+
+    lawgroup_colonization = {
+        law_colonial_exploitation = approve
+        law_no_colonial_affairs = neutral
+        law_colonial_resettlement = neutral
+        law_frontier_colonization = neutral
+    }
+
+    lawgroup_labor_rights = {
+        law_no_workers_rights = neutral
+        law_regulatory_bodies = disapprove
+        law_worker_protections = strongly_disapprove
+    }
+
+    lawgroup_land_reform = {
+        law_collectivized_agriculture = strongly_disapprove
+        law_serfdom = disapprove
+        law_tenant_farmers = neutral
+        law_peasant_proprietorship = disapprove
+        law_commercialized_agriculture = approve
+    }
+}
+
+ideology_ca_enclavist = {
+    icon = "gfx/interface/icons/ideology_icons/enclavist.dds"
+
+    lawgroup_distribution_of_power = {
+        law_oligarchy = strongly_approve
+        law_wealth_voting = disapprove
+        law_technocracy = approve
+        law_landed_voting = neutral
+        law_census_voting = disapprove
+        law_single_party_state = disapprove
+        law_autocracy = strongly_approve
+        law_universal_suffrage = strongly_disapprove
+        law_anarchy = strongly_disapprove
+    }
+
+    lawgroup_governance_principles = {
+        law_monarchy = neutral
+        law_presidential_republic = neutral
+        law_parliamentary_republic = neutral
+        law_corporate_state = neutral
+        law_theocracy = disapprove
+        law_council_republic = strongly_disapprove
+    }
+
+    lawgroup_citizenship = {
+        law_ethnostate = neutral
+        law_national_supremacy = approve
+        law_racial_segregation = approve
+        law_cultural_exclusion = disapprove
+        law_multicultural = strongly_disapprove
+    }
+
+    lawgroup_policing = {
+        law_militarized_police = strongly_approve
+        law_dedicated_police = approve
+        law_local_police = neutral
+        law_no_police = disapprove
+    }
+
+    lawgroup_bureaucracy = {
+        law_hereditary_bureaucrats = disapprove
+        law_appointed_bureaucrats = approve
+        law_elected_bureaucrats = disapprove
+    }
+}
+
+ideology_ca_radical_enclavist = { #Nacional Enclavist
+    icon = "gfx/interface/icons/ideology_icons/enclavist.dds"
+
+    lawgroup_colonization = {
+        law_no_colonial_affairs = strongly_disapprove
+        law_colonial_resettlement = strongly_disapprove
+        law_colonial_exploitation = strongly_approve
+        law_frontier_colonization = strongly_disapprove
+    }
+
+    lawgroup_distribution_of_power = {
+        law_oligarchy = strongly_approve
+        law_wealth_voting = disapprove
+        law_technocracy = approve
+        law_landed_voting = disapprove
+        law_census_voting = strongly_disapprove
+        law_single_party_state = strongly_disapprove
+        law_autocracy = strongly_approve
+        law_universal_suffrage = strongly_disapprove
+        law_anarchy = strongly_disapprove
+    }
+
+    lawgroup_governance_principles = {
+        law_monarchy = neutral
+        law_presidential_republic = neutral
+        law_parliamentary_republic = neutral
+        law_corporate_state = neutral
+        law_theocracy = disapprove
+        law_council_republic = strongly_disapprove
+    }
+
+    lawgroup_citizenship = {
+        law_ethnostate = strongly_approve
+        law_national_supremacy = strongly_disapprove
+        law_racial_segregation = strongly_disapprove
+        law_cultural_exclusion = strongly_disapprove
+        law_multicultural = strongly_disapprove
+    }
+
+    lawgroup_policing = {
+        law_militarized_police = strongly_approve
+        law_dedicated_police = approve
+        law_local_police = neutral
+        law_no_police = strongly_disapprove
+    }
+
+    lawgroup_bureaucracy = {
+        law_hereditary_bureaucrats = strongly_disapprove
+        law_appointed_bureaucrats = approve
+        law_elected_bureaucrats = strongly_disapprove
+    }
+}
+
+ideology_ca_autocratic_autonomist = {
+    icon = "gfx/interface/icons/ideology_icons/unused/no_ideology.dds"
+    
+
+    lawgroup_ca_state_structure = {
+        law_ca_central_american_unitary = strongly_disapprove
+        law_ca_central_american_federal = strongly_disapprove
+        law_ca_central_american_confederated = strongly_approve
+    }
+
+    lawgroup_governance_principles = {
+        law_monarchy = strongly_approve
+        law_presidential_republic = approve
+        law_parliamentary_republic = disapprove
+        law_theocracy = approve
+        law_council_republic = strongly_disapprove
+    }
+
+    lawgroup_distribution_of_power = {
+        law_autocracy = strongly_approve
+        law_oligarchy = approve
+        law_landed_voting = disapprove
+        law_wealth_voting = strongly_disapprove
+        law_census_voting = strongly_disapprove
+        law_universal_suffrage = strongly_disapprove
+        law_anarchy = strongly_disapprove
+    }
+
+    lawgroup_policing = {
+        law_local_police = approve
+        law_dedicated_police = disapprove
+        law_militarized_police = strongly_disapprove
+        law_no_police = neutral
+    }
+
+    lawgroup_army_model = {
+        law_national_militia = strongly_approve
+        law_professional_army = neutral
+        law_mass_conscription = disapprove
+        law_peasant_levies = disapprove
+    }
+}
+ideology_ca_servile = {
+	icon = "gfx/interface/icons/ideology_icons/paternalistic.dds"
+
+	lawgroup_distribution_of_power = {
+		law_oligarchy = strongly_approve
+		law_autocracy = approve
+		law_universal_suffrage = strongly_disapprove
+	}
+
+	lawgroup_church_and_state = {
+		law_state_religion = strongly_approve
+		law_total_separation = strongly_disapprove
+	}
+
+	lawgroup_trade_policy = {
+		law_mercantilism = strongly_approve
+		law_protectionism = approve
+		law_free_trade = disapprove
+	}
+}
+
+
+
+#Liberalismo Cafetalero (Positivismo Autoritario)
+ideology_ca_coffee_liberal = {
+	icon = "gfx/interface/icons/ideology_icons/market_liberal.dds"
+
+	lawgroup_economic_system = {
+		law_laissez_faire = approve
+		law_interventionism = neutral
+		law_traditionalism = strongly_disapprove
+	}
+
+	lawgroup_trade_policy = {
+		law_free_trade = strongly_approve
+		law_protectionism = disapprove
+	}
+
+	lawgroup_army_model = {
+		law_professional_army = strongly_approve
+		law_national_militia = strongly_disapprove
+	}
+
+	lawgroup_policing = {
+		law_dedicated_police = strongly_approve
+		law_militarized_police = approve
+		law_local_police = disapprove
+	}
+	
+	lawgroup_land_reform = {
+		law_commercialized_agriculture = strongly_approve
+		law_peasant_proprietorship = disapprove
+	}
+	
+	lawgroup_labor_rights = {
+		law_worker_protections = strongly_disapprove
+	}
+}
+
+#Indigenismo Comunal (Levantamientos Nativos)
+ideology_ca_indigenous_communalism = {
+	icon = "gfx/interface/icons/ideology_icons/agrarian.dds"
+
+	lawgroup_land_reform = {
+		law_peasant_proprietorship = strongly_approve
+		law_collectivized_agriculture = approve
+		law_commercialized_agriculture = strongly_disapprove
+		law_serfdom = strongly_disapprove
+	}
+
+	lawgroup_citizenship = {
+		law_multicultural = strongly_approve
+		law_national_supremacy = strongly_disapprove
+		law_racial_segregation = disapprove
+	}
+
+	lawgroup_policing = {
+		law_dedicated_police = strongly_disapprove
+	}
+}
+
+
+
+#Separatismo Soberano (Localismo Radical)
+ideology_ca_separatist = {
+	icon = "gfx/interface/icons/ideology_icons/ethno_nationalist.dds"
+
+	lawgroup_army_model = {
+		law_national_militia = strongly_approve
+		law_professional_army = disapprove
+	}
+
+	lawgroup_migration = {
+		law_closed_borders = strongly_approve
+		law_migration_controls = approve
+		law_no_migration_controls = strongly_disapprove
+	}
+
+	lawgroup_trade_policy = {
+		law_isolationism = strongly_approve
+	}
+}
+
+#Colaboracionismo Enclavista ("Vende-Patrias")
+ideology_ca_enclavist_pick = {
+	icon = "gfx/interface/icons/ideology_icons/capitalist.dds"
+
+	lawgroup_economic_system = {
+		law_laissez_faire = strongly_approve
+		law_interventionism = disapprove
+	}
+
+	lawgroup_trade_policy = {
+		law_free_trade = strongly_approve
+		law_isolationism = strongly_disapprove
+		law_protectionism = strongly_disapprove
+	}
+
+	lawgroup_migration = {
+		law_no_migration_controls = strongly_approve
+	}
+	
+	lawgroup_taxation = {
+		law_graduated_taxation = strongly_disapprove
+	}
+}
+
+ideology_ca_moralist = {
+	icon = "gfx/interface/icons/ideology_icons/moralist.dds"
+	
+	lawgroup_governance_principles = {
+		law_monarchy = strongly_approve
+		law_theocracy = approve	
+		law_presidential_republic = neutral
+		law_parliamentary_republic = neutral
+		law_council_republic = strongly_disapprove
+	}
+
+	lawgroup_church_and_state = {
+		law_state_religion = strongly_approve
+		law_freedom_of_conscience = neutral
+		law_total_separation = strongly_disapprove
+		law_state_atheism = strongly_disapprove
+	}
+
+	lawgroup_citizenship = {
+		law_ethnostate = strongly_disapprove
+		law_national_supremacy = disapprove
+		law_racial_segregation = neutral
+		law_cultural_exclusion = approve
+		law_multicultural = strongly_approve	
+	}
+	lawgroup_slavery = {
+		law_slavery_banned = strongly_approve
+		law_legacy_slavery = disapprove
+		law_debt_slavery = strongly_disapprove
+		law_slave_trade = strongly_disapprove
+	}
+}
+ideology_ca_papal_moralist = {
+	icon = "gfx/interface/icons/ideology_icons/papal_moralist.dds"
+	
+	lawgroup_governance_principles = {
+		law_monarchy = approve
+		law_theocracy = strongly_approve
+		law_presidential_republic = neutral
+		law_parliamentary_republic = neutral
+		law_council_republic = strongly_disapprove
+	}
+
+	lawgroup_church_and_state = {
+		law_state_religion = strongly_approve
+		law_freedom_of_conscience = neutral
+		law_total_separation = strongly_disapprove
+		law_state_atheism = strongly_disapprove
+	}
+
+	lawgroup_citizenship = {
+		law_ethnostate = strongly_disapprove
+		law_national_supremacy = disapprove
+		law_racial_segregation = neutral
+		law_cultural_exclusion = approve
+		law_multicultural = strongly_approve	
+	}
+	lawgroup_slavery = {
+		law_slavery_banned = strongly_approve
+		law_legacy_slavery = disapprove
+		law_debt_slavery = strongly_disapprove
+		law_slave_trade = strongly_disapprove
+	}
+}
+# Criollismo Afrocaribeño: costa de Bluefields, Limón y Belice
+ideology_ca_creole_caribbean = {
+	icon = "gfx/interface/icons/ideology_icons/market_liberal.dds"
+ 
+	lawgroup_church_and_state = {
+		law_freedom_of_conscience = strongly_approve
+		law_state_religion = strongly_disapprove
+	}
+	lawgroup_trade_policy = {
+		law_free_trade = strongly_approve
+		law_isolationism = strongly_disapprove
+	}
+	lawgroup_citizenship = {
+		law_multicultural = strongly_approve
+		law_ethnostate = strongly_disapprove
+		law_national_supremacy = strongly_disapprove
+	}
+	lawgroup_slavery = {
+		law_slavery_banned = strongly_approve
+		law_debt_slavery = strongly_disapprove
+	}
+	lawgroup_economic_system = {
+		law_laissez_faire = approve
+	}
+	lawgroup_free_speech = {
+		law_protected_speech = approve
+	}
+}
+ 
+# Masonería Liberal: red de logias del liberalismo centroamericano
+ideology_ca_masonic_liberal = {
+	icon = "gfx/interface/icons/ideology_icons/liberal.dds"
+ 
+	lawgroup_church_and_state = {
+		law_total_separation = strongly_approve
+		law_freedom_of_conscience = approve
+		law_state_religion = strongly_disapprove
+	}
+	lawgroup_education_system = {
+		law_public_schools = strongly_approve
+		law_religious_schools = strongly_disapprove
+	}
+	lawgroup_free_speech = {
+		law_protected_speech = strongly_approve
+		law_right_of_assembly = approve
+		law_outlawed_dissent = strongly_disapprove
+	}
+}
+ 
+# Mutualismo Artesano: sociedades de artesanos y socorro mutuo (1870-1890)
+ideology_ca_mutualism = {
+	icon = "gfx/interface/icons/ideology_icons/egalitarian.dds"
+ 
+	lawgroup_labour_associations = {
+		law_right_to_associate = strongly_approve
+		law_guild_system = approve
+		law_combination_acts = strongly_disapprove
+	}
+	lawgroup_welfare = {
+		law_poor_laws = strongly_approve
+		law_no_social_security = strongly_disapprove
+	}
+	lawgroup_labor_rights = {
+		law_worker_protections = approve
+	}
+}
+ 
+# Confederacionismo Pactista: Pacto de Chinandega / Confederación 1842-44
+ideology_ca_pact_confederalist = {
+	icon = "gfx/interface/icons/ideology_icons/reformer.dds"
+ 
+	lawgroup_ca_state_structure = {
+		law_ca_central_american_confederated = strongly_approve
+		law_ca_central_american_federal = approve
+		law_ca_central_american_unitary = strongly_disapprove
+	}
+	lawgroup_governance_principles = {
+		law_presidential_republic = strongly_approve
+	}
+	lawgroup_distribution_of_power = {
+		law_census_voting = approve
+		law_autocracy = strongly_disapprove
+		law_single_party_state = strongly_disapprove
+	}
+}

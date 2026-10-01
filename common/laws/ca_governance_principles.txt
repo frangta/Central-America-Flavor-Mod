@@ -1,0 +1,197 @@
+﻿# ====================================================================
+# CAFM - PRINCIPIOS DE GOBIERNO (lawgroup_governance_principles)
+# ====================================================================
+# Leyes INDEPENDIENTES. Se quedan en principios de gobierno.
+#
+# IMPORTANTE: el título y la sucesión del gobernante salen de
+# common/government_types, que pregunta por la ley de principios de
+# gobierno. Como estas leyes no tienen parent, ningún tipo de gobierno
+# vanilla las reconoce. Los tipos de gobierno para estas 4 leyes están en
+# common/government_types/ca_government_types_laws.txt (archivo nuevo).
+#
+# Las elecciones siguen dependiendo de la ley de DISTRIBUCIÓN DEL PODER
+# (sus modificadores de voto), así que estas leyes conviven con ella.
+#
+# Cambios: se quitó is_country_type = decentralized (los países
+# centroamericanos no son "decentralized" y las leyes nunca estaban
+# disponibles) y los on_activate/on_deactivate vacíos.
+# ====================================================================
+
+# --------------------------------------------------------------------
+# CAFETOCRACIA (República cafetalera)
+# El Estado al servicio de los barones del café.
+# Requiere un régimen agrario de grandes propietarios.
+# --------------------------------------------------------------------
+law_ca_coffeacracia = {
+	group = lawgroup_governance_principles
+	icon = "gfx/interface/icons/law_icons/oligarchy.dds"
+	progressiveness = -30
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	can_enact = {
+		only_latin_centralamericans_cultures = yes
+		OR = {
+			has_law = law_type:law_land_reform_coffee_oligarchy
+			has_law = law_type:law_land_reform_hacienda_system
+			has_law_or_variant = law_type:law_tenant_farmers
+			has_law_or_variant = law_type:law_commercialized_agriculture
+		}
+	}
+
+	modifier = {
+		interest_group_ig_landowners_pol_str_mult = 0.30
+        building_group_bg_plantations_throughput_add = 0.10
+        building_coffee_plantation_throughput_add = 0.10
+        country_institution_schools_max_investment_add = -1
+        country_bureaucracy_mult = -0.10
+        state_tax_capacity_mult = -0.05
+		country_legitimacy_base_add = 5
+
+	}
+
+	ai_enact_weight_modifier = {
+		value = 0
+		if = {
+			limit = {
+				any_interest_group = {
+					is_in_government = yes
+					OR = {
+						has_ideology = ideology:ideology_ca_coffee_liberal
+						leader ?= { has_ideology = ideology:ideology_coffee_liberalism }
+					}
+				}
+			}
+			add = 300
+		}
+	}
+}
+
+# --------------------------------------------------------------------
+# TECNOCRACIA POSITIVISTA ("Los Científicos", "Orden y Progreso")
+# Requiere una élite letrada mínima.
+# --------------------------------------------------------------------
+law_ca_tecnocracy = {
+	group = lawgroup_governance_principles
+	icon = "gfx/interface/icons/law_icons/technocracy.dds"
+	progressiveness = 40
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	can_enact = {
+		only_latin_centralamericans_cultures = yes
+		literacy_rate >= 0.20
+	}
+
+	modifier = {
+        interest_group_ig_intelligentsia_pol_str_mult = 0.25
+        interest_group_ig_armed_forces_pol_str_mult = 0.10
+        interest_group_ig_devout_pol_str_mult = -0.20
+        country_weekly_innovation_mult = 0.10
+        state_assimilation_mult = 0.25
+        country_bureaucracy_mult = 0.10
+        country_legitimacy_base_add = 10
+	}
+
+	ai_enact_weight_modifier = {
+		value = 0
+		if = {
+			limit = {
+				any_interest_group = {
+					is_in_government = yes
+					leader ?= { has_ideology = ideology:ideology_ca_cientifico_technocracy }
+				}
+			}
+			add = 300
+		}
+	}
+}
+
+# --------------------------------------------------------------------
+# JUNTA MILITAR
+# Gobiernan los cuarteles. Requiere a las Fuerzas Armadas en el gobierno.
+# --------------------------------------------------------------------
+law_ca_junta = {
+	group = lawgroup_governance_principles
+	icon = "gfx/interface/icons/law_icons/autocracy.dds"
+	progressiveness = -50
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	can_enact = {
+		only_latin_centralamericans_cultures = yes
+		ca_armed_forces_in_government = yes
+	}
+
+	modifier = {
+        interest_group_ig_armed_forces_pol_str_mult = 0.50
+        country_authority_add = 100
+        country_legitimacy_base_add = -20
+        state_turmoil_effects_mult = -0.20
+        political_movement_radicalism_add = 0.10
+	}
+
+	ai_enact_weight_modifier = {
+		value = 0
+		if = {
+			limit = {
+				any_interest_group = {
+					is_in_government = yes
+					is_interest_group_type = ig_armed_forces
+					leader ?= { has_ideology = ideology:ideology_ca_tropical_bonapartism }
+				}
+			}
+			add = 300
+		}
+	}
+}
+
+# --------------------------------------------------------------------
+# CONSEJO DE JUNTA (transición cívico-militar)
+# Reparte el poder entre militares, letrados y clases medias.
+# Estable pero lento: las leyes avanzan más despacio.
+# --------------------------------------------------------------------
+law_ca_consejo_junta = {
+	group = lawgroup_governance_principles
+	icon = "gfx/interface/icons/law_icons/presidential_republic.dds"
+	progressiveness = 10
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	can_enact = {
+		only_latin_centralamericans_cultures = yes
+		OR = {
+			ca_armed_forces_in_government = yes
+			has_law = law_type:law_ca_junta
+		}
+	}
+
+	modifier = {
+        interest_group_ig_armed_forces_pol_str_mult = 0.10
+        interest_group_ig_intelligentsia_pol_str_mult = 0.10
+        interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.10
+        country_legitimacy_base_add = 10
+        country_authority_add = 25
+		country_law_enactment_speed_mult = -0.15
+	}
+
+	ai_enact_weight_modifier = {
+		value = 0
+		# Salida natural de una junta impopular.
+		if = {
+			limit = {
+				has_law = law_type:law_ca_junta
+				legitimacy < 25
+			}
+			add = 400
+		}
+	}
+}

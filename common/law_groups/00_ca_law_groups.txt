@@ -1,0 +1,16 @@
+﻿lawgroup_ca_state_structure = {
+	law_group_category = power_structure
+	base_enactment_days = 200
+	enactment_approval_mult = 2.0
+	ideological_opinion_impact = 2.0
+	affected_by_regime_change = no
+
+	enable = {
+		only_latin_centralamericans_cultures = yes
+                has_variable = ca_organization_apro
+	}
+
+	change_allowed_trigger = {
+		only_latin_centralamericans_cultures = yes
+	}
+}

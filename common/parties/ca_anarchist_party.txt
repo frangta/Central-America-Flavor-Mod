@@ -1,0 +1,79 @@
+﻿ca_anarchist_party = {
+	color = { 30 30 30 }
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_ca_anarchist_gua
+				trigger = { c:GUA ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_anarchist_els
+				trigger = { c:ELS ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_anarchist_hon
+				trigger = { c:HON ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_anarchist_nic
+				trigger = { c:NIC ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_anarchist_cos
+				trigger = { c:COS ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_anarchist_generic
+				trigger = { always = yes }
+			}
+		}
+	}
+	icon = { default = "gfx/interface/icons/political_parties/anarchist.dds" }
+	unlocking_technologies = { anarchism }
+
+	valid_for_country = { is_ca_culture_country = yes }
+	available_for_interest_group = {
+		owner = { country_has_voting_franchise = yes }
+		leader ?= {
+			OR = {
+				has_ideology = ideology:ideology_anarchist
+				has_ideology = ideology:ideology_ca_tropical_utopian
+			}
+		}
+	}
+
+	join_weight = {
+		value = 0
+		add = { value = -5 desc = "ca_party_join_base" }
+
+		# Líder anarquista (vanilla) o utopista selvático
+		if = {
+			limit = { leader ?= { has_ideology = ideology:ideology_anarchist } }
+			add = { value = 15 desc = "ca_party_join_leader_core" }
+		}
+		if = {
+			limit = { leader ?= { has_ideology = ideology:ideology_ca_tropical_utopian } }
+			add = { value = 12 desc = "ca_party_join_leader_core" }
+		}
+		# Comunalismo: tradición de autogestión campesina e indígena
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_communalist
+					has_ideology = ideology:ideology_ca_indigenous_communalism
+					has_ideology = ideology:ideology_ca_mutualism
+				}
+			}
+			add = { value = 5 desc = "ca_party_join_ig_affinity" }
+		}
+		if = {
+			limit = {
+				OR = {
+					is_interest_group_type = ig_rural_folk
+					is_interest_group_type = ig_trade_unions
+				}
+			}
+			add = { value = 3 desc = "ca_party_join_ig_type" }
+		}
+	}
+}

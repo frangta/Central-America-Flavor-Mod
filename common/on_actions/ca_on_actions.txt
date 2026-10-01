@@ -1,0 +1,167 @@
+﻿on_acquired_technology = {
+	on_actions = { ca_on_acquired_technology }
+}
+
+ca_on_acquired_technology = {
+	effect = {
+		if = {
+			limit = {
+				is_ca_culture_country = yes
+				has_technology_researched = prospecting
+				NOT = { has_variable = ca_survey_progress }
+			}
+			set_variable = {
+				name = ca_survey_progress
+				value = 0
+			}
+		}
+	}
+}
+
+on_game_started = {
+	on_actions = { ca_on_game_started }
+}
+
+ca_on_game_started = {
+	effect = {
+		every_country = {
+			limit = {
+				is_ca_culture_country = yes
+				has_technology_researched = prospecting
+				NOT = { has_variable = ca_survey_progress }
+			}
+			set_variable = {
+				name = ca_survey_progress
+				value = 0
+			}
+		}
+	}
+}
+
+on_yearly_pulse_country = {
+	on_actions = { ca_yearly_pulse_country }
+}
+
+ca_yearly_pulse_country = {
+	events = {
+		ca_central_america.2
+		ca_central_america.8
+		ca_central_america.9
+		ca_central_america.10
+		ca_central_america.11
+		ca_central_america.16
+		ca_central_america.22
+		ca_central_america.43
+		ca_central_america.44
+		ca_central_america.52
+		ca_central_america.55
+		ca_central_america.58
+		ca_central_america.61
+		ca_central_america.65
+		ca_central_america.67
+		ca_central_america.71
+		ca_central_america.73
+		ca_central_america.75
+		ca_central_america.78
+		ca_central_america.79
+		ca_central_america.34
+        ca_central_america.35
+        ca_central_america.36
+        ca_central_america.37
+        ca_central_america.38
+        ca_central_america.39
+        ca_central_america.40
+        ca_central_america.41
+        ca_central_america.88
+        ca_central_america.89
+        ca_central_america.90
+        ca_central_america.91
+        ca_central_america.92
+        ca_central_america.93
+        ca_central_america.94
+        ca_central_america.95
+        ca_central_america.96
+        ca_central_america.97
+        ca_central_america.98
+        ca_central_america.101
+        ca_central_america.102
+        ca_central_america.103
+        ca_central_america.104
+        ca_central_america.105
+        ca_central_america.106
+        ca_central_america.107
+        ca_central_america.108
+        ca_central_america.109
+        ca_central_america.110
+        ca_central_america.111
+        ca_central_america.112
+        ca_central_america.113
+        ca_central_america.114
+        ca_central_america.115
+        ca_central_america.116
+        ca_central_america.117
+        ca_central_america.118
+        ca_central_america.120
+        ca_central_america.121
+        ca_central_america.122
+        ca_costa_rica_events.2
+        ca_costa_rica_events.3
+        ca_costa_rica_events.6
+        ca_costa_rica_events.7
+        ca_costa_rica_events.8
+        ca_el_salvador_events.9
+        ca_el_salvador_events.10
+        ca_el_salvador_events.11
+        ca_el_salvador_events.12
+        ca_el_salvador_events.13
+        ca_guatemala_events.5
+        ca_guatemala_events.6
+        ca_guatemala_events.7
+        ca_guatemala_events.8
+        ca_honduras_events.14
+        ca_honduras_events.15
+        ca_honduras_events.16
+        ca_honduras_events.17
+        ca_honduras_events.18
+        ca_nicaragua_events.19
+        ca_nicaragua_events.20
+        ca_nicaragua_events.21
+        ca_nicaragua_events.22
+        ca_nicaragua_events.23
+        ca_nicaragua_events.24
+        ca_nicaragua_events.25
+        ca_prospecting.1 
+        ca_prospecting.2 
+        ca_prospecting.3 
+        ca_prospecting.4 
+        ca_prospecting.5 
+        ca_prospecting.6 
+        ca_prospecting.7 
+        ca_prospecting.8 
+        ca_prospecting.9 
+        ca_prospecting.10
+        ca_prospecting.11
+        ca_prospecting.12
+        ca_prospecting.13
+        ca_prospecting.14
+        ca_prospecting.15
+        ca_prospecting.16
+        ca_prospecting.17
+        ca_prospecting.18
+        ca_prospecting.19
+        ca_prospecting.20
+        ca_prospecting.21
+        ca_prospecting.22
+        ca_prospecting.23
+        ca_prospecting.24
+        ca_prospecting.25
+        ca_prospecting.26
+        ca_prospecting.27
+        ca_prospecting.28
+        ca_prospecting.29
+        ca_prospecting.30
+        ca_setup_events.1
+        ca_setup_events.3
+        ca_setup_events.4
+	}
+}

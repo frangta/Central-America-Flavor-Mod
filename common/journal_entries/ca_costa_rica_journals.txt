@@ -1,0 +1,682 @@
+# =========================================================================
+# CAFM - Diarios de Costa Rica (estructura madre + capitulos)
+#
+#   je_ca_historic_situation_in_costarica  Diario madre (1836-1842)
+#     Capitulo A  je_ca_pacificacion_norte      jun-dic 1836  (barra)
+#     Capitulo B  je_ca_cos_bocas_del_toro      feb 1836-1837 (sin barra, paralelo)
+#     Capitulo C  je_ca_cos_urnas_y_cuartel     1837-1838     (sin barra)
+#     Capitulo D  je_ca_cos_regreso_aguila      1840-1842     (sin barra)
+#   Fracaso leve   -> je_ca_cos_caida_morazan  (1842)
+#   Fracaso grave  -> je_ca_cos_nueva_liga     (balcanizacion y reunificacion)
+#
+# REEMPLAZA a je_ca_historic_situation_in_costarica y je_ca_pacificacion_norte
+# de ca_central_american_states.txt y ca_central_american_states_journal.txt
+# (ver LEEME_INTEGRACION.md).
+# =========================================================================
+
+
+# =========================================================================
+# DIARIO MADRE: El Estado Libre de Costa Rica
+# =========================================================================
+je_ca_historic_situation_in_costarica = {
+	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
+	group = je_group_historical_content
+
+	scripted_progress_bar = ca_cos_soberania_bar
+
+	should_be_pinned_by_default = yes
+
+	immediate = {
+		set_variable = ca_cos_madre_activa
+	}
+
+	# Planificador: abre cada capitulo en su ventana de fechas
+	on_monthly_pulse = {
+		effect = {
+			ca_cos_chapter_scheduler_effect = yes
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_historic_situation_in_costarica_status_federal
+				trigger = { has_variable = ca_cos_ruta_federal }
+			}
+			triggered_desc = {
+				desc = je_ca_historic_situation_in_costarica_status_separatista
+				trigger = { has_variable = ca_cos_ruta_separatista }
+			}
+			triggered_desc = {
+				desc = je_ca_historic_situation_in_costarica_status_inicio
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	complete = {
+		OR = {
+			# Ruta separatista (Carrillo): la amenaza de Morazan quedo resuelta
+			custom_tooltip = {
+				text = je_ca_historic_situation_in_costarica_goal_carrillo
+				has_variable = ca_cos_cap_d_exito
+			}
+			# Ruta federal: Costa Rica sigue en la Federacion con un gobierno estable
+			custom_tooltip = {
+				text = je_ca_historic_situation_in_costarica_goal_federal
+				has_variable = ca_cos_ruta_federal
+				game_date >= 1840.1.1
+				scope:journal_entry = {
+					scripted_bar_progress = { name = ca_cos_soberania_bar value >= 60 }
+				}
+			}
+		}
+	}
+
+	on_complete = {
+		ca_cos_close_mother_effect = yes
+		trigger_event = { id = ca_costa_rica_events.300 popup = yes }
+	}
+
+	fail = {
+		OR = {
+			custom_tooltip = {
+				text = je_ca_historic_situation_in_costarica_fail_colapso
+				scope:journal_entry = {
+					scripted_bar_progress = { name = ca_cos_soberania_bar value <= 0 }
+				}
+			}
+			custom_tooltip = {
+				text = je_ca_historic_situation_in_costarica_fail_morazan
+				has_variable = ca_cos_morazan_victorioso
+			}
+		}
+	}
+
+	on_fail = {
+		ca_cos_close_mother_effect = yes
+		# Fracaso gradual: la barra decide cuan grave es la caida
+		if = {
+			limit = {
+				scope:journal_entry = {
+					scripted_bar_progress = { name = ca_cos_soberania_bar value <= 25 }
+				}
+			}
+			# Fracaso grave: la Liga renace
+			trigger_event = { id = ca_costa_rica_events.310 popup = yes }
+		}
+		else = {
+			# Fracaso leve: Morazan gobierna Costa Rica
+			trigger_event = { id = ca_costa_rica_events.320 popup = yes }
+		}
+	}
+
+	# Sobrevive a la caida de la UCA (antes se invalidaba al desaparecer la UCA)
+	invalid = {
+		NOT = { c:COS ?= this }
+	}
+	on_invalid = {
+		ca_cos_close_mother_effect = yes
+	}
+
+	# Fin de la era de Carrillo: ~7 anos desde 1836
+	timeout = 2555
+	on_timeout = {
+		ca_cos_close_mother_effect = yes
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}
+
+
+# =========================================================================
+# CAPITULO A: La Pacificacion del Norte (junio - diciembre 1836)
+# Usa la variable ca_pacificacion_progress, igual que los eventos 5-8 y 81,
+# asi que esos eventos funcionan sin cambios.
+# =========================================================================
+je_ca_pacificacion_norte = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+
+	progressbar = yes
+	current_value = {
+		value = 0
+		if = {
+			limit = { has_variable = ca_pacificacion_progress }
+			add = var:ca_pacificacion_progress
+		}
+	}
+	goal_add_value = {
+		add = 100
+	}
+
+	immediate = {
+		set_variable = ca_crisis_guanacaste_active
+		if = {
+			limit = { NOT = { has_variable = ca_pacificacion_progress } }
+			set_variable = { name = ca_pacificacion_progress value = 0 }
+		}
+		# El motin de la Villa abre el capitulo
+		trigger_event = { id = ca_costa_rica_events.4 popup = yes }
+	}
+
+	complete = {
+		scope:journal_entry = { is_goal_complete = yes }
+	}
+
+	on_complete = {
+		remove_variable = ca_crisis_guanacaste_active
+		set_variable = ca_cos_cap_a_exito
+		ca_cos_change_soberania_effect = { VALUE = 20 }
+		# Fase 3: El Informe Jimenez -> Guanacaste heroica -> Maniobra maestra
+		trigger_event = { id = ca_costa_rica_events.9 days = 2 }
+	}
+
+	fail = {
+		game_date >= 1837.1.1
+	}
+
+	on_fail = {
+		remove_variable = ca_crisis_guanacaste_active
+		set_variable = ca_cos_guanacaste_perdido
+		ca_cos_change_soberania_effect = { VALUE = -30 }
+		trigger_event = { id = ca_costa_rica_events.99 popup = yes }
+	}
+
+	invalid = {
+		NOT = { ca_cos_capitulo_valido_trigger = yes }
+	}
+	on_invalid = {
+		remove_variable = ca_crisis_guanacaste_active
+	}
+
+	weight = 150
+	transferable = no
+	can_revolution_inherit = no
+}
+
+
+# =========================================================================
+# CAPITULO B: La cuestion de Bocas del Toro (1836 - 1837)
+# Sin barra: solo cuenta el desenlace. Puede correr en paralelo al A.
+# =========================================================================
+je_ca_cos_bocas_del_toro = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+
+	immediate = {
+		# Subditos de la Corona en el Caribe abre la rama
+		trigger_event = { id = ca_costa_rica_events.12 popup = yes }
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_cos_bocas_del_toro_status_perdido
+				trigger = { has_variable = ca_bocas_del_toro_lost }
+			}
+			triggered_desc = {
+				desc = je_ca_cos_bocas_del_toro_status_reclamo
+				trigger = { has_variable = ca_bocas_del_toro_claimed }
+			}
+			triggered_desc = {
+				desc = je_ca_cos_bocas_del_toro_status_inicio
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	complete = {
+		OR = {
+			has_variable = ca_epifania_tragica          # 18.a: la Federacion calla
+			has_variable = ca_cos_bocas_apoyo_federal   # 18.b: la Federacion va a la guerra
+			has_variable = ca_cos_bocas_rechazo_temprano # 14.b: la UCA no financia a Galindo
+		}
+	}
+
+	on_complete = {
+		if = {
+			limit = { has_variable = ca_epifania_tragica }
+			# La humillacion alimenta el orgullo de San Jose frente a la Federacion
+			ca_cos_change_soberania_effect = { VALUE = 10 }
+		}
+		else_if = {
+			limit = { has_variable = ca_cos_bocas_apoyo_federal }
+			# San Jose queda en deuda con la Federacion
+			ca_cos_change_soberania_effect = { VALUE = -10 }
+		}
+		else = {
+			ca_cos_change_soberania_effect = { VALUE = 5 }
+		}
+	}
+
+	# Si la cadena se corta, el capitulo se cierra solo a inicios de 1838
+	timeout = 700
+
+	invalid = {
+		NOT = { ca_cos_capitulo_valido_trigger = yes }
+	}
+
+	weight = 120
+	transferable = no
+	can_revolution_inherit = no
+}
+
+
+# =========================================================================
+# CAPITULO C: Las urnas y el cuartel (1837 - 1838)
+# La soberania acumulada decide si el golpe josefino triunfa.
+# =========================================================================
+je_ca_cos_urnas_y_cuartel = {
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	group = je_group_historical_content
+
+	immediate = {
+		# Los electores de 1837
+		trigger_event = { id = ca_costa_rica_events.19 popup = yes }
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			# Mayo de 1838: si gobierna Aguilar, Carrillo intenta el golpe
+			if = {
+				limit = {
+					game_date >= 1838.5.1
+					has_variable = ca_gobierno_aguilar
+					NOT = { has_variable = ca_cos_golpe_resuelto }
+				}
+				set_variable = ca_cos_golpe_resuelto
+				if = {
+					limit = { ca_cos_soberania_min_trigger = { VALUE = 40 } }
+					# El golpe josefino triunfa (evento historico)
+					trigger_event = { id = ca_costa_rica_events.20 popup = yes }
+				}
+				else = {
+					# El golpe fracasa: Aguilar se sostiene
+					trigger_event = { id = ca_costa_rica_events.330 popup = yes }
+				}
+			}
+		}
+	}
+
+	complete = {
+		OR = {
+			has_variable = ca_golpe_josefino_fired   # 20: golpe triunfante
+			has_variable = ca_gobierno_carrillo_2    # 19.b: Carrillo gana en las urnas
+			has_variable = ca_gobierno_arguello      # 19.c: Arguello y alianza federal
+			has_variable = ca_cos_golpe_frustrado    # 330: golpe fallido
+		}
+	}
+
+	on_complete = {
+		if = {
+			limit = { has_variable = ca_golpe_josefino_fired }
+			set_variable = ca_cos_ruta_separatista
+			ca_cos_change_soberania_effect = { VALUE = 25 }
+		}
+		else_if = {
+			limit = { has_variable = ca_gobierno_carrillo_2 }
+			set_variable = ca_cos_ruta_separatista
+			ca_cos_change_soberania_effect = { VALUE = 15 }
+		}
+		else_if = {
+			limit = { has_variable = ca_gobierno_arguello }
+			set_variable = ca_cos_ruta_federal
+			ca_cos_change_soberania_effect = { VALUE = -10 }
+		}
+		else = {
+			set_variable = ca_cos_ruta_federal
+			ca_cos_change_soberania_effect = { VALUE = -15 }
+		}
+	}
+
+	# Si nada se resolvio para agosto de 1838, Costa Rica sigue en la Federacion
+	timeout = 600
+	on_timeout = {
+		set_variable = ca_cos_ruta_federal
+	}
+
+	invalid = {
+		NOT = { ca_cos_capitulo_valido_trigger = yes }
+	}
+
+	weight = 150
+	transferable = no
+	can_revolution_inherit = no
+}
+
+
+# =========================================================================
+# CAPITULO D: El regreso del Aguila (1840 - 1842)
+# Solo en la ruta separatista. Usa ca_morazan_invasion_prep (eventos 201-203).
+# =========================================================================
+je_ca_cos_regreso_aguila = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+
+	immediate = {
+		# El manifiesto de David
+		trigger_event = { id = ca_costa_rica_events.201 popup = yes }
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			# 7 de abril de 1842: Morazan desembarca en Caldera
+			if = {
+				limit = {
+					game_date >= 1842.4.7
+					has_variable = ca_morazan_is_coming
+					NOT = { has_variable = ca_cos_caldera_resuelto }
+				}
+				set_variable = ca_cos_caldera_resuelto
+				trigger_event = { id = ca_costa_rica_events.340 popup = yes }
+			}
+		}
+	}
+
+	complete = {
+		OR = {
+			has_variable = ca_morazan_stayed_in_peru  # 203.b: Morazan se queda en Peru
+			has_variable = ca_cos_morazan_derrotado   # 340.a: Carrillo resiste
+		}
+	}
+
+	on_complete = {
+		set_variable = ca_cos_cap_d_exito
+		ca_cos_change_soberania_effect = { VALUE = 15 }
+	}
+
+	# 340.b: el ejercito se pasa al Aguila -> falla tambien el diario madre
+	fail = {
+		has_variable = ca_cos_morazan_victorioso
+	}
+
+	# Si Morazan nunca llega, la amenaza se da por superada a fines de 1842
+	timeout = 1095
+	on_timeout = {
+		set_variable = ca_cos_cap_d_exito
+	}
+
+	invalid = {
+		NOT = { ca_cos_capitulo_valido_trigger = yes }
+	}
+
+	weight = 160
+	transferable = no
+	can_revolution_inherit = no
+}
+
+
+# =========================================================================
+# FRACASO LEVE: La caida de Morazan (abril - septiembre 1842)
+# =========================================================================
+je_ca_cos_caida_morazan = {
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	group = je_group_historical_content
+
+	scripted_progress_bar = ca_cos_descontento_bar
+
+	should_be_pinned_by_default = yes
+
+	complete = {
+		scope:journal_entry = {
+			scripted_bar_progress = { name = ca_cos_descontento_bar value >= 100 }
+		}
+	}
+
+	on_complete = {
+		# La revuelta de septiembre
+		trigger_event = { id = ca_costa_rica_events.350 popup = yes }
+	}
+
+	timeout = 365
+	on_timeout = {
+		trigger_event = { id = ca_costa_rica_events.350 popup = yes }
+	}
+
+	invalid = {
+		NOT = { c:COS ?= this }
+	}
+
+	weight = 180
+	transferable = no
+	can_revolution_inherit = no
+}
+
+
+# =========================================================================
+# FRACASO GRAVE: La nueva Liga (reunificacion)
+#   Por las armas: anexar a las ciudades -> Costa Rica unitaria
+#   Por pacto: llenar la barra -> Confederacion de Costa Rica (CCR)
+# =========================================================================
+je_ca_cos_nueva_liga = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+
+	scripted_progress_bar = ca_cos_reunificacion_bar
+
+	should_be_pinned_by_default = yes
+
+	complete = {
+		OR = {
+			custom_tooltip = {
+				text = je_ca_cos_nueva_liga_goal_armas
+				NOR = {
+					exists = c:PC8
+					exists = c:PC5
+					exists = c:PC6
+					AND = {
+						exists = c:PC2
+						c:PC2 = { has_variable = ca_cos_ciudad_liga }
+					}
+				}
+			}
+			custom_tooltip = {
+				text = je_ca_cos_nueva_liga_goal_pacto
+				scope:journal_entry = {
+					scripted_bar_progress = { name = ca_cos_reunificacion_bar value >= 100 }
+				}
+			}
+		}
+	}
+
+	on_complete = {
+		if = {
+			limit = {
+				OR = {
+					exists = c:PC8
+					exists = c:PC5
+					exists = c:PC6
+				}
+			}
+			# Quedan ciudades: se reunen por pacto
+			trigger_event = { id = ca_costa_rica_events.360 popup = yes }
+		}
+		else = {
+			# Todas fueron reconquistadas
+			trigger_event = { id = ca_costa_rica_events.361 popup = yes }
+		}
+	}
+
+	# Diez anos sin reunificacion: la fragmentacion se vuelve permanente
+	timeout = 3650
+	on_timeout = {
+		trigger_event = { id = ca_costa_rica_events.362 popup = yes }
+	}
+
+	invalid = {
+		NOT = { c:COS ?= this }
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}
+###############Versiones sin modificar#########
+# =========================================================================
+# COSTA RICA - DIARIO HISTORICO PRINCIPAL (1836 - 1850)
+# "El dilema costarricense"
+#
+# Motor de la cadena ca_costa_rica_events:
+#   - Cada mes intenta los eventos fechados de la lista; cada evento se
+#     filtra con su propio trigger (fecha + variable de "ya disparado").
+#   - La barra ca_cos_consolidation_bar mide la consolidacion del Estado
+#     costarricense frente a la Federacion.
+# Resolucion:
+#   - Exito:   barra >= 100 y Costa Rica ya no es subdito de nadie,
+#              o llega 1850 siendo independiente.
+#   - Fracaso: barra <= 0, o llega 1850 y Costa Rica sigue subordinada.
+# =========================================================================
+#je_ca_historic_situation_in_costarica = {
+#	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
+#	group = je_group_historical_content
+#
+#	scripted_progress_bar = ca_cos_consolidation_bar
+#
+#	possible = {
+#		c:COS ?= this
+#		NOT = { has_variable = ca_cos_historic_situation_resolved }
+#	}
+#
+#	immediate = {
+#		# El evento 2 (La Ley de la Ambulancia) espera esta variable
+#		set_variable = ca_ecos_federacion_fired
+#	}
+#
+#	on_monthly_pulse = {
+#		events = {
+#			# FASE 1 - El escenario (1836)
+#			ca_costa_rica_events.2		# Las cicatrices de la Ley de la Ambulancia
+#			ca_costa_rica_events.3		# La dimision de Carrillo (>= 1836.3.2)
+#			# FASE 2 - La Pacificacion del Norte (jun - ago 1836)
+#			ca_costa_rica_events.4		# El motin de la Villa (>= 1836.6.1) -> abre je_ca_pacificacion_norte
+#			ca_costa_rica_events.6		# El saqueo de Bagaces (>= 1836.7.7)
+#			ca_costa_rica_events.7		# El desembarco en El Bolson (>= 1836.8.1)
+#			# BOCAS DEL TORO (1836 - 1837)
+#			ca_costa_rica_events.12		# Subditos de la Corona en el Caribe (1836.2 - 1836.4)
+#			# FASE 4 - Elecciones y golpe (1837 - 1838)
+#			ca_costa_rica_events.19		# Los electores de 1837
+#			ca_costa_rica_events.20		# El golpe josefino (1838.5)
+#			# FASE 5 - Morazan en el exilio (1840 - 1841)
+#			ca_costa_rica_events.201	# El manifiesto de David
+#			ca_costa_rica_events.202	# Sombras y mercenarios en Lima
+#			ca_costa_rica_events.203	# La encrucijada andina
+#			# FASE 6 - La Republica (1844 - 1849)
+#			ca_costa_rica_events.22		# Primer sufragio directo (1844)
+#			ca_costa_rica_events.23		# Elecciones de 1847
+#			ca_costa_rica_events.24		# Elecciones extraordinarias (1849)
+#		}
+#	}
+#
+#	complete = {
+#		OR = {
+#			AND = {
+#				scope:journal_entry = { "scripted_bar_progress(ca_cos_consolidation_bar)" >= 100 }
+#				is_subject = no
+#			}
+#			AND = {
+#				game_date >= 1850.1.1
+#				is_subject = no
+#			}
+#		}
+#	}
+#
+#	on_complete = {
+#		set_variable = ca_cos_historic_situation_resolved
+#		set_variable = ca_cos_state_consolidated
+#		add_modifier = { name = ca_el_gran_avanse_modifier years = 10 }
+#	}
+#
+#	fail = {
+#		OR = {
+#			scope:journal_entry = { "scripted_bar_progress(ca_cos_consolidation_bar)" <= 0 }
+#			AND = {
+#				game_date >= 1850.1.1
+#				is_subject = yes
+#			}
+#		}
+#	}
+#
+#	on_fail = {
+#		set_variable = ca_cos_historic_situation_resolved
+#		set_variable = ca_cos_state_collapsed
+#		add_modifier = { name = ca_federal_paralysis months = 36 }
+#		add_radicals = { value = 0.10 culture = cu:costa_rican }
+#	}
+#
+#	# Deja de tener sentido si Costa Rica pierde su propio territorio
+#	invalid = {
+#		NOT = { any_scope_state = { state_region = s:STATE_COSTA_RICA } }
+#	}
+#
+#	on_invalid = {
+#		set_variable = ca_cos_historic_situation_resolved
+#	}
+#
+#	weight = 100
+#	should_be_pinned_by_default = yes
+#	transferable = no
+#}
+#
+## =========================================================================
+## COSTA RICA - CRISIS: LA PACIFICACION DEL NORTE (junio - diciembre 1836)
+##
+## La abre el evento ca_costa_rica_events.4 (El motin de la Villa).
+## Los eventos 5, 6, 7 y 81 suman progreso con:
+##   je:je_ca_pacificacion_norte ?= { add_progress = { value = X name = ca_pacificacion_norte_bar } }
+## Resolucion:
+##   - Exito:   barra >= 100  -> evento 9 (El Informe Jimenez)
+##   - Fracaso: llega 1837.1.1 sin llenar la barra -> evento 99 (El colapso del Norte)
+## =========================================================================
+#je_ca_pacificacion_norte = {
+#	icon = "gfx/interface/icons/event_icons/event_military.dds"
+#	group = je_group_historical_content
+#
+#	scripted_progress_bar = ca_pacificacion_norte_bar
+#
+#	possible = {
+#		c:COS ?= this
+#	}
+#
+#	immediate = {
+#		set_variable = ca_crisis_guanacaste_active
+#	}
+#
+#	complete = {
+#		scope:journal_entry = { "scripted_bar_progress(ca_pacificacion_norte_bar)" >= 100 }
+#	}
+#
+#	on_complete = {
+#		remove_variable = ca_crisis_guanacaste_active
+#		trigger_event = { id = ca_costa_rica_events.9 days = 2 }
+#		je:je_ca_historic_situation_in_costarica ?= {
+#			add_progress = { value = 15 name = ca_cos_consolidation_bar }
+#		}
+#	}
+#
+#	fail = {
+#		game_date >= 1837.1.1
+#	}
+#
+#	on_fail = {
+#		remove_variable = ca_crisis_guanacaste_active
+#		trigger_event = { id = ca_costa_rica_events.99 popup = yes }
+#		je:je_ca_historic_situation_in_costarica ?= {
+#			add_progress = { value = -20 name = ca_cos_consolidation_bar }
+#		}
+#	}
+#
+#	invalid = {
+#		NOT = { any_scope_state = { state_region = s:STATE_COSTA_RICA } }
+#	}
+#
+#	on_invalid = {
+#		remove_variable = ca_crisis_guanacaste_active
+#	}
+#
+#	weight = 150
+#	should_be_pinned_by_default = yes
+#	transferable = no
+#}

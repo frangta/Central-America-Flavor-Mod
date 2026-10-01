@@ -1,0 +1,148 @@
+﻿ca_liberal_party = {
+	color = { 52 138 199 }
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_ca_liberal_uca_federal
+				trigger = {
+					c:UCA ?= this
+					has_law_or_variant = law_type:law_ca_central_american_federal
+				}
+			}
+			triggered_desc = {
+				desc = party_ca_liberal_uca
+				trigger = { c:UCA ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_liberal_gua
+				trigger = { c:GUA ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_liberal_els
+				trigger = { c:ELS ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_liberal_hon
+				trigger = { c:HON ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_liberal_nic
+				trigger = { c:NIC ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_liberal_cos
+				trigger = { c:COS ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_liberal_alt
+				trigger = { c:ALT ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_liberal_pnm
+				trigger = { c:PNM ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_liberal_generic
+				trigger = { always = yes }
+			}
+		}
+	}
+	icon = { default = "gfx/interface/icons/political_parties/liberal.dds" }
+
+	valid_for_country = { is_ca_culture_country = yes }
+	available_for_interest_group = {
+		owner = { country_has_voting_franchise = yes }
+	}
+
+	join_weight = {
+		value = 0
+		add = { value = -5 desc = "ca_party_join_base" }
+
+		# Ideologías de IG centrales
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_central_american_federal
+					has_ideology = ideology:ideology_ca_liberal
+					has_ideology = ideology:ideology_ca_constitutionalist
+					has_ideology = ideology:ideology_ca_secularist
+					has_ideology = ideology:ideology_ca_criollo_liberal
+					has_ideology = ideology:ideology_ca_coffee_liberal
+					has_ideology = ideology:ideology_ca_masonic_liberal
+					has_ideology = ideology:ideology_ca_pact_confederalist
+					# has_ideology = ideology:ideology_ca_liberalismo  # pendiente: no existe aún
+				}
+			}
+			add = { value = 12 desc = "ca_party_join_ig_core" }
+		}
+		# Ideologías de IG opuestas
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_papal_moralist
+					has_ideology = ideology:ideology_ca_servile
+					has_ideology = ideology:ideology_central_american_reactionary_2
+					has_ideology = ideology:ideology_ca_criollo_stratocratic
+				}
+			}
+			add = { value = -10 desc = "ca_party_join_ig_hostile" }
+		}
+		# Ideologías de líder centrales
+		if = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_liberal_monarchist
+						has_ideology = ideology:ideology_ca_federalist
+						has_ideology = ideology:ideology_ca_reformer
+						has_ideology = ideology:ideology_ca_morazanista
+						has_ideology = ideology:ideology_olympus_liberalism
+						has_ideology = ideology:ideology_ca_late_unionist
+						has_ideology = ideology:ideology_ca_bolivarian_integration
+						has_ideology = ideology:ideology_ca_cientifico_technocracy
+						has_ideology = ideology:ideology_ca_barrismo
+						has_ideology = ideology:ideology_ca_soto_rosa_reformism
+					}
+				}
+			}
+			add = { value = 15 desc = "ca_party_join_leader_core" }
+		}
+		# Ideologías de líder afines
+		if = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_coffee_liberalism
+						has_ideology = ideology:ideology_carrillismo
+					}
+				}
+			}
+			add = { value = 6 desc = "ca_party_join_leader_affinity" }
+		}
+		# Ideologías de líder opuestas
+		if = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_jesuit_theocracy
+						has_ideology = ideology:ideology_ca_imperial_monarchist
+						has_ideology = ideology:ideology_granadine_legitimism
+					}
+				}
+			}
+			add = { value = -10 desc = "ca_party_join_leader_hostile" }
+		}
+		# Contexto: los federalistas se agrupan con los liberales bajo una república federal
+		if = {
+			limit = {
+				has_ideology = ideology:ideology_central_american_federal
+				owner = { has_law_or_variant = law_type:law_ca_central_american_federal }
+			}
+			add = { value = 4 desc = "ca_party_join_federal_context" }
+		}
+		if = {
+			limit = { is_interest_group_type = ig_intelligentsia }
+			add = { value = 3 desc = "ca_party_join_ig_type" }
+		}
+	}
+}

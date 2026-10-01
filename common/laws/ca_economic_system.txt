@@ -1,0 +1,88 @@
+﻿# ====================================================================
+# CAFM - SISTEMA ECONÓMICO (lawgroup_economic_system)
+# ====================================================================
+# Ley INDEPENDIENTE: se quitó parent = law_agrarianism a petición del
+# diseño (posturas ideológicas propias).
+#
+# Consecuencias de no tener parent:
+#  - Los IG vanilla quedan NEUTRALES ante ella. Añade la postura en tus
+#    ideologías (ver NOTAS_CAMBIOS.md).
+#  - El script vanilla que pregunta has_law_or_variant = law_agrarianism
+#    (journals, IA) no la reconoce.
+#  - La clave se mantiene (la usa events/ca_central_america_events.txt).
+# ====================================================================
+
+# --------------------------------------------------------------------
+# AGROEXPORTACIÓN
+# Economía volcada a exportar café, añil, azúcar y banano. La inversión
+# la dirigen los terratenientes; el Estado no nacionaliza.
+# --------------------------------------------------------------------
+law_central_american_agrarianism = {
+	group = lawgroup_economic_system
+	icon = "gfx/interface/icons/law_icons/agrarianism.dds"
+	progressiveness = 0
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	unlocking_technologies = {
+		romanticism
+	}
+
+	disallowing_laws = {
+		law_anarchy
+	}
+
+	modifier = {
+        state_aristocrats_investment_pool_efficiency_mult = 0.30
+        state_clergymen_investment_pool_efficiency_mult = 0.15
+        state_farmers_investment_pool_efficiency_mult = 0.25
+        state_capitalists_investment_pool_efficiency_mult = -0.15
+        country_private_construction_allocation_mult = 0.85
+        state_bureaucracy_population_base_cost_factor_mult = -0.13
+        building_nationalization_investment_return_add = 0.35
+        country_government_dividends_reinvestment_add = 0.35
+        country_government_dividends_efficiency_add = 0.15
+        country_free_charters_add = 1
+        country_construction_add = -2.5
+        country_disable_nationalization_bool = yes
+        country_disable_nationalization_without_compensation_bool = yes
+	}
+
+	ai_will_do = {
+		OR = {
+			has_law = law_type:law_traditionalism
+			has_law = law_type:law_central_american_agrarianism
+			literacy_rate < 0.4
+		}
+	}
+
+	ai_enact_weight_modifier = {
+		value = 0
+		if = {
+			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+			add = 750
+		}
+		# Salir del tradicionalismo es prioridad para la IA centroamericana.
+		if = {
+			limit = {
+				has_law = law_type:law_traditionalism
+				NOT = { has_strategy = ai_strategy_reactionary_agenda }
+			}
+			add = 1000
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					is_in_government = yes
+					OR = {
+						has_ideology = ideology:ideology_ca_agroexportadores
+						has_ideology = ideology:ideology_ca_coffee_liberal
+					}
+				}
+			}
+			add = 300
+		}
+	}
+}

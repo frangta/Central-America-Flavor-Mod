@@ -1,0 +1,611 @@
+﻿state_ca_iron_mine_max_level_add={
+    script_only = yes
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+	
+}
+state_ca_coal_mine_max_level_add={
+    script_only = yes
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+state_ca_lead_mine_max_level_add={
+    script_only = yes
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+state_ca_sulfur_mine_max_level_add={
+    script_only = yes
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+state_ca_gold_mine_max_level_add={
+    script_only = yes
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+state_ca_oil_rig_max_level_add={
+    script_only = yes
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+state_ca_gold_field_max_level_add={
+    script_only = yes
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+state_pop_support_movement_ca_reactionary_add={
+
+	decimals=1
+	color=neutral
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_reactionary_mult={
+
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+state_pop_support_movement_ca_liberal_add={
+
+	decimals=1
+	color=neutral
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_liberal_mult={
+
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+state_pop_support_movement_ca_unitarian_add={
+
+	decimals=1
+	color=bad
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_unitarian_mult={
+
+	decimals=0
+	color=bad
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+state_pop_support_movement_ca_federalist_add={
+
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_federalist_mult={
+
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+state_political_movement_ca_reactionary_radicalism_add = {
+
+    decimals = 1
+    color = bad 
+    game_data = { ai_value = 0 }
+	script_only = yes
+}
+
+
+state_political_movement_ca_liberal_radicalism_add = {
+
+    decimals = 1
+    color = bad
+    game_data = { ai_value = 0 }
+	script_only = yes
+}
+
+state_political_movement_ca_unitarian_radicalism_add = {
+
+    decimals = 1
+    color = bad
+    game_data = { ai_value = 0 }
+	script_only = yes
+}
+
+
+state_political_movement_ca_federalist_radicalism_add = {
+
+    decimals = 1
+    color = bad
+    game_data = { ai_value = 0 }
+	script_only = yes
+}
+# ==========================================
+# MODIFIER TYPES
+# ==========================================
+
+# --- costa_rican ---
+state_costa_rican_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_costa_rican_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_costa_rican_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- panamanian ---
+state_panamanian_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_panamanian_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_panamanian_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- nicaraguan ---
+state_nicaraguan_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_nicaraguan_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_nicaraguan_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- guatemalan ---
+state_guatemalan_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_guatemalan_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_guatemalan_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- el_salvadorian ---
+state_el_salvadorian_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_el_salvadorian_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_el_salvadorian_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- honduran ---
+state_honduran_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_honduran_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_honduran_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- chibchan_central_america ---
+state_chibchan_central_america_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_chibchan_central_america_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_chibchan_central_america_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- bribri_talamanca ---
+state_bribri_talamanca_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_bribri_talamanca_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_bribri_talamanca_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- cabecar ---
+state_cabecar_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_cabecar_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_cabecar_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- ngabe_culture ---
+state_ngabe_culture_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_ngabe_culture_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_ngabe_culture_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- embera ---
+state_embera_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_embera_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_embera_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- guna_kuna ---
+state_guna_kuna_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_guna_kuna_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_guna_kuna_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- lenca ---
+state_lenca_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_lenca_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_lenca_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- mangue_chorotega ---
+state_mangue_chorotega_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_mangue_chorotega_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_mangue_chorotega_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- garifuna_arawak ---
+state_garifuna_arawak_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_garifuna_arawak_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_garifuna_arawak_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- chiapanecan ---
+state_chiapanecan_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_chiapanecan_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_chiapanecan_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- ca_antillianen ---
+state_ca_antillianen_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_ca_antillianen_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_ca_antillianen_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- ca_pipil ---
+state_ca_pipil_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_ca_pipil_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_ca_pipil_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- ca_kiche ---
+state_ca_kiche_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_ca_kiche_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_ca_kiche_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- latinoafricano ---
+state_latinoafricano_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_latinoafricano_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_latinoafricano_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- coreano_latino ---
+state_coreano_latino_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_coreano_latino_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_coreano_latino_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- vietnamita_latino ---
+state_vietnamita_latino_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_vietnamita_latino_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_vietnamita_latino_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- ca_hakka ---
+state_ca_hakka_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_ca_hakka_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_ca_hakka_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- nicoyamato ---
+state_nicoyamato_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_nicoyamato_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_nicoyamato_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+
+# --- ca_panyabi ---
+state_ca_panyabi_standard_of_living_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_ca_panyabi_cultural_acceptance_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+country_fervor_target_ca_panyabi_add = {
+	decimals=1
+	color=good
+	game_data = { ai_value=0 }
+}
+state_peasants_investment_pool_contribution_add={
+
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+} 
+
+state_peasants_investment_pool_efficiency_mult={
+
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+

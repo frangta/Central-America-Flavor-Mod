@@ -1,0 +1,8 @@
+﻿GOVERNMENT = {
+	c:UCA ?= {
+		py:ca_liberal_party ?= {
+			set_ruling_party = yes
+			add_momentum = -0.25 # Adjusted for historical election results
+		}					
+	}
+}

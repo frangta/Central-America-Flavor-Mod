@@ -1,0 +1,255 @@
+﻿# ====================================================================
+# CAFM - MODELO DE EJÉRCITO (lawgroup_army_model)
+# ====================================================================
+# Leyes INDEPENDIENTES (sin parent). Las ideologías del mod ya tienen
+# postura sobre ellas (ca_ig_ideologies_flavored.txt).
+#
+# Nota: se quitaron los tooltips vanilla aristocrats_af_ig_shift_effect_tt,
+# military_pops_af_ig_shift_effect_negative_tt y
+# QUALIFICATIONS_OFFICERS_PEASANT_LEVIES_DESC. Describen efectos que el
+# juego aplica con has_law_or_variant = law_peasant_levies /
+# law_professional_army; como estas leyes son independientes, esos
+# efectos NO ocurren y el tooltip mentía.
+# ====================================================================
+
+# --------------------------------------------------------------------
+# MILICIA COMUNAL
+# Levas de los pueblos para defender su tierra. Empodera a la población
+# rural (no a los terratenientes). Barata, numerosa y frágil, pero
+# fuerte defendiendo territorio propio.
+# --------------------------------------------------------------------
+law_ca_comunal_milicia = {
+	group = lawgroup_army_model
+	icon = "gfx/interface/icons/law_icons/peasant_levies.dds"
+	progressiveness = -40
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	modifier = {
+        country_can_only_conscript_peasants_bool = yes
+        interest_group_ig_rural_folk_pol_str_mult = 0.20
+        state_conscription_rate_add = 0.03
+        unit_morale_loss_mult = 0.10
+        unit_experience_gain_mult = -0.25
+        country_military_goods_cost_mult = -0.10
+        state_building_barrack_max_level_add = 2
+        state_building_conscription_center_max_level_add = 25
+	}
+
+	can_impose = {
+		OR = {
+			AND = {
+				is_in_same_power_bloc = scope:target_country
+				modifier:country_can_impose_same_lawgroup_army_model_in_power_bloc_bool = yes
+				has_law_or_variant = scope:law
+			}
+			can_impose_law_default = yes
+		}
+	}
+
+	# La IA no vuelve a las levas.
+	ai_will_do = {
+		always = no
+	}
+
+	ai_enact_weight_modifier = {
+		value = 0
+		if = {
+			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+			add = 750
+		}
+	}
+}
+
+# --------------------------------------------------------------------
+# CAUDILLISMO
+# Ejércitos privados de hombres fuertes regionales. Leales a su jefe,
+# poco entrenados, y una fuente constante de pronunciamientos.
+# --------------------------------------------------------------------
+law_ca_caudillismo = {
+	group = lawgroup_army_model
+	icon = "gfx/interface/icons/law_icons/peasant_levies.dds"
+	progressiveness = -50
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	modifier = {
+        country_can_only_conscript_peasants_bool = yes
+        interest_group_ig_landowners_pol_str_mult = 0.20
+        country_aristocrats_pol_str_mult = 0.15
+        state_conscription_rate_add = 0.04
+        unit_morale_loss_mult = -0.05
+        unit_experience_gain_mult = -0.15
+        country_authority_add = -25
+        state_turmoil_effects_mult = 0.10
+        state_building_barrack_max_level_add = 25
+        state_building_conscription_center_max_level_add = 25
+	}
+
+	can_impose = {
+		OR = {
+			AND = {
+				is_in_same_power_bloc = scope:target_country
+				modifier:country_can_impose_same_lawgroup_army_model_in_power_bloc_bool = yes
+				has_law_or_variant = scope:law
+			}
+			can_impose_law_default = yes
+		}
+	}
+
+	ai_will_do = {
+		always = no
+	}
+
+	ai_enact_weight_modifier = {
+		value = 0
+		if = {
+			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+			add = 750
+		}
+	}
+}
+
+# --------------------------------------------------------------------
+# MILICIA REGIONALISTA
+# Milicias de cada estado en lugar de un ejército central. Resiste la
+# influencia extranjera y el poder de los oficiales de carrera.
+# (Se mantiene la clave sin prefijo ca_: la usan eventos, partidos,
+#  journals, ideologías y scripted_effects.)
+# --------------------------------------------------------------------
+law_regionalist_militia = {
+	group = lawgroup_army_model
+	icon = "gfx/interface/icons/law_icons/national_militia.dds"
+	progressiveness = 0
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	can_enact = {
+		OR = {
+			is_power_bloc_leader = no
+			power_bloc ?= {
+				NOT = { has_identity = identity:identity_military_treaty_organization }
+			}
+		}
+	}
+
+	modifier = {
+        unit_morale_loss_mult = -0.05
+        state_conscription_rate_add = 0.05
+        country_leverage_resistance_mult = 0.50
+        country_officers_pol_str_mult = -0.25
+        country_authority_add = -10
+        state_building_barrack_max_level_add = 1
+        state_building_conscription_center_max_level_add = 10
+	}
+
+	# Una república unitaria no quiere milicias de los estados.
+	ai_will_do = {
+		NOT = { has_law = law_type:law_ca_central_american_unitary }
+	}
+
+	ai_enact_weight_modifier = {
+		value = 0
+		if = {
+			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+			add = 750
+		}
+		if = {
+			limit = {
+				OR = {
+					has_law = law_type:law_ca_central_american_confederated
+					has_law = law_type:law_ca_confederated_state
+				}
+			}
+			add = 200
+		}
+	}
+}
+
+# --------------------------------------------------------------------
+# EJÉRCITO FEDERAL
+# Ejército profesional de la Unión. Solo para el soberano y solo bajo
+# la República Federal. Convierte a las Fuerzas Armadas en el Ejército
+# Federal y lo revierte si la ley se pierde.
+# --------------------------------------------------------------------
+law_ca_federal_army = {
+	group = lawgroup_army_model
+	icon = "gfx/interface/icons/law_icons/professional_army.dds"
+	progressiveness = 25
+
+	unlocking_technologies = { military_drill }
+
+	is_visible = {
+		only_latin_centralamericans_cultures = yes
+		OR = {
+			ca_is_union_sovereign = yes
+			has_law = law_type:law_ca_federal_army
+		}
+	}
+
+	can_enact = {
+		ca_is_union_sovereign = yes
+		has_law = law_type:law_ca_central_american_federal
+	}
+
+	modifier = {
+        unit_morale_loss_mult = -0.10
+        unit_experience_gain_mult = 0.15
+        state_conscription_rate_add = 0.03
+        country_officers_pol_str_mult = 0.20
+        interest_group_ig_intelligentsia_pol_str_mult = 0.10
+        state_building_barrack_max_level_add = 25
+        state_building_conscription_center_max_level_add = 75
+	}
+
+	on_enact = {
+		ig:ig_armed_forces ?= {
+			remove_ideology = ideology_caudillismo
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_central_american_federal
+			set_interest_group_name = ig_ejercito_federal
+		}
+	}
+
+	# Se ejecuta al perder la ley por cualquier motivo
+	# (cambio de ley, cambio de estructura del Estado, evento).
+	on_deactivate = {
+		ig:ig_armed_forces ?= {
+			remove_ideology = ideology_central_american_federal
+			add_ideology = ideology_paternalistic
+			set_interest_group_name = ig_armed_forces
+		}
+	}
+
+	can_impose = {
+		always = no
+	}
+
+	ai_will_do = {
+		ca_is_union_sovereign = yes
+	}
+
+	ai_enact_weight_modifier = {
+		value = 0
+		if = {
+			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
+			add = 750
+		}
+		# Los federalistas siempre intentarán impulsarla.
+		if = {
+			limit = {
+				any_interest_group = {
+					is_in_government = yes
+					leader ?= { has_ideology = ideology:ideology_ca_federalist }
+				}
+			}
+			add = 500
+		}
+	}
+}

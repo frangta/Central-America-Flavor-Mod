@@ -1,0 +1,133 @@
+﻿ca_radical_party = {
+	color = { 210 105 30 }
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_ca_radical_uca
+				trigger = { c:UCA ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_radical_gua
+				trigger = { c:GUA ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_radical_els
+				trigger = { c:ELS ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_radical_hon
+				trigger = { c:HON ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_radical_nic
+				trigger = { c:NIC ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_radical_cos
+				trigger = { c:COS ?= this }
+			}
+			triggered_desc = {
+				desc = party_ca_radical_generic
+				trigger = { always = yes }
+			}
+		}
+	}
+	icon = { default = "gfx/interface/icons/political_parties/radical.dds" }
+
+	valid_for_country = { is_ca_culture_country = yes }
+	available_for_interest_group = {
+		owner = { country_has_voting_franchise = yes }
+	}
+
+	join_weight = {
+		value = 0
+		add = { value = -5 desc = "ca_party_join_base" }
+
+		# Ideologías de IG centrales
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_enclavist_pick
+					has_ideology = ideology:ideology_ca_enclavist
+					has_ideology = ideology:ideology_ca_radical_enclavist
+				}
+			}
+			add = { value = 12 desc = "ca_party_join_ig_core" }
+		}
+		# Ideologías de IG afines
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_central_american_reactionary
+					has_ideology = ideology:ideology_ca_agroexportadores
+					has_ideology = ideology:ideology_ca_constitutionalist
+					has_ideology = ideology:ideology_ca_masonic_liberal
+				}
+			}
+			add = { value = 5 desc = "ca_party_join_ig_affinity" }
+		}
+		# Ideologías de IG opuestas
+		if = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_ca_separatist
+					has_ideology = ideology:ideology_ca_isolationist_expansionism
+				}
+			}
+			add = { value = -10 desc = "ca_party_join_ig_hostile" }
+		}
+		# Ideologías de líder centrales
+		if = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_ca_reformer
+						has_ideology = ideology:ideology_chacara_social_democracy
+					}
+				}
+			}
+			add = { value = 15 desc = "ca_party_join_leader_core" }
+		}
+		# Ideologías de líder afines
+		if = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_olympus_liberalism
+						has_ideology = ideology:ideology_ca_canal_company_rule
+						has_ideology = ideology:ideology_mercantile_transitism
+					}
+				}
+			}
+			add = { value = 6 desc = "ca_party_join_leader_affinity" }
+		}
+		# Ideologías de líder opuestas
+		if = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_anti_imperialist_sovereigntism
+					}
+				}
+			}
+			add = { value = -10 desc = "ca_party_join_leader_hostile" }
+		}
+		# Contexto: con sufragio restringido, las clases medias buscan un partido radical
+		if = {
+			limit = {
+				OR = {
+					is_interest_group_type = ig_intelligentsia
+					is_interest_group_type = ig_petty_bourgeoisie
+				}
+				owner = {
+					OR = {
+						has_law_or_variant = law_type:law_census_voting
+						has_law_or_variant = law_type:law_wealth_voting
+						has_law_or_variant = law_type:law_landed_voting
+					}
+				}
+			}
+			add = { value = 3 desc = "ca_party_join_suffrage_context" }
+		}
+	}
+}

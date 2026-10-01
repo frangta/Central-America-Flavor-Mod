@@ -1,0 +1,122 @@
+﻿COUNTRIES = {
+	c:UCA ?= {
+		set_next_election_date = 1837.4.9
+		
+		set_variable = ca_organization_apro
+		set_variable = is_frca_var
+		effect_starting_technology_tier_2_tech = yes
+		effect_starting_politics_conservative = yes
+		
+		add_technology_researched = empiricism
+		
+        activate_law = law_type:law_presidential_republic
+        activate_law = law_type:law_ca_central_american_federal
+        activate_law = law_type:law_ca_federal_army
+        activate_law = law_type:law_tenant_farmers
+        activate_law = law_type:law_census_voting
+        activate_law = law_type:law_cultural_exclusion
+        activate_law = law_type:law_mercantilism
+        activate_law = law_type:law_interventionism                                        
+        activate_law = law_type:law_right_of_assembly
+        activate_law = law_type:law_per_capita_based_taxation
+        activate_law = law_type:law_charitable_health_system        
+        activate_law = law_type:law_religious_schools
+        activate_law = law_type:law_no_police
+        activate_law = law_type:law_freedom_of_conscience
+
+		ig:ig_armed_forces ?= {
+			add_ruling_interest_group = yes
+		}
+		
+		ig:ig_intelligentsia ?= {
+		add_ruling_interest_group = yes
+		}
+		
+		ig:ig_armed_forces = {
+            remove_ideology = ideology_caudillismo
+            remove_ideology = ideology_paternalistic
+            add_ideology = ideology_central_american_federal
+            set_interest_group_name = ig_ejercito_federal
+        }
+
+        ig:ig_devout = {
+             remove_ideology = ideology_moralist
+             add_ideology = ideology_ca_moralist	
+             add_ideology = ideology_central_american_reactionary_2
+             set_interest_group_name = ig_catholic_church
+        }
+        
+        ig:ig_landowners = {            
+            remove_ideology = ideology_republican_paternalistic
+            remove_ideology = ideology_hierarchic
+            remove_ideology = ideology_paternalistic
+            add_ideology = ideology_ca_criollo_paternalistic
+            add_ideology = ideology_ca_criollo_stratocratic            
+            add_ideology = ideology_central_american_reactionary_2
+            set_interest_group_name = ig_hacendados
+        }
+        
+        ig:ig_industrialists = {
+            remove_ideology = ideology_plutocratic
+            remove_ideology = ideology_laissez_faire
+            add_ideology = ideology_ca_agroexportadores
+            add_ideology = ideology_ca_liberal     
+            set_interest_group_name = ig_elite_comercial
+        }
+        
+        ig:ig_intelligentsia = {
+            remove_ideology = ideology_liberal
+            remove_ideology = ideology_anti_clerical
+            remove_ideology = ideology_republican
+            add_ideology = ideology_ca_constitutionalist
+            add_ideology = ideology_ca_secularist
+            add_ideology = ideology_central_american_federal
+            set_interest_group_name = ig_liberales_morazanistas            
+        }
+        
+        ig:ig_petty_bourgeoisie = {
+            remove_ideology = ideology_patriotic
+            add_ideology = ideology_central_american_federal
+            add_ideology = ideology_ca_artesanado
+            set_interest_group_name = ig_artesanos_urbanos
+        }
+        
+        ig:ig_rural_folk = {
+            remove_ideology = ideology_isolationist
+            remove_ideology = ideology_agrarian
+            remove_ideology = ideology_particularist
+            add_ideology = ideology_ca_guilds
+            set_interest_group_name = ig_pequenos_campesinos
+        }
+
+		
+        trigger_event = { id = ca_central_america.119  day = 15}
+		trigger_event = { id = ca_el_salvador_events.1}
+		trigger_event = { id = ca_guatemala_events.1}
+		trigger_event = { id = ca_honduras_events.1}
+		trigger_event = { id = ca_nicaragua_events.1}
+		trigger_event = { id = ca_costa_rica_events.1}
+ 
+		set_variable = { name = historic_central_american}
+		set_variable = { name = frca_preserved }
+ 
+ 		add_journal_entry = {
+			type = je_historic_central_america_falls_apart
+		}
+ 
+        add_modifier = {
+            name = age_of_caudillos_modifier
+        }
+        add_modifier = {
+            name = ca_federal_paralysis
+        }
+        add_modifier = {
+            name = ca_british_debt_crisis
+        }        
+        add_modifier = {
+            name = ca_military_disarray
+            days = 1825 # 5 años
+        } 
+		initialise_caciquismo_effect = yes
+	}
+}

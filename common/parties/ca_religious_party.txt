@@ -1,0 +1,20 @@
+﻿TRY_INJECT:religious_party = {
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				desc = party_ca_devout_union
+				trigger = { has_variable = ca_devout_on }
+			}
+			triggered_desc = {
+				desc = party_religious
+				trigger = { always = yes }
+			}
+		}
+	}
+	
+	join_weight = {
+		
+	}
+
+}
