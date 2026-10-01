@@ -111,7 +111,7 @@ In practice, this means a mod that works perfectly on one version of the game ca
 
 Since the Steam Workshop exposes the mod to thousands of users who expect it to work immediately after every game update, publishing before that compatibility is fully validated would mean delivering a poor experience and generating bug reports that, in many cases, don't even stem from the mod itself but from the engine changes.
 
-For that reason, the decision has been made to **temporarily postpone the Steam Workshop upload** until:
+That is why the decision was made to temporarily place the mod in BETA after uploading it to the Steam Workshop.
 
 1. Full revalidation of all content (events, diplomacy, laws, localization) against the current game version is complete.
 2. Errors and warnings in the game logs are reduced to a minimum.
