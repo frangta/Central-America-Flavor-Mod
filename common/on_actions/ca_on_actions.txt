@@ -165,3 +165,14 @@ ca_yearly_pulse_country = {
         ca_setup_events.4
 	}
 }
+on_election_campaign_start = {
+	on_actions = { ca_cos_on_election_campaign_start }
+}
+
+ca_cos_on_election_campaign_start = {
+	events = {
+		ca_costa_rica_events.22 # 1844: Primer sufragio directo
+		ca_costa_rica_events.23 # 1847: Castro Madriz
+		ca_costa_rica_events.24 # 1849: Juan Rafael Mora
+	}
+}
