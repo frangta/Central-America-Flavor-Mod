@@ -1,0 +1,262 @@
+﻿namespace = ca_honduras_events
+
+##scope_HON
+#scope_GIG
+#scope_UHO
+#scope_DH1
+#scope_DH2
+#scope_DH3
+#scope_DH4
+#scope_DH5
+#scope_DH6
+#scope_DH7
+## introduccion de HONDURAS
+ca_honduras_events.1 = {
+	type = country_event
+	placement = s:STATE_HONDURAS.region_state:UCA
+	title = ca_honduras_events.1.t
+	desc = ca_honduras_events.1.d
+	flavor = ca_honduras_events.1.f
+	duration = 3
+	event_image = {
+		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	trigger = {
+        exists = c:UCA
+        this = c:UCA 
+        game_date <= 1836.1.1
+	}
+	
+	immediate = {
+        s:STATE_HONDURAS.region_state:UCA = {
+        state_region = { add_state_trait = state_trait_mining_hon } # CAFM fix: add_state_trait es de state_region
+		add_modifier = { name = ca_uca_federalist_heartland }
+        add_modifier = { name = waning_federal_stronghold }
+        add_modifier = { name = conservative_stronghold_small_nation }
+        }
+	}
+
+	option = {
+		name = ca_honduras_events.1.a
+		default_option = yes
+
+	}
+	option = {
+		name = ca_honduras_events.2.a
+		trigger = {
+			c:UCA ?= {
+			has_variable = ca_state_selection_to_playing
+			}
+		}
+        ca_create_honduras_effect = yes 
+		ca_play_honduras_effect = yes
+        play_as = c:HON
+	}
+}
+# 1. 1837: La elección de Justo José de Herrera
+ca_honduras_events.14 = {
+    type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
+    placement = ROOT
+    title = ca_honduras_events.14.t
+    desc = ca_honduras_events.14.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:HON ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = hon_elec_1837_fired }
+        game_date >= 1837.1.1
+        game_date <= 1838.1.1
+    }
+    
+    immediate = { 
+        set_variable = { name = hon_elec_1837_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Justo José de Herrera asume como civil moderado
+    option = {
+        name = ca_honduras_events.14.a
+        default_option = yes
+        ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_medium } }
+    }
+
+    # Opción B (Alternativa): Los militares exigen un líder de armas
+    option = {
+        name = ca_honduras_events.14.b
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
+        add_radicals = { value = small_radicals pop_type = academics }
+    }
+
+    # Opción C (Alternativa): Los liberales radicales intentan tomar la Asamblea
+    option = {
+        name = ca_honduras_events.14.c
+        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
+        ig:ig_landowners ?= { party = { add_momentum = momentum_small_decrease } }
+    }
+}
+
+# 2. 1840-1841: El Ascenso del General Francisco Ferrera
+ca_honduras_events.15 = {
+    type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
+    placement = ROOT
+    title = ca_honduras_events.15.t
+    desc = ca_honduras_events.15.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:HON ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = hon_elec_1840_fired }
+        game_date >= 1840.10.1
+        game_date <= 1841.12.31
+    }
+    
+    immediate = { 
+        set_variable = { name = hon_elec_1840_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Francisco Ferrera (El "Mulatillo") consolida el estado conservador
+    option = {
+        name = ca_honduras_events.15.a
+        default_option = yes
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_very_large } }
+        ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
+    }
+
+    # Opción B (Alternativa): Resistencia civil liberal contra Ferrera
+    option = {
+        name = ca_honduras_events.15.b
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+        add_radicals = { value = medium_radicals pop_type = soldiers } # El ejército no acepta perder
+    }
+}
+
+# 3. 1844: La Reelección de Francisco Ferrera
+ca_honduras_events.16 = {
+    type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
+    placement = ROOT
+    title = ca_honduras_events.16.t
+    desc = ca_honduras_events.16.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:HON ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = hon_elec_1844_fired }
+        game_date >= 1844.11.1
+        game_date <= 1845.12.31
+    }
+    
+    immediate = { 
+        set_variable = { name = hon_elec_1844_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Ferrera domina la Cámara y es reelecto
+    option = {
+        name = ca_honduras_events.16.a
+        default_option = yes
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
+    }
+
+    # Opción B (Alternativa): Los hacendados se cansan del militarismo y buscan un civil
+    option = {
+        name = ca_honduras_events.16.b
+        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium_decrease } }
+    }
+
+    # Opción C (Alternativa): Levantamiento urbano contra la dictadura
+    option = {
+        name = ca_honduras_events.16.c
+        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
+        add_radicals = { value = large_radicals pop_type = clerks }
+        add_radicals = { value = medium_radicals pop_type = shopkeepers }
+    }
+}
+
+# 4. 1847: El Triunfo de Juan Lindo
+ca_honduras_events.17 = {
+    type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
+    placement = ROOT
+    title = ca_honduras_events.17.t
+    desc = ca_honduras_events.17.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:HON ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = hon_elec_1847_fired }
+        game_date >= 1847.1.1
+        game_date <= 1848.1.1
+    }
+    
+    immediate = { 
+        set_variable = { name = hon_elec_1847_fired value = yes } 
+    }
+
+    # Opción A (Histórica): El estadista Juan Lindo promete educación e institucionalidad
+    option = {
+        name = ca_honduras_events.17.a
+        default_option = yes
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_very_large } }
+        ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
+    }
+
+    # Opción B (Alternativa): Ferrera intenta sabotear a Lindo desde las sombras
+    option = {
+        name = ca_honduras_events.17.b
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
+        add_radicals = { value = medium_radicals pop_type = academics }
+    }
+}
+
+# 5. 1848: La Constitución de 1848 y la Ratificación
+ca_honduras_events.18 = {
+    type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
+    placement = ROOT
+    title = ca_honduras_events.18.t
+    desc = ca_honduras_events.18.d
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+
+    trigger = {
+        c:HON ?= this
+        in_election_campaign = yes
+        NOT = { has_variable = hon_elec_1848_fired }
+        game_date >= 1848.6.1
+        game_date <= 1849.6.1
+    }
+    
+    immediate = { 
+        set_variable = { name = hon_elec_1848_fired value = yes } 
+    }
+
+    # Opción A (Histórica): Juan Lindo ratificado bajo la nueva constitución civil
+    option = {
+        name = ca_honduras_events.18.a
+        default_option = yes
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_medium } }
+    }
+
+    # Opción B (Alternativa): Los militares se rebelan contra la nueva constitución
+    option = {
+        name = ca_honduras_events.18.b
+        ig:ig_armed_forces ?= { party = { add_momentum = momentum_very_large } }
+        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large_decrease } }
+        add_radicals = { value = medium_radicals pop_type = officers }
+    }
+}

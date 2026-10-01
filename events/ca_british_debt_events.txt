@@ -1,0 +1,302 @@
+﻿namespace = ca_british_debt
+
+# ============================================================
+# CAFM - Eventos de la Deuda Inglesa
+# Basado en hispaniola_events. El deudor viaja en scope:ca_debtor_scope
+# (guardado en el botón / on_complete / on_fail antes del trigger_event).
+# ============================================================
+
+# ------------------------------------------------------------
+# .1 - Deuda saldada (deudor)
+# ------------------------------------------------------------
+ca_british_debt.1 = {
+	type = country_event
+	placement = root
+
+	title = ca_british_debt.1.t
+	desc = ca_british_debt.1.d
+	flavor = ca_british_debt.1.f
+
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 3
+
+	trigger = {
+		# Evento de completado de je_ca_british_debt
+	}
+
+	immediate = {
+		c:GBR ?= {
+			save_scope_as = britain_scope
+		}
+	}
+
+	# Mantener buen crédito en Londres
+	option = {
+		name = ca_british_debt.1.a
+		default_option = yes
+		add_modifier = {
+			name = modifier_ca_british_debt_good_credit
+			days = very_long_modifier_time
+		}
+		change_relations = {
+			country = c:GBR
+			value = 20
+		}
+	}
+
+	# Presumir la soberanía financiera
+	option = {
+		name = ca_british_debt.1.b
+		add_modifier = {
+			name = modifier_ca_british_debt_sovereign_finances
+			days = very_long_modifier_time
+		}
+	}
+}
+
+# ------------------------------------------------------------
+# .2 - Deuda saldada (aviso a GBR)
+# ------------------------------------------------------------
+ca_british_debt.2 = {
+	type = country_event
+	placement = root
+
+	title = ca_british_debt.2.t
+	desc = ca_british_debt.2.d
+	flavor = ca_british_debt.2.f
+
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		# Evento de completado de je_ca_british_debt (GBR)
+	}
+
+	option = {
+		name = ca_british_debt.2.a
+		default_option = yes
+		change_relations = {
+			country = scope:ca_debtor_scope
+			value = 20
+		}
+	}
+}
+
+# ------------------------------------------------------------
+# .3 - El deudor pide conversión de la deuda (GBR decide)
+# ------------------------------------------------------------
+ca_british_debt.3 = {
+	type = country_event
+	placement = root
+
+	title = ca_british_debt.3.t
+	desc = ca_british_debt.3.d
+	flavor = ca_british_debt.3.f
+
+	event_image = {
+		video = "africa_diplomats_negotiating"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		# Disparado por je_ca_british_debt_negotiation_button
+	}
+
+	# Aceptar la conversión
+	option = {
+		name = ca_british_debt.3.a
+		default_option = yes
+		scope:ca_debtor_scope = {
+			trigger_event = { id = ca_british_debt.4 popup = yes }
+		}
+		show_as_tooltip = {
+			scope:ca_debtor_scope = {
+				ca_british_debt_reduce_tier_effect = yes
+				ca_british_debt_obligation_effect = yes
+			}
+		}
+		change_relations = {
+			country = scope:ca_debtor_scope
+			value = 20
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+
+	# Rechazar: los bonistas exigen el pago íntegro
+	option = {
+		name = ca_british_debt.3.b
+		scope:ca_debtor_scope = {
+			trigger_event = { id = ca_british_debt.5 popup = yes }
+		}
+		change_relations = {
+			country = scope:ca_debtor_scope
+			value = -20
+		}
+		ai_chance = {
+			base = 40
+		}
+	}
+}
+
+# ------------------------------------------------------------
+# .4 - GBR acepta la conversión (deudor)
+# ------------------------------------------------------------
+ca_british_debt.4 = {
+	type = country_event
+	placement = root
+
+	title = ca_british_debt.4.t
+	desc = ca_british_debt.4.d
+	flavor = ca_british_debt.4.f
+
+	event_image = {
+		video = "africa_diplomats_negotiating"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		# Disparado por ca_british_debt.3
+	}
+
+	immediate = {
+		c:GBR ?= {
+			save_scope_as = britain_scope
+		}
+	}
+
+	option = {
+		name = ca_british_debt.4.a
+		default_option = yes
+		ca_british_debt_obligation_effect = yes
+		ca_british_debt_reduce_tier_effect = yes
+		change_relations = {
+			country = c:GBR
+			value = 20
+		}
+	}
+}
+
+# ------------------------------------------------------------
+# .5 - GBR rechaza la conversión (deudor)
+# ------------------------------------------------------------
+ca_british_debt.5 = {
+	type = country_event
+	placement = root
+
+	title = ca_british_debt.5.t
+	desc = ca_british_debt.5.d
+	flavor = ca_british_debt.5.f
+
+	event_image = {
+		video = "africa_diplomats_negotiating"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		# Disparado por ca_british_debt.3
+	}
+
+	immediate = {
+		c:GBR ?= {
+			save_scope_as = britain_scope
+		}
+	}
+
+	option = {
+		name = ca_british_debt.5.a
+		default_option = yes
+		change_relations = {
+			country = c:GBR
+			value = -20
+		}
+	}
+}
+
+# ------------------------------------------------------------
+# .6 - Un deudor centroamericano repudia la deuda (GBR)
+# ------------------------------------------------------------
+ca_british_debt.6 = {
+	type = country_event
+	placement = root
+
+	title = ca_british_debt.6.t
+	desc = ca_british_debt.6.d
+	flavor = ca_british_debt.6.f
+
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		# Disparado por on_fail de je_ca_british_debt
+	}
+
+	# Protesta formal y cierre de la plaza de Londres
+	option = {
+		name = ca_british_debt.6.a
+		default_option = yes
+		change_relations = {
+			country = scope:ca_debtor_scope
+			value = -30
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+
+	# Diplomacia de cañonero: el cónsul exige compensación
+	option = {
+		name = ca_british_debt.6.b
+		change_relations = {
+			country = scope:ca_debtor_scope
+			value = -60
+		}
+		scope:ca_debtor_scope = {
+			set_owes_obligation_to = {
+				country = root
+				setting = yes
+			}
+		}
+		change_infamy = 5
+		ai_chance = {
+			base = 30
+		}
+	}
+}
