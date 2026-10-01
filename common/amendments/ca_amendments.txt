@@ -1,145 +1,142 @@
-﻿# ==============================================
-# ENMIENDAS CENTROAMERICANAS (CA_AMENDMENTS)
-# ==============================================
+﻿# ====================================================================
+# CAFM - ENMIENDAS CENTROAMERICANAS
+# ====================================================================
+# Plantilla de cada enmienda (ver amendments.md):
+#   parent           -> ley que define la postura de IG y movimientos
+#   allowed_laws     -> leyes a las que puede adjuntarse
+#   modifier / tax_modifier_*
+#   possible         -> si se puede adjuntar
+#   would_sponsor    -> root = IG; scope:approval = aprobación de la ley padre
+#   ai_will_revoke / can_repeal / amendment_activism_multiplier
+#
+# Correcciones generales:
+#  - 15 enmiendas tenían "set_variable = " vacío: rompía el parseo.
+#  - possible ya no excluye la ley a la que se adjunta la enmienda.
+#  - Todas tienen would_sponsor, ai_will_revoke y can_repeal.
+#  - Valores bajados a la escala vanilla (aprobación ±1/±2,
+#    autoridad <= 75; la enmienda vanilla más extrema da +50).
+#  - Se conservan TODAS las claves (las usan scripted_effects y eventos).
+# ====================================================================
 
 
-# 1. LEYES DE VAGANCIA (Trabajo forzado agrícola)
-# Vinculado a: Agricultura Comercial o Arrendatarios
-# Efecto: Aumenta la producción a costa de los derechos de los estratos bajos.
+# ####################################################################
+# 1. ENMIENDAS GENÉRICAS CENTROAMERICANAS
+# ####################################################################
+
+# --------------------------------------------------------------------
+# LEYES DE VAGANCIA
+# Quien no prueba tener trabajo puede ser obligado a trabajar en fincas.
+# --------------------------------------------------------------------
 amendment_vagrancy_laws = {
-    parent = law_commercialized_agriculture
+	parent = law_commercialized_agriculture
 
-    allowed_laws = {
-        law_commercialized_agriculture
-        law_tenant_farmers
-    }
+	allowed_laws = {
+		law_commercialized_agriculture
+		law_tenant_farmers
+		law_land_reform_coffee_oligarchy
+		law_land_reform_hacienda_system
+	}
 
-    modifier = {
-        # Aumenta el rendimiento de todas las granjas y plantaciones
-        building_group_bg_agriculture_throughput_add = 0.15
-        
-        # Penalización severa al nivel de vida de los trabajadores forzados
-        state_lower_strata_standard_of_living_add = -1.0
-        
-        # Empodera a los terratenientes que se benefician del sistema
-        interest_group_ig_landowners_pol_str_mult = 0.10
-    }
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.10
+		building_group_bg_plantations_throughput_add = 0.05
+		state_lower_strata_standard_of_living_add = -1
+		interest_group_ig_landowners_pol_str_mult = 0.10
+	}
 
-    possible = {
-        # No se puede tener si hay protecciones laborales o sindicatos fuertes
-        NOT = { has_law_or_variant = law_type:law_regulatory_bodies }
-        NOT = { has_law_or_variant = law_type:law_worker_protections }
-        
-        # Restricción Cultural Regional
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:costa_rican
-            country_has_primary_culture = cu:panamanian
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-        }
-    }
+	possible = {
+		only_latin_centralamericans_cultures = yes
+		NOR = {
+			has_law_or_variant = law_type:law_regulatory_bodies
+			has_law_or_variant = law_type:law_worker_protections
+		}
+	}
 
-    # Los Terratenientes siempre intentarán incluir esto en las negociaciones
-    would_sponsor = {
-        is_interest_group_type = ig_landowners
-    }
+	would_sponsor = {
+		is_interest_group_type = ig_landowners
+	}
 
-    # La IA la revocará si los grupos progresistas o sindicatos toman el poder
-    ai_will_revoke = {
-        any_interest_group = {
-            is_in_government = yes
-            OR = {
-                is_interest_group_type = ig_trade_unions
-                is_interest_group_type = ig_intelligentsia
-            }
-        }
-    }
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			OR = {
+				is_interest_group_type = ig_trade_unions
+				is_interest_group_type = ig_intelligentsia
+			}
+		}
+	}
 
-    can_repeal = {
-        legitimacy >= legitimacy_to_repeal_amendment
-    }
+	can_repeal = {
+		legitimacy >= legitimacy_to_repeal_amendment
+	}
 
-    # Es relativamente fácil de agitar en contra por su crueldad
-    amendment_activism_multiplier = 0.5
+	amendment_activism_multiplier = 0.5
 }
 
-# 2. JEFES POLÍTICOS (Caudillismo Local)
-# Vinculado a: Burócratas Designados
-# Efecto: Mucha autoridad y control militar, pero con corrupción institucional.
+# --------------------------------------------------------------------
+# JEFES POLÍTICOS
+# Delegados del Ejecutivo que mandan en cada departamento.
+# --------------------------------------------------------------------
 amendment_jefes_politicos = {
-    parent = law_appointed_bureaucrats
+	parent = law_appointed_bureaucrats
 
-    allowed_laws = {
-        law_appointed_bureaucrats
-    }
+	allowed_laws = {
+		law_appointed_bureaucrats
+	}
 
-    modifier = {
-        # Representa el control férreo del Ejecutivo en las provincias
-        country_authority_add = 150
-        
-        # El precio de la corrupción local y el desvío de fondos
-        state_tax_waste_add = 0.15
-        
-        # Fortalece el poder político del estamento militar
-        interest_group_ig_armed_forces_pol_str_mult = 0.20
-
-        # NUEVO 1.13: Facilita la supresión de disturbios locales
-        country_suppression_cost_mult = -0.25
+	modifier = {
+		country_authority_add = 50
+		state_tax_waste_add = 0.10
+		interest_group_ig_armed_forces_pol_str_mult = 0.15
+		country_suppression_cost_mult = -0.20
 		country_suppression_attraction_factor = -0.10
-    }
+	}
 
-    possible = {
-        # Requiere un sistema de poder concentrado
-        OR = {
-            has_law_or_variant = law_type:law_autocracy
-            has_law_or_variant = law_type:law_oligarchy
-        }
-        
-        # Restricción Cultural
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:costa_rican
-            country_has_primary_culture = cu:panamanian
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-        }
-    }
+	possible = {
+		only_latin_centralamericans_cultures = yes
+		OR = {
+			has_law_or_variant = law_type:law_autocracy
+			has_law_or_variant = law_type:law_oligarchy
+		}
+	}
 
-    # Los Militares patrocinan esta enmienda para controlar el territorio
-    would_sponsor = {
-        is_interest_group_type = ig_armed_forces
-    }
+	would_sponsor = {
+		is_interest_group_type = ig_armed_forces
+	}
 
-    # La IA la quitará si se democratiza el país o si la Intelligentsia quiere limpiar el estado
-    ai_will_revoke = {
-        OR = {
-            NOT = { has_law_or_variant = law_type:law_autocracy }
-            NOT = { has_law_or_variant = law_type:law_oligarchy }
-            any_interest_group = {
-                is_in_government = yes
-                is_interest_group_type = ig_intelligentsia
-            }
-        }
-    }
+	# Antes: OR = { NOT autocracia  NOT oligarquía } -> siempre verdadero.
+	ai_will_revoke = {
+		OR = {
+			NOR = {
+				has_law_or_variant = law_type:law_autocracy
+				has_law_or_variant = law_type:law_oligarchy
+			}
+			any_interest_group = {
+				is_in_government = yes
+				is_interest_group_type = ig_intelligentsia
+			}
+		}
+	}
 
-    can_repeal = {
-        legitimacy >= legitimacy_to_repeal_amendment
-    }
+	can_repeal = {
+		legitimacy >= legitimacy_to_repeal_amendment
+	}
 
-    # Es difícil de quitar porque los jefes políticos suelen resistirse
-    amendment_activism_multiplier = 0.25
+	amendment_activism_multiplier = 0.25
 }
+
+
+# ####################################################################
+# 2. CONSTITUCIONES HISTÓRICAS
+# Se aplican por evento o scripted effect (would_sponsor = always no).
+# Las variables se mantienen: las usan government_types y eventos.
+# ####################################################################
 
 # ==========================================
 # COSTA RICA
 # ==========================================
 
-# 1. Ley Fundamental del Estado Libre de Costa Rica
+# Ley Fundamental del Estado Libre de Costa Rica (1825)
 amendment_costa_rica_1830s = {
 	parent = law_presidential_republic
 
@@ -150,94 +147,81 @@ amendment_costa_rica_1830s = {
 
 	modifier = {
 		country_legitimacy_base_add = 10
-		country_authority_add = 50
+		country_authority_add = 25
 	}
 
 	possible = {
 		c:COS ?= this
-		NOT = { has_law = law_type:law_autocracy }
+		NOT = { has_law_or_variant = law_type:law_autocracy }
 	}
 
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
+
+	on_activate = { set_variable = costa_rica_1830s }
+	on_deactivate = { remove_variable = costa_rica_1830s }
+}
+
+# Decreto de Bases y Garantías (Braulio Carrillo, 1841)
+amendment_ca_bases_y_garantias = {
+	parent = law_autocracy
+
+	allowed_laws = {
+		law_autocracy
+	}
+
+	modifier = {
+		country_authority_add = 75
+		country_legitimacy_base_add = 10
+		interest_group_ig_landowners_pol_str_mult = 0.20
+		interest_group_ig_industrialists_pol_str_mult = 0.10
+		interest_group_ig_rural_folk_pol_str_mult = -0.30
+		country_institution_cost_institution_police_mult = -0.10
+		country_bureaucracy_mult = 0.10
+	}
+
+	# Antes: NOT = { A B } (nunca bloqueaba) y on_activate ponía esas
+	# mismas variables, invalidándose a sí misma. Ahora solo se impide
+	# volver a promulgarla después de derogada.
+	possible = {
+		c:COS ?= this
+		NOT = { has_variable = decreto_bases_garantias_derogado }
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_landowners
+			is_interest_group_type = ig_armed_forces
+			leader ?= { has_ideology = ideology:ideology_carrillismo }
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			is_interest_group_type = ig_intelligentsia
+		}
+	}
+
+	can_repeal = {
+		legitimacy >= legitimacy_to_repeal_amendment
+	}
+
+	amendment_activism_multiplier = 1.0
+
 	on_activate = {
-		set_variable = costa_rica_1830s
+		set_variable = decreto_bases_garantias_activo
 	}
 
 	on_deactivate = {
-		remove_variable = costa_rica_1830s
+		remove_variable = decreto_bases_garantias_activo
+		set_variable = decreto_bases_garantias_derogado
 	}
 }
 
-# 2. Decreto de Bases y Garantías (Braulio Carrillo)
-amendment_ca_bases_y_garantias = {
-    parent = law_autocracy
-
-    allowed_laws = {
-        law_autocracy
-    }
-
-    modifier = {
-        # Concentración de poder y autocracia
-        country_authority_add = 200
-        country_legitimacy_base_add = 20
-        
-        # Filtro censitario y empoderamiento de la élite
-        interest_group_ig_landowners_pol_str_mult = 0.25
-        interest_group_ig_industrialists_pol_str_mult = 0.15
-        interest_group_ig_rural_folk_pol_str_mult = -0.50
-        
-        # Supresión de municipalidades (Centralización)
-        country_institution_cost_institution_police_mult = -0.10
-        country_bureaucracy_mult = 0.10
-    }
-
-    possible = {
-        # Limitado estrictamente a Costa Rica
-        c:COS ?= this
-        NOT = {
-            has_variable = ca_carrilo_decret
-			has_variable = decreto_bases_garantias_activo
-        }
-    }
-
-    would_sponsor = {
-        # Los grupos de poder que apoyarían programáticamente esta ley
-        OR = {
-            is_interest_group_type = ig_landowners
-            is_interest_group_type = ig_armed_forces
-            leader = {
-                has_ideology = ideology:ideology_carrillismo
-            }
-        }
-    }
-
-    ai_will_revoke = {
-        # La IA no revocará esto a menos que los liberales tomen el poder
-        any_interest_group = {
-            is_in_government = yes
-            is_interest_group_type = ig_intelligentsia
-        }
-    }
-
-    can_repeal = {
-        legitimacy >= legitimacy_to_repeal_amendment
-    }
-
-    on_activate = {
-        # Esta variable es crucial para que programemos los eventos de Morazán después
-        set_variable = decreto_bases_garantias_activo
-		set_variable = ca_carrilo_decret
-    }
-
-    on_deactivate = {
-        remove_variable = decreto_bases_garantias_activo
-        set_variable = decreto_bases_garantias_derogado
-		remove_variable = ca_carrilo_decret
-    }
-
-    amendment_activism_multiplier = 1.0
-}
-
-# 3. Constitución Política del Estado Libre de Costa Rica (1844)
+# Constitución del Estado Libre de Costa Rica (1844)
 amendment_free_costa_rica_reform = {
 	parent = law_oligarchy
 
@@ -256,19 +240,18 @@ amendment_free_costa_rica_reform = {
 
 	possible = {
 		c:COS ?= this
-		NOT = { has_law = law_type:law_oligarchy }
 	}
 
-	on_activate = {
-		set_variable = free_costa_rica_reform
-	}
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_deactivate = {
-		remove_variable = free_costa_rica_reform
-	}
+	on_activate = { set_variable = free_costa_rica_reform }
+	on_deactivate = { remove_variable = free_costa_rica_reform }
 }
 
-# 4. Constitución Política de Costa Rica de 1847 (1ra República)
+# Constitución de 1847 (Primera República)
 amendment_costa_rica_1st_republic = {
 	parent = law_parliamentary_republic
 
@@ -278,26 +261,25 @@ amendment_costa_rica_1st_republic = {
 	}
 
 	modifier = {
-		country_legitimacy_base_add = 25
+		country_legitimacy_base_add = 20
 		country_bureaucracy_mult = 0.05
 		interest_group_ig_industrialists_pol_str_mult = 0.10
 	}
 
 	possible = {
 		c:COS ?= this
-		NOT = { has_law = law_type:law_parliamentary_republic }
 	}
 
-	on_activate = {
-		set_variable = costa_rica_1st_republic
-	}
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_deactivate = {
-		remove_variable = costa_rica_1st_republic
-	}
+	on_activate = { set_variable = costa_rica_1st_republic }
+	on_deactivate = { remove_variable = costa_rica_1st_republic }
 }
 
-# 5. Pacto Nacional de los Obreros (Socialismo)
+# Pacto Nacional de los Obreros (historia alternativa socialista)
 amendment_costa_rica_socialist_republic = {
 	parent = law_council_republic
 
@@ -307,30 +289,29 @@ amendment_costa_rica_socialist_republic = {
 
 	modifier = {
 		country_legitimacy_base_add = 10
-		interest_group_ig_trade_unions_pol_str_mult = 0.30
-		interest_group_ig_rural_folk_pol_str_mult = 0.20
-		interest_group_ig_landowners_pol_str_mult = -0.50
+		interest_group_ig_trade_unions_pol_str_mult = 0.25
+		interest_group_ig_rural_folk_pol_str_mult = 0.15
+		interest_group_ig_landowners_pol_str_mult = -0.30
 	}
 
 	possible = {
 		c:COS ?= this
-		NOT = { has_law = law_type:law_council_republic }
 	}
 
-	on_activate = {
-		set_variable = costa_rica_socialist_republic
-	}
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_deactivate = {
-		remove_variable = costa_rica_socialist_republic
-	}
+	on_activate = { set_variable = costa_rica_socialist_republic }
+	on_deactivate = { remove_variable = costa_rica_socialist_republic }
 }
-
 
 # ==========================================
 # NICARAGUA
 # ==========================================
 
+# Primera constitución del Estado de Nicaragua (influencia de Cádiz)
 amendment_nicaragua_1826 = {
 	parent = law_presidential_republic
 
@@ -345,22 +326,17 @@ amendment_nicaragua_1826 = {
 		state_bureaucracy_population_base_cost_factor_mult = 0.05
 	}
 
-	possible = {
-		c:NIC ?= this
-	}
+	possible = { c:NIC ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = nicaragua_1826_cons
-	}
-
-	on_deactivate = {
-		remove_variable = nicaragua_1826_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Primera constitución del Estado de Nicaragua dentro de la República Federal de Centroamérica. Influenciada por Cádiz.
+	on_activate = { set_variable = nicaragua_1826_cons }
+	on_deactivate = { remove_variable = nicaragua_1826_cons }
 }
 
+# Separación de la Federación (conservadora y oligárquica)
 amendment_nicaragua_1838 = {
 	parent = law_oligarchy
 
@@ -375,22 +351,17 @@ amendment_nicaragua_1838 = {
 		interest_group_ig_devout_pol_str_mult = 0.10
 	}
 
-	possible = {
-		c:NIC ?= this
-	}
+	possible = { c:NIC ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = nicaragua_1838_cons
-	}
-
-	on_deactivate = {
-		remove_variable = nicaragua_1838_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Separa definitivamente a Nicaragua de la Federación. Conservadora y oligárquica.
+	on_activate = { set_variable = nicaragua_1838_cons }
+	on_deactivate = { remove_variable = nicaragua_1838_cons }
 }
 
+# Tras la Guerra Nacional: los "treinta años conservadores"
 amendment_nicaragua_1858 = {
 	parent = law_presidential_republic
 
@@ -406,22 +377,17 @@ amendment_nicaragua_1858 = {
 		country_institution_police_max_investment_add = 1
 	}
 
-	possible = {
-		c:NIC ?= this
-	}
+	possible = { c:NIC ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = nicaragua_1858_cons
-	}
-
-	on_deactivate = {
-		remove_variable = nicaragua_1858_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Tras la Guerra Nacional. Inicia los "30 años conservadores".
+	on_activate = { set_variable = nicaragua_1858_cons }
+	on_deactivate = { remove_variable = nicaragua_1858_cons }
 }
 
+# "La Libérrima" (José Santos Zelaya): secularización y reforma liberal
 amendment_nicaragua_1893 = {
 	parent = law_presidential_republic
 
@@ -431,27 +397,22 @@ amendment_nicaragua_1893 = {
 	}
 
 	modifier = {
-		interest_group_ig_devout_pol_str_mult = -0.30
-		interest_group_ig_intelligentsia_pol_str_mult = 0.25
-		state_education_access_add = 0.10
+		interest_group_ig_devout_pol_str_mult = -0.25
+		interest_group_ig_intelligentsia_pol_str_mult = 0.20
+		state_education_access_add = 0.05
 	}
 
-	possible = {
-		c:NIC ?= this
-	}
+	possible = { c:NIC ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = nicaragua_1893_cons
-	}
-
-	on_deactivate = {
-		remove_variable = nicaragua_1893_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: "La Libérrima" (José Santos Zelaya). Secularización y reforma liberal.
+	on_activate = { set_variable = nicaragua_1893_cons }
+	on_deactivate = { remove_variable = nicaragua_1893_cons }
 }
 
+# Reforma de Zelaya para perpetuarse en el poder
 amendment_nicaragua_1905 = {
 	parent = law_autocracy
 
@@ -464,25 +425,20 @@ amendment_nicaragua_1905 = {
 	modifier = {
 		country_authority_add = 50
 		interest_group_ig_armed_forces_pol_str_mult = 0.20
-		interest_group_approval_add = -2
+		interest_group_approval_add = -1
 	}
 
-	possible = {
-		c:NIC ?= this
-	}
+	possible = { c:NIC ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.75
 
-	on_activate = {
-		set_variable = nicaragua_1905_cons
-	}
-
-	on_deactivate = {
-		remove_variable = nicaragua_1905_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Reforma dictatorial de Zelaya para mantenerse en el poder.
+	on_activate = { set_variable = nicaragua_1905_cons }
+	on_deactivate = { remove_variable = nicaragua_1905_cons }
 }
 
+# Restauración conservadora respaldada por EE. UU.
 amendment_nicaragua_1911 = {
 	parent = law_oligarchy
 
@@ -493,31 +449,25 @@ amendment_nicaragua_1911 = {
 
 	modifier = {
 		interest_group_ig_landowners_pol_str_mult = 0.20
-		country_influence_add = -25
-		country_diplomatic_play_maneuvers_add = -5
+		country_influence_mult = -0.15
+		country_leverage_resistance_mult = -0.20
 	}
 
-	possible = {
-		c:NIC ?= this
-	}
+	possible = { c:NIC ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = nicaragua_1911_cons
-	}
-
-	on_deactivate = {
-		remove_variable = nicaragua_1911_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Restauración conservadora respaldada por EE. UU.
+	on_activate = { set_variable = nicaragua_1911_cons }
+	on_deactivate = { remove_variable = nicaragua_1911_cons }
 }
-
 
 # ==========================================
 # HONDURAS
 # ==========================================
 
+# Primera tras la Federación, marcada por la inestabilidad
 amendment_honduras_1839 = {
 	parent = law_presidential_republic
 
@@ -529,25 +479,20 @@ amendment_honduras_1839 = {
 	modifier = {
 		country_authority_add = 10
 		interest_group_ig_rural_folk_pol_str_mult = 0.10
-		state_turmoil_effects_mult = 0.15
+		state_turmoil_effects_mult = 0.10
 	}
 
-	possible = {
-		c:HON ?= this
-	}
+	possible = { c:HON ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = honduras_1839_cons
-	}
-
-	on_deactivate = {
-		remove_variable = honduras_1839_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Primera tras separarse de la Federación. Marcada por inestabilidad.
+	on_activate = { set_variable = honduras_1839_cons }
+	on_deactivate = { remove_variable = honduras_1839_cons }
 }
 
+# Reforma Liberal de Marco Aurelio Soto: minería y modernización
 amendment_honduras_1880 = {
 	parent = law_presidential_republic
 
@@ -557,32 +502,27 @@ amendment_honduras_1880 = {
 	}
 
 	modifier = {
-		building_group_bg_mining_throughput_add = 0.10 
-        interest_group_ig_intelligentsia_pol_str_mult = 0.15
-        country_capitalists_pol_str_mult = 0.10
+		building_group_bg_mining_throughput_add = 0.10
+		interest_group_ig_intelligentsia_pol_str_mult = 0.15
+		country_capitalists_pol_str_mult = 0.10
 	}
 
-	possible = {
-		c:HON ?= this
-	}
+	possible = { c:HON ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = honduras_1880_cons
-	}
-
-	on_deactivate = {
-		remove_variable = honduras_1880_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Reforma Liberal de Marco Aurelio Soto. Fomento minero y modernización.
+	on_activate = { set_variable = honduras_1880_cons }
+	on_deactivate = { remove_variable = honduras_1880_cons }
 }
-
 
 # ==========================================
 # EL SALVADOR
 # ==========================================
 
+# Primera constitución del Estado (liberal, dentro de la Federación).
+# Antes era idéntica a la de 1841.
 amendment_el_salvador_1824 = {
 	parent = law_presidential_republic
 
@@ -591,23 +531,21 @@ amendment_el_salvador_1824 = {
 	}
 
 	modifier = {
-		interest_group_ig_armed_forces_pol_str_mult = 0.15
-		country_authority_add = 15
+		country_legitimacy_base_add = 10
+		interest_group_ig_intelligentsia_pol_str_mult = 0.10
 	}
 
-	possible = {
-		c:ELS ?= this
-	}
+	possible = { c:ELS ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = el_salvador_1824_cons
-	}
-
-	on_deactivate = {
-		remove_variable = el_salvador_1824_cons
-	}
+	on_activate = { set_variable = el_salvador_1824_cons }
+	on_deactivate = { remove_variable = el_salvador_1824_cons }
 }
 
+# Separación bajo la influencia militar de Francisco Malespín
 amendment_el_salvador_1841 = {
 	parent = law_presidential_republic
 
@@ -621,22 +559,17 @@ amendment_el_salvador_1841 = {
 		country_authority_add = 15
 	}
 
-	possible = {
-		c:ELS ?= this
-	}
+	possible = { c:ELS ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = el_salvador_1841_cons
-	}
-
-	on_deactivate = {
-		remove_variable = el_salvador_1841_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Separación oficial bajo la influencia de Francisco Malespín.
+	on_activate = { set_variable = el_salvador_1841_cons }
+	on_deactivate = { remove_variable = el_salvador_1841_cons }
 }
 
+# República cafetalera ("los Catorce")
 amendment_el_salvador_1886 = {
 	parent = law_presidential_republic
 
@@ -646,32 +579,27 @@ amendment_el_salvador_1886 = {
 	}
 
 	modifier = {
-		building_group_bg_agriculture_throughput_add = 0.15
-		interest_group_ig_landowners_pol_str_mult = 0.25
-		interest_group_ig_rural_folk_pol_str_mult = -0.30
+		building_coffee_plantation_throughput_add = 0.15
+		interest_group_ig_landowners_pol_str_mult = 0.20
+		interest_group_ig_rural_folk_pol_str_mult = -0.20
 	}
 
-	possible = {
-		c:ELS ?= this
-	}
+	possible = { c:ELS ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = el_salvador_1886_cons
-	}
-
-	on_deactivate = {
-		remove_variable = el_salvador_1886_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Consolidación de la República Cafetalera ("La República de los 14").
+	on_activate = { set_variable = el_salvador_1886_cons }
+	on_deactivate = { remove_variable = el_salvador_1886_cons }
 }
-
 
 # ==========================================
 # GUATEMALA
 # ==========================================
 
+# Constitución del Estado de Guatemala (liberal, era federal).
+# Antes era idéntica a la de 1851.
 amendment_guatemala_1825 = {
 	parent = law_presidential_republic
 
@@ -681,24 +609,22 @@ amendment_guatemala_1825 = {
 	}
 
 	modifier = {
-		interest_group_ig_devout_pol_str_mult = 0.30
-		interest_group_ig_landowners_pol_str_mult = 0.20
-		country_legitimacy_base_add = 15
+		interest_group_ig_intelligentsia_pol_str_mult = 0.15
+		interest_group_ig_devout_pol_str_mult = -0.10
+		country_legitimacy_base_add = 10
 	}
 
-	possible = {
-		c:GUA ?= this
-	}
+	possible = { c:GUA ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = guatemala_1825_cons
-	}
-
-	on_deactivate = {
-		remove_variable = guatemala_1825_cons
-	}
+	on_activate = { set_variable = guatemala_1825_cons }
+	on_deactivate = { remove_variable = guatemala_1825_cons }
 }
 
+# Acta Constitutiva: régimen conservador de Rafael Carrera
 amendment_guatemala_1851 = {
 	parent = law_autocracy
 
@@ -711,25 +637,20 @@ amendment_guatemala_1851 = {
 	modifier = {
 		interest_group_ig_devout_pol_str_mult = 0.30
 		interest_group_ig_landowners_pol_str_mult = 0.20
-		country_legitimacy_base_add = 15
+		country_authority_add = 25
 	}
 
-	possible = {
-		c:GUA ?= this
-	}
+	possible = { c:GUA ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = guatemala_1851_cons
-	}
-
-	on_deactivate = {
-		remove_variable = guatemala_1851_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: "Acta Constitutiva de la República". Régimen conservador de Rafael Carrera.
+	on_activate = { set_variable = guatemala_1851_cons }
+	on_deactivate = { remove_variable = guatemala_1851_cons }
 }
 
+# Reforma Liberal de Justo Rufino Barrios
 amendment_guatemala_1879 = {
 	parent = law_autocracy
 
@@ -745,22 +666,15 @@ amendment_guatemala_1879 = {
 		country_authority_add = 30
 	}
 
-	possible = {
-		c:GUA ?= this
-	}
+	possible = { c:GUA ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = guatemala_1879_cons
-	}
-
-	on_deactivate = {
-		remove_variable = guatemala_1879_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Reforma Liberal de Justo Rufino Barrios. Anticlericalismo e infraestructura.
+	on_activate = { set_variable = guatemala_1879_cons }
+	on_deactivate = { remove_variable = guatemala_1879_cons }
 }
-
 
 # ==========================================
 # LOS ALTOS
@@ -780,22 +694,15 @@ amendment_los_altos_1838 = {
 		state_incorporation_speed_mult = -0.20
 	}
 
-	possible = {
-		c:ALT ?= this
-	}
+	possible = { c:ALT ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = los_altos_1838_cons
-	}
-
-	on_deactivate = {
-		remove_variable = los_altos_1838_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Separación del Estado de Los Altos (Quetzaltenango) de Guatemala.
+	on_activate = { set_variable = los_altos_1838_cons }
+	on_deactivate = { remove_variable = los_altos_1838_cons }
 }
-
 
 # ==========================================
 # CHIAPAS
@@ -815,402 +722,1213 @@ amendment_chiapas_1826 = {
 		country_bureaucracy_add = 10
 	}
 
-	possible = {
-		c:CHP ?= this
-	}
+	possible = { c:CHP ?= this }
+	would_sponsor = { always = no }
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 
-	on_activate = {
-		set_variable = chiapas_1826_cons
-	}
-
-	on_deactivate = {
-		remove_variable = chiapas_1826_cons
-	}
-
-	# NOTAS PARA MODDERS:
-	# Históricamente: Primera constitución de Chiapas tras unirse formalmente a México.
+	on_activate = { set_variable = chiapas_1826_cons }
+	on_deactivate = { remove_variable = chiapas_1826_cons }
 }
 
 
+# ####################################################################
+# 3. ENMIENDAS DE LAS LEYES CENTROAMERICANAS
+# parent = la propia ley centroamericana (independiente), para que las
+# posturas de tus ideologías sobre esa ley decidan quién las apoya.
+# ####################################################################
 
-# ====================================================================
-# ENMIENDAS: COFFEACRACIA
-# ====================================================================
+# ==========================================
+# CAFETOCRACIA
+# ==========================================
 
 amendment_ca_libretas_jornaleros = {
+	parent = law_ca_coffeacracia
 
-	
-	
 	allowed_laws = {
-	law_ca_coffeacracia
-	} 
-	
-    modifier = {
-        state_working_adult_ratio_add = 0.10 # Obligan a más gente a trabajar
-        state_lower_strata_standard_of_living_add = -1 # Explotación
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_coffeacracia
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		state_working_adult_ratio_add = 0.05
+		state_lower_strata_standard_of_living_add = -1
 	}
 
-	on_deactivate = {
-		remove_variable = 
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		is_interest_group_type = ig_landowners
 	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			law_stance = {
+				law = law_type:law_ca_coffeacracia
+				value < neutral
+			}
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 }
 
 amendment_ca_exencion_fiscal = {
+	parent = law_ca_coffeacracia
 
-	
 	allowed_laws = {
-    law_ca_coffeacracia
-	}	
-    modifier = {
-        state_aristocrats_investment_pool_efficiency_mult = 0.20
-        state_tax_capacity_mult = -0.15 # El estado no recauda de los ricos
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_coffeacracia
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		state_aristocrats_investment_pool_efficiency_mult = 0.20
+		state_tax_capacity_mult = -0.15
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		is_interest_group_type = ig_landowners
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			law_stance = {
+				law = law_type:law_ca_coffeacracia
+				value < neutral
+			}
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 }
 
 amendment_ca_inversion_barones = {
+	parent = law_ca_coffeacracia
 
-	
 	allowed_laws = {
-    law_ca_coffeacracia
-	}	
-	
-    modifier = {
-        state_infrastructure_from_population_add = 0.10
-        interest_group_ig_landowners_pol_str_mult = 0.10
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_coffeacracia
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		state_infrastructure_from_population_add = 0.25
+		interest_group_ig_landowners_pol_str_mult = 0.10
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		AND = {
+			exists = scope:approval
+			scope:approval > 0
+		}
+	}
+
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.25
 }
 
-# ====================================================================
-# ENMIENDAS: TECNOCRACIA
-# ====================================================================
+# ==========================================
+# TECNOCRACIA
+# ==========================================
 
 amendment_ca_darwinismo_social = {
+	parent = law_ca_tecnocracy
 
-	
 	allowed_laws = {
-    law_ca_tecnocracy
-	}	
-		
-    modifier = {
-        state_migration_pull_mult = 0.20
-        state_radicals_and_loyalists_from_sol_change_mult = 0.30 # Indígenas muy enojados
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_tecnocracy
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		state_migration_pull_mult = 0.20
+		state_radicals_and_loyalists_from_sol_change_mult = 0.30
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		leader ?= { has_ideology = ideology:ideology_ca_cientifico_technocracy }
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			law_stance = {
+				law = law_type:law_ca_tecnocracy
+				value < neutral
+			}
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 1.0
 }
 
 amendment_ca_educacion_positivista = {
+	parent = law_ca_tecnocracy
 
-	
 	allowed_laws = {
-    law_ca_tecnocracy
-	}	
-		
-    modifier = {
-        state_education_access_add = 0.10
-        interest_group_ig_devout_approval_add = -5 # La Iglesia lo odia
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_tecnocracy
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		state_education_access_add = 0.05
+		interest_group_ig_devout_approval_add = -2
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_intelligentsia
+			AND = {
+				exists = scope:approval
+				scope:approval > 0
+			}
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			is_interest_group_type = ig_devout
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 }
 
 amendment_ca_fomento_cientifico = {
+	parent = law_ca_tecnocracy
 
-	
 	allowed_laws = {
-    law_ca_tecnocracy
-	}	
-		
-    modifier = {
-        building_group_bg_manufacturing_throughput_add = 0.10
-        building_group_bg_mining_throughput_add = 0.10
-        country_bureaucracy_mult = 0.10 # Requiere más burócratas
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_tecnocracy
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		building_group_bg_manufacturing_throughput_add = 0.10
+		building_group_bg_mining_throughput_add = 0.10
+		country_bureaucracy_mult = -0.10		# más burócratas = menos burocracia disponible
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		AND = {
+			exists = scope:approval
+			scope:approval > 0
+		}
+	}
+
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.25
 }
 
-# ====================================================================
-# ENMIENDAS: JUNTA MILITAR
-# ====================================================================
+# ==========================================
+# JUNTA MILITAR
+# ==========================================
 
 amendment_ca_tribunales_militares = {
+	parent = law_ca_junta
 
-	
 	allowed_laws = {
-	law_ca_junta
-	}	
-		
-    modifier = {
-        state_turmoil_effects_mult = -0.30 # Represión brutal del disenso
-        country_prestige_mult = -0.10 # Mal visto internacionalmente
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_junta
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		state_turmoil_effects_mult = -0.30
+		country_prestige_mult = -0.10
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		is_interest_group_type = ig_armed_forces
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			law_stance = {
+				law = law_type:law_ca_junta
+				value < neutral
+			}
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 1.0
 }
 
 amendment_ca_presupuesto_negro = {
+	parent = law_ca_junta
 
-	
 	allowed_laws = {
-	law_ca_junta
-	}	
-		
-    modifier = {
-        interest_group_ig_armed_forces_approval_add = 5
-        country_officers_pol_str_mult = 0.20
-        state_tax_waste_add = 0.10 # Corrupción
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_junta
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		interest_group_ig_armed_forces_approval_add = 2
+		country_officers_pol_str_mult = 0.20
+		state_tax_waste_add = 0.10
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		is_interest_group_type = ig_armed_forces
+	}
+
+	ai_will_revoke = {
+		NOT = { ca_armed_forces_in_government = yes }
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.75
 }
 
 amendment_ca_leva_suprema = {
+	parent = law_ca_junta
 
-	
 	allowed_laws = {
-	law_ca_junta
-	}	
-		
-    modifier = {
-        state_conscription_rate_add = 0.05
-        state_mortality_mult = 0.05 # La gente muere más por las levas
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_junta
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		state_conscription_rate_add = 0.05
+		state_mortality_mult = 0.05
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		is_interest_group_type = ig_armed_forces
+	}
+
+	ai_will_revoke = {
+		is_at_war = no
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 1.0
 }
 
-# ====================================================================
-# ENMIENDAS: CONSEJO DE JUNTA
-# ====================================================================
+# ==========================================
+# CONSEJO DE JUNTA
+# ==========================================
 
 amendment_ca_gabinete_transicion = {
+	parent = law_ca_consejo_junta
 
-	
 	allowed_laws = {
 		law_ca_consejo_junta
-	}	
-		
-    modifier = {
-        political_movement_radicalism_from_enactment_disapproval_mult = -0.30 # Calma las protestas
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		political_movement_radicalism_from_enactment_disapproval_mult = -0.30
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		AND = {
+			exists = scope:approval
+			scope:approval > 0
+		}
+	}
+
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.25
 }
 
 amendment_ca_pacto_generales = {
+	parent = law_ca_consejo_junta
 
-	
 	allowed_laws = {
-	law_ca_consejo_junta
-	}	
-		
-    modifier = {
-        country_military_wages_mult = 0.20 # Se les paga para que no den otro golpe
-        interest_group_ig_armed_forces_approval_add = 3
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_consejo_junta
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		country_military_wages_mult = 0.20
+		interest_group_ig_armed_forces_approval_add = 2
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		is_interest_group_type = ig_armed_forces
+	}
+
+	ai_will_revoke = {
+		NOT = { ca_armed_forces_in_government = yes }
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 }
 
 amendment_ca_amnistia_politica = {
+	parent = law_ca_consejo_junta
 
-	
 	allowed_laws = {
-	law_ca_consejo_junta
-	}	
-		
-    modifier = {
-        political_movement_radicalism_add = -0.05
-        interest_group_ig_trade_unions_pol_str_mult = 0.10 # Regresan del exilio
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_consejo_junta
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		political_movement_radicalism_add = -0.05
+		interest_group_ig_trade_unions_pol_str_mult = 0.10
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_intelligentsia
+			is_interest_group_type = ig_trade_unions
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			is_interest_group_type = ig_armed_forces
+			is_powerful = yes
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 }
 
-# ====================================================================
-# ENMIENDAS: POLICÍA COMUNAL
-# ====================================================================
+# ==========================================
+# POLICÍA COMUNAL
+# ==========================================
 
 amendment_ca_justicia_consuetudinaria = {
+	parent = law_ca_policia_comunal
 
-	
 	allowed_laws = {
-	law_ca_policia_comunal
-	}	
-		
-    modifier = {
-        state_radicals_and_loyalists_from_sol_change_mult = -0.10
-        interest_group_ig_landowners_approval_add = -3 # Terratenientes odian esto
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_policia_comunal
 	}
 
-	on_activate = {
-		set_variable = 
+	modifier = {
+		state_radicals_and_loyalists_from_sol_change_mult = -0.10
+		interest_group_ig_landowners_approval_add = -1
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		is_interest_group_type = ig_rural_folk
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			is_interest_group_type = ig_landowners
+			is_powerful = yes
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 }
 
 amendment_ca_milicias_autodefensa = {
+	parent = law_ca_policia_comunal
 
-	
 	allowed_laws = {
-	law_ca_policia_comunal
-	}	
-		
-    modifier = {
-        unit_defense_mult = 0.10 
-        country_institution_police_max_investment_add = -1
-    }
-	possible = {
-		only_latin_centralamericans_cultures = yes		
+		law_ca_policia_comunal
 	}
 
-	on_activate = {
-		set_variable = 
+	# Antes: country_institution_police_max_investment_add = -1, que se
+	# sumaba al -1 de la propia ley (-2 en total).
+	modifier = {
+		battle_defense_owned_province_mult = 0.10
+		state_conscription_rate_add = 0.01
 	}
 
-	on_deactivate = {
-		remove_variable = 
-	}	
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		is_interest_group_type = ig_rural_folk
+	}
+
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
 }
 
 amendment_ca_patrullajes_agricolas = {
+	parent = law_ca_policia_comunal
 
-	
 	allowed_laws = {
-	law_ca_policia_comunal
-	}	
-		
-    modifier = {
-        building_subsistence_output_mult = 0.15
-    }
+		law_ca_policia_comunal
+	}
+
+	modifier = {
+		building_subsistence_output_mult = 0.10
+	}
+
+	possible = { only_latin_centralamericans_cultures = yes }
+
+	would_sponsor = {
+		AND = {
+			exists = scope:approval
+			scope:approval > 0
+		}
+	}
+
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.25
+}
+
+
+# ####################################################################
+# 4. ENMIENDAS NUEVAS - HISTÓRICAS
+# ####################################################################
+
+# --------------------------------------------------------------------
+# EXTINCIÓN DE EJIDOS (El Salvador, 1881-1882)
+# Abolición de las tierras comunales para expandir el café.
+# --------------------------------------------------------------------
+amendment_ca_extincion_ejidos = {
+	parent = law_land_reform_coffee_oligarchy
+
+	allowed_laws = {
+		law_land_reform_coffee_oligarchy
+		law_commercialized_agriculture
+		law_tenant_farmers
+	}
+
+	modifier = {
+		building_coffee_plantation_throughput_add = 0.10
+		building_group_bg_subsistence_agriculture_peasants_standard_of_living_add = -1
+		interest_group_ig_rural_folk_approval_add = -2
+		interest_group_ig_landowners_approval_add = 1
+		state_radicals_from_political_movements_mult = 0.15
+	}
+
 	possible = {
 		only_latin_centralamericans_cultures = yes
 	}
 
-	on_activate = {
-		set_variable = 
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_landowners
+			has_ideology = ideology:ideology_ca_coffee_liberal
+		}
 	}
 
-	on_deactivate = {
-		remove_variable = 
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			is_interest_group_type = ig_rural_folk
+		}
 	}
 
-    amendment_activism_multiplier = 1.0	
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 1.0
+}
+
+# --------------------------------------------------------------------
+# REGLAMENTO DE JORNALEROS (Guatemala, 1877)
+# Libreta de trabajo y deudas que atan al jornalero a la finca.
+# --------------------------------------------------------------------
+amendment_ca_reglamento_jornaleros = {
+	parent = law_ca_mandamientos
+
+	allowed_laws = {
+		law_ca_mandamientos
+	}
+
+	modifier = {
+		state_working_adult_ratio_add = 0.05
+		building_group_bg_plantations_throughput_add = 0.05
+		state_peasants_mortality_mult = 0.03
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	would_sponsor = {
+		is_interest_group_type = ig_landowners
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			law_stance = {
+				law = law_type:law_ca_mandamientos
+				value < neutral
+			}
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 1.0
+}
+
+# --------------------------------------------------------------------
+# MATRIMONIO CIVIL (reformas liberales)
+# --------------------------------------------------------------------
+amendment_ca_matrimonio_civil = {
+	parent = law_total_separation
+
+	allowed_laws = {
+		law_freedom_of_conscience
+		law_total_separation
+	}
+
+	modifier = {
+		country_legitimacy_base_add = 5
+		country_clergymen_pol_str_mult = -0.05
+		interest_group_ig_devout_approval_add = -1
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	would_sponsor = {
+		OR = {
+			has_ideology = ideology:ideology_ca_secularist
+			has_ideology = ideology:ideology_ca_liberal
+			AND = {
+				exists = scope:approval
+				scope:approval > 0
+			}
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			law_stance = {
+				law = law_type:law_total_separation
+				value < neutral
+			}
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
+}
+
+# --------------------------------------------------------------------
+# EXPULSIÓN DE LOS JESUITAS (Guatemala 1871, Nicaragua 1881...)
+# --------------------------------------------------------------------
+amendment_ca_expulsion_jesuitas = {
+	parent = law_total_separation
+
+	allowed_laws = {
+		law_state_religion
+		law_freedom_of_conscience
+		law_total_separation
+	}
+
+	modifier = {
+		country_clergymen_pol_str_mult = -0.15
+		interest_group_ig_devout_approval_add = -2
+		country_authority_add = 25
+		state_radicals_from_political_movements_mult = 0.05
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+		NOR = {
+			any_active_law = { has_amendment = amendment_type:amendment_ca_concordato }
+			currently_enacting_law ?= { has_amendment = amendment_type:amendment_ca_concordato }
+		}
+	}
+
+	would_sponsor = {
+		OR = {
+			has_ideology = ideology:ideology_anti_clerical
+			has_ideology = ideology:ideology_ca_secularist
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			is_interest_group_type = ig_devout
+			is_powerful = yes
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 1.0
+}
+
+# --------------------------------------------------------------------
+# CONCORDATO CON LA SANTA SEDE (Guatemala 1852, Costa Rica 1852)
+# --------------------------------------------------------------------
+amendment_ca_concordato = {
+	parent = law_state_religion
+
+	allowed_laws = {
+		law_state_religion
+		law_theocracy
+	}
+
+	modifier = {
+		interest_group_ig_devout_pol_str_mult = 0.15
+		country_legitimacy_base_add = 10
+		state_conversion_mult = 0.05
+		country_institution_cost_institution_schools_mult = -0.05
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+		NOR = {
+			any_active_law = { has_amendment = amendment_type:amendment_ca_patronato }
+			currently_enacting_law ?= { has_amendment = amendment_type:amendment_ca_patronato }
+			any_active_law = { has_amendment = amendment_type:amendment_ca_expulsion_jesuitas }
+		}
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_devout
+			has_ideology = ideology:ideology_ca_moralist
+			has_ideology = ideology:ideology_ca_papal_moralist
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			has_ideology = ideology:ideology_ca_secularist
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
+}
+
+# --------------------------------------------------------------------
+# PATRONATO REGIO / NACIONAL
+# El Estado nombra a obispos y párrocos. Excluyente con el Concordato.
+# --------------------------------------------------------------------
+amendment_ca_patronato = {
+	parent = law_freedom_of_conscience
+
+	allowed_laws = {
+		law_state_religion
+		law_freedom_of_conscience
+	}
+
+	modifier = {
+		country_clergymen_pol_str_mult = -0.10
+		country_authority_add = 25
+		interest_group_ig_devout_approval_add = -1
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+		NOR = {
+			any_active_law = { has_amendment = amendment_type:amendment_ca_concordato }
+			currently_enacting_law ?= { has_amendment = amendment_type:amendment_ca_concordato }
+		}
+	}
+
+	would_sponsor = {
+		OR = {
+			has_ideology = ideology:ideology_ca_liberal
+			has_ideology = ideology:ideology_ca_secularist
+			AND = {
+				exists = scope:approval
+				scope:approval > 0
+			}
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			is_interest_group_type = ig_devout
+			is_powerful = yes
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
+}
+
+# --------------------------------------------------------------------
+# CONTRATO SOTO-KEITH (Costa Rica, 1884)
+# Ferrocarril al Atlántico a cambio de tierras y renegociar la deuda.
+# --------------------------------------------------------------------
+amendment_ca_contrato_keith = {
+	parent = law_land_reform_banana_republic
+
+	allowed_laws = {
+		law_land_reform_banana_republic
+		law_commercialized_agriculture
+	}
+
+	modifier = {
+		building_railway_throughput_add = 0.15
+		building_banana_plantation_throughput_add = 0.10
+		country_loan_interest_rate_mult = -0.10
+		country_leverage_resistance_mult = -0.10
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_industrialists
+			has_ideology = ideology:ideology_ca_enclavist
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			has_ideology = ideology:ideology_anti_imperialist_sovereigntism
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.75
+}
+
+# --------------------------------------------------------------------
+# ABOLICIÓN DE LA PENA DE MUERTE (Costa Rica, 1882)
+# --------------------------------------------------------------------
+amendment_ca_abolicion_pena_muerte = {
+	parent = law_local_police
+
+	allowed_laws = {
+		law_no_police
+		law_local_police
+		law_dedicated_police
+		law_ca_policia_comunal
+	}
+
+	modifier = {
+		country_legitimacy_base_add = 5
+		country_suppression_cost_mult = 0.10
+		state_radicals_from_political_movements_mult = -0.05
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+		NOT = { has_law = law_type:law_ca_junta }
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_intelligentsia
+			has_ideology = ideology:ideology_ca_liberal
+		}
+	}
+
+	ai_will_revoke = {
+		has_law = law_type:law_ca_junta
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.25
+}
+
+# --------------------------------------------------------------------
+# ESTANCO DE AGUARDIENTE Y TABACO
+# Monopolio fiscal heredado de la Colonia. Va como enmienda porque las
+# leyes de tributación definen los tipos impositivos en cada ley.
+# --------------------------------------------------------------------
+amendment_ca_estanco = {
+	parent = law_consumption_based_taxation
+
+	allowed_laws = {
+		law_land_based_taxation
+		law_consumption_based_taxation
+		law_per_capita_based_taxation
+	}
+
+	modifier = {
+		interest_group_ig_petty_bourgeoisie_approval_add = -1
+		state_tax_waste_add = 0.03			# contrabando y corrupción
+	}
+
+	tax_modifier_very_low = {
+		tax_consumption_add = 0.03
+	}
+
+	tax_modifier_low = {
+		tax_consumption_add = 0.04
+	}
+
+	tax_modifier_medium = {
+		tax_consumption_add = 0.05
+	}
+
+	tax_modifier_high = {
+		tax_consumption_add = 0.06
+	}
+
+	tax_modifier_very_high = {
+		tax_consumption_add = 0.07
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	would_sponsor = {
+		AND = {
+			exists = scope:approval
+			scope:approval > 0
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			is_interest_group_type = ig_petty_bourgeoisie
+			is_powerful = yes
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.25
+}
+
+
+# ####################################################################
+# 5. ENMIENDAS NUEVAS - DINÁMICAS
+# Aparecen y desaparecen según el estado del país.
+# ####################################################################
+
+# --------------------------------------------------------------------
+# CONTINUISMO
+# El presidente se reelige por encima de la constitución.
+# Solo con legitimidad alta; la IA la retira cuando cae.
+# --------------------------------------------------------------------
+amendment_ca_continuismo = {
+	parent = law_autocracy
+
+	allowed_laws = {
+		law_presidential_republic
+		law_ca_coffeacracia
+		law_ca_tecnocracy
+		law_ca_consejo_junta
+	}
+
+	modifier = {
+		country_legitimacy_headofstate_add = 10
+		country_legitimacy_base_add = -5
+		country_authority_mult = 0.10
+		state_radicals_from_political_movements_mult = 0.10
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+		legitimacy >= 50
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_armed_forces
+			has_ideology = ideology:ideology_caudillismo
+		}
+	}
+
+	ai_will_revoke = {
+		legitimacy < 30
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 1.0
+}
+
+# --------------------------------------------------------------------
+# ESTADO DE SITIO
+# Suspende garantías durante una guerra o con mucha turbulencia.
+# La IA la retira cuando vuelve la calma.
+# --------------------------------------------------------------------
+amendment_ca_estado_de_sitio = {
+	parent = law_autocracy
+
+	allowed_laws = {
+		law_presidential_republic
+		law_parliamentary_republic
+		law_ca_coffeacracia
+		law_ca_tecnocracy
+		law_ca_junta
+		law_ca_consejo_junta
+	}
+
+	modifier = {
+		country_suppression_cost_mult = -0.30
+		state_turmoil_effects_mult = -0.20
+		country_legitimacy_base_add = -10
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+		OR = {
+			is_at_war = yes
+			country_turmoil >= 0.15
+		}
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_armed_forces
+			is_interest_group_type = ig_landowners
+		}
+	}
+
+	ai_will_revoke = {
+		is_at_war = no
+		country_turmoil < 0.05
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 1.0
+}
+
+# --------------------------------------------------------------------
+# INTERVENCIÓN ADUANERA (receptoría, Nicaragua 1911)
+# Los acreedores cobran directamente en las aduanas.
+# Solo en bancarrota; se retira al salir de ella.
+# --------------------------------------------------------------------
+amendment_ca_intervencion_aduanera = {
+	parent = law_free_trade
+
+	allowed_laws = {
+		law_mercantilism
+		law_protectionism
+		law_free_trade
+	}
+
+	modifier = {
+		country_loan_interest_rate_mult = -0.25
+		state_tax_waste_add = -0.05
+		country_leverage_resistance_mult = -0.25
+		country_prestige_mult = -0.10
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+		in_default = yes
+	}
+
+	would_sponsor = {
+		is_interest_group_type = ig_industrialists
+	}
+
+	ai_will_revoke = {
+		in_default = no
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.75
+}
+
+
+# ####################################################################
+# 6. ENMIENDAS NUEVAS - HISTORIA ALTERNATIVA DE LA UNIÓN
+# Sobre las leyes de estructura del Estado (solo el soberano).
+# ####################################################################
+
+# --------------------------------------------------------------------
+# SENADO DE LOS ESTADOS
+# Representación igual por estado: más lealtad, leyes más lentas.
+# --------------------------------------------------------------------
+amendment_ca_senado_de_estados = {
+	parent = law_ca_central_american_federal
+
+	allowed_laws = {
+		law_ca_central_american_federal
+	}
+
+	modifier = {
+		country_legitimacy_base_add = 10
+		country_liberty_desire_of_subjects_add = -0.05
+		country_law_enactment_speed_mult = -0.10
+	}
+
+	possible = {
+		ca_is_union_sovereign = yes
+	}
+
+	would_sponsor = {
+		OR = {
+			leader ?= { has_ideology = ideology:ideology_ca_federalist }
+			AND = {
+				exists = scope:approval
+				scope:approval > 0
+			}
+		}
+	}
+
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.25
+}
+
+# --------------------------------------------------------------------
+# CAPITAL ROTATIVA
+# La capital federal rota entre los estados para evitar el dominio
+# guatemalteco (la capital pasó de Guatemala a San Salvador en 1834).
+# --------------------------------------------------------------------
+amendment_ca_capital_rotativa = {
+	parent = law_ca_central_american_federal
+
+	allowed_laws = {
+		law_ca_central_american_federal
+		law_ca_central_american_confederated
+	}
+
+	modifier = {
+		country_liberty_desire_of_subjects_add = -0.05
+		state_turmoil_effects_mult = -0.05
+		country_bureaucracy_mult = -0.05
+	}
+
+	possible = {
+		ca_is_union_sovereign = yes
+	}
+
+	would_sponsor = {
+		AND = {
+			exists = scope:approval
+			scope:approval > 0
+		}
+	}
+
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.25
+}
+
+# --------------------------------------------------------------------
+# DIETA CONFEDERAL (Pacto de Chinandega, 1842)
+# Un órgano común que da algo de cohesión a la Confederación.
+# --------------------------------------------------------------------
+amendment_ca_dieta_confederal = {
+	parent = law_ca_central_american_confederated
+
+	allowed_laws = {
+		law_ca_central_american_confederated
+	}
+
+	modifier = {
+		country_authority_add = 15
+		country_subject_income_transfer_mult = 0.15
+		country_liberty_desire_of_subjects_add = -0.05
+	}
+
+	possible = {
+		ca_is_union_sovereign = yes
+	}
+
+	would_sponsor = {
+		AND = {
+			exists = scope:approval
+			scope:approval > 0
+		}
+	}
+
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.25
+}
+
+# --------------------------------------------------------------------
+# EJÉRCITO ÚNICO
+# Disuelve las milicias de los estados en un solo ejército nacional.
+# --------------------------------------------------------------------
+amendment_ca_ejercito_unico = {
+	parent = law_ca_central_american_unitary
+
+	allowed_laws = {
+		law_ca_central_american_unitary
+		law_ca_central_american_federal
+	}
+
+	modifier = {
+		country_authority_add = 25
+		unit_experience_gain_mult = 0.10
+		country_officers_pol_str_mult = 0.10
+		country_liberty_desire_of_subjects_add = 0.05
+	}
+
+	possible = {
+		ca_is_union_sovereign = yes
+		NOT = { has_law = law_type:law_regionalist_militia }
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_armed_forces
+			leader ?= { has_ideology = ideology:ideology_ca_unitarian }
+		}
+	}
+
+	ai_will_revoke = {
+		has_law = law_type:law_ca_central_american_confederated
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
+}
+
+# --------------------------------------------------------------------
+# CIUDADANÍA CENTROAMERICANA
+# Todo centroamericano es ciudadano en cualquier estado de la Unión.
+# --------------------------------------------------------------------
+amendment_ca_ciudadania_centroamericana = {
+	parent = law_ca_central_american_federal
+
+	allowed_laws = {
+		law_ca_central_american_federal
+		law_ca_central_american_confederated
+	}
+
+	modifier = {
+		country_central_american_cultural_acceptance_add = 10
+		country_guatemalan_cultural_acceptance_add = 10
+		country_el_salvadorian_cultural_acceptance_add = 10
+		country_honduran_cultural_acceptance_add = 10
+		country_nicaraguan_cultural_acceptance_add = 10
+		country_costa_rican_cultural_acceptance_add = 10
+		country_panamanian_cultural_acceptance_add = 10
+		country_chiapanecan_cultural_acceptance_add = 10
+	}
+
+	possible = {
+		ca_is_union_sovereign = yes
+	}
+
+	would_sponsor = {
+		OR = {
+			leader ?= { has_ideology = ideology:ideology_ca_federalist }
+			leader ?= { has_ideology = ideology:ideology_ca_morazanista }
+			AND = {
+				exists = scope:approval
+				scope:approval > 0
+			}
+		}
+	}
+
+	ai_will_revoke = { always = no }
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.25
 }

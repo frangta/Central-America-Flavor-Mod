@@ -20,7 +20,7 @@ color = { 207 72 60 }
 	
 	cultures = { costa_rican }
 	capital = STATE_COSTA_RICA
-	is_named_from_capital = yes
+	
 }
 PC2 = { #Guanacaste
 color = { 187 65 54 }
@@ -31,7 +31,7 @@ color = { 187 65 54 }
 	
 	cultures = { costa_rican }
 	capital = STATE_COSTA_RICA
-	is_named_from_capital = yes
+	
 }
 PC3 = { #Nicoya
 color = { 227 79 66 }
@@ -42,7 +42,7 @@ color = { 227 79 66 }
 	
 	cultures = { central_american }
 	capital = STATE_COSTA_RICA
-	is_named_from_capital = yes
+
 }
 PC4 = { #Limon
 color = { 197 69 58 }
@@ -53,7 +53,7 @@ color = { 197 69 58 }
 	
 	cultures = { costa_rican }
 	capital = STATE_COSTA_RICA
-	is_named_from_capital = yes
+	
 }
 PC5 = { #Heredia
 color = { 217 75 63 }
@@ -64,7 +64,7 @@ color = { 217 75 63 }
 	
 	cultures = { costa_rican }
 	capital = STATE_COSTA_RICA
-	is_named_from_capital = yes
+	
 }
 PC6 = { #Alaguela
 color = { 197 82 72 }
@@ -75,7 +75,7 @@ color = { 197 82 72 }
 	
 	cultures = { costa_rican }
 	capital = STATE_COSTA_RICA
-	is_named_from_capital = yes
+	
 }
 PC7 = { #Osa
 color = { 217 85 67 }
@@ -86,7 +86,7 @@ color = { 217 85 67 }
 	
 	cultures = { costa_rican }
 	capital = STATE_COSTA_RICA
-	is_named_from_capital = yes
+	
 }
 PC8 = { #Cartago
 color = { 207 60 50 }
@@ -97,7 +97,7 @@ color = { 207 60 50 }
 	
 	cultures = { costa_rican }
 	capital = STATE_COSTA_RICA
-	is_named_from_capital = yes
+	
 }
 RDT = { #Talamanca
 color = { 125 52 52 }
@@ -109,7 +109,7 @@ color = { 125 52 52 }
 	cultures = { bribri_talamanca cabecar chibchan_central_america }
         religion = catholic
 	capital = STATE_COSTA_RICA
-	is_named_from_capital = yes
+	
 }
 CCR = { #Confederation of Costa Rica
 	color = { 207 72 60 }
@@ -120,7 +120,7 @@ CCR = { #Confederation of Costa Rica
 	
 	cultures = { central_american costa_rican }
 	capital = STATE_COSTA_RICA
-	is_named_from_capital = yes
+	
 }
 
 
@@ -156,7 +156,7 @@ GGA = { #Gran Republic of Guatemala / Kingdom of Guatemala
 	
 	cultures = { guatemalan }
 	capital = STATE_GUATEMALA
-	is_named_from_capital = yes
+	
 }
 DG1 = { #Peten
 color = { 200 180 237 }
@@ -167,7 +167,7 @@ color = { 200 180 237 }
 	
 	cultures = { central_american }
 	capital = STATE_GUATEMALA
-	is_named_from_capital = yes
+	
 }
 DG2 = { #Izabal
 color = { 245 250 210 }
@@ -178,7 +178,7 @@ color = { 245 250 210 }
 	
 	cultures = { central_american }
 	capital = STATE_GUATEMALA
-	is_named_from_capital = yes
+	
 }
 DG3 = { #Verapaz
 color = { 230 235 242 }
@@ -189,7 +189,7 @@ color = { 230 235 242 }
 	
 	cultures = { central_american }
 	capital = STATE_GUATEMALA
-	is_named_from_capital = yes
+	
 }
 DG4 = { #Guatemala,
 color = { 260 225 252 }
@@ -200,7 +200,7 @@ color = { 260 225 252 }
 	
 	cultures = { guatemalan }
 	capital = STATE_GUATEMALA
-	is_named_from_capital = yes
+	
 }
 DG5 = { #Quetzaltenango,
 color = { 220 210 237 }
@@ -211,7 +211,7 @@ color = { 220 210 237 }
 	
 	cultures = { guatemalan }
 	capital = STATE_GUATEMALA
-	is_named_from_capital = yes
+	
 }
 DG6 = { #Soconusco
 color = { 180 200 200 }
@@ -222,7 +222,7 @@ color = { 180 200 200 }
 	
 	cultures = { guatemalan central_american }
 	capital = STATE_GUATEMALA
-	is_named_from_capital = yes
+	
 }
 ###########Nicaragua#####tags:PN1 - 10
 REPLACE:NIC = {
@@ -245,7 +245,7 @@ RNI = {
 	
 	cultures = { central_american }
 	capital = STATE_NICARAGUA
-	is_named_from_capital = yes
+	
 }
 PN1 = { #Leon
 color = { 34 98 156 }
@@ -256,7 +256,7 @@ color = { 34 98 156 }
 	
 	cultures = { nicaraguan }
 	capital = STATE_NICARAGUA
-	is_named_from_capital = yes
+	
 }
 PN2 = { #Managua
 color = { 44 98 196 }
@@ -267,7 +267,7 @@ color = { 44 98 196 }
 	
 	cultures = { nicaraguan }
 	capital = STATE_NICARAGUA
-	is_named_from_capital = yes
+	
 }
 PN3 = { #Matagalpa
 color = { 54 108 206 }
@@ -278,7 +278,7 @@ color = { 54 108 206 }
 	
 	cultures = { nicaraguan }
 	capital = STATE_NICARAGUA
-	is_named_from_capital = yes
+	
 }
 PN4 = { #Sur zone
 color = { 64 118 216 }
@@ -289,7 +289,7 @@ color = { 64 118 216 }
 	
 	cultures = { nicaraguan central_american }
 	capital = STATE_NICARAGUA
-	is_named_from_capital = yes
+	
 }
 PN5 = { #Nort zone
 color = { 54 128 206 }
@@ -300,7 +300,7 @@ color = { 54 128 206 }
 	
 	cultures = { nicaraguan central_american }
 	capital = STATE_NICARAGUA
-	is_named_from_capital = yes
+	
 }
 PN6 = { #Granada
 color = { 54 158 206 }
@@ -311,7 +311,7 @@ color = { 54 158 206 }
 	
 	cultures = { nicaraguan }
 	capital = STATE_NICARAGUA
-	is_named_from_capital = yes
+	
 }
 ###########El Salvador#####tags:DE
 REPLACE:ELS = {
@@ -334,7 +334,7 @@ UEL = {
 	
 	cultures = { el_salvadorian }
 	capital = STATE_SAN_SALVADOR
-	is_named_from_capital = yes
+	
 }
 DE1 = { #San Salvador
 color = { 10 57 104  }
@@ -345,7 +345,7 @@ color = { 10 57 104  }
 	
 	cultures = { el_salvadorian }
 	capital = STATE_SAN_SALVADOR
-	is_named_from_capital = yes
+	
 }
 
 DE2 = { #Sonsonate
@@ -357,7 +357,7 @@ color = { 20 67 114 }
 	
 	cultures = { el_salvadorian }
 	capital = STATE_SAN_SALVADOR
-	is_named_from_capital = yes
+	
 }
 
 DE3 = { #San Miguel
@@ -369,20 +369,20 @@ color = { 0 37 64  }
 	
 	cultures = { el_salvadorian }
 	capital = STATE_SAN_SALVADOR
-	is_named_from_capital = yes
+	
 }
 
 ###########Honduras#####tags:DH1 - 10
 REPLACE:HON = {
 	color = { 235 240 247 }
-	
+	is_named_from_capital = yes
 	country_type = recognized
 	
 	tier = principality
 	
 	cultures = {central_american honduran  }
 	capital = STATE_HONDURAS
-	is_named_from_capital = yes
+	
 }
 GIG = { #garínagu
 	color = { 235 240 247 }
@@ -393,7 +393,7 @@ GIG = { #garínagu
 	
 	cultures = { garifuna_arawak }
 	capital = STATE_HONDURAS
-	is_named_from_capital = yes
+	
 }
 
 UHO = {
@@ -405,7 +405,7 @@ UHO = {
 	
 	cultures = { honduran  }
 	capital = STATE_HONDURAS
-	is_named_from_capital = yes
+	
 }
 
 DH1 = { #Olancho
@@ -417,7 +417,7 @@ color = { 235 230 227  }
 	
 	cultures = { honduran }
 	capital = STATE_HONDURAS
-	is_named_from_capital = yes
+	
 }
 DH2 = { #Yoro
 color = { 225 230 237  }
@@ -428,7 +428,7 @@ color = { 225 230 237  }
 	
 	cultures = { honduran }
 	capital = STATE_HONDURAS
-	is_named_from_capital = yes
+	
 }
 DH3 = { #Santa Barbara
 color = { 230 235 242 }
@@ -439,7 +439,7 @@ color = { 230 235 242 }
 	
 	cultures = { honduran }
 	capital = STATE_HONDURAS
-	is_named_from_capital = yes
+	
 }
 DH4 = { #El Salvador
 color = { 240 245 252 }
@@ -450,7 +450,7 @@ color = { 240 245 252 }
 	
 	cultures = { honduran }
 	capital = STATE_HONDURAS
-	is_named_from_capital = yes
+	
 }
 DH5 = { #Comayagua
 color = { 220 230 237  }
@@ -461,7 +461,7 @@ color = { 220 230 237  }
 	
 	cultures = { honduran }
 	capital = STATE_HONDURAS
-	is_named_from_capital = yes
+	
 }
 DH6 = { #Tegucigalpa
 color = { 210 220 227  }
@@ -472,7 +472,7 @@ color = { 210 220 227  }
 	
 	cultures = { honduran }
 	capital = STATE_HONDURAS
-	is_named_from_capital = yes
+	
 }
 DH7 = { #San Miguel
 color = { 200 225 237 }
@@ -483,7 +483,7 @@ color = { 200 225 237 }
 	
 	cultures = { honduran }
 	capital = STATE_HONDURAS
-	is_named_from_capital = yes
+	
 }
 ###########Panama#####tags:PP1 - 10 Provinces of Panama
 REPLACE:PNM = {
@@ -506,7 +506,7 @@ TLE = { #República de Tule
 	
 	cultures = { guna_kuna }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 
 }
 UPN = {
@@ -518,7 +518,7 @@ UPN = {
 	
 	cultures = { panamanian }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 VGA ={
     color = { 150 85 61 }
@@ -529,7 +529,7 @@ VGA ={
 	
 	cultures = { panamanian }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 PP1 = { #Bocas de toro
 color = { 155 90 70 }
@@ -540,7 +540,7 @@ color = { 155 90 70 }
 	
 	cultures = { panamanian costa_rican central_american }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 PP2 = { #Veragua
 color = { 140 75 51 }
@@ -551,7 +551,7 @@ color = { 140 75 51 }
 	
 	cultures = { panamanian }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 PP3 = { #Dariel
 color = { 160 95 71 }
@@ -562,7 +562,7 @@ color = { 160 95 71 }
 	
 	cultures = { panamanian }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 PP4 = { #Chiriqui
 color = { 170 105 81 }
@@ -573,7 +573,7 @@ color = { 170 105 81 }
 	
 	cultures = { panamanian }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 PP5 = { #Azuero
 color = { 130 65 41 }
@@ -584,7 +584,7 @@ color = { 130 65 41 }
 	
 	cultures = { panamanian }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 PP6 = { #Soto
 color = { 160 85 61 }
@@ -595,7 +595,7 @@ color = { 160 85 61 }
 	
 	cultures = { panamanian }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 PP7 = { #Colon
 color = { 150 75 51 }
@@ -606,7 +606,7 @@ color = { 150 75 51 }
 	
 	cultures = { panamanian }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 PP8 = { #Panama
 color = { 140 95 81 }
@@ -617,7 +617,7 @@ color = { 140 95 81 }
 	
 	cultures = { panamanian }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 ##########Chiapas########################
 #Chiapas Republic/Soconusco
@@ -875,7 +875,7 @@ INJECT_OR_CREATE:BAH = {
 	
 	cultures = { british afro_caribbean }
 	capital = STATE_BAHAMAS
-	is_named_from_capital = yes
+	
 }
 
 #Suriname
@@ -1153,7 +1153,7 @@ color = { 160 95 71 }
 	
 	cultures = { ngabe_culture }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 
 NC2 = { #embera #B0A911
@@ -1165,7 +1165,7 @@ color = { 160 95 71 }
 	
 	cultures = { embera }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 
 NC3 = { #guna_kuna #xBB820B
@@ -1177,7 +1177,7 @@ color = { 160 95 71 }
 	
 	cultures = { guna_kuna }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 
 NC4 = { #lenca #107040 #52914C #907040
@@ -1189,7 +1189,7 @@ color = { 160 95 71 }
 	
 	cultures = { lenca }
 	capital = STATE_PANAMA
-	is_named_from_capital = yes
+	
 }
 
 NC5 = { #mangue_chorotega
@@ -1201,7 +1201,7 @@ color = { 160 95 71 }
 	
 	cultures = { mangue_chorotega }
 	capital = STATE_NICARAGUA
-	is_named_from_capital = yes
+	
 }
 NC6 = { #garifuna_arawak
 color = { 160 95 71 }
@@ -1212,7 +1212,7 @@ color = { 160 95 71 }
 	
 	cultures = { garifuna_arawak }
 	capital = STATE_NICARAGUA
-	is_named_from_capital = yes
+	
 }
 
 #################################
