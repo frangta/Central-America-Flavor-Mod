@@ -28,7 +28,7 @@
 	
 		target_requires_approval_to_break = yes	
 		
-		subject_type = subject_type_autonomous_province	
+		subject_type = subject_type_ca_autonomous_province # CAFM fix: el tipo del mod lleva prefijo ca_	
 		
 		actor_can_break = {
 			is_diplomatic_play_committed_participant = no
@@ -338,17 +338,19 @@
 
 			if = {
 				limit = {
-					any_scope_diplomatic_pact = {
-						#OR = {
-						#	is_diplomatic_action_type = alliance
-						#	is_diplomatic_action_type = customs_union
-						#	is_diplomatic_action_type = defensive_pact
-						#}
-
-						"diplomatic_pact_other_country(scope:actor)" = {
-							OR = {
-								country_rank >= scope:actor.country_rank
-								army_size >= scope:actor.army_size
+					any_country = { # CAFM fix: aliados poderosos del objetivo (tratados)
+						NOT = { this = scope:actor }
+						OR = {
+							country_rank >= scope:actor.country_rank
+							army_size >= scope:actor.army_size
+						}
+						any_scope_treaty = { # CAFM fix: desde 1.10 las alianzas y pactos defensivos son articulos de tratado
+							binds = root
+							any_scope_article = {
+								OR = {
+									has_type = alliance
+									has_type = defensive_pact
+								}
 							}
 						}
 					}
@@ -491,16 +493,19 @@
 
 			if = {
 				limit = {
-					any_scope_diplomatic_pact = {
+					any_country = { # CAFM fix: is_diplomatic_action_type = alliance/defensive_pact ya no existe en 1.14
+						NOT = { this = root }
 						OR = {
-							is_diplomatic_action_type = alliance
-							is_diplomatic_action_type = defensive_pact
+							country_rank >= root.country_rank
+							army_size >= root.army_size
 						}
-
-						"diplomatic_pact_other_country(root)" = {
-							OR = {
-								country_rank >= root.country_rank
-								army_size >= root.army_size
+						any_scope_treaty = { # CAFM fix: desde 1.10 las alianzas y pactos defensivos son articulos de tratado
+							binds = scope:actor
+							any_scope_article = {
+								OR = {
+									has_type = alliance
+									has_type = defensive_pact
+								}
 							}
 						}
 					}

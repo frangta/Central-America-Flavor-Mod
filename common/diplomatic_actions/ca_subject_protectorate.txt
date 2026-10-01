@@ -17,14 +17,14 @@
 		}
 		custom_tooltip = {
 			text = DIPLO_ACTION_MARKET_CONNECTION_REQUIRED
-			OR = {	
+			OR = { # CAFM fix: has_port -> has_port_market, is_adjacent -> is_adjacent_to_country
 				AND = {
-					market = { has_port = yes }
-					scope:target_country.market = { has_port = yes }
+					market = { has_port_market = yes }
+					scope:target_country.market = { has_port_market = yes }
 				}
-				scope:actor.market = {
+				scope:target_country.market = {
 					any_scope_country = {
-						is_adjacent = root
+						is_adjacent_to_country = root
 					}
 				}
 			}
@@ -35,7 +35,7 @@
 		cost = 25
 		#is_customs_union = yes
 		has_junior_participant = yes
-		recipient_pays_maintenance = no	
+		maintenance_paid_by = first_country # CAFM fix: recipient_pays_maintenance ya no existe	
 		
 		relations_progress_per_day = 1
 		relations_improvement_max = 50
@@ -43,9 +43,7 @@
 		target_requires_approval_to_break = yes	
 		
 		subject_type = subject_type_ca_protectorate	
-		second_modifier = {
-			country_convoy_contribution_to_market_owner_add = 0.25
-		}
+		# CAFM fix: country_convoy_contribution_to_market_owner_add no existe en 1.14 (los convoyes ya no existen)
 		actor_can_break = {
 			is_diplomatic_play_committed_participant = no
 		}
@@ -54,9 +52,8 @@
 			is_diplomatic_play_committed_participant = no
 		}		
 
-		break_effect = {
-			create_truce = { country = scope:target_country months = 12 }
-		}
+		manual_break_effect = { create_bidirectional_truce = { country = scope:target_country months = 12 } } # CAFM fix: break_effect/create_truce ya no existen
+		auto_break_effect = { create_bidirectional_truce = { country = scope:target_country months = 12 } }
 	}
 	
 	accept_effect = {
@@ -64,7 +61,7 @@
 			country = scope:target_country
 			value = 5
 		}
-		create_truce = { country = scope:target_country months = 60 }
+		create_bidirectional_truce = { country = scope:target_country months = 60 } # CAFM fix
 	}
 	
 	ai = {
@@ -378,16 +375,14 @@
 							army_size >= scope:actor.army_size
 						}
 						
-						OR = {
-							has_diplomatic_pact = {
-								who = root
-								type = alliance
+						any_scope_treaty = { # CAFM fix: desde 1.10 las alianzas y pactos defensivos son articulos de tratado
+							binds = root
+							any_scope_article = {
+								OR = {
+									has_type = alliance
+									has_type = defensive_pact
+								}
 							}
-
-							has_diplomatic_pact = {
-								who = root
-								type = defensive_pact
-							}									
 						}							
 					}
 				}
@@ -536,19 +531,14 @@
 							army_size >= root.army_size
 						}
 						
-						OR = {
-							has_diplomatic_pact = {
-								who = scope:actor
-								type = alliance
+						any_scope_treaty = { # CAFM fix: desde 1.10 las alianzas y pactos defensivos son articulos de tratado
+							binds = scope:actor
+							any_scope_article = {
+								OR = {
+									has_type = alliance
+									has_type = defensive_pact
+								}
 							}
-							#has_diplomatic_pact = {
-							#	who = scope:actor
-							#	type = customs_union
-							#}
-							has_diplomatic_pact = {
-								who = scope:actor
-								type = defensive_pact
-							}									
 						}							
 					}
 				}
@@ -603,7 +593,7 @@ ca_become_protectorate = {
 		}
 	}
 	
-	reverse_pact = protectorate
+	reverse_pact = ca_protectorate # CAFM fix: apuntaba al protectorado vanilla
 	
 	ai = {
 		check_acceptance_for_will_propose = yes

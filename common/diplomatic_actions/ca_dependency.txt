@@ -100,7 +100,7 @@
             # 2. Comparación de PIB (Reducido a un máximo de +50)
             add = {
                 desc = "DIPLOMATIC_ACCEPTANCE_GDP"
-                value = "scope:source_country.ai_gdp_comparison(scope:target_country)"
+                value = "scope:actor.ai_gdp_comparison(root)" # CAFM fix: scope:source_country no existe en acciones diplomaticas
                 multiply = 5
                 min = -50
                 max = 50
@@ -110,10 +110,10 @@
             if = {
                 limit = {
                     any_scope_treaty = {
-                        binds = scope:target_country
+                        binds = scope:actor # CAFM fix: root ya es el pais objetivo; hay que mirar tratados con el que propone
                         any_scope_article = {
                             has_type = trade_privilege
-                            source_country = scope:target_country
+                            source_country = root
                         }
                     }
                 }
@@ -127,7 +127,7 @@
             if = {
                 limit = {
                     any_scope_treaty = {
-                        binds = scope:target_country
+                        binds = scope:actor # CAFM fix
                         any_scope_article = { has_type = alliance }
                     }
                 }
@@ -156,7 +156,9 @@
 
             # 6. Cultura y Religión Compartida (Identidad Centroamericana)
             if = {
-                limit = { scope:actor.culture = scope:target_country.culture }
+                limit = { # CAFM fix: los paises no tienen enlace .culture
+                    any_primary_culture = { is_primary_culture_of = scope:actor }
+                }
                 add = {
                     desc = "CA_UNIFY_ACCEPT_SHARED_CULTURE" # Asegúrate de definir esto en tu .yml
                     value = 30
@@ -244,12 +246,14 @@
                 }
             }
         }
-    }
 
+		# CAFM fix: estaba fuera del bloque ai (sobraba una llave) y apuntaba a ca_unify_countries
 		will_propose = {
-			would_accept_diplomatic_action = {
-				actor = scope:target_country
-				type = ca_unify_countries
+			scope:target_country = {
+				would_accept_diplomatic_action = {
+					actor = root
+					type = ca_dependency
+				}
 			}
 		}
 

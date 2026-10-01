@@ -53,12 +53,12 @@
 					infamy < infamy_threshold:infamous
 					has_attitude = {
 						who = scope:target_country
-						attitude = attitude_protective
+						attitude = protective # CAFM fix: la clave es sin prefijo
 					}
 				}
 				has_attitude = {
 					who = scope:target_country
-					attitude = attitude_domineering
+					attitude = domineering # CAFM fix
 				}				
 			}
 		}

@@ -191,7 +191,7 @@
 					is_in_same_power_bloc = scope:actor
 				}
 				add = {
-					desc = "ZTR_UNIFY_ACCEPT_SAME_POWER_BLOC"
+					desc = "CA_UNIFY_ACCEPT_SAME_POWER_BLOC" # CAFM fix
 					value = 50
 				}
 			}
@@ -229,9 +229,11 @@
 		}
 
 		will_propose = {
-			would_accept_diplomatic_action = {
-				actor = scope:target_country
-				type = ztr_unify_countries
+			scope:target_country = { # CAFM fix: ztr_unify_countries no existe (resto de otro mod)
+				would_accept_diplomatic_action = {
+					actor = root
+					type = ca_federal_dependency
+				}
 			}
 		}
 

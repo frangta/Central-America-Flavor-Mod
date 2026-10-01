@@ -146,23 +146,19 @@
 			#DIPLOMATIC ACCEPTANCE RELATIONS
 			add = {
 				desc = "DIPLOMATIC_ACCEPTANCE_RELATIONS"
+				# CAFM fix: "=<" no es un operador valido (es "<="); ademas los tramos se solapaban
 				if = {
 					limit = {
-						"relations(scope:actor)" =< relations_threshold:neutral
+						"relations(scope:actor)" < relations_threshold:neutral
 					}
 					value = -1000
 				}
 				if = {
 					limit = {
 						"relations(scope:actor)" >= relations_threshold:neutral
+						"relations(scope:actor)" < relations_threshold:cordial
 					}
 					value = -250
-				}
-				if = {
-					limit = {
-						"relations(scope:actor)" =  relations_threshold:cordial
-					}
-					value = -75
 				}				
 				if = {
 					limit = {
@@ -299,9 +295,11 @@
 		}
 
 		will_propose = {
-			would_accept_diplomatic_action = {
-				actor = scope:target_country
-				type = ca_unify_countries
+			scope:target_country = { # CAFM fix: el que decide aceptar es el objetivo; el actor es root
+				would_accept_diplomatic_action = {
+					actor = root
+					type = ca_unify_countries
+				}
 			}
 		}
 

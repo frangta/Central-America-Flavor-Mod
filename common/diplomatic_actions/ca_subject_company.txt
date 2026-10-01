@@ -33,9 +33,7 @@
 
 		subject_type = subject_type_ca_chartered_company
 		
-		second_modifier = {
-			country_convoy_contribution_to_market_owner_add = 0.5
-		}
+		# CAFM fix: country_convoy_contribution_to_market_owner_add no existe en 1.14 (los convoyes ya no existen)
 		
 		actor_can_break = {
 			is_diplomatic_play_committed_participant = no
