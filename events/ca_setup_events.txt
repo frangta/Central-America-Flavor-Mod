@@ -5,7 +5,6 @@ ca_setup_events.1 = { #elecion de la cadena de eventos para la ia
 	title = ca_central_america.setup.t
 	desc = ca_central_america.setup.d
 	flavor =  ca_central_america.setup.f
-	is_triggered_only = yes
 
 	duration = 3
 
@@ -61,16 +60,14 @@ ca_setup_events.1 = { #elecion de la cadena de eventos para la ia
 		
 
 
-		ca_history_rail_events = yes
+		# ca_history_rail_events = yes # CAFM fix: ese efecto esta comentado en 00_ca_scripted_effects.txt
 
 		if = {
 			limit = {
 				is_ai = yes
 			}
 			hidden_effect = {
-				trigger_event = { 
-					id = ca_setup_events.2
-				}			
+				# trigger_event = { id = ca_setup_events.2 } # CAFM fix: ca_setup_events.2 no existe
 				trigger_event = { 
 					id = ca_central_america.1
 					months = 3
@@ -172,21 +169,23 @@ ca_setup_events.3 = {
 		# 2. CONFIGURACIÓN GEOPOLÍTICA HISTÓRICA
 		# Guatemala: Foco de la oposición conservadora (Cuna de Carrera)
 		s:STATE_GUATEMALA = {
-			add_modifier = {
-				name = ca_separatist_agitation_modifier
-				months = 48
+			every_scope_state = { # CAFM fix: los modificadores van en el estado, no en la state_region
+				add_modifier = {
+					name = ca_separatist_agitation_modifier
+					months = 48
+				}
 			}
-			# Guardamos targets para evitar errores de "Event target used but not set"
-			save_global_event_target_as = disaster_state
+			# save_global_event_target_as no existe en Victoria 3 (CAFM fix)
 		}
 
 		# Costa Rica: Bajo Braulio Carrillo, buscando orden y café
 		s:STATE_COSTA_RICA = {
-			add_modifier = {
-				name = ca_infrastructure_boom_modifier
-				months = 60
+			every_scope_state = { # CAFM fix
+				add_modifier = {
+					name = ca_infrastructure_boom_modifier
+					months = 60
+				}
 			}
-			save_global_event_target_as = success_state
 		}
 
 		# 3. SETUP DE LÍDERES
@@ -198,12 +197,12 @@ ca_setup_events.3 = {
 			random_scope_character = {
 				limit = { has_variable = is_morazan }
 				# Aseguramos su ideología federalista
-				set_role = ruler
+				set_character_as_ruler = yes # CAFM fix: set_role no existe
 			}
 		}
 
 		# 4. DISPARAR EVENTO DE LOBBIES
-		trigger_event = { id = ca_setup_events.2 days = 2 }
+		# trigger_event = { id = ca_setup_events.2 days = 2 } # CAFM fix: ca_setup_events.2 no existe
 	}
 }
 
@@ -214,7 +213,7 @@ ca_setup_events.4 = {
 
 	immediate = {
 		# Forzamos la creación del Lobby Pro-Federalista en los sujetos leales
-		every_subject = {
+		every_direct_subject = { # CAFM fix: every_subject no existe
 			limit = {
 				is_subject_type = subject_type_ca_dependency
 			}

@@ -111,6 +111,40 @@
  je_guatemala_intervention_central_america_button: ""
  je_el_salvador_intervention_central_america_button: ""
  # ==========================================
+ # JOURNAL ENTRIES (Situations & Events)
+ # ==========================================
+ je_ca_historic_situation_in_talamanca:0 "The Talamanca Situation"
+ je_ca_historic_situation_in_talamanca_reason:0 "The indigenous populations of the Talamanca region have long maintained their autonomy and resisted central authority. We must carefully decide how to integrate, conquer, or interact with these historic communities."
+ 
+ je_ca_agro_export_boom:0 "The Agro-Export Boom"
+ je_ca_agro_export_boom_reason:0 "Global demand for our cash crops is skyrocketing. By expanding our plantations, securing foreign investment, and modernizing our infrastructure, we can usher in an unprecedented era of economic prosperity."
+ 
+ je_ca_military_reform:0 "Central American Military Reforms"
+ je_ca_military_reform_reason:0 "Our armed forces currently rely on outdated colonial tactics and undisciplined local militias. We must professionalize the army and centralize command to secure our sovereignty and maintain internal order."
+ 
+ je_national_geological_survey:0 "National Geological Survey"
+ je_national_geological_survey_reason:0 "To fully exploit our nation's hidden natural wealth, we must commission a comprehensive geological survey. Mapping our untamed regions will reveal new veins of minerals and potential excavation sites."
+ je_annex_subject_overlord:0 "Integrating [SCOPE.sCountry('annex_target_scope').GetName]"
+ je_annex_subject_overlord_reason:0 "We have begun the process of fully integrating our subject into our nation. As long as no foreign power interferes, its institutions will gradually merge with ours."
+ je_annex_subject_overlord_goal:0 "Months of integration"
+ je_annex_subject_junior:0 "Integration into [SCOPE.sCountry('overlord_scope').GetName]"
+ je_annex_subject_junior_reason:0 "Our overlord has begun the process of absorbing our nation. Unless a foreign power intervenes, we will soon cease to exist as a separate state."
+ je_annex_subject_junior_goal:0 "Months of integration"
+
+ je_ca_central_american_fragile_unity:0 "A Fragile Unity"
+ je_ca_central_american_fragile_unity_reason:0 "The Federal Republic of Central America holds together by little more than habit and fear. Federalists, centralists and separatists each pull the isthmus in a different direction. Whoever tips the balance will decide whether Central America survives as one nation or breaks into pieces."
+
+ je_ca_company_independence:0 "Company Independence"
+ je_ca_company_independence_reason:0 "We govern these lands under a charter granted by a distant overlord. Should the company lose its privileges, the colony it built will have to learn to stand on its own."
+ je_ca_company_autonomy:0 "Company Autonomy"
+ je_ca_company_autonomy_reason:0 "Our chartered company has grown prosperous enough to demand greater freedom from its overlord. A wealthy colony can negotiate on its own terms."
+ je_ca_company_bankruptcy:0 "Company Bankruptcy"
+ je_ca_company_bankruptcy_reason:0 "The company has fallen into debt. If it cannot repay its creditors, its overlord will take direct control of its affairs."
+
+ je_ca_national_geological_survey:0 "National Geological Survey"
+ je_ca_national_geological_survey_reason:0 "To fully exploit our nation's hidden natural wealth, we must commission a comprehensive geological survey. Mapping our untamed regions will reveal new veins of minerals and potential excavation sites."
+  
+ # ==========================================
  # 3. JOURNAL BUTTONS & INTERACTIONS
  # ==========================================
  restore_order_gua_button:0 "Restore Order in Guatemala"
@@ -146,13 +180,24 @@
  invade_el_salvador_frca_stab_tt:0 "Invading El Salvador will impact regional stability."
  invade_el_salvador_frca_els_support_tt:0 "Salvadoran support for the Union will change."
  
- controls_gua_tt:0 "Controls the state of Guatemala."
- controls_hon_tt:0 "Controls the state of Honduras."
- controls_nic_tt:0 "Controls the state of Nicaragua."
- controls_cos_tt:0 "Controls the state of Costa Rica."
- uca_restore_order_cooldown_tt:0 "Must wait for the current intervention cooldown to expire."
- ca_intervention_cooldown_tt:0 "The Federal Republic is currently recovering from a recent intervention."
+ federal_congress_decree_button:0 "Convene the Federal Congress"
+ federal_congress_decree_button_desc:0 "Call the representatives of the States to debate the future of the Union. Congress will decide whether the States may organize themselves as best suits their interests."
 
+ ca_button_centralist_discipline:0 "Centralist Discipline"
+ ca_button_centralist_discipline_desc:0 "Use the army to impose the authority of the federal government on the rebellious provinces. Order will be restored, but resentment among the middle and lower classes will grow."
+ ca_button_federalist_support:0 "Rally Federalist Support"
+ ca_button_federalist_support_desc:0 "The intellectuals in government call on the citizens to defend the Federal Republic, spreading pamphlets and speeches in favor of the Union."
+
+ ca_button_sabotage_federation:0 "Sabotage the Federation"
+ ca_button_support_federation:0 "Support the Federation"
+ ca_button_support_centralistas:0 "Back the Centralists"
+ ca_button_support_centralistas_desc:0 "Hand power to the officers of the Armed Forces so they can hold the State together with an iron fist. The caudillos will be grateful; the lower classes will not."
+ ca_button_support_confederation:0 "Promote a Confederation"
+ ca_button_support_confederation_desc:0 "Propose a loose confederation of sovereign States: united in name and defense, but free to govern themselves. A middle path between the Union and separation."
+
+ nicaragua_intervention_central_america_button:0 "Intervene in Nicaragua"
+ nicaragua_intervention_central_america_button_desc:0 "Send the federal army to Nicaragua to put an end to the conflict between León and Granada and restore the authority of the Union."
+ 
  central_america_two_party_system: "Central American Two-Party Dominance"
  ca_continuismo: "Continuismo"
  ca_no_continuismo: "Constitutional Reappointment"
@@ -209,9 +254,7 @@
  annex_subject_laws_tt: "We have the required laws to annex this subject."
  gdp_per_capita_2: "GDP per capita is adequate."
  ca_tooltip_centralamerican_countries_share_primary_culture: "Shares a primary Central American culture."
- ca_centralamerican_share_primary_cultur: "Shares a primary culture with the target country."
- ca_tooltip_countries_state_neighbour: "Shares a border or is located within the same state region."
- 
+
  costa_rica_intervention_central_america_button: "Intervene in Costa Rica"
  costa_rica_intervention_central_america_button_desc: "Authorize a federal intervention in Costa Rica. Deploy forces to neutralize separatist influence and reassert Central American unity."
  guatemala_intervention_central_america_button: "Intervene in Guatemala"
@@ -271,7 +314,14 @@
  ca_notification_unification_notification_generic_name: "[SCOPE.sCountry('formation_country').GetAdjective] Unification"
  ca_notification_unification_notification_generic_desc: "[SCOPE.sCountry('formation_country').GetName] has emerged as a rising power in [SCOPE.sStrategicRegion('capital_region_scope').GetName]."
  ca_notification_unification_notification_generic_tooltip: "#header $notification_unification_notification_generic_name$#!\n$TOOLTIP_DELIMITER$\n$notification_unification_notification_generic_desc$"
- 
+ # ------------------------------------------------------------
+ # SCRIPTED TRIGGERS (custom_description)
+ # ------------------------------------------------------------
+ state_is_in_ca_central_america_desc:0 "State is in Central America"
+ state_is_in_ca_caribbean_desc:0 "State is in the Caribbean"
+ state_is_in_ca_latin_centralamericans_cultures_desc:0 "Has a Latin Central American primary culture"
+ state_is_in_ca_naive_centralamericans_cultures_desc:0 "Has an indigenous or Afro-Caribbean Central American primary culture"
+ state_is_centralamericans_cultures_desc:0 "Has a Central American primary culture"
  # ==========================================
  # COUNTRY SELECTION SCREEN FLAVOR TEXT (1836)
  # ==========================================
@@ -319,4 +369,46 @@
  nicaragua_support_tt: "Nicaragua supports the Federal Republic." 
  costa_rica_support_tt: "Costa Rica supports the Federal Republic." 
  frca_lost_war_tt: "The Federal Republic has lost a major conflict."
- usa_annex_snr_tt: "United States will annex Sonora" 
+ usa_annex_snr_tt: "United States will annex Sonora"
+
+ # ------------------------------------------------------------
+ # CHEAT/DEBUG DECREES (ch_decisionCheat_Decrees.txt)
+ # ------------------------------------------------------------
+ ch_DecisionCheatDecree_MarkState:0 "[Cheat] Mark State"
+ ch_DecisionCheatDecree_MarkState_desc:0 "Debug decree."
+ ch_DecisionCheatDecree_1:0 "[Cheat] Rapid Construction"
+ ch_DecisionCheatDecree_1_desc:0 "Greatly increases construction and infrastructure in the state."
+ ch_DecisionCheatDecree_3:0 "[Cheat] Empty Decree"
+ ch_DecisionCheatDecree_3_desc:0 "Debug decree with no effects."
+ ch_DecisionCheatDecree_5:0 "[Cheat] Cheap Inputs"
+ ch_DecisionCheatDecree_5_desc:0 "Halves the goods input of buildings in the state."
+ ch_DecisionCheatDecree_6:0 "[Cheat] Universal Education"
+ ch_DecisionCheatDecree_6_desc:0 "Increases education access in the state."
+ ch_DecisionCheatDecree_10:0 "[Cheat] Qualified Population"
+ ch_DecisionCheatDecree_10_desc:0 "Doubles the growth of pop qualifications in the state."
+ ch_DecisionCheatDecree_11:0 "[Cheat] Working Population"
+ ch_DecisionCheatDecree_11_desc:0 "Greatly increases the working adult ratio in the state."
+ ch_DecisionCheatDecree_12:0 "[Cheat] Rapid Assimilation"
+ ch_DecisionCheatDecree_12_desc:0 "Greatly speeds up assimilation in the state."
+ ch_DecisionColony_MarkState:0 "[Cheat] Colonial Growth"
+ ch_DecisionColony_MarkState_desc:0 "Greatly speeds up colonial growth and reduces mortality in the state."
+ ch_DecisionColony_MarkState2:0 "[Cheat] Population Boom"
+ ch_DecisionColony_MarkState2_desc:0 "Greatly increases the birth rate in the state."
+ ch_DecisionColony_MarkState3:0 "[Cheat] Mass Conscription"
+ ch_DecisionColony_MarkState3_desc:0 "Increases conscription and training rates in the state."
+ ch_DecisionColony_MarkState4:0 "[Cheat] Local Investment"
+ ch_DecisionColony_MarkState4_desc:0 "Increases the investment pool contributions of local pops."
+ ch_Decision_state_birth:0 "[Cheat] Baby Boom"
+ ch_Decision_state_birth_desc:0 "Multiplies the birth rate in the state."
+ ch_Decision_state_UP:0 "[Cheat] Prosperity"
+ ch_Decision_state_UP_desc:0 "Raises the standard of living of all pops in the state."
+ ch_Decision_state_UP_2:0 "[Cheat] Upper Strata Prosperity"
+ ch_Decision_state_UP_2_desc:0 "Raises the standard of living of the upper strata in the state."
+ ch_Decision_state_UP_3:0 "[Cheat] Middle Strata Prosperity"
+ ch_Decision_state_UP_3_desc:0 "Raises the standard of living of the middle strata in the state."
+ ch_Decision_state_UP_4:0 "[Cheat] Lower Strata Prosperity"
+ ch_Decision_state_UP_4_desc:0 "Raises the standard of living of the lower strata in the state."
+ ch_Decision_state_UP_6:0 "[Cheat] Technology Spread"
+ ch_Decision_state_UP_6_desc:0 "Speeds up the spread of technology."
+ ch_decree_emergency_relief:0 "Emergency Relief"
+ ch_decree_emergency_relief_desc:0 "Provides welfare payments and food security to the state at the cost of tax income." 

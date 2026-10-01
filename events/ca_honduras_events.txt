@@ -32,7 +32,7 @@ ca_honduras_events.1 = {
 	
 	immediate = {
         s:STATE_HONDURAS.region_state:UCA = {
-        add_state_trait = state_trait_mining_hon
+        state_region = { add_state_trait = state_trait_mining_hon } # CAFM fix: add_state_trait es de state_region
 		add_modifier = { name = ca_uca_federalist_heartland }
         add_modifier = { name = waning_federal_stronghold }
         add_modifier = { name = conservative_stronghold_small_nation }
@@ -59,6 +59,7 @@ ca_honduras_events.1 = {
 # 1. 1837: La elección de Justo José de Herrera
 ca_honduras_events.14 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_honduras_events.14.t
     desc = ca_honduras_events.14.d
@@ -103,6 +104,7 @@ ca_honduras_events.14 = {
 # 2. 1840-1841: El Ascenso del General Francisco Ferrera
 ca_honduras_events.15 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_honduras_events.15.t
     desc = ca_honduras_events.15.d
@@ -140,6 +142,7 @@ ca_honduras_events.15 = {
 # 3. 1844: La Reelección de Francisco Ferrera
 ca_honduras_events.16 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_honduras_events.16.t
     desc = ca_honduras_events.16.d
@@ -184,6 +187,7 @@ ca_honduras_events.16 = {
 # 4. 1847: El Triunfo de Juan Lindo
 ca_honduras_events.17 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_honduras_events.17.t
     desc = ca_honduras_events.17.d
@@ -221,6 +225,7 @@ ca_honduras_events.17 = {
 # 5. 1848: La Constitución de 1848 y la Ratificación
 ca_honduras_events.18 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_honduras_events.18.t
     desc = ca_honduras_events.18.d

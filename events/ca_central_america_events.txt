@@ -705,7 +705,7 @@ ca_central_america.2 = {
     event_image = {
         video = "unspecific_politicians_arguing"
     }
-    icon = "gfx/interface/icons/event_icons/event_gavel.dds"
+    icon = "gfx/interface/icons/event_icons/event_scales.dds"
     
     on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     duration = 3
@@ -777,7 +777,7 @@ ca_central_america.3 = {
     flavor = ca_central_america.3.f
     
     event_image = {
-        video = "unspecific_reform" # MEJORA: Video correcto
+        video = "unspecific_signed_contract" # MEJORA: Video correcto
     }
     
     icon = "gfx/interface/icons/event_icons/event_map.dds" # MEJORA: Icono de mapa
@@ -792,7 +792,7 @@ ca_central_america.3 = {
         NOT = { exists = c:ALT }
 		OR = {
 			s:STATE_GUATEMALA = {
-				turmoil > 0.2
+				any_scope_state = { turmoil > 0.2 } # CAFM fix: turmoil es de estado, no de state_region
 			}
 			AND = {
 				ig:ig_landowners = {
@@ -880,7 +880,7 @@ ca_central_america.4 = {
     flavor = ca_central_america.4.f
     
     event_image = {
-        video = "southamerica_revolt"
+        video = "southamerica_war_civilians"
     }
     icon = "gfx/interface/icons/event_icons/event_fire.dds"
     
@@ -1015,14 +1015,10 @@ ca_central_america.5 = {
 				name = ca_federal_protection_modifier
 				months = 36
 			}
-			ig:ig_intelligentsia = {
-				add_loyalists = { value = 0.15 }
-			}
+			add_loyalists = { value = 0.15 interest_group = ig:ig_intelligentsia } # CAFM fix
 		}
 		c:GUA = {
-			ig:ig_landowners = {
-				add_radicals = { value = 0.15 }
-			}
+			add_radicals = { value = 0.15 interest_group = ig:ig_landowners } # CAFM fix
 		}
        
         
@@ -1090,15 +1086,13 @@ ca_central_america.5 = {
     
     # OPCIÓN D
     option = {
-        name = ca_central_america.5.d
+        name = ca_central_america.5.e # CAFM fix: 5.d es la descripcion del evento
         default_option = yes		
         trigger = { exists = c:ALT } 
         
         c:ALT = { annex = c:CIP } 
         c:ALT = {
-			ig:ig_intelligentsia = {
-				add_loyalists = { value = 0.20 }
-			}
+			add_loyalists = { value = 0.20 interest_group = ig:ig_intelligentsia } # CAFM fix
 		}
 		change_relations = {
 			country = c:GUA
@@ -1134,7 +1128,7 @@ ca_central_america.6 = {
     
     
     event_image = {
-        video = "europenorthamerica_colonial_outpost"
+        video = "africa_construction_colony"
     }
     icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
     
@@ -1288,7 +1282,7 @@ ca_central_america.7 = {
     flavor = ca_central_america.7.f
     
 
-    event_image = { video = "europenorthamerica_colonial_outpost" }
+    event_image = { video = "africa_construction_colony" }
     icon = "gfx/interface/icons/event_icons/event_map.dds"
     on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     duration = 3
@@ -1390,7 +1384,7 @@ ca_central_america.8 = {
     flavor = ca_central_america.8.f
     
     
-    event_image = { video = "southamerica_government" }
+    event_image = { video = "unspecific_politicians_arguing" }
     icon = "gfx/interface/icons/event_icons/event_map.dds"
     
     on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -1511,7 +1505,7 @@ ca_central_america.9 = {
     flavor = ca_central_america.9.f
     
     # MEJORA: Video de campamento militar en la selva
-    event_image = { video = "southamerica_military_camp" }
+    event_image = { video = "europenorthamerica_before_the_battle" }
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
     on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -1624,7 +1618,7 @@ ca_central_america.10 = {
     flavor = ca_central_america.10.f
     
     event_image = { video = "unspecific_politicians_arguing" }
-    icon = "gfx/interface/icons/event_icons/event_gavel.dds"
+    icon = "gfx/interface/icons/event_icons/event_scales.dds"
     on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     duration = 3
     
@@ -1732,8 +1726,8 @@ ca_central_america.11 = {
     on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear" 
     duration = 3
     
-    trigger = { 
-        
+    trigger = {
+        is_ca_culture_country = yes # CAFM fix: sin esto el primer pais del mundo que se evalua recibe el evento
         has_global_variable = bocas_del_toro_crisis_fired
         NOT = { has_global_variable = fate_of_bocas_resolved }
     }
@@ -1822,7 +1816,7 @@ ca_central_america.12 = {
     desc = ca_central_america.12.d
     flavor = ca_central_america.12.f
     
-    event_image = { video = "southamerica_military_camp" }
+    event_image = { video = "europenorthamerica_before_the_battle" }
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     duration = 3
@@ -1861,17 +1855,15 @@ ca_central_america.12 = {
 		}
 		if = {
             limit = { p:x47C5F8 = { owner = c:COS } }
-			    set_owner_of_provinces = {
-                country = c:CLM
-                provinces = { x47C5F8 }
-            }
+			p:x47C5F8 = {
+				state = { state_region = { set_owner_of_provinces = { country = c:CLM provinces = { x47C5F8 } } } } # CAFM fix
+			}
 		}
 		if = {
             limit = { p:x47C5F8 = { owner = c:UCA } }
-			    set_owner_of_provinces = {
-                country = c:CLM
-                provinces = { x47C5F8 }
-            }
+			p:x47C5F8 = {
+				state = { state_region = { set_owner_of_provinces = { country = c:CLM provinces = { x47C5F8 } } } } # CAFM fix
+			}
 		}			
     }
     
@@ -2402,12 +2394,12 @@ ca_central_america.14 = {
 		set_global_variable = uca_livingston_penal_code
 		ig:ig_landowners = {
 			add_modifier = { name = ca_ig_approval_down_massive months = 60 }
-			add_radicals = { value = 0.2 }
 		}
+		add_radicals = { value = 0.2 interest_group = ig:ig_landowners } # CAFM fix
 		ig:ig_devout = {
 			add_modifier = { name = ca_ig_approval_down_massive months = 60 }
-			add_radicals = { value = 0.2 }
 		}
+		add_radicals = { value = 0.2 interest_group = ig:ig_devout } # CAFM fix
 	}
 	
 	option = {
@@ -2425,7 +2417,7 @@ ca_central_america.14 = {
 
 ## Cholera Outbreak in Guatemala
 ca_central_america.15 = {
-    type = state_event
+    type = country_event
     placement = ROOT
     title = ca_central_america.15.t
     desc = ca_central_america.15.d
@@ -2439,20 +2431,19 @@ ca_central_america.15 = {
         game_date >= 1837.2.2
 		NOT = { has_global_variable = uca_cholera_pandemic }
 		s:STATE_GUATEMALA = {
-			NOT = { has_variable = ca_cholera_affect }
+			any_scope_state = { owner = ROOT NOT = { has_variable = ca_cholera_affect } } # CAFM fix
 		}
     }
     
     immediate = {
         set_global_variable = uca_cholera_pandemic
 
-        if = {
-            limit = { 
-			state_region = s:STATE_GUATEMALA 
-			NOT = { has_variable = ca_cholera_affect }  
-           }
-		s:STATE_GUATEMALA = { save_scope_as = cholera_affect_state }
-        }
+        s:STATE_GUATEMALA = { # CAFM fix: guardar el ESTADO (no la state_region)
+			random_scope_state = {
+				limit = { owner = ROOT NOT = { has_variable = ca_cholera_affect } }
+				save_scope_as = cholera_affect_state
+			}
+		}
     }
     
     option = { #Quarantine the state
@@ -2477,10 +2468,7 @@ ca_central_america.15 = {
 		scope:cholera_affect_state = {
 			set_variable = ca_cholera_affect
 			add_modifier = { name = uca_cholera days = 365 }
-			every_state_pop = {
-				limit = { is_pop_type = peasants }
-				add_radicals = { value = 0.15 }
-			}
+			add_radicals_in_state = { value = 0.15 pop_type = peasants } # CAFM fix
 		}
         ai_chance = { base = 90 }
     }
@@ -2488,7 +2476,7 @@ ca_central_america.15 = {
 
 ## Generic Cholera Outbreak in Central America
 ca_central_america.16 = {
-    type = state_event
+    type = country_event
     placement = ROOT
     title = ca_central_america.16.t
     desc = ca_central_america.16.d
@@ -2537,10 +2525,7 @@ ca_central_america.16 = {
         scope:cholera_affect_state = {
 			set_variable = ca_cholera_affect
 			add_modifier = { name = uca_cholera days = 365 }
-			every_state_pop = {
-				limit = { is_pop_type = peasants }
-				add_radicals = { value = 0.15 }
-			}
+			add_radicals_in_state = { value = 0.15 pop_type = peasants } # CAFM fix
 		}
         ai_chance = { base = 90 }
     }
@@ -2548,7 +2533,7 @@ ca_central_america.16 = {
 
 ## Cholera Outbreak Spreads
 ca_central_america.17 = {
-    type = state_event
+    type = country_event
     placement = ROOT
     title = ca_central_america.17.t
     desc = ca_central_america.17.d
@@ -2688,7 +2673,7 @@ ca_central_america.18 = {
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
             capital = { add_devastation = 15 }
-			every_state_pop = { add_loyalists = { value = 0.1 } }
+			add_loyalists = { value = 0.1 } # CAFM fix
         }
         trigger_event = { id = ca_central_america.3 days = 30 }
 		je:je_historic_central_america_falls_apart = {
@@ -2820,7 +2805,7 @@ ca_central_america.19 = {
         scope:secession_country = {
             change_relations = { country = ROOT value = -50 }
             capital = { add_devastation = 15 }
-			every_state_pop = { add_loyalists = { value = 0.1 } }
+			add_loyalists = { value = 0.1 } # CAFM fix
         }
 		je:je_historic_central_america_falls_apart = {
 			add_progress = { value = -15 name = frca_support_bar }
@@ -2901,7 +2886,7 @@ ca_central_america.20 = {
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
             capital = { add_devastation = 15 }
-			every_state_pop = { add_loyalists = { value = 0.1 } }
+			add_loyalists = { value = 0.1 } # CAFM fix
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
     }
@@ -3000,7 +2985,7 @@ ca_central_america.21 = {
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
             capital = { add_devastation = 15 }
-			every_state_pop = { add_loyalists = { value = 0.1 } }
+			add_loyalists = { value = 0.1 } # CAFM fix
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
     }
@@ -3101,7 +3086,7 @@ ca_central_america.22 = {
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
             capital = { add_devastation = 15 }
-			every_state_pop = { add_loyalists = { value = 0.1 } }
+			add_loyalists = { value = 0.1 } # CAFM fix
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
     }
@@ -3174,8 +3159,11 @@ ca_central_america.23 = {
                 p:x42124E = { owner = ROOT }
                 p:x78C465 = { owner = ROOT }
             }
-			ca_liberate_losaltos_effect = yes
-            ca_create_losaltos_effect = yes
+			ca_create_post_losaltoswithoutsoconusco_effect = yes # CAFM fix: crea ALT y ejecuta su setup dentro del nuevo pais
+            scope:ca_secession_country ?= {
+                save_scope_as = secession_country
+                capital = { save_scope_as = secession_capital }
+            }
 
             ROOT = {
                 create_diplomatic_pact = {
@@ -3205,7 +3193,7 @@ ca_central_america.23 = {
         scope:secession_country = {
             change_relations = { country = ROOT value = 20 }
             capital = { add_devastation = 15 }
-			every_state_pop = { add_loyalists = { value = 0.1 } }
+			add_loyalists = { value = 0.1 } # CAFM fix
         }
         trigger_event = { id = ca_central_america.3 months = 6 }
     }
@@ -3315,7 +3303,6 @@ ca_central_america.26 = {
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
     icon = "gfx/interface/icons/event_icons/event_fire.dds"
-    is_triggered_only = yes   
     # Accept secession
     option = {
         name = ca_central_america.26.a
@@ -3339,7 +3326,6 @@ ca_central_america.26 = {
 				type = dp_hungarian_revolution
 				target_state = c:NIC.capital
 				
-                handle_annexation_as_civil_war = yes
 			add_war_goal = {
 				holder = c:UCA
 				type = return_state
@@ -3391,7 +3377,6 @@ ca_central_america.27 = {
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
     on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
     icon = "gfx/interface/icons/event_icons/event_fire.dds"
-    is_triggered_only = yes
     # Accept secession
     option = {
         name = ca_central_america.27.a
@@ -3434,13 +3419,13 @@ ca_central_america.27 = {
 #Nicaragua apply intervention
 ca_central_america.28 = {
     type = country_event
+    event_image = { video = "europenorthamerica_before_the_battle" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = root
     title = ca_central_america.28.t
     desc = ca_central_america.28.d
     flavor = ca_central_america.28.f
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
-    is_triggered_only = yes
 
     # Limpiamos la variable para que el botón desaparezca
     immediate = {
@@ -3452,7 +3437,7 @@ ca_central_america.28 = {
         
         custom_tooltip = { 
             text = frca_support_28a 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = 15 name = frca_support_bar } 
             }
         }
@@ -3472,7 +3457,7 @@ ca_central_america.28 = {
         
         custom_tooltip = { 
             text = frca_support_28b 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = -15 name = frca_support_bar } 
             }
         }
@@ -3483,13 +3468,13 @@ ca_central_america.28 = {
 #Costa Rica apply intervention
 ca_central_america.29 = {
     type = country_event
+    event_image = { video = "europenorthamerica_before_the_battle" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = root
     title = ca_central_america.29.t
     desc = ca_central_america.29.d
     flavor = ca_central_america.29.f
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
-    is_triggered_only = yes
 
     immediate = {
         c:COS = { remove_variable = ca_intervention_request_active }
@@ -3499,7 +3484,7 @@ ca_central_america.29 = {
         name = ca_central_america.29.a # Intervenir
         custom_tooltip = { 
             text = frca_support_29a 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = 15 name = frca_support_bar } 
             }
         }
@@ -3511,7 +3496,7 @@ ca_central_america.29 = {
         name = ca_central_america.29.b # Ignorar
         custom_tooltip = { 
             text = frca_support_29b 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = -15 name = frca_support_bar } 
             }
         }
@@ -3522,13 +3507,13 @@ ca_central_america.29 = {
 #Honduras apply intervention
 ca_central_america.30 = {
     type = country_event
+    event_image = { video = "europenorthamerica_before_the_battle" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = root
     title = ca_central_america.30.t
     desc = ca_central_america.30.d
     flavor = ca_central_america.30.f
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
-    is_triggered_only = yes
 
     immediate = {
         c:HON = { remove_variable = ca_intervention_request_active }
@@ -3538,7 +3523,7 @@ ca_central_america.30 = {
         name = ca_central_america.30.a # Intervenir
         custom_tooltip = { 
             text = frca_support_30a 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = 15 name = frca_support_bar } 
             }
         }
@@ -3550,7 +3535,7 @@ ca_central_america.30 = {
         name = ca_central_america.30.b # Ignorar
         custom_tooltip = { 
             text = frca_support_30b 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = -15 name = frca_support_bar } 
             }
         }
@@ -3561,13 +3546,13 @@ ca_central_america.30 = {
 #El Salvador apply intervention
 ca_central_america.31 = {
     type = country_event
+    event_image = { video = "europenorthamerica_before_the_battle" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = root
     title = ca_central_america.31.t
     desc = ca_central_america.31.d
     flavor = ca_central_america.31.f
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
-    is_triggered_only = yes
 
     immediate = {
         c:ELS = { remove_variable = ca_intervention_request_active }
@@ -3577,7 +3562,7 @@ ca_central_america.31 = {
         name = ca_central_america.31.a # Intervenir
         custom_tooltip = { 
             text = frca_support_31a 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = 15 name = frca_support_bar } 
             }
         }
@@ -3589,7 +3574,7 @@ ca_central_america.31 = {
         name = ca_central_america.31.b # Ignorar
         custom_tooltip = { 
             text = frca_support_31b 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = -15 name = frca_support_bar } 
             }
         }
@@ -3600,13 +3585,13 @@ ca_central_america.31 = {
 #Guatemala apply intervention
 ca_central_america.32 = {
     type = country_event
+    event_image = { video = "europenorthamerica_before_the_battle" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = root
     title = ca_central_america.32.t
     desc = ca_central_america.32.d
     flavor = ca_central_america.32.f
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
-    is_triggered_only = yes
 
     immediate = {
         c:GUA = { remove_variable = ca_intervention_request_active }
@@ -3616,7 +3601,7 @@ ca_central_america.32 = {
         name = ca_central_america.32.a # Intervenir
         custom_tooltip = { 
             text = frca_support_32a 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = 15 name = frca_support_bar } 
             }
         }
@@ -3628,7 +3613,7 @@ ca_central_america.32 = {
         name = ca_central_america.32.b # Ignorar
         custom_tooltip = { 
             text = frca_support_32b 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = -15 name = frca_support_bar } 
             }
         }
@@ -3639,13 +3624,13 @@ ca_central_america.32 = {
 #Los Altos apply intervention
 ca_central_america.33 = {
     type = country_event
+    event_image = { video = "europenorthamerica_before_the_battle" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = root
     title = ca_central_america.33.t
     desc = ca_central_america.33.d
     flavor = ca_central_america.33.f
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
-    is_triggered_only = yes
 
     immediate = {
         c:ALT = { remove_variable = ca_intervention_request_active }
@@ -3655,7 +3640,7 @@ ca_central_america.33 = {
         name = ca_central_america.33.a # Intervenir
         custom_tooltip = { 
             text = frca_support_33a 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = 15 name = frca_support_bar } 
             }
         }
@@ -3667,7 +3652,7 @@ ca_central_america.33 = {
         name = ca_central_america.33.b # Ignorar
         custom_tooltip = { 
             text = frca_support_33b 
-            je:je_ca_federalists_vs_separatists_situation = {
+            je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = -15 name = frca_support_bar } 
             }
         }
@@ -3873,13 +3858,13 @@ ca_central_america.40 = {
 #UCA Do not accept the intervention (Genérico)
 ca_central_america.41 = {
 	type = country_event
+	event_image = { video = "africa_diplomats_negotiating" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.41.t
 	desc = ca_central_america.41.d
 	flavor = ca_central_america.41.f
 	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
 	
-	is_triggered_only = yes
 
 	option = {
 		name = ca_central_america.41.a # "Nuestros recursos son demasiado escasos..."
@@ -3892,19 +3877,15 @@ ca_central_america.41 = {
 
 		custom_tooltip = { 
 			text = frca_support_41a 
-			je:je_ca_federalists_vs_separatists_situation = {
-				add_progress = { value = -15 name = frca_support_bar } 
+			je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
+                add_progress = { value = -15 name = frca_support_bar } 
 			}
 		}
 		
 		
 		
 		# Genera un poco de descontento entre los militares por la inacción
-		ig:ig_armed_forces = {
-			add_loyalists = {
-				value = -0.05
-			}
-		}
+		add_radicals = { value = 0.05 interest_group = ig:ig_armed_forces } # CAFM fix
 	}
 }
 ## Historic Second Central American Civil War/ End of the Union?
@@ -3922,7 +3903,8 @@ ca_central_america.42 = {
 	trigger = {
 		this = c:UCA
 
-		scripted_bar_progress = { name = frca_support_bar value <= 10 }
+		has_journal_entry = je_historic_central_america_falls_apart
+		je:je_historic_central_america_falls_apart = { scripted_bar_progress = { name = frca_support_bar value <= 10 } } # CAFM fix
 
 		OR = {
 			exists = c:GUA
@@ -3944,7 +3926,7 @@ ca_central_america.42 = {
 					this = c:ALT
 				}
 			}
-			free_subject = yes
+			make_independent = yes # CAFM fix
 		}
 	}
 
@@ -4040,11 +4022,11 @@ ca_central_america.42 = {
 			# Transferencia correcta de provincias de Chiapas a Guatemala
 			if = {
 				limit = { exists = c:GUA }
-                s:STATE_CHIAPAS.region_state:UCA = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
+                s:STATE_CHIAPAS = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
             }
             if = {
                 limit = { this = c:ELS }
-                s:STATE_CHIAPAS.region_state:ELS = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
+                s:STATE_CHIAPAS = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
             }
 			# Exiliamos al actual gobernante (Morazán)
 			ruler = { exile_character = yes }
@@ -4102,11 +4084,11 @@ ca_central_america.43 = {
         ruler = { exile_character = yes }
             if = {
 				limit = { exists = c:GUA }
-                s:STATE_CHIAPAS.region_state:UCA = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
+                s:STATE_CHIAPAS = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
             }
             if = {
                 limit = { this = c:ELS }
-                s:STATE_CHIAPAS.region_state:ELS = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
+                s:STATE_CHIAPAS = { set_owner_of_provinces = { country = c:GUA provinces = { x1030C0 x4DBDE9 xD03040 xA087F6 x8E26C5 } } }
             }
     }
     option = { #Continue as El Salvador
@@ -5951,7 +5933,7 @@ ca_central_america.79 = {
     type = country_event
     title = ca_central_america.79.t 
     desc = ca_central_america.79.d
-    picture = "gfx/event_pictures/central_america_congress.dds"
+    event_image = { video = "unspecific_politicians_arguing" } # CAFM fix: "picture" no existe en V3
 
     trigger = {
 	OR = {
@@ -6059,7 +6041,7 @@ ca_central_america.79 = {
         }
         
         add_loyalists = {
-            value = medium_loyalists
+            value = medium_radicals # CAFM fix: medium_loyalists no existe
             culture = cu:central_american                                              
         }
           
@@ -6144,7 +6126,7 @@ ca_central_america.80 = {
 
     # OPCIÓN 4: Jugar como Nicaragua
     option = {
-        name = ca_central_america.80.d
+        name = ca_central_america.80.nic # CAFM fix: 80.d es la descripcion
         ca_create_nicaragua_effect = yes 
 		ca_play_nicaragua_effect = yes
         play_as = c:NIC
@@ -6160,9 +6142,9 @@ ca_central_america.80 = {
     
     # OPCIÓN 6: Jugar como Los Altos
     option = {
-        name = ca_central_america.80.f
+        name = ca_central_america.80.alt # CAFM fix: 80.f es el flavor
         trigger = { exists = s:STATE_CHIAPAS.region_state:UCA }
-        ca_create_losaltos_effect = yes
+        ca_create_losaltoswithsoconusco_effect = yes # CAFM fix: ca_create_losaltos_effect no existe
 		ca_play_losaltos_effect = yes
         play_as = c:ALT
     }
@@ -6406,7 +6388,7 @@ ca_central_america.89 = {
     desc = ca_central_america.89.d
     flavor = ca_central_america.89.f
     
-    event_image = { video = "parliament" }
+    event_image = { video = "asia_politician_parliament_motion" }
     icon = "gfx/interface/icons/event_icons/event_default.dds"
     
     trigger = {
@@ -6463,7 +6445,7 @@ ca_central_america.90 = {
     title = ca_central_america.90.t
     desc = ca_central_america.90.d
     
-    event_image = { video = "civil_unrest" }
+    event_image = { video = "unspecific_vandalized_storefront" }
     icon = "gfx/interface/icons/event_icons/event_protest.dds"
     
     trigger = {
@@ -6533,14 +6515,14 @@ ca_central_america.91 = {
     title = ca_central_america.91.t
     desc = ca_central_america.91.d
     
-    event_image = { video = "market_busy" }
+    event_image = { video = "asia_farmers_market" }
     
     trigger = {
         is_ca_culture_country = yes
         any_scope_state = {
             state_is_in_ca_central_america = yes
             # Validación correcta de niveles de edificio (indianevents.txt)
-            building_levels = { type = building_coffee_plantation value >= 1 }
+            has_building = building_coffee_plantation # CAFM fix
         }
     }
 
@@ -6548,7 +6530,7 @@ ca_central_america.91 = {
         random_scope_state = {
             limit = {
                 state_is_in_ca_central_america = yes
-                building_levels = { type = building_coffee_plantation value >= 1 }
+                has_building = building_coffee_plantation # CAFM fix
             }
             save_scope_as = boom_state
         }
@@ -6559,7 +6541,7 @@ ca_central_america.91 = {
         
         scope:boom_state = { add_modifier = { name = ca_coffee_export_boom months = 60 } }
         ca_increase_support_economic_boom_effect = yes
-        ig:ig_landowners = { add_approval = { value = 2 months = 60 } }
+        ig:ig_landowners = { add_modifier = { name = ca_ig_approval_up months = 60 } }
     }
 
     option = {
@@ -6577,11 +6559,11 @@ ca_central_america.92 = {
     type = country_event
     title = ca_central_america.92.t
     desc = ca_central_america.92.d
-    event_image = { video = "poverty" }
+    event_image = { video = "europenorthamerica_rich_and_poor" }
 
     trigger = {
         is_ca_culture_country = yes
-        is_in_default = yes # Macro vanilla correcta
+        in_default = yes # CAFM fix # Macro vanilla correcta
     }
 
     option = {
@@ -6599,7 +6581,7 @@ ca_central_america.92 = {
     option = {
         name = ca_central_america.92.b
         default_option = yes
-        declare_bankruptcy = yes # Efecto vanilla correcto
+        # declare_bankruptcy = yes # CAFM fix: no existe; el default ya es automatico
         add_modifier = { name = ca_economic_chaos_prestige_loss months = 120 }
         ca_reduce_support_civil_war_effect = yes 
     }
@@ -6618,7 +6600,7 @@ ca_central_america.93 = {
     desc = ca_central_america.93.d
     
     event_image = {
-        video = "earthquake" # Video genérico de desastres en V3
+        video = "unspecific_devastation" # Video genérico de desastres en V3
     }
     icon = "gfx/interface/icons/event_icons/event_protest.dds"
     
@@ -6647,7 +6629,7 @@ ca_central_america.93 = {
         name = ca_central_america.93.a
         
         add_treasury = -10000 # Coste de reconstrucción
-        add_bureaucracy = -50
+        add_modifier = { name = ca_federal_relief_bureaucracy_cost months = 24 } # CAFM fix: add_bureaucracy no existe
         
         scope:earthquake_state = {
             add_devastation = 10
@@ -6660,7 +6642,7 @@ ca_central_america.93 = {
         # La ayuda federal aumenta la fe en la Unión
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_300a add_progress = { value = 10 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_300a je:je_historic_central_america_falls_apart = { add_progress = { value = 10 name = frca_support_bar } } } # CAFM fix
         }
     }
 
@@ -6681,7 +6663,7 @@ ca_central_america.93 = {
         # El abandono reduce masivamente el soporte a la federación
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_300b add_progress = { value = -25 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_300b je:je_historic_central_america_falls_apart = { add_progress = { value = -25 name = frca_support_bar } } } # CAFM fix
         }
     }
 }
@@ -6696,7 +6678,7 @@ ca_central_america.94 = {
     desc = ca_central_america.94.d
     
     event_image = {
-        video = "school"
+        video = "middleeast_middleclass_cafe"
     }
 
     trigger = {
@@ -6710,10 +6692,7 @@ ca_central_america.94 = {
         name = ca_central_america.94.a
         default_option = yes
         ig:ig_intelligentsia = {
-            add_approval = {
-                value = 3
-                months = 36
-            }
+            add_modifier = { name = ca_ig_approval_up months = 36 }
         }
         add_modifier = {
             name = ca_secular_literacy_campaign
@@ -6734,10 +6713,7 @@ ca_central_america.94 = {
         name = ca_central_america.94.b
         
         ig:ig_devout = {
-            add_approval = {
-                value = 3
-                months = 36
-            }
+            add_modifier = { name = ca_ig_approval_up months = 36 }
         }
         add_modifier = {
             name = ca_religious_education_drive
@@ -6756,7 +6732,7 @@ ca_central_america.95 = {
     desc = ca_central_america.95.d
     
     event_image = {
-        video = "civil_unrest"
+        video = "unspecific_vandalized_storefront"
     }
 
     trigger = {
@@ -6767,7 +6743,6 @@ ca_central_america.95 = {
             # Presencia de campesinos descontentos
             any_scope_pop = {
                 is_pop_type = peasants
-                is_discriminated = yes
             }
         }
     }
@@ -6787,10 +6762,10 @@ ca_central_america.95 = {
         name = ca_central_america.95.a
         
         ig:ig_landowners = {
-            add_approval = { value = -3 months = 60 }
+            add_modifier = { name = ca_ig_approval_down months = 60 }
         }
         ig:ig_rural_folk = {
-            add_approval = { value = 3 months = 60 }
+            add_modifier = { name = ca_ig_approval_up months = 60 }
         }
         scope:rebellion_state = {
             add_loyalists_in_state = { value = 0.1 culture = cu:central_american }
@@ -6833,7 +6808,7 @@ ca_central_america.96 = {
     placement = scope:foreign_power
     title = ca_central_america.96.t
     desc = ca_central_america.96.d
-    event_image = { video = "diplomacy" }
+    event_image = { video = "africa_diplomats_negotiating" }
     
     trigger = {
         is_ca_culture_country = yes
@@ -6860,16 +6835,14 @@ ca_central_america.96 = {
         add_modifier = { name = ca_foreign_capital_injection months = 12 }
         
         # La Gran Potencia adquiere una obligación sobre nosotros (sintaxis oficial)
-        scope:foreign_power = {
-            add_obligation = ROOT
-        }
+        set_owes_obligation_to = { country = scope:foreign_power setting = yes } # CAFM fix: add_obligation no existe
         
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_400a add_progress = { value = -15 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_400a je:je_historic_central_america_falls_apart = { add_progress = { value = -15 name = frca_support_bar } } } # CAFM fix
         }
         
-        ig:ig_industrialists = { add_approval = { value = 2 months = 60 } }
+        ig:ig_industrialists = { add_modifier = { name = ca_ig_approval_up months = 60 } }
     }
 
     option = {
@@ -6894,18 +6867,22 @@ ca_central_america.97 = {
     placement = scope:border_neighbor
     title = ca_central_america.97.t
     desc = ca_central_america.97.d
-    event_image = { video = "military_camp" }
+    event_image = { video = "europenorthamerica_before_the_battle" }
 
     trigger = {
         is_ca_culture_country = yes
-        any_neighbor_country = { # Macro oficial V3
+        any_country = { # CAFM fix: any_neighbor_country no existe
+            is_adjacent_to_country = ROOT
             NOT = { is_ca_culture_country = yes }
         }
     }
 
     immediate = {
-        random_neighbor_country = {
-            limit = { NOT = { is_ca_culture_country = yes } }
+        random_country = { # CAFM fix
+            limit = {
+                is_adjacent_to_country = ROOT
+                NOT = { is_ca_culture_country = yes }
+            }
             save_scope_as = border_neighbor
         }
     }
@@ -6917,7 +6894,7 @@ ca_central_america.97 = {
         add_modifier = { name = ca_military_deployment_cost months = 12 }
         
         ig:ig_armed_forces = {
-            add_approval = { value = 3 months = 60 }
+            add_modifier = { name = ca_ig_approval_up months = 60 }
             add_modifier = { name = ca_border_mobilization months = 36 }
         }
         
@@ -6931,7 +6908,7 @@ ca_central_america.97 = {
     option = {
         name = ca_central_america.97.b
         
-        ig:ig_armed_forces = { add_approval = { value = -2 months = 60 } }
+        ig:ig_armed_forces = { add_modifier = { name = ca_ig_approval_down months = 60 } }
         
         scope:border_neighbor = {
             change_relations = { country = ROOT value = 20 }
@@ -6939,7 +6916,7 @@ ca_central_america.97 = {
         
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_401b add_progress = { value = -10 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_401b je:je_historic_central_america_falls_apart = { add_progress = { value = -10 name = frca_support_bar } } } # CAFM fix
         }
     }
 }
@@ -6950,7 +6927,7 @@ ca_central_america.98 = {
     placement = root
     title = ca_central_america.98.t
     desc = ca_central_america.98.d
-    event_image = { video = "generals_tent" }
+    event_image = { video = "europenorthamerica_before_the_battle" }
 
     trigger = {
         is_ca_culture_country = yes
@@ -6968,7 +6945,7 @@ ca_central_america.98 = {
         
         if = {
             limit = { has_variable = frca_support }
-            custom_tooltip = { text = frca_support_402a add_progress = { value = 20 name = frca_support_bar } }
+            custom_tooltip = { text = frca_support_402a je:je_historic_central_america_falls_apart = { add_progress = { value = 20 name = frca_support_bar } } } # CAFM fix
         }
     }
 
@@ -6992,6 +6969,7 @@ ca_central_america.98 = {
 # Inserto A: El Eco de Granada
 ca_central_america.101 = {
 	type = country_event
+	event_image = { video = "unspecific_politicians_arguing" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.101.t
 	desc = ca_central_america.101.d
@@ -7017,7 +6995,6 @@ ca_central_america.101 = {
 		name = ca_central_america.101.b # "Debemos censurar la prensa para evitar pánico"
 		add_radicals = {
 			value = 0.05
-			pop_type = all
 		}
 		add_modifier = {
 			name = ca_censorship_panic_modifier
@@ -7029,11 +7006,12 @@ ca_central_america.101 = {
 # Inserto B: El Dilema en la Capital
 ca_central_america.102 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_capitalists_meeting" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.102.t
 	desc = ca_central_america.102.d
 	flavor = ca_central_america.102.f
-	icon = "gfx/interface/icons/event_icons/event_coin.dds"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	
 	 
 
@@ -7060,6 +7038,7 @@ ca_central_america.102 = {
 # Inserto C: Lágrimas en el Lago Cocibolca (Resolución)
 ca_central_america.103 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_before_the_battle" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.103.t
 	desc = ca_central_america.103.d
@@ -7109,6 +7088,7 @@ ca_central_america.103 = {
 # Inserto A: El Silencio de San José
 ca_central_america.104 = {
 	type = country_event
+	event_image = { video = "unspecific_vandalized_storefront" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.104.t
 	desc = ca_central_america.104.d
@@ -7133,19 +7113,17 @@ ca_central_america.104 = {
 	option = {
 		name = ca_central_america.104.b # "Confisquen sus exportaciones..."
 		c:COS = {
-			trigger_event = { id = ca_costa_rica_events.99 } # Define un evento de crisis económica en COS
+			# trigger_event = { id = ca_costa_rica_events.99 } # CAFM fix: CR.99 no existe (y es el Colapso del Norte, no una crisis economica)
+			add_modifier = { name = ca_coffee_exports_seized_modifier months = 24 }
 		}
-		ig:ig_industrialists = {
-			add_loyalists = {
-				value = -0.1
-			}
-		}
+		add_radicals = { value = 0.1 interest_group = ig:ig_industrialists } # CAFM fix
 	}
 }
 
 # Inserto B: El Aroma de la Traición
 ca_central_america.105 = {
 	type = country_event
+	event_image = { video = "africa_diplomats_negotiating" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.105.t
 	desc = ca_central_america.105.d
@@ -7176,6 +7154,7 @@ ca_central_america.105 = {
 # Inserto C: El Destino del Pacto (Resolución)
 ca_central_america.106 = {
 	type = country_event
+	event_image = { video = "southamerica_aristocrats" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.106.t
 	desc = ca_central_america.106.d
@@ -7231,6 +7210,7 @@ ca_central_america.106 = {
 # Inserto A: La Puñalada en Comayagua
 ca_central_america.107 = {
 	type = country_event
+	event_image = { video = "southamerica_war_civilians" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.107.t
 	desc = ca_central_america.107.d
@@ -7253,17 +7233,14 @@ ca_central_america.107 = {
 
 	option = {
 		name = ca_central_america.107.b # "Debemos negociar con Ferrera..."
-		ig:ig_armed_forces = {
-			add_loyalists = {
-				value = -0.15
-			}
-		}
+		add_radicals = { value = 0.15 interest_group = ig:ig_armed_forces } # CAFM fix
 	}
 }
 
 # Inserto B: Sangre en el Río Ulúa
 ca_central_america.108 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_before_the_battle" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.108.t
 	desc = ca_central_america.108.d
@@ -7287,7 +7264,7 @@ ca_central_america.108 = {
 	option = {
 		name = ca_central_america.108.b # "Que se maten entre ellos"
 		c:HON = {
-			any_scope_state = {
+			every_scope_state = { # CAFM fix
 				limit = { state_is_in_ca_central_america = yes }
 				add_devastation = 30
 			}
@@ -7298,6 +7275,7 @@ ca_central_america.108 = {
 # Inserto C: El Destino del General Ferrera (Resolución)
 ca_central_america.109 = {
 	type = country_event
+	event_image = { video = "southamerica_aristocrats" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.109.t
 	desc = ca_central_america.109.d
@@ -7337,11 +7315,7 @@ ca_central_america.109 = {
 				}
 			}
 		}
-		ig:ig_armed_forces = {
-			add_loyalists = {
-				value = 0.2
-			}
-		}
+		add_loyalists = { value = 0.2 interest_group = ig:ig_armed_forces } # CAFM fix
 	}
 }
 
@@ -7352,6 +7326,7 @@ ca_central_america.109 = {
 # Inserto A: El Rugido de la Montaña
 ca_central_america.110 = {
 	type = country_event
+	event_image = { video = "southamerica_aristocrats" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.110.t
 	desc = ca_central_america.110.d
@@ -7390,6 +7365,7 @@ ca_central_america.110 = {
 # Inserto B: El Pánico de Gálvez
 ca_central_america.111 = {
 	type = country_event
+	event_image = { video = "africa_diplomats_negotiating" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.111.t
 	desc = ca_central_america.111.d
@@ -7413,21 +7389,18 @@ ca_central_america.111 = {
 
 	option = {
 		name = ca_central_america.111.b # "Gálvez cavó su propia tumba..."
-		ig:ig_intelligentsia = {
-			add_loyalists = {
-				value = -0.15
-			}
-		}
+		add_radicals = { value = 0.15 interest_group = ig:ig_intelligentsia } # CAFM fix
 	}
 }
 
 # Inserto C: El Destino del Caudillo (Resolución)
 ca_central_america.112 = {
 	type = country_event
+	event_image = { video = "unspecific_sick_in_hospital" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.112.t
 	desc = ca_central_america.112.d
-	icon = "gfx/interface/icons/event_icons/event_death.dds"
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
 	
 	 
 
@@ -7466,9 +7439,9 @@ ca_central_america.112 = {
 			}
 		}
 		# Avanza la Journal Entry de la UCA
-		add_journal_entry_progress = {
-			journal_entry = je_ca_federalists_vs_separatists_situation
-			value = 50
+		if = { # CAFM fix: add_journal_entry_progress no existe
+			limit = { has_variable = federalists_vs_separatists_next }
+			change_variable = { name = federalists_vs_separatists_next add = 50 }
 		}
 	}
 }
@@ -7480,6 +7453,7 @@ ca_central_america.112 = {
 # Inserto A: El Enemigo en Casa
 ca_central_america.113 = {
 	type = country_event
+	event_image = { video = "unspecific_vandalized_storefront" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.113.t
 	desc = ca_central_america.113.d
@@ -7516,6 +7490,7 @@ ca_central_america.113 = {
 # Inserto B: La Leva Suprema
 ca_central_america.114 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_before_the_battle" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.114.t
 	desc = ca_central_america.114.d
@@ -7537,14 +7512,9 @@ ca_central_america.114 = {
 
 	option = {
 		name = ca_central_america.114.b # "Solo confío en mis veteranos"
+		add_loyalists = { value = 0.1 interest_group = ig:ig_armed_forces } # CAFM fix
 		ig:ig_armed_forces = {
-			add_loyalists = {
-				value = 0.1
-			}
-			add_modifier = {
-				name = ca_ig_strength_boost_modifier
-				months = 12
-			}
+			add_modifier = { name = ca_ig_strength_boost_modifier months = 12 }
 		}
 	}
 }
@@ -7552,10 +7522,11 @@ ca_central_america.114 = {
 # Inserto C: El Fin de la Utopía (Resolución)
 ca_central_america.115 = {
 	type = country_event
+	event_image = { video = "unspecific_sick_in_hospital" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.115.t
 	desc = ca_central_america.115.d
-	icon = "gfx/interface/icons/event_icons/event_death.dds"
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
 	
 	 
 
@@ -7602,6 +7573,7 @@ ca_central_america.115 = {
 # Inserto A: El Reconocimiento del Sexto Estado
 ca_central_america.116 = {
 	type = country_event
+	event_image = { video = "africa_diplomats_negotiating" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.116.t
 	desc = ca_central_america.116.d
@@ -7611,11 +7583,7 @@ ca_central_america.116 = {
 
 	option = {
 		name = ca_central_america.116.a # "¡Bienvenidos a la Federación!"
-		ig:ig_intelligentsia = {
-			add_loyalists = {
-				value = 0.2
-			}
-		}
+		add_loyalists = { value = 0.2 interest_group = ig:ig_intelligentsia } # CAFM fix
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
@@ -7650,6 +7618,7 @@ ca_central_america.116 = {
 # Inserto B: La Sombra de Carrera
 ca_central_america.117 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_before_the_battle" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.117.t
 	desc = ca_central_america.117.d
@@ -7682,10 +7651,11 @@ ca_central_america.117 = {
 # Inserto C: Los Mártires de Quetzaltenango (Resolución)
 ca_central_america.118 = {
 	type = country_event
+	event_image = { video = "unspecific_sick_in_hospital" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.118.t
 	desc = ca_central_america.118.d
-	icon = "gfx/interface/icons/event_icons/event_death.dds"
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
 	
 	 
 
@@ -7693,11 +7663,7 @@ ca_central_america.118 = {
 	option = {
 		name = ca_central_america.118.a # "Una masacre imperdonable..."
 		trigger = { has_variable = ca_los_altos_separatists_won } # En este contexto los separatistas son Guatemala aplastando a ALT
-		ig:ig_intelligentsia = {
-			add_radicals = {
-				value = 0.2
-			}
-		}
+		add_radicals = { value = 0.2 interest_group = ig:ig_intelligentsia } # CAFM fix
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
@@ -7707,17 +7673,11 @@ ca_central_america.118 = {
 				}
 			}
 		}
-		s:STATE_CHIAPAS = { 
-			add_modifier = {
-				name = ca_tierra_arrasada_modifier
-				months = 60
-			}
+		s:STATE_CHIAPAS = {
+			every_scope_state = { add_modifier = { name = ca_tierra_arrasada_modifier months = 60 } } # CAFM fix
 		}
-		s:STATE_GUATEMALA = { 
-			add_modifier = {
-				name = ca_tierra_arrasada_modifier
-				months = 60
-			}
+		s:STATE_GUATEMALA = {
+			every_scope_state = { add_modifier = { name = ca_tierra_arrasada_modifier months = 60 } } # CAFM fix
 		}		
 	}
 
@@ -7734,9 +7694,7 @@ ca_central_america.118 = {
 				}
 			}
 		}
-		c:ALT = {
-			trigger_event = { id = ca_los_altos_soconusco_events.1 } # Dispara la anexión de Soconusco
-		}
+		# c:ALT = { trigger_event = { id = ca_los_altos_soconusco_events.1 } } # CAFM fix: ese evento todavia no existe (ca_los_altos_soconusco_events.txt esta vacio)
 	}
 }
 ca_central_america.119 = { 
@@ -7862,7 +7820,7 @@ ca_central_america.119 = {
         }
         
         add_loyalists = {
-            value = medium_loyalists
+            value = medium_radicals # CAFM fix: medium_loyalists no existe
             culture = cu:central_american                                              
         }
           
@@ -7894,6 +7852,7 @@ ca_central_america.119 = {
 }
 ca_central_america.120 = { #El Grito del Sexto Estado (La Crisis de Los Altos)
 	type = country_event
+	event_image = { video = "southamerica_aristocrats" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.120.t
 	desc = ca_central_america.120.d
@@ -7905,7 +7864,7 @@ ca_central_america.120 = { #El Grito del Sexto Estado (La Crisis de Los Altos)
 		game_date < 1838.1.1
 		OR = {
 			s:STATE_GUATEMALA = {
-				turmoil > 0.2
+				any_scope_state = { turmoil > 0.2 } # CAFM fix: turmoil es de estado, no de state_region
 			}
 			AND = {
 				ig:ig_landowners = {
@@ -7947,9 +7906,7 @@ ca_central_america.120 = { #El Grito del Sexto Estado (La Crisis de Los Altos)
 			}
 		}
 		c:GUA = {
-			ig:ig_landowners = {
-				add_radicals = { value = 0.1 }
-			}
+			add_radicals = { value = 0.1 interest_group = ig:ig_landowners } # CAFM fix
 		}
 		trigger_event = {
 			id = ca_central_america.2
@@ -7969,12 +7926,8 @@ ca_central_america.120 = { #El Grito del Sexto Estado (La Crisis de Los Altos)
 			name = ca_authority_boost
 			months = 24
 		}
-		ig:ig_intelligentsia = {
-			add_radicals = { value = 0.15 }
-		}
-		ig:ig_petty_bourgeoisie = {
-			add_radicals = { value = 0.15 }
-		}
+		add_radicals = { value = 0.15 interest_group = ig:ig_intelligentsia } # CAFM fix
+		add_radicals = { value = 0.15 interest_group = ig:ig_petty_bourgeoisie }
 		change_variable = {
 			name = ca_hidden_secession_var
 			add = 1
@@ -7998,6 +7951,7 @@ ca_central_america.120 = { #El Grito del Sexto Estado (La Crisis de Los Altos)
 
 ca_central_america.121 = {
 	type = country_event
+	event_image = { video = "southamerica_aristocrats" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.121.t
 	desc = ca_central_america.121.d
@@ -8005,7 +7959,7 @@ ca_central_america.121 = {
 	
 	trigger = {
 		this = c:UCA
-		owns_entire_state_region = s:STATE_GUATEMALA
+		owns_entire_state_region = STATE_GUATEMALA # CAFM fix
 	}
 	
 	option = {
@@ -8058,16 +8012,14 @@ ca_central_america.121 = {
 			months = 12
 		}
 		je:je_historic_central_america_falls_apart = {
-			change_variable = {
-				name = frca_support_bar
-				add = 5
-			}
+			add_progress = { value = 5 name = frca_support_bar } # CAFM fix: es una barra, no una variable
 		}
 	}
 }
 
 ca_central_america.122 = {
 	type = country_event
+	event_image = { video = "southamerica_aristocrats" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_central_america.122.t
 	desc = ca_central_america.122.d
@@ -8095,18 +8047,13 @@ ca_central_america.122 = {
 			months = 36
 		}
 		je:je_historic_central_america_falls_apart = {
-			change_variable = {
-				name = frca_support_bar
-				subtract = 15
-			}
+			add_progress = { value = -15 name = frca_support_bar } # CAFM fix: es una barra, no una variable
 		}
 		scope:secession_country = {
-			every_owned_state = {
+			every_scope_state = { # CAFM fix
 				add_devastation = 15
 			}
-			every_state_pop = {
-				add_loyalists = { value = 0.1 }
-			}
+			add_loyalists = { value = 0.1 } # CAFM fix
 		}
 	}
 	
@@ -8122,7 +8069,7 @@ ca_central_america.122 = {
 			target_country = scope:secession_country
 		}
 		scope:secession_country = {
-			every_owned_state = {
+			every_scope_state = { # CAFM fix
 				add_devastation = 25
 			}
 		}

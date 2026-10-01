@@ -27,7 +27,7 @@ ca_el_salvador_events.1 = {
 	
 	immediate = {
         s:STATE_SAN_SALVADOR.region_state:UCA = {
-        add_state_trait = state_trait_mining_els
+        state_region = { add_state_trait = state_trait_mining_els } # CAFM fix: add_state_trait es de state_region
         add_modifier = { name = ca_uca_liberal_stronghold }
         add_modifier = { name = federal_stronghold }
         }
@@ -57,6 +57,7 @@ ca_el_salvador_events.1 = {
 # 1. 1838: La salida de Silva y la elección de Menéndez
 ca_el_salvador_events.9 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_el_salvador_events.9.t
     desc = ca_el_salvador_events.9.d
@@ -101,6 +102,7 @@ ca_el_salvador_events.9 = {
 # 2. 1842: Primera Elección Constitucional (Juan José Guzmán)
 ca_el_salvador_events.10 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_el_salvador_events.10.t
     desc = ca_el_salvador_events.10.d
@@ -144,6 +146,7 @@ ca_el_salvador_events.10 = {
 # 3. 1844: La Dictadura de Francisco Malespín
 ca_el_salvador_events.11 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_el_salvador_events.11.t
     desc = ca_el_salvador_events.11.d
@@ -183,6 +186,7 @@ ca_el_salvador_events.11 = {
 # 4. 1846: La Caída de Malespín y Eugenio Aguilar
 ca_el_salvador_events.12 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_el_salvador_events.12.t
     desc = ca_el_salvador_events.12.d
@@ -219,6 +223,7 @@ ca_el_salvador_events.12 = {
 # 5. 1848: Doroteo Vasconcelos y los tambores de guerra
 ca_el_salvador_events.13 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_el_salvador_events.13.t
     desc = ca_el_salvador_events.13.d

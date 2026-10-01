@@ -2,6 +2,7 @@
 
 ca_prospecting.1 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.1.t
 	desc = ca_prospecting.1.d
@@ -9,13 +10,13 @@ ca_prospecting.1 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 			}
@@ -30,10 +31,7 @@ ca_prospecting.1 = {
 				type = building_gold_mine
 				amount = 2
 			}
-			every_state_pop = {
-				limit = { is_pop_type = peasants }
-				add_radicals = { value = 0.05 }
-			}
+			add_radicals_in_state = { value = 0.05 pop_type = peasants } # CAFM fix
 		}
 	}
 	
@@ -64,6 +62,7 @@ ca_prospecting.1 = {
 
 ca_prospecting.2 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.2.t
 	desc = ca_prospecting.2.d
@@ -71,13 +70,13 @@ ca_prospecting.2 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			has_potential_resource = bg_iron_mining
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				has_potential_resource = bg_iron_mining
 			}
@@ -120,6 +119,7 @@ ca_prospecting.2 = {
 
 ca_prospecting.3 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.3.t
 	desc = ca_prospecting.3.d
@@ -130,7 +130,7 @@ ca_prospecting.3 = {
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			save_scope_as = target_state
 		}
 	}
@@ -165,6 +165,7 @@ ca_prospecting.3 = {
 
 ca_prospecting.4 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.4.t
 	desc = ca_prospecting.4.d
@@ -172,13 +173,13 @@ ca_prospecting.4 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			has_potential_resource = bg_lead_mining
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				has_potential_resource = bg_lead_mining
 			}
@@ -207,6 +208,7 @@ ca_prospecting.4 = {
 
 ca_prospecting.5 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.5.t
 	desc = ca_prospecting.5.d
@@ -214,7 +216,7 @@ ca_prospecting.5 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			OR = {
 				state_region = s:STATE_HONDURAS
 				state_region = s:STATE_NICARAGUA
@@ -223,7 +225,7 @@ ca_prospecting.5 = {
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				OR = {
 					state_region = s:STATE_HONDURAS
@@ -264,6 +266,7 @@ ca_prospecting.5 = {
 
 ca_prospecting.6 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.6.t
 	desc = ca_prospecting.6.d
@@ -271,13 +274,13 @@ ca_prospecting.6 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 			}
@@ -297,9 +300,7 @@ ca_prospecting.6 = {
 				months = 60
 			}
 		}
-		ig:ig_landowners = {
-			add_radicals = { value = 0.05 }
-		}
+		add_radicals = { value = 0.05 interest_group = ig:ig_landowners } # CAFM fix
 	}
 	
 	option = {
@@ -319,6 +320,7 @@ ca_prospecting.6 = {
 
 ca_prospecting.7 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.7.t
 	desc = ca_prospecting.7.d
@@ -326,13 +328,13 @@ ca_prospecting.7 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			has_potential_resource = bg_coal_mining
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				has_potential_resource = bg_coal_mining
 			}
@@ -363,7 +365,7 @@ ca_prospecting.7 = {
 				name = ca_ig_approval_up
 				months = 60
 			}
-			add_clout = 0.05
+			add_modifier = { name = ca_ig_strength_boost_modifier months = 60 } # CAFM fix: add_clout no existe
 		}
 		add_modifier = {
 			name = ca_state_corruption_modifier
@@ -374,6 +376,7 @@ ca_prospecting.7 = {
 
 ca_prospecting.8 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.8.t
 	desc = ca_prospecting.8.d
@@ -382,13 +385,13 @@ ca_prospecting.8 = {
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
 		has_technology_researched = prospecting
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_region = s:STATE_PANAMA
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_region = s:STATE_PANAMA
 			}
@@ -426,6 +429,7 @@ ca_prospecting.8 = {
 
 ca_prospecting.9 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.9.t
 	desc = ca_prospecting.9.d
@@ -433,13 +437,13 @@ ca_prospecting.9 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 			}
@@ -464,7 +468,7 @@ ca_prospecting.9 = {
 	option = {
 		name = ca_prospecting.9.b
 		scope:target_state = {
-			add_arable_land = 2
+			state_region = { add_arable_land = 2 } # CAFM fix: es efecto de state_region
 		}
 		ig:ig_rural_folk = {
 			add_modifier = {
@@ -477,6 +481,7 @@ ca_prospecting.9 = {
 
 ca_prospecting.10 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_prospecting.10.t
 	desc = ca_prospecting.10.d
@@ -488,8 +493,8 @@ ca_prospecting.10 = {
 	
 	option = {
 		name = ca_prospecting.10.a
-		add_prestige = -10
-		every_owned_state = {
+		add_modifier = { name = ca_prestige_scandal_modifier months = 60 } # CAFM fix: add_prestige no existe
+		every_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 			}
@@ -508,6 +513,7 @@ ca_prospecting.10 = {
 
 ca_prospecting.11 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.11.t
 	desc = ca_prospecting.11.d
@@ -515,13 +521,13 @@ ca_prospecting.11 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 			}
@@ -532,7 +538,7 @@ ca_prospecting.11 = {
 	option = {
 		name = ca_prospecting.11.a
 		scope:target_state = {
-			add_arable_land = 5
+			state_region = { add_arable_land = 5 } # CAFM fix: es efecto de state_region
 			add_modifier = {
 				name = ca_volcanic_soil_modifier
 				months = 120
@@ -548,19 +554,17 @@ ca_prospecting.11 = {
 				name = ca_ig_approval_up
 				months = 60
 			}
-			add_clout = 0.05
+			add_modifier = { name = ca_ig_strength_boost_modifier months = 60 } # CAFM fix: add_clout no existe
 		}
 		scope:target_state = {
-			every_state_pop = {
-				limit = { is_pop_type = peasants }
-				add_radicals = { value = 0.10 }
-			}
+			add_radicals_in_state = { value = 0.10 pop_type = peasants } # CAFM fix
 		}
 	}
 }
 
 ca_prospecting.12 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.12.t
 	desc = ca_prospecting.12.d
@@ -568,13 +572,13 @@ ca_prospecting.12 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 			}
@@ -610,6 +614,7 @@ ca_prospecting.12 = {
 
 ca_prospecting.13 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.13.t
 	desc = ca_prospecting.13.d
@@ -617,13 +622,13 @@ ca_prospecting.13 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 			}
@@ -649,6 +654,7 @@ ca_prospecting.13 = {
 
 ca_prospecting.14 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.14.t
 	desc = ca_prospecting.14.d
@@ -656,13 +662,13 @@ ca_prospecting.14 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 			}
@@ -704,6 +710,7 @@ ca_prospecting.14 = {
 
 ca_prospecting.15 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.15.t
 	desc = ca_prospecting.15.d
@@ -711,13 +718,13 @@ ca_prospecting.15 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 			}
@@ -747,6 +754,7 @@ ca_prospecting.15 = {
 
 ca_prospecting.16 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.16.t
 	desc = ca_prospecting.16.d
@@ -754,13 +762,13 @@ ca_prospecting.16 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = { state_is_in_ca_central_america = yes }
 			save_scope_as = target_state
 		}
@@ -796,6 +804,7 @@ ca_prospecting.16 = {
 
 ca_prospecting.17 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.17.t
 	desc = ca_prospecting.17.d
@@ -803,13 +812,13 @@ ca_prospecting.17 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = { state_is_in_ca_central_america = yes }
 			save_scope_as = target_state
 		}
@@ -818,10 +827,10 @@ ca_prospecting.17 = {
 	
 	option = {
 		name = ca_prospecting.17.a
-		trigger = { treasury >= 20000 }
+		trigger = { gold_reserves >= 20000 } # CAFM fix: treasury no existe
 		add_treasury = -20000
 		scope:target_state = {
-			add_arable_land = 10
+			state_region = { add_arable_land = 10 } # CAFM fix: es efecto de state_region
 		}
 	}
 	
@@ -840,6 +849,7 @@ ca_prospecting.17 = {
 
 ca_prospecting.18 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.18.t
 	desc = ca_prospecting.18.d
@@ -847,13 +857,13 @@ ca_prospecting.18 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = { state_is_in_ca_central_america = yes }
 			save_scope_as = target_state
 		}
@@ -863,12 +873,9 @@ ca_prospecting.18 = {
 	option = {
 		name = ca_prospecting.18.a
 		scope:target_state = {
-			add_arable_land = 5
+			state_region = { add_arable_land = 5 } # CAFM fix: es efecto de state_region
 			
-			every_state_pop = {
-				limit = { is_pop_type = peasants }
-				add_radicals = { value = 0.15 } 
-			}
+			add_radicals_in_state = { value = 0.15 pop_type = peasants } # CAFM fix
 		}
 	}
 	
@@ -891,6 +898,7 @@ ca_prospecting.18 = {
 
 ca_prospecting.19 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.19.t
 	desc = ca_prospecting.19.d
@@ -898,13 +906,13 @@ ca_prospecting.19 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = { state_is_in_ca_central_america = yes }
 			save_scope_as = target_state
 		}
@@ -935,10 +943,8 @@ ca_prospecting.19 = {
 				name = ca_high_mortality_modifier 
 				months = 12
 			}
-			every_state_pop = {
-				limit = { OR = { is_pop_type = laborers is_pop_type = peasants } }
-				add_radicals = { value = 0.20 }
-			}
+			add_radicals_in_state = { value = 0.20 pop_type = laborers } # CAFM fix
+			add_radicals_in_state = { value = 0.20 pop_type = peasants }
 		}
 	}
 }
@@ -946,6 +952,7 @@ ca_prospecting.19 = {
 
 ca_prospecting.20 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.20.t
 	desc = ca_prospecting.20.d
@@ -954,14 +961,14 @@ ca_prospecting.20 = {
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
 		# Este evento solo debe ocurrir donde ya hay minas de azufre construidas
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 			has_building = building_sulfur_mine
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 				has_building = building_sulfur_mine
@@ -998,6 +1005,7 @@ ca_prospecting.20 = {
 
 ca_prospecting.21 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_prospecting.21.t
 	desc = ca_prospecting.21.d
@@ -1020,9 +1028,9 @@ ca_prospecting.21 = {
 		random_list = {
 			50 = {}
 			50 = {
-				random_owned_state = {
+				random_scope_state = { # CAFM fix
 					limit = { state_is_in_ca_central_america = yes }
-					add_arable_land = 1
+					state_region = { add_arable_land = 1 } # CAFM fix: es efecto de state_region
 				}
 			}
 		}
@@ -1031,6 +1039,7 @@ ca_prospecting.21 = {
 
 ca_prospecting.22 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.22.t
 	desc = ca_prospecting.22.d
@@ -1038,20 +1047,20 @@ ca_prospecting.22 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
-			any_state_pop = {
-				is_discriminated = yes
+			any_scope_pop = { # CAFM fix
+				pop_has_primary_culture = no # CAFM fix: is_discriminated no existe
 			}
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
-				any_state_pop = {
-					is_discriminated = yes
+				any_scope_pop = { # CAFM fix
+					pop_has_primary_culture = no # CAFM fix: is_discriminated no existe
 				}
 			}
 			save_scope_as = target_state
@@ -1062,11 +1071,8 @@ ca_prospecting.22 = {
 		name = ca_prospecting.22.a
 		scope:target_state = {
 			add_devastation = 20
-			add_arable_land = 2
-			every_state_pop = {
-				limit = { is_discriminated = yes }
-				add_radicals = { value = 0.20 }
-			}
+			state_region = { add_arable_land = 2 } # CAFM fix: es efecto de state_region
+			add_radicals_in_state = { value = 0.20 } # CAFM fix: is_discriminated no existe para pops
 		}
 	}
 	
@@ -1078,13 +1084,14 @@ ca_prospecting.22 = {
 			subtract = 10
 		}
 		scope:target_state = {
-			add_arable_land = 2
+			state_region = { add_arable_land = 2 } # CAFM fix: es efecto de state_region
 		}
 	}
 }
 
 ca_prospecting.23 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.23.t
 	desc = ca_prospecting.23.d
@@ -1092,13 +1099,13 @@ ca_prospecting.23 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = { state_is_in_ca_central_america = yes }
 			save_scope_as = target_state
 		}
@@ -1108,7 +1115,7 @@ ca_prospecting.23 = {
 		name = ca_prospecting.23.a
 		scope:target_state = {
 			add_devastation = 25
-			add_arable_land = 2
+			state_region = { add_arable_land = 2 } # CAFM fix: es efecto de state_region
 		}
 	}
 	
@@ -1123,13 +1130,14 @@ ca_prospecting.23 = {
 				name = ca_ig_approval_up
 				months = 36
 			}
-			add_clout = 0.05
+			add_modifier = { name = ca_ig_strength_boost_modifier months = 60 } # CAFM fix: add_clout no existe
 		}
 	}
 }
 
 ca_prospecting.24 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_prospecting.24.t
 	desc = ca_prospecting.24.d
@@ -1137,9 +1145,9 @@ ca_prospecting.24 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
-			has_terrain = terrain_jungle
+			any_province = { has_terrain = terrain_jungle } # CAFM fix: has_terrain es de provincia
 		}
 	}
 	
@@ -1158,25 +1166,23 @@ ca_prospecting.24 = {
 			name = ca_survey_progress
 			add = 15
 		}
-		every_owned_state = {
+		every_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
-				has_terrain = terrain_jungle
+				any_province = { has_terrain = terrain_jungle } # CAFM fix: has_terrain es de provincia
 			}
 			add_modifier = {
 				name = ca_high_mortality_modifier
 				months = 12
 			}
-			every_state_pop = {
-				limit = { is_pop_type = laborers }
-				add_radicals = { value = 0.15 }
-			}
+			add_radicals_in_state = { value = 0.15 pop_type = laborers } # CAFM fix
 		}
 	}
 }
 
 ca_prospecting.25 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_prospecting.25.t
 	desc = ca_prospecting.25.d
@@ -1184,13 +1190,13 @@ ca_prospecting.25 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			has_potential_resource = bg_iron_mining
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				has_potential_resource = bg_iron_mining
 			}
@@ -1211,7 +1217,7 @@ ca_prospecting.25 = {
 				name = ca_ig_approval_up
 				months = 60
 			}
-			add_clout = 0.05
+			add_modifier = { name = ca_ig_strength_boost_modifier months = 60 } # CAFM fix: add_clout no existe
 		}
 		add_modifier = {
 			name = ca_foreign_monopoly_modifier
@@ -1265,6 +1271,7 @@ ca_prospecting.25 = {
 
 ca_prospecting.26 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_prospecting.26.t
 	desc = ca_prospecting.26.d
@@ -1298,7 +1305,7 @@ ca_prospecting.26 = {
 			}
 			70 = {
 				add_radicals = { value = 0.05 }
-				every_owned_state = {
+				every_scope_state = { # CAFM fix
 					limit = {
 						state_is_in_ca_central_america = yes
 					}
@@ -1314,6 +1321,7 @@ ca_prospecting.26 = {
 
 ca_prospecting.27 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.27.t
 	desc = ca_prospecting.27.d
@@ -1321,14 +1329,14 @@ ca_prospecting.27 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
 			turmoil >= 0.20
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
 				turmoil >= 0.20
@@ -1346,10 +1354,7 @@ ca_prospecting.27 = {
 			}
 		}
 		scope:target_state = {
-			every_state_pop = {
-				limit = { is_pop_type = peasants }
-				add_radicals = { value = 0.20 }
-			}
+			add_radicals_in_state = { value = 0.20 pop_type = peasants } # CAFM fix
 		}
 	}
 	
@@ -1376,6 +1381,7 @@ ca_prospecting.27 = {
 
 ca_prospecting.28 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_prospecting.28.t
 	desc = ca_prospecting.28.d
@@ -1409,6 +1415,7 @@ ca_prospecting.28 = {
 
 ca_prospecting.29 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = scope:target_state
 	title = ca_prospecting.29.t
 	desc = ca_prospecting.29.d
@@ -1416,19 +1423,19 @@ ca_prospecting.29 = {
 	
 	trigger = {
 		has_journal_entry = je_ca_national_geological_survey
-		any_owned_state = {
+		any_scope_state = { # CAFM fix
 			state_is_in_ca_central_america = yes
-			any_state_pop = {
+			any_scope_pop = { # CAFM fix
 				has_pop_culture = cu:mayan
 			}
 		}
 	}
 	
 	immediate = {
-		random_owned_state = {
+		random_scope_state = { # CAFM fix
 			limit = {
 				state_is_in_ca_central_america = yes
-				any_state_pop = {
+				any_scope_pop = { # CAFM fix
 					has_pop_culture = cu:mayan
 				}
 			}
@@ -1457,15 +1464,14 @@ ca_prospecting.29 = {
 			name = ca_survey_progress
 			add = 10
 		}
-		add_prestige = -15
-		ig:ig_intelligentsia = {
-			add_radicals = { value = 0.10 }
-		}
+		add_modifier = { name = ca_prestige_scandal_modifier months = 60 } # CAFM fix: add_prestige no existe
+		add_radicals = { value = 0.10 interest_group = ig:ig_intelligentsia } # CAFM fix
 	}
 }
 
 ca_prospecting.30 = {
 	type = country_event
+	event_image = { video = "europenorthamerica_gold_prospectors" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
 	title = ca_prospecting.30.t
 	desc = ca_prospecting.30.d
@@ -1491,7 +1497,7 @@ ca_prospecting.30 = {
 				name = ca_ig_approval_up
 				months = 60
 			}
-			add_clout = 0.05
+			add_modifier = { name = ca_ig_strength_boost_modifier months = 60 } # CAFM fix: add_clout no existe
 		}
 	}
 }
@@ -1505,8 +1511,8 @@ ca_prospecting.30 = {
 #    title = ca_prospecting.1.t
 #    desc = ca_prospecting.1.d
 #    
-#    event_image = { video = "unspecific_research" }
-#    icon = "gfx/interface/icons/event_icons/event_coin.dds"
+#    event_image = { video = "middleeast_engineer_blueprint" }
+#    icon = "gfx/interface/icons/event_icons/event_trade.dds"
 #
 #    trigger = {} # Disparado por la decisión (scripted_button)
 #
@@ -1563,7 +1569,7 @@ ca_prospecting.30 = {
 #    title = ca_prospecting.2.t
 #    desc = ca_prospecting.2.d
 #    
-#    event_image = { video = "unspecific_disaster" }
+#    event_image = { video = "unspecific_devastation" }
 #    icon = "gfx/interface/icons/event_icons/event_fire.dds"
 #    trigger = {}
 #
@@ -1599,7 +1605,7 @@ ca_prospecting.30 = {
 #    placement = root
 #    title = ca_prospecting.3.t
 #    
-#    event_image = { video = "unspecific_reform" }
+#    event_image = { video = "unspecific_signed_contract" }
 #    icon = "gfx/interface/icons/event_icons/event_map.dds"
 #    trigger = {}
 #
@@ -1633,7 +1639,7 @@ ca_prospecting.30 = {
 #    placement = root
 #    title = ca_prospecting.4.t
 #    
-#    event_image = { video = "unspecific_protest" }
+#    event_image = { video = "unspecific_vandalized_storefront" }
 #    icon = "gfx/interface/icons/event_icons/event_protest.dds"
 #    trigger = {}
 #
@@ -1676,7 +1682,7 @@ ca_prospecting.30 = {
 #    placement = root
 #    title = ca_prospecting.5.t
 #    
-#    event_image = { video = "unspecific_research" }
+#    event_image = { video = "middleeast_engineer_blueprint" }
 #    icon = "gfx/interface/icons/event_icons/event_industry.dds"
 #    trigger = {}
 #
@@ -1720,8 +1726,8 @@ ca_prospecting.30 = {
 #    title = ca_prospecting.6.t
 #    desc = ca_prospecting.6.d
 #    
-#    event_image = { video = "unspecific_miners" }
-#    icon = "gfx/interface/icons/event_icons/event_coin.dds"
+#    event_image = { video = "europenorthamerica_gold_prospectors" }
+#    icon = "gfx/interface/icons/event_icons/event_trade.dds"
 #    trigger = {}
 #
 #    immediate = {
@@ -1841,7 +1847,7 @@ ca_prospecting.30 = {
 #    title = ca_prospecting.9.t
 #    desc = ca_prospecting.9.d
 #    
-#    event_image = { video = "unspecific_mountain" }
+#    event_image = { video = "middleeast_jungle_expedition" }
 #    icon = "gfx/interface/icons/event_icons/event_industry.dds"
 #    trigger = {}
 #
@@ -1875,7 +1881,7 @@ ca_prospecting.30 = {
 #    placement = root
 #    title = ca_prospecting.10.t
 #    
-#    event_image = { video = "unspecific_health" }
+#    event_image = { video = "unspecific_sick_in_hospital" }
 #    icon = "gfx/interface/icons/event_icons/event_fire.dds"
 #    trigger = {}
 #
@@ -1917,7 +1923,7 @@ ca_prospecting.30 = {
 #    placement = root
 #    title = ca_prospecting.11.t
 #    
-#    event_image = { video = "unspecific_research" }
+#    event_image = { video = "middleeast_engineer_blueprint" }
 #    icon = "gfx/interface/icons/event_icons/event_documents.dds"
 #    trigger = {}
 #
@@ -1937,7 +1943,7 @@ ca_prospecting.30 = {
 #    placement = root
 #    title = ca_prospecting.12.t
 #    
-#    event_image = { video = "unspecific_miners" }
+#    event_image = { video = "europenorthamerica_gold_prospectors" }
 #    icon = "gfx/interface/icons/event_icons/event_cross.dds"
 #    trigger = {}
 #
@@ -1957,8 +1963,8 @@ ca_prospecting.30 = {
 #    placement = root
 #    title = ca_prospecting.13.t
 #    
-#    event_image = { video = "unspecific_protest" }
-#    icon = "gfx/interface/icons/event_icons/event_coin.dds"
+#    event_image = { video = "unspecific_vandalized_storefront" }
+#    icon = "gfx/interface/icons/event_icons/event_trade.dds"
 #    trigger = {}
 #
 #    option = {
@@ -1985,7 +1991,7 @@ ca_prospecting.30 = {
 #    title = ca_prospecting.14.t
 #    
 #    event_image = { video = "southamerica_aristocrats" }
-#    icon = "gfx/interface/icons/event_icons/event_gavel.dds"
+#    icon = "gfx/interface/icons/event_icons/event_scales.dds"
 #    trigger = {}
 #
 #    option = {
@@ -2012,7 +2018,7 @@ ca_prospecting.30 = {
 #    placement = root
 #    title = ca_prospecting.15.t
 #    
-#    event_image = { video = "unspecific_church" }
+#    event_image = { video = "southamerica_christianity" }
 #    icon = "gfx/interface/icons/event_icons/event_flag.dds"
 #    trigger = {}
 #
@@ -2031,7 +2037,7 @@ ca_prospecting.30 = {
 #    placement = root
 #    title = ca_prospecting.16.t
 #    
-#    event_image = { video = "unspecific_research" }
+#    event_image = { video = "middleeast_engineer_blueprint" }
 #    icon = "gfx/interface/icons/event_icons/event_lightbulb.dds"
 #    trigger = {}
 #
@@ -2050,7 +2056,7 @@ ca_prospecting.30 = {
 #    placement = root
 #    title = ca_prospecting.17.t
 #    
-#    event_image = { video = "unspecific_industry" }
+#    event_image = { video = "unspecific_gears_pistons" }
 #    icon = "gfx/interface/icons/event_icons/event_industry.dds"
 #    trigger = {}
 #
@@ -2080,7 +2086,7 @@ ca_prospecting.30 = {
 #    placement = root
 #    title = ca_prospecting.18.t
 #    
-#    event_image = { video = "unspecific_diplomacy" }
+#    event_image = { video = "africa_diplomats_negotiating" }
 #    icon = "gfx/interface/icons/event_icons/event_spy.dds"
 #    trigger = {}
 #

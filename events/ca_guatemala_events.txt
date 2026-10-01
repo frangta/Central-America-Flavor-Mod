@@ -31,7 +31,7 @@ ca_guatemala_events.1 = {
 	
 	immediate = {
         s:STATE_GUATEMALA.region_state:UCA = {
-        add_state_trait = state_trait_mining_gua
+        state_region = { add_state_trait = state_trait_mining_gua } # CAFM fix: add_state_trait es de state_region
 		add_modifier = { name = ca_uca_conservative_capital }
         add_modifier = { name = unitary_stronghold }
         add_modifier = { name = conservative_stronghold }
@@ -61,6 +61,7 @@ ca_guatemala_events.1 = {
 # 1. 1837-1838: La Crisis de Gálvez y la Rebelión de la Montaña
 ca_guatemala_events.5 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_guatemala_events.5.t
     desc = ca_guatemala_events.5.d
@@ -107,6 +108,7 @@ ca_guatemala_events.5 = {
 # 2. 1842: Ratificación Institucional
 ca_guatemala_events.6 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_guatemala_events.6.t
     desc = ca_guatemala_events.6.d
@@ -144,6 +146,7 @@ ca_guatemala_events.6 = {
 # 3. 1844: El Ascenso Oficial de Rafael Carrera
 ca_guatemala_events.7 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_guatemala_events.7.t
     desc = ca_guatemala_events.7.d
@@ -183,6 +186,7 @@ ca_guatemala_events.7 = {
 # 4. 1848-1849: La Renuncia de Carrera y el Caos de Sucesión
 ca_guatemala_events.8 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_guatemala_events.8.t
     desc = ca_guatemala_events.8.d

@@ -29,7 +29,7 @@ ca_nicaragua_events.1 = {
 	
 	immediate = {
         s:STATE_NICARAGUA.region_state:UCA = {
-        add_state_trait = state_trait_mining_nic
+        state_region = { add_state_trait = state_trait_mining_nic } # CAFM fix: add_state_trait es de state_region
 		add_modifier = { name = ca_uca_leones_vs_granadinos }
         add_modifier = { name = separatism_stronghold }
         add_modifier = { name = liberal_stronghold_small_nation }
@@ -63,7 +63,7 @@ ca_nicaragua_events.1 = {
 #	flavor = ca_nicaragua_events.2.f
 #	
 #	event_image = {
-#		video = "southamerica_aristocrats.bk2"
+#		video = "southamerica_aristocrats"
 #	}
 #	
 #	icon = "gfx/interface/icons/event_icons/event_default.dds"
@@ -104,7 +104,7 @@ ca_nicaragua_events.1 = {
 #	flavor = ca_nicaragua_events.3.f
 #	
 #	event_image = {
-#		video = "southamerica_aristocrats.bk2"
+#		video = "southamerica_aristocrats"
 #	}
 #	
 #	icon = "gfx/interface/icons/event_icons/event_default.dds"
@@ -241,7 +241,7 @@ ca_nicaragua_events.1 = {
 #	flavor = ca_nicaragua_events.3.f
 #	
 #	event_image = {
-#		video = "southamerica_war_civilian"
+#		video = "southamerica_war_civilians"
 #	}
 #	
 #	icon = "gfx/interface/icons/event_icons/event_default.dds"
@@ -457,6 +457,7 @@ ca_nicaragua_events.1 = {
 # 1. 1837: José Núñez y el fin de la Federación
 ca_nicaragua_events.19 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_nicaragua_events.19.t
     desc = ca_nicaragua_events.19.d
@@ -494,6 +495,7 @@ ca_nicaragua_events.19 = {
 # 2. 1839: Primeras Elecciones Constitucionales (Patricio Rivas)
 ca_nicaragua_events.20 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_nicaragua_events.20.t
     desc = ca_nicaragua_events.20.d
@@ -531,6 +533,7 @@ ca_nicaragua_events.20 = {
 # 3. 1841: Pablo Buitrago y el retorno Liberal
 ca_nicaragua_events.21 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_nicaragua_events.21.t
     desc = ca_nicaragua_events.21.d
@@ -567,6 +570,7 @@ ca_nicaragua_events.21 = {
 # 4. 1843: Manuel Pérez
 ca_nicaragua_events.22 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_nicaragua_events.22.t
     desc = ca_nicaragua_events.22.d
@@ -603,6 +607,7 @@ ca_nicaragua_events.22 = {
 # 5. 1845: Las Ruinas de León y José León Sandoval
 ca_nicaragua_events.23 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_nicaragua_events.23.t
     desc = ca_nicaragua_events.23.d
@@ -641,6 +646,7 @@ ca_nicaragua_events.23 = {
 # 6. 1847: José María Guerrero de Arcos (Crisis con Gran Bretaña)
 ca_nicaragua_events.24 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_nicaragua_events.24.t
     desc = ca_nicaragua_events.24.d
@@ -677,6 +683,7 @@ ca_nicaragua_events.24 = {
 # 7. 1849: Norberto Ramírez (Transición y Tratados Extranjeros)
 ca_nicaragua_events.25 = {
     type = country_event
+    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
     placement = ROOT
     title = ca_nicaragua_events.25.t
     desc = ca_nicaragua_events.25.d
