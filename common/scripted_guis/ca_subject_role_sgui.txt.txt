@@ -1,0 +1,59 @@
+﻿# --- CENTRALISTAS (Niveles 1 a 3) ---
+ca_sgui_centralist_lvl_1 = {
+    scope = country
+    is_shown = {
+        var:ca_centralist_influence >= 1
+    }
+}
+ca_sgui_centralist_lvl_2 = {
+    scope = country
+    is_shown = {
+        var:ca_centralist_influence >= 2
+    }
+}
+ca_sgui_centralist_lvl_3 = {
+    scope = country
+    is_shown = {
+        var:ca_centralist_influence >= 3
+    }
+}
+
+# --- FEDERALISTAS (Niveles 1 a 3) ---
+ca_sgui_federalist_lvl_1 = {
+    scope = country
+    is_shown = {
+        var:ca_federalist_influence >= 1
+    }
+}
+ca_sgui_federalist_lvl_2 = {
+    scope = country
+    is_shown = {
+        var:ca_federalist_influence >= 2
+    }
+}
+ca_sgui_federalist_lvl_3 = {
+    scope = country
+    is_shown = {
+        var:ca_federalist_influence >= 3
+    }
+}
+
+# --- SEPARATISTAS (Niveles 1 a 3) ---
+ca_sgui_separatist_lvl_1 = {
+    scope = country
+    is_shown = {
+        var:ca_separatist_influence >= 1
+    }
+}
+ca_sgui_separatist_lvl_2 = {
+    scope = country
+    is_shown = {
+        var:ca_separatist_influence >= 2
+    }
+}
+ca_sgui_separatist_lvl_3 = {
+    scope = country
+    is_shown = {
+        var:ca_separatist_influence >= 3
+    }
+}

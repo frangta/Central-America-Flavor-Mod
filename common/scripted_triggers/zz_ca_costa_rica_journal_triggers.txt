@@ -1,0 +1,25 @@
+# =========================================================================
+# CAFM - Triggers de los diarios de Costa Rica
+# =========================================================================
+
+# Soberania de San Jose >= VALUE (lee la barra del diario madre)
+# Uso: ca_cos_soberania_min_trigger = { VALUE = 40 }
+ca_cos_soberania_min_trigger = {
+	je:je_ca_historic_situation_in_costarica ?= {
+		scripted_bar_progress = {
+			name = ca_cos_soberania_bar
+			value >= $VALUE$
+		}
+	}
+}
+
+# Hay un capitulo con barra activo (regla: solo uno a la vez)
+ca_cos_capitulo_con_barra_activo_trigger = {
+	has_journal_entry = je_ca_pacificacion_norte
+}
+
+# El pais sigue siendo Costa Rica y el diario madre sigue vivo
+ca_cos_capitulo_valido_trigger = {
+	c:COS ?= this
+	has_variable = ca_cos_madre_activa
+}

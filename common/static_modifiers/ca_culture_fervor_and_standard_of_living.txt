@@ -1,0 +1,653 @@
+﻿# ==========================================
+# STATIC MODIFIERS
+# ==========================================
+
+# --- costa_rican ---
+costa_rican_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_costa_rican_standard_of_living_add = 1
+}
+costa_rican_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_costa_rican_standard_of_living_add = -1
+}
+costa_rican_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_costa_rican_cultural_acceptance_add = 1
+}
+costa_rican_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_costa_rican_cultural_acceptance_add = -1
+}
+costa_rican_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_costa_rican_add = 1
+}
+costa_rican_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_costa_rican_add = -1
+}
+
+# --- panamanian ---
+panamanian_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_panamanian_standard_of_living_add = 1
+}
+panamanian_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_panamanian_standard_of_living_add = -1
+}
+panamanian_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_panamanian_cultural_acceptance_add = 1
+}
+panamanian_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_panamanian_cultural_acceptance_add = -1
+}
+panamanian_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_panamanian_add = 1
+}
+panamanian_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_panamanian_add = -1
+}
+
+# --- nicaraguan ---
+nicaraguan_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_nicaraguan_standard_of_living_add = 1
+}
+nicaraguan_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_nicaraguan_standard_of_living_add = -1
+}
+nicaraguan_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_nicaraguan_cultural_acceptance_add = 1
+}
+nicaraguan_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_nicaraguan_cultural_acceptance_add = -1
+}
+nicaraguan_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_nicaraguan_add = 1
+}
+nicaraguan_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_nicaraguan_add = -1
+}
+
+# --- guatemalan ---
+guatemalan_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_guatemalan_standard_of_living_add = 1
+}
+guatemalan_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_guatemalan_standard_of_living_add = -1
+}
+guatemalan_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_guatemalan_cultural_acceptance_add = 1
+}
+guatemalan_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_guatemalan_cultural_acceptance_add = -1
+}
+guatemalan_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_guatemalan_add = 1
+}
+guatemalan_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_guatemalan_add = -1
+}
+
+# --- el_salvadorian ---
+el_salvadorian_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_el_salvadorian_standard_of_living_add = 1
+}
+el_salvadorian_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_el_salvadorian_standard_of_living_add = -1
+}
+el_salvadorian_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_el_salvadorian_cultural_acceptance_add = 1
+}
+el_salvadorian_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_el_salvadorian_cultural_acceptance_add = -1
+}
+el_salvadorian_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_el_salvadorian_add = 1
+}
+el_salvadorian_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_el_salvadorian_add = -1
+}
+
+# --- honduran ---
+honduran_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_honduran_standard_of_living_add = 1
+}
+honduran_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_honduran_standard_of_living_add = -1
+}
+honduran_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_honduran_cultural_acceptance_add = 1
+}
+honduran_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_honduran_cultural_acceptance_add = -1
+}
+honduran_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_honduran_add = 1
+}
+honduran_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_honduran_add = -1
+}
+
+# --- chibchan_central_america ---
+chibchan_central_america_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_chibchan_central_america_standard_of_living_add = 1
+}
+chibchan_central_america_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_chibchan_central_america_standard_of_living_add = -1
+}
+chibchan_central_america_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_chibchan_central_america_cultural_acceptance_add = 1
+}
+chibchan_central_america_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_chibchan_central_america_cultural_acceptance_add = -1
+}
+chibchan_central_america_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_chibchan_central_america_add = 1
+}
+chibchan_central_america_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_chibchan_central_america_add = -1
+}
+
+# --- bribri_talamanca ---
+bribri_talamanca_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_bribri_talamanca_standard_of_living_add = 1
+}
+bribri_talamanca_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_bribri_talamanca_standard_of_living_add = -1
+}
+bribri_talamanca_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_bribri_talamanca_cultural_acceptance_add = 1
+}
+bribri_talamanca_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_bribri_talamanca_cultural_acceptance_add = -1
+}
+bribri_talamanca_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_bribri_talamanca_add = 1
+}
+bribri_talamanca_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_bribri_talamanca_add = -1
+}
+
+# --- cabecar ---
+cabecar_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cabecar_standard_of_living_add = 1
+}
+cabecar_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cabecar_standard_of_living_add = -1
+}
+cabecar_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_cabecar_cultural_acceptance_add = 1
+}
+cabecar_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_cabecar_cultural_acceptance_add = -1
+}
+cabecar_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_cabecar_add = 1
+}
+cabecar_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_cabecar_add = -1
+}
+
+# --- ngabe_culture ---
+ngabe_culture_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_ngabe_culture_standard_of_living_add = 1
+}
+ngabe_culture_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_ngabe_culture_standard_of_living_add = -1
+}
+ngabe_culture_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_ngabe_culture_cultural_acceptance_add = 1
+}
+ngabe_culture_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_ngabe_culture_cultural_acceptance_add = -1
+}
+ngabe_culture_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_ngabe_culture_add = 1
+}
+ngabe_culture_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_ngabe_culture_add = -1
+}
+
+# --- embera ---
+embera_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_embera_standard_of_living_add = 1
+}
+embera_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_embera_standard_of_living_add = -1
+}
+embera_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_embera_cultural_acceptance_add = 1
+}
+embera_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_embera_cultural_acceptance_add = -1
+}
+embera_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_embera_add = 1
+}
+embera_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_embera_add = -1
+}
+
+# --- guna_kuna ---
+guna_kuna_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_guna_kuna_standard_of_living_add = 1
+}
+guna_kuna_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_guna_kuna_standard_of_living_add = -1
+}
+guna_kuna_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_guna_kuna_cultural_acceptance_add = 1
+}
+guna_kuna_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_guna_kuna_cultural_acceptance_add = -1
+}
+guna_kuna_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_guna_kuna_add = 1
+}
+guna_kuna_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_guna_kuna_add = -1
+}
+
+# --- lenca ---
+lenca_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_lenca_standard_of_living_add = 1
+}
+lenca_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_lenca_standard_of_living_add = -1
+}
+lenca_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_lenca_cultural_acceptance_add = 1
+}
+lenca_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_lenca_cultural_acceptance_add = -1
+}
+lenca_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_lenca_add = 1
+}
+lenca_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_lenca_add = -1
+}
+
+# --- mangue_chorotega ---
+mangue_chorotega_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_mangue_chorotega_standard_of_living_add = 1
+}
+mangue_chorotega_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_mangue_chorotega_standard_of_living_add = -1
+}
+mangue_chorotega_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_mangue_chorotega_cultural_acceptance_add = 1
+}
+mangue_chorotega_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_mangue_chorotega_cultural_acceptance_add = -1
+}
+mangue_chorotega_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_mangue_chorotega_add = 1
+}
+mangue_chorotega_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_mangue_chorotega_add = -1
+}
+
+# --- garifuna_arawak ---
+garifuna_arawak_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_garifuna_arawak_standard_of_living_add = 1
+}
+garifuna_arawak_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_garifuna_arawak_standard_of_living_add = -1
+}
+garifuna_arawak_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_garifuna_arawak_cultural_acceptance_add = 1
+}
+garifuna_arawak_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_garifuna_arawak_cultural_acceptance_add = -1
+}
+garifuna_arawak_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_garifuna_arawak_add = 1
+}
+garifuna_arawak_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_garifuna_arawak_add = -1
+}
+
+# --- chiapanecan ---
+chiapanecan_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_chiapanecan_standard_of_living_add = 1
+}
+chiapanecan_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_chiapanecan_standard_of_living_add = -1
+}
+chiapanecan_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_chiapanecan_cultural_acceptance_add = 1
+}
+chiapanecan_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_chiapanecan_cultural_acceptance_add = -1
+}
+chiapanecan_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_chiapanecan_add = 1
+}
+chiapanecan_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_chiapanecan_add = -1
+}
+
+# --- ca_antillianen ---
+ca_antillianen_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_ca_antillianen_standard_of_living_add = 1
+}
+ca_antillianen_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_ca_antillianen_standard_of_living_add = -1
+}
+ca_antillianen_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_ca_antillianen_cultural_acceptance_add = 1
+}
+ca_antillianen_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_ca_antillianen_cultural_acceptance_add = -1
+}
+ca_antillianen_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_ca_antillianen_add = 1
+}
+ca_ca_antillianen_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_ca_antillianen_add = -1
+}
+
+# --- ca_pipil ---
+ca_pipil_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_ca_pipil_standard_of_living_add = 1
+}
+ca_pipil_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_ca_pipil_standard_of_living_add = -1
+}
+ca_pipil_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_ca_pipil_cultural_acceptance_add = 1
+}
+ca_pipil_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_ca_pipil_cultural_acceptance_add = -1
+}
+ca_pipil_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_ca_pipil_add = 1
+}
+ca_pipil_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_ca_pipil_add = -1
+}
+
+# --- ca_kiche ---
+ca_kiche_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_ca_kiche_standard_of_living_add = 1
+}
+ca_kiche_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_ca_kiche_standard_of_living_add = -1
+}
+ca_kiche_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_ca_kiche_cultural_acceptance_add = 1
+}
+ca_kiche_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_ca_kiche_cultural_acceptance_add = -1
+}
+ca_kiche_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_ca_kiche_add = 1
+}
+ca_kiche_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_ca_kiche_add = -1
+}
+
+# --- latinoafricano ---
+latinoafricano_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_latinoafricano_standard_of_living_add = 1
+}
+latinoafricano_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_latinoafricano_standard_of_living_add = -1
+}
+latinoafricano_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_latinoafricano_cultural_acceptance_add = 1
+}
+latinoafricano_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_latinoafricano_cultural_acceptance_add = -1
+}
+latinoafricano_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_latinoafricano_add = 1
+}
+latinoafricano_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_latinoafricano_add = -1
+}
+
+# --- coreano_latino ---
+coreano_latino_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_coreano_latino_standard_of_living_add = 1
+}
+coreano_latino_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_coreano_latino_standard_of_living_add = -1
+}
+coreano_latino_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_coreano_latino_cultural_acceptance_add = 1
+}
+coreano_latino_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_coreano_latino_cultural_acceptance_add = -1
+}
+coreano_latino_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_coreano_latino_add = 1
+}
+coreano_latino_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_coreano_latino_add = -1
+}
+
+# --- vietnamita_latino ---
+vietnamita_latino_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_vietnamita_latino_standard_of_living_add = 1
+}
+vietnamita_latino_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_vietnamita_latino_standard_of_living_add = -1
+}
+vietnamita_latino_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_vietnamita_latino_cultural_acceptance_add = 1
+}
+vietnamita_latino_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_vietnamita_latino_cultural_acceptance_add = -1
+}
+vietnamita_latino_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_vietnamita_latino_add = 1
+}
+vietnamita_latino_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_vietnamita_latino_add = -1
+}
+
+# --- ca_hakka ---
+ca_hakka_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_ca_hakka_standard_of_living_add = 1
+}
+ca_hakka_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_ca_hakka_standard_of_living_add = -1
+}
+ca_hakka_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_ca_hakka_cultural_acceptance_add = 1
+}
+ca_hakka_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_ca_hakka_cultural_acceptance_add = -1
+}
+ca_hakka_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_ca_hakka_add = 1
+}
+ca_hakka_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_ca_hakka_add = -1
+}
+
+# --- nicoyamato ---
+nicoyamato_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_nicoyamato_standard_of_living_add = 1
+}
+nicoyamato_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_nicoyamato_standard_of_living_add = -1
+}
+nicoyamato_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_nicoyamato_cultural_acceptance_add = 1
+}
+nicoyamato_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_nicoyamato_cultural_acceptance_add = -1
+}
+nicoyamato_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_nicoyamato_add = 1
+}
+nicoyamato_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_nicoyamato_add = -1
+}
+
+# --- ca_panyabi ---
+ca_panyabi_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_ca_panyabi_standard_of_living_add = 1
+}
+ca_panyabi_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_ca_panyabi_standard_of_living_add = -1
+}
+ca_panyabi_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_ca_panyabi_cultural_acceptance_add = 1
+}
+ca_panyabi_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_ca_panyabi_cultural_acceptance_add = -1
+}
+ca_panyabi_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_ca_panyabi_add = 1
+}
+ca_panyabi_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_ca_panyabi_add = -1
+}

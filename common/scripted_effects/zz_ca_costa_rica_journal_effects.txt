@@ -1,0 +1,140 @@
+# =========================================================================
+# CAFM - Efectos de los diarios de Costa Rica
+# =========================================================================
+
+# -------------------------------------------------------------------------
+# Sumar o restar Soberania de San Jose
+# Uso: ca_cos_change_soberania_effect = { VALUE = 20 }   (o VALUE = -30)
+# -------------------------------------------------------------------------
+ca_cos_change_soberania_effect = {
+	je:je_ca_historic_situation_in_costarica ?= {
+		add_progress = {
+			name = ca_cos_soberania_bar
+			value = $VALUE$
+		}
+	}
+}
+
+# -------------------------------------------------------------------------
+# Planificador de capitulos (se llama cada mes desde el diario madre)
+# Regla: solo un capitulo CON BARRA a la vez. Bocas del Toro no tiene barra
+# y puede correr en paralelo.
+# Cada capitulo tiene ventana de fechas: si Costa Rica aparece tarde
+# (p. ej. por la disolucion de 1838), los capitulos pasados se saltan.
+# -------------------------------------------------------------------------
+ca_cos_chapter_scheduler_effect = {
+	# Capitulo B: La cuestion de Bocas del Toro (feb - jun 1836)
+	if = {
+		limit = {
+			game_date >= 1836.2.1
+			game_date <= 1836.6.1
+			NOT = { has_variable = ca_cos_cap_b_iniciado }
+		}
+		set_variable = ca_cos_cap_b_iniciado
+		add_journal_entry = { type = je_ca_cos_bocas_del_toro }
+	}
+
+	# Capitulo A: La Pacificacion del Norte (jun - sep 1836)
+	if = {
+		limit = {
+			game_date >= 1836.6.1
+			game_date <= 1836.9.1
+			NOT = { has_variable = ca_cos_cap_a_iniciado }
+			NOT = { ca_cos_capitulo_con_barra_activo_trigger = yes }
+		}
+		set_variable = ca_cos_cap_a_iniciado
+		add_journal_entry = { type = je_ca_pacificacion_norte }
+	}
+
+	# Capitulo C: Las urnas y el cuartel (ene 1837 - mar 1838)
+	if = {
+		limit = {
+			game_date >= 1837.1.1
+			game_date <= 1838.3.1
+			NOT = { has_variable = ca_cos_cap_c_iniciado }
+			NOT = { ca_cos_capitulo_con_barra_activo_trigger = yes }
+		}
+		set_variable = ca_cos_cap_c_iniciado
+		add_journal_entry = { type = je_ca_cos_urnas_y_cuartel }
+	}
+
+	# Capitulo D: El regreso del Aguila (1840 - 1841), solo en la ruta separatista
+	if = {
+		limit = {
+			game_date >= 1840.1.1
+			game_date <= 1841.12.31
+			has_variable = ca_cos_ruta_separatista
+			NOT = { has_variable = ca_cos_cap_d_iniciado }
+			NOT = { ca_cos_capitulo_con_barra_activo_trigger = yes }
+		}
+		set_variable = ca_cos_cap_d_iniciado
+		add_journal_entry = { type = je_ca_cos_regreso_aguila }
+	}
+}
+
+# -------------------------------------------------------------------------
+# Balcanizacion: "La Liga renace"
+# Se separan Cartago (PC8), Heredia (PC5), Alajuela (PC6) y Guanacaste (PC2).
+# Limon y Osa quedan con San Jose.
+#
+# !!! RELLENAR: cambia cada xRELLENAR_... por el ID hexadecimal de la
+# provincia capital de esa ciudad (map_data/state_regions, STATE_COSTA_RICA).
+# Mientras no se rellenen, el juego dara error al cargar este archivo.
+# -------------------------------------------------------------------------
+ca_cos_balkanize_effect = {
+	ca_cos_release_city_effect = { TAG = PC8 PROV = xRELLENAR_CARTAGO }
+	ca_cos_release_city_effect = { TAG = PC5 PROV = xRELLENAR_HEREDIA }
+	ca_cos_release_city_effect = { TAG = PC6 PROV = xRELLENAR_ALAJUELA }
+	# Guanacaste solo si no se perdio ya en la Pacificacion del Norte
+	if = {
+		limit = { NOT = { has_variable = ca_cos_guanacaste_perdido } }
+		ca_cos_release_city_effect = { TAG = PC2 PROV = xRELLENAR_GUANACASTE }
+	}
+	set_variable = ca_cos_balcanizada
+}
+
+# Libera una ciudad de la Liga a partir de una provincia de Costa Rica.
+# Mismo patron que ca_create_losaltoswithoutsoconusco_effect del mod.
+ca_cos_release_city_effect = {
+	if = {
+		limit = {
+			NOT = { exists = c:$TAG$ }
+		}
+		create_country = {
+			tag = $TAG$
+			origin = ROOT
+			province = p:$PROV$
+			on_created = {
+				set_variable = ca_cos_ciudad_liga
+			}
+		}
+		change_relations = {
+			country = c:$TAG$
+			value = -50
+		}
+	}
+}
+
+# -------------------------------------------------------------------------
+# Reunificacion por pacto: absorbe las ciudades que queden
+# -------------------------------------------------------------------------
+ca_cos_annex_liga_effect = {
+	if = { limit = { exists = c:PC8 } annex = c:PC8 }
+	if = { limit = { exists = c:PC5 } annex = c:PC5 }
+	if = { limit = { exists = c:PC6 } annex = c:PC6 }
+	if = {
+		limit = {
+			exists = c:PC2
+			c:PC2 = { has_variable = ca_cos_ciudad_liga }
+		}
+		annex = c:PC2
+	}
+}
+
+# -------------------------------------------------------------------------
+# Cierre del diario madre (exito o fracaso): apaga los capitulos
+# -------------------------------------------------------------------------
+ca_cos_close_mother_effect = {
+	remove_variable = ca_cos_madre_activa
+	remove_variable = ca_crisis_guanacaste_active
+}

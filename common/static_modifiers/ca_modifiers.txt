@@ -1,0 +1,1174 @@
+﻿# ============================================================================
+# CAFM - Static modifiers (common/static_modifiers/ca_modifiers.txt)
+# Revisado contra la lista de modifier types de Victoria 3 1.13
+#
+# Convención de comentarios:
+#   # CAFM-FIX:  se cambió algo porque estaba roto o no tenía efecto
+#   # CAFM-NEW:  modificador que estaba vacío (solo icono) y ahora tiene efectos
+#   # CAFM-FLOW: la clave es válida pero NO llega a su destino desde el scope
+#                donde se aplica (ver informe). No se cambió, hay que decidir.
+#   # CAFM-BAL:  valor válido pero extremo; revisar si es intencional
+#
+# Recordatorio de flujo (wiki "Modifier types > Modifier type flow"):
+#   país    -> estado, edificio, grupo de interés, movimiento, formación, unidad
+#   estado  -> edificio, batalla, unidad (solo combate)
+#   estado  -X-> país / grupo de interés / movimiento   (NO sube)
+# ============================================================================
+
+age_of_ca_caudillos_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_armed_forces_pop_attraction_mult = 0.3
+	interest_group_ig_armed_forces_pol_str_mult = 0.6
+	country_officers_pol_str_mult = 0.6
+}
+
+# CAFM-BAL Debug: los tres siguientes son valores de depuración (5000 de autoridad,
+# 10000 de innovación). ca_add_power y ca_add_innovation se usan en decisiones
+# reales (Warcivil.txt, Plan_of_Veragua5 y 13): el jugador los recibe en partida.
+ca_add_power = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_bureaucracy_add = 5000
+	country_influence_add = 5000
+	country_authority_add = 5000
+}
+
+ca_add_tech_spread = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_tech_spread_add = 5000
+}
+
+ca_add_innovation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_weekly_innovation_add = 10000
+	country_weekly_innovation_max_add = 10000
+}
+
+# CAFM-BAL: state_pop_qualifications_mult = 5 es +500 %, ship_construction_efficiency_add = 10
+# es +1000 %, state_construction_mult = 1 es +100 %. Hoy solo se usa comentado.
+ca_el_gran_avanse_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_minting_add = 20000.0
+	country_construction_add = 200
+	country_ship_construction_add = 1000
+	country_ship_construction_progress_max_add = 100
+	country_ship_construction_efficiency_add = 10
+	state_migration_pull_mult = 0.5
+	state_education_access_add = 0.25
+	state_pop_qualifications_mult = 5
+	state_construction_mult = 1
+}
+
+# CAFM-BAL: se usa en Plan_of_Veragua6. Aún tiene qualifications +500 % y construcción +100 %.
+ca_small_el_gran_avanse_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_minting_add = 5000.0
+	country_construction_add = 25
+	country_ship_construction_add = 20
+	country_ship_construction_progress_max_add = 1
+	country_ship_construction_efficiency_add = 0.25
+	state_migration_pull_mult = 0.5
+	state_education_access_add = 0.25
+	state_pop_qualifications_mult = 5
+	state_construction_mult = 1
+}
+
+ca_private_gold_reserve_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_minting_add = 50000.0
+	country_gold_reserve_limit_mult = 2
+}
+
+# Se aplica a UCA en history/countries/zzz_ca_uca.txt (permanente, sin duración).
+# Las tres claves state_pop_support_movement_* apuntan a movimientos VANILLA
+# (movement_liberal / movement_radical / movement_modernizer). Si alguno no existe
+# en 1.13, error.log dirá "modifier type definition does not exist".
+ca_federal_paralysis = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_negative.dds"
+	country_cannot_start_law_enactment_bool = yes
+	country_cannot_cancel_law_enactment_bool = yes
+	country_disallow_agitator_invites_bool = yes
+	country_authority_add = -250
+	state_pop_support_movement_liberal_mult = -0.90
+	state_pop_support_movement_radical_mult = -0.90
+	state_pop_support_movement_modernizer_mult = -0.90
+	country_legitimacy_govt_size_add = -1
+	political_movement_radicalism_add = 0.30
+}
+
+ca_funding_separatists_modifier = {
+	icon = "gfx/interface/icons/modifier_icons/modifier_taxes_down.dds"
+	country_authority_add = -50
+	state_tax_capacity_mult = -0.10 # Desvías impuestos para comprar armas
+}
+
+ca_funding_federalists_modifier = {
+	icon = "gfx/interface/icons/modifier_icons/modifier_bureaucracy_down.dds"
+	country_bureaucracy_add = -50 # Gastas tu burocracia ayudando a la capital
+}
+
+ca_modifier_pop_attraction_low = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	political_movement_pop_attraction_mult = 0.25
+}
+ca_modifier_pop_attraction_mid = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	political_movement_pop_attraction_mult = 0.50
+}
+ca_modifier_pop_attraction_high = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	political_movement_pop_attraction_mult = 0.75
+}
+ca_modifier_total = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_negative.dds
+	political_movement_radicalism_add = 0.90
+}
+ca_modifier_total_debug = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_negative.dds
+	political_movement_radicalism_add = -2
+	political_movement_pop_attraction_mult = -2
+}
+ca_modifier_radicalism_low = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	political_movement_radicalism_add = 0.15
+}
+ca_modifier_radicalism_mid = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	political_movement_radicalism_add = 0.30
+}
+ca_modifier_radicalism_high = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	political_movement_radicalism_add = 0.60
+}
+
+ca_british_debt_crisis = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_disable_investment_pool_bool = yes
+	country_prestige_add = -5
+	state_tax_waste_add = 0.25
+	country_gold_reserve_limit_mult = -0.25
+}
+
+# CAFM-FIX: icono sin prefijo "modifier_" (timed_modifier_icons/bureaucracy_negative.dds)
+ca_military_disarray = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	character_command_limit_mult = -0.25              # país -> formación -> general: sí llega
+	military_formation_organization_gain_mult = -0.25
+}
+
+ca_separatist_agitation_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_unrest_negative.dds
+	state_turmoil_effects_mult = 0.20
+	state_radicals_and_loyalists_from_sol_change_mult = 0.15
+}
+
+ca_mountain_vein_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gold_positive.dds
+	building_gold_mine_throughput_add = 0.30
+	building_group_bg_extraction_construction_efficiency_add = 0.20
+}
+
+# CAFM-FIX: no tenía icono
+ca_radical_agitation_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_radicals_from_political_movements_mult = 0.25
+}
+
+# --- Aprobación de grupos de interés (aplicar SIEMPRE dentro de ig:ig_xxx = { }) ---
+ca_ig_approval_up = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_generic_positive.dds
+	interest_group_approval_add = 2
+}
+ca_ig_approval_down = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_generic_negative.dds
+	interest_group_approval_add = -2
+}
+ca_ig_approval_states_rights = {
+	icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_up.dds"
+	interest_group_approval_add = 3
+}
+ca_ig_disapproval_federal_betrayal = {
+	icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_down.dds"
+	interest_group_approval_add = -3
+}
+ca_ig_approval_strong_republic = {
+	icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_up.dds"
+	interest_group_approval_add = 4
+}
+ca_ig_disapproval_centralist_tyranny = {
+	icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_down.dds"
+	interest_group_approval_add = -4
+}
+
+# CAFM-FLOW: se aplica a scope:guatemala_state (evento .1). country_weekly_innovation_add
+# no sube de estado a país: no hace nada. Educación -50 % es muy fuerte.
+ca_newspaper_censored_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	state_education_access_add = -0.5
+	country_weekly_innovation_add = -5
+}
+
+ca_humiliated_federation_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_prestige_negative.dds
+	country_prestige_add = -20
+	country_influence_add = -50
+}
+
+ca_reasserted_sovereignty_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_prestige_positive.dds
+	country_prestige_add = 15
+	country_authority_add = 100
+}
+
+# CAFM-FIX: se aplica a un ESTADO (scope:bocas_state). country_bureaucracy_add no subía al
+# país; se reemplaza por el costo burocrático del propio estado (+10 %).
+ca_direct_administration_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_tax_capacity_add = 20
+	state_bureaucracy_population_base_cost_factor_mult = 0.10
+}
+
+# CAFM-FIX: tenía building_throughput_add repetido dos veces (0.15 + 0.10 = +25 % a TODO).
+# Según el comentario del evento .7 la idea era +10 % de madera.
+ca_british_outpost_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_wood_positive.dds
+	building_group_bg_logging_throughput_add = 0.10
+}
+
+# CAFM-FIX: country_expenses_add es una cantidad PLANA de dinero por semana
+# (tu deuda inglesa usa 100-500). 0.05 / 0.10 / 0.20 equivalían a cero.
+ca_funding_low_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds
+	country_expenses_add = 100
+}
+ca_funding_med_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds
+	country_expenses_add = 250
+}
+ca_funding_high_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds
+	country_expenses_add = 500
+}
+
+# CAFM-FIX: country_minting_add = 0.10 es plano (0.1 libras). Era +10 % -> _mult.
+ca_recovered_funds_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_positive.dds
+	country_minting_mult = 0.10
+}
+
+ca_failed_expedition_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	state_construction_mult = -0.25
+}
+
+ca_infrastructure_boom_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_road_positive.dds
+	state_infrastructure_add = 10
+	state_construction_mult = 0.15
+}
+
+ca_deep_vein_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gold_positive.dds
+	building_gold_mine_throughput_add = 0.20
+}
+
+ca_gold_rush_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gold_positive.dds
+	state_migration_pull_add = 25
+	state_turmoil_effects_mult = 0.10
+}
+
+# CAFM-FIX: state_<pop>_investment_pool_contribution_add es porcentaje: 10 = +1000 %.
+ca_foreign_monopoly_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_diplomacy_negative.dds
+	building_gold_mine_throughput_add = 0.10
+	state_capitalists_investment_pool_contribution_add = 0.10
+	state_aristocrats_investment_pool_contribution_add = 0.10
+}
+
+ca_anti_corruption_campaign_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_scales_positive.dds
+	country_bureaucracy_mult = 0.10
+}
+
+ca_state_corruption_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_scales_negative.dds
+	country_bureaucracy_mult = -0.15
+}
+
+ca_jungle_fever_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	state_mortality_mult = 0.25
+}
+
+ca_archaeological_find_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_prestige_positive.dds
+	country_prestige_add = 10
+}
+
+ca_geological_innovation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_weekly_innovation_add = 25
+}
+
+ca_abundant_coal_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coal_positive.dds
+	building_coal_mine_throughput_add = 0.20
+}
+
+ca_private_mining_rights = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_positive.dds
+	building_gold_mine_throughput_add = 0.05
+	interest_group_ig_industrialists_approval_add = 2
+}
+
+# CAFM-FIX: igual que ca_recovered_funds (plano 0.05 -> +5 %)
+ca_state_mining_rights = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_minting_mult = 0.05
+	interest_group_ig_industrialists_approval_add = -2
+}
+
+# ============================================================================
+# === GRUPOS DE INTERÉS E INTRIGA  (antes vacíos) ===
+# ============================================================================
+
+# CAFM-NEW: ig:ig_landowners (evento .119). OJO: en el mismo bloque también recibe
+# ca_ig_disapproval_centralist_tyranny (-4). Neto = -2. Si no es intencional, quita uno.
+ca_state_rights_approval = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_approval_add = 2
+}
+
+# CAFM-NEW: ig:ig_intelligentsia (evento .119). Hace lo mismo que
+# ca_ig_disapproval_federal_betrayal (-3, evento .79): considera unificarlos.
+ca_federal_betrayal_disapproval = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	interest_group_approval_add = -3
+}
+
+# CAFM-NEW: ig:ig_landowners, evento .89.a (la intriga triunfa)
+ig_political_intrigue_success = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_pol_str_mult = 0.15
+	interest_group_approval_add = 2
+}
+
+# CAFM-NEW: ig:ig_landowners, evento .89.b (purga del gabinete)
+ig_purged_cabinet = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	interest_group_pol_str_mult = -0.20
+	interest_group_approval_add = -3
+}
+
+# ============================================================================
+# === GOBERNANTES Y CAUDILLOS ===
+# ============================================================================
+
+# CAFM-NEW: ruler = { } (scope personaje), eventos .79 y .119
+ca_unpopular_ruler_modifier = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	character_popularity_add = -25
+}
+
+# CAFM-NEW: ruler = { } (scope personaje), eventos .79 y .119
+ca_popular_ruler_modifier = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	character_popularity_add = 25
+}
+
+# CAFM-NEW: scope:caudillo_state (ESTADO), evento .88. El caudillo local manda:
+# se pierde recaudación y administrarlo cuesta más. Icono cambiado a negativo
+# porque para el dueño del estado es una penalización.
+ca_autonomous_caudillo_modifier = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_tax_waste_add = 0.10
+	state_bureaucracy_population_base_cost_factor_mult = 0.15
+	state_radicals_from_political_movements_mult = 0.10
+}
+
+# ============================================================================
+# === SEPARATISMO ===
+# ============================================================================
+
+# CAFM-NEW: se aplica al PAÍS en immediate_all_involved de
+# je_ca_federalists_vs_separatists_situation. Por eso usa claves state_ (bajan a todos
+# sus estados). Nombre sin prefijo ca_: riesgo de choque con otros mods.
+state_separatist_unrest = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_turmoil_effects_mult = 0.10
+	state_radicals_from_political_movements_mult = 0.10
+	state_pop_support_movement_ca_federalist_add = -5
+}
+
+# ============================================================================
+# === ECONOMÍA E INFRAESTRUCTURA ===
+# ============================================================================
+
+# CAFM-NEW: scope:boom_state (ESTADO), evento .91.a
+ca_coffee_export_boom = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	building_coffee_plantation_throughput_add = 0.20
+	state_migration_pull_mult = 0.10
+}
+
+# CAFM-NEW: PAÍS, evento .91.b ("usamos un modificador de impuestos")
+ca_heavy_coffee_tax_national = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	building_group_bg_plantations_tax_mult = 0.25
+	interest_group_ig_landowners_approval_add = -2
+}
+
+# CAFM-NEW: scope:boom_state (ESTADO), evento .91.b
+ca_heavy_coffee_tax_state = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	building_coffee_plantation_throughput_add = -0.10
+	building_group_bg_plantations_standard_of_living_add = -1
+}
+
+# CAFM-NEW: PAÍS, evento .92.a (en default)
+ca_austerity_measures = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_government_wages_mult = -0.20
+	country_military_wages_mult = -0.15
+	state_standard_of_living_add = -1
+	interest_group_ig_armed_forces_approval_add = -2
+}
+
+# CAFM-NEW: PAÍS, evento .92.b (bancarrota declarada, 120 meses)
+ca_economic_chaos_prestige_loss = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_mult = -0.20
+	country_loan_interest_rate_mult = 0.25
+}
+
+# CAFM-NEW: PAÍS, evento .96.a ("añade fondos vía modificador", 12 meses)
+ca_foreign_capital_injection = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_tax_income_add = 500
+	state_capitalists_investment_pool_contribution_add = 0.05
+}
+
+# ============================================================================
+# === DIPLOMACIA Y SOBERANÍA ===
+# ============================================================================
+
+# CAFM-NEW: PAÍS, evento .96.b (rechazar a la Gran Potencia)
+ca_defiance_prestige = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_prestige_add = 15
+	country_authority_add = 25
+}
+
+# ============================================================================
+# === MILITAR Y ORDEN ===
+# ============================================================================
+
+# CAFM-NEW: ig:ig_armed_forces, evento .95.b (represión militar, "sube el poder del ejército")
+ca_military_law_imposed = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_pol_str_mult = 0.20
+	interest_group_approval_add = 2
+}
+
+# CAFM-NEW: PAÍS, evento .97.a ("gasto logístico temporal", 12 meses)
+ca_military_deployment_cost = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_military_goods_cost_mult = 0.15
+	country_expenses_add = 150
+}
+
+# CAFM-NEW: ig:ig_armed_forces, evento .97.a (la aprobación +3 ya la da add_approval)
+ca_border_mobilization = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_pol_str_mult = 0.10
+}
+
+# CAFM-NEW: PAÍS, evento .98.a ("burocracia cuesta mediante modificador")
+ca_federal_army_centralized = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_bureaucracy_add = -50
+	military_formation_organization_gain_mult = 0.15
+	character_command_limit_mult = 0.10
+}
+
+# ============================================================================
+# === ENFERMEDADES Y SOCIEDAD ===
+# ============================================================================
+
+# CAFM-NEW: scope:earthquake_state (ESTADO), evento .93.a
+ca_federal_reconstruction = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_construction_mult = 0.25
+	state_infrastructure_add = 5
+	state_pop_support_movement_ca_federalist_add = 10
+}
+
+# CAFM-NEW: scope:earthquake_state (ESTADO), evento .93.b
+ca_abandoned_by_federal_gov = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_tax_collection_mult = -0.15
+	state_radicals_from_political_movements_mult = 0.20
+	state_pop_support_movement_ca_federalist_add = -15
+}
+
+# CAFM-NEW: PAÍS, evento .94.a (educación laica)
+ca_secular_literacy_campaign = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_education_access_add = 0.05
+	country_weekly_innovation_add = 10
+	interest_group_ig_devout_approval_add = -1
+}
+
+# CAFM-NEW: PAÍS, evento .94.b (educación religiosa)
+ca_religious_education_drive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_education_access_add = 0.03
+	state_conversion_mult = 0.10
+	interest_group_ig_devout_pol_str_mult = 0.10
+}
+
+# --- Modificadores de Estado (Map Impact - Event 79) ---
+ca_separatist_unrest = {
+	icon = "gfx/interface/icons/modifier_icons/modifier_devastation.dds"
+	state_turmoil_effects_mult = 0.25 # Añade 25% de agitación directa al estado
+	state_tax_capacity_mult = -0.20 # Reduce la recaudación por la rebeldía
+}
+
+# Recompensa Económica: Auge Exportador
+ca_agro_export_miracle_modifier = {
+	icon = "gfx/interface/icons/goods_icons/coffee.dds"
+	building_group_bg_agriculture_throughput_add = 0.15
+	building_port_throughput_add = 0.20
+	country_prestige_add = 10
+}
+
+# Recompensa Militar: Ejército Profesional
+# CAFM-FIX: unit_defense_add es PLANO (+0.1 de defensa = nada). La intención era +10 %.
+ca_professional_army_bonus_modifier = {
+	icon = "gfx/interface/icons/law_icons/professional_army.dds"
+	unit_army_offense_mult = 0.10
+	unit_defense_mult = 0.10
+	unit_morale_recovery_mult = 0.15
+	political_movement_radicalism_add = -0.10
+}
+
+# Recompensa Cultural: Era de la Ilustración
+ca_enlightenment_era_modifier = {
+	icon = "gfx/interface/icons/jomini/literacy_icon.dds"
+	state_education_access_add = 0.10
+	state_assimilation_mult = 0.25
+	country_tech_spread_mult = 0.15
+	state_migration_pull_mult = 0.10
+}
+
+coffee_oligarchy_boom_modifier = {
+	icon = "gfx/interface/icons/goods_icons/coffee.dds"
+	building_coffee_plantation_throughput_add = 0.25
+	country_prestige_add = 20
+	interest_group_ig_landowners_pol_str_mult = 0.25
+	state_migration_pull_mult = 0.10
+}
+
+uca_new_penal_code = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_intelligentsia_approval_add = 3
+	interest_group_ig_landowners_approval_add = -8
+	state_radicals_from_political_movements_mult = 0.2
+	country_authority_add = 100
+	country_prestige_mult = 0.05
+}
+
+# CAFM-FIX: icono positivo en una epidemia
+uca_cholera = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	state_mortality_mult = 0.2
+}
+
+uca_quarantine = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	building_throughput_add = -0.5
+	state_mortality_mult = -0.15
+}
+
+uca_morazan_presidency = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_authority_add = 100
+	country_legitimacy_base_add = 10
+	interest_group_ig_intelligentsia_approval_add = 2
+}
+
+#ca_allow_multiple_alliances = {
+#	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+#	country_allow_multiple_alliances_bool = yes   # clave válida en 1.13
+#}
+
+# ============================================================================
+# === POST-UCA: identidad política regional (antes vacíos) ===
+# Se aplican con ca_setup_post_uca_political_movements_effect a s:STATE_X.region_state:UCA
+# (ESTADOS). Son la versión "después de la Federación" de los ca_uca_*: el eje
+# federal pierde peso y gana el eje liberal/conservador local, con menos radicalismo.
+# CAFM-FIX (icono): "timed_modifier_icons/Blanked/anarchy.dds" no existe en el mod
+# ni en vanilla -> se usa modifier_flag_*.
+# ============================================================================
+
+# CAFM-NEW: San Salvador
+ca_liberal_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	# El Salvador es el motor del liberalismo y el federalismo morazanista
+	state_pop_support_movement_ca_liberal_add = 25
+	state_pop_support_movement_ca_federalist_add = 10
+	state_pop_support_movement_ca_unitarian_add = -30
+	state_radicals_from_political_movements_mult = 0.10
+}
+
+# CAFM-NEW: Guatemala
+ca_conservative_capital = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	# Núcleo del poder unitario y de los "Serviles" (reaccionarios)
+	state_pop_support_movement_ca_reactionary_add = 25
+	state_pop_support_movement_ca_unitarian_add = 15
+	state_pop_support_movement_ca_liberal_add = -15
+	state_pop_support_movement_ca_federalist_add = -20
+	state_loyalists_from_political_movements_mult = 0.20
+}
+
+# CAFM-NEW: Nicaragua
+ca_leones_vs_granadinos = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	# Rivalidad León (liberal) vs Granada (conservadora): tras la Federación el
+	# conflicto deja de ser federal y se vuelve puramente liberal-conservador.
+	state_pop_support_movement_ca_liberal_add = 20
+	state_pop_support_movement_ca_reactionary_add = 20
+	state_pop_support_movement_ca_federalist_add = 5
+	state_radicals_from_political_movements_mult = 0.30
+	state_loyalists_from_political_movements_mult = -0.20
+}
+
+# CAFM-NEW: Costa Rica
+ca_isolated_autonomists = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	# Pragmática, orden interno, autonomía
+	state_pop_support_movement_ca_liberal_add = 10
+	state_pop_support_movement_ca_reactionary_add = 10
+	state_pop_support_movement_ca_federalist_add = -10
+	state_radicals_from_political_movements_mult = -0.25
+	state_loyalists_from_political_movements_mult = 0.30
+}
+
+# CAFM-NEW: Honduras
+ca_federalist_heartland = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	# Nostalgia federal fuerte, pero inestable por caudillos locales
+	state_pop_support_movement_ca_federalist_add = 20
+	state_pop_support_movement_ca_liberal_add = 10
+	state_radicals_from_political_movements_mult = 0.15
+}
+
+# CAFM-NEW: Panamá
+ca_isthmian_liberalism = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	# Tendencias separatistas de la Gran Colombia y liberalismo comercial
+	state_pop_support_movement_ca_liberal_add = 20
+	state_pop_support_movement_ca_unitarian_add = -30
+	state_radicals_from_political_movements_mult = 0.05
+}
+
+# CAFM-NEW: Chiapas
+ca_frontier_tensions = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	# Disputa entre el centralismo mexicano y las raíces centroamericanas
+	state_pop_support_movement_ca_reactionary_add = 15
+	state_pop_support_movement_ca_unitarian_add = 15
+	state_pop_support_movement_ca_federalist_add = 10
+	state_radicals_from_political_movements_mult = 0.20
+	state_loyalists_from_political_movements_mult = -0.15
+}
+
+# ============================================================================
+# === UCA: identidad política regional (aplicados a estados) ===
+# ============================================================================
+
+ca_uca_liberal_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	# El Salvador es el motor del liberalismo y el federalismo morazanista
+	state_pop_support_movement_ca_liberal_add = 25
+	state_pop_support_movement_ca_federalist_add = 20
+	state_pop_support_movement_ca_unitarian_add = -50
+	state_radicals_from_political_movements_mult = 0.15
+	state_loyalists_from_political_movements_mult = -0.10
+}
+
+ca_uca_conservative_capital = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	# Núcleo del poder unitario y de los "Serviles" (reaccionarios)
+	state_pop_support_movement_ca_reactionary_add = 30
+	state_pop_support_movement_ca_unitarian_add = 25
+	state_pop_support_movement_ca_liberal_add = -20
+	state_pop_support_movement_ca_federalist_add = -30
+	state_loyalists_from_political_movements_mult = 0.20
+}
+
+ca_uca_leones_vs_granadinos = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	# Rivalidad extrema entre León (Liberal/Federal) y Granada (Conservadora/Unitaria)
+	state_pop_support_movement_ca_liberal_add = 20
+	state_pop_support_movement_ca_unitarian_add = 20
+	state_pop_support_movement_ca_federalist_add = 15
+	state_pop_support_movement_ca_reactionary_add = 10
+	# Nicaragua era el estado con mayor guerra civil interna
+	state_radicals_from_political_movements_mult = 0.40
+	state_loyalists_from_political_movements_mult = -0.30
+}
+
+ca_uca_isolated_autonomists = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	# Pragmática, orden interno y autonomía (federalismo suave)
+	state_pop_support_movement_ca_federalist_add = 15
+	state_pop_support_movement_ca_liberal_add = 10
+	state_pop_support_movement_ca_reactionary_add = 15
+	state_radicals_from_political_movements_mult = -0.25
+	state_loyalists_from_political_movements_mult = 0.30
+}
+
+# CAFM-FIX: radicals_mult = 10 era +1000 % de radicales (typo de 0.10).
+# CAFM-BAL: unitarian +25 en el "corazón federalista" contradice el comentario;
+# si era para reflejar a los caudillos unitarios hondureños, déjalo.
+ca_uca_federalist_heartland = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	# Apoyo sólido al modelo federal pero con inestabilidad por caudillos locales
+	state_pop_support_movement_ca_federalist_add = 20
+	state_pop_support_movement_ca_liberal_add = 15
+	state_pop_support_movement_ca_unitarian_add = 25
+	state_radicals_from_political_movements_mult = 0.10
+}
+
+ca_uca_isthmian_liberalism = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	# Tendencias separatistas de la Gran Colombia y liberalismo comercial
+	state_pop_support_movement_ca_liberal_add = 15
+	state_pop_support_movement_ca_federalist_add = 20
+	state_pop_support_movement_ca_unitarian_add = -40
+	state_radicals_from_political_movements_mult = 0.05
+}
+
+ca_uca_frontier_tensions = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	# Disputa entre el centralismo mexicano y las raíces centroamericanas
+	state_pop_support_movement_ca_reactionary_add = 15
+	state_pop_support_movement_ca_unitarian_add = 10
+	state_pop_support_movement_ca_federalist_add = 20
+	state_radicals_from_political_movements_mult = 0.20
+	state_loyalists_from_political_movements_mult = -0.15
+}
+
+# CAFM-FIX: turmoil_effects_mult = 5 era +500 %. Icono con ruta inexistente.
+# Nota: nadie lo aplica; solo se comprueba con has_modifier en 00_ca_political_lobbies.txt.
+ca_regional_resentment_modifier = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	political_movement_radicalism_add = 0.1
+	state_turmoil_effects_mult = 0.5
+}
+
+# ============================================================================
+# === STRONGHOLDS ===
+# CAFM-FLOW: ca_setup_ideological_strongholds_effect los aplica dentro de
+# every_scope_state (a ESTADOS). Desde un estado solo funcionan las claves state_,
+# building_ y unit_. Las claves country_ e interest_group_ de estos bloques NO hacen
+# nada ahí. unitary_stronghold es la excepción: los eventos .79 y .119 también lo
+# aplican al país, y ahí sí funciona completo. Ver informe para la solución.
+# ============================================================================
+
+# CAFM-FIX: las claves state_ca_*_max_level_add son script_only: no hacen nada salvo
+# que algo las lea. Solo state_ca_gold_field_max_level_add se lee (en ca_building.txt).
+# El resto se cambia a la clave vanilla state_<edificio>_max_level_add.
+all_stronghold = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_building_ca_iron_mine_max_level_add = 5
+	state_building_ca_coal_mine_max_level_add = 5
+	state_building_ca_lead_mine_max_level_add = 5
+	state_building_ca_sulfur_mine_max_level_add = 5
+	state_building_ca_gold_mine_max_level_add = 5
+	state_building_ca_oil_rig_max_level_add = 5
+	state_ca_gold_field_max_level_add = 5
+}
+
+# --- FEDERALISTAS ---
+federal_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	country_legitimacy_govt_size_add = 10                   # CAFM-FLOW
+	interest_group_ig_intelligentsia_pol_str_mult = 0.10    # CAFM-FLOW
+	state_pop_support_movement_ca_federalist_add = 25
+}
+
+federal_stronghold_small_nation = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	country_legitimacy_govt_size_add = 5                    # CAFM-FLOW
+	state_bureaucracy_population_base_cost_factor_mult = -0.05
+	state_pop_support_movement_ca_federalist_add = 10
+}
+
+waning_federal_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
+	country_legitimacy_govt_size_add = -5                   # CAFM-FLOW
+	state_radicals_and_loyalists_from_sol_change_mult = 0.10
+	state_pop_support_movement_ca_federalist_add = -10
+}
+
+# --- UNITARIOS ---
+unitary_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds"
+	country_authority_add = 25                              # CAFM-FLOW (solo en estados)
+	state_radicals_and_loyalists_from_sol_change_mult = 0.05
+	state_pop_support_movement_ca_unitarian_add = 25
+}
+
+unitary_stronghold_small_nation = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds"
+	country_authority_add = 10                              # CAFM-FLOW
+	state_decree_cost_mult = -0.10
+	state_pop_support_movement_ca_unitarian_add = 10
+}
+
+# CAFM-FIX: state_political_movement_ca_unitarian_radicalism_add es script_only y nada
+# lo lee: no hacía nada. Se sustituye por más radicales desde movimientos en el estado.
+waning_unitary_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_negative.dds"
+	# Caos por falta de autoridad
+	country_authority_add = -20                             # CAFM-FLOW
+	state_radicals_and_loyalists_from_sol_change_mult = 0.15
+	state_pop_support_movement_ca_unitarian_add = -10
+	state_radicals_from_political_movements_mult = 0.20
+}
+
+# --- SEPARATISTAS ---
+separatism_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_bureaucracy_population_base_cost_factor_mult = 0.25
+	state_tax_waste_add = 0.15
+	# state_defense_mult y state_radicals_from_discrimination_add NO existen en 1.13
+	# (el segundo se eliminó en 1.8). Déjalos borrados.
+}
+
+separatism_stronghold_small_nation = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_defense_mult = 0.10          # desde estado: solo en batallas dentro de ese estado
+	state_migration_pull_mult = 0.1
+}
+
+suppressed_separatism_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_radicals_and_loyalists_from_sol_change_mult = 0.05
+}
+
+# --- REACCIONARIOS ---
+reactionary_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_neutral.dds"
+	state_pop_support_movement_ca_reactionary_add = 30
+	interest_group_ig_petty_bourgeoisie_pop_attraction_mult = 0.25   # CAFM-FLOW
+	interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.20          # CAFM-FLOW
+}
+
+reactionary_stronghold_small_nation = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_speech_positive.dds"
+	state_pop_support_movement_ca_reactionary_add = 30
+	interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.15          # CAFM-FLOW
+}
+
+fading_reactionary_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_speech_negative.dds"
+	# La gente abandona las ideas reaccionarias
+	state_pop_support_movement_ca_reactionary_add = -30
+	interest_group_ig_petty_bourgeoisie_pop_attraction_mult = -0.25  # CAFM-FLOW
+}
+
+# --- CONSERVADORES ---
+# CAFM-FLOW: estos tres SOLO tienen claves interest_group_. Aplicados a estados
+# (como hace hoy el efecto) no producen ningún efecto.
+conservative_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	interest_group_ig_landowners_pop_attraction_mult = 0.20
+	interest_group_ig_landowners_pol_str_mult = 0.25
+}
+
+age_of_conservative_stronghold = { # La "Era" conservadora (efecto mayor)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	interest_group_ig_landowners_pop_attraction_mult = 0.35
+	interest_group_ig_landowners_pol_str_mult = 0.40
+	interest_group_ig_devout_pol_str_mult = 0.10
+}
+
+conservative_stronghold_small_nation = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	interest_group_ig_landowners_pop_attraction_mult = 0.10
+	interest_group_ig_landowners_pol_str_mult = 0.15
+}
+
+# --- LIBERALES ---
+liberal_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_tech_positive.dds"
+	state_pop_support_movement_ca_liberal_add = 30
+	interest_group_ig_intelligentsia_pop_attraction_mult = 0.25      # CAFM-FLOW
+	interest_group_ig_intelligentsia_pol_str_mult = 0.20             # CAFM-FLOW
+}
+
+age_of_liberal_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_tech_positive.dds"
+	state_pop_support_movement_ca_liberal_add = 50
+	interest_group_ig_intelligentsia_pop_attraction_mult = 0.40      # CAFM-FLOW
+	interest_group_ig_intelligentsia_pol_str_mult = 0.30             # CAFM-FLOW
+	country_mass_migration_attraction_mult = 0.10                    # CAFM-FLOW
+}
+
+liberal_stronghold_small_nation = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_neutral.dds"
+	state_pop_support_movement_ca_liberal_add = 10
+	interest_group_ig_intelligentsia_pop_attraction_mult = 0.15      # CAFM-FLOW
+	interest_group_ig_intelligentsia_pol_str_mult = 0.10             # CAFM-FLOW
+}
+
+# ============================================================================
+# === FALTANTES: se usan en código activo pero no estaban definidos en ningún
+# === static_modifiers. Sin definición el juego los ignora y ensucia error.log.
+# ============================================================================
+
+# CAFM-NEW: c:NIC / c:COS / etc. (PAÍS), eventos .28 a .33 (intervención federal, 12 meses)
+ca_federal_intervention_boost = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_authority_add = 50
+	state_loyalists_from_political_movements_mult = 0.15
+	state_pop_support_movement_ca_federalist_add = 10
+}
+
+# CAFM-NEW: ig:ig_landowners / ig:ig_devout, eventos .14 y .121
+ca_ig_approval_down_massive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	interest_group_approval_add = -5
+}
+
+# CAFM-NEW: ig:ig_xxx, eventos .102 a .114
+ca_ig_strength_boost_modifier = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_pol_str_mult = 0.20
+	interest_group_pop_attraction_mult = 0.1
+}
+
+# CAFM-NEW: PAÍS, ca_prospecting.28.a (espía arrestado, 24 meses)
+ca_arrested_spy_modifier = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_prestige_add = 5
+	country_authority_add = 25
+	country_legitimacy_base_add = -3
+}
+ca_federal_protection_modifier = { # evento 5.a (Soconusco bajo protección federal)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 5
+	country_authority_add = 25
+}
+
+ca_reforms_stalled = { # evento 14.b (Código Livingston abandonado)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -5
+}
+
+ca_epifania_tragica = { # Epifanía trágica en Costa Rica
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -10
+	state_radicals_from_political_movements_mult = 0.1
+}
+
+
+ca_censorship_panic_modifier = { # evento 101.b
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -5
+	state_radicals_from_political_movements_mult = 0.1
+}
+
+ca_fear_of_dissolution_modifier = { # evento 103
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -5
+	state_migration_pull_mult = -0.1
+}
+
+ca_nationalist_fervor_military_modifier = { # evento 105.b
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_offense_mult = 0.05
+	unit_morale_recovery_mult = 0.1
+}
+
+ca_el_cafe_federal_modifier = { # evento 106 (Costa Rica y el café)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds"
+	building_group_bg_agriculture_throughput_add = -0.05
+}
+
+ca_coffee_exports_seized_modifier = { # evento 104.b (reemplaza el trigger a ca_costa_rica_events.99)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds"
+	building_group_bg_agriculture_throughput_add = -0.1
+}
+
+ca_officer_discipline_bureaucracy_cost = { # evento 108.a
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_bureaucracy_add = -25
+}
+
+ca_loyalist_militia_morale_buff = { # eventos 108.a y 114
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_morale_recovery_mult = 0.15
+}
+
+ca_loyalist_militia_defense_buff = { # evento 117.a (Los Altos)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_defense_mult = 0.1
+}
+
+ca_triunfo_caudillismo_modifier = { # evento 109
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -10
+	country_authority_add = -25
+}
+
+ca_rural_pacification_cost_modifier = { # evento 110.b
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds"
+	country_expenses_add = 500
+}
+
+ca_total_intervention_economy_penalty = { # evento 111
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds"
+	state_construction_mult = -0.1
+	state_tax_collection_mult = -0.05
+}
+
+ca_ejercito_montana_modifier = { # evento 112 (Guatemala)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_defense_mult = 0.1
+	unit_offense_mult = 0.05
+}
+
+ca_capital_under_siege_defense_modifier = { # evento 113.a
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	unit_defense_mult = 0.15
+}
+
+ca_capital_tax_collapse_modifier = { # evento 113.a
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds"
+	state_tax_collection_mult = -0.15
+}
+
+ca_heroes_federacion_modifier = { # evento 115 (10 años)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	country_legitimacy_base_add = 10
+	country_prestige_add = 10
+}
+
+ca_refugee_bureaucracy_cost = { # evento 117.b
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_bureaucracy_add = -20
+}
+
+ca_authority_boost = { # evento 120.b
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_authority_add = 50
+}
+
+ca_fiscal_support_kept = { # evento 121.b
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_positive.dds"
+	state_tax_collection_mult = 0.05
+}
+
+ca_paralisis_federal = { # evento 121.c
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = -50
+	country_bureaucracy_add = -20
+}
+
+ca_federacion_humillada = { # evento 122.a
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_add = -15
+	country_legitimacy_base_add = -5
+}
+
+ca_federal_relief_bureaucracy_cost = { # evento 93.a (reemplaza add_bureaucracy = -50)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_bureaucracy_add = -50
+}
+
+ca_prestige_scandal_modifier = { # ca_prospecting 10.a y 29.b (reemplaza add_prestige)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_add = -10
+}
+
+
+ca_federal_propaganda_modifier = { # scripted_buttons/ca_flavor_buttons.txt
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 5
+}
+
+ca_federal_triumph_modifier = { # journal_entries/ca_central_america_journal.txt
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	country_legitimacy_base_add = 10
+	country_authority_add = 50
+}
+
+# ---------------- ESTADO ----------------
+
+ca_massive_agitation_modifier = { # evento 120.c
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_radicals_from_political_movements_mult = 0.25
+	state_turmoil_effects_mult = 0.1
+}
+
+ca_tierra_arrasada_modifier = { # evento 118.a (Chiapas y Guatemala)
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_construction_mult = -0.2
+	state_standard_of_living_add = -1
+}
+
+ca_volcanic_soil_modifier = { # ca_prospecting 11.a
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	building_group_bg_agriculture_throughput_add = 0.1
+}
+
+ca_reduced_turmoil_modifier = { # ca_prospecting 16.b y 26
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_turmoil_effects_mult = -0.2
+}
+
+ca_high_mortality_modifier = { # ca_prospecting 19 y 24.b
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_mortality_mult = 0.1
+}
+
+ca_high_pollution_modifier = { # ca_prospecting 20.a
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_pollution_generation_add = 10
+}
+
+ca_low_pollution_modifier = { # ca_prospecting 20.b
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_pollution_generation_add = -5
+}
+
+# ---------------- GRUPO DE INTERÉS ----------------
+
+ca_ig_approval_up_massive = { # evento 5.c
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_generic_positive.dds"
+	interest_group_approval_add = 5
+}
+
+ca_ig_betrayal_anger_modifier = { # evento 105.a
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_generic_negative.dds"
+	interest_group_approval_add = -3
+}
+
+######################Soon##########
+##Anarcho-Liberal_stronghold = { }
+##Removed_Anarcho-Liberal_stronghold = { }
+##Anarcho-Liberal_stronghold_Small_Nation = { }
+##Socialist_stronghold = { }
+##Removed_Socialist_stronghold = { }
+##Socialist_stronghold_Small_Nation = { }
+##Communist_stronghold = { }
+##Removed_Communist_stronghold = { }
+##Communist_stronghold_Small_Nation = { }
+##Fascist_stronghold = { }
+##Removed_Fascist_stronghold = { }
+##Fascist_stronghold_Small_Nation = { }

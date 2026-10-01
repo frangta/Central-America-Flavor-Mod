@@ -1,0 +1,618 @@
+﻿frca_support_bar = {
+	name = "my_frca_support_bar_name"
+	desc = "my_frca_support_bar_desc"
+	second_desc = "my_frca_support_bar_desc2"
+	double_sided_bad = yes
+    monthly_progress = {
+
+		if = {
+			limit = {
+				has_variable = gua_support_var
+				NOT = { exists = c:GUA }
+				NOT = { has_variable = je_gua_support_var }
+			}
+			add = {
+				desc = "gua_support_DESC1"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_variable = gua_support_var }
+					exists = c:GUA
+				}
+				has_variable = je_gua_support_var
+			}
+			add = {
+				desc = "gua_support_DESC2"
+				value = -1
+			}
+		}
+
+
+		if = {
+			limit = {
+				has_variable = els_support_var
+				NOT = { exists = c:ELS }
+				NOT = { has_variable = je_els_support_var }
+			}
+			add = {
+				desc = "els_support_var_DESC1"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_variable = els_support_var }
+					exists = c:ELS
+				}
+				has_variable = je_els_support_var
+			}
+			add = {
+				desc = "els_support_var_DESC2"
+				value = -1
+			}
+		}
+
+
+		if = {
+			limit = {
+				has_variable = hon_support_var
+				NOT = { exists = c:HON }
+				NOT = { has_variable = je_hon_support_var }
+			}
+			add = {
+				desc = "hon_support_var_DESC1"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_variable = hon_support_var }
+					exists = c:HON
+				}
+				has_variable = je_hon_support_var
+			}
+			add = {
+				desc = "hon_support_var_DESC2"
+				value = -1
+			}
+		}
+
+
+		if = {
+			limit = {
+				has_variable = nic_support_var
+				NOT = { exists = c:NIC }
+				NOT = { has_variable = je_nic_support_var }
+			}
+			add = {
+				desc = "nic_support_var_DESC1"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_variable = nic_support_var }
+					exists = c:NIC
+				}
+				has_variable = je_nic_support_var
+			}
+			add = {
+				desc = "nic_support_var_DESC2"
+				value = -1
+			}
+		}
+
+		if = {
+			limit = {
+				has_variable = cos_support_var
+				NOT = { exists = c:COS }
+				NOT = { has_variable = je_cos_support_var }
+			}
+			add = {
+				desc = "cos_support_var_DESC1"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_variable = cos_support_var }
+					exists = c:COS
+				}
+				has_variable = je_cos_support_var
+			}
+			add = {
+				desc = "cos_support_var_DESC12"
+				value = -1
+			}
+		}
+
+		if = {
+			limit = {
+				exists = c:ELS
+				has_variable = frca_elsalvador_peace_var
+			}
+			add = {
+				desc = "frca_elsalvador_peace_DESC1"
+				value = -5
+			}
+		}
+		if = {
+			limit = {
+				exists = c:HON
+				has_variable = frca_honduras_peace_var
+			}
+			add = {
+				desc = "frca_honduras_peace_DESC1"
+				value = -5
+			}
+		}
+		if = {
+			limit = {
+				exists = c:NIC
+				has_variable = frca_nicaragua_peace_var
+			}
+			add = {
+				desc = "frca_nicaragua_peace_DESC1"
+				value = -5
+			}
+		}
+		if = {
+			limit = {
+				exists = c:COS
+				has_variable = frca_costarica_peace_var
+			}
+			add = {
+				desc = "frca_costarica_peace_DESC1"
+				value = -5
+			}
+		}
+
+        if = {
+            limit = {
+                has_law_or_variant = law_type:law_ca_central_american_unitary
+            }
+            add = {
+                desc = "ca_unitary_law_support_desc"
+                value = 1
+            }
+        }
+        if = {
+            limit = {
+                has_law_or_variant = law_type:law_ca_central_american_confederated
+            }
+            add = {
+                desc = "ca_confederated_law_penalty_desc"
+                value = -2 # Castigo por ceder autonomía
+            }
+        }
+
+
+        if = {
+            limit = {
+                any_political_lobby = {
+                    is_political_lobby_type = lobby_pro_federalist
+                    lobby_clout >= 25 
+                }
+            }
+            add = {
+                desc = "ca_lobby_pro_federalist_happy_desc"
+                value = 1
+            }
+        }
+        if = {
+            limit = {
+                any_political_lobby = {
+                    is_political_lobby_type = lobby_pro_federalist
+                    lobby_clout <= -25 
+                }
+            }
+            add = {
+                desc = "ca_lobby_pro_federalist_angry_desc"
+                value = -2 # Castigo severo si los ignoras
+            }
+        }
+	}
+    start_value = 75
+	min_value = 0
+	max_value = 200
+	
+}
+ca_core_progress_bar = {
+    name = "great_game_core_progress_bar_name"
+    desc = "great_game_core_progress_bar_britain_desc"
+    
+    start_value = 100
+    min_value = 0
+    max_value = 200
+    
+    default_bad = yes
+
+    monthly_progress = {
+        add = {
+            desc = "Decrease if intelligentsia is powerful"
+            if = {
+                limit = {
+                    ig:ig_intelligentsia = {
+                        is_powerful = yes
+                    }
+                }
+                value = -20
+            }
+        }
+        add = {
+            desc = "Increase if intelligentsia is in government"
+            if = {
+                limit = {
+                    ig:ig_intelligentsia = {
+                        is_in_government = yes
+                    }
+                }
+                value = -1
+            }
+        }
+        add = {
+            desc = "Decrease if intelligentsia is marginal"
+            if = {
+                limit = {
+                    ig:ig_intelligentsia = {
+                        is_marginal = yes
+                    }
+                }
+                value = -10
+            }
+        }
+        add = {
+            desc = "Decrease if any of the specified laws are in place"
+            if = {
+                limit = {
+                    OR = {
+                        has_law_or_variant = law_type:law_total_separation
+                        has_law_or_variant = law_type:law_cultural_exclusion
+                        has_law_or_variant = law_type:law_census_voting
+                        has_law_or_variant = law_type:law_universal_suffrage
+                        has_law_or_variant = law_type:law_peasant_proprietorship
+                        has_law_or_variant = law_type:law_right_of_assembly
+                        has_law_or_variant = law_type:law_elected_bureaucrats
+                    }
+                }
+                value = -5
+            }
+        }
+        add = {
+            desc = "Increase if any of the specified laws are in place"
+            if = {
+                limit = {
+                    OR = {
+                        has_law_or_variant = law_type:law_autocracy
+                        has_law_or_variant = law_type:law_oligarchy
+                        has_law_or_variant = law_type:law_single_party_state
+                        has_law_or_variant = law_type:law_state_religion
+                        has_law_or_variant = law_type:law_national_supremacy
+                        has_law_or_variant = law_type:law_traditionalism
+                        has_law_or_variant = law_type:law_hereditary_bureaucrats
+                        has_law_or_variant = law_type:law_tenant_farmers
+                        has_law_or_variant = law_type:law_censorship
+                    }
+                }
+                value = 10
+            }
+        }
+        add = {
+            desc = "Increase if landowners are powerful"
+            if = {
+                limit = {
+                    ig:ig_landowners = {
+                        is_powerful = yes
+                    }
+                }
+                value = 10
+            }
+        }
+        add = {
+            desc = "Increase if landowners are in government"
+            if = {
+                limit = {
+                    ig:ig_landowners = {
+                        is_in_government = yes
+                    }
+                }
+                value = 10
+            }
+        }
+        add = {
+            desc = "Decrease if landowners are marginal"
+            if = {
+                limit = {
+                    ig:ig_landowners = {
+                        is_marginal = yes
+                    }
+                }
+                value = -10
+            }
+        }
+        
+    }
+}
+
+ca_golden_grain_bar = {
+	name = "ca_golden_grain_bar_name"
+	desc = "ca_golden_grain_bar_desc"
+	
+	default_green = yes
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	monthly_progress = {
+		# 1. Producción Base
+		if = {
+			limit = {
+				
+				any_scope_state = {
+					state_has_building_type_levels = {
+						target = bt:building_coffee_plantation
+						value >= 10
+					}
+				}
+			}
+			add = {
+				desc = "golden_grain_production_base"
+				value = 1
+			}
+		}
+
+		# 2. Infraestructura
+		if = {
+			limit = {
+				has_technology_researched = railways
+				any_scope_state = {
+					has_building = building_coffee_plantation
+					has_building = building_railway
+				}
+			}
+			add = {
+				desc = "golden_grain_infrastructure"
+				value = 1
+			}
+		}
+
+		# 3. Exportaciones
+		if = {
+			limit = {
+				OR = {
+					has_law_or_variant = law_type:law_free_trade
+					has_law_or_variant = law_type:law_mercantilism
+				}
+			}
+			add = {
+				desc = "golden_grain_exports"
+				value = 1
+			}
+		}
+
+		# 4. Apoyo de Oligarquía
+		if = {
+			limit = {
+				ig:ig_landowners = {
+					is_powerful = yes
+					ig_approval > 5 # CORRECCIÓN: ig_approval en vez de approval
+				}
+			}
+			add = {
+				desc = "golden_grain_oligarchy_support"
+				value = 0.5
+			}
+		}
+
+		# 5. Penalización: Falta de Mano de Obra
+		if = {
+			limit = {
+				
+				any_scope_state = {
+					has_building = building_coffee_plantation
+					pop_employment_building = {
+						building = building_coffee_plantation
+						
+					}
+				}
+			}
+			add = {
+				desc = "golden_grain_labor_shortage"
+				value = -2
+			}
+		}
+	}
+}
+
+federalists_vs_separatists_progress_core_progress_bar = {
+	name = "federalists_vs_separatists_progress_core_progress_bar_name"
+	desc = "federalists_vs_separatists_progress_core_progress_bar_federalists_desc"
+	second_desc = "federalists_vs_separatists_progress_core_progress_bar_separatists_desc"
+
+	double_sided_gold = yes
+
+	start_value = 100
+	min_value = 0
+	max_value = 200
+
+	monthly_progress = {
+		# ===============================================
+		# FACTORES FEDERALISTAS (+)
+		# ===============================================
+		if = {
+			limit = {
+				ig:ig_intelligentsia = { is_in_government = yes }
+			}
+			add = {
+				desc = "federalists_intelligentsia_in_gov"
+				value = 1
+			}
+		}
+
+		if = {
+			limit = {
+				has_law_or_variant = law_type:law_ca_central_american_federal
+			}
+			add = {
+				desc = "federalists_law_active"
+				value = 0.5
+			}
+		}
+
+		if = {
+			limit = {
+				legitimacy >= 90
+			}
+			add = {
+				desc = "federalists_high_legitimacy"
+				value = 0.5
+			}
+		}
+
+		if = {
+			limit = {
+				any_interest_group = {
+					leader = {
+						has_ideology = ideology:ideology_ca_federalist # CORRECCIÓN: Prefijo ideology: añadido
+					}
+				}
+			}
+			add = {
+				desc = "federalist_ig_leader_bonus"
+				value = 3
+			}
+		}
+
+		# ===============================================
+		# FACTORES SEPARATISTAS (-)
+		# ===============================================
+		if = {
+			limit = {
+				ig:ig_landowners = { 
+					is_powerful = yes
+					ig_approval < -5 # CORRECCIÓN
+				}
+			}
+			add = {
+				desc = "separatists_angry_landowners"
+				value = -2
+			}
+		}
+
+		if = {
+			limit = {
+				ig:ig_devout = {
+					is_powerful = yes
+					ig_approval < -5 # CORRECCIÓN
+				}
+			}
+			add = {
+				desc = "separatists_angry_church"
+				value = -1
+			}
+		}
+
+		if = {
+			limit = {
+				legitimacy < 25
+			}
+			add = {
+				desc = "separatists_low_legitimacy"
+				value = -1
+			}
+		}
+
+		if = {
+			limit = {
+				# CORRECCIÓN: Separamos la validación de región de la de estado
+				any_scope_state = {
+					state_region = { is_homeland = cu:central_american }
+					turmoil > 0.25
+				}
+			}
+			add = {
+				desc = "separatists_local_turmoil"
+				value = -1
+			}
+		}
+
+		if = {
+			limit = {
+				has_variable = voting_ca_self_determination
+			}
+			add = {
+				desc = "separatists_may_30_decree_active"
+				value = -10 
+			}
+		}
+
+        if = {
+            limit = {
+                any_direct_subject = {
+                    any_scope_state = {
+                        state_region = { is_homeland = cu:central_american }
+                        turmoil > 0.25
+                    }
+                }
+            }
+            add = {
+                desc = "separatists_subject_in_turmoil" # "Un estado miembro está en caos"
+                value = -2 # Castigo más fuerte porque es un estado entero rebelándose
+            }
+        }
+
+
+        if = {
+            limit = {
+                any_direct_subject = {
+                    ig:ig_landowners = { 
+                        is_in_government = yes 
+                        is_powerful = yes
+                    }
+                }
+            }
+            add = {
+                desc = "separatists_subject_conservative_gov" # "Gobierno conservador en estado miembro"
+                value = -1
+            }
+        }
+
+
+        if = {
+            limit = {
+                any_direct_subject = {
+                    has_law_or_variant = law_type:law_peasant_levies # Reemplaza con la ley separatista de tu mod
+                }
+            }
+            add = {
+                desc = "separatists_subject_autonomous_laws" # "Leyes autonómicas en estado miembro"
+                value = -1
+            }
+        }        
+      }
+}
+
+
+ca_prospecting_bar = {
+	name = "ca_prospecting_bar"
+	desc = "ca_prospecting_bar_desc"
+	
+	default = yes 
+	start_value = 0
+	min_value = 0
+	max_value = 100
+	
+	weekly_progress = {
+		add = {
+			
+			value = -1
+		}
+	}
+}

@@ -1,0 +1,100 @@
+﻿# ====================================================================
+# CAFM - TRIGGERS DE LEYES
+# Scope: country (salvo que se indique)
+# ====================================================================
+
+# El país es el soberano de la Unión Centroamericana.
+ca_is_union_sovereign = {
+	only_latin_centralamericans_cultures = yes
+	has_variable = ca_organization_apro
+	NOT = { is_subject_type = subject_type_ca_dependency }
+}
+
+# El país es un estado miembro (dependencia) de la Unión.
+ca_is_union_member_state = {
+	only_latin_centralamericans_cultures = yes
+	is_subject_type = subject_type_ca_dependency
+}
+
+# País centroamericano independiente, fuera de la Unión.
+ca_is_outside_union = {
+	only_latin_centralamericans_cultures = yes
+	NOT = { has_variable = ca_organization_apro }
+	NOT = { is_subject_type = subject_type_ca_dependency }
+}
+
+# La ley de estructura del Estado actual ya no es válida para la posición
+# del país (p. ej., un estado que se independizó y sigue con law_ca_federal_state).
+# La IA usa esto para corregirse sola.
+ca_has_mismatched_member_law = {
+	OR = {
+		AND = {
+			has_law = law_type:law_ca_federal_state
+			NAND = {
+				ca_is_union_member_state = yes
+				overlord ?= { has_law = law_type:law_ca_central_american_federal }
+			}
+		}
+		AND = {
+			has_law = law_type:law_ca_confederated_state
+			NAND = {
+				ca_is_union_member_state = yes
+				overlord ?= { has_law = law_type:law_ca_central_american_confederated }
+			}
+		}
+		AND = {
+			has_law = law_type:law_ca_departmental_state
+			NAND = {
+				ca_is_union_member_state = yes
+				overlord ?= { has_law = law_type:law_ca_central_american_unitary }
+			}
+		}
+		AND = {
+			has_law = law_type:law_ca_autonomous_state
+			NAND = {
+				ca_is_union_member_state = yes
+				overlord ?= {
+					OR = {
+						has_law = law_type:law_ca_central_american_federal
+						has_law = law_type:law_ca_central_american_confederated
+					}
+				}
+			}
+		}
+		AND = {
+			has_law = law_type:law_ca_sovereign_state
+			ca_is_outside_union = no
+		}
+		AND = {
+			OR = {
+				has_law = law_type:law_ca_central_american_federal
+				has_law = law_type:law_ca_central_american_unitary
+				has_law = law_type:law_ca_central_american_confederated
+			}
+			ca_is_union_sovereign = no
+		}
+	}
+}
+
+# Agrupa las leyes de trabajo coaccionado del mod (sustituye a
+# has_law_or_variant = law_type:law_serfdom en eventos propios).
+ca_has_coerced_labor_law = {
+	OR = {
+		has_law = law_type:law_land_reform_hacienda_system
+		has_law = law_type:law_land_reform_coffee_oligarchy
+		has_law = law_type:law_ca_mandamientos
+	}
+}
+
+# Agrupa los regímenes militares del mod.
+ca_has_military_regime_law = {
+	OR = {
+		has_law = law_type:law_ca_junta
+		has_law = law_type:law_ca_consejo_junta
+	}
+}
+
+# Las Fuerzas Armadas están en el gobierno.
+ca_armed_forces_in_government = {
+	ig:ig_armed_forces ?= { is_in_government = yes }
+}

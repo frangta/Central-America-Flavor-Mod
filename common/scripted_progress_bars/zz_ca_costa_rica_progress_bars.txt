@@ -1,0 +1,154 @@
+# =========================================================================
+# CAFM - Barras de progreso de los diarios de Costa Rica
+# =========================================================================
+
+# -------------------------------------------------------------------------
+# Diario madre: Soberania de San Jose (0-100, empieza en 50)
+# 0 = el Estado se quiebra (balcanizacion)  /  100 = Estado consolidado
+# -------------------------------------------------------------------------
+ca_cos_soberania_bar = {
+	name = "ca_cos_soberania_bar_name"
+	desc = "ca_cos_soberania_bar_desc"
+
+	start_value = 50
+	min_value = 0
+	max_value = 100
+
+	default_green = yes
+
+	monthly_progress = {
+		add = {
+			desc = "ca_cos_soberania_carrillo_desc"
+			if = {
+				limit = {
+					ruler ?= { has_variable = is_carrillo }
+				}
+				value = 1
+			}
+		}
+		add = {
+			desc = "ca_cos_soberania_army_desc"
+			if = {
+				limit = {
+					ig:ig_armed_forces ?= { is_in_government = yes }
+				}
+				value = 1
+			}
+		}
+		add = {
+			desc = "ca_cos_soberania_bases_desc"
+			if = {
+				limit = {
+					has_variable = decreto_bases_garantias_activo
+				}
+				value = 2
+			}
+		}
+		add = {
+			desc = "ca_cos_soberania_federalists_desc"
+			if = {
+				limit = {
+					ig:ig_intelligentsia ?= { is_powerful = yes }
+				}
+				value = -1
+			}
+		}
+		add = {
+			desc = "ca_cos_soberania_turmoil_desc"
+			if = {
+				limit = {
+					any_scope_state = {
+						state_region = s:STATE_COSTA_RICA
+						turmoil >= 0.25
+					}
+				}
+				value = -1
+			}
+		}
+		add = {
+			desc = "ca_cos_soberania_guanacaste_desc"
+			if = {
+				limit = {
+					has_variable = ca_cos_guanacaste_perdido
+				}
+				value = -2
+			}
+		}
+	}
+}
+
+# -------------------------------------------------------------------------
+# Tras el fracaso leve: Descontento josefino contra Morazan (0-100)
+# Al llegar a 100 estalla la revuelta de septiembre de 1842
+# -------------------------------------------------------------------------
+ca_cos_descontento_bar = {
+	name = "ca_cos_descontento_bar_name"
+	desc = "ca_cos_descontento_bar_desc"
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	default_bad = yes
+
+	monthly_progress = {
+		add = {
+			desc = "ca_cos_descontento_base_desc"
+			value = 15
+		}
+		add = {
+			desc = "ca_cos_descontento_war_desc"
+			if = {
+				limit = { is_at_war = yes }
+				value = 5
+			}
+		}
+		add = {
+			desc = "ca_cos_descontento_liberals_desc"
+			if = {
+				limit = {
+					ig:ig_intelligentsia ?= { is_in_government = yes }
+				}
+				value = -3
+			}
+		}
+	}
+}
+
+# -------------------------------------------------------------------------
+# Tras la balcanizacion: Reunificacion por pacto (0-100)
+# Al llegar a 100 se firma el Pacto de la Confederacion (CCR)
+# -------------------------------------------------------------------------
+ca_cos_reunificacion_bar = {
+	name = "ca_cos_reunificacion_bar_name"
+	desc = "ca_cos_reunificacion_bar_desc"
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	default_green = yes
+
+	monthly_progress = {
+		add = {
+			desc = "ca_cos_reunificacion_base_desc"
+			value = 2
+		}
+		add = {
+			desc = "ca_cos_reunificacion_liberals_desc"
+			if = {
+				limit = {
+					ig:ig_intelligentsia ?= { is_in_government = yes }
+				}
+				value = 1
+			}
+		}
+		add = {
+			desc = "ca_cos_reunificacion_war_desc"
+			if = {
+				limit = { is_at_war = yes }
+				value = -2
+			}
+		}
+	}
+}

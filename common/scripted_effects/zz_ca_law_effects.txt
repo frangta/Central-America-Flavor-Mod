@@ -1,0 +1,33 @@
+﻿# ====================================================================
+# CAFM - EFECTOS DE LEYES
+# ====================================================================
+
+# Sincroniza la ley de los estados miembros cuando el soberano cambia
+# de estructura del Estado.
+#   MEMBER_LAW = ley que deben tener los estados
+#   KEEP_LAW   = ley que se respeta si el estado ya la tiene
+#                (p. ej., estado autónomo bajo una federación)
+# Scope: country (el soberano). Se llama desde on_activate.
+ca_sync_union_member_laws_effect = {
+	every_direct_subject = {
+		limit = {
+			is_subject_type = subject_type_ca_dependency
+			NOT = { has_law = law_type:$MEMBER_LAW$ }
+			NOT = { has_law = law_type:$KEEP_LAW$ }
+		}
+		activate_law = law_type:$MEMBER_LAW$
+	}
+}
+
+# Para eventos de independencia o disolución de la Unión:
+# pone la ley de Estado Soberano si el país quedó fuera de la Unión.
+# Scope: country.
+ca_set_sovereign_state_law_effect = {
+	if = {
+		limit = {
+			ca_is_outside_union = yes
+			NOT = { has_law = law_type:law_ca_sovereign_state }
+		}
+		activate_law = law_type:law_ca_sovereign_state
+	}
+}
