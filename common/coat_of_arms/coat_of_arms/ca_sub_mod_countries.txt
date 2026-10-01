@@ -1,0 +1,2054 @@
+#NGR = {	# Nigeria
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "white"
+#		color2 = "green"
+#	}
+#}
+#
+#NGR_subject = {	# Nigeria
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue" 
+#
+#	colored_emblem = {
+#		texture = "ce_circle.dds"
+#		color1 = "red"
+#		instance = { scale = { 0.85 0.85 }	position = { 0.75 0.5 }	}
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_hexagram.dds"
+#		color1 = "green"
+#		instance = { scale = { 0.6 0.6 }	position = { 0.75 0.5 }	}
+#	}
+#	colored_emblem = {
+#		texture = "ce_crown_tudor.dds"
+#		color1 = "yellow"
+#		color2 = "red"
+#		color3 = "white"
+#		instance = { scale = { 0.15 0.15 }	position = { 0.75 0.5 }	}
+#	}
+#}
+#
+#CMR = {	# Cameroon
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "red"
+#		color2 = "yellow"
+#	}
+#}
+#
+#CMR_subject_GBR = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue" 
+#
+#	textured_emblem = {
+#		texture = "te_coa_cameroon_british.dds"
+#		instance = { scale = { 0.5 0.5 }	position = { 0.75 0.5 }	}
+#	}
+#}
+#
+#CMR_subject_FRA = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue" 
+#
+#	colored_emblem = {
+#		texture = "ce_coa_cameroon_french.dds"
+#		color1 = green_light
+#		instance = { scale = { 0.5 0.5 }	position = { 0.75 0.5 }	}
+#	}
+#}
+#
+#CMR_subject_GER = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue" 
+#
+#	textured_emblem = {
+#		texture = "te_coa_cameroon_german.dds"
+#		instance = { scale = { 0.5 0.5 }	position = { 0.75 0.5 }	}
+#	}
+#}
+#
+#SNL = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "yellow"
+#		color2 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "green"
+#		instance = { scale = { 0.35 0.35 }	position = { 0.5 0.5 }	}
+#	}
+#}
+#
+#MLI = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "yellow"
+#		color2 = "red"
+#	}
+#}
+#
+#GUN = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "yellow"
+#		color2 = "green"
+#	}
+#}
+#
+#DAH_recognized = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "yellow"
+#	
+#	colored_emblem = {
+#		texture = "ce_tribar.dds"
+#		color1 = "yellow"
+#		color2 = "red"
+#		color3 = "green"
+#	}
+#}
+#
+#CHD = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "yellow"
+#		color2 = "red"
+#	}
+#}
+#
+#GBS = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "yellow"
+#	
+#	colored_emblem = {
+#		texture = "ce_tribar.dds"
+#		color1 = "yellow"
+#		color2 = "green"
+#		color3 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "black"
+#		instance = { scale = { 0.3 0.3 }	position = { 0.175 0.5 }	}
+#	}
+#}
+#
+#IVC = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "orange"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "white"
+#		color2 = "green"
+#	}
+#}
+#
+#GAB = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "yellow"
+#		color2 = "blue_light"
+#	}
+#}
+#
+#NIG = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "orange"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "green_light"
+#	}
+#	colored_emblem = {
+#		texture = "ce_circle.dds"
+#		color1 = "orange"
+#		instance = { scale = { 0.45 0.45 }	position = { 0.5 0.5 }	}
+#	}
+#}
+#
+#SOM = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue_light"
+#
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.5 0.5 }	position = { 0.5 0.5 }	}
+#	}
+#}
+#
+#MLW = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "black"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "red"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_sun_malawi.dds"
+#		color1 = "red"
+#		instance = { scale = { 0.45 0.45 }	position = { 0.5 0.18 }	}
+#	}
+#}
+#
+#NGL = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "red"
+#	color2 = "black"
+#
+#	colored_emblem = {
+#		texture = "ce_machete_angola.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 0.6 0.6 }	position = { 0.5 0.5 }	}
+#	}
+#}
+#
+#MAD = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_tribar.dds"
+#		color1 = "red_light"
+#		color2 = "green"
+#		color3 = "white"
+#	}
+#}
+#
+#NMB = {
+#	pattern = "pattern_per_bend_senester.dds"
+#	color1 = "blue"
+#	color2 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_bend_sinister_fimbriated.dds"
+#		color1 = "white"
+#		color2 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_sun.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 0.3 0.3 }	position = { 0.25 0.25 }	}
+#	}
+#}
+#
+#GHA = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "yellow"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "black"
+#		instance = { scale = { 0.35 0.35 }	position = { 0.5 0.5 }	}
+#	}
+#}
+#
+#BTS = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#
+#	colored_emblem = {
+#		texture = "ce_tricolor_fimbriated_thin.dds"
+#		color1 = blue_light
+#		color2 = black
+#		color3 = blue_light
+#	}
+#}
+#
+#CRF = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "white"
+#	color2 = "green_light"
+#
+#	colored_emblem = {
+#		texture = "ce_stripe_bottom.dds"
+#		color1 = yellow
+#	}
+#
+#	colored_emblem = {
+#		texture = "ce_stripe_bottom.dds"
+#		color1 = blue
+#		instance = { rotation = 180 }
+#	}
+#
+#	colored_emblem = {
+#		texture = "ce_stripe_center.dds"
+#		color1 = red
+#		instance = { rotation = 90 scale = { 0.5 1 } }
+#	}
+#
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 0.25 0.25 }	position = { 0.2 0.125 }	}
+#	}
+#}
+#
+#MZQ = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#
+#	colored_emblem = {
+#		texture = "ce_tricolor_fimbriated_thin.dds"
+#		color1 = green
+#		color2 = black
+#		color3 = yellow
+#	}
+#
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = red
+#		instance = { scale = { 0.9 1 }	position = { 0 0.5 }	}
+#	}
+#}
+#
+#TGO = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "yellow"
+#
+#	colored_emblem = {
+#		texture = "ce_stripes_05.dds"
+#		color1 = green
+#	}
+#
+#	colored_emblem = {
+#		texture = "ce_frame_square.dds"
+#		color1 = red
+#		instance = { scale = { 0.6 0.6 }	position = { 0.2 0.3 }	}
+#	}
+#
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = white
+#		instance = { scale = { 0.35 0.35 }	position = { 0.2 0.3 }	}
+#	}
+#}
+#
+#MAU = {
+#	pattern = "pattern_solid.tga"
+#	color1 = green
+#
+#	colored_emblem = {
+#		texture = "ce_crescent_star_05_pale.dds"
+#		color1 = yellow
+#		instance = { scale = { 0.75 0.75 }	position = { 0.5 0.45 }	}
+#	}
+#}
+#
+#BKF = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = red_light
+#	color2 = green_light
+#
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = yellow
+#		instance = { scale = { 0.45 0.45 }	position = { 0.5 0.5 }	}
+#	}
+#}
+#
+#TAN = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "yellow"
+#	color2 = "green"
+#	color3 = "black"
+#	color4 = "green"
+#
+#	colored_emblem = {
+#		texture = "ce_tricolor_fimbriated_thin.dds"
+#		color1 = color2
+#		color2 = color3
+#		color3 = color4
+#	}
+#}
+#
+#TAN_subject = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#
+#	textured_emblem = {
+#		texture = "te_coa_tanganyika.dds"
+#		instance = { scale = { 0.6 0.6 }	position = { 0.75 0.5 }	}
+#	}
+#}
+#
+#TZN = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	color2 = "yellow"
+#	color3 = "black"
+#
+#
+#	colored_emblem = {
+#		texture = "ce_bicolor_bottom.dds"
+#		color1 = "blue_light"
+#
+#		instance = { scale = { 1.5 1.5 }	position = { 0.5 0.7 }	rotation = -45}
+#	}
+#
+#	colored_emblem = {
+#		texture = "ce_bend_sinister_fimbriated.dds"
+#		color1 = color2
+#		color2 = color3
+#	}
+#}
+#AZW = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "red"
+#		color2 = "black"
+#	}
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "yellow"
+#		instance = { position = { 0 0.5 } }
+#	}
+#}
+#
+#BFR = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "black"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_biafrarelease.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 1 1 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#ZNZ = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "black"
+#		color2 = "green_light"
+#	}
+#}
+#
+#KTN = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_katanga.dds"
+#		color1 = "green"
+#		color2 = "red"
+#	}
+#}
+#
+#CAB = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "orange"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "black"
+#	}
+#}
+#
+#SRW = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "black"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "red"
+#		instance = { scale = { 0.66 1 } position = { 0 0.5 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_sahrawi.dds"
+#		color1 = "red"
+#		instance = { scale = { 1 1 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#MRT = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_fimbriated_large.dds"
+#		color1 = "red"
+#		color2 = "green"
+#		color3 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_crescent_star_05_pale.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 0.7 0.7 } position = { 0.5 0.475 } }
+#	}
+#}
+#
+#CBV = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_cabo_verde.dds"
+#		color1 = "blue"
+#		color2 = "red"
+#		color3 = "yellow"
+#	}
+#}
+#
+#SGL = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "yellow"
+#		color2 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "green"
+#		instance = { scale = { 0.5 0.5 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#TGB = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "red"
+#	color2 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_fess_fimbriated.dds"
+#		color1 = "blue"
+#		color2 = "white"
+#	}
+#}
+#
+#GIB = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tribar.dds"
+#		color1 = "yellow"
+#		color2 = "green"
+#		color3 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "black"
+#		instance = { scale = { 0.45 0.45 } position = { 0.16 0.5 } }
+#	}
+#}
+#
+#GUN = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "yellow"
+#		color2 = "green"
+#	}
+#}
+#
+#COI = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "orange"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "white"
+#		color2 = "green"
+#	}
+#}
+#
+#BRK = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "red"
+#	color2 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 0.5 0.5 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#WTG = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "red"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_wtg.dds"
+#		color1 = "white"
+#		color2 = "black"
+#	}
+#}
+#
+#TOG = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "yellow"
+#	
+#	colored_emblem = {
+#		texture = "ce_stripes_05.dds"
+#		color1 = "green"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_canton.dds"
+#		color1 = "red"
+#		color2 = "red"
+#		instance = { scale = { 1.25 1.25 } position = { 0.45 0.6 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "white"
+#		color2 = "white"
+#		instance = { scale = { 0.5 0.5 } position = { 0.225 0.3 } }
+#	}
+#}
+#
+#LAG = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "white"
+#		color2 = "green"
+#	}
+#}
+#
+#MLI = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "yellow"
+#		color2 = "red"
+#	}
+#}
+#
+#NMY = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "orange"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_circle.dds"
+#		color1 = "orange"
+#		instance = { scale = { 0.5 0.5 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#CHD = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "yellow"
+#		color2 = "red"
+#	}
+#}
+#
+#CMN = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "red"
+#		color2 = "yellow"
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 0.45 0.45 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#MAU = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "red"
+#	color2 = "yellow"
+#	
+#	colored_emblem = {
+#		texture = "ce_bicolor_bottom.dds"
+#		color1 = "blue"
+#		instance = { scale = { 1 0.5 } position = { 0.5 0.25 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_bicolor_bottom.dds"
+#		color1 = "green"
+#		instance = { scale = { 1 0.5 } position = { 0.5 0.75 } }
+#	}
+#}
+#
+#REU = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_reunion.dds"
+#		color1 = "azure"
+#		color2 = "yellow"
+#		color3 = "red"
+#	}
+#}
+#
+#SEY = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_seychelles_1.dds"
+#		color1 = "blue"
+#		color2 = "yellow"
+#	}
+#	colored_emblem = {
+#		texture = "ce_seychelles_2.dds"
+#		color1 = "red"
+#		color2 = "green"
+#	}
+#}
+#SEY_communist = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_seychelles.dds"
+#		color1 = "red"
+#		color2 = "green"
+#	}
+#}
+#
+#CMR = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "yellow"
+#	color2 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_bicolor_bottom.dds"
+#		color1 = "white"
+#		instance = { scale = { 1 0.5 } position = { 0.5 0.25 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_bicolor_bottom.dds"
+#		color1 = "blue_light"
+#		instance = { scale = { 1 0.5 } position = { 0.5 0.75 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "green_light"
+#		instance = { position = { 0 0.5 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_crescent_comoros.dds"
+#		color1 = "white"
+#	}
+#}
+#
+#ERI = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_eritrea.dds"
+#		color1 = "red"
+#		color2 = "green"
+#		color3 = "blue_light"
+#	}
+#	colored_emblem = {
+#		texture = "ce_eritrea_2.dds"
+#		color1 = "yellow"
+#	}
+#}
+#ERI_subject = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_eritrea_2.dds"
+#		color1 = "green"
+#		instance = { scale = { 1.25 1.25 } position = { 0.825 0.5 } }
+#	}
+#}
+#
+#SOM = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.6 0.6 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#SLL = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "black"
+#		instance = { scale = { 0.3 0.3 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#DJI = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "blue_light"
+#	color2 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "white"
+#		instance = { position = { 0 0.5 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "red"
+#		instance = { scale = { 0.35 0.35 } position = { 0.175 0.5 } }
+#	}
+#}
+#
+#CNT = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "blue"
+#	color2 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_bicolor_bottom.dds"
+#		color1 = "white"
+#		instance = { scale = { 1 0.5 } position = { 0.5 0.25 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_bicolor_bottom.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 1 0.5 } position = { 0.5 0.75 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_solid.dds"
+#		color1 = "red"
+#		instance = { scale = { 0.2 1 } position = { 0.5 0.5 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 0.25 0.25 } position = { 0.18 0.13 } }
+#	}
+#}
+#
+#SSD = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_fimbriated_thin.dds"
+#		color1 = "black"
+#		color2 = "red"
+#		color3 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "blue_light"
+#		instance = { position = { 0 0.5 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 0.4 0.4 } position = { 0.175 0.5 } }
+#	}
+#}
+#
+#KNY = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_fimbriated_thin.dds"
+#		color1 = "black"
+#		color2 = "red"
+#		color3 = "green"
+#	}
+#	textured_emblem = {
+#		texture = "te_kenya_shield.dds"
+#		instance = { scale = { 0.875 0.875 } position = { 0.5 0.485 } }
+#	}
+#}
+#KNY_mornachy = {
+#	# Mornachy
+#	
+#	pattern = "pattern_solid.tga"
+#	color1 = "black"
+#	
+#
+#	colored_emblem = {
+#		texture = "ce_kenya.dds"
+#		color1 = "white"
+#	    color2 = "red"
+#	    color3 = "white"
+#	}	
+#	
+#	colored_emblem = {
+#		texture = "ce_kenya_coat.dds"
+#		color1 = "black"
+#		color2 = "yellow"
+#		color3 = "green"
+#		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+#	}	
+#}
+#
+#KNY_republic = { 
+#    #Republic
+#   	
+#	pattern = "pattern_solid.tga"
+#	color1 = "black"
+#	
+#
+#	colored_emblem = {
+#		texture = "ce_kenya.dds"
+#		color1 = "white"
+#	    color2 = "green_dark"
+#	    color3 = "white"
+#	}	
+#
+#	colored_emblem = {
+#		texture = "ce_masai_shield.dds"
+#		color1 = "white"
+#		color2 = "red"
+#		color3 = "red"
+#		color4 = "black"
+#		instance = { position = { 0.5 0.5 } scale = { 0.95 0.95 } }
+#	}	
+#}
+#
+#KNY_communist = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	color2 = "black"
+#	color3 = "yellow"
+#
+#	colored_emblem = {
+#		texture = "ce_hammer_sickle_star_wreath.dds"
+#		color1 = "black"
+#		color2 = "yellow"
+#		color3 = "yellow"
+#		instance = { scale = { 0.95 0.95 } position = { 0.5 0.5 } } 		
+#	}
+#}
+#
+#KNY_fascist = {	
+#	
+#	# Flag is White
+#	
+#	pattern = "pattern_solid.tga"
+#	color1 = "black"
+#	
+#
+#	colored_emblem = {
+#		texture = "ce_kenya.dds"
+#		color1 = "white"
+#	    color2 = "white"
+#	    color3 = "white"
+#	}	
+#	
+#	colored_emblem = {
+#		texture = "ce_masai_shield.dds"
+#		color1 = "white"
+#		color2 = "black"
+#		color3 = "red"
+#		color4 = "black"
+#		instance = { position = { 0.5 0.5 } scale = { 0.95 0.95 } }
+#	}		
+#}
+#TNZ = {
+#	pattern = "pattern_per_bend_senester.dds"
+#	color1 = "green_light"
+#	color2 = "blue_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_bend_sinister_fimbriated.dds"
+#		color1 = "yellow"
+#		color2 = "black"
+#	}
+#}
+#
+#UGA = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_doubled.dds"
+#		color1 = "black"
+#		color2 = "yellow"
+#		color3 = "red"
+#	}
+#	textured_emblem = {
+#		texture = "te_uganda_flag.dds"
+#		instance = { scale = { 1 1 } position = { 0.5 0.5 } }
+#	}
+#}
+#UGA_monarchy = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "white"
+#		color2 = "blue"
+#	}
+#}
+#
+#RWD = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "yellow"
+#		color2 = "green"
+#	}
+#}
+#RWD_republic = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "yellow"
+#		color2 = "green"
+#		instance = { scale = { 1 0.75 } position = { 0.5 0.625 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_rwanda_sun.dds"
+#		color1 = "yellow"
+#	}
+#}
+#
+#BRD = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_burundi2.dds"
+#		color1 = "red"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_burundi3.dds"
+#		color1 = "green"
+#		color2 = "orange"
+#		color3 = "red"
+#	}
+#}
+#BRD_republic = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_burundi_flag.dds"
+#		color1 = "red"
+#		color2 = "green"
+#	}
+#}
+#
+#TRI_republic = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal_thick.dds"
+#		color1 = "black"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_crescent_star_05.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.4 0.4 } position = { 0.5 0.5 } }
+#	}
+#}
+#TRI_communist = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#
+#}
+#
+#LYA = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal_thick.dds"
+#		color1 = "black"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_crescent_star_05.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.4 0.4 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#TUN_republic = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_tunisia_flag.dds"
+#		color1 = "white"
+#		color2 = "red"
+#	}
+#}
+#
+#GAB = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "yellow"
+#		color2 = "blue_light"
+#	}
+#}
+#
+#EQG = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "azure"
+#		instance = { scale = { 0.66 1 } position = { 0 0.5 } }
+#	}
+#	textured_emblem = {
+#		texture = "te_equatorial_guinea.dds"
+#	}
+#}
+#
+#STP = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "yellow_light"
+#		color2 = "green_light"
+#	}
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "red_light"
+#		instance = { scale = { 0.66 1 } position = { 0 0.5 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "black"
+#		instance = { scale = { 0.325 0.325 } position = { 0.75 0.5 } }
+#		instance = { scale = { 0.325 0.325 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#CKS = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_bend.dds"
+#		color1 = "yellow"
+#		color2 = "red"
+#	}
+#}
+#CKS_communist = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	textured_emblem = {
+#		texture = "te_communist_congo.dds"
+#	}
+#}
+#
+#DRC = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "azure"
+#	
+#	colored_emblem = {
+#		texture = "ce_drc_flag.dds"
+#		color1 = "blue_light"
+#		color2 = "yellow"
+#		color3 = "red"
+#	}
+#}
+#DRC_dictatorship = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green_light"
+#	
+#	textured_emblem = {
+#		texture = "te_zaire_flag.dds"
+#	}
+#}
+#
+#ANG = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "red"
+#	color2 = "black"
+#	
+#	colored_emblem = {
+#		texture = "ce_angola_symbol.dds"
+#		color1 = "yellow"
+#	}
+#}
+#ANG_alt = {
+#    pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_angola.dds"
+#		color1  = "black"
+#	    color2  = "white"
+#	}		
+#	
+#	colored_emblem = {
+#	    texture = "ce_hammer_sickle_star_wreath.dds"
+#		color1  = "pearl"
+#		color2  = "yellow"
+#		instance = { scale = { 0.75 0.75 } position = { 0.5 0.5 }  }
+#	}
+#}
+#ANG_communist = { #normal
+#    pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_angola.dds"
+#		color1  = "black"
+#	    color2  = "black"
+#	}	
+#	
+#	colored_emblem = {
+#		texture = "ce_unicorn.dds"
+#		color1 = "yellow"
+#		color2 = "yellow"
+#		instance = { scale = { 0.5 0.5 } position = { 0.5 0.5} }	
+#	}
+#}
+#ESW = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "yellow"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_fimbriated_large.dds"
+#		color1 = "azure"
+#		color2 = "red"
+#		color3 = "azure"
+#	}
+#	textured_emblem = {
+#		texture = "te_swaziland.dds"
+#	}
+#}
+#
+#MLW = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "black"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "red"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_malawi.dds"
+#		color1 = "red"
+#		instance = { scale = { 1 1 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#MOZ = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_fimbriated_thin.dds"
+#		color1 = "teal"
+#		color2 = "black"
+#		color3 = "yellow"
+#	}
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "red"
+#		instance = { position = { 0 0.5 } }
+#	}
+#	textured_emblem = {
+#		texture = "te_mozambic.dds"
+#		instance = { scale = { 1 1 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#NMB = {
+#	pattern = "pattern_per_bend_senester.dds"
+#	color1 = "blue"
+#	color2 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_bend_sinister_fimbriated.dds"
+#		color1 = "white"
+#		color2 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_namibian_sun.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 1 1 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#NMB_subject = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "orange"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "blue"
+#	}
+#}
+#
+#BOT = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "blue_light"
+#	color2 = "blue_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_fess_fimbriated.dds"
+#		color1 = "black"
+#		color2 = "white"
+#	}
+#}
+#BOT_alt = {
+#    pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_kenya.dds"
+#		color1 = "blue_light"
+#	    color2 = "black"
+#	    color3 = "blue_light"
+#	}	
+#	
+#	colored_emblem = {
+#	    texture = "te_buffalo_painted_skull.dds"
+#		color1  = "red"
+#		color2  = "white"
+#		instance = { scale = { 0.875 0.875 } position = { 0.5 0.5 } }	
+#	}
+#}
+#LST = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "azure"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_mokorotio.dds"
+#		color1 = "black"
+#		instance = { scale = { 0.9 0.9 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#ZMB = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_zambia.dds"
+#		color1 = "orange"
+#		color2 = "black"
+#		color3 = "red"
+#	}
+#}
+#
+#TGK = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "yellow"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_fimbriated_thin.dds"
+#		color1 = "green_light"
+#		color2 = "black"
+#		color3 = "green_light"
+#	}
+#}
+#
+#EAF = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_eastafrica1.dds"
+#		color1 = "blue_light"
+#		color2 = "white"
+#		color3 = "green"
+#	}
+#	colored_emblem = {
+#		texture = "ce_eastafrica2.dds"
+#		color1 = "black"
+#		color2 = "yellow"
+#		color3 = "red"
+#	}
+#}
+#EAF_1 = { # East Afrika Republic one refuses to trigger
+#
+#	pattern = "pattern_per_bend_senester.dds"
+#	color1 = "red"
+#	color2 = "green_dark"
+#	
+#	
+#	colored_emblem = {
+#		texture = "ce_bend_sinister_fimbriated.dds"
+#		instance = { scale = { 1.0 1.0 } position = { 0.5 0.5 } }
+#		color1 = "yellow"
+#		color2 = "black"
+#	}	
+#	colored_emblem = {
+#		texture = "ce_eaf_coat.dds"
+#		color1 = "green"
+#		color2 = "yellow"
+#		color3 = "pearl"		
+#		instance = { position = { 0.5 0.5 } scale = { 1.25 1.25 } }
+#	}	
+#}
+#
+#EAF_republic = { # Jamhuri ya Afrika Mashariki
+#
+#	pattern = "pattern_per_bend_senester.dds"
+#	color1 = "red"
+#	color2 = "green_dark"
+#	
+#
+#	colored_emblem = {
+#		texture = "ce_bend_sinister_fimbriated.dds"
+#		instance = { scale = { 1.0 1.0 } position = { 0.5 0.5 } }
+#		color1 = "yellow"
+#		color2 = "black"
+#	}	
+#	colored_emblem = {
+#		texture = "ce_stars_circle_13.dds"
+#		instance = { scale = { 0.25 0.25 } position = { 0.175 0.175 } }
+#		color1 = "pearl"
+#	}
+#	colored_emblem = {
+#		texture = "ce_eaf_coat.dds"
+#		color1 = "green"
+#		color2 = "yellow"
+#		color3 = "pearl"		
+#		instance = { position = { 0.5 0.5 } scale = { 1 1 } }
+#	}		
+#}
+#
+#EAF_communist = { # Umoja / Harambe
+#    pattern = "pattern_solid.tga"
+#	color1 = "red"
+#
+#	colored_emblem = {
+#		texture = "pattern_vertical_split_01.tga"
+#		color1 = "yellow"
+#		color2 = "black"
+#		instance = { scale = { 1 0.1 } position = { 0.25 0.25 } }
+#	}	
+#	colored_emblem = {
+#		texture = "ce_hammer_sickle_star_wreath.dds"
+#		color1 = "yellow"
+#		color2 = "yellow"
+#		instance = { scale = { 0.5 0.5 } position = { 0.25 0.28 } }	
+#	}
+#}
+#
+#EAF_fascist = {
+#
+#	pattern = "pattern_solid.tga"
+#	color1 = "black"
+#
+#	colored_emblem = {		
+#		texture = "ce_solid.dds"
+#		color1 = "white"
+#        instance = { scale = { 1.0 0.25 } position = { 0.5 0.75 }  }				
+#	}	
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "white"
+#		color2 = "white"
+#		instance = { scale = { 0.25 0.25 } position = { 0.25 0.33 } }	
+#		instance = { scale = { 0.25 0.25 } position = { 0.5 0.33 } }	
+#		instance = { scale = { 0.25 0.25 } position = { 0.75 0.33 } }			
+#	}	
+#}
+#
+#ZAR = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green_dark"
+#
+#	colored_emblem = {
+#		texture = "zaire_frame_star.dds"
+#		color1 = "yellow"
+#		color2 = "red"
+#		instance = { scale = { 0.55 0.55 } position = { 0.5 0.5 } }	
+#	}
+#}
+#
+#ZAR_communist = { # Umoja / Harambe
+#    pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#
+#	colored_emblem = {
+#		texture = "ce_solid.dds"
+#		color1 = "red"
+#		color2 = "white"
+#		instance = { scale = { 0.5 0.58 } position = { 0.25 0.25 } }
+#	}	
+#	colored_emblem = {
+#		texture = "ce_hammer_sickle_star_wreath.dds"
+#		color1 = "yellow"
+#		color2 = "yellow"
+#		instance = { scale = { 0.5 0.5 } position = { 0.25 0.28 } }	
+#	}
+#}
+#TGR = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_star_tigray.dds"
+#		color1 = "yellow"
+#	}
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "yellow"
+#		instance = { position = { 0 0.5 } }
+#	}
+#}
+#
+#OGD = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "blue"
+#		color2 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.3 0.3 } position = { 0.5 0.5 } }
+#	}
+#}
+#OGD_subject = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "blue_light"
+#		instance = { scale = { 0.66 1 } position = { 0 0.5 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_tigray.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.8 0.8 } position = { 0 0.5 } }
+#	}
+#}
+#
+#MRO = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "red"
+#		color2 = "yellow"
+#	}
+#}
+#
+#UPN = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue_light"
+#
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 0.75 0.75 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#HLB = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_fimbriated_thin.dds"
+#		color1 = "red"
+#		color2 = "white"
+#		color3 = "black"
+#	}
+#}
+#
+#CPR = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "black"
+#	color2 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_bicolor_bottom.dds"
+#		color1 = "white"
+#		instance = { scale = { 1 0.5 } position = { 0.5 0.25 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_bicolor_bottom.dds"
+#		color1 = "blue"
+#		instance = { scale = { 1 0.5 } position = { 0.5 0.75 } }
+#	}
+#}
+#
+#KWL = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_fimbriated_thin.dds"
+#		color1 = "black"
+#		color2 = "white"
+#		color3 = "red"
+#	}
+#}
+#
+#ABZ = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_ambazonia.dds"
+#		color1 = "blue_light"
+#		color2 = "white"
+#	}
+#	textured_emblem = {
+#		texture = "te_ambazonia.dds"
+#	}
+#}
+#
+#ARF = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.55 0.825 } position = { 0.5 0.5 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_crescent_star_06.dds"
+#		color1 = "green"
+#		instance = { scale = { 0.5 0.5 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#RWZ = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "green"
+#		color2 = "yellow"
+#	}
+#}
+#
+#TOO = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#	
+#	colored_emblem = {
+#		texture = "ce_bicolor_left.dds"
+#		color1 = "yellow"
+#	}
+#}
+#
+#BSG = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "yellow"
+#		color2 = "red"
+#	}
+#}
+#
+#BNY = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#	
+#	colored_emblem = {
+#		texture = "ce_bunyoro.dds"
+#		color1 = "white"
+#		color2 = "blue_light"
+#	}
+#	colored_emblem = {
+#		texture = "ce_nguni_shield_02.dds"
+#		color1 = "red"
+#		color2 = "yellow"
+#		instance = { scale = { 0.5 0.5 } position = { 0.2 0.25 } }
+#	}
+#}
+#
+#BUG = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "white"
+#		color2 = "blue"
+#	}
+#	colored_emblem = {
+#		texture = "ce_nguni_shield_02.dds"
+#		color1 = "yellow"
+#		color2 = "yellow"
+#		instance = { scale = { 0.75 0.75 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#LOZ = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_bend_dexter.dds"
+#		color1 = "white"
+#	}
+#}
+#
+#ORM = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "green"
+#		color2 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_oromo_independent.dds"
+#		color1 = "yellow"
+#		color2 = "green"
+#		color3 = "red"
+#	}
+#}
+#ORM_subject = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "black"
+#	}
+#}
+#
+#CSM = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "yellow"
+#	color2 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_rhombus.dds"
+#		color1 = "red"
+#		instance = { scale = { 0.75 1 } position = { 0 0.5 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.45 0.45 } position = { 0.15 0.5 } }
+#	}
+#}
+#
+#SDR = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "red"
+#	}
+#	colored_emblem = {
+#		texture = "ce_sidama2.dds"
+#		color1 = "blue"
+#		color2 = "white"
+#	}
+#}
+#SDR_subject = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#	
+#	colored_emblem = {
+#		texture = "ce_sidama1.dds"
+#		color1 = "white"
+#		color2 = "green"
+#		color3 = "red"
+#	}
+#}
+#
+#SKS = {
+#	pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "red"
+#	color2 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_southkasai.dds"
+#		color1 = "yellow"
+#	}
+#}
+#
+#AWS = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#}
+#
+#ULA = {
+#		pattern = "pattern_horizontal_split_01.tga"
+#	color1 = "blue"
+#	color2 = "green"
+#	
+#	colored_emblem = {
+#		texture = "ce_bicolor_bottom.dds"
+#		color1 = "white"
+#		instance = { scale = { 1 0.5 } position = { 0.5 0.25 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_bicolor_bottom.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 1 0.5 } position = { 0.5 0.75 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_solid.dds"
+#		color1 = "red"
+#		instance = { scale = { 0.2 1 } position = { 0.5 0.5 } }
+#	}
+#	colored_emblem = {
+#		texture = "ce_star_05.dds"
+#		color1 = "yellow"
+#		instance = { scale = { 0.25 0.25 } position = { 0.18 0.13 } }
+#	}
+#}
+#
+#CYC = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "black"
+#	
+#	colored_emblem = {
+#		texture = "ce_crescent_star_05.dds"
+#		color1 = "white"
+#		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#FZA = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "red"
+#	
+#	colored_emblem = {
+#		texture = "ce_crescent.dds"
+#		color1 = "white"
+#		color2 = "white"
+#		instance = { scale = { 0.66 0.66 } position = { 0.41 0.5 } }	
+#	}
+#	
+#	colored_emblem = {
+#		texture = "ce_star_05_tilted.dds"
+#		instance = { scale = { 0.36 0.36 } position = { 0.64 0.50 } }		
+#		color1 = "white"
+#		color2 = "white"		
+#	}	
+#
+#	colored_emblem = {
+#		texture = "ce_star_05_tilted.dds"
+#		instance = { scale = { 0.3 0.3 } position = { 0.64 0.50 } }		
+#		color1 = "red"
+#		color2 = "red"		
+#	}	
+#}
+#
+#RDA = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "green_dark"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_vertical.dds"
+#		color1 = "white"
+#		color2 = "green_dark"
+#	}
+#	textured_emblem = {
+#		texture = "te_rhodesia.dds"
+#		instance = { scale = { 0.55 0.55 } position = { 0.5 0.5 } }
+#	}
+#}
+#
+#TKI = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "brown_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "green_light"
+#	}
+#}
+#
+#BPT = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#	
+#	colored_emblem = {
+#		texture = "ce_bophuthatswana.dds"
+#		color1 = "orange"
+#		color2 = "white"
+#		color3 = "black"
+#	}
+#}
+#
+#VDA = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#	
+#	colored_emblem = {
+#		texture = "ce_venda.dds"
+#		color1 = "green"
+#		color2 = "yellow"
+#		color3 = "brown"
+#	}
+#}
+#
+#CKI = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "white"
+#	
+#	colored_emblem = {
+#		texture = "ce_ciskei.dds"
+#		color1 = "blue_light"
+#		color2 = "black"
+#	}
+#}
+#
+#SHL = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#
+#	colored_emblem = {
+#		texture = "ce_canton.dds"
+#		color1 = "yellow"
+#	}
+#	textured_emblem = {
+#		texture = "te_napol.dds"
+#	}
+#}
+#SHL_subject_GBR = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue"
+#
+#	textured_emblem = {
+#		texture = "te_sthelenab.dds"
+#	}
+#}
+#
+#UVL = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "black"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "white"
+#		color2 = "red"
+#	}
+#}
+#
+#LME = {
+#	pattern = "pattern_solid.tga"
+#	color1 = "blue_light"
+#	
+#	colored_emblem = {
+#		texture = "ce_tricolor_horizontal.dds"
+#		color1 = "blue"
+#		color2 = "green"
+#	}
+#}

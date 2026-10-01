@@ -1,0 +1,1444 @@
+﻿# This is a special strategy that sets the default values for different AI scores
+# All AIs always load data from this strategy, which can then be either added to or overridden by data from its other strategies
+
+ai_strategy_unify_central_america = {
+    icon = "gfx/interface/icons/ai_strategy_icons/unification.dds"
+
+    type = diplomatic
+
+    will_form_power_bloc = {
+        always = yes
+    }
+
+    # Infamy thresholds: más bajos que grandes potencias para forzar cautela regional
+    undesirable_infamy_level = { value = 15 }
+    unacceptable_infamy_level = { value = 40 }
+
+    ideological_opinion_effect_mult = { value = 0.6 }
+
+    # Reserve fraction for wargoal maneuvers
+    wargoal_maneuvers_fraction = { value = 0.12 }
+
+    # diplomatic play style (0 = aggressive diplomacy)
+    diplomatic_play_neutrality = { value = 0 }
+    diplomatic_play_boldness = { value = 50 }
+
+    # Obligation: mayor si target comparte cultura family central_american
+    obligation_value = {
+        value = 0
+        if = {
+            limit = {
+                scope:target_country = {
+                    OR = {
+                        country_has_primary_culture = cu:central_american
+                        country_has_primary_culture = cu:guatemalan
+                        country_has_primary_culture = cu:el_salvadorian
+                        country_has_primary_culture = cu:honduran
+                        country_has_primary_culture = cu:nicaraguan
+                        country_has_primary_culture = cu:costa_rican
+                        country_has_primary_culture = cu:panamanian
+                    }
+                }
+            }
+            add = 20
+        }
+    }
+
+    # How reckless the AI is; increases with military tech
+    recklessness = {
+        value = 0.4
+        if = {
+            limit = { has_technology_researched = enlistment_offices } # placeholder; ajusta si tu mod usa otro tech
+            add = 0.2
+        }
+    }
+
+    # Base aggression and conditional modifiers
+    aggression = {
+        value = -0.6  # comportamiento inicial cauteloso
+
+        # Si el target es candidato de unificación, sube agresividad
+        if = {
+            limit = {
+                scope:target_country = { is_unification_candidate = UCA }
+            }
+            add = 1.5
+        }
+
+        # Si target comparte cultura pero NO es candidato → leve presión diplomática
+        else_if = {
+            limit = {
+                scope:target_country = {
+                    OR = {
+                        country_has_primary_culture = cu:central_american
+                        country_has_primary_culture = cu:guatemalan
+                        country_has_primary_culture = cu:el_salvadorian
+                        country_has_primary_culture = cu:honduran
+                        country_has_primary_culture = cu:nicaraguan
+                        country_has_primary_culture = cu:costa_rican
+                        country_has_primary_culture = cu:panamanian
+                    }
+                    NOT = { is_unification_candidate = UCA }
+                }
+            }
+            add = 0.35
+        }
+
+        # Penaliza agresividad contra países solo "antagonistic"
+        if = {
+            limit = {
+                has_attitude = {
+                    who = scope:target_country
+                    attitude = antagonistic
+                }
+            }
+            multiply = 0.4
+        }
+
+        # Ajuste por opinion ideológica (usa función engine)
+        multiply = {
+            value = "ai_ideological_opinion(scope:target_country)"
+            multiply = -0.1
+            add = 1
+            max = 1.5
+            min = 0.5
+        }
+    }
+
+    # Edificios que prioriza para proyección regional
+    building_group_weights = {
+        bg_army = 1.4
+        bg_infrastructure = 1.2
+        bg_military_industry = 1.1
+    }
+
+    # Estados que son de alto valor para la unificación (lista basada en tus estados)
+    state_value = {
+        if = {
+            limit = {
+                scope:target_state = {
+                    OR = {
+                        state_region = s:STATE_GUATEMALA
+                        state_region = s:STATE_SAN_SALVADOR
+                        state_region = s:STATE_COSTA_RICA
+                        state_region = s:STATE_HONDURAS
+                        state_region = s:STATE_PANAMA
+                        state_region = s:STATE_CHIAPAS
+                        state_region = s:STATE_YUCATAN
+                    }
+                    can_reach_target_state = yes
+                }
+            }
+            add = 90
+        }
+    }
+
+    # Wargoal scoring: prioriza liderazgo en unificación y anexión de candidatos
+    wargoal_scores = {
+        unification_leadership = {
+            value = 4
+            # bonus if some "pan-national" tech/event exists
+            if = {
+                limit = { has_technology_researched = pan-nationalism } # placeholder
+                add = {
+                    value = country_fervor_primary_culture
+                    divide = 3
+                }
+            }
+            else = {
+                add = {
+                    value = country_fervor_primary_culture
+                    divide = 8
+                }
+            }
+
+            # reduce value if subjecthood exists
+            if = {
+                limit = { has_law = law_type:law_subjecthood }
+                multiply = 0.25
+            }
+        }
+
+        annex_country = {
+            value = 0
+            # strong incentive to annex when target is unification candidate and reachable
+            if = {
+                limit = {
+                    scope:target_country = {
+                        is_unification_candidate = UCA
+                    }
+                    can_reach_target_country = yes
+                }
+                add = 250
+            }
+        }
+    }
+
+    # Secret goals (local scale values)
+    secret_goal_scores = {
+        protect = {
+            trigger = {
+                scope:target_country = {
+                    OR = {
+                        country_has_primary_culture = cu:central_american
+                        country_has_primary_culture = cu:guatemalan
+                        country_has_primary_culture = cu:el_salvadorian
+                        country_has_primary_culture = cu:honduran
+                        country_has_primary_culture = cu:nicaraguan
+                        country_has_primary_culture = cu:costa_rican
+                        country_has_primary_culture = cu:panamanian
+                    }
+                    NOT = { is_unification_candidate = UCA }
+                    OR = {
+                        is_supporting_unification_candidate = { who = root country_formation = UCA }
+                        is_subject_of = root
+                        is_in_customs_union_with = root
+                    }
+                }
+            }
+            score = { value = 700 }
+        }
+
+        dominate = {
+            trigger = {
+                scope:target_country = {
+                    OR = {
+                        country_has_primary_culture = cu:central_american
+                        country_has_primary_culture = cu:guatemalan
+                        country_has_primary_culture = cu:el_salvadorian
+                        country_has_primary_culture = cu:honduran
+                        country_has_primary_culture = cu:nicaraguan
+                        country_has_primary_culture = cu:costa_rican
+                        country_has_primary_culture = cu:panamanian
+                    }
+                    NOT = { is_unification_candidate = UCA }
+                    NOR = {
+                        is_supporting_unification_candidate = { who = root country_formation = UCA }
+                        is_subject_of = root
+                        is_in_customs_union_with = root
+                    }
+                }
+            }
+            score = { value = 600 }
+        }
+
+        conquer = {
+            trigger = {
+                scope:target_country = {
+                    is_unification_candidate = UCA
+                }
+            }
+            score = { value = 900 }
+        }
+    }
+
+    # Quién puede elegirla
+    possible = {
+        is_subject = no
+        is_unification_candidate = UCA
+        NOT = { country_tier = empire }
+    }
+
+    # Peso base para elegir la strategy
+    weight = {
+        value = 6
+        if = {
+            limit = { has_technology_researched = pan-nationalism } # placeholder
+            add = {
+                value = country_fervor_primary_culture
+                divide = 3
+            }
+        }
+        else = {
+            add = {
+                value = country_fervor_primary_culture
+                divide = 12
+            }
+        }
+
+        # Increase if there is a regional unity movement (you should define movement type)
+        #if = {
+        #    limit = {
+        #        any_political_movement ?= {
+        #            is_political_movement_type = movement_regional_unity
+        #            save_temporary_scope_as = regional_unity_movement
+        #        }
+        #    }
+        #    scope:regional_unity_movement ?= {
+        #        multiply = {
+        #            value = 1
+        #            add = this.political_movement_radicalism
+        #        }
+        #    }
+        #}
+    }
+}
+# ==============================================================================
+# ESTRATEGIAS DE IA - COSTA RICA (VERSION 1.13+)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. ESTRATEGIA ADMINISTRATIVA: OLIGARQUÍA CAFETALERA
+# Prioriza fuertemente la agroexportación y el aislamiento económico interno.
+# ------------------------------------------------------------------------------
+ai_strategy_cos_agro_export_focus = {
+    icon = "gfx/interface/icons/ai_strategy_icons/agricultural_expansion.dds"
+    type = administrative
+
+    # Prioridad absoluta en plantaciones (Café) y madera
+    building_group_weights = {
+        bg_plantations = 4.0
+        bg_logging = 2.0
+        bg_agriculture = 1.5
+        bg_military = 0.1 # Descuida el ejército histórico
+    }
+
+    # Posturas comerciales 1.13
+    goods_stances = {
+        coffee = { stance = wants_export }
+        wood = { stance = wants_export }
+        fruit = { stance = wants_export }
+        weapons = { stance = wants_import }
+    }
+
+    possible = {
+        c:COS ?= THIS
+    }
+
+    weight = {
+        value = 100
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 2. ESTRATEGIA POLÍTICA: DICTADOR AUTONOMISTA (BRAULIO CARRILLO)
+# Se activa si el líder tiene ideologías autoritarias o si manda la élite criolla.
+# ------------------------------------------------------------------------------
+ai_strategy_cos_autocratic_autonomist = {
+    icon = "gfx/interface/icons/ai_strategy_icons/conservative_agenda.dds"
+    type = political
+
+    # Baja aversión a la revolución (impone el orden a toda costa)
+    revolution_aversion = { value = 25 }
+
+    # Grupos de interés respaldados
+    pro_interest_groups = {
+        ig_armed_forces
+        ig_landowners
+    }
+
+    # Movimientos que apoya u odia (Sintaxis 1.13)
+    pro_movements = {
+        movement_ca_reactionary
+        # Si agregaste el movimiento autonomista, inclúyelo aquí
+        # movement_ca_autocratic_autonomist 
+    }
+
+    anti_movements = {
+        movement_ca_liberal
+        movement_ca_federalist
+    }
+
+    possible = {
+        c:COS ?= THIS
+        # Se activa si el líder tiene las ideologías clave
+        ruler = {
+		
+            OR = {
+                has_ideology = ideology_ca_leader_autocratic_autonomist
+                has_ideology = ideology_ca_criollo_elite
+            }
+        }
+    }
+
+    weight = {
+        value = 200 # Sobrescribe estrategias políticas vainilla
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 3. ESTRATEGIA DIPLOMÁTICA: AISLACIONISMO PRAGMÁTICO (Y AMBICIÓN OCULTA)
+# Máxima neutralidad excepto si Bocas del Toro (Panamá) se vuelve vulnerable.
+# ------------------------------------------------------------------------------
+ai_strategy_cos_isolated_autonomist = {
+    icon = "gfx/interface/icons/ai_strategy_icons/maintain_power_balance.dds"
+    type = diplomatic
+
+    # Máxima neutralidad y cobardía general
+    diplomatic_play_neutrality = { value = 100 }
+    diplomatic_play_boldness = { value = -50 }
+
+    # Condición de oportunidad para Panamá/Bocas del Toro
+    wargoal_weights = {
+        conquer = {
+            trigger = {
+                scope:target_state = s:STATE_PANAMA
+                scope:target_country = { 
+                    OR = {
+                        is_rank = rank_unrecognized_minor
+                        is_rank = rank_unrecognized_tiny
+                    }
+                }
+            }
+            score = { value = 500 } # Ataque oportunista si Panamá es débil
+        }
+    }
+
+    possible = {
+        c:COS ?= THIS
+    }
+
+    weight = {
+        value = 100
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 4. ESTRATEGIA DE SUJETO: EL ANTAGONISTA SILENCIOSO
+# Si sigue dentro de la UCA, tratará de destruirla o escapar.
+# ------------------------------------------------------------------------------
+ai_strategy_cos_antagonize_uca = {
+    icon = "gfx/interface/icons/ai_strategy_icons/subject_break_free.dds"
+    type = diplomatic
+
+    # Objetivos Secretos 1.13
+    secret_goal_scores = {
+        antagonize = {
+            trigger = { is_subject_of = c:UCA }
+            score = { value = 10000 } # Odio activo
+        }
+        comply = {
+            trigger = { is_subject_of = c:UCA }
+            score = { value = -5000 } # Jamás será leal
+        }
+    }
+
+    # Deseo primario: Independencia o Mayor Autonomía
+    wargoal_weights = {
+        independence = 20.0
+        increase_autonomy = 10.0
+    }
+
+    possible = {
+        c:COS ?= THIS
+        is_subject = yes
+    }
+
+    weight = {
+        value = 500 # Peso altísimo para ignorar la lógica genérica de sujetos
+    }
+}
+
+# =========================================================================
+# ESTRATEGIAS DE IA PARA NICARAGUA (VIC 3 - v1.13)
+# =========================================================================
+
+# -------------------------------------------------------------------------
+# 1. ESTRATEGIA DE SUJETO: El Antagonismo Federal (La ruptura de la UCA)
+# -------------------------------------------------------------------------
+# Mientras Nicaragua sea sujeto de la UCA, intentará destruirla desde adentro.
+ai_strategy_nic_uca_antagonize = {
+    icon = "gfx/interface/icons/ai_strategy_icons/subject_break_free.dds"
+    type = diplomatic
+
+    # Alta audacia e imprudencia para forzar la guerra de independencia
+    diplomatic_play_boldness = { value = 75 }
+    recklessness = { value = 0.5 }
+
+    wargoal_weights = {
+        independence = 10.0
+        increase_autonomy = 5.0
+    }
+
+    # SISTEMA 1.13: Objetivos Secretos como Sujeto
+    secret_goal_scores = {
+        antagonize = {
+            trigger = { is_subject_of = c:UCA }
+            score = { value = 10000 } # Odio absoluto a la Federación
+        }
+        comply = {
+            trigger = { is_subject_of = c:UCA }
+            score = { value = -5000 } # Nunca cooperará
+        }
+    }
+
+    possible = {
+        c:NIC ?= THIS
+        is_subject_of = c:UCA
+    }
+    weight = { value = 100 }
+}
+
+# -------------------------------------------------------------------------
+# 2. ESTRATEGIA POLÍTICA: "La Ruta del Caos" (Polarización Histórica)
+# -------------------------------------------------------------------------
+# Refleja la inestabilidad de León vs Granada. La IA no teme a la guerra civil.
+ai_strategy_nic_historic_chaos = {
+    icon = "gfx/interface/icons/ai_strategy_icons/conservative_agenda.dds"
+    type = political
+
+    # SISTEMA 1.13: Aversión a la Revolución casi nula (están locos)
+    revolution_aversion = { value = 10 } 
+    min_law_chance_to_pass = { value = 5 } # Intentan pasar leyes aunque no tengan apoyo
+
+    # Cambian de leyes constantemente, generando más caos
+    change_law_chance = { value = 50 } 
+
+    pro_movements = {
+        movement_ca_reactionary
+        movement_ca_liberal
+    }
+
+    possible = {
+        c:NIC ?= THIS
+        has_variable = frca_crisis_var # Variable que pusimos en los eventos
+    }
+    weight = { 
+        value = 100 
+        # Si Walker toma el poder, esta estrategia se desactiva
+        if = { limit = { ruler = { has_ideology = ideology_jingoist } } multiply = 0 }
+    }
+}
+
+# -------------------------------------------------------------------------
+# 3. ESTRATEGIA DIPLOMÁTICA: "La República Filibustera" (William Walker)
+# -------------------------------------------------------------------------
+# IA Extremadamente Agresiva. Quiere conquistar Centroamérica y restaurar la esclavitud.
+ai_strategy_nic_filibuster_state = {
+    icon = "gfx/interface/icons/ai_strategy_icons/territorial_expansion.dds"
+    type = diplomatic
+
+    will_form_power_bloc = { always = no } # No quiere diplomacia, quiere sangre
+
+    # SISTEMA 1.13: Límites de infamia altísimos
+    undesirable_infamy_level = { value = 80 }
+    unacceptable_infamy_level = { value = 120 }
+
+    diplomatic_play_neutrality = { value = -50 }
+    diplomatic_play_boldness = { value = 100 } # Nunca retrocederá
+    recklessness = { value = 1.0 }
+
+    wargoal_weights = {
+        conquer = 10.0
+        make_puppet = 5.0
+    }
+
+    possible = {
+        c:NIC ?= THIS
+        ruler = { has_ideology = ideology_jingoist } # Solo si un Jingoísta (Walker) gobierna
+    }
+    weight = { value = 200 } # Sobrescribe cualquier otra estrategia
+}
+
+# -------------------------------------------------------------------------
+# 4. ESTRATEGIA ADMINISTRATIVA: "El Imperio del Canal" (Tecnocracia del Istmo)
+# -------------------------------------------------------------------------
+# Si los Industriales/Intelectuales dominan y hay paz, se enfocan en infraestructura.
+ai_strategy_nic_canal_empire = {
+    icon = "gfx/interface/icons/ai_strategy_icons/resource_expansion.dds"
+    type = administrative
+
+    # SISTEMA 1.13: Pesos de construcción (Build Queue)
+    building_group_weights = {
+        bg_infrastructure = 5.0 # Prioridad MASIVA a puertos y ferrocarriles
+        bg_trade = 3.0
+        bg_manufacturing = 2.0
+        bg_agriculture = 0.5    # Ignora el campo
+    }
+
+    # SISTEMA 1.13: Subsidios obligatorios para asegurar que el transporte funcione
+    subsidies = {
+        building_railway = must_have
+        building_port = must_have
+    }
+
+    # SISTEMA 1.13: Posturas comerciales
+    goods_stances = {
+        tools = { stance = wants_high_supply }
+        clippers = { stance = wants_high_supply }
+        coal = { stance = wants_high_supply }
+    }
+
+    possible = {
+        c:NIC ?= THIS
+        is_at_war = no
+        OR = {
+            ig:ig_industrialists = { is_in_government = yes is_powerful = yes }
+            has_law = law_type:law_technocracy
+        }
+    }
+    weight = { value = 150 }
+}
+
+# -------------------------------------------------------------------------
+# 5. ESTRATEGIA DIPLOMÁTICA DE SUJETO: "El Reino de la Mosquitia"
+# -------------------------------------------------------------------------
+# Si Nicaragua colapsa y se vuelve súbdito de Gran Bretaña, será el vasallo perfecto.
+ai_strategy_nic_mosquitia_loyalist = {
+    icon = "gfx/interface/icons/ai_strategy_icons/subject_overlord_compliance.dds"
+    type = diplomatic
+
+    # Objetivos Secretos: Amor a la Corona Británica
+    secret_goal_scores = {
+        comply = {
+            trigger = { is_subject_of = c:GBR }
+            score = { value = 10000 }
+        }
+        antagonize = {
+            trigger = { is_subject_of = c:GBR }
+            score = { value = -10000 }
+        }
+    }
+
+    wargoal_weights = {
+        independence = 0.0
+        increase_autonomy = 0.0
+        return_state = 5.0 # Usará el ejército de su señor para reclamar tierras a HON/COS
+    }
+
+    possible = {
+        c:NIC ?= THIS
+        is_subject_of = c:GBR
+        # Se activa si las culturas nativas toman el control
+        OR = {
+            country_has_primary_culture = cu:miskito
+            country_has_primary_culture = cu:garifuna_arawak
+        }
+    }
+    weight = { value = 150 }
+}
+# Estrategia Administrativa: Hegemonía Extractiva
+ai_strategy_gua_hegemonic_economy = {
+	icon = "gfx/interface/icons/ai_strategy_icons/industrial_expansion.dds"
+	type = administrative
+
+	# Prioriza Minas (Oro/Plomo) y Plantaciones según tu diseño
+	building_group_weights = {
+		bg_mining = 3.0
+		bg_plantations = 2.5
+		bg_army = 2.0         # Al contrario que Costa Rica, Guatemala invierte en tropas
+		bg_manufacturing = 1.0
+	}
+
+	# Postura comercial: Exportar materias primas
+	goods_stances = {
+		coffee = { stance = wants_export }
+		lead = { stance = wants_export }
+		iron = { stance = wants_export }
+		small_arms = { stance = wants_high_supply } # Quiere sus propios fusiles
+	}
+
+	possible = {
+		c:GUA ?= THIS
+	}
+
+	weight = {
+		value = 100
+	}
+}
+# Estrategia Política: Centralismo y Tradición
+ai_strategy_gua_unitary_stronghold = {
+	icon = "gfx/interface/icons/ai_strategy_icons/conservative_agenda.dds"
+	type = political
+
+	# Muy intolerante a los cambios liberales
+	revolution_aversion = { value = 80 }
+
+	pro_interest_groups = {
+		ig_landowners
+		ig_devout
+		ig_armed_forces
+	}
+
+	# Interacción directa con tus Movimientos Ideológicos (Sintaxis 1.13)
+	pro_movements = {
+		movement_ca_unitarian
+		movement_ca_reactionary
+	}
+
+	anti_movements = {
+		movement_ca_liberal
+		movement_ca_federalist
+		movement_ca_separatist # Odia a muerte la secesión
+	}
+
+	possible = {
+		c:GUA ?= THIS
+		OR = {
+			has_modifier = ca_conservative_capital
+			has_modifier = reactionary_stronghold
+		}
+	}
+
+	weight = {
+		value = 200
+	}
+}
+# Estrategia Diplomática: Reconquista y Dominación
+ai_strategy_gua_aggressive_hegemon = {
+	icon = "gfx/interface/icons/ai_strategy_icons/territorial_expansion.dds"
+	type = diplomatic
+
+	# Alta audacia, agresividad máxima contra liberales
+	diplomatic_play_neutrality = { value = -50 }
+	diplomatic_play_boldness = { value = 100 }
+	ideological_opinion_effect_mult = { value = 2.5 } # Odia a los vecinos liberales el doble
+
+	# Prioridades de Guerra
+	wargoal_weights = {
+		conquer = {
+			trigger = {
+				scope:target_state = s:STATE_GUATEMALA # Si Los Altos tiene un pedazo de "su" estado
+			}
+			score = { value = 5000 } # Prioridad absoluta: Aniquilar a Los Altos
+		}
+		regime_change = {
+			trigger = {
+				scope:target_country = {
+					OR = {
+						c:ELS ?= THIS
+						c:HON ?= THIS
+					}
+					# Solo si son liberales/federalistas
+					has_political_movement = movement_ca_liberal
+				}
+			}
+			score = { value = 1000 } # Intervenir para poner conservadores
+		}
+	}
+
+	possible = {
+		c:GUA ?= THIS
+	}
+
+	weight = {
+		value = 150
+	}
+}
+# Estrategia de Sujeto: El Usurpador
+ai_strategy_gua_antagonize_uca = {
+	type = diplomatic
+
+	secret_goal_scores = {
+		# Guatemala no quiere irse (separarse), quiere MANDAR (antagonizar al líder actual)
+		antagonize = {
+			trigger = { 
+				is_subject_of = c:UCA 
+				NOT = { c:UCA = { has_law = law_type:law_ca_central_american_unitary } }
+			}
+			score = { value = 8000 }
+		}
+	}
+
+	possible = {
+		c:GUA ?= THIS
+		is_subject = yes
+	}
+
+	weight = {
+		value = 300
+	}
+}
+# ==============================================================================
+# ESTRATEGIAS DE IA - EL SALVADOR (VERSION 1.13+)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. ESTRATEGIA POLÍTICA: LA CRUZADA MORAZANISTA (Histórica / Liberal)
+# Se activa si la Intelligentsia logra desplazar a los Terratenientes.
+# ------------------------------------------------------------------------------
+ai_strategy_els_morazanist_crusade = {
+    icon = "gfx/interface/icons/ai_strategy_icons/egalitarian_agenda.dds"
+    type = political
+
+    # Están dispuestos a ir a la guerra civil para imponer el liberalismo
+    revolution_aversion = { value = 15 }
+
+    pro_interest_groups = {
+        ig_intelligentsia
+        ig_armed_forces # Ejército leal a la causa federal
+    }
+
+    # Interacción con movimientos Ideológicos
+    pro_movements = {
+        movement_ca_liberal
+        movement_ca_federalist
+    }
+
+    anti_movements = {
+        movement_ca_reactionary
+        movement_ca_unitarian
+        movement_ca_separatist
+    }
+
+    possible = {
+        c:ELS ?= THIS
+        ig:ig_intelligentsia = { is_powerful = yes }
+    }
+
+    weight = {
+        value = 200
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 2. ESTRATEGIA DIPLOMÁTICA: EXPORTADOR DE REVOLUCIONES
+# El Salvador intenta forzar cambios de régimen en sus vecinos conservadores.
+# ------------------------------------------------------------------------------
+ai_strategy_els_export_revolution = {
+    icon = "gfx/interface/icons/ai_strategy_icons/revolutionary.dds"
+    type = diplomatic
+
+    # IA audaz, lista para intervenir en el istmo
+    diplomatic_play_neutrality = { value = -30 }
+    diplomatic_play_boldness = { value = 60 }
+    
+    # Odio profundo hacia ideologías opuestas (Guatemala)
+    ideological_opinion_effect_mult = { value = 3.0 }
+
+    wargoal_weights = {
+        # Su prioridad máxima es cambiar el gobierno de los vecinos, no anexarlos
+        regime_change = {
+            trigger = {
+                scope:target_country = {
+                    OR = {
+                        c:GUA ?= THIS
+                        c:HON ?= THIS
+                        c:NIC ?= THIS
+                    }
+                    # Ataca si el vecino está dominado por reaccionarios o unitarios
+                    OR = {
+                        has_political_movement = movement_ca_reactionary
+                        has_political_movement = movement_ca_unitarian
+                        ig:ig_landowners = { is_in_government = yes }
+                    }
+                }
+            }
+            score = { value = 5000 }
+        }
+        # Poco interés en conquistas territoriales si esta estrategia está activa
+        conquer = { score = { value = -100 } }
+    }
+
+    possible = {
+        c:ELS ?= THIS
+        has_strategy = ai_strategy_els_morazanist_crusade
+    }
+
+    weight = {
+        value = 200
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 3. ESTRATEGIA ADMINISTRATIVA: LA REPÚBLICA DE LAS 14 FAMILIAS (Oligarquía)
+# Se activa si los Terratenientes (Juan Lindo u otros) logran aplastar a los liberales.
+# ------------------------------------------------------------------------------
+ai_strategy_els_14_families = {
+    icon = "gfx/interface/icons/ai_strategy_icons/agricultural_expansion.dds"
+    type = administrative
+
+    # Ignoran la educación y la industria; todo va al añil y al café
+    building_group_weights = {
+        bg_plantations = 4.0
+        bg_agriculture = 2.0
+        bg_government_funded_institutions = 0.1 # Odian las escuelas públicas
+    }
+
+    goods_stances = {
+        coffee = { stance = wants_export }
+        indigo = { stance = wants_export } # El Salvador histórico producía mucho añil
+    }
+
+    possible = {
+        c:ELS ?= THIS
+        ig:ig_landowners = { 
+            is_in_government = yes 
+            is_powerful = yes
+        }
+    }
+
+    weight = {
+        value = 200
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 4. ESTRATEGIA DIPLOMÁTICA: LA PRUSIA CENTROAMERICANA
+# Se activa si los Industriales y las Fuerzas Armadas se alían (Militarismo Tecnocrático).
+# ------------------------------------------------------------------------------
+ai_strategy_els_central_american_prussia = {
+    icon = "gfx/interface/icons/ai_strategy_icons/territorial_expansion.dds"
+    type = diplomatic
+
+    # Agresividad militar absoluta. Unificación por "Sangre y Hierro".
+    diplomatic_play_neutrality = { value = -100 }
+    diplomatic_play_boldness = { value = 100 }
+    
+    # No le importa la infamia regional
+    undesirable_infamy_level = { value = 80 }
+
+    # Ya no quiere cambiar de régimen; quiere pintar el mapa.
+    wargoal_weights = {
+        conquer = {
+            trigger = {
+                scope:target_state = {
+                    OR = {
+                        state_region = s:STATE_HONDURAS   # Primer objetivo: Salida al Caribe
+                        state_region = s:STATE_GUATEMALA  # Segundo objetivo: Destruir a la capital rival
+                    }
+                }
+            }
+            score = { value = 8000 }
+        }
+    }
+
+    possible = {
+        c:ELS ?= THIS
+        ig:ig_armed_forces = { is_in_government = yes }
+        ig:ig_industrialists = { is_powerful = yes }
+        has_journal_entry = je_ca_military_reform # Tu diario de profesionalización
+    }
+
+    weight = {
+        value = 300
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 5. ESTRATEGIA POLÍTICA: LA REBELIÓN DE LOS NONUALCOS
+# Se activa si el Pueblo Rural (Indígenas/Campesinos) toma el poder.
+# ------------------------------------------------------------------------------
+ai_strategy_els_nonualco_rebellion = {
+    icon = "gfx/interface/icons/ai_strategy_icons/egalitarian_agenda.dds"
+    type = political
+
+    pro_interest_groups = {
+        ig_rural_folk
+        ig_trade_unions
+    }
+
+    anti_interest_groups = {
+        ig_landowners
+        ig_industrialists
+        ig_devout
+    }
+
+    # Apoya movimientos de reforma agraria radical
+    pro_movements = {
+        movement_ca_communalist # Si existe en tu mod
+        movement_cultural_majority
+    }
+
+    possible = {
+        c:ELS ?= THIS
+        ig:ig_rural_folk = { is_in_government = yes }
+    }
+
+    weight = {
+        value = 300
+    }
+}
+# ==============================================================================
+# ESTRATEGIAS DE IA - HONDURAS (VERSION 1.13+)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. ESTRATEGIA ADMINISTRATIVA: EL ENCLAVE MINERO Y BANANERO
+# Se enfoca en explotar minas y plantaciones, ignorando el desarrollo social.
+# ------------------------------------------------------------------------------
+ai_strategy_hon_mining_banana_enclave = {
+    icon = "gfx/interface/icons/ai_strategy_icons/economic_imperialism.dds"
+    type = administrative
+
+    # Prioridad absoluta en Minas (Rasgo Hondureño) y Plantaciones (Banano)
+    building_group_weights = {
+        bg_mining = 4.0
+        bg_plantations = 3.0
+        bg_logging = 1.5
+        bg_manufacturing = 0.1 # Nulo interés en industrializarse
+        bg_government_funded_institutions = 0.1
+    }
+
+    # Posturas comerciales para inundar el mercado de frutas y minerales
+    goods_stances = {
+        fruit = { stance = wants_export } # Representando el Banano
+        wood = { stance = wants_export }
+        lead = { stance = wants_export }
+        weapons = { stance = wants_import }
+    }
+
+    possible = {
+        c:HON ?= THIS
+    }
+
+    weight = {
+        value = 100
+        # Aumenta masivamente si gobierna la élite vende-patrias
+        if = {
+            limit = { 
+                ig:ig_landowners = { 
+                    is_in_government = yes 
+                    has_ideology = ideology_ca_criollo_elite 
+                } 
+            }
+            add = 200
+        }
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 2. ESTRATEGIA DIPLOMÁTICA: ESTADO AMORTIGUADOR Y OPORTUNISTA (Histórica)
+# Evita guerras ofensivas, busca alianzas de conveniencia y sobrevive.
+# ------------------------------------------------------------------------------
+ai_strategy_hon_opportunist_buffer = {
+    icon = "gfx/interface/icons/ai_strategy_icons/maintain_power_balance.dds"
+    type = diplomatic
+
+    # IA temerosa y neutral por defecto
+    diplomatic_play_neutrality = { value = 50 }
+    diplomatic_play_boldness = { value = -50 }
+
+    # Trata de evitar iniciar guerras de conquista
+    wargoal_weights = {
+        conquer = { score = { value = -1000 } }
+    }
+
+    possible = {
+        c:HON ?= THIS
+    }
+
+    weight = {
+        value = 100
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 3. ESTRATEGIA DIPLOMÁTICA: EL VERDADERO BASTIÓN MORAZANISTA
+# Si los federalistas triunfan en Honduras, se vuelve extremadamente agresiva.
+# ------------------------------------------------------------------------------
+ai_strategy_hon_morazanist_revival = {
+    icon = "gfx/interface/icons/ai_strategy_icons/unification.dds"
+    type = diplomatic
+
+    # Se vuelve audaz y agresiva contra los conservadores
+    diplomatic_play_neutrality = { value = -30 }
+    diplomatic_play_boldness = { value = 60 }
+    ideological_opinion_effect_mult = { value = 3.0 }
+    
+    wargoal_weights = {
+        # Misión 1: Liberar a Los Altos de las garras de Guatemala
+        liberate_country = {
+            trigger = { scope:target_country = c:ALT }
+            score = { value = 3000 }
+        }
+        # Misión 2: Forzar repúblicas federales en Guatemala y Nicaragua
+        regime_change = {
+            trigger = {
+                scope:target_country = {
+                    OR = { c:GUA ?= THIS c:NIC ?= THIS }
+                    has_political_movement = movement_ca_reactionary
+                }
+            }
+            score = { value = 5000 }
+        }
+    }
+
+    possible = {
+        c:HON ?= THIS
+        ig:ig_intelligentsia = { is_powerful = yes }
+        has_political_movement = movement_ca_federalist
+    }
+
+    weight = {
+        value = 300
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 4. ESTRATEGIA DE SUJETO: LA VANGUARDIA UNITARIA / PROTECTORADO
+# Se somete por completo a Guatemala o a una Gran Potencia extranjera.
+# ------------------------------------------------------------------------------
+ai_strategy_hon_submissive_vanguard = {
+    icon = "gfx/interface/icons/ai_strategy_icons/subject_overlord_compliance.dds"
+    type = diplomatic
+
+    secret_goal_scores = {
+        # Si Guatemala la domina, Honduras será su perro de ataque
+        comply = {
+            trigger = { is_subject_of = c:GUA }
+            score = { value = 10000 } 
+        }
+        antagonize = {
+            trigger = { is_subject_of = c:GUA }
+            score = { value = -10000 }
+        }
+        # Si una potencia la hace protectorado para proteger las minas
+        comply = {
+            trigger = { 
+                scope:target_country = {
+                    OR = { c:GBR ?= THIS c:USA ?= THIS }
+                }
+            }
+            score = { value = 8000 }
+        }
+    }
+
+    # Anula cualquier deseo de independencia
+    wargoal_weights = {
+        independence = -1000.0 
+    }
+
+    possible = {
+        c:HON ?= THIS
+        is_subject = yes
+    }
+
+    weight = {
+        value = 500
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 5. ESTRATEGIA POLÍTICA: LA REPÚBLICA GARÍFUNA-LENCA (Despertar Indígena)
+# Se activa si el Pueblo Rural y los nativos toman el control.
+# ------------------------------------------------------------------------------
+ai_strategy_hon_indigenous_republic = {
+    icon = "gfx/interface/icons/ai_strategy_icons/egalitarian_agenda.dds"
+    type = political
+
+    # Pelearán hasta la muerte por sus tierras comunales
+    revolution_aversion = { value = 10 }
+
+    pro_interest_groups = {
+        ig_rural_folk
+        ig_trade_unions
+    }
+
+    anti_interest_groups = {
+        ig_landowners
+        ig_armed_forces
+        ig_industrialists
+    }
+
+    # Rechazan ideologías europeas y apoyan su herencia
+    pro_movements = {
+        movement_cultural_majority
+        movement_ca_communalist # Si existe en tu mod
+    }
+    
+    anti_movements = {
+        movement_ca_reactionary
+        movement_ca_unitarian
+    }
+
+    possible = {
+        c:HON ?= THIS
+        ig:ig_rural_folk = { is_in_government = yes }
+    }
+
+    weight = {
+        value = 400
+    }
+}
+# ==============================================================================
+# ESTRATEGIAS DE IA - LOS ALTOS (VERSION 1.13+)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. ESTRATEGIA DIPLOMÁTICA: SUPERVIVENCIA DESESPERADA
+# Busca protección extranjera ofreciendo obligaciones, huye de las guerras ofensivas.
+# ------------------------------------------------------------------------------
+ai_strategy_alt_desperate_survival = {
+    icon = "gfx/interface/icons/ai_strategy_icons/armed_isolationism.dds"
+    type = diplomatic
+
+    # Máxima cobardía y neutralidad. No iniciará jugadas diplomáticas.
+    diplomatic_play_neutrality = { value = 100 }
+    diplomatic_play_boldness = { value = -100 }
+
+    # Entregará su alma (Obligaciones) para conseguir pactos defensivos o vasallaje
+    # con México o El Salvador, para protegerse de Guatemala.
+    obligation_value = {
+        value = 20
+        if = {
+            limit = {
+                OR = {
+                    scope:target_country = c:MEX
+                    scope:target_country = c:ELS
+                }
+            }
+            add = 100 # Sobrevalora enormemente aliarse con los enemigos de Guatemala
+        }
+    }
+
+    # Desactiva completamente la conquista
+    wargoal_weights = {
+        conquer = { score = { value = -5000 } }
+    }
+
+    possible = {
+        c:ALT ?= THIS
+        is_subject = no # Solo hace esto si es independiente y vulnerable
+    }
+
+    weight = {
+        value = 200
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 2. ESTRATEGIA POLÍTICA: LIBERALISMO MODERADO Y ESTABILIDAD
+# Evita las guerras civiles a toda costa; aprueba leyes progresistas lentamente.
+# ------------------------------------------------------------------------------
+ai_strategy_alt_moderate_liberalism = {
+    icon = "gfx/interface/icons/ai_strategy_icons/egalitarian_agenda.dds"
+    type = political
+
+    # Pánico a la revolución. Cederán antes que pelear internamente, 
+    # no pueden permitirse una guerra civil con Guatemala al lado.
+    revolution_aversion = { value = 95 }
+
+    pro_interest_groups = {
+        ig_intelligentsia
+        ig_armed_forces # Necesita un ejército para defenderse
+    }
+
+    anti_interest_groups = {
+        ig_landowners
+        ig_devout
+    }
+
+    # Apoya la federación y las reformas liberales, pero odia el autoritarismo
+    pro_movements = {
+        movement_ca_liberal
+        movement_ca_federalist
+    }
+
+    anti_movements = {
+        movement_ca_reactionary
+        movement_ca_unitarian
+    }
+
+    possible = {
+        c:ALT ?= THIS
+    }
+
+    weight = {
+        value = 100
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 3. ESTRATEGIA ADMINISTRATIVA: ECONOMÍA DE SUBSISTENCIA MILITARIZADA
+# Construye lo básico para sobrevivir e importa armas masivamente.
+# ------------------------------------------------------------------------------
+ai_strategy_alt_subsistence_defense = {
+    icon = "gfx/interface/icons/ai_strategy_icons/resource_expansion.dds"
+    type = administrative
+
+    # Foco en agricultura básica y barracones
+    building_group_weights = {
+        bg_agriculture = 3.0
+        bg_ranching = 2.0
+        bg_army = 2.0
+        bg_manufacturing = 0.1
+    }
+
+    # Postura Comercial: Importar armas a toda costa
+    goods_stances = {
+        small_arms = { stance = wants_import }
+        artillery = { stance = wants_import }
+        ammunition = { stance = wants_import }
+        grain = { stance = wants_high_supply } # Mantener a la población alimentada y callada
+    }
+
+    possible = {
+        c:ALT ?= THIS
+    }
+
+    weight = {
+        value = 100
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 4. ESTRATEGIA DE SUJETO: EL PROTECTORADO AGRADECIDO
+# Si México o El Salvador lo salvan, será el vasallo más leal del mundo.
+# ------------------------------------------------------------------------------
+ai_strategy_alt_loyal_subject = {
+    icon = "gfx/interface/icons/ai_strategy_icons/subject_overlord_compliance.dds"
+    type = diplomatic
+
+    # Objetivos Secretos 1.13
+    secret_goal_scores = {
+        # Si México o ELS son sus amos, obedecerá ciegamente para no ser devorado por Guatemala
+        comply = {
+            trigger = { 
+                OR = {
+                    is_subject_of = c:MEX
+                    is_subject_of = c:ELS
+                }
+            }
+            score = { value = 10000 }
+        }
+        antagonize = {
+            trigger = { 
+                OR = {
+                    is_subject_of = c:MEX
+                    is_subject_of = c:ELS
+                }
+            }
+            score = { value = -10000 }
+        }
+    }
+
+    wargoal_weights = {
+        independence = -1000.0 # Nunca muerdas la mano que te defiende
+    }
+
+    possible = {
+        c:ALT ?= THIS
+        is_subject = yes
+    }
+
+    weight = {
+        value = 500
+    }
+}
+# ==============================================================================
+# ESTRATEGIAS DE IA - REPÚBLICA FEDERAL (UCA) (VERSION 1.13+)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. ESTRATEGIA POLÍTICA: ESTABILIZACIÓN DESESPERADA
+# Prioridad absoluta: evitar la revolución y la parálisis federal.
+# ------------------------------------------------------------------------------
+ai_strategy_uca_desperate_survival = {
+    icon = "gfx/interface/icons/ai_strategy_icons/placate_population.dds"
+    type = political
+
+    # Pánico total a la guerra civil. La UCA cederá ante cualquier movimiento 
+    # radical con tal de no fragmentarse prematuramente.
+    revolution_aversion = { value = 100 }
+
+    # Intenta mantener a los grupos más poderosos en el gobierno para no perder Autoridad
+    pro_interest_groups = {
+        ig_landowners
+        ig_armed_forces
+        ig_intelligentsia
+    }
+
+    # Trata de bloquear movimientos que generen fricción entre estados
+    anti_movements = {
+        movement_ca_separatist
+        movement_ca_autocratic_autonomist
+    }
+
+    possible = {
+        c:UCA ?= THIS
+        # Se activa especialmente si el apoyo federal es bajo
+        "scripted_bar_progress(frca_support_bar)" < 100
+    }
+
+    weight = {
+        value = 200
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 2. ESTRATEGIA DIPLOMÁTICA: PASIVIDAD DEFENSIVA
+# Cede ante potencias extranjeras para sobrevivir internamente.
+# ------------------------------------------------------------------------------
+ai_strategy_uca_passive_defense = {
+    icon = "gfx/interface/icons/ai_strategy_icons/armed_isolationism.dds"
+    type = diplomatic
+
+    # Neutralidad absoluta en guerras externas (México, USA, Europa)
+    diplomatic_play_neutrality = { value = 150 }
+    diplomatic_play_boldness = { value = -100 }
+
+    # Valor de Obligaciones: La UCA entregará su soberanía económica a cambio
+    # de que una Gran Potencia garantice su integridad territorial.
+    obligation_value = {
+        value = 50
+        if = {
+            limit = {
+                scope:target_country = { country_rank >= rank_great_power }
+            }
+            add = 100
+        }
+    }
+
+    # Pesos de Guerra: Odia la conquista, solo quiere mantener lo que tiene.
+    wargoal_weights = {
+        conquer = { score = { value = -5000 } }
+        liberate_country = { score = { value = -1000 } }
+    }
+
+    possible = {
+        c:UCA ?= THIS
+    }
+
+    weight = {
+        value = 100
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 3. ESTRATEGIA ADMINISTRATIVA: GESTIÓN DE LA PARÁLISIS
+# Usa sus pocos recursos para intentar calmar los ánimos en los estados.
+# ------------------------------------------------------------------------------
+ai_strategy_uca_authority_management = {
+    icon = "gfx/interface/icons/ai_strategy_icons/resource_expansion.dds"
+    type = administrative
+
+    # No construye industria nueva; gasta en edificios gubernamentales y 
+    # puertos para mantener la cohesión de la unión.
+    building_group_weights = {
+        bg_government_funded_institutions = 3.0
+        bg_ports = 2.0
+        bg_manufacturing = 0.1
+    }
+
+    # Postura Comercial: Necesita suministros básicos para evitar hambrunas 
+    # que disparen el separatismo.
+    goods_stances = {
+        grain = { stance = wants_high_supply }
+        clothes = { stance = wants_high_supply }
+        small_arms = { stance = wants_high_supply }
+    }
+
+    possible = {
+        c:UCA ?= THIS
+    }
+
+    weight = {
+        value = 100
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 4. ESTRATEGIA DE SEÑOR (OVERLORD): APACIGUAMIENTO DE ESTADOS
+# La UCA tratará de que sus sujetos (GUA, COS, etc.) no la odien.
+# ------------------------------------------------------------------------------
+ai_strategy_uca_overlord_appeasement = {
+    type = diplomatic
+
+    # Objetivos de la 1.13 hacia sus sujetos
+    # Intentará que los estados "cumplan" bajándoles los impuestos federales
+    secret_goal_scores = {
+        comply = {
+            score = { value = 5000 }
+        }
+    }
+
+    possible = {
+        c:UCA ?= THIS
+        any_subject = { is_ca_culture_country = yes }
+    }
+
+    weight = {
+        value = 150
+    }
+}
