@@ -1,0 +1,119 @@
+﻿# =====================================================================
+# CAFM — CHIAPAS / SOCONUSCO — CIP
+# Plantillas de personaje con el esquema por bloques del autor.
+# Generado el 2026-10-02. Cast latente: cada personaje se etiqueta con
+#   set_variable = cafm_cast_<cast>      (su cast nacional)
+#   cafm_hc_<clave>                      (registro global anti-duplicados)
+# Certeza: V verificado · P parcial · M de memoria (confirmar fechas)
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# VERSIÓN 1.0 (1836–1850)
+# ---------------------------------------------------------------------
+
+cafm_joaquin_miguel_gutierrez = {
+	# Joaquin Miguel Gutierrez — cast CIP · nivel A · certeza V
+	# NOTAS: Federalista chiapaneco; gobernador 1832 y 1833–1835; muere combatiendo al centralismo en Tuxtla
+	#        (8.6.1838).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Joaquin_Miguel"
+	last_name = "Gutierrez"
+	historical = yes
+	female = no
+	birth_date = 1796.8.21
+	culture = cu:chiapanecan
+	religion = rel:catholic
+	home_region = STATE_CHIAPAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+	role = general
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_1
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		brave
+		romantic
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cip
+		set_global_variable = { name = cafm_hc_joaquin_miguel_gutierrez value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:CIP ?= THIS
+			NOT = { has_global_variable = cafm_hc_joaquin_miguel_gutierrez }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1838.6.8
+	}
+}
+
+cafm_angel_albino_corzo = {
+	# Angel Albino Corzo — cast CIP · nivel B · certeza V
+	# NOTAS: Liberal chiapaneco; gobernador desde 1855.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Angel_Albino"
+	last_name = "Corzo"
+	historical = yes
+	female = no
+	birth_date = 1816.3.1
+	culture = cu:chiapanecan
+	religion = rel:catholic
+	home_region = STATE_CHIAPAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_liberal_leader
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		persistent
+		honorable
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cip
+		set_global_variable = { name = cafm_hc_corzo value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:CIP ?= THIS
+			NOT = { has_global_variable = cafm_hc_corzo }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1875.8.12
+	}
+}

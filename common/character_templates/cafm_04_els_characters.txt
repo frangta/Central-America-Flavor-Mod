@@ -1,0 +1,450 @@
+﻿# =====================================================================
+# CAFM — EL SALVADOR — ELS
+# Plantillas de personaje con el esquema por bloques del autor.
+# Generado el 2026-10-02. Cast latente: cada personaje se etiqueta con
+#   set_variable = cafm_cast_<cast>      (su cast nacional)
+#   cafm_hc_<clave>                      (registro global anti-duplicados)
+# Certeza: V verificado · P parcial · M de memoria (confirmar fechas)
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# VERSIÓN 1.0 (1836–1850)
+# ---------------------------------------------------------------------
+
+els_francisco_gomez_character_template = {
+	# Francisco Gomez — cast ELS · nivel A · certeza P
+	# NOTAS: REVISAR: hoy es el gobernante inicial de El Salvador en los efectos de creación, pero la
+	#        investigación encontró a un Francisco Gómez presidente interino de HONDURAS (1852). El jefe
+	#        salvadoreño de 1836–1837 fue Diego Vigil.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Francisco"
+	last_name = "Gomez"
+	historical = yes
+	female = no
+	birth_date = 1796.1.1			# M: confirmar fecha
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_francisco_gomez_els value = this }
+	}
+}
+
+els_francisco_malespin_character_template = {
+	# Francisco Malespin — cast ELS · nivel B · certeza P
+	# NOTAS: Caudillo militar; presidente 1844–1845; chocó con el obispo Viteri.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Francisco"
+	last_name = "Malespin"
+	historical = yes
+	female = no
+	birth_date = 1806.1.1			# M: confirmar fecha
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_central_america_caudillo
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_1
+	hq = region_central_america
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		imperious
+		wrathful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_malespin value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	commander_usage = {
+		country_trigger = {
+			c:ELS ?= THIS
+			NOT = { has_global_variable = cafm_hc_malespin }
+		}
+		role = general
+		earliest_usage_date = 1840.1.1
+		latest_usage_date = 1846.6.1
+	}
+}
+
+cafm_pedro_jose_arce = {
+	# Pedro Jose Arce — cast ELS · nivel B · certeza V
+	# NOTAS: Terrateniente del añil; presidente interino en 1841 y 1843, vicepresidente 1842–1844.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Pedro_Jose"
+	last_name = "Arce"
+	historical = yes
+	female = no
+	birth_date = 1801.8.28
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+	role = character_role_magnate
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	holding_type = building_manor_house
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		honorable
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_arce value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:ELS ?= THIS
+			NOT = { has_global_variable = cafm_hc_arce }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1840.1.1
+		latest_usage_date = 1850.1.1
+	}
+}
+
+cafm_juan_jose_guzman = {
+	# Juan Jose Guzman — cast ELS · nivel B · certeza P
+	# NOTAS: Jefe/presidente de El Salvador 1842–1844.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Juan_Jose"
+	last_name = "Guzman"
+	historical = yes
+	female = no
+	birth_date = 1797.1.1			# M: confirmar fecha
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_juan_jose_guzman value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:ELS ?= THIS
+			NOT = { has_global_variable = cafm_hc_juan_jose_guzman }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1842.1.1
+		latest_usage_date = 1846.1.1
+	}
+}
+
+cafm_jorge_viteri = {
+	# Jorge Viteri y Ungo — cast ELS · nivel B · certeza M
+	# NOTAS: Primer obispo de San Salvador (1842); después obispo de León (Nicaragua). Multinacional.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Jorge"
+	last_name = "Viteri_y_Ungo"
+	historical = yes
+	female = no
+	birth_date = 1802.4.23			# M: confirmar fecha
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		ambitious
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_viteri value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:ELS ?= THIS
+			NOT = { has_global_variable = cafm_hc_viteri }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_devout
+		}
+		earliest_usage_date = 1842.1.1
+		latest_usage_date = 1850.1.1
+	}
+}
+
+cafm_eugenio_aguilar = {
+	# Eugenio Aguilar — cast ELS · nivel B · certeza M
+	# NOTAS: Presidente 1846–1848.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Eugenio"
+	last_name = "Aguilar"
+	historical = yes
+	female = no
+	birth_date = 1804.1.1			# M: confirmar fecha
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		honorable
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_eugenio_aguilar value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:ELS ?= THIS
+			NOT = { has_global_variable = cafm_hc_eugenio_aguilar }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1850.1.1
+	}
+}
+
+els_doroteo_vasconcelos_character_template = {
+	# Doroteo Vasconcelos — cast ELS · nivel B · certeza M
+	# NOTAS: Liberal unionista; presidente 1848–1851.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Doroteo"
+	last_name = "Vasconcelos"
+	historical = yes
+	female = no
+	birth_date = 1803.1.1			# M: confirmar fecha
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_market_liberal
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		ambitious
+		innovative
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_vasconcelos value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:ELS ?= THIS
+			NOT = { has_global_variable = cafm_hc_vasconcelos }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1852.1.1
+	}
+}
+
+els_gerardo_barrios_character_template = {
+	# Gerardo Barrios — cast ELS · nivel B · certeza M
+	# NOTAS: General liberal morazanista; presidente 1859–1863; fusilado en 1865. Multinacional.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Gerardo"
+	last_name = "Barrios"
+	historical = yes
+	female = no
+	birth_date = 1813.9.24			# M: confirmar fecha
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_market_liberal
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_1
+	hq = region_central_america
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		innovative
+		ambitious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_gerardo_barrios value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	commander_usage = {
+		country_trigger = {
+			c:ELS ?= THIS
+			NOT = { has_global_variable = cafm_hc_gerardo_barrios }
+		}
+		role = general
+		earliest_usage_date = 1840.1.1
+		latest_usage_date = 1865.1.1
+	}
+}
+
+# ---------------------------------------------------------------------
+# FUERA DE LA VERSIÓN 1.0 (se conservan para versiones futuras)
+# ---------------------------------------------------------------------
+
+els_francisco_duenas_character_template = {
+	# Francisco Duenas — cast ELS · nivel B · certeza M
+	# NOTAS: Conservador; presidente 1851–1854 y 1863–1871. Fuera de la versión 1.0.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Francisco"
+	last_name = "Duenas"
+	historical = yes
+	female = no
+	birth_date = 1810.12.3			# M: confirmar fecha
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_devout
+	ideology = ideology_traditionalist
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		imperious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_duenas value = this }
+	}
+}

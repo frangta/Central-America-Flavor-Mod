@@ -104,7 +104,7 @@ dynamic_country_name = { name = dyn_c_cip_soconusco adjective = CIP_ADJ_soconusc
 #### Costa Rica ####
 COS = {
     
-	dynamic_country_name = { name = dyn_c_costarica_free_state adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = scope:actor scope:actor = { has_variable = costa_rica_1830s } } }
+	dynamic_country_name = { name = dyn_c_costarica_free_state adjective = COS_ADJ is_main_tag_only = yes priority = 10 trigger = { exists = scope:actor scope:actor = { has_variable = costa_rica_1830s } } }
  
     
 	dynamic_country_name = { name = dyn_c_COS_puppet_FRA adjective = COS_ADJ is_main_tag_only = yes priority = 100 trigger = { exists = c:FRA scope:actor = { is_subject_of = c:FRA } } }
