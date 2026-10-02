@@ -1,0 +1,119 @@
+﻿# Why do some state entries have quote marks around them, when others don't?
+# It's because of differing methods of editing throughout the production of the game. Quote marks are unnecessary, but harmless if present.
+
+STATES = {
+	s:STATE_GUATEMALA = {
+		add_homeland = cu:mayan
+		add_homeland = cu:central_american
+		add_homeland = cu:guatemalan
+		add_homeland = cu:garifuna_arawak 
+        
+	}
+	s:STATE_HONDURAS = {
+		
+		
+	    set_owner_of_provinces = {
+			country = c:MKT
+			provinces = { x528F3B }
+		}
+		add_homeland = cu:central_american
+		add_homeland = cu:honduran
+		add_homeland = cu:lenca             
+		add_homeland = cu:mangue_chorotega  
+		add_homeland = cu:garifuna_arawak
+          
+		
+	}
+	s:STATE_NICARAGUA = { 
+		add_homeland = cu:central_american
+		add_homeland = cu:nicaraguan
+		add_homeland = cu:miskito
+		add_homeland = cu:mangue_chorotega
+		add_homeland = cu:garifuna_arawak 
+        
+		
+		
+	}
+	s:STATE_COSTA_RICA = {
+		set_owner_of_provinces = {
+			country = c:RDT
+			provinces = { x1A076A }
+		}
+		set_owner_of_provinces = {
+			country = c:CLM
+			provinces = { x10EF80 }
+		}
+		add_homeland = cu:central_american
+		add_homeland = cu:costa_rican
+		add_homeland = cu:chibchan_central_america
+		add_homeland = cu:bribri_talamanca        
+		add_homeland = cu:cabecar                 
+		add_homeland = cu:ngabe_culture           
+		add_homeland = cu:mangue_chorotega        		
+	}
+	s:STATE_PANAMA = {
+		
+		set_owner_of_provinces = {
+			country = c:UCA
+			provinces = { x47C5F8 }
+		}
+		set_owner_of_provinces = {
+			country = c:NC3
+			provinces = { xBB820B }
+		}
+		set_owner_of_provinces = {
+			country = c:NC2
+			provinces = { xB0A911 }
+		}
+
+		add_claim = c:CLM
+		add_homeland = cu:central_american
+		add_homeland = cu:panamanian
+		add_homeland = cu:afro_caribeno
+		add_homeland = cu:chibchan_central_america
+		add_homeland = cu:bribri_talamanca        
+		add_homeland = cu:embera                 
+		add_homeland = cu:ngabe_culture
+		add_homeland = cu:guna_kuna		
+	}
+
+	s:STATE_CHIAPAS = {
+		# Soconusco and parts of Los Altos. Control was disputed.
+		
+		set_owner_of_provinces = {
+			country = c:CIP
+			provinces = { x1030C0 x4DBDE9 xA087F6 x8E26C5 xD03040 }
+		}
+               
+		add_homeland = cu:mexican
+		add_homeland = cu:central_american		
+		add_homeland = cu:mayan
+		add_claim = c:MEX
+                add_claim = c:UCA
+	}
+	s:STATE_SAN_SALVADOR = {
+
+		add_homeland = cu:central_american
+		add_homeland = cu:el_salvadorian
+		add_homeland = cu:lenca
+		add_homeland = cu:ngabe_culture
+		
+	}
+	s:STATE_YUCATAN = {
+		
+		set_owner_of_provinces = {
+			country = c:MEX
+			provinces = { x1DB7A7 x40B001 xCE98DE x23EF68 x2C4E34 x35FEEB x47D122 x4F7405 x5030C0 x51E4B6 x54250B x68F271 x69E5AF x8BE638 x90AC14 x91484C xA59F7B xA8DEBE xB598B9 xCE9FD1 xD1EC91 xDB85B0 xDD8B61 xE280B2 xE31B45 xE3AD92 xE68FD8 xFEE4D4 }
+		}
+		#set_owner_of_provinces = {
+		#	country = c:UCA
+		#	provinces = {  }
+		#}
+		
+		add_homeland = cu:mexican
+		add_homeland = cu:mayan
+		add_claim = c:MEX
+                add_claim = c:UCA
+	}
+	
+}

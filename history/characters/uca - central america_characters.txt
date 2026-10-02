@@ -1,0 +1,39 @@
+﻿CHARACTERS = {
+	c:UCA ?= {
+		create_character = {
+			template = UCA_francisco_morazan
+                      ig_leader = yes
+		}
+       # --- LÍDER INTELECTUAL ---
+        create_character = {
+            template = gua_mariano_galvez_character_template
+            ig_leader = yes
+        }
+
+        # --- LÍDER IGLESIA ---
+        create_character = {
+            template = uca_ramon_casaus_character_template
+            ig_leader = yes
+        }
+
+        # --- LÍDER PEQUEÑA BURGUESÍA ---
+        create_character = {
+            template = uca_francisco_barrundia_character_template
+            ig_leader = yes
+        }
+
+        # --- LÍDER HACENDADOS ---
+        create_character = {
+            template = gua_mariano_aycinena_character_template
+            ig_leader = yes
+        }
+
+        # --- GENERAL ADICIONAL ---
+        create_character = {
+            template = hon_cabanas_character_template
+
+        }
+        
+
+    }
+}

@@ -1,0 +1,264 @@
+﻿ca_dependency = {
+	groups = { general }
+	texture = "gfx/interface/icons/lens_toolbar_icons/protectorate.dds"
+	requires_approval = yes
+	uses_random_approval = no
+	can_use_obligations = no
+	should_notify_third_parties = yes
+
+	unlocking_technologies = {
+	}
+
+	selectable = {
+	    is_ca_culture_country = yes
+		NOT = { is_country_type = decentralized }
+		is_revolutionary = no
+		is_secessionist = no
+		NOT = { is_subject = yes }
+		NOT = { is_at_war = yes }
+	}
+
+	potential = {
+		
+		scope:target_country = {
+			NOT = { is_country_type = decentralized }
+			is_ca_culture_country = yes
+			#country_rank <= rank_value:insignificant_power
+			OR = {
+				NOT = { is_subject = yes }
+				is_subject_of = scope:actor
+			}
+			NOT = { is_at_war = yes }
+		}
+	}
+
+	possible = {		
+		
+		NOT = { has_war_with = scope:target_country }
+		NOT = { is_diplomatic_play_enemy_of = scope:target_country }
+
+		
+		NOT = { infamy >= 25 }
+	}
+
+
+    pact = {
+        cost = 10
+		#has_junior_participant = yes
+		maintenance_paid_by = first_country
+		income_transfer = 0.3
+		second_country_gets_income_transfer = no
+		income_transfer_based_on_second_country = yes
+
+		max_target_involvement = 8000
+		target_involvement_applies_to = source_country
+
+        
+		relations_progress_per_day = 1
+        relations_improvement_max = 60
+
+
+        subject_type = subject_type_ca_dependency
+
+        second_modifier = {
+				country_law_enactment_imposition_success_add = 0.1
+        }
+        
+		actor_can_break = {
+			is_diplomatic_play_committed_participant = no
+		}
+
+		target_can_break = { # Has to use diplomatic play to break
+			always = no
+		}
+
+		manual_break_effect = {
+			create_bidirectional_truce = { country = scope:target_country months = 60 }
+		}
+
+		auto_break_effect = {
+			create_bidirectional_truce = { country = scope:target_country months = 60 }
+		}
+    }
+
+	ai = {
+        check_acceptance_for_will_propose = yes
+
+        evaluation_chance = {
+            value = 1
+        }
+
+        accept_score = {
+            value = 0
+
+            # 1. Base restrictiva.
+            add = {
+                desc = "DIPLOMATIC_ACCEPTANCE_BASE"
+                value = -100
+            }
+
+            # 2. Comparación de PIB (Reducido a un máximo de +50)
+            add = {
+                desc = "DIPLOMATIC_ACCEPTANCE_GDP"
+                value = "scope:actor.ai_gdp_comparison(root)" # CAFM fix: scope:source_country no existe en acciones diplomaticas
+                multiply = 5
+                min = -50
+                max = 50
+            }
+
+            # 3. Privilegios Comerciales 
+            if = {
+                limit = {
+                    any_scope_treaty = {
+                        binds = scope:actor # CAFM fix: root ya es el pais objetivo; hay que mirar tratados con el que propone
+                        any_scope_article = {
+                            has_type = trade_privilege
+                            source_country = root
+                        }
+                    }
+                }
+                add = {
+                    desc = "DIPLOMATIC_ACCEPTANCE_TRADE_PRIVILEGES"
+                    value = 25
+                }
+            }
+
+            # 4. Alianza (Si ya son aliados, confían en ti)
+            if = {
+                limit = {
+                    any_scope_treaty = {
+                        binds = scope:actor # CAFM fix
+                        any_scope_article = { has_type = alliance }
+                    }
+                }
+                add = {
+                    desc = "DIPLOMATIC_ACCEPTANCE_ALLIANCE"
+                    value = 40
+                }
+            }
+
+            # 5. Fuerza del Ejército y Armada (Intimidación militar)
+            if = {
+                limit = { "scope:actor.ai_army_comparison(root)" > 0 }
+                add = {
+                    desc = "DIPLOMATIC_ACCEPTANCE_ARMY_STRENGTH"
+                    value = "scope:actor.ai_army_comparison(root)"
+                    multiply = 2
+                    max = 50
+                }
+            }
+            else = {
+                add = {
+                    desc = "DIPLOMATIC_ACCEPTANCE_ARMY_STRENGTH"
+                    value = -50 # Penalización si eres más débil
+                }
+            }
+
+            # 6. Cultura y Religión Compartida (Identidad Centroamericana)
+            if = {
+                limit = { # CAFM fix: los paises no tienen enlace .culture
+                    any_primary_culture = { is_primary_culture_of = scope:actor }
+                }
+                add = {
+                    desc = "CA_UNIFY_ACCEPT_SHARED_CULTURE" # Asegúrate de definir esto en tu .yml
+                    value = 30
+                }
+            }
+            if = {
+                limit = { scope:actor.religion = scope:target_country.religion }
+                add = {
+                    desc = "CA_UNIFY_ACCEPT_SHARED_RELIGION"
+                    value = 10
+                }
+            }
+
+            # 7. Relaciones
+            add = {
+                desc = "DIPLOMATIC_ACCEPTANCE_RELATIONS"
+                if = {
+                    limit = { "relations(scope:actor)" < relations_threshold:cordial }
+                    value = -50
+                }
+                if = {
+                    limit = {
+                        "relations(scope:actor)" >= relations_threshold:cordial
+                        "relations(scope:actor)" < relations_threshold:amicable
+                    }
+                    value = 0
+                }
+                if = {
+                    limit = {
+                        "relations(scope:actor)" >= relations_threshold:amicable
+                        "relations(scope:actor)" < relations_threshold:friendly
+                    }
+                    value = 25
+                }
+                if = {
+                    limit = { "relations(scope:actor)" >= relations_threshold:friendly }
+                    value = 50
+                }
+            }
+
+            # 8. Actitud
+            add = {
+                desc = "DIPLOMATIC_ACCEPTANCE_ATTITUDE"
+                if = {
+                    limit = { has_attitude = { who = scope:actor attitude = genial } }
+                    value = 50
+                }
+                else_if = {
+                    limit = {
+                        OR = {
+                            has_attitude = { who = scope:actor attitude = cooperative }
+                            has_attitude = { who = scope:actor attitude = conciliatory }
+                            has_attitude = { who = scope:actor attitude = loyal }
+                            has_attitude = { who = scope:actor attitude = protective }
+                        }
+                    }
+                    value = 20
+                }
+                else_if = {
+                    limit = {
+                        OR = {
+                            has_attitude = { who = scope:actor attitude = antagonistic }
+                            has_attitude = { who = scope:actor attitude = domineering }
+                            has_attitude = { who = scope:actor attitude = belligerent }
+                            has_attitude = { who = scope:actor attitude = rebellious }
+                        }
+                    }
+                    value = -200
+                }
+            }
+
+            # 9. Infamia
+            add = {
+                desc = "DIPLOMATIC_ACCEPTANCE_INFAMY"
+                if = {
+                    limit = {
+                        "scope:actor.infamy" >= infamy_threshold:infamous
+                        "scope:actor.infamy" < infamy_threshold:notorious
+                    }
+                    value = -10
+                }
+                if = {
+                    limit = { "scope:actor.infamy" >= infamy_threshold:notorious }
+                    value = -50
+                }
+            }
+        }
+
+		# CAFM fix: estaba fuera del bloque ai (sobraba una llave) y apuntaba a ca_unify_countries
+		will_propose = {
+			scope:target_country = {
+				would_accept_diplomatic_action = {
+					actor = root
+					type = ca_dependency
+				}
+			}
+		}
+
+		propose_score = {
+			value = 10000
+		}
+	}
+}

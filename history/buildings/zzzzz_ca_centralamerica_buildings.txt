@@ -1,0 +1,61 @@
+﻿BUILDINGS={
+	s:STATE_GUATEMALA={
+		region_state:UCA={
+			create_building={
+				building="building_university"
+				add_ownership={
+					country={
+						country="c:UCA"
+						levels=1
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_scholastic_education" "pm_religious_academia" }
+			}
+
+		}
+	}
+	s:STATE_COSTA_RICA={
+		region_state:UCA={
+			create_building={
+				building="building_coffee_plantation"
+				add_ownership={
+					building={
+						type="building_manor_house"
+						country="c:UCA"
+						levels=1
+						region="STATE_COSTA_RICA"
+					}
+				}
+				reserves=1
+				activate_production_methods={ "coffee_plantation_dry_process" "pm_road_carts"  }
+			}
+			create_building={
+				building="building_fishing_wharf"
+				add_ownership={
+					building={
+						type="building_fishing_wharf"
+						country="c:UCA"
+						levels=1
+						region="STATE_COSTA_RICA"
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_simple_fishing" "pm_unrefrigerated"  }
+			}
+			create_building={
+				building="building_maize_farm"
+				add_ownership={
+					building={
+						type="building_maize_farm"
+						country="c:UCA"
+						levels=1
+						region="STATE_COSTA_RICA"
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled"  }
+			}
+		}
+	}
+}

@@ -1,0 +1,602 @@
+﻿# =====================================================================
+# CAFM — HONDURAS — HON
+# Plantillas de personaje con el esquema por bloques del autor.
+# Generado el 2026-10-02. Cast latente: cada personaje se etiqueta con
+#   set_variable = cafm_cast_<cast>      (su cast nacional)
+#   cafm_hc_<clave>                      (registro global anti-duplicados)
+# Certeza: V verificado · P parcial · M de memoria (confirmar fechas)
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# VERSIÓN 1.0 (1836–1850)
+# ---------------------------------------------------------------------
+
+hon_joaquin_rivera_character_template = {
+	# Joaquin Rivera Bragas — cast HON · nivel A · certeza P
+	# NOTAS: Jefe de Estado de Honduras 1833–1836. Lo crean los efectos de creación de HON como gobernante.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Joaquin"
+	last_name = "Rivera_Bragas"
+	historical = yes
+	female = no
+	birth_date = 1795.10.20			# M: confirmar fecha
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_reformer
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		brave
+		meticulous
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_joaquin_rivera value = this }
+	}
+}
+
+hon_jose_maria_martinez_character_template = {
+	# Jose Maria Martinez Salinas — cast HON · nivel B · certeza M
+	# NOTAS: Jefe de Estado 1837–1838.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Jose_Maria"
+	last_name = "Martinez_Salinas"
+	historical = yes
+	female = no
+	birth_date = 1794.1.1			# M: confirmar fecha
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_market_liberal
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		experienced_political_operator
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_martinez_salinas value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:HON ?= THIS
+			NOT = { has_global_variable = cafm_hc_martinez_salinas }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1840.1.1
+	}
+}
+
+juan_franscisco_de_molina_character_template = {
+	# Juan Francisco de Molina — cast HON · nivel B · certeza M
+	# NOTAS: Jefe de Estado 1839.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Juan_Francisco"
+	last_name = "de_Molina"
+	historical = yes
+	female = no
+	birth_date = 1779.4.4			# M: confirmar fecha
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_juan_francisco_molina value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:HON ?= THIS
+			NOT = { has_global_variable = cafm_hc_juan_francisco_molina }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1838.1.1
+		latest_usage_date = 1841.1.1
+	}
+}
+
+hon_jose_zelaya_character_template = {
+	# Jose Francisco Zelaya — cast HON · nivel B · certeza M
+	# NOTAS: Jefe de Estado 1839–1841.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Jose_Francisco"
+	last_name = "Zelaya"
+	historical = yes
+	female = no
+	birth_date = 1798.1.1			# M: confirmar fecha
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		imperious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_zelaya_ayes value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:HON ?= THIS
+			NOT = { has_global_variable = cafm_hc_zelaya_ayes }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1839.1.1
+		latest_usage_date = 1842.1.1
+	}
+}
+
+hon_francisco_ferrera_character_template = {
+	# Francisco Ferrera — cast HON · nivel B · certeza P
+	# NOTAS: Caudillo conservador; primer presidente de Honduras 1841–1845.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Francisco"
+	last_name = "Ferrera"
+	historical = yes
+	female = no
+	birth_date = 1794.4.4			# M: confirmar fecha
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_central_america_caudillo
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_2
+	hq = region_central_america
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		imperious
+		cruel
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_ferrera value = this }
+		set_variable = is_ferrera
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	commander_usage = {
+		country_trigger = {
+			c:HON ?= THIS
+			NOT = { has_global_variable = cafm_hc_ferrera }
+		}
+		role = general
+		earliest_usage_date = 1838.1.1
+		latest_usage_date = 1848.1.1
+	}
+}
+
+cafm_coronado_chavez = {
+	# Coronado Chavez — cast HON · nivel B · certeza V
+	# NOTAS: Vicepresidente con Ferrera; presidente 1845–1847; fundó la Sociedad Literaria (1846), origen de
+	#        la Universidad.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Coronado"
+	last_name = "Chavez"
+	historical = yes
+	female = no
+	birth_date = 1807.1.1			# M: confirmar fecha
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_traditionalist
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+		erudite
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_coronado_chavez value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:HON ?= THIS
+			NOT = { has_global_variable = cafm_hc_coronado_chavez }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1841.1.1
+		latest_usage_date = 1850.1.1
+	}
+}
+
+juan_lindo_character_template = {
+	# Juan Lindo — cast HON · nivel C (evento) · certeza V
+	# NOTAS: Hondureño (Tegucigalpa). Jefe de El Salvador 1841–1842; presidente de Honduras 1847–1852.
+	#        Multinacional. Lleva ruler = yes porque el evento de ca_central_america que lo crea no lo pasa.
+	#        CORREGIDO: antes estaba en Los Altos.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Juan"
+	last_name = "Lindo"
+	historical = yes
+	female = no
+	birth_date = 1790.5.16			# M: confirmar fecha
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	ruler = yes
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+		meticulous
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_lindo value = this }
+	}
+}
+
+hon_de_herrera_character_template = {
+	# Dionisio de Herrera — cast HON · nivel B · certeza V
+	# NOTAS: Jefe de Honduras 1824–1827 y de Nicaragua 1830–1833; retirado como maestro en San Vicente (El
+	#        Salvador) desde 1838. Multinacional.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Dionisio"
+	last_name = "de_Herrera"
+	historical = yes
+	female = no
+	birth_date = 1781.10.9
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		expert_political_operator
+		charismatic
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_dionisio_herrera value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:HON ?= THIS
+			NOT = { has_global_variable = cafm_hc_dionisio_herrera }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			OR = {
+				is_interest_group_type = ig_intelligentsia
+				is_interest_group_type = ig_landowners
+			}
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.6.13
+		chance = 90
+	}
+}
+
+hon_cabanas_character_template = {
+	# Jose Trinidad Cabanas — cast HON · nivel B · certeza V
+	# NOTAS: General liberal morazanista; presidente 1852–1855.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Jose_Trinidad"
+	last_name = "Cabanas"
+	historical = yes
+	female = no
+	birth_date = 1805.6.9
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_liberal_leader
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_1
+	hq = region_central_america
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		brave
+		romantic
+		tactful
+		expert_offensive_planner
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_cabanas value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	commander_usage = {
+		country_trigger = {
+			c:HON ?= THIS
+			NOT = { has_global_variable = cafm_hc_cabanas }
+		}
+		role = general
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1871.1.8
+	}
+}
+
+hon_jose_santos_guardiola_character_template = {
+	# Jose Santos Guardiola — cast HON · nivel B · certeza M
+	# NOTAS: General conservador; presidente 1856–1862.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Jose_Santos"
+	last_name = "Guardiola"
+	historical = yes
+	female = no
+	birth_date = 1816.11.1			# M: confirmar fecha
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_1
+	hq = region_central_america
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		brave
+		arrogant
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_guardiola value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	commander_usage = {
+		country_trigger = {
+			c:HON ?= THIS
+			NOT = { has_global_variable = cafm_hc_guardiola }
+		}
+		role = general
+		earliest_usage_date = 1844.1.1
+		latest_usage_date = 1862.1.11
+	}
+}
+
+# ---------------------------------------------------------------------
+# FUERA DE LA VERSIÓN 1.0 (se conservan para versiones futuras)
+# ---------------------------------------------------------------------
+
+hon_bogran_character_template = {
+	# Luis Bogran — cast HON · nivel B · certeza V
+	# NOTAS: Presidente 1883–1891. Fuera de la versión 1.0.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Luis"
+	last_name = "Bogran"
+	historical = yes
+	female = no
+	birth_date = 1849.6.3
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_reformer
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		innovative
+		expensive_tastes
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_bogran value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:HON ?= THIS
+			NOT = { has_global_variable = cafm_hc_bogran }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			OR = {
+				is_interest_group_type = ig_landowners
+				is_interest_group_type = ig_rural_folk
+			}
+		}
+		earliest_usage_date = 1880.1.1
+		latest_usage_date = 1895.7.9
+		chance = 90
+	}
+}
+
+hon_marco_aurelio_soto_character_template = {
+	# Marco Aurelio Soto — cast HON · nivel B · certeza V
+	# NOTAS: Reforma Liberal 1876–1883. Fuera de la versión 1.0.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Marco_Aurelio"
+	last_name = "Soto"
+	historical = yes
+	female = no
+	birth_date = 1846.11.13
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_modernizer_leader
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		innovative
+		meticulous
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_marco_aurelio_soto value = this }
+	}
+}

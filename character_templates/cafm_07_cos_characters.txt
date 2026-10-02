@@ -1,0 +1,725 @@
+﻿# =====================================================================
+# CAFM — COSTA RICA — COS
+# Plantillas de personaje con el esquema por bloques del autor.
+# Generado el 2026-10-02. Cast latente: cada personaje se etiqueta con
+#   set_variable = cafm_cast_<cast>      (su cast nacional)
+#   cafm_hc_<clave>                      (registro global anti-duplicados)
+# Certeza: V verificado · P parcial · M de memoria (confirmar fechas)
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# VERSIÓN 1.0 (1836–1850)
+# ---------------------------------------------------------------------
+
+cos_braulio_carrillo_character_template = {
+	# Braulio Carrillo — cast COS · nivel A · certeza V
+	# NOTAS: Jefe de Estado 1835–1837 y 1838–1842; derrocado por Morazán; asesinado en El Salvador (1845).
+	#        Multinacional. Lo crean los efectos de creación de COS como gobernante.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Braulio"
+	last_name = "Carrillo"
+	historical = yes
+	female = no
+	birth_date = 1800.3.20
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_central_america_caudillo
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		brave
+		experienced_political_operator
+		direct
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_carrillo value = this }
+		set_variable = is_carrillo
+	}
+}
+
+cafm_juan_mora_fernandez = {
+	# Juan Mora Fernandez — cast COS · nivel B · certeza M
+	# NOTAS: Primer jefe de Estado de Costa Rica (1824–1833); figura moderada.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Juan"
+	last_name = "Mora_Fernandez"
+	historical = yes
+	female = no
+	birth_date = 1784.7.12			# M: confirmar fecha
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		honorable
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_juan_mora_fernandez value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:COS ?= THIS
+			NOT = { has_global_variable = cafm_hc_juan_mora_fernandez }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
+	}
+}
+
+joaquin_mora_character_template = {
+	# Joaquin Mora Fernandez — cast COS · nivel B · certeza V
+	# NOTAS: Jefe provisional en 1837; desterrado por conspirar contra Carrillo (1839).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Joaquin"
+	last_name = "Mora_Fernandez"
+	historical = yes
+	female = no
+	birth_date = 1786.1.16
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		experienced_political_operator
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_joaquin_mora value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:COS ?= THIS
+			NOT = { has_global_variable = cafm_hc_joaquin_mora }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1840.1.1
+	}
+}
+
+cos_manuel_aguilar_character_template = {
+	# Manuel Aguilar Chacon — cast COS · nivel B · certeza M
+	# NOTAS: Jefe de Estado 1837–1838; derrocado por Carrillo.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Manuel"
+	last_name = "Aguilar_Chacon"
+	historical = yes
+	female = no
+	birth_date = 1797.1.1			# M: confirmar fecha
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_market_liberal
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		innovative
+		meticulous
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_aguilar_chacon value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:COS ?= THIS
+			NOT = { has_global_variable = cafm_hc_aguilar_chacon }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1837.1.1
+		latest_usage_date = 1839.1.1
+	}
+}
+
+cafm_jose_rafael_gallegos = {
+	# Jose Rafael de Gallegos — cast COS · nivel B · certeza V
+	# NOTAS: Jefe de Estado 1833–1835 y 1845–1846; élite de Cartago.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Jose_Rafael"
+	last_name = "de_Gallegos"
+	historical = yes
+	female = no
+	birth_date = 1784.10.9			# M: confirmar fecha
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_gallegos value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:COS ?= THIS
+			NOT = { has_global_variable = cafm_hc_gallegos }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1850.1.1
+	}
+}
+
+cafm_manuel_antonio_bonilla = {
+	# Manuel Antonio Bonilla Nava — cast COS · nivel B · certeza V
+	# NOTAS: Jefe suplente y ministro general de Carrillo (1841–1842). Seguidor de Carrillo: lleva
+	#        ideology_carrillismo.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Manuel_Antonio"
+	last_name = "Bonilla_Nava"
+	historical = yes
+	female = no
+	birth_date = 1806.10.15
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_carrillismo
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		meticulous
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_bonilla_nava value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:COS ?= THIS
+			NOT = { has_global_variable = cafm_hc_bonilla_nava }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1838.1.1
+		latest_usage_date = 1850.1.1
+	}
+}
+
+cafm_antonio_pinto_soares = {
+	# Antonio Pinto Soares — cast COS · nivel C (evento 1842) · certeza P
+	# NOTAS: General portugués al servicio de Costa Rica; encabezó el levantamiento del 11 de septiembre de
+	#        1842 contra Morazán. Nivel C: lo crea el evento de 1842.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Antonio"
+	last_name = "Pinto_Soares"
+	historical = yes
+	female = no
+	birth_date = 1780.1.1			# M: confirmar fecha
+	culture = cu:portuguese
+	religion = rel:catholic
+	home_region = STATE_ENTRE_DOURO_E_MINHO
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_moderate
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_1
+	hq = region_central_america
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		brave
+		basic_defensive_strategist
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_pinto_soares value = this }
+	}
+}
+
+cafm_pancha_carrasco = {
+	# Francisca Carrasco Jimenez — cast COS · nivel C (evento 1842) · certeza V
+	# NOTAS: Agitó contra Morazán (1842); combatió en Rivas (1856). Nivel C: la crea el evento de 1842.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Francisca"
+	last_name = "Carrasco_Jimenez"
+	historical = yes
+	female = yes
+	birth_date = 1816.4.8
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_agitator
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_rural_folk
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		brave
+		firebrand
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_pancha_carrasco value = this }
+	}
+}
+
+cos_jose_maria_alfaro_character_template = {
+	# Jose Maria Alfaro Zamora — cast COS · nivel B · certeza M
+	# NOTAS: Jefe de Estado 1842–1844 y 1846–1847.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Jose_Maria"
+	last_name = "Alfaro_Zamora"
+	historical = yes
+	female = no
+	birth_date = 1799.1.1			# M: confirmar fecha
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_market_liberal
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		meticulous
+		innovative
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_alfaro_zamora value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:COS ?= THIS
+			NOT = { has_global_variable = cafm_hc_alfaro_zamora }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1842.1.1
+		latest_usage_date = 1848.1.1
+	}
+}
+
+cafm_francisco_maria_oreamuno = {
+	# Francisco Maria Oreamuno — cast COS · nivel B · certeza M
+	# NOTAS: Jefe de Estado en 1844.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Francisco_Maria"
+	last_name = "Oreamuno"
+	historical = yes
+	female = no
+	birth_date = 1801.1.1			# M: confirmar fecha
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		honorable
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_oreamuno value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:COS ?= THIS
+			NOT = { has_global_variable = cafm_hc_oreamuno }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1843.1.1
+		latest_usage_date = 1846.1.1
+	}
+}
+
+cos_castro_character_template = {
+	# Jose Maria Castro — cast COS · nivel B · certeza V
+	# NOTAS: Presidente 1847–1849 (proclamó la República en 1848) y 1866–1868.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Jose_Maria"
+	last_name = "Castro"
+	historical = yes
+	female = no
+	birth_date = 1818.9.1
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_republican_leader
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		arrogant
+		experienced_political_operator
+		direct
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_castro_madriz value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:COS ?= THIS
+			NOT = { has_global_variable = cafm_hc_castro_madriz }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1844.1.1
+		latest_usage_date = 1892.4.4
+		chance = 90
+	}
+}
+
+cos_juan_rafael_mora_character_template = {
+	# Juan Rafael Mora Porras — cast COS · nivel B · certeza M
+	# NOTAS: Cafetalero; presidente 1849–1859; Campaña Nacional contra Walker. Magnate del café.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Juan_Rafael"
+	last_name = "Mora_Porras"
+	historical = yes
+	female = no
+	birth_date = 1814.2.8			# M: confirmar fecha
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+	role = character_role_magnate
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_market_liberal
+	holding_type = building_manor_house
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		charismatic
+		brave
+		innovative
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_juan_rafael_mora value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:COS ?= THIS
+			NOT = { has_global_variable = cafm_hc_juan_rafael_mora }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1846.1.1
+		latest_usage_date = 1860.9.30
+	}
+}
+
+# ---------------------------------------------------------------------
+# FUERA DE LA VERSIÓN 1.0 (se conservan para versiones futuras)
+# ---------------------------------------------------------------------
+
+cos_tomas_guardia_character_template = {
+	# Tomas Guardia Gutierrez — cast COS · nivel B · certeza V
+	# NOTAS: Dictador 1870–1882. Fuera de la versión 1.0.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Tomas"
+	last_name = "Guardia_Gutierrez"
+	historical = yes
+	female = no
+	birth_date = 1831.12.16
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_market_liberal
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		imperious
+		innovative
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_tomas_guardia value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			c:COS ?= THIS
+			NOT = { has_global_variable = cafm_hc_tomas_guardia }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_armed_forces
+		}
+		earliest_usage_date = 1870.4.27
+		latest_usage_date = 1882.7.6
+		chance = 100
+	}
+}
+
+cos_prospero_fernandez_character_template = {
+	# Prospero Fernandez Oreamuno — cast COS · nivel B · certeza M
+	# NOTAS: Presidente 1882–1885 (leyes liberales de 1884). Fuera de la versión 1.0. Antes llevaba
+	#        ideology_liberal_anticlerical, que no existe.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Prospero"
+	last_name = "Fernandez_Oreamuno"
+	historical = yes
+	female = no
+	birth_date = 1834.2.18			# M: confirmar fecha
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_liberal_leader
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		innovative
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_prospero_fernandez value = this }
+	}
+}
+
+cos_bernardo_soto_character_template = {
+	# Bernardo Soto Alfaro — cast COS · nivel B · certeza M
+	# NOTAS: Presidente 1885–1889. Fuera de la versión 1.0.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Bernardo"
+	last_name = "Soto_Alfaro"
+	historical = yes
+	female = no
+	birth_date = 1854.2.12			# M: confirmar fecha
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_market_liberal
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		meticulous
+		innovative
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_bernardo_soto value = this }
+	}
+}
