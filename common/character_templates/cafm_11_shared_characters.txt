@@ -1,0 +1,209 @@
+﻿# =====================================================================
+# CAFM — PERSONAJES COMPARTIDOS ENTRE CASTS
+# Mismo esquema por bloques que cafm_01 ... cafm_99. Un personaje
+# compartido lleva las variables de todos sus casts; el registro
+# global cafm_hc_<clave> impide que exista dos veces.
+# Certeza: V verificado · P parcial · M de memoria (confirmar fechas)
+# =====================================================================
+
+cafm_manuel_quijano = {
+	# Manuel Quijano y Garcia — casts COS + NIC · nivel B · certeza V
+	# FUENTE: R. Fernandez Guardia, "La guerra de la Liga y la invasion de
+	#         Quijano", Revista del Archivo Nacional 3 (1939), pp. 373-382.
+	# NOTAS: Nacio hacia 1801 en Cartago (padre nicaraguense). Artillero
+	#        espanol (Cadiz, Cartagena, La Habana, Panama), deserto en 1821;
+	#        imperialista en Ochomogo (1823); capitan federal (1826). Complot
+	#        liguero de 1835 -> desterrado por Carrillo. Invade Guanacaste
+	#        en 1836 y Carrillo lo declara fuera de la ley (4 jul 1836).
+	#        Coronel al servicio de Nicaragua: El Potrero (31 ene 1840),
+	#        San Juan del Norte (1841, incidente de la HMS Tweed), deserta a
+	#        Malespin (1844), toma de Leon (ene 1845), Monterredondo (14 ago 1845).
+	#        En Costa Rica es un proscrito: no tiene bloque de uso para COS.
+	#        Lo crean el evento ca_nicaragua_events.8 (opcion b) y
+	#        ca_costa_rica_events.99 (Guanacaste independiente).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Manuel"
+	last_name = "Quijano"
+	historical = yes
+	female = no
+	birth_date = 1801.1.1			# P: "hacia 1801" segun la fuente
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist	# ligero en 1835; en Nicaragua, del partido "servil"
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_1
+	hq = region_central_america
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		ambitious
+		bandit
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_variable = cafm_cast_nic
+		set_global_variable = { name = cafm_hc_quijano value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	# Solo en Nicaragua: coronel desde 1840, general hasta 1845
+	commander_usage = {
+		country_trigger = {
+			c:NIC ?= THIS
+			NOT = { has_global_variable = cafm_hc_quijano }
+		}
+		role = general
+		earliest_usage_date = 1839.6.1
+		latest_usage_date = 1846.1.1
+	}
+}
+
+cafm_vicente_villasenor = {
+	# Vicente Villasenor — casts COS + ELS · nivel C · certeza P
+	# FUENTES: Fernandez Guardia, Revista del Archivo Nacional 3 (1939);
+	#          Wikipedia ES "Pacto del Jocote"; Wikipedia EN "Francisco Morazan".
+	# NOTAS: Salvadoreno al servicio de Costa Rica. Coronel en 1836: manda los
+	#        800 hombres contra Quijano (Pacificacion del Norte). Brigadier en
+	#        1842: Carrillo lo envia con 400 hombres contra Morazan y se une a el
+	#        en el Pacto del Jocote (11 abr 1842). Fusilado con Morazan en San
+	#        Jose el 15 sep 1842. Seguidor de Morazan: ideologia morazanista.
+	#        Lo crean los eventos .340 y .320 (sin bloque de uso).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Vicente"
+	last_name = "Villasenor"
+	historical = yes
+	female = no
+	birth_date = 1790.1.1			# M: confirmar fecha
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_ca_morazanista
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_2
+	hq = region_central_america
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+		basic_defensive_strategist
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_villasenor value = this }
+	}
+}
+
+cafm_jose_manuel_quiros = {
+	# Jose Manuel Quiros — cast COS · nivel C · certeza V (papel) / M (datos)
+	# FUENTE: Corella Ovares, "No queremos que nos vendan al Ecuador", Revista
+	#         de Historia (UNA) 80 (2019), pp. 77-94.
+	# NOTAS: Como capitan desconoce a Aguilar el 27 may 1838 (pronunciamiento
+	#        que devuelve el poder a Carrillo); como general desconoce a Castro
+	#        Madriz en nov 1849. Miembro de la elite militar. Lo crea el evento
+	#        .234 (sin bloque de uso).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Jose_Manuel"
+	last_name = "Quiros"
+	historical = yes
+	female = no
+	birth_date = 1800.1.1			# M: confirmar fecha
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_2
+	hq = region_central_america
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		ambitious
+		imperious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_jose_manuel_quiros value = this }
+	}
+}
+
+cafm_rafael_moya = {
+	# Rafael Moya Murillo — cast COS · nivel C · certeza P
+	# FUENTES: TSE, Historia de las elecciones presidenciales (2008), p. 13;
+	#          Wikipedia EN "Francisco Maria Oreamuno Bonilla".
+	# NOTAS: Jefe interino tras la partida de Oreamuno (1844-1845). Segundo en
+	#        las elecciones de 1849 (32 votos frente a 49 de Mora Porras).
+	#        Lo crea el evento .24 (opcion b).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Rafael"
+	last_name = "Moya_Murillo"
+	historical = yes
+	female = no
+	birth_date = 1799.1.1			# M: confirmar fecha
+	culture = cu:costa_rican
+	religion = rel:catholic
+	home_region = STATE_COSTA_RICA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_cos
+		set_global_variable = { name = cafm_hc_rafael_moya value = this }
+	}
+}

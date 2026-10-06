@@ -47,19 +47,22 @@ nic_jose_zepeda_character_template = {
 	on_created = {
 		set_variable = cafm_cast_nic
 		set_global_variable = { name = cafm_hc_zepeda value = this }
+		set_variable = is_zepeda		# CAFM Fase 1: lo usan je_ca_nic_conspiracy y ca_nicaragua_events.6/.13
 	}
 }
 
-TRY_REPLACE:NIC_braulio_mendieta = {
-	# Braulio Mendieta — cast NIC · nivel A · certeza V
-	# NOTAS: Encabezó el golpe de 1837 en el que murió Zepeda.
+nic_braulio_mendiola_character_template = {
+	# Braulio Mendiola — cast NIC · nivel C · certeza V
+	# NOTAS: Preso liberado por Méndez y Fonseca el 25 ene 1837 para detener a Zepeda; fue
+	#        capturado y ejecutado después (Fundación Enrique Bolaños). Antes figuraba como
+	#        «Mendieta» y con TRY_REPLACE, que solo reemplaza plantillas existentes.
 
 	# --- DATOS BÁSICOS ---
 	first_name = "Braulio"
-	last_name = "Mendieta"
+	last_name = "Mendiola"
 	historical = yes
 	female = no
-	birth_date = 1795.5.10			# M: confirmar fecha
+	birth_date = 1800.1.1			# M: fecha desconocida
 	culture = cu:nicaraguan
 	religion = rel:catholic
 	home_region = STATE_NICARAGUA
@@ -89,8 +92,52 @@ TRY_REPLACE:NIC_braulio_mendieta = {
 	# --- EFECTOS AL CREARSE ---
 	on_created = {
 		set_variable = cafm_cast_nic
-		set_global_variable = { name = cafm_hc_mendieta value = this }
-		set_variable = is_mendieta_conspirator
+		set_global_variable = { name = cafm_hc_mendiola value = this }
+		set_variable = is_mendiola_conspirator
+	}
+}
+
+nic_bernardo_mendez_character_template = {
+	# Bernardo Mendez de Figueroa — cast NIC · nivel B · certeza V
+	# NOTAS: Coronel nacido en León (1782), alias «el Pavo». Con Casto Fonseca dio el golpe del
+	#        25 ene 1837; Núñez lo nombró comandante general de armas el 26 ene 1837. Derrotado por
+	#        Morazán en Espíritu Santo (6 abr 1839); murió hacia mayo de 1839. Lo crea
+	#        ca_nicaragua_events.14 (Fase 1).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Bernardo"
+	last_name = "ca_Mendez"
+	historical = yes
+	female = no
+	birth_date = 1782.1.1			# P: año verificado, día no
+	culture = cu:nicaraguan
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+
+	# --- ROLES E IDENTIDAD ---
+	role = general
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_central_america_caudillo
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_2
+	hq = region_central_america
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		ambitious
+		imperious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_nic
+		set_global_variable = { name = cafm_hc_bernardo_mendez value = this }
 	}
 }
 

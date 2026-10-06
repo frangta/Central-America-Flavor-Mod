@@ -1,158 +1,205 @@
-﻿
+﻿############################################################
+# CAFM - Formables regionales y Federacion
+# Sistema en cadena: Nivel 1 -> Nivel 2 -> Nivel 3 (UCA) -> Nivel 4 (GCA)
+# Triggers en common/scripted_triggers/zz_ca_formables_triggers.txt
+############################################################
 
-REPLACE:UCA = {
-	use_culture_states = yes
+############################################################
+# NIVEL 2 - UNIONES REGIONALES (gran principado)
+# Requisito: ser el pais base de la ruta + los 3 diarios
+# (je_ca_enlightenment, je_ca_military_reform, je_ca_agro_export_boom)
+############################################################
 
-	required_states_fraction = 0.5
-	
-	ai_will_do = { always = yes }
+# Ruta Tica: Costa Rica -> Confederacion de Costa Rica
+CCR = {
+	states = {
+		STATE_COSTA_RICA
+		STATE_NICARAGUA
+		STATE_PANAMA
+	}
+	required_states_fraction = 1
+
+	possible = {
+		c:COS ?= this
+		is_subject = no
+		has_technology_researched = nationalism
+		ca_formable_consolidation_done = yes
+	}
+
+	ai_will_do = {
+		ca_formable_ai_ready = yes
+	}
 }
 
-
-#CCR = {
-#	states = {
-#		STATE_COSTA_RICA
-#		STATE_PANAMA
-#		STATE_NICARAGUA
-#	}
-#
-#	required_states_fraction = 1
-#	
-#	ai_will_do = { always = yes }
-#	
-#	possible = {
-#	NOT = { country_has_primary_culture = cu:central_american}
-#        country_has_primary_culture = cu:costa_rican
-#		has_technology_researched = nationalism
-#	}
-#}
-#
-#GGA = {
-#	states = {
-#		STATE_GUATEMALA
-#		STATE_CHIAPAS
-#		STATE_YUCATAN
-#	}
-#
-#	required_states_fraction = 1
-#	
-#	ai_will_do = { always = yes }
-#	
-#	possible = {
-#	NOT = { country_has_primary_culture = cu:central_american}	
-#    country_has_primary_culture = cu:guatemalan
-#
-#	}
-#}
-#
-#RNI = {
-#	states = {
-#		STATE_NICARAGUA
-#		STATE_HONDURAS
-#		STATE_COSTA_RICA
-#	}
-#
-#	required_states_fraction = 1
-#	
-#	ai_will_do = { always = yes }
-#	
-#	possible = {
-#	NOT = { country_has_primary_culture = cu:central_american}	
-#	country_has_primary_culture = cu:nicaraguan
-#       has_technology_researched = nationalism
-#	}
-#
-#
-#}
-#
-#UEL = {
-#	states = {
-#		STATE_SAN_SALVADOR
-#		STATE_GUATEMALA
-#		STATE_HONDURAS
-#	}
-#
-#	required_states_fraction = 1
-#	
-#	ai_will_do = { always = yes }
-#	
-#	possible = {
-#	NOT = { country_has_primary_culture = cu:central_american}	
-#     country_has_primary_culture = cu:el_salvadorian
-#		has_technology_researched = nationalism
-#	}
-#}
-#
-#UHO = {
-#	states = {
-#		STATE_HONDURAS
-#		STATE_NICARAGUA
-#		STATE_SAN_SALVADOR
-#	}
-#
-#	required_states_fraction = 1
-#	
-#	ai_will_do = { always = yes }
-#	
-#	possible = {
-#	NOT = { country_has_primary_culture = cu:central_american}	
-#     country_has_primary_culture = cu:honduran
-#		has_technology_researched = nationalism
-#	}
-#}
-#
-#UPN = {
-#	states = {
-#		STATE_PANAMA
-#		STATE_COSTA_RICA
-#		STATE_ANTIOQUIA
-#	}
-#
-#	required_states_fraction = 1
-#	
-#	ai_will_do = { always = yes }
-#	
-#	possible = {
-#	NOT = { country_has_primary_culture = cu:central_american}	
-#     country_has_primary_culture = cu:panamanian
-#				save_temporary_scope_as  = ca_secession_country
-#
-#	}
-#}
-
-
-CCA = {
+# Ruta Nica: Nicaragua -> Gran Nicaragua
+RNI = {
 	states = {
-		STATE_HONDURAS
-		STATE_GUATEMALA		
 		STATE_NICARAGUA
-		STATE_SAN_SALVADOR
-		STATE_PANAMA
+		STATE_HONDURAS
 		STATE_COSTA_RICA
 	}
+	required_states_fraction = 1
 
-	required_states_fraction = 0.5
-	
-	ai_will_do = { always = yes }
 	possible = {
-	OR = {
-	
-		country_has_primary_culture = cu:central_american
-
-		}	
-		
-	has_technology_researched = nationalism
-	save_temporary_scope_as  = central_american_confederation
-	save_temporary_scope_as  = central_american_was_falling
-		
+		c:NIC ?= this
+		is_subject = no
+		has_technology_researched = nationalism
+		ca_formable_consolidation_done = yes
 	}
 
+	ai_will_do = {
+		ca_formable_ai_ready = yes
+	}
 }
-REPLACE:CRB = {
-	states = { 
-                STATE_CENTRAL_CUBA
-                STATE_EASTERN_CUBA
+
+# Ruta Catracha: Honduras -> Union de Honduras
+UHO = {
+	states = {
+		STATE_HONDURAS
+		STATE_NICARAGUA
+		STATE_SAN_SALVADOR
+	}
+	required_states_fraction = 1
+
+	possible = {
+		c:HON ?= this
+		is_subject = no
+		has_technology_researched = nationalism
+		ca_formable_consolidation_done = yes
+	}
+
+	ai_will_do = {
+		ca_formable_ai_ready = yes
+	}
+}
+
+# Ruta Chapina: Guatemala -> Reino / Gran Republica de Guatemala
+GGA = {
+	states = {
+		STATE_GUATEMALA
+		STATE_CHIAPAS
+		STATE_YUCATAN
+	}
+	required_states_fraction = 1
+
+	possible = {
+		c:GUA ?= this
+		is_subject = no
+		has_technology_researched = nationalism
+		ca_formable_consolidation_done = yes
+	}
+
+	ai_will_do = {
+		ca_formable_ai_ready = yes
+	}
+}
+
+# Ruta Guanaca: El Salvador -> Triangulo del Norte
+UEL = {
+	states = {
+		STATE_SAN_SALVADOR
+		STATE_GUATEMALA
+		STATE_HONDURAS
+	}
+	required_states_fraction = 1
+
+	possible = {
+		c:ELS ?= this
+		is_subject = no
+		has_technology_researched = nationalism
+		ca_formable_consolidation_done = yes
+	}
+
+	ai_will_do = {
+		ca_formable_ai_ready = yes
+	}
+}
+
+# Ruta Istmena: Panama -> Union Panamena / Darien
+UPN = {
+	states = {
+		STATE_PANAMA
+		STATE_COSTA_RICA
+		STATE_ANTIOQUIA
+	}
+	required_states_fraction = 1
+
+	possible = {
+		c:PNM ?= this
+		is_subject = no
+		has_technology_researched = nationalism
+		ca_formable_consolidation_done = yes
+	}
+
+	ai_will_do = {
+		ca_formable_ai_ready = yes
+	}
+}
+
+# Ruta historica alternativa: Confederacion de Centroamerica
+# (Pacto de Chinandega, 1842: El Salvador, Honduras y Nicaragua).
+# Cuenta como Nivel 2. Antes la podia formar cualquier pais
+# central_american con la mitad de los 6 estados.
+CCA = {
+	states = {
+		STATE_SAN_SALVADOR
+		STATE_HONDURAS
+		STATE_NICARAGUA
+	}
+	required_states_fraction = 1
+
+	possible = {
+		OR = {
+			c:ELS ?= this
+			c:HON ?= this
+			c:NIC ?= this
+		}
+		is_subject = no
+		has_technology_researched = nationalism
+		ca_formable_consolidation_done = yes
+	}
+
+	ai_will_do = {
+		ca_formable_ai_ready = yes
+	}
+}
+
+############################################################
+# NIVEL 3 - REPUBLICA FEDERAL DE CENTROAMERICA
+# Requisito: ser potencia regional (Nivel 2) + je_reunify_central_america
+############################################################
+REPLACE_OR_CREATE:UCA = {
+	states = {
+		STATE_GUATEMALA
+		STATE_SAN_SALVADOR
+		STATE_HONDURAS
+		STATE_NICARAGUA
+		STATE_COSTA_RICA
+	}
+	required_states_fraction = 0.8	# 4 de los 5 estados de la Federacion de 1823
+
+	possible = {
+		ca_formable_tier_2_country = yes
+		is_subject = no
+		has_technology_researched = nationalism
+		ca_formable_reunification_done = yes
+	}
+
+	ai_will_do = {
+		ca_formable_ai_ready = yes
+	}
+}
+
+############################################################
+# CARIBE (fuera de la cadena centroamericana)
+############################################################
+
+# Federacion del Caribe
+REPLACE_OR_CREATE:CRB = {
+	states = {
 		STATE_WESTERN_CUBA
+		STATE_CENTRAL_CUBA
+		STATE_EASTERN_CUBA
 		STATE_JAMAICA
 		STATE_BAHAMAS
 		STATE_HAITI
@@ -161,22 +208,42 @@ REPLACE:CRB = {
 		STATE_WEST_INDIES
 		STATE_GUAYANA
 	}
-
 	required_states_fraction = 0.75
-	
-	ai_will_do = { always = yes }
+
+	possible = {
+		OR = {
+			country_has_primary_culture = cu:caribeno
+			country_has_primary_culture = cu:afro_antillean
+			country_has_primary_culture = cu:ca_antillianen
+		}
+		is_subject = no
+		has_technology_researched = pan-nationalism
+	}
+
+	ai_will_do = {
+		ca_formable_ai_ready = yes
+	}
 }
 
-REPLACE:ACF = {
-	states = { 
-                STATE_CENTRAL_CUBA
-                STATE_EASTERN_CUBA
+# Confederacion Antillana (Cuba, Santo Domingo y Puerto Rico)
+# OJO: country_definitions la crea como "ca_ACF"; debe ser "ACF".
+REPLACE_OR_CREATE:ACF = {
+	states = {
 		STATE_WESTERN_CUBA
+		STATE_CENTRAL_CUBA
+		STATE_EASTERN_CUBA
 		STATE_SANTO_DOMINGO
 		STATE_PUERTO_RICO
 	}
-
 	required_states_fraction = 1
-	
-	ai_will_do = { always = yes }
+
+	possible = {
+		country_has_primary_culture = cu:caribeno
+		is_subject = no
+		has_technology_researched = nationalism
+	}
+
+	ai_will_do = {
+		ca_formable_ai_ready = yes
+	}
 }

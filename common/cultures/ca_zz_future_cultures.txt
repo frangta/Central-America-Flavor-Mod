@@ -1,0 +1,386 @@
+﻿# =====================================================================
+# CAFM — Culturas fuera de la versión 1.0 (siglo XX / pendientes de decisión)
+# Revisado contra vanilla 1.13 (00_cultures, 00_cultural_heritages,
+# 01_languages, 01_language_groups). Generado 2026-10-02.
+# =====================================================================
+
+# Se conservan sin pops. ca_antillianen: pendiente decidir si son afroantillanos
+# anglófonos (usar afro_caribbean de vanilla) o una cultura neerlandesa.
+
+INJECT_OR_CREATE:ca_antillianen={
+	color = rgb{191 110 38}
+	religion = protestant
+    heritage = heritage_african_diaspora
+	language = language_dutch
+	traditions = { }	
+	male_common_first_names={
+		Abraham
+		Adolf
+		Adriaan
+		Alexander
+		Andreas
+		Andries
+		Antonius
+		Antoon
+		Barthout
+		Casimir
+		Christiaan
+		Christoffel
+		Constantijn
+		Cornelis
+		Daniel
+		Daniel_2
+		David
+		Dirk
+		Dominicus
+		Drikus
+		Eduardus
+		Eise
+		Elias
+		Ernst
+		Erwin
+		Frans
+		Frederik
+		Gabriel
+		Gaspar
+		Gerard
+		Gerben
+		Gijsbert
+		Godfried
+		Gustaaf
+		Hans
+		Hendrik
+		Hugo
+		Isaac
+		Jacob
+		Jan
+		Jeroen
+		Johan
+		Joost
+		Jurgen_2
+		Karel
+		Kasper
+		Laurens
+		Lodewijk
+		Luuk
+		Marius
+		Matthijs
+		Maurits
+		Maximiliaam
+		Merkus
+		Moritz
+		Nikolaas
+		Paul
+		Pauwel
+		Pieter
+		Quinten
+		Rafael
+		Richardus
+		Roeland
+		Rogier
+		Ruben
+		Rudolf
+		Rutger
+		Simon
+		Stefan
+		Thomas
+		Victor
+		Vincent
+		Willem
+		Zacharias
+	}
+	female_common_first_names = {
+		Aletta Annewies Anna Anna_Louisa
+		Beatrix
+		Cornelie Christina Catharina Constantia
+		Diderika
+		Emma Eufemia
+		Felicia
+		Goverdine
+		Henrieette
+		Ida
+		Juliana Johanna Jacoba
+		Louise Lessina
+		Maria Martha Margaretha
+		Pauline Petronella
+		Roosje 
+		Suzanna Sjoukje Sara
+		Wilhelmina
+	}	
+	noble_last_names = {
+		van_Boetzelaer
+		van_Coeverden
+		van_Doorn
+		De_Geer
+		Lampsins van_Lynden van_Lyere
+		van_den_Velden de_Vos_van_Steenwijk
+		van_Egmont
+		van_Saksen-Weimar
+		van_Oranje-Nassau
+		Schimmelpenninck_van_der_Oye
+		Melvill_van_Carnbee
+		van_Wassenaer
+	}
+	common_last_names={
+		Batenburg
+		Bentinck
+		Boetge
+		Boreel
+		Boumeester
+		Brandt
+		Brouwer
+		Buyskes
+		Broekhof
+		Uiterwijk
+		Chasse
+		Cleerens
+		Cochius
+		Coehoorn
+		Coen
+		Coops
+		Cort-Heyligers
+		Crijnssen
+		Daendels
+		Deijkerhoff
+		Duycker
+		Ellis
+		Engels
+		Engelvaart
+		Evertzen
+		Fabius
+		Gregory
+		Janssens
+		Kater
+		Kool
+		Kortenaer
+		Kruys
+		Kohler
+		Kuiper
+		List
+		Lucas
+		Martena
+		Michiels
+		Nachtegaal
+		Nahuys
+		Nepveu
+		Ongerboer
+		Reijersen
+		Rijk
+		Roell
+		Sabron
+		Schenk
+		Schouten
+		Spiegel
+		Staal
+		Steltman
+		Stokhuyzen
+		Stuyvesant
+		Tasman
+		Trip
+		Van_Utenhove
+		Verspijck
+		Vetter
+		Weitzel
+		Wolterbeek
+		de_Casembroot
+		de_Constant_Rebecque
+		de_Eerens
+		de_Grouwe
+		de_Houtman
+		de_Kock
+		de_Moor
+		de_Rijk
+		de_Winter
+		den_Beer_Poortugael
+		van_Assendelft
+		van_Braam_Houckgeest
+		van_Brederode
+		van_Bronkhorst
+		van_Culemborg
+		van_Dambenoy
+		van_Diemen
+		van_Duivenvoorde
+		van_Galen
+		van_Geen
+		van_Ham
+		van_Haren
+		van_Heemskerck
+		van_Heutsz
+		van_Hoensbroeck
+		van_Huchtenbroek
+		van_Ilpendam
+		van_Keppel
+		van_Marnix
+		van_Nieuwenaar
+		van_Noort
+		van_Pallandt
+		van_Raephorst
+		van_Rechteren
+		van_Renesse
+		van_Riebeeck
+		van_Rossum
+		van_Spilbergen
+		van_Swieten
+		van_Troyen
+		van_Vredenburch
+		van_Walbeeck
+		van_Wesembeke
+		van_Wijngaarden
+		van_Wingle
+		van_den_Bosch
+		van_der_Aa
+		van_der_Capellen
+		van_der_Does
+		van_der_Heijden
+		van_der_Werff
+		van_der_Wijck
+	}
+	male_regal_first_names = {
+		Alexander
+		Ernst_Casimir
+		Frederik_Hendrik
+		Hendrik
+		Maurits
+		Willem Willem_Alexander Willem_Frederik
+	}
+	female_regal_first_names = {
+		Alexia Ariane
+		Beatrix
+		Catharina_Amalia Christina
+		Irene
+		Juliana
+		Margriet
+		Sophie
+		Wilhelmina
+	}
+	graphics = african
+	ethnicities = {
+		1 = african
+	}
+}
+
+INJECT_OR_CREATE:coreano_latino = {
+	color = rgb{ 150 150 200 }
+	religion = catholic
+	heritage = heritage_korean
+	language = language_hispanophone
+
+
+	obsessions = {
+		liquor
+		coffee
+	}
+	
+	male_common_first_names = {
+		Antonio Carlos David Diego Francisco Hector Jorge Jose Juan Luis Manuel Miguel Pedro Raul Rafael
+	}
+	female_common_first_names = {
+		Ana Beatriz Carmen Catalina Elena Flor Gabriela Ines Lucia Margarita Maria Paula Rosa Teresa
+	}
+	common_last_names = {
+		Ahn Baek Cho Choi Han Hwang Jang Jung Kang Kim Kwon Lee Lim Moon Oh Park Ryu Seo Shin Song Yoon 		Bo
+		Ch_ok Chung
+		Guk Gyu
+		Haung Hu Hwan Hyong
+		Im
+		Jip
+		Mok
+		Seo Seon
+		Shinjong Si Sun
+		Taek
+		Yong
+	}
+	
+	ethnicities = { 1 = asian }
+	graphics = east_asian
+}
+
+INJECT_OR_CREATE:vietnamita_latino = {
+	color = rgb{ 210 130 50 }
+	religion = catholic
+	heritage = heritage_vietnamese
+	language = language_hispanophone
+	
+	obsessions = { coffee }
+	
+	male_common_first_names = {
+		Andres Carlos Daniel Enrique Fernando Gabriel Hugo Joaquin Jose Juan Luis Mario Mateo Pablo
+	}
+	female_common_first_names = {
+		Alejandra Andrea Carmen Clara Daniela Elena Gloria Isabel Josefina Maria Patricia Rosa Sara Teresa
+	}
+	common_last_names = {
+		Bui Dang Dinh Do Duong Ho Hoang Huynh Le Ly Ngo Nguyen Pham Phan Tran Vo Vu
+	}
+	
+	ethnicities = { 10 = asian }
+	graphics = east_asian
+}
+
+INJECT_OR_CREATE:ca_hakka = {
+	color = rgb{ 220 170 60 }
+	religion = catholic
+	heritage = heritage_han
+	language = language_hispanophone
+	
+	obsessions = { tea }
+	
+	male_common_first_names = {
+		Alfonso Antonio Carlos Emilio Federico Jorge Jose Juan Luis Manuel Pedro Roberto
+	}
+	female_common_first_names = {
+		Ana Carmen Elena Rosa Maria Luisa Josefina Teresa Isabel Mercedes
+	}
+	common_last_names = {
+		Chang Chen Choy Chung Lay Leon Li Lin Lu Mac Pun Wang Wong Yee
+	}
+	
+	ethnicities = { 10 = asian }
+	graphics = east_asian
+}
+
+INJECT_OR_CREATE:nicoyamato = {
+	color = rgb{ 190 70 80 }
+	religion = catholic
+	heritage = heritage_japanese
+	language = language_hispanophone
+	
+	
+	obsessions = { tea }
+	
+	male_common_first_names = {
+		Alejandro Arturo Carlos Eduardo Fernando Jose Juan Julio Luis Mario Miguel Oscar Roberto
+	}
+	female_common_first_names = {
+		Alicia Angelica Carmen Elena Julia Laura Luisa Margarita Maria Rosa Silvia Susana
+	}
+	common_last_names = {
+		Higa Ito Kaneshiro Kato Kobayashi Matsuda Nakamura Sato Shimabukuro Suzuki Takahashi Watanabe Yamada Yoshida
+	}
+	
+	ethnicities = { 10 = asian }
+	graphics = east_asian
+}
+
+INJECT_OR_CREATE:ca_panyabi = {
+	color = rgb{ 160 110 50 }
+	religion = sikh
+	heritage = heritage_indusine
+	language = language_hispanophone
+	
+	male_common_first_names = {
+		
+	Andres Alejandro Baba Banda Bhuma Carlos Chand Dhalip Diwan Eduardo Fernando Francisco Gabriel Ganda Jassa Jorge Jose Juan  Kharak Karam_Singh Manuel Miguel Pedro Nau Nawab Nihal Ranjit Shir
+
+	}
+	female_common_first_names = {
+		Ana Carmen Clara Datar Elena Fateh Gabriela Jind Ines Mehtab Moran Rani Riffat Sada Savita Isabel Juana Lucia Maria Patricia Rosa Sofia Teresa
+	}
+	common_last_names = {
+		Singh Kaur Gill Dhillon Sandhu Brar Grewal Johal Cheema Bains Atwal Deol Sahota Virk Ahluwalia Dhillon Kaur Kunwar Mal Mulraj Nalwa Ramgarhia
+	}
+	
+	ethnicities = { 1 = indian }
+	graphics = south_asian
+}
+

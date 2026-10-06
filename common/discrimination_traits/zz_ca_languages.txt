@@ -1,33 +1,47 @@
-﻿# This list is alphabetically sorted. Please keep it so.
-#News Central America Cultures 
+﻿# CAFM — idiomas de Centroamérica (validado contra vanilla 1.13 01_languages / 01_language_groups)
+# Mantener orden alfabético.
 
-language_cabecar = {	
-type = language
+language_bribri_talamanca = {
+	type = language
 	trait_group = language_group_chibchan
-	}
-language_ngabe = {	
-        type = language
+}
+
+language_cabecar = {
+	type = language
 	trait_group = language_group_chibchan
-	}
-language_chibchan_central_america = {	
-         type = language
+}
+
+language_chibchan_central_america = {
+	type = language
 	trait_group = language_group_chibchan
-	}
-language_guna_kuna = {	
-        type = language
+}
+
+language_embera = {			# NUEVO: el emberá es chocó, no chibcha
+	type = language
+	trait_group = language_group_chocoan
+}
+
+language_garifuna = {		# NUEVO: el garífuna es arawak (antes usaba language_miskito)
+	type = language
+	trait_group = language_group_arawakan
+}
+
+language_guna_kuna = {
+	type = language
 	trait_group = language_group_chibchan
-	}
-language_bribri_talamanca = {	
-        type = language
-	trait_group = language_group_chibchan
-	}	
-language_lenca = {	
-        type = language
+}
+
+language_lenca = {			# CAMBIADO: lengua aislada, grupo propio (antes oto-mangue)
+	type = language
+	trait_group = language_group_lencan
+}
+
+language_mangue_chorotega = {	# el chorotega-mangue sí es oto-mangue
+	type = language
 	trait_group = language_group_oto_manguean
-	}
+}
 
-language_mangue_chorotega = {	
-        type = language
-	trait_group = language_group_oto_manguean
-	}
-
+language_ngabe = {
+	type = language
+	trait_group = language_group_chibchan
+}

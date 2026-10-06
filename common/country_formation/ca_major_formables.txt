@@ -1,90 +1,68 @@
-﻿GCA = { #Se Necesita de los culturas centroameriacanas.
-	geographic_region = geographic_region_ca_central_america
-	use_culture_states = yes
-	
+﻿############################################################
+# CAFM - NIVEL 4: GRAN REPUBLICA DE CENTROAMERICA (major formation)
+#
+# Quien puede proclamarla: la Federacion (UCA, Nivel 3) o una potencia
+# regional (Nivel 2) que le gano el liderazgo (UCA ya no existe o es su
+# subdito). Ver ca_formable_can_claim_hegemony.
+#
+# Candidatos: UCA + las uniones regionales que sigan vivas. Si hay varios,
+# compiten con dp_leadership_central_america ("battle royale").
+#
+# Via del Hegemon / Via del Conquistador: van por eventos tras la
+# formacion (liberar Panama y Antioquia como subditos o anexion directa).
+############################################################
+GCA = {
 	is_major_formation = yes
-	
 	unification_play = dp_unify_central_america
 	leadership_play = dp_leadership_central_america
 
+	geographic_region = geographic_region_ca_central_america
+	use_culture_states = yes
 	required_states_fraction = 0.8
-	
-	ai_will_do = { always = yes }
-        
 
-        potential = {
-        is_ca_culture_country = yes
-	    }
-
-   
 	possible = {
+		ca_formable_can_claim_hegemony = yes
+		is_subject = no
+		has_technology_researched = pan-nationalism
+	}
+
+	ai_will_do = { always = yes }
+
+	########################################################
+	# Candidatos a liderar la unificacion
+	########################################################
+	max_num_formation_candidates = 3
+
+	can_be_formation_candidate = {
+		country_rank >= rank_value:minor_power
+		is_subject = no
 		OR = {
-			country_has_primary_culture = cu:central_american
-			AND = {
-				exists = cu:guatemalan
-				country_has_primary_culture = cu:guatemalan
-			}
-			AND = {
-				exists = cu:el_salvadorian
-				country_has_primary_culture = cu:el_salvadorian
-			}
-			AND = {
-				exists = cu:honduran
-				country_has_primary_culture = cu:honduran
-			}
-			AND = {
-				exists = cu:nicaraguan
-				country_has_primary_culture = cu:nicaraguan
-			}
-			AND = {
-				exists = cu:costa_rican
-				country_has_primary_culture = cu:costa_rican
-			}
-			AND = {
-				exists = cu:panamanian
-				country_has_primary_culture = cu:panamanian
-			}			
-			
-		}	
-		#has_journal_entry = je_great_republic_of_central_america
+			ca_formable_tier_3_country = yes
+			ca_formable_tier_2_country = yes
+		}
+		# El nacionalismo debe haber prendido en al menos la mitad
+		# de los paises centroamericanos que siguen en pie.
 		any_country = {
-			OR = {
-			country_has_primary_culture = cu:central_american
-			AND = {
-				exists = cu:guatemalan
-				country_has_primary_culture = cu:guatemalan
+			filter = {
+				ca_is_ca_national_country = yes
 			}
-			AND = {
-				exists = cu:el_salvadorian
-				country_has_primary_culture = cu:el_salvadorian
-			}
-			AND = {
-				exists = cu:honduran
-				country_has_primary_culture = cu:honduran
-			}
-			AND = {
-				exists = cu:nicaraguan
-				country_has_primary_culture = cu:nicaraguan
-			}
-			AND = {
-				exists = cu:costa_rican
-				country_has_primary_culture = cu:costa_rican
-			}
-			AND = {
-				exists = cu:panamanian
-				country_has_primary_culture = cu:panamanian
-			}
-			}	
-			has_technology_researched = pan-nationalism	
+			has_technology_researched = nationalism
+			percent >= 0.5
 		}
 	}
-	max_num_formation_candidates = 5
-	can_be_formation_candidate = {
-		is_ca_culture_country = yes
-	}
 
+	########################################################
+	# Quien puede ser absorbido por la unificacion
+	########################################################
 	can_be_unification_target = {
-		is_ca_culture_country = yes
+		NOT = { is_country_type = decentralized }
+		country_rank < rank_value:great_power
+		OR = {
+			# Los paises del istmo y Chiapas
+			ca_is_ca_national_country = yes
+			# Mesoamerica y el Darien: Yucatan, Chiapas, Panama, Antioquia
+			capital = { ca_is_gca_frontier_state = yes }
+		}
 	}
 
 	should_target_state_in_unification_play = {}

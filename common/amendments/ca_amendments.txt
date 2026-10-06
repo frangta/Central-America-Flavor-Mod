@@ -1932,3 +1932,154 @@ amendment_ca_ciudadania_centroamericana = {
 	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
 	amendment_activism_multiplier = 0.25
 }
+
+
+# ####################################################################
+# 7. ENMIENDAS NUEVAS - CIUDADANÍA Y SUFRAGIO
+# (Ladinización y República de Indios iban a ser leyes de ciudadanía;
+#  van como enmiendas porque las leyes de ciudadanía fijan la aceptación
+#  cultural base y una ley independiente la dejaría rota.)
+# ####################################################################
+
+# --------------------------------------------------------------------
+# LADINIZACIÓN
+# Asimilación forzada de los pueblos indígenas a la cultura ladina.
+# Excluyente con Protección de los Pueblos.
+# --------------------------------------------------------------------
+amendment_ca_ladinizacion = {
+	parent = law_national_supremacy
+
+	allowed_laws = {
+		law_national_supremacy
+		law_cultural_exclusion
+		law_racial_segregation
+	}
+
+	modifier = {
+		state_assimilation_mult = 0.25
+		state_radicals_from_political_movements_mult = 0.10
+		interest_group_ig_rural_folk_approval_add = -1
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+		NOR = {
+			any_active_law = { has_amendment = amendment_type:amendment_ca_proteccion_pueblos }
+			currently_enacting_law ?= { has_amendment = amendment_type:amendment_ca_proteccion_pueblos }
+		}
+	}
+
+	would_sponsor = {
+		OR = {
+			has_ideology = ideology:ideology_ca_coffee_liberal
+			leader ?= { has_ideology = ideology:ideology_ca_cientifico_technocracy }
+			AND = {
+				exists = scope:approval
+				scope:approval > 0
+			}
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			has_ideology = ideology:ideology_ca_indigenous_communalism
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 1.0
+}
+
+# --------------------------------------------------------------------
+# PROTECCIÓN DE LOS PUEBLOS ("República de Indios")
+# Herencia colonial de jurisdicciones separadas: protege las tierras y
+# autoridades de los pueblos indígenas, pero frena su integración.
+# Excluyente con Ladinización.
+# --------------------------------------------------------------------
+amendment_ca_proteccion_pueblos = {
+	parent = law_cultural_exclusion
+
+	allowed_laws = {
+		law_cultural_exclusion
+		law_national_supremacy
+		law_multicultural
+	}
+
+	modifier = {
+		state_assimilation_mult = -0.25
+		building_group_bg_subsistence_agriculture_peasants_standard_of_living_add = 1
+		state_radicals_from_political_movements_mult = -0.05
+		interest_group_ig_landowners_approval_add = -1
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+		NOR = {
+			any_active_law = { has_amendment = amendment_type:amendment_ca_ladinizacion }
+			currently_enacting_law ?= { has_amendment = amendment_type:amendment_ca_ladinizacion }
+		}
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_devout
+			has_ideology = ideology:ideology_ca_indigenous_communalism
+			has_ideology = ideology:ideology_ca_communalist
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			has_ideology = ideology:ideology_ca_coffee_liberal
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
+}
+
+# --------------------------------------------------------------------
+# SUFRAGIO CENSITARIO CENTROAMERICANO
+# Votan solo los que saben leer y tienen renta o propiedad.
+# --------------------------------------------------------------------
+amendment_ca_sufragio_censitario = {
+	parent = law_census_voting
+
+	allowed_laws = {
+		law_landed_voting
+		law_wealth_voting
+		law_census_voting
+	}
+
+	modifier = {
+		country_voting_power_from_literacy_add = 10
+		country_voting_power_wealth_threshold_add = 5
+		country_voting_power_base_add = -5
+	}
+
+	possible = {
+		only_latin_centralamericans_cultures = yes
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_landowners
+			is_interest_group_type = ig_industrialists
+		}
+	}
+
+	ai_will_revoke = {
+		any_interest_group = {
+			is_in_government = yes
+			OR = {
+				is_interest_group_type = ig_trade_unions
+				is_interest_group_type = ig_rural_folk
+			}
+		}
+	}
+
+	can_repeal = { legitimacy >= legitimacy_to_repeal_amendment }
+	amendment_activism_multiplier = 0.5
+}
