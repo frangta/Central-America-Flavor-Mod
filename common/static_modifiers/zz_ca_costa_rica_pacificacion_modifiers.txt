@@ -1,0 +1,42 @@
+# CAFM - Modificadores propios de los eventos de Costa Rica (1836-1842)
+# Sustituyen a ca_add_authority (no existia) y a ca_el_gran_avanse_modifier
+# (modificador de trampa: +20,000 acunacion, +200 construccion, cualificaciones x5).
+
+# Evento 11, opcion B: la purga del norte
+ca_cos_purga_del_norte = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = 100
+}
+
+# Evento 10: Guanacaste, ciudad heroica (estado)
+ca_cos_ciudad_heroica = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	state_migration_pull_mult = 0.15
+	state_education_access_add = 0.05
+}
+
+# Evento 19, opcion A: la reconciliacion de Aguilar (1837)
+ca_cos_reconciliacion_1837 = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 10
+	state_migration_pull_mult = 0.05
+}
+
+# Evento 201, opcion A: quemar los panfletos del Manifiesto de David
+ca_cos_censura_panfletos = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = -25
+}
+
+# Eventos 203.b, 300 y 361: estabilidad del Estado (antes ca_el_gran_avanse_modifier)
+ca_cos_estabilidad_carrillista = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	country_legitimacy_base_add = 10
+	country_authority_add = 50
+}
+
+# Evento 26: el cafe va directo a Londres (Le Lacheur, 1843)
+ca_cos_cafe_londres = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_positive.dds"
+	building_group_bg_agriculture_throughput_add = 0.05
+}

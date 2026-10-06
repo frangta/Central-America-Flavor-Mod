@@ -1,0 +1,131 @@
+﻿############################################################
+# CAFM - Sistema de formables en cadena (4 niveles)
+#
+#   Nivel 1  COS NIC HON GUA ELS PNM          (principado)
+#   Nivel 2  CCR RNI UHO GGA UEL UPN (+CCA)   (gran principado)
+#   Nivel 3  UCA                              (Federacion)
+#   Nivel 4  GCA                              (major formation)
+#
+# El nivel se deduce del TAG actual; no hace falta on_action.
+# Al formar, el pais conserva el mismo objeto y sus variables.
+############################################################
+
+# ---------- Culturas ----------
+
+# Paises centroamericanos "nacionales" (sin culturas nativas).
+# is_ca_culture_country incluye ngabe y miskito; este no, para que
+# los nativos no sean candidatos ni objetivos de unificacion.
+ca_is_ca_national_country = {
+	OR = {
+		country_has_primary_culture = cu:central_american
+		country_has_primary_culture = cu:guatemalan
+		country_has_primary_culture = cu:el_salvadorian
+		country_has_primary_culture = cu:honduran
+		country_has_primary_culture = cu:nicaraguan
+		country_has_primary_culture = cu:costa_rican
+		country_has_primary_culture = cu:panamanian
+		country_has_primary_culture = cu:chiapanecan
+	}
+}
+
+# ---------- Niveles por tag ----------
+
+ca_formable_tier_1_country = {
+	OR = {
+		c:COS ?= this
+		c:NIC ?= this
+		c:HON ?= this
+		c:GUA ?= this
+		c:ELS ?= this
+		c:PNM ?= this
+	}
+}
+
+ca_formable_tier_2_country = {
+	OR = {
+		c:CCR ?= this
+		c:RNI ?= this
+		c:UHO ?= this
+		c:GGA ?= this
+		c:UEL ?= this
+		c:UPN ?= this
+		c:CCA ?= this	# ruta historica alternativa (Pacto de Chinandega)
+	}
+}
+
+# UCA cuenta como Nivel 3 si:
+#  - la restauro alguien por la cadena (je_reunify_central_america), o
+#  - es la Federacion de 1836 que nunca se rompio (is_frca_var se borra
+#    cuando je_historic_central_america_falls_apart la disuelve).
+ca_formable_tier_3_country = {
+	c:UCA ?= this
+	OR = {
+		has_variable = ca_reunification_completed
+		has_variable = is_frca_var
+	}
+}
+
+# ---------- Requisitos de progresion ----------
+
+# Nivel 1 -> 2: los tres diarios de consolidacion interna.
+# Las variables las ponen los on_complete de cada diario.
+ca_formable_consolidation_done = {
+	custom_tooltip = {
+		text = ca_formable_enlightenment_tt
+		has_variable = ca_enlightenment_completed
+	}
+	custom_tooltip = {
+		text = ca_formable_military_reform_tt
+		has_variable = ca_military_reform_completed
+	}
+	custom_tooltip = {
+		text = ca_formable_agro_export_tt
+		has_variable = ca_agro_export_miracle_completed
+	}
+}
+
+# Nivel 2 -> 3: el diario je_reunify_central_america (POR CREAR)
+# debe hacer set_variable = ca_reunification_completed en su on_complete.
+ca_formable_reunification_done = {
+	custom_tooltip = {
+		text = ca_formable_reunification_tt
+		has_variable = ca_reunification_completed
+	}
+}
+
+# Nivel 3 -> 4: quien puede proclamar la Gran Republica.
+#  - La Federacion (Nivel 3), o
+#  - una potencia regional (Nivel 2) que le gano el liderazgo a la
+#    Federacion (dp_leadership): UCA ya no existe o es su subdito.
+ca_formable_can_claim_hegemony = {
+	OR = {
+		ca_formable_tier_3_country = yes
+		AND = {
+			ca_formable_tier_2_country = yes
+			OR = {
+				NOT = { exists = c:UCA }
+				c:UCA ?= { is_subject_of = root }
+			}
+		}
+	}
+}
+
+# ---------- Geografia de la Gran Republica ----------
+
+# Estados fuera del istmo que la GCA reclama (Mesoamerica y el Darien).
+ca_is_gca_frontier_state = {
+	OR = {
+		state_region = s:STATE_CHIAPAS
+		state_region = s:STATE_YUCATAN
+		state_region = s:STATE_PANAMA
+		state_region = s:STATE_ANTIOQUIA
+	}
+}
+
+# ---------- IA ----------
+
+# La IA solo proclama una nueva entidad cuando tiene la casa en orden.
+ca_formable_ai_ready = {
+	is_at_war = no
+	is_subject = no
+}

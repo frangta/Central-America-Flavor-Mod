@@ -251,6 +251,7 @@ ca_play_honduras_effect = {
 
 ca_play_nicaragua_effect = {
 	c:NIC ?= {
+	trigger_event = { id = ca_nicaragua_events.2 days = 7 } # CAFM Fase 1: El Estado dividido (solo antes de 1837)
     #add_modifier = { name = ca_starting_nicaragua_modifier months = 60 }
     add_journal_entry = { type = je_ca_historic_situation_in_nicaragua }
     add_journal_entry = { type = je_ca_state_role_in_federation }

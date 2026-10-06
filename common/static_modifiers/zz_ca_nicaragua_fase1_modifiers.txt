@@ -1,0 +1,138 @@
+﻿# =====================================================================
+# CAFM — NICARAGUA — FASE 1 (1836–1837): modificadores de ca_nicaragua_events
+# Solo tipos de modificador que el mod ya usa, salvo character_popularity_add
+# (ya usado en ca_popular_ruler_modifier). Los state_* puestos en el país se
+# aplican a todos sus estados.
+# =====================================================================
+
+# --- .2 El Estado dividido ---
+
+# PAÍS. Opción a: Zepeda gobierna desde León contra los caudillos.
+nic_gobierno_desde_leon = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_authority_add = 25
+	country_prestige_add = 5
+}
+
+# PAÍS. Opción b: Nicaragua pide la tutela de la Federación.
+nic_tutela_federal = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -5
+	state_turmoil_effects_mult = -0.15
+}
+
+# ESTADO (STATE_NICARAGUA de NIC). Las élites granadinas conspiran y no pagan.
+nic_agitacion_aristocratica = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_tax_collection_mult = -0.1
+	state_radicals_from_political_movements_mult = 0.1
+}
+
+# --- .6 La audacia de José Zepeda ---
+
+# PAÍS. Opción a: jurado, Corte de Cuentas, universidades de León y Granada.
+nic_reformas_zepeda = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	country_legitimacy_base_add = 5
+	state_education_access_add = 0.05
+	country_weekly_innovation_add = 2
+}
+
+# PAÍS. Opción b: reformas diluidas para calmar a Granada.
+nic_pacto_granadino = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
+	country_legitimacy_base_add = 5
+	state_education_access_add = -0.05
+}
+
+# --- .7 El Código Penal y el jurado ---
+
+# PAÍS. Opción a.
+nic_codigo_penal = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	country_legitimacy_base_add = 5
+	state_turmoil_effects_mult = -0.1
+}
+
+# PAÍS. Opción b.
+nic_codigo_engavetado = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
+	country_prestige_add = -5
+}
+
+# --- .9 El Telégrafo Nicaragüense ---
+
+# PAÍS. Opción a: prensa libre.
+nic_telegrafo_libre = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	state_education_access_add = 0.05
+	country_weekly_innovation_add = 2
+}
+
+# PAÍS. Opción b: censura parcial.
+nic_censura_parcial = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
+	country_authority_add = 50
+	country_weekly_innovation_add = -2
+}
+
+# --- .10 / .12 Arrestos ---
+
+# PAÍS. .10 opción a (6 meses).
+nic_arrestos_preventivos = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = -50
+}
+
+# PAÍS. .12 opción a (12 meses).
+nic_arrestos_masivos = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = -100
+	state_radicals_from_political_movements_mult = 0.1
+}
+
+# --- .11 La purga del cuartel ---
+
+# GRUPO DE INTERÉS (ig_armed_forces). Opción a.
+nic_purga_cuartel = {
+	icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_down.dds"
+	interest_group_approval_add = -5
+	interest_group_pol_str_mult = -0.2
+}
+
+# PAÍS. Opción b: Zepeda muestra debilidad.
+nic_purga_retroceso = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -10
+}
+
+# --- .13 La noche del cuartel (si Zepeda sobrevive) ---
+
+# PERSONAJE (Zepeda). Permanente.
+nic_heroe_nacional = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	character_popularity_add = 30
+}
+
+# PAÍS. 5 años.
+nic_paz_institucional = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 10
+	state_radicals_from_political_movements_mult = -0.2
+}
+
+# GRUPO DE INTERÉS (ig_landowners). 5 años.
+nic_terratenientes_en_desgracia = {
+	icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_down.dds"
+	interest_group_approval_add = -3
+	interest_group_pol_str_mult = -0.25
+}
+
+# --- .14 El vacío de poder (si Zepeda muere) ---
+
+# GRUPO DE INTERÉS (ig_armed_forces). 5 años: Méndez y Fonseca mandan.
+nic_cuartel_al_poder = {
+	icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_up.dds"
+	interest_group_approval_add = 2
+	interest_group_pol_str_mult = 0.5
+}

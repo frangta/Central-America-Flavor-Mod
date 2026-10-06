@@ -34,10 +34,10 @@ ca_cos_chapter_scheduler_effect = {
 		add_journal_entry = { type = je_ca_cos_bocas_del_toro }
 	}
 
-	# Capitulo A: La Pacificacion del Norte (jun - sep 1836)
+	# Capitulo A: La Pacificacion del Norte (may - sep 1836)
 	if = {
 		limit = {
-			game_date >= 1836.6.1
+			game_date >= 1836.5.1
 			game_date <= 1836.9.1
 			NOT = { has_variable = ca_cos_cap_a_iniciado }
 			NOT = { ca_cos_capitulo_con_barra_activo_trigger = yes }
@@ -58,10 +58,10 @@ ca_cos_chapter_scheduler_effect = {
 		add_journal_entry = { type = je_ca_cos_urnas_y_cuartel }
 	}
 
-	# Capitulo D: El regreso del Aguila (1840 - 1841), solo en la ruta separatista
+	# Capitulo D: El regreso del Aguila (1839 - 1841), solo en la ruta separatista
 	if = {
 		limit = {
-			game_date >= 1840.1.1
+			game_date >= 1839.1.1
 			game_date <= 1841.12.31
 			has_variable = ca_cos_ruta_separatista
 			NOT = { has_variable = ca_cos_cap_d_iniciado }
@@ -76,19 +76,31 @@ ca_cos_chapter_scheduler_effect = {
 # Balcanizacion: "La Liga renace"
 # Se separan Cartago (PC8), Heredia (PC5), Alajuela (PC6) y Guanacaste (PC2).
 # Limon y Osa quedan con San Jose.
-#
-# !!! RELLENAR: cambia cada xRELLENAR_... por el ID hexadecimal de la
-# provincia capital de esa ciudad (map_data/state_regions, STATE_COSTA_RICA).
-# Mientras no se rellenen, el juego dara error al cargar este archivo.
+# Provincias tomadas del bloque "Costarica" de common/decisions/Warcivil.txt.
 # -------------------------------------------------------------------------
 ca_cos_balkanize_effect = {
-	ca_cos_release_city_effect = { TAG = PC8 PROV = xRELLENAR_CARTAGO }
-	ca_cos_release_city_effect = { TAG = PC5 PROV = xRELLENAR_HEREDIA }
-	ca_cos_release_city_effect = { TAG = PC6 PROV = xRELLENAR_ALAJUELA }
-	# Guanacaste solo si no se perdio ya en la Pacificacion del Norte
+	ca_cos_release_city_effect = { TAG = PC8 PROV = x32AA32 }	# Cartago
+	ca_cos_release_city_effect = { TAG = PC5 PROV = x535AE8 }	# Heredia
+	ca_cos_release_city_effect = { TAG = PC6 PROV = xB0243F }	# Alajuela
+	# Guanacaste (2 provincias) solo si no se perdio ya en la Pacificacion del Norte
 	if = {
-		limit = { NOT = { has_variable = ca_cos_guanacaste_perdido } }
-		ca_cos_release_city_effect = { TAG = PC2 PROV = xRELLENAR_GUANACASTE }
+		limit = {
+			NOT = { has_variable = ca_cos_guanacaste_perdido }
+			NOT = { exists = c:PC2 }
+		}
+		create_country = {
+			tag = PC2
+			origin = ROOT
+			province = p:x478109
+			province = p:xD88369
+			on_created = {
+				set_variable = ca_cos_ciudad_liga
+			}
+		}
+		change_relations = {
+			country = c:PC2
+			value = -50
+		}
 	}
 	set_variable = ca_cos_balcanizada
 }
@@ -137,4 +149,577 @@ ca_cos_annex_liga_effect = {
 ca_cos_close_mother_effect = {
 	remove_variable = ca_cos_madre_activa
 	remove_variable = ca_crisis_guanacaste_active
+}
+
+# -------------------------------------------------------------------------
+# Capitulo A: etapas de la Pacificacion del Norte (pulso semanal del diario)
+# Una etapa por semana, en orden historico. Cada una exige la anterior, asi
+# que si el diario abre tarde las etapas atrasadas salen en semanas seguidas.
+# Fuente: Fernandez Guardia, Revista del Archivo Nacional 3 (1939).
+# -------------------------------------------------------------------------
+ca_cos_pacificacion_beats_effect = {
+	# May 1836: Joaquin Rivas, insultado en la villa de Nicaragua
+	if = {
+		limit = {
+			game_date >= 1836.5.10
+			NOT = { has_variable = ca_cos_pn_comisionado_fired }
+		}
+		set_variable = ca_cos_pn_comisionado_fired
+		trigger_event = { id = ca_costa_rica_events.40 popup = yes }
+	}
+	# 24-27 jun: llega el correo de la invasion; facultades extraordinarias
+	else_if = {
+		limit = {
+			game_date >= 1836.6.25
+			NOT = { has_variable = ca_cos_pn_ligueros_fired }
+		}
+		set_variable = ca_cos_pn_ligueros_fired
+		trigger_event = { id = ca_costa_rica_events.41 popup = yes }
+	}
+	# 29 jun: el motin de la Villa (el .4 dispara el .5)
+	else_if = {
+		limit = {
+			game_date >= 1836.6.29
+			NOT = { has_variable = ca_motin_villa_fired }
+		}
+		set_variable = ca_motin_villa_fired
+		trigger_event = { id = ca_costa_rica_events.4 popup = yes }
+	}
+	# 7 jul: el saqueo de Bagaces
+	else_if = {
+		limit = {
+			game_date >= 1836.7.7
+			NOT = { has_variable = ca_saqueo_bagaces_fired }
+		}
+		set_variable = ca_saqueo_bagaces_fired
+		trigger_event = { id = ca_costa_rica_events.6 popup = yes }
+	}
+	# 8 jul: el segundo asalto
+	else_if = {
+		limit = {
+			game_date >= 1836.7.8
+			NOT = { has_variable = ca_cos_pn_segundo_asalto_fired }
+		}
+		set_variable = ca_cos_pn_segundo_asalto_fired
+		trigger_event = { id = ca_costa_rica_events.61 popup = yes }
+	}
+	# Julio: El Bolson, solo si la campana va bien (progreso >= 40)
+	else_if = {
+		limit = {
+			game_date >= 1836.7.15
+			NOT = { has_variable = ca_desembarco_bolson_fired }
+			var:ca_pacificacion_progress >= 40
+		}
+		set_variable = ca_desembarco_bolson_fired
+		trigger_event = { id = ca_costa_rica_events.7 popup = yes }
+	}
+	# 24 jul: Sapoa, solo con la expedicion en campana
+	else_if = {
+		limit = {
+			game_date >= 1836.7.24
+			NOT = { has_variable = ca_cos_pn_sapoa_fired }
+			has_variable = ca_cos_expedicion_en_campo
+		}
+		set_variable = ca_cos_pn_sapoa_fired
+		trigger_event = { id = ca_costa_rica_events.71 popup = yes }
+	}
+	# 4 ago: Morazan envia a Mora Fernandez y Bermudez (evento de la UCA)
+	else_if = {
+		limit = {
+			game_date >= 1836.8.4
+			NOT = { has_variable = ca_cos_pn_mediacion_pedida }
+			exists = c:UCA
+		}
+		set_variable = ca_cos_pn_mediacion_pedida
+		c:UCA ?= { trigger_event = { id = ca_costa_rica_events.8 popup = yes } }
+	}
+
+	# Avance semanal: la campana pacifica el norte poco a poco
+	if = {
+		limit = { has_variable = ca_cos_quijano_expulsado }
+		change_variable = { name = ca_pacificacion_progress add = 3 }
+	}
+	else_if = {
+		limit = { has_variable = ca_cos_expedicion_en_campo }
+		change_variable = { name = ca_pacificacion_progress add = 1 }
+	}
+}
+
+# -------------------------------------------------------------------------
+# Capitulo B: etapas de Bocas del Toro (pulso semanal del diario)
+# Una etapa por semana, en orden historico; cada una exige la anterior.
+# Fuente: carta de Paredes (21 ene 1837), Revista del Archivo Nacional 3 (1938).
+# -------------------------------------------------------------------------
+ca_cos_bocas_beats_effect = {
+	# Feb 1836: jamaicanos bajo bandera britanica en las lagunas
+	if = {
+		limit = {
+			game_date >= 1836.2.1
+			NOT = { has_variable = ca_subditos_corona_fired }
+		}
+		set_variable = ca_subditos_corona_fired
+		trigger_event = { id = ca_costa_rica_events.12 popup = yes }
+	}
+	# Mar 1836: el titulo de 1803 y el uti possidetis de 1825
+	else_if = {
+		limit = {
+			game_date >= 1836.3.1
+			NOT = { has_variable = ca_cos_bocas_titulo_fired }
+		}
+		set_variable = ca_cos_bocas_titulo_fired
+		trigger_event = { id = ca_costa_rica_events.13 popup = yes }
+	}
+	# 30 may 1836: decreto federal y expedicion de Galindo (evento de la UCA)
+	else_if = {
+		limit = {
+			game_date >= 1836.5.30
+			has_variable = ca_cos_bocas_informado
+			NOT = { has_variable = ca_cos_bocas_uca_consultada }
+		}
+		set_variable = ca_cos_bocas_uca_consultada
+		if = {
+			limit = { exists = c:UCA }
+			c:UCA = { trigger_event = { id = ca_costa_rica_events.14 popup = yes } }
+		}
+		else = {
+			# Sin Federacion no hay expedicion
+			set_variable = ca_cos_bocas_rechazo_temprano
+		}
+	}
+	# 1 dic 1836: las velas granadinas
+	else_if = {
+		limit = {
+			game_date >= 1836.12.1
+			has_variable = ca_bocas_del_toro_claimed
+			NOT = { has_variable = ca_cos_bocas_velas_fired }
+		}
+		set_variable = ca_cos_bocas_velas_fired
+		trigger_event = { id = ca_costa_rica_events.16 popup = yes }
+	}
+	# 18 dic 1836: el desembarco de Paredes
+	else_if = {
+		limit = {
+			game_date >= 1836.12.18
+			has_variable = ca_cos_bocas_velas_fired
+			NOT = { has_variable = ca_cos_bocas_paredes_fired }
+		}
+		set_variable = ca_cos_bocas_paredes_fired
+		trigger_event = { id = ca_costa_rica_events.161 popup = yes }
+	}
+	# 21 ene 1837: la carta de Paredes
+	else_if = {
+		limit = {
+			game_date >= 1837.1.21
+			has_variable = ca_bocas_del_toro_lost
+			NOT = { has_variable = ca_cos_bocas_carta_fired }
+		}
+		set_variable = ca_cos_bocas_carta_fired
+		trigger_event = { id = ca_costa_rica_events.162 popup = yes }
+	}
+	# 19 abr 1837: el clamor de Carrillo
+	else_if = {
+		limit = {
+			game_date >= 1837.4.19
+			has_variable = ca_cos_bocas_protesta_federal
+			NOT = { has_variable = ca_cos_bocas_clamor_fired }
+		}
+		set_variable = ca_cos_bocas_clamor_fired
+		trigger_event = { id = ca_costa_rica_events.17 popup = yes }
+	}
+}
+
+# -------------------------------------------------------------------------
+# Diario madre: hitos sueltos (pulso semanal)
+# -------------------------------------------------------------------------
+ca_cos_madre_weekly_effect = {
+	# 14 nov 1838: la Asamblea Constituyente decide la separacion
+	if = {
+		limit = {
+			game_date >= 1838.11.14
+			has_variable = ca_cos_ruta_separatista
+			NOT = { has_variable = ca_cos_constituyente_1838_fired }
+		}
+		set_variable = ca_cos_constituyente_1838_fired
+		trigger_event = { id = ca_costa_rica_events.196 popup = yes }
+	}
+}
+
+# -------------------------------------------------------------------------
+# Capitulo C: las urnas y el cuartel (pulso semanal)
+# Fuentes: TSE (2008), p. 17; Villegas Arce, Rev. Ciencias Juridicas 131 (2013)
+# -------------------------------------------------------------------------
+ca_cos_urnas_beats_effect = {
+	# 9 abr 1837: votan los electores de segundo grado
+	if = {
+		limit = {
+			game_date >= 1837.4.9
+			NOT = { has_variable = ca_elecciones_1837_fired }
+		}
+		set_variable = ca_elecciones_1837_fired
+		trigger_event = { id = ca_costa_rica_events.19 popup = yes }
+	}
+	# 17 abr 1837: Aguilar asume en Heredia
+	else_if = {
+		limit = {
+			game_date >= 1837.4.17
+			has_variable = ca_gobierno_aguilar
+			NOT = { has_variable = ca_cos_programa_aguilar_fired }
+		}
+		set_variable = ca_cos_programa_aguilar_fired
+		trigger_event = { id = ca_costa_rica_events.192 popup = yes }
+	}
+	# Ago 1837: la conspiracion carrillista
+	else_if = {
+		limit = {
+			game_date >= 1837.8.15
+			has_variable = ca_gobierno_aguilar
+			NOT = { has_variable = ca_cos_conspiracion_1837 }
+		}
+		set_variable = ca_cos_conspiracion_1837
+		trigger_event = { id = ca_costa_rica_events.193 popup = yes }
+	}
+	# 19 dic 1837: Juan Mora Fernandez, interino
+	else_if = {
+		limit = {
+			game_date >= 1837.12.19
+			has_variable = ca_gobierno_aguilar
+			NOT = { has_variable = ca_cos_mora_interino }
+		}
+		set_variable = ca_cos_mora_interino
+		trigger_event = { id = ca_costa_rica_events.194 popup = yes }
+	}
+	# Mar 1838: la renuncia de Aguilar
+	else_if = {
+		limit = {
+			game_date >= 1838.3.10
+			has_variable = ca_gobierno_aguilar
+			NOT = { has_variable = ca_cos_renuncia_fired }
+		}
+		set_variable = ca_cos_renuncia_fired
+		trigger_event = { id = ca_costa_rica_events.195 popup = yes }
+	}
+	# 27 may 1838: el pronunciamiento de San Jose
+	# Umbral de soberania: 40 (50 si se castigo la conspiracion, 30 si se ignoro)
+	else_if = {
+		limit = {
+			game_date >= 1838.5.27
+			has_variable = ca_gobierno_aguilar
+			NOT = { has_variable = ca_cos_golpe_resuelto }
+		}
+		set_variable = ca_cos_golpe_resuelto
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						has_variable = ca_cos_conspiracion_castigada
+						ca_cos_soberania_min_trigger = { VALUE = 50 }
+					}
+					AND = {
+						has_variable = ca_cos_conspiracion_ignorada
+						ca_cos_soberania_min_trigger = { VALUE = 30 }
+					}
+					AND = {
+						NOT = { has_variable = ca_cos_conspiracion_castigada }
+						NOT = { has_variable = ca_cos_conspiracion_ignorada }
+						ca_cos_soberania_min_trigger = { VALUE = 40 }
+					}
+				}
+			}
+			trigger_event = { id = ca_costa_rica_events.20 popup = yes }
+		}
+		else = {
+			trigger_event = { id = ca_costa_rica_events.330 popup = yes }
+		}
+	}
+}
+
+# -------------------------------------------------------------------------
+# Capitulo D: el Estado de Carrillo y el regreso del Aguila (pulso semanal)
+# Fuentes: Archivo Nacional (Bases y Garantias, 8 mar 1841); Leiva (1942)
+# -------------------------------------------------------------------------
+ca_cos_aguila_beats_effect = {
+	# Ene 1839: la conspiracion de Joaquin Mora
+	if = {
+		limit = {
+			game_date >= 1839.1.15
+			NOT = { has_variable = ca_cos_conspiracion_mora_fired }
+		}
+		set_variable = ca_cos_conspiracion_mora_fired
+		trigger_event = { id = ca_costa_rica_events.197 popup = yes }
+	}
+	# Abr 1840: Morazan, exiliado, toca Puntarenas
+	else_if = {
+		limit = {
+			game_date >= 1840.4.12
+			NOT = { has_variable = ca_cos_asilo_fired }
+		}
+		set_variable = ca_cos_asilo_fired
+		trigger_event = { id = ca_costa_rica_events.198 popup = yes }
+	}
+	# 8 mar 1841: la Ley de Bases y Garantias
+	else_if = {
+		limit = {
+			game_date >= 1841.3.8
+			NOT = { has_variable = ca_cos_bases_fired }
+		}
+		set_variable = ca_cos_bases_fired
+		trigger_event = { id = ca_costa_rica_events.21 popup = yes }
+	}
+	# 16 jul 1841: el Manifiesto de David
+	else_if = {
+		limit = {
+			game_date >= 1841.7.16
+			NOT = { has_variable = ca_manifiesto_david_fired }
+		}
+		set_variable = ca_manifiesto_david_fired
+		trigger_event = { id = ca_costa_rica_events.201 popup = yes }
+	}
+	# 22 sep 1841: el tratado con el Estado del Istmo (si existe)
+	else_if = {
+		limit = {
+			game_date >= 1841.9.22
+			exists = c:PNM
+			NOT = { has_variable = ca_cos_tratado_istmo_fired }
+		}
+		set_variable = ca_cos_tratado_istmo_fired
+		trigger_event = { id = ca_costa_rica_events.205 popup = yes }
+	}
+	# Oct 1841: Morazan en Lima
+	else_if = {
+		limit = {
+			game_date >= 1841.10.1
+			has_variable = ca_manifiesto_david_fired
+			NOT = { has_variable = ca_sombras_lima_fired }
+		}
+		set_variable = ca_sombras_lima_fired
+		trigger_event = { id = ca_costa_rica_events.202 popup = yes }
+	}
+	# Dic 1841: la encrucijada andina
+	else_if = {
+		limit = {
+			game_date >= 1841.12.20
+			has_variable = ca_sombras_lima_fired
+			NOT = { has_variable = ca_encrucijada_andina_fired }
+		}
+		set_variable = ca_encrucijada_andina_fired
+		trigger_event = { id = ca_costa_rica_events.203 popup = yes }
+	}
+	# 7 abr 1842: Caldera
+	else_if = {
+		limit = {
+			game_date >= 1842.4.7
+			has_variable = ca_morazan_is_coming
+			NOT = { has_variable = ca_cos_caldera_resuelto }
+		}
+		set_variable = ca_cos_caldera_resuelto
+		trigger_event = { id = ca_costa_rica_events.340 popup = yes }
+	}
+}
+
+# -------------------------------------------------------------------------
+# La caida de Morazan (pulso semanal del diario je_ca_cos_caida_morazan)
+# -------------------------------------------------------------------------
+ca_cos_caida_beats_effect = {
+	# 6 jun 1842: anulacion de Bases y Garantias
+	if = {
+		limit = {
+			game_date >= 1842.6.6
+			NOT = { has_variable = ca_cos_anulacion_bases_fired }
+		}
+		set_variable = ca_cos_anulacion_bases_fired
+		trigger_event = { id = ca_costa_rica_events.321 popup = yes }
+	}
+	# Jul 1842: la leva para la Union
+	else_if = {
+		limit = {
+			game_date >= 1842.7.10
+			NOT = { has_variable = ca_cos_leva_fired }
+		}
+		set_variable = ca_cos_leva_fired
+		trigger_event = { id = ca_costa_rica_events.322 popup = yes }
+	}
+	# 24 ago 1842: la Ley Fundamental de 1825
+	else_if = {
+		limit = {
+			game_date >= 1842.8.24
+			NOT = { has_variable = ca_cos_ley_1825_fired }
+		}
+		set_variable = ca_cos_ley_1825_fired
+		trigger_event = { id = ca_costa_rica_events.323 popup = yes }
+	}
+	# 11 sep 1842 con descontento >= 60, o en cualquier momento al llegar a 100
+	else_if = {
+		limit = {
+			NOT = { has_variable = ca_cos_revuelta_fired }
+			je:je_ca_cos_caida_morazan ?= {
+				OR = {
+					AND = {
+						scripted_bar_progress = { name = ca_cos_descontento_bar value >= 100 }
+					}
+					AND = {
+						game_date >= 1842.9.11
+						scripted_bar_progress = { name = ca_cos_descontento_bar value >= 60 }
+					}
+				}
+			}
+		}
+		set_variable = ca_cos_revuelta_fired
+		trigger_event = { id = ca_costa_rica_events.350 popup = yes }
+	}
+}
+
+# -------------------------------------------------------------------------
+# Capitulo E: la Republica de los cafetaleros, 1842-1850 (pulso semanal)
+# Fuentes: TSE (2008), pp. 10-13; Corella Ovares, Revista de Historia 80 (2019)
+# -------------------------------------------------------------------------
+ca_cos_republica_beats_effect = {
+	# 3 may 1843: la Universidad de Santo Tomas (decreto 11)
+	if = {
+		limit = {
+			game_date >= 1843.5.3
+			NOT = { has_variable = ca_cos_universidad_fired }
+		}
+		set_variable = ca_cos_universidad_fired
+		trigger_event = { id = ca_costa_rica_events.25 popup = yes }
+	}
+	# 1843: el Monarch de Le Lacheur
+	else_if = {
+		limit = {
+			game_date >= 1843.8.1
+			NOT = { has_variable = ca_cos_monarch_fired }
+		}
+		set_variable = ca_cos_monarch_fired
+		trigger_event = { id = ca_costa_rica_events.26 popup = yes }
+	}
+	# 9 abr 1844: la Constitucion de 1844
+	else_if = {
+		limit = {
+			game_date >= 1844.4.9
+			NOT = { has_variable = ca_cos_constitucion_1844_fired }
+		}
+		set_variable = ca_cos_constitucion_1844_fired
+		trigger_event = { id = ca_costa_rica_events.27 popup = yes }
+	}
+	# 2-4 jun 1844: el primer sufragio directo
+	else_if = {
+		limit = {
+			game_date >= 1844.6.4
+			NOT = { has_variable = cos_elec_1844_fired }
+		}
+		set_variable = cos_elec_1844_fired
+		trigger_event = { id = ca_costa_rica_events.22 popup = yes }
+	}
+	# Dic 1844: Oreamuno se va a Cartago
+	else_if = {
+		limit = {
+			game_date >= 1844.12.10
+			has_variable = ca_cos_gobierno_oreamuno
+			NOT = { has_variable = ca_cos_oreamuno_renuncia_fired }
+		}
+		set_variable = ca_cos_oreamuno_renuncia_fired
+		trigger_event = { id = ca_costa_rica_events.221 popup = yes }
+	}
+	# May 1845: Carrillo, asesinado en El Salvador
+	else_if = {
+		limit = {
+			game_date >= 1845.5.20
+			has_global_variable = cafm_hc_carrillo
+			OR = {
+				has_variable = ca_cos_carrillo_exiliado
+				has_variable = ca_cos_carrillo_desterrado
+			}
+			NOT = { has_variable = ca_cos_muerte_carrillo_fired }
+		}
+		set_variable = ca_cos_muerte_carrillo_fired
+		trigger_event = { id = ca_costa_rica_events.222 popup = yes }
+	}
+	# 7 jun 1846: la caida de Gallegos
+	else_if = {
+		limit = {
+			game_date >= 1846.6.7
+			OR = {
+				has_variable = ca_cos_gobierno_gallegos
+				has_variable = ca_cos_gobierno_oreamuno
+			}
+			NOT = { has_variable = ca_cos_caida_gallegos_fired }
+		}
+		set_variable = ca_cos_caida_gallegos_fired
+		trigger_event = { id = ca_costa_rica_events.223 popup = yes }
+	}
+	# Ene 1847: la Constitucion de 1847
+	else_if = {
+		limit = {
+			game_date >= 1847.1.21
+			NOT = { has_variable = ca_cos_constitucion_1847_fired }
+		}
+		set_variable = ca_cos_constitucion_1847_fired
+		trigger_event = { id = ca_costa_rica_events.224 popup = yes }
+	}
+	# 11 abr 1847: los electores de 1847
+	else_if = {
+		limit = {
+			game_date >= 1847.4.11
+			NOT = { has_variable = cos_elec_1847_fired }
+		}
+		set_variable = cos_elec_1847_fired
+		trigger_event = { id = ca_costa_rica_events.23 popup = yes }
+	}
+	# 31 ago 1848: la Republica (solo si gobierna Castro)
+	else_if = {
+		limit = {
+			game_date >= 1848.8.31
+			has_variable = ca_cos_gobierno_castro
+			NOT = { has_variable = ca_cos_republica_fired }
+		}
+		set_variable = ca_cos_republica_fired
+		trigger_event = { id = ca_costa_rica_events.231 popup = yes }
+	}
+	# Sep 1848: la bandera
+	else_if = {
+		limit = {
+			game_date >= 1848.9.29
+			has_variable = ca_cos_republica_1848
+			NOT = { has_variable = ca_cos_bandera_1848_fired }
+		}
+		set_variable = ca_cos_bandera_1848_fired
+		trigger_event = { id = ca_costa_rica_events.232 popup = yes }
+	}
+	# Nov 1848: la reforma del sufragio
+	else_if = {
+		limit = {
+			game_date >= 1848.11.22
+			NOT = { has_variable = ca_cos_reforma_1848_fired }
+		}
+		set_variable = ca_cos_reforma_1848_fired
+		trigger_event = { id = ca_costa_rica_events.233 popup = yes }
+	}
+	# 15 nov 1849: el general Quiros desconoce a Castro
+	else_if = {
+		limit = {
+			game_date >= 1849.11.15
+			has_variable = ca_cos_gobierno_castro
+			NOT = { has_variable = ca_cos_renuncia_castro_fired }
+		}
+		set_variable = ca_cos_renuncia_castro_fired
+		trigger_event = { id = ca_costa_rica_events.234 popup = yes }
+	}
+	# 2-9 dic 1849: los electores de 1849 (si Castro cayo o si no gobernaba)
+	else_if = {
+		limit = {
+			game_date >= 1849.12.9
+			NOT = { has_variable = ca_cos_gobierno_castro }
+			NOT = { has_variable = cos_elec_1849_fired }
+		}
+		set_variable = cos_elec_1849_fired
+		trigger_event = { id = ca_costa_rica_events.24 popup = yes }
+	}
+	# 4 jun 1850: el intento de golpe del general Manuel Quiros
+	else_if = {
+		limit = {
+			game_date >= 1850.6.4
+			NOT = { has_variable = ca_cos_quiros_1850_fired }
+		}
+		set_variable = ca_cos_quiros_1850_fired
+		trigger_event = { id = ca_costa_rica_events.235 popup = yes }
+	}
 }
