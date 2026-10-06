@@ -35,19 +35,27 @@ law_central_american_agrarianism = {
 	}
 
 	modifier = {
-        state_aristocrats_investment_pool_efficiency_mult = 0.30
-        state_clergymen_investment_pool_efficiency_mult = 0.15
-        state_farmers_investment_pool_efficiency_mult = 0.25
-        state_capitalists_investment_pool_efficiency_mult = -0.15
-        country_private_construction_allocation_mult = 0.85
-        state_bureaucracy_population_base_cost_factor_mult = -0.13
-        building_nationalization_investment_return_add = 0.35
-        country_government_dividends_reinvestment_add = 0.35
-        country_government_dividends_efficiency_add = 0.15
-        country_free_charters_add = 1
-        country_construction_add = -2.5
-        country_disable_nationalization_bool = yes
-        country_disable_nationalization_without_compensation_bool = yes
+		# Inversión: la dirigen hacendados y agricultores
+		state_aristocrats_investment_pool_efficiency_mult = 0.30
+		state_farmers_investment_pool_efficiency_mult = 0.25
+		state_clergymen_investment_pool_efficiency_mult = 0.10
+		state_capitalists_investment_pool_efficiency_mult = -0.25
+		country_private_construction_allocation_mult = 0.50
+		country_free_charters_add = 1
+		country_construction_add = -2.5
+
+		# El Estado no toca la propiedad
+		country_disable_nationalization_bool = yes
+		country_disable_nationalization_without_compensation_bool = yes
+		building_nationalization_investment_return_add = 0.35
+		country_government_dividends_reinvestment_add = 0.35
+		country_government_dividends_efficiency_add = 0.15
+		state_bureaucracy_population_base_cost_factor_mult = -0.10
+
+		# Lo que la hace "agroexportadora"
+		building_group_bg_plantations_throughput_add = 0.10
+		building_coffee_plantation_throughput_add = 0.05
+		building_group_bg_plantations_tax_mult = -0.10
 	}
 
 	ai_will_do = {

@@ -31,9 +31,21 @@ je_ca_historic_situation_in_costarica = {
 	}
 
 	# Planificador: abre cada capitulo en su ventana de fechas
+	# Hitos sueltos del diario madre (p. ej. la Constituyente del 14 nov 1838)
+	on_weekly_pulse = {
+		effect = {
+			ca_cos_madre_weekly_effect = yes
+		}
+	}
+
 	on_monthly_pulse = {
 		effect = {
 			ca_cos_chapter_scheduler_effect = yes
+		}
+		# CAFM fix: antes estaban en on_yearly_pulse_country (solo el 1 de enero)
+		events = {
+			ca_costa_rica_events.2
+			ca_costa_rica_events.3
 		}
 	}
 
@@ -123,6 +135,14 @@ je_ca_historic_situation_in_costarica = {
 	timeout = 2555
 	on_timeout = {
 		ca_cos_close_mother_effect = yes
+		# La era de Carrillo termina: empieza la Republica de los cafetaleros
+		if = {
+			limit = {
+				game_date < 1850.6.1
+				NOT = { has_journal_entry = je_ca_cos_republica }
+			}
+			add_journal_entry = { type = je_ca_cos_republica }
+		}
 	}
 
 	weight = 200
@@ -158,8 +178,13 @@ je_ca_pacificacion_norte = {
 			limit = { NOT = { has_variable = ca_pacificacion_progress } }
 			set_variable = { name = ca_pacificacion_progress value = 0 }
 		}
-		# El motin de la Villa abre el capitulo
-		trigger_event = { id = ca_costa_rica_events.4 popup = yes }
+	}
+
+	# Las etapas historicas salen una por semana, en orden (ver ca_cos_pacificacion_beats_effect)
+	on_weekly_pulse = {
+		effect = {
+			ca_cos_pacificacion_beats_effect = yes
+		}
 	}
 
 	complete = {
@@ -170,8 +195,8 @@ je_ca_pacificacion_norte = {
 		remove_variable = ca_crisis_guanacaste_active
 		set_variable = ca_cos_cap_a_exito
 		ca_cos_change_soberania_effect = { VALUE = 20 }
-		# Fase 3: El Informe Jimenez -> Guanacaste heroica -> Maniobra maestra
-		trigger_event = { id = ca_costa_rica_events.9 days = 2 }
+		# Fase 3 en orden historico: ciudad heroica (3 sep) -> Informe Jimenez (10 sep) -> Maniobra maestra
+		trigger_event = { id = ca_costa_rica_events.10 days = 20 }
 	}
 
 	fail = {
@@ -206,9 +231,11 @@ je_ca_cos_bocas_del_toro = {
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 	group = je_group_historical_content
 
-	immediate = {
-		# Subditos de la Corona en el Caribe abre la rama
-		trigger_event = { id = ca_costa_rica_events.12 popup = yes }
+	# Las etapas historicas salen por semana y en orden (ver ca_cos_bocas_beats_effect)
+	on_weekly_pulse = {
+		effect = {
+			ca_cos_bocas_beats_effect = yes
+		}
 	}
 
 	status_desc = {
@@ -216,6 +243,10 @@ je_ca_cos_bocas_del_toro = {
 			triggered_desc = {
 				desc = je_ca_cos_bocas_del_toro_status_perdido
 				trigger = { has_variable = ca_bocas_del_toro_lost }
+			}
+			triggered_desc = {
+				desc = je_ca_cos_bocas_del_toro_status_defendida
+				trigger = { has_variable = ca_cos_bocas_defendida }
 			}
 			triggered_desc = {
 				desc = je_ca_cos_bocas_del_toro_status_reclamo
@@ -233,6 +264,9 @@ je_ca_cos_bocas_del_toro = {
 			has_variable = ca_epifania_tragica          # 18.a: la Federacion calla
 			has_variable = ca_cos_bocas_apoyo_federal   # 18.b: la Federacion va a la guerra
 			has_variable = ca_cos_bocas_rechazo_temprano # 14.b: la UCA no financia a Galindo
+			has_variable = ca_cos_bocas_renuncia        # 13.b / 162.c: Costa Rica renuncia
+			has_variable = ca_cos_bocas_reclamo_propio  # 162.b: Carrillo responde solo
+			has_variable = ca_cos_bocas_defendida       # 161.b: Paredes se retira
 		}
 	}
 
@@ -246,6 +280,20 @@ je_ca_cos_bocas_del_toro = {
 			limit = { has_variable = ca_cos_bocas_apoyo_federal }
 			# San Jose queda en deuda con la Federacion
 			ca_cos_change_soberania_effect = { VALUE = -10 }
+		}
+		else_if = {
+			limit = { has_variable = ca_cos_bocas_defendida }
+			# El distrito resistio: San Jose sale reforzada
+			ca_cos_change_soberania_effect = { VALUE = 15 }
+		}
+		else_if = {
+			limit = { has_variable = ca_cos_bocas_reclamo_propio }
+			# Carrillo actua sin la Federacion
+			ca_cos_change_soberania_effect = { VALUE = 10 }
+		}
+		else_if = {
+			limit = { has_variable = ca_cos_bocas_renuncia }
+			ca_cos_change_soberania_effect = { VALUE = -5 }
 		}
 		else = {
 			ca_cos_change_soberania_effect = { VALUE = 5 }
@@ -273,31 +321,10 @@ je_ca_cos_urnas_y_cuartel = {
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	group = je_group_historical_content
 
-	immediate = {
-		# Los electores de 1837
-		trigger_event = { id = ca_costa_rica_events.19 popup = yes }
-	}
-
-	on_monthly_pulse = {
+	# Las etapas historicas salen por semana y en orden (ver ca_cos_urnas_beats_effect)
+	on_weekly_pulse = {
 		effect = {
-			# Mayo de 1838: si gobierna Aguilar, Carrillo intenta el golpe
-			if = {
-				limit = {
-					game_date >= 1838.5.1
-					has_variable = ca_gobierno_aguilar
-					NOT = { has_variable = ca_cos_golpe_resuelto }
-				}
-				set_variable = ca_cos_golpe_resuelto
-				if = {
-					limit = { ca_cos_soberania_min_trigger = { VALUE = 40 } }
-					# El golpe josefino triunfa (evento historico)
-					trigger_event = { id = ca_costa_rica_events.20 popup = yes }
-				}
-				else = {
-					# El golpe fracasa: Aguilar se sostiene
-					trigger_event = { id = ca_costa_rica_events.330 popup = yes }
-				}
-			}
+			ca_cos_urnas_beats_effect = yes
 		}
 	}
 
@@ -356,23 +383,10 @@ je_ca_cos_regreso_aguila = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	group = je_group_historical_content
 
-	immediate = {
-		# El manifiesto de David
-		trigger_event = { id = ca_costa_rica_events.201 popup = yes }
-	}
-
-	on_monthly_pulse = {
+	# Las etapas historicas salen por semana y en orden (ver ca_cos_aguila_beats_effect)
+	on_weekly_pulse = {
 		effect = {
-			# 7 de abril de 1842: Morazan desembarca en Caldera
-			if = {
-				limit = {
-					game_date >= 1842.4.7
-					has_variable = ca_morazan_is_coming
-					NOT = { has_variable = ca_cos_caldera_resuelto }
-				}
-				set_variable = ca_cos_caldera_resuelto
-				trigger_event = { id = ca_costa_rica_events.340 popup = yes }
-			}
+			ca_cos_aguila_beats_effect = yes
 		}
 	}
 
@@ -393,8 +407,8 @@ je_ca_cos_regreso_aguila = {
 		has_variable = ca_cos_morazan_victorioso
 	}
 
-	# Si Morazan nunca llega, la amenaza se da por superada a fines de 1842
-	timeout = 1095
+	# Si Morazan nunca llega, la amenaza se da por superada a mediados de 1842
+	timeout = 1300
 	on_timeout = {
 		set_variable = ca_cos_cap_d_exito
 	}
@@ -420,20 +434,24 @@ je_ca_cos_caida_morazan = {
 
 	should_be_pinned_by_default = yes
 
-	complete = {
-		scope:journal_entry = {
-			scripted_bar_progress = { name = ca_cos_descontento_bar value >= 100 }
+	# Las etapas historicas salen por semana (ver ca_cos_caida_beats_effect);
+	# la revuelta (.350) sale el 11 sep 1842 si el descontento >= 60, o al llegar a 100
+	on_weekly_pulse = {
+		effect = {
+			ca_cos_caida_beats_effect = yes
 		}
 	}
 
-	on_complete = {
-		# La revuelta de septiembre
-		trigger_event = { id = ca_costa_rica_events.350 popup = yes }
+	complete = {
+		has_variable = ca_cos_revuelta_fired
 	}
 
 	timeout = 365
 	on_timeout = {
-		trigger_event = { id = ca_costa_rica_events.350 popup = yes }
+		if = {
+			limit = { NOT = { has_variable = ca_cos_revuelta_fired } }
+			trigger_event = { id = ca_costa_rica_events.350 popup = yes }
+		}
 	}
 
 	invalid = {
@@ -680,3 +698,40 @@ je_ca_cos_nueva_liga = {
 #	should_be_pinned_by_default = yes
 #	transferable = no
 #}
+
+# =========================================================================
+# CAPITULO E: La Republica de los cafetaleros (1842 - 1850)
+# Lo abren .351 (Alfaro, tras la caida de Morazan), .300 (Estado
+# consolidado), .361 (unidad por las armas) o el fin del diario madre.
+# Fuentes: TSE (2008); Corella Ovares, Revista de Historia (UNA) 80 (2019).
+# =========================================================================
+je_ca_cos_republica = {
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	group = je_group_historical_content
+
+	should_be_pinned_by_default = yes
+
+	# Las etapas historicas salen por semana y en orden (ver ca_cos_republica_beats_effect)
+	on_weekly_pulse = {
+		effect = {
+			ca_cos_republica_beats_effect = yes
+		}
+	}
+
+	complete = {
+		has_variable = ca_cos_quiros_1850_fired
+	}
+
+	timeout = 3650
+	on_timeout = {
+		set_variable = ca_cos_republica_cerrada
+	}
+
+	invalid = {
+		NOT = { c:COS ?= this }
+	}
+
+	weight = 150
+	transferable = no
+	can_revolution_inherit = no
+}

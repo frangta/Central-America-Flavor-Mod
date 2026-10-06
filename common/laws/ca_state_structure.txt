@@ -37,12 +37,10 @@ law_ca_central_american_federal = {
 	progressiveness = 50
 
 	is_visible = {
-		hidden_trigger = { exists = this } 
 		ca_is_union_sovereign = yes
 	}
 
 	can_enact = {
-		hidden_trigger = { exists = this } 
 		ca_is_union_sovereign = yes
 	}
 
@@ -53,11 +51,7 @@ law_ca_central_american_federal = {
 
 	modifier = {
 		country_authority_add = -25
-        country_legitimacy_base_add = 10
-        state_tax_capacity_mult = -0.10
-        state_turmoil_effects_mult = -0.10
-        political_movement_radicalism_add = -0.05
-        interest_group_ig_intelligentsia_pol_str_mult = 0.10
+		country_legitimacy_base_add = 15
 		country_liberty_desire_of_subjects_add = -0.1		# por semana; ajustar tras probar
 		state_radicals_from_political_movements_mult = -0.10
 	}
@@ -107,24 +101,20 @@ law_ca_central_american_unitary = {
 	progressiveness = -10
 
 	is_visible = {
-		hidden_trigger = { exists = this } 
 		ca_is_union_sovereign = yes
 	}
 
 	can_enact = {
-		hidden_trigger = { exists = this } 
 		ca_is_union_sovereign = yes
 	}
 
 	modifier = {
-		country_authority_add = 50
-        state_tax_capacity_mult = 0.10
-        state_turmoil_effects_mult = 0.15
-        political_movement_radicalism_add = 0.10
-        interest_group_ig_landowners_pol_str_mult = 0.10
+		country_authority_add = 75
 		state_decree_cost_mult = -0.15
 		country_subject_income_transfer_mult = 0.25		# lo que pagan los estados al soberano
 		country_liberty_desire_of_subjects_add = 0.15	# por semana; ajustar tras probar
+		state_turmoil_effects_mult = 0.15
+		political_movement_radicalism_add = 0.10
 	}
 
 	on_activate = {
@@ -172,22 +162,19 @@ law_ca_central_american_confederated = {
 	progressiveness = 10
 
 	is_visible = {
-		hidden_trigger = { exists = this } 
 		ca_is_union_sovereign = yes
 	}
 
 	can_enact = {
-		hidden_trigger = { exists = this } 
 		ca_is_union_sovereign = yes
 	}
 
 	modifier = {
 		country_authority_add = -75
+		country_legitimacy_base_add = 10
 		country_subject_income_transfer_mult = -0.50
-		country_liberty_desire_of_subjects_add = 0.10
-		country_legitimacy_base_add = -10
-        state_tax_capacity_mult = -0.30
-        state_turmoil_effects_mult = -0.25 # CAFM fix: estaba repetido (-0.15 y -0.25); se deja un solo valor
+		country_liberty_desire_of_subjects_add = 0.10	# por semana; ajustar tras probar
+		state_turmoil_effects_mult = -0.15
 	}
 
 	on_activate = {
@@ -232,20 +219,18 @@ law_ca_federal_state = {
 	progressiveness = 40
 
 	is_visible = {
-		hidden_trigger = { exists = this } 
 		ca_is_union_member_state = yes
 	}
 
 	can_enact = {
-		hidden_trigger = { exists = this } 
 		ca_is_union_member_state = yes
 		overlord ?= { has_law = law_type:law_ca_central_american_federal }
 	}
 
 	modifier = {
-        country_authority_add = -15
-        country_legitimacy_base_add = 10
-        state_tax_capacity_mult = -0.10
+		country_legitimacy_base_add = 10
+		country_liberty_desire_add = -0.1				# por semana; ajustar tras probar
+		state_radicals_from_political_movements_mult = -0.10
 	}
 
 	can_impose = {
@@ -274,21 +259,18 @@ law_ca_confederated_state = {
 	progressiveness = 10
 
 	is_visible = {
-		hidden_trigger = { exists = this }
 		ca_is_union_member_state = yes
 	}
 
 	can_enact = {
-		hidden_trigger = { exists = this }
 		ca_is_union_member_state = yes
 		overlord ?= { has_law = law_type:law_ca_central_american_confederated }
 	}
 
 	modifier = {
-        country_authority_add = 25
-        state_tax_capacity_mult = 0.05
-        country_leverage_resistance_mult = 0.25
-        political_movement_radicalism_add = 0.05
+		country_authority_add = 25
+		country_overlord_income_transfer_mult = -0.50	# paga menos al soberano
+		country_liberty_desire_add = 0.1				# por semana; ajustar tras probar
 	}
 
 	can_impose = {
@@ -318,12 +300,10 @@ law_ca_departmental_state = {
 	progressiveness = -20
 
 	is_visible = {
-		hidden_trigger = { exists = this } 
 		ca_is_union_member_state = yes
 	}
 
 	can_enact = {
-		hidden_trigger = { exists = this }
 		ca_is_union_member_state = yes
 		overlord ?= { has_law = law_type:law_ca_central_american_unitary }
 	}
@@ -363,12 +343,10 @@ law_ca_autonomous_state = {
 	progressiveness = 20
 
 	is_visible = {
-		hidden_trigger = { exists = this } 
 		ca_is_union_member_state = yes
 	}
 
 	can_enact = {
-		hidden_trigger = { exists = this } 
 		ca_is_union_member_state = yes
 		overlord ?= {
 			OR = {
@@ -380,10 +358,10 @@ law_ca_autonomous_state = {
 	}
 
 	modifier = {
-		country_authority_add = 50
-        state_tax_capacity_mult = 0.10
-        country_leverage_resistance_mult = 0.50
-        state_turmoil_effects_mult = -0.15
+		country_legitimacy_base_add = 10
+		country_overlord_income_transfer_mult = -0.25
+		country_liberty_desire_add = -0.15				# la concesión calma; ajustar tras probar
+		state_turmoil_effects_mult = -0.25
 	}
 
 	can_impose = {
@@ -408,7 +386,9 @@ law_ca_autonomous_state = {
 }
 
 
-
+# ====================================================================
+# LADO INDEPENDIENTE
+# ====================================================================
 
 # --------------------------------------------------------------------
 # ESTADO SOBERANO (NUEVA)
@@ -422,12 +402,10 @@ law_ca_sovereign_state = {
 	progressiveness = 0
 
 	is_visible = {
-		hidden_trigger = { exists = this } 
 		ca_is_outside_union = yes
 	}
 
 	can_enact = {
-		hidden_trigger = { exists = this } 
 		ca_is_outside_union = yes
 	}
 

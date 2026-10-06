@@ -28,14 +28,16 @@ law_ca_comunal_milicia = {
 	}
 
 	modifier = {
-        country_can_only_conscript_peasants_bool = yes
-        interest_group_ig_rural_folk_pol_str_mult = 0.20
-        state_conscription_rate_add = 0.03
-        unit_morale_loss_mult = 0.10
-        unit_experience_gain_mult = -0.25
-        country_military_goods_cost_mult = -0.10
-        state_building_barrack_max_level_add = 2
-        state_building_conscription_center_max_level_add = 25
+		country_can_only_conscript_peasants_bool = yes
+		state_conscription_rate_add = 0.05
+		unit_morale_loss_mult = 0.15
+		unit_experience_gain_mult = -0.25
+		battle_defense_owned_province_mult = 0.10
+		country_military_goods_cost_mult = -0.15
+		interest_group_ig_rural_folk_pol_str_mult = 0.20
+		country_peasants_pol_str_mult = 0.10
+		state_building_barrack_max_level_add = 25
+		state_building_conscription_center_max_level_add = 25
 	}
 
 	can_impose = {
@@ -78,16 +80,17 @@ law_ca_caudillismo = {
 	}
 
 	modifier = {
-        country_can_only_conscript_peasants_bool = yes
-        interest_group_ig_landowners_pol_str_mult = 0.20
-        country_aristocrats_pol_str_mult = 0.15
-        state_conscription_rate_add = 0.04
-        unit_morale_loss_mult = -0.05
-        unit_experience_gain_mult = -0.15
-        country_authority_add = -25
-        state_turmoil_effects_mult = 0.10
-        state_building_barrack_max_level_add = 25
-        state_building_conscription_center_max_level_add = 25
+		country_can_only_conscript_peasants_bool = yes
+		state_conscription_rate_add = 0.04
+		unit_morale_loss_mult = -0.05
+		unit_experience_gain_mult = -0.15
+		country_authority_add = 25
+		country_officers_pol_str_mult = 0.25
+		interest_group_ig_landowners_pol_str_mult = 0.15
+		interest_group_ig_armed_forces_pol_str_mult = 0.15
+		state_radicals_from_political_movements_mult = 0.10
+		state_building_barrack_max_level_add = 25
+		state_building_conscription_center_max_level_add = 25
 	}
 
 	can_impose = {
@@ -140,13 +143,12 @@ law_regionalist_militia = {
 	}
 
 	modifier = {
-        unit_morale_loss_mult = -0.05
-        state_conscription_rate_add = 0.05
-        country_leverage_resistance_mult = 0.50
-        country_officers_pol_str_mult = -0.25
-        country_authority_add = -10
-        state_building_barrack_max_level_add = 1
-        state_building_conscription_center_max_level_add = 10
+		unit_morale_loss_mult = -0.05
+		state_conscription_rate_add = 0.05
+		country_leverage_resistance_mult = 0.25
+		country_officers_pol_str_mult = -0.25
+		state_building_barrack_max_level_add = 1
+		state_building_conscription_center_max_level_add = 10
 	}
 
 	# Una república unitaria no quiere milicias de los estados.
@@ -199,13 +201,14 @@ law_ca_federal_army = {
 	}
 
 	modifier = {
-        unit_morale_loss_mult = -0.10
-        unit_experience_gain_mult = 0.15
-        state_conscription_rate_add = 0.03
-        country_officers_pol_str_mult = 0.20
-        interest_group_ig_intelligentsia_pol_str_mult = 0.10
-        state_building_barrack_max_level_add = 25
-        state_building_conscription_center_max_level_add = 75
+		unit_morale_loss_mult = -0.05
+		unit_experience_gain_mult = 0.25
+		state_conscription_rate_add = 0.03
+		country_military_wages_mult = 0.10
+		country_officers_pol_str_mult = 0.25
+		interest_group_ig_intelligentsia_pol_str_mult = 0.10
+		state_building_barrack_max_level_add = 25
+		state_building_conscription_center_max_level_add = 25
 	}
 
 	on_enact = {

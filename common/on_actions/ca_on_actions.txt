@@ -63,7 +63,7 @@ ca_yearly_pulse_country = {
 		ca_central_america.73
 		ca_central_america.75
 		ca_central_america.78
-		ca_central_america.79
+		# CAFM: ca_central_america.79 -> pulso mensual de je_historic_central_america_falls_apart
 		ca_central_america.34
         ca_central_america.35
         ca_central_america.36
@@ -104,11 +104,8 @@ ca_yearly_pulse_country = {
         ca_central_america.120
         ca_central_america.121
         ca_central_america.122
-        ca_costa_rica_events.2
-        ca_costa_rica_events.3
-        ca_costa_rica_events.6
-        ca_costa_rica_events.7
-        ca_costa_rica_events.8
+        # CAFM: ca_costa_rica_events.2 y .3 -> pulso mensual del diario madre
+        # CAFM: ca_costa_rica_events.6, .7 y .8 -> pulso semanal de je_ca_pacificacion_norte
         ca_el_salvador_events.9
         ca_el_salvador_events.10
         ca_el_salvador_events.11
@@ -170,9 +167,8 @@ on_election_campaign_start = {
 }
 
 ca_cos_on_election_campaign_start = {
+	# CAFM: las elecciones de Costa Rica de 1844, 1847 y 1849 (.22 .23 .24) salen
+	# ahora por fecha desde je_ca_cos_republica; se dejan aqui como referencia.
 	events = {
-		ca_costa_rica_events.22 # 1844: Primer sufragio directo
-		ca_costa_rica_events.23 # 1847: Castro Madriz
-		ca_costa_rica_events.24 # 1849: Juan Rafael Mora
 	}
 }

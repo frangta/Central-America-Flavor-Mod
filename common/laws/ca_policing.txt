@@ -30,10 +30,10 @@ law_ca_policia_comunal = {
 	}
 
 	modifier = {
-        interest_group_ig_rural_folk_pol_str_mult = 0.15
-        interest_group_ig_landowners_pol_str_mult = -0.10
-        state_turmoil_effects_mult = -0.10
-        country_authority_add = -10
+		interest_group_ig_rural_folk_pol_str_mult = 0.20
+		interest_group_ig_landowners_approval_add = -1
+		country_institution_cost_institution_police_mult = -0.25
+		country_institution_police_max_investment_add = -1
 	}
 
 	ai_will_do = {

@@ -1,4 +1,18 @@
-﻿lawgroup_ca_state_structure = {
+﻿# ====================================================================
+# CAFM - GRUPOS DE LEYES
+# ====================================================================
+# enable              -> si es "no", el país no tiene ninguna ley de este grupo
+#                        (mismo mecanismo que lawgroup_navy_model para países sin costa).
+# change_allowed_trigger -> si es "no", el país no puede cambiar la ley.
+#
+# Cambio respecto a la versión anterior:
+#   change_allowed_trigger ya NO exige has_variable = ca_organization_apro.
+#   Antes, los estados miembros y los países que salían de la Unión quedaban
+#   congelados para siempre. Ahora cada ley controla quién puede promulgarla
+#   con su propio can_enact (soberano / súbdito / independiente).
+# ====================================================================
+
+lawgroup_ca_state_structure = {
 	law_group_category = power_structure
 	base_enactment_days = 200
 	enactment_approval_mult = 2.0
@@ -6,8 +20,8 @@
 	affected_by_regime_change = no
 
 	enable = {
+                #has_variable = ca_organization_apro.
 		only_latin_centralamericans_cultures = yes
-                has_variable = ca_organization_apro
 	}
 
 	change_allowed_trigger = {

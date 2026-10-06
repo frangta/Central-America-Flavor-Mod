@@ -110,6 +110,9 @@ ideology_ca_liberal = {
         law_theocracy = strongly_disapprove  
         law_parliamentary_republic = strongly_approve  
         law_council_republic = disapprove  
+        law_ca_junta = strongly_disapprove
+        law_ca_consejo_junta = disapprove
+        law_ca_tecnocracy = approve
     }
     
     lawgroup_distribution_of_power = {    
@@ -128,6 +131,7 @@ ideology_ca_liberal = {
         law_hereditary_bureaucrats = strongly_disapprove  
         law_appointed_bureaucrats = approve  
         law_elected_bureaucrats = strongly_approve  
+        law_ca_municipalismo = approve
     }
     
     lawgroup_economic_system = {
@@ -139,6 +143,7 @@ ideology_ca_liberal = {
         law_cooperative_ownership = neutral
         law_extraction_economy = neutral		
         law_command_economy = strongly_disapprove  
+        law_central_american_agrarianism = neutral
     }
     
     lawgroup_trade_policy = {
@@ -154,7 +159,13 @@ ideology_ca_liberal = {
         law_collectivized_agriculture = neutral  
         law_tenant_farmers = disapprove  
         law_serfdom = strongly_disapprove  
+        law_land_reform_hacienda_system = strongly_disapprove
+        law_land_reform_communal_lands = disapprove
     }    
+
+	lawgroup_labor_rights = {
+		law_ca_mandamientos = disapprove
+	}
 }
 
 ideology_ca_constitutionalist = {
@@ -167,6 +178,9 @@ ideology_ca_constitutionalist = {
         law_monarchy = approve # Constitucional
         law_theocracy = neutral
         law_council_republic = disapprove
+        law_ca_junta = strongly_disapprove
+        law_ca_consejo_junta = disapprove
+        law_ca_coffeacracia = disapprove
     }
 
     lawgroup_distribution_of_power = {
@@ -180,6 +194,10 @@ ideology_ca_constitutionalist = {
         law_autocracy = disapprove
         law_anarchy = strongly_disapprove
     }
+
+	lawgroup_bureaucracy = {
+		law_ca_municipalismo = strongly_approve
+	}
 }
 
 ideology_central_american_federal = {
@@ -189,6 +207,10 @@ ideology_central_american_federal = {
         law_ca_central_american_unitary = strongly_disapprove
         law_ca_central_american_confederated = disapprove
         law_ca_central_american_federal = strongly_approve
+        law_ca_federal_state = strongly_approve
+        law_ca_departmental_state = strongly_disapprove
+        law_ca_autonomous_state = approve
+        law_ca_sovereign_state = disapprove
     }
     
     lawgroup_church_and_state = {
@@ -220,6 +242,8 @@ ideology_central_american_reactionary = {
         law_ca_central_american_unitary = strongly_disapprove 
         law_ca_central_american_confederated = strongly_disapprove
         law_ca_central_american_federal = strongly_disapprove
+        law_ca_departmental_state = approve
+        law_ca_sovereign_state = neutral
     }
 
     lawgroup_policing = {
@@ -227,6 +251,7 @@ ideology_central_american_reactionary = {
         law_dedicated_police = strongly_disapprove
         law_militarized_police = strongly_disapprove
         law_no_police = neutral
+        law_ca_policia_comunal = disapprove
     }
     
     lawgroup_church_and_state = {
@@ -238,6 +263,11 @@ ideology_central_american_reactionary = {
 	
 	lawgroup_army_model = {
 	
+	}
+
+	lawgroup_land_reform = {
+		law_land_reform_hacienda_system = approve
+		law_land_reform_communal_lands = disapprove
 	}
 }
 
@@ -346,6 +376,7 @@ ideology_ca_communalist = {
         law_dedicated_police = disapprove
         law_militarized_police = strongly_disapprove
         law_no_police = neutral
+        law_ca_policia_comunal = strongly_approve
     }
 
     lawgroup_army_model = {
@@ -369,6 +400,21 @@ ideology_ca_communalist = {
         law_cultural_exclusion = neutral
         law_multicultural = neutral
     }    
+
+	lawgroup_land_reform = {
+		law_land_reform_communal_lands = strongly_approve
+		law_land_reform_hacienda_system = strongly_disapprove
+		law_land_reform_coffee_oligarchy = strongly_disapprove
+		law_land_reform_banana_republic = disapprove
+	}
+
+	lawgroup_labor_rights = {
+		law_ca_mandamientos = strongly_disapprove
+	}
+
+	lawgroup_economic_system = {
+		law_central_american_agrarianism = disapprove
+	}
 }
 
 ideology_ca_secularist = {
@@ -385,6 +431,7 @@ ideology_ca_secularist = {
         law_private_schools = neutral
         law_religious_schools = neutral    
         law_no_schools = disapprove    
+        law_ca_escuela_laica = strongly_approve
     }
 
     lawgroup_bureaucracy = {
@@ -392,6 +439,10 @@ ideology_ca_secularist = {
         law_appointed_bureaucrats = disapprove
         law_elected_bureaucrats = strongly_approve
     }
+
+	lawgroup_governance_principles = {
+		law_ca_tecnocracy = approve
+	}
 }
 
 ideology_ca_soberania_aristocratica = {
@@ -524,6 +575,7 @@ ideology_ca_criollo_stratocratic = {
         law_professional_army = neutral
         law_national_militia = strongly_disapprove
         law_mass_conscription = disapprove
+        law_ca_guardia_nacional = approve
     }
     
     lawgroup_land_reform = {
@@ -532,6 +584,7 @@ ideology_ca_criollo_stratocratic = {
         law_commercialized_agriculture = disapprove
         law_peasant_proprietorship = strongly_disapprove
         law_collectivized_agriculture = strongly_disapprove
+        law_land_reform_hacienda_system = approve
     }
     lawgroup_citizenship = {
         law_ethnostate = strongly_approve
@@ -545,7 +598,13 @@ ideology_ca_criollo_stratocratic = {
         law_no_workers_rights = approve
         law_regulatory_bodies = disapprove
         law_worker_protections = disapprove
+        law_ca_mandamientos = approve
     }
+
+	lawgroup_governance_principles = {
+		law_ca_junta = strongly_approve
+		law_ca_consejo_junta = approve
+	}
 }
 
 ideology_ca_artesanado = {
@@ -585,6 +644,7 @@ ideology_ca_agroexportadores = {
 		law_extraction_economy = disapprove
         law_laissez_faire = strongly_disapprove
         law_command_economy = strongly_disapprove
+        law_central_american_agrarianism = strongly_approve
     }
 
     lawgroup_trade_policy = {        
@@ -600,6 +660,10 @@ ideology_ca_agroexportadores = {
         law_commercialized_agriculture = neutral
         law_collectivized_agriculture = neutral
         law_peasant_proprietorship = approve
+        law_land_reform_coffee_oligarchy = strongly_approve
+        law_land_reform_hacienda_system = approve
+        law_land_reform_banana_republic = neutral
+        law_land_reform_communal_lands = strongly_disapprove
     }        
 
     lawgroup_taxation = {
@@ -609,6 +673,14 @@ ideology_ca_agroexportadores = {
         law_graduated_taxation = neutral
         law_land_based_taxation = disapprove
     }    
+
+	lawgroup_labor_rights = {
+		law_ca_mandamientos = approve
+	}
+
+	lawgroup_governance_principles = {
+		law_ca_coffeacracia = strongly_approve
+	}
 }
 
 ideology_ca_colonialist = {
@@ -675,6 +747,7 @@ ideology_ca_enclavist = {
         law_corporate_state = neutral
         law_theocracy = disapprove
         law_council_republic = strongly_disapprove
+        law_ca_coffeacracia = neutral
     }
 
     lawgroup_citizenship = {
@@ -697,6 +770,11 @@ ideology_ca_enclavist = {
         law_appointed_bureaucrats = approve
         law_elected_bureaucrats = disapprove
     }
+
+	lawgroup_land_reform = {
+		law_land_reform_banana_republic = strongly_approve
+		law_land_reform_communal_lands = disapprove
+	}
 }
 
 ideology_ca_radical_enclavist = { #Nacional Enclavist
@@ -825,6 +903,7 @@ ideology_ca_coffee_liberal = {
 		law_laissez_faire = approve
 		law_interventionism = neutral
 		law_traditionalism = strongly_disapprove
+		law_central_american_agrarianism = approve
 	}
 
 	lawgroup_trade_policy = {
@@ -841,15 +920,25 @@ ideology_ca_coffee_liberal = {
 		law_dedicated_police = strongly_approve
 		law_militarized_police = approve
 		law_local_police = disapprove
+		law_ca_policia_comunal = disapprove
 	}
 	
 	lawgroup_land_reform = {
 		law_commercialized_agriculture = strongly_approve
 		law_peasant_proprietorship = disapprove
+		law_land_reform_coffee_oligarchy = approve
+		law_land_reform_hacienda_system = disapprove
+		law_land_reform_communal_lands = disapprove
 	}
 	
 	lawgroup_labor_rights = {
 		law_worker_protections = strongly_disapprove
+		law_ca_mandamientos = neutral
+	}
+
+	lawgroup_governance_principles = {
+		law_ca_coffeacracia = approve
+		law_ca_tecnocracy = approve
 	}
 }
 
@@ -862,6 +951,9 @@ ideology_ca_indigenous_communalism = {
 		law_collectivized_agriculture = approve
 		law_commercialized_agriculture = strongly_disapprove
 		law_serfdom = strongly_disapprove
+		law_land_reform_communal_lands = strongly_approve
+		law_land_reform_coffee_oligarchy = strongly_disapprove
+		law_land_reform_hacienda_system = disapprove
 	}
 
 	lawgroup_citizenship = {
@@ -872,6 +964,11 @@ ideology_ca_indigenous_communalism = {
 
 	lawgroup_policing = {
 		law_dedicated_police = strongly_disapprove
+		law_ca_policia_comunal = strongly_approve
+	}
+
+	lawgroup_labor_rights = {
+		law_ca_mandamientos = strongly_disapprove
 	}
 }
 
@@ -894,6 +991,13 @@ ideology_ca_separatist = {
 
 	lawgroup_trade_policy = {
 		law_isolationism = strongly_approve
+	}
+
+	lawgroup_ca_state_structure = {
+		law_ca_sovereign_state = strongly_approve
+		law_ca_autonomous_state = approve
+		law_ca_confederated_state = approve
+		law_ca_departmental_state = strongly_disapprove
 	}
 }
 
@@ -930,6 +1034,7 @@ ideology_ca_moralist = {
 		law_presidential_republic = neutral
 		law_parliamentary_republic = neutral
 		law_council_republic = strongly_disapprove
+		law_ca_tecnocracy = strongly_disapprove
 	}
 
 	lawgroup_church_and_state = {
@@ -951,6 +1056,10 @@ ideology_ca_moralist = {
 		law_legacy_slavery = disapprove
 		law_debt_slavery = strongly_disapprove
 		law_slave_trade = strongly_disapprove
+	}
+
+	lawgroup_education_system = {
+		law_ca_escuela_laica = strongly_disapprove
 	}
 }
 ideology_ca_papal_moralist = {
@@ -983,90 +1092,5 @@ ideology_ca_papal_moralist = {
 		law_legacy_slavery = disapprove
 		law_debt_slavery = strongly_disapprove
 		law_slave_trade = strongly_disapprove
-	}
-}
-# Criollismo Afrocaribeño: costa de Bluefields, Limón y Belice
-ideology_ca_creole_caribbean = {
-	icon = "gfx/interface/icons/ideology_icons/market_liberal.dds"
- 
-	lawgroup_church_and_state = {
-		law_freedom_of_conscience = strongly_approve
-		law_state_religion = strongly_disapprove
-	}
-	lawgroup_trade_policy = {
-		law_free_trade = strongly_approve
-		law_isolationism = strongly_disapprove
-	}
-	lawgroup_citizenship = {
-		law_multicultural = strongly_approve
-		law_ethnostate = strongly_disapprove
-		law_national_supremacy = strongly_disapprove
-	}
-	lawgroup_slavery = {
-		law_slavery_banned = strongly_approve
-		law_debt_slavery = strongly_disapprove
-	}
-	lawgroup_economic_system = {
-		law_laissez_faire = approve
-	}
-	lawgroup_free_speech = {
-		law_protected_speech = approve
-	}
-}
- 
-# Masonería Liberal: red de logias del liberalismo centroamericano
-ideology_ca_masonic_liberal = {
-	icon = "gfx/interface/icons/ideology_icons/liberal.dds"
- 
-	lawgroup_church_and_state = {
-		law_total_separation = strongly_approve
-		law_freedom_of_conscience = approve
-		law_state_religion = strongly_disapprove
-	}
-	lawgroup_education_system = {
-		law_public_schools = strongly_approve
-		law_religious_schools = strongly_disapprove
-	}
-	lawgroup_free_speech = {
-		law_protected_speech = strongly_approve
-		law_right_of_assembly = approve
-		law_outlawed_dissent = strongly_disapprove
-	}
-}
- 
-# Mutualismo Artesano: sociedades de artesanos y socorro mutuo (1870-1890)
-ideology_ca_mutualism = {
-	icon = "gfx/interface/icons/ideology_icons/egalitarian.dds"
- 
-	lawgroup_labour_associations = {
-		law_right_to_associate = strongly_approve
-		law_guild_system = approve
-		law_combination_acts = strongly_disapprove
-	}
-	lawgroup_welfare = {
-		law_poor_laws = strongly_approve
-		law_no_social_security = strongly_disapprove
-	}
-	lawgroup_labor_rights = {
-		law_worker_protections = approve
-	}
-}
- 
-# Confederacionismo Pactista: Pacto de Chinandega / Confederación 1842-44
-ideology_ca_pact_confederalist = {
-	icon = "gfx/interface/icons/ideology_icons/reformer.dds"
- 
-	lawgroup_ca_state_structure = {
-		law_ca_central_american_confederated = strongly_approve
-		law_ca_central_american_federal = approve
-		law_ca_central_american_unitary = strongly_disapprove
-	}
-	lawgroup_governance_principles = {
-		law_presidential_republic = strongly_approve
-	}
-	lawgroup_distribution_of_power = {
-		law_census_voting = approve
-		law_autocracy = strongly_disapprove
-		law_single_party_state = strongly_disapprove
 	}
 }

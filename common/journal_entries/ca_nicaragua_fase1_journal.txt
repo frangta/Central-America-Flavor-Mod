@@ -1,0 +1,175 @@
+﻿# =====================================================================
+# CAFM — NICARAGUA — FASE 1: La Conspiración del Cuartel (1836–1837)
+# La añade ca_nicaragua_events.6 (opción a). La variable var:nic_conspiracy
+# se pone en 20 ANTES de añadir el diario, así el objetivo queda en 100.
+# Subir es malo: a 100 estalla ca_nicaragua_events.13.
+# =====================================================================
+
+je_ca_nic_conspiracy = {
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	group = je_group_historical_content
+	should_be_pinned_by_default = yes
+
+	current_value = {
+		value = root.var:nic_conspiracy
+	}
+	goal_add_value = {
+		add = 80
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_nic_conspiracy_status_critica
+				trigger = { var:nic_conspiracy >= 80 }
+			}
+			triggered_desc = {
+				desc = je_ca_nic_conspiracy_status_alta
+				trigger = { var:nic_conspiracy >= 50 }
+			}
+			triggered_desc = {
+				desc = je_ca_nic_conspiracy_status_baja
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	# Zepeda sobrevive al golpe, o (fuera del modo histórico) llega 1838 sin golpe
+	complete = {
+		OR = {
+			has_variable = nic_zepeda_survived
+			AND = {
+				NOT = { has_variable = nic_historic_mode }
+				game_date >= 1838.1.1
+				var:nic_conspiracy < 100
+			}
+		}
+	}
+
+	on_complete = {
+		remove_variable = nic_conspiracy
+	}
+
+	# Zepeda muere: .13 ya dispara .14 (El vacío de poder)
+	fail = {
+		has_variable = nic_zepeda_murdered
+	}
+
+	on_fail = {
+		remove_variable = nic_conspiracy
+	}
+
+	# Zepeda deja el poder por otra vía (elecciones, otro evento)
+	invalid = {
+		NOT = { has_variable = nic_zepeda_murdered }
+		NOT = { has_variable = nic_zepeda_survived }
+		NOT = { ruler ?= { has_variable = is_zepeda } }
+	}
+
+	on_invalid = {
+		remove_variable = nic_conspiracy
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			# --- Enlace con ca_nicaragua_events.8 (paquete cafm_zepeda_quijano) ---
+			if = {
+				limit = {
+					NOT = { has_variable = nic_conspiracy_quijano_applied }
+					OR = {
+						has_global_variable = ca_nic_zepeda_apoyo_abierto
+						has_global_variable = ca_nic_zepeda_condicional
+						has_global_variable = ca_nic_zepeda_expulsa
+					}
+				}
+				set_variable = nic_conspiracy_quijano_applied
+				if = {
+					limit = { has_global_variable = ca_nic_zepeda_apoyo_abierto }
+					change_variable = { name = nic_conspiracy add = 30 }
+				}
+				else_if = {
+					limit = { has_global_variable = ca_nic_zepeda_condicional }
+					change_variable = { name = nic_conspiracy add = 10 }
+				}
+			}
+
+			# --- Límites 0–100 ---
+			if = {
+				limit = { var:nic_conspiracy > 100 }
+				set_variable = { name = nic_conspiracy value = 100 }
+			}
+			if = {
+				limit = { var:nic_conspiracy < 0 }
+				set_variable = { name = nic_conspiracy value = 0 }
+			}
+
+			# --- Disparadores (uno por semana como máximo): golpe, purga, 50, 80 ---
+			if = {
+				limit = {
+					NOT = { has_variable = nic_e13_fired }
+					OR = {
+						var:nic_conspiracy >= 100
+						AND = {
+							has_variable = nic_historic_mode
+							game_date >= 1837.1.25
+						}
+					}
+				}
+				trigger_event = { id = ca_nicaragua_events.13 popup = yes }
+			}
+			else_if = {
+				limit = {
+					NOT = { has_variable = nic_e11_fired }
+					game_date >= 1836.8.1
+					has_global_variable = ca_nic_zepeda_apoyo_abierto
+				}
+				trigger_event = { id = ca_nicaragua_events.11 popup = yes }
+			}
+			else_if = {
+				limit = {
+					NOT = { has_variable = nic_e10_fired }
+					var:nic_conspiracy >= 50
+				}
+				trigger_event = { id = ca_nicaragua_events.10 popup = yes }
+			}
+			else_if = {
+				limit = {
+					NOT = { has_variable = nic_e12_fired }
+					var:nic_conspiracy >= 80
+				}
+				trigger_event = { id = ca_nicaragua_events.12 popup = yes }
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			# Base: la tensión crece sola
+			change_variable = { name = nic_conspiracy add = 1 }
+			# Fuerzas Armadas descontentas
+			if = {
+				limit = { ig:ig_armed_forces ?= { ig_approval < 0 } }
+				change_variable = { name = nic_conspiracy add = 2 }
+			}
+			# Terratenientes fuera del gobierno
+			if = {
+				limit = { ig:ig_landowners ?= { is_in_government = no } }
+				change_variable = { name = nic_conspiracy add = 1 }
+			}
+			# Fuerzas Armadas en el gobierno
+			if = {
+				limit = { ig:ig_armed_forces ?= { is_in_government = yes } }
+				change_variable = { name = nic_conspiracy subtract = 1 }
+			}
+		}
+		events = {
+			ca_nicaragua_events.7 # El Código Penal y el jurado (desde may 1836)
+			ca_nicaragua_events.9 # El Telégrafo Nicaragüense (desde jul 1836)
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}

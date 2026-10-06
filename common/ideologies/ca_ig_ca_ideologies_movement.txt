@@ -8,12 +8,15 @@ ideology_ca_unitarian_movement = {
         law_ca_central_american_unitary = strongly_approve
         law_ca_central_american_federal = strongly_disapprove
         law_ca_central_american_confederated = strongly_disapprove
+        law_ca_departmental_state = strongly_approve
+        law_ca_autonomous_state = strongly_disapprove
     }
 
     lawgroup_bureaucracy = { 
         law_hereditary_bureaucrats = strongly_disapprove
         law_appointed_bureaucrats = strongly_approve # Control desde la capital
         law_elected_bureaucrats = strongly_disapprove
+        law_ca_municipalismo = strongly_disapprove
     }
 }
 
@@ -28,12 +31,15 @@ ideology_ca_federalist_movement = {
         law_ca_central_american_unitary = strongly_disapprove
         law_ca_central_american_federal = strongly_approve
         law_ca_central_american_confederated = neutral # Aceptable como compromiso
+        law_ca_federal_state = strongly_approve
+        law_ca_departmental_state = strongly_disapprove
     }
 
     lawgroup_bureaucracy = { 
         law_hereditary_bureaucrats = strongly_disapprove
         law_appointed_bureaucrats = disapprove
         law_elected_bureaucrats = strongly_approve # Poder local
+        law_ca_municipalismo = approve
     }
 }
 
