@@ -29,7 +29,7 @@ ca_nicaragua_events.1 = {
 	
 	immediate = {
         s:STATE_NICARAGUA.region_state:UCA = {
-        state_region = { add_state_trait = state_trait_mining_nic } # CAFM fix: add_state_trait es de state_region
+        # CAFM Fase 1: state_trait_mining_nic se quita de aqui; es premio del diario de prospeccion
 		add_modifier = { name = ca_uca_leones_vs_granadinos }
         add_modifier = { name = separatism_stronghold }
         add_modifier = { name = liberal_stronghold_small_nation }
@@ -40,10 +40,10 @@ ca_nicaragua_events.1 = {
 	option = {
 		name = ca_nicaragua_events.1.a
 		default_option = yes
-
+		ai_chance = { base = 100 }
 	}
 	option = {
-		name = ca_nicaragua_events.2.b
+		name = ca_nicaragua_events.1.c # CAFM Fase 1: texto propio (antes usaba .2.b)
 		trigger = {
 			c:UCA ?= {
 			has_variable = ca_state_selection_to_playing
@@ -52,408 +52,485 @@ ca_nicaragua_events.1 = {
         ca_create_nicaragua_effect = yes 
 		ca_play_nicaragua_effect = yes
         play_as = c:NIC
+		ai_chance = { base = 0 }
 	}
 }                                            
-#ca_nicaragua_events.2  = { #Rivalry between cities
-#      type = country_event
-#
-#	
-#	title = ca_nicaragua_events.2.t
-#	desc = ca_nicaragua_events.2.d
-#	flavor = ca_nicaragua_events.2.f
-#	
-#	event_image = {
-#		video = "southamerica_aristocrats"
-#	}
-#	
-#	icon = "gfx/interface/icons/event_icons/event_default.dds"
-#	
-#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#	
-#	duration = 3
-#	
-#	trigger = {
-#		exists = c:NIC
-#		this = c:NIC
-#	}
-#	
-#
-#	immediate = {
-#	scope:scope_PN1 = {set_relations = { country = c:PN6 value = -150 }}
-#   scope:scope_PN6 = {set_relations = { country = c:PN1 value = -150 }}
-#	}
-#	
-#	option = {
-#		name = ca_nicaragua_events.1.a
-#		add_journal_entry = {
-#			type = je_ca_federalists_vs_separatists_situation
-#		}		
-#		
-#		default_option = yes
-#	}
-#	
-#	
-#
-#}                                     
-#ca_nicaragua_events.3  = { #Proposal for agrarian reform in Leon
-#  type = country_event
-#
-#	
-#	title = ca_nicaragua_events.3.t
-#	desc = ca_nicaragua_events.3.d
-#	flavor = ca_nicaragua_events.3.f
-#	
-#	event_image = {
-#		video = "southamerica_aristocrats"
-#	}
-#	
-#	icon = "gfx/interface/icons/event_icons/event_default.dds"
-#	
-#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#	
-#	duration = 3
-#	
-#	trigger = {
-#	has_journal_entry = je_ca_historic_situation_in_nicaragua
-#		exists = c:NIC
-#		this = c:NIC
-#	}
-#	immediate = {
-#	
-#	}
-#	
-#	option = {
-#		name = ca_nicaragua_events.1.a
-#		default_option = yes
-#		set_variable = voting_ca_self_determination
-#	}
-#	
-#	option = {
-#		name = ca_nicaragua_events.1.b
-#	}
-#	
-#
-#}
-#ca_nicaragua_events.4  = { #Reforma Judicial de Granada
-#   type = country_event
-#
-#	
-#	title = ca_nicaragua_events.4.t
-#	desc = ca_nicaragua_events.4.d
-#	flavor = ca_nicaragua_events.4.f
-#	
-#	event_image = {
-#		video = ""
-#	}
-#	
-#	icon = "gfx/interface/icons/event_icons/event_default.dds"
-#	
-#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#	
-#	duration = 3
-#	
-#	trigger = {
-#	has_journal_entry = je_ca_historic_situation_in_nicaragua
-#	    game_date < 1838.5.30
-#		exists = c:NIC
-#		this = c:NIC
-#	}
-#	
-#	#cancellation_trigger = {
-#	#}
-#
-#	cooldown = {
-#	}
-#
-#	immediate = {
-#	
-#	}
-#	
-#	option = {
-#		name = ca_nicaragua_events.1.a
-#		default_option = yes
-#		set_variable = voting_ca_self_determination
-#	}
-#	
-#	option = {
-#		name = ca_nicaragua_events.1.b
-#	}
-#	
-#	#after = {
-#	#}
-#
-#}                                     
-#ca_nicaragua_events.5  = { #Intentos de Fortalecimiento Militar en Nicaragua
-#  type = country_event
-#
-#	
-#	title = ca_nicaragua_events.1.t
-#	desc = ca_nicaragua_events.3.d
-#	flavor = ca_nicaragua_events.3.f
-#	
-#	event_image = {
-#		video = ""
-#	}
-#	
-#	icon = "gfx/interface/icons/event_icons/event_default.dds"
-#	
-#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#	
-#	duration = 3
-#	
-#	trigger = {
-#	has_journal_entry = je_ca_historic_situation_in_nicaragua
-#	    game_date < 1838.5.30
-#		exists = c:NIC
-#		this = c:NIC
-#	}
-#	
-#	#cancellation_trigger = {
-#	#}
-#
-#	cooldown = {
-#	}
-#
-#	immediate = {
-#	
-#	}
-#	
-#	option = {
-#		name = ca_nicaragua_events.1.a
-#		default_option = yes
-#		set_variable = voting_ca_self_determination
-#	}
-#	
-#	option = {
-#		name = ca_nicaragua_events.1.b
-#	}
-#	
-#	#after = {
-#	#}
-#
-#}                                     
-#ca_nicaragua_events.6  = { #Cholera Spreads in Nicaragua
-#   type = country_event
-#   placement = ROOT
-#	
-#	title = ca_nicaragua_events.1.t
-#	desc = ca_nicaragua_events.3.d
-#	flavor = ca_nicaragua_events.3.f
-#	
-#	event_image = {
-#		video = "southamerica_war_civilians"
-#	}
-#	
-#	icon = "gfx/interface/icons/event_icons/event_default.dds"
-#	
-#	on_opened_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#	
-#	duration = 3
-#	
-#	trigger = {
-#        has_journal_entry = je_ca_historic_situation_in_nicaragua	
-#	    game_date < 1838.5.30
-#		exists = c:NIC
-#		this = c:NIC
-#	}
-#	
-#	#cancellation_trigger = {
-#	#}
-#
-#	cooldown = {
-#	}
-#
-#	immediate = {
-#	set_variable = uca_cholera_pandemic
-#		s:STATE_NICARAGUA.region_state:NIC = {
-#			limit = {
-#				NOT = { has_variable = ca_cholera_affect }
-#			}
-#			save_scope_as = cholera_affect_state
-#		}
-#	}
-#	
-#	option = {
-#		name = ca_nicaragua_events.1.a
-#		default_option = yes 
-#		scope:cholera_affect_state = {
-#			set_variable = ca_cholera_affect
-#			add_modifier = {
-#				name = uca_cholera
-#				days = 365
-#			}
-#			add_modifier = {
-#				name = uca_quarantine
-#				days = 370
-#			}
-#		}
-#		
-#		ai_chance = {
-#			base = 10
-#		}
-#	}
-#	
-#	option = {
-#		name = ca_nicaragua_events.1.b
-#		scope:cholera_affect_state = {
-#			set_variable = ca_cholera_affect
-#			add_modifier = {
-#				name = uca_cholera
-#				days = 365
-#			}
-#		}
-#		
-#		ai_chance = {
-#			base = 90
-#		}
-#	}
-#	
-#	#after = {
-#	#}
-#
-#}
-### Play with Nicaragua 
-#ca_nicaragua_events.7 = {
-#	type = country_event
-#	placement = scope:secession_capital
-#	title = ca_nicaragua_events.7.t
-#	desc = ca_nicaragua_events.7.d
-#	flavor =  ca_nicaragua_events.7.f
-#
-#	duration = 3
-#
-#	event_image = {
-#		video = "gfx/event_pictures/southamerica_aristocrats.bk2"
-#	}
-#
-#	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-#	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
-#
-#	icon = "gfx/interface/icons/event_icons/event_fire.dds"
-#
-#	trigger = {
-#         # triggered by je_historic_central_america_falls_apart when the player selected Nicaragua to play
-#	}
-#	
-#	immediate = {
-#		set_variable = {
-#			name = frca_recent_separatism_event_var
-#			days = 40
-#		}	
-#		random_scope_state = {
-#			limit = {
-#				is_capital = no
-#				state_region = s:STATE_NICARAGUA
-#				turmoil > 0.2
-#			}
-#			save_scope_as = secession_state
-#		}
-#		create_country = {
-#			tag = NIC
-#			origin = this
-#			state = scope:secession_state
-#		}
-#		create_diplomatic_pact = {
-#            country = c:NIC
-#            type = ca_dependency
-#        }		
-#		c:NIC = {
-#			save_scope_as = scope_NIC
-#			save_scope_as = secession_country
-#			capital = {
-#				save_scope_as = secession_capital
-#			}
-#		  add_journal_entry = {
-#		  type = je_ca_historic_situation_in_nicaragua
-#		   }
-#		   set_variable = {}
-#			set_relations = { country = c:UCA value = -50 }
-#		    create_character = {
-#				first_name = Jose
-#				last_name = Nunez
-#				historical = yes
-#				ig_leader = yes
-#				interest_group = ig_landowners
-#				ruler = yes
-#				birth_date = 1800.02.02
-#				female = no
-#				culture = cu:nicaraguan
-#				ideology = ideology:ideology_meritocratic
-#				religion = rel:catholic
-#				traits = {
-#					basic_diplomat
-#			}
-#		    }
-#		ig:ig_landowners = {
-#			remove_ideology = ideology_paternalistic
-#			add_ideology = ideology_central_american_reactionary
-#			set_interest_group_name = ig_nic_convervador
-#		}
-#		ig:ig_intelligentsia = {
-#		remove_ideology = ideology_liberal
-#        remove_ideology = ideology_republican		
-#		add_ideology = ideology_ca_constitutionalist
-#        set_interest_group_name = ig_nic_liberal
-#
-#		}		
-#		ig:ig_armed_forces = {
-#			remove_ideology = ideology_paternalistic
-#		}
-#
-#		ig:ig_devout = {
-#			add_ideology = ideology_central_american_reactionary
-#			set_interest_group_name = ig_catholic_church
-#		}			
-#			activate_law = law_type:law_freedom_of_conscience
-#			#activate_law = law_type:law_unitary
-#			activate_law = law_type:law_mercantilism
-#			activate_law = law_type:law_wealth_voting
-#			activate_law = law_type:law_censorship
-#		it = {
-#		limit = { has_variable = historic_central_american }
-#	
-#		    trigger_event = { 
-#		    	id = ca_nicaragua_events.1 
-#		    }
-#		}
-#		it = {
-#		limit = { has_variable = random_central_american }
-#        random_events = {
-#			50 = ca_central_america.13
-#			50 = ca_central_america.14
-#			}
-#		}				
-#		}
-#		
-#		set_variable = frca_crisis_var
-#		trigger_event = { 
-#			id = ca_central_america.6
-#			months = 1
-#		}
-#	}
-#
-#	# Accept secession
-#	option = {
-#		name = ca_nicaragua_events.7.a
-#		default_option = yes
-#
-#	}
-#
-#	# Reject Secession
-#	option = {
-#		name = ca_nicaragua_events.7.b
-#
-#	}
-#	option = { #Switch tags
-#		name = ca_nicaragua_events.7.c
-#		
-#		play_as = c:NIC
-#		
-#		ai_chance = {
-#			base = 0
-#		}
-#	}
-#}
+## .2 — El Estado dividido (reutiliza ca_nicaragua_events.2.*)
+## Lo dispara ca_play_nicaragua_effect 7 días después de crear NIC (eventos .1 y ca_central_america.80).
+ca_nicaragua_events.2 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.2.t
+	desc = ca_nicaragua_events.2.d
+	flavor = ca_nicaragua_events.2.f
+	duration = 3
+	event_image = { video = "southamerica_aristocrats" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	trigger = {
+		c:NIC ?= this
+		game_date < 1837.1.1
+		NOT = { has_variable = nic_e2_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e2_fired
+		if = {
+			limit = { c:UCA ?= { has_variable = historic_central_american } }
+			set_variable = nic_historic_mode
+		}
+		s:STATE_NICARAGUA.region_state:NIC ?= {
+			add_modifier = { name = nic_agitacion_aristocratica months = 60 }
+		}
+	}
+
+	# Histórica: Zepeda gobierna desde León contra los caudillos
+	option = {
+		name = ca_nicaragua_events.2.a
+		default_option = yes
+		add_modifier = { name = nic_gobierno_desde_leon months = 60 }
+		add_radicals = { value = small_radicals pop_type = aristocrats }
+		ai_chance = { base = 80 }
+	}
+
+	# Alternativa: pedir tutela federal (sube el apoyo federal en la Fase 2)
+	option = {
+		name = ca_nicaragua_events.2.b
+		add_modifier = { name = nic_tutela_federal months = 36 }
+		set_variable = nic_pidio_federacion
+		c:UCA ?= { change_relations = { country = ROOT value = 20 } }
+		ai_chance = { base = 20 }
+	}
+}
+
+## .6 — La audacia de José Zepeda (abr 1836)
+## Lo dispara el pulso mensual de je_ca_historic_situation_in_nicaragua.
+ca_nicaragua_events.6 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.6.t
+	desc = ca_nicaragua_events.6.d
+	flavor = ca_nicaragua_events.6.f
+	duration = 3
+	event_image = { video = "unspecific_reform" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	trigger = {
+		c:NIC ?= this
+		game_date >= 1836.4.1
+		game_date < 1837.1.1
+		ruler ?= { has_variable = is_zepeda }
+		NOT = { has_variable = nic_e6_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e6_fired
+	}
+
+	# Histórica: la modernidad no espera (abre la conspiración)
+	option = {
+		name = ca_nicaragua_events.6.a
+		default_option = yes
+		set_variable = nic_zepeda_reforms
+		add_modifier = { name = nic_reformas_zepeda months = 60 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		# La variable va antes del diario: goal = valor actual (20) + 80 = 100
+		set_variable = { name = nic_conspiracy value = 20 }
+		add_journal_entry = { type = je_ca_nic_conspiracy }
+		ai_chance = { base = 90 }
+	}
+
+	# Alternativa: el pacto granadino (sin conspiración; Zepeda no corre peligro)
+	option = {
+		name = ca_nicaragua_events.6.b
+		set_variable = nic_pacto_granadino
+		add_modifier = { name = nic_pacto_granadino months = 60 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 10 }
+	}
+}
+
+## .7 — El Código Penal y el jurado (may 1836 en adelante)
+## Lo dispara el pulso mensual de je_ca_nic_conspiracy.
+ca_nicaragua_events.7 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.7.t
+	desc = ca_nicaragua_events.7.d
+	flavor = ca_nicaragua_events.7.f
+	duration = 3
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		game_date >= 1836.5.1
+		NOT = { has_variable = nic_e7_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e7_fired
+	}
+
+	# Histórica: aprobar el código, el jurado y la Corte de Cuentas
+	option = {
+		name = ca_nicaragua_events.7.a
+		default_option = yes
+		add_modifier = { name = nic_codigo_penal months = 60 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		custom_tooltip = {
+			text = nic_conspiracy_up_15_tt
+			change_variable = { name = nic_conspiracy add = 15 }
+		}
+		ai_chance = { base = 80 }
+	}
+
+	# Alternativa: engavetarlo
+	option = {
+		name = ca_nicaragua_events.7.b
+		add_modifier = { name = nic_codigo_engavetado months = 24 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 20 }
+	}
+}
+
+## .9 — El Telégrafo Nicaragüense (jul 1836 en adelante)
+## Lo dispara el pulso mensual de je_ca_nic_conspiracy.
+ca_nicaragua_events.9 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.9.t
+	desc = ca_nicaragua_events.9.d
+	flavor = ca_nicaragua_events.9.f
+	duration = 3
+	event_image = { video = "unspecific_research" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		game_date >= 1836.7.1
+		NOT = { has_variable = nic_e9_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e9_fired
+	}
+
+	# Histórica: prensa libre
+	option = {
+		name = ca_nicaragua_events.9.a
+		default_option = yes
+		add_modifier = { name = nic_telegrafo_libre months = 60 }
+		add_radicals = { value = small_radicals pop_type = academics }
+		custom_tooltip = {
+			text = nic_conspiracy_up_15_tt
+			change_variable = { name = nic_conspiracy add = 15 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	# Alternativa: censura parcial
+	option = {
+		name = ca_nicaragua_events.9.b
+		add_modifier = { name = nic_censura_parcial months = 24 }
+		ai_chance = { base = 30 }
+	}
+}
+
+## .10 — El descontento granadino (barra >= 50)
+## Lo dispara el pulso semanal de je_ca_nic_conspiracy.
+ca_nicaragua_events.10 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.10.t
+	desc = ca_nicaragua_events.10.d
+	flavor = ca_nicaragua_events.10.f
+	duration = 3
+	event_image = { video = "southamerica_aristocrats" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		NOT = { has_variable = nic_e10_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e10_fired
+	}
+
+	# Arrestar sospechosos
+	option = {
+		name = ca_nicaragua_events.10.a
+		trigger = { authority >= 50 }
+		add_modifier = { name = nic_arrestos_preventivos months = 6 }
+		custom_tooltip = {
+			text = nic_conspiracy_down_20_tt
+			change_variable = { name = nic_conspiracy subtract = 20 }
+		}
+		ai_chance = { base = 40 }
+	}
+
+	# Comprar lealtades
+	option = {
+		name = ca_nicaragua_events.10.b
+		trigger = { gold_reserves >= 5000 }
+		add_treasury = -5000
+		custom_tooltip = {
+			text = nic_conspiracy_down_20_tt
+			change_variable = { name = nic_conspiracy subtract = 20 }
+		}
+		ai_chance = { base = 40 }
+	}
+
+	# Que Dios nos proteja (siempre disponible)
+	option = {
+		name = ca_nicaragua_events.10.c
+		default_option = yes
+		ai_chance = { base = 20 }
+	}
+}
+
+## .11 — La purga del cuartel (tras armar abiertamente a Quijano)
+## Lo dispara el pulso semanal de je_ca_nic_conspiracy desde el 1 ago 1836
+## si existe la variable global ca_nic_zepeda_apoyo_abierto (ca_nicaragua_events.8.b).
+ca_nicaragua_events.11 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.11.t
+	desc = ca_nicaragua_events.11.d
+	flavor = ca_nicaragua_events.11.f
+	duration = 3
+	event_image = { video = "unspecific_military_parade" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		NOT = { has_variable = nic_e11_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e11_fired
+	}
+
+	# Purgar a los oficiales conservadores: el golpe se precipita
+	option = {
+		name = ca_nicaragua_events.11.a
+		ig:ig_armed_forces ?= { add_modifier = { name = nic_purga_cuartel months = 36 } }
+		custom_tooltip = {
+			text = nic_conspiracy_to_100_tt
+			set_variable = { name = nic_conspiracy value = 100 }
+		}
+		ai_chance = { base = 20 }
+	}
+
+	# Retroceder
+	option = {
+		name = ca_nicaragua_events.11.b
+		default_option = yes
+		add_modifier = { name = nic_purga_retroceso months = 24 }
+		ai_chance = { base = 80 }
+	}
+}
+
+## .12 — Rumores en las sombras (barra >= 80)
+## Lo dispara el pulso semanal de je_ca_nic_conspiracy.
+ca_nicaragua_events.12 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.12.t
+	desc = ca_nicaragua_events.12.d
+	flavor = ca_nicaragua_events.12.f
+	duration = 3
+	event_image = { video = "unspecific_vandalized_storefront" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		NOT = { has_variable = nic_e12_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e12_fired
+	}
+
+	option = {
+		name = ca_nicaragua_events.12.a
+		trigger = { authority >= 100 }
+		add_modifier = { name = nic_arrestos_masivos months = 12 }
+		custom_tooltip = {
+			text = nic_conspiracy_down_20_tt
+			change_variable = { name = nic_conspiracy subtract = 20 }
+		}
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = ca_nicaragua_events.12.b
+		trigger = { gold_reserves >= 10000 }
+		add_treasury = -10000
+		custom_tooltip = {
+			text = nic_conspiracy_down_20_tt
+			change_variable = { name = nic_conspiracy subtract = 20 }
+		}
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = ca_nicaragua_events.12.c
+		default_option = yes
+		ai_chance = { base = 20 }
+	}
+}
+
+## .13 — La noche del cuartel (25 ene 1837, o barra = 100)
+## Modo histórico + fecha alcanzada: Zepeda muere siempre.
+## Barra a 100 antes de la fecha, o modo aleatorio: 70 % muere / 30 % sobrevive.
+ca_nicaragua_events.13 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.13.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ca_nicaragua_events.13.d_triunfa
+				trigger = { has_variable = nic_golpe_triunfa }
+			}
+			triggered_desc = {
+				desc = ca_nicaragua_events.13.d_fracasa
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = ca_nicaragua_events.13.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		NOT = { has_variable = nic_e13_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e13_fired
+		set_variable = { name = nic_conspiracy value = 100 }
+		if = {
+			limit = {
+				has_variable = nic_historic_mode
+				game_date >= 1837.1.25
+			}
+			set_variable = nic_golpe_triunfa
+		}
+		else = {
+			random_list = {
+				70 = { set_variable = nic_golpe_triunfa }
+				30 = { set_variable = nic_golpe_fracasa }
+			}
+		}
+	}
+
+	option = {
+		name = ca_nicaragua_events.13.a
+		default_option = yes
+		if = {
+			limit = { has_variable = nic_golpe_triunfa }
+			custom_tooltip = nic_golpe_triunfa_tt
+			if = {
+				limit = { ruler ?= { has_variable = is_zepeda } }
+				set_variable = nic_zepeda_murdered
+				# El registro anti-duplicados pasa a ser una bandera: el puntero al muerto daría errores
+				remove_global_variable = cafm_hc_zepeda
+				set_global_variable = cafm_zepeda_dead
+				ruler = { kill_character = yes }
+				trigger_event = { id = ca_nicaragua_events.14 days = 1 }
+			}
+		}
+		else = {
+			custom_tooltip = nic_golpe_fracasa_tt
+			set_variable = nic_zepeda_survived
+			if = {
+				limit = { ruler ?= { has_variable = is_zepeda } }
+				ruler = { add_modifier = { name = nic_heroe_nacional } }
+			}
+			add_modifier = { name = nic_paz_institucional months = 60 }
+			ig:ig_landowners ?= { add_modifier = { name = nic_terratenientes_en_desgracia months = 60 } }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+## .14 — El vacío de poder (solo si Zepeda muere)
+ca_nicaragua_events.14 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.14.t
+	desc = ca_nicaragua_events.14.d
+	flavor = ca_nicaragua_events.14.f
+	duration = 3
+	event_image = { video = "ep1_transfer_of_authority" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_variable = nic_zepeda_murdered
+		NOT = { has_variable = nic_e14_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e14_fired
+		set_variable = nic_unionism_dead
+	}
+
+	# Histórica: Núñez completa el periodo; Méndez, comandante general (26 ene 1837)
+	option = {
+		name = ca_nicaragua_events.14.a
+		default_option = yes
+		if = {
+			limit = {
+				has_global_variable = cafm_hc_jose_nunez
+				any_scope_character = { this = global_var:cafm_hc_jose_nunez }
+			}
+			random_scope_character = {
+				limit = { this = global_var:cafm_hc_jose_nunez }
+				set_character_as_ruler = yes
+			}
+		}
+		else = {
+			create_character = {
+				template = jose_nunez_character_template
+				ruler = yes
+			}
+		}
+		if = {
+			limit = { NOT = { has_global_variable = cafm_hc_bernardo_mendez } }
+			create_character = { template = nic_bernardo_mendez_character_template }
+		}
+		if = {
+			limit = { NOT = { has_global_variable = cafm_hc_casto_fonseca } }
+			create_character = { template = cafm_casto_fonseca }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = nic_cuartel_al_poder months = 60 } }
+		ai_chance = { base = 100 }
+	}
+}
 # 1. 1837: José Núñez y el fin de la Federación
 ca_nicaragua_events.19 = {
     type = country_event
@@ -719,3 +796,491 @@ ca_nicaragua_events.25 = {
     }
 }                                     
 
+# =====================================================================
+# CAFM — NICARAGUA — FASE 1: EL POLVORÍN DE ZEPEDA (1836–1837)
+# Paquete cafm_nicaragua_fase1. Base: rama Post-Reworking-ver-1.2.4, commit 18ef8c6.
+# IDs: .2 (reutiliza su localización), .6, .7, .9–.14.
+#      .3 y .4 tienen localización antigua sin uso; .8 es «La oferta condicional de Zepeda»
+#      (paquete cafm_zepeda_quijano). Quedan libres .15–.18 para la Fase 2.
+# Fuentes: Fundación Enrique Bolaños, «Amnistías en Nicaragua» (golpe del 25 ene 1837:
+#          Bernardo Méndez y Casto Fonseca; Mendiola; Núñez nombra a Méndez comandante general);
+#          reformas de Zepeda: Código Penal, jurado, Corte de Cuentas, El Telégrafo Nicaragüense.
+# Modo histórico: variable nic_historic_mode (se copia de UCA en .2).
+# =====================================================================
+
+## .2 — El Estado dividido (reutiliza ca_nicaragua_events.2.*)
+## Lo dispara ca_play_nicaragua_effect 7 días después de crear NIC (eventos .1 y ca_central_america.80).
+ca_nicaragua_events.2 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.2.t
+	desc = ca_nicaragua_events.2.d
+	flavor = ca_nicaragua_events.2.f
+	duration = 3
+	event_image = { video = "southamerica_aristocrats" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	trigger = {
+		c:NIC ?= this
+		game_date < 1837.1.1
+		NOT = { has_variable = nic_e2_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e2_fired
+		if = {
+			limit = { c:UCA ?= { has_variable = historic_central_american } }
+			set_variable = nic_historic_mode
+		}
+		s:STATE_NICARAGUA.region_state:NIC ?= {
+			add_modifier = { name = nic_agitacion_aristocratica months = 60 }
+		}
+	}
+
+	# Histórica: Zepeda gobierna desde León contra los caudillos
+	option = {
+		name = ca_nicaragua_events.2.a
+		default_option = yes
+		add_modifier = { name = nic_gobierno_desde_leon months = 60 }
+		add_radicals = { value = small_radicals pop_type = aristocrats }
+		ai_chance = { base = 80 }
+	}
+
+	# Alternativa: pedir tutela federal (sube el apoyo federal en la Fase 2)
+	option = {
+		name = ca_nicaragua_events.2.b
+		add_modifier = { name = nic_tutela_federal months = 36 }
+		set_variable = nic_pidio_federacion
+		c:UCA ?= { change_relations = { country = ROOT value = 20 } }
+		ai_chance = { base = 20 }
+	}
+}
+
+## .6 — La audacia de José Zepeda (abr 1836)
+## Lo dispara el pulso mensual de je_ca_historic_situation_in_nicaragua.
+ca_nicaragua_events.6 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.6.t
+	desc = ca_nicaragua_events.6.d
+	flavor = ca_nicaragua_events.6.f
+	duration = 3
+	event_image = { video = "unspecific_reform" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	trigger = {
+		c:NIC ?= this
+		game_date >= 1836.4.1
+		game_date < 1837.1.1
+		ruler ?= { has_variable = is_zepeda }
+		NOT = { has_variable = nic_e6_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e6_fired
+	}
+
+	# Histórica: la modernidad no espera (abre la conspiración)
+	option = {
+		name = ca_nicaragua_events.6.a
+		default_option = yes
+		set_variable = nic_zepeda_reforms
+		add_modifier = { name = nic_reformas_zepeda months = 60 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		# La variable va antes del diario: goal = valor actual (20) + 80 = 100
+		set_variable = { name = nic_conspiracy value = 20 }
+		add_journal_entry = { type = je_ca_nic_conspiracy }
+		ai_chance = { base = 90 }
+	}
+
+	# Alternativa: el pacto granadino (sin conspiración; Zepeda no corre peligro)
+	option = {
+		name = ca_nicaragua_events.6.b
+		set_variable = nic_pacto_granadino
+		add_modifier = { name = nic_pacto_granadino months = 60 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 10 }
+	}
+}
+
+## .7 — El Código Penal y el jurado (may 1836 en adelante)
+## Lo dispara el pulso mensual de je_ca_nic_conspiracy.
+ca_nicaragua_events.7 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.7.t
+	desc = ca_nicaragua_events.7.d
+	flavor = ca_nicaragua_events.7.f
+	duration = 3
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		game_date >= 1836.5.1
+		NOT = { has_variable = nic_e7_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e7_fired
+	}
+
+	# Histórica: aprobar el código, el jurado y la Corte de Cuentas
+	option = {
+		name = ca_nicaragua_events.7.a
+		default_option = yes
+		add_modifier = { name = nic_codigo_penal months = 60 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		custom_tooltip = {
+			text = nic_conspiracy_up_15_tt
+			change_variable = { name = nic_conspiracy add = 15 }
+		}
+		ai_chance = { base = 80 }
+	}
+
+	# Alternativa: engavetarlo
+	option = {
+		name = ca_nicaragua_events.7.b
+		add_modifier = { name = nic_codigo_engavetado months = 24 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 20 }
+	}
+}
+
+## .9 — El Telégrafo Nicaragüense (jul 1836 en adelante)
+## Lo dispara el pulso mensual de je_ca_nic_conspiracy.
+ca_nicaragua_events.9 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.9.t
+	desc = ca_nicaragua_events.9.d
+	flavor = ca_nicaragua_events.9.f
+	duration = 3
+	event_image = { video = "unspecific_research" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		game_date >= 1836.7.1
+		NOT = { has_variable = nic_e9_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e9_fired
+	}
+
+	# Histórica: prensa libre
+	option = {
+		name = ca_nicaragua_events.9.a
+		default_option = yes
+		add_modifier = { name = nic_telegrafo_libre months = 60 }
+		add_radicals = { value = small_radicals pop_type = academics }
+		custom_tooltip = {
+			text = nic_conspiracy_up_15_tt
+			change_variable = { name = nic_conspiracy add = 15 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	# Alternativa: censura parcial
+	option = {
+		name = ca_nicaragua_events.9.b
+		add_modifier = { name = nic_censura_parcial months = 24 }
+		ai_chance = { base = 30 }
+	}
+}
+
+## .10 — El descontento granadino (barra >= 50)
+## Lo dispara el pulso semanal de je_ca_nic_conspiracy.
+ca_nicaragua_events.10 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.10.t
+	desc = ca_nicaragua_events.10.d
+	flavor = ca_nicaragua_events.10.f
+	duration = 3
+	event_image = { video = "southamerica_aristocrats" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		NOT = { has_variable = nic_e10_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e10_fired
+	}
+
+	# Arrestar sospechosos
+	option = {
+		name = ca_nicaragua_events.10.a
+		trigger = { authority >= 50 }
+		add_modifier = { name = nic_arrestos_preventivos months = 6 }
+		custom_tooltip = {
+			text = nic_conspiracy_down_20_tt
+			change_variable = { name = nic_conspiracy subtract = 20 }
+		}
+		ai_chance = { base = 40 }
+	}
+
+	# Comprar lealtades
+	option = {
+		name = ca_nicaragua_events.10.b
+		trigger = { gold_reserves >= 5000 }
+		add_treasury = -5000
+		custom_tooltip = {
+			text = nic_conspiracy_down_20_tt
+			change_variable = { name = nic_conspiracy subtract = 20 }
+		}
+		ai_chance = { base = 40 }
+	}
+
+	# Que Dios nos proteja (siempre disponible)
+	option = {
+		name = ca_nicaragua_events.10.c
+		default_option = yes
+		ai_chance = { base = 20 }
+	}
+}
+
+## .11 — La purga del cuartel (tras armar abiertamente a Quijano)
+## Lo dispara el pulso semanal de je_ca_nic_conspiracy desde el 1 ago 1836
+## si existe la variable global ca_nic_zepeda_apoyo_abierto (ca_nicaragua_events.8.b).
+ca_nicaragua_events.11 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.11.t
+	desc = ca_nicaragua_events.11.d
+	flavor = ca_nicaragua_events.11.f
+	duration = 3
+	event_image = { video = "unspecific_military_parade" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		NOT = { has_variable = nic_e11_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e11_fired
+	}
+
+	# Purgar a los oficiales conservadores: el golpe se precipita
+	option = {
+		name = ca_nicaragua_events.11.a
+		ig:ig_armed_forces ?= { add_modifier = { name = nic_purga_cuartel months = 36 } }
+		custom_tooltip = {
+			text = nic_conspiracy_to_100_tt
+			set_variable = { name = nic_conspiracy value = 100 }
+		}
+		ai_chance = { base = 20 }
+	}
+
+	# Retroceder
+	option = {
+		name = ca_nicaragua_events.11.b
+		default_option = yes
+		add_modifier = { name = nic_purga_retroceso months = 24 }
+		ai_chance = { base = 80 }
+	}
+}
+
+## .12 — Rumores en las sombras (barra >= 80)
+## Lo dispara el pulso semanal de je_ca_nic_conspiracy.
+ca_nicaragua_events.12 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.12.t
+	desc = ca_nicaragua_events.12.d
+	flavor = ca_nicaragua_events.12.f
+	duration = 3
+	event_image = { video = "unspecific_vandalized_storefront" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		NOT = { has_variable = nic_e12_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e12_fired
+	}
+
+	option = {
+		name = ca_nicaragua_events.12.a
+		trigger = { authority >= 100 }
+		add_modifier = { name = nic_arrestos_masivos months = 12 }
+		custom_tooltip = {
+			text = nic_conspiracy_down_20_tt
+			change_variable = { name = nic_conspiracy subtract = 20 }
+		}
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = ca_nicaragua_events.12.b
+		trigger = { gold_reserves >= 10000 }
+		add_treasury = -10000
+		custom_tooltip = {
+			text = nic_conspiracy_down_20_tt
+			change_variable = { name = nic_conspiracy subtract = 20 }
+		}
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = ca_nicaragua_events.12.c
+		default_option = yes
+		ai_chance = { base = 20 }
+	}
+}
+
+## .13 — La noche del cuartel (25 ene 1837, o barra = 100)
+## Modo histórico + fecha alcanzada: Zepeda muere siempre.
+## Barra a 100 antes de la fecha, o modo aleatorio: 70 % muere / 30 % sobrevive.
+ca_nicaragua_events.13 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.13.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ca_nicaragua_events.13.d_triunfa
+				trigger = { has_variable = nic_golpe_triunfa }
+			}
+			triggered_desc = {
+				desc = ca_nicaragua_events.13.d_fracasa
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = ca_nicaragua_events.13.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_journal_entry = je_ca_nic_conspiracy
+		NOT = { has_variable = nic_e13_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e13_fired
+		set_variable = { name = nic_conspiracy value = 100 }
+		if = {
+			limit = {
+				has_variable = nic_historic_mode
+				game_date >= 1837.1.25
+			}
+			set_variable = nic_golpe_triunfa
+		}
+		else = {
+			random_list = {
+				70 = { set_variable = nic_golpe_triunfa }
+				30 = { set_variable = nic_golpe_fracasa }
+			}
+		}
+	}
+
+	option = {
+		name = ca_nicaragua_events.13.a
+		default_option = yes
+		if = {
+			limit = { has_variable = nic_golpe_triunfa }
+			custom_tooltip = nic_golpe_triunfa_tt
+			if = {
+				limit = { ruler ?= { has_variable = is_zepeda } }
+				set_variable = nic_zepeda_murdered
+				# El registro anti-duplicados pasa a ser una bandera: el puntero al muerto daría errores
+				remove_global_variable = cafm_hc_zepeda
+				set_global_variable = cafm_zepeda_dead
+				ruler = { kill_character = yes }
+				trigger_event = { id = ca_nicaragua_events.14 days = 1 }
+			}
+		}
+		else = {
+			custom_tooltip = nic_golpe_fracasa_tt
+			set_variable = nic_zepeda_survived
+			if = {
+				limit = { ruler ?= { has_variable = is_zepeda } }
+				ruler = { add_modifier = { name = nic_heroe_nacional } }
+			}
+			add_modifier = { name = nic_paz_institucional months = 60 }
+			ig:ig_landowners ?= { add_modifier = { name = nic_terratenientes_en_desgracia months = 60 } }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+## .14 — El vacío de poder (solo si Zepeda muere)
+ca_nicaragua_events.14 = {
+	type = country_event
+	placement = ROOT
+	title = ca_nicaragua_events.14.t
+	desc = ca_nicaragua_events.14.d
+	flavor = ca_nicaragua_events.14.f
+	duration = 3
+	event_image = { video = "ep1_transfer_of_authority" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	trigger = {
+		c:NIC ?= this
+		has_variable = nic_zepeda_murdered
+		NOT = { has_variable = nic_e14_fired }
+	}
+
+	immediate = {
+		set_variable = nic_e14_fired
+		set_variable = nic_unionism_dead
+	}
+
+	# Histórica: Núñez completa el periodo; Méndez, comandante general (26 ene 1837)
+	option = {
+		name = ca_nicaragua_events.14.a
+		default_option = yes
+		if = {
+			limit = {
+				has_global_variable = cafm_hc_jose_nunez
+				any_scope_character = { this = global_var:cafm_hc_jose_nunez }
+			}
+			random_scope_character = {
+				limit = { this = global_var:cafm_hc_jose_nunez }
+				set_character_as_ruler = yes
+			}
+		}
+		else = {
+			create_character = {
+				template = jose_nunez_character_template
+				ruler = yes
+			}
+		}
+		if = {
+			limit = { NOT = { has_global_variable = cafm_hc_bernardo_mendez } }
+			create_character = { template = nic_bernardo_mendez_character_template }
+		}
+		if = {
+			limit = { NOT = { has_global_variable = cafm_hc_casto_fonseca } }
+			create_character = { template = cafm_casto_fonseca }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = nic_cuartel_al_poder months = 60 } }
+		ai_chance = { base = 100 }
+	}
+}

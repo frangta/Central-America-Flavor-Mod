@@ -38,7 +38,6 @@ ca_costa_rica_events.1 = {
 	
 	immediate = {
          s:STATE_COSTA_RICA = { add_state_trait = state_trait_mining_cos } 
-        c:COS ?= { set_variable = ca_ecos_federacion_fired } 
         s:STATE_COSTA_RICA.region_state:UCA = {
 		add_modifier = { name = ca_uca_isolated_autonomists }
         add_modifier = { name = separatism_stronghold }
@@ -49,6 +48,7 @@ ca_costa_rica_events.1 = {
 	option = {
 		name = ca_costa_rica_events.1.a
 		default_option = yes
+		ai_chance = { base = 100 }
 
 	}
 	option = {
@@ -60,6 +60,9 @@ ca_costa_rica_events.1 = {
 		}
         ca_create_costarica_effect = yes
 		ca_play_costarica_effect = yes
+		# CAFM fix: COS ya existe aqui (antes se ponia en el immediate, cuando COS aun no existia)
+		c:COS ?= { set_variable = ca_ecos_federacion_fired }
+		ai_chance = { base = 0 }
         play_as = c:COS
 	}
 } 
@@ -113,6 +116,7 @@ ca_costa_rica_events.3 = {
     trigger = {
         this = c:COS
         game_date >= 1836.3.2
+        game_date <= 1836.6.1 # CAFM: ahora sale por el pulso mensual; sin tope saltaria en 1838
         NOT = { has_variable = ca_dimision_carrillo_fired }
         # Opcional: Asegurarnos de que Carrillo siga vivo y en el poder
         # ruler = { has_template = cos_braulio_carrillo_character_template }
@@ -126,6 +130,7 @@ ca_costa_rica_events.3 = {
         name = ca_costa_rica_events.3.a 
         # Opción Histórica: La Asamblea rechaza la renuncia.
         default_option = yes
+        ai_chance = { base = 80 }
         add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: add_loyalists es efecto de pais
         add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces }
         # Un pequeño bono de legitimidad o estabilidad temporal
@@ -138,6 +143,7 @@ ca_costa_rica_events.3 = {
     option = {
         name = ca_costa_rica_events.3.b 
         # Opción Alternativa: Aceptar la renuncia.
+        ai_chance = { base = 20 }
         
         # Genera inestabilidad temprana
         add_radicals = {
@@ -150,384 +156,604 @@ ca_costa_rica_events.3 = {
     }
 }
 # =========================================================================
-# FASE 2: Diario de Entradas "La Pacificación del Norte" (Junio - Agosto 1836)
+# FASE 2: Diario "La Pacificacion del Norte" (mayo - agosto 1836)
+# Rediseno CAFM segun Fernandez Guardia, "La guerra de la Liga y la
+# invasion de Quijano", Revista del Archivo Nacional 3 (1939).
+#
+# Todos los eventos de esta fase los dispara el diario je_ca_pacificacion_norte
+# (on_weekly_pulse -> ca_cos_pacificacion_beats_effect), uno por semana y en
+# orden historico. Ninguno va en on_actions.
+#
+#   .40  May 1836   El comisionado insultado (Joaquin Rivas en la villa de Nicaragua)
+#   .41  27 jun     Los ligueros vuelven a la bandera (facultades extraordinarias)
+#   .4   29 jun     El motin de la Villa
+#   .5   29-30 jun  Juan Rafael Munoz se proclama jefe politico
+#   .6   7 jul      El saqueo de Bagaces
+#   .61  8 jul      El segundo asalto
+#   .7   jul        El desembarco en El Bolson (requiere progreso >= 40)
+#   .71  24 jul     Sapoa (requiere la expedicion en campana)
+#   .8   4 ago      La oferta de Morazan (evento de la UCA) -> .81 La respuesta
+#
+# Progreso historico aproximado: 5+25+15+15+10+10+10 = 90, mas el avance
+# semanal (+1 con la expedicion en campana, +3 con Quijano expulsado).
+# El diario se completa hacia mediados de agosto de 1836.
 # =========================================================================
 
-# Evento 4: El Motín de la Villa y la Invasión (Junio 1836)
+# Evento 40: El comisionado insultado (mayo de 1836)
+ca_costa_rica_events.40 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.40.t
+    desc = ca_costa_rica_events.40.d
+    flavor = ca_costa_rica_events.40.f
+
+    icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_pacificacion_norte
+    }
+
+    immediate = {
+        set_variable = ca_cos_pn_comisionado_fired
+    }
+
+    # Historica: protesta diplomatica ante Zepeda
+    option = {
+        name = ca_costa_rica_events.40.a
+        default_option = yes
+        add_modifier = { name = ca_cos_prestige_loss_small months = 12 }
+        c:NIC ?= { change_relations = { country = ROOT value = -10 } }
+        change_variable = { name = ca_pacificacion_progress add = 5 }
+        ai_chance = { base = 70 }
+    }
+
+    # Reforzar la frontera: el motin sera menos destructivo
+    option = {
+        name = ca_costa_rica_events.40.b
+        add_treasury = -2000
+        set_variable = ca_cos_frontera_reforzada
+        c:NIC ?= { change_relations = { country = ROOT value = -20 } }
+        change_variable = { name = ca_pacificacion_progress add = 10 }
+        ai_chance = { base = 20 }
+    }
+
+    # Pedir a la Federacion que llame al orden a Nicaragua
+    option = {
+        name = ca_costa_rica_events.40.c
+        trigger = { exists = c:UCA }
+        c:UCA ?= { change_relations = { country = ROOT value = 10 } }
+        change_variable = { name = ca_pacificacion_progress add = 5 }
+        ai_chance = { base = 10 }
+    }
+}
+
+# Evento 41: Los ligueros vuelven a la bandera (27 de junio - 4 de julio de 1836)
+ca_costa_rica_events.41 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.41.t
+    desc = ca_costa_rica_events.41.d
+    flavor = ca_costa_rica_events.41.f
+
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_pacificacion_norte
+    }
+
+    immediate = {
+        set_variable = ca_cos_pn_ligueros_fired
+    }
+
+    # Historica: facultades extraordinarias, 800 hombres con Villasenor,
+    # donativo de Ulloa (1,500 pesos) e indulto del 4 de julio
+    option = {
+        name = ca_costa_rica_events.41.a
+        default_option = yes
+        add_treasury = -3500
+        set_variable = ca_cos_expedicion_en_campo
+        set_variable = ca_cos_ligueros_indultados
+        if = {
+            limit = { NOT = { has_global_variable = cafm_hc_villasenor } }
+            create_character = { template = cafm_vicente_villasenor }
+        }
+        add_loyalists = { value = 0.05 culture = cu:costa_rican }
+        ca_cos_change_soberania_effect = { VALUE = 5 }
+        change_variable = { name = ca_pacificacion_progress add = 25 }
+        ai_chance = { base = 70 }
+    }
+
+    # La expedicion sale, pero sin perdon para la Liga
+    option = {
+        name = ca_costa_rica_events.41.b
+        add_treasury = -5000
+        set_variable = ca_cos_expedicion_en_campo
+        add_radicals = { value = 0.03 culture = cu:costa_rican }
+        change_variable = { name = ca_pacificacion_progress add = 15 }
+        ai_chance = { base = 25 }
+    }
+
+    # Esperar noticias mas claras: no sale ninguna expedicion
+    option = {
+        name = ca_costa_rica_events.41.c
+        ai_chance = { base = 5 }
+    }
+}
+
+# Evento 4: El motin de la Villa (29 de junio de 1836)
 ca_costa_rica_events.4 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.4.t
     desc = ca_costa_rica_events.4.d
     flavor = ca_costa_rica_events.4.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_fire.dds"
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    
+
+    duration = 3
+
     trigger = {
-        this = c:COS
-        game_date >= 1836.6.1
-        NOT = { has_variable = ca_motin_villa_fired }
+        always = no # Lo dispara je_ca_pacificacion_norte
     }
-    
+
     immediate = {
         set_variable = ca_motin_villa_fired
-        # Activamos la variable para que el Diario sea visible
         set_variable = ca_crisis_guanacaste_active
-
         if = {
             limit = { NOT = { has_variable = ca_pacificacion_progress } }
             set_variable = { name = ca_pacificacion_progress value = 0 }
         }
     }
-    
+
     option = {
         name = ca_costa_rica_events.4.a
-        # "¡Traición en el Norte!"
-        
-        
-        # Penalización a Costa Rica (Simula pérdida de ingresos por estancos)
+        default_option = yes
         add_modifier = {
-            name = ca_funding_separatists_modifier # Penalización temporal
+            name = ca_funding_separatists_modifier
             months = 6
         }
-        
-        # Devastación en la región de Guanacaste
+        # Con la frontera reforzada (evento 40.b) el dano es menor
         random_scope_state = {
-            limit = { state_region = s:STATE_COSTA_RICA } # Ajusta esto si Guanacaste tiene su propio state_region en tu mod
-            add_devastation = 10
+            limit = { state_region = s:STATE_COSTA_RICA }
+            if = {
+                limit = { root = { has_variable = ca_cos_frontera_reforzada } }
+                add_devastation = 5
+            }
+            else = {
+                add_devastation = 10
+            }
         }
-        
-        # Preparamos el Evento 5 para que salte en un par de semanas
-        trigger_event = { id = ca_costa_rica_events.5 days = 20 }
+        # La decision de Zepeda (ca_nicaragua_events.8) pesa en la invasion
+        if = {
+            limit = { has_global_variable = ca_nic_zepeda_apoyo_abierto }
+            change_variable = { name = ca_pacificacion_progress add = -15 }
+        }
+        else_if = {
+            limit = { has_global_variable = ca_nic_zepeda_expulsa }
+            change_variable = { name = ca_pacificacion_progress add = 10 }
+        }
+        trigger_event = { id = ca_costa_rica_events.5 days = 1 }
     }
 }
 
-# Evento 5: El Vacío de Poder: Pedro Muñoz (Finales de Junio)
+# Evento 5: El vacio de poder - Juan Rafael Munoz (29-30 de junio de 1836)
 ca_costa_rica_events.5 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.5.t
     desc = ca_costa_rica_events.5.d
     flavor = ca_costa_rica_events.5.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_protest.dds"
-    
+
+    duration = 3
+
     trigger = {
-        always = no # Solo se dispara por el Evento 4
+        always = no # Solo desde el evento 4
     }
-    
+
+    # Historica: la expedicion restablece a las autoridades leales
     option = {
         name = ca_costa_rica_events.5.a
-        # Opción A: Enviar fuerzas regulares (Cuesta recursos, avanza la barra)
         default_option = yes
-        
-        add_treasury = -5000 # Coste en dinero
-        add_modifier = {
-            name = ca_federal_paralysis # Cuesta burocracia/autoridad temporalmente
-            months = 3
+        if = {
+            limit = { has_variable = ca_cos_expedicion_en_campo }
+            add_treasury = -1000
         }
-        # ¡Gran salto en la barra de progreso!
-        change_variable = { name = ca_pacificacion_progress add = 40 }
+        else = {
+            # La expedicion no habia salido (41.c): sale ahora, mas cara
+            add_treasury = -5000
+            set_variable = ca_cos_expedicion_en_campo
+        }
+        change_variable = { name = ca_pacificacion_progress add = 15 }
+        ai_chance = { base = 80 }
     }
-    
+
+    # Tolerar a Munoz por ahora
     option = {
         name = ca_costa_rica_events.5.b
-        # Opción B: Dudar (No avanza la barra, crece la agitación)
-        
-        add_radicals = {
-            value = 0.05
-            culture = cu:costa_rican
+        set_variable = ca_cos_munoz_tolerado
+        add_radicals = { value = 0.03 culture = cu:costa_rican }
+        change_variable = { name = ca_pacificacion_progress add = 5 }
+        # Guanacaste queda "pronunciada": Zepeda cumple su oferta de 500 hombres
+        # (salvo que haya expulsado a Quijano o apoyado abiertamente desde el inicio)
+        if = {
+            limit = {
+                NOR = {
+                    has_global_variable = ca_nic_zepeda_expulsa
+                    has_global_variable = ca_nic_zepeda_apoyo_abierto
+                }
+            }
+            set_variable = ca_cos_pn_los_500_de_zepeda
+            change_variable = { name = ca_pacificacion_progress add = -20 }
+            c:NIC ?= { change_relations = { country = ROOT value = -20 } }
         }
-        # La barra no avanza, poniendo en riesgo el límite de tiempo.
+        ai_chance = { base = 20 }
     }
 }
-# =========================================================================
-# Eventos Continuación - FASE 2: La Pacificación del Norte
-# =========================================================================
 
-# Evento 6: El Saqueo de Bagaces y la Fuga del Tesoro (7 de Julio 1836)
+# Evento 6: El saqueo de Bagaces (7 de julio de 1836)
 ca_costa_rica_events.6 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.6.t
     desc = ca_costa_rica_events.6.d
     flavor = ca_costa_rica_events.6.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_fire.dds"
-    
+
+    duration = 3
+
     trigger = {
-        this = c:COS
-        has_journal_entry = je_ca_pacificacion_norte
-        game_date >= 1836.7.7
-        NOT = { has_variable = ca_saqueo_bagaces_fired }
+        always = no # Lo dispara je_ca_pacificacion_norte
     }
-    
+
     immediate = {
         set_variable = ca_saqueo_bagaces_fired
     }
-    
+
+    # Historica: Rudesindo de la Guardia salva mas de 3,300 pesos
     option = {
-        name = ca_costa_rica_events.6.a 
-		default_option = yes
-        # "Proteger el tesoro a toda costa."
-        add_treasury = 3300 # Recuperas los fondos
-        add_radicals = { 
-            value = 0.02 
-            culture = cu:costa_rican 
-        }
-        # Avance moderado del diario
+        name = ca_costa_rica_events.6.a
+        default_option = yes
+        add_treasury = 3300
+        add_radicals = { value = 0.02 culture = cu:costa_rican }
         change_variable = { name = ca_pacificacion_progress add = 15 }
+        ai_chance = { base = 70 }
     }
-    
+
+    # Proteger primero a la poblacion
     option = {
-        name = ca_costa_rica_events.6.b 
-        # "Nuestra prioridad es salvar a los civiles."
-        add_loyalists = { 
-            value = 0.05 
-            culture = cu:costa_rican 
-        }
-        add_treasury = -1000 # Gasto estatal en ayuda humanitaria temprana
-        # Gran avance del diario por pacificar a la población
-        change_variable = { name = ca_pacificacion_progress add = 30 }
+        name = ca_costa_rica_events.6.b
+        add_treasury = -1000
+        add_loyalists = { value = 0.05 culture = cu:costa_rican }
+        change_variable = { name = ca_pacificacion_progress add = 20 }
+        ai_chance = { base = 30 }
     }
 }
 
-# Evento 7: El Desembarco en El Bolsón (Agosto 1836)
+# Evento 61: El segundo asalto (8 de julio de 1836)
+ca_costa_rica_events.61 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.61.t
+    desc = ca_costa_rica_events.61.d
+    flavor = ca_costa_rica_events.61.f
+
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_pacificacion_norte
+    }
+
+    immediate = {
+        set_variable = ca_cos_pn_segundo_asalto_fired
+    }
+
+    # Historica: honrar a las milicias de Nicoya y Santa Cruz
+    option = {
+        name = ca_costa_rica_events.61.a
+        default_option = yes
+        add_loyalists = { value = 0.03 culture = cu:costa_rican }
+        change_variable = { name = ca_pacificacion_progress add = 10 }
+        ai_chance = { base = 75 }
+    }
+
+    # Arrestar a los sublevados del 29 de junio que impidieron la persecucion
+    option = {
+        name = ca_costa_rica_events.61.b
+        set_variable = ca_cos_sublevados_arrestados
+        remove_variable = ca_cos_munoz_tolerado
+        add_radicals = { value = 0.03 culture = cu:costa_rican }
+        change_variable = { name = ca_pacificacion_progress add = 15 }
+        ai_chance = { base = 25 }
+    }
+}
+
+# Evento 7: El desembarco en El Bolson (julio de 1836)
 ca_costa_rica_events.7 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.7.t
     desc = ca_costa_rica_events.7.d
     flavor = ca_costa_rica_events.7.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_military.dds"
-    
+
+    duration = 3
+
     trigger = {
-        this = c:COS
-        has_journal_entry = je_ca_pacificacion_norte
-        game_date >= 1836.8.1
-        # Este evento premia haber tomado buenas decisiones antes
-        has_variable = ca_pacificacion_progress
-        var:ca_pacificacion_progress >= 40 # CAFM fix: check_variable no existe
-        NOT = { has_variable = ca_desembarco_bolson_fired }
+        always = no # Lo dispara je_ca_pacificacion_norte (progreso >= 40)
     }
-    
+
     immediate = {
         set_variable = ca_desembarco_bolson_fired
     }
-    
+
     option = {
-        name = ca_costa_rica_events.7.a 
-        # "Una brillante maniobra de Belatín."
+        name = ca_costa_rica_events.7.a
         default_option = yes
         add_modifier = {
-            name = age_of_ca_caudillos_modifier # Un pequeño bono militar tuyo
+            name = age_of_ca_caudillos_modifier
             months = 12
         }
-        change_variable = { name = ca_pacificacion_progress add = 40 }
+        change_variable = { name = ca_pacificacion_progress add = 10 }
     }
 }
 
-# Evento 8: La Intervención de Morazán (Dual - Se dispara en la UCA)
+# Evento 71: Sapoa (24 de julio de 1836)
+ca_costa_rica_events.71 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.71.t
+    desc = ca_costa_rica_events.71.d
+    flavor = ca_costa_rica_events.71.f
+
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_pacificacion_norte
+    }
+
+    immediate = {
+        set_variable = ca_cos_pn_sapoa_fired
+        set_variable = ca_cos_quijano_expulsado
+    }
+
+    # Historica: fusilamiento de Joaquin Jimenez y de Banegas
+    option = {
+        name = ca_costa_rica_events.71.a
+        default_option = yes
+        add_radicals = { value = 0.02 culture = cu:costa_rican }
+        ca_cos_change_soberania_effect = { VALUE = 5 }
+        change_variable = { name = ca_pacificacion_progress add = 10 }
+        ai_chance = { base = 70 }
+    }
+
+    # Conmutar las penas
+    option = {
+        name = ca_costa_rica_events.71.b
+        add_loyalists = { value = 0.03 culture = cu:costa_rican }
+        change_variable = { name = ca_pacificacion_progress add = 5 }
+        ai_chance = { base = 25 }
+    }
+
+    # Perseguir a Quijano al otro lado de la frontera
+    option = {
+        name = ca_costa_rica_events.71.c
+        c:NIC ?= { change_relations = { country = ROOT value = -30 } }
+        add_modifier = { name = ca_frontier_tensions months = 12 }
+        change_variable = { name = ca_pacificacion_progress add = 15 }
+        ai_chance = { base = 5 }
+    }
+}
+
+# Evento 8: La oferta de Morazan (4 de agosto de 1836, evento de la UCA)
 ca_costa_rica_events.8 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.8.t
     desc = ca_costa_rica_events.8.d
     flavor = ca_costa_rica_events.8.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
-    
+
+    duration = 3
+
     trigger = {
-        this = c:UCA
-        # Se dispara si UCA nota que Costa Rica está en medio del diario
-        c:COS = { has_journal_entry = je_ca_pacificacion_norte }
-        game_date >= 1836.8.15
-        NOT = { has_variable = ca_intervencion_morazan_fired }
+        always = no # Lo dispara el diario de Costa Rica sobre c:UCA
     }
-    
+
     immediate = {
         set_variable = ca_intervencion_morazan_fired
     }
-    
+
     option = {
-        name = ca_costa_rica_events.8.a 
-        # "Envíen a Juan Mora Fernández a mediar."
+        name = ca_costa_rica_events.8.a
+        default_option = yes
         add_modifier = { name = ca_cos_prestige_gain_small months = 60 }
-        # Esto dispara el evento de recepción en Costa Rica en 3 días
-        c:COS = {
-            trigger_event = { id = ca_costa_rica_events.81 days = 3 }
+        # La nota del ministro Alvarez llega a San Jose el 11 de agosto
+        c:COS ?= {
+            trigger_event = { id = ca_costa_rica_events.81 days = 7 }
         }
     }
 }
 
-# Evento 8.1: La Respuesta en San José (Recibido por Costa Rica)
+# Evento 81: La respuesta de San Jose (recibido por Costa Rica)
 ca_costa_rica_events.81 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.81.t
     desc = ca_costa_rica_events.81.d
     flavor = ca_costa_rica_events.81.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
+    duration = 3
+
     trigger = {
-        always = no # Solo puede ser disparado por la opción del evento 8 de la UCA
+        always = no # Solo desde el evento 8
     }
-    
+
     option = {
-        name = ca_costa_rica_events.81.a 
-        # "Agradecemos la oferta, pero la situación ha sido resuelta por las armas costarricenses."
+        name = ca_costa_rica_events.81.a
+        default_option = yes
         add_modifier = { name = ca_cos_prestige_gain months = 60 }
-        # Este último empujón debería llevar la barra al 100 y completar el Diario
-        change_variable = { name = ca_pacificacion_progress add = 30 }
+        change_variable = { name = ca_pacificacion_progress add = 10 }
     }
 }
 
 # =========================================================================
-# FASE 3: El Desenlace y la "Maniobra Maestra" (Septiembre 1836)
+# FASE 3: El desenlace (septiembre de 1836)
+# Orden historico: titulo de ciudad (3 sep) -> Informe Jimenez (10 sep)
+# -> la maniobra de Carrillo. Lo abre el on_complete del diario (.10).
 # =========================================================================
 
-# Evento 9: El Informe Jiménez: Enemigo Interno
-ca_costa_rica_events.9 = {
-    type = country_event
-    placement = root
-    
-    title = ca_costa_rica_events.9.t
-    desc = ca_costa_rica_events.9.d
-    flavor = ca_costa_rica_events.9.f
-    
-    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
-    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    
-    trigger = {
-        always = no # Solo se dispara por el "on_complete" del Diario je_ca_pacificacion_norte
-    }
-    
-    immediate = {
-        # Prepara el terreno para la anexión
-        set_variable = ca_informe_jimenez_leaked
-    }
-    
-    option = {
-        name = ca_costa_rica_events.9.a
-        # "Tenemos la excusa perfecta."
-        add_modifier = { name = ca_cos_prestige_gain_small months = 60 }
-        trigger_event = { id = ca_costa_rica_events.10 days = 2 }
-    }
-}
-
-# Evento 10: Guanacaste, Ciudad Heroica
+# Evento 10: Guanacaste, ciudad heroica (3 de septiembre de 1836)
 ca_costa_rica_events.10 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.10.t
     desc = ca_costa_rica_events.10.d
     flavor = ca_costa_rica_events.10.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_industry.dds"
-    
+
+    duration = 3
+
     trigger = {
-        always = no
+        always = no # Solo desde el on_complete de je_ca_pacificacion_norte
     }
-    
+
     immediate = {
-        # Guardamos la región para darle el bono
         random_scope_state = {
-            limit = { state_region = s:STATE_COSTA_RICA } 
+            limit = { state_region = s:STATE_COSTA_RICA }
             save_scope_as = guanacaste_state
         }
     }
-    
+
     option = {
         name = ca_costa_rica_events.10.a
-        # "Un decreto para ensalzar su valentía."
-        scope:guanacaste_state = {
-            add_modifier = { name = ca_el_gran_avanse_modifier months = 60 } # Usando tu bono de prosperidad
+        default_option = yes
+        scope:guanacaste_state ?= {
+            add_modifier = { name = ca_cos_ciudad_heroica months = 60 }
         }
+        trigger_event = { id = ca_costa_rica_events.9 days = 7 }
+    }
+}
+
+# Evento 9: El Informe Jimenez (10 de septiembre de 1836)
+ca_costa_rica_events.9 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.9.t
+    desc = ca_costa_rica_events.9.d
+    flavor = ca_costa_rica_events.9.f
+
+    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+    duration = 3
+
+    trigger = {
+        always = no # Solo desde el evento 10
+    }
+
+    immediate = {
+        set_variable = ca_informe_jimenez_leaked
+    }
+
+    option = {
+        name = ca_costa_rica_events.9.a
+        default_option = yes
+        add_modifier = { name = ca_cos_prestige_gain_small months = 60 }
         trigger_event = { id = ca_costa_rica_events.11 days = 5 }
     }
 }
 
-# Evento 11: La Maniobra Maestra de Carrillo
+# Evento 11: La maniobra maestra de Carrillo
 ca_costa_rica_events.11 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.11.t
     desc = ca_costa_rica_events.11.d
     flavor = ca_costa_rica_events.11.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_portrait.dds"
-    
+
+    duration = 3
+
     trigger = {
-        always = no
+        always = no # Solo desde el evento 9
     }
-    
+
+    # Historica: sin castigos y con ascensos, para que Nicaragua desconfie
+    # de los oficiales guanacastecos y deje de apoyar a los conspiradores
     option = {
         name = ca_costa_rica_events.11.a
-        # Opción A (Histórica): Ascensos y honores (Anexión pacífica)
         default_option = yes
-        
-        # Anexar a Guanacaste (PC2) pacíficamente
         if = {
             limit = { exists = c:PC2 }
             annex = c:PC2
         }
-        
-        # Bono de lealtad por la vía diplomática
+        set_variable = ca_cos_nicaragua_desconfia
         add_loyalists = { value = 0.10 culture = cu:costa_rican }
-        
-        # Nicaragua pierde confianza
-        if = {
-            limit = { exists = c:NIC }
-            c:NIC = {
-                add_modifier = { name = ca_federal_paralysis months = 24 } # Simula la desconfianza/caos interno en León
-            }
-        }
+        ca_cos_change_soberania_effect = { VALUE = 5 }
+        ai_chance = { base = 80 }
     }
-    
+
+    # La purga: fusilar a los cabecillas del 29 de junio
     option = {
         name = ca_costa_rica_events.11.b
-        # Opción B (La Purga): Ejecutar a los líderes
-        
         if = {
             limit = { exists = c:PC2 }
             annex = c:PC2
         }
-        
-        # Mucha autoridad, pero muchos radicales
-        add_modifier = { name = ca_add_authority months = 36 }
+        add_modifier = { name = ca_cos_purga_del_norte months = 36 }
         add_radicals = { value = 0.15 culture = cu:costa_rican }
-        
-        # Nicaragua se enfurece y gana un reclamo/motivo de guerra
         if = {
             limit = { exists = c:NIC }
             change_relations = { country = c:NIC value = -50 }
-            c:NIC = { add_claim = s:STATE_COSTA_RICA }
+            s:STATE_COSTA_RICA = { add_claim = c:NIC }
         }
+        ai_chance = { base = 10 }
     }
-    
+
+    # Amnistia silenciosa
     option = {
         name = ca_costa_rica_events.11.c
-        # Opción C (Amnistía Silenciosa): Sin teatro político
-        
         if = {
             limit = { exists = c:PC2 }
             annex = c:PC2
         }
-        
-        # Modificador de vulnerabilidad fronteriza
         add_modifier = { name = ca_funding_separatists_modifier months = 60 }
+        ai_chance = { base = 10 }
     }
 }
 
@@ -559,6 +785,11 @@ ca_costa_rica_events.99 = {
                 c:PC2 = { is_subject_of = c:COS }
             }
             c:PC2 = { make_independent = yes }
+            # Manuel Quijano se pone al frente de Guanacaste
+            if = {
+                limit = { NOT = { has_global_variable = cafm_hc_quijano } }
+                c:PC2 = { create_character = { template = cafm_manuel_quijano } }
+            }
             
             # Guanacaste se alía con Nicaragua si existe
             if = {
@@ -584,141 +815,183 @@ ca_costa_rica_events.99 = {
 }
 
 # =========================================================================
-# BOCAS DEL TORO - FASE 1: La Amenaza Imperial y el Reclamo (Principios 1836)
+# BOCAS DEL TORO (1836 - 1837) - rediseno CAFM
+# Fuentes: carta de Ildefonso de Paredes (21 ene 1837), Revista del Archivo
+# Nacional 3 (1938), pp. 72-73; ver CAFM_BOCAS_DEL_TORO_1836.md.
+#
+# Todos los eventos los dispara el diario je_ca_cos_bocas_del_toro
+# (on_weekly_pulse -> ca_cos_bocas_beats_effect), en orden historico:
+#   .12   feb 1836     Subditos de la Corona (jamaicanos bajo bandera britanica)
+#   .13   mar 1836     El titulo de 1803 (Costa Rica informa a la Federacion)
+#   .14   30 may 1836  La expedicion de Juan Galindo (evento de la UCA)
+#   .15   jul 1836     El Distrito de Morazan (la provincia pasa a Costa Rica)
+#   .16   1 dic 1836   Las velas granadinas
+#   .161  18 dic 1836  El desembarco de Paredes (la provincia pasa a Nueva Granada)
+#   .162  21 ene 1837  La carta de Paredes (nuevo)
+#   .17   19 abr 1837  El clamor de Carrillo
+#   .18   abr 1837     El silencio de la Federacion (evento de la UCA)
+#
+# La provincia de Bocas es p:x47C5F8 (STATE_PANAMA; de la UCA al empezar).
 # =========================================================================
 
-# Evento 12: Súbditos de la Corona en el Caribe
+# Evento 12: Subditos de la Corona en el Caribe (febrero de 1836)
 ca_costa_rica_events.12 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.12.t
     desc = ca_costa_rica_events.12.d
     flavor = ca_costa_rica_events.12.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_trade.dds"
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    
+
+    duration = 3
+
     trigger = {
-        this = c:COS
-        game_date >= 1836.2.1
-        game_date <= 1836.4.1
-        NOT = { has_variable = ca_subditos_corona_fired }
+        always = no # Lo dispara je_ca_cos_bocas_del_toro
     }
-    
+
     immediate = {
         set_variable = ca_subditos_corona_fired
+        # Evita que la crisis paralela de la UCA (ca_central_america.6) salte tambien
+        set_global_variable = bocas_del_toro_crisis_fired
     }
-    
+
     option = {
-        name = ca_costa_rica_events.12.a 
-        # "Debemos vigilar esos asentamientos."
+        name = ca_costa_rica_events.12.a
+        default_option = yes
         add_modifier = {
-            name = ca_frontier_tensions # Tensión fronteriza general
+            name = ca_frontier_tensions
             months = 24
         }
-        # Disparamos el siguiente evento diplomático en un par de semanas
-        trigger_event = { id = ca_costa_rica_events.13 days = 20 }
     }
 }
 
-# Evento 13: El Polémico Título de 1803
+# Evento 13: El polemico titulo de 1803 (marzo de 1836)
 ca_costa_rica_events.13 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.13.t
     desc = ca_costa_rica_events.13.d
     flavor = ca_costa_rica_events.13.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
-    
+
+    duration = 3
+
     trigger = {
-        always = no # Disparado automáticamente por el Evento 12
+        always = no # Lo dispara je_ca_cos_bocas_del_toro
     }
-    
+
+    immediate = {
+        set_variable = ca_cos_bocas_titulo_fired
+    }
+
+    # Historica: el uti possidetis de 1825 nos da la razon; que actue la Federacion
     option = {
-        name = ca_costa_rica_events.13.a 
-        # "Nuestros derechos son innegables. Informen a la Federación."
+        name = ca_costa_rica_events.13.a
+        default_option = yes
+        set_variable = ca_cos_bocas_informado
         if = {
-            limit = { exists = c:CLM } # CLM = Nueva Granada / Colombia
+            limit = { exists = c:CLM }
             change_relations = { country = c:CLM value = -20 }
         }
-        # Pasamos la narrativa al jugador de la UCA
-        c:UCA = { 
-            trigger_event = { id = ca_costa_rica_events.14 days = 15 } 
+        ai_chance = { base = 90 }
+    }
+
+    # Renunciar a una costa que no podemos defender
+    option = {
+        name = ca_costa_rica_events.13.b
+        set_variable = ca_cos_bocas_renuncia
+        if = {
+            limit = { exists = c:CLM }
+            change_relations = { country = c:CLM value = 20 }
         }
+        ai_chance = { base = 10 }
     }
 }
 
-# =========================================================================
-# BOCAS DEL TORO - FASE 2: La Osadía de Galindo (Mayo - Junio 1836)
-# =========================================================================
-
-# Evento 14: La Expedición de Juan Galindo (Juega la UCA)
+# Evento 14: La expedicion de Juan Galindo (30 de mayo de 1836, evento de la UCA)
 ca_costa_rica_events.14 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.14.t
     desc = ca_costa_rica_events.14.d
     flavor = ca_costa_rica_events.14.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_military.dds"
-    
+
+    duration = 3
+
     trigger = {
-        always = no # Disparado por el 13
+        always = no # Lo dispara el diario de Costa Rica sobre c:UCA
     }
-    
+
+    # Historica: decreto federal y expedicion de Galindo
     option = {
-        name = ca_costa_rica_events.14.a 
-        # "Financiar la expedición. ¡Por la soberanía!" (Opción Histórica)
+        name = ca_costa_rica_events.14.a
         default_option = yes
         add_treasury = -3000
         add_modifier = { name = ca_cos_prestige_gain months = 60 }
-        # Galindo desembarca en Costa Rica pronto
-        c:COS = { trigger_event = { id = ca_costa_rica_events.15 days = 30 } }
+        # Galindo llega a Bocas en unas semanas
+        c:COS ?= { trigger_event = { id = ca_costa_rica_events.15 days = 30 } }
+        ai_chance = { base = 80 }
     }
-    
+
+    # No hay fondos para aventuras en la selva
     option = {
-        name = ca_costa_rica_events.14.b 
-        # "No tenemos fondos para aventuras en la selva."
-        add_modifier = { name = ca_cos_prestige_loss_small months = 60 } 
-        # Fracaso temprano: Costa Rica gana resentimiento contra la UCA
-        c:COS = {
+        name = ca_costa_rica_events.14.b
+        add_modifier = { name = ca_cos_prestige_loss_small months = 60 }
+        c:COS ?= {
             change_relations = { country = c:UCA value = -30 }
             add_modifier = { name = ca_federal_betrayal_disapproval months = 60 }
-            set_variable = ca_cos_bocas_rechazo_temprano # CAFM fix: el diario la usa y nadie la creaba
+            set_variable = ca_cos_bocas_rechazo_temprano
         }
+        ai_chance = { base = 20 }
     }
 }
 
-# Evento 15: La Fundación del Distrito de Morazán (Juega Costa Rica)
+# Evento 15: El Distrito de Morazan (julio de 1836)
 ca_costa_rica_events.15 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.15.t
     desc = ca_costa_rica_events.15.d
     flavor = ca_costa_rica_events.15.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_map.dds"
-    
+
+    duration = 3
+
     trigger = {
-        always = no # Disparado por la expedición aprobada en el 14
+        always = no # Solo desde el evento 14
     }
-    
+
     immediate = {
         set_variable = ca_bocas_del_toro_claimed
     }
-    
+
     option = {
-        name = ca_costa_rica_events.15.a 
-        # "Una jugada audaz."
-        # Costa Rica obtiene un reclamo territorial sobre Panamá/Bocas del Toro
-        s:STATE_PANAMA = { add_claim = ROOT } 
-        
-        # Furia de Nueva Granada
+        name = ca_costa_rica_events.15.a
+        default_option = yes
+        # El distrito se organiza como parte de Costa Rica
+        if = {
+            limit = {
+                exists = c:UCA
+                p:x47C5F8 = { owner = c:UCA }
+            }
+            s:STATE_PANAMA = {
+                set_owner_of_provinces = {
+                    country = ROOT
+                    provinces = { x47C5F8 }
+                }
+            }
+        }
+        s:STATE_PANAMA = { add_claim = ROOT }
         if = {
             limit = { exists = c:CLM }
             change_relations = { country = c:CLM value = -40 }
@@ -726,650 +999,1521 @@ ca_costa_rica_events.15 = {
                 add_modifier = { name = ca_frontier_tensions months = 12 }
             }
         }
-        
-        # LA TRAMPA: Esto activa un reloj oculto para la Fase 3 (La Humillación)
-        # 150 días después de junio nos lleva a noviembre de 1836.
-        trigger_event = { id = ca_costa_rica_events.16 days = 150 }
     }
 }
-# =========================================================================
-# BOCAS DEL TORO - FASE 3: El Choque de Realidades (Finales de 1836)
-# =========================================================================
 
-# Evento 16: Las Velas de San Carlos
+# Evento 16: Las velas granadinas (diciembre de 1836)
 ca_costa_rica_events.16 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.16.t
     desc = ca_costa_rica_events.16.d
     flavor = ca_costa_rica_events.16.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_trade.dds"
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    
+
+    duration = 3
+
     trigger = {
-        always = no # Disparado por los 150 días del Evento 15
+        always = no # Lo dispara je_ca_cos_bocas_del_toro
     }
-    
+
+    # Historica: el distrito no tiene con que defenderse
     option = {
-        name = ca_costa_rica_events.16.a 
-        # "¡La flota granadina se acerca!"
-        # Genera pánico temporal
-        add_radicals = { value = 0.05 culture = cu:costa_rican }
-        # Un mes después ocurre el desembarco y la humillación
-        trigger_event = { id = ca_costa_rica_events.161 days = 30 }
+        name = ca_costa_rica_events.16.a
+        default_option = yes
+        add_radicals = { value = 0.03 culture = cu:costa_rican }
+        ai_chance = { base = 80 }
+    }
+
+    # Enviar refuerzos a Filemon Galindo
+    option = {
+        name = ca_costa_rica_events.16.b
+        add_treasury = -5000
+        set_variable = ca_cos_bocas_reforzada
+        ai_chance = { base = 20 }
     }
 }
 
-# Evento 161 (Humillación de Bocas del Toro): El Desembarco de Paredes
+# Evento 161: El desembarco de Paredes (18 de diciembre de 1836)
 ca_costa_rica_events.161 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.161.t
-    desc = ca_costa_rica_events.161.d
-    flavor = ca_costa_rica_events.161.f
-    
-    icon = "gfx/interface/icons/event_icons/event_military.dds"
-    
-    trigger = {
-        always = no
-    }
-    
-    immediate = {
-        set_variable = ca_bocas_del_toro_lost
-    }
-    
-    option = {
-        name = ca_costa_rica_events.161.a 
-        # "Galindo debe huir. Hemos sido humillados."
-        
-        # Costa Rica pierde el reclamo y prestigio
-        s:STATE_PANAMA = { remove_claim = ROOT } 
-        add_modifier = { name = ca_cos_prestige_loss months = 60 } 
-        
-        # Nueva Granada reafirma su control
-        if = {
-            limit = { exists = c:CLM }
-            c:CLM = {
-                add_modifier = { name = ca_cos_prestige_gain months = 60 } 
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                desc = ca_costa_rica_events.161.d_defendida
+                trigger = { has_variable = ca_cos_bocas_reforzada }
+            }
+            triggered_desc = {
+                desc = ca_costa_rica_events.161.d
+                trigger = { always = yes }
             }
         }
-        
-        # Costa Rica se prepara para reclamar a la UCA a principios de 1837
-        trigger_event = { id = ca_costa_rica_events.17 days = 45 }
+    }
+    flavor = ca_costa_rica_events.161.f
+
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_cos_bocas_del_toro
+    }
+
+    # Historica: Filemon Galindo se va en la goleta Constanza, sin combate.
+    # Costa Rica pierde el distrito pero MANTIENE el reclamo (hasta 1941).
+    option = {
+        name = ca_costa_rica_events.161.a
+        default_option = yes
+        trigger = { NOT = { has_variable = ca_cos_bocas_reforzada } }
+        set_variable = ca_bocas_del_toro_lost
+        if = {
+            limit = {
+                exists = c:CLM
+                OR = {
+                    p:x47C5F8 = { owner = ROOT }
+                    AND = {
+                        exists = c:UCA
+                        p:x47C5F8 = { owner = c:UCA }
+                    }
+                }
+            }
+            s:STATE_PANAMA = {
+                set_owner_of_provinces = {
+                    country = c:CLM
+                    provinces = { x47C5F8 }
+                }
+            }
+        }
+        add_modifier = { name = ca_cos_prestige_loss months = 60 }
+        c:CLM ?= {
+            add_modifier = { name = ca_cos_prestige_gain months = 60 }
+        }
+    }
+
+    # Alternativa: Paredes encuentra el distrito defendido y se retira
+    option = {
+        name = ca_costa_rica_events.161.b
+        trigger = { has_variable = ca_cos_bocas_reforzada }
+        set_variable = ca_cos_bocas_defendida
+        add_modifier = { name = ca_cos_prestige_gain months = 60 }
+        add_modifier = { name = ca_frontier_tensions months = 24 }
+        if = {
+            limit = { exists = c:CLM }
+            change_relations = { country = c:CLM value = -50 }
+        }
     }
 }
 
-# =========================================================================
-# BOCAS DEL TORO - FASE 4: La Epifanía y la Fractura (1837)
-# =========================================================================
+# Evento 162: La carta de Paredes (21 de enero de 1837)
+ca_costa_rica_events.162 = {
+    type = country_event
+    placement = root
 
-# Evento 17: El Clamor de Carrillo
+    title = ca_costa_rica_events.162.t
+    desc = ca_costa_rica_events.162.d
+    flavor = ca_costa_rica_events.162.f
+
+    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_cos_bocas_del_toro
+    }
+
+    immediate = {
+        set_variable = ca_cos_bocas_carta_fired
+    }
+
+    # Historica: llevar la protesta a la Federacion
+    option = {
+        name = ca_costa_rica_events.162.a
+        default_option = yes
+        set_variable = ca_cos_bocas_protesta_federal
+        ai_chance = { base = 70 }
+    }
+
+    # Responder por nuestra cuenta, sin esperar a San Salvador
+    option = {
+        name = ca_costa_rica_events.162.b
+        set_variable = ca_cos_bocas_reclamo_propio
+        if = {
+            limit = { exists = c:CLM }
+            change_relations = { country = c:CLM value = -20 }
+        }
+        c:UCA ?= { change_relations = { country = ROOT value = -10 } }
+        ai_chance = { base = 20 }
+    }
+
+    # Aceptar el statu quo del tratado de 1825
+    option = {
+        name = ca_costa_rica_events.162.c
+        set_variable = ca_cos_bocas_renuncia
+        s:STATE_PANAMA = { remove_claim = ROOT }
+        if = {
+            limit = { exists = c:CLM }
+            change_relations = { country = c:CLM value = 30 }
+        }
+        ai_chance = { base = 10 }
+    }
+}
+
+# Evento 17: El clamor de Carrillo (19 de abril de 1837)
 ca_costa_rica_events.17 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.17.t
     desc = ca_costa_rica_events.17.d
     flavor = ca_costa_rica_events.17.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_protest.dds"
-    
+
+    duration = 3
+
     trigger = {
-        always = no # Disparado por la humillación
+        always = no # Lo dispara je_ca_cos_bocas_del_toro
     }
-    
+
+    immediate = {
+        set_variable = ca_cos_bocas_clamor_fired
+    }
+
     option = {
-        name = ca_costa_rica_events.17.a 
-        # "¡Exigimos acción inmediata de la Federación!"
+        name = ca_costa_rica_events.17.a
+        default_option = yes
         add_modifier = {
-            name = ca_authority_boost # Carrillo se fortalece en la indignación
+            name = ca_authority_boost
             months = 12
         }
-        
-        # Pasamos la decisión a la UCA
         if = {
             limit = { exists = c:UCA }
             c:UCA = { trigger_event = { id = ca_costa_rica_events.18 days = 10 } }
         }
+        else = {
+            # Ya no hay Federacion a la que reclamar
+            set_variable = ca_epifania_tragica
+        }
     }
 }
 
-# Evento 18: El Silencio de la Federación (Juega la UCA)
+# Evento 18: El silencio de la Federacion (abril de 1837, evento de la UCA)
 ca_costa_rica_events.18 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.18.t
     desc = ca_costa_rica_events.18.d
     flavor = ca_costa_rica_events.18.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
-    
+
+    duration = 3
+
     trigger = {
-        always = no
+        always = no # Solo desde el evento 17
     }
-    
+
+    # Historica: demasiados problemas internos. Silencio.
     option = {
-        name = ca_costa_rica_events.18.a 
-        # Opción A (Histórica): "Tenemos demasiados problemas internos. Silencio."
+        name = ca_costa_rica_events.18.a
         default_option = yes
-        
-        # Cae el soporte de la federación
-        if = {
-            limit = { has_variable = frca_support }
-            change_variable = { name = frca_support subtract = 15 }
+        # CAFM fix: frca_support es una barra, no una variable
+        je:je_historic_central_america_falls_apart ?= {
+            add_progress = { value = -15 name = frca_support_bar }
         }
-        
-        # Costa Rica recibe la traición
-        c:COS = {
-            # Se añade un modificador personalizado que facilitará la separación en 1838
+        c:COS ?= {
             add_modifier = { name = ca_federal_betrayal_disapproval months = 60 }
             change_relations = { country = c:UCA value = -50 }
-            set_variable = ca_epifania_tragica # Esta variable servirá para eventos de independencia
+            set_variable = ca_epifania_tragica
         }
+        ai_chance = { base = 80 }
     }
-    
+
+    # Alternativa: a las armas por Centroamerica
     option = {
-        name = ca_costa_rica_events.18.b 
-        # Opción B (Alt-History): "¡A las armas por Centroamérica!"
-        
-        # Un gran impulso al soporte federal por la valentía, pero a un costo inmenso
-        if = {
-            limit = { has_variable = frca_support }
-            change_variable = { name = frca_support add = 30 }
+        name = ca_costa_rica_events.18.b
+        je:je_historic_central_america_falls_apart ?= {
+            add_progress = { value = 30 name = frca_support_bar }
         }
-        
-        # Costa Rica jura lealtad
-        c:COS = {
+        c:COS ?= {
             change_relations = { country = c:UCA value = 80 }
             add_loyalists = { value = 0.10 culture = cu:costa_rican }
-            set_variable = ca_cos_bocas_apoyo_federal # CAFM fix: el diario la usa y nadie la creaba
+            set_variable = ca_cos_bocas_apoyo_federal
         }
-        
-        # Declaración automática de guerra (Jugada diplomática) contra Colombia por Panamá
         if = {
             limit = {
                 exists = c:CLM
                 exists = s:STATE_PANAMA.region_state:CLM
             }
             create_diplomatic_play = {
-                type = dp_conquer_state # CAFM fix: la clave es type, no name
+                type = dp_conquer_state
                 target_country = c:CLM
-                target_state = s:STATE_PANAMA.region_state:CLM # CAFM fix: estado, no state_region
+                target_state = s:STATE_PANAMA.region_state:CLM
             }
         }
+        ai_chance = { base = 20 }
     }
 }
+
 # =========================================================================
-# FASE 4: Política Interna - Las Elecciones y el Golpe (1837 - 1838)
+# FASE 4: Las urnas y el cuartel (1837 - 1838) - rediseno CAFM
+# Fuentes: TSE, Historia de las elecciones presidenciales (2008), p. 17;
+# Villegas Arce, Rev. de Ciencias Juridicas (UCR) 131 (2013); Archivo
+# Nacional (dictamen sobre el "pronunciamiento de 27 de mayo de 1838").
+# Ver CAFM_ELECCIONES_GOLPE_1837_1838.md.
+#
+# Todos los eventos los dispara je_ca_cos_urnas_y_cuartel (on_weekly_pulse
+# -> ca_cos_urnas_beats_effect), salvo .196 (diario madre, 14 nov 1838):
+#   .19   9 abr 1837   Los electores de 1837 (Aguilar 22, Carrillo 17, Arguello 2)
+#   .192  17 abr 1837  Aguilar en Heredia: el programa
+#   .193  ago 1837     La conspiracion de agosto
+#   .194  19 dic 1837  El jefe enfermo: Juan Mora Fernandez interino
+#   .195  mar 1838     La renuncia rechazada
+#   .20   27 may 1838  El pronunciamiento de San Jose (o .330 si fracasa)
+#   .191  1838         Muerte de Arguello (solo si gano Arguello)
+#   .196  14 nov 1838  La Asamblea Constituyente: fuera de la Federacion
 # =========================================================================
 
-# Evento 19: Los Electores de 1837
+# Evento 19: Los electores de 1837 (9 de abril de 1837)
 ca_costa_rica_events.19 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.19.t
     desc = ca_costa_rica_events.19.d
     flavor = ca_costa_rica_events.19.f
-    
-    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    
+
+    duration = 3
+
     trigger = {
-        this = c:COS
-        game_date >= 1837.1.1
-        game_date <= 1837.3.1
-        NOT = { has_variable = ca_elecciones_1837_fired }
+        always = no # Lo dispara je_ca_cos_urnas_y_cuartel
     }
-    
+
     immediate = {
         set_variable = ca_elecciones_1837_fired
     }
-    
+
+    # Historica: Aguilar, con Alajuela, Cartago y Heredia (22 electores)
     option = {
-        name = ca_costa_rica_events.19.a 
-        # Opción A (Histórica/Unionista): Manuel Aguilar Chacón
+        name = ca_costa_rica_events.19.a
         default_option = yes
-        
-        # Guardamos la variable para que estalle el golpe en 1838
         set_variable = ca_gobierno_aguilar
-        
-        # Fortalecemos a la Intelligentsia
-        add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: efecto de pais
-        
-        # Bonos temporales a la legitimidad y migración
-        add_modifier = { name = ca_el_gran_avanse_modifier months = 16 }
+        add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia }
+        add_modifier = { name = ca_cos_reconciliacion_1837 months = 24 }
+        ai_chance = { base = 80 }
     }
-    
+
+    # Los electores se inclinan por Carrillo (17 electores en la historia)
     option = {
-        name = ca_costa_rica_events.19.b 
-        # Opción B (Alt. Autoritario): Respaldar a Braulio Carrillo
-        
+        name = ca_costa_rica_events.19.b
         set_variable = ca_gobierno_carrillo_2
-        
-        # Fortalecemos Fuerzas Armadas y Terratenientes
-        add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces } # CAFM fix: efecto de pais
-        
-        # Gran aumento de autoridad, pero baja relación con la UCA
+        add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces }
+        add_radicals = { value = 0.05 interest_group = ig:ig_intelligentsia }
         add_modifier = { name = ca_authority_boost months = 36 }
-        add_radicals = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: efecto de pais
-        
         if = {
             limit = { exists = c:UCA }
             change_relations = { country = c:UCA value = -50 }
         }
+        ai_chance = { base = 15 }
     }
-    
+
+    # El tercer hombre: Toribio Arguello (2 electores en la historia)
     option = {
-        name = ca_costa_rica_events.19.c 
-        # Opción C (Alt. Unionista): Toribio Argüello
-        
+        name = ca_costa_rica_events.19.c
         set_variable = ca_gobierno_arguello
-        
-        # Alianza automática con la UCA
         if = {
             limit = { exists = c:UCA }
-            change_relations = { country = c:UCA value = 80 }
-            # CAFM fix 1.14: la alianza ahora es un articulo de tratado
-            create_treaty = {
-                first_country = ROOT
-                second_country = c:UCA
-                is_draft = no
-                binding_period = { years = 5 }
-                articles_to_create = {
-                    { article = alliance }
-                }
-            }
+            change_relations = { country = c:UCA value = 30 }
         }
-        
-        # Costa Rica entra en estado militar y gana devastación leve
-        add_modifier = { name = ca_funding_federalists_modifier months = 24 }
-        
-        # Evento oculto de la muerte de Argüello a finales de año
         trigger_event = { id = ca_costa_rica_events.191 days = 200 }
+        ai_chance = { base = 5 }
     }
 }
 
-# Evento 191: Luto en San José (Muerte de Toribio Argüello)
+# Evento 191: Luto en San Jose - muere Toribio Arguello (1838)
 ca_costa_rica_events.191 = {
     type = country_event
     placement = root
+
     title = ca_costa_rica_events.191.t
     desc = ca_costa_rica_events.191.d
+
     icon = "gfx/interface/icons/event_icons/event_skull.dds"
-    
-    trigger = { always = no } # Disparado por la Opción C del Evento 19
-    
+
+    duration = 3
+
+    trigger = {
+        always = no # Solo desde la opcion C del evento 19
+    }
+
     option = {
         name = ca_costa_rica_events.191.a
+        default_option = yes
         remove_variable = ca_gobierno_arguello
-        # Crisis de sucesión: Inestabilidad brutal
-        add_modifier = { name = ca_federal_paralysis months = 24 }
-        add_radicals = { value = 0.10 culture = cu:costa_rican }
+        # El vacio lo llena el bando constitucional: gobierna el vicejefe
+        set_variable = ca_gobierno_aguilar
+        add_radicals = { value = 0.05 culture = cu:costa_rican }
     }
 }
 
-# Evento 20: El Golpe Josefino y la Ruptura Federal (Mayo de 1838)
+# Evento 192: Aguilar en Heredia - el programa de gobierno (17 de abril de 1837)
+ca_costa_rica_events.192 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.192.t
+    desc = ca_costa_rica_events.192.d
+    flavor = ca_costa_rica_events.192.f
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_cos_urnas_y_cuartel
+    }
+
+    immediate = {
+        set_variable = ca_cos_programa_aguilar_fired
+        # Aguilar asume como jefe de Estado
+        create_character = {
+            template = cos_manuel_aguilar_character_template
+            ruler = yes
+        }
+    }
+
+    # Historica: amnistia, fin del fuero militar y poderes repartidos
+    # entre Heredia (legislativo) y San Jose (ejecutivo y judicial)
+    option = {
+        name = ca_costa_rica_events.192.a
+        default_option = yes
+        set_variable = ca_cos_fuero_abolido
+        set_variable = ca_cos_amnistia_1837
+        add_loyalists = { value = 0.05 culture = cu:costa_rican }
+        add_radicals = { value = 0.05 interest_group = ig:ig_armed_forces }
+        ca_cos_change_soberania_effect = { VALUE = -5 }
+        ai_chance = { base = 70 }
+    }
+
+    # Gobernar con prudencia, sin tocar el fuero
+    option = {
+        name = ca_costa_rica_events.192.b
+        set_variable = ca_cos_reformas_moderadas
+        ai_chance = { base = 30 }
+    }
+}
+
+# Evento 193: La conspiracion de agosto (agosto de 1837)
+ca_costa_rica_events.193 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.193.t
+    desc = ca_costa_rica_events.193.d
+    flavor = ca_costa_rica_events.193.f
+
+    icon = "gfx/interface/icons/event_icons/event_protest.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_cos_urnas_y_cuartel
+    }
+
+    immediate = {
+        set_variable = ca_cos_conspiracion_1837
+    }
+
+    # Historica: el plan se desarticula sin escandalo
+    option = {
+        name = ca_costa_rica_events.193.a
+        default_option = yes
+        ai_chance = { base = 60 }
+    }
+
+    # Castigo ejemplar a los carrillistas: el golpe de 1838 sera mas dificil
+    option = {
+        name = ca_costa_rica_events.193.b
+        set_variable = ca_cos_conspiracion_castigada
+        add_radicals = { value = 0.03 interest_group = ig:ig_armed_forces }
+        ai_chance = { base = 30 }
+    }
+
+    # Ignorarla: el golpe de 1838 sera mas facil
+    option = {
+        name = ca_costa_rica_events.193.c
+        set_variable = ca_cos_conspiracion_ignorada
+        ai_chance = { base = 10 }
+    }
+}
+
+# Evento 194: El jefe enfermo - Juan Mora Fernandez interino (19 de diciembre de 1837)
+ca_costa_rica_events.194 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.194.t
+    desc = ca_costa_rica_events.194.d
+    flavor = ca_costa_rica_events.194.f
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_cos_urnas_y_cuartel
+    }
+
+    immediate = {
+        set_variable = ca_cos_mora_interino
+    }
+
+    option = {
+        name = ca_costa_rica_events.194.a
+        default_option = yes
+        # Sin fuero militar, los cuarteles aprovechan la ausencia del jefe
+        if = {
+            limit = { has_variable = ca_cos_fuero_abolido }
+            add_radicals = { value = 0.03 interest_group = ig:ig_armed_forces }
+        }
+    }
+}
+
+# Evento 195: La renuncia rechazada (marzo de 1838)
+ca_costa_rica_events.195 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.195.t
+    desc = ca_costa_rica_events.195.d
+    flavor = ca_costa_rica_events.195.f
+
+    icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_cos_urnas_y_cuartel
+    }
+
+    immediate = {
+        set_variable = ca_cos_renuncia_fired
+    }
+
+    # Historica: la Asamblea no acepta la renuncia
+    option = {
+        name = ca_costa_rica_events.195.a
+        default_option = yes
+        set_variable = ca_cos_renuncia_rechazada
+        ai_chance = { base = 80 }
+    }
+
+    # Aceptarla: gobierna el vicejefe Juan Mora Fernandez
+    option = {
+        name = ca_costa_rica_events.195.b
+        set_variable = ca_cos_gobierno_mora
+        create_character = {
+            template = cafm_juan_mora_fernandez
+            ruler = yes
+        }
+        ai_chance = { base = 20 }
+    }
+}
+
+# Evento 20: El pronunciamiento de San Jose (27 de mayo de 1838)
 ca_costa_rica_events.20 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.20.t
     desc = ca_costa_rica_events.20.d
     flavor = ca_costa_rica_events.20.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_protest.dds"
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-    
+
+    duration = 3
+
     trigger = {
-        this = c:COS
-        # Solo salta si Aguilar ganó en 1837 y estamos en mayo de 1838
-        has_variable = ca_gobierno_aguilar
-        game_date >= 1838.5.1
-        game_date <= 1838.6.1
-        NOT = { has_variable = ca_golpe_josefino_fired }
+        always = no # Lo dispara je_ca_cos_urnas_y_cuartel (umbral de soberania)
     }
-    
+
     immediate = {
         set_variable = ca_golpe_josefino_fired
-    }
-    
-    option = {
-        name = ca_costa_rica_events.20.a 
-        # "¡Carrillo retoma el control! Costa Rica es libre."
-        
         remove_variable = ca_gobierno_aguilar
+        remove_variable = ca_cos_gobierno_mora
         set_variable = ca_gobierno_carrillo_dictadura
-        
-        # Ruptura con la Federación
+        # Aguilar (o Mora) tiene doce horas para salir de San Jose y
+        # Carrillo vuelve como jefe de Estado (se retira su instancia anterior)
         if = {
-            limit = { 
-                exists = c:UCA
-                is_subject_of = c:UCA 
+            limit = { ruler ?= { NOT = { has_variable = is_carrillo } } }
+            ruler = { exile_character = yes }
+            global_var:cafm_hc_carrillo ?= { exile_character = yes }
+            create_character = {
+                template = cos_braulio_carrillo_character_template
+                ruler = yes
             }
-            make_independent = yes # CAFM fix: free_subject no existe; rompe la sujecion
-            change_relations = { country = c:UCA value = -80 }
         }
-        
-        # Bono masivo de Autoridad, pero muchos radicales
-        add_modifier = { name = ca_authority_boost months = 60 }
-        add_radicals = { value = 0.15 culture = cu:costa_rican }
-        
-        # Eventualmente Carrillo hará su Ley de Bases y Garantías (Evento 21)
-        trigger_event = { id = ca_costa_rica_events.21 days = 1000 } # Se dispara cerca de 1841
     }
-}
- #=========================================================================
- #FASE: El Ajedrez Sudamericano y el Arquitecto del Estado (1840 - 1842)
- #=========================================================================
 
-# Evento: El Manifiesto de David (1840)
-ca_costa_rica_events.201 = {
-    type = country_event
-    placement = root
-    
-    title = ca_costa_rica_events.201.t
-    desc = ca_costa_rica_events.201.d
-    flavor = ca_costa_rica_events.201.f
-    
-    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
-    
-    trigger = {
-        this = c:COS
-        has_variable = ca_golpe_josefino_fired # Solo tiene sentido si Carrillo rompió la federación
-        game_date >= 1840.1.1
-        game_date <= 1840.12.31
-        NOT = { has_variable = ca_manifiesto_david_fired }
-    }
-    
-    immediate = {
-        set_variable = ca_manifiesto_david_fired
-        # Iniciamos la variable de preparación de la invasión en el país
-        set_variable = { name = ca_morazan_invasion_prep value = 0 }
-        trigger_event = { id = ca_costa_rica_events.202 days = 210 } # CAFM fix: 202 estaba huerfano
-    }
-    
+    # Historica: Juan Mora Fernandez tambien va al destierro
     option = {
-        name = ca_costa_rica_events.201.a 
-        # "¡Quemen esos panfletos subversivos!" (Conservadora)
+        name = ca_costa_rica_events.20.a
         default_option = yes
-        add_modifier = { name = ca_federal_paralysis months = 6 } # Cuesta autoridad/recursos
-        add_radicals = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: efecto de pais
-        # Evita que el mito crezca (no suma a la invasión)
+        global_var:cafm_hc_juan_mora_fernandez ?= { exile_character = yes }
+        add_modifier = { name = ca_authority_boost months = 24 }
+        add_radicals = { value = 0.10 culture = cu:costa_rican }
+        ai_chance = { base = 90 }
     }
-    
+
+    # Conservar a Mora para dar legitimidad al nuevo gobierno
     option = {
-        name = ca_costa_rica_events.201.b 
-        # "Dejen que sus palabras circulen en las sombras." (Liberal)
-        trigger = {
-            ig:ig_intelligentsia = { is_marginal = no } # Requiere que no estén marginados
-        }
-        change_variable = { name = ca_morazan_invasion_prep add = 1 }
-        add_modifier = { name = ca_frontier_tensions months = 12 } # Aumenta la popularidad federalista/tensión
+        name = ca_costa_rica_events.20.b
+        set_variable = ca_cos_mora_con_carrillo
+        add_radicals = { value = 0.05 culture = cu:costa_rican }
+        ai_chance = { base = 10 }
     }
 }
 
-# Evento: Sombras y Mercenarios en Lima (1841)
-ca_costa_rica_events.202 = {
+# Evento 196: La Asamblea Constituyente - fuera de la Federacion (14 de noviembre de 1838)
+ca_costa_rica_events.196 = {
     type = country_event
     placement = root
-    
-    title = ca_costa_rica_events.202.t
-    desc = ca_costa_rica_events.202.d
-    flavor = ca_costa_rica_events.202.f
-    
-    icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
-    
+
+    title = ca_costa_rica_events.196.t
+    desc = ca_costa_rica_events.196.d
+    flavor = ca_costa_rica_events.196.f
+
+    icon = "gfx/interface/icons/event_icons/event_scales.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+    duration = 3
+
     trigger = {
-        this = c:COS
-        has_variable = ca_manifiesto_david_fired
-        NOT = { has_variable = ca_sombras_lima_fired } # CAFM fix: sin ventana de fechas, lo encadena el 201
+        always = no # Lo dispara el diario madre (ruta separatista)
     }
-    
+
     immediate = {
-        set_variable = ca_sombras_lima_fired
-        trigger_event = { id = ca_costa_rica_events.203 days = 180 } # CAFM fix: 203 estaba huerfano
+        set_variable = ca_cos_constituyente_1838_fired
     }
-    
+
+    # Historica: Costa Rica deja la Federacion
     option = {
-        name = ca_costa_rica_events.202.a 
+        name = ca_costa_rica_events.196.a
         default_option = yes
-        # "Exijan su extradición a Lima." (Sabotaje)
-        add_modifier = { name = ca_funding_separatists_modifier months = 12 } # Gastas burocracia/dinero
+        set_variable = ca_cos_separada_1838
         if = {
-            limit = { exists = c:PRU } # PRU = Perú
-            change_relations = { country = c:PRU value = -20 }
+            limit = {
+                exists = c:UCA
+                is_subject_of = c:UCA
+            }
+            make_independent = yes
         }
-        change_variable = { name = ca_morazan_invasion_prep subtract = 1 }
+        # La UCA responde: reconocer o restaurar el orden
+        c:UCA ?= { trigger_event = { id = ca_central_america.45 popup = yes } }
+        ca_cos_change_soberania_effect = { VALUE = 10 }
+        ai_chance = { base = 90 }
     }
-    
+
+    # Seguir como estado federal autonomo
     option = {
-        name = ca_costa_rica_events.202.b 
-        # "Envíenle oro en secreto." (Financiación clandestina)
-        trigger = {
-            ig:ig_intelligentsia = { is_in_government = yes } # Solo si los liberales lograron entrar al poder
-        }
-        add_treasury = -5000
-        change_variable = { name = ca_morazan_invasion_prep add = 2 }
+        name = ca_costa_rica_events.196.b
+        set_variable = ca_cos_estado_federal_autonomo
+        c:UCA ?= { change_relations = { country = ROOT value = 20 } }
+        ca_cos_change_soberania_effect = { VALUE = -5 }
+        ai_chance = { base = 10 }
     }
 }
+# =========================================================================
+# FASE 5: El Estado de Carrillo y la sombra del Aguila (1839 - 1841)
+# Fuentes: Archivo Nacional (decreto de Bases y Garantias, 8 mar 1841);
+# Leiva, "Morazan y el Manifiesto de David", Cultura (1942); ver
+# CAFM_FASE_1839_1842.md.
+#
+# Todos los eventos los dispara je_ca_cos_regreso_aguila (on_weekly_pulse
+# -> ca_cos_aguila_beats_effect), en orden historico:
+#   .197  ene 1839    La conspiracion de Joaquin Mora
+#   .198  abr 1840    El asilo de Puntarenas (por verificar)
+#   .21   8 mar 1841  La Ley de Bases y Garantias
+#   .201  16 jul 1841 El Manifiesto de David
+#   .205  22 sep 1841 El tratado con el Estado del Istmo (solo si existe PNM)
+#   .202  oct 1841    Sombras en Lima
+#   .203  dic 1841    La encrucijada andina
+# =========================================================================
 
-# Evento: La Encrucijada Andina (Finales de 1841)
-ca_costa_rica_events.203 = {
+# Evento 197: La conspiracion de Joaquin Mora (enero de 1839)
+ca_costa_rica_events.197 = {
     type = country_event
     placement = root
-    
-    title = ca_costa_rica_events.203.t
-    desc = ca_costa_rica_events.203.d
-    flavor = ca_costa_rica_events.203.f
-    
-    icon = "gfx/interface/icons/event_icons/event_military.dds"
-    
+
+    title = ca_costa_rica_events.197.t
+    desc = ca_costa_rica_events.197.d
+    flavor = ca_costa_rica_events.197.f
+
+    icon = "gfx/interface/icons/event_icons/event_protest.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+    duration = 3
+
     trigger = {
-        this = c:COS
-        has_variable = ca_sombras_lima_fired
-        NOT = { has_variable = ca_encrucijada_andina_fired }
+        always = no # Lo dispara je_ca_cos_regreso_aguila
     }
-    
+
     immediate = {
-        set_variable = ca_encrucijada_andina_fired
+        set_variable = ca_cos_conspiracion_mora_fired
     }
-    
+
+    # Historica: pena de muerte conmutada por destierro
     option = {
-        name = ca_costa_rica_events.203.a 
+        name = ca_costa_rica_events.197.a
         default_option = yes
-        # Ruta Histórica: "Mi destino está en Centroamérica."
-        trigger = {
-            var:ca_morazan_invasion_prep >= 0 # CAFM fix: check_variable no existe
-        }
-        # ¡Morazán viene en camino! Esto activa la FASE 5 (Retorno del Águila) en 1842
-        set_variable = ca_morazan_is_coming
-        # CAFM fix: el capitulo D dispara Caldera (.340) por fecha; el .22 ahora sale con las elecciones
+        set_variable = ca_cos_mora_desterrado
+        global_var:cafm_hc_joaquin_mora ?= { exile_character = yes }
+        ai_chance = { base = 70 }
     }
-    
+
+    # Ejecucion
     option = {
-        name = ca_costa_rica_events.203.b 
-        # Ruta Alternativa: "Acepto el mando en Perú."
-        trigger = {
-            var:ca_morazan_invasion_prep < 0 # Solo si el jugador lo saboteó con éxito
-        }
-        # Centroamérica se libra de Morazán para siempre
-        add_modifier = { name = ca_el_gran_avanse_modifier years = 5 } # Estabilidad permanente
-        set_variable = ca_morazan_stayed_in_peru
+        name = ca_costa_rica_events.197.b
+        global_var:cafm_hc_joaquin_mora ?= { kill_character = yes }
+        add_radicals = { value = 0.05 culture = cu:costa_rican }
+        ca_cos_change_soberania_effect = { VALUE = 5 }
+        ai_chance = { base = 20 }
+    }
+
+    # Perdon
+    option = {
+        name = ca_costa_rica_events.197.c
+        add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+        ca_cos_change_soberania_effect = { VALUE = -5 }
+        ai_chance = { base = 10 }
     }
 }
 
-# Evento 21: El "Arquitecto del Estado" y la Ley de Bases y Garantías (1841)
+# Evento 198: El asilo de Puntarenas (abril de 1840) - POR VERIFICAR en fuentes
+ca_costa_rica_events.198 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.198.t
+    desc = ca_costa_rica_events.198.d
+    flavor = ca_costa_rica_events.198.f
+
+    icon = "gfx/interface/icons/event_icons/event_ship.dds"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_cos_regreso_aguila
+    }
+
+    immediate = {
+        set_variable = ca_cos_asilo_fired
+        if = {
+            limit = { NOT = { has_variable = ca_morazan_invasion_prep } }
+            set_variable = { name = ca_morazan_invasion_prep value = 0 }
+        }
+    }
+
+    # Asilo con condiciones: que siga su camino hacia el sur
+    option = {
+        name = ca_costa_rica_events.198.a
+        default_option = yes
+        set_variable = ca_cos_asilo_morazan
+        ai_chance = { base = 60 }
+    }
+
+    # Negarle el desembarco
+    option = {
+        name = ca_costa_rica_events.198.b
+        change_variable = { name = ca_morazan_invasion_prep add = -1 }
+        c:ELS ?= { change_relations = { country = ROOT value = -10 } }
+        ai_chance = { base = 40 }
+    }
+}
+
+# Evento 21: La Ley de Bases y Garantias (8 de marzo de 1841)
 ca_costa_rica_events.21 = {
     type = country_event
     placement = root
-    
+
     title = ca_costa_rica_events.21.t
     desc = ca_costa_rica_events.21.d
     flavor = ca_costa_rica_events.21.f
-    
+
     icon = "gfx/interface/icons/event_icons/event_industry.dds"
-    
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+    duration = 3
+
     trigger = {
-        always = no # Es disparado por el Evento 20 (El Golpe Josefino) tras unos 1000 días
+        always = no # Lo dispara je_ca_cos_regreso_aguila
     }
-    
+
+    immediate = {
+        set_variable = ca_cos_bases_fired
+    }
+
+    # Historica: jefe inamovible, Camara Consultiva, cinco departamentos,
+    # supresion de las municipalidades
     option = {
-        name = ca_costa_rica_events.21.a 
-        # "El orden y el progreso exigen mano dura."
-        
-        # Cambio dictatorial de leyes (Ajusta los law_types según los tengas definidos en tu mod/vainilla)
-        activate_law = law_type:law_autocracy
-        activate_law = law_type:law_interventionism
-        
-        # Debilita a la Iglesia y a los oligarcas locales, fortalece burocracia
+        name = ca_costa_rica_events.21.a
+        default_option = yes
+        set_variable = ca_cos_bases_garantias
+        # La enmienda de la 1.2.4 ya no pone ca_carrilo_decret: la pone el evento
+        # (la usan la bandera COS_1840_1842_carrilo y gov_ca_cos_jefatura_vitalicia)
+        set_variable = ca_carrilo_decret
+        if = {
+            limit = { NOT = { has_law = law_type:law_autocracy } }
+            activate_law = law_type:law_autocracy
+        }
+        # La enmienda ya existe: activa ca_carrilo_decret (bandera y jefatura vitalicia)
+        active_law:lawgroup_distribution_of_power ?= {
+            add_amendment = {
+                type = amendment_ca_bases_y_garantias
+                sponsor = PREV.ig:ig_landowners
+            }
+        }
         ig:ig_devout = { add_modifier = { name = ca_cos_ig_suppressed months = 60 } }
-        add_radicals = { value = 0.05 interest_group = ig:ig_landowners } # CAFM fix: efecto de pais
-        
-        add_modifier = { name = ca_authority_boost months = 120 }
-        
-        # Dispara o avanza tu diario del Boom Cafetalero (je_ca_agro_export_boom)
+        add_radicals = { value = 0.05 interest_group = ig:ig_landowners }
+        ca_cos_change_soberania_effect = { VALUE = 10 }
         if = {
             limit = { NOT = { has_journal_entry = je_ca_agro_export_boom } }
             add_journal_entry = { type = je_ca_agro_export_boom }
         }
+        ai_chance = { base = 90 }
+    }
+
+    # Gobernar sin decreto
+    option = {
+        name = ca_costa_rica_events.21.b
+        add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+        ai_chance = { base = 10 }
     }
 }
-#1844: Primer Sufragio Directo Popular (Francisco María Oreamuno Bonilla)
-ca_costa_rica_events.22 = {
+
+# Evento 201: El Manifiesto de David (16 de julio de 1841)
+ca_costa_rica_events.201 = {
     type = country_event
-    placement = ROOT
-    title = ca_costa_rica_events.22.t
-    desc = ca_costa_rica_events.22.d
-    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    placement = root
+
+    title = ca_costa_rica_events.201.t
+    desc = ca_costa_rica_events.201.d
+    flavor = ca_costa_rica_events.201.f
+
+    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
     duration = 3
 
     trigger = {
-        c:COS ?= this
-        in_election_campaign = yes
-        NOT = { has_variable = cos_elec_1844_fired }
-        game_date >= 1844.6.2
-        game_date <= 1845.1.1
+        always = no # Lo dispara je_ca_cos_regreso_aguila
     }
 
-    immediate = { 
-        set_variable = { name = cos_elec_1844_fired value = yes } 
+    immediate = {
+        set_variable = ca_manifiesto_david_fired
+        if = {
+            limit = { NOT = { has_variable = ca_morazan_invasion_prep } }
+            set_variable = { name = ca_morazan_invasion_prep value = 0 }
+        }
     }
 
-    # Opción A (Histórica): Elección popular de Francisco María Oreamuno (Civilista Moderado)
+    # Quemar los panfletos (censura moderada)
+    option = {
+        name = ca_costa_rica_events.201.a
+        default_option = yes
+        add_modifier = { name = ca_cos_censura_panfletos months = 12 }
+        add_radicals = { value = 0.05 interest_group = ig:ig_intelligentsia }
+        ai_chance = { base = 70 }
+    }
+
+    # Dejarlos circular
+    option = {
+        name = ca_costa_rica_events.201.b
+        change_variable = { name = ca_morazan_invasion_prep add = 1 }
+        add_modifier = { name = ca_frontier_tensions months = 12 }
+        ai_chance = { base = 30 }
+    }
+}
+
+# Evento 205: El tratado con el Estado del Istmo (22 de septiembre de 1841)
+ca_costa_rica_events.205 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.205.t
+    desc = ca_costa_rica_events.205.d
+    flavor = ca_costa_rica_events.205.f
+
+    icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_cos_regreso_aguila (solo si existe c:PNM)
+    }
+
+    immediate = {
+        set_variable = ca_cos_tratado_istmo_fired
+    }
+
+    # Historica: reconocer al Istmo reservandose el derecho sobre Bocas
+    option = {
+        name = ca_costa_rica_events.205.a
+        default_option = yes
+        set_variable = ca_cos_tratado_istmo
+        c:PNM ?= { change_relations = { country = ROOT value = 30 } }
+        s:STATE_PANAMA = { add_claim = ROOT }
+        ai_chance = { base = 70 }
+    }
+
+    # Exigir Bocas del Toro a cambio del reconocimiento
+    option = {
+        name = ca_costa_rica_events.205.b
+        c:PNM ?= { change_relations = { country = ROOT value = -20 } }
+        s:STATE_PANAMA = { add_claim = ROOT }
+        ai_chance = { base = 20 }
+    }
+
+    # No firmar
+    option = {
+        name = ca_costa_rica_events.205.c
+        ai_chance = { base = 10 }
+    }
+}
+
+# Evento 202: Sombras en Lima (octubre de 1841)
+ca_costa_rica_events.202 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.202.t
+    desc = ca_costa_rica_events.202.d
+    flavor = ca_costa_rica_events.202.f
+
+    icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_cos_regreso_aguila
+    }
+
+    immediate = {
+        set_variable = ca_sombras_lima_fired
+    }
+
+    # Exigir su extradicion a Lima (sabotaje)
+    option = {
+        name = ca_costa_rica_events.202.a
+        default_option = yes
+        add_modifier = { name = ca_funding_separatists_modifier months = 12 }
+        c:PRU ?= { change_relations = { country = ROOT value = -20 } }
+        change_variable = { name = ca_morazan_invasion_prep add = -1 }
+        ai_chance = { base = 70 }
+    }
+
+    # Enviarle oro en secreto
+    option = {
+        name = ca_costa_rica_events.202.b
+        trigger = {
+            ig:ig_intelligentsia ?= { is_in_government = yes }
+        }
+        add_treasury = -5000
+        change_variable = { name = ca_morazan_invasion_prep add = 2 }
+        ai_chance = { base = 30 }
+    }
+}
+
+# Evento 203: La encrucijada andina (diciembre de 1841)
+ca_costa_rica_events.203 = {
+    type = country_event
+    placement = root
+
+    title = ca_costa_rica_events.203.t
+    desc = ca_costa_rica_events.203.d
+    flavor = ca_costa_rica_events.203.f
+
+    icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+    duration = 3
+
+    trigger = {
+        always = no # Lo dispara je_ca_cos_regreso_aguila
+    }
+
+    immediate = {
+        set_variable = ca_encrucijada_andina_fired
+    }
+
+    # Historica: Morazan rechaza el mando peruano y zarpa en el Crusader
+    option = {
+        name = ca_costa_rica_events.203.a
+        default_option = yes
+        trigger = { var:ca_morazan_invasion_prep >= 0 }
+        set_variable = ca_morazan_is_coming
+    }
+
+    # Alternativa: Morazan acepta el mando en Peru
+    option = {
+        name = ca_costa_rica_events.203.b
+        trigger = { var:ca_morazan_invasion_prep < 0 }
+        set_variable = ca_morazan_stayed_in_peru
+        add_modifier = { name = ca_cos_estabilidad_carrillista years = 5 }
+    }
+}
+# =========================================================================
+# FASE 6: La Republica de los cafetaleros (1842 - 1850) - rediseno CAFM
+# Fuentes: TSE, Historia de las elecciones presidenciales (2008), pp. 10-13;
+# Corella Ovares, "No queremos que nos vendan al Ecuador", Revista de
+# Historia (UNA) 80 (2019), pp. 77-94; ver CAFM_FASE_1842_1850.md.
+#
+# Todos los eventos los dispara je_ca_cos_republica (on_weekly_pulse ->
+# ca_cos_republica_beats_effect), en orden historico:
+#   .25   3 may 1843   La Universidad de Santo Tomas
+#   .26   1843         El Monarch de Le Lacheur (cafe directo a Londres)
+#   .27   9 abr 1844   La Constitucion de 1844
+#   .22   2-4 jun 1844 El primer sufragio directo (Oreamuno 1541, Alfaro 486)
+#   .221  dic 1844     El jefe que no quiso gobernar (Oreamuno -> Gallegos)
+#   .222  may 1845     La muerte de Carrillo en El Salvador
+#   .223  7 jun 1846   La caida de Gallegos (Alfaro provisorio)
+#   .224  ene 1847     La Constitucion de 1847
+#   .23   11 abr 1847  Los electores de 1847 (Castro 99, Alfaro 52)
+#   .231  31 ago 1848  La Republica de Costa Rica
+#   .232  sep 1848     La bandera de Pacifica Fernandez
+#   .233  nov 1848     La reforma de 1848 (el sufragio mas restringido)
+#   .234  15 nov 1849  La renuncia de Castro (el general Jose Manuel Quiros)
+#   .24   2-9 dic 1849 Los electores de 1849 (Mora 49, Moya 32, Bonilla 9)
+#   .235  4 jun 1850   "No queremos que nos vendan al Ecuador"
+# =========================================================================
+
+# Evento 25: La Universidad de Santo Tomas (3 de mayo de 1843)
+ca_costa_rica_events.25 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.25.t
+    desc = ca_costa_rica_events.25.d
+    flavor = ca_costa_rica_events.25.f
+    icon = "gfx/interface/icons/event_icons/event_scales.dds"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica
+    immediate = { set_variable = ca_cos_universidad_fired }
+
+    # Historica: decreto 11 de Alfaro, a iniciativa de Castro Madriz
+    option = {
+        name = ca_costa_rica_events.25.a
+        default_option = yes
+        set_variable = ca_cos_universidad_santo_tomas
+        add_modifier = { name = ca_cos_education_reform years = 10 }
+        add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia }
+        ai_chance = { base = 90 }
+    }
+
+    # Aplazarla: el tesoro no da para catedras
+    option = {
+        name = ca_costa_rica_events.25.b
+        add_radicals = { value = 0.03 interest_group = ig:ig_intelligentsia }
+        ai_chance = { base = 10 }
+    }
+}
+
+# Evento 26: El Monarch de Le Lacheur (1843)
+ca_costa_rica_events.26 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.26.t
+    desc = ca_costa_rica_events.26.d
+    flavor = ca_costa_rica_events.26.f
+    icon = "gfx/interface/icons/event_icons/event_trade.dds"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica
+    immediate = { set_variable = ca_cos_monarch_fired }
+
+    # Historica: el cafe va directo a Londres a credito del capitan
+    option = {
+        name = ca_costa_rica_events.26.a
+        default_option = yes
+        set_variable = ca_cos_cafe_a_londres
+        add_modifier = { name = ca_cos_cafe_londres years = 10 }
+        c:GBR ?= { change_relations = { country = ROOT value = 20 } }
+        ai_chance = { base = 85 }
+    }
+
+    # Seguir vendiendo por Valparaiso
+    option = {
+        name = ca_costa_rica_events.26.b
+        c:CHL ?= { change_relations = { country = ROOT value = 10 } }
+        ai_chance = { base = 15 }
+    }
+}
+
+# Evento 27: La Constitucion de 1844 (9 de abril de 1844)
+ca_costa_rica_events.27 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.27.t
+    desc = ca_costa_rica_events.27.d
+    flavor = ca_costa_rica_events.27.f
+    icon = "gfx/interface/icons/event_icons/event_scales.dds"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica
+    immediate = { set_variable = ca_cos_constitucion_1844_fired }
+
+    # Historica: el Estado Libre se da una nueva constitucion con voto directo
+    option = {
+        name = ca_costa_rica_events.27.a
+        default_option = yes
+        if = {
+            limit = { NOT = { has_law = law_type:law_oligarchy } }
+            activate_law = law_type:law_oligarchy
+        }
+        active_law:lawgroup_distribution_of_power ?= {
+            add_amendment = {
+                type = amendment_free_costa_rica_reform
+                sponsor = PREV.ig:ig_intelligentsia
+            }
+        }
+        ai_chance = { base = 90 }
+    }
+
+    # Mantener la Ley Fundamental de 1825
+    option = {
+        name = ca_costa_rica_events.27.b
+        ai_chance = { base = 10 }
+    }
+}
+
+# Evento 22: El primer sufragio directo (2-4 de junio de 1844)
+ca_costa_rica_events.22 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.22.t
+    desc = ca_costa_rica_events.22.d
+    flavor = ca_costa_rica_events.22.f
+    icon = "gfx/interface/icons/event_icons/event_election.dds"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica
+    immediate = { set_variable = cos_elec_1844_fired }
+
+    # Historica: Oreamuno, 1,541 votos
     option = {
         name = ca_costa_rica_events.22.a
         default_option = yes
-        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
-        ig:ig_industrialists ?= { party = { add_momentum = momentum_medium } }
+        set_variable = ca_cos_gobierno_oreamuno
+        add_loyalists = { value = 0.05 interest_group = ig:ig_landowners }
+        ai_chance = { base = 80 }
     }
 
-    # Opción B (Alternativa): Impulso radical-liberal de José María Castro Madriz
+    # Alfaro sigue en el poder (486 votos en la historia)
     option = {
         name = ca_costa_rica_events.22.b
-        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_very_large } }
-        ig:ig_landowners ?= { party = { add_momentum = momentum_small_decrease } }
+        set_variable = ca_cos_gobierno_alfaro
+        add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia }
+        ai_chance = { base = 15 }
     }
 
-    # Opción C (Alternativa): La facción militar de los cuarteles intenta imponer condiciones
+    # El viejo Juan Mora Fernandez (97 votos en la historia)
     option = {
         name = ca_costa_rica_events.22.c
-        ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
-        add_radicals = { value = medium_radicals pop_type = shopkeepers }
+        set_variable = ca_cos_gobierno_juan_mora
+        create_character = {
+            template = cafm_juan_mora_fernandez
+            ruler = yes
+        }
+        ai_chance = { base = 5 }
     }
 }
 
-#1847: Elecciones Indirectas de Segundo Grado (José María Castro Madriz)
+# Evento 221: El jefe que no quiso gobernar (diciembre de 1844)
+ca_costa_rica_events.221 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.221.t
+    desc = ca_costa_rica_events.221.d
+    flavor = ca_costa_rica_events.221.f
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica (si gano Oreamuno)
+    immediate = { set_variable = ca_cos_oreamuno_renuncia_fired }
+
+    # Historica: Oreamuno se va a Cartago; Moya interino y luego Gallegos (1845)
+    option = {
+        name = ca_costa_rica_events.221.a
+        default_option = yes
+        remove_variable = ca_cos_gobierno_oreamuno
+        set_variable = ca_cos_gobierno_gallegos
+        create_character = {
+            template = cafm_jose_rafael_gallegos
+            ruler = yes
+        }
+        ai_chance = { base = 80 }
+    }
+
+    # Obligar a Oreamuno a gobernar
+    option = {
+        name = ca_costa_rica_events.221.b
+        create_character = {
+            template = cafm_francisco_maria_oreamuno
+            ruler = yes
+        }
+        add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
+        ai_chance = { base = 20 }
+    }
+}
+
+# Evento 222: La muerte de Carrillo (mayo de 1845)
+ca_costa_rica_events.222 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.222.t
+    desc = ca_costa_rica_events.222.d
+    flavor = ca_costa_rica_events.222.f
+    icon = "gfx/interface/icons/event_icons/event_skull.dds"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica (si Carrillo esta en el exilio)
+    immediate = {
+        set_variable = ca_cos_muerte_carrillo_fired
+        global_var:cafm_hc_carrillo ?= { kill_character = yes }
+    }
+
+    # Silencio oficial
+    option = {
+        name = ca_costa_rica_events.222.a
+        default_option = yes
+        ai_chance = { base = 60 }
+    }
+
+    # Honras al Arquitecto del Estado
+    option = {
+        name = ca_costa_rica_events.222.b
+        add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces }
+        add_radicals = { value = 0.03 interest_group = ig:ig_intelligentsia }
+        ai_chance = { base = 40 }
+    }
+}
+
+# Evento 223: La caida de Gallegos (7 de junio de 1846)
+ca_costa_rica_events.223 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.223.t
+    desc = ca_costa_rica_events.223.d
+    flavor = ca_costa_rica_events.223.f
+    icon = "gfx/interface/icons/event_icons/event_protest.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica
+    immediate = { set_variable = ca_cos_caida_gallegos_fired }
+
+    # Historica: los cuarteles deponen a Gallegos; Alfaro, jefe provisorio
+    option = {
+        name = ca_costa_rica_events.223.a
+        default_option = yes
+        remove_variable = ca_cos_gobierno_gallegos
+        remove_variable = ca_cos_gobierno_oreamuno
+        set_variable = ca_cos_gobierno_alfaro
+        create_character = {
+            template = cos_jose_maria_alfaro_character_template
+            ruler = yes
+        }
+        add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces }
+        ai_chance = { base = 80 }
+    }
+
+    # Resistir: el gobierno legal se sostiene
+    option = {
+        name = ca_costa_rica_events.223.b
+        add_radicals = { value = 0.10 interest_group = ig:ig_armed_forces }
+        ai_chance = { base = 20 }
+    }
+}
+
+# Evento 224: La Constitucion de 1847 (enero de 1847)
+ca_costa_rica_events.224 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.224.t
+    desc = ca_costa_rica_events.224.d
+    flavor = ca_costa_rica_events.224.f
+    icon = "gfx/interface/icons/event_icons/event_scales.dds"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica
+    immediate = { set_variable = ca_cos_constitucion_1847_fired }
+
+    option = {
+        name = ca_costa_rica_events.224.a
+        default_option = yes
+        set_variable = ca_cos_constitucion_1847
+        add_modifier = { name = ca_cos_estabilidad_carrillista years = 2 }
+        ai_chance = { base = 90 }
+    }
+
+    option = {
+        name = ca_costa_rica_events.224.b
+        ai_chance = { base = 10 }
+    }
+}
+
+# Evento 23: Los electores de 1847 (11 de abril de 1847)
 ca_costa_rica_events.23 = {
     type = country_event
-    placement = ROOT
+    placement = root
     title = ca_costa_rica_events.23.t
     desc = ca_costa_rica_events.23.d
+    flavor = ca_costa_rica_events.23.f
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica
+    immediate = { set_variable = cos_elec_1847_fired }
 
-    trigger = {
-        c:COS ?= this
-        in_election_campaign = yes
-        NOT = { has_variable = cos_elec_1847_fired }
-        game_date >= 1847.4.11
-        game_date <= 1848.1.1
-    }
-
-    immediate = { 
-        set_variable = { name = cos_elec_1847_fired value = yes } 
-    }
-
-    # Opción A (Histórica): José María Castro Madriz ("Fundador de la República")
+    # Historica: Castro Madriz, 99 votos; Mora Porras, vicepresidente
     option = {
         name = ca_costa_rica_events.23.a
         default_option = yes
-        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_very_large } }
-        ig:ig_industrialists ?= { party = { add_momentum = momentum_medium } }
-        add_modifier = { name = ca_cos_education_reform days = long_modifier_time }
+        remove_variable = ca_cos_gobierno_alfaro
+        set_variable = ca_cos_gobierno_castro
+        create_character = {
+            template = cos_castro_character_template
+            ruler = yes
+        }
+        add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia }
+        ai_chance = { base = 80 }
     }
 
-    # Opción B (Alternativa): Candidatura tradicionalista de José Rafael Gallegos
+    # Alfaro (52 votos en la historia)
     option = {
         name = ca_costa_rica_events.23.b
-        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
-        ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
-    }
-
-    # Opción C (Alternativa): La burguesía mercantil de Manuel José Carazo
-    option = {
-        name = ca_costa_rica_events.23.c
-        ig:ig_industrialists ?= { party = { add_momentum = momentum_large } }
-        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_medium } }
+        set_variable = ca_cos_gobierno_alfaro
+        add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces }
+        ai_chance = { base = 20 }
     }
 }
 
-#1849: Elecciones Extraordinarias (Juan Rafael Mora Porras)
+# Evento 231: La Republica de Costa Rica (31 de agosto de 1848)
+ca_costa_rica_events.231 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.231.t
+    desc = ca_costa_rica_events.231.d
+    flavor = ca_costa_rica_events.231.f
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica (si gobierna Castro)
+    immediate = { set_variable = ca_cos_republica_fired }
+
+    # Historica: Costa Rica, republica soberana. Activa la enmienda de la
+    # 1.a Republica (bandera COS_1848 y gobierno gov_ca_cos_primera_republica)
+    option = {
+        name = ca_costa_rica_events.231.a
+        default_option = yes
+        set_variable = ca_cos_republica_1848
+        if = {
+            limit = { NOT = { has_law = law_type:law_parliamentary_republic } }
+            activate_law = law_type:law_parliamentary_republic
+        }
+        active_law:lawgroup_governance_principles ?= {
+            add_amendment = {
+                type = amendment_costa_rica_1st_republic
+                sponsor = PREV.ig:ig_intelligentsia
+            }
+        }
+        add_modifier = { name = ca_cos_prestige_gain months = 60 }
+        ai_chance = { base = 90 }
+    }
+
+    # Seguir siendo un Estado, por si la Union renace
+    option = {
+        name = ca_costa_rica_events.231.b
+        ai_chance = { base = 10 }
+    }
+}
+
+# Evento 232: La bandera de Pacifica Fernandez (septiembre de 1848)
+ca_costa_rica_events.232 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.232.t
+    desc = ca_costa_rica_events.232.d
+    flavor = ca_costa_rica_events.232.f
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica (si se proclamo la Republica)
+    immediate = { set_variable = ca_cos_bandera_1848_fired }
+
+    option = {
+        name = ca_costa_rica_events.232.a
+        default_option = yes
+        add_modifier = { name = ca_cos_prestige_gain_small months = 60 }
+        add_loyalists = { value = 0.03 culture = cu:costa_rican }
+    }
+}
+
+# Evento 233: La reforma de 1848 (noviembre de 1848)
+ca_costa_rica_events.233 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.233.t
+    desc = ca_costa_rica_events.233.d
+    flavor = ca_costa_rica_events.233.f
+    icon = "gfx/interface/icons/event_icons/event_scales.dds"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica
+    immediate = { set_variable = ca_cos_reforma_1848_fired }
+
+    # Historica: el sufragio mas restringido de la historia del pais
+    option = {
+        name = ca_costa_rica_events.233.a
+        default_option = yes
+        if = {
+            limit = { NOT = { has_law = law_type:law_oligarchy } }
+            activate_law = law_type:law_oligarchy
+        }
+        add_loyalists = { value = 0.05 interest_group = ig:ig_landowners }
+        add_radicals = { value = 0.05 interest_group = ig:ig_petty_bourgeoisie }
+        ai_chance = { base = 80 }
+    }
+
+    # Ampliar el voto a los propietarios
+    option = {
+        name = ca_costa_rica_events.233.b
+        if = {
+            limit = { NOT = { has_law = law_type:law_wealth_voting } }
+            activate_law = law_type:law_wealth_voting
+        }
+        add_radicals = { value = 0.05 interest_group = ig:ig_landowners }
+        ai_chance = { base = 20 }
+    }
+}
+
+# Evento 234: La renuncia de Castro (15-16 de noviembre de 1849)
+ca_costa_rica_events.234 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.234.t
+    desc = ca_costa_rica_events.234.d
+    flavor = ca_costa_rica_events.234.f
+    icon = "gfx/interface/icons/event_icons/event_protest.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica (si gobierna Castro)
+    immediate = {
+        set_variable = ca_cos_renuncia_castro_fired
+        if = {
+            limit = { NOT = { has_global_variable = cafm_hc_jose_manuel_quiros } }
+            create_character = { template = cafm_jose_manuel_quiros }
+        }
+    }
+
+    # Historica: el general Jose Manuel Quiros lo desconoce y Castro renuncia
+    option = {
+        name = ca_costa_rica_events.234.a
+        default_option = yes
+        remove_variable = ca_cos_gobierno_castro
+        set_variable = ca_cos_castro_depuesto
+        ruler = { exile_character = yes }
+        add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces }
+        ai_chance = { base = 80 }
+    }
+
+    # Resistir: Quiros al destierro
+    option = {
+        name = ca_costa_rica_events.234.b
+        global_var:cafm_hc_jose_manuel_quiros ?= { exile_character = yes }
+        add_radicals = { value = 0.10 interest_group = ig:ig_armed_forces }
+        ai_chance = { base = 20 }
+    }
+}
+
+# Evento 24: Los electores de 1849 (2-9 de diciembre de 1849)
 ca_costa_rica_events.24 = {
     type = country_event
-    placement = ROOT
+    placement = root
     title = ca_costa_rica_events.24.t
     desc = ca_costa_rica_events.24.d
+    flavor = ca_costa_rica_events.24.f
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica
+    immediate = { set_variable = cos_elec_1849_fired }
 
-    trigger = {
-        c:COS ?= this
-        in_election_campaign = yes
-        NOT = { has_variable = cos_elec_1849_fired }
-        game_date >= 1849.12.9
-        game_date <= 1850.6.1
-    }
-
-    immediate = { 
-        set_variable = { name = cos_elec_1849_fired value = yes } 
-    }
-
-    # Opción A (Histórica): Juan Rafael Mora Porras y el despegue de la oligarquía cafetalera
+    # Historica: Juan Rafael Mora Porras, 49 votos
     option = {
         name = ca_costa_rica_events.24.a
         default_option = yes
-        ig:ig_industrialists ?= { party = { add_momentum = momentum_very_large } }
-        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
-        ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium } }
+        set_variable = ca_cos_gobierno_mora_porras
+        create_character = {
+            template = cos_juan_rafael_mora_character_template
+            ruler = yes
+        }
+        add_loyalists = { value = 0.05 interest_group = ig:ig_landowners }
+        ai_chance = { base = 75 }
     }
 
-    # Opción B (Alternativa): Retorno y defensa del modelo civilista de Castro Madriz
+    # Rafael Moya (32 votos en la historia)
     option = {
         name = ca_costa_rica_events.24.b
-        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
-        add_radicals = { value = small_radicals pop_type = aristocrats }
+        set_variable = ca_cos_gobierno_moya
+        create_character = {
+            template = cafm_rafael_moya
+            ruler = yes
+        }
+        ai_chance = { base = 20 }
     }
 
-    # Opción C (Alternativa): Candidatura militar-comercial de Miguel Mora Porras
+    # Manuel Antonio Bonilla, el carrillista (9 votos en la historia)
     option = {
         name = ca_costa_rica_events.24.c
-        ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
-        ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium } }
+        set_variable = ca_cos_gobierno_bonilla
+        create_character = {
+            template = cafm_manuel_antonio_bonilla
+            ruler = yes
+        }
+        ai_chance = { base = 5 }
+    }
+}
+
+# Evento 235: "No queremos que nos vendan al Ecuador" (4 de junio de 1850)
+ca_costa_rica_events.235 = {
+    type = country_event
+    placement = root
+    title = ca_costa_rica_events.235.t
+    desc = ca_costa_rica_events.235.d
+    flavor = ca_costa_rica_events.235.f
+    icon = "gfx/interface/icons/event_icons/event_protest.dds"
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    duration = 3
+    trigger = { always = no } # Lo dispara je_ca_cos_republica
+    immediate = { set_variable = ca_cos_quiros_1850_fired }
+
+    # Historica: el intento fracasa; apenas se reunen veinte hombres
+    option = {
+        name = ca_costa_rica_events.235.a
+        default_option = yes
+        add_loyalists = { value = 0.05 culture = cu:costa_rican }
+        add_radicals = { value = 0.05 interest_group = ig:ig_armed_forces }
+        ai_chance = { base = 70 }
+    }
+
+    # Desmentir el rumor y purgar el alto mando
+    option = {
+        name = ca_costa_rica_events.235.b
+        global_var:cafm_hc_jose_manuel_quiros ?= { exile_character = yes }
+        add_modifier = { name = ca_authority_boost months = 12 }
+        ai_chance = { base = 30 }
     }
 }
 # =========================================================================
@@ -1422,6 +2566,13 @@ ca_costa_rica_events.300 = {
 
 	immediate = {
 		set_variable = ca_cos_estado_consolidado
+		if = {
+			limit = {
+				game_date < 1850.6.1
+				NOT = { has_journal_entry = je_ca_cos_republica }
+			}
+			add_journal_entry = { type = je_ca_cos_republica }
+		}
 	}
 
 	# Ruta separatista: el Estado de Carrillo
@@ -1430,7 +2581,7 @@ ca_costa_rica_events.300 = {
 		default_option = yes
 		trigger = { NOT = { has_variable = ca_cos_ruta_federal } }
 		add_modifier = {
-			name = ca_el_gran_avanse_modifier
+			name = ca_cos_estabilidad_carrillista
 			years = 10
 		}
 	}
@@ -1440,7 +2591,7 @@ ca_costa_rica_events.300 = {
 		name = ca_costa_rica_events.300.b
 		trigger = { has_variable = ca_cos_ruta_federal }
 		add_modifier = {
-			name = ca_el_gran_avanse_modifier
+			name = ca_cos_estabilidad_carrillista
 			years = 5
 		}
 		if = {
@@ -1493,8 +2644,19 @@ ca_costa_rica_events.310 = {
 
 
 # -------------------------------------------------------------------------
-# .320 El Aguila en San Jose (fracaso leve)
+# 1842: el regreso y la caida de Morazan - rediseno CAFM
+# Ver CAFM_FASE_1839_1842.md. Orden:
+#   .340  7 abr 1842   El desembarco de Caldera (capitulo D)
+#   .341  11 abr 1842  El Pacto del Jocote (capitulo D)
+#   .320  13 abr 1842  El Aguila en San Jose (on_fail del diario madre)
+#   .321  6 jun 1842   Anulacion de Bases y Garantias   } diario
+#   .322  jul 1842     La leva para la Union            } je_ca_cos_caida_morazan
+#   .323  24 ago 1842  La Ley Fundamental de 1825       } (pulso semanal)
+#   .350  11 sep 1842  La revuelta de septiembre        }
+#   .351  27 sep 1842  La eleccion de Alfaro
 # -------------------------------------------------------------------------
+
+# .320 El Aguila en San Jose (13 de abril de 1842)
 ca_costa_rica_events.320 = {
 	type = country_event
 	placement = root
@@ -1523,13 +2685,14 @@ ca_costa_rica_events.320 = {
 		name = ca_costa_rica_events.320.a
 		default_option = yes
 
-		# Carrillo sale del poder (mismo recurso que el evento 3: lo retira)
+		# Carrillo sale de Puntarenas hacia El Salvador (15 de abril)
 		if = {
 			limit = { ruler ?= { has_variable = is_carrillo } }
-			ruler = { kill_character = yes }
+			set_variable = ca_cos_carrillo_exiliado
+			ruler = { exile_character = yes }
 		}
 
-		# Morazan toma el mando si no existe ya en otro pais
+		# Morazan, Jefe Supremo (si no existe ya en otro pais)
 		if = {
 			limit = {
 				NOT = {
@@ -1544,19 +2707,130 @@ ca_costa_rica_events.320 = {
 			}
 		}
 
+		# Villasenor, el general que se paso al Aguila en El Jocote
+		if = {
+			limit = { NOT = { has_global_variable = cafm_hc_villasenor } }
+			create_character = { template = cafm_vicente_villasenor }
+		}
+
 		if = {
 			limit = { exists = c:UCA }
 			change_relations = { country = c:UCA value = 50 }
 		}
-
 		add_journal_entry = { type = je_ca_cos_caida_morazan }
 	}
 }
 
+# .321 Anulacion de Bases y Garantias (6 de junio de 1842)
+ca_costa_rica_events.321 = {
+	type = country_event
+	placement = root
 
-# -------------------------------------------------------------------------
-# .330 El golpe frustrado (capitulo C)
-# -------------------------------------------------------------------------
+	title = ca_costa_rica_events.321.t
+	desc = ca_costa_rica_events.321.d
+	flavor = ca_costa_rica_events.321.f
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		always = no # Lo dispara je_ca_cos_caida_morazan
+	}
+
+	immediate = {
+		set_variable = ca_cos_anulacion_bases_fired
+	}
+
+	option = {
+		name = ca_costa_rica_events.321.a
+		default_option = yes
+		remove_variable = ca_carrilo_decret
+		remove_variable = decreto_bases_garantias_activo
+		set_variable = decreto_bases_garantias_derogado
+		je:je_ca_cos_caida_morazan ?= {
+			add_progress = { name = ca_cos_descontento_bar value = -5 }
+		}
+	}
+}
+
+# .322 La leva para la Union (julio de 1842)
+ca_costa_rica_events.322 = {
+	type = country_event
+	placement = root
+
+	title = ca_costa_rica_events.322.t
+	desc = ca_costa_rica_events.322.d
+	flavor = ca_costa_rica_events.322.f
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	duration = 3
+
+	trigger = {
+		always = no # Lo dispara je_ca_cos_caida_morazan
+	}
+
+	immediate = {
+		set_variable = ca_cos_leva_fired
+	}
+
+	# Historica: reclutar y cobrar prestamos para la guerra de la Union
+	option = {
+		name = ca_costa_rica_events.322.a
+		default_option = yes
+		add_treasury = 3000
+		add_radicals = { value = 0.05 culture = cu:costa_rican }
+		je:je_ca_cos_caida_morazan ?= {
+			add_progress = { name = ca_cos_descontento_bar value = 25 }
+		}
+		ai_chance = { base = 80 }
+	}
+
+	# Moderar la leva
+	option = {
+		name = ca_costa_rica_events.322.b
+		je:je_ca_cos_caida_morazan ?= {
+			add_progress = { name = ca_cos_descontento_bar value = 10 }
+		}
+		ai_chance = { base = 20 }
+	}
+}
+
+# .323 La Ley Fundamental de 1825 restablecida (24 de agosto de 1842)
+ca_costa_rica_events.323 = {
+	type = country_event
+	placement = root
+
+	title = ca_costa_rica_events.323.t
+	desc = ca_costa_rica_events.323.d
+	flavor = ca_costa_rica_events.323.f
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		always = no # Lo dispara je_ca_cos_caida_morazan
+	}
+
+	immediate = {
+		set_variable = ca_cos_ley_1825_fired
+	}
+
+	option = {
+		name = ca_costa_rica_events.323.a
+		default_option = yes
+		# Fin de la autocracia de Carrillo (la enmienda cae con su ley madre)
+		if = {
+			limit = { NOT = { has_law = law_type:law_wealth_voting } }
+			activate_law = law_type:law_wealth_voting
+		}
+	}
+}
+
+# .330 El golpe frustrado (27 de mayo de 1838, capitulo C)
 ca_costa_rica_events.330 = {
 	type = country_event
 	placement = root
@@ -1581,30 +2855,30 @@ ca_costa_rica_events.330 = {
 		set_variable = ca_cos_golpe_frustrado
 	}
 
+	# La ley prevalece: Carrillo al destierro
 	option = {
 		name = ca_costa_rica_events.330.a
 		default_option = yes
-		# La ley prevalece
-		add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: efecto de pais
+		set_variable = ca_cos_carrillo_desterrado
+		global_var:cafm_hc_carrillo ?= { exile_character = yes }
+		add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia }
 		if = {
 			limit = { exists = c:UCA }
 			change_relations = { country = c:UCA value = 20 }
 		}
+		ai_chance = { base = 70 }
 	}
 
+	# Perdonar a los conspiradores para calmar a los cuarteles
 	option = {
 		name = ca_costa_rica_events.330.b
-		# Perdonar a los conspiradores para calmar a los cuarteles
-		add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces } # CAFM fix: efecto de pais
-		add_radicals = { value = 0.05 interest_group = ig:ig_intelligentsia } # CAFM fix: efecto de pais
+		add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces }
+		add_radicals = { value = 0.05 interest_group = ig:ig_intelligentsia }
+		ai_chance = { base = 30 }
 	}
 }
 
-
-# -------------------------------------------------------------------------
-# .340 El desembarco de Caldera (capitulo D, abril 1842)
-# La soberania decide si el ejercito sigue a Carrillo o se pasa a Morazan.
-# -------------------------------------------------------------------------
+# .340 El desembarco de Caldera (7 de abril de 1842)
 ca_costa_rica_events.340 = {
 	type = country_event
 	placement = root
@@ -1622,33 +2896,65 @@ ca_costa_rica_events.340 = {
 	duration = 3
 
 	trigger = {
-		always = no # Solo desde el capitulo D
+		always = no # Lo dispara je_ca_cos_regreso_aguila
 	}
 
-	# Soberania >= 60: Villasenor se mantiene leal y Morazan es rechazado
+	immediate = {
+		set_variable = ca_cos_caldera_resuelto
+	}
+
 	option = {
 		name = ca_costa_rica_events.340.a
 		default_option = yes
-		trigger = { ca_cos_soberania_min_trigger = { VALUE = 60 } }
-		set_variable = ca_cos_morazan_derrotado
-		add_modifier = {
-			name = ca_frontier_tensions
-			months = 12
+		# Villasenor sale con 400 hombres; el Jocote se decide en cuatro dias
+		if = {
+			limit = { NOT = { has_global_variable = cafm_hc_villasenor } }
+			create_character = { template = cafm_vicente_villasenor }
 		}
-	}
-
-	# Soberania < 60: el Pacto del Jocote, el ejercito se pasa al Aguila
-	option = {
-		name = ca_costa_rica_events.340.b
-		trigger = { NOT = { ca_cos_soberania_min_trigger = { VALUE = 60 } } }
-		set_variable = ca_cos_morazan_victorioso
+		trigger_event = { id = ca_costa_rica_events.341 days = 4 }
 	}
 }
 
+# .341 El Pacto del Jocote (11 de abril de 1842)
+# La soberania decide si el ejercito sigue a Carrillo o se pasa a Morazan.
+ca_costa_rica_events.341 = {
+	type = country_event
+	placement = root
 
-# -------------------------------------------------------------------------
-# .350 La revuelta de septiembre (fin de la caida de Morazan)
-# -------------------------------------------------------------------------
+	title = ca_costa_rica_events.341.t
+	desc = ca_costa_rica_events.341.d
+	flavor = ca_costa_rica_events.341.f
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		always = no # Solo desde el evento 340
+	}
+
+	# Historica (soberania < 60): Villasenor se une a Morazan sin combatir
+	option = {
+		name = ca_costa_rica_events.341.a
+		default_option = yes
+		trigger = { NOT = { ca_cos_soberania_min_trigger = { VALUE = 60 } } }
+		set_variable = ca_cos_morazan_victorioso
+	}
+
+	# Alternativa (soberania >= 60): Villasenor se mantiene leal
+	option = {
+		name = ca_costa_rica_events.341.b
+		trigger = { ca_cos_soberania_min_trigger = { VALUE = 60 } }
+		set_variable = ca_cos_morazan_derrotado
+		add_modifier = { name = ca_frontier_tensions months = 12 }
+	}
+}
+
+# .350 La revuelta de septiembre (11-15 de septiembre de 1842)
 ca_costa_rica_events.350 = {
 	type = country_event
 	placement = root
@@ -1670,10 +2976,16 @@ ca_costa_rica_events.350 = {
 	}
 
 	immediate = {
+		set_variable = ca_cos_revuelta_fired
 		remove_variable = ca_cos_gobierno_morazan
+		# Pancha Carrasco combate contra el Aguila
+		if = {
+			limit = { NOT = { has_global_variable = cafm_hc_pancha_carrasco } }
+			create_character = { template = cafm_pancha_carrasco }
+		}
 	}
 
-	# Historica: fusilamiento en San Jose, 15 de septiembre de 1842
+	# Historica: fusilamiento en San Jose, 15 de septiembre, con Villasenor
 	option = {
 		name = ca_costa_rica_events.350.a
 		default_option = yes
@@ -1682,25 +2994,78 @@ ca_costa_rica_events.350 = {
 			limit = { ruler ?= { has_variable = is_morazan } }
 			ruler = { kill_character = yes }
 		}
+		global_var:cafm_hc_villasenor ?= { kill_character = yes }
 		if = {
 			limit = { exists = c:UCA }
 			change_relations = { country = c:UCA value = -50 }
 		}
 		add_radicals = { value = 0.05 culture = cu:costa_rican }
+		ai_chance = { base = 90 }
 	}
 
-	# Alternativa: exilio del Aguila
+	# Alternativa: destierro del Aguila
 	option = {
 		name = ca_costa_rica_events.350.b
 		set_variable = ca_cos_morazan_exiliado
 		if = {
 			limit = { ruler ?= { has_variable = is_morazan } }
-			ruler = { kill_character = yes } # Sale de Costa Rica (verificar un efecto de exilio en effects.log)
+			ruler = { exile_character = yes }
 		}
+		global_var:cafm_hc_villasenor ?= { exile_character = yes }
 		add_loyalists = { value = 0.05 culture = cu:costa_rican }
+		ai_chance = { base = 10 }
+	}
+
+	# Pinto Soares asume la jefatura (11-27 de septiembre)
+	after = {
+		create_character = {
+			template = cafm_antonio_pinto_soares
+			ruler = yes
+		}
+		trigger_event = { id = ca_costa_rica_events.351 days = 16 }
 	}
 }
 
+# .351 La eleccion de Alfaro (27 de septiembre de 1842)
+ca_costa_rica_events.351 = {
+	type = country_event
+	placement = root
+
+	title = ca_costa_rica_events.351.t
+	desc = ca_costa_rica_events.351.d
+	flavor = ca_costa_rica_events.351.f
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	duration = 3
+
+	trigger = {
+		always = no # Solo desde el evento 350
+	}
+
+	immediate = {
+		set_variable = ca_cos_alfaro_1842
+	}
+
+	option = {
+		name = ca_costa_rica_events.351.a
+		default_option = yes
+		create_character = {
+			template = cos_jose_maria_alfaro_character_template
+			ruler = yes
+		}
+		# Pinto Soares restablecio las relaciones con el resto de Centroamerica
+		c:GUA ?= { change_relations = { country = ROOT value = 20 } }
+		c:ELS ?= { change_relations = { country = ROOT value = 20 } }
+		c:HON ?= { change_relations = { country = ROOT value = 20 } }
+		c:NIC ?= { change_relations = { country = ROOT value = 20 } }
+		set_variable = ca_cos_gobierno_alfaro
+		if = {
+			limit = { NOT = { has_journal_entry = je_ca_cos_republica } }
+			add_journal_entry = { type = je_ca_cos_republica }
+		}
+	}
+}
 
 # -------------------------------------------------------------------------
 # .360 El Pacto de la Confederacion (reunificacion por pacto)
@@ -1764,8 +3129,16 @@ ca_costa_rica_events.361 = {
 		default_option = yes
 		set_variable = ca_cos_unitaria
 		remove_variable = ca_cos_balcanizada
+		if = {
+			limit = {
+				game_date < 1850.6.1
+				NOT = { has_journal_entry = je_ca_cos_republica }
+			}
+			add_journal_entry = { type = je_ca_cos_republica }
+		}
+
 		add_modifier = {
-			name = ca_el_gran_avanse_modifier
+			name = ca_cos_estabilidad_carrillista
 			years = 5
 		}
 	}
