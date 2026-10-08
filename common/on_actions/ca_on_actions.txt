@@ -35,17 +35,29 @@ ca_on_game_started = {
 				value = 0
 			}
 		}
+		# CAFM fix: eventos de arranque, una sola vez y solo para la UCA
+		# (antes estaban en el pulso anual: salian cada año en todos los paises del mundo)
+		c:UCA ?= {
+			trigger_event = { id = ca_setup_events.3 days = 1 } # variables iniciales
+			trigger_event = { id = ca_setup_events.4 days = 1 } # era de los caudillos
+			trigger_event = { id = ca_setup_events.1 days = 2 } # eleccion de cadena de eventos
+		}
 	}
 }
 
 on_yearly_pulse_country = {
-	on_actions = { ca_yearly_pulse_country }
+	on_actions = {
+		ca_yearly_pulse_country
+		ca_yearly_flavor_country
+		ca_yearly_prospecting_country
+	}
 }
 
 ca_yearly_pulse_country = {
+	# CAFM fix: "events" dispara TODOS los eventos validos el mismo dia.
+	# Aqui solo quedan los historicos de una sola vez (fecha y/o variable de control).
+	# Quitados: .2 y .8 (los encadenan 120.a y 6.c) y ca_setup_events (van al inicio de partida).
 	events = {
-		ca_central_america.2
-		ca_central_america.8
 		ca_central_america.9
 		ca_central_america.10
 		ca_central_america.11
@@ -63,79 +75,87 @@ ca_yearly_pulse_country = {
 		ca_central_america.73
 		ca_central_america.75
 		ca_central_america.78
-		# CAFM: ca_central_america.79 -> pulso mensual de je_historic_central_america_falls_apart
-		# CAFM: .34-.41 y .101-.118 retirados del pulso anual: no tienen trigger y saltaban
-		# en TODOS los países del mundo. Quedan en el archivo de eventos, pendientes de disparador.
-        ca_central_america.88
-        ca_central_america.89
-        ca_central_america.90
-        ca_central_america.91
-        ca_central_america.92
-        ca_central_america.93
-        ca_central_america.94
-        ca_central_america.95
-        ca_central_america.96
-        ca_central_america.97
-        ca_central_america.98
-        ca_central_america.120
-        ca_central_america.121
-        ca_central_america.122
-        # CAFM: ca_costa_rica_events.2 y .3 -> pulso mensual del diario madre
-        # CAFM: ca_costa_rica_events.6, .7 y .8 -> pulso semanal de je_ca_pacificacion_norte
-        ca_el_salvador_events.9
-        ca_el_salvador_events.10
-        ca_el_salvador_events.11
-        ca_el_salvador_events.12
-        ca_el_salvador_events.13
-        ca_guatemala_events.5
-        ca_guatemala_events.6
-        ca_guatemala_events.7
-        ca_guatemala_events.8
-        ca_honduras_events.14
-        ca_honduras_events.15
-        ca_honduras_events.16
-        ca_honduras_events.17
-        ca_honduras_events.18
-        ca_nicaragua_events.19
-        ca_nicaragua_events.20
-        ca_nicaragua_events.21
-        ca_nicaragua_events.22
-        ca_nicaragua_events.23
-        ca_nicaragua_events.24
-        ca_nicaragua_events.25
-        ca_prospecting.1 
-        ca_prospecting.2 
-        ca_prospecting.3 
-        ca_prospecting.4 
-        ca_prospecting.5 
-        ca_prospecting.6 
-        ca_prospecting.7 
-        ca_prospecting.8 
-        ca_prospecting.9 
-        ca_prospecting.10
-        ca_prospecting.11
-        ca_prospecting.12
-        ca_prospecting.13
-        ca_prospecting.14
-        ca_prospecting.15
-        ca_prospecting.16
-        ca_prospecting.17
-        ca_prospecting.18
-        ca_prospecting.19
-        ca_prospecting.20
-        ca_prospecting.21
-        ca_prospecting.22
-        ca_prospecting.23
-        ca_prospecting.24
-        ca_prospecting.25
-        ca_prospecting.26
-        ca_prospecting.27
-        ca_prospecting.28
-        ca_prospecting.29
-        ca_prospecting.30
-        ca_setup_events.1
-        ca_setup_events.3
-        ca_setup_events.4
+		ca_central_america.120
+		ca_central_america.121
+		ca_central_america.122
+		ca_el_salvador_events.9
+		ca_el_salvador_events.10
+		ca_el_salvador_events.11
+		ca_el_salvador_events.12
+		ca_el_salvador_events.13
+		ca_guatemala_events.5
+		ca_guatemala_events.6
+		ca_guatemala_events.7
+		ca_guatemala_events.8
+		ca_honduras_events.14
+		ca_honduras_events.15
+		ca_honduras_events.16
+		ca_honduras_events.17
+		ca_honduras_events.18
+		ca_nicaragua_events.19
+		ca_nicaragua_events.20
+		ca_nicaragua_events.21
+		ca_nicaragua_events.22
+		ca_nicaragua_events.23
+		ca_nicaragua_events.24
+		ca_nicaragua_events.25
+	}
+}
+
+# CAFM fix: eventos de ambientacion. Como mucho UNO por año y pais (antes salian todos a la vez).
+# "100 = 0" es el peso de "no pasa nada": con 11 eventos x 10 hay ~52 % de que salga uno cada año.
+ca_yearly_flavor_country = {
+	random_events = {
+		100 = 0
+		10 = ca_central_america.88
+		10 = ca_central_america.89
+		10 = ca_central_america.90
+		10 = ca_central_america.91
+		10 = ca_central_america.92
+		10 = ca_central_america.93
+		10 = ca_central_america.94
+		10 = ca_central_america.95
+		10 = ca_central_america.96
+		10 = ca_central_america.97
+		10 = ca_central_america.98
+	}
+}
+
+# CAFM fix: hallazgos de la prospeccion geologica. Como mucho UNO por año mientras el diario
+# je_ca_national_geological_survey este activo (antes salian los 30 a la vez).
+ca_yearly_prospecting_country = {
+	random_events = {
+		100 = 0
+		10 = ca_prospecting.1
+		10 = ca_prospecting.2
+		10 = ca_prospecting.3
+		10 = ca_prospecting.4
+		10 = ca_prospecting.5
+		10 = ca_prospecting.6
+		10 = ca_prospecting.7
+		10 = ca_prospecting.8
+		10 = ca_prospecting.9
+		10 = ca_prospecting.10
+		10 = ca_prospecting.11
+		10 = ca_prospecting.12
+		10 = ca_prospecting.13
+		10 = ca_prospecting.14
+		10 = ca_prospecting.15
+		10 = ca_prospecting.16
+		10 = ca_prospecting.17
+		10 = ca_prospecting.18
+		10 = ca_prospecting.19
+		10 = ca_prospecting.20
+		10 = ca_prospecting.21
+		10 = ca_prospecting.22
+		10 = ca_prospecting.23
+		10 = ca_prospecting.24
+		10 = ca_prospecting.25
+		10 = ca_prospecting.26
+		10 = ca_prospecting.27
+		10 = ca_prospecting.28
+		10 = ca_prospecting.29
+		10 = ca_prospecting.30
 	}
 }
 on_election_campaign_start = {

@@ -99,9 +99,17 @@
  
 		set_variable = { name = historic_central_american}
 		set_variable = { name = frca_preserved }
+		set_variable = hon_support_var
+		set_variable = nic_support_var
+		set_variable = cos_support_var
+		#set_variable = gua_support_var
+		set_variable = els_support_var
  
  		add_journal_entry = {
 			type = je_historic_central_america_falls_apart
+		}
+		add_journal_entry = {
+			type = je_ca_british_debt
 		}
  
         add_modifier = {

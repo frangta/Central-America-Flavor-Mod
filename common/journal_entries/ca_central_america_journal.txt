@@ -82,25 +82,25 @@
     
     on_monthly_pulse = {
         events = {
-            ca_central_america.14 #The Livingston Penal Code
-            ca_central_america.1 #A local newspaper proposed the formation of a state that would include the regions of Quetzaltenango, Totonicapán, Sololá and Suchitepéquez.
-            ca_central_america.3 #Establishment of Los Altos 5 de junio de 1838
-			ca_central_america.5 #The Fate of Soconusco
-			ca_central_america.15 #Cholera Pandemic Hits Central America
-            ca_central_america.20 #Separatism in Guatemala
-			ca_central_america.19 #Separatism in Nicaragua  
-			ca_central_america.46 #Nicaragua Declares Independence
-			ca_central_america.18 #Separatism in Costa Rica  
-			ca_central_america.45 #Costa Rica declares independence
-			ca_central_america.79 # CAFM: 30 may 1838, el Congreso autoriza a los estados (antes en el pulso anual)
-			ca_central_america.42 #Union Collapses Into Civil War / #Accept Fate & Become El Salvador			
-			ca_central_america.21 #Separatism in Honduras  
-			ca_central_america.48 #Honduras Declares Independence      
-			#ca_central_america.69 # CAFM fix: su trigger exige this = c:GUA; desde el pulso de la UCA nunca sale (sigue en je_ca_federalists_vs_separatists_situation)
-			ca_central_america.23 #Separatism in Los Altos
-			#ca_central_america.85 # CAFM fix: no tiene trigger: salia CADA MES y anexaba Nicaragua. Es la victoria federal en Nicaragua y se lanza desde otro evento
-			ca_central_america.47 #Guatemala Declares Independence
-			#ca_central_america.63 # CAFM fix: su trigger exige this = c:NIC; desde el pulso de la UCA nunca sale
+        #ca_central_america.14 #The Livingston Penal Code
+        ca_central_america.1 #A local newspaper proposed the formation of a state that would include the regions of Quetzaltenango, Totonicapán, Sololá and Suchitepéquez.
+        ca_central_america.3 #Establishment of Los Altos 5 de junio de 1838
+	ca_central_america.5 #The Fate of Soconusco
+	ca_central_america.15 #Cholera Pandemic Hits Central America
+        ca_central_america.20 #Separatism in Guatemala
+	ca_central_america.19 #Separatism in Nicaragua  
+	ca_central_america.46 #Nicaragua Declares Independence
+	ca_central_america.18 #Separatism in Costa Rica  
+	ca_central_america.45 #Costa Rica declares independence
+	ca_central_america.79 # CAFM: 30 may 1838, el Congreso autoriza a los estados (antes en el pulso anual)
+	ca_central_america.42 #Union Collapses Into Civil War / #Accept Fate & Become El Salvador			
+	ca_central_america.21 #Separatism in Honduras  
+	ca_central_america.48 #Honduras Declares Independence      
+	#ca_central_america.69 # CAFM fix: su trigger exige this = c:GUA; desde el pulso de la UCA nunca sale (sigue en je_ca_federalists_vs_separatists_situation)
+	ca_central_america.23 #Separatism in Los Altos
+	#ca_central_america.85 # CAFM fix: no tiene trigger: salia CADA MES y anexaba Nicaragua. Es la victoria federal en Nicaragua y se lanza desde otro evento
+	ca_central_america.47 #Guatemala Declares Independence
+	#ca_central_america.63 # CAFM fix: su trigger exige this = c:NIC; desde el pulso de la UCA nunca sale
  
         }
         random_events = {
