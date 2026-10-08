@@ -5,6 +5,7 @@
  # ===================================================================
  # GOVERNMENT TYPES
  # ===================================================================
+
  gov_ca_coffeacracia:0 "Coffee Republic"
  gov_ca_coffeacracia_desc:0 "A republic governed in the interest of the great coffee growers."
  gov_ca_tecnocracy:0 "Positivist Republic"
@@ -13,16 +14,24 @@
  gov_ca_military_junta_desc:0 "The officer corps governs the nation directly."
  gov_ca_consejo_junta:0 "Junta Council"
  gov_ca_consejo_junta_desc:0 "A civil and military council that shares power while the country prepares a return to constitutional rule."
- #gov_ca_director_supremo:0 "Supreme Directorate"
- #gov_ca_jefe_estado:0 "Free State"
- #gov_ca_jefe_supremo:0 "Perpetual Dictatorship"
- #gov_ca_republica_cafetalera:0 "Coffee Oligarchy"
- #gov_ca_republica_bananera:0 "Banana Republic"
- #gov_ca_junta:0 "Central American Junta"
- #gov_ca_presidential_democracy:0 "Presidential Democracy"
- #gov_ca_presidential_oligarchy:0 "Presidential Oligarchy"
-
-
+ gov_ca_director_supremo:0 "Supreme Directorate"
+ gov_ca_jefe_estado:0 "Free State"
+ gov_ca_jefe_supremo:0 "Perpetual Dictatorship"
+ gov_ca_republica_cafetalera:0 "Coffee Oligarchy"
+ gov_ca_republica_bananera:0 "Banana Republic"
+ gov_ca_presidential_democracy:0 "Presidential Democracy"
+ gov_ca_presidential_oligarchy:0 "Oligarchic Presidential Republic"
+ gov_ca_governorate:0 "Governorate"
+ gov_ca_grand_duchy_posen:0 "Grand Duchy"
+ gov_ca_governor_generalship:0 "Governor-General"
+ gov_ca_governor_generalship_desc:0 "A type of administration characterized by sweeping executive authority."
+ gov_ca_parliamentary_oligarchy_chancellor:0 "Parliamentary Oligarchy"
+ gov_ca_parliamentary_oligarchy_chancellor_desc:0 "A political system dominated by a wealthy or privileged few through parliamentary mechanisms."
+ gov_ca_parliamentary_democracy_chancellor:0 "Parliamentary Democracy"
+ gov_ca_parliamentary_democracy_chancellor_desc:0 "A democratic system structured around a parliament and a chancellor representing the popular will."
+ gov_ca_reservation:0 "Indian Reservation"
+ gov_ca_reservation_desc:0 "This is a recognized territory managed by indigenous groups with specific treaties."
+ 
  # --- Costa Rica: alternative ---
  gov_ca_cos_confederacion:0 "Confederation of Costa Rica"
  gov_ca_cos_ciudad_liga:0 "Sovereign City of the League"
@@ -34,20 +43,12 @@
  gov_ca_cos_jefatura_vitalicia:0 "Perpetual Headship of State"
  gov_ca_cos_primera_republica:0 "First Republic of Costa Rica"
  gov_ca_cos_estado_1844:0 "Constitutional State of Costa Rica"
- gov_ca_jefe_estado:0 "Free State of Costa Rica"
+ 
 
  # --- Costa Rica: dynamic ---
  gov_ca_cos_republica_olimpo:0 "Republic of Olympus"
  gov_ca_cos_cuarteles:0 "Barracks Government"
 
- # --- Central America: generic ---
- gov_ca_jefe_supremo:0 "Caudillo Dictatorship"
- gov_ca_junta:0 "Central American Military Junta"
- gov_ca_republica_bananera:0 "Banana Republic"
- gov_ca_republica_cafetalera:0 "Coffee Republic"
- gov_ca_director_supremo:0 "Supreme Directorate"
- gov_ca_presidential_oligarchy:0 "Oligarchic Presidential Republic"
- gov_ca_presidential_democracy:0 "Presidential Republic"
 
  # --- Ruler titles ---
  RULER_TITLE_CA_CONFEDERATION_PRESIDENT:0 "President of the Confederation"
@@ -81,4 +82,3 @@
  RULER_TITLE_CA_COUNCIL_PRESIDENT:0 "President of the Council"
  RULER_TITLE_SUPREME_DIRECTOR:0 "Supreme Director"
  RULER_TITLE_JEFE_DE_ESTADO:0 "Head of State"
- RULER_TITLE_PERPETUAL_DICTATOR:0 "Perpetual Dictator"

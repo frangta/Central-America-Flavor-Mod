@@ -55,6 +55,18 @@ ca_nicaragua_events.1 = {
 		ai_chance = { base = 0 }
 	}
 }                                            
+# =====================================================================
+# CAFM — NICARAGUA — FASE 1: EL POLVORÍN DE ZEPEDA (1836–1837)
+# Paquete cafm_nicaragua_fase1. Base: rama Post-Reworking-ver-1.2.4, commit 18ef8c6.
+# IDs: .2 (reutiliza su localización), .6, .7, .9–.14.
+#      .3 y .4 tienen localización antigua sin uso; .8 es «La oferta condicional de Zepeda»
+#      (paquete cafm_zepeda_quijano). Quedan libres .15–.18 para la Fase 2.
+# Fuentes: Fundación Enrique Bolaños, «Amnistías en Nicaragua» (golpe del 25 ene 1837:
+#          Bernardo Méndez y Casto Fonseca; Mendiola; Núñez nombra a Méndez comandante general);
+#          reformas de Zepeda: Código Penal, jurado, Corte de Cuentas, El Telégrafo Nicaragüense.
+# Modo histórico: variable nic_historic_mode (se copia de UCA en .2).
+# =====================================================================
+
 ## .2 — El Estado dividido (reutiliza ca_nicaragua_events.2.*)
 ## Lo dispara ca_play_nicaragua_effect 7 días después de crear NIC (eventos .1 y ca_central_america.80).
 ca_nicaragua_events.2 = {

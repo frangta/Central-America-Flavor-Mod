@@ -991,7 +991,7 @@ ca_central_america.5 = {
     trigger = {
 		this = c:UCA
 		exists = c:CIP
-		c:CIP = {
+		c:CIP ?= {
 			is_subject_of = c:UCA
 			is_subject_type = subject_type_ca_dependency
 		}
@@ -1003,7 +1003,7 @@ ca_central_america.5 = {
     
     immediate = {
         set_variable = ca_fate_soconusco
-        c:CIP = { save_scope_as = cip_scope }
+        c:CIP ?= { save_scope_as = cip_scope }
     }
     
     # OPCIÓN A
@@ -1017,7 +1017,7 @@ ca_central_america.5 = {
 			}
 			add_loyalists = { value = 0.15 interest_group = ig:ig_intelligentsia } # CAFM fix
 		}
-		c:GUA = {
+		c:GUA ?= {
 			add_radicals = { value = 0.15 interest_group = ig:ig_landowners } # CAFM fix
 		}
        
@@ -1026,7 +1026,7 @@ ca_central_america.5 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_5a 
-                je:je_historic_central_america_falls_apart = {
+                je:je_historic_central_america_falls_apart ?= {
                     add_progress = { value = 10 name = frca_support_bar } 
                 }
             }
@@ -1045,7 +1045,7 @@ ca_central_america.5 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_5b 
-                je:je_historic_central_america_falls_apart = {
+                je:je_historic_central_america_falls_apart ?= {
                     add_progress = { value = -10 name = frca_support_bar } 
                 }
             }
@@ -1060,7 +1060,7 @@ ca_central_america.5 = {
         name = ca_central_america.5.c 
         trigger = { exists = c:GUA } 
         
-        c:GUA = { annex = c:CIP } 
+        c:GUA ?= { annex = c:CIP } 
         ig:ig_landowners = {
 				add_modifier = {
 					name = ca_ig_approval_up_massive
@@ -1075,7 +1075,7 @@ ca_central_america.5 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_5c 
-                je:je_historic_central_america_falls_apart = {
+                je:je_historic_central_america_falls_apart ?= {
                     add_progress = { value = -10 name = frca_support_bar } 
                 }
             }
@@ -1090,8 +1090,8 @@ ca_central_america.5 = {
         default_option = yes		
         trigger = { exists = c:ALT } 
         
-        c:ALT = { annex = c:CIP } 
-        c:ALT = {
+        c:ALT ?= { annex = c:CIP } 
+        c:ALT ?= {
 			add_loyalists = { value = 0.20 interest_group = ig:ig_intelligentsia } # CAFM fix
 		}
 		change_relations = {
@@ -1108,7 +1108,7 @@ ca_central_america.5 = {
             limit = { has_variable = frca_support }
             custom_tooltip = { 
                 text = frca_support_5d 
-                je:je_historic_central_america_falls_apart = {
+                je:je_historic_central_america_falls_apart ?= {
                     add_progress = { value = -15 name = frca_support_bar } 
                 }
             }
@@ -2583,6 +2583,7 @@ ca_central_america.17 = {
 		scope:cholera_state_spread_to = {
 			add_modifier = { name = uca_cholera days = 365 }
 		}
+		default_option = yes
 		ai_chance = { base = 50 }
 	}
 	
@@ -2652,7 +2653,7 @@ ca_central_america.18 = {
         if = {
             limit = { exists = scope:secession_state }
             ca_create_costarica_effect = yes
-			ca_liberate_costarica_effect = yes
+			c:COS ?= { ca_liberate_costarica_effect = yes }	# CAFM cast (fase 1): antes corría en el scope de la UCA
 
             ROOT = {
                 create_diplomatic_pact = {
@@ -2759,7 +2760,7 @@ ca_central_america.19 = {
         if = {
             limit = { exists = scope:secession_state }
             ca_create_nicaragua_effect = yes  
-			ca_liberate_nicaragua_effect = yes
+			c:NIC ?= { ca_liberate_nicaragua_effect = yes }	# CAFM cast (fase 1): antes corría en el scope de la UCA
 
             ROOT = {
                 create_diplomatic_pact = {
@@ -2864,7 +2865,7 @@ ca_central_america.20 = {
         if = {
             limit = { exists = scope:secession_state }
             ca_create_guatemala_effect = yes
-			ca_liberate_guatemala_effect = yes
+			c:GUA ?= { ca_liberate_guatemala_effect = yes }	# CAFM cast (fase 1): antes corría en el scope de la UCA
 
             ROOT = {
                 create_diplomatic_pact = {
@@ -2963,7 +2964,7 @@ ca_central_america.21 = {
         if = {
             limit = { exists = scope:secession_state }
             ca_create_honduras_effect = yes
-			ca_liberate_honduras_effect = yes
+			c:HON ?= { ca_liberate_honduras_effect = yes }	# CAFM cast (fase 1): antes corría en el scope de la UCA
 
             ROOT = {
                 create_diplomatic_pact = {
@@ -3064,7 +3065,7 @@ ca_central_america.22 = {
         if = {
             limit = { exists = scope:secession_state }
             ca_create_elsalvador_effect = yes
-			ca_liberate_elsalvador_effect = yes
+			c:ELS ?= { ca_liberate_elsalvador_effect = yes }	# CAFM cast (fase 1): antes corría en el scope de la UCA
 
             ROOT = {
                 create_diplomatic_pact = {
@@ -3428,13 +3429,18 @@ ca_central_america.28 = {
     
 
     # Limpiamos la variable para que el botón desaparezca
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     immediate = {
         c:NIC = { remove_variable = ca_intervention_request_active }
     }
 
     option = {
         name = ca_central_america.28.a # Intervenir (Éxito inicial, cuesta recursos)
-        
+		trigger_event = { id = ca_central_america.37 days = 1 } # CAFM: confirmacion de la intervencion
+        default_option = yes
         custom_tooltip = { 
             text = frca_support_28a 
             je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
@@ -3454,6 +3460,8 @@ ca_central_america.28 = {
 
     option = {
         name = ca_central_america.28.b # Ignorar petición
+		c:NIC ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_refused TARGET = c:UCA } } # CAFM catalizador 2
+		trigger_event = { id = ca_central_america.41 days = 1 } # CAFM: la UCA rechaza la intervencion
         
         custom_tooltip = { 
             text = frca_support_28b 
@@ -3476,24 +3484,32 @@ ca_central_america.29 = {
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     immediate = {
         c:COS = { remove_variable = ca_intervention_request_active }
     }
 
     option = {
         name = ca_central_america.29.a # Intervenir
+		trigger_event = { id = ca_central_america.35 days = 1 } # CAFM: confirmacion de la intervencion
         custom_tooltip = { 
             text = frca_support_29a 
             je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = 15 name = frca_support_bar } 
             }
         }
+		default_option = yes
         add_treasury = -15000
         c:COS = { add_modifier = { name = ca_federal_intervention_boost months = 12 } }
     }
 
     option = {
         name = ca_central_america.29.b # Ignorar
+		c:COS ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_refused TARGET = c:UCA } } # CAFM catalizador 2
+		trigger_event = { id = ca_central_america.41 days = 1 } # CAFM: la UCA rechaza la intervencion
         custom_tooltip = { 
             text = frca_support_29b 
             je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
@@ -3515,24 +3531,33 @@ ca_central_america.30 = {
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     immediate = {
         c:HON = { remove_variable = ca_intervention_request_active }
     }
 
     option = {
+	default_option = yes
         name = ca_central_america.30.a # Intervenir
+		trigger_event = { id = ca_central_america.36 days = 1 } # CAFM: confirmacion de la intervencion
         custom_tooltip = { 
             text = frca_support_30a 
             je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = 15 name = frca_support_bar } 
             }
         }
+		
         add_treasury = -15000
         c:HON = { add_modifier = { name = ca_federal_intervention_boost months = 12 } }
     }
 
     option = {
         name = ca_central_america.30.b # Ignorar
+		c:HON ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_refused TARGET = c:UCA } } # CAFM catalizador 2
+		trigger_event = { id = ca_central_america.41 days = 1 } # CAFM: la UCA rechaza la intervencion
         custom_tooltip = { 
             text = frca_support_30b 
             je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
@@ -3554,12 +3579,18 @@ ca_central_america.31 = {
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     immediate = {
         c:ELS = { remove_variable = ca_intervention_request_active }
     }
 
     option = {
+	default_option = yes
         name = ca_central_america.31.a # Intervenir
+		trigger_event = { id = ca_central_america.38 days = 1 } # CAFM: confirmacion de la intervencion
         custom_tooltip = { 
             text = frca_support_31a 
             je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
@@ -3572,6 +3603,8 @@ ca_central_america.31 = {
 
     option = {
         name = ca_central_america.31.b # Ignorar
+		c:ELS ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_refused TARGET = c:UCA } } # CAFM catalizador 2
+		trigger_event = { id = ca_central_america.41 days = 1 } # CAFM: la UCA rechaza la intervencion
         custom_tooltip = { 
             text = frca_support_31b 
             je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
@@ -3593,12 +3626,18 @@ ca_central_america.32 = {
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     immediate = {
         c:GUA = { remove_variable = ca_intervention_request_active }
     }
 
     option = {
+	default_option = yes
         name = ca_central_america.32.a # Intervenir
+		trigger_event = { id = ca_central_america.39 days = 1 } # CAFM: confirmacion de la intervencion
         custom_tooltip = { 
             text = frca_support_32a 
             je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
@@ -3611,6 +3650,8 @@ ca_central_america.32 = {
 
     option = {
         name = ca_central_america.32.b # Ignorar
+		c:GUA ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_refused TARGET = c:UCA } } # CAFM catalizador 2
+		trigger_event = { id = ca_central_america.41 days = 1 } # CAFM: la UCA rechaza la intervencion
         custom_tooltip = { 
             text = frca_support_32b 
             je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
@@ -3632,12 +3673,18 @@ ca_central_america.33 = {
     icon = "gfx/interface/icons/event_icons/event_military.dds"
     
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     immediate = {
         c:ALT = { remove_variable = ca_intervention_request_active }
     }
 
     option = {
+	default_option = yes
         name = ca_central_america.33.a # Intervenir
+		trigger_event = { id = ca_central_america.40 days = 1 } # CAFM: confirmacion de la intervencion
         custom_tooltip = { 
             text = frca_support_33a 
             je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
@@ -3650,6 +3697,8 @@ ca_central_america.33 = {
 
     option = {
         name = ca_central_america.33.b # Ignorar
+		c:ALT ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_refused TARGET = c:UCA } } # CAFM catalizador 2
+		trigger_event = { id = ca_central_america.41 days = 1 } # CAFM: la UCA rechaza la intervencion
         custom_tooltip = { 
             text = frca_support_33b 
             je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
@@ -3685,7 +3734,7 @@ ca_central_america.34 = {
         name = ca_central_america.34.b
         ai_chance = { base = 50 }
         
-        if = { limit = { exists = c:UCA } c:UCA = { ca_reduce_support_intervention_fail_effect = yes } }
+        if = { limit = { exists = c:UCA } c:UCA ?= { ca_reduce_support_intervention_fail_effect = yes } }
     }
 }
 ## UCA Accept the intervention in Costa Rica 
@@ -3699,15 +3748,20 @@ ca_central_america.35 = {
     event_image = { video = "unspecific_military_parade" } 
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 
     icon = "gfx/interface/icons/event_icons/event_newspaper.dds" 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     option = { # Hurray 
         name = ca_central_america.35.a 
+		c:COS ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_accepted TARGET = c:UCA } } # CAFM catalizador 1
         default_option = yes 
         set_variable = { name = cos_support_var } 
         if = { 
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_35a 
-                je:je_historic_central_america_falls_apart = {
+                je:je_historic_central_america_falls_apart ?= {
                     add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
@@ -3727,15 +3781,20 @@ ca_central_america.36 = {
     event_image = { video = "unspecific_military_parade" } 
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 
     icon = "gfx/interface/icons/event_icons/event_newspaper.dds" 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     option = { # Hurray 
         name = ca_central_america.36.a 
+		c:HON ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_accepted TARGET = c:UCA } } # CAFM catalizador 1
         default_option = yes 
         set_variable = { name = hon_support_var } 
         if = { 
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_36a 
-                je:je_historic_central_america_falls_apart = {
+                je:je_historic_central_america_falls_apart ?= {
                     add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
@@ -3755,15 +3814,20 @@ ca_central_america.37 = {
     event_image = { video = "unspecific_military_parade" } 
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 
     icon = "gfx/interface/icons/event_icons/event_newspaper.dds" 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     option = { # Hurray 
         name = ca_central_america.37.a 
+		c:NIC ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_accepted TARGET = c:UCA } } # CAFM catalizador 1
         default_option = yes 
         set_variable = { name = nic_support_var } 
         if = { 
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_37a 
-                je:je_historic_central_america_falls_apart = {
+                je:je_historic_central_america_falls_apart ?= {
                     add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
@@ -3783,15 +3847,20 @@ ca_central_america.38 = {
     event_image = { video = "unspecific_military_parade" } 
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 
     icon = "gfx/interface/icons/event_icons/event_newspaper.dds" 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     option = { # Hurray 
         name = ca_central_america.38.a 
+		c:ELS ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_accepted TARGET = c:UCA } } # CAFM catalizador 1
         default_option = yes 
         set_variable = { name = els_support_var } 
         if = { 
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_38a 
-                je:je_historic_central_america_falls_apart = {
+                je:je_historic_central_america_falls_apart ?= {
                     add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
@@ -3811,15 +3880,20 @@ ca_central_america.39 = {
     event_image = { video = "unspecific_military_parade" } 
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 
     icon = "gfx/interface/icons/event_icons/event_newspaper.dds" 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     option = { # Hurray 
         name = ca_central_america.39.a 
+		c:GUA ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_accepted TARGET = c:UCA } } # CAFM catalizador 1
         default_option = yes 
         set_variable = { name = gua_support_var } 
         if = { 
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_39a 
-                je:je_historic_central_america_falls_apart = {
+                je:je_historic_central_america_falls_apart ?= {
                     add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
@@ -3839,15 +3913,20 @@ ca_central_america.40 = {
     event_image = { video = "unspecific_military_parade" } 
     on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 
     icon = "gfx/interface/icons/event_icons/event_newspaper.dds" 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
     option = { # Hurray 
         name = ca_central_america.40.a 
+		c:ALT ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_accepted TARGET = c:UCA } } # CAFM catalizador 1
         default_option = yes 
         set_variable = { name = alt_support_var } 
         if = { 
             limit = { has_variable = frca_support } 
             custom_tooltip = { 
                 text = frca_support_40a 
-                je:je_historic_central_america_falls_apart = {
+                je:je_historic_central_america_falls_apart ?= {
                     add_progress = { value = 15 name = frca_support_bar } 
                 }
             } 
@@ -3866,6 +3945,10 @@ ca_central_america.41 = {
 	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
 	
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.41.a # "Nuestros recursos son demasiado escasos..."
 		
@@ -3877,7 +3960,7 @@ ca_central_america.41 = {
 
 		custom_tooltip = { 
 			text = frca_support_41a 
-			je:je_historic_central_america_falls_apart = { # CAFM fix: la barra frca_support_bar es de este diario
+			je:je_historic_central_america_falls_apart ?= { # CAFM fix: la barra frca_support_bar es de este diario
                 add_progress = { value = -15 name = frca_support_bar } 
 			}
 		}
@@ -4181,6 +4264,11 @@ ca_central_america.45 = {
             }
             remove_diplomatic_pact = { country = c:COS type = ca_autonomous_province }
         }
+		# CAFM catalizador 3: secesion (UCA) y contagio (demas estados)
+		if = {
+			limit = { exists = scope:secession_country }
+			cafm_catalyst_secession = { SECEDER = scope:secession_country }
+		}
     }
 
     # Accept this Independence
@@ -4276,6 +4364,11 @@ ca_central_america.46 = {
             }
             remove_diplomatic_pact = { country = c:NIC type = ca_autonomous_province }
         }
+		# CAFM catalizador 3: secesion (UCA) y contagio (demas estados)
+		if = {
+			limit = { exists = scope:secession_country }
+			cafm_catalyst_secession = { SECEDER = scope:secession_country }
+		}
     }
 
     # Accept this Independence
@@ -4371,6 +4464,11 @@ ca_central_america.47 = {
             }
             remove_diplomatic_pact = { country = c:GUA type = ca_autonomous_province }
         }
+		# CAFM catalizador 3: secesion (UCA) y contagio (demas estados)
+		if = {
+			limit = { exists = scope:secession_country }
+			cafm_catalyst_secession = { SECEDER = scope:secession_country }
+		}
     }
 
     # Accept this Independence
@@ -4466,6 +4564,11 @@ ca_central_america.48 = {
             }
             remove_diplomatic_pact = { country = c:HON type = ca_autonomous_province }
         }
+		# CAFM catalizador 3: secesion (UCA) y contagio (demas estados)
+		if = {
+			limit = { exists = scope:secession_country }
+			cafm_catalyst_secession = { SECEDER = scope:secession_country }
+		}
     }
 
     # Accept this Independence
@@ -4609,7 +4712,7 @@ ca_central_america.52 = {
     trigger = {
         exists = c:ELS
         has_variable = els_civil_peace_var
-        NOT = { has_variable = frca_el_salvador_peace_var }
+        NOT = { has_variable = frca_elsalvador_peace_var }
     }
     immediate = {
         remove_variable = els_support_var
@@ -4891,6 +4994,16 @@ ca_central_america.63 = {
     }
     
     immediate = {
+		# CAFM: abre el capitulo de NIC en la UCA (insertos A y B; la resolucion C llega por pulso mensual)
+		c:UCA ?= {
+			if = {
+				limit = { NOT = { has_variable = ca_chapter_nic_started } }
+				set_variable = ca_chapter_nic_started
+				set_variable = { name = ca_chapter_nic_cooldown days = 180 }
+				trigger_event = { id = ca_central_america.101 days = 7 }
+				trigger_event = { id = ca_central_america.102 days = 60 }
+			}
+		}
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_NICARAGUA = { add_claim = root  }
         
@@ -4957,6 +5070,16 @@ ca_central_america.65 = {
     }
     
     immediate = {
+		# CAFM: abre el capitulo de COS en la UCA (insertos A y B; la resolucion C llega por pulso mensual)
+		c:UCA ?= {
+			if = {
+				limit = { NOT = { has_variable = ca_chapter_cos_started } }
+				set_variable = ca_chapter_cos_started
+				set_variable = { name = ca_chapter_cos_cooldown days = 180 }
+				trigger_event = { id = ca_central_america.104 days = 7 }
+				trigger_event = { id = ca_central_america.105 days = 60 }
+			}
+		}
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_COSTA_RICA = { add_claim = root }
         
@@ -5017,6 +5140,12 @@ ca_central_america.66 = {
         }
         set_variable = { name = frca_costarica_peace_var }
         set_variable = { name = frca_crisis_var }
+		# CAFM catalizadores 3 y 5: secesion en armas y paz con el estado separado
+		if = {
+			limit = { exists = scope:secession_country }
+			cafm_catalyst_secession = { SECEDER = scope:secession_country }
+			cafm_catalyst_peace_with_secessionist = { SECEDER = scope:secession_country }
+		}
     }
     
     option = {
@@ -5110,6 +5239,16 @@ ca_central_america.67 = {
     }
     
     immediate = {
+		# CAFM: abre el capitulo de HON en la UCA (insertos A y B; la resolucion C llega por pulso mensual)
+		c:UCA ?= {
+			if = {
+				limit = { NOT = { has_variable = ca_chapter_hon_started } }
+				set_variable = ca_chapter_hon_started
+				set_variable = { name = ca_chapter_hon_cooldown days = 180 }
+				trigger_event = { id = ca_central_america.107 days = 7 }
+				trigger_event = { id = ca_central_america.108 days = 60 }
+			}
+		}
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_HONDURAS = { add_claim = root }
         
@@ -5171,6 +5310,12 @@ ca_central_america.68 = {
         set_variable = { name = frca_honduras_peace_var }
         set_variable = { name = frca_crisis_var }
         trigger_event = { id = ca_central_america.5 months = 1 popup = yes }
+		# CAFM catalizadores 3 y 5: secesion en armas y paz con el estado separado
+		if = {
+			limit = { exists = scope:secession_country }
+			cafm_catalyst_secession = { SECEDER = scope:secession_country }
+			cafm_catalyst_peace_with_secessionist = { SECEDER = scope:secession_country }
+		}
     }
     
     option = {
@@ -5264,6 +5409,16 @@ ca_central_america.69 = {
     }
     
     immediate = {
+		# CAFM: abre el capitulo de GUA en la UCA (insertos A y B; la resolucion C llega por pulso mensual)
+		c:UCA ?= {
+			if = {
+				limit = { NOT = { has_variable = ca_chapter_gua_started } }
+				set_variable = ca_chapter_gua_started
+				set_variable = { name = ca_chapter_gua_cooldown days = 180 }
+				trigger_event = { id = ca_central_america.110 days = 7 }
+				trigger_event = { id = ca_central_america.111 days = 60 }
+			}
+		}
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_GUATEMALA = { add_claim = root }
         
@@ -5325,6 +5480,12 @@ ca_central_america.70 = {
         set_variable = { name = frca_guatemala_peace_var }
         set_variable = { name = frca_crisis_var }
         trigger_event = { id = ca_central_america.5 months = 1 popup = yes }
+		# CAFM catalizadores 3 y 5: secesion en armas y paz con el estado separado
+		if = {
+			limit = { exists = scope:secession_country }
+			cafm_catalyst_secession = { SECEDER = scope:secession_country }
+			cafm_catalyst_peace_with_secessionist = { SECEDER = scope:secession_country }
+		}
     }
     
     option = {
@@ -5418,6 +5579,16 @@ ca_central_america.71 = {
     }
     
     immediate = {
+		# CAFM: abre el capitulo de ELS en la UCA (insertos A y B; la resolucion C llega por pulso mensual)
+		c:UCA ?= {
+			if = {
+				limit = { NOT = { has_variable = ca_chapter_els_started } }
+				set_variable = ca_chapter_els_started
+				set_variable = { name = ca_chapter_els_cooldown days = 180 }
+				trigger_event = { id = ca_central_america.113 days = 7 }
+				trigger_event = { id = ca_central_america.114 days = 60 }
+			}
+		}
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_SAN_SALVADOR = { add_claim = root }
         
@@ -5479,6 +5650,12 @@ ca_central_america.72 = {
         set_variable = { name = frca_elsalvador_peace_var }
         set_variable = { name = frca_crisis_var }
         trigger_event = { id = ca_central_america.5 months = 1 popup = yes }
+		# CAFM catalizadores 3 y 5: secesion en armas y paz con el estado separado
+		if = {
+			limit = { exists = scope:secession_country }
+			cafm_catalyst_secession = { SECEDER = scope:secession_country }
+			cafm_catalyst_peace_with_secessionist = { SECEDER = scope:secession_country }
+		}
     }
     
     option = {
@@ -5572,6 +5749,16 @@ ca_central_america.73 = {
     }
     
     immediate = {
+		# CAFM: abre el capitulo de ALT en la UCA (insertos A y B; la resolucion C llega por pulso mensual)
+		c:UCA ?= {
+			if = {
+				limit = { NOT = { has_variable = ca_chapter_alt_started } }
+				set_variable = ca_chapter_alt_started
+				set_variable = { name = ca_chapter_alt_cooldown days = 180 }
+				trigger_event = { id = ca_central_america.116 days = 7 }
+				trigger_event = { id = ca_central_america.117 days = 60 }
+			}
+		}
         set_variable = { name = frca_recent_independence_event_var days = 40 }
         s:STATE_GUATEMALA = { add_claim = root }
         
@@ -5633,6 +5820,12 @@ ca_central_america.74 = {
         set_variable = { name = frca_losaltos_peace_var }
         set_variable = { name = frca_crisis_var }
         trigger_event = { id = ca_central_america.5 months = 1 popup = yes }
+		# CAFM catalizadores 3 y 5: secesion en armas y paz con el estado separado
+		if = {
+			limit = { exists = scope:secession_country }
+			cafm_catalyst_secession = { SECEDER = scope:secession_country }
+			cafm_catalyst_peace_with_secessionist = { SECEDER = scope:secession_country }
+		}
     }
     
     option = {
@@ -6978,13 +7171,18 @@ ca_central_america.101 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.101.a # "Malditos traidores..."
+		default_option = yes
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_101a 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -15 name = frca_support_bar } 
 				}
 			}
@@ -7015,8 +7213,13 @@ ca_central_america.102 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.102.a # "Abran las arcas del tesoro"
+		default_option = yes
 		add_treasury = -20000
 		set_variable = ca_uca_funded_nicaragua_loyalists # Variable para amor futuro
 	}
@@ -7024,7 +7227,7 @@ ca_central_america.102 = {
 	option = {
 		name = ca_central_america.102.b # "Nuestras reservas están vacías"
 		
-		c:NIC = {
+		c:NIC ?= {
 			ig:ig_landowners = {
 				add_modifier = {
 					name = ca_ig_strength_boost_modifier
@@ -7047,14 +7250,38 @@ ca_central_america.103 = {
 	 
 
 	# Opción si ganó Nicaragua/UCA (Se dispara desde el 85)
+	# CAFM: resolucion del capitulo de NIC. Llega por pulso mensual (zz_cafm_frca_on_actions.txt)
+	# 180 dias despues de la guerra civil, cuando la UCA ya no esta en guerra.
+	trigger = {
+		this = c:UCA
+		has_variable = ca_chapter_nic_started
+		NOT = { has_variable = ca_chapter_nic_cooldown }
+		NOT = { has_variable = ca_chapter_nic_resolved }
+		is_at_war = no
+	}
+
+	immediate = {
+		set_variable = ca_chapter_nic_resolved
+		if = { # el estado sigue existiendo y ya no es subdito de la UCA
+			limit = {
+				exists = c:NIC
+				c:NIC = { NOT = { is_subject_of = c:UCA } }
+			}
+			set_variable = ca_nicaragua_separatists_won
+		}
+		else = {
+			set_variable = ca_nicaragua_loyalists_won
+		}
+	}
 	option = {
+	default_option = yes
 		name = ca_central_america.103.a # "El orden ha sido restaurado en el Istmo"
 		trigger = { has_variable = ca_nicaragua_loyalists_won }
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_103a 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = 20 name = frca_support_bar } 
 				}
 			}
@@ -7069,7 +7296,7 @@ ca_central_america.103 = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_103b 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -30 name = frca_support_bar } 
 				}
 			}
@@ -7096,14 +7323,18 @@ ca_central_america.104 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.104.a # "Son unos desagradecidos"
-		
+		default_option = yes
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_104a 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -15 name = frca_support_bar } 
 				}
 			}
@@ -7112,7 +7343,7 @@ ca_central_america.104 = {
 
 	option = {
 		name = ca_central_america.104.b # "Confisquen sus exportaciones..."
-		c:COS = {
+		c:COS ?= {
 			# trigger_event = { id = ca_costa_rica_events.99 } # CAFM fix: CR.99 no existe (y es el Colapso del Norte, no una crisis economica)
 			add_modifier = { name = ca_coffee_exports_seized_modifier months = 24 }
 		}
@@ -7131,6 +7362,10 @@ ca_central_america.105 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.105.a # "Aceptamos el oro extranjero"
 		add_treasury = 30000
@@ -7144,6 +7379,7 @@ ca_central_america.105 = {
 
 	option = {
 		name = ca_central_america.105.b # "Centroamérica no está en venta"
+		default_option = yes
 		add_modifier = {
 			name = ca_nationalist_fervor_military_modifier
 			months = 12
@@ -7163,14 +7399,38 @@ ca_central_america.106 = {
 	 
 
 	# Si Costa Rica cae (Evento 84)
+	# CAFM: resolucion del capitulo de COS. Llega por pulso mensual (zz_cafm_frca_on_actions.txt)
+	# 180 dias despues de la guerra civil, cuando la UCA ya no esta en guerra.
+	trigger = {
+		this = c:UCA
+		has_variable = ca_chapter_cos_started
+		NOT = { has_variable = ca_chapter_cos_cooldown }
+		NOT = { has_variable = ca_chapter_cos_resolved }
+		is_at_war = no
+	}
+
+	immediate = {
+		set_variable = ca_chapter_cos_resolved
+		if = { # el estado sigue existiendo y ya no es subdito de la UCA
+			limit = {
+				exists = c:COS
+				c:COS = { NOT = { is_subject_of = c:UCA } }
+			}
+			set_variable = ca_costa_rica_separatists_won
+		}
+		else = {
+			set_variable = ca_costa_rica_loyalists_won
+		}
+	}
 	option = {
 		name = ca_central_america.106.a # "Carrillo ha consolidado su tiranía..."
+		default_option = yes
 		trigger = { has_variable = ca_costa_rica_separatists_won }
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_106a 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -30 name = frca_support_bar } 
 				}
 			}
@@ -7189,12 +7449,12 @@ ca_central_america.106 = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_106b 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = 25 name = frca_support_bar } 
 				}
 			}
 		}
-		c:COS = {
+		c:COS ?= {
 			add_modifier = {
 				name = ca_el_cafe_federal_modifier
 				months = 60
@@ -7209,6 +7469,7 @@ ca_central_america.106 = {
 
 # Inserto A: La Puñalada en Comayagua
 ca_central_america.107 = {
+
 	type = country_event
 	event_image = { video = "southamerica_war_civilians" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
 	placement = root
@@ -7218,13 +7479,18 @@ ca_central_america.107 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.107.a # "¡Es una traición imperdonable!"
+		default_option = yes
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_107a 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -25 name = frca_support_bar } 
 				}
 			}
@@ -7248,7 +7514,12 @@ ca_central_america.108 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
+	    default_option = yes
 		name = ca_central_america.108.a # "Envíen oficiales para disciplinar a las milicias"
 		add_modifier = {
 			name = ca_officer_discipline_bureaucracy_cost
@@ -7263,7 +7534,7 @@ ca_central_america.108 = {
 
 	option = {
 		name = ca_central_america.108.b # "Que se maten entre ellos"
-		c:HON = {
+		c:HON ?= {
 			every_scope_state = { # CAFM fix
 				limit = { state_is_in_ca_central_america = yes }
 				add_devastation = 30
@@ -7284,14 +7555,38 @@ ca_central_america.109 = {
 	 
 
 	# Si Honduras cae (Evento 82)
+	# CAFM: resolucion del capitulo de HON. Llega por pulso mensual (zz_cafm_frca_on_actions.txt)
+	# 180 dias despues de la guerra civil, cuando la UCA ya no esta en guerra.
+	trigger = {
+		this = c:UCA
+		has_variable = ca_chapter_hon_started
+		NOT = { has_variable = ca_chapter_hon_cooldown }
+		NOT = { has_variable = ca_chapter_hon_resolved }
+		is_at_war = no
+	}
+
+	immediate = {
+		set_variable = ca_chapter_hon_resolved
+		if = { # el estado sigue existiendo y ya no es subdito de la UCA
+			limit = {
+				exists = c:HON
+				c:HON = { NOT = { is_subject_of = c:UCA } }
+			}
+			set_variable = ca_honduras_separatists_won
+		}
+		else = {
+			set_variable = ca_honduras_loyalists_won
+		}
+	}
 	option = {
 		name = ca_central_america.109.a # "Ferrera ha triunfado..."
+		default_option = yes
 		trigger = { has_variable = ca_honduras_separatists_won }
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_109a 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -25 name = frca_support_bar } 
 				}
 			}
@@ -7310,7 +7605,7 @@ ca_central_america.109 = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_109b 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = 30 name = frca_support_bar } 
 				}
 			}
@@ -7334,13 +7629,18 @@ ca_central_america.110 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.110.a # "La ignorancia es nuestro peor enemigo"
+		default_option = yes
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_110a 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -20 name = frca_support_bar } 
 				}
 			}
@@ -7373,8 +7673,13 @@ ca_central_america.111 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.111.a # "Morazán marchará a Guatemala"
+		default_option = yes
 		ig:ig_armed_forces = {
 			add_modifier = {
 				name = ca_ig_strength_boost_modifier
@@ -7405,19 +7710,43 @@ ca_central_america.112 = {
 	 
 
 	# Si Guatemala cae (Evento 54)
+	# CAFM: resolucion del capitulo de GUA. Llega por pulso mensual (zz_cafm_frca_on_actions.txt)
+	# 180 dias despues de la guerra civil, cuando la UCA ya no esta en guerra.
+	trigger = {
+		this = c:UCA
+		has_variable = ca_chapter_gua_started
+		NOT = { has_variable = ca_chapter_gua_cooldown }
+		NOT = { has_variable = ca_chapter_gua_resolved }
+		is_at_war = no
+	}
+
+	immediate = {
+		set_variable = ca_chapter_gua_resolved
+		if = { # el estado sigue existiendo y ya no es subdito de la UCA
+			limit = {
+				exists = c:GUA
+				c:GUA = { NOT = { is_subject_of = c:UCA } }
+			}
+			set_variable = ca_guatemala_separatists_won
+		}
+		else = {
+			set_variable = ca_guatemala_loyalists_won
+		}
+	}
 	option = {
+	default_option = yes
 		name = ca_central_america.112.a # "La República Conservadora ha nacido"
 		trigger = { has_variable = ca_guatemala_separatists_won }
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_112a 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -40 name = frca_support_bar } 
 				}
 			}
 		}
-		c:GUA = {
+		c:GUA ?= {
 			add_modifier = {
 				name = ca_ejercito_montana_modifier
 				months = 60
@@ -7433,7 +7762,7 @@ ca_central_america.112 = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_112b 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = 40 name = frca_support_bar } 
 				}
 			}
@@ -7461,8 +7790,13 @@ ca_central_america.113 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.113.a # "¡Protejan la capital a toda costa!"
+		default_option = yes
 		add_modifier = {
 			name = ca_capital_under_siege_defense_modifier
 			months = 12
@@ -7479,7 +7813,7 @@ ca_central_america.113 = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_113b 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -35 name = frca_support_bar } 
 				}
 			}
@@ -7498,8 +7832,13 @@ ca_central_america.114 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.114.a # "Armen a los artesanos y campesinos"
+		default_option = yes
 		add_modifier = {
 			name = ca_loyalist_militia_morale_buff
 			months = 12
@@ -7531,14 +7870,38 @@ ca_central_america.115 = {
 	 
 
 	# Si El Salvador cae (Evento 51)
+	# CAFM: resolucion del capitulo de ELS. Llega por pulso mensual (zz_cafm_frca_on_actions.txt)
+	# 180 dias despues de la guerra civil, cuando la UCA ya no esta en guerra.
+	trigger = {
+		this = c:UCA
+		has_variable = ca_chapter_els_started
+		NOT = { has_variable = ca_chapter_els_cooldown }
+		NOT = { has_variable = ca_chapter_els_resolved }
+		is_at_war = no
+	}
+
+	immediate = {
+		set_variable = ca_chapter_els_resolved
+		if = { # el estado sigue existiendo y ya no es subdito de la UCA
+			limit = {
+				exists = c:ELS
+				c:ELS = { NOT = { is_subject_of = c:UCA } }
+			}
+			set_variable = ca_el_salvador_separatists_won
+		}
+		else = {
+			set_variable = ca_el_salvador_loyalists_won
+		}
+	}
 	option = {
 		name = ca_central_america.115.a # "El exilio del Director Supremo..."
+		default_option = yes
 		trigger = { has_variable = ca_el_salvador_separatists_won }
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_115a
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -100 name = frca_support_bar } 
 				}
 			}
@@ -7554,7 +7917,7 @@ ca_central_america.115 = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_115b 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = 50 name = frca_support_bar } 
 				}
 			}
@@ -7581,19 +7944,24 @@ ca_central_america.116 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.116.a # "¡Bienvenidos a la Federación!"
+		default_option = yes
 		add_loyalists = { value = 0.2 interest_group = ig:ig_intelligentsia } # CAFM fix
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_116a 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = 15 name = frca_support_bar } 
 				}
 			}
 		}
-		c:GUA = {
+		c:GUA ?= {
 			change_relations = {
 				country = root
 				value = -50
@@ -7607,7 +7975,7 @@ ca_central_america.116 = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_116b 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -15 name = frca_support_bar } 
 				}
 			}
@@ -7626,11 +7994,16 @@ ca_central_america.117 = {
 	
 	 
 
+	# CAFM: solo para la UCA (antes saltaba en cualquier pais)
+	trigger = {
+		this = c:UCA
+	}
 	option = {
 		name = ca_central_america.117.a # "Desvíen armas hacia el norte"
+		default_option = yes
 		add_treasury = -10000
 		# Asumiendo que ALT es el tag de Los Altos
-		c:ALT = {
+		c:ALT ?= {
 			add_modifier = {
 				name = ca_loyalist_militia_defense_buff
 				months = 12
@@ -7640,6 +8013,7 @@ ca_central_america.117 = {
 
 	option = {
 		name = ca_central_america.117.b # "Solo podemos ofrecerles asilo"
+		c:GUA ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_exiles_sheltered TARGET = root } } # CAFM catalizador 7: Guatemala resiente el asilo
 		
 		add_modifier = {
 			name = ca_refugee_bureaucracy_cost
@@ -7660,15 +8034,36 @@ ca_central_america.118 = {
 	 
 
 	# Si Los Altos cae (Evento 57)
+	# CAFM: resolucion del capitulo de ALT. Llega por pulso mensual (zz_cafm_frca_on_actions.txt)
+	# 180 dias despues de la guerra civil, cuando la UCA ya no esta en guerra.
+	trigger = {
+		this = c:UCA
+		has_variable = ca_chapter_alt_started
+		NOT = { has_variable = ca_chapter_alt_cooldown }
+		NOT = { has_variable = ca_chapter_alt_resolved }
+		is_at_war = no
+	}
+
+	immediate = {
+		set_variable = ca_chapter_alt_resolved
+		if = { # Para Los Altos, "separatistas" = Guatemala aplasta a ALT
+			limit = { NOT = { exists = c:ALT } }
+			set_variable = ca_los_altos_separatists_won
+		}
+		else = {
+			set_variable = ca_los_altos_loyalists_won
+		}
+	}
 	option = {
 		name = ca_central_america.118.a # "Una masacre imperdonable..."
+		default_option = yes
 		trigger = { has_variable = ca_los_altos_separatists_won } # En este contexto los separatistas son Guatemala aplastando a ALT
 		add_radicals = { value = 0.2 interest_group = ig:ig_intelligentsia } # CAFM fix
 		if = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_118a 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = -25 name = frca_support_bar } 
 				}
 			}
@@ -7689,12 +8084,12 @@ ca_central_america.118 = {
 			limit = { has_variable = frca_support }
 			custom_tooltip = { 
 				text = frca_support_118b 
-				je:je_historic_central_america_falls_apart = {
+				je:je_historic_central_america_falls_apart ?= {
 					add_progress = { value = 30 name = frca_support_bar } 
 				}
 			}
 		}
-		# c:ALT = { trigger_event = { id = ca_los_altos_soconusco_events.1 } } # CAFM fix: ese evento todavia no existe (ca_los_altos_soconusco_events.txt esta vacio)
+		# c:ALT ?= { trigger_event = { id = ca_los_altos_soconusco_events.1 } } # CAFM fix: ese evento todavia no existe (ca_los_altos_soconusco_events.txt esta vacio)
 	}
 }
 ca_central_america.119 = { 
@@ -7885,6 +8280,7 @@ ca_central_america.120 = { #El Grito del Sexto Estado (La Crisis de Los Altos)
 	
 	option = {
 		name = ca_central_america.120.a
+		default_option = yes
 		je:je_historic_central_america_falls_apart = {
 			change_variable = {
 				name = frca_support_bar
@@ -7964,6 +8360,7 @@ ca_central_america.121 = {
 	
 	option = {
 		name = ca_central_america.121.a
+		default_option = yes
 		trigger = {
 			ig:ig_intelligentsia = {
 				is_marginal = no
@@ -8038,6 +8435,7 @@ ca_central_america.122 = {
 	
 	option = {
 		name = ca_central_america.122.a
+		default_option = yes
 		change_relations = {
 			country = scope:secession_country
 			value = 20

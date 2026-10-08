@@ -32,7 +32,7 @@ ca_honduras_events.1 = {
 	
 	immediate = {
         s:STATE_HONDURAS.region_state:UCA = {
-        state_region = { add_state_trait = state_trait_mining_hon } # CAFM fix: add_state_trait es de state_region
+        # CAFM Fase 1: state_trait_mining_hon se quita; era el limitador de los edificios antiguos del mod
 		add_modifier = { name = ca_uca_federalist_heartland }
         add_modifier = { name = waning_federal_stronghold }
         add_modifier = { name = conservative_stronghold_small_nation }
@@ -42,10 +42,18 @@ ca_honduras_events.1 = {
 	option = {
 		name = ca_honduras_events.1.a
 		default_option = yes
-
+		ai_chance = { base = 70 }
+	}
+	# CAFM Fase 1: el texto .1.b existía pero ninguna opción lo usaba
+	option = {
+		name = ca_honduras_events.1.b
+		s:STATE_HONDURAS.region_state:UCA ?= {
+			add_radicals_in_state = { value = 0.05 } # add_radicals es efecto de país
+		}
+		ai_chance = { base = 30 }
 	}
 	option = {
-		name = ca_honduras_events.2.a
+		name = ca_honduras_events.1.c # CAFM Fase 1: texto propio (antes usaba .2.a, «declarar la independencia»)
 		trigger = {
 			c:UCA ?= {
 			has_variable = ca_state_selection_to_playing
@@ -54,6 +62,427 @@ ca_honduras_events.1 = {
         ca_create_honduras_effect = yes 
 		ca_play_honduras_effect = yes
         play_as = c:HON
+		ai_chance = { base = 0 }
+	}
+}
+
+# =====================================================================
+# CAFM — HONDURAS — FASE 1: El último Jefe federal (1836–1837)
+# Diseño: doc «Eventos de Honduras 1836–1850: definición» (6 oct 2026).
+# .2 lo dispara ca_play_honduras_effect (7 días); .3–.5 el pulso mensual
+# de je_ca_historic_situation_in_honduras; .6 y .7 su pulso semanal.
+# Modo histórico: hon_historic_mode (copia de historic_central_american).
+# =====================================================================
+
+## .2 — Dos ciudades, un Estado
+ca_honduras_events.2 = {
+	type = country_event
+	placement = ROOT
+	title = ca_honduras_events.2.t
+	desc = ca_honduras_events.2.d
+	flavor = ca_honduras_events.2.f
+	duration = 3
+	event_image = { video = "southamerica_aristocrats" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/southamerica/aristocrats"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	trigger = {
+		c:HON ?= this
+		game_date < 1837.1.1
+		NOT = { has_variable = hon_e2_fired }
+	}
+
+	immediate = {
+		set_variable = hon_e2_fired
+		if = {
+			limit = { c:UCA ?= { has_variable = historic_central_american } }
+			set_variable = hon_historic_mode
+		}
+		# Marca a Rivera en tiempo de juego (no depende de qué plantilla duplicada cargó)
+		ruler ?= { set_variable = is_rivera }
+		set_variable = { name = hon_british value = 0 }
+		# Diario del caudillo: la variable va ANTES del diario para que el objetivo quede en 100
+		set_variable = { name = hon_caudillo value = 15 }
+		add_journal_entry = { type = je_ca_hon_caudillo }
+		# Arranque: Estado inacabado, milicias de comarca y moneda de 1832
+		add_modifier = { name = hon_estado_inacabado months = 60 }
+		add_modifier = { name = hon_milicias_comarca months = 60 }
+		add_modifier = { name = hon_media_leche }
+	}
+
+	# Histórica: Comayagua, capital desde 1830
+	option = {
+		name = ca_honduras_events.2.a
+		default_option = yes
+		set_variable = hon_seat_comayagua
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 80 }
+	}
+
+	# El dinero está en Tegucigalpa
+	option = {
+		name = ca_honduras_events.2.b
+		set_variable = hon_seat_tegucigalpa
+		add_modifier = { name = hon_sede_tegucigalpa months = 60 }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		custom_tooltip = {
+			text = hon_caudillo_up_5_tt
+			change_variable = { name = hon_caudillo add = 5 }
+		}
+		ai_chance = { base = 15 }
+	}
+
+	# Capital alterna entre las dos ciudades
+	option = {
+		name = ca_honduras_events.2.c
+		set_variable = hon_seat_alterna
+		add_modifier = { name = hon_sede_alterna months = 60 }
+		ai_chance = { base = 5 }
+	}
+}
+
+## .3 — La encrucijada de Rivera (mensaje a la Asamblea, 1 jun 1836)
+ca_honduras_events.3 = {
+	type = country_event
+	placement = ROOT
+	title = ca_honduras_events.3.t
+	desc = ca_honduras_events.3.d
+	flavor = ca_honduras_events.3.f
+	duration = 3
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	trigger = {
+		c:HON ?= this
+		has_variable = hon_e2_fired
+		game_date >= 1836.6.1
+		game_date < 1836.12.1
+		ruler ?= { has_variable = is_rivera }
+		NOT = { has_variable = hon_e3_fired }
+	}
+
+	immediate = {
+		set_variable = hon_e3_fired
+	}
+
+	# Histórica: reformar la administración interior
+	option = {
+		name = ca_honduras_events.3.a
+		default_option = yes
+		set_variable = hon_rivera_legalista
+		add_modifier = { name = hon_reforma_administrativa months = 60 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 70 }
+	}
+
+	# Liberal radical: las rentas del clero para el Estado
+	option = {
+		name = ca_honduras_events.3.b
+		set_variable = hon_clero_expropiado
+		add_treasury = 8000
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		add_radicals = { value = medium_radicals pop_type = clergymen }
+		custom_tooltip = {
+			text = hon_caudillo_up_20_tt
+			change_variable = { name = hon_caudillo add = 20 }
+		}
+		ai_chance = { base = 10 }
+	}
+
+	# Caudillista: que el comandante imponga el orden
+	option = {
+		name = ca_honduras_events.3.c
+		add_modifier = { name = hon_orden_militar months = 36 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		custom_tooltip = {
+			text = hon_caudillo_up_15_tt
+			change_variable = { name = hon_caudillo add = 15 }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = cafm_hc_ferrera }
+				NOT = { has_variable = hon_ferrera_created }
+			}
+			set_variable = hon_ferrera_created # por si carga la plantilla duplicada de all_centroamerican_templates.txt
+			create_character = { template = hon_francisco_ferrera_character_template }
+		}
+		ai_chance = { base = 20 }
+	}
+}
+
+## .4 — La plata de Tegucigalpa (solo tras .3.a)
+ca_honduras_events.4 = {
+	type = country_event
+	placement = ROOT
+	title = ca_honduras_events.4.t
+	desc = ca_honduras_events.4.d
+	flavor = ca_honduras_events.4.f
+	duration = 3
+	event_image = { video = "europenorthamerica_gold_prospectors" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	trigger = {
+		c:HON ?= this
+		has_variable = hon_e2_fired
+		has_variable = hon_rivera_legalista
+		game_date >= 1836.7.1
+		game_date < 1837.6.1
+		NOT = { has_variable = hon_e4_fired }
+	}
+
+	immediate = {
+		set_variable = hon_e4_fired
+		if = {
+			limit = { NOT = { has_variable = hon_british } }
+			set_variable = { name = hon_british value = 0 }
+		}
+	}
+
+	# Concesiones a casas extranjeras
+	option = {
+		name = ca_honduras_events.4.a
+		default_option = yes
+		add_modifier = { name = hon_concesiones_mineras months = 120 }
+		c:GBR ?= { change_relations = { country = ROOT value = 10 } }
+		change_variable = { name = hon_british add = 5 }
+		ai_chance = { base = 60 }
+	}
+
+	# Fortalecer la Casa de Moneda
+	option = {
+		name = ca_honduras_events.4.b
+		trigger = { gold_reserves >= 5000 }
+		add_treasury = -5000
+		add_modifier = { name = hon_casa_de_moneda months = 120 }
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 30 }
+	}
+
+	# Que los vecinos sigan con sus minas
+	option = {
+		name = ca_honduras_events.4.c
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 12 } }
+		ai_chance = { base = 10 }
+	}
+}
+
+## .5 — La caoba de la costa norte
+ca_honduras_events.5 = {
+	type = country_event
+	placement = ROOT
+	title = ca_honduras_events.5.t
+	desc = ca_honduras_events.5.d
+	flavor = ca_honduras_events.5.f
+	duration = 3
+	event_image = { video = "unspecific_signed_contract" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	trigger = {
+		c:HON ?= this
+		has_variable = hon_e2_fired
+		game_date >= 1836.8.1
+		game_date < 1837.6.1
+		NOT = { has_variable = hon_e5_fired }
+	}
+
+	immediate = {
+		set_variable = hon_e5_fired
+		if = {
+			limit = { NOT = { has_variable = hon_british } }
+			set_variable = { name = hon_british value = 0 }
+		}
+	}
+
+	# Histórica: respetar la contrata federal (rescindida en junio de 1840)
+	option = {
+		name = ca_honduras_events.5.a
+		default_option = yes
+		add_modifier = { name = hon_contrata_caoba months = 46 }
+		change_variable = { name = hon_british add = 10 }
+		c:UCA ?= { change_relations = { country = ROOT value = 10 } }
+		ai_chance = { base = 70 }
+	}
+
+	# Exigir la parte de Honduras
+	option = {
+		name = ca_honduras_events.5.b
+		set_variable = hon_caoba_reclamada
+		add_treasury = 5000
+		change_variable = { name = hon_british add = 5 }
+		c:UCA ?= { change_relations = { country = ROOT value = -15 } }
+		ai_chance = { base = 30 }
+	}
+}
+
+## .6 — Navidad de fuego en Tegucigalpa (24 dic 1836)
+## Lo dispara el pulso semanal de je_ca_historic_situation_in_honduras.
+ca_honduras_events.6 = {
+	type = country_event
+	placement = ROOT
+	title = ca_honduras_events.6.t
+	desc = ca_honduras_events.6.d
+	flavor = ca_honduras_events.6.f
+	duration = 3
+	event_image = { video = "unspecific_vandalized_storefront" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	trigger = {
+		c:HON ?= this
+		has_variable = hon_e2_fired
+		game_date < 1837.6.1
+		NOT = { has_variable = hon_e6_fired }
+	}
+
+	immediate = {
+		set_variable = hon_e6_fired
+	}
+
+	# Histórica: amnistía con excepciones
+	option = {
+		name = ca_honduras_events.6.a
+		default_option = yes
+		set_variable = hon_amnistia_1836
+		add_modifier = { name = hon_amnistia months = 12 }
+		custom_tooltip = {
+			text = hon_caudillo_down_5_tt
+			change_variable = { name = hon_caudillo subtract = 5 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	# Que la tropa lo resuelva
+	option = {
+		name = ca_honduras_events.6.b
+		add_modifier = { name = hon_tegucigalpa_asolada months = 24 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		custom_tooltip = {
+			text = hon_caudillo_up_10_tt
+			change_variable = { name = hon_caudillo add = 10 }
+		}
+		ai_chance = { base = 20 }
+	}
+
+	# Negociar con los cabildos
+	option = {
+		name = ca_honduras_events.6.c
+		add_modifier = { name = hon_cabildos months = 12 }
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 10 }
+	}
+}
+
+## .7 — El mandato vencido (31 dic 1836)
+## En modo histórico solo existe la opción a: Martínez Salinas recibe el poder.
+ca_honduras_events.7 = {
+	type = country_event
+	placement = ROOT
+	title = ca_honduras_events.7.t
+	desc = ca_honduras_events.7.d
+	flavor = ca_honduras_events.7.f
+	duration = 3
+	event_image = { video = "ep1_transfer_of_authority" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	trigger = {
+		c:HON ?= this
+		has_variable = hon_e2_fired
+		game_date < 1837.6.1
+		NOT = { has_variable = hon_e7_fired }
+	}
+
+	immediate = {
+		set_variable = hon_e7_fired
+		set_variable = hon_mandato_vencido
+	}
+
+	# Histórica: Rivera deposita el poder en el consejero Martínez Salinas
+	option = {
+		name = ca_honduras_events.7.a
+		default_option = yes
+		if = {
+			limit = {
+				has_global_variable = cafm_hc_martinez_salinas
+				any_scope_character = { this = global_var:cafm_hc_martinez_salinas }
+			}
+			random_scope_character = {
+				limit = { this = global_var:cafm_hc_martinez_salinas }
+				set_character_as_ruler = yes
+			}
+		}
+		else = {
+			create_character = {
+				template = hon_jose_maria_martinez_character_template
+				ruler = yes
+			}
+		}
+		add_modifier = { name = hon_vacio_de_poder months = 12 }
+		ai_chance = { base = 75 }
+	}
+
+	# Rivera prorroga su mandato (fuera del modo histórico)
+	option = {
+		name = ca_honduras_events.7.b
+		trigger = {
+			NOT = { has_variable = hon_historic_mode }
+			ruler ?= { has_variable = is_rivera }
+		}
+		add_modifier = { name = hon_prorroga_rivera months = 24 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		custom_tooltip = {
+			text = hon_caudillo_up_5_tt
+			change_variable = { name = hon_caudillo add = 5 }
+		}
+		ai_chance = { base = 10 }
+	}
+
+	# El comandante asume (fuera del modo histórico, caudillo >= 50)
+	option = {
+		name = ca_honduras_events.7.c
+		trigger = {
+			NOT = { has_variable = hon_historic_mode }
+			has_variable = hon_caudillo
+			var:hon_caudillo >= 50
+		}
+		if = {
+			limit = {
+				has_global_variable = cafm_hc_ferrera
+				any_scope_character = { this = global_var:cafm_hc_ferrera }
+			}
+			random_scope_character = {
+				limit = { this = global_var:cafm_hc_ferrera }
+				set_character_as_ruler = yes
+			}
+		}
+		else_if = {
+			limit = { has_variable = hon_ferrera_created }
+			random_scope_character = {
+				limit = { has_variable = is_ferrera }
+				set_character_as_ruler = yes
+			}
+		}
+		else = {
+			set_variable = hon_ferrera_created
+			create_character = {
+				template = hon_francisco_ferrera_character_template
+				ruler = yes
+			}
+		}
+		add_radicals = { value = small_radicals pop_type = academics }
+		custom_tooltip = {
+			text = hon_caudillo_up_25_tt
+			change_variable = { name = hon_caudillo add = 25 }
+		}
+		ai_chance = { base = 15 }
 	}
 }
 # 1. 1837: La elección de Justo José de Herrera
@@ -82,6 +511,23 @@ ca_honduras_events.14 = {
     option = {
         name = ca_honduras_events.14.a
         default_option = yes
+        # CAFM Fase 1: Herrera gobierna desde el 28 may 1837
+        if = {
+            limit = {
+                has_global_variable = cafm_hc_justo_herrera
+                any_scope_character = { this = global_var:cafm_hc_justo_herrera }
+            }
+            random_scope_character = {
+                limit = { this = global_var:cafm_hc_justo_herrera }
+                set_character_as_ruler = yes
+            }
+        }
+        else = {
+            create_character = {
+                template = hon_justo_jose_herrera_character_template
+                ruler = yes
+            }
+        }
         ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_medium } }
     }

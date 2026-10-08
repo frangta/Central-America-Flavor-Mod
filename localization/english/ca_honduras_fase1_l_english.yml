@@ -1,0 +1,106 @@
+﻿l_english:
+ # =====================================================================
+ # CAFM — HONDURAS — FASE 1 (1836–1837)
+ # .1.c y .2–.7 de ca_honduras_events, diario je_ca_hon_caudillo y modificadores hon_*.
+ # Los textos antiguos ca_honduras_events.2.* se quitaron de ca_events_flavor_1_l_english.yml.
+ # =====================================================================
+
+ ca_honduras_events.1.c:0 "Take the reins of Honduras."
+
+ # --- .2 Dos ciudades, un Estado ---
+ ca_honduras_events.2.t:0 "Two Cities, One State"
+ ca_honduras_events.2.d:0 "Since 1830 Comayagua has been our permanent capital, the seat of the bishop and the Assembly. Yet the silver comes from Tegucigalpa, where the Mint has struck coin since 1831 and the merchants keep their accounts. Between them lie mountains without a single cart road. The copper coin of 1832 is refused in half the villages, the ports of Omoa and Trujillo pay their duties to the Federation, and in the countryside the militias answer to their hacendados before they answer to Jefe Joaquín Rivera. From which city will this unfinished state be governed?"
+ ca_honduras_events.2.f:0 "Honduras has a map, a Jefe and an Assembly. It does not yet have roads."
+ ca_honduras_events.2.a:0 "Comayagua remains the capital, as the law commands."
+ ca_honduras_events.2.b:0 "The money is in Tegucigalpa; the government should be too."
+ ca_honduras_events.2.c:0 "Let the government sit in both cities by turns."
+
+ # --- .3 La encrucijada de Rivera ---
+ ca_honduras_events.3.t:0 "Rivera's Crossroads"
+ ca_honduras_events.3.d:0 "On the first of June, Jefe Joaquín Rivera addressed the Assembly. He asked it to reform the interior administration by 'the simplest and most energetic method', so that the state might gain stability and respect, and to protect lives and property from the criminals who cross our borders. Behind the words lies an empty treasury. The soldiers have not been paid, the Church still keeps its rents, and Rivera's term ends in December with no successor elected. Vice-Jefe and commander Francisco Ferrera watches and waits."
+ ca_honduras_events.3.f:0 "Rivera had once refused power because no election had given it to him. Now he must hold it without money."
+ ca_honduras_events.3.a:0 "Reform the administration, pay the debt and keep to the law."
+ ca_honduras_events.3.b:0 "The rents of the clergy will pay the state's bills."
+ ca_honduras_events.3.c:0 "Let the commander of arms restore order."
+
+ # --- .4 La plata de Tegucigalpa ---
+ ca_honduras_events.4.t:0 "The Silver of Tegucigalpa"
+ ca_honduras_events.4.d:0 "Rivera's reforms need revenue, and the only wealth Honduras exports in quantity lies in the old mining districts of Tegucigalpa and Yuscarán. Foreign houses offer capital in exchange for concessions. Others urge us to strengthen the Mint instead, so that our silver becomes our own coin and not Guatemala's."
+ ca_honduras_events.4.f:0 "For two centuries the silver of Tegucigalpa filled other treasuries."
+ ca_honduras_events.4.a:0 "Grant concessions to the foreign mining houses."
+ ca_honduras_events.4.b:0 "Invest in the Mint of Tegucigalpa."
+ ca_honduras_events.4.c:0 "Leave the mines to the local owners."
+
+ # --- .5 La caoba de la costa norte ---
+ ca_honduras_events.5.t:0 "Mahogany of the North Coast"
+ ca_honduras_events.5.d:0 "The federal government has granted British merchants from Belize a contract to cut mahogany along our northern coast, from Omoa to Trujillo. The logs leave on British ships, the duties go to the Federation, and Honduras sees little of either. Our officials on the coast ask whether we should honour the contract or demand our share."
+ ca_honduras_events.5.f:0 "On the north coast, British axes reach farther than Honduran law."
+ ca_honduras_events.5.a:0 "Honour the federal contract."
+ ca_honduras_events.5.b:0 "Demand that Honduras receive its share."
+
+ # --- .6 Navidad de fuego en Tegucigalpa ---
+ ca_honduras_events.6.t:0 "A Christmas of Fire in Tegucigalpa"
+ ca_honduras_events.6.d:0 "On the twenty-fourth of December, a mutiny broke out against the authorities of Tegucigalpa and spread to several towns of the district. Most of the inhabitants fled to the hills, and the city was left deserted. The rising comes a week before Rivera's term expires with no elected successor, and every faction is asking who will govern in January."
+ ca_honduras_events.6.f:0 "'The city was left desolate, for most of its inhabitants fled to the hills.' — Lorenzo Montúfar"
+ ca_honduras_events.6.a:0 "Grant an amnesty, except to those who keep conspiring."
+ ca_honduras_events.6.b:0 "Let the troops settle it."
+ ca_honduras_events.6.c:0 "Negotiate with the town councils."
+
+ # --- .7 El mandato vencido ---
+ ca_honduras_events.7.t:0 "The Expired Mandate"
+ ca_honduras_events.7.d:0 "Joaquín Rivera's term ends on the last day of 1836, and no election has produced a successor. The law leaves the executive to a member of the Council until the Assembly can meet. Rivera has always respected legal forms, but the army, the clergy and the merchants of Tegucigalpa each have their own idea of who should rule."
+ ca_honduras_events.7.f:0 "A Jefe without a successor, a state without a government."
+ ca_honduras_events.7.a:0 "Rivera hands power to Councillor José María Martínez Salinas."
+ ca_honduras_events.7.b:0 "Rivera extends his own term until order returns."
+ ca_honduras_events.7.c:0 "The commander of arms takes power."
+
+ # --- Tooltips ---
+ hon_caudillo_up_5_tt:0 "The Caudillo's Shadow rises by #N 5#!"
+ hon_caudillo_up_10_tt:0 "The Caudillo's Shadow rises by #N 10#!"
+ hon_caudillo_up_15_tt:0 "The Caudillo's Shadow rises by #N 15#!"
+ hon_caudillo_up_20_tt:0 "The Caudillo's Shadow rises by #N 20#!"
+ hon_caudillo_up_25_tt:0 "The Caudillo's Shadow rises by #N 25#!"
+ hon_caudillo_down_5_tt:0 "The Caudillo's Shadow falls by #P 5#!"
+
+ # --- Diario je_ca_hon_caudillo ---
+ je_ca_hon_caudillo:0 "The Caudillo's Shadow"
+ je_ca_hon_caudillo_reason:0 "Honduras has a Jefe, an Assembly and a constitution, but the men with rifles answer to the commander of arms. The higher this value climbs, the more the barracks govern in place of the law. At 40 Francisco Ferrera enters the scene; at 80 the commander's regime is open."
+ je_ca_hon_caudillo_status_baja:0 "The civil government still rules."
+ je_ca_hon_caudillo_status_alta:0 "The commander of arms weighs on every decision."
+ je_ca_hon_caudillo_status_regimen:0 "The barracks govern in all but name."
+ je_ca_hon_caudillo_complete:0 "The caudillo goes into exile."
+ je_ca_hon_caudillo_fail:0 "The caudillo rules for life."
+
+ # --- Modificadores ---
+ hon_estado_inacabado:0 "An Unfinished State"
+ hon_estado_inacabado_desc:0 "No cart roads link the interior with the coasts, contraband empties the treasury and the state does not hold a monopoly on violence."
+ hon_milicias_comarca:0 "District Militias"
+ hon_milicias_comarca_desc:0 "Rural militias obey their hacendados and the commander of arms before the civil government."
+ hon_media_leche:0 "The Media Leche Coin"
+ hon_media_leche_desc:0 "The provisional coin of 1832, half silver and half copper, is refused in many villages."
+ hon_sede_tegucigalpa:0 "Government in Tegucigalpa"
+ hon_sede_tegucigalpa_desc:0 "The government sits beside the silver mines and the Mint."
+ hon_sede_alterna:0 "An Alternating Capital"
+ hon_sede_alterna_desc:0 "The government moves between Comayagua and Tegucigalpa: costly for the administration, but neither city feels abandoned."
+ hon_reforma_administrativa:0 "Reform of the Interior Administration"
+ hon_reforma_administrativa_desc:0 "Rivera's reform seeks stability and respect for the state through simpler and more energetic administration."
+ hon_orden_militar:0 "Military Order"
+ hon_orden_militar_desc:0 "The commander of arms keeps order with the army, above the civil authorities."
+ hon_concesiones_mineras:0 "Mining Concessions"
+ hon_concesiones_mineras_desc:0 "Foreign houses work the old mines of Tegucigalpa and Yuscarán."
+ hon_casa_de_moneda:0 "The Mint of Tegucigalpa"
+ hon_casa_de_moneda_desc:0 "Honduran silver is struck into Honduran coin."
+ hon_contrata_caoba:0 "The Mahogany Contract"
+ hon_contrata_caoba_desc:0 "British cutters from Belize fell mahogany on the north coast under a federal contract."
+ hon_amnistia:0 "The Amnesty of 1836"
+ hon_amnistia_desc:0 "The government pardoned the mutineers of Tegucigalpa, except those who keep conspiring."
+ hon_tegucigalpa_asolada:0 "Tegucigalpa Laid Waste"
+ hon_tegucigalpa_asolada_desc:0 "The troops retook the city, but many of its people have not returned to the mines."
+ hon_cabildos:0 "Concessions to the Town Councils"
+ hon_cabildos_desc:0 "The government bought peace from the town councils at the cost of its own authority."
+ hon_vacio_de_poder:0 "Power Vacuum"
+ hon_vacio_de_poder_desc:0 "A provisional councillor governs until an elected Jefe takes office."
+ hon_prorroga_rivera:0 "Rivera's Extended Term"
+ hon_prorroga_rivera_desc:0 "The Jefe remains in office after his term expired, against the forms he once defended."
+ hon_regimen_comandante:0 "The Commander's Regime"
+ hon_regimen_comandante_desc:0 "Whoever sits in the Jefe's chair, the commander of arms decides."
