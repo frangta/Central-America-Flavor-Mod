@@ -1,0 +1,60 @@
+# =====================================================================
+# CAFM — Categorías de catalizadores diplomáticos (2026-10-07)
+# Formato: vanilla 1.13 (diplomatic_catalyst_categories.md)
+# =====================================================================
+
+# Relaciones entre la UCA y sus estados (ayuda, rechazo, decretos, paces)
+cc_ca_federal_relations = {
+	lobby_formation_reason = diplomacy
+	duration = { years = 5 }
+	catalyst_effect_cooldown = { years = 1 }
+}
+
+# Declaraciones de independencia y su contagio
+cc_ca_secession = {
+	lobby_formation_reason = aggression
+	duration = { years = 10 }
+	catalyst_effect_cooldown = { years = 1 }
+}
+
+# Liberales contra conservadores (afinidad o rivalidad de régimen)
+cc_ca_partisan = {
+	lobby_formation_reason = ideology
+	duration = { years = 5 }
+	catalyst_effect_cooldown = { years = 2 }
+}
+
+# Filibusteros (Walker, 1855-1857) y Guerra Nacional
+cc_ca_filibuster = {
+	lobby_formation_reason = aggression
+	duration = { years = 20 }
+	catalyst_effect_cooldown = { years = 1 }
+}
+
+# Presión de potencias extranjeras (Mosquitia, deuda, bloqueos)
+cc_ca_foreign_coercion = {
+	lobby_formation_reason = aggression
+	duration = { years = 10 }
+	catalyst_effect_cooldown = { years = 1 }
+}
+
+# Concesiones de tránsito interoceánico
+cc_ca_transit = {
+	lobby_formation_reason = economy
+	duration = { years = 5 }
+	catalyst_effect_cooldown = { years = 1 }
+}
+
+# Tratados comerciales entre estados (café, aranceles)
+cc_ca_trade = {
+	lobby_formation_reason = economy
+	duration = { years = 5 }
+	catalyst_effect_cooldown = { years = 1 }
+}
+
+# Congresos y pactos unionistas (Chinandega 1842, Nacaome 1847, Unión 1852)
+cc_ca_union = {
+	lobby_formation_reason = diplomacy
+	duration = { years = 10 }
+	catalyst_effect_cooldown = { years = 2 }
+}

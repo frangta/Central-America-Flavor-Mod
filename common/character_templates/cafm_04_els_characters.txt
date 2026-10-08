@@ -12,20 +12,21 @@
 # ---------------------------------------------------------------------
 
 els_francisco_gomez_character_template = {
-	# Francisco Gomez — cast ELS · nivel A · certeza P
-	# NOTAS: REVISAR: hoy es el gobernante inicial de El Salvador en los efectos de creación, pero la
-	#        investigación encontró a un Francisco Gómez presidente interino de HONDURAS (1852). El jefe
-	#        salvadoreño de 1836–1837 fue Diego Vigil.
+	# Francisco Gómez — cast ELS · nivel A (historial 1836, político de la UCA) · certeza V
+	# NOTAS: Nacido en Cartago (Costa Rica) el 5 ago 1796. Diputado (1826). Jefe interino de El Salvador
+	#        (15 nov 1835–1 feb 1836): por eso es el gobernante si El Salvador se separa en enero de 1836.
+	#        Asesinado en Guatemala el 17 may 1838 (pulso de muertes). No es el Francisco Gómez hondureño
+	#        de 1852.
 
 	# --- DATOS BÁSICOS ---
 	first_name = "Francisco"
 	last_name = "Gomez"
 	historical = yes
 	female = no
-	birth_date = 1796.1.1			# M: confirmar fecha
-	culture = cu:el_salvadorian
+	birth_date = 1796.8.5			# V
+	culture = cu:costa_rican
 	religion = rel:catholic
-	home_region = STATE_SAN_SALVADOR
+	home_region = STATE_COSTA_RICA
 
 	# --- ROLES E IDENTIDAD ---
 	role = character_role_politician
@@ -47,6 +48,64 @@ els_francisco_gomez_character_template = {
 	on_created = {
 		set_variable = cafm_cast_els
 		set_global_variable = { name = cafm_hc_francisco_gomez_els value = this }
+	}
+}
+
+els_diego_vigil_character_template = {
+	# Diego Vigil y Cocaña — cast ELS · nivel A (historial 1836, político de la UCA) · certeza V
+	# NOTAS: Nacido en Tegucigalpa (1799). Jefe de Honduras (1829). Jefe de El Salvador (1 feb 1836–
+	#        6 ene 1838, con el interinato de Timoteo Menéndez en may–jun 1837). Vicepresidente federal
+	#        (1 feb 1838) y último presidente de la Federación (1 feb 1839–31 mar 1840). Muere en Granada
+	#        (Nicaragua) el 10 ene 1845. Multinacional: pertenece al cast ELS (su primer cargo en 1836).
+	#        Si la UCA lo necesita como presidente en 1839, un evento lo devuelve a la UCA.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Diego"
+	last_name = "Vigil_y_Cocana"
+	historical = yes
+	female = no
+	birth_date = 1799.1.1			# V: año 1799 (Tegucigalpa); día desconocido
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_ca_federalist
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		meticulous
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_vigil value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			OR = {
+				c:UCA ?= THIS
+				c:ELS ?= THIS
+			}
+			NOT = { has_global_variable = cafm_hc_vigil }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_intelligentsia
+		}
+		earliest_usage_date = 1836.1.1
+		latest_usage_date = 1840.6.1
 	}
 }
 

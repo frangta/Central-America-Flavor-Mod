@@ -1,77 +1,92 @@
-﻿company_basic_bank = {
-	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds" 
-	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufactering_light.dds"
-	
+﻿# =====================================================================
+# CAFM — Compañías de Centroamérica
+# Actualizado al formato vanilla 1.13/1.14 (00_companies_americas.txt,
+# 99_basic_companies.txt, companies.md). 2026-10-07.
+# - Regiones con prefijo sr: (sr:region_central_america).
+# - attainable / possible / ai_will_do comprueban el estado concreto.
+# - ai_construction_targets con el formato vanilla (edificio + level + state_trigger).
+# - prestige_goods_trigger en cada compañía con bien de prestigio.
+# - ai_weight = 3 en compañías con sabor (como vanilla).
+# =====================================================================
+
+company_basic_bank = {
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
+
 	flavored_company = yes
-	
-	possible_prestige_goods = {
-		prestige_good_generic_currency_paper
-	}
-	
-	building_types = {  
+
+	building_types = {
 		building_paper_mill
 		building_tooling_workshop
 		building_livestock_ranch
 	}
-	
-	extension_building_types = {	
+
+	extension_building_types = {
 		building_coal_mine
 		building_logging_camp
 		building_textile_mill
-		building_furniture_manufactury
+		building_furniture_manufactory
 	}
-	
+
+	possible_prestige_goods = {
+		prestige_good_generic_currency_paper
+	}
+
 	potential = {
 		has_game_rule = banks_enabled
 	}
 
-	possible = { 
-		any_owned_state = {
+	possible = {
+		has_technology_researched = investment_banks
+		unique_companies_has_bank = no
+		any_scope_state = {
 			any_scope_building = {
 				is_building_type = building_financial_district
 				level >= 15
 			}
 		}
-		has_technology_researched = investment_banks
-		unique_companies_has_bank = no
 	}
-	
-	prosperity_modifier = { 
+
+	prosperity_modifier = {
 		country_minting_mult = 0.025
 		country_loan_interest_rate_mult = -0.025
-        country_private_construction_allocation_mult = 0.1		
-		
+		country_private_construction_allocation_mult = 0.1
+
 		state_farmers_investment_pool_contribution_add = 0.015
 		state_shopkeepers_investment_pool_contribution_add = 0.015
 		state_clergymen_investment_pool_contribution_add = 0.04
 		state_aristocrats_investment_pool_contribution_add = 0.04
 		state_capitalists_investment_pool_contribution_add = 0.065
-		
+
 		building_nationalization_investment_return_add = 0.05
 		country_government_dividends_reinvestment_add = 0.05
 		country_government_dividends_efficiency_add = 0.05
-		
+
 		country_max_companies_add = 1
 	}
-	
+
 	ai_will_do = {
 		has_technology_researched = investment_banks
 		any_scope_state = {
-		any_scope_building = {
-			is_building_type = building_paper_mill
-			level >= 3
-		}
+			any_scope_building = {
+				is_building_type = building_paper_mill
+				level >= 3
+			}
 		}
 	}
 
 	ai_construction_targets = {
-any_scope_state = {
-            any_scope_building = {
-                is_building_type = building_paper_mill
-                level >= 5
-            }
-        }
+		building_paper_mill = {
+			level = 5
+			state_trigger = {
+				is_incorporated = yes
+				any_scope_building = {
+					is_building_type = building_paper_mill
+				}
+			}
+		}
 	}
+
 	ai_weight = {
 		value = 4 # Higher base value for flavored companies
 	}
@@ -147,355 +162,496 @@ any_scope_state = {
 #		value = 4 # Higher base value for flavored companies
 #	}
 #}
-#==============================================
-#COMPAÑÍAS DE COSTA RICA
-#==============================================
+
+# ==============================================
+# COMPAÑÍAS DE COSTA RICA
+# ==============================================
 
 company_tournon_coffee = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_plantation.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_plantation.dds"
 
-    flavored_company = yes
-    # category = aristocrat_owned # Parámetro inválido en esquema base V3
+	category = aristocrat_owned
 
-    preferred_headquarters = { STATE_COSTA_RICA }
+	flavored_company = yes
 
-    building_types = {
-        building_coffee_plantation
-    }
+	preferred_headquarters = { STATE_COSTA_RICA }
 
-    extension_building_types = {
-        building_port 
-        building_sugar_plantation
-    }
+	building_types = {
+		building_coffee_plantation
+	}
 
-    possible_prestige_goods = {
-        prestige_good_generic_coffee 
-    }
+	extension_building_types = {
+		building_port
+		building_sugar_plantation
+	}
 
-    potential = {
-        OR = {
-            country_has_primary_culture = cu:costa_rican
-            country_has_primary_culture = cu:central_american
-        }
-        has_interest_marker_in_region = region_central_america
-    }
+	possible_prestige_goods = {
+		prestige_good_generic_coffee
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_COSTA_RICA
-            }
-        }
-    }
+	prestige_goods_trigger = {
+		custom_tooltip = {
+			text = je_prestige_goods_coffee_complete_tt
+			has_variable = prestige_good_generic_coffee_var
+		}
+	}
 
-    possible = {
-        has_technology_researched = intensive_agriculture
-        any_scope_state = {
-            state_region = s:STATE_COSTA_RICA
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_coffee_plantation
-                level >= 5
-            }
-        }
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+		OR = {
+			country_has_primary_culture = cu:costa_rican
+			country_has_primary_culture = cu:central_american
+		}
+	}
 
-    prosperity_modifier = {
-        building_coffee_plantation_throughput_add = 0.20
-        interest_group_ig_landowners_pol_str_mult = 0.10
-        country_prestige_add = 5
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_COSTA_RICA
+			}
+		}
+	}
 
-    ai_will_do = {
-        any_scope_state = {
-            state_region = s:STATE_COSTA_RICA
-            has_building = building_coffee_plantation
-        }
-    }
+	possible = {
+		has_technology_researched = intensive_agriculture
+		any_scope_state = {
+			state_region = s:STATE_COSTA_RICA
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_coffee_plantation
+				level >= 5
+			}
+		}
+	}
+
+	prosperity_modifier = {
+		building_coffee_plantation_throughput_add = 0.20
+		interest_group_ig_landowners_pol_str_mult = 0.10
+		country_prestige_add = 5
+	}
+
+	ai_will_do = {
+		any_scope_state = {
+			state_region = s:STATE_COSTA_RICA
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_coffee_plantation = {
+			level = 5
+			state_trigger = {
+				state_region = s:STATE_COSTA_RICA
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
 
 company_northern_railway = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds" 
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_railways.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_railways.dds"
 
-    flavored_company = yes
+	flavored_company = yes
 
-    preferred_headquarters = { STATE_COSTA_RICA }
+	preferred_headquarters = { STATE_COSTA_RICA }
 
-    building_types = {
-        building_railway
-        building_banana_plantation
-    }
+	building_types = {
+		building_railway
+		building_banana_plantation
+	}
 
-    extension_building_types = {
-        building_port
-    }
+	extension_building_types = {
+		building_port
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_COSTA_RICA
-            }
-        }
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_COSTA_RICA
+			}
+		}
+	}
 
-    possible = {
-        has_technology_researched = railways
-        any_scope_state = {
-            state_region = s:STATE_COSTA_RICA
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_railway
-                level >= 1
-            }
-        }
-    }
+	possible = {
+		has_technology_researched = railways
+		any_scope_state = {
+			state_region = s:STATE_COSTA_RICA
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_railway
+				level >= 1
+			}
+		}
+	}
 
-    prosperity_modifier = {
-        building_railway_throughput_add = 0.20
-        state_migration_pull_mult = 0.15 
-        state_infrastructure_from_population_mult = 0.1
-    }
+	prosperity_modifier = {
+		building_railway_throughput_add = 0.20
+		state_migration_pull_mult = 0.15
+		state_infrastructure_mult = 0.05
+	}
 
-    ai_will_do = {
-        has_technology_researched = railways
-    }
+	ai_will_do = {
+		has_technology_researched = railways
+		any_scope_state = {
+			state_region = s:STATE_COSTA_RICA
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_railway = {
+			level = 1
+			state_trigger = {
+				state_region = s:STATE_COSTA_RICA
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
 
 company_fifco = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
 
-    flavored_company = yes
-    # category = capitalist_owned 
+	flavored_company = yes
 
-    preferred_headquarters = { STATE_COSTA_RICA }
+	preferred_headquarters = { STATE_COSTA_RICA }
 
-    building_types = {
-        building_food_industry 
-    }
+	building_types = {
+		building_food_industry
+	}
 
-    extension_building_types = {
-        building_sugar_plantation 
-        building_glassworks       
-    }
+	extension_building_types = {
+		building_sugar_plantation
+		building_glassworks
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-        has_technology_researched = canneries 
-    }
+	possible_prestige_goods = {
+		prestige_good_generic_groceries
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_COSTA_RICA
-            }
-        }
-    }
+	prestige_goods_trigger = {
+		custom_tooltip = {
+			text = je_prestige_goods_groceries_complete_tt
+			has_variable = prestige_good_generic_groceries_var
+		}
+	}
 
-    possible = {
-        has_technology_researched = canneries
-        any_scope_state = {
-            state_region = s:STATE_COSTA_RICA
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_food_industry
-                level >= 3
-            }
-        }
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+	}
 
-    prosperity_modifier = {
-        building_food_industry_throughput_add = 0.25
-        state_standard_of_living_add = 0.5 
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_COSTA_RICA
+			}
+		}
+	}
 
-    ai_will_do = {
-        has_technology_researched = canneries
-    }
+	possible = {
+		has_technology_researched = canneries
+		any_scope_state = {
+			state_region = s:STATE_COSTA_RICA
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_food_industry
+				level >= 3
+			}
+		}
+	}
+
+	prosperity_modifier = {
+		building_food_industry_throughput_add = 0.25
+		state_standard_of_living_add = 0.5
+	}
+
+	ai_will_do = {
+		has_technology_researched = canneries
+		any_scope_state = {
+			state_region = s:STATE_COSTA_RICA
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_food_industry = {
+			level = 3
+			state_trigger = {
+				state_region = s:STATE_COSTA_RICA
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
+
 # ==============================================
 # COMPAÑÍAS DE NICARAGUA
 # ==============================================
 
 company_accessory_transit = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds" 
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_harbor_shipbuilding.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_harbor_shipbuilding.dds"
 
-    flavored_company = yes
-    # category = capitalist_owned 
+	flavored_company = yes
 
-    preferred_headquarters = { STATE_NICARAGUA }
+	preferred_headquarters = { STATE_NICARAGUA }
 
-    building_types = {
-        building_port
-        building_trade_center
-    }
+	building_types = {
+		building_port
+		building_trade_center
+	}
 
-    extension_building_types = {
-        building_shipyard 
-    }
+	extension_building_types = {
+		building_shipyard
+	}
 
-    potential = {
-        OR = {
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:central_american
-            c:USA ?= this 
-        }
-        has_interest_marker_in_region = region_central_america
-    }
+	possible_prestige_goods = {
+		prestige_good_generic_merchant_marine
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_NICARAGUA
-            }
-        }
-    }
+	prestige_goods_trigger = {
+		custom_tooltip = {
+			text = je_prestige_goods_merchant_marine_complete_tt
+			has_variable = prestige_good_generic_merchant_marine_var
+		}
+	}
 
-    possible = {
-        has_technology_researched = mechanized_workshops
-        any_scope_state = {
-            state_region = s:STATE_NICARAGUA
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_port
-                level >= 2 
-            }
-        }
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+		OR = {
+			country_has_primary_culture = cu:nicaraguan
+			country_has_primary_culture = cu:central_american
+			c:USA ?= this
+		}
+	}
 
-    prosperity_modifier = {
-        state_migration_pull_mult = 0.25 
-        country_convoys_capacity_mult = 0.20
-        building_port_throughput_add = 0.10
-        state_infrastructure_from_population_add = 0.15
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_NICARAGUA
+			}
+		}
+	}
 
-    ai_will_do = {
-        has_technology_researched = mechanized_workshops
-    }
+	possible = {
+		has_technology_researched = mechanized_workshops
+		any_scope_state = {
+			state_region = s:STATE_NICARAGUA
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_port
+				level >= 2
+			}
+		}
+	}
+
+	prosperity_modifier = {
+		state_migration_pull_mult = 0.25
+		country_convoys_capacity_mult = 0.20
+		building_port_throughput_add = 0.10
+		state_infrastructure_from_population_add = 0.15
+	}
+
+	ai_will_do = {
+		has_technology_researched = mechanized_workshops
+		any_scope_state = {
+			state_region = s:STATE_NICARAGUA
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_port = {
+			level = 2
+			state_trigger = {
+				state_region = s:STATE_NICARAGUA
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
 
 company_flor_de_cana = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_plantation.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_plantation.dds"
 
-    flavored_company = yes
-    # category = aristocrat_owned 
+	category = aristocrat_owned
 
-    preferred_headquarters = { STATE_NICARAGUA }
+	flavored_company = yes
 
-    building_types = {
-        building_sugar_plantation 
-        building_food_industry    
-    }
+	preferred_headquarters = { STATE_NICARAGUA }
 
-    extension_building_types = {
-        building_glassworks       
-    }
+	building_types = {
+		building_sugar_plantation
+		building_food_industry
+	}
 
-    possible_prestige_goods = {
-        prestige_good_generic_liquor 
-    }
+	extension_building_types = {
+		building_glassworks
+	}
 
-    potential = {
-        OR = {
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:central_american
-        }
-        has_interest_marker_in_region = region_central_america
-    }
+	possible_prestige_goods = {
+		prestige_good_generic_groceries
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_NICARAGUA
-            }
-        }
-    }
+	prestige_goods_trigger = {
+		custom_tooltip = {
+			text = je_prestige_goods_groceries_complete_tt
+			has_variable = prestige_good_generic_groceries_var
+		}
+	}
 
-    possible = {
-        has_technology_researched = distillation
-        any_scope_state = {
-            state_region = s:STATE_NICARAGUA
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_food_industry
-                level >= 3
-            }
-            any_scope_building = {
-                is_building_type = building_sugar_plantation
-                level >= 5
-            }
-        }
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+		OR = {
+			country_has_primary_culture = cu:nicaraguan
+			country_has_primary_culture = cu:central_american
+		}
+	}
 
-    prosperity_modifier = {
-        building_food_industry_throughput_add = 0.25
-        building_sugar_plantation_throughput_add = 0.15
-        interest_group_ig_industrialists_pol_str_mult = 0.10
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_NICARAGUA
+			}
+		}
+	}
 
-    ai_will_do = {
-        has_technology_researched = distillation
-    }
+	possible = {
+		has_technology_researched = canneries
+		any_scope_state = {
+			state_region = s:STATE_NICARAGUA
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_food_industry
+				level >= 3
+			}
+			any_scope_building = {
+				is_building_type = building_sugar_plantation
+				level >= 5
+			}
+		}
+	}
+
+	prosperity_modifier = {
+		building_food_industry_throughput_add = 0.25
+		building_sugar_plantation_throughput_add = 0.15
+		interest_group_ig_industrialists_pol_str_mult = 0.10
+	}
+
+	ai_will_do = {
+		has_technology_researched = canneries
+		any_scope_state = {
+			state_region = s:STATE_NICARAGUA
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_sugar_plantation = {
+			level = 5
+			state_trigger = {
+				state_region = s:STATE_NICARAGUA
+			}
+		}
+		building_food_industry = {
+			level = 3
+			state_trigger = {
+				state_region = s:STATE_NICARAGUA
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
 
 company_la_luz_mining = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_mining.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_mining.dds"
 
-    flavored_company = yes
-    # category = capitalist_owned
+	flavored_company = yes
 
-    preferred_headquarters = { STATE_NICARAGUA }
+	preferred_headquarters = { STATE_NICARAGUA }
 
-    building_types = {
-        building_gold_mine
-    }
+	building_types = {
+		building_gold_mine
+	}
 
-    extension_building_types = {
-        building_logging_camp 
-    }
+	extension_building_types = {
+		building_logging_camp
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_NICARAGUA
-            }
-        }
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_NICARAGUA
+			}
+		}
+	}
 
-    possible = {
-        has_technology_researched = dynamite
-        any_scope_state = {
-            state_region = s:STATE_NICARAGUA
-            any_scope_building = {
-                is_building_type = building_gold_mine
-                level >= 2 
-            }
-        }
-    }
+	possible = {
+		has_technology_researched = dynamite
+		any_scope_state = {
+			state_region = s:STATE_NICARAGUA
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_gold_mine
+				level >= 2
+			}
+		}
+	}
 
-    prosperity_modifier = {
-        building_gold_mine_throughput_add = 0.25
-        country_minting_mult = 0.10 
-        country_tech_spread_mult = 0.10
-    }
+	prosperity_modifier = {
+		building_gold_mine_throughput_add = 0.25
+		country_minting_mult = 0.10
+		country_tech_spread_mult = 0.10
+	}
 
-    ai_will_do = {
-        has_technology_researched = dynamite
-    }
+	ai_will_do = {
+		has_technology_researched = dynamite
+		any_scope_state = {
+			state_region = s:STATE_NICARAGUA
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_gold_mine = {
+			level = 2
+			state_trigger = {
+				state_region = s:STATE_NICARAGUA
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
 
 # ==============================================
@@ -503,535 +659,715 @@ company_la_luz_mining = {
 # ==============================================
 
 company_rosario_mining = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_mining.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_mining.dds"
 
-    flavored_company = yes
-    # category = capitalist_owned 
+	flavored_company = yes
 
-    preferred_headquarters = { STATE_HONDURAS }
+	preferred_headquarters = { STATE_HONDURAS }
 
-    building_types = {
-        building_gold_mine
-    }
+	building_types = {
+		building_gold_mine
+	}
 
-    extension_building_types = {
-        building_power_plant 
-    }
+	extension_building_types = {
+		building_power_plant
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-        OR = {
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:central_american
-        }
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+		OR = {
+			country_has_primary_culture = cu:honduran
+			country_has_primary_culture = cu:central_american
+		}
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_HONDURAS
-            }
-        }
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_HONDURAS
+			}
+		}
+	}
 
-    possible = {
-        has_technology_researched = dynamite
-        any_scope_state = {
-            state_region = s:STATE_HONDURAS
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_gold_mine
-                level >= 2
-            }
-        }
-    }
+	possible = {
+		has_technology_researched = dynamite
+		any_scope_state = {
+			state_region = s:STATE_HONDURAS
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_gold_mine
+				level >= 2
+			}
+		}
+	}
 
-    prosperity_modifier = {
-        building_gold_mine_throughput_add = 0.20
-        country_minting_mult = 0.15 
-        country_prestige_add = 5
-    }
+	prosperity_modifier = {
+		building_gold_mine_throughput_add = 0.20
+		country_minting_mult = 0.15
+		country_prestige_add = 5
+	}
 
-    ai_will_do = {
-        has_technology_researched = dynamite
-    }
+	ai_will_do = {
+		has_technology_researched = dynamite
+		any_scope_state = {
+			state_region = s:STATE_HONDURAS
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_gold_mine = {
+			level = 2
+			state_trigger = {
+				state_region = s:STATE_HONDURAS
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
 
 company_cuyamel_fruit = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds" 
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_plantation.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_plantation.dds"
 
-    flavored_company = yes
-    # category = capitalist_owned 
+	flavored_company = yes
 
-    preferred_headquarters = { STATE_HONDURAS }
+	preferred_headquarters = { STATE_HONDURAS }
 
-    building_types = {
-        building_banana_plantation
-        building_railway
-    }
+	building_types = {
+		building_banana_plantation
+		building_railway
+	}
 
-    extension_building_types = {
-        building_port
-    }
+	extension_building_types = {
+		building_port
+	}
 
-    possible_prestige_goods = {
-        prestige_good_generic_fruit 
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+		OR = {
+			country_has_primary_culture = cu:honduran
+			country_has_primary_culture = cu:central_american
+			c:USA ?= this
+		}
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-        OR = {
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:central_american
-            c:USA ?= this 
-        }
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_HONDURAS
+			}
+		}
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_HONDURAS
-            }
-        }
-    }
+	possible = {
+		has_technology_researched = railways
+		any_scope_state = {
+			state_region = s:STATE_HONDURAS
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_banana_plantation
+				level >= 5
+			}
+		}
+	}
 
-    possible = {
-        has_technology_researched = railways
-        any_scope_state = {
-            state_region = s:STATE_HONDURAS
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_banana_plantation
-                level >= 5
-            }
-        }
-    }
+	prosperity_modifier = {
+		building_banana_plantation_throughput_add = 0.30
+		unit_army_offense_mult = 0.05
+		state_infrastructure_from_population_add = 0.1
+	}
 
-    prosperity_modifier = {
-        building_banana_plantation_throughput_add = 0.30
-        unit_army_offense_mult = 0.05 
-        state_infrastructure_from_population_add = 0.1
-    }
+	ai_will_do = {
+		has_technology_researched = railways
+		any_scope_state = {
+			state_region = s:STATE_HONDURAS
+			is_incorporated = yes
+		}
+	}
 
-    ai_will_do = {
-        has_technology_researched = railways
-    }
+	ai_construction_targets = {
+		building_banana_plantation = {
+			level = 5
+			state_trigger = {
+				state_region = s:STATE_HONDURAS
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
 
 company_standard_fruit = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_harbor_shipbuilding.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_harbor_shipbuilding.dds"
 
-    flavored_company = yes
-    # category = capitalist_owned 
+	flavored_company = yes
 
-    preferred_headquarters = { STATE_HONDURAS }
+	preferred_headquarters = { STATE_HONDURAS }
 
-    building_types = {
-        building_banana_plantation
-        building_shipyard 
-    }
+	building_types = {
+		building_banana_plantation
+		building_shipyard
+	}
 
-    extension_building_types = {
-        building_fishing_wharf 
-        building_food_industry
-    }
+	extension_building_types = {
+		building_fishing_wharf
+		building_food_industry
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_HONDURAS
-            }
-        }
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_HONDURAS
+			}
+		}
+	}
 
-    possible = {
-        has_technology_researched = steam_donkey
-        any_scope_state = {
-            state_region = s:STATE_HONDURAS
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_banana_plantation
-                level >= 5
-            }
-        }
-    }
+	possible = {
+		has_technology_researched = steam_donkey
+		any_scope_state = {
+			state_region = s:STATE_HONDURAS
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_banana_plantation
+				level >= 5
+			}
+		}
+	}
 
-    prosperity_modifier = {
-        building_shipyard_throughput_add = 0.15
-        country_convoys_capacity_mult = 0.10
-        state_migration_pull_mult = 0.10 
-    }
+	prosperity_modifier = {
+		building_shipyard_throughput_add = 0.15
+		country_convoys_capacity_mult = 0.10
+		state_migration_pull_mult = 0.10
+	}
 
-    ai_will_do = {
-        has_technology_researched = steam_donkey
-    }
+	ai_will_do = {
+		has_technology_researched = steam_donkey
+		any_scope_state = {
+			state_region = s:STATE_HONDURAS
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_banana_plantation = {
+			level = 5
+			state_trigger = {
+				state_region = s:STATE_HONDURAS
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
+
 # ==============================================
 # COMPAÑÍAS DE EL SALVADOR
 # ==============================================
 
 company_salvadoran_indigo_guilds = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds" 
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_plantation.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_plantation.dds"
 
-    flavored_company = yes
-    # category = aristocrat_owned 
+	category = aristocrat_owned
 
-    preferred_headquarters = { STATE_SAN_SALVADOR }
+	flavored_company = yes
 
-    building_types = {
-        building_dye_plantation
-    }
+	preferred_headquarters = { STATE_SAN_SALVADOR }
 
-    extension_building_types = {
-        building_cotton_plantation 
-        building_textile_mill      
-    }
+	building_types = {
+		building_dye_plantation
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-        OR = {
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:central_american
-        }
-    }
+	extension_building_types = {
+		building_cotton_plantation
+		building_textile_mill
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_SAN_SALVADOR
-            }
-        }
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+		OR = {
+			country_has_primary_culture = cu:el_salvadorian
+			country_has_primary_culture = cu:central_american
+		}
+	}
 
-    possible = {
-        has_technology_researched = enclosure 
-        any_scope_state = {
-            state_region = s:STATE_SAN_SALVADOR
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_dye_plantation
-                level >= 3
-            }
-        }
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_SAN_SALVADOR
+			}
+		}
+	}
 
-    prosperity_modifier = {
-        building_dye_plantation_throughput_add = 0.25
-        interest_group_ig_landowners_pol_str_mult = 0.10
-        state_infrastructure_from_population_add = 0.1
-    }
+	possible = {
+		has_technology_researched = enclosure
+		any_scope_state = {
+			state_region = s:STATE_SAN_SALVADOR
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_dye_plantation
+				level >= 3
+			}
+		}
+	}
 
-    ai_will_do = {
-        has_technology_researched = enclosure
-    }
+	prosperity_modifier = {
+		building_dye_plantation_throughput_add = 0.25
+		interest_group_ig_landowners_pol_str_mult = 0.10
+		state_infrastructure_from_population_add = 0.1
+	}
+
+	ai_will_do = {
+		has_technology_researched = enclosure
+		any_scope_state = {
+			state_region = s:STATE_SAN_SALVADOR
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_dye_plantation = {
+			level = 3
+			state_trigger = {
+				state_region = s:STATE_SAN_SALVADOR
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
 
 company_banco_salvadoreno = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
 
-    flavored_company = yes
-    # category = capitalist_owned 
+	flavored_company = yes
 
-    preferred_headquarters = { STATE_SAN_SALVADOR }
+	preferred_headquarters = { STATE_SAN_SALVADOR }
 
-    building_types = {
-        building_coffee_plantation
-        building_trade_center 
-    }
+	building_types = {
+		building_coffee_plantation
+		building_trade_center
+	}
 
-    extension_building_types = {
-        building_railway 
-    }
+	extension_building_types = {
+		building_railway
+	}
 
-    possible_prestige_goods = {
-        prestige_good_generic_coffee
-    }
+	possible_prestige_goods = {
+		prestige_good_generic_coffee
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-        OR = {
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:central_american
-        }
-    }
+	prestige_goods_trigger = {
+		custom_tooltip = {
+			text = je_prestige_goods_coffee_complete_tt
+			has_variable = prestige_good_generic_coffee_var
+		}
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_SAN_SALVADOR
-            }
-        }
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+		OR = {
+			country_has_primary_culture = cu:el_salvadorian
+			country_has_primary_culture = cu:central_american
+		}
+	}
 
-    possible = {
-        has_technology_researched = central_banking
-        any_scope_state = {
-            state_region = s:STATE_SAN_SALVADOR
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_coffee_plantation
-                level >= 5
-            }
-        }
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_SAN_SALVADOR
+			}
+		}
+	}
 
-    prosperity_modifier = {
-        country_minting_mult = 0.15
-        state_trade_advantage_mult = 0.20
-        building_coffee_plantation_throughput_add = 0.15
-    }
+	possible = {
+		has_technology_researched = central_banking
+		any_scope_state = {
+			state_region = s:STATE_SAN_SALVADOR
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_coffee_plantation
+				level >= 5
+			}
+		}
+	}
 
-    ai_will_do = {
-        has_technology_researched = central_banking
-    }
+	prosperity_modifier = {
+		country_minting_mult = 0.15
+		state_trade_advantage_mult = 0.20
+		building_coffee_plantation_throughput_add = 0.15
+	}
+
+	ai_will_do = {
+		has_technology_researched = central_banking
+		any_scope_state = {
+			state_region = s:STATE_SAN_SALVADOR
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_coffee_plantation = {
+			level = 5
+			state_trigger = {
+				state_region = s:STATE_SAN_SALVADOR
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
 
 company_la_constancia = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
 
-    flavored_company = yes
-    # category = capitalist_owned 
+	flavored_company = yes
 
-    preferred_headquarters = { STATE_SAN_SALVADOR }
+	preferred_headquarters = { STATE_SAN_SALVADOR }
 
-    building_types = {
-        building_food_industry 
-    }
+	building_types = {
+		building_food_industry
+	}
 
-    extension_building_types = {
-        building_glassworks 
-        building_sugar_plantation 
-    }
+	extension_building_types = {
+		building_glassworks
+		building_sugar_plantation
+	}
 
-    possible_prestige_goods = {
-        prestige_good_generic_liquor
-    }
+	possible_prestige_goods = {
+		prestige_good_generic_groceries
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-    }
+	prestige_goods_trigger = {
+		custom_tooltip = {
+			text = je_prestige_goods_groceries_complete_tt
+			has_variable = prestige_good_generic_groceries_var
+		}
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_SAN_SALVADOR
-            }
-        }
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+	}
 
-    possible = {
-        has_technology_researched = pasteurization
-        any_scope_state = {
-            state_region = s:STATE_SAN_SALVADOR
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_food_industry
-                level >= 3
-            }
-        }
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_SAN_SALVADOR
+			}
+		}
+	}
 
-    prosperity_modifier = {
-        building_food_industry_throughput_add = 0.25
-        country_prestige_add = 10
-        state_standard_of_living_add = 0.5
-    }
+	possible = {
+		has_technology_researched = canneries
+		any_scope_state = {
+			state_region = s:STATE_SAN_SALVADOR
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_food_industry
+				level >= 3
+			}
+		}
+	}
 
-    ai_will_do = {
-        has_technology_researched = pasteurization
-    }
+	prosperity_modifier = {
+		building_food_industry_throughput_add = 0.25
+		country_prestige_add = 10
+		state_standard_of_living_add = 0.5
+	}
+
+	ai_will_do = {
+		has_technology_researched = canneries
+		any_scope_state = {
+			state_region = s:STATE_SAN_SALVADOR
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_food_industry = {
+			level = 3
+			state_trigger = {
+				state_region = s:STATE_SAN_SALVADOR
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
-## ==============================================
+
+# ==============================================
 # COMPAÑÍAS DE GUATEMALA
 # ==============================================
 
 company_irca = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds" 
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_railways.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_railways.dds"
 
-    flavored_company = yes
-    # category = capitalist_owned 
+	flavored_company = yes
 
-    preferred_headquarters = { STATE_GUATEMALA }
+	preferred_headquarters = { STATE_GUATEMALA }
 
-    building_types = {
-        building_railway
-        building_port
-    }
+	building_types = {
+		building_railway
+		building_port
+	}
 
-    extension_building_types = {
-        building_banana_plantation 
-        building_trade_center
-    }
+	extension_building_types = {
+		building_banana_plantation
+		building_trade_center
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-        OR = {
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:central_american
-            c:USA ?= this 
-        }
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+		OR = {
+			country_has_primary_culture = cu:guatemalan
+			country_has_primary_culture = cu:central_american
+			c:USA ?= this
+		}
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_GUATEMALA
-            }
-        }
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_GUATEMALA
+			}
+		}
+	}
 
-    possible = {
-        has_technology_researched = railways
-        any_scope_state = {
-            state_region = s:STATE_GUATEMALA
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_railway
-                level >= 3
-            }
-            any_scope_building = {
-                is_building_type = building_port
-                level >= 2
-            }
-        }
-    }
+	possible = {
+		has_technology_researched = railways
+		any_scope_state = {
+			state_region = s:STATE_GUATEMALA
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_railway
+				level >= 3
+			}
+			any_scope_building = {
+				is_building_type = building_port
+				level >= 2
+			}
+		}
+	}
 
-    prosperity_modifier = {
-        building_railway_throughput_add = 0.20
-        military_formation_organization_gain_add = 5 
-        state_infrastructure_from_population_add = 0.15
-    }
+	prosperity_modifier = {
+		building_railway_throughput_add = 0.20
+		interest_group_ig_industrialists_approval_add = 3
+		state_infrastructure_from_population_add = 0.15
+	}
 
-    ai_will_do = {
-        has_technology_researched = railways
-    }
+	ai_will_do = {
+		has_technology_researched = railways
+		any_scope_state = {
+			state_region = s:STATE_GUATEMALA
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_railway = {
+			level = 3
+			state_trigger = {
+				state_region = s:STATE_GUATEMALA
+			}
+		}
+		building_port = {
+			level = 2
+			state_trigger = {
+				state_region = s:STATE_GUATEMALA
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
 
 company_cerveceria_centro_americana = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
 
-    flavored_company = yes
-    # category = capitalist_owned 
+	flavored_company = yes
 
-    preferred_headquarters = { STATE_GUATEMALA }
+	preferred_headquarters = { STATE_GUATEMALA }
 
-    building_types = {
-        building_food_industry 
-    }
+	building_types = {
+		building_food_industry
+	}
 
-    extension_building_types = {
-        building_glassworks 
-        building_maize_farm 
-    }
+	extension_building_types = {
+		building_glassworks
+		building_maize_farm
+	}
 
-    possible_prestige_goods = {
-        prestige_good_generic_liquor 
-    }
+	possible_prestige_goods = {
+		prestige_good_generic_groceries
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-        OR = {
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:central_american
-        }
-    }
+	prestige_goods_trigger = {
+		custom_tooltip = {
+			text = je_prestige_goods_groceries_complete_tt
+			has_variable = prestige_good_generic_groceries_var
+		}
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_GUATEMALA
-            }
-        }
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+		OR = {
+			country_has_primary_culture = cu:guatemalan
+			country_has_primary_culture = cu:central_american
+		}
+	}
 
-    possible = {
-        has_technology_researched = pasteurization
-        any_scope_state = {
-            state_region = s:STATE_GUATEMALA
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_food_industry
-                level >= 3
-            }
-        }
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_GUATEMALA
+			}
+		}
+	}
 
-    prosperity_modifier = {
-        building_food_industry_throughput_add = 0.25
-        state_standard_of_living_add = 0.5
-        country_loyalists_from_legitimacy_mult = 0.10
-    }
+	possible = {
+		has_technology_researched = canneries
+		any_scope_state = {
+			state_region = s:STATE_GUATEMALA
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_food_industry
+				level >= 3
+			}
+		}
+	}
 
-    ai_will_do = {
-        has_technology_researched = pasteurization
-    }
+	prosperity_modifier = {
+		building_food_industry_throughput_add = 0.25
+		state_standard_of_living_add = 0.5
+		country_loyalists_from_legitimacy_mult = 0.10
+	}
+
+	ai_will_do = {
+		has_technology_researched = canneries
+		any_scope_state = {
+			state_region = s:STATE_GUATEMALA
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_food_industry = {
+			level = 3
+			state_trigger = {
+				state_region = s:STATE_GUATEMALA
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }
 
 company_verapaz_coffee = {
-    icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds" 
-    background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_plantation.dds"
+	icon = "gfx/interface/icons/company_icons/custom_companies_placeholder.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_plantation.dds"
 
-    flavored_company = yes
-    # category = capitalist_owned 
+	category = aristocrat_owned
 
-    preferred_headquarters = { STATE_GUATEMALA } 
+	flavored_company = yes
 
-    building_types = {
-        building_coffee_plantation
-    }
+	preferred_headquarters = { STATE_GUATEMALA }
 
-    extension_building_types = {
-        building_railway 
-        building_logging_camp 
-    }
+	building_types = {
+		building_coffee_plantation
+	}
 
-    possible_prestige_goods = {
-        prestige_good_generic_coffee 
-    }
+	extension_building_types = {
+		building_railway
+		building_logging_camp
+	}
 
-    potential = {
-        has_interest_marker_in_region = region_central_america
-    }
+	possible_prestige_goods = {
+		prestige_good_generic_coffee
+	}
 
-    attainable = {
-        hidden_trigger = {
-            any_scope_state = {
-                state_region = s:STATE_GUATEMALA
-            }
-        }
-    }
+	prestige_goods_trigger = {
+		custom_tooltip = {
+			text = je_prestige_goods_coffee_complete_tt
+			has_variable = prestige_good_generic_coffee_var
+		}
+	}
 
-    possible = {
-        has_technology_researched = mechanical_tools
-        any_scope_state = {
-            state_region = s:STATE_GUATEMALA
-            is_incorporated = yes
-            any_scope_building = {
-                is_building_type = building_coffee_plantation
-                level >= 5
-            }
-        }
-    }
+	potential = {
+		has_interest_marker_in_region = sr:region_central_america
+	}
 
-    prosperity_modifier = {
-        building_coffee_plantation_throughput_add = 0.25
-        country_tech_spread_mult = 0.15 
-        country_prestige_add = 5
-    }
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_GUATEMALA
+			}
+		}
+	}
 
-    ai_will_do = {
-        has_technology_researched = mechanical_tools
-    }
+	possible = {
+		has_technology_researched = mechanical_tools
+		any_scope_state = {
+			state_region = s:STATE_GUATEMALA
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_coffee_plantation
+				level >= 5
+			}
+		}
+	}
+
+	prosperity_modifier = {
+		building_coffee_plantation_throughput_add = 0.25
+		country_tech_spread_mult = 0.15
+		country_prestige_add = 5
+	}
+
+	ai_will_do = {
+		has_technology_researched = mechanical_tools
+		any_scope_state = {
+			state_region = s:STATE_GUATEMALA
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_coffee_plantation = {
+			level = 5
+			state_trigger = {
+				state_region = s:STATE_GUATEMALA
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
 }

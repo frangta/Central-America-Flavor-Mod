@@ -58,57 +58,6 @@ TRY_REPLACE:UCA_francisco_morazan = {
 	}
 }
 
-els_diego_vigil_character_template = {
-	# Diego Vigil y Cocana — cast UCA · nivel B · certeza P
-	# NOTAS: Vicepresidente federal y último presidente de la Federación (1838–1840). Jefe de El Salvador
-	#        1836–1837. Multinacional.
-
-	# --- DATOS BÁSICOS ---
-	first_name = "Diego"
-	last_name = "Vigil_y_Cocana"
-	historical = yes
-	female = no
-	birth_date = 1799.1.1			# M: confirmar fecha
-	culture = cu:el_salvadorian
-	religion = rel:catholic
-	home_region = STATE_SAN_SALVADOR
-
-	# --- ROLES E IDENTIDAD ---
-	role = character_role_politician
-
-	# --- POLÍTICA Y RIQUEZA ---
-	interest_group = ig_intelligentsia
-	ideology = ideology_ca_federalist
-
-	# --- RASGOS (TRAITS) ---
-	traits = {
-		meticulous
-		tactful
-	}
-
-	# --- GENERACIÓN DINÁMICA DE RASGOS ---
-	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
-
-	# --- EFECTOS AL CREARSE ---
-	on_created = {
-		set_variable = cafm_cast_uca
-		set_global_variable = { name = cafm_hc_vigil value = this }
-	}
-
-	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
-	interest_group_leader_usage = {
-		country_trigger = {
-			c:UCA ?= THIS
-			NOT = { has_global_variable = cafm_hc_vigil }
-		}
-		interest_group_trigger = {
-			ig_counts_as_marginal = no
-			is_interest_group_type = ig_intelligentsia
-		}
-		earliest_usage_date = 1836.1.1
-		latest_usage_date = 1840.6.1
-	}
-}
 
 uca_francisco_barrundia_character_template = {
 	# Jose Francisco Barrundia — cast UCA · nivel A (historial 1836) · certeza V
@@ -150,7 +99,7 @@ uca_francisco_barrundia_character_template = {
 uca_ramon_casaus_character_template = {
 	# Ramon Casaus y Torres — cast UCA · nivel A (exilio) · certeza V
 	# NOTAS: Arzobispo de Guatemala, expulsado en 1829. En 1836 está exiliado en La Habana (muere allí en
-	#        1845): debe empezar en el exilio.
+	#        1845): el historial de la UCA lo crea y lo envía al exilio el día 1.
 
 	# --- DATOS BÁSICOS ---
 	first_name = "Ramon"
@@ -185,16 +134,57 @@ uca_ramon_casaus_character_template = {
 	}
 }
 
+cafm_gregorio_salazar = {
+	# José Gregorio Salazar — cast UCA · nivel A (historial 1836) · certeza P
+	# NOTAS: Vicepresidente federal; presidente interino (16 sep 1834–14 feb 1835). Muerto por las tropas
+	#        de Carrera al tomar la Ciudad de Guatemala, el 1 feb 1838, siendo vicepresidente (pulso de
+	#        muertes). Nacimiento: 1773 en San Salvador según la mayoría de fuentes (es.wiki da 1795).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Jose_Gregorio"
+	last_name = "Salazar"
+	historical = yes
+	female = no
+	birth_date = 1773.1.1			# P: año 1773 (San Salvador); día desconocido
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_ca_federalist
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		honorable
+		cautious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_uca
+		set_global_variable = { name = cafm_hc_gregorio_salazar value = this }
+	}
+}
+
 cafm_carlos_salazar = {
-	# Carlos Salazar — cast UCA · nivel B · certeza M
-	# NOTAS: General federal; jefe interino de Guatemala 1838–1839; combatió a Carrera.
+	# Carlos Salazar Castro — cast UCA · nivel A (historial 1836) · certeza V
+	# NOTAS: Teniente de Morazán desde 1832. Jefe provisional de El Salvador (23 jun–13 jul 1834) y de
+	#        Guatemala (30 ene–13 abr 1839). Vencedor en Villa Nueva (1839). Exiliado con Morazán en 1840.
+	#        Muere en San José (Costa Rica) el 23 jul 1867.
 
 	# --- DATOS BÁSICOS ---
 	first_name = "Carlos"
 	last_name = "Salazar"
 	historical = yes
 	female = no
-	birth_date = 1800.1.1			# M: confirmar fecha
+	birth_date = 1800.1.1			# V: año 1800 (San Salvador); día desconocido
 	culture = cu:el_salvadorian
 	religion = rel:catholic
 	home_region = STATE_SAN_SALVADOR
@@ -238,7 +228,8 @@ cafm_carlos_salazar = {
 }
 
 cafm_juan_galindo = {
-	# Juan Galindo — cast UCA · nivel B · certeza M
+	# Juan Galindo — cast UCA · nivel A (historial 1836) · certeza V
+	# Muere el 30 ene 1840 tras la derrota de Cabañas cerca de Tegucigalpa (pulso de muertes).
 	# NOTAS: Irlandés al servicio federal: gobernador del Petén, explorador de Copán, enviado a Londres por
 	#        la cuestión de Belice. Muere en Honduras en 1840.
 
@@ -247,7 +238,7 @@ cafm_juan_galindo = {
 	last_name = "Galindo"
 	historical = yes
 	female = no
-	birth_date = 1802.1.1			# M: confirmar fecha
+	birth_date = 1802.1.1			# V: año 1802 (Dublín); día desconocido
 	culture = cu:irish
 	religion = rel:catholic
 	home_region = STATE_LEINSTER
@@ -291,15 +282,16 @@ cafm_juan_galindo = {
 }
 
 cafm_pedro_molina = {
-	# Pedro Molina — cast UCA · nivel B · certeza M
-	# NOTAS: Prócer de la independencia, jefe de Guatemala 1829–1830, periodista liberal.
+	# Pedro Molina Mazariegos — cast UCA · nivel A (historial 1836, líder de Intelectuales) · certeza V
+	# NOTAS: Prócer de la independencia, jefe de Guatemala (ago 1829–mar 1830), ministro federal (1831),
+	#        diputado en Guatemala (1838) y en El Salvador (1840). Muere el 21 sep 1854.
 
 	# --- DATOS BÁSICOS ---
 	first_name = "Pedro"
 	last_name = "Molina"
 	historical = yes
 	female = no
-	birth_date = 1777.4.29			# M: confirmar fecha
+	birth_date = 1777.4.29			# V
 	culture = cu:guatemalan
 	religion = rel:catholic
 	home_region = STATE_GUATEMALA

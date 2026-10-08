@@ -1,0 +1,1148 @@
+﻿# =====================================================================
+# CAFM — Catalizadores diplomáticos (2026-10-07)
+# Formato vanilla 1.13 (diplomatic_catalysts.md / 00_diplomatic_catalysts.txt)
+#   root                 = país para el que se dispara el catalizador
+#   scope:target_country = país que lo provoca
+# Se disparan con cafm_catalyst_fire = { TYPE = ... TARGET = ... }
+# (common/scripted_effects/zz_cafm_catalyst_effects.txt)
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# A. CRISIS FEDERAL (root = estado, target = UCA salvo que se indique)
+# ---------------------------------------------------------------------
+
+# 1. La UCA acepta intervenir en el estado (eventos .35-.40)
+catalyst_ca_federal_aid_accepted = {
+	category = cc_ca_federal_relations
+
+	political_lobby_creation = {
+		lobby_pro_federalist = {
+			value = 0.2
+			if = {
+				limit = { liberty_desire < 25 }
+				multiply = 3
+			}
+			else_if = {
+				limit = { liberty_desire < 50 }
+				multiply = 2
+			}
+		}
+
+		lobby_pro_country = {
+			value = 0.05
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" < relations_threshold:cordial }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_friendly
+		chance = {
+			value = 0.25
+
+			if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:amicable }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:cordial }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		every_political_lobby = {
+			limit = {
+				is_political_lobby_type = lobby_pro_federalist
+				target = scope:target_country
+			}
+			change_appeasement = {
+				amount = 2
+				factor = appeasement_federal_aid_received
+			}
+		}
+		every_political_lobby = {
+			limit = {
+				is_political_lobby_type = lobby_anti_federalist
+				target = scope:target_country
+			}
+			change_appeasement = {
+				amount = -1
+				factor = appeasement_federal_aid_received
+			}
+		}
+	}
+}
+
+# 2. La UCA ignora la petición de intervención del estado (opción b de .28-.33)
+catalyst_ca_federal_aid_refused = {
+	category = cc_ca_federal_relations
+
+	political_lobby_creation = {
+		lobby_anti_federalist = {
+			value = 0.25
+			if = {
+				limit = { liberty_desire >= 75 }
+				multiply = 3
+			}
+			else_if = {
+				limit = { liberty_desire >= 50 }
+				multiply = 2
+			}
+		}
+
+		lobby_anti_country = {
+			value = 0.05
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" > relations_threshold:poor }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.25
+
+			if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:cold }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:poor }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		every_political_lobby = {
+			limit = {
+				is_political_lobby_type = lobby_pro_federalist
+				target = scope:target_country
+			}
+			change_appeasement = {
+				amount = -2
+				factor = appeasement_federal_incompetence
+			}
+		}
+		every_political_lobby = {
+			limit = {
+				is_political_lobby_type = lobby_anti_federalist
+				target = scope:target_country
+			}
+			change_appeasement = {
+				amount = 2
+				factor = appeasement_federal_incompetence
+			}
+		}
+	}
+}
+
+# 3a. Un estado declara su independencia. root = UCA, target = el estado separado
+catalyst_ca_secession_declared = {
+	category = cc_ca_secession
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 0.3
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" > relations_threshold:poor }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 1.0
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = -3
+			ANTI_AMOUNT = 3
+			FACTOR = appeasement_special_events_negative
+		}
+	}
+}
+
+# 3b. Contagio separatista en los demás estados súbditos de la UCA. root = estado, target = UCA
+catalyst_ca_secession_contagion = {
+	category = cc_ca_secession
+
+	political_lobby_creation = {
+		lobby_anti_federalist = {
+			value = 0.15
+			if = {
+				limit = { liberty_desire >= 75 }
+				multiply = 3
+			}
+			else_if = {
+				limit = { liberty_desire >= 50 }
+				multiply = 2
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.1
+
+			if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:cold }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:poor }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		every_political_lobby = {
+			limit = {
+				is_political_lobby_type = lobby_anti_federalist
+				target = scope:target_country
+			}
+			change_appeasement = {
+				amount = 1
+				factor = appeasement_federal_authority_challenged
+			}
+		}
+		every_political_lobby = {
+			limit = {
+				is_political_lobby_type = lobby_pro_federalist
+				target = scope:target_country
+			}
+			change_appeasement = {
+				amount = -1
+				factor = appeasement_federal_authority_challenged
+			}
+		}
+	}
+}
+
+# 4. Disciplina centralista impuesta a los estados (botón ca_button_centralist_discipline)
+catalyst_ca_federal_decree_imposed = {
+	category = cc_ca_federal_relations
+
+	political_lobby_creation = {
+		trigger = {
+			liberty_desire >= 50
+		}
+
+		lobby_anti_federalist = {
+			value = 0.15
+			if = {
+				limit = { liberty_desire >= 75 }
+				multiply = 3
+			}
+			else_if = {
+				limit = { liberty_desire >= 50 }
+				multiply = 2
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.1
+
+			if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:cold }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:poor }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		every_political_lobby = {
+			limit = {
+				is_political_lobby_type = lobby_anti_federalist
+				target = scope:target_country
+			}
+			change_appeasement = {
+				amount = 2
+				factor = appeasement_centralization_resisted
+			}
+		}
+		every_political_lobby = {
+			limit = {
+				is_political_lobby_type = lobby_pro_federalist
+				target = scope:target_country
+			}
+			change_appeasement = {
+				amount = -1
+				factor = appeasement_centralization_resisted
+			}
+		}
+	}
+}
+
+# 5. La UCA firma la paz con un estado separado. root = otro estado de Centroamérica, target = el estado separado
+catalyst_ca_peace_with_secessionist = {
+	category = cc_ca_federal_relations
+
+	political_lobby_creation = {
+		lobby_pro_country = {
+			value = 0.05
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" < relations_threshold:cordial }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_friendly
+		chance = {
+			value = 0.2
+
+			if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:amicable }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:cordial }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		every_political_lobby = {
+			limit = {
+				is_political_lobby_type = lobby_pro_federalist
+			}
+			change_appeasement = {
+				amount = -1
+				factor = appeasement_federal_incompetence
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# B. CAUDILLOS Y BANDOS
+# ---------------------------------------------------------------------
+
+# 6a. Un vecino pasa a un régimen del mismo bando. root = vecino, target = país que cambió de régimen
+catalyst_ca_partisan_kinship = {
+	category = cc_ca_partisan
+
+	political_lobby_creation = {
+		lobby_pro_country = {
+			value = 0.1
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" < relations_threshold:cordial }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_friendly
+		chance = {
+			value = 0.2
+
+			if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:amicable }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:cordial }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = 1
+			ANTI_AMOUNT = -1
+			FACTOR = appeasement_special_events_positive
+		}
+	}
+}
+
+# 6b. Un vecino pasa al bando contrario. root = vecino, target = país que cambió de régimen
+catalyst_ca_partisan_rivalry = {
+	category = cc_ca_partisan
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 0.1
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" > relations_threshold:poor }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.2
+
+			if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:cold }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:poor }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = -1
+			ANTI_AMOUNT = 1
+			FACTOR = appeasement_special_events_negative
+		}
+	}
+}
+
+# 7. Un país da asilo a los exiliados de otro. root = país de origen de los exiliados, target = país que los acoge
+catalyst_ca_exiles_sheltered = {
+	category = cc_exiles
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 0.1
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" > relations_threshold:poor }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.15
+
+			if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:cold }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:poor }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = -1
+			ANTI_AMOUNT = 2
+			FACTOR = appeasement_special_events_negative
+		}
+	}
+}
+
+# 8. Incursión de un caudillo vecino. root = país atacado, target = país del caudillo
+catalyst_ca_caudillo_border_raid = {
+	category = cc_diplomatic_incident
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 0.2
+			if = {
+				limit = { scope:target_country.country_rank > root.country_rank }
+				multiply = 2
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" > relations_threshold:poor }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.5
+
+			if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:cold }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:poor }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = -2
+			ANTI_AMOUNT = 2
+			FACTOR = appeasement_special_events_negative
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# C. POTENCIAS EXTRANJERAS
+# ---------------------------------------------------------------------
+
+# 9a. Avance británico en la Mosquitia o San Juan del Norte. root = estado afectado, target = Gran Bretaña
+catalyst_ca_british_encroachment = {
+	category = cc_ca_foreign_coercion
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 0.25
+			if = {
+				limit = { "relations(scope:target_country)" > relations_threshold:poor }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.5
+
+			if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:cold }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:poor }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = -2
+			ANTI_AMOUNT = 3
+			FACTOR = appeasement_special_events_negative
+		}
+	}
+}
+
+# 9b. Simpatía de EE. UU. por el estado afectado. root = EE. UU., target = estado afectado
+catalyst_ca_monroe_sympathy = {
+	category = cc_ca_foreign_coercion
+
+	political_lobby_creation = {
+		trigger = {
+			country_rank >= rank_value:major_power
+		}
+
+		lobby_pro_country = {
+			value = 0.1
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_friendly
+		chance = {
+			value = 0.3
+
+			if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:amicable }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:cordial }
+				multiply = 2.0
+			}
+		}
+	}
+}
+
+# 10a. Desembarco filibustero. root = estado de Centroamérica, target = país de origen de los filibusteros
+catalyst_ca_filibuster_landing = {
+	category = cc_ca_filibuster
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 0.3
+			if = {
+				limit = { scope:target_country.country_rank > root.country_rank }
+				multiply = 2
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" > relations_threshold:poor }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 1.0
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = -3
+			ANTI_AMOUNT = 3
+			FACTOR = appeasement_special_events_negative
+		}
+	}
+}
+
+# 10b. Solidaridad de la Guerra Nacional. root = estado, target = otro estado que combate a los filibusteros
+catalyst_ca_national_war_solidarity = {
+	category = cc_ca_filibuster
+
+	political_lobby_creation = {
+		lobby_pro_country = {
+			value = 0.2
+			if = {
+				limit = { "relations(scope:target_country)" < relations_threshold:cordial }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_friendly
+		chance = {
+			value = 1.0
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = 2
+			ANTI_AMOUNT = -2
+			FACTOR = appeasement_special_events_positive
+		}
+	}
+}
+
+# 11a. Concesión de tránsito interoceánico. root = potencia que la recibe, target = país que la otorga
+catalyst_ca_transit_concession_granted = {
+	category = cc_ca_transit
+
+	political_lobby_creation = {
+		lobby_pro_country = {
+			value = 0.1
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" < relations_threshold:cordial }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_friendly
+		chance = {
+			value = 0.5
+
+			if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:amicable }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:cordial }
+				multiply = 2.0
+			}
+		}
+	}
+}
+
+# 11b. El vecino otorga la ruta de tránsito a otro. root = vecino rival, target = país que la otorga
+catalyst_ca_transit_concession_rival = {
+	category = cc_ca_transit
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 0.1
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" > relations_threshold:poor }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.1
+
+			if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:cold }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:poor }
+				multiply = 2.0
+			}
+		}
+	}
+}
+
+# 12. Presión o bloqueo por la deuda británica. root = deudor, target = acreedor
+catalyst_ca_debt_coercion = {
+	category = cc_ca_foreign_coercion
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 0.2
+			if = {
+				limit = { "relations(scope:target_country)" > relations_threshold:poor }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.3
+
+			if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:cold }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:poor }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = -2
+			ANTI_AMOUNT = 2
+			FACTOR = appeasement_special_events_negative
+		}
+	}
+}
+
+# 13. Disputa fronteriza (Bocas del Toro, Guanacaste, Soconusco, Mosquitia). root = un lado, target = el otro
+catalyst_ca_border_dispute = {
+	category = cc_diplomatic_incident
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 0.1
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" > relations_threshold:poor }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.2
+
+			if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:cold }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:poor }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = -1
+			ANTI_AMOUNT = 1
+			FACTOR = appeasement_special_events_negative
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# D. ECONOMÍA Y REUNIFICACIÓN
+# ---------------------------------------------------------------------
+
+# 14. Tratado comercial entre estados (café, aranceles). root = un firmante, target = el otro
+catalyst_ca_trade_pact = {
+	category = cc_ca_trade
+
+	political_lobby_creation = {
+		lobby_pro_country = {
+			value = 0.1
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" < relations_threshold:cordial }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_friendly
+		chance = {
+			value = 0.2
+
+			if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:amicable }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:cordial }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = 1
+			ANTI_AMOUNT = -1
+			FACTOR = appeasement_special_events_positive
+		}
+	}
+}
+
+# 15a. Congreso unionista exitoso. root = participante, target = convocante
+catalyst_ca_unionist_congress_success = {
+	category = cc_ca_union
+
+	political_lobby_creation = {
+		lobby_pro_federalist = {
+			value = 0.2
+			if = {
+				limit = { liberty_desire < 25 }
+				multiply = 3
+			}
+			else_if = {
+				limit = { liberty_desire < 50 }
+				multiply = 2
+			}
+		}
+
+		lobby_pro_country = {
+			value = 0.15
+			if = {
+				limit = { "relations(scope:target_country)" < relations_threshold:cordial }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" >= relations_threshold:friendly }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = only_friendly
+		chance = {
+			value = 1.0
+		}
+	}
+
+	effect = {
+		every_political_lobby = {
+			limit = {
+				is_political_lobby_type = lobby_pro_federalist
+				target = scope:target_country
+			}
+			change_appeasement = {
+				amount = 2
+				factor = appeasement_laws_harmonized
+			}
+		}
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = 2
+			ANTI_AMOUNT = -2
+			FACTOR = appeasement_special_events_positive
+		}
+	}
+}
+
+# 15b. Congreso unionista fracasado. root = participante, target = convocante
+catalyst_ca_unionist_congress_failed = {
+	category = cc_ca_union
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 0.05
+			if = {
+				limit = { NOT = { has_strategic_adjacency = scope:target_country } }
+				multiply = 0.5
+			}
+
+			if = {
+				limit = { "relations(scope:target_country)" > relations_threshold:poor }
+				multiply = 0.5
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.1
+
+			if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:hostile }
+				multiply = 4.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:cold }
+				multiply = 3.0
+			}
+			else_if = {
+				limit = { "relations(scope:target_country)" <= relations_threshold:poor }
+				multiply = 2.0
+			}
+		}
+	}
+
+	effect = {
+		every_political_lobby = {
+			limit = {
+				is_political_lobby_type = lobby_pro_federalist
+				target = scope:target_country
+			}
+			change_appeasement = {
+				amount = -1
+				factor = appeasement_federal_incompetence
+			}
+		}
+	}
+}

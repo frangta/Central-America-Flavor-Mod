@@ -97,15 +97,16 @@ gua_rafael_carrera_character_template = {
 }
 
 gua_mariano_rivera_paz_character_template = {
-	# Mariano Rivera Paz — cast GUA · nivel B · certeza P
-	# NOTAS: Jefe de Estado conservador 1838–1844.
+	# Mariano Rivera Paz — cast GUA · nivel B · certeza V
+	# NOTAS: Nacido en Ciudad de Guatemala el 24 dic 1804. Jefe de Estado conservador: 29 jul 1838–30 ene
+	#        1839, 13 abr 1839–25 feb 1842 y 14 may 1842–11 dic 1844. Muerto en Jalapa el 26 feb 1849.
 
 	# --- DATOS BÁSICOS ---
 	first_name = "Mariano"
 	last_name = "Rivera_Paz"
 	historical = yes
 	female = no
-	birth_date = 1804.1.1			# M: confirmar fecha
+	birth_date = 1804.12.24			# V
 	culture = cu:guatemalan
 	religion = rel:catholic
 	home_region = STATE_GUATEMALA
@@ -148,9 +149,10 @@ gua_mariano_rivera_paz_character_template = {
 }
 
 gua_mariano_aycinena_character_template = {
-	# Mariano de Aycinena y Pinol — cast GUA · nivel A · certeza V
-	# NOTAS: Cabeza del clan Aycinena (centralista). En 1836 también estaba exiliado (volvió hacia 1837). Lo
-	#        crea el historial de la UCA.
+	# Mariano de Aycinena y Piñol — cast GUA · nivel B · certeza V
+	# NOTAS: Cabeza del clan Aycinena (centralista). Expulsado por Morazán en 1829 (Estados Unidos, México);
+	#        en 1836 sigue exiliado en Comitán. Vuelve en 1837: aparece por su bloque de uso, en la UCA o en
+	#        Guatemala. Diputado y jefe del Consulado de Comercio. Muere el 29 mar 1855.
 
 	# --- DATOS BÁSICOS ---
 	first_name = "Mariano"
@@ -185,6 +187,23 @@ gua_mariano_aycinena_character_template = {
 	on_created = {
 		set_variable = cafm_cast_gua
 		set_global_variable = { name = cafm_hc_mariano_aycinena value = this }
+	}
+
+	# --- BLOQUES DE APARICIÓN DINÁMICA (USAGE BLOCKS) ---
+	interest_group_leader_usage = {
+		country_trigger = {
+			OR = {
+				c:UCA ?= THIS
+				c:GUA ?= THIS
+			}
+			NOT = { has_global_variable = cafm_hc_mariano_aycinena }
+		}
+		interest_group_trigger = {
+			ig_counts_as_marginal = no
+			is_interest_group_type = ig_landowners
+		}
+		earliest_usage_date = 1837.1.1
+		latest_usage_date = 1850.1.1
 	}
 }
 

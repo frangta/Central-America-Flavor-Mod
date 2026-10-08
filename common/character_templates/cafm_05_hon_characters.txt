@@ -45,6 +45,7 @@ hon_joaquin_rivera_character_template = {
 	on_created = {
 		set_variable = cafm_cast_hon
 		set_global_variable = { name = cafm_hc_joaquin_rivera value = this }
+		set_variable = is_rivera		# CAFM Fase 1: lo exige ca_honduras_events.3 y .7.b
 	}
 }
 
@@ -90,7 +91,7 @@ hon_jose_maria_martinez_character_template = {
 			NOT = { has_global_variable = cafm_hc_martinez_salinas }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1836.1.1
@@ -140,7 +141,7 @@ juan_franscisco_de_molina_character_template = {
 			NOT = { has_global_variable = cafm_hc_juan_francisco_molina }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1838.1.1
@@ -190,7 +191,7 @@ hon_jose_zelaya_character_template = {
 			NOT = { has_global_variable = cafm_hc_zelaya_ayes }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1839.1.1
@@ -296,7 +297,7 @@ cafm_coronado_chavez = {
 			NOT = { has_global_variable = cafm_hc_coronado_chavez }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1841.1.1
@@ -340,6 +341,46 @@ juan_lindo_character_template = {
 	on_created = {
 		set_variable = cafm_cast_hon
 		set_global_variable = { name = cafm_hc_lindo value = this }
+	}
+}
+
+hon_justo_jose_herrera_character_template = {
+	# Justo Jose de Herrera y Diaz del Valle — cast HON · nivel C (evento) · certeza P
+	# NOTAS: Abogado, comerciante y minero; hermano de Dionisio de Herrera y primo de José Cecilio
+	#        del Valle. Jefe de Estado del 28 may 1837 al 3 sep 1838 (cólera, Yocón, revisión de la
+	#        Constitución de 1825). Fuentes en conflicto: 19 jul 1786 en Choluteca (es-academic) o
+	#        1789 en Tegucigalpa (Wikipedia EN). Orientación: conservador (ES) o liberal (EN); aquí
+	#        moderado. Lo crea ca_honduras_events.14 (opción a). Sin bloque de uso: solo por evento.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "Justo_Jose"
+	last_name = "de_Herrera"
+	historical = yes
+	female = no
+	birth_date = 1786.7.19			# P: fuentes en conflicto (1786 o 1789)
+	culture = cu:honduran
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_justo_herrera value = this }
 	}
 }
 
@@ -387,7 +428,7 @@ hon_de_herrera_character_template = {
 			NOT = { has_global_variable = cafm_hc_dionisio_herrera }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
 			OR = {
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_landowners
@@ -552,7 +593,7 @@ hon_bogran_character_template = {
 			NOT = { has_global_variable = cafm_hc_bogran }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
 			OR = {
 				is_interest_group_type = ig_landowners
 				is_interest_group_type = ig_rural_folk
