@@ -24,7 +24,7 @@ je_ca_historic_situation_in_costarica = {
 
 	scripted_progress_bar = ca_cos_soberania_bar
 
-	should_be_pinned_by_default = yes
+	#CAFM FIX
 
 	immediate = {
 		set_variable = ca_cos_madre_activa
@@ -432,7 +432,7 @@ je_ca_cos_caida_morazan = {
 
 	scripted_progress_bar = ca_cos_descontento_bar
 
-	should_be_pinned_by_default = yes
+	#CAFM FIX
 
 	# Las etapas historicas salen por semana (ver ca_cos_caida_beats_effect);
 	# la revuelta (.350) sale el 11 sep 1842 si el descontento >= 60, o al llegar a 100
@@ -475,7 +475,7 @@ je_ca_cos_nueva_liga = {
 
 	scripted_progress_bar = ca_cos_reunificacion_bar
 
-	should_be_pinned_by_default = yes
+	#CAFM FIX
 
 	complete = {
 		OR = {
@@ -634,7 +634,7 @@ je_ca_cos_nueva_liga = {
 #	}
 #
 #	weight = 100
-#	should_be_pinned_by_default = yes
+#	#CAFM FIX
 #	transferable = no
 #}
 #
@@ -695,7 +695,7 @@ je_ca_cos_nueva_liga = {
 #	}
 #
 #	weight = 150
-#	should_be_pinned_by_default = yes
+#	#CAFM FIX
 #	transferable = no
 #}
 
@@ -709,7 +709,7 @@ je_ca_cos_republica = {
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	group = je_group_historical_content
 
-	should_be_pinned_by_default = yes
+	#CAFM FIX
 
 	# Las etapas historicas salen por semana y en orden (ver ca_cos_republica_beats_effect)
 	on_weekly_pulse = {

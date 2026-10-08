@@ -64,14 +64,8 @@ ca_yearly_pulse_country = {
 		ca_central_america.75
 		ca_central_america.78
 		# CAFM: ca_central_america.79 -> pulso mensual de je_historic_central_america_falls_apart
-		ca_central_america.34
-        ca_central_america.35
-        ca_central_america.36
-        ca_central_america.37
-        ca_central_america.38
-        ca_central_america.39
-        ca_central_america.40
-        ca_central_america.41
+		# CAFM: .34-.41 y .101-.118 retirados del pulso anual: no tienen trigger y saltaban
+		# en TODOS los países del mundo. Quedan en el archivo de eventos, pendientes de disparador.
         ca_central_america.88
         ca_central_america.89
         ca_central_america.90
@@ -83,24 +77,6 @@ ca_yearly_pulse_country = {
         ca_central_america.96
         ca_central_america.97
         ca_central_america.98
-        ca_central_america.101
-        ca_central_america.102
-        ca_central_america.103
-        ca_central_america.104
-        ca_central_america.105
-        ca_central_america.106
-        ca_central_america.107
-        ca_central_america.108
-        ca_central_america.109
-        ca_central_america.110
-        ca_central_america.111
-        ca_central_america.112
-        ca_central_america.113
-        ca_central_america.114
-        ca_central_america.115
-        ca_central_america.116
-        ca_central_america.117
-        ca_central_america.118
         ca_central_america.120
         ca_central_america.121
         ca_central_america.122

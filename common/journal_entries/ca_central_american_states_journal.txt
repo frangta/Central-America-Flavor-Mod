@@ -220,6 +220,53 @@ je_ca_historic_situation_in_honduras = {
 	fail = {
 		
 	}
+
+	# CAFM Fase 1 (Honduras): eventos de 1836
+	on_monthly_pulse = {
+		events = {
+			ca_honduras_events.3 # La encrucijada de Rivera (jun–nov 1836)
+			ca_honduras_events.4 # La plata de Tegucigalpa (tras .3.a)
+			ca_honduras_events.5 # La caoba de la costa norte (desde ago 1836)
+		}
+	}
+
+	# CAFM Fase 1 (Honduras): fechas exactas del motín y del fin del mandato
+	on_weekly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					has_variable = hon_e2_fired
+					NOT = { has_variable = hon_e6_fired }
+					game_date < 1837.6.1
+					OR = {
+						game_date >= 1836.12.24
+						AND = {
+							NOT = { has_variable = hon_historic_mode }
+							game_date >= 1836.6.1
+							has_variable = hon_caudillo
+							var:hon_caudillo >= 60
+						}
+					}
+				}
+				trigger_event = { id = ca_honduras_events.6 popup = yes }
+			}
+			else_if = {
+				limit = {
+					has_variable = hon_e2_fired
+					NOT = { has_variable = hon_e7_fired }
+					game_date < 1837.6.1
+					OR = {
+						game_date >= 1836.12.31
+						AND = {
+							NOT = { has_variable = hon_historic_mode }
+							has_variable = hon_e6_fired
+						}
+					}
+				}
+				trigger_event = { id = ca_honduras_events.7 popup = yes }
+			}
+		}
+	}
 	
 	on_fail = {
 		

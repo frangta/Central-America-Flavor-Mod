@@ -431,7 +431,6 @@ ideology_ca_secularist = {
         law_private_schools = neutral
         law_religious_schools = neutral    
         law_no_schools = disapprove    
-        law_ca_escuela_laica = strongly_approve
     }
 
     lawgroup_bureaucracy = {
@@ -575,7 +574,6 @@ ideology_ca_criollo_stratocratic = {
         law_professional_army = neutral
         law_national_militia = strongly_disapprove
         law_mass_conscription = disapprove
-        law_ca_guardia_nacional = approve
     }
     
     lawgroup_land_reform = {
@@ -1058,9 +1056,6 @@ ideology_ca_moralist = {
 		law_slave_trade = strongly_disapprove
 	}
 
-	lawgroup_education_system = {
-		law_ca_escuela_laica = strongly_disapprove
-	}
 }
 ideology_ca_papal_moralist = {
 	icon = "gfx/interface/icons/ideology_icons/papal_moralist.dds"
@@ -1092,5 +1087,90 @@ ideology_ca_papal_moralist = {
 		law_legacy_slavery = disapprove
 		law_debt_slavery = strongly_disapprove
 		law_slave_trade = strongly_disapprove
+	}
+}
+# Criollismo Afrocaribeño: costa de Bluefields, Limón y Belice
+ideology_ca_creole_caribbean = {
+	icon = "gfx/interface/icons/ideology_icons/market_liberal.dds"
+ 
+	lawgroup_church_and_state = {
+		law_freedom_of_conscience = strongly_approve
+		law_state_religion = strongly_disapprove
+	}
+	lawgroup_trade_policy = {
+		law_free_trade = strongly_approve
+		law_isolationism = strongly_disapprove
+	}
+	lawgroup_citizenship = {
+		law_multicultural = strongly_approve
+		law_ethnostate = strongly_disapprove
+		law_national_supremacy = strongly_disapprove
+	}
+	lawgroup_slavery = {
+		law_slavery_banned = strongly_approve
+		law_debt_slavery = strongly_disapprove
+	}
+	lawgroup_economic_system = {
+		law_laissez_faire = approve
+	}
+	lawgroup_free_speech = {
+		law_protected_speech = approve
+	}
+}
+ 
+# Masonería Liberal: red de logias del liberalismo centroamericano
+ideology_ca_masonic_liberal = {
+	icon = "gfx/interface/icons/ideology_icons/liberal.dds"
+ 
+	lawgroup_church_and_state = {
+		law_total_separation = strongly_approve
+		law_freedom_of_conscience = approve
+		law_state_religion = strongly_disapprove
+	}
+	lawgroup_education_system = {
+		law_public_schools = strongly_approve
+		law_religious_schools = strongly_disapprove
+	}
+	lawgroup_free_speech = {
+		law_protected_speech = strongly_approve
+		law_right_of_assembly = approve
+		law_outlawed_dissent = strongly_disapprove
+	}
+}
+ 
+# Mutualismo Artesano: sociedades de artesanos y socorro mutuo (1870-1890)
+ideology_ca_mutualism = {
+	icon = "gfx/interface/icons/ideology_icons/egalitarian.dds"
+ 
+	lawgroup_labour_associations = {
+		law_right_to_associate = strongly_approve
+		law_guild_system = approve
+		law_combination_acts = strongly_disapprove
+	}
+	lawgroup_welfare = {
+		law_poor_laws = strongly_approve
+		law_no_social_security = strongly_disapprove
+	}
+	lawgroup_labor_rights = {
+		law_worker_protections = approve
+	}
+}
+ 
+# Confederacionismo Pactista: Pacto de Chinandega / Confederación 1842-44
+ideology_ca_pact_confederalist = {
+	icon = "gfx/interface/icons/ideology_icons/reformer.dds"
+ 
+	lawgroup_ca_state_structure = {
+		law_ca_central_american_confederated = strongly_approve
+		law_ca_central_american_federal = approve
+		law_ca_central_american_unitary = strongly_disapprove
+	}
+	lawgroup_governance_principles = {
+		law_presidential_republic = strongly_approve
+	}
+	lawgroup_distribution_of_power = {
+		law_census_voting = approve
+		law_autocracy = strongly_disapprove
+		law_single_party_state = strongly_disapprove
 	}
 }

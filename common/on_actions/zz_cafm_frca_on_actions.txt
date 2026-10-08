@@ -1,0 +1,22 @@
+﻿# CAFM — Pulso mensual de la UCA para las resoluciones de los capitulos de la crisis federal
+# (eventos .103 .106 .109 .112 .115 .118). Cada evento solo salta para la UCA,
+# 180 dias despues de la guerra civil del estado y sin guerra activa (ver su trigger).
+
+on_monthly_pulse_country = {
+	on_actions = { cafm_frca_chapters_monthly }
+}
+
+cafm_frca_chapters_monthly = {
+	trigger = {
+		exists = c:UCA
+		c:UCA ?= this
+	}
+	events = {
+		ca_central_america.103
+		ca_central_america.106
+		ca_central_america.109
+		ca_central_america.112
+		ca_central_america.115
+		ca_central_america.118
+	}
+}

@@ -1,0 +1,137 @@
+﻿# =====================================================================
+# CAFM — HONDURAS — La sombra del caudillo (1836–1850)
+# La añade ca_honduras_events.2. La variable var:hon_caudillo se pone en 15
+# ANTES de añadir el diario, así el objetivo queda en 100.
+# Subir es malo: mide cuánto manda el comandante de armas sobre el gobierno civil.
+# Completa con Pespire (ca_honduras_events.42, Fase 5); falla con el caudillo perpetuo.
+# =====================================================================
+
+je_ca_hon_caudillo = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+	should_be_pinned_by_default = yes
+
+	current_value = {
+		value = root.var:hon_caudillo
+	}
+	goal_add_value = {
+		add = 85
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_hon_caudillo_status_regimen
+				trigger = { var:hon_caudillo >= 80 }
+			}
+			triggered_desc = {
+				desc = je_ca_hon_caudillo_status_alta
+				trigger = { var:hon_caudillo >= 40 }
+			}
+			triggered_desc = {
+				desc = je_ca_hon_caudillo_status_baja
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	# Pespire: el caudillo sale al exilio (lo pone .42 en la Fase 5)
+	complete = {
+		has_variable = hon_pespire
+	}
+
+	on_complete = {
+		remove_variable = hon_caudillo
+		if = {
+			limit = { has_modifier = hon_regimen_comandante }
+			remove_modifier = hon_regimen_comandante
+		}
+	}
+
+	# El caudillo perpetuo: 100 desde 1847, o Ferrera acepta en .17 (Fase 5)
+	fail = {
+		OR = {
+			has_variable = hon_caudillo_perpetuo
+			AND = {
+				game_date >= 1847.1.1
+				var:hon_caudillo >= 100
+			}
+		}
+	}
+
+	on_fail = {
+		set_variable = hon_caudillo_perpetuo
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			# --- Límites 0–100 ---
+			if = {
+				limit = { var:hon_caudillo > 100 }
+				set_variable = { name = hon_caudillo value = 100 }
+			}
+			if = {
+				limit = { var:hon_caudillo < 0 }
+				set_variable = { name = hon_caudillo value = 0 }
+			}
+
+			# --- 40: aparece Ferrera como general ---
+			if = {
+				limit = {
+					var:hon_caudillo >= 40
+					NOT = { has_global_variable = cafm_hc_ferrera }
+					NOT = { has_variable = hon_ferrera_created }
+				}
+				# La bandera de país evita duplicados si carga la plantilla vieja (sin cafm_hc_ferrera)
+				set_variable = hon_ferrera_created
+				create_character = { template = hon_francisco_ferrera_character_template }
+			}
+
+			# --- 80: régimen del comandante mientras siga por encima ---
+			if = {
+				limit = {
+					var:hon_caudillo >= 80
+					NOT = { has_modifier = hon_regimen_comandante }
+				}
+				add_modifier = { name = hon_regimen_comandante }
+			}
+			else_if = {
+				limit = {
+					var:hon_caudillo < 80
+					has_modifier = hon_regimen_comandante
+				}
+				remove_modifier = hon_regimen_comandante
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			# Fuerzas Armadas descontentas
+			if = {
+				limit = { ig:ig_armed_forces ?= { ig_approval < 0 } }
+				change_variable = { name = hon_caudillo add = 1 }
+			}
+			# Honduras en guerra
+			if = {
+				limit = { is_at_war = yes }
+				change_variable = { name = hon_caudillo add = 1 }
+			}
+			# Gobierno sin legitimidad
+			if = {
+				limit = { government_legitimacy < 50 }
+				change_variable = { name = hon_caudillo add = 1 }
+			}
+			# Intelligentsia en el gobierno
+			if = {
+				limit = { ig:ig_intelligentsia ?= { is_in_government = yes } }
+				change_variable = { name = hon_caudillo subtract = 1 }
+			}
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}

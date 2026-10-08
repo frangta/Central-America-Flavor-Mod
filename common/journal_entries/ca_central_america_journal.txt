@@ -7,7 +7,7 @@
  	is_shown_in_lobby = {
 		c:UCA ?= THIS
 	}
-
+ 
     #is_shown_when_inactive = {
     #    c:UCA ?= THIS
     #}
@@ -23,28 +23,29 @@
     #    has_interest_in_region = sr:region_central_america
     #}
     
-
+ 
     #widget = {
     #    
     #    gui = "gui/ca_frca_custom_widgets.gui"
     #    name = "ca_frca_support_widget"
     #    container = "custom_widget_container_1"
     #}
-
+ 
     status_desc = {
         first_valid = {
-            triggered_desc = {
-                desc = ca_status_critical_desc # "¡La Federación se desmorona!"
-                trigger = { scope:journal_entry = { scripted_bar_progress = { name = frca_support_bar value > 100 } } }
-            }
+            # CAFM fix: orden corregido, de mayor a menor apoyo; el ultimo es el caso por defecto
             triggered_desc = {
                 desc = ca_status_stable_desc # "El gobierno federal mantiene el orden."
                 trigger = { scope:journal_entry = { scripted_bar_progress = { name = frca_support_bar value > 150 } } }
             }
             triggered_desc = {
                 desc = ca_status_default_desc # "La República pende de un hilo."
-				trigger = { scope:journal_entry = { scripted_bar_progress = { name = frca_support_bar value > 50 } } }
-			}
+                trigger = { scope:journal_entry = { scripted_bar_progress = { name = frca_support_bar value > 50 } } }
+            }
+            triggered_desc = {
+                desc = ca_status_critical_desc # "¡La Federación se desmorona!"
+                trigger = { always = yes }
+            }
         }
     }
     
@@ -59,17 +60,12 @@
     scripted_button = je_guatemala_intervention_central_america_button
     scripted_button = je_el_salvador_intervention_central_america_button
     scripted_button = federal_congress_decree_button
-
-    immediate = {
-        #if = {
-        #    limit = { NOT = { has_variable = frca_support } }
-        #    set_variable = { name = frca_support value = 100 }
-        #}
-                je:je_historic_central_america_falls_apart = {
-                    add_progress = { value = 50 name = frca_support_bar } 
-                }
-    }
-
+ 
+    # CAFM fix: el immediate usaba je:je_historic_central_america_falls_apart, pero cuando
+    # corre el immediate el diario todavia no existe ("Failed to scope to journal entry").
+    # El +50 nunca se aplico: la barra siempre empezo en 75 (start_value de frca_support_bar).
+    # Si quieres empezar en 125, cambia start_value en zz_ca_progress_bars.txt.
+ 
     
     #immediate_all_involved = {
     #    # Marca a los países como involucrados en el colapso
@@ -77,7 +73,7 @@
     #    # Agrega tensión política mientras dure la crisis (usando tu modificador existente)
     #    add_modifier = { name = ca_funding_separatists_flag months = 120 } 
     #}
-
+ 
     
     #goal_add_value = { add = 200 }
     scripted_progress_bar = frca_support_bar
@@ -96,22 +92,23 @@
 			ca_central_america.46 #Nicaragua Declares Independence
 			ca_central_america.18 #Separatism in Costa Rica  
 			ca_central_america.45 #Costa Rica declares independence
+			ca_central_america.79 # CAFM: 30 may 1838, el Congreso autoriza a los estados (antes en el pulso anual)
 			ca_central_america.42 #Union Collapses Into Civil War / #Accept Fate & Become El Salvador			
 			ca_central_america.21 #Separatism in Honduras  
 			ca_central_america.48 #Honduras Declares Independence      
-			ca_central_america.69 #Civil War in Guatemala  
+			#ca_central_america.69 # CAFM fix: su trigger exige this = c:GUA; desde el pulso de la UCA nunca sale (sigue en je_ca_federalists_vs_separatists_situation)
 			ca_central_america.23 #Separatism in Los Altos
-			ca_central_america.85 #Los Altos Declares Independence
+			#ca_central_america.85 # CAFM fix: no tiene trigger: salia CADA MES y anexaba Nicaragua. Es la victoria federal en Nicaragua y se lanza desde otro evento
 			ca_central_america.47 #Guatemala Declares Independence
-			ca_central_america.63 #Civil War in Nicaragua
-
+			#ca_central_america.63 # CAFM fix: su trigger exige this = c:NIC; desde el pulso de la UCA nunca sale
+ 
         }
         random_events = {
             90 = 0
             25 = ca_central_america.17
         }
     }
-
+ 
     complete = {
         OR = {
 		
@@ -174,7 +171,7 @@
             }
         }
     }      
-
+ 
     fail = {
         OR = {
             # El soporte llega a cero absoluto (Colapso político)		  
@@ -268,7 +265,7 @@
     #}
 	
     on_complete = {
-        remove_variable = uca_cholera_pandemic
+        remove_global_variable = uca_cholera_pandemic # CAFM fix: es variable global (la pone .15)
         
         hidden_effect = { 
             ig:ig_landowners = {
@@ -285,7 +282,7 @@
 			#trigger_event = { id = "the_grand_union" }											 
         }
     }
-
+ 
     
     #on_complete_all_involved = {
     #    # Si la Federación sobrevive, limpia la variable y recompensa a todos con estabilidad
@@ -309,7 +306,7 @@
     # ----------------------------------------------------
     
     transferable = no
-
+ 
     invalid = {
         NOT = { exists = c:UCA }
     }
@@ -319,6 +316,7 @@
     #    remove_modifier = ca_funding_separatists_flag
     #}	
 }
+
 je_ca_coffee_boom = {
 	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
 	group = je_group_internal_affairs
@@ -574,7 +572,7 @@ je_ca_central_american_fragile_unity = { #events 1836 - 1842
     transferable = no
     can_revolution_inherit = yes
     can_deactivate = no
-    should_be_pinned_by_default = yes
+    #CAFM FIX
 }
 je_ca_state_role_in_federation = {
     icon = "gfx/interface/icons/event_icons/event_protest.dds"

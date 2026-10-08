@@ -1,39 +1,76 @@
-﻿CHARACTERS = {
+﻿# =====================================================================
+# CAFM — UCA, 1 de enero de 1836
+# Cast federal + los líderes de cada estado como políticos de la UCA.
+# Al separarse un estado, cafm_cast_activate_<estado> pasa a su gente
+# al nuevo país (ver zz_cafm_cast_effects.txt).
+# Diseño: claude/CAFM_NATIONAL_CAST_1836_1850.md (v3).
+# =====================================================================
+CHARACTERS = {
 	c:UCA ?= {
+
+		# =============================================================
+		# CAST FEDERAL
+		# =============================================================
+
+		# Presidente federal (1835–1839) y Ejército
 		create_character = {
 			template = UCA_francisco_morazan
-                      ig_leader = yes
+			ig_leader = yes
 		}
-       # --- LÍDER INTELECTUAL ---
-        create_character = {
-            template = gua_mariano_galvez_character_template
-            ig_leader = yes
-        }
 
-        # --- LÍDER IGLESIA ---
-        create_character = {
-            template = uca_ramon_casaus_character_template
-            ig_leader = yes
-        }
+		# Vicepresidente federal; muere el 1 feb 1838 (pulso de muertes)
+		create_character = {
+			template = cafm_gregorio_salazar
+		}
 
-        # --- LÍDER PEQUEÑA BURGUESÍA ---
-        create_character = {
-            template = uca_francisco_barrundia_character_template
-            ig_leader = yes
-        }
+		# Intelectuales: Pedro Molina, prócer y periodista liberal
+		create_character = {
+			template = cafm_pedro_molina
+			ig_leader = yes
+		}
 
-        # --- LÍDER HACENDADOS ---
-        create_character = {
-            template = gua_mariano_aycinena_character_template
-            ig_leader = yes
-        }
+		# Pequeña Burguesía: Barrundia, liberal "fiebre"
+		create_character = {
+			template = uca_francisco_barrundia_character_template
+			ig_leader = yes
+		}
 
-        # --- GENERAL ADICIONAL ---
-        create_character = {
-            template = hon_cabanas_character_template
+		# Generales federales
+		create_character = { template = cafm_carlos_salazar }
+		create_character = { template = cafm_juan_galindo }
 
-        }
-        
+		# El arzobispo Casaús lleva en La Habana desde 1829: empieza en el exilio
+		create_character = {
+			template = uca_ramon_casaus_character_template
+			save_scope_as = cafm_casaus_scope
+		}
+		scope:cafm_casaus_scope = { exile_character = yes }
 
-    }
+		# Mariano de Aycinena (Terratenientes) está exiliado en Comitán:
+		# vuelve en 1837 por su bloque de uso (cafm_02_gua_characters.txt).
+
+		# =============================================================
+		# LÍDERES DE LOS ESTADOS (políticos de la UCA)
+		# =============================================================
+
+		# Guatemala: Mariano Gálvez, jefe de Estado (1831–1838)
+		create_character = { template = gua_mariano_galvez_character_template }
+
+		# El Salvador: Francisco Gómez, jefe interino (15 nov 1835–1 feb 1836)
+		create_character = { template = els_francisco_gomez_character_template }
+		# El Salvador: Diego Vigil, jefe desde el 1 feb 1836; después
+		# vicepresidente (1838) y último presidente federal (1839–1840)
+		create_character = { template = els_diego_vigil_character_template }
+
+		# Honduras: Joaquín Rivera, jefe de Estado hasta el 31 dic 1836
+		create_character = { template = hon_joaquin_rivera_character_template }
+		# Honduras: José Trinidad Cabañas, general morazanista
+		create_character = { template = hon_cabanas_character_template }
+
+		# Nicaragua: José Zepeda, jefe de Estado; asesinado el 25 ene 1837
+		create_character = { template = nic_jose_zepeda_character_template }
+
+		# Costa Rica: Braulio Carrillo, jefe de Estado (1835–1837)
+		create_character = { template = cos_braulio_carrillo_character_template }
+	}
 }
