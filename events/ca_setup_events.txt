@@ -18,9 +18,11 @@ ca_setup_events.1 = { #elecion de la cadena de eventos para la ia
 	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
 
 	trigger = {
+		this = c:UCA # CAFM fix: sin trigger salia cada año en todos los paises del mundo
+		NOT = { has_variable = ca_setup_choice_made }
 	}
 	immediate = {
-
+		set_variable = ca_setup_choice_made
 	}
 	option = { #Historic Railway Events
 		name = ca_central_america.setup.a
@@ -211,7 +213,13 @@ ca_setup_events.4 = {
 	type = country_event
 	hidden = yes
 
+	trigger = {
+		this = c:UCA # CAFM fix: sin trigger salia cada año en todos los paises del mundo
+		NOT = { has_variable = ca_setup_4_done }
+	}
+
 	immediate = {
+		set_variable = ca_setup_4_done
 		# Forzamos la creación del Lobby Pro-Federalista en los sujetos leales
 		every_direct_subject = { # CAFM fix: every_subject no existe
 			limit = {
@@ -227,8 +235,7 @@ ca_setup_events.4 = {
 
 		# Aplicamos el modificador de "Era de los Caudillos" a nivel nacional
 		add_modifier = {
-			name = age_of_ca_caudillos_modifier
-			months = -1 # Permanente hasta que se remueva por evento
+			name = age_of_ca_caudillos_modifier # CAFM fix: sin duracion = permanente (months = -1 no es valido)
 		}
 		every_political_movement = {
             limit = {

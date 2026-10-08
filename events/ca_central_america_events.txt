@@ -601,7 +601,8 @@ ca_central_america.1 = {
     trigger = {
         game_date >= 1836.5.1
         exists = c:UCA
-        this = c:UCA 
+        this = c:UCA
+        exists = s:STATE_GUATEMALA.region_state:UCA # CAFM fix: placement y efectos usan este estado 
        
         NOT = { has_global_variable = ca_los_altos_proposal_fired }
     }
@@ -635,7 +636,7 @@ ca_central_america.1 = {
         }
         
         scope:guatemala_state = {
-            add_loyalists = {
+            add_loyalists_in_state = { # CAFM fix: add_loyalists es de pais (causaba ADD_LOYALISTS_THIRD)
                 value = 0.1
                 culture = cu:central_american
             }
@@ -681,7 +682,7 @@ ca_central_america.1 = {
         }
         
         scope:guatemala_state = {
-            add_radicals = {
+            add_radicals_in_state = { # CAFM fix: add_radicals es de pais
                 value = 0.15
                 culture = cu:central_american
             }
@@ -759,10 +760,10 @@ ca_central_america.2 = {
         
         scope:guatemala_state = {
             add_modifier = { name = ca_separatist_agitation_modifier months = 12 }
-            add_radicals = { value = 0.10 pop_type = academics }
-            add_radicals = { value = 0.10 pop_type = shopkeepers }
-            add_radicals = { value = 0.10 pop_type = clerks }
-            add_radicals = { value = 0.10 pop_type = aristocrats }
+            add_radicals_in_state = { value = 0.10 pop_type = academics }
+            add_radicals_in_state = { value = 0.10 pop_type = shopkeepers }
+            add_radicals_in_state = { value = 0.10 pop_type = clerks }
+            add_radicals_in_state = { value = 0.10 pop_type = aristocrats }
         }
         
         ai_chance = { base = 50 }
@@ -955,7 +956,7 @@ ca_central_america.4 = {
         }
         
         scope:rebellion_state = {
-            add_radicals = {
+            add_radicals_in_state = { # CAFM fix: add_radicals es de pais
                 value = 0.25
                 culture = cu:central_american
             }
@@ -1163,7 +1164,7 @@ ca_central_america.6 = {
     option = { #UCA/COS
         name = ca_central_america.6.a 
         default_option = yes
-        scope:bocas_state = {
+        p:x47C5F8.state ?= { # CAFM fix: bocas_state es state_region aqui
 			add_modifier = {
 				name = ca_direct_administration_modifier
 				months = 60
@@ -1365,7 +1366,7 @@ ca_central_america.7 = {
         name = ca_central_america.7.c # Direct Crown Administration        
         set_variable = rejects_pp1_gbr        
         create_incident = { country = ROOT value = 3 }                                      
-        scope:bocas_state = {
+        p:x47C5F8.state ?= { # CAFM fix: bocas_state es state_region aqui
             add_modifier = {
                 name = ca_british_outpost_modifier # Puedes crearlo con +10% producción de madera
                 months = 120
@@ -1515,15 +1516,23 @@ ca_central_america.9 = {
     trigger = { 
 		this = c:UCA
 		exists = c:CLM
-        #c:PP1 = { is_subject = yes } 
+		# CAFM fix: solo cuando Bocas ya es un titere EXTRANJERO (eventos 7.a o 8.a).
+		# Si PP1 es sujeto de la UCA lo trata el evento 10.
+		exists = c:PP1
+		c:PP1 = {
+			is_subject = yes
+			NOT = { is_subject_of = c:UCA }
+		}
+		NOT = { has_variable = intervene_pp1_clm }
+		NOT = { has_variable = rejects_pp1_clm }
     }
 
     immediate = {
        	c:UCA = { save_scope_as = uca_scope }
 		c:CLM = { save_scope_as = colombia_scope }
-		c:COS = { save_scope_as = costa_rica_scope }
+		c:COS ?= { save_scope_as = costa_rica_scope } # CAFM fix: COS no existe mientras siga dentro de la UCA
 	 
-        c:PP1 = {
+        c:PP1 ?= {
             save_scope_as = bocas_puppet
             overlord = {
                 save_scope_as = puppet_master
@@ -1551,7 +1560,10 @@ ca_central_america.9 = {
 		}
 		}
 		if = {
-            limit = { p:x47C5F8 = { owner = c:COS } }
+            limit = {
+				exists = c:COS # CAFM fix: comparar con un pais que no existe da 'Invalid right side'
+				p:x47C5F8 = { owner = c:COS }
+			}
 		
 		
 		c:CLM = {
@@ -1564,7 +1576,7 @@ ca_central_america.9 = {
 		}	
 		
 		
-        scope:puppet_master = {
+        scope:puppet_master ?= {
             create_incident = {
                 country = root 
                 value = 15
@@ -1585,7 +1597,7 @@ ca_central_america.9 = {
         je:je_historic_central_america_falls_apart = {
 		add_progress = { value = -25 name = frca_support_bar }
 		}
-		scope:costa_rica_scope = {
+		scope:costa_rica_scope ?= {
 			add_modifier = {
 				name = ca_epifania_tragica
 				months = 60
@@ -1598,7 +1610,7 @@ ca_central_america.9 = {
         }
         
         
-        scope:puppet_master = {
+        scope:puppet_master ?= {
             change_relations = {
                 country = root
                 value = 20
@@ -1678,7 +1690,7 @@ ca_central_america.10 = {
         scope:secession_capital_region = { add_claim = ROOT }
         
         scope:bocas_state = {
-            add_radicals = {
+            add_radicals_in_state = { # CAFM fix: add_radicals es de pais
                 value = 0.20
                 culture = cu:central_american
             }
@@ -2372,7 +2384,11 @@ ca_central_america.14 = {
     icon = "gfx/interface/icons/event_icons/event_scales.dds"
     trigger = {
         this = c:UCA
-        NOT = { has_variable = uca_livingston_penal_code }
+        # CAFM fix: las opciones guardan una variable GLOBAL; antes se revisaba la del pais y el evento salia cada mes
+        NOT = { has_global_variable = uca_livingston_penal_code }
+        # CAFM fix: ventana historica (los codigos entraron en vigor en Guatemala el 1 de enero de 1837)
+        game_date >= 1836.3.1
+        game_date < 1837.6.1
     }
     
     immediate = {
@@ -2400,6 +2416,7 @@ ca_central_america.14 = {
 			add_modifier = { name = ca_ig_approval_down_massive months = 60 }
 		}
 		add_radicals = { value = 0.2 interest_group = ig:ig_devout } # CAFM fix
+		ai_chance = { base = 80 } # CAFM fix: historica (Galvez aplico los codigos)
 	}
 	
 	option = {
@@ -2410,7 +2427,7 @@ ca_central_america.14 = {
 			months = 24
 		}
 	
-        ai_chance = { base = 50 }
+        ai_chance = { base = 20 } # CAFM fix: antes 50
     }
 
 }
@@ -3631,7 +3648,7 @@ ca_central_america.32 = {
 		this = c:UCA
 	}
     immediate = {
-        c:GUA = { remove_variable = ca_intervention_request_active }
+        c:GUA ?= { remove_variable = ca_intervention_request_active }
     }
 
     option = {
@@ -3645,7 +3662,7 @@ ca_central_america.32 = {
             }
         }
         add_treasury = -15000
-        c:GUA = { add_modifier = { name = ca_federal_intervention_boost months = 12 } }
+        c:GUA ?= { add_modifier = { name = ca_federal_intervention_boost months = 12 } }
     }
 
     option = {
@@ -3988,6 +4005,7 @@ ca_central_america.42 = {
 
 		has_journal_entry = je_historic_central_america_falls_apart
 		je:je_historic_central_america_falls_apart = { scripted_bar_progress = { name = frca_support_bar value <= 10 } } # CAFM fix
+		NOT = { has_variable = second_frca_civil_war_var } # CAFM fix: sin esto la guerra civil se repetia cada mes
 
 		OR = {
 			exists = c:GUA
@@ -4143,6 +4161,8 @@ ca_central_america.43 = {
     icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
     trigger = {
         this = c:UCA
+        NOT = { has_variable = frca_lost_war } # CAFM fix: el evento ya la crea pero no la comprobaba
+        NOT = { has_variable = frca_won_war }
         is_at_war = no
         is_active_in_diplomatic_play = no
         OR = {
@@ -4163,6 +4183,7 @@ ca_central_america.43 = {
         }
     }
     immediate = {
+        set_variable = frca_lost_war # CAFM fix: marca inmediata (antes solo en las opciones)
         set_variable = frca_lost_war
         ruler = { exile_character = yes }
             if = {
@@ -4208,6 +4229,8 @@ ca_central_america.44 = {
     icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
     trigger = {
         this = c:UCA
+        NOT = { has_variable = frca_won_war } # CAFM fix: el evento ya la crea pero no la comprobaba
+        NOT = { has_variable = frca_lost_war }
         has_variable = second_frca_civil_war_var
         is_at_war = no
         is_active_in_diplomatic_play = no
@@ -4218,7 +4241,9 @@ ca_central_america.44 = {
             NOT = { exists = c:COS }
         }
     }
-    immediate = { }
+    immediate = {
+        set_variable = frca_won_war # CAFM fix: marca inmediata (antes solo en las opciones)
+    }
     option = { #The Union has prevailed for now
         name = ca_central_america.44.a
         default_option = yes
@@ -8255,8 +8280,10 @@ ca_central_america.120 = { #El Grito del Sexto Estado (La Crisis de Los Altos)
 	
 	trigger = {
 		this = c:UCA
+		exists = s:STATE_GUATEMALA.region_state:UCA # CAFM fix
 		has_journal_entry = je_historic_central_america_falls_apart
 		game_date < 1838.1.1
+		NOT = { has_variable = ca_grito_sexto_estado_fired } # CAFM fix: una sola vez
 		OR = {
 			s:STATE_GUATEMALA = {
 				any_scope_state = { turmoil > 0.2 } # CAFM fix: turmoil es de estado, no de state_region
@@ -8273,7 +8300,8 @@ ca_central_america.120 = { #El Grito del Sexto Estado (La Crisis de Los Altos)
 	}
 	
 	immediate = {
-		s:STATE_GUATEMALA = {
+		set_variable = ca_grito_sexto_estado_fired
+		s:STATE_GUATEMALA.region_state:UCA ?= { # CAFM fix: guardar el ESTADO de la UCA, no el state_region
 			save_scope_as = guatemala_state
 		}
 	}
@@ -8282,27 +8310,26 @@ ca_central_america.120 = { #El Grito del Sexto Estado (La Crisis de Los Altos)
 		name = ca_central_america.120.a
 		default_option = yes
 		je:je_historic_central_america_falls_apart = {
-			change_variable = {
-				name = frca_support_bar
-				subtract = 10
-			}
+			add_progress = { value = -10 name = frca_support_bar } # CAFM fix: es una barra, no una variable
 		}
-		create_country = {
-			tag = ALT
-			state = scope:guatemala_state
-		}
-		create_diplomatic_pact = {
-			country = c:ALT
-			type = ca_dependency
-		}
-		scope:guatemala_state = {
+		# CAFM fix: create_country necesita un ESTADO o provincias, no un state_region.
+		# Este efecto ya existe: crea ALT con las 4 provincias de Los Altos y la hace dependencia de la UCA.
+		ca_create_losaltoswithoutsoconusco_effect = yes
+		scope:guatemala_state ?= {
 			add_modifier = {
 				name = ca_infrastructure_boom_modifier
 				months = 36
 			}
 		}
-		c:GUA = {
-			add_radicals = { value = 0.1 interest_group = ig:ig_landowners } # CAFM fix
+		# CAFM fix: c:GUA no existe en 1836-1837 (Guatemala sigue dentro de la UCA)
+		if = {
+			limit = { exists = c:GUA }
+			c:GUA = {
+				add_radicals = { value = 0.1 interest_group = ig:ig_landowners }
+			}
+		}
+		else = {
+			add_radicals = { value = 0.1 interest_group = ig:ig_landowners }
 		}
 		trigger_event = {
 			id = ca_central_america.2
@@ -8332,7 +8359,7 @@ ca_central_america.120 = { #El Grito del Sexto Estado (La Crisis de Los Altos)
 	
 	option = {
 		name = ca_central_america.120.c
-		scope:guatemala_state = {
+		scope:guatemala_state ?= {
 			add_modifier = {
 				name = ca_massive_agitation_modifier
 				months = 12
@@ -8356,6 +8383,11 @@ ca_central_america.121 = {
 	trigger = {
 		this = c:UCA
 		owns_entire_state_region = STATE_GUATEMALA # CAFM fix
+		NOT = { has_variable = ca_peso_guatemala_fired } # CAFM fix: una sola vez
+	}
+
+	immediate = {
+		set_variable = ca_peso_guatemala_fired
 	}
 	
 	option = {
@@ -8366,11 +8398,28 @@ ca_central_america.121 = {
 				is_marginal = no
 			}
 		}
+		# CAFM fix: je_gua_support_var nunca se crea; change_variable sobre una variable vacia da error
+		if = {
+			limit = { NOT = { has_variable = je_gua_support_var } }
+			set_variable = { name = je_gua_support_var value = 0 }
+		}
 		change_variable = {
 			name = je_gua_support_var
 			subtract = 20
 		}
-		c:GUA = {
+		# CAFM fix: c:GUA no existe mientras la UCA posee Guatemala (es el trigger de este evento)
+		if = {
+			limit = { exists = c:GUA }
+			c:GUA = {
+				ig:ig_landowners = {
+					add_modifier = {
+						name = ca_ig_approval_down_massive
+						months = 36
+					}
+				}
+			}
+		}
+		else = {
 			ig:ig_landowners = {
 				add_modifier = {
 					name = ca_ig_approval_down_massive
@@ -8425,9 +8474,11 @@ ca_central_america.122 = {
 	trigger = {
 		this = c:UCA
 		exists = c:ALT
+		NOT = { has_variable = ca_secesion_altos_fired } # CAFM fix: una sola vez
 	}
 	
 	immediate = {
+		set_variable = ca_secesion_altos_fired
 		c:ALT = {
 			save_scope_as = secession_country
 		}
