@@ -1,0 +1,310 @@
+﻿# =====================================================================
+# CAFM — Cast nacional: mecanismo (fase 1)
+#
+# Diseño: claude/CAFM_NATIONAL_CAST_1836_1850.md (v3).
+#
+# Reglas
+#  1. Cada plantilla registra a su personaje al crearse:
+#       set_variable = cafm_cast_<cast>                              (su cast)
+#       set_global_variable = { name = cafm_hc_<clave> value = this } (registro)
+#  2. Durante la UCA, los líderes de cada estado viven en la UCA como
+#     políticos. Al separarse un estado, todo su cast pasa al nuevo país
+#     (cafm_cast_activate_<estado>) y se fija su gobernante por fecha.
+#  3. Nadie se crea dos veces: todo pasa por cafm_spawn_or_transfer.
+#  4. Una muerte histórica deja la marca global cafm_dead_<clave>. Un
+#     personaje marcado no se vuelve a crear ni a transferir.
+#  5. El gobernante en funciones de la UCA nunca se transfiere.
+#
+# VERIFICAR con effects.log / triggers.log de 1.13–1.14:
+#  - transfer_character (efecto de personaje con país de destino).
+#  - every_scope_character como efecto.
+#  - Parámetros $X$ en scripted effects anidados.
+#  - Que la referencia global a un personaje muerto deje de ser válida.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# cafm_spawn_or_transfer
+# Trae a un personaje histórico al país del scope actual.
+#   KEY      = clave del registro (cafm_hc_<KEY>)
+#   TEMPLATE = plantilla de personaje
+#   RULER    = yes / no (hacerlo gobernante)
+#
+# Ejemplo:
+#   c:GUA = {
+#       cafm_spawn_or_transfer = {
+#           KEY = galvez
+#           TEMPLATE = gua_mariano_galvez_character_template
+#           RULER = yes
+#       }
+#   }
+# ---------------------------------------------------------------------
+cafm_spawn_or_transfer = {
+	save_scope_as = cafm_cast_target
+	if = {
+		# Ya existe: se trae aquí
+		limit = {
+			NOT = { has_global_variable = cafm_dead_$KEY$ }
+			global_var:cafm_hc_$KEY$ ?= { always = yes }
+		}
+		global_var:cafm_hc_$KEY$ = {
+			if = {
+				limit = {
+					NOT = {
+						scope:cafm_cast_target = {
+							any_scope_character = { this = global_var:cafm_hc_$KEY$ }
+						}
+					}
+				}
+				transfer_character = scope:cafm_cast_target
+			}
+			if = {
+				limit = { always = $RULER$ }
+				set_character_as_ruler = yes
+			}
+		}
+	}
+	else_if = {
+		# Nunca existió (o se perdió su referencia) y no murió: se crea
+		limit = {
+			NOT = { has_global_variable = cafm_dead_$KEY$ }
+		}
+		create_character = {
+			template = $TEMPLATE$
+			ruler = $RULER$
+		}
+	}
+}
+
+
+# ---------------------------------------------------------------------
+# cafm_cast_transfer_from_uca
+# Pasa al país del scope a todos los personajes del cast CAST que estén
+# en la UCA, salvo el gobernante de la UCA y quien tenga cafm_cast_stays.
+#   CAST = gua / els / hon / nic / cos / alt / pnm / cip
+# ---------------------------------------------------------------------
+cafm_cast_transfer_from_uca = {
+	save_scope_as = cafm_cast_target
+	if = {
+		limit = {
+			exists = c:UCA
+			NOT = { c:UCA ?= this }
+		}
+		c:UCA = {
+			every_scope_character = {
+				limit = {
+					has_variable = cafm_cast_$CAST$
+					NOT = { has_variable = cafm_cast_stays }
+					NOT = { c:UCA.ruler ?= this }
+				}
+				transfer_character = scope:cafm_cast_target
+			}
+		}
+	}
+}
+
+
+# ---------------------------------------------------------------------
+# cafm_cast_historical_death
+# Muerte histórica de un personaje que sigue en el país del scope.
+#   KEY = clave del registro
+# ---------------------------------------------------------------------
+cafm_cast_historical_death = {
+	if = {
+		limit = {
+			NOT = { has_global_variable = cafm_dead_$KEY$ }
+			global_var:cafm_hc_$KEY$ ?= { always = yes }
+			any_scope_character = { this = global_var:cafm_hc_$KEY$ }
+		}
+		global_var:cafm_hc_$KEY$ = { kill_character = yes }
+		set_global_variable = cafm_dead_$KEY$
+	}
+}
+
+
+# =====================================================================
+# MUERTES HISTÓRICAS EN LA UCA (pulso mensual, solo modo histórico)
+# Solo matan si el personaje sigue en la UCA. Si su estado ya se separó,
+# la muerte la llevan los eventos de ese país (por ejemplo, Zepeda en
+# ca_nicaragua_events.13).
+# =====================================================================
+cafm_cast_uca_historical_deaths = {
+	# José Zepeda, asesinado en el golpe de León (25 ene 1837)
+	if = {
+		limit = {
+			game_date >= 1837.1.25
+			NOT = { has_global_variable = cafm_zepeda_dead }
+		}
+		cafm_cast_historical_death = { KEY = zepeda }
+		if = {
+			limit = { has_global_variable = cafm_dead_zepeda }
+			set_global_variable = cafm_zepeda_dead		# compatibilidad con Nicaragua fase 1
+		}
+	}
+	# José Gregorio Salazar, vicepresidente federal, muerto por las tropas
+	# de Carrera al tomar la capital (1 feb 1838)
+	if = {
+		limit = { game_date >= 1838.2.1 }
+		cafm_cast_historical_death = { KEY = gregorio_salazar }
+	}
+	# Francisco Gómez, asesinado en Guatemala (17 may 1838)
+	if = {
+		limit = { game_date >= 1838.5.17 }
+		cafm_cast_historical_death = { KEY = francisco_gomez_els }
+	}
+	# Juan Galindo, muerto tras la batalla cerca de Tegucigalpa (30 ene 1840)
+	if = {
+		limit = { game_date >= 1840.1.30 }
+		cafm_cast_historical_death = { KEY = galindo }
+	}
+}
+
+
+# =====================================================================
+# ACTIVACIÓN DE CADA CAST (scope: el país recién creado o liberado)
+# Se llama desde ca_play_<estado>_effect y ca_liberate_<estado>_effect.
+# Si se llama con otro scope (por ejemplo, la UCA), no hace nada. Antes,
+# ca_central_america.18–.22 llamaban a ca_liberate_<estado>_effect desde
+# la UCA (esta fase lo corrige con c:<TAG> ?= { ... }).
+# =====================================================================
+cafm_cast_activate_gua = {
+	if = {
+		limit = { c:GUA ?= this }		# solo en el propio país (nunca en la UCA)
+		cafm_cast_transfer_from_uca = { CAST = gua }
+		cafm_cast_set_ruler_gua = yes
+	}
+}
+cafm_cast_activate_els = {
+	if = {
+		limit = { c:ELS ?= this }		# solo en el propio país (nunca en la UCA)
+		cafm_cast_transfer_from_uca = { CAST = els }
+		cafm_cast_set_ruler_els = yes
+	}
+}
+cafm_cast_activate_hon = {
+	if = {
+		limit = { c:HON ?= this }		# solo en el propio país (nunca en la UCA)
+		cafm_cast_transfer_from_uca = { CAST = hon }
+		cafm_cast_set_ruler_hon = yes
+	}
+}
+cafm_cast_activate_nic = {
+	if = {
+		limit = { c:NIC ?= this }		# solo en el propio país (nunca en la UCA)
+		cafm_cast_transfer_from_uca = { CAST = nic }
+		cafm_cast_set_ruler_nic = yes
+	}
+}
+cafm_cast_activate_cos = {
+	if = {
+		limit = { c:COS ?= this }		# solo en el propio país (nunca en la UCA)
+		cafm_cast_transfer_from_uca = { CAST = cos }
+		cafm_cast_set_ruler_cos = yes
+	}
+}
+cafm_cast_activate_alt = {
+	if = {
+		limit = { c:ALT ?= this }		# solo en el propio país (nunca en la UCA)
+		cafm_cast_transfer_from_uca = { CAST = alt }
+		cafm_cast_set_ruler_alt = yes
+	}
+}
+
+
+# =====================================================================
+# GOBERNANTES POR FECHA (1836–1850)
+# Solo los tramos verificados. Fuera de ellos no se fuerza gobernante:
+# el juego elige uno y los eventos del país toman el relevo. Cada fase
+# de país completa su tabla.
+# =====================================================================
+
+# --- Guatemala ---
+# Gálvez 1831–feb 1838 · Valenzuela feb–jul 1838 (P) ·
+# Rivera Paz 29 jul 1838–11 dic 1844 (se omiten los interinatos de Carlos
+# Salazar, ene–abr 1839, y de Venancio López, feb–may 1842) ·
+# Carrera 11 dic 1844–15 ago 1848
+cafm_cast_set_ruler_gua = {
+	if = {
+		limit = { game_date < 1838.2.1 }
+		cafm_spawn_or_transfer = { KEY = galvez TEMPLATE = gua_mariano_galvez_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1838.7.29 }
+		cafm_spawn_or_transfer = { KEY = valenzuela TEMPLATE = cafm_pedro_valenzuela RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1844.12.11 }
+		cafm_spawn_or_transfer = { KEY = rivera_paz TEMPLATE = gua_mariano_rivera_paz_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1848.8.15 }
+		cafm_spawn_or_transfer = { KEY = carrera TEMPLATE = gua_rafael_carrera_character_template RULER = yes }
+	}
+}
+
+# --- El Salvador ---
+# Francisco Gómez (interino) 15 nov 1835–1 feb 1836 ·
+# Diego Vigil 1 feb 1836–6 ene 1838 (se omite el interinato de Timoteo
+# Menéndez, 23 may–7 jun 1837) · Después: fase El Salvador
+cafm_cast_set_ruler_els = {
+	if = {
+		limit = { game_date < 1836.2.1 }
+		cafm_spawn_or_transfer = { KEY = francisco_gomez_els TEMPLATE = els_francisco_gomez_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1838.1.6 }
+		cafm_spawn_or_transfer = { KEY = vigil TEMPLATE = els_diego_vigil_character_template RULER = yes }
+	}
+}
+
+# --- Honduras ---
+# Joaquín Rivera hasta el 31 dic 1836 · Después: fase Honduras
+# (Martínez Salinas, Justo José de Herrera, etc.)
+cafm_cast_set_ruler_hon = {
+	if = {
+		limit = { game_date < 1837.1.1 }
+		cafm_spawn_or_transfer = { KEY = joaquin_rivera TEMPLATE = hon_joaquin_rivera_character_template RULER = yes }
+	}
+}
+
+# --- Nicaragua ---
+# José Zepeda hasta su asesinato (25 ene 1837) · Después: fase Nicaragua
+# (Núñez lo pone ca_nicaragua_events.14)
+cafm_cast_set_ruler_nic = {
+	if = {
+		limit = {
+			game_date < 1837.1.25
+			NOT = { has_global_variable = cafm_zepeda_dead }
+		}
+		cafm_spawn_or_transfer = { KEY = zepeda TEMPLATE = nic_jose_zepeda_character_template RULER = yes }
+	}
+}
+
+# --- Costa Rica ---
+# Carrillo hasta el 1 mar 1837 · Joaquín Mora 1 mar–17 abr 1837 ·
+# Aguilar 17 abr 1837–27 may 1838 · Carrillo 27 may 1838–13 abr 1842 ·
+# Después: los eventos de la República (je_ca_cos_republica)
+cafm_cast_set_ruler_cos = {
+	if = {
+		limit = { game_date < 1837.3.1 }
+		cafm_spawn_or_transfer = { KEY = carrillo TEMPLATE = cos_braulio_carrillo_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1837.4.17 }
+		cafm_spawn_or_transfer = { KEY = joaquin_mora TEMPLATE = joaquin_mora_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1838.5.27 }
+		cafm_spawn_or_transfer = { KEY = aguilar_chacon TEMPLATE = cos_manuel_aguilar_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1842.4.13 }
+		cafm_spawn_or_transfer = { KEY = carrillo TEMPLATE = cos_braulio_carrillo_character_template RULER = yes }
+	}
+}
+
+# --- Los Altos ---
+# Marcelo Molina (antes se creaba en línea, sin plantilla) · Fechas: fase Los Altos
+cafm_cast_set_ruler_alt = {
+	cafm_spawn_or_transfer = { KEY = marcelo_molina TEMPLATE = cafm_marcelo_molina RULER = yes }
+}

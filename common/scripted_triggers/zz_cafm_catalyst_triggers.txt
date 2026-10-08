@@ -1,0 +1,22 @@
+# =====================================================================
+# CAFM — Triggers de apoyo para los catalizadores (2026-10-07)
+# Bandos del siglo XIX centroamericano: liberales (fiebres) y conservadores (serviles).
+# =====================================================================
+
+# Régimen liberal: la Intelligentsia en el gobierno y sin terratenientes ni clero
+cafm_is_liberal_regime = {
+	ig:ig_intelligentsia ?= { is_in_government = yes }
+	NOR = {
+		ig:ig_landowners ?= { is_in_government = yes }
+		ig:ig_devout ?= { is_in_government = yes }
+	}
+}
+
+# Régimen conservador: terratenientes o clero en el gobierno y sin la Intelligentsia
+cafm_is_conservative_regime = {
+	OR = {
+		ig:ig_landowners ?= { is_in_government = yes }
+		ig:ig_devout ?= { is_in_government = yes }
+	}
+	NOT = { ig:ig_intelligentsia ?= { is_in_government = yes } }
+}

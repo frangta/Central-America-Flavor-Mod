@@ -1,0 +1,130 @@
+﻿# =====================================================================
+# CAFM — HONDURAS — FASE 1 (1836–1837): modificadores de ca_honduras_events
+# y de je_ca_hon_caudillo. Solo tipos de modificador que el mod ya usa.
+# Los state_* puestos en el país se aplican a todos sus estados.
+# Las cifras son propuestas de balance.
+# =====================================================================
+
+# --- .2 Dos ciudades, un Estado (arranque, cualquier opción) ---
+
+# PAÍS. 5 años. Sin caminos, sin monopolio de la violencia, contrabando.
+hon_estado_inacabado = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_tax_capacity_mult = -0.15
+	state_infrastructure_add = -5
+}
+
+# PAÍS. 5 años. Las milicias de comarca responden a sus hacendados.
+hon_milicias_comarca = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	interest_group_ig_armed_forces_pol_str_mult = 0.25
+	interest_group_ig_landowners_pol_str_mult = 0.15
+	country_legitimacy_base_add = -5
+}
+
+# PAÍS. Sin plazo. La moneda provisional de 1832, mitad plata y mitad cobre.
+# Se quitará con la compra del cuño (decisión de una fase posterior).
+hon_media_leche = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	state_tax_collection_mult = -0.05
+	country_minting_add = -100
+}
+
+# PAÍS. Opción b: la sede se acerca a la plata.
+hon_sede_tegucigalpa = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	building_gold_mine_throughput_add = 0.10
+	country_minting_add = 100
+}
+
+# PAÍS. Opción c: capital alterna entre Comayagua y Tegucigalpa.
+hon_sede_alterna = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
+	country_bureaucracy_add = -15
+	country_legitimacy_base_add = 5
+}
+
+# --- .3 La encrucijada de Rivera ---
+
+# PAÍS. Opción a: reforma de la administración interior.
+hon_reforma_administrativa = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	country_bureaucracy_add = 10
+	state_tax_capacity_mult = 0.10
+	country_legitimacy_base_add = 5
+}
+
+# PAÍS. Opción c: el comandante impone el orden.
+hon_orden_militar = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = 50
+	country_legitimacy_base_add = -10
+}
+
+# --- .4 La plata de Tegucigalpa ---
+
+# PAÍS. Opción a: concesiones a casas extranjeras.
+hon_concesiones_mineras = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	building_gold_mine_throughput_add = 0.15
+}
+
+# PAÍS. Opción b: Casa de Moneda de Tegucigalpa (1831).
+hon_casa_de_moneda = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	country_minting_add = 200
+}
+
+# --- .5 La caoba de la costa norte ---
+
+# PAÍS. Opción a: contrata federal de corte de caoba (hasta 1840).
+hon_contrata_caoba = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_wood_positive.dds"
+	building_group_bg_logging_throughput_add = 0.10
+}
+
+# --- .6 Navidad de fuego en Tegucigalpa ---
+
+# PAÍS. Opción a: amnistía con excepciones.
+hon_amnistia = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 5
+	state_radicals_from_political_movements_mult = -0.2
+}
+
+# PAÍS. Opción b: la ciudad queda asolada.
+hon_tegucigalpa_asolada = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	building_gold_mine_throughput_add = -0.10
+	state_radicals_from_political_movements_mult = 0.1
+}
+
+# PAÍS. Opción c: negociar con los cabildos.
+hon_cabildos = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = -50
+}
+
+# --- .7 El mandato vencido ---
+
+# PAÍS. Opción a: el poder queda en un consejero provisional.
+hon_vacio_de_poder = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -10
+}
+
+# PAÍS. Opción b: Rivera prorroga su mandato.
+hon_prorroga_rivera = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -15
+}
+
+# --- je_ca_hon_caudillo ---
+
+# PAÍS. Mientras var:hon_caudillo >= 80.
+hon_regimen_comandante = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	interest_group_ig_armed_forces_pol_str_mult = 0.30
+	country_authority_add = 50
+	country_legitimacy_base_add = -10
+}

@@ -12,10 +12,8 @@ ca_play_guatemala_effect = {
 
 
 
-    create_character = {
-	template = gua_mariano_galvez_character_template
-    ruler = yes       
-    }
+    # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
+    cafm_cast_activate_gua = yes
 
 
 	ig:ig_armed_forces = {
@@ -96,10 +94,8 @@ ca_play_elsalvador_effect = {
     add_journal_entry = { type = je_ca_state_role_in_federation }
     add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
     #remove_variable = ca_secession_country
-    create_character = {
-        template = els_francisco_gomez_character_template
-        ruler = yes        
-    }
+    # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
+    cafm_cast_activate_els = yes
 
 	ig:ig_armed_forces = {
             remove_ideology = ideology_caudillismo
@@ -181,10 +177,8 @@ ca_play_honduras_effect = {
     add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
     #remove_variable = ca_secession_country
 
-    create_character = {
-        template = hon_joaquin_rivera_character_template
-        ruler = yes
-    }
+    # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
+    cafm_cast_activate_hon = yes
 
 	ig:ig_armed_forces = {
             remove_ideology = ideology_caudillismo
@@ -257,10 +251,8 @@ ca_play_nicaragua_effect = {
     add_journal_entry = { type = je_ca_state_role_in_federation }
     add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
     #remove_variable = ca_secession_country
-    create_character = {
-        template = nic_jose_zepeda_character_template
-        ruler = yes
-    }
+    # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
+    cafm_cast_activate_nic = yes
 
 	ig:ig_armed_forces = {
             remove_ideology = ideology_caudillismo
@@ -339,10 +331,8 @@ ca_play_costarica_effect = {
     add_journal_entry = { type = je_ca_state_role_in_federation }
     add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
     #remove_variable = ca_secession_country
-    create_character = {
-        template = cos_braulio_carrillo_character_template
-        ruler = yes 
-    }
+    # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
+    cafm_cast_activate_cos = yes
 
 	ig:ig_armed_forces = {
             remove_ideology = ideology_caudillismo
@@ -420,16 +410,8 @@ ca_play_losaltos_effect = {
     #remove_variable = ca_secession_country
     add_journal_entry = { type = je_ca_state_role_in_federation }
     add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }
-    create_character = {
-        first_name = "Marcelo"
-        last_name = "Molina"
-        ruler = yes
-        ig_leader = yes
-        birth_date = 1800.1.1
-        interest_group = ig_intelligentsia
-        ideology = ideology:ideology_reformer
-        traits = { meticulous }
-    }
+    # CAFM cast (fase 1): Marcelo Molina por plantilla (antes se creaba en línea)
+    cafm_cast_activate_alt = yes
 
 	ig:ig_armed_forces = {
             remove_ideology = ideology_caudillismo

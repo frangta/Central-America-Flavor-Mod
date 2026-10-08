@@ -1,0 +1,192 @@
+# =====================================================================
+# CAFM — Efectos para disparar los catalizadores diplomáticos (2026-10-07)
+#
+# IMPORTANTE: todo pasa por cafm_catalyst_fire. Si el efecto vanilla que
+# lanza un catalizador se llama distinto en tu versión, se cambia SOLO aquí.
+# (Para comprobarlo: busca "catalyst_event_positive" en la carpeta events/ de vanilla.)
+# =====================================================================
+
+# Se ejecuta en el país "root" del catalizador. TARGET = país que lo provoca.
+# Uso: c:NIC ?= { cafm_catalyst_fire = { TYPE = catalyst_ca_federal_aid_accepted TARGET = c:UCA } }
+cafm_catalyst_fire = {
+	create_diplomatic_catalyst = {
+		type = $TYPE$
+		target = $TARGET$
+	}
+}
+
+# --- 3. Secesión: catalizador en la UCA + contagio en los demás estados súbditos ---
+# Se ejecuta en la UCA. SECEDER = el estado que se separa.
+cafm_catalyst_secession = {
+	if = {
+		limit = { exists = $SECEDER$ }
+		cafm_catalyst_fire = { TYPE = catalyst_ca_secession_declared TARGET = $SECEDER$ }
+	}
+	every_country = {
+		limit = {
+			is_subject_of = c:UCA
+			NOT = { this = $SECEDER$ }
+		}
+		cafm_catalyst_fire = { TYPE = catalyst_ca_secession_contagion TARGET = c:UCA }
+	}
+}
+
+# --- 5. Paz con un estado separado: los demás estados de Centroamérica lo miran mejor ---
+# Se ejecuta donde sea. SECEDER = el estado separado.
+cafm_catalyst_peace_with_secessionist = {
+	if = {
+		limit = { exists = $SECEDER$ }
+		every_country = {
+			limit = {
+				is_ca_culture_country = yes
+				NOT = { this = $SECEDER$ }
+				NOT = { c:UCA ?= this }
+			}
+			cafm_catalyst_fire = { TYPE = catalyst_ca_peace_with_secessionist TARGET = $SECEDER$ }
+		}
+	}
+}
+
+# --- 6. Cambio de régimen: afinidad o rivalidad con los vecinos centroamericanos ---
+# Se ejecuta en el país que acaba de cambiar de régimen (golpe, nuevo gobernante, revolución).
+cafm_catalyst_partisan_regime_change = {
+	save_scope_as = cafm_regime_changer
+	if = {
+		limit = { cafm_is_liberal_regime = yes }
+		every_country = {
+			limit = {
+				is_ca_culture_country = yes
+				NOT = { this = scope:cafm_regime_changer }
+				has_strategic_adjacency = scope:cafm_regime_changer
+			}
+			if = {
+				limit = { cafm_is_liberal_regime = yes }
+				cafm_catalyst_fire = { TYPE = catalyst_ca_partisan_kinship TARGET = scope:cafm_regime_changer }
+			}
+			else_if = {
+				limit = { cafm_is_conservative_regime = yes }
+				cafm_catalyst_fire = { TYPE = catalyst_ca_partisan_rivalry TARGET = scope:cafm_regime_changer }
+			}
+		}
+	}
+	else_if = {
+		limit = { cafm_is_conservative_regime = yes }
+		every_country = {
+			limit = {
+				is_ca_culture_country = yes
+				NOT = { this = scope:cafm_regime_changer }
+				has_strategic_adjacency = scope:cafm_regime_changer
+			}
+			if = {
+				limit = { cafm_is_conservative_regime = yes }
+				cafm_catalyst_fire = { TYPE = catalyst_ca_partisan_kinship TARGET = scope:cafm_regime_changer }
+			}
+			else_if = {
+				limit = { cafm_is_liberal_regime = yes }
+				cafm_catalyst_fire = { TYPE = catalyst_ca_partisan_rivalry TARGET = scope:cafm_regime_changer }
+			}
+		}
+	}
+}
+
+# --- 9. Avance británico: los estados afectados contra GBR y EE. UU. simpatiza con ellos ---
+# Se ejecuta en el estado afectado (NIC, HON o COS).
+cafm_catalyst_british_encroachment = {
+	save_scope_as = cafm_encroached
+	if = {
+		limit = { exists = c:GBR }
+		cafm_catalyst_fire = { TYPE = catalyst_ca_british_encroachment TARGET = c:GBR }
+	}
+	c:USA ?= {
+		cafm_catalyst_fire = { TYPE = catalyst_ca_monroe_sympathy TARGET = scope:cafm_encroached }
+	}
+}
+
+# --- 10. Filibusteros: todos los estados contra el origen y solidaridad entre ellos ---
+# Se ejecuta donde sea. ORIGIN = país de origen de los filibusteros (o el país filibustero).
+cafm_catalyst_filibuster_landing = {
+	every_country = {
+		limit = {
+			is_ca_culture_country = yes
+			NOT = { this = $ORIGIN$ }
+		}
+		save_scope_as = cafm_filibuster_victim
+		cafm_catalyst_fire = { TYPE = catalyst_ca_filibuster_landing TARGET = $ORIGIN$ }
+		every_country = {
+			limit = {
+				is_ca_culture_country = yes
+				NOT = { this = scope:cafm_filibuster_victim }
+				NOT = { this = $ORIGIN$ }
+			}
+			scope:cafm_filibuster_victim = {
+				cafm_catalyst_fire = { TYPE = catalyst_ca_national_war_solidarity TARGET = prev }
+			}
+		}
+	}
+}
+
+# --- 11. Concesión de tránsito ---
+# Se ejecuta en el país que la otorga. GRANTEE = potencia que la recibe.
+cafm_catalyst_transit_concession = {
+	save_scope_as = cafm_transit_grantor
+	$GRANTEE$ ?= {
+		cafm_catalyst_fire = { TYPE = catalyst_ca_transit_concession_granted TARGET = scope:cafm_transit_grantor }
+	}
+	every_country = {
+		limit = {
+			is_ca_culture_country = yes
+			NOT = { this = scope:cafm_transit_grantor }
+			has_strategic_adjacency = scope:cafm_transit_grantor
+		}
+		cafm_catalyst_fire = { TYPE = catalyst_ca_transit_concession_rival TARGET = scope:cafm_transit_grantor }
+	}
+}
+
+# --- 13. Disputa fronteriza: el catalizador a los dos lados ---
+# Se ejecuta en un lado. OTHER = el otro lado.
+cafm_catalyst_border_dispute = {
+	save_scope_as = cafm_dispute_side
+	if = {
+		limit = { exists = $OTHER$ }
+		cafm_catalyst_fire = { TYPE = catalyst_ca_border_dispute TARGET = $OTHER$ }
+		$OTHER$ = {
+			cafm_catalyst_fire = { TYPE = catalyst_ca_border_dispute TARGET = scope:cafm_dispute_side }
+		}
+	}
+}
+
+# --- 14. Tratado comercial: a los dos firmantes ---
+# Se ejecuta en un firmante. OTHER = el otro firmante.
+cafm_catalyst_trade_pact = {
+	save_scope_as = cafm_trade_side
+	if = {
+		limit = { exists = $OTHER$ }
+		cafm_catalyst_fire = { TYPE = catalyst_ca_trade_pact TARGET = $OTHER$ }
+		$OTHER$ = {
+			cafm_catalyst_fire = { TYPE = catalyst_ca_trade_pact TARGET = scope:cafm_trade_side }
+		}
+	}
+}
+
+# --- 15. Congreso unionista ---
+# Se ejecuta en el país que convoca. Participan los estados centroamericanos vecinos.
+cafm_catalyst_unionist_congress_success = {
+	save_scope_as = cafm_union_convener
+	every_country = {
+		limit = {
+			is_ca_culture_country = yes
+			NOT = { this = scope:cafm_union_convener }
+		}
+		cafm_catalyst_fire = { TYPE = catalyst_ca_unionist_congress_success TARGET = scope:cafm_union_convener }
+	}
+}
+cafm_catalyst_unionist_congress_failed = {
+	save_scope_as = cafm_union_convener
+	every_country = {
+		limit = {
+			is_ca_culture_country = yes
+			NOT = { this = scope:cafm_union_convener }
+		}
+		cafm_catalyst_fire = { TYPE = catalyst_ca_unionist_congress_failed TARGET = scope:cafm_union_convener }
+	}
+}

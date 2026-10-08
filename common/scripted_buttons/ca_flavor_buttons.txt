@@ -6,7 +6,7 @@
           }	
 	visible = { 
 	NOT = {
-	has_valiable  = voting_ca_self_determination}
+	has_variable = voting_ca_self_determination } # CAFM: antes "has_valiable" (errata)
     }	
 	possible = {
 		custom_tooltip = {
@@ -50,6 +50,11 @@ ca_button_centralist_discipline = {
         }
         # Dispara un evento que ajusta la barra de progreso a favor del centralismo
         trigger_event = { id = ca_centralist.1 popup = yes }
+        # CAFM catalizador 4: los estados subditos resienten la disciplina centralista
+        every_country = {
+            limit = { is_subject_of = root }
+            cafm_catalyst_fire = { TYPE = catalyst_ca_federal_decree_imposed TARGET = root }
+        }
     }
 
     ai_chance = {
@@ -732,21 +737,21 @@ je_restore_order_cos_button = {
 		value = 100
 	}
 }
-je_restore_order_els_button = {
-	name = "restore_order_cos_button"
-	desc = "restore_order_cos_button_desc"
+je_restore_order_els_button = { # CAFM: era una copia del boton de Costa Rica (ponia cos_support_var)
+	name = "restore_order_els_button"
+	desc = "restore_order_els_button_desc"
 
 	visible = { 
-		NOT = { has_variable = je_central_america_setup_cos_var }
+		NOT = { has_variable = je_central_america_setup_els_var }
 		NOT = { exists = c:ELS }
 	}
 
 	possible = {
 		NOT = { exists = c:ELS }
 		custom_tooltip = {
-			text = controls_cos_tt
+			text = controls_els_tt
 			this = c:UCA
-			NOT = { has_variable = cos_support_var }
+			NOT = { has_variable = els_support_var }
 		}
 		custom_tooltip = {
 			text = uca_restore_order_cooldown_tt
@@ -756,8 +761,8 @@ je_restore_order_els_button = {
 
 	effect = {
 		custom_tooltip = {
-			text = restore_order_cos_tt
-			set_variable = cos_support_var
+			text = restore_order_els_tt
+			set_variable = els_support_var
 			set_variable = {
 				name = uca_recentled_restored_order_var
 				days = 60
@@ -851,12 +856,12 @@ ca_request_intervention_button = {
 		
 		}
         OR = {
-            c:NIC = { has_variable = ca_intervention_request_active }
-            c:COS = { has_variable = ca_intervention_request_active }
-            c:HON = { has_variable = ca_intervention_request_active }
-            c:ELS = { has_variable = ca_intervention_request_active }
-            c:GUA = { has_variable = ca_intervention_request_active }
-            c:ALT = { has_variable = ca_intervention_request_active }
+            c:NIC ?= { has_variable = ca_intervention_request_active }
+            c:COS ?= { has_variable = ca_intervention_request_active }
+            c:HON ?= { has_variable = ca_intervention_request_active }
+            c:ELS ?= { has_variable = ca_intervention_request_active }
+            c:GUA ?= { has_variable = ca_intervention_request_active }
+            c:ALT ?= { has_variable = ca_intervention_request_active }
         }
     }
 
@@ -873,27 +878,27 @@ ca_request_intervention_button = {
     effect = {
         # Evaluamos quién tiene la variable activa y disparamos su evento de intervención
         if = {
-            limit = { c:NIC = { has_variable = ca_intervention_request_active } }
+            limit = { c:NIC ?= { has_variable = ca_intervention_request_active } }
             trigger_event = { id = ca_central_america.28 }
         }
         else_if = {
-            limit = { c:COS = { has_variable = ca_intervention_request_active } }
+            limit = { c:COS ?= { has_variable = ca_intervention_request_active } }
             trigger_event = { id = ca_central_america.29 }
         }
         else_if = {
-            limit = { c:HON = { has_variable = ca_intervention_request_active } }
+            limit = { c:HON ?= { has_variable = ca_intervention_request_active } }
             trigger_event = { id = ca_central_america.30 }
         }
         else_if = {
-            limit = { c:ELS = { has_variable = ca_intervention_request_active } }
+            limit = { c:ELS ?= { has_variable = ca_intervention_request_active } }
             trigger_event = { id = ca_central_america.31 }
         }
         else_if = {
-            limit = { c:GUA = { has_variable = ca_intervention_request_active } }
+            limit = { c:GUA ?= { has_variable = ca_intervention_request_active } }
             trigger_event = { id = ca_central_america.32 }
         }
         else_if = {
-            limit = { c:ALT = { has_variable = ca_intervention_request_active } }
+            limit = { c:ALT ?= { has_variable = ca_intervention_request_active } }
             trigger_event = { id = ca_central_america.33 }
         }
     }

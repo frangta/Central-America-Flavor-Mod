@@ -128,7 +128,33 @@
 				has_variable = je_cos_support_var
 			}
 			add = {
-				desc = "cos_support_var_DESC12"
+				desc = "cos_support_var_DESC2" # CAFM: antes DESC12 (errata)
+				value = -1
+			}
+		}
+
+		# CAFM: Los Altos (alt_support_var lo pone el evento .40, la UCA acepta intervenir en Los Altos)
+		if = {
+			limit = {
+				has_variable = alt_support_var
+				NOT = { exists = c:ALT }
+				NOT = { has_variable = je_alt_support_var }
+			}
+			add = {
+				desc = "alt_support_var_DESC1"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_variable = alt_support_var }
+					exists = c:ALT
+				}
+				has_variable = je_alt_support_var
+			}
+			add = {
+				desc = "alt_support_var_DESC2"
 				value = -1
 			}
 		}
@@ -174,6 +200,28 @@
 			}
 		}
 
+		# CAFM: faltaban las paces con Guatemala y Los Altos (las ponen los eventos .70 y .74)
+		if = {
+			limit = {
+				exists = c:GUA
+				has_variable = frca_guatemala_peace_var
+			}
+			add = {
+				desc = "frca_guatemala_peace_DESC1"
+				value = -5
+			}
+		}
+		if = {
+			limit = {
+				exists = c:ALT
+				has_variable = frca_losaltos_peace_var
+			}
+			add = {
+				desc = "frca_losaltos_peace_DESC1"
+				value = -5
+			}
+		}
+
         if = {
             limit = {
                 has_law_or_variant = law_type:law_ca_central_american_unitary
@@ -210,7 +258,7 @@
             limit = {
                 any_political_lobby = {
                     is_political_lobby_type = lobby_pro_federalist
-                    lobby_clout <= -25 
+                    lobby_clout <= -25  # CAFM REVISAR: la influencia (clout) no puede ser negativa; esta condicion nunca se cumple
                 }
             }
             add = {
