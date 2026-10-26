@@ -507,3 +507,75 @@ els_francisco_duenas_character_template = {
 		set_global_variable = { name = cafm_hc_duenas value = this }
 	}
 }
+
+
+# ---------------------------------------------------------------------
+# CAFM F6 - Gobernantes de 1838-1841 (tabla de CAFM_F0_VERIFICACIONES.md §3)
+# Certeza M: confirmar fechas de nacimiento e ideologia.
+# ---------------------------------------------------------------------
+
+cafm_timoteo_menendez = {
+	# Timoteo Menéndez — cast ELS · nivel C · certeza M
+	# NOTAS: Jefe de Estado interino de El Salvador (6 ene 1838 – 23 may 1839).
+	first_name = "Timoteo"
+	last_name = "Menendez"
+	historical = yes
+	female = no
+	birth_date = 1790.1.1			# M: confirmar
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+	role = character_role_politician
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+	traits = { cautious }
+	trait_generation = { }
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_timoteo_menendez value = this }
+	}
+}
+
+cafm_antonio_jose_canas = {
+	# Antonio José Cañas — cast ELS · nivel C · certeza M
+	# NOTAS: Jefe de Estado de El Salvador (23 may – 11 jul 1839; 16 feb – 20 sep 1840).
+	first_name = "Antonio_Jose"
+	last_name = "Canas"
+	historical = yes
+	female = no
+	birth_date = 1785.1.1			# M: confirmar
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+	role = character_role_politician
+	interest_group = ig_intelligentsia
+	ideology = ideology_ca_federalist
+	traits = { honorable }
+	trait_generation = { }
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_antonio_jose_canas value = this }
+	}
+}
+
+cafm_norberto_ramirez = {
+	# Norberto Ramírez — cast ELS · nivel C · certeza M
+	# NOTAS: Jefe de Estado de El Salvador (20 sep 1840 – 7 ene 1841); luego Director de Nicaragua (1849–1851).
+	first_name = "Norberto"
+	last_name = "Ramirez"
+	historical = yes
+	female = no
+	birth_date = 1800.1.1			# M: confirmar
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+	role = character_role_politician
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+	traits = { cautious }
+	trait_generation = { }
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_norberto_ramirez value = this }
+	}
+}

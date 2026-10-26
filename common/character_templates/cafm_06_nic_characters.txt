@@ -650,3 +650,75 @@ nic_william_walker_character_template = {
 		set_global_variable = { name = cafm_hc_walker value = this }
 	}
 }
+
+
+# ---------------------------------------------------------------------
+# CAFM F6 - Gobernantes de 1839-1840 (tabla de CAFM_F0_VERIFICACIONES.md §3)
+# Certeza M: confirmar fechas de nacimiento e ideologia.
+# ---------------------------------------------------------------------
+
+cafm_evaristo_rocha = {
+	# Evaristo Rocha — cast NIC · nivel C · certeza M
+	# NOTAS: Jefe de Estado de Nicaragua (5 ene – 30 jun 1839).
+	first_name = "Evaristo"
+	last_name = "Rocha"
+	historical = yes
+	female = no
+	birth_date = 1795.1.1			# M: confirmar
+	culture = cu:nicaraguan
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+	role = character_role_politician
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	traits = { cautious }
+	trait_generation = { }
+	on_created = {
+		set_variable = cafm_cast_nic
+		set_global_variable = { name = cafm_hc_evaristo_rocha value = this }
+	}
+}
+
+cafm_joaquin_cossio = {
+	# Joaquín del Cossío — cast NIC · nivel C · certeza M
+	# NOTAS: Jefe de Estado de Nicaragua (30 jun – 20 oct 1839; se funde el interinato de Patricio Rivas).
+	first_name = "Joaquin"
+	last_name = "del_Cossio"
+	historical = yes
+	female = no
+	birth_date = 1790.1.1			# M: confirmar
+	culture = cu:nicaraguan
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+	role = character_role_politician
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	traits = { cautious }
+	trait_generation = { }
+	on_created = {
+		set_variable = cafm_cast_nic
+		set_global_variable = { name = cafm_hc_joaquin_cossio value = this }
+	}
+}
+
+cafm_tomas_valladares = {
+	# Tomás Valladares — cast NIC · nivel C · certeza M
+	# NOTAS: Jefe de Estado de Nicaragua (20 oct 1839 – 21 sep 1840; se funde el interinato de Hilario Ulloa).
+	first_name = "Tomas"
+	last_name = "Valladares"
+	historical = yes
+	female = no
+	birth_date = 1790.1.1			# M: confirmar
+	culture = cu:nicaraguan
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+	role = character_role_politician
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	traits = { cautious }
+	trait_generation = { }
+	on_created = {
+		set_variable = cafm_cast_nic
+		set_global_variable = { name = cafm_hc_tomas_valladares value = this }
+	}
+}

@@ -39,7 +39,7 @@ ch_DecisionCheatDecree_3 = {
         building_group_bg_manufacturing_throughput_add = 1
 		building_group_bg_service_throughput_add = 1
 		building_group_bg_agriculture_throughput_add = 1
-		building_group_bg_plantation_throughput_add = 1
+		building_group_bg_plantations_throughput_add = 1
 		building_group_bg_ranching_throughput_add = 1
         building_group_bg_mining_throughput_add = 1
 		building_group_bg_logging_throughput_add = 1
@@ -128,8 +128,6 @@ ch_DecisionColony_MarkState3 = {
 		state_conscription_rate_add = 1
 		building_training_rate_add = 1000
 		building_training_rate_mult = 1
-                state_building_naval_base_max_level_add = 100
-                state_building_barracks_max_level_add = 100
 	}
 	unlocking_technologies = { 
 		
@@ -325,7 +323,6 @@ ch_decree_emergency_relief = {
 ch_Decision_state_UP_6 = {
 	texture = "gfx/interface/icons/decree/decree_greener_grass_campaign.dds"
 	modifier = {
-    country_tech_spread_add = 5000
 	}
 	unlocking_technologies = { 
 		

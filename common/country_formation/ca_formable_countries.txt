@@ -23,7 +23,10 @@ CCR = {
 		c:COS ?= this
 		is_subject = no
 		has_technology_researched = nationalism
-		ca_formable_consolidation_done = yes
+		OR = {
+			ca_formable_consolidation_done = yes
+			has_variable = ca_cos_estado_consolidado # F15 (E3): el Estado consolidado de Costa Rica abre la Gran Costa Rica
+		}
 	}
 
 	ai_will_do = {

@@ -126,7 +126,6 @@ ai_strategy_unify_central_america = {
                         state_region = s:STATE_CHIAPAS
                         state_region = s:STATE_YUCATAN
                     }
-                    can_reach_target_state = yes
                 }
             }
             add = 90
@@ -167,7 +166,6 @@ ai_strategy_unify_central_america = {
                     scope:target_country = {
                         is_unification_candidate = UCA
                     }
-                    can_reach_target_country = yes
                 }
                 add = 250
             }
@@ -298,7 +296,7 @@ ai_strategy_cos_agro_export_focus = {
         coffee = { stance = wants_export }
         wood = { stance = wants_export }
         fruit = { stance = wants_export }
-        weapons = { stance = wants_import }
+        small_arms = { stance = wants_import }
     }
 
     possible = {
@@ -345,8 +343,8 @@ ai_strategy_cos_autocratic_autonomist = {
         ruler = {
 		
             OR = {
-                has_ideology = ideology_ca_leader_autocratic_autonomist
-                has_ideology = ideology_ca_criollo_elite
+                has_ideology = ideology:ideology_ca_leader_autocratic_autonomist
+                has_ideology = ideology:ideology_ca_criollo_elite
             }
         }
     }
@@ -369,20 +367,9 @@ ai_strategy_cos_isolated_autonomist = {
     diplomatic_play_boldness = { value = -50 }
 
     # Condición de oportunidad para Panamá/Bocas del Toro
-    wargoal_weights = {
-        conquer = {
-            trigger = {
-                scope:target_state = s:STATE_PANAMA
-                scope:target_country = { 
-                    OR = {
-                        is_rank = rank_unrecognized_minor
-                        is_rank = rank_unrecognized_tiny
-                    }
-                }
-            }
-            score = { value = 500 } # Ataque oportunista si Panamá es débil
-        }
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		conquer_state = 2.0
+	}
 
     possible = {
         c:COS ?= THIS
@@ -414,10 +401,10 @@ ai_strategy_cos_antagonize_uca = {
     }
 
     # Deseo primario: Independencia o Mayor Autonomía
-    wargoal_weights = {
-        independence = 20.0
-        increase_autonomy = 10.0
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		independence = 20.0
+		increase_autonomy = 10.0
+	}
 
     possible = {
         c:COS ?= THIS
@@ -445,10 +432,10 @@ ai_strategy_nic_uca_antagonize = {
     diplomatic_play_boldness = { value = 75 }
     recklessness = { value = 0.5 }
 
-    wargoal_weights = {
-        independence = 10.0
-        increase_autonomy = 5.0
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		independence = 10.0
+		increase_autonomy = 5.0
+	}
 
     # SISTEMA 1.13: Objetivos Secretos como Sujeto
     secret_goal_scores = {
@@ -491,12 +478,12 @@ ai_strategy_nic_historic_chaos = {
 
     possible = {
         c:NIC ?= THIS
-        has_variable = frca_crisis_var # Variable que pusimos en los eventos
+        has_variable = opposition_crisis_var # CAFM F20: marca de ca_nicaragua_events.3 (antes frca_crisis_var, que nadie ponia)
     }
     weight = { 
         value = 100 
         # Si Walker toma el poder, esta estrategia se desactiva
-        if = { limit = { ruler = { has_ideology = ideology_jingoist } } multiply = 0 }
+        if = { limit = { ruler ?= { has_ideology = ideology:ideology_jingoist } } multiply = 0 }
     }
 }
 
@@ -518,14 +505,14 @@ ai_strategy_nic_filibuster_state = {
     diplomatic_play_boldness = { value = 100 } # Nunca retrocederá
     recklessness = { value = 1.0 }
 
-    wargoal_weights = {
-        conquer = 10.0
-        make_puppet = 5.0
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		conquer_state = 10.0
+		make_protectorate = 5.0
+	}
 
     possible = {
         c:NIC ?= THIS
-        ruler = { has_ideology = ideology_jingoist } # Solo si un Jingoísta (Walker) gobierna
+        ruler ?= { has_ideology = ideology:ideology_jingoist } # Solo si un Jingoísta (Walker) gobierna
     }
     weight = { value = 200 } # Sobrescribe cualquier otra estrategia
 }
@@ -590,11 +577,11 @@ ai_strategy_nic_mosquitia_loyalist = {
         }
     }
 
-    wargoal_weights = {
-        independence = 0.0
-        increase_autonomy = 0.0
-        return_state = 5.0 # Usará el ejército de su señor para reclamar tierras a HON/COS
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		independence = 0.0
+		increase_autonomy = 0.0
+		return_state = 5.0
+	}
 
     possible = {
         c:NIC ?= THIS
@@ -659,7 +646,7 @@ ai_strategy_gua_unitary_stronghold = {
 	anti_movements = {
 		movement_ca_liberal
 		movement_ca_federalist
-		movement_ca_separatist # Odia a muerte la secesión
+		movement_ca_carrillista # Odia a muerte la secesión
 	}
 
 	possible = {
@@ -685,26 +672,9 @@ ai_strategy_gua_aggressive_hegemon = {
 	ideological_opinion_effect_mult = { value = 2.5 } # Odia a los vecinos liberales el doble
 
 	# Prioridades de Guerra
-	wargoal_weights = {
-		conquer = {
-			trigger = {
-				scope:target_state = s:STATE_GUATEMALA # Si Los Altos tiene un pedazo de "su" estado
-			}
-			score = { value = 5000 } # Prioridad absoluta: Aniquilar a Los Altos
-		}
-		regime_change = {
-			trigger = {
-				scope:target_country = {
-					OR = {
-						c:ELS ?= THIS
-						c:HON ?= THIS
-					}
-					# Solo si son liberales/federalistas
-					has_political_movement = movement_ca_liberal
-				}
-			}
-			score = { value = 1000 } # Intervenir para poner conservadores
-		}
+	wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		conquer_state = 3.0
+		regime_change = 2.0
 	}
 
 	possible = {
@@ -768,7 +738,7 @@ ai_strategy_els_morazanist_crusade = {
     anti_movements = {
         movement_ca_reactionary
         movement_ca_unitarian
-        movement_ca_separatist
+        movement_ca_carrillista
     }
 
     possible = {
@@ -796,29 +766,10 @@ ai_strategy_els_export_revolution = {
     # Odio profundo hacia ideologías opuestas (Guatemala)
     ideological_opinion_effect_mult = { value = 3.0 }
 
-    wargoal_weights = {
-        # Su prioridad máxima es cambiar el gobierno de los vecinos, no anexarlos
-        regime_change = {
-            trigger = {
-                scope:target_country = {
-                    OR = {
-                        c:GUA ?= THIS
-                        c:HON ?= THIS
-                        c:NIC ?= THIS
-                    }
-                    # Ataca si el vecino está dominado por reaccionarios o unitarios
-                    OR = {
-                        has_political_movement = movement_ca_reactionary
-                        has_political_movement = movement_ca_unitarian
-                        ig:ig_landowners = { is_in_government = yes }
-                    }
-                }
-            }
-            score = { value = 5000 }
-        }
-        # Poco interés en conquistas territoriales si esta estrategia está activa
-        conquer = { score = { value = -100 } }
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		regime_change = 3.0
+		conquer_state = 0.0
+	}
 
     possible = {
         c:ELS ?= THIS
@@ -847,7 +798,7 @@ ai_strategy_els_14_families = {
 
     goods_stances = {
         coffee = { stance = wants_export }
-        indigo = { stance = wants_export } # El Salvador histórico producía mucho añil
+        dye = { stance = wants_export } # El Salvador histórico producía mucho añil
     }
 
     possible = {
@@ -879,19 +830,9 @@ ai_strategy_els_central_american_prussia = {
     undesirable_infamy_level = { value = 80 }
 
     # Ya no quiere cambiar de régimen; quiere pintar el mapa.
-    wargoal_weights = {
-        conquer = {
-            trigger = {
-                scope:target_state = {
-                    OR = {
-                        state_region = s:STATE_HONDURAS   # Primer objetivo: Salida al Caribe
-                        state_region = s:STATE_GUATEMALA  # Segundo objetivo: Destruir a la capital rival
-                    }
-                }
-            }
-            score = { value = 8000 }
-        }
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		conquer_state = 3.0
+	}
 
     possible = {
         c:ELS ?= THIS
@@ -965,7 +906,7 @@ ai_strategy_hon_mining_banana_enclave = {
         fruit = { stance = wants_export } # Representando el Banano
         wood = { stance = wants_export }
         lead = { stance = wants_export }
-        weapons = { stance = wants_import }
+        small_arms = { stance = wants_import }
     }
 
     possible = {
@@ -979,7 +920,7 @@ ai_strategy_hon_mining_banana_enclave = {
             limit = { 
                 ig:ig_landowners = { 
                     is_in_government = yes 
-                    has_ideology = ideology_ca_criollo_elite 
+                    has_ideology = ideology:ideology_ca_criollo_elite 
                 } 
             }
             add = 200
@@ -1000,9 +941,9 @@ ai_strategy_hon_opportunist_buffer = {
     diplomatic_play_boldness = { value = -50 }
 
     # Trata de evitar iniciar guerras de conquista
-    wargoal_weights = {
-        conquer = { score = { value = -1000 } }
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		conquer_state = 0.0
+	}
 
     possible = {
         c:HON ?= THIS
@@ -1026,28 +967,15 @@ ai_strategy_hon_morazanist_revival = {
     diplomatic_play_boldness = { value = 60 }
     ideological_opinion_effect_mult = { value = 3.0 }
     
-    wargoal_weights = {
-        # Misión 1: Liberar a Los Altos de las garras de Guatemala
-        liberate_country = {
-            trigger = { scope:target_country = c:ALT }
-            score = { value = 3000 }
-        }
-        # Misión 2: Forzar repúblicas federales en Guatemala y Nicaragua
-        regime_change = {
-            trigger = {
-                scope:target_country = {
-                    OR = { c:GUA ?= THIS c:NIC ?= THIS }
-                    has_political_movement = movement_ca_reactionary
-                }
-            }
-            score = { value = 5000 }
-        }
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		liberate_country = 3.0
+		regime_change = 3.0
+	}
 
     possible = {
         c:HON ?= THIS
         ig:ig_intelligentsia = { is_powerful = yes }
-        has_political_movement = movement_ca_federalist
+        any_political_movement = { is_political_movement_type = movement_ca_federalist }
     }
 
     weight = {
@@ -1085,9 +1013,9 @@ ai_strategy_hon_submissive_vanguard = {
     }
 
     # Anula cualquier deseo de independencia
-    wargoal_weights = {
-        independence = -1000.0 
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		independence = 0.0
+	}
 
     possible = {
         c:HON ?= THIS
@@ -1173,9 +1101,9 @@ ai_strategy_alt_desperate_survival = {
     }
 
     # Desactiva completamente la conquista
-    wargoal_weights = {
-        conquer = { score = { value = -5000 } }
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		conquer_state = 0.0
+	}
 
     possible = {
         c:ALT ?= THIS
@@ -1293,9 +1221,9 @@ ai_strategy_alt_loyal_subject = {
         }
     }
 
-    wargoal_weights = {
-        independence = -1000.0 # Nunca muerdas la mano que te defiende
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		independence = 0.0
+	}
 
     possible = {
         c:ALT ?= THIS
@@ -1331,14 +1259,14 @@ ai_strategy_uca_desperate_survival = {
 
     # Trata de bloquear movimientos que generen fricción entre estados
     anti_movements = {
-        movement_ca_separatist
+        movement_ca_carrillista
         movement_ca_autocratic_autonomist
     }
 
     possible = {
         c:UCA ?= THIS
         # Se activa especialmente si el apoyo federal es bajo
-        "scripted_bar_progress(frca_support_bar)" < 100
+        je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" < 100 }
     }
 
     weight = {
@@ -1364,17 +1292,17 @@ ai_strategy_uca_passive_defense = {
         value = 50
         if = {
             limit = {
-                scope:target_country = { country_rank >= rank_great_power }
+                scope:target_country = { country_rank >= rank_value:great_power }
             }
             add = 100
         }
     }
 
     # Pesos de Guerra: Odia la conquista, solo quiere mantener lo que tiene.
-    wargoal_weights = {
-        conquer = { score = { value = -5000 } }
-        liberate_country = { score = { value = -1000 } }
-    }
+    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
+		conquer_state = 0.0
+		liberate_country = 0.0
+	}
 
     possible = {
         c:UCA ?= THIS
@@ -1435,7 +1363,7 @@ ai_strategy_uca_overlord_appeasement = {
 
     possible = {
         c:UCA ?= THIS
-        any_subject = { is_ca_culture_country = yes }
+        any_subject_or_below = { is_ca_culture_country = yes }
     }
 
     weight = {
