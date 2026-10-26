@@ -26,7 +26,7 @@ El mod está en desarrollo activo. Gran parte del contenido —eventos, diplomac
 
 ## Sobre la publicación en Steam Workshop
 
-Por el momento, **la subida del mod al Steam Workshop está pospuesta**.
+Por el momento, **la subida del mod al Steam Workshop sera una beta debido a Problemas internos del mod**.
 
 Esto no se debe a que el contenido esté incompleto o abandonado, sino a un problema que afecta de forma recurrente a buena parte de la comunidad de modding de Victoria 3: **los cambios internos que Paradox introduce con cada actualización del motor del juego y con cada DLC**.
 
@@ -97,7 +97,7 @@ The mod is under active development. Much of the content — events, diplomacy, 
 
 ### About the Steam Workshop release
 
-For now, **the mod's upload to the Steam Workshop has been postponed**.
+For now, **the mod's upload to the Steam Workshop will be a beta due to internal issues of the mod **.
 
 This is not because the content is incomplete or abandoned, but because of a problem that recurrently affects much of the Victoria 3 modding community: **the internal changes Paradox introduces with every game engine update and every DLC**.
 
