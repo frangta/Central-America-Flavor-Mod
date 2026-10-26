@@ -1,0 +1,129 @@
+﻿############################################################################
+# CAFM - F1 - Riesgo e IA (common/script_values/ca_04_risk_ai.txt)
+############################################################################
+
+
+# ---------------------------------------------------------------------------
+# Riesgo de caudillo en un estado (.88 y cadena C). Scope: estado. 0-100.
+#   turmoil del estado, lealtad baja del estado en la UCA, ejercito poderoso.
+# ---------------------------------------------------------------------------
+ca_caudillo_risk = {
+	add = { value = turmoil multiply = 100 max = 50 desc = "CA_RISK_TURMOIL" }
+	if = {
+		limit = { owner = { ig:ig_armed_forces ?= { is_powerful = yes } } }
+		add = { value = 20 desc = "CA_RISK_POWERFUL_ARMY" }
+	}
+	if = {
+		limit = { owner = { ig:ig_armed_forces ?= { is_in_government = no } } }
+		add = { value = 10 desc = "CA_RISK_ARMY_OUT_OF_GOVERNMENT" }
+	}
+	if = {
+		limit = { owner = { has_variable = frca_phase var:frca_phase >= 3 } }
+		add = { value = 10 desc = "CA_RISK_FEDERAL_WAR" }
+	}
+	min = 0
+	max = 100
+}
+
+
+# ---------------------------------------------------------------------------
+# Riesgo campesino en un estado (.95 y cadena P). Scope: estado. 0-100.
+#   turmoil, radicales y leyes de tierra que atacan los ejidos.
+# ---------------------------------------------------------------------------
+ca_peasant_risk = {
+	add = { value = turmoil multiply = 100 max = 50 desc = "CA_RISK_TURMOIL" }
+	add = { value = radical_fraction multiply = 100 max = 30 desc = "CA_RISK_RADICALS" }
+	if = {
+		limit = {
+			owner = {
+				OR = {
+					has_law_or_variant = law_type:law_land_reform_coffee_oligarchy
+					has_law_or_variant = law_type:law_land_reform_hacienda_system
+					has_law_or_variant = law_type:law_ca_mandamientos
+				}
+			}
+		}
+		add = { value = 20 desc = "CA_RISK_LAND_LAWS" }
+	}
+	min = 0
+	max = 100
+}
+
+
+# ---------------------------------------------------------------------------
+# Fuerza de golpe de un caudillo. Scope: personaje.
+# Vanilla commander_coup_strength + bono CAFM (base rural y descontento).
+# Comparar:  ca_caudillo_coup_strength > owner.country_coup_resistance
+# ---------------------------------------------------------------------------
+ca_caudillo_coup_strength = {
+	add = commander_coup_strength
+	if = {
+		limit = {
+			interest_group ?= {
+				OR = {
+					is_interest_group_type = ig_devout
+					is_interest_group_type = ig_landowners
+				}
+			}
+		}
+		add = { value = 2 desc = "CA_COUP_RURAL_BASE" }
+	}
+	if = {
+		limit = { has_ideology = ideology:ideology_central_america_caudillo }
+		add = { value = 2 desc = "CA_COUP_CAUDILLO_IDEOLOGY" }
+	}
+}
+
+
+# ---------------------------------------------------------------------------
+# Pesos de la IA dinamica (frca_ai_dynamic). Scope: pais UCA.
+# Se usan en ai_chance = { base = ... } de los eventos.
+# ---------------------------------------------------------------------------
+
+# Opcion conciliadora: pesa mas cuanto mas baja esta la barra.
+ca_ai_weight_conciliate = {
+	value = 50
+	if = {
+		limit = { exists = je:je_historic_central_america_falls_apart }
+		add = {
+			value = ca_frca_bar_start
+			subtract = "je:je_historic_central_america_falls_apart.scripted_bar_progress(frca_support_bar)"
+			divide = 2
+		}
+	}
+	add = { value = ca_core_states_rebel_count multiply = 10 }
+	min = 5
+	max = 95
+}
+
+# Opcion de mano dura: pesa mas con el ejercito en el gobierno y la barra alta.
+ca_ai_weight_hardline = {
+	value = 30
+	if = {
+		limit = { ig:ig_armed_forces ?= { is_in_government = yes } }
+		add = 20
+	}
+	if = {
+		limit = { has_variable = ca_faction_centralist }
+		add = 20
+	}
+	if = {
+		limit = { exists = je:je_historic_central_america_falls_apart }
+		add = {
+			value = "je:je_historic_central_america_falls_apart.scripted_bar_progress(frca_support_bar)"
+			subtract = ca_frca_bar_start
+			divide = 4
+		}
+	}
+	min = 5
+	max = 95
+}
+
+# Aceptar una separacion: pesa mas con muchos estados separados o frentes perdidos.
+ca_ai_weight_accept_separation = {
+	value = 10
+	add = { value = ca_core_states_separated_count multiply = 15 }
+	add = { value = ca_frca_fronts_lost_count multiply = 10 }
+	min = 0
+	max = 90
+}

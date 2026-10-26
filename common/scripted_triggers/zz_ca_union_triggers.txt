@@ -1,0 +1,41 @@
+﻿# CAFM - F12 - Confederacion y Patria Grande (common/scripted_triggers/zz_ca_union_triggers.txt)
+
+# Hay guerra entre dos socios confederados de la UCA. Scope: la UCA.
+ca_conf_war_between_partners = {
+	any_subject_or_below = {
+		is_subject_type = subject_type_ca_confederative_partner
+		save_temporary_scope_as = ca_partner_a
+		c:UCA = {
+			any_subject_or_below = {
+				is_subject_type = subject_type_ca_confederative_partner
+				has_war_with = scope:ca_partner_a
+			}
+		}
+	}
+}
+
+# Estado que se puede invitar a la Confederacion. Scope: el invitado.
+ca_conf_can_be_invited = {
+	ca_is_ca_national_country = yes
+	is_subject = no
+	NOT = { this = c:UCA }
+	NOT = { has_war_with = c:UCA }
+	NOT = { has_variable = ca_conf_refused_recently }
+	OR = {
+		c:GUA ?= this
+		c:COS ?= this
+		c:HON ?= this
+		c:ELS ?= this
+		AND = {
+			c:NIC ?= this
+			NOT = { has_variable = nic_unionism_dead }
+		}
+	}
+}
+
+# La IA historica no completa la Patria Grande (la intenta, pero fracasa como Barrios en 1885).
+ca_patria_grande_ai_blocked = {
+	is_ai = yes
+	has_global_variable = ca_world_historic
+}
+

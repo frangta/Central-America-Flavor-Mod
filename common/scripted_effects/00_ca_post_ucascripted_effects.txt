@@ -5,7 +5,7 @@
 
 ca_liberate_guatemala_effect = {
     #add_modifier = { name = ca_starting_guatemala_modifier months = 60 }
-    #add_journal_entry = { type = je_ca_historic_situation_in_guatemala }
+    ca_gua_start_chain = yes # CAFM F4: diario historico y arranque de la cadena (IA)
     #remove_variable = ca_secession_country
 
     # Líder Histórico
@@ -37,11 +37,12 @@ ca_liberate_guatemala_effect = {
     activate_law = law_type:law_mercantilism
     activate_law = law_type:law_wealth_voting
     activate_law = law_type:law_censorship
+    ca_ig_config_independent = yes # F18 (E): seccion 4.4 y variantes 4.5
 }
 
 ca_liberate_elsalvador_effect = {
     #add_modifier = { name = ca_starting_salvador_modifier months = 60 }
-    #add_journal_entry = { type = je_ca_historic_situation_in_elsalvador }
+    ca_els_start_chain = yes # CAFM F4: diario historico y arranque de la cadena (IA)
     #remove_variable = ca_secession_country
     set_variable = { name = el_salvador_early }
     # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
@@ -71,11 +72,12 @@ ca_liberate_elsalvador_effect = {
     activate_law = law_type:law_mercantilism
     activate_law = law_type:law_censorship
     activate_law = law_type:law_religious_schools
+    ca_ig_config_independent = yes # F18 (E): seccion 4.4 y variantes 4.5
 }
 
 ca_liberate_honduras_effect = {
     #add_modifier = { name = ca_starting_honduras_modifier months = 60 }
-    #add_journal_entry = { type = je_ca_historic_situation_in_honduras }
+    ca_hon_start_chain = yes # CAFM F4: diario historico y arranque de la cadena (IA)
     #remove_variable = ca_secession_country
 
     # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
@@ -103,11 +105,12 @@ ca_liberate_honduras_effect = {
     activate_law = law_type:law_freedom_of_conscience
     activate_law = law_type:law_landed_voting
     activate_law = law_type:law_mercantilism
+    ca_ig_config_independent = yes # F18 (E): seccion 4.4 y variantes 4.5
 }
 
 ca_liberate_nicaragua_effect = {
     #add_modifier = { name = ca_starting_nicaragua_modifier months = 60 }
-    #add_journal_entry = { type = je_ca_historic_situation_in_nicaragua }
+    ca_nic_start_chain = yes # CAFM F4: diario historico y arranque de la cadena (IA)
     #remove_variable = ca_secession_country
     set_variable = { name = nicaragua_early_cons }
     # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
@@ -136,6 +139,7 @@ ca_liberate_nicaragua_effect = {
     activate_law = law_type:law_mercantilism
     activate_law = law_type:law_wealth_voting
     activate_law = law_type:law_censorship
+    ca_ig_config_independent = yes # F18 (E): seccion 4.4 y variantes 4.5
 }
 
 ca_liberate_costarica_effect = {
@@ -168,6 +172,7 @@ ca_liberate_costarica_effect = {
     activate_law = law_type:law_freedom_of_conscience
     activate_law = law_type:law_mercantilism
     activate_law = law_type:law_wealth_voting
+    ca_ig_config_independent = yes # F18 (E): seccion 4.4 y variantes 4.5
 }
 
 ca_liberate_losaltos_effect = {
@@ -203,6 +208,7 @@ ca_liberate_losaltos_effect = {
     activate_law = law_type:law_mercantilism
     activate_law = law_type:law_censorship
     activate_law = law_type:law_religious_schools
+    ca_ig_config_independent = yes # F18 (E): seccion 4.4 y variantes 4.5
 }
 
 

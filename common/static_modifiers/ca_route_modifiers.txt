@@ -1,0 +1,172 @@
+﻿# ============================================================================
+# CAFM - F11 - Rutas federal y centralista (common/static_modifiers/ca_route_modifiers.txt)
+# ============================================================================
+
+# Grupos de interes
+ca_fed_pact_liberal = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	interest_group_approval_add = 2
+	interest_group_pol_str_mult = 0.1
+}
+
+ca_fed_pact_states = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	interest_group_approval_add = 2
+	interest_group_pol_str_mult = 0.1
+}
+
+ca_fed_pact_army = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	interest_group_approval_add = 2
+	interest_group_pol_str_mult = 0.1
+}
+
+ca_fed_constitutional_reform = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	interest_group_approval_add = 1
+	interest_group_pol_str_mult = 0.1
+}
+
+ca_cen_pillar_army = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	interest_group_approval_add = 3
+	interest_group_pol_str_mult = 0.1
+}
+
+ca_cen_pillar_church = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	interest_group_approval_add = 3
+	interest_group_pol_str_mult = 0.1
+}
+
+ca_cen_pillar_landowners = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	interest_group_approval_add = 3
+	interest_group_pol_str_mult = 0.1
+}
+
+# Pais
+ca_fed_realism = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 5
+	country_authority_add = -25
+}
+
+ca_fed_war_effort = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	unit_offense_mult = 0.1
+	unit_morale_recovery_mult = 0.1
+	country_expenses_add = 200
+}
+
+ca_fed_republic_restored = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 10
+	country_prestige_add = 25
+}
+
+ca_fed_national_pride = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 5
+}
+
+ca_fed_austerity = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_expenses_add = -200
+	country_legitimacy_base_add = -5
+}
+
+ca_fed_rule_by_decree = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_authority_add = 50
+	country_legitimacy_base_add = -10
+}
+
+ca_fed_civic_militia = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	unit_defense_mult = 0.1
+	country_expenses_add = 100
+}
+
+ca_fed_clean_election = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 10
+}
+
+ca_cen_rule_by_decree = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_authority_add = 100
+	country_legitimacy_base_add = -15
+}
+
+ca_cen_council_of_state = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_authority_add = 50
+	country_legitimacy_base_add = 5
+}
+
+ca_cen_supreme_director = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_authority_add = 150
+	country_legitimacy_headofstate_add = 10
+	country_radicals_from_legitimacy_mult = 0.2
+}
+
+# Personaje
+ca_fed_general_command = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	character_command_limit_mult = 0.25
+	character_popularity_add = 10
+}
+
+# Aprobacion de leyes (add_enactment_modifier)
+ca_enact_teachers_arrive = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_success_add = 0.1
+}
+
+ca_enact_slow_support = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_success_add = -0.05
+	country_law_enactment_stall_add = -0.05
+}
+
+ca_enact_firm_reform = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_success_add = 0.1
+	country_law_enactment_stall_add = 0.05
+}
+
+ca_enact_compromise = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_success_add = 0.05
+	country_law_enactment_stall_add = -0.1
+}
+
+ca_enact_civil_registry = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_success_add = 0.1
+}
+
+ca_enact_open_councils = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_success_add = 0.15
+}
+
+ca_enact_intendants_sworn = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_success_add = 0.15
+	country_law_enactment_stall_add = 0.05
+}
+
+ca_enact_career_officers = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_success_add = 0.1
+}
+
+ca_enact_concordat_talks = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_success_add = 0.1
+	country_law_enactment_stall_add = -0.05
+}
+

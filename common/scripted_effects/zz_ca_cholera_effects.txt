@@ -1,0 +1,29 @@
+﻿# CAFM - F16 - Colera generico (.16/.17) y Codigos Livingston (.14)
+
+# .16: espera de 5 a 10 anos por pais (decision del autor, 13 oct 2026). Scope: pais.
+ca_generic_cholera_cooldown = {
+	random_list = {
+		25 = { set_variable = { name = ca_generic_cholera_cd days = 1825 } }
+		25 = { set_variable = { name = ca_generic_cholera_cd days = 2370 } }
+		25 = { set_variable = { name = ca_generic_cholera_cd days = 2920 } }
+		25 = { set_variable = { name = ca_generic_cholera_cd days = 3650 } }
+	}
+}
+
+# Derogacion historica de los Codigos Livingston (13 mar 1838), solo IA historica. Scope: UCA.
+ca_livingston_historic_repeal = {
+	if = {
+		limit = {
+			ca_frca_ai_historic = yes
+			has_variable = ca_livingston_applied
+			NOT = { has_variable = ca_livingston_repealed }
+			game_date >= 1838.3.13
+		}
+		set_variable = ca_livingston_repealed
+		if = {
+			limit = { has_modifier = uca_new_penal_code }
+			remove_modifier = uca_new_penal_code
+		}
+		add_modifier = { name = ca_livingston_repealed months = 60 }
+	}
+}

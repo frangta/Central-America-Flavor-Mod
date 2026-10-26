@@ -1,0 +1,90 @@
+﻿############################################################################
+# CAFM - F1 - Leyes favoritas por eje (common/script_values/ca_05_ideologies.txt)
+# Patron vanilla ideology_*_favoured_laws. Scope: pais.
+# Sirven para pesos de IA, aprobacion en eventos y mecanicas de ideologias (F18).
+# Ejes de CAFM_IDEOLOGIES_RESTRUCTURE.md §1.1 y posturas de §7.
+############################################################################
+
+# --- Federal (Federalismo centroamericano / morazanismo) ---
+ca_federal_favoured_laws = {
+	value = 0
+	if = { limit = { has_law_or_variant = law_type:law_ca_central_american_federal } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_federal_state } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_federal_army } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_municipalismo } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_presidential_republic } add = 1 }
+}
+ca_federal_disfavoured_laws = {
+	value = 0
+	if = { limit = { has_law_or_variant = law_type:law_ca_central_american_unitary } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_departmental_state } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_junta } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_sovereign_state } add = 1 }
+}
+
+# --- Morazanismo (federal, liberal y laico) ---
+ca_morazanista_favoured_laws = {
+	value = ca_federal_favoured_laws
+	if = {
+		limit = {
+			OR = {
+				has_law_or_variant = law_type:law_total_separation
+				has_law_or_variant = law_type:law_freedom_of_conscience
+			}
+		}
+		add = 1
+	}
+	if = { limit = { has_law = law_type:law_ca_escuela_laica } add = 1 }
+}
+ca_morazanista_disfavoured_laws = {
+	value = ca_federal_disfavoured_laws
+	if = { limit = { has_law_or_variant = law_type:law_state_religion } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_religious_schools } add = 1 }
+}
+
+# --- Unitario / centralista (Servilismo y Centralismo) ---
+ca_unitary_favoured_laws = {
+	value = 0
+	if = { limit = { has_law_or_variant = law_type:law_ca_central_american_unitary } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_departmental_state } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_appointed_bureaucrats } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_state_religion } add = 1 }
+}
+ca_unitary_disfavoured_laws = {
+	value = 0
+	if = { limit = { has_law_or_variant = law_type:law_ca_central_american_federal } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_central_american_confederated } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_municipalismo } add = 1 }
+	if = { limit = { has_law = law_type:law_ca_escuela_laica } add = 1 }
+}
+
+# --- Confederal (Confederalismo pactista) ---
+ca_confederal_favoured_laws = {
+	value = 0
+	if = { limit = { has_law_or_variant = law_type:law_ca_central_american_confederated } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_confederated_state } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_municipalismo } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_census_voting } add = 1 }
+}
+ca_confederal_disfavoured_laws = {
+	value = 0
+	if = { limit = { has_law_or_variant = law_type:law_ca_central_american_unitary } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_departmental_state } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_federal_army } add = 1 }
+}
+
+# --- Soberanista (separatismo / soberania del estado) ---
+ca_sovereignist_favoured_laws = {
+	value = 0
+	if = { limit = { has_law_or_variant = law_type:law_ca_sovereign_state } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_autonomous_state } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_regionalist_militia } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_municipalismo } add = 1 }
+}
+ca_sovereignist_disfavoured_laws = {
+	value = 0
+	if = { limit = { has_law_or_variant = law_type:law_ca_central_american_federal } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_central_american_unitary } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_federal_army } add = 1 }
+	if = { limit = { has_law_or_variant = law_type:law_ca_departmental_state } add = 1 }
+}

@@ -1,0 +1,199 @@
+﻿############################################################################
+# CAFM - F4 - Arranque de la UCA y de las cadenas de los estados
+# (common/scripted_effects/zz_ca_frca_start_effects.txt)
+# Diseno: CAFM_EVENTOS_REDEFINIDOS.md, grupos 14 y 15, y grupo E
+# ("Arranque de las cadenas de los estados - jugador e IA", 22 oct 2026).
+############################################################################
+
+# ---------------------------------------------------------------------------
+# Ruta de la UCA (.119) y modo de la IA
+# ---------------------------------------------------------------------------
+
+# Sorteo de la IA (diario §8): 80 % historica, 20 % dinamica. Scope: UCA.
+ca_frca_ai_roll = {
+	remove_variable = frca_ai_historic
+	remove_variable = frca_ai_dynamic
+	random_list = {
+		80 = {
+			set_variable = frca_ai_historic
+			set_global_variable = ca_world_historic # F12: la IA del resto de Centroamerica sigue la historia
+		}
+		20 = {
+			set_variable = frca_ai_dynamic
+			remove_global_variable = ca_world_historic
+		}
+	}
+}
+
+# Un jugador lleva la UCA: no hay modo de IA. Scope: UCA.
+ca_frca_ai_clear = {
+	remove_global_variable = ca_world_historic # F12
+	remove_variable = frca_ai_historic
+	remove_variable = frca_ai_dynamic
+}
+
+# Elegir la ruta en .119. Uso: ca_frca_choose_route = { ROUTE = federal } (o centralist).
+# Scope: UCA. Lanza el gancho H1 (F11).
+ca_frca_choose_route = {
+	remove_variable = ca_faction_federal
+	remove_variable = ca_faction_centralist
+	remove_variable = ca_faction_separatist
+	remove_variable = ca_state_selection_to_playing
+	set_variable = ca_faction_$ROUTE$
+	# F18 (E): el ejercito se pasa al centralismo; la Iglesia sin Reaccion; intelectuales y pequena burguesia siguen federales
+	if = {
+		limit = { has_variable = ca_faction_centralist }
+		ca_ig_config_centralist = yes
+	}
+	if = {
+		limit = { is_ai = yes }
+		ca_frca_ai_roll = yes
+	}
+	else = {
+		ca_frca_ai_clear = yes
+	}
+	ca_frca_fire_hook = { HOOK = 1 }
+}
+
+# El jugador deja la UCA desde el selector .80. Scope: UCA (antes del play_as).
+# La UCA sigue en la ruta federal en manos de la IA y tira el dado 80/20.
+ca_frca_selector_leave_uca = {
+	remove_variable = ca_faction_separatist
+	remove_variable = ca_faction_centralist
+	remove_variable = ca_state_selection_to_playing
+	remove_variable = frca_selector_from_119
+	remove_variable = frca_selector_from_79
+	set_variable = ca_faction_federal
+	ca_frca_ai_roll = yes
+	if = {
+		limit = {
+			NOT = { has_variable = frca_last_hook }
+		}
+		ca_frca_fire_hook = { HOOK = 1 }
+	}
+}
+
+# Efectos de .79 a "Permitir a los estados organizarse a su voluntad" (grupo 14).
+# Los usa .80 "Mantenerse leal" cuando viene de .79 c; F6 los usa en .79 a.
+# Scope: UCA.
+ca_frca_decree_allow_effect = {
+	set_variable = voting_ca_self_determination
+	set_variable = frca_decree_issued
+	ca_frca_bar_moderate_down = yes
+	ca_frca_set_phase = { VALUE = 2 }
+	custom_tooltip = voting_ca_self_determination_complete
+	ig:ig_landowners ?= {
+		add_modifier = { name = ca_ig_approval_states_rights months = 24 }
+	}
+	ig:ig_devout ?= {
+		add_modifier = { name = ca_ig_approval_states_rights months = 24 }
+	}
+	ig:ig_intelligentsia ?= {
+		add_modifier = { name = ca_ig_disapproval_federal_betrayal months = 24 }
+	}
+	ruler ?= {
+		add_modifier = { name = ca_unpopular_ruler_modifier months = 24 }
+	}
+	add_radicals = { value = small_radicals culture = cu:central_american }
+	add_loyalists = { value = small_radicals culture = cu:guatemalan }
+	add_loyalists = { value = small_radicals culture = cu:el_salvadorian }
+	add_loyalists = { value = small_radicals culture = cu:honduran }
+	add_loyalists = { value = small_radicals culture = cu:nicaraguan }
+	add_loyalists = { value = small_radicals culture = cu:costa_rican }
+	every_scope_state = {
+		limit = {
+			OR = {
+				state_region = s:STATE_HONDURAS
+				state_region = s:STATE_NICARAGUA
+				state_region = s:STATE_COSTA_RICA
+			}
+		}
+		add_modifier = { name = state_separatist_unrest months = 12 }
+	}
+}
+
+
+# ---------------------------------------------------------------------------
+# Arranque de las cadenas de los estados (jugador e IA)
+# Se llaman desde ca_play_<estado>_effect (jugador) y ca_liberate_<estado>_effect (IA).
+# Scope: el pais del estado.
+# ---------------------------------------------------------------------------
+
+# Guatemala: su diario historico (E4).
+ca_gua_start_chain = {
+	if = {
+		limit = { NOT = { has_journal_entry = je_ca_historic_situation_in_guatemala } }
+		add_journal_entry = { type = je_ca_historic_situation_in_guatemala }
+	}
+}
+
+# El Salvador: su diario historico (E4).
+ca_els_start_chain = {
+	if = {
+		limit = { NOT = { has_journal_entry = je_ca_historic_situation_in_elsalvador } }
+		add_journal_entry = { type = je_ca_historic_situation_in_elsalvador }
+	}
+}
+
+# Honduras (E2): antes de 1837, .2 a los 7 dias y la cadena de 1836 completa.
+# Desde 1837: sin eventos de 1836; je_ca_hon_caudillo directo con la barra en 15,
+# +10 si esta en guerra y +10 con legitimidad baja (la variable va antes del
+# diario para que el objetivo quede en 100; el extra se suma despues).
+ca_hon_start_chain = {
+	if = {
+		limit = { NOT = { has_journal_entry = je_ca_historic_situation_in_honduras } }
+		add_journal_entry = { type = je_ca_historic_situation_in_honduras }
+	}
+	if = {
+		limit = { game_date < 1837.1.1 }
+		trigger_event = { id = ca_honduras_events.2 days = 7 }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_journal_entry = je_ca_hon_caudillo }
+			NOT = { has_variable = hon_caudillo }
+		}
+		if = {
+			limit = { c:UCA ?= { has_variable = historic_central_american } }
+			set_variable = hon_historic_mode
+		}
+		set_variable = { name = hon_british value = 0 }
+		set_variable = { name = hon_caudillo value = 15 }
+		add_journal_entry = { type = je_ca_hon_caudillo }
+		if = {
+			limit = { is_at_war = yes }
+			change_variable = { name = hon_caudillo add = 10 }
+		}
+		if = {
+			limit = { legitimacy < 40 }
+			change_variable = { name = hon_caudillo add = 10 }
+		}
+	}
+}
+
+# Nicaragua (E1): antes de 1837, .2 a los 7 dias. Desde 1837: je_ca_nic_conspiracy
+# solo si Zepeda vive (la variable va antes del diario: objetivo 100).
+ca_nic_start_chain = {
+	if = {
+		limit = { NOT = { has_journal_entry = je_ca_historic_situation_in_nicaragua } }
+		add_journal_entry = { type = je_ca_historic_situation_in_nicaragua }
+	}
+	if = {
+		limit = { game_date < 1837.1.1 }
+		trigger_event = { id = ca_nicaragua_events.2 days = 7 }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_global_variable = cafm_zepeda_dead }
+			NOT = { has_journal_entry = je_ca_nic_conspiracy }
+			NOT = { has_variable = nic_zepeda_murdered }
+			NOT = { has_variable = nic_zepeda_survived }
+		}
+		if = {
+			limit = { c:UCA ?= { has_variable = historic_central_american } }
+			set_variable = nic_historic_mode
+		}
+		set_variable = { name = nic_conspiracy value = 20 }
+		add_journal_entry = { type = je_ca_nic_conspiracy }
+	}
+}

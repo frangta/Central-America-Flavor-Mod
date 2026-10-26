@@ -1,0 +1,79 @@
+﻿############################################################################
+# CAFM - F1 - Economia y costos (common/script_values/ca_03_economy.txt)
+# Dinero de eventos y botones escalado al PIB, con minimos bajos para las
+# economias pequenas de Centroamerica en 1836. Redondeado a 10.
+# Uso:  add_treasury = { value = ca_money_small multiply = -1 }
+# Texto: [ScriptValue('ca_money_small')|0]
+# Scope: pais.
+############################################################################
+
+ca_money_small = {
+	value = gdp
+	multiply = 0.0003		# 0,03 % del PIB
+	divide = 10
+	round = yes
+	multiply = 10
+	min = 30
+}
+
+ca_money_medium = {
+	value = gdp
+	multiply = 0.0008		# 0,08 % del PIB
+	divide = 10
+	round = yes
+	multiply = 10
+	min = 80
+}
+
+ca_money_large = {
+	value = gdp
+	multiply = 0.002		# 0,2 % del PIB
+	divide = 10
+	round = yes
+	multiply = 10
+	min = 200
+}
+
+
+# --- Costos de botones y eventos (diario §7, grupo 16) ---
+
+# Campana federal (boton por estado): mediano
+ca_federal_campaign_cost = {
+	value = ca_money_medium
+}
+
+# Cooptar o comprar a un caudillo (boton 11, C3 opcion c): grande
+ca_bribe_caudillo_cost = {
+	value = ca_money_large
+}
+
+# Ayuda tras un desastre (.93, sequia .141): mediano
+ca_disaster_aid_cost = {
+	value = ca_money_medium
+}
+
+# Emisario o mediacion (.41 b, .3 c de Nicaragua): pequeno
+ca_envoy_cost = {
+	value = ca_money_small
+}
+
+
+# --- Niveles de edificios (diarios de desarrollo A1 y A2) ---
+
+# Niveles totales de cafetales. Scope: pais.
+ca_coffee_plantation_levels = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_coffee_plantation }
+		add = this.level
+	}
+}
+
+# Niveles totales de bananales. Scope: pais.
+ca_banana_plantation_levels = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_banana_plantation }
+		add = this.level
+	}
+}

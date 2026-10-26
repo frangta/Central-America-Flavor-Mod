@@ -1,0 +1,59 @@
+﻿# CAFM - F18 - Ideologias v3 (common/scripted_triggers/zz_ca_ideology_axis_triggers.txt)
+
+# Eje del grupo (scope: grupo de interes)
+ca_ig_axis_federal = { has_ideology = ideology:ideology_central_american_federal }
+ca_ig_axis_unitary = {
+	OR = {
+		has_ideology = ideology:ideology_ca_servile
+		has_ideology = ideology:ideology_central_american_reactionary_2
+	}
+}
+ca_ig_axis_confederal = {
+	OR = {
+		has_ideology = ideology:ideology_ca_pact_confederalist
+		has_ideology = ideology:ideology_ca_autocratic_autonomist
+	}
+}
+ca_ig_axis_sovereign = { has_ideology = ideology:ideology_ca_separatist }
+
+# Eje del lider (scope: personaje)
+ca_char_axis_federal = {
+	OR = {
+		has_ideology = ideology:ideology_ca_federalist
+		has_ideology = ideology:ideology_ca_morazanista
+	}
+}
+ca_char_axis_unitary = {
+	OR = {
+		has_ideology = ideology:ideology_ca_unitarian
+		has_ideology = ideology:ideology_central_america_caudillo
+	}
+}
+ca_char_axis_confederal = { has_ideology = ideology:ideology_ca_leader_autocratic_autonomist }
+ca_char_axis_sovereign = {
+	OR = {
+		has_ideology = ideology:ideology_carrillismo
+		has_ideology = ideology:ideology_isthmian_separatism
+	}
+}
+
+# Grupo dividido: el lider tiene un eje distinto del eje del grupo (scope: grupo de interes)
+ca_ig_is_divided = {
+	exists = leader
+	OR = {
+		AND = { ca_ig_axis_federal = yes leader = { OR = { ca_char_axis_unitary = yes ca_char_axis_confederal = yes ca_char_axis_sovereign = yes } } }
+		AND = { ca_ig_axis_unitary = yes leader = { OR = { ca_char_axis_federal = yes ca_char_axis_confederal = yes ca_char_axis_sovereign = yes } } }
+		AND = { ca_ig_axis_confederal = yes leader = { OR = { ca_char_axis_federal = yes ca_char_axis_unitary = yes ca_char_axis_sovereign = yes } } }
+		AND = { ca_ig_axis_sovereign = yes leader = { OR = { ca_char_axis_federal = yes ca_char_axis_unitary = yes ca_char_axis_confederal = yes } } }
+	}
+}
+
+# Mecanica 7: gobernante caudillo (scope: personaje)
+ca_character_is_caudillo = {
+	OR = {
+		has_ideology = ideology:ideology_central_america_caudillo
+		has_ideology = ideology:ideology_carrillismo
+		has_ideology = ideology:ideology_ca_morazanista
+		has_ideology = ideology:ideology_ca_peasant_caudillismo
+	}
+}

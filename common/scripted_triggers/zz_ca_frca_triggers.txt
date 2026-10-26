@@ -1,0 +1,190 @@
+﻿############################################################################
+# CAFM - F1 - Triggers comunes del sistema federal
+# (common/scripted_triggers/zz_ca_frca_triggers.txt)
+# Todos usan c:UCA ?= { } para no dar error si la UCA ya no existe.
+# TAG en minusculas: gua, els, hon, nic, cos, alt, cip.
+############################################################################
+
+# El pais es uno de los 5 estados nucleo. Scope: pais.
+ca_is_core_state_tag = {
+	OR = {
+		c:GUA ?= this
+		c:ELS ?= this
+		c:HON ?= this
+		c:NIC ?= this
+		c:COS ?= this
+	}
+}
+
+# El pais es estado miembro (subdito ca_dependency) o socio confederado de la UCA. Scope: pais.
+ca_is_member_state = {
+	exists = c:UCA
+	is_subject_of = c:UCA
+	OR = {
+		is_subject_type = subject_type_ca_dependency
+		is_subject_type = subject_type_ca_confederative_partner
+	}
+}
+
+# El diario de la Federacion esta activo.
+ca_frca_journal_active = {
+	c:UCA ?= { has_journal_entry = je_historic_central_america_falls_apart }
+}
+
+# Lealtad de un estado menor o igual / mayor o igual que VALUE.
+# Uso: ca_frca_loyalty_le = { TAG = gua VALUE = 1 }
+ca_frca_loyalty_le = {
+	c:UCA ?= {
+		has_variable = frca_loyalty_$TAG$
+		var:frca_loyalty_$TAG$ <= $VALUE$
+	}
+}
+ca_frca_loyalty_ge = {
+	c:UCA ?= {
+		has_variable = frca_loyalty_$TAG$
+		var:frca_loyalty_$TAG$ >= $VALUE$
+	}
+}
+
+# Fase del diario mayor o igual que VALUE. Uso: ca_frca_phase_ge = { VALUE = 2 }
+ca_frca_phase_ge = {
+	c:UCA ?= {
+		has_variable = frca_phase
+		var:frca_phase >= $VALUE$
+	}
+}
+
+# Ruta de la UCA (.119). La federal es la de defecto.
+ca_frca_route_centralist = {
+	c:UCA ?= { has_variable = ca_faction_centralist }
+}
+ca_frca_route_federal = {
+	c:UCA ?= { NOT = { has_variable = ca_faction_centralist } }
+}
+
+# Modo de la IA de la UCA (sorteo 80/20 de la §8 del diario).
+ca_frca_ai_historic = {
+	c:UCA ?= {
+		is_ai = yes
+		has_variable = frca_ai_historic
+	}
+}
+ca_frca_ai_dynamic = {
+	c:UCA ?= {
+		is_ai = yes
+		has_variable = frca_ai_dynamic
+	}
+}
+
+# Nivel de un frente de la fase IV mayor o igual que VALUE.
+# Uso: ca_frca_front_ge = { FRONT = british VALUE = 2 }
+ca_frca_front_ge = {
+	c:UCA ?= {
+		has_variable = frca_front_$FRONT$
+		var:frca_front_$FRONT$ >= $VALUE$
+	}
+}
+
+
+# ===========================================================================
+# CAFM F3 - Nucleo del diario de la Federacion
+# ===========================================================================
+
+# La UCA tiene al menos un estado en cada una de las 5 regiones nucleo.
+# (Se comprueba por estado y no por region entera: crear Los Altos con 4
+# provincias de Guatemala no rompe A ni B.) Scope: pais UCA.
+ca_frca_holds_core_regions = {
+	any_scope_state = { state_region = s:STATE_GUATEMALA }
+	any_scope_state = { state_region = s:STATE_SAN_SALVADOR }
+	any_scope_state = { state_region = s:STATE_HONDURAS }
+	any_scope_state = { state_region = s:STATE_NICARAGUA }
+	any_scope_state = { state_region = s:STATE_COSTA_RICA }
+}
+
+# La UCA reconocio la independencia de un estado nucleo (D1). Scope: pais UCA.
+ca_frca_core_independence_recognized = {
+	OR = {
+		has_variable = frca_recognized_gua
+		has_variable = frca_recognized_els
+		has_variable = frca_recognized_hon
+		has_variable = frca_recognized_nic
+		has_variable = frca_recognized_cos
+	}
+}
+
+
+# ===========================================================================
+# CAFM F9 - Botones por estado del minimapa (scope: UCA)
+# ===========================================================================
+ca_frca_action_possible_campaign = {
+	custom_tooltip = {
+		text = ca_mm_member_tt
+		has_variable = frca_loyalty_$TAG$
+		var:frca_loyalty_$TAG$ >= 1
+	}
+	trigger_if = {
+		limit = { has_variable = frca_loyalty_$TAG$ }
+		var:frca_loyalty_$TAG$ < 3
+	}
+	custom_tooltip = {
+		text = ca_mm_cooldown_tt
+		NOT = { has_variable = frca_campaign_cd_$TAG$ }
+	}
+}
+ca_frca_action_possible_negotiate = {
+	custom_tooltip = {
+		text = ca_mm_member_tt
+		has_variable = frca_loyalty_$TAG$
+		var:frca_loyalty_$TAG$ >= 1
+	}
+	trigger_if = {
+		limit = { has_variable = frca_loyalty_$TAG$ }
+		var:frca_loyalty_$TAG$ < 3
+	}
+	custom_tooltip = {
+		text = ca_mm_cooldown_tt
+		NOT = { has_variable = frca_negotiate_cd_$TAG$ }
+	}
+}
+ca_frca_action_possible_intendant = {
+	custom_tooltip = {
+		text = ca_mm_member_tt
+		has_variable = frca_loyalty_$TAG$
+		var:frca_loyalty_$TAG$ >= 1
+	}
+	trigger_if = {
+		limit = { has_variable = frca_loyalty_$TAG$ }
+		var:frca_loyalty_$TAG$ < 3
+	}
+	custom_tooltip = {
+		text = ca_mm_cooldown_tt
+		NOT = { has_variable = frca_intendant_cd_$TAG$ }
+	}
+}
+ca_frca_action_possible_siege = {
+	custom_tooltip = {
+		text = ca_mm_member_tt
+		has_variable = frca_loyalty_$TAG$
+		var:frca_loyalty_$TAG$ >= 1
+	}
+	NOT = { has_variable = frca_loyalty_lock_$TAG$ }
+	custom_tooltip = {
+		text = ca_mm_cooldown_tt
+		NOT = { has_variable = frca_siege_cd_$TAG$ }
+	}
+}
+ca_frca_action_possible_coopt = {
+	custom_tooltip = {
+		text = ca_mm_member_tt
+		has_variable = frca_loyalty_$TAG$
+		var:frca_loyalty_$TAG$ >= 1
+	}
+	trigger_if = {
+		limit = { has_variable = frca_loyalty_$TAG$ }
+		var:frca_loyalty_$TAG$ < 3
+	}
+	custom_tooltip = {
+		text = ca_mm_cooldown_tt
+		NOT = { has_variable = frca_coopt_cd_$TAG$ }
+	}
+}

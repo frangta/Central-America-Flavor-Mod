@@ -1,0 +1,1557 @@
+﻿############################################################################
+# CAFM - F6 - Secesion, facciones y diarios del estado
+# (common/scripted_effects/zz_ca_secession_effects.txt)
+# Diseno: CAFM_EVENTOS_REDEFINIDOS.md, grupos 4, 5, 9, 11, 12 y 14;
+# "Sistema de facciones (R1)" y "Diseno aprobado de los dos diarios del estado".
+#
+# Variables en el pais del estado:
+#   ca_fvs_bar                      barra Federalistas <-> Separatistas (0-100)
+#   ca_federalist_influence / ca_separatist_influence / ca_centralist_influence  (0-3)
+#   ca_role_separatist              eligio apoyar a los separatistas
+#   ca_ai_stage                     1 inicio · 2 separatismo · 3 fuera de la UCA
+#   ca_fvs_resolved, ca_fvs_result_<beats|falls>, ca_fvs_cause_<causa>
+#   ca_independence_declared / ca_independence_denied / ca_independence_recognized
+# Variables globales: ca_sep_<x>_fired (paso 1 hecho)
+# Variables en la UCA: frca_sep_negotiated_<x>, frca_sep_cooldown_<x>,
+#   frca_<x>_independence_request, frca_<x>_armed_pending, frca_indep_war_<x>,
+#   frca_reconquest_<x>, frca_<x>_independence_done
+############################################################################
+
+# Lealtad del propio estado (scope: el pais del estado).
+ca_state_loyalty_up = {
+	if = {
+		limit = { c:NIC ?= this }
+		ca_frca_loyalty_up = { TAG = nic }
+	}
+	else_if = {
+		limit = { c:HON ?= this }
+		ca_frca_loyalty_up = { TAG = hon }
+	}
+	else_if = {
+		limit = { c:COS ?= this }
+		ca_frca_loyalty_up = { TAG = cos }
+	}
+	else_if = {
+		limit = { c:GUA ?= this }
+		ca_frca_loyalty_up = { TAG = gua }
+	}
+	else_if = {
+		limit = { c:ELS ?= this }
+		ca_frca_loyalty_up = { TAG = els }
+	}
+	else_if = {
+		limit = { c:ALT ?= this }
+		ca_frca_loyalty_up = { TAG = alt }
+	}
+	else_if = {
+		limit = { c:CIP ?= this }
+		ca_frca_loyalty_up = { TAG = cip }
+	}
+}
+ca_state_loyalty_down = {
+	if = {
+		limit = { c:NIC ?= this }
+		ca_frca_loyalty_down = { TAG = nic }
+	}
+	else_if = {
+		limit = { c:HON ?= this }
+		ca_frca_loyalty_down = { TAG = hon }
+	}
+	else_if = {
+		limit = { c:COS ?= this }
+		ca_frca_loyalty_down = { TAG = cos }
+	}
+	else_if = {
+		limit = { c:GUA ?= this }
+		ca_frca_loyalty_down = { TAG = gua }
+	}
+	else_if = {
+		limit = { c:ELS ?= this }
+		ca_frca_loyalty_down = { TAG = els }
+	}
+	else_if = {
+		limit = { c:ALT ?= this }
+		ca_frca_loyalty_down = { TAG = alt }
+	}
+	else_if = {
+		limit = { c:CIP ?= this }
+		ca_frca_loyalty_down = { TAG = cip }
+	}
+}
+# Uso: ca_state_loyalty_set = { VALUE = 0 }
+ca_state_loyalty_set = {
+	if = {
+		limit = { c:NIC ?= this }
+		ca_frca_loyalty_set = { TAG = nic VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:HON ?= this }
+		ca_frca_loyalty_set = { TAG = hon VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:COS ?= this }
+		ca_frca_loyalty_set = { TAG = cos VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:GUA ?= this }
+		ca_frca_loyalty_set = { TAG = gua VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:ELS ?= this }
+		ca_frca_loyalty_set = { TAG = els VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:ALT ?= this }
+		ca_frca_loyalty_set = { TAG = alt VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:CIP ?= this }
+		ca_frca_loyalty_set = { TAG = cip VALUE = $VALUE$ }
+	}
+}
+# Cambio directo, sin el suelo de Rebelde (sirve para volver de Separado a Rebelde). Uso: ca_state_loyalty_change = { VALUE = 1 }
+ca_state_loyalty_change = {
+	if = {
+		limit = { c:NIC ?= this }
+		ca_frca_loyalty_change = { TAG = nic VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:HON ?= this }
+		ca_frca_loyalty_change = { TAG = hon VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:COS ?= this }
+		ca_frca_loyalty_change = { TAG = cos VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:GUA ?= this }
+		ca_frca_loyalty_change = { TAG = gua VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:ELS ?= this }
+		ca_frca_loyalty_change = { TAG = els VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:ALT ?= this }
+		ca_frca_loyalty_change = { TAG = alt VALUE = $VALUE$ }
+	}
+	else_if = {
+		limit = { c:CIP ?= this }
+		ca_frca_loyalty_change = { TAG = cip VALUE = $VALUE$ }
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Barra del diario 2 (je_ca_federalists_vs_separatists_situation), 0-100
+# ---------------------------------------------------------------------------
+
+# Uso: ca_fvs_bar_change = { VALUE = 10 }   (scope: el pais del estado)
+ca_fvs_bar_change = {
+	if = {
+		limit = { has_variable = ca_fvs_bar }
+		change_variable = { name = ca_fvs_bar add = $VALUE$ }
+		if = {
+			limit = { var:ca_fvs_bar > 100 }
+			set_variable = { name = ca_fvs_bar value = 100 }
+		}
+		if = {
+			limit = { var:ca_fvs_bar < 0 }
+			set_variable = { name = ca_fvs_bar value = 0 }
+		}
+		ca_fvs_bar_sync = yes
+	}
+}
+
+# F28: copia ca_fvs_bar a la barra del diario. Scope: el pais del estado.
+ca_fvs_bar_sync = {
+	if = {
+		limit = { has_variable = ca_fvs_bar }
+		# F28: la barra del diario muestra el valor de la variable (0-100)
+		save_temporary_scope_as = ca_fvs_country
+		je:je_ca_federalists_vs_separatists_situation ?= {
+			set_bar_progress = { name = ca_fvs_bar_display value = scope:ca_fvs_country.var:ca_fvs_bar }
+		}
+	}
+}
+
+# Anade el diario 2 con la barra en su valor inicial (Leal 75 / Vacilante 50 / Rebelde 25).
+# La variable va ANTES del diario para que el objetivo quede en 100.
+ca_fvs_add_journal = {
+	if = {
+		limit = {
+			NOT = { has_journal_entry = je_ca_federalists_vs_separatists_situation }
+			NOT = { has_variable = ca_fvs_resolved }
+			is_subject_of = c:UCA
+		}
+		set_variable = { name = ca_fvs_bar value = ca_fvs_start_value }
+		add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }
+	}
+}
+
+# Anade el diario 1 (politica ante la UCA).
+ca_role_add_journal = {
+	if = {
+		limit = {
+			NOT = { has_journal_entry = je_ca_state_role_in_federation }
+			is_subject_of = c:UCA
+		}
+		if = {
+			limit = { NOT = { has_variable = ca_federalist_influence } }
+			set_variable = { name = ca_federalist_influence value = 0 }
+		}
+		if = {
+			limit = { NOT = { has_variable = ca_separatist_influence } }
+			set_variable = { name = ca_separatist_influence value = 0 }
+		}
+		if = {
+			limit = { NOT = { has_variable = ca_centralist_influence } }
+			set_variable = { name = ca_centralist_influence value = 0 }
+		}
+		add_journal_entry = { type = je_ca_state_role_in_federation }
+	}
+}
+
+# Pulso mensual del diario 2: +1 si gobierna un grupo unionista (intelectuales o
+# pequena burguesia), -1 si gobiernan los terratenientes.
+ca_fvs_monthly = {
+	if = {
+		limit = {
+			OR = {
+				ig:ig_intelligentsia ?= { is_in_government = yes }
+				ig:ig_petty_bourgeoisie ?= { is_in_government = yes }
+			}
+		}
+		ca_fvs_bar_change = { VALUE = 1 }
+	}
+	if = {
+		limit = { ig:ig_landowners ?= { is_in_government = yes } }
+		ca_fvs_bar_change = { VALUE = -1 }
+	}
+	# F7: fuente secundaria de peticiones de intervencion (estado de la IA)
+	ca_frca_ai_request_check = yes
+	# Tras una eleccion (on_election_campaign_end): grupo unionista en el gobierno -> federalistas;
+	# terratenientes -> separatistas. Solo si la barra ya se inclina hacia ese lado (>= 60 / <= 40).
+	if = {
+		limit = { has_variable = ca_fvs_election_check }
+		if = {
+			limit = {
+				var:ca_fvs_bar >= 60
+				OR = {
+					ig:ig_intelligentsia ?= { is_in_government = yes }
+					ig:ig_petty_bourgeoisie ?= { is_in_government = yes }
+				}
+				NOT = { ig:ig_landowners ?= { is_in_government = yes } }
+			}
+			remove_variable = ca_fvs_election_check
+			ca_fvs_resolve_self = { RESULT = beats CAUSE = election }
+		}
+		else_if = {
+			limit = {
+				var:ca_fvs_bar <= 40
+				ig:ig_landowners ?= { is_in_government = yes }
+			}
+			remove_variable = ca_fvs_election_check
+			ca_fvs_resolve_self = { RESULT = falls CAUSE = election }
+		}
+	}
+}
+
+# Giro de los grupos de interes al resolverse la lucha interna (antes en el
+# on_complete / on_fail del diario).
+ca_fvs_ig_shift_beats = {
+	ig:ig_landowners ?= {
+		remove_ideology = ideology_central_american_reactionary
+	}
+	ig:ig_armed_forces ?= {
+		remove_ideology = ideology_central_american_reactionary
+	}
+	ig:ig_devout ?= {
+		add_ideology = ideology_paternalistic
+		remove_ideology = ideology_central_american_reactionary
+	}
+}
+ca_fvs_ig_shift_falls = {
+	ig:ig_landowners ?= {
+		remove_ideology = ideology_central_american_reactionary
+		add_ideology = ideology_caudillismo
+	}
+	ig:ig_devout ?= {
+		add_ideology = ideology_paternalistic
+	}
+}
+
+# Beats / Falls (grupo 9): una sola vez por estado, gana la primera fuente; solo con el
+# estado miembro en las fases I-III. Lanza a la UCA el evento correcto y guarda la causa.
+# RESULT = beats / falls · CAUSE = journal / election / coup / civil_war / assembly / revolt / morazan
+# Uso: ca_fvs_resolve = { CTAG = NIC BEATS = 85 FALLS = 86 RESULT = falls CAUSE = journal }
+ca_fvs_resolve = {
+	c:$CTAG$ ?= {
+		if = {
+			limit = {
+				NOT = { has_variable = ca_fvs_resolved }
+				is_subject_of = c:UCA
+				NOT = { ca_frca_phase_ge = { VALUE = 4 } }
+			}
+			set_variable = ca_fvs_resolved
+			set_variable = ca_fvs_result_$RESULT$
+			set_variable = ca_fvs_cause_$CAUSE$
+			ca_fvs_ig_shift_$RESULT$ = yes
+			if = {
+				limit = { has_variable = ca_fvs_result_beats }
+				c:UCA ?= { trigger_event = { id = ca_central_america.$BEATS$ days = 1 popup = yes } }
+			}
+			else = {
+				c:UCA ?= { trigger_event = { id = ca_central_america.$FALLS$ days = 1 popup = yes } }
+			}
+		}
+	}
+}
+# Desde el propio estado. Uso: ca_fvs_resolve_self = { RESULT = beats CAUSE = election }
+ca_fvs_resolve_self = {
+	if = {
+		limit = { c:NIC ?= this }
+		ca_fvs_resolve = { CTAG = NIC BEATS = 85 FALLS = 86 RESULT = $RESULT$ CAUSE = $CAUSE$ }
+	}
+	else_if = {
+		limit = { c:HON ?= this }
+		ca_fvs_resolve = { CTAG = HON BEATS = 81 FALLS = 82 RESULT = $RESULT$ CAUSE = $CAUSE$ }
+	}
+	else_if = {
+		limit = { c:COS ?= this }
+		ca_fvs_resolve = { CTAG = COS BEATS = 83 FALLS = 84 RESULT = $RESULT$ CAUSE = $CAUSE$ }
+	}
+	else_if = {
+		limit = { c:GUA ?= this }
+		ca_fvs_resolve = { CTAG = GUA BEATS = 53 FALLS = 54 RESULT = $RESULT$ CAUSE = $CAUSE$ }
+	}
+	else_if = {
+		limit = { c:ELS ?= this }
+		ca_fvs_resolve = { CTAG = ELS BEATS = 50 FALLS = 51 RESULT = $RESULT$ CAUSE = $CAUSE$ }
+	}
+	else_if = {
+		limit = { c:ALT ?= this }
+		ca_fvs_resolve = { CTAG = ALT BEATS = 56 FALLS = 57 RESULT = $RESULT$ CAUSE = $CAUSE$ }
+	}
+}
+
+# Con la IA historica, la lucha interna se resuelve con la causa y el resultado reales,
+# dentro de su ventana de fechas (grupo 9, punto 3). Scope: UCA.
+# Uso: ca_fvs_historic_one = { CTAG = NIC FROM = 1838.4.1 TO = 1838.4.30 RESULT = falls CAUSE = assembly BEATS = 85 FALLS = 86 }
+ca_fvs_historic_one = {
+	if = {
+		limit = {
+			game_date >= $FROM$
+			game_date < $TO$
+			c:$CTAG$ ?= {
+				has_journal_entry = je_ca_federalists_vs_separatists_situation
+				NOT = { has_variable = ca_fvs_resolved }
+			}
+		}
+		ca_fvs_resolve = { CTAG = $CTAG$ BEATS = $BEATS$ FALLS = $FALLS$ RESULT = $RESULT$ CAUSE = $CAUSE$ }
+	}
+}
+ca_fvs_historic_check = {
+	if = {
+		limit = { ca_frca_ai_historic = yes }
+		ca_fvs_historic_one = { CTAG = NIC FROM = 1838.4.1 TO = 1838.4.30 RESULT = falls CAUSE = assembly BEATS = 85 FALLS = 86 }
+		ca_fvs_historic_one = { CTAG = HON FROM = 1838.10.1 TO = 1838.10.26 RESULT = falls CAUSE = assembly BEATS = 81 FALLS = 82 }
+		ca_fvs_historic_one = { CTAG = COS FROM = 1838.5.27 TO = 1838.11.15 RESULT = falls CAUSE = coup BEATS = 83 FALLS = 84 }
+		ca_fvs_historic_one = { CTAG = GUA FROM = 1838.2.1 TO = 1839.4.17 RESULT = falls CAUSE = revolt BEATS = 53 FALLS = 54 }
+		ca_fvs_historic_one = { CTAG = ELS FROM = 1839.7.11 TO = 1840.2.16 RESULT = beats CAUSE = morazan BEATS = 50 FALLS = 51 }
+		ca_fvs_historic_one = { CTAG = ALT FROM = 1840.1.29 TO = 1840.12.31 RESULT = falls CAUSE = civil_war BEATS = 56 FALLS = 57 }
+	}
+}
+
+# Reacciones dinamicas a la secesion (grupo 5): .24 (oposicion) o .25 (aceptacion), a la UCA
+# y al estado. No salen con la IA historica. Scope: UCA. Uso: ca_frca_secession_reaction = { CTAG = NIC }
+ca_frca_secession_reaction = {
+	if = {
+		limit = {
+			NOT = { ca_frca_ai_historic = yes }
+			exists = c:$CTAG$
+		}
+		set_variable = { name = ca_reaction_target value = c:$CTAG$ }
+		c:$CTAG$ = { set_variable = { name = ca_reaction_target value = c:$CTAG$ } }
+		if = {
+			# Oposicion mas probable: lealtad alta antes de separarse, o intelectuales / pequena burguesia fuertes
+			limit = {
+				c:$CTAG$ = {
+					OR = {
+						has_variable = ca_prev_loyalty_high
+						ig:ig_intelligentsia ?= { is_powerful = yes }
+						ig:ig_petty_bourgeoisie ?= { is_powerful = yes }
+					}
+				}
+			}
+			random_list = {
+				70 = { ca_frca_send_reaction = { ID = 24 CTAG = $CTAG$ } }
+				30 = { ca_frca_send_reaction = { ID = 25 CTAG = $CTAG$ } }
+			}
+		}
+		else_if = {
+			# Aceptacion mas probable: turmoil alto o guerra
+			limit = {
+				OR = {
+					is_at_war = yes
+					c:$CTAG$ = { any_scope_state = { turmoil > ca_loyalty_turmoil_threshold } }
+				}
+			}
+			random_list = {
+				30 = { ca_frca_send_reaction = { ID = 24 CTAG = $CTAG$ } }
+				70 = { ca_frca_send_reaction = { ID = 25 CTAG = $CTAG$ } }
+			}
+		}
+		else = {
+			random_list = {
+				50 = { ca_frca_send_reaction = { ID = 24 CTAG = $CTAG$ } }
+				50 = { ca_frca_send_reaction = { ID = 25 CTAG = $CTAG$ } }
+			}
+		}
+	}
+}
+ca_frca_send_reaction = {
+	trigger_event = { id = ca_central_america.$ID$ days = 10 }
+	c:$CTAG$ = { trigger_event = { id = ca_central_america.$ID$ days = 10 } }
+}
+
+# Paso 1 desde la UCA (V1): crea el estado como subdito ca_dependency en manos de la IA
+# (ca_ai_<estado>_effect rama 2: diarios del estado). Scope: UCA.
+# Uso: ca_frca_secession_create = { TAG = nic CTAG = NIC NAME = nicaragua }
+ca_frca_secession_create = {
+	if = {
+		limit = { ca_frca_loyalty_ge = { TAG = $TAG$ VALUE = 2 } }
+		set_variable = ca_prev_loyalty_high_$TAG$
+	}
+	ca_create_$NAME$_effect = yes
+	c:$CTAG$ ?= {
+		if = {
+			limit = { c:UCA ?= { has_variable = ca_prev_loyalty_high_$TAG$ } }
+			set_variable = ca_prev_loyalty_high
+		}
+		ca_ai_$NAME$_effect = yes
+	}
+	remove_variable = ca_prev_loyalty_high_$TAG$
+	ca_frca_loyalty_set = { TAG = $TAG$ VALUE = 0 }
+}
+
+# Reconocer la independencia (.45-.48, .99, .78 y .64-.74 b). Scope: UCA.
+# Uso: ca_frca_recognize_independence = { TAG = nic CTAG = NIC NAME = nicaragua RELATIONS = 20 }
+ca_frca_recognize_independence = {
+	c:$CTAG$ ?= {
+		save_scope_as = ca_recognized_state
+	}
+	if = {
+		limit = { exists = scope:ca_recognized_state }
+		remove_diplomatic_pact = { country = scope:ca_recognized_state type = ca_dependency }
+		scope:ca_recognized_state = {
+			if = {
+				limit = { is_subject_of = c:UCA }
+				make_independent = yes
+			}
+			set_variable = ca_independence_recognized
+			remove_variable = ca_independence_denied
+			change_relations = { country = c:UCA value = $RELATIONS$ }
+			ca_ai_$NAME$_effect = yes
+		}
+		set_variable = frca_recognized_$TAG$
+		ca_frca_loyalty_set = { TAG = $TAG$ VALUE = 0 }
+	}
+}
+
+# Fin de la guerra de independencia (.64-.74 a). Scope: UCA, pulso del diario.
+# Uso: ca_frca_independence_war_check = { TAG = nic CTAG = NIC NAME = nicaragua }
+ca_frca_independence_war_check = {
+	if = {
+		limit = { has_variable = frca_indep_war_$TAG$ }
+		if = {
+			limit = { c:$CTAG$ ?= { is_at_war = yes } }
+			set_variable = frca_indep_war_started_$TAG$
+		}
+		else_if = {
+			limit = { has_variable = frca_indep_war_started_$TAG$ }
+			remove_variable = frca_indep_war_$TAG$
+			remove_variable = frca_indep_war_started_$TAG$
+			if = {
+				# Gana la UCA: el estado sigue siendo subdito
+				limit = { c:$CTAG$ ?= { is_subject_of = c:UCA } }
+				ca_frca_bar_moderate_up = yes
+				if = {
+					limit = { ca_frca_route_centralist = yes }
+					annex = c:$CTAG$
+					ca_frca_loyalty_set = { TAG = $TAG$ VALUE = 3 }
+				}
+				else = {
+					ca_frca_loyalty_set = { TAG = $TAG$ VALUE = 1 }
+				}
+			}
+			else_if = {
+				# Gana el estado: independencia de hecho
+				limit = { exists = c:$CTAG$ }
+				c:$CTAG$ = {
+					set_variable = ca_independence_recognized
+					ca_ai_$NAME$_effect = yes
+				}
+				ca_frca_loyalty_set = { TAG = $TAG$ VALUE = 0 }
+				ca_frca_bar_major_down = yes
+			}
+		}
+		else_if = {
+			# La jugada no llego a guerra en 90 dias
+			limit = { NOT = { has_variable = frca_indep_war_grace_$TAG$ } }
+			remove_variable = frca_indep_war_$TAG$
+		}
+	}
+}
+
+# Pulso mensual de F6 en el diario de la Federacion. Scope: UCA.
+ca_frca_secession_monthly = {
+	ca_fvs_historic_check = yes
+	ca_frca_gua_carrera_return_check = yes # F7
+	ca_frca_independence_war_check = { TAG = nic CTAG = NIC NAME = nicaragua }
+	ca_frca_independence_war_check = { TAG = hon CTAG = HON NAME = honduras }
+	ca_frca_independence_war_check = { TAG = cos CTAG = COS NAME = costarica }
+	ca_frca_independence_war_check = { TAG = gua CTAG = GUA NAME = guatemala }
+	ca_frca_independence_war_check = { TAG = els CTAG = ELS NAME = elsalvador }
+	ca_frca_independence_war_check = { TAG = alt CTAG = ALT NAME = losaltos }
+}
+
+# ---------------------------------------------------------------------------
+# IA de cada estado (grupo 4, A): 3 ramas. Scope: el pais del estado.
+#   1. Inicio: subdito sin separatismo todavia. Historica siempre.
+#   2. Separatismo: subdito y con ca_sep_<x>_fired.
+#   3. Fuera de la UCA: ca_liberate_<estado>_effect (reparto post-UCA).
+# ---------------------------------------------------------------------------
+ca_ai_nicaragua_effect = {
+	if = {
+		limit = { is_ai = yes }
+		if = {
+			limit = {
+				is_subject_of = c:UCA
+				NOT = { has_global_variable = ca_sep_nic_fired }
+			}
+			cafm_cast_activate_nic = yes
+			ca_nic_member_setup = yes
+			ca_nic_start_chain = yes
+			ca_role_add_journal = yes
+			set_variable = { name = ca_federalist_influence value = 1 }
+			ca_nic_set_election_date = yes
+			set_variable = { name = ca_ai_stage value = 1 }
+		}
+		else_if = {
+			limit = { is_subject_of = c:UCA }
+			cafm_cast_activate_nic = yes
+			if = {
+				limit = { NOT = { has_variable = ca_ai_stage } }
+				ca_nic_member_setup = yes
+				ca_nic_start_chain = yes
+			}
+			# Giro hacia el separatismo
+			ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+			ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+			ca_role_add_journal = yes
+			ca_fvs_add_journal = yes
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			set_variable = { name = ca_ai_stage value = 2 }
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = {
+						AND = {
+							has_variable = ca_ai_stage
+							var:ca_ai_stage >= 3
+						}
+					}
+				}
+				ca_liberate_nicaragua_effect = yes
+			}
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			if = {
+				limit = { NOT = { has_variable = ca_caudillismo_set } }
+				set_variable = ca_caudillismo_set
+				activate_law = law_type:law_ca_caudillismo # F13 (A3)
+			}
+			set_variable = { name = ca_ai_stage value = 3 }
+		}
+	}
+}
+ca_ai_honduras_effect = {
+	if = {
+		limit = { is_ai = yes }
+		if = {
+			limit = {
+				is_subject_of = c:UCA
+				NOT = { has_global_variable = ca_sep_hon_fired }
+			}
+			cafm_cast_activate_hon = yes
+			ca_hon_member_setup = yes
+			ca_hon_start_chain = yes
+			ca_role_add_journal = yes
+			set_variable = { name = ca_federalist_influence value = 1 }
+			ca_hon_set_election_date = yes
+			set_variable = { name = ca_ai_stage value = 1 }
+		}
+		else_if = {
+			limit = { is_subject_of = c:UCA }
+			cafm_cast_activate_hon = yes
+			if = {
+				limit = { NOT = { has_variable = ca_ai_stage } }
+				ca_hon_member_setup = yes
+				ca_hon_start_chain = yes
+			}
+			# Giro hacia el separatismo
+			ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+			ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+			ca_role_add_journal = yes
+			ca_fvs_add_journal = yes
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			set_variable = { name = ca_ai_stage value = 2 }
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = {
+						AND = {
+							has_variable = ca_ai_stage
+							var:ca_ai_stage >= 3
+						}
+					}
+				}
+				ca_liberate_honduras_effect = yes
+			}
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			if = {
+				limit = { NOT = { has_variable = ca_caudillismo_set } }
+				set_variable = ca_caudillismo_set
+				activate_law = law_type:law_ca_caudillismo # F13 (A3)
+			}
+			set_variable = { name = ca_ai_stage value = 3 }
+		}
+	}
+}
+ca_ai_costarica_effect = {
+	if = {
+		limit = { is_ai = yes }
+		if = {
+			limit = {
+				is_subject_of = c:UCA
+				NOT = { has_global_variable = ca_sep_cos_fired }
+			}
+			cafm_cast_activate_cos = yes
+			ca_cos_member_setup = yes
+			
+			ca_role_add_journal = yes
+			set_variable = { name = ca_federalist_influence value = 1 }
+			ca_cos_set_election_date = yes
+			set_variable = { name = ca_ai_stage value = 1 }
+		}
+		else_if = {
+			limit = { is_subject_of = c:UCA }
+			cafm_cast_activate_cos = yes
+			if = {
+				limit = { NOT = { has_variable = ca_ai_stage } }
+				ca_cos_member_setup = yes
+				
+			}
+			# Giro hacia el separatismo
+			ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+			ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+			ca_role_add_journal = yes
+			ca_fvs_add_journal = yes
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			set_variable = { name = ca_ai_stage value = 2 }
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = {
+						AND = {
+							has_variable = ca_ai_stage
+							var:ca_ai_stage >= 3
+						}
+					}
+				}
+				ca_liberate_costarica_effect = yes
+			}
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			if = {
+				limit = { NOT = { has_variable = ca_caudillismo_set } }
+				set_variable = ca_caudillismo_set
+				activate_law = law_type:law_ca_caudillismo # F13 (A3)
+			}
+			set_variable = { name = ca_ai_stage value = 3 }
+		}
+	}
+}
+ca_ai_guatemala_effect = {
+	if = {
+		limit = { is_ai = yes }
+		if = {
+			limit = {
+				is_subject_of = c:UCA
+				NOT = { has_global_variable = ca_sep_gua_fired }
+			}
+			cafm_cast_activate_gua = yes
+			ca_gua_member_setup = yes
+			ca_gua_start_chain = yes
+			ca_role_add_journal = yes
+			set_variable = { name = ca_federalist_influence value = 1 }
+			ca_gua_set_election_date = yes
+			set_variable = { name = ca_ai_stage value = 1 }
+		}
+		else_if = {
+			limit = { is_subject_of = c:UCA }
+			cafm_cast_activate_gua = yes
+			if = {
+				limit = { NOT = { has_variable = ca_ai_stage } }
+				ca_gua_member_setup = yes
+				ca_gua_start_chain = yes
+			}
+			# Giro hacia el separatismo
+			ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+			ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+			ca_role_add_journal = yes
+			ca_fvs_add_journal = yes
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			set_variable = { name = ca_ai_stage value = 2 }
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = {
+						AND = {
+							has_variable = ca_ai_stage
+							var:ca_ai_stage >= 3
+						}
+					}
+				}
+				ca_liberate_guatemala_effect = yes
+			}
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			if = {
+				limit = { NOT = { has_variable = ca_caudillismo_set } }
+				set_variable = ca_caudillismo_set
+				activate_law = law_type:law_ca_caudillismo # F13 (A3)
+			}
+			set_variable = { name = ca_ai_stage value = 3 }
+		}
+	}
+}
+ca_ai_elsalvador_effect = {
+	if = {
+		limit = { is_ai = yes }
+		if = {
+			limit = {
+				is_subject_of = c:UCA
+				NOT = { has_global_variable = ca_sep_els_fired }
+			}
+			cafm_cast_activate_els = yes
+			ca_els_member_setup = yes
+			ca_els_start_chain = yes
+			ca_role_add_journal = yes
+			set_variable = { name = ca_federalist_influence value = 1 }
+			ca_els_set_election_date = yes
+			set_variable = { name = ca_ai_stage value = 1 }
+		}
+		else_if = {
+			limit = { is_subject_of = c:UCA }
+			cafm_cast_activate_els = yes
+			if = {
+				limit = { NOT = { has_variable = ca_ai_stage } }
+				ca_els_member_setup = yes
+				ca_els_start_chain = yes
+			}
+			# Giro hacia el separatismo
+			ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+			ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+			ca_role_add_journal = yes
+			ca_fvs_add_journal = yes
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			set_variable = { name = ca_ai_stage value = 2 }
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = {
+						AND = {
+							has_variable = ca_ai_stage
+							var:ca_ai_stage >= 3
+						}
+					}
+				}
+				ca_liberate_elsalvador_effect = yes
+			}
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			if = {
+				limit = { NOT = { has_variable = ca_caudillismo_set } }
+				set_variable = ca_caudillismo_set
+				activate_law = law_type:law_ca_caudillismo # F13 (A3)
+			}
+			set_variable = { name = ca_ai_stage value = 3 }
+		}
+	}
+}
+ca_ai_losaltos_effect = {
+	if = {
+		limit = { is_ai = yes }
+		if = {
+			limit = {
+				is_subject_of = c:UCA
+				NOT = { has_global_variable = ca_sep_alt_fired }
+			}
+			cafm_cast_activate_alt = yes
+			ca_alt_member_setup = yes
+			
+			ca_role_add_journal = yes
+			set_variable = { name = ca_federalist_influence value = 1 }
+			ca_alt_set_election_date = yes
+			set_variable = { name = ca_ai_stage value = 1 }
+		}
+		else_if = {
+			limit = { is_subject_of = c:UCA }
+			cafm_cast_activate_alt = yes
+			if = {
+				limit = { NOT = { has_variable = ca_ai_stage } }
+				ca_alt_member_setup = yes
+				
+			}
+			# Giro hacia el separatismo
+			ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+			ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+			ca_role_add_journal = yes
+			ca_fvs_add_journal = yes
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			set_variable = { name = ca_ai_stage value = 2 }
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = {
+						AND = {
+							has_variable = ca_ai_stage
+							var:ca_ai_stage >= 3
+						}
+					}
+				}
+				ca_liberate_losaltos_effect = yes
+			}
+			ca_add_enlightenment_journal = yes # F13 (A4)
+			if = {
+				limit = { NOT = { has_variable = ca_caudillismo_set } }
+				set_variable = ca_caudillismo_set
+				activate_law = law_type:law_ca_caudillismo # F13 (A3)
+			}
+			set_variable = { name = ca_ai_stage value = 3 }
+		}
+	}
+}
+
+# Fecha de la proxima eleccion de cada estado (pedido del autor en el grupo 4).
+# FECHAS POR VERIFICAR (CAFM_ZZZ_CA_UCA_ANALISIS.md §6). Solo si la fecha es futura y
+# el pais tiene elecciones.
+ca_nic_set_election_date = {
+	if = {
+		limit = {
+			game_date < 1838.3.1
+			country_has_voting_franchise = yes
+		}
+		set_next_election_date = 1838.3.1
+	}
+}
+ca_hon_set_election_date = {
+	if = {
+		limit = {
+			game_date < 1837.5.1
+			country_has_voting_franchise = yes
+		}
+		set_next_election_date = 1837.5.1
+	}
+}
+ca_cos_set_election_date = {
+	if = {
+		limit = {
+			game_date < 1837.4.1
+			country_has_voting_franchise = yes
+		}
+		set_next_election_date = 1837.4.1
+	}
+}
+ca_gua_set_election_date = {
+	if = {
+		limit = {
+			game_date < 1838.6.1
+			country_has_voting_franchise = yes
+		}
+		set_next_election_date = 1838.6.1
+	}
+}
+ca_els_set_election_date = {
+	if = {
+		limit = {
+			game_date < 1838.2.1
+			country_has_voting_franchise = yes
+		}
+		set_next_election_date = 1838.2.1
+	}
+}
+ca_alt_set_election_date = {
+	if = {
+		limit = {
+			game_date < 1838.12.1
+			country_has_voting_franchise = yes
+		}
+		set_next_election_date = 1838.12.1
+	}
+}
+
+# Al empezar con un estado se crean como miembros en manos de la IA (rama 1) solo sus
+# vecinos (grupo 4, cierre del 15 oct). Scope: UCA.
+ca_create_neighbors_cos = {
+	if = {
+		limit = {
+			NOT = { exists = c:NIC }
+			exists = s:STATE_NICARAGUA.region_state:UCA
+		}
+		ca_create_nicaragua_effect = yes
+		c:NIC ?= { ca_ai_nicaragua_effect = yes }
+	}
+}
+ca_create_neighbors_nic = {
+	if = {
+		limit = {
+			NOT = { exists = c:HON }
+			exists = s:STATE_HONDURAS.region_state:UCA
+		}
+		ca_create_honduras_effect = yes
+		c:HON ?= { ca_ai_honduras_effect = yes }
+	}
+	if = {
+		limit = {
+			NOT = { exists = c:COS }
+			exists = s:STATE_COSTA_RICA.region_state:UCA
+		}
+		ca_create_costarica_effect = yes
+		c:COS ?= { ca_ai_costarica_effect = yes }
+	}
+}
+ca_create_neighbors_hon = {
+	if = {
+		limit = {
+			NOT = { exists = c:GUA }
+			exists = s:STATE_GUATEMALA.region_state:UCA
+		}
+		ca_create_guatemala_effect = yes
+		c:GUA ?= { ca_ai_guatemala_effect = yes }
+	}
+	if = {
+		limit = {
+			NOT = { exists = c:ELS }
+			exists = s:STATE_SAN_SALVADOR.region_state:UCA
+		}
+		ca_create_elsalvador_effect = yes
+		c:ELS ?= { ca_ai_elsalvador_effect = yes }
+	}
+	if = {
+		limit = {
+			NOT = { exists = c:NIC }
+			exists = s:STATE_NICARAGUA.region_state:UCA
+		}
+		ca_create_nicaragua_effect = yes
+		c:NIC ?= { ca_ai_nicaragua_effect = yes }
+	}
+}
+ca_create_neighbors_els = {
+	if = {
+		limit = {
+			NOT = { exists = c:GUA }
+			exists = s:STATE_GUATEMALA.region_state:UCA
+		}
+		ca_create_guatemala_effect = yes
+		c:GUA ?= { ca_ai_guatemala_effect = yes }
+	}
+	if = {
+		limit = {
+			NOT = { exists = c:HON }
+			exists = s:STATE_HONDURAS.region_state:UCA
+		}
+		ca_create_honduras_effect = yes
+		c:HON ?= { ca_ai_honduras_effect = yes }
+	}
+}
+ca_create_neighbors_gua = {
+	if = {
+		limit = {
+			NOT = { exists = c:ELS }
+			exists = s:STATE_SAN_SALVADOR.region_state:UCA
+		}
+		ca_create_elsalvador_effect = yes
+		c:ELS ?= { ca_ai_elsalvador_effect = yes }
+	}
+	if = {
+		limit = {
+			NOT = { exists = c:HON }
+			exists = s:STATE_HONDURAS.region_state:UCA
+		}
+		ca_create_honduras_effect = yes
+		c:HON ?= { ca_ai_honduras_effect = yes }
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Grupos de interes y leyes de 1836 de cada estado miembro (antes dentro de
+# ca_play_<estado>_effect). Scope: el pais del estado.
+# ---------------------------------------------------------------------------
+ca_nic_member_setup = {
+	ig:ig_armed_forces = {
+            remove_ideology = ideology_caudillismo
+            remove_ideology = ideology_paternalistic
+            add_ideology = ideology_central_american_federal
+            set_interest_group_name = ig_ejercito_federal
+        }
+
+    ig:ig_devout = {
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
+    }
+    
+    ig:ig_landowners = {            
+        remove_ideology = ideology_republican_paternalistic
+        remove_ideology = ideology_hierarchic
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_ca_criollo_paternalistic
+        add_ideology = ideology_ca_criollo_stratocratic            
+        add_ideology = ideology_central_american_reactionary_2
+        set_interest_group_name = ig_nic_convervador2
+    }
+    
+    ig:ig_industrialists = {
+        remove_ideology = ideology_plutocratic
+        remove_ideology = ideology_laissez_faire
+        add_ideology = ideology_ca_agroexportadores
+        add_ideology = ideology_ca_liberal     
+        set_interest_group_name = ig_elite_comercial
+    }
+    
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_anti_clerical
+        remove_ideology = ideology_republican
+        add_ideology = ideology_ca_constitutionalist
+        add_ideology = ideology_ca_secularist
+        add_ideology = ideology_central_american_federal
+        set_interest_group_name = ig_liberales_morazanistas            
+    }
+    
+    ig:ig_petty_bourgeoisie = {
+        remove_ideology = ideology_patriotic
+        add_ideology = ideology_central_american_federal
+        add_ideology = ideology_ca_artesanado
+        set_interest_group_name = ig_artesanos_urbanos
+    }
+    
+    ig:ig_rural_folk = {
+        remove_ideology = ideology_isolationist
+        remove_ideology = ideology_agrarian
+        remove_ideology = ideology_particularist
+        add_ideology = ideology_ca_guilds
+        set_interest_group_name = ig_pequenos_campesinos
+    }            
+    activate_law = law_type:law_ca_federal_state
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_mercantilism
+    activate_law = law_type:law_wealth_voting
+    activate_law = law_type:law_censorship
+	active_law:lawgroup_governance_principles ?= { 
+			add_amendment = {
+				type = amendment_nicaragua_1826
+				sponsor = PREV.ig:ig_intelligentsia
+			}
+		}
+	ca_ig_config_member = yes # F18 (E): seccion 4.3 y variantes 4.5
+}
+ca_hon_member_setup = {
+	ig:ig_armed_forces = {
+            remove_ideology = ideology_caudillismo
+            remove_ideology = ideology_paternalistic
+            add_ideology = ideology_central_american_federal
+            set_interest_group_name = ig_ejercito_federal
+        }
+
+    ig:ig_devout = {
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
+    }
+    
+    ig:ig_landowners = {            
+        remove_ideology = ideology_republican_paternalistic
+        remove_ideology = ideology_hierarchic
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_ca_criollo_paternalistic
+        add_ideology = ideology_ca_criollo_stratocratic            
+        add_ideology = ideology_central_american_reactionary_2
+        set_interest_group_name = ig_hacendados
+    }
+    
+    ig:ig_industrialists = {
+        remove_ideology = ideology_plutocratic
+        remove_ideology = ideology_laissez_faire
+        add_ideology = ideology_ca_agroexportadores
+        add_ideology = ideology_ca_liberal     
+        set_interest_group_name = ig_elite_comercial
+    }
+    
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_anti_clerical
+        remove_ideology = ideology_republican
+        add_ideology = ideology_ca_constitutionalist
+        add_ideology = ideology_ca_secularist
+        add_ideology = ideology_central_american_federal
+        set_interest_group_name = ig_liberales_morazanistas            
+    }
+    
+    ig:ig_petty_bourgeoisie = {
+        remove_ideology = ideology_patriotic
+        add_ideology = ideology_central_american_federal
+        add_ideology = ideology_ca_artesanado
+        set_interest_group_name = ig_artesanos_urbanos
+    }
+    
+    ig:ig_rural_folk = {
+        remove_ideology = ideology_isolationist
+        remove_ideology = ideology_agrarian
+        remove_ideology = ideology_particularist
+        add_ideology = ideology_ca_guilds
+        set_interest_group_name = ig_pequenos_campesinos
+    }
+    activate_law = law_type:law_ca_federal_state
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_landed_voting
+    activate_law = law_type:law_mercantilism
+	ca_ig_config_member = yes # F18 (E): seccion 4.3 y variantes 4.5
+}
+ca_cos_member_setup = {
+	ig:ig_armed_forces = {
+            remove_ideology = ideology_caudillismo
+            remove_ideology = ideology_paternalistic
+            add_ideology = ideology_central_american_federal
+            set_interest_group_name = ig_ejercito_federal
+        }
+
+    ig:ig_devout = {
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
+    }
+    
+    ig:ig_landowners = {            
+        remove_ideology = ideology_republican_paternalistic
+        remove_ideology = ideology_hierarchic
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_ca_criollo_paternalistic
+        add_ideology = ideology_ca_criollo_stratocratic            
+        add_ideology = ideology_central_american_reactionary_2
+        set_interest_group_name = ig_cos_convervador3
+    }
+    
+    ig:ig_industrialists = {
+        remove_ideology = ideology_plutocratic
+        remove_ideology = ideology_laissez_faire
+        add_ideology = ideology_ca_agroexportadores
+        add_ideology = ideology_ca_liberal     
+        set_interest_group_name = ig_elite_comercial
+    }
+    
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_anti_clerical
+        remove_ideology = ideology_republican
+        add_ideology = ideology_ca_constitutionalist
+        add_ideology = ideology_ca_secularist
+        add_ideology = ideology_central_american_federal
+        set_interest_group_name = ig_liberales_morazanistas            
+    }
+    
+    ig:ig_petty_bourgeoisie = {
+        remove_ideology = ideology_patriotic
+        add_ideology = ideology_central_american_federal
+        add_ideology = ideology_ca_artesanado
+        set_interest_group_name = ig_artesanos_urbanos
+    }
+    
+    ig:ig_rural_folk = {
+        remove_ideology = ideology_isolationist
+        remove_ideology = ideology_agrarian
+        remove_ideology = ideology_particularist
+        add_ideology = ideology_ca_guilds
+        set_interest_group_name = ig_pequenos_campesinos
+    }
+    activate_law = law_type:law_ca_federal_state
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_mercantilism
+    activate_law = law_type:law_wealth_voting
+	active_law:lawgroup_governance_principles ?= { 
+			add_amendment = {
+				type = amendment_costa_rica_1830s
+				sponsor = PREV.ig:ig_intelligentsia
+			}
+		}
+	ca_ig_config_member = yes # F18 (E): seccion 4.3 y variantes 4.5
+}
+ca_gua_member_setup = {
+	ig:ig_armed_forces = {
+            remove_ideology = ideology_caudillismo
+            remove_ideology = ideology_paternalistic
+            add_ideology = ideology_central_american_federal
+            set_interest_group_name = ig_ejercito_federal
+        }
+
+    ig:ig_devout = {
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
+    }
+    
+    ig:ig_landowners = {            
+        remove_ideology = ideology_republican_paternalistic
+        remove_ideology = ideology_hierarchic
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_ca_criollo_paternalistic
+        add_ideology = ideology_ca_criollo_stratocratic            
+        add_ideology = ideology_central_american_reactionary_2
+        set_interest_group_name = ig_gua_convervador
+    }
+    
+    ig:ig_industrialists = {
+        remove_ideology = ideology_plutocratic
+        remove_ideology = ideology_laissez_faire
+        add_ideology = ideology_ca_agroexportadores
+        add_ideology = ideology_ca_liberal     
+        set_interest_group_name = ig_elite_comercial
+    }
+    
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_anti_clerical
+        remove_ideology = ideology_republican
+        add_ideology = ideology_ca_constitutionalist
+        add_ideology = ideology_ca_secularist
+        add_ideology = ideology_central_american_federal
+        set_interest_group_name = ig_liberales_morazanistas             
+    }
+    
+    ig:ig_petty_bourgeoisie = {
+        remove_ideology = ideology_patriotic
+        add_ideology = ideology_central_american_federal
+        add_ideology = ideology_ca_artesanado
+        set_interest_group_name = ig_artesanos_urbanos
+    }
+    
+    ig:ig_rural_folk = {
+        remove_ideology = ideology_isolationist
+        remove_ideology = ideology_agrarian
+        remove_ideology = ideology_particularist
+        add_ideology = ideology_ca_guilds
+        set_interest_group_name = ig_pequenos_campesinos
+    }
+
+    activate_law = law_type:law_ca_federal_state
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_mercantilism
+    activate_law = law_type:law_wealth_voting
+    activate_law = law_type:law_censorship
+	active_law:lawgroup_governance_principles ?= {
+			add_amendment = {
+				type = amendment_guatemala_1825
+				sponsor = PREV.ig:ig_intelligentsia
+			}
+		}
+	ca_ig_config_member = yes # F18 (E): seccion 4.3 y variantes 4.5
+}
+ca_els_member_setup = {
+	ig:ig_armed_forces = {
+            remove_ideology = ideology_caudillismo
+            remove_ideology = ideology_paternalistic
+            add_ideology = ideology_central_american_federal
+            set_interest_group_name = ig_ejercito_federal
+        }
+
+    ig:ig_devout = {
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
+    }
+    
+    ig:ig_landowners = {            
+        remove_ideology = ideology_republican_paternalistic
+        remove_ideology = ideology_hierarchic
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_ca_criollo_paternalistic
+        add_ideology = ideology_ca_criollo_stratocratic            
+        add_ideology = ideology_central_american_reactionary_2
+        set_interest_group_name = ig_els_convervador
+    }
+    
+    ig:ig_industrialists = {
+        remove_ideology = ideology_plutocratic
+        remove_ideology = ideology_laissez_faire
+        add_ideology = ideology_ca_agroexportadores
+        add_ideology = ideology_ca_liberal     
+        set_interest_group_name = ig_elite_comercial
+    }
+    
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_anti_clerical
+        remove_ideology = ideology_republican
+        add_ideology = ideology_ca_constitutionalist
+        add_ideology = ideology_ca_secularist
+        add_ideology = ideology_central_american_federal
+        set_interest_group_name = ig_liberales_morazanistas             
+    }
+    
+    ig:ig_petty_bourgeoisie = {
+        remove_ideology = ideology_patriotic
+        add_ideology = ideology_central_american_federal
+        add_ideology = ideology_ca_artesanado
+        set_interest_group_name = ig_artesanos_urbanos
+    }
+    
+    ig:ig_rural_folk = {
+        remove_ideology = ideology_isolationist
+        remove_ideology = ideology_agrarian
+        remove_ideology = ideology_particularist
+        add_ideology = ideology_ca_guilds
+        set_interest_group_name = ig_pequenos_campesinos
+    }
+
+    activate_law = law_type:law_ca_federal_state
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_landed_voting
+    activate_law = law_type:law_mercantilism
+    activate_law = law_type:law_censorship
+    activate_law = law_type:law_religious_schools
+	active_law:lawgroup_governance_principles ?= {
+			add_amendment = {
+				type = amendment_el_salvador_1824
+				sponsor = PREV.ig:ig_intelligentsia
+			}
+		}
+	ca_ig_config_member = yes # F18 (E): seccion 4.3 y variantes 4.5
+}
+ca_alt_member_setup = {
+	ig:ig_armed_forces = {
+            remove_ideology = ideology_caudillismo
+            remove_ideology = ideology_paternalistic
+            add_ideology = ideology_central_american_federal
+            set_interest_group_name = ig_ejercito_federal
+        }
+
+    ig:ig_devout = {
+         remove_ideology = ideology_moralist
+         add_ideology = ideology_ca_moralist	
+         add_ideology = ideology_central_american_reactionary_2
+         set_interest_group_name = ig_catholic_church
+    }
+    
+    ig:ig_landowners = {            
+        remove_ideology = ideology_republican_paternalistic
+        remove_ideology = ideology_hierarchic
+        remove_ideology = ideology_paternalistic
+        add_ideology = ideology_ca_criollo_paternalistic
+        add_ideology = ideology_ca_criollo_stratocratic            
+        add_ideology = ideology_central_american_reactionary_2
+        set_interest_group_name = ig_hacendados
+    }
+    
+    ig:ig_industrialists = {
+        remove_ideology = ideology_plutocratic
+        remove_ideology = ideology_laissez_faire
+        add_ideology = ideology_ca_agroexportadores
+        add_ideology = ideology_ca_liberal     
+        set_interest_group_name = ig_elite_comercial
+    }
+    
+    ig:ig_intelligentsia = {
+        remove_ideology = ideology_liberal
+        remove_ideology = ideology_anti_clerical
+        remove_ideology = ideology_republican
+        add_ideology = ideology_ca_constitutionalist
+        add_ideology = ideology_ca_secularist
+        add_ideology = ideology_central_american_federal
+        set_interest_group_name = ig_liberales_morazanistas            
+    }
+    
+    ig:ig_petty_bourgeoisie = {
+        remove_ideology = ideology_patriotic
+        add_ideology = ideology_central_american_federal
+        add_ideology = ideology_ca_artesanado
+        set_interest_group_name = ig_artesanos_urbanos
+    }
+    
+    ig:ig_rural_folk = {
+        remove_ideology = ideology_isolationist
+        remove_ideology = ideology_agrarian
+        remove_ideology = ideology_particularist
+        add_ideology = ideology_ca_guilds
+        set_interest_group_name = ig_pequenos_campesinos
+    }
+    activate_law = law_type:law_ca_federal_state
+    activate_law = law_type:law_freedom_of_conscience
+    activate_law = law_type:law_landed_voting
+    activate_law = law_type:law_mercantilism
+    activate_law = law_type:law_censorship
+    activate_law = law_type:law_religious_schools
+	ca_ig_config_member = yes # F18 (E): seccion 4.3 y variantes 4.5
+}
+
+
+# ===========================================================================
+# CAFM F7 - Intervenciones y guerras civiles de los estados
+# ===========================================================================
+
+# Consecuencia de rechazar una intervencion (.41), segun el estado. Scope: UCA, con scope:ca_target.
+ca_frca_refusal_consequence = {
+	if = {
+		limit = { scope:ca_target ?= { c:COS ?= this } }
+		scope:ca_target = {
+			set_variable = ca_epifania_tragica
+			add_modifier = { name = ca_epifania_tragica months = 12 }
+		}
+	}
+	else_if = {
+		limit = { scope:ca_target ?= { c:GUA ?= this } }
+		# Frente conservador +1 (al empezar la fase IV, o ya si estamos en ella)
+		set_variable = frca_carrera_strengthened
+		ca_frca_front_change = { FRONT = conservative VALUE = 1 }
+	}
+	else_if = {
+		limit = { scope:ca_target ?= { c:ALT ?= this } }
+		set_global_variable = ca_gua_claims_los_altos
+		scope:ca_target = { set_variable = alt_exposed }
+	}
+	else_if = {
+		limit = { scope:ca_target ?= { c:HON ?= this } }
+		set_variable = frca_sep_early_hon
+	}
+	else_if = {
+		limit = { scope:ca_target ?= { c:NIC ?= this } }
+		set_variable = frca_sep_early_nic
+	}
+	else_if = {
+		limit = { scope:ca_target ?= { c:ELS ?= this } }
+		ca_frca_bar_minor_down = yes
+	}
+}
+
+# Ayuda a un bando en la guerra civil del estado: +-1 = +-10 % de victoria federal
+# (ca_civil_war_federal_chance). Scope: el pais del estado. Uso: ca_cw_help_change = { VALUE = 1 }
+ca_cw_help_change = {
+	if = {
+		limit = { NOT = { has_variable = ca_cw_federal_help } }
+		set_variable = { name = ca_cw_federal_help value = 0 }
+	}
+	change_variable = { name = ca_cw_federal_help add = $VALUE$ }
+}
+
+# Abre el capitulo de la guerra civil en la UCA: A a los 7 dias, B a los 60, C a los 180.
+# Scope: el pais del estado. Uso: ca_cw_start_chapter = { TAG = nic A = 101 B = 102 }
+ca_cw_start_chapter = {
+	c:UCA ?= {
+		if = {
+			limit = { NOT = { has_variable = ca_chapter_$TAG$_started } }
+			set_variable = ca_chapter_$TAG$_started
+			set_variable = { name = ca_chapter_$TAG$_cooldown days = 180 }
+			trigger_event = { id = ca_central_america.$A$ days = 7 }
+			trigger_event = { id = ca_central_america.$B$ days = 60 }
+		}
+	}
+}
+
+# Resolucion de la guerra civil (capitulo C). Decide el vencedor (fijado por la historia o por
+# ca_civil_war_federal_chance), guarda ca_<NAME>_loyalists_won / ca_<NAME>_separatists_won en la
+# UCA y llama a ca_fvs_resolve con la causa "guerra civil". Scope: UCA.
+# Uso: ca_cw_resolve = { CTAG = NIC NAME = nicaragua BEATS = 85 FALLS = 86 }
+ca_cw_resolve = {
+	if = {
+		limit = { exists = c:$CTAG$ }
+		c:$CTAG$ = { save_scope_as = ca_target }
+		if = {
+			limit = { c:$CTAG$ = { has_variable = ca_cw_winner_separatists } }
+			set_variable = ca_$NAME$_separatists_won
+		}
+		else_if = {
+			limit = { c:$CTAG$ = { has_variable = ca_cw_winner_federalists } }
+			set_variable = ca_$NAME$_loyalists_won
+		}
+		else = {
+			random = { chance = ca_civil_war_federal_chance set_variable = ca_$NAME$_loyalists_won }
+			if = {
+				limit = { NOT = { has_variable = ca_$NAME$_loyalists_won } }
+				set_variable = ca_$NAME$_separatists_won
+			}
+		}
+		if = {
+			limit = { has_variable = ca_$NAME$_loyalists_won }
+			ca_fvs_resolve = { CTAG = $CTAG$ BEATS = $BEATS$ FALLS = $FALLS$ RESULT = beats CAUSE = civil_war }
+		}
+		else = {
+			ca_fvs_resolve = { CTAG = $CTAG$ BEATS = $BEATS$ FALLS = $FALLS$ RESULT = falls CAUSE = civil_war }
+		}
+	}
+	else = {
+		set_variable = ca_$NAME$_separatists_won
+	}
+}
+
+# Guatemala, exito parcial historico (.39): Carrera vuelve a los 12 meses. Scope: UCA.
+ca_frca_gua_carrera_return_check = {
+	if = {
+		limit = {
+			has_variable = frca_gua_partial_success
+			NOT = { has_variable = frca_gua_carrera_returns }
+		}
+		remove_variable = frca_gua_partial_success
+		ca_frca_loyalty_down = { TAG = gua }
+		set_variable = frca_carrera_strengthened
+	}
+}
+
+# Fuente secundaria de peticiones (grupo 6): un estado de la IA, todavia miembro, con
+# lealtad >= 2 y presion separatista (barra del estado < 40), en las fases II-III y sin la IA
+# historica. Pone la peticion; el boton aparece en el diario de la UCA. Scope: el pais del estado.
+ca_frca_ai_request_check = {
+	if = {
+		limit = {
+			is_ai = yes
+			is_subject_of = c:UCA
+			NOT = { ca_frca_ai_historic = yes }
+			ca_frca_phase_ge = { VALUE = 2 }
+			NOT = { ca_frca_phase_ge = { VALUE = 4 } }
+			has_variable = ca_fvs_bar
+			var:ca_fvs_bar < 40
+			NOT = { has_variable = ca_intervention_request_active }
+			NOT = { has_variable = ca_intervention_request_cooldown }
+			OR = {
+				AND = { c:GUA ?= this ca_frca_loyalty_ge = { TAG = gua VALUE = 2 } }
+				AND = { c:ELS ?= this ca_frca_loyalty_ge = { TAG = els VALUE = 2 } }
+				AND = { c:HON ?= this ca_frca_loyalty_ge = { TAG = hon VALUE = 2 } }
+				AND = { c:NIC ?= this ca_frca_loyalty_ge = { TAG = nic VALUE = 2 } }
+				AND = { c:COS ?= this ca_frca_loyalty_ge = { TAG = cos VALUE = 2 } }
+				AND = { c:ALT ?= this ca_frca_loyalty_ge = { TAG = alt VALUE = 2 } }
+			}
+		}
+		random = {
+			chance = 10
+			set_variable = { name = ca_intervention_request_active days = 180 }
+			set_variable = { name = ca_intervention_request_cooldown days = 365 }
+		}
+	}
+}

@@ -63,7 +63,10 @@ ca_cos_chapter_scheduler_effect = {
 		limit = {
 			game_date >= 1839.1.1
 			game_date <= 1841.12.31
-			has_variable = ca_cos_ruta_separatista
+			OR = {
+				has_variable = ca_cos_ruta_separatista
+				has_variable = ca_cos_asilo_morazan # F15 (E3): el asilo de Morazan permite su regreso
+			}
 			NOT = { has_variable = ca_cos_cap_d_iniciado }
 			NOT = { ca_cos_capitulo_con_barra_activo_trigger = yes }
 		}
@@ -443,6 +446,7 @@ ca_cos_aguila_beats_effect = {
 		limit = {
 			game_date >= 1839.1.15
 			NOT = { has_variable = ca_cos_conspiracion_mora_fired }
+			NOT = { has_variable = ca_cos_mora_con_carrillo } # F15 (E3): Mora no conspira en 1839
 		}
 		set_variable = ca_cos_conspiracion_mora_fired
 		trigger_event = { id = ca_costa_rica_events.197 popup = yes }
@@ -721,5 +725,139 @@ ca_cos_republica_beats_effect = {
 		}
 		set_variable = ca_cos_quiros_1850_fired
 		trigger_event = { id = ca_costa_rica_events.235 popup = yes }
+	}
+}
+
+# -------------------------------------------------------------------------
+# CAFM F15 (E3): consecuencias de las marcas de Costa Rica (una vez cada una).
+# Lo llama el pulso mensual de je_ca_historic_situation_in_costarica. Scope: COS.
+# -------------------------------------------------------------------------
+ca_cos_consequences_monthly = {
+	# Bloque 1 - Quien gobierna
+	if = {
+		limit = { has_variable = ca_gobierno_carrillo_dictadura game_date < 1842.4.1 NOT = { has_variable = ca_cos_dictadura_push } }
+		set_variable = { name = ca_cos_dictadura_push days = 365 }
+		ca_cos_change_soberania_effect = { VALUE = 5 }
+	}
+	if = {
+		limit = { has_variable = ca_cos_castro_depuesto NOT = { has_variable = ca_cos_c_castro } }
+		set_variable = ca_cos_c_castro
+		add_modifier = { name = ca_cos_castro_depuesto_mod months = 24 }
+	}
+	# Bloque 2 - Morazan y la Federacion
+	if = {
+		limit = { has_variable = ca_cos_estado_federal_autonomo NOT = { has_variable = ca_cos_c_autonomo } }
+		set_variable = ca_cos_c_autonomo
+		c:UCA ?= { ca_frca_loyalty_up = { TAG = cos } }
+	}
+	if = {
+		limit = { has_variable = ca_cos_separada_1838 NOT = { has_variable = ca_cos_c_separada } }
+		set_variable = ca_cos_c_separada
+		set_global_variable = ca_sep_cos_fired
+		c:UCA ?= { set_variable = { name = frca_loyalty_cos value = 0 } }
+	}
+	if = {
+		limit = {
+			has_variable = ca_intervencion_morazan_fired
+			NOT = { has_variable = ca_cos_c_intervencion }
+			ca_frca_phase_ge = { VALUE = 4 }
+		}
+		set_variable = ca_cos_c_intervencion
+		c:UCA ?= { ca_frca_front_change = { FRONT = conservative VALUE = 1 } }
+	}
+	if = {
+		limit = { has_variable = ca_informe_jimenez_leaked NOT = { has_variable = ca_cos_c_jimenez } }
+		set_variable = ca_cos_c_jimenez
+		c:UCA ?= { change_relations = { country = root value = -20 } }
+		ca_fvs_bar_change = { VALUE = -10 }
+	}
+	if = {
+		limit = { has_variable = ca_cos_nicaragua_desconfia NOT = { has_variable = ca_cos_c_nicaragua } }
+		set_variable = ca_cos_c_nicaragua
+		c:NIC ?= { change_relations = { country = root value = -20 } }
+	}
+	if = {
+		limit = { has_variable = ca_cos_morazan_fusilado NOT = { has_variable = ca_cos_c_fusilado } }
+		set_variable = ca_cos_c_fusilado
+		c:ELS ?= { change_relations = { country = root value = -20 } }
+		c:HON ?= { change_relations = { country = root value = -20 } }
+	}
+	# Bloque 3 - Politica interna
+	if = {
+		limit = {
+			has_journal_entry = je_ca_cos_nueva_liga
+			OR = {
+				has_variable = ca_cos_ligueros_indultados
+				has_variable = ca_cos_amnistia_1837
+				has_variable = ca_cos_reformas_moderadas
+			}
+			NOT = { has_variable = ca_cos_c_liga }
+		}
+		set_variable = ca_cos_c_liga
+		if = {
+			limit = { has_variable = ca_cos_ligueros_indultados }
+			je:je_ca_cos_nueva_liga = { add_progress = { name = ca_cos_reunificacion_bar value = 10 } }
+		}
+		if = {
+			limit = { has_variable = ca_cos_amnistia_1837 }
+			je:je_ca_cos_nueva_liga = { add_progress = { name = ca_cos_reunificacion_bar value = 10 } }
+		}
+		if = {
+			limit = { has_variable = ca_cos_reformas_moderadas }
+			je:je_ca_cos_nueva_liga = { add_progress = { name = ca_cos_reunificacion_bar value = 10 } }
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				has_variable = ca_cos_sublevados_arrestados
+				has_variable = ca_cos_mora_desterrado
+			}
+			NOT = { has_variable = ca_cos_c_represion }
+		}
+		set_variable = ca_cos_c_represion
+		add_radicals = { value = small_radicals culture = cu:costa_rican }
+		set_variable = ca_cos_conspirators_may_return
+	}
+	if = {
+		limit = { has_variable = ca_cos_renuncia_rechazada NOT = { has_variable = ca_cos_c_renuncia } }
+		set_variable = ca_cos_c_renuncia
+		add_modifier = { name = ca_cos_renuncia_rechazada_mod months = 24 }
+	}
+	# Bloque 4 - Instituciones y economia
+	if = {
+		limit = {
+			has_variable = ca_cos_constitucion_1847
+			NOT = { has_variable = ca_cos_c_1847 }
+			OR = {
+				has_law = law_type:law_parliamentary_republic
+				has_law = law_type:law_presidential_republic
+			}
+		}
+		set_variable = ca_cos_c_1847
+		active_law:lawgroup_governance_principles ?= {
+			add_amendment = {
+				type = amendment_costa_rica_1st_republic
+				sponsor = root.ig:ig_intelligentsia
+			}
+		}
+	}
+	if = {
+		limit = { has_variable = ca_cos_universidad_santo_tomas NOT = { has_variable = ca_cos_c_universidad } }
+		set_variable = ca_cos_c_universidad
+		ca_enl_bar_change = { VALUE = 15 }
+	}
+	if = {
+		limit = { has_variable = ca_cos_cafe_a_londres NOT = { has_variable = ca_cos_c_cafe } }
+		set_variable = ca_cos_c_cafe
+		ca_coffee_bar_change = { VALUE = 10 }
+		c:GBR ?= { change_relations = { country = root value = 20 } }
+	}
+	# Bloque 5 - Finales de la fragmentacion
+	if = {
+		limit = { has_variable = ca_cos_unitaria NOT = { has_variable = ca_cos_c_unitaria } }
+		set_variable = ca_cos_c_unitaria
+		add_modifier = { name = ca_cos_republica_unitaria_mod months = 36 }
+		s:STATE_COSTA_RICA.region_state:COS ?= { add_modifier = { name = ca_cos_ciudades_agraviadas months = 36 } }
 	}
 }

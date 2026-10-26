@@ -1,0 +1,53 @@
+﻿# ============================================================================
+# CAFM - F8 - Modificadores de los desenlaces (common/static_modifiers/ca_outcome_modifiers.txt)
+# ============================================================================
+
+# .44 a "Viva la Federacion!" (5 anos)
+ca_frca_federal_victory = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 15
+	country_prestige_add = 10
+}
+
+# .44 b "Clemencia" (2 anos)
+ca_frca_clemency = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_authority_add = -50
+}
+
+# A. La Republica sobrevive: "Republica consolidada" (10 anos)
+ca_frca_republic_consolidated = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 10
+	country_authority_add = 50
+	country_bureaucracy_add = 25
+}
+
+# B. Union por la espada (5 anos)
+ca_frca_union_by_sword = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_authority_add = 100
+	country_legitimacy_base_add = -5
+	interest_group_ig_armed_forces_pol_str_mult = 0.25
+}
+
+# B. Estados reconquistados (5 anos)
+ca_frca_reconquest_unrest = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_radicals_from_political_movements_mult = 0.25
+	state_turmoil_effects_mult = 0.25
+}
+
+# Variante "Republica de los Seis Estados" (10 anos)
+ca_frca_six_states = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_add = 15
+	country_legitimacy_base_add = 5
+}
+
+# D2. Federacion menguada (10 anos)
+ca_frca_federation_diminished = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_authority_add = -100
+	country_prestige_add = -10
+}

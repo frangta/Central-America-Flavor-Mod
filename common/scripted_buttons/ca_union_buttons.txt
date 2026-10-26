@@ -1,0 +1,134 @@
+﻿############################################################################
+# CAFM - F12 - Botones de la Confederacion y la Patria Grande
+# (common/scripted_buttons/ca_union_buttons.txt)
+############################################################################
+
+# Convocar la Dieta (anual): cohesion +10, relaciones con los socios +10
+ca_button_conf_diet = {
+	name = "ca_button_conf_diet"
+	desc = "ca_button_conf_diet_desc"
+	visible = { has_journal_entry = je_ca_confederation }
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = ca_conf_diet_cd }
+		}
+		gold_reserves >= ca_money_small
+	}
+	effect = {
+		set_variable = { name = ca_conf_diet_cd days = 365 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ca_conf_cohesion_change = { VALUE = 10 }
+		every_subject_or_below = {
+			limit = { is_subject_type = subject_type_ca_confederative_partner }
+			change_relations = { country = root value = 10 }
+		}
+	}
+	ai_chance = { value = 50 }
+}
+
+# Defensa comun (una vez): pacto defensivo de la Confederacion con cada socio
+ca_button_conf_defense = {
+	name = "ca_button_conf_defense"
+	desc = "ca_button_conf_defense_desc"
+	visible = {
+		has_journal_entry = je_ca_confederation
+		NOT = { has_variable = ca_conf_common_defense }
+	}
+	possible = {
+		ca_confederation_partners_count >= 1
+	}
+	effect = {
+		set_variable = ca_conf_common_defense
+		every_subject_or_below = {
+			limit = { is_subject_type = subject_type_ca_confederative_partner }
+			save_scope_as = ca_conf_partner
+			root = {
+				create_diplomatic_pact = {
+					country = scope:ca_conf_partner
+					type = ca_defensive_pact_confederation
+				}
+			}
+		}
+		ca_conf_cohesion_change = { VALUE = 10 }
+	}
+	ai_chance = { value = 40 }
+}
+
+# Aduana y moneda comunes (una vez, cohesion 40 o mas)
+ca_button_conf_customs = {
+	name = "ca_button_conf_customs"
+	desc = "ca_button_conf_customs_desc"
+	visible = {
+		has_journal_entry = je_ca_confederation
+		NOT = { has_variable = ca_conf_customs_union }
+	}
+	possible = {
+		custom_tooltip = {
+			text = ca_button_conf_cohesion_40_tt
+			var:ca_conf_cohesion >= 40
+		}
+		gold_reserves >= ca_money_medium
+	}
+	effect = {
+		set_variable = ca_conf_customs_union
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		add_modifier = { name = ca_conf_customs_union_mod months = 120 }
+		ca_conf_cohesion_change = { VALUE = 15 }
+	}
+	ai_chance = { value = 30 }
+}
+
+# Invitar a un estado centroamericano independiente (cada 2 anos)
+ca_button_conf_invite = {
+	name = "ca_button_conf_invite"
+	desc = "ca_button_conf_invite_desc"
+	visible = { has_journal_entry = je_ca_confederation }
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = ca_conf_invite_cd }
+		}
+		custom_tooltip = {
+			text = ca_button_conf_invite_target_tt
+			any_country = { ca_conf_can_be_invited = yes }
+		}
+	}
+	effect = {
+		set_variable = { name = ca_conf_invite_cd days = 730 }
+		every_country = {
+			limit = { ca_conf_can_be_invited = yes }
+			random = {
+				chance = ca_conf_invite_chance
+				ca_conf_join = yes
+			}
+			if = {
+				limit = { NOT = { has_variable = ca_conf_joined_now } }
+				set_variable = { name = ca_conf_refused_recently days = 1825 }
+				root = { ca_conf_cohesion_change = { VALUE = -5 } }
+			}
+		}
+	}
+	ai_chance = { value = 25 }
+}
+
+# Convocar un congreso unionista (cada 5 anos)
+ca_button_unionist_congress = {
+	name = "ca_button_unionist_congress"
+	desc = "ca_button_unionist_congress_desc"
+	visible = { has_journal_entry = je_ca_patria_grande }
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = ca_unionist_congress_cd }
+		}
+		gold_reserves >= ca_money_small
+		is_at_war = no
+	}
+	effect = {
+		add_treasury = { value = ca_money_small multiply = -1 }
+		custom_tooltip = ca_button_unionist_congress_tt
+		hidden_effect = { ca_unionist_congress = yes }
+	}
+	ai_chance = { value = 30 }
+}

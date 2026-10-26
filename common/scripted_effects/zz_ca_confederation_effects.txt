@@ -1,0 +1,238 @@
+﻿############################################################################
+# CAFM - F12 - La Confederacion (B1) y la Patria Grande (B3)
+# (common/scripted_effects/zz_ca_confederation_effects.txt)
+############################################################################
+
+# Barra generica 0-100 guardada en una variable. Uso: ca_var_bar_change = { VAR = ca_conf_cohesion VALUE = 10 }
+ca_var_bar_change = {
+	if = {
+		limit = { NOT = { has_variable = $VAR$ } }
+		set_variable = { name = $VAR$ value = 0 }
+	}
+	change_variable = { name = $VAR$ add = $VALUE$ }
+	if = {
+		limit = { var:$VAR$ > 100 }
+		set_variable = { name = $VAR$ value = 100 }
+	}
+	else_if = {
+		limit = { var:$VAR$ < 0 }
+		set_variable = { name = $VAR$ value = 0 }
+	}
+}
+
+# ---------------------------------------------------------------------------
+# B1. La Confederacion Centroamericana (1842-1845). Scope: la UCA (cabeza).
+# ---------------------------------------------------------------------------
+ca_conf_cohesion_change = {
+	ca_var_bar_change = { VAR = ca_conf_cohesion VALUE = $VALUE$ }
+}
+
+# Inicio (desenlace C): cohesion 50; lealtad de los socios reiniciada a 2 ("Socio"); 12 meses de gracia.
+ca_conf_setup = {
+	set_variable = { name = ca_conf_cohesion value = 50 }
+	set_variable = { name = ca_conf_grace days = 365 }
+	set_variable = { name = ca_conf_start_date value = 1 }
+	if = {
+		limit = { c:GUA ?= { is_subject_of = c:UCA is_subject_type = subject_type_ca_confederative_partner } }
+		set_variable = { name = frca_loyalty_gua value = 2 }
+	}
+	if = {
+		limit = { c:ELS ?= { is_subject_of = c:UCA is_subject_type = subject_type_ca_confederative_partner } }
+		set_variable = { name = frca_loyalty_els value = 2 }
+	}
+	if = {
+		limit = { c:HON ?= { is_subject_of = c:UCA is_subject_type = subject_type_ca_confederative_partner } }
+		set_variable = { name = frca_loyalty_hon value = 2 }
+	}
+	if = {
+		limit = { c:NIC ?= { is_subject_of = c:UCA is_subject_type = subject_type_ca_confederative_partner } }
+		set_variable = { name = frca_loyalty_nic value = 2 }
+	}
+	if = {
+		limit = { c:COS ?= { is_subject_of = c:UCA is_subject_type = subject_type_ca_confederative_partner } }
+		set_variable = { name = frca_loyalty_cos value = 2 }
+	}
+	if = {
+		limit = { c:ALT ?= { is_subject_of = c:UCA is_subject_type = subject_type_ca_confederative_partner } }
+		set_variable = { name = frca_loyalty_alt value = 2 }
+	}
+	if = {
+		limit = { c:CIP ?= { is_subject_of = c:UCA is_subject_type = subject_type_ca_confederative_partner } }
+		set_variable = { name = frca_loyalty_cip value = 2 }
+	}
+}
+
+# Pulso mensual del diario.
+ca_conf_monthly = {
+	ca_conf_cohesion_change = { VALUE = ca_conf_monthly_change }
+}
+
+# Consolidada: cohesion 100, 3 o mas socios, sin guerras entre socios, antes de 1850.
+ca_conf_consolidated = {
+	set_variable = ca_conf_consolidated
+	set_global_variable = ca_conf_consolidated
+	add_modifier = { name = ca_conf_consolidated_mod months = 120 }
+	every_subject_or_below = {
+		limit = { is_subject_type = subject_type_ca_confederative_partner }
+		change_relations = { country = c:UCA value = 20 }
+	}
+	if = {
+		limit = { NOT = { has_journal_entry = je_ca_patria_grande } }
+		add_journal_entry = { type = je_ca_patria_grande }
+	}
+	custom_tooltip = ca_conf_consolidated_tt
+}
+
+# Ruptura: los socios se independizan sin guerra (como D2). Despues de 1850, ruptura pacifica.
+# Uso interno: ca_conf_release = { CTAG = NIC NAME = nicaragua }
+ca_conf_release = {
+	if = {
+		limit = { c:$CTAG$ ?= { is_subject_of = c:UCA is_subject_type = subject_type_ca_confederative_partner } }
+		remove_diplomatic_pact = { country = c:$CTAG$ type = ca_confederative_partner }
+		c:$CTAG$ = {
+			make_independent = yes
+			if = {
+				limit = { has_global_variable = ca_conf_peaceful_end }
+				change_relations = { country = c:UCA value = 20 }
+			}
+			else = {
+				change_relations = { country = c:UCA value = -20 }
+			}
+			ca_ai_$NAME$_effect = yes
+		}
+	}
+}
+ca_conf_rupture = {
+	set_global_variable = ca_conf_broken
+	if = {
+		limit = { game_date >= 1850.1.1 }
+		set_global_variable = ca_conf_peaceful_end
+	}
+	ca_conf_release = { CTAG = GUA NAME = guatemala }
+	ca_conf_release = { CTAG = ELS NAME = elsalvador }
+	ca_conf_release = { CTAG = HON NAME = honduras }
+	ca_conf_release = { CTAG = NIC NAME = nicaragua }
+	ca_conf_release = { CTAG = COS NAME = costarica }
+	ca_conf_release = { CTAG = ALT NAME = losaltos }
+	if = {
+		limit = { c:CIP ?= { is_subject_of = c:UCA is_subject_type = subject_type_ca_confederative_partner } }
+		remove_diplomatic_pact = { country = c:CIP type = ca_confederative_partner }
+		c:CIP = { make_independent = yes }
+	}
+	if = {
+		limit = { has_law = law_type:law_ca_central_american_confederated }
+		activate_law = law_type:law_ca_central_american_federal
+	}
+	add_modifier = { name = ca_conf_broken_mod months = 60 }
+}
+
+# Invitar a un estado independiente a la Confederacion (boton y .159). Scope: el invitado.
+ca_conf_join = {
+	c:UCA = {
+		create_diplomatic_pact = {
+			country = prev
+			type = ca_confederative_partner
+		}
+		ca_conf_cohesion_change = { VALUE = 10 }
+	}
+	change_relations = { country = c:UCA value = 20 }
+	set_variable = { name = ca_conf_joined_now days = 30 }
+}
+
+# ---------------------------------------------------------------------------
+# B3. La Patria Grande (je_ca_patria_grande). Scope: el pais con el diario.
+# ---------------------------------------------------------------------------
+ca_unity_change = {
+	ca_var_bar_change = { VAR = ca_unity VALUE = $VALUE$ }
+}
+
+ca_unity_monthly = {
+	ca_unity_change = { VALUE = ca_unity_monthly_change }
+}
+
+# Pulso anual: quien recibe el diario (B3, punto 1).
+ca_patria_grande_check = {
+	if = {
+		limit = {
+			NOT = { has_journal_entry = je_ca_patria_grande }
+			NOT = { has_variable = ca_reunification_completed }
+			NOT = { has_global_variable = ca_reunification_completed }
+			is_subject = no
+			OR = {
+				AND = {
+					c:UCA ?= this
+					has_global_variable = ca_frca_federation_diminished
+				}
+				AND = {
+					c:UCA ?= this
+					has_variable = ca_conf_consolidated
+				}
+				ca_formable_tier_2_country = yes
+				AND = {
+					game_date >= 1850.1.1
+					ca_is_ca_national_country = yes
+					has_technology_researched = nationalism
+					NOT = { has_variable = is_frca_var }
+				}
+			}
+		}
+		add_journal_entry = { type = je_ca_patria_grande }
+	}
+}
+
+# Congreso unionista (boton). Tira el dado y lanza .162 con el resultado.
+ca_unionist_congress = {
+	set_variable = { name = ca_unionist_congress_cd days = 1825 }
+	remove_variable = ca_congress_success
+	random = {
+		chance = ca_unionist_congress_chance
+		set_variable = ca_congress_success
+	}
+	if = {
+		limit = { has_variable = ca_congress_success }
+		cafm_catalyst_unionist_congress_success = yes
+		ca_unity_change = { VALUE = 15 }
+		save_scope_as = ca_congress_host
+		every_country = {
+			limit = {
+				ca_is_ca_national_country = yes
+				is_subject = no
+				NOT = { this = scope:ca_congress_host }
+				NOT = { has_war_with = scope:ca_congress_host }
+				"relations(scope:ca_congress_host)" >= relations_threshold:friendly
+				NOT = { has_variable = nic_unionism_dead }
+				NOT = { has_variable = ca_cos_republica_cerrada }
+			}
+			random = {
+				chance = 30
+				scope:ca_congress_host = {
+					create_diplomatic_pact = {
+						country = prev
+						type = ca_confederative_partner
+					}
+				}
+				set_variable = { name = ca_joined_by_congress days = 30 }
+			}
+		}
+	}
+	else = {
+		cafm_catalyst_unionist_congress_failed = yes
+		ca_unity_change = { VALUE = -10 }
+	}
+	trigger_event = { id = ca_central_america.162 popup = yes }
+}
+
+# Completar: variable de formables, etiqueta UCA y .166.
+ca_patria_grande_complete = {
+	set_variable = ca_reunification_completed
+	set_global_variable = ca_reunification_completed
+	if = {
+		limit = {
+			NOT = { c:UCA ?= this }
+			NOT = { exists = c:UCA }
+		}
+		change_tag = UCA
+	}
+	trigger_event = { id = ca_central_america.166 popup = yes }
+}
+

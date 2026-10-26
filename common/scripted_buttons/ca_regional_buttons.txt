@@ -1,0 +1,58 @@
+﻿# CAFM - F14 - Regional (common/scripted_buttons/ca_regional_buttons.txt)
+
+# ---------------------------------------------------------------------------
+# D2 - Talamanca: los tres caminos (una sola eleccion)
+# ---------------------------------------------------------------------------
+ca_button_talamanca_integrate = {
+	name = "ca_button_talamanca_integrate"
+	desc = "ca_button_talamanca_integrate_desc"
+	visible = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_variable = ca_talamanca_path_conquer }
+		NOT = { has_variable = ca_talamanca_path_coexist }
+	}
+	possible = {
+		NOT = { has_variable = ca_talamanca_path_integrate }
+	}
+	effect = {
+		set_variable = ca_talamanca_path_integrate
+		ca_talamanca_change = { VALUE = 5 }
+	}
+	ai_chance = { value = 40 }
+}
+
+ca_button_talamanca_conquer = {
+	name = "ca_button_talamanca_conquer"
+	desc = "ca_button_talamanca_conquer_desc"
+	visible = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_variable = ca_talamanca_path_integrate }
+		NOT = { has_variable = ca_talamanca_path_coexist }
+	}
+	possible = {
+		NOT = { has_variable = ca_talamanca_path_conquer }
+	}
+	effect = {
+		set_variable = ca_talamanca_path_conquer
+		c:RDT ?= { change_relations = { country = root value = -30 } }
+	}
+	ai_chance = { value = 20 }
+}
+
+ca_button_talamanca_coexist = {
+	name = "ca_button_talamanca_coexist"
+	desc = "ca_button_talamanca_coexist_desc"
+	visible = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_variable = ca_talamanca_path_integrate }
+		NOT = { has_variable = ca_talamanca_path_conquer }
+	}
+	possible = {
+		NOT = { has_variable = ca_talamanca_path_coexist }
+	}
+	effect = {
+		set_variable = ca_talamanca_path_coexist
+		c:RDT ?= { change_relations = { country = root value = 30 } }
+	}
+	ai_chance = { value = 40 }
+}

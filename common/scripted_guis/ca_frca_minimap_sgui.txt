@@ -1,0 +1,994 @@
+﻿############################################################################
+# CAFM - F9 - Minimapa de lealtad (common/scripted_guis/ca_frca_minimap_sgui.txt)
+# Lo usa gui/ca_frca_minimap.gui (widget del diario de la Federacion).
+# ca_minimap_selected (en la UCA): 1 GUA 2 ELS 3 HON 4 NIC 5 COS 6 ALT 7 CIP 8 Bocas
+############################################################################
+ca_mm_gua_loyal = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_gua
+		var:frca_loyalty_gua = 3
+	}
+}
+ca_mm_gua_wavering = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_gua
+		var:frca_loyalty_gua = 2
+	}
+}
+ca_mm_gua_rebel = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_gua
+		var:frca_loyalty_gua = 1
+	}
+}
+ca_mm_gua_separated = {
+	scope = country
+	is_shown = {
+		OR = {
+			NOT = { has_variable = frca_loyalty_gua }
+			var:frca_loyalty_gua <= 0
+		}
+	}
+}
+ca_mm_select_gua = {
+	scope = country
+	effect = {
+		if = {
+			limit = {
+				has_variable = ca_minimap_selected
+				var:ca_minimap_selected = 1
+			}
+			remove_variable = ca_minimap_selected
+		}
+		else = {
+			set_variable = { name = ca_minimap_selected value = 1 }
+		}
+	}
+}
+ca_mm_panel_gua = {
+	scope = country
+	is_shown = {
+		has_variable = ca_minimap_selected
+		var:ca_minimap_selected = 1
+	}
+}
+ca_mm_els_loyal = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_els
+		var:frca_loyalty_els = 3
+	}
+}
+ca_mm_els_wavering = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_els
+		var:frca_loyalty_els = 2
+	}
+}
+ca_mm_els_rebel = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_els
+		var:frca_loyalty_els = 1
+	}
+}
+ca_mm_els_separated = {
+	scope = country
+	is_shown = {
+		OR = {
+			NOT = { has_variable = frca_loyalty_els }
+			var:frca_loyalty_els <= 0
+		}
+	}
+}
+ca_mm_select_els = {
+	scope = country
+	effect = {
+		if = {
+			limit = {
+				has_variable = ca_minimap_selected
+				var:ca_minimap_selected = 2
+			}
+			remove_variable = ca_minimap_selected
+		}
+		else = {
+			set_variable = { name = ca_minimap_selected value = 2 }
+		}
+	}
+}
+ca_mm_panel_els = {
+	scope = country
+	is_shown = {
+		has_variable = ca_minimap_selected
+		var:ca_minimap_selected = 2
+	}
+}
+ca_mm_hon_loyal = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_hon
+		var:frca_loyalty_hon = 3
+	}
+}
+ca_mm_hon_wavering = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_hon
+		var:frca_loyalty_hon = 2
+	}
+}
+ca_mm_hon_rebel = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_hon
+		var:frca_loyalty_hon = 1
+	}
+}
+ca_mm_hon_separated = {
+	scope = country
+	is_shown = {
+		OR = {
+			NOT = { has_variable = frca_loyalty_hon }
+			var:frca_loyalty_hon <= 0
+		}
+	}
+}
+ca_mm_select_hon = {
+	scope = country
+	effect = {
+		if = {
+			limit = {
+				has_variable = ca_minimap_selected
+				var:ca_minimap_selected = 3
+			}
+			remove_variable = ca_minimap_selected
+		}
+		else = {
+			set_variable = { name = ca_minimap_selected value = 3 }
+		}
+	}
+}
+ca_mm_panel_hon = {
+	scope = country
+	is_shown = {
+		has_variable = ca_minimap_selected
+		var:ca_minimap_selected = 3
+	}
+}
+ca_mm_nic_loyal = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_nic
+		var:frca_loyalty_nic = 3
+	}
+}
+ca_mm_nic_wavering = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_nic
+		var:frca_loyalty_nic = 2
+	}
+}
+ca_mm_nic_rebel = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_nic
+		var:frca_loyalty_nic = 1
+	}
+}
+ca_mm_nic_separated = {
+	scope = country
+	is_shown = {
+		OR = {
+			NOT = { has_variable = frca_loyalty_nic }
+			var:frca_loyalty_nic <= 0
+		}
+	}
+}
+ca_mm_select_nic = {
+	scope = country
+	effect = {
+		if = {
+			limit = {
+				has_variable = ca_minimap_selected
+				var:ca_minimap_selected = 4
+			}
+			remove_variable = ca_minimap_selected
+		}
+		else = {
+			set_variable = { name = ca_minimap_selected value = 4 }
+		}
+	}
+}
+ca_mm_panel_nic = {
+	scope = country
+	is_shown = {
+		has_variable = ca_minimap_selected
+		var:ca_minimap_selected = 4
+	}
+}
+ca_mm_cos_loyal = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_cos
+		var:frca_loyalty_cos = 3
+	}
+}
+ca_mm_cos_wavering = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_cos
+		var:frca_loyalty_cos = 2
+	}
+}
+ca_mm_cos_rebel = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_cos
+		var:frca_loyalty_cos = 1
+	}
+}
+ca_mm_cos_separated = {
+	scope = country
+	is_shown = {
+		OR = {
+			NOT = { has_variable = frca_loyalty_cos }
+			var:frca_loyalty_cos <= 0
+		}
+	}
+}
+ca_mm_select_cos = {
+	scope = country
+	effect = {
+		if = {
+			limit = {
+				has_variable = ca_minimap_selected
+				var:ca_minimap_selected = 5
+			}
+			remove_variable = ca_minimap_selected
+		}
+		else = {
+			set_variable = { name = ca_minimap_selected value = 5 }
+		}
+	}
+}
+ca_mm_panel_cos = {
+	scope = country
+	is_shown = {
+		has_variable = ca_minimap_selected
+		var:ca_minimap_selected = 5
+	}
+}
+ca_mm_alt_loyal = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_alt
+		var:frca_loyalty_alt = 3
+	}
+}
+ca_mm_alt_wavering = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_alt
+		var:frca_loyalty_alt = 2
+	}
+}
+ca_mm_alt_rebel = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_alt
+		var:frca_loyalty_alt = 1
+	}
+}
+ca_mm_alt_separated = {
+	scope = country
+	is_shown = {
+		OR = {
+			NOT = { has_variable = frca_loyalty_alt }
+			var:frca_loyalty_alt <= 0
+		}
+	}
+}
+ca_mm_select_alt = {
+	scope = country
+	effect = {
+		if = {
+			limit = {
+				has_variable = ca_minimap_selected
+				var:ca_minimap_selected = 6
+			}
+			remove_variable = ca_minimap_selected
+		}
+		else = {
+			set_variable = { name = ca_minimap_selected value = 6 }
+		}
+	}
+}
+ca_mm_panel_alt = {
+	scope = country
+	is_shown = {
+		has_variable = ca_minimap_selected
+		var:ca_minimap_selected = 6
+	}
+}
+ca_mm_cip_loyal = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_cip
+		var:frca_loyalty_cip = 3
+	}
+}
+ca_mm_cip_wavering = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_cip
+		var:frca_loyalty_cip = 2
+	}
+}
+ca_mm_cip_rebel = {
+	scope = country
+	is_shown = {
+		has_variable = frca_loyalty_cip
+		var:frca_loyalty_cip = 1
+	}
+}
+ca_mm_cip_separated = {
+	scope = country
+	is_shown = {
+		OR = {
+			NOT = { has_variable = frca_loyalty_cip }
+			var:frca_loyalty_cip <= 0
+		}
+	}
+}
+ca_mm_select_cip = {
+	scope = country
+	effect = {
+		if = {
+			limit = {
+				has_variable = ca_minimap_selected
+				var:ca_minimap_selected = 7
+			}
+			remove_variable = ca_minimap_selected
+		}
+		else = {
+			set_variable = { name = ca_minimap_selected value = 7 }
+		}
+	}
+}
+ca_mm_panel_cip = {
+	scope = country
+	is_shown = {
+		has_variable = ca_minimap_selected
+		var:ca_minimap_selected = 7
+	}
+}
+ca_mm_boc_loyal = {
+	scope = country
+	is_shown = {
+		exists = s:STATE_PANAMA.region_state:UCA
+	}
+}
+ca_mm_boc_wavering = {
+	scope = country
+	is_shown = {
+		always = no
+	}
+}
+ca_mm_boc_rebel = {
+	scope = country
+	is_shown = {
+		always = no
+	}
+}
+ca_mm_boc_separated = {
+	scope = country
+	is_shown = {
+		NOT = { exists = s:STATE_PANAMA.region_state:UCA }
+	}
+}
+ca_mm_select_boc = {
+	scope = country
+	effect = {
+		if = {
+			limit = {
+				has_variable = ca_minimap_selected
+				var:ca_minimap_selected = 8
+			}
+			remove_variable = ca_minimap_selected
+		}
+		else = {
+			set_variable = { name = ca_minimap_selected value = 8 }
+		}
+	}
+}
+ca_mm_panel_boc = {
+	scope = country
+	is_shown = {
+		has_variable = ca_minimap_selected
+		var:ca_minimap_selected = 8
+	}
+}
+ca_mm_gua_campaign = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_campaign = { TAG = gua }
+	}
+	effect = {
+		ca_frca_action_campaign = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_gua_negotiate = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_negotiate = { TAG = gua }
+	}
+	effect = {
+		ca_frca_action_negotiate = { TAG = gua }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_gua_intendant = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_intendant = { TAG = gua }
+	}
+	effect = {
+		ca_frca_action_intendant = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_gua_siege = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_siege = { TAG = gua }
+	}
+	effect = {
+		ca_frca_action_siege = { TAG = gua }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_gua_coopt = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_coopt = { TAG = gua }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+	effect = {
+		ca_frca_action_coopt = { TAG = gua }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_els_campaign = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_campaign = { TAG = els }
+	}
+	effect = {
+		ca_frca_action_campaign = { TAG = els CTAG = ELS STATE = STATE_SAN_SALVADOR }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_els_negotiate = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_negotiate = { TAG = els }
+	}
+	effect = {
+		ca_frca_action_negotiate = { TAG = els }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_els_intendant = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_intendant = { TAG = els }
+	}
+	effect = {
+		ca_frca_action_intendant = { TAG = els CTAG = ELS STATE = STATE_SAN_SALVADOR }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_els_siege = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_siege = { TAG = els }
+	}
+	effect = {
+		ca_frca_action_siege = { TAG = els }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_els_coopt = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_coopt = { TAG = els }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+	effect = {
+		ca_frca_action_coopt = { TAG = els }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_hon_campaign = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_campaign = { TAG = hon }
+	}
+	effect = {
+		ca_frca_action_campaign = { TAG = hon CTAG = HON STATE = STATE_HONDURAS }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_hon_negotiate = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_negotiate = { TAG = hon }
+	}
+	effect = {
+		ca_frca_action_negotiate = { TAG = hon }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_hon_intendant = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_intendant = { TAG = hon }
+	}
+	effect = {
+		ca_frca_action_intendant = { TAG = hon CTAG = HON STATE = STATE_HONDURAS }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_hon_siege = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_siege = { TAG = hon }
+	}
+	effect = {
+		ca_frca_action_siege = { TAG = hon }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_hon_coopt = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_coopt = { TAG = hon }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+	effect = {
+		ca_frca_action_coopt = { TAG = hon }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_nic_campaign = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_campaign = { TAG = nic }
+	}
+	effect = {
+		ca_frca_action_campaign = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_nic_negotiate = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_negotiate = { TAG = nic }
+	}
+	effect = {
+		ca_frca_action_negotiate = { TAG = nic }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_nic_intendant = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_intendant = { TAG = nic }
+	}
+	effect = {
+		ca_frca_action_intendant = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_nic_siege = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_siege = { TAG = nic }
+	}
+	effect = {
+		ca_frca_action_siege = { TAG = nic }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_nic_coopt = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_coopt = { TAG = nic }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+	effect = {
+		ca_frca_action_coopt = { TAG = nic }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_cos_campaign = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_campaign = { TAG = cos }
+	}
+	effect = {
+		ca_frca_action_campaign = { TAG = cos CTAG = COS STATE = STATE_COSTA_RICA }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_cos_negotiate = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_negotiate = { TAG = cos }
+	}
+	effect = {
+		ca_frca_action_negotiate = { TAG = cos }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_cos_intendant = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_intendant = { TAG = cos }
+	}
+	effect = {
+		ca_frca_action_intendant = { TAG = cos CTAG = COS STATE = STATE_COSTA_RICA }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_cos_siege = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_siege = { TAG = cos }
+	}
+	effect = {
+		ca_frca_action_siege = { TAG = cos }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_cos_coopt = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_coopt = { TAG = cos }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+	effect = {
+		ca_frca_action_coopt = { TAG = cos }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_alt_campaign = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_campaign = { TAG = alt }
+	}
+	effect = {
+		ca_frca_action_campaign = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_alt_negotiate = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_negotiate = { TAG = alt }
+	}
+	effect = {
+		ca_frca_action_negotiate = { TAG = alt }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_alt_intendant = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_intendant = { TAG = alt }
+	}
+	effect = {
+		ca_frca_action_intendant = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_alt_siege = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_siege = { TAG = alt }
+	}
+	effect = {
+		ca_frca_action_siege = { TAG = alt }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_alt_coopt = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_coopt = { TAG = alt }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+	effect = {
+		ca_frca_action_coopt = { TAG = alt }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_cip_campaign = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_campaign = { TAG = cip }
+	}
+	effect = {
+		ca_frca_action_campaign = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_cip_negotiate = {
+	scope = country
+	is_shown = {
+		ca_frca_route_federal = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_negotiate = { TAG = cip }
+	}
+	effect = {
+		ca_frca_action_negotiate = { TAG = cip }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_cip_intendant = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_intendant = { TAG = cip }
+	}
+	effect = {
+		ca_frca_action_intendant = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_cip_siege = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_siege = { TAG = cip }
+	}
+	effect = {
+		ca_frca_action_siege = { TAG = cip }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_cip_coopt = {
+	scope = country
+	is_shown = {
+		ca_frca_route_centralist = yes
+	}
+	is_valid = {
+		ca_frca_action_possible_coopt = { TAG = cip }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+	effect = {
+		ca_frca_action_coopt = { TAG = cip }
+	}
+	ai_is_valid = { always = no }
+}
+
+############################################################################
+# F26: zonas nuevas del minimapa. Petén y Guanacaste usan las condiciones de
+# Guatemala y Costa Rica. Mosquitia y Belice salen en color extranjero mientras
+# sean de la Mosquitia (MKT) o de Gran Bretaña; si no, siguen al estado padre.
+############################################################################
+ca_mm_mos_foreign = {
+	scope = country
+	is_shown = {
+		OR = {
+			exists = s:STATE_NICARAGUA.region_state:MKT
+			exists = s:STATE_NICARAGUA.region_state:GBR
+		}
+	}
+}
+ca_mm_mos_loyal = {
+	scope = country
+	is_shown = {
+		NOT = {
+			OR = {
+				exists = s:STATE_NICARAGUA.region_state:MKT
+				exists = s:STATE_NICARAGUA.region_state:GBR
+			}
+		}
+		has_variable = frca_loyalty_nic
+		var:frca_loyalty_nic = 3
+	}
+}
+ca_mm_mos_wavering = {
+	scope = country
+	is_shown = {
+		NOT = {
+			OR = {
+				exists = s:STATE_NICARAGUA.region_state:MKT
+				exists = s:STATE_NICARAGUA.region_state:GBR
+			}
+		}
+		has_variable = frca_loyalty_nic
+		var:frca_loyalty_nic = 2
+	}
+}
+ca_mm_mos_rebel = {
+	scope = country
+	is_shown = {
+		NOT = {
+			OR = {
+				exists = s:STATE_NICARAGUA.region_state:MKT
+				exists = s:STATE_NICARAGUA.region_state:GBR
+			}
+		}
+		has_variable = frca_loyalty_nic
+		var:frca_loyalty_nic = 1
+	}
+}
+ca_mm_mos_separated = {
+	scope = country
+	is_shown = {
+		NOT = {
+			OR = {
+				exists = s:STATE_NICARAGUA.region_state:MKT
+				exists = s:STATE_NICARAGUA.region_state:GBR
+			}
+		}
+		OR = {
+			NOT = { has_variable = frca_loyalty_nic }
+			var:frca_loyalty_nic <= 0
+		}
+	}
+}
+ca_mm_blz_foreign = {
+	scope = country
+	is_shown = {
+		exists = s:STATE_GUATEMALA.region_state:GBR
+	}
+}
+ca_mm_blz_loyal = {
+	scope = country
+	is_shown = {
+		NOT = {
+			exists = s:STATE_GUATEMALA.region_state:GBR
+		}
+		has_variable = frca_loyalty_gua
+		var:frca_loyalty_gua = 3
+	}
+}
+ca_mm_blz_wavering = {
+	scope = country
+	is_shown = {
+		NOT = {
+			exists = s:STATE_GUATEMALA.region_state:GBR
+		}
+		has_variable = frca_loyalty_gua
+		var:frca_loyalty_gua = 2
+	}
+}
+ca_mm_blz_rebel = {
+	scope = country
+	is_shown = {
+		NOT = {
+			exists = s:STATE_GUATEMALA.region_state:GBR
+		}
+		has_variable = frca_loyalty_gua
+		var:frca_loyalty_gua = 1
+	}
+}
+ca_mm_blz_separated = {
+	scope = country
+	is_shown = {
+		NOT = {
+			exists = s:STATE_GUATEMALA.region_state:GBR
+		}
+		OR = {
+			NOT = { has_variable = frca_loyalty_gua }
+			var:frca_loyalty_gua <= 0
+		}
+	}
+}

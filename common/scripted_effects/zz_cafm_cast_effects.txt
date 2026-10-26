@@ -245,7 +245,11 @@ cafm_cast_set_ruler_gua = {
 # --- El Salvador ---
 # Francisco Gómez (interino) 15 nov 1835–1 feb 1836 ·
 # Diego Vigil 1 feb 1836–6 ene 1838 (se omite el interinato de Timoteo
-# Menéndez, 23 may–7 jun 1837) · Después: fase El Salvador
+# Menéndez, 23 may–7 jun 1837) · CAFM F6 (tabla 1838–1842):
+# Timoteo Menéndez (interino) 6 ene 1838–23 may 1839 · Antonio José Cañas
+# 23 may–11 jul 1839 · Morazán 11 jul 1839–16 feb 1840 (solo si ya no gobierna
+# la UCA; si no, Cañas) · Cañas 16 feb–20 sep 1840 · Norberto Ramírez
+# 20 sep 1840–7 ene 1841 · Juan Lindo 7 ene 1841–1 feb 1842
 cafm_cast_set_ruler_els = {
 	if = {
 		limit = { game_date < 1836.2.1 }
@@ -255,21 +259,80 @@ cafm_cast_set_ruler_els = {
 		limit = { game_date < 1838.1.6 }
 		cafm_spawn_or_transfer = { KEY = vigil TEMPLATE = els_diego_vigil_character_template RULER = yes }
 	}
+	else_if = {
+		limit = { game_date < 1839.5.23 }
+		cafm_spawn_or_transfer = { KEY = timoteo_menendez TEMPLATE = cafm_timoteo_menendez RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1839.7.11 }
+		cafm_spawn_or_transfer = { KEY = antonio_jose_canas TEMPLATE = cafm_antonio_jose_canas RULER = yes }
+	}
+	else_if = {
+		limit = {
+			game_date < 1840.2.16
+			NOT = { has_global_variable = cafm_dead_morazan }
+			NOT = { c:UCA ?= { ruler ?= { has_variable = is_morazan } } }
+		}
+		cafm_spawn_or_transfer = { KEY = morazan TEMPLATE = UCA_francisco_morazan RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1840.9.20 }
+		cafm_spawn_or_transfer = { KEY = antonio_jose_canas TEMPLATE = cafm_antonio_jose_canas RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1841.1.7 }
+		cafm_spawn_or_transfer = { KEY = norberto_ramirez TEMPLATE = cafm_norberto_ramirez RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1842.2.1 }
+		cafm_spawn_or_transfer = { KEY = lindo TEMPLATE = juan_lindo_character_template RULER = yes }
+	}
 }
 
 # --- Honduras ---
-# Joaquín Rivera hasta el 31 dic 1836 · Después: fase Honduras
-# (Martínez Salinas, Justo José de Herrera, etc.)
+# Joaquín Rivera hasta el 31 dic 1836 · CAFM F6 (tabla 1837–1842):
+# José María Martínez Salinas (provisional) 1 ene–28 may 1837 · Justo José Herrera
+# 28 may 1837–3 sep 1838 · Martínez Salinas 3 sep 1838–11 ene 1839 (se funde
+# Lino Matute) · Juan Francisco de Molina 11 ene–21 sep 1839 (se funden los
+# interinatos de abr–sep 1839) · Francisco Zelaya y Ayes 21 sep 1839–1 ene 1841 ·
+# Francisco Ferrera 1 ene 1841–1847 (ver cast)
 cafm_cast_set_ruler_hon = {
 	if = {
 		limit = { game_date < 1837.1.1 }
 		cafm_spawn_or_transfer = { KEY = joaquin_rivera TEMPLATE = hon_joaquin_rivera_character_template RULER = yes }
 	}
+	else_if = {
+		limit = { game_date < 1837.5.28 }
+		cafm_spawn_or_transfer = { KEY = martinez_salinas TEMPLATE = hon_jose_maria_martinez_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1838.9.3 }
+		cafm_spawn_or_transfer = { KEY = justo_herrera TEMPLATE = hon_justo_jose_herrera_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1839.1.11 }
+		cafm_spawn_or_transfer = { KEY = martinez_salinas TEMPLATE = hon_jose_maria_martinez_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1839.9.21 }
+		cafm_spawn_or_transfer = { KEY = juan_francisco_molina TEMPLATE = juan_franscisco_de_molina_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1841.1.1 }
+		cafm_spawn_or_transfer = { KEY = zelaya_ayes TEMPLATE = hon_jose_zelaya_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1847.1.1 }
+		cafm_spawn_or_transfer = { KEY = ferrera TEMPLATE = hon_francisco_ferrera_character_template RULER = yes }
+	}
 }
 
 # --- Nicaragua ---
-# José Zepeda hasta su asesinato (25 ene 1837) · Después: fase Nicaragua
-# (Núñez lo pone ca_nicaragua_events.14)
+# José Zepeda hasta su asesinato (25 ene 1837) · CAFM F6 (tabla 1837–1843):
+# José Núñez 25 ene 1837–5 ene 1839 (se funde Jiménez Rubio) · Evaristo Rocha
+# 5 ene–30 jun 1839 · Joaquín del Cossío 30 jun–20 oct 1839 · Tomás Valladares
+# 20 oct 1839–21 sep 1840 · Patricio Rivas 21 sep 1840–4 mar 1841 · Pablo
+# Buitrago 4 mar 1841–1 abr 1843. (En la Fase 1, Núñez lo pone ca_nicaragua_events.14.)
 cafm_cast_set_ruler_nic = {
 	if = {
 		limit = {
@@ -277,6 +340,30 @@ cafm_cast_set_ruler_nic = {
 			NOT = { has_global_variable = cafm_zepeda_dead }
 		}
 		cafm_spawn_or_transfer = { KEY = zepeda TEMPLATE = nic_jose_zepeda_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1839.1.5 }
+		cafm_spawn_or_transfer = { KEY = jose_nunez TEMPLATE = jose_nunez_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1839.6.30 }
+		cafm_spawn_or_transfer = { KEY = evaristo_rocha TEMPLATE = cafm_evaristo_rocha RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1839.10.20 }
+		cafm_spawn_or_transfer = { KEY = joaquin_cossio TEMPLATE = cafm_joaquin_cossio RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1840.9.21 }
+		cafm_spawn_or_transfer = { KEY = tomas_valladares TEMPLATE = cafm_tomas_valladares RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1841.3.4 }
+		cafm_spawn_or_transfer = { KEY = patricio_rivas TEMPLATE = cafm_patricio_rivas RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1843.4.1 }
+		cafm_spawn_or_transfer = { KEY = buitrago TEMPLATE = cafm_pablo_buitrago RULER = yes }
 	}
 }
 

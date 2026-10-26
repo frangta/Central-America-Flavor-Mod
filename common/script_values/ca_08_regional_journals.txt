@@ -1,0 +1,53 @@
+﻿# CAFM - F14 - Cambios mensuales de las barras regionales (D1, D2, D3)
+
+# D1: cambio mensual de "Autonomia del Istmo" (scope: dueno del Istmo). Base: ca_istmo_autonomy_drift (F1).
+ca_istmo_monthly_change = {
+	value = ca_istmo_autonomy_drift
+	if = {
+		limit = { has_global_variable = ca_isthmus_gold_rush }
+		add = { value = 0.25 desc = "CA_ISTMO_TRANSIT" }
+	}
+	if = {
+		limit = { has_global_variable = ca_panama_railroad }
+		add = { value = 0.25 desc = "CA_ISTMO_RAILROAD" }
+	}
+	if = {
+		limit = { c:PNM ?= this }
+		add = { value = 0.5 desc = "CA_ISTMO_INDEPENDENT" }
+	}
+}
+
+# D2: cambio mensual de "Influencia en Talamanca" (scope: senor de RDT). Base: ca_talamanca_influence_drift (F1).
+ca_talamanca_monthly_change = {
+	value = ca_talamanca_influence_drift
+	if = {
+		limit = { has_variable = ca_talamanca_path_integrate }
+		add = { value = 0.5 desc = "CA_TALAMANCA_PATH_INTEGRATE" }
+	}
+	if = {
+		limit = { has_variable = ca_talamanca_path_conquer }
+		add = { value = 0.75 desc = "CA_TALAMANCA_PATH_CONQUER" }
+	}
+	if = {
+		limit = { has_variable = ca_talamanca_path_coexist }
+		add = { value = 0.25 desc = "CA_TALAMANCA_PATH_COEXIST" }
+	}
+}
+
+# D3: cambio mensual de la barra del Soconusco (scope: CIP). Base: ca_soconusco_culture_drift (F1).
+# La UCA influye con la lealtad del Soconusco (minimapa): Leal +0,5, Rebelde -0,5, Separado -1.
+ca_soconusco_monthly_change = {
+	value = ca_soconusco_culture_drift
+	if = {
+		limit = { c:UCA ?= { has_variable = frca_loyalty_cip var:frca_loyalty_cip >= 3 } }
+		add = { value = 0.5 desc = "CA_SOCONUSCO_LOYAL" }
+	}
+	else_if = {
+		limit = { c:UCA ?= { has_variable = frca_loyalty_cip var:frca_loyalty_cip = 1 } }
+		add = { value = -0.5 desc = "CA_SOCONUSCO_REBEL" }
+	}
+	else_if = {
+		limit = { c:UCA ?= { has_variable = frca_loyalty_cip var:frca_loyalty_cip <= 0 } }
+		add = { value = -1 desc = "CA_SOCONUSCO_SEPARATED" }
+	}
+}

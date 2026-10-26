@@ -1,0 +1,370 @@
+﻿############################################################################
+# CAFM - F1 - Federacion (common/script_values/ca_01_federation.txt)
+# Scope por defecto: pais UCA (dueno de je_historic_central_america_falls_apart).
+# Variables en la UCA:
+#   frca_loyalty_<gua|els|hon|nic|cos|alt|cip>  0 Separado 1 Rebelde 2 Vacilante 3 Leal
+#   frca_recognized_<x>   paz firmada / independencia reconocida
+#   frca_phase            1-4
+#   frca_front_<british|mexican|conservative|caudillos>  0-3
+#   ca_faction_federal / ca_faction_centralist
+# Los Altos y el Soconusco cuentan para la barra solo si tienen su variable
+# de lealtad (son miembros); no cuentan como estados nucleo.
+############################################################################
+
+# Cambio mensual de frca_support_bar con desglose (diario §3).
+# Uso en la barra:  monthly_progress = { add = ca_frca_monthly_change }
+ca_frca_monthly_change = {
+	value = 0
+
+	# --- GUA ---
+	if = {
+		limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua >= ca_loyalty_loyal }
+		add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_GUA_LOYAL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua = ca_loyalty_rebel }
+		add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_GUA_REBEL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua <= ca_loyalty_separated has_variable = frca_recognized_gua }
+		add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_GUA_SEPARATED_PEACE" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua <= ca_loyalty_separated }
+		add = { value = ca_frca_monthly_separated desc = "CA_FRCA_GUA_SEPARATED" }
+	}
+
+	# --- ELS ---
+	if = {
+		limit = { has_variable = frca_loyalty_els var:frca_loyalty_els >= ca_loyalty_loyal }
+		add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_ELS_LOYAL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_els var:frca_loyalty_els = ca_loyalty_rebel }
+		add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_ELS_REBEL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_els var:frca_loyalty_els <= ca_loyalty_separated has_variable = frca_recognized_els }
+		add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_ELS_SEPARATED_PEACE" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_els var:frca_loyalty_els <= ca_loyalty_separated }
+		add = { value = ca_frca_monthly_separated desc = "CA_FRCA_ELS_SEPARATED" }
+	}
+
+	# --- HON ---
+	if = {
+		limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon >= ca_loyalty_loyal }
+		add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_HON_LOYAL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon = ca_loyalty_rebel }
+		add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_HON_REBEL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon <= ca_loyalty_separated has_variable = frca_recognized_hon }
+		add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_HON_SEPARATED_PEACE" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon <= ca_loyalty_separated }
+		add = { value = ca_frca_monthly_separated desc = "CA_FRCA_HON_SEPARATED" }
+	}
+
+	# --- NIC ---
+	if = {
+		limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic >= ca_loyalty_loyal }
+		add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_NIC_LOYAL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic = ca_loyalty_rebel }
+		add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_NIC_REBEL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic <= ca_loyalty_separated has_variable = frca_recognized_nic }
+		add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_NIC_SEPARATED_PEACE" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic <= ca_loyalty_separated }
+		add = { value = ca_frca_monthly_separated desc = "CA_FRCA_NIC_SEPARATED" }
+	}
+
+	# --- COS ---
+	if = {
+		limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos >= ca_loyalty_loyal }
+		add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_COS_LOYAL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos = ca_loyalty_rebel }
+		add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_COS_REBEL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos <= ca_loyalty_separated has_variable = frca_recognized_cos }
+		add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_COS_SEPARATED_PEACE" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos <= ca_loyalty_separated }
+		add = { value = ca_frca_monthly_separated desc = "CA_FRCA_COS_SEPARATED" }
+	}
+
+	# --- ALT ---
+	if = {
+		limit = { has_variable = frca_loyalty_alt var:frca_loyalty_alt >= ca_loyalty_loyal }
+		add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_ALT_LOYAL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_alt var:frca_loyalty_alt = ca_loyalty_rebel }
+		add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_ALT_REBEL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_alt var:frca_loyalty_alt <= ca_loyalty_separated has_variable = frca_recognized_alt }
+		add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_ALT_SEPARATED_PEACE" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_alt var:frca_loyalty_alt <= ca_loyalty_separated }
+		add = { value = ca_frca_monthly_separated desc = "CA_FRCA_ALT_SEPARATED" }
+	}
+
+	# --- CIP ---
+	if = {
+		limit = { has_variable = frca_loyalty_cip var:frca_loyalty_cip >= ca_loyalty_loyal }
+		add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_CIP_LOYAL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_cip var:frca_loyalty_cip = ca_loyalty_rebel }
+		add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_CIP_REBEL" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_cip var:frca_loyalty_cip <= ca_loyalty_separated has_variable = frca_recognized_cip }
+		add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_CIP_SEPARATED_PEACE" }
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_cip var:frca_loyalty_cip <= ca_loyalty_separated }
+		add = { value = ca_frca_monthly_separated desc = "CA_FRCA_CIP_SEPARATED" }
+	}
+
+	# --- Ley de estructura de la Union ---
+	if = {
+		limit = { has_law_or_variant = law_type:law_ca_central_american_unitary }
+		add = { value = ca_frca_monthly_law_unitary desc = "CA_FRCA_LAW_UNITARY" }
+	}
+	else_if = {
+		limit = { has_law_or_variant = law_type:law_ca_central_american_confederated }
+		add = { value = ca_frca_monthly_law_confederated desc = "CA_FRCA_LAW_CONFEDERATED" }
+	}
+
+	# --- Lobby profederalista (peso de sus grupos >= 25 %) ---
+	if = {
+		limit = { ca_frca_pro_federal_lobby_clout >= ca_frca_monthly_lobby_clout }
+		add = { value = ca_frca_monthly_lobby desc = "CA_FRCA_LOBBY" }
+	}
+
+	# --- Frente british (solo fase IV) ---
+	if = {
+		limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_british var:frca_front_british >= ca_front_lost }
+		add = { value = ca_frca_monthly_front_lost desc = "CA_FRCA_FRONT_BRITISH_LOST" }
+	}
+	else_if = {
+		limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_british var:frca_front_british = ca_front_critical }
+		add = { value = ca_frca_monthly_front_critical desc = "CA_FRCA_FRONT_BRITISH_CRITICAL" }
+	}
+
+	# --- Frente mexican (solo fase IV) ---
+	if = {
+		limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_mexican var:frca_front_mexican >= ca_front_lost }
+		add = { value = ca_frca_monthly_front_lost desc = "CA_FRCA_FRONT_MEXICAN_LOST" }
+	}
+	else_if = {
+		limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_mexican var:frca_front_mexican = ca_front_critical }
+		add = { value = ca_frca_monthly_front_critical desc = "CA_FRCA_FRONT_MEXICAN_CRITICAL" }
+	}
+
+	# --- Frente conservative (solo fase IV) ---
+	if = {
+		limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_conservative var:frca_front_conservative >= ca_front_lost }
+		add = { value = ca_frca_monthly_front_lost desc = "CA_FRCA_FRONT_CONSERVATIVE_LOST" }
+	}
+	else_if = {
+		limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_conservative var:frca_front_conservative = ca_front_critical }
+		add = { value = ca_frca_monthly_front_critical desc = "CA_FRCA_FRONT_CONSERVATIVE_CRITICAL" }
+	}
+
+	# --- Frente caudillos (solo fase IV) ---
+	if = {
+		limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_caudillos var:frca_front_caudillos >= ca_front_lost }
+		add = { value = ca_frca_monthly_front_lost desc = "CA_FRCA_FRONT_CAUDILLOS_LOST" }
+	}
+	else_if = {
+		limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_caudillos var:frca_front_caudillos = ca_front_critical }
+		add = { value = ca_frca_monthly_front_critical desc = "CA_FRCA_FRONT_CAUDILLOS_CRITICAL" }
+	}
+}
+
+# Peso (clout) de los grupos de interes del lobby profederalista. Scope: pais.
+ca_frca_pro_federal_lobby_clout = {
+	value = 0
+	every_interest_group = {
+		limit = { is_member_of_lobby = lobby_type:lobby_pro_federalist }
+		add = ig_clout
+	}
+}
+
+# Estados nucleo Leales.
+ca_core_states_loyal_count = {
+	value = 0
+	if = { limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua >= ca_loyalty_loyal } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_els var:frca_loyalty_els >= ca_loyalty_loyal } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon >= ca_loyalty_loyal } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic >= ca_loyalty_loyal } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos >= ca_loyalty_loyal } add = 1 }
+}
+
+# Estados nucleo Vacilantes.
+ca_core_states_wavering_count = {
+	value = 0
+	if = { limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua = ca_loyalty_wavering } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_els var:frca_loyalty_els = ca_loyalty_wavering } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon = ca_loyalty_wavering } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic = ca_loyalty_wavering } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos = ca_loyalty_wavering } add = 1 }
+}
+
+# Estados nucleo Rebeldes.
+ca_core_states_rebel_count = {
+	value = 0
+	if = { limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua = ca_loyalty_rebel } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_els var:frca_loyalty_els = ca_loyalty_rebel } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon = ca_loyalty_rebel } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic = ca_loyalty_rebel } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos = ca_loyalty_rebel } add = 1 }
+}
+
+# Estados nucleo Separados (lealtad 0: subditos ca_dependency o independientes).
+ca_core_states_separated_count = {
+	value = 0
+	if = { limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua <= ca_loyalty_separated } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_els var:frca_loyalty_els <= ca_loyalty_separated } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon <= ca_loyalty_separated } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic <= ca_loyalty_separated } add = 1 }
+	if = { limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos <= ca_loyalty_separated } add = 1 }
+}
+
+# Estados nucleo independientes: la etiqueta existe y no es subdita de la UCA.
+ca_core_states_independent_count = {
+	value = 0
+	if = { limit = { exists = c:GUA c:GUA = { NOT = { is_subject_of = c:UCA } } } add = 1 }
+	if = { limit = { exists = c:ELS c:ELS = { NOT = { is_subject_of = c:UCA } } } add = 1 }
+	if = { limit = { exists = c:HON c:HON = { NOT = { is_subject_of = c:UCA } } } add = 1 }
+	if = { limit = { exists = c:NIC c:NIC = { NOT = { is_subject_of = c:UCA } } } add = 1 }
+	if = { limit = { exists = c:COS c:COS = { NOT = { is_subject_of = c:UCA } } } add = 1 }
+}
+
+# Frentes Perdidos (nivel 3). Desenlaces A (<= 1) y B (<= 2).
+ca_frca_fronts_lost_count = {
+	value = 0
+	if = { limit = { has_variable = frca_front_british var:frca_front_british >= ca_front_lost } add = 1 }
+	if = { limit = { has_variable = frca_front_mexican var:frca_front_mexican >= ca_front_lost } add = 1 }
+	if = { limit = { has_variable = frca_front_conservative var:frca_front_conservative >= ca_front_lost } add = 1 }
+	if = { limit = { has_variable = frca_front_caudillos var:frca_front_caudillos >= ca_front_lost } add = 1 }
+}
+
+# Anos que faltan para 1845 (patron vanilla espartero_age). Uso en textos:
+# [ScriptValue('ca_years_until_1845')|0]
+ca_years_until_1845 = {
+	value = ca_uca_target_year
+	subtract = year
+	min = 0
+}
+
+# Lealtad del estado guardado en scope:ca_target (pais GUA/ELS/HON/NIC/COS/ALT/CIP).
+# Scope: pais UCA. Devuelve 0-3; 2 si no hay dato.
+ca_target_loyalty = {
+	value = ca_loyalty_wavering
+	if = { limit = { scope:ca_target ?= { c:GUA ?= this } has_variable = frca_loyalty_gua } value = var:frca_loyalty_gua }
+	if = { limit = { scope:ca_target ?= { c:ELS ?= this } has_variable = frca_loyalty_els } value = var:frca_loyalty_els }
+	if = { limit = { scope:ca_target ?= { c:HON ?= this } has_variable = frca_loyalty_hon } value = var:frca_loyalty_hon }
+	if = { limit = { scope:ca_target ?= { c:NIC ?= this } has_variable = frca_loyalty_nic } value = var:frca_loyalty_nic }
+	if = { limit = { scope:ca_target ?= { c:COS ?= this } has_variable = frca_loyalty_cos } value = var:frca_loyalty_cos }
+	if = { limit = { scope:ca_target ?= { c:ALT ?= this } has_variable = frca_loyalty_alt } value = var:frca_loyalty_alt }
+	if = { limit = { scope:ca_target ?= { c:CIP ?= this } has_variable = frca_loyalty_cip } value = var:frca_loyalty_cip }
+}
+
+# Probabilidad de exito de una intervencion federal (.35-.40), en %.
+# Scope: UCA, con scope:ca_target = estado intervenido.
+# Base 50 + 10 por nivel de lealtad, +10 si el ejercito esta en el gobierno,
+# -10 si la UCA esta en otra guerra, ajuste por estado (grupo 7).
+ca_intervention_success_chance = {
+	add = { value = 50 desc = "CA_INTERVENTION_BASE" }
+	add = { value = ca_target_loyalty multiply = 10 desc = "CA_INTERVENTION_LOYALTY" }
+	if = {
+		limit = { ig:ig_armed_forces ?= { is_in_government = yes } }
+		add = { value = 10 desc = "CA_INTERVENTION_ARMY" }
+	}
+	if = {
+		limit = { is_at_war = yes }
+		add = { value = -10 desc = "CA_INTERVENTION_AT_WAR" }
+	}
+	if = {
+		limit = { scope:ca_target ?= { c:ELS ?= this } }
+		add = { value = 20 desc = "CA_INTERVENTION_ELS" }
+	}
+	# F7 (grupo 7): Costa Rica -15 %; Nicaragua +-10 % (Leon liberal en el gobierno o Granada)
+	if = {
+		limit = { scope:ca_target ?= { c:COS ?= this } }
+		add = { value = -15 desc = "CA_INTERVENTION_COS" }
+	}
+	if = {
+		limit = {
+			scope:ca_target ?= {
+				c:NIC ?= this
+				ig:ig_intelligentsia ?= { is_in_government = yes }
+			}
+		}
+		add = { value = 10 desc = "CA_INTERVENTION_NIC_LEON" }
+	}
+	else_if = {
+		limit = { scope:ca_target ?= { c:NIC ?= this } }
+		add = { value = -10 desc = "CA_INTERVENTION_NIC_GRANADA" }
+	}
+	if = {
+		limit = {
+			scope:ca_target ?= { c:GUA ?= this }
+			game_date >= 1839.1.1
+		}
+		add = { value = -10 desc = "CA_INTERVENTION_GUA_CARRERA" }
+	}
+	if = {
+		limit = {
+			scope:ca_target ?= { c:ALT ?= this }
+			c:GUA ?= { has_variable = ca_role_separatist }
+		}
+		add = { value = -10 desc = "CA_INTERVENTION_ALT_GUATEMALA" }
+	}
+	min = 5
+	max = 95
+}
+
+# Probabilidad de victoria federal en una guerra civil de estado (.63-.73), en %.
+# Scope: UCA, con scope:ca_target = estado en guerra civil.
+# Base 40 + 5 por nivel de lealtad + 10 por cada ayuda de los capitulos A/B
+# (variable ca_cw_federal_help en el estado).
+ca_civil_war_federal_chance = {
+	add = { value = 40 desc = "CA_CIVIL_WAR_BASE" }
+	add = { value = ca_target_loyalty multiply = 5 desc = "CA_CIVIL_WAR_LOYALTY" }
+	if = {
+		limit = { scope:ca_target ?= { has_variable = ca_cw_federal_help } }
+		add = { value = scope:ca_target.var:ca_cw_federal_help multiply = 10 desc = "CA_CIVIL_WAR_CHAPTERS" }
+	}
+	min = 5
+	max = 95
+}
+
+
+# CAFM F8 - Estados nucleo que la UCA todavia gobierna como provincias propias (D2).
+ca_frca_core_states_kept = {
+	value = 0
+	if = { limit = { exists = s:STATE_NICARAGUA.region_state:UCA } add = 1 }
+	if = { limit = { exists = s:STATE_HONDURAS.region_state:UCA } add = 1 }
+	if = { limit = { exists = s:STATE_COSTA_RICA.region_state:UCA } add = 1 }
+	if = { limit = { exists = s:STATE_GUATEMALA.region_state:UCA } add = 1 }
+	if = { limit = { exists = s:STATE_SAN_SALVADOR.region_state:UCA } add = 1 }
+}

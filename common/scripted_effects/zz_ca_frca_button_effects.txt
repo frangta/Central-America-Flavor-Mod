@@ -1,0 +1,186 @@
+﻿############################################################################
+# CAFM - F9 - Acciones de los botones por estado y de la IA
+# (common/scripted_effects/zz_ca_frca_button_effects.txt)
+############################################################################
+
+# ===========================================================================
+# CAFM F9 - Acciones por estado (minimapa) y de la IA. Scope: UCA.
+# Uso: ca_frca_action_campaign = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
+# ===========================================================================
+
+# Modificador de estado para el estado del TAG (provincia de la UCA o pais miembro).
+ca_frca_state_modifier = {
+	if = {
+		limit = { exists = c:$CTAG$ }
+		c:$CTAG$ = {
+			every_scope_state = {
+				limit = { state_region = s:$STATE$ }
+				add_modifier = { name = $NAME$ months = $MONTHS$ }
+			}
+		}
+	}
+	else = {
+		s:$STATE$.region_state:UCA ?= { add_modifier = { name = $NAME$ months = $MONTHS$ } }
+	}
+}
+
+# Campana federal: lealtad +1; dinero; turmoil en el estado; 180 dias.
+ca_frca_action_campaign = {
+	add_treasury = { value = ca_federal_campaign_cost multiply = -1 }
+	ca_frca_loyalty_up = { TAG = $TAG$ }
+	ca_frca_state_modifier = { CTAG = $CTAG$ STATE = $STATE$ NAME = ca_federal_campaign_unrest MONTHS = 6 }
+	set_variable = { name = frca_campaign_cd_$TAG$ days = 180 }
+}
+
+# Negociar autonomia: lealtad +1; barra -10.
+ca_frca_action_negotiate = {
+	ca_frca_loyalty_up = { TAG = $TAG$ }
+	ca_frca_bar_minor_down = yes
+	set_variable = { name = frca_negotiate_cd_$TAG$ days = 365 }
+}
+
+# Intendente militar (centralista): lealtad +1 inmediata; mas turmoil que la campana;
+# los terratenientes locales lo desaprueban.
+ca_frca_action_intendant = {
+	ca_frca_loyalty_up = { TAG = $TAG$ }
+	ca_frca_state_modifier = { CTAG = $CTAG$ STATE = $STATE$ NAME = ca_military_intendant MONTHS = 12 }
+	if = {
+		limit = { exists = c:$CTAG$ }
+		c:$CTAG$ = { ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } } }
+	}
+	else = {
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+	}
+	set_variable = { name = frca_intendant_cd_$TAG$ days = 180 }
+}
+
+# Estado de sitio (centralista): la lealtad no baja durante 12 meses; barra -10; -legitimidad.
+ca_frca_action_siege = {
+	set_variable = { name = frca_loyalty_lock_$TAG$ days = 365 }
+	ca_frca_bar_minor_down = yes
+	add_modifier = { name = ca_state_of_siege months = 12 }
+	set_variable = { name = frca_siege_cd_$TAG$ days = 365 }
+}
+
+# Cooptar a un caudillo (centralista, fases II-IV): frente de caudillos -1; lealtad +1; dinero;
+# terratenientes y ejercito aprueban (mas poder a los caudillos).
+ca_frca_action_coopt = {
+	add_treasury = { value = ca_bribe_caudillo_cost multiply = -1 }
+	ca_frca_front_change = { FRONT = caudillos VALUE = -1 }
+	ca_frca_loyalty_up = { TAG = $TAG$ }
+	ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+	ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+	set_variable = { name = frca_coopt_cd_$TAG$ days = 365 }
+}
+
+# IA en modo dinamico: usa la campana federal en el estado con la lealtad mas baja
+# (diario §8). Como mucho una vez al mes, con un 25 %.
+ca_frca_ai_state_actions = {
+	if = {
+		limit = {
+			ca_frca_ai_dynamic = yes
+			ca_frca_route_federal = yes
+		}
+		random = {
+			chance = 25
+			if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = gua }
+					var:frca_loyalty_gua = 1
+				}
+				ca_frca_action_campaign = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = els }
+					var:frca_loyalty_els = 1
+				}
+				ca_frca_action_campaign = { TAG = els CTAG = ELS STATE = STATE_SAN_SALVADOR }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = hon }
+					var:frca_loyalty_hon = 1
+				}
+				ca_frca_action_campaign = { TAG = hon CTAG = HON STATE = STATE_HONDURAS }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = nic }
+					var:frca_loyalty_nic = 1
+				}
+				ca_frca_action_campaign = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = cos }
+					var:frca_loyalty_cos = 1
+				}
+				ca_frca_action_campaign = { TAG = cos CTAG = COS STATE = STATE_COSTA_RICA }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = alt }
+					var:frca_loyalty_alt = 1
+				}
+				ca_frca_action_campaign = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = cip }
+					var:frca_loyalty_cip = 1
+				}
+				ca_frca_action_campaign = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = gua }
+					var:frca_loyalty_gua = 2
+				}
+				ca_frca_action_campaign = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = els }
+					var:frca_loyalty_els = 2
+				}
+				ca_frca_action_campaign = { TAG = els CTAG = ELS STATE = STATE_SAN_SALVADOR }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = hon }
+					var:frca_loyalty_hon = 2
+				}
+				ca_frca_action_campaign = { TAG = hon CTAG = HON STATE = STATE_HONDURAS }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = nic }
+					var:frca_loyalty_nic = 2
+				}
+				ca_frca_action_campaign = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = cos }
+					var:frca_loyalty_cos = 2
+				}
+				ca_frca_action_campaign = { TAG = cos CTAG = COS STATE = STATE_COSTA_RICA }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = alt }
+					var:frca_loyalty_alt = 2
+				}
+				ca_frca_action_campaign = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
+			}
+			else_if = {
+				limit = {
+					ca_frca_action_possible_campaign = { TAG = cip }
+					var:frca_loyalty_cip = 2
+				}
+				ca_frca_action_campaign = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
+			}
+		}
+	}
+}

@@ -1,0 +1,171 @@
+﻿############################################################################
+# CAFM - F12 - Confederacion y Patria Grande (common/script_values/ca_06_union.txt)
+############################################################################
+
+# Cambio mensual de "Cohesion confederal" (scope: la UCA). Base: ca_confederal_cohesion_drift (F1).
+ca_conf_monthly_change = {
+	value = ca_confederal_cohesion_drift
+	if = {
+		limit = { has_variable = ca_conf_customs_union }
+		add = { value = 1 desc = "CA_CONF_CUSTOMS_UNION" }
+	}
+	if = {
+		limit = { has_variable = ca_conf_common_defense }
+		add = { value = 0.5 desc = "CA_CONF_COMMON_DEFENSE" }
+	}
+	if = {
+		limit = { has_variable = frca_front_caudillos var:frca_front_caudillos >= 2 }
+		add = { value = -1 desc = "CA_CONF_CAUDILLOS" }
+	}
+	if = {
+		limit = { c:GUA ?= { is_subject = no "relations(c:UCA)" <= relations_threshold:poor } }
+		add = { value = -1 desc = "CA_CONF_HOSTILE_GUATEMALA" }
+	}
+}
+
+# Cambio mensual de "Unidad centroamericana" (scope: el pais con je_ca_patria_grande). Base: ca_unity_drift (F1).
+ca_unity_monthly_change = {
+	value = ca_unity_drift
+	every_subject_or_below = {
+		limit = { is_subject_type = subject_type_ca_confederative_partner }
+		add = { value = 0.25 desc = "CA_UNITY_CONFEDERATED_PARTNER" }
+	}
+	if = {
+		limit = { has_variable = ca_barrios_failed }
+		add = { value = -0.5 desc = "CA_UNITY_FAILED_CAMPAIGN" }
+	}
+}
+
+# Probabilidad de exito de un congreso unionista (0-100). Scope: el convocante.
+ca_unionist_congress_chance = {
+	value = 30
+	add = { value = var:ca_unity multiply = 0.4 desc = "CA_CONGRESS_UNITY" }
+	if = {
+		limit = { any_country = { ca_is_ca_national_country = yes has_war_with = root } }
+		add = { value = -30 desc = "CA_CONGRESS_AT_WAR" }
+	}
+	if = {
+		limit = { c:COS ?= { has_variable = ca_cos_republica_cerrada } }
+		add = { value = -10 desc = "CA_CONGRESS_CLOSED_REPUBLIC" }
+	}
+	if = {
+		limit = { c:NIC ?= { has_variable = nic_unionism_dead } }
+		add = { value = -10 desc = "CA_CONGRESS_NIC_UNIONISM_DEAD" }
+	}
+	min = 5
+	max = 90
+}
+
+# Estados de 1823 bajo el pais o sus socios confederados (para completar la Patria Grande).
+ca_patria_grande_states = {
+	value = 0
+	if = {
+		limit = {
+			s:STATE_GUATEMALA = {
+				any_scope_state = {
+					is_capital = yes
+					OR = {
+						owner = root
+						owner = {
+							is_subject_of = root
+							is_subject_type = subject_type_ca_confederative_partner
+						}
+					}
+				}
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			s:STATE_SAN_SALVADOR = {
+				any_scope_state = {
+					is_capital = yes
+					OR = {
+						owner = root
+						owner = {
+							is_subject_of = root
+							is_subject_type = subject_type_ca_confederative_partner
+						}
+					}
+				}
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			s:STATE_HONDURAS = {
+				any_scope_state = {
+					is_capital = yes
+					OR = {
+						owner = root
+						owner = {
+							is_subject_of = root
+							is_subject_type = subject_type_ca_confederative_partner
+						}
+					}
+				}
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			s:STATE_NICARAGUA = {
+				any_scope_state = {
+					is_capital = yes
+					OR = {
+						owner = root
+						owner = {
+							is_subject_of = root
+							is_subject_type = subject_type_ca_confederative_partner
+						}
+					}
+				}
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			s:STATE_COSTA_RICA = {
+				any_scope_state = {
+					is_capital = yes
+					OR = {
+						owner = root
+						owner = {
+							is_subject_of = root
+							is_subject_type = subject_type_ca_confederative_partner
+						}
+					}
+				}
+			}
+		}
+		add = 1
+	}
+}
+
+# Probabilidad de que un estado acepte entrar en la Confederacion (scope: el invitado; scope:ca_conf_head = la UCA).
+ca_conf_invite_chance = {
+	value = 25
+	if = {
+		limit = { "relations(c:UCA)" >= relations_threshold:friendly }
+		add = { value = 20 desc = "CA_INVITE_FRIENDLY" }
+	}
+	if = {
+		limit = { ig:ig_intelligentsia ?= { is_in_government = yes } }
+		add = { value = 10 desc = "CA_INVITE_LIBERALS" }
+	}
+	if = {
+		limit = { ig:ig_landowners ?= { is_powerful = yes } }
+		add = { value = -15 desc = "CA_INVITE_LANDOWNERS" }
+	}
+	if = {
+		limit = { has_variable = ca_cos_republica_cerrada }
+		add = { value = -20 desc = "CA_INVITE_CLOSED_REPUBLIC" }
+	}
+	min = 5
+	max = 80
+}
+

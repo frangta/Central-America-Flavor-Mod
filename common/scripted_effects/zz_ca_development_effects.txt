@@ -1,0 +1,99 @@
+﻿############################################################################
+# CAFM - F13 - Diarios de desarrollo A1-A4 (common/scripted_effects/zz_ca_development_effects.txt)
+# Barras: ca_coffee_bar, ca_agro_bar, ca_military_bar, ca_enl_bar (0-100, variable del pais).
+# Uso desde otros eventos (F17): ca_coffee_bar_change = { VALUE = -10 }
+############################################################################
+
+ca_coffee_bar_change = { ca_var_bar_change = { VAR = ca_coffee_bar VALUE = $VALUE$ } }
+ca_agro_bar_change = { ca_var_bar_change = { VAR = ca_agro_bar VALUE = $VALUE$ } }
+ca_military_bar_change = { ca_var_bar_change = { VAR = ca_military_bar VALUE = $VALUE$ } }
+ca_enl_bar_change = { ca_var_bar_change = { VAR = ca_enl_bar VALUE = $VALUE$ } }
+
+# Pulso anual: altas de los diarios. Scope: pais.
+ca_development_yearly = {
+	if = {
+		limit = {
+			ca_is_ca_national_country = yes
+			is_subject = no
+		}
+		# A1 cafe: al menos un cafetal (Costa Rica desde el inicio)
+		if = {
+			limit = {
+				NOT = { has_journal_entry = je_ca_coffee_boom }
+				NOT = { has_variable = ca_coffee_boom_consolidated }
+				OR = {
+					c:COS ?= this
+					ca_coffee_levels >= 1
+				}
+			}
+			add_journal_entry = { type = je_ca_coffee_boom }
+		}
+		# A2 agroexportacion: tras el cafe o desde 1870, con puerto
+		if = {
+			limit = {
+				NOT = { has_journal_entry = je_ca_agro_export_boom }
+				NOT = { has_variable = ca_agro_export_miracle_completed }
+				OR = {
+					has_variable = ca_coffee_boom_consolidated
+					game_date >= 1870.1.1
+				}
+				any_scope_building = { is_building_type = building_port }
+			}
+			add_journal_entry = { type = je_ca_agro_export_boom }
+		}
+		# A3 reforma militar: desde 1845 con la ley de caudillismo
+		if = {
+			limit = {
+				NOT = { has_journal_entry = je_ca_military_reform }
+				NOT = { has_variable = ca_military_reform_completed }
+				NOT = { has_variable = ca_military_reform_failed }
+				game_date >= 1845.1.1
+				has_law_or_variant = law_type:law_ca_caudillismo
+			}
+			add_journal_entry = { type = je_ca_military_reform }
+		}
+		# A4 ilustracion: red de seguridad (los estados la reciben al nacer)
+		ca_add_enlightenment_journal = yes
+	}
+}
+
+# A4: la UCA al inicio y cada estado al nacer (ramas 2 y 3 de ca_ai_<estado>, y jugador).
+ca_add_enlightenment_journal = {
+	if = {
+		limit = {
+			NOT = { has_journal_entry = je_ca_enlightenment }
+			NOT = { has_variable = ca_enlightenment_completed }
+		}
+		add_journal_entry = { type = je_ca_enlightenment }
+	}
+}
+
+# A3: los golpes cuentan para el fracaso (dos golpes). Scope: pais con el diario.
+ca_military_coup_count = {
+	if = {
+		limit = {
+			has_variable = recent_coup_or_revolution_var
+			NOT = { has_variable = ca_coup_counted }
+		}
+		set_variable = { name = ca_coup_counted days = 740 } # F20: dura lo mismo que recent_coup_or_revolution_var
+		if = {
+			limit = { NOT = { has_variable = ca_caudillo_coups } }
+			set_variable = { name = ca_caudillo_coups value = 0 }
+		}
+		change_variable = { name = ca_caudillo_coups add = 1 }
+		ca_military_bar_change = { VALUE = -15 }
+	}
+}
+
+# A3: fracaso (on_fail / on_timeout). Scope: pais.
+ca_military_reform_failure = {
+	remove_variable = ca_military_reform_active_var
+	set_variable = ca_military_reform_failed
+	trigger_event = { id = ca_military.2 popup = yes }
+	ig:ig_armed_forces ?= {
+		add_modifier = {
+			name = age_of_ca_caudillos_modifier
+			months = 120
+		}
+	}
+}

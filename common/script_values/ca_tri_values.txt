@@ -1,0 +1,124 @@
+﻿# CAFM F29: posicion de un estado en el triangulo de alineamiento (0-9).
+# Reticula de 10 puntos (C, F, S) con C + F + S = 3; se normalizan los niveles 0-3 de
+# ca_centralist_influence / ca_federalist_influence / ca_separatist_influence y se redondea.
+#   0 = (3,0,0) vertice centralista      6 = (0,3,0) vertice federalista      9 = (0,0,3) vertice separatista
+#   4 = (1,1,1) centro (tambien si no hay ninguna inclinacion)
+# Scope: el pais del estado.
+ca_tri_point_index = {
+	value = 4
+	if = {
+		limit = {
+			has_variable = ca_centralist_influence
+			has_variable = ca_federalist_influence
+			has_variable = ca_separatist_influence
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = { var:ca_centralist_influence = 1 var:ca_federalist_influence = 0 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 2 var:ca_federalist_influence = 0 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 3 var:ca_federalist_influence = 0 var:ca_separatist_influence = 0 }
+				}
+			}
+			value = 0
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = { var:ca_centralist_influence = 1 var:ca_federalist_influence = 1 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 2 var:ca_federalist_influence = 1 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 2 var:ca_federalist_influence = 2 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 3 var:ca_federalist_influence = 1 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 3 var:ca_federalist_influence = 1 var:ca_separatist_influence = 1 }
+					AND = { var:ca_centralist_influence = 3 var:ca_federalist_influence = 2 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 3 var:ca_federalist_influence = 2 var:ca_separatist_influence = 1 }
+					AND = { var:ca_centralist_influence = 3 var:ca_federalist_influence = 3 var:ca_separatist_influence = 0 }
+				}
+			}
+			value = 1
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = { var:ca_centralist_influence = 1 var:ca_federalist_influence = 0 var:ca_separatist_influence = 1 }
+					AND = { var:ca_centralist_influence = 2 var:ca_federalist_influence = 0 var:ca_separatist_influence = 1 }
+					AND = { var:ca_centralist_influence = 2 var:ca_federalist_influence = 0 var:ca_separatist_influence = 2 }
+					AND = { var:ca_centralist_influence = 3 var:ca_federalist_influence = 0 var:ca_separatist_influence = 1 }
+					AND = { var:ca_centralist_influence = 3 var:ca_federalist_influence = 0 var:ca_separatist_influence = 2 }
+					AND = { var:ca_centralist_influence = 3 var:ca_federalist_influence = 0 var:ca_separatist_influence = 3 }
+					AND = { var:ca_centralist_influence = 3 var:ca_federalist_influence = 1 var:ca_separatist_influence = 2 }
+				}
+			}
+			value = 2
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = { var:ca_centralist_influence = 1 var:ca_federalist_influence = 2 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 1 var:ca_federalist_influence = 3 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 1 var:ca_federalist_influence = 3 var:ca_separatist_influence = 1 }
+					AND = { var:ca_centralist_influence = 2 var:ca_federalist_influence = 3 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 2 var:ca_federalist_influence = 3 var:ca_separatist_influence = 1 }
+				}
+			}
+			value = 3
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = { var:ca_centralist_influence = 1 var:ca_federalist_influence = 0 var:ca_separatist_influence = 2 }
+					AND = { var:ca_centralist_influence = 1 var:ca_federalist_influence = 0 var:ca_separatist_influence = 3 }
+					AND = { var:ca_centralist_influence = 1 var:ca_federalist_influence = 1 var:ca_separatist_influence = 3 }
+					AND = { var:ca_centralist_influence = 2 var:ca_federalist_influence = 0 var:ca_separatist_influence = 3 }
+					AND = { var:ca_centralist_influence = 2 var:ca_federalist_influence = 1 var:ca_separatist_influence = 3 }
+				}
+			}
+			value = 5
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 1 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 2 var:ca_separatist_influence = 0 }
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 3 var:ca_separatist_influence = 0 }
+				}
+			}
+			value = 6
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 1 var:ca_separatist_influence = 1 }
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 2 var:ca_separatist_influence = 1 }
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 2 var:ca_separatist_influence = 2 }
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 3 var:ca_separatist_influence = 1 }
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 3 var:ca_separatist_influence = 2 }
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 3 var:ca_separatist_influence = 3 }
+					AND = { var:ca_centralist_influence = 1 var:ca_federalist_influence = 3 var:ca_separatist_influence = 2 }
+				}
+			}
+			value = 7
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 1 var:ca_separatist_influence = 2 }
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 1 var:ca_separatist_influence = 3 }
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 2 var:ca_separatist_influence = 3 }
+					AND = { var:ca_centralist_influence = 1 var:ca_federalist_influence = 2 var:ca_separatist_influence = 3 }
+				}
+			}
+			value = 8
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 0 var:ca_separatist_influence = 1 }
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 0 var:ca_separatist_influence = 2 }
+					AND = { var:ca_centralist_influence = 0 var:ca_federalist_influence = 0 var:ca_separatist_influence = 3 }
+				}
+			}
+			value = 9
+		}
+	}
+}

@@ -1,0 +1,14 @@
+﻿# CAFM - F16 - Colera (common/static_modifiers/ca_cholera_modifiers.txt)
+
+# Brote generico de la region (.16/.17); separado del brote de Guatemala (uca_cholera)
+ca_generic_cholera_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_mortality_mult = 0.2
+	state_standard_of_living_add = -1
+}
+
+# .15 c: el clero calma los rumores
+ca_cholera_clergy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_radicals_from_political_movements_mult = -0.1
+}

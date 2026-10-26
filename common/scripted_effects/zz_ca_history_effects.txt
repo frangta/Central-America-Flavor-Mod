@@ -1,0 +1,46 @@
+﻿# =========================================================================
+# CAFM F2 - Efectos de arranque que la historia no puede hacer sola
+# =========================================================================
+
+# Asigna los generales de 1836 a sus formaciones (ca_military_formations.txt).
+# La historia de personajes carga despues que la de formaciones, por eso va aqui.
+# Lo llama ca_on_game_started (common/on_actions/ca_on_actions.txt).
+ca_assign_starting_generals = {
+	c:UCA ?= {
+		# CAFM F24: vanilla y el mod crean cada uno a Morazan (la misma plantilla). Se queda uno:
+		# el gobernante si es Morazan; si no, el que guarda cafm_hc_morazan.
+		if = {
+			limit = { ruler ?= { has_variable = is_morazan } }
+			ruler = { save_scope_as = ca_morazan_keep }
+		}
+		else_if = {
+			limit = { has_global_variable = cafm_hc_morazan }
+			global_var:cafm_hc_morazan = { save_scope_as = ca_morazan_keep }
+		}
+		if = {
+			limit = { exists = scope:ca_morazan_keep }
+			every_scope_character = {
+				limit = {
+					has_variable = is_morazan
+					NOT = { this = scope:ca_morazan_keep }
+				}
+				kill_character = { hidden = yes }
+			}
+			set_global_variable = { name = cafm_hc_morazan value = scope:ca_morazan_keep }
+		}
+		# Ejercito Federal: Francisco Morazan
+		random_military_formation = {
+			limit = { formation_army_unit_type_fraction = { target = unit_type:combat_unit_type_hussars value > 0 } } # F23: el unico con husares
+			save_temporary_scope_as = ca_formation_federal_scope
+		}
+		if = {
+			limit = {
+				exists = scope:ca_formation_federal_scope
+				has_global_variable = cafm_hc_morazan
+				global_var:cafm_hc_morazan = { has_role = character_role_general } # F24: el gobernante no puede mandar una formacion
+			}
+			global_var:cafm_hc_morazan = { transfer_to_formation = scope:ca_formation_federal_scope }
+		}
+		# (CAFM F23: Carlos Salazar ya no se asigna: las milicias no se distinguen sin variables)
+	}
+}

@@ -1,0 +1,193 @@
+﻿############################################################################
+# CAFM - F1 - Valores regionales (common/script_values/ca_02_regional.txt)
+# Anillo 2: barra del estado, Soconusco (D3), Istmo (D1), Talamanca (D2),
+# Confederacion (B1) y Patria Grande (B3).
+# Las barras las usaran los diarios de F6, F12 y F14; aqui solo se definen.
+############################################################################
+
+
+# ---------------------------------------------------------------------------
+# Barra del estado (je_ca_federalists_vs_separatists_situation): valor inicial
+# segun la lealtad que el estado tiene en la UCA. Leal 75, Vacilante 50, Rebelde 25.
+# Scope: pais del estado (GUA, ELS, HON, NIC, COS, ALT, CIP).
+# ---------------------------------------------------------------------------
+ca_fvs_start_value = {
+	value = ca_fvs_start_wavering
+	save_temporary_scope_as = ca_target
+	c:UCA ?= {
+		save_temporary_scope_as = ca_uca
+	}
+	if = {
+		limit = { exists = scope:ca_uca }
+		if = {
+			limit = { scope:ca_uca.ca_target_loyalty >= ca_loyalty_loyal }
+			value = ca_fvs_start_loyal
+		}
+		else_if = {
+			limit = { scope:ca_uca.ca_target_loyalty = ca_loyalty_wavering }
+			value = ca_fvs_start_wavering
+		}
+		else = {
+			value = ca_fvs_start_rebel
+		}
+	}
+}
+
+
+# ---------------------------------------------------------------------------
+# Mecanismo unionista: % de cultura central_american en un estado.
+# Scope: estado. Devuelve 0-1.
+# ---------------------------------------------------------------------------
+ca_central_american_share_state = {
+	value = "culture_percent_state(cu:central_american)"
+}
+
+
+# ---------------------------------------------------------------------------
+# D3 - El Soconusco: deriva mensual de la barra "Centroamerica <-> Mexico"
+# (0-100; 100 = rumbo centroamericano, 0 = rumbo mexicano).
+# Scope: pais CIP.
+#   central_american > mexican  -> +1
+#   mexican > central_american  -> -1
+#   chiapanecan >= 30 %         -> la deriva se reduce a la mitad
+# ---------------------------------------------------------------------------
+ca_soconusco_culture_drift = {
+	value = 0
+	if = {
+		limit = { "culture_percent_country(cu:central_american)" > "culture_percent_country(cu:mexican)" }
+		add = { value = 1 desc = "CA_SOCONUSCO_CENTRAL_AMERICAN" }
+	}
+	else_if = {
+		limit = { "culture_percent_country(cu:mexican)" > "culture_percent_country(cu:central_american)" }
+		add = { value = -1 desc = "CA_SOCONUSCO_MEXICAN" }
+	}
+	if = {
+		limit = { "culture_percent_country(cu:chiapanecan)" >= ca_soconusco_chiapanecan_brake }
+		multiply = { value = 0.5 desc = "CA_SOCONUSCO_CHIAPANECAN" }
+	}
+}
+
+
+# ---------------------------------------------------------------------------
+# D1 - El Istmo: deriva mensual base de la barra "Autonomia del Istmo" (0-100).
+# Scope: dueno de STATE_PANAMA (Nueva Granada o PNM). Los eventos hacen el resto.
+#   + turmoil alto en el Istmo (el cabildo se agita)
+#   + el dueno esta en guerra (Bogota se distrae)
+#   - el dueno tiene burocratas nombrados (centralizacion)
+# ---------------------------------------------------------------------------
+ca_istmo_autonomy_drift = {
+	value = 0
+	if = {
+		limit = {
+			any_scope_state = {
+				state_region = s:STATE_PANAMA
+				turmoil > ca_loyalty_turmoil_threshold
+			}
+		}
+		add = { value = 0.5 desc = "CA_ISTMO_TURMOIL" }
+	}
+	if = {
+		limit = { is_at_war = yes }
+		add = { value = 0.5 desc = "CA_ISTMO_OWNER_AT_WAR" }
+	}
+	if = {
+		limit = { has_law_or_variant = law_type:law_appointed_bureaucrats }
+		add = { value = -0.5 desc = "CA_ISTMO_CENTRALIZATION" }
+	}
+}
+
+
+# ---------------------------------------------------------------------------
+# D2 - Talamanca: deriva mensual base de la barra "Influencia en Talamanca" (0-100).
+# Scope: senor de RDT (UCA o Costa Rica).
+#   + buenas relaciones con RDT
+#   - malas relaciones con RDT
+#   - turmoil en Costa Rica
+# ---------------------------------------------------------------------------
+ca_talamanca_influence_drift = {
+	value = 0
+	if = {
+		limit = { c:RDT ?= { relations:root >= relations_threshold:cordial } }
+		add = { value = 0.5 desc = "CA_TALAMANCA_GOOD_RELATIONS" }
+	}
+	else_if = {
+		limit = { c:RDT ?= { relations:root < relations_threshold:poor } }
+		add = { value = -0.5 desc = "CA_TALAMANCA_BAD_RELATIONS" }
+	}
+	if = {
+		limit = {
+			any_scope_state = {
+				state_region = s:STATE_COSTA_RICA
+				turmoil > ca_loyalty_turmoil_threshold
+			}
+		}
+		add = { value = -0.5 desc = "CA_TALAMANCA_TURMOIL" }
+	}
+}
+
+
+# ---------------------------------------------------------------------------
+# B1 - La Confederacion: socios confederados y deriva base de "Cohesion confederal".
+# Scope: cabeza de la Confederacion (la UCA).
+# ---------------------------------------------------------------------------
+ca_confederation_partners_count = {
+	value = 0
+	every_subject_or_below = {
+		limit = { is_subject_type = subject_type_ca_confederative_partner }
+		add = 1
+	}
+}
+
+ca_confederal_cohesion_drift = {
+	value = 0
+	# Guerra entre socios
+	if = {
+		limit = {
+			any_subject_or_below = {
+				is_subject_type = subject_type_ca_confederative_partner
+				save_temporary_scope_as = ca_partner_a
+				root = {
+					any_subject_or_below = {
+						is_subject_type = subject_type_ca_confederative_partner
+						has_war_with = scope:ca_partner_a
+					}
+				}
+			}
+		}
+		add = { value = -2 desc = "CA_CONFEDERATION_WAR_BETWEEN_PARTNERS" }
+	}
+	# Pocos socios
+	if = {
+		limit = { ca_confederation_partners_count < 2 }
+		add = { value = -1 desc = "CA_CONFEDERATION_FEW_PARTNERS" }
+	}
+}
+
+
+# ---------------------------------------------------------------------------
+# B3 - La Patria Grande: deriva base de "Unidad centroamericana" (0-100).
+# Scope: pais con je_ca_patria_grande.
+#   + por cada pais centroamericano con relaciones amistosas
+#   - si esta en guerra con un pais centroamericano
+# ---------------------------------------------------------------------------
+ca_unity_drift = {
+	value = 0
+	every_country = {
+		limit = {
+			NOT = { this = root }
+			only_latin_centralamericans_cultures = yes
+			relations:root >= relations_threshold:friendly
+		}
+		add = { value = 0.25 desc = "CA_UNITY_FRIENDLY_NEIGHBOUR" }
+	}
+	if = {
+		limit = {
+			any_country = {
+				only_latin_centralamericans_cultures = yes
+				has_war_with = root
+			}
+		}
+		add = { value = -1 desc = "CA_UNITY_WAR_BETWEEN_CENTRAL_AMERICANS" }
+	}
+	max = 1
+}

@@ -4,11 +4,12 @@
 # ==========================================
 
 ca_play_guatemala_effect = {
+	ca_add_enlightenment_journal = yes # F13 (A4)
     c:GUA ?= {
 	#add_modifier = { name = ca_starting_guatemala_modifier months = 60 }
-    add_journal_entry = { type = je_ca_historic_situation_in_guatemala }
-    add_journal_entry = { type = je_ca_state_role_in_federation }
-    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
+    ca_gua_start_chain = yes # CAFM F4: diario historico y arranque de la cadena (jugador)
+    ca_role_add_journal = yes # CAFM F6
+    ca_fvs_add_journal = yes # CAFM F6: barra inicial segun la lealtad	
 
 
 
@@ -16,465 +17,96 @@ ca_play_guatemala_effect = {
     cafm_cast_activate_gua = yes
 
 
-	ig:ig_armed_forces = {
-            remove_ideology = ideology_caudillismo
-            remove_ideology = ideology_paternalistic
-            add_ideology = ideology_central_american_federal
-            set_interest_group_name = ig_ejercito_federal
-        }
-
-    ig:ig_devout = {
-         remove_ideology = ideology_moralist
-         add_ideology = ideology_ca_moralist	
-         add_ideology = ideology_central_american_reactionary_2
-         set_interest_group_name = ig_catholic_church
-    }
-    
-    ig:ig_landowners = {            
-        remove_ideology = ideology_republican_paternalistic
-        remove_ideology = ideology_hierarchic
-        remove_ideology = ideology_paternalistic
-        add_ideology = ideology_ca_criollo_paternalistic
-        add_ideology = ideology_ca_criollo_stratocratic            
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_gua_convervador
-    }
-    
-    ig:ig_industrialists = {
-        remove_ideology = ideology_plutocratic
-        remove_ideology = ideology_laissez_faire
-        add_ideology = ideology_ca_agroexportadores
-        add_ideology = ideology_ca_liberal     
-        set_interest_group_name = ig_elite_comercial
-    }
-    
-    ig:ig_intelligentsia = {
-        remove_ideology = ideology_liberal
-        remove_ideology = ideology_anti_clerical
-        remove_ideology = ideology_republican
-        add_ideology = ideology_ca_constitutionalist
-        add_ideology = ideology_ca_secularist
-        add_ideology = ideology_central_american_federal
-        set_interest_group_name = ig_liberales_morazanistas             
-    }
-    
-    ig:ig_petty_bourgeoisie = {
-        remove_ideology = ideology_patriotic
-        add_ideology = ideology_central_american_federal
-        add_ideology = ideology_ca_artesanado
-        set_interest_group_name = ig_artesanos_urbanos
-    }
-    
-    ig:ig_rural_folk = {
-        remove_ideology = ideology_isolationist
-        remove_ideology = ideology_agrarian
-        remove_ideology = ideology_particularist
-        add_ideology = ideology_ca_guilds
-        set_interest_group_name = ig_pequenos_campesinos
-    }
-
-    activate_law = law_type:law_ca_federal_state
-    activate_law = law_type:law_freedom_of_conscience
-    activate_law = law_type:law_mercantilism
-    activate_law = law_type:law_wealth_voting
-    activate_law = law_type:law_censorship
-	active_law:lawgroup_governance_principles ?= {
-			add_amendment = {
-				type = amendment_guatemala_1825
-				sponsor = PREV.ig:ig_intelligentsia
-			}
-		}
+	# CAFM F6: grupos de interes y leyes de 1836 en ca_gua_member_setup (los usa tambien la IA)
+	ca_gua_member_setup = yes
+	ca_gua_set_election_date = yes
 	}
 }
 
 ca_play_elsalvador_effect = {
+	ca_add_enlightenment_journal = yes # F13 (A4)
 	c:ELS ?= {
     #add_modifier = { name = ca_starting_salvador_modifier months = 60 }
-    add_journal_entry = { type = je_ca_historic_situation_in_elsalvador }
-    add_journal_entry = { type = je_ca_state_role_in_federation }
-    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
+    ca_els_start_chain = yes # CAFM F4: diario historico y arranque de la cadena (jugador)
+    ca_role_add_journal = yes # CAFM F6
+    ca_fvs_add_journal = yes # CAFM F6: barra inicial segun la lealtad	
     #remove_variable = ca_secession_country
     # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
     cafm_cast_activate_els = yes
 
-	ig:ig_armed_forces = {
-            remove_ideology = ideology_caudillismo
-            remove_ideology = ideology_paternalistic
-            add_ideology = ideology_central_american_federal
-            set_interest_group_name = ig_ejercito_federal
-        }
-
-    ig:ig_devout = {
-         remove_ideology = ideology_moralist
-         add_ideology = ideology_ca_moralist	
-         add_ideology = ideology_central_american_reactionary_2
-         set_interest_group_name = ig_catholic_church
-    }
-    
-    ig:ig_landowners = {            
-        remove_ideology = ideology_republican_paternalistic
-        remove_ideology = ideology_hierarchic
-        remove_ideology = ideology_paternalistic
-        add_ideology = ideology_ca_criollo_paternalistic
-        add_ideology = ideology_ca_criollo_stratocratic            
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_els_convervador
-    }
-    
-    ig:ig_industrialists = {
-        remove_ideology = ideology_plutocratic
-        remove_ideology = ideology_laissez_faire
-        add_ideology = ideology_ca_agroexportadores
-        add_ideology = ideology_ca_liberal     
-        set_interest_group_name = ig_elite_comercial
-    }
-    
-    ig:ig_intelligentsia = {
-        remove_ideology = ideology_liberal
-        remove_ideology = ideology_anti_clerical
-        remove_ideology = ideology_republican
-        add_ideology = ideology_ca_constitutionalist
-        add_ideology = ideology_ca_secularist
-        add_ideology = ideology_central_american_federal
-        set_interest_group_name = ig_liberales_morazanistas             
-    }
-    
-    ig:ig_petty_bourgeoisie = {
-        remove_ideology = ideology_patriotic
-        add_ideology = ideology_central_american_federal
-        add_ideology = ideology_ca_artesanado
-        set_interest_group_name = ig_artesanos_urbanos
-    }
-    
-    ig:ig_rural_folk = {
-        remove_ideology = ideology_isolationist
-        remove_ideology = ideology_agrarian
-        remove_ideology = ideology_particularist
-        add_ideology = ideology_ca_guilds
-        set_interest_group_name = ig_pequenos_campesinos
-    }
-
-    activate_law = law_type:law_ca_federal_state
-    activate_law = law_type:law_freedom_of_conscience
-    activate_law = law_type:law_landed_voting
-    activate_law = law_type:law_mercantilism
-    activate_law = law_type:law_censorship
-    activate_law = law_type:law_religious_schools
-	active_law:lawgroup_governance_principles ?= {
-			add_amendment = {
-				type = amendment_el_salvador_1824
-				sponsor = PREV.ig:ig_intelligentsia
-			}
-		}
+	# CAFM F6: grupos de interes y leyes de 1836 en ca_els_member_setup (los usa tambien la IA)
+	ca_els_member_setup = yes
+	ca_els_set_election_date = yes
 	}
 }
 
 ca_play_honduras_effect = {
+	ca_add_enlightenment_journal = yes # F13 (A4)
     c:HON ?= {
     #add_modifier = { name = ca_starting_honduras_modifier months = 60 }
-    add_journal_entry = { type = je_ca_historic_situation_in_honduras }
-    add_journal_entry = { type = je_ca_state_role_in_federation }
-    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
+    ca_hon_start_chain = yes # CAFM F4: diario historico y arranque de la cadena (jugador)
+    ca_role_add_journal = yes # CAFM F6
+    ca_fvs_add_journal = yes # CAFM F6: barra inicial segun la lealtad	
     #remove_variable = ca_secession_country
 
     # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
     cafm_cast_activate_hon = yes
 
-	ig:ig_armed_forces = {
-            remove_ideology = ideology_caudillismo
-            remove_ideology = ideology_paternalistic
-            add_ideology = ideology_central_american_federal
-            set_interest_group_name = ig_ejercito_federal
-        }
-
-    ig:ig_devout = {
-         remove_ideology = ideology_moralist
-         add_ideology = ideology_ca_moralist	
-         add_ideology = ideology_central_american_reactionary_2
-         set_interest_group_name = ig_catholic_church
-    }
-    
-    ig:ig_landowners = {            
-        remove_ideology = ideology_republican_paternalistic
-        remove_ideology = ideology_hierarchic
-        remove_ideology = ideology_paternalistic
-        add_ideology = ideology_ca_criollo_paternalistic
-        add_ideology = ideology_ca_criollo_stratocratic            
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_hacendados
-    }
-    
-    ig:ig_industrialists = {
-        remove_ideology = ideology_plutocratic
-        remove_ideology = ideology_laissez_faire
-        add_ideology = ideology_ca_agroexportadores
-        add_ideology = ideology_ca_liberal     
-        set_interest_group_name = ig_elite_comercial
-    }
-    
-    ig:ig_intelligentsia = {
-        remove_ideology = ideology_liberal
-        remove_ideology = ideology_anti_clerical
-        remove_ideology = ideology_republican
-        add_ideology = ideology_ca_constitutionalist
-        add_ideology = ideology_ca_secularist
-        add_ideology = ideology_central_american_federal
-        set_interest_group_name = ig_liberales_morazanistas            
-    }
-    
-    ig:ig_petty_bourgeoisie = {
-        remove_ideology = ideology_patriotic
-        add_ideology = ideology_central_american_federal
-        add_ideology = ideology_ca_artesanado
-        set_interest_group_name = ig_artesanos_urbanos
-    }
-    
-    ig:ig_rural_folk = {
-        remove_ideology = ideology_isolationist
-        remove_ideology = ideology_agrarian
-        remove_ideology = ideology_particularist
-        add_ideology = ideology_ca_guilds
-        set_interest_group_name = ig_pequenos_campesinos
-    }
-    activate_law = law_type:law_ca_federal_state
-    activate_law = law_type:law_freedom_of_conscience
-    activate_law = law_type:law_landed_voting
-    activate_law = law_type:law_mercantilism
+	# CAFM F6: grupos de interes y leyes de 1836 en ca_hon_member_setup (los usa tambien la IA)
+	ca_hon_member_setup = yes
+	ca_hon_set_election_date = yes
 	}
 }
 
 ca_play_nicaragua_effect = {
+	ca_add_enlightenment_journal = yes # F13 (A4)
 	c:NIC ?= {
-	trigger_event = { id = ca_nicaragua_events.2 days = 7 } # CAFM Fase 1: El Estado dividido (solo antes de 1837)
     #add_modifier = { name = ca_starting_nicaragua_modifier months = 60 }
-    add_journal_entry = { type = je_ca_historic_situation_in_nicaragua }
-    add_journal_entry = { type = je_ca_state_role_in_federation }
-    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
+    ca_nic_start_chain = yes # CAFM F4: diario historico y arranque de la cadena (jugador)
+    ca_role_add_journal = yes # CAFM F6
+    ca_fvs_add_journal = yes # CAFM F6: barra inicial segun la lealtad	
     #remove_variable = ca_secession_country
     # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
     cafm_cast_activate_nic = yes
 
-	ig:ig_armed_forces = {
-            remove_ideology = ideology_caudillismo
-            remove_ideology = ideology_paternalistic
-            add_ideology = ideology_central_american_federal
-            set_interest_group_name = ig_ejercito_federal
-        }
-
-    ig:ig_devout = {
-         remove_ideology = ideology_moralist
-         add_ideology = ideology_ca_moralist	
-         add_ideology = ideology_central_american_reactionary_2
-         set_interest_group_name = ig_catholic_church
-    }
-    
-    ig:ig_landowners = {            
-        remove_ideology = ideology_republican_paternalistic
-        remove_ideology = ideology_hierarchic
-        remove_ideology = ideology_paternalistic
-        add_ideology = ideology_ca_criollo_paternalistic
-        add_ideology = ideology_ca_criollo_stratocratic            
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_nic_convervador2
-    }
-    
-    ig:ig_industrialists = {
-        remove_ideology = ideology_plutocratic
-        remove_ideology = ideology_laissez_faire
-        add_ideology = ideology_ca_agroexportadores
-        add_ideology = ideology_ca_liberal     
-        set_interest_group_name = ig_elite_comercial
-    }
-    
-    ig:ig_intelligentsia = {
-        remove_ideology = ideology_liberal
-        remove_ideology = ideology_anti_clerical
-        remove_ideology = ideology_republican
-        add_ideology = ideology_ca_constitutionalist
-        add_ideology = ideology_ca_secularist
-        add_ideology = ideology_central_american_federal
-        set_interest_group_name = ig_liberales_morazanistas            
-    }
-    
-    ig:ig_petty_bourgeoisie = {
-        remove_ideology = ideology_patriotic
-        add_ideology = ideology_central_american_federal
-        add_ideology = ideology_ca_artesanado
-        set_interest_group_name = ig_artesanos_urbanos
-    }
-    
-    ig:ig_rural_folk = {
-        remove_ideology = ideology_isolationist
-        remove_ideology = ideology_agrarian
-        remove_ideology = ideology_particularist
-        add_ideology = ideology_ca_guilds
-        set_interest_group_name = ig_pequenos_campesinos
-    }            
-    activate_law = law_type:law_ca_federal_state
-    activate_law = law_type:law_freedom_of_conscience
-    activate_law = law_type:law_mercantilism
-    activate_law = law_type:law_wealth_voting
-    activate_law = law_type:law_censorship
-	active_law:lawgroup_governance_principles ?= { 
-			add_amendment = {
-				type = amendment_nicaragua_1826
-				sponsor = PREV.ig:ig_intelligentsia
-			}
-		}
+	# CAFM F6: grupos de interes y leyes de 1836 en ca_nic_member_setup (los usa tambien la IA)
+	ca_nic_member_setup = yes
+	ca_nic_set_election_date = yes
 	}
 }
 
 ca_play_costarica_effect = {
+	ca_add_enlightenment_journal = yes # F13 (A4)
 	c:COS ?= {
     #add_modifier = { name = ca_starting_costarica_modifier months = 60 }
     add_journal_entry = { type = je_ca_historic_situation_in_costarica }
-    add_journal_entry = { type = je_ca_state_role_in_federation }
-    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }	
+    set_variable = ca_ecos_federacion_fired # CAFM F4: antes en ca_costa_rica_events.1, cuando COS aun no existia
+    ca_role_add_journal = yes # CAFM F6
+    ca_fvs_add_journal = yes # CAFM F6: barra inicial segun la lealtad	
     #remove_variable = ca_secession_country
     # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
     cafm_cast_activate_cos = yes
 
-	ig:ig_armed_forces = {
-            remove_ideology = ideology_caudillismo
-            remove_ideology = ideology_paternalistic
-            add_ideology = ideology_central_american_federal
-            set_interest_group_name = ig_ejercito_federal
-        }
-
-    ig:ig_devout = {
-         remove_ideology = ideology_moralist
-         add_ideology = ideology_ca_moralist	
-         add_ideology = ideology_central_american_reactionary_2
-         set_interest_group_name = ig_catholic_church
-    }
-    
-    ig:ig_landowners = {            
-        remove_ideology = ideology_republican_paternalistic
-        remove_ideology = ideology_hierarchic
-        remove_ideology = ideology_paternalistic
-        add_ideology = ideology_ca_criollo_paternalistic
-        add_ideology = ideology_ca_criollo_stratocratic            
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_cos_convervador3
-    }
-    
-    ig:ig_industrialists = {
-        remove_ideology = ideology_plutocratic
-        remove_ideology = ideology_laissez_faire
-        add_ideology = ideology_ca_agroexportadores
-        add_ideology = ideology_ca_liberal     
-        set_interest_group_name = ig_elite_comercial
-    }
-    
-    ig:ig_intelligentsia = {
-        remove_ideology = ideology_liberal
-        remove_ideology = ideology_anti_clerical
-        remove_ideology = ideology_republican
-        add_ideology = ideology_ca_constitutionalist
-        add_ideology = ideology_ca_secularist
-        add_ideology = ideology_central_american_federal
-        set_interest_group_name = ig_liberales_morazanistas            
-    }
-    
-    ig:ig_petty_bourgeoisie = {
-        remove_ideology = ideology_patriotic
-        add_ideology = ideology_central_american_federal
-        add_ideology = ideology_ca_artesanado
-        set_interest_group_name = ig_artesanos_urbanos
-    }
-    
-    ig:ig_rural_folk = {
-        remove_ideology = ideology_isolationist
-        remove_ideology = ideology_agrarian
-        remove_ideology = ideology_particularist
-        add_ideology = ideology_ca_guilds
-        set_interest_group_name = ig_pequenos_campesinos
-    }
-    activate_law = law_type:law_ca_federal_state
-    activate_law = law_type:law_freedom_of_conscience
-    activate_law = law_type:law_mercantilism
-    activate_law = law_type:law_wealth_voting
-	active_law:lawgroup_governance_principles ?= { 
-			add_amendment = {
-				type = amendment_costa_rica_1830s
-				sponsor = PREV.ig:ig_intelligentsia
-			}
-		}
+	# CAFM F6: grupos de interes y leyes de 1836 en ca_cos_member_setup (los usa tambien la IA)
+	ca_cos_member_setup = yes
+	ca_cos_set_election_date = yes
 	}
 }
 
 ca_play_losaltos_effect = {
+	ca_add_enlightenment_journal = yes # F13 (A4)
 	c:ALT ?= {
     #add_modifier = { name = ca_starting_losaltos_modifier months = 60 }
     add_journal_entry = { type = je_ca_situation_in_losaltos }
     #remove_variable = ca_secession_country
-    add_journal_entry = { type = je_ca_state_role_in_federation }
-    add_journal_entry = { type = je_ca_federalists_vs_separatists_situation }
+    ca_role_add_journal = yes # CAFM F6
+    ca_fvs_add_journal = yes # CAFM F6: barra inicial segun la lealtad
     # CAFM cast (fase 1): Marcelo Molina por plantilla (antes se creaba en línea)
     cafm_cast_activate_alt = yes
 
-	ig:ig_armed_forces = {
-            remove_ideology = ideology_caudillismo
-            remove_ideology = ideology_paternalistic
-            add_ideology = ideology_central_american_federal
-            set_interest_group_name = ig_ejercito_federal
-        }
-
-    ig:ig_devout = {
-         remove_ideology = ideology_moralist
-         add_ideology = ideology_ca_moralist	
-         add_ideology = ideology_central_american_reactionary_2
-         set_interest_group_name = ig_catholic_church
-    }
-    
-    ig:ig_landowners = {            
-        remove_ideology = ideology_republican_paternalistic
-        remove_ideology = ideology_hierarchic
-        remove_ideology = ideology_paternalistic
-        add_ideology = ideology_ca_criollo_paternalistic
-        add_ideology = ideology_ca_criollo_stratocratic            
-        add_ideology = ideology_central_american_reactionary_2
-        set_interest_group_name = ig_hacendados
-    }
-    
-    ig:ig_industrialists = {
-        remove_ideology = ideology_plutocratic
-        remove_ideology = ideology_laissez_faire
-        add_ideology = ideology_ca_agroexportadores
-        add_ideology = ideology_ca_liberal     
-        set_interest_group_name = ig_elite_comercial
-    }
-    
-    ig:ig_intelligentsia = {
-        remove_ideology = ideology_liberal
-        remove_ideology = ideology_anti_clerical
-        remove_ideology = ideology_republican
-        add_ideology = ideology_ca_constitutionalist
-        add_ideology = ideology_ca_secularist
-        add_ideology = ideology_central_american_federal
-        set_interest_group_name = ig_liberales_morazanistas            
-    }
-    
-    ig:ig_petty_bourgeoisie = {
-        remove_ideology = ideology_patriotic
-        add_ideology = ideology_central_american_federal
-        add_ideology = ideology_ca_artesanado
-        set_interest_group_name = ig_artesanos_urbanos
-    }
-    
-    ig:ig_rural_folk = {
-        remove_ideology = ideology_isolationist
-        remove_ideology = ideology_agrarian
-        remove_ideology = ideology_particularist
-        add_ideology = ideology_ca_guilds
-        set_interest_group_name = ig_pequenos_campesinos
-    }
-    activate_law = law_type:law_ca_federal_state
-    activate_law = law_type:law_freedom_of_conscience
-    activate_law = law_type:law_landed_voting
-    activate_law = law_type:law_mercantilism
-    activate_law = law_type:law_censorship
-    activate_law = law_type:law_religious_schools
+	# CAFM F6: grupos de interes y leyes de 1836 en ca_alt_member_setup (los usa tambien la IA)
+	ca_alt_member_setup = yes
+	ca_alt_set_election_date = yes
 	}
 }
 

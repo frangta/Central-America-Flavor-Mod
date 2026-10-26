@@ -1,0 +1,853 @@
+﻿############################################################################
+# CAFM - F18 - Ideologias v3: configuracion de los grupos de interes por escenario (E),
+# grupo dividido (F) y mecanicas dinamicas (G). (common/scripted_effects/zz_ca_ideology_effects.txt)
+# Principio rector: cuando cambia la ley, las ideologias se quedan. Solo cambian en las transiciones
+# (inicio, .119, separacion, independencia) y por las mecanicas de abajo.
+############################################################################
+
+# Quita todas las ideologias CAFM y las vanilla por defecto de cada grupo. Scope: pais.
+ca_ig_strip_all = {
+	ig:ig_armed_forces ?= {
+		remove_ideology = ideology_paternalistic
+		remove_ideology = ideology_caudillismo
+		remove_ideology = ideology_patriotic
+		remove_ideology = ideology_jingoist
+		remove_ideology = ideology_loyalist
+		remove_ideology = ideology_central_american_federal
+		remove_ideology = ideology_ca_servile
+		remove_ideology = ideology_central_american_reactionary_2
+		remove_ideology = ideology_ca_pact_confederalist
+		remove_ideology = ideology_ca_autocratic_autonomist
+		remove_ideology = ideology_ca_separatist
+		remove_ideology = ideology_central_american_reactionary
+		remove_ideology = ideology_ca_criollo_paternalistic
+		remove_ideology = ideology_ca_criollo_elite
+		remove_ideology = ideology_ca_soberania_aristocratica
+		remove_ideology = ideology_ca_isolationist_expansionism
+		remove_ideology = ideology_ca_caudillismo_jingoist
+		remove_ideology = ideology_law_regionalist_militia
+		remove_ideology = ideology_ca_criollo_stratocratic
+		remove_ideology = ideology_ca_secularist
+		remove_ideology = ideology_ca_constitutionalist
+		remove_ideology = ideology_ca_criollo_liberal
+		remove_ideology = ideology_ca_masonic_liberal
+		remove_ideology = ideology_ca_moralist
+		remove_ideology = ideology_ca_papal_moralist
+		remove_ideology = ideology_ca_artesanado
+		remove_ideology = ideology_ca_mutualism
+		remove_ideology = ideology_ca_liberal
+		remove_ideology = ideology_ca_agroexportadores
+		remove_ideology = ideology_ca_coffee_liberal
+		remove_ideology = ideology_ca_creole_caribbean
+		remove_ideology = ideology_ca_guilds
+		remove_ideology = ideology_ca_communalist
+		remove_ideology = ideology_ca_comunal_milicia
+		remove_ideology = ideology_ca_indigenous_communalism
+		remove_ideology = ideology_ca_colonialist
+		remove_ideology = ideology_ca_enclavist
+		remove_ideology = ideology_ca_radical_enclavist
+		remove_ideology = ideology_ca_enclavist_pick
+	}
+	ig:ig_devout ?= {
+		remove_ideology = ideology_moralist
+		remove_ideology = ideology_pious
+		remove_ideology = ideology_patriarchal
+		remove_ideology = ideology_central_american_federal
+		remove_ideology = ideology_ca_servile
+		remove_ideology = ideology_central_american_reactionary_2
+		remove_ideology = ideology_ca_pact_confederalist
+		remove_ideology = ideology_ca_autocratic_autonomist
+		remove_ideology = ideology_ca_separatist
+		remove_ideology = ideology_central_american_reactionary
+		remove_ideology = ideology_ca_criollo_paternalistic
+		remove_ideology = ideology_ca_criollo_elite
+		remove_ideology = ideology_ca_soberania_aristocratica
+		remove_ideology = ideology_ca_isolationist_expansionism
+		remove_ideology = ideology_ca_caudillismo_jingoist
+		remove_ideology = ideology_law_regionalist_militia
+		remove_ideology = ideology_ca_criollo_stratocratic
+		remove_ideology = ideology_ca_secularist
+		remove_ideology = ideology_ca_constitutionalist
+		remove_ideology = ideology_ca_criollo_liberal
+		remove_ideology = ideology_ca_masonic_liberal
+		remove_ideology = ideology_ca_moralist
+		remove_ideology = ideology_ca_papal_moralist
+		remove_ideology = ideology_ca_artesanado
+		remove_ideology = ideology_ca_mutualism
+		remove_ideology = ideology_ca_liberal
+		remove_ideology = ideology_ca_agroexportadores
+		remove_ideology = ideology_ca_coffee_liberal
+		remove_ideology = ideology_ca_creole_caribbean
+		remove_ideology = ideology_ca_guilds
+		remove_ideology = ideology_ca_communalist
+		remove_ideology = ideology_ca_comunal_milicia
+		remove_ideology = ideology_ca_indigenous_communalism
+		remove_ideology = ideology_ca_colonialist
+		remove_ideology = ideology_ca_enclavist
+		remove_ideology = ideology_ca_radical_enclavist
+		remove_ideology = ideology_ca_enclavist_pick
+	}
+	ig:ig_landowners ?= {
+		remove_ideology = ideology_paternalistic
+		remove_ideology = ideology_republican_paternalistic
+		remove_ideology = ideology_hierarchic
+		remove_ideology = ideology_traditionalist
+		remove_ideology = ideology_central_american_federal
+		remove_ideology = ideology_ca_servile
+		remove_ideology = ideology_central_american_reactionary_2
+		remove_ideology = ideology_ca_pact_confederalist
+		remove_ideology = ideology_ca_autocratic_autonomist
+		remove_ideology = ideology_ca_separatist
+		remove_ideology = ideology_central_american_reactionary
+		remove_ideology = ideology_ca_criollo_paternalistic
+		remove_ideology = ideology_ca_criollo_elite
+		remove_ideology = ideology_ca_soberania_aristocratica
+		remove_ideology = ideology_ca_isolationist_expansionism
+		remove_ideology = ideology_ca_caudillismo_jingoist
+		remove_ideology = ideology_law_regionalist_militia
+		remove_ideology = ideology_ca_criollo_stratocratic
+		remove_ideology = ideology_ca_secularist
+		remove_ideology = ideology_ca_constitutionalist
+		remove_ideology = ideology_ca_criollo_liberal
+		remove_ideology = ideology_ca_masonic_liberal
+		remove_ideology = ideology_ca_moralist
+		remove_ideology = ideology_ca_papal_moralist
+		remove_ideology = ideology_ca_artesanado
+		remove_ideology = ideology_ca_mutualism
+		remove_ideology = ideology_ca_liberal
+		remove_ideology = ideology_ca_agroexportadores
+		remove_ideology = ideology_ca_coffee_liberal
+		remove_ideology = ideology_ca_creole_caribbean
+		remove_ideology = ideology_ca_guilds
+		remove_ideology = ideology_ca_communalist
+		remove_ideology = ideology_ca_comunal_milicia
+		remove_ideology = ideology_ca_indigenous_communalism
+		remove_ideology = ideology_ca_colonialist
+		remove_ideology = ideology_ca_enclavist
+		remove_ideology = ideology_ca_radical_enclavist
+		remove_ideology = ideology_ca_enclavist_pick
+	}
+	ig:ig_industrialists ?= {
+		remove_ideology = ideology_plutocratic
+		remove_ideology = ideology_laissez_faire
+		remove_ideology = ideology_protectionist
+		remove_ideology = ideology_central_american_federal
+		remove_ideology = ideology_ca_servile
+		remove_ideology = ideology_central_american_reactionary_2
+		remove_ideology = ideology_ca_pact_confederalist
+		remove_ideology = ideology_ca_autocratic_autonomist
+		remove_ideology = ideology_ca_separatist
+		remove_ideology = ideology_central_american_reactionary
+		remove_ideology = ideology_ca_criollo_paternalistic
+		remove_ideology = ideology_ca_criollo_elite
+		remove_ideology = ideology_ca_soberania_aristocratica
+		remove_ideology = ideology_ca_isolationist_expansionism
+		remove_ideology = ideology_ca_caudillismo_jingoist
+		remove_ideology = ideology_law_regionalist_militia
+		remove_ideology = ideology_ca_criollo_stratocratic
+		remove_ideology = ideology_ca_secularist
+		remove_ideology = ideology_ca_constitutionalist
+		remove_ideology = ideology_ca_criollo_liberal
+		remove_ideology = ideology_ca_masonic_liberal
+		remove_ideology = ideology_ca_moralist
+		remove_ideology = ideology_ca_papal_moralist
+		remove_ideology = ideology_ca_artesanado
+		remove_ideology = ideology_ca_mutualism
+		remove_ideology = ideology_ca_liberal
+		remove_ideology = ideology_ca_agroexportadores
+		remove_ideology = ideology_ca_coffee_liberal
+		remove_ideology = ideology_ca_creole_caribbean
+		remove_ideology = ideology_ca_guilds
+		remove_ideology = ideology_ca_communalist
+		remove_ideology = ideology_ca_comunal_milicia
+		remove_ideology = ideology_ca_indigenous_communalism
+		remove_ideology = ideology_ca_colonialist
+		remove_ideology = ideology_ca_enclavist
+		remove_ideology = ideology_ca_radical_enclavist
+		remove_ideology = ideology_ca_enclavist_pick
+	}
+	ig:ig_intelligentsia ?= {
+		remove_ideology = ideology_liberal
+		remove_ideology = ideology_anti_clerical
+		remove_ideology = ideology_republican
+		remove_ideology = ideology_reformer
+		remove_ideology = ideology_central_american_federal
+		remove_ideology = ideology_ca_servile
+		remove_ideology = ideology_central_american_reactionary_2
+		remove_ideology = ideology_ca_pact_confederalist
+		remove_ideology = ideology_ca_autocratic_autonomist
+		remove_ideology = ideology_ca_separatist
+		remove_ideology = ideology_central_american_reactionary
+		remove_ideology = ideology_ca_criollo_paternalistic
+		remove_ideology = ideology_ca_criollo_elite
+		remove_ideology = ideology_ca_soberania_aristocratica
+		remove_ideology = ideology_ca_isolationist_expansionism
+		remove_ideology = ideology_ca_caudillismo_jingoist
+		remove_ideology = ideology_law_regionalist_militia
+		remove_ideology = ideology_ca_criollo_stratocratic
+		remove_ideology = ideology_ca_secularist
+		remove_ideology = ideology_ca_constitutionalist
+		remove_ideology = ideology_ca_criollo_liberal
+		remove_ideology = ideology_ca_masonic_liberal
+		remove_ideology = ideology_ca_moralist
+		remove_ideology = ideology_ca_papal_moralist
+		remove_ideology = ideology_ca_artesanado
+		remove_ideology = ideology_ca_mutualism
+		remove_ideology = ideology_ca_liberal
+		remove_ideology = ideology_ca_agroexportadores
+		remove_ideology = ideology_ca_coffee_liberal
+		remove_ideology = ideology_ca_creole_caribbean
+		remove_ideology = ideology_ca_guilds
+		remove_ideology = ideology_ca_communalist
+		remove_ideology = ideology_ca_comunal_milicia
+		remove_ideology = ideology_ca_indigenous_communalism
+		remove_ideology = ideology_ca_colonialist
+		remove_ideology = ideology_ca_enclavist
+		remove_ideology = ideology_ca_radical_enclavist
+		remove_ideology = ideology_ca_enclavist_pick
+	}
+	ig:ig_petty_bourgeoisie ?= {
+		remove_ideology = ideology_patriotic
+		remove_ideology = ideology_protectionist
+		remove_ideology = ideology_isolationist
+		remove_ideology = ideology_central_american_federal
+		remove_ideology = ideology_ca_servile
+		remove_ideology = ideology_central_american_reactionary_2
+		remove_ideology = ideology_ca_pact_confederalist
+		remove_ideology = ideology_ca_autocratic_autonomist
+		remove_ideology = ideology_ca_separatist
+		remove_ideology = ideology_central_american_reactionary
+		remove_ideology = ideology_ca_criollo_paternalistic
+		remove_ideology = ideology_ca_criollo_elite
+		remove_ideology = ideology_ca_soberania_aristocratica
+		remove_ideology = ideology_ca_isolationist_expansionism
+		remove_ideology = ideology_ca_caudillismo_jingoist
+		remove_ideology = ideology_law_regionalist_militia
+		remove_ideology = ideology_ca_criollo_stratocratic
+		remove_ideology = ideology_ca_secularist
+		remove_ideology = ideology_ca_constitutionalist
+		remove_ideology = ideology_ca_criollo_liberal
+		remove_ideology = ideology_ca_masonic_liberal
+		remove_ideology = ideology_ca_moralist
+		remove_ideology = ideology_ca_papal_moralist
+		remove_ideology = ideology_ca_artesanado
+		remove_ideology = ideology_ca_mutualism
+		remove_ideology = ideology_ca_liberal
+		remove_ideology = ideology_ca_agroexportadores
+		remove_ideology = ideology_ca_coffee_liberal
+		remove_ideology = ideology_ca_creole_caribbean
+		remove_ideology = ideology_ca_guilds
+		remove_ideology = ideology_ca_communalist
+		remove_ideology = ideology_ca_comunal_milicia
+		remove_ideology = ideology_ca_indigenous_communalism
+		remove_ideology = ideology_ca_colonialist
+		remove_ideology = ideology_ca_enclavist
+		remove_ideology = ideology_ca_radical_enclavist
+		remove_ideology = ideology_ca_enclavist_pick
+	}
+	ig:ig_rural_folk ?= {
+		remove_ideology = ideology_isolationist
+		remove_ideology = ideology_agrarian
+		remove_ideology = ideology_particularist
+		remove_ideology = ideology_pious
+		remove_ideology = ideology_central_american_federal
+		remove_ideology = ideology_ca_servile
+		remove_ideology = ideology_central_american_reactionary_2
+		remove_ideology = ideology_ca_pact_confederalist
+		remove_ideology = ideology_ca_autocratic_autonomist
+		remove_ideology = ideology_ca_separatist
+		remove_ideology = ideology_central_american_reactionary
+		remove_ideology = ideology_ca_criollo_paternalistic
+		remove_ideology = ideology_ca_criollo_elite
+		remove_ideology = ideology_ca_soberania_aristocratica
+		remove_ideology = ideology_ca_isolationist_expansionism
+		remove_ideology = ideology_ca_caudillismo_jingoist
+		remove_ideology = ideology_law_regionalist_militia
+		remove_ideology = ideology_ca_criollo_stratocratic
+		remove_ideology = ideology_ca_secularist
+		remove_ideology = ideology_ca_constitutionalist
+		remove_ideology = ideology_ca_criollo_liberal
+		remove_ideology = ideology_ca_masonic_liberal
+		remove_ideology = ideology_ca_moralist
+		remove_ideology = ideology_ca_papal_moralist
+		remove_ideology = ideology_ca_artesanado
+		remove_ideology = ideology_ca_mutualism
+		remove_ideology = ideology_ca_liberal
+		remove_ideology = ideology_ca_agroexportadores
+		remove_ideology = ideology_ca_coffee_liberal
+		remove_ideology = ideology_ca_creole_caribbean
+		remove_ideology = ideology_ca_guilds
+		remove_ideology = ideology_ca_communalist
+		remove_ideology = ideology_ca_comunal_milicia
+		remove_ideology = ideology_ca_indigenous_communalism
+		remove_ideology = ideology_ca_colonialist
+		remove_ideology = ideology_ca_enclavist
+		remove_ideology = ideology_ca_radical_enclavist
+		remove_ideology = ideology_ca_enclavist_pick
+	}
+	ig:ig_trade_unions ?= {
+		remove_ideology = ideology_populist
+		remove_ideology = ideology_central_american_federal
+		remove_ideology = ideology_ca_servile
+		remove_ideology = ideology_central_american_reactionary_2
+		remove_ideology = ideology_ca_pact_confederalist
+		remove_ideology = ideology_ca_autocratic_autonomist
+		remove_ideology = ideology_ca_separatist
+		remove_ideology = ideology_central_american_reactionary
+		remove_ideology = ideology_ca_criollo_paternalistic
+		remove_ideology = ideology_ca_criollo_elite
+		remove_ideology = ideology_ca_soberania_aristocratica
+		remove_ideology = ideology_ca_isolationist_expansionism
+		remove_ideology = ideology_ca_caudillismo_jingoist
+		remove_ideology = ideology_law_regionalist_militia
+		remove_ideology = ideology_ca_criollo_stratocratic
+		remove_ideology = ideology_ca_secularist
+		remove_ideology = ideology_ca_constitutionalist
+		remove_ideology = ideology_ca_criollo_liberal
+		remove_ideology = ideology_ca_masonic_liberal
+		remove_ideology = ideology_ca_moralist
+		remove_ideology = ideology_ca_papal_moralist
+		remove_ideology = ideology_ca_artesanado
+		remove_ideology = ideology_ca_mutualism
+		remove_ideology = ideology_ca_liberal
+		remove_ideology = ideology_ca_agroexportadores
+		remove_ideology = ideology_ca_coffee_liberal
+		remove_ideology = ideology_ca_creole_caribbean
+		remove_ideology = ideology_ca_guilds
+		remove_ideology = ideology_ca_communalist
+		remove_ideology = ideology_ca_comunal_milicia
+		remove_ideology = ideology_ca_indigenous_communalism
+		remove_ideology = ideology_ca_colonialist
+		remove_ideology = ideology_ca_enclavist
+		remove_ideology = ideology_ca_radical_enclavist
+		remove_ideology = ideology_ca_enclavist_pick
+	}
+}
+
+# Escenario: federal (CAFM_IDEOLOGIES_RESTRUCTURE.md, seccion 4). Scope: pais.
+ca_ig_config_federal = {
+	ca_ig_strip_all = yes
+	ig:ig_armed_forces ?= {
+		add_ideology = ideology_ca_caudillismo_jingoist
+		add_ideology = ideology_central_american_federal
+	}
+	ig:ig_devout ?= {
+		add_ideology = ideology_ca_moralist
+		add_ideology = ideology_pious
+		add_ideology = ideology_patriarchal
+		add_ideology = ideology_central_american_reactionary
+	}
+	ig:ig_industrialists ?= {
+		add_ideology = ideology_ca_liberal
+		add_ideology = ideology_ca_agroexportadores
+	}
+	ig:ig_intelligentsia ?= {
+		add_ideology = ideology_central_american_federal
+		add_ideology = ideology_ca_secularist
+		add_ideology = ideology_ca_constitutionalist
+	}
+	ig:ig_landowners ?= {
+		add_ideology = ideology_central_american_reactionary_2
+		add_ideology = ideology_ca_criollo_paternalistic
+		add_ideology = ideology_ca_criollo_stratocratic
+	}
+	ig:ig_petty_bourgeoisie ?= {
+		add_ideology = ideology_central_american_federal
+		add_ideology = ideology_ca_artesanado
+	}
+	ig:ig_rural_folk ?= {
+		add_ideology = ideology_ca_guilds
+		add_ideology = ideology_ca_communalist
+	}
+	set_variable = { name = ca_ig_scenario value = 1 }
+}
+
+# Escenario: centralist (CAFM_IDEOLOGIES_RESTRUCTURE.md, seccion 4). Scope: pais.
+ca_ig_config_centralist = {
+	ca_ig_strip_all = yes
+	ig:ig_armed_forces ?= {
+		add_ideology = ideology_ca_caudillismo_jingoist
+		add_ideology = ideology_central_american_reactionary_2
+	}
+	ig:ig_devout ?= {
+		add_ideology = ideology_ca_moralist
+		add_ideology = ideology_pious
+		add_ideology = ideology_patriarchal
+	}
+	ig:ig_industrialists ?= {
+		add_ideology = ideology_ca_liberal
+		add_ideology = ideology_ca_agroexportadores
+	}
+	ig:ig_intelligentsia ?= {
+		add_ideology = ideology_central_american_federal
+		add_ideology = ideology_ca_secularist
+		add_ideology = ideology_ca_constitutionalist
+	}
+	ig:ig_landowners ?= {
+		add_ideology = ideology_central_american_reactionary_2
+		add_ideology = ideology_ca_criollo_paternalistic
+		add_ideology = ideology_ca_criollo_stratocratic
+	}
+	ig:ig_petty_bourgeoisie ?= {
+		add_ideology = ideology_central_american_federal
+		add_ideology = ideology_ca_artesanado
+	}
+	ig:ig_rural_folk ?= {
+		add_ideology = ideology_ca_guilds
+		add_ideology = ideology_ca_communalist
+	}
+	set_variable = { name = ca_ig_scenario value = 2 }
+}
+
+# Escenario: member (CAFM_IDEOLOGIES_RESTRUCTURE.md, seccion 4). Scope: pais.
+ca_ig_config_member = {
+	ca_ig_strip_all = yes
+	ig:ig_armed_forces ?= {
+		add_ideology = ideology_law_regionalist_militia
+	}
+	ig:ig_devout ?= {
+		add_ideology = ideology_ca_moralist
+		add_ideology = ideology_pious
+		add_ideology = ideology_patriarchal
+	}
+	ig:ig_industrialists ?= {
+		add_ideology = ideology_ca_liberal
+		add_ideology = ideology_ca_agroexportadores
+	}
+	ig:ig_intelligentsia ?= {
+		add_ideology = ideology_central_american_federal
+		add_ideology = ideology_ca_secularist
+		add_ideology = ideology_ca_constitutionalist
+	}
+	ig:ig_landowners ?= {
+		add_ideology = ideology_ca_criollo_paternalistic
+		add_ideology = ideology_ca_criollo_stratocratic
+	}
+	ig:ig_petty_bourgeoisie ?= {
+		add_ideology = ideology_central_american_federal
+		add_ideology = ideology_ca_artesanado
+	}
+	ig:ig_rural_folk ?= {
+		add_ideology = ideology_ca_guilds
+		add_ideology = ideology_ca_communalist
+		add_ideology = ideology_ca_comunal_milicia
+	}
+	ig:ig_trade_unions ?= {
+		add_ideology = ideology_populist
+	}
+	ca_ig_config_variants = yes
+	set_variable = { name = ca_ig_scenario value = 3 }
+}
+
+# Escenario: independent (CAFM_IDEOLOGIES_RESTRUCTURE.md, seccion 4). Scope: pais.
+ca_ig_config_independent = {
+	ca_ig_strip_all = yes
+	ig:ig_armed_forces ?= {
+		add_ideology = ideology_law_regionalist_militia
+		add_ideology = ideology_ca_caudillismo_jingoist
+	}
+	ig:ig_devout ?= {
+		add_ideology = ideology_ca_moralist
+		add_ideology = ideology_pious
+		add_ideology = ideology_patriarchal
+	}
+	ig:ig_industrialists ?= {
+		add_ideology = ideology_ca_agroexportadores
+	}
+	ig:ig_intelligentsia ?= {
+		add_ideology = ideology_ca_constitutionalist
+		add_ideology = ideology_ca_secularist
+		add_ideology = ideology_central_american_federal
+	}
+	ig:ig_landowners ?= {
+		add_ideology = ideology_ca_criollo_paternalistic
+		add_ideology = ideology_ca_criollo_stratocratic
+		add_ideology = ideology_ca_soberania_aristocratica
+	}
+	ig:ig_petty_bourgeoisie ?= {
+		add_ideology = ideology_ca_artesanado
+		add_ideology = ideology_central_american_federal
+	}
+	ig:ig_rural_folk ?= {
+		add_ideology = ideology_ca_guilds
+		add_ideology = ideology_ca_communalist
+	}
+	ig:ig_trade_unions ?= {
+		add_ideology = ideology_populist
+	}
+	ca_ig_config_variants = yes
+	set_variable = { name = ca_ig_scenario value = 4 }
+}
+
+# Cambia el eje de un grupo. Uso: ca_ig_axis_set = { IG = ig_intelligentsia AXIS = ca_pact_confederalist }
+ca_ig_axis_set = {
+	ig:$IG$ ?= {
+		remove_ideology = ideology_central_american_federal
+		remove_ideology = ideology_ca_servile
+		remove_ideology = ideology_ca_pact_confederalist
+		remove_ideology = ideology_ca_separatist
+		add_ideology = ideology_$AXIS$
+	}
+}
+
+# Sustituye una ideologia por otra en un grupo. Uso: ca_ig_swap = { IG = ig_devout FROM = ca_moralist TO = ca_papal_moralist }
+ca_ig_swap = {
+	ig:$IG$ ?= {
+		if = {
+			limit = { has_ideology = ideology:ideology_$FROM$ }
+			remove_ideology = ideology_$FROM$
+			add_ideology = ideology_$TO$
+		}
+	}
+}
+
+# Variantes por pais (seccion 4.5) y eje del comercio (decision 3). Scope: pais.
+ca_ig_config_variants = {
+	if = {
+		limit = { c:GUA ?= this }
+		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_servile }
+		ca_ig_swap = { IG = ig_landowners FROM = ca_criollo_paternalistic TO = ca_criollo_elite }
+		ca_ig_swap = { IG = ig_rural_folk FROM = ca_communalist TO = ca_indigenous_communalism }
+	}
+	else_if = {
+		limit = { OR = { c:ELS ?= this c:ALT ?= this } }
+		ca_ig_axis_set = { IG = ig_industrialists AXIS = central_american_federal }
+		if = {
+			limit = { c:ALT ?= this }
+			ca_ig_swap = { IG = ig_rural_folk FROM = ca_communalist TO = ca_indigenous_communalism }
+		}
+	}
+	else_if = {
+		limit = { c:HON ?= this }
+		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_pact_confederalist }
+		ig:ig_armed_forces ?= { add_ideology = ideology_ca_autocratic_autonomist }
+	}
+	else_if = {
+		limit = { c:NIC ?= this }
+		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_pact_confederalist }
+		ca_ig_swap = { IG = ig_intelligentsia FROM = ca_secularist TO = ca_criollo_liberal }
+	}
+	else_if = {
+		limit = { c:COS ?= this }
+		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_separatist }
+		if = {
+			limit = { game_date >= 1840.1.1 }
+			ca_ig_swap = { IG = ig_industrialists FROM = ca_agroexportadores TO = ca_coffee_liberal }
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# F. Grupo dividido: el lider tiene un eje y el grupo, otro (seccion 5). Scope: grupo de interes.
+# ---------------------------------------------------------------------------
+ca_ig_division_check = {
+	if = {
+		limit = { ca_ig_is_divided = yes }
+		if = {
+			limit = { NOT = { has_modifier = ca_ig_divided } }
+			add_modifier = { name = ca_ig_divided }
+			set_variable = { name = ca_divided_years value = 0 }
+		}
+		else = {
+			change_variable = { name = ca_divided_years add = 1 }
+			random = {
+				chance = {
+					value = 15
+					add = { value = var:ca_divided_years multiply = 10 }
+				}
+				save_scope_as = ca_divided_ig
+				owner = { trigger_event = { id = ca_ideology_events.2 days = 1 } }
+			}
+		}
+	}
+	else_if = {
+		limit = { has_modifier = ca_ig_divided }
+		remove_modifier = ca_ig_divided
+		remove_variable = ca_divided_years
+	}
+}
+
+# ---------------------------------------------------------------------------
+# G. Mecanicas dinamicas (seccion 6), una vez al ano. Scope: pais con ca_organization_apro.
+# ---------------------------------------------------------------------------
+ca_ideology_yearly = {
+	if = {
+		limit = { has_variable = ca_organization_apro }
+		# F. grupo dividido
+		every_interest_group = {
+			limit = { exists = leader }
+			ca_ig_division_check = yes
+		}
+		# 1. El % de central_american decide el eje (estado independiente; umbrales provisionales 30 % y 15 %)
+		if = {
+			limit = {
+				is_subject = no
+				NOT = { c:UCA ?= this }
+			}
+			if = {
+				limit = { "culture_percent_country(cu:central_american)" >= 0.3 }
+				ca_ig_axis_set = { IG = ig_intelligentsia AXIS = central_american_federal }
+				ca_ig_axis_set = { IG = ig_petty_bourgeoisie AXIS = central_american_federal }
+			}
+			else_if = {
+				limit = { "culture_percent_country(cu:central_american)" >= 0.15 }
+				ca_ig_axis_set = { IG = ig_intelligentsia AXIS = ca_pact_confederalist }
+				ca_ig_axis_set = { IG = ig_petty_bourgeoisie AXIS = ca_pact_confederalist }
+			}
+			else = {
+				ca_ig_axis_set = { IG = ig_intelligentsia AXIS = ca_separatist }
+				ca_ig_axis_set = { IG = ig_petty_bourgeoisie AXIS = ca_separatist }
+			}
+		}
+		# 2. El deseo de libertad mueve a los estados miembro (tramos 33 / 66)
+		if = {
+			limit = {
+				exists = c:UCA
+				is_subject_of = c:UCA
+			}
+			if = {
+				limit = { liberty_desire < 33 }
+				ca_ig_axis_set = { IG = ig_petty_bourgeoisie AXIS = central_american_federal }
+			}
+			else_if = {
+				limit = { liberty_desire < 66 }
+				ca_ig_axis_set = { IG = ig_petty_bourgeoisie AXIS = ca_pact_confederalist }
+			}
+			else = {
+				ca_ig_axis_set = { IG = ig_petty_bourgeoisie AXIS = ca_separatist }
+			}
+		}
+		# 3. Choques Iglesia-Estado: la Iglesia gana la Reaccion catolica; el Concordato la cambia por el Ultramontanismo
+		if = {
+			limit = {
+				OR = {
+					has_law_or_variant = law_type:law_total_separation
+					has_law = law_type:law_ca_escuela_laica
+					has_variable = ca_church_clash
+				}
+				NOT = { has_variable = ca_concordat_signed }
+			}
+			ig:ig_devout ?= {
+				if = {
+					limit = { NOT = { has_ideology = ideology:ideology_central_american_reactionary } }
+					add_ideology = ideology_central_american_reactionary
+				}
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					has_modifier = ca_concordat
+					has_variable = ca_concordat_signed
+					AND = {
+						c:GUA ?= this
+						game_date >= 1852.1.1
+					}
+				}
+				NOT = { has_variable = ca_ultramontane_done }
+			}
+			set_variable = ca_ultramontane_done
+			set_variable = ca_concordat_signed
+			ig:ig_devout ?= { remove_ideology = ideology_central_american_reactionary }
+			ca_ig_swap = { IG = ig_devout FROM = ca_moralist TO = ca_papal_moralist }
+		}
+		# 4. El colera de 1837 con reformas liberales: los campesinos ganan la Reaccion catolica
+		if = {
+			limit = {
+				has_global_variable = ca_carrera_revolt_seed
+				OR = { c:UCA ?= this c:GUA ?= this c:ALT ?= this }
+				OR = {
+					has_variable = ca_livingston_applied
+					ig:ig_intelligentsia ?= { is_in_government = yes }
+				}
+				NOT = { has_variable = ca_cholera_reaction_done }
+			}
+			set_variable = { name = ca_cholera_reaction_done days = 3650 }
+			ig:ig_rural_folk ?= { add_ideology = ideology_central_american_reactionary }
+		}
+		else_if = {
+			limit = {
+				has_variable = ca_cholera_reaction_done
+				ig:ig_intelligentsia ?= { is_in_government = no }
+				NOT = { has_variable = ca_cholera_reaction_kept }
+				game_date >= 1842.1.1
+			}
+			set_variable = ca_cholera_reaction_kept
+			ig:ig_rural_folk ?= { remove_ideology = ideology_central_american_reactionary }
+		}
+		# 5. La economia cambia a las elites
+		if = {
+			limit = {
+				OR = {
+					has_variable = ca_coffee_boom_consolidated
+					has_variable = ca_agro_export_miracle_completed
+				}
+			}
+			ca_ig_swap = { IG = ig_industrialists FROM = ca_agroexportadores TO = ca_coffee_liberal }
+		}
+		# 6. Rivalidad de ciudades: la elite de la capital marca el eje (lo pone .140)
+		if = {
+			limit = { has_variable = ca_capital_liberal_city }
+			ca_ig_axis_set = { IG = ig_industrialists AXIS = central_american_federal }
+		}
+		else_if = {
+			limit = { has_variable = ca_capital_conservative_city }
+			ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_servile }
+		}
+		# 7. Vacio de poder tras el caudillo
+		if = {
+			limit = {
+				has_variable = ca_ruler_was_caudillo
+				NOT = { ruler ?= { ca_character_is_caudillo = yes } }
+			}
+			remove_variable = ca_ruler_was_caudillo
+			random_list = {
+				50 = {
+					ig:ig_armed_forces ?= {
+						remove_ideology = ideology_law_regionalist_militia
+						add_ideology = ideology_ca_caudillismo_jingoist
+					}
+				}
+				50 = {
+					ig:ig_armed_forces ?= {
+						remove_ideology = ideology_ca_caudillismo_jingoist
+						add_ideology = ideology_law_regionalist_militia
+					}
+				}
+			}
+		}
+		if = {
+			limit = { ruler ?= { ca_character_is_caudillo = yes } }
+			set_variable = ca_ruler_was_caudillo
+		}
+		# 8. Constituciones (evento)
+		trigger_event = { id = ca_ideology_events.1 }
+		# 9. Habituacion: 20 anos bajo la misma ley de estructura
+		ca_habituation_tick = yes
+		# G7: la republica
+		ca_republic_yearly = yes
+	}
+}
+
+# 9. Habituacion. Scope: pais.
+ca_habituation_tick = {
+	if = {
+		limit = {
+			OR = {
+				has_law = law_type:law_ca_sovereign_state
+				has_law = law_type:law_ca_autonomous_state
+			}
+		}
+		if = {
+			limit = { NOT = { has_variable = ca_structure_years } }
+			set_variable = { name = ca_structure_years value = 0 }
+		}
+		change_variable = { name = ca_structure_years add = 1 }
+		if = {
+			limit = {
+				var:ca_structure_years >= 20
+				NOT = { has_modifier = ca_habituation }
+			}
+			add_modifier = { name = ca_habituation }
+		}
+	}
+	else = {
+		remove_variable = ca_structure_years
+		if = {
+			limit = { has_modifier = ca_habituation }
+			remove_modifier = ca_habituation
+		}
+	}
+}
+
+# Mecanica 8: la constitucion es una enmienda de la republica presidencial (sustituye a la anterior). Scope: pais.
+ca_constitution_adopt = {
+	set_variable = { name = ca_constitution_cd days = 5475 }
+	if = { limit = { game_date >= 1838.1.1 game_date < 1839.1.1 } set_variable = ca_constitution_1838 }
+	if = { limit = { game_date >= 1839.1.1 game_date < 1840.1.1 } set_variable = ca_constitution_1839 }
+	if = { limit = { game_date >= 1841.1.1 game_date < 1842.1.1 } set_variable = ca_constitution_1841 }
+	if = { limit = { game_date >= 1844.1.1 game_date < 1845.1.1 } set_variable = ca_constitution_1844 }
+	if = { limit = { game_date >= 1848.1.1 game_date < 1849.1.1 } set_variable = ca_constitution_1848 }
+	if = { limit = { game_date >= 1851.1.1 game_date < 1852.1.1 } set_variable = ca_constitution_1851 }
+	if = {
+		limit = {
+			OR = {
+				has_law = law_type:law_presidential_republic
+				has_law = law_type:law_parliamentary_republic
+			}
+		}
+		active_law:lawgroup_governance_principles ?= {
+			add_amendment = {
+				type = amendment_ca_new_constitution
+				sponsor = root.ig:ig_intelligentsia
+			}
+		}
+	}
+	else = {
+		add_modifier = { name = ca_new_constitution_mod months = 120 }
+	}
+}
+
+# F, conversion: el grupo adopta el eje de su lider. Scope: grupo de interes.
+ca_ig_convert_to_leader_axis = {
+	if = {
+		limit = { leader = { ca_char_axis_federal = yes } }
+		owner = { ca_ig_axis_set_scope = { AXIS = central_american_federal } }
+	}
+	else_if = {
+		limit = { leader = { ca_char_axis_unitary = yes } }
+		owner = { ca_ig_axis_set_scope = { AXIS = ca_servile } }
+	}
+	else_if = {
+		limit = { leader = { ca_char_axis_confederal = yes } }
+		owner = { ca_ig_axis_set_scope = { AXIS = ca_pact_confederalist } }
+	}
+	else_if = {
+		limit = { leader = { ca_char_axis_sovereign = yes } }
+		owner = { ca_ig_axis_set_scope = { AXIS = ca_separatist } }
+	}
+}
+# Igual que ca_ig_axis_set, sobre scope:ca_divided_ig. Scope: pais.
+ca_ig_axis_set_scope = {
+	scope:ca_divided_ig = {
+		remove_ideology = ideology_central_american_federal
+		remove_ideology = ideology_ca_servile
+		remove_ideology = ideology_central_american_reactionary_2
+		remove_ideology = ideology_ca_pact_confederalist
+		remove_ideology = ideology_ca_autocratic_autonomist
+		remove_ideology = ideology_ca_separatist
+		add_ideology = ideology_$AXIS$
+	}
+}
+
+# Mecanica 6 (.140): Leon y San Jose son liberales; Granada, Comayagua y Cartago, conservadoras.
+# A = eje si el pais es Nicaragua o Costa Rica; B = eje si es Honduras. Scope: pais.
+ca_capital_city_axis = {
+	remove_variable = ca_capital_liberal_city
+	remove_variable = ca_capital_conservative_city
+	if = {
+		limit = { OR = { c:NIC ?= this c:COS ?= this } }
+		set_variable = ca_capital_$A$_city
+	}
+	else = {
+		set_variable = ca_capital_$B$_city
+	}
+}
+
+# G7: anos de independencia (no subdito, no socio confederado) y declaracion de la republica. Scope: pais.
+ca_republic_yearly = {
+	if = {
+		limit = {
+			ca_is_ca_national_country = yes
+			is_subject = no
+			NOT = { c:UCA ?= this }
+			NOT = { has_variable = ca_republic_declared }
+		}
+		if = {
+			limit = { NOT = { has_variable = ca_independent_years } }
+			set_variable = { name = ca_independent_years value = 0 }
+		}
+		change_variable = { name = ca_independent_years add = 1 }
+		trigger_event = { id = ca_ideology_events.3 }
+	}
+}

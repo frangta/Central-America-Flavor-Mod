@@ -1,0 +1,163 @@
+﻿############################################################################
+# CAFM - F14 - Regional: Bocas del Toro, el Istmo, Talamanca y el Soconusco
+############################################################################
+
+# ---------------------------------------------------------------------------
+# F14 - Bocas del Toro (grupos 2 y 3) y el Istmo (grupo 17)
+# ---------------------------------------------------------------------------
+# .10 -> .11 a los 6 meses: UCA, Gran Bretana, Nueva Granada y, con un 20 %, EE. UU. Scope: UCA.
+ca_bocas_fate_send = {
+	trigger_event = { id = ca_central_america.11 days = 180 }
+	c:GBR ?= { trigger_event = { id = ca_central_america.11 days = 170 } }
+	c:CLM ?= { trigger_event = { id = ca_central_america.11 days = 175 } }
+	random = {
+		chance = 20
+		c:USA ?= { trigger_event = { id = ca_central_america.11 days = 178 } }
+	}
+}
+
+# Nace PNM: pide reconocimiento a la UCA o, si no existe, a Costa Rica con Bocas. Scope: cualquiera.
+ca_isthmus_ask_recognition = {
+	c:PNM ?= { set_variable = { name = ca_pnm_young days = 1825 } }
+	if = {
+		limit = { exists = c:UCA }
+		c:UCA = { trigger_event = { id = ca_central_america.34 days = 15 } }
+	}
+	else_if = {
+		limit = { exists = c:COS }
+		c:COS = { trigger_event = { id = ca_central_america.34 days = 15 } }
+	}
+}
+
+# Regreso del Istmo a Nueva Granada (.4 de Panama o .75 b). Scope: cualquiera.
+ca_isthmus_return = {
+	if = {
+		limit = {
+			exists = c:PNM
+			exists = c:CLM
+			c:PNM = { is_subject = no }
+		}
+		set_global_variable = ca_pnm_returned
+		c:CLM = { annex = c:PNM }
+		c:UCA ?= { trigger_event = { id = ca_central_america.60 days = 5 } }
+		if = {
+			limit = { NOT = { exists = c:UCA } }
+			c:COS ?= { trigger_event = { id = ca_central_america.60 days = 5 } }
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# D1 - La encrucijada del Istmo
+# ---------------------------------------------------------------------------
+ca_istmo_change = { ca_var_bar_change = { VAR = ca_istmo_autonomy VALUE = $VALUE$ } }
+
+# Pulso mensual. A 100: crisis de independencia (Nueva Granada .76; PNM ya es independiente).
+ca_istmo_monthly = {
+	ca_istmo_change = { VALUE = ca_istmo_monthly_change }
+	if = {
+		limit = {
+			var:ca_istmo_autonomy >= 100
+			NOT = { c:PNM ?= this }
+			NOT = { has_variable = ca_istmo_crisis }
+			NOT = { has_global_variable = ca_pnm_born }
+		}
+		set_variable = ca_istmo_crisis
+	}
+}
+
+# Pulso anual: el dueno de la capital del Istmo recibe el diario.
+ca_istmo_yearly = {
+	if = {
+		limit = {
+			ca_isthmus_holder = yes
+			NOT = { has_journal_entry = je_ca_historic_situation_in_panama }
+			NOT = { has_variable = ca_istmo_federal_state }
+			NOT = { has_variable = ca_istmo_absorbed }
+		}
+		add_journal_entry = { type = je_ca_historic_situation_in_panama }
+	}
+}
+
+# ---------------------------------------------------------------------------
+# D2 - La cuestion de Talamanca. Scope: senor de RDT.
+# ---------------------------------------------------------------------------
+ca_talamanca_change = { ca_var_bar_change = { VAR = ca_talamanca_influence VALUE = $VALUE$ } }
+
+ca_talamanca_monthly = {
+	ca_talamanca_change = { VALUE = ca_talamanca_monthly_change }
+	if = {
+		limit = { has_variable = ca_talamanca_path_integrate }
+		add_treasury = -50
+	}
+	# Barra en 0: Talamanca se libera
+	if = {
+		limit = {
+			var:ca_talamanca_influence <= 0
+			c:RDT ?= { is_subject_of = prev }
+		}
+		if = {
+			limit = { c:RDT = { is_subject_type = subject_type_ca_dependency } }
+			remove_diplomatic_pact = { country = c:RDT type = ca_dependency }
+		}
+		c:RDT = { make_independent = yes }
+	}
+}
+
+ca_talamanca_complete = {
+	if = {
+		limit = { has_variable = ca_talamanca_path_integrate }
+		annex = c:RDT
+		add_modifier = { name = ca_talamanca_integrated months = 120 }
+	}
+	else_if = {
+		limit = { has_variable = ca_talamanca_path_conquer }
+		annex = c:RDT
+		add_modifier = { name = ca_talamanca_conquered months = 120 }
+		add_radicals = { value = small_radicals }
+	}
+	else = {
+		add_modifier = { name = ca_talamanca_partnership months = 240 }
+		c:RDT ?= { change_relations = { country = root value = 30 } }
+	}
+}
+
+# Pulso anual: el senor de RDT recibe el diario (la UCA en 1836; Costa Rica despues).
+ca_talamanca_yearly = {
+	if = {
+		limit = {
+			c:RDT ?= { is_subject_of = prev }
+			NOT = { has_journal_entry = je_ca_historic_situation_in_talamanca }
+		}
+		add_journal_entry = { type = je_ca_historic_situation_in_talamanca }
+	}
+}
+
+# ---------------------------------------------------------------------------
+# D3 - El Soconusco. Scope: CIP.
+# ---------------------------------------------------------------------------
+ca_soconusco_change = { ca_var_bar_change = { VAR = ca_soconusco_bar VALUE = $VALUE$ } }
+
+ca_soconusco_add_journal = {
+	c:CIP ?= {
+		if = {
+			limit = {
+				NOT = { has_journal_entry = je_ca_soconusco }
+				NOT = { has_variable = ca_soconusco_fate_decided }
+				NOT = { has_variable = ca_soconusco_result_central }
+				NOT = { has_variable = ca_soconusco_result_mexico }
+			}
+			add_journal_entry = { type = je_ca_soconusco }
+		}
+	}
+}
+
+# Pulso anual: altas de los diarios regionales. Scope: pais.
+ca_regional_yearly = {
+	ca_istmo_yearly = yes
+	ca_talamanca_yearly = yes
+	if = {
+		limit = { c:CIP ?= this }
+		ca_soconusco_add_journal = yes
+	}
+}

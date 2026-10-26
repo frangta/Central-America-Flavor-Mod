@@ -1,250 +1,49 @@
-﻿calculate_frca_support_event_progress = {
-	
-		if = {
-				limit = {
-					has_variable = gua_support_var
-					NOT = { exists = c:GUA }
-					NOT = { has_variable = je_gua_support_var }
-				}
-				change_variable = { name = frca_support add = 1 }
-			}
-		if = {
-				limit = {
-					OR = {
-						NOT = { has_variable = gua_support_var }
-						exists = c:GUA
-					}
-					has_variable = je_gua_support_var
-				}
-				change_variable = { name = frca_support add = -1 }
-			}
-		if = {
-				limit = {
-					has_variable = els_support_var
-					NOT = { exists = c:ELS }
-					NOT = { has_variable = je_els_support_var }
-				}
-				change_variable = { name = frca_support add = 1 }
-			}
-		if = {
-				limit = {
-					OR = {
-						NOT = { has_variable = els_support_var }
-						exists = c:ELS
-					}
-					has_variable = je_els_support_var
-				}
-				change_variable = { name = frca_support add = -1 }
-			}
-		if = {
-				limit = {
-					has_variable = hon_support_var
-					NOT = { exists = c:HON }
-					NOT = { has_variable = je_hon_support_var }
-				}
-				change_variable = { name = frca_support add = 1 }
-			}
-		if = {
-				limit = {
-					OR = {
-						NOT = { has_variable = hon_support_var }
-						exists = c:HON
-					}
-					has_variable = je_hon_support_var
-				}
-				change_variable = { name = frca_support add = -1 }
-			}
-		if = {
-				limit = {
-					has_variable = nic_support_var
-					NOT = { exists = c:NIC }
-					NOT = { has_variable = je_nic_support_var }
-				}
-				change_variable = { name = frca_support add = 1 }
-			}
-		if = {
-				limit = {
-					OR = {
-						NOT = { has_variable = nic_support_var }
-						exists = c:NIC
-					}
-					has_variable = je_nic_support_var
-				}
-				change_variable = { name = frca_support add = -1 }
-			}
-		if = {
-				limit = {
-					has_variable = cos_support_var
-					NOT = { exists = c:COS }
-					NOT = { has_variable = je_cos_support_var }
-				}
-				change_variable = { name = frca_support add = 1 }
-			}
-		if = {
-				limit = {
-					OR = {
-						NOT = { has_variable = cos_support_var }
-						exists = c:COS
-					}
-					has_variable = je_cos_support_var
-				}
-				change_variable = { name = frca_support add = -1 }
-			}
+﻿############################################################################
+# CAFM F3 - Efectos viejos de la barra (common/scripted_effects/ca_frca_support_effects.txt)
+# Los siguen llamando eventos que se reescriben en F5-F17. Ahora pasan por la
+# escala comun (ca_frca_bar_*, ±10/20/30/50) con el signo correcto y actuan
+# siempre sobre la UCA. Antes exigian la variable frca_support, que nadie
+# ponia, asi que nunca movian la barra.
+# Se quita calculate_frca_support_event_progress (sistema de <x>_support_var):
+# su trabajo lo hace ahora ca_frca_monthly_change.
+############################################################################
 
-
-	    if = {
-	     	limit = {
-	     		exists = c:ELS
-	     		has_variable = frca_elsalvador_peace_var
-	     	}
-	     	change_variable = { name = frca_support add = -5 }
-	     }
-	    if = {
-	     	limit = {
-	     		exists = c:HON
-	     		has_variable = frca_honduras_peace_var
-	     	}
-	     	change_variable = { name = frca_support add = -5 }
-	     }
-	    if = {
-	     	limit = {
-	     		exists = c:NIC
-	     		has_variable = frca_nicaragua_peace_var
-	     	}
-			change_variable = { name = frca_support add = -5 }
-	     }
-	    if = {
-	     	limit = {
-	     		exists = c:COS
-	     		has_variable = frca_costarica_peace_var
-	     	}
-	     	change_variable = { name = frca_support add = -5 }
-	     }
-
-
-
-}
-
-# 1. EVENTOS DE SEPARATISMO (18 al 23)
-# Impacto: Reducción moderada
+# Separatismo (.18-.23): -10
 ca_reduce_support_separatism_effect = {
-	if = {
-		limit = { has_variable = frca_support }
-		        je:je_historic_central_america_falls_apart = {
-                    add_progress = { value = -10 name = frca_support_bar } 
-                }
-	}
+	ca_frca_bar_minor_down = yes
 }
 
-# 2. DECLARACIONES DE INDEPENDENCIA (45-48, 64-78)
-# Impacto: Reducción severa
+# Declaraciones de independencia (.45-.48, .64-.78): -20 (antes sumaba +20)
 ca_reduce_support_independence_effect = {
-	if = {
-		limit = { has_variable = frca_support }
-		            je:je_historic_central_america_falls_apart = {
-                    add_progress = { value = 20 name = frca_support_bar } 
-                }
-	}
+	ca_frca_bar_moderate_down = yes
 }
 
-# 3. GUERRAS CIVILES (63, 65, 67, 69, 71, 73, 75)
-# Impacto: Reducción drástica
+# Guerras civiles (.63-.75): -30
 ca_reduce_support_civil_war_effect = {
-	if = {
-		limit = { has_variable = frca_support }
-                je:je_historic_central_america_falls_apart = {
-                    add_progress = { value = -30 name = frca_support_bar } 
-                }
-	}
+	ca_frca_bar_major_down = yes
 }
 
-# 4. INTERVENCIONES: ÉXITO (28-40)
-# Impacto: Aumento de autoridad central
+# Intervencion con exito (.35-.40): +20 (grupo 7)
 ca_increase_support_intervention_success_effect = {
-	if = {
-		limit = { has_variable = frca_support }
-        je:je_historic_central_america_falls_apart = {
-            add_progress = { value = 15 name = frca_support_bar } 
-        }
-	}
+	ca_frca_bar_moderate_up = yes
 }
 
-# 5. INTERVENCIONES: FRACASO (28-40)
-# Impacto: Pérdida de autoridad
+# Intervencion fracasada (.35-.41): -10 (antes sumaba +15)
 ca_reduce_support_intervention_fail_effect = {
-	if = {
-		limit = { has_variable = frca_support }
-		    je:je_historic_central_america_falls_apart = {
-            add_progress = { value = 15 name = frca_support_bar } 
-            }
-	}
+	ca_frca_bar_minor_down = yes
 }
-# ==========================================================
-# CAFM - Efectos de soporte federal que usaban los eventos 91-98
-# pero no estaban definidos (error.log: "Unknown effect ...").
-# Mismo formato que ca_frca_support_effects.txt
-# Uso: country_event (ROOT = UCA)
-# ==========================================================
 
-# Auge económico (evento 91.a)
+# Auge economico (.91.a): +10
 ca_increase_support_economic_boom_effect = {
-	if = {
-		limit = { has_variable = frca_support }
-		je:je_historic_central_america_falls_apart = {
-			add_progress = { value = 5 name = frca_support_bar }
-		}
-	}
+	ca_frca_bar_minor_up = yes
 }
 
-# Golpe menor al soporte federal (eventos 91.b y 98.b)
+# Golpe menor (.91.b, .98.b): -10
 ca_reduce_support_event_minor_effect = {
-	if = {
-		limit = { has_variable = frca_support }
-		je:je_historic_central_america_falls_apart = {
-			add_progress = { value = -5 name = frca_support_bar }
-		}
-	}
+	ca_frca_bar_minor_down = yes
 }
 
-# Crisis económica / deuda (evento 92.a)
+# Crisis economica o deuda (.92.a): -10
 ca_reduce_support_economic_crisis_effect = {
-	if = {
-		limit = { has_variable = frca_support }
-		je:je_historic_central_america_falls_apart = {
-			add_progress = { value = -15 name = frca_support_bar }
-		}
-	}
+	ca_frca_bar_minor_down = yes
 }
-
-## Uso: country_event
-#ca_reduce_support_separatism_effect = {
-#	if = {
-#		limit = { has_variable = frca_support }
-#		change_variable = {
-#			name = frca_support
-#			subtract = 10 # Balanceable desde un solo archivo
-#		}
-#	}
-#}
-#
-## Uso: country_event
-#ca_reduce_support_drastic_effect = {
-#	if = {
-#		limit = { has_variable = frca_support }
-#		change_variable = {
-#			name = frca_support
-#			subtract = 25
-#		}
-#	}
-#}
-#
-## Uso: country_event
-#ca_increase_support_intervention_effect = {
-#	if = {
-#		limit = { has_variable = frca_support }
-#		change_variable = {
-#			name = frca_support
-#			add = 15
-#		}
-#	}
-#}

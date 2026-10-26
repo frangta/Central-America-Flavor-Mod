@@ -1,0 +1,292 @@
+﻿# CAFM F18 (D): grupos de interes de cada ideologia de personaje (scope: IG).
+# Generado; sustituye a los 5 que habia en zz_ca_scripted_triggers.txt.
+
+ideology_ca_federalist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_petty_bourgeoisie
+	}
+}
+
+ideology_ca_unitarian_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_devout
+		is_interest_group_type = ig_armed_forces
+	}
+}
+
+ideology_ca_leader_autocratic_autonomist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_rural_folk
+	}
+}
+
+ideology_central_america_caudillo_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_landowners
+	}
+}
+
+ideology_ca_peasant_caudillismo_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_devout
+	}
+}
+
+ideology_ca_reformer_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+	}
+}
+
+ideology_ca_agrarian_luddism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_devout
+	}
+}
+
+ideology_ca_tropical_utopian_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_industrialists
+	}
+}
+
+ideology_ca_jesuit_theocracy_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_devout
+	}
+}
+
+ideology_ca_morazanista_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_petty_bourgeoisie
+	}
+}
+
+ideology_carrillismo_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_industrialists
+	}
+}
+
+ideology_granadine_legitimism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_devout
+	}
+}
+
+ideology_isthmian_separatism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_industrialists
+		is_interest_group_type = ig_petty_bourgeoisie
+		is_interest_group_type = ig_landowners
+	}
+}
+
+ideology_mercantile_transitism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_industrialists
+		is_interest_group_type = ig_petty_bourgeoisie
+	}
+}
+
+ideology_ca_mexican_annexationist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_devout
+		is_interest_group_type = ig_industrialists
+	}
+}
+
+ideology_ca_morismo_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_industrialists
+		is_interest_group_type = ig_landowners
+	}
+}
+
+ideology_maya_autonomism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+	}
+}
+
+ideology_crucismo_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_devout
+	}
+}
+
+ideology_ca_syncretic_cult_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+	}
+}
+
+ideology_ca_moravian_pietism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_devout
+		is_interest_group_type = ig_rural_folk
+	}
+}
+
+ideology_ca_miskito_hegemony_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_armed_forces
+	}
+}
+
+ideology_slaver_filibusterism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_armed_forces
+	}
+}
+
+ideology_ca_filibuster_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_industrialists
+	}
+}
+
+ideology_coffee_liberalism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_industrialists
+		is_interest_group_type = ig_landowners
+	}
+}
+
+ideology_olympus_liberalism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_industrialists
+	}
+}
+
+ideology_ca_barrismo_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_armed_forces
+		is_interest_group_type = ig_intelligentsia
+	}
+}
+
+ideology_ca_soto_rosa_reformism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_industrialists
+	}
+}
+
+ideology_ca_cientifico_technocracy_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_industrialists
+	}
+}
+
+ideology_ca_late_unionist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_petty_bourgeoisie
+	}
+}
+
+ideology_ca_canal_company_rule_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_industrialists
+	}
+}
+
+ideology_anti_imperialist_sovereigntism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_petty_bourgeoisie
+		is_interest_group_type = ig_rural_folk
+	}
+}
+
+ideology_ca_banana_socialism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_trade_unions
+		is_interest_group_type = ig_rural_folk
+	}
+}
+
+ideology_cuscatleco_nationalism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_petty_bourgeoisie
+		is_interest_group_type = ig_armed_forces
+	}
+}
+
+ideology_chacara_social_democracy_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_trade_unions
+		is_interest_group_type = ig_intelligentsia
+	}
+}
+
+ideology_ca_liberal_monarchist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_industrialists
+		is_interest_group_type = ig_armed_forces
+	}
+}
+
+ideology_ca_imperial_monarchist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_devout
+		is_interest_group_type = ig_armed_forces
+	}
+}
+
+ideology_ca_tropical_bonapartism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_armed_forces
+	}
+}
+
+ideology_ca_corsair_republic_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_industrialists
+		is_interest_group_type = ig_armed_forces
+	}
+}
+
+ideology_ca_bolivarian_integration_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_armed_forces
+	}
+}
+
+ideology_ca_neo_mayan_restoration_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+	}
+}
+
+ideology_ca_hermit_isolationism_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_landowners
+		is_interest_group_type = ig_devout
+	}
+}

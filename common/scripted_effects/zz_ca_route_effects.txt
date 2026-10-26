@@ -1,0 +1,220 @@
+﻿# ============================================================================
+# CAFM - F11 - Efectos de las rutas (common/scripted_effects/zz_ca_route_effects.txt)
+# ============================================================================
+
+# Guarda como scope:ca_weak_state un estado (State) del miembro nucleo con menor lealtad que siga en la Federacion (1 o 2).
+# Si todos son Leales, el primero de la lista. Scope: UCA.
+ca_frca_save_weakest_state = {
+	if = {
+		limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua = 1 }
+		s:STATE_GUATEMALA = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_els var:frca_loyalty_els = 1 }
+		s:STATE_SAN_SALVADOR = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon = 1 }
+		s:STATE_HONDURAS = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic = 1 }
+		s:STATE_NICARAGUA = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos = 1 }
+		s:STATE_COSTA_RICA = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua = 2 }
+		s:STATE_GUATEMALA = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_els var:frca_loyalty_els = 2 }
+		s:STATE_SAN_SALVADOR = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon = 2 }
+		s:STATE_HONDURAS = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic = 2 }
+		s:STATE_NICARAGUA = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos = 2 }
+		s:STATE_COSTA_RICA = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua >= 3 }
+		s:STATE_GUATEMALA = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_els var:frca_loyalty_els >= 3 }
+		s:STATE_SAN_SALVADOR = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon >= 3 }
+		s:STATE_HONDURAS = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic >= 3 }
+		s:STATE_NICARAGUA = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else_if = {
+		limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos >= 3 }
+		s:STATE_COSTA_RICA = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+	else = {
+		s:STATE_GUATEMALA = {
+			random_scope_state = { save_scope_as = ca_weak_state }
+		}
+	}
+}
+
+# Baja en 1 el frente de la fase IV mas alto (britanico, mexicano, conservador, caudillos). Scope: UCA.
+ca_frca_calm_worst_front = {
+	if = {
+		limit = { has_variable = frca_front_british var:frca_front_british >= 3 }
+		ca_frca_front_change = { FRONT = british VALUE = -1 }
+	}
+	else_if = {
+		limit = { has_variable = frca_front_mexican var:frca_front_mexican >= 3 }
+		ca_frca_front_change = { FRONT = mexican VALUE = -1 }
+	}
+	else_if = {
+		limit = { has_variable = frca_front_conservative var:frca_front_conservative >= 3 }
+		ca_frca_front_change = { FRONT = conservative VALUE = -1 }
+	}
+	else_if = {
+		limit = { has_variable = frca_front_caudillos var:frca_front_caudillos >= 3 }
+		ca_frca_front_change = { FRONT = caudillos VALUE = -1 }
+	}
+	else_if = {
+		limit = { has_variable = frca_front_british var:frca_front_british >= 2 }
+		ca_frca_front_change = { FRONT = british VALUE = -1 }
+	}
+	else_if = {
+		limit = { has_variable = frca_front_mexican var:frca_front_mexican >= 2 }
+		ca_frca_front_change = { FRONT = mexican VALUE = -1 }
+	}
+	else_if = {
+		limit = { has_variable = frca_front_conservative var:frca_front_conservative >= 2 }
+		ca_frca_front_change = { FRONT = conservative VALUE = -1 }
+	}
+	else_if = {
+		limit = { has_variable = frca_front_caudillos var:frca_front_caudillos >= 2 }
+		ca_frca_front_change = { FRONT = caudillos VALUE = -1 }
+	}
+	else_if = {
+		limit = { has_variable = frca_front_british var:frca_front_british >= 1 }
+		ca_frca_front_change = { FRONT = british VALUE = -1 }
+	}
+	else_if = {
+		limit = { has_variable = frca_front_mexican var:frca_front_mexican >= 1 }
+		ca_frca_front_change = { FRONT = mexican VALUE = -1 }
+	}
+	else_if = {
+		limit = { has_variable = frca_front_conservative var:frca_front_conservative >= 1 }
+		ca_frca_front_change = { FRONT = conservative VALUE = -1 }
+	}
+	else_if = {
+		limit = { has_variable = frca_front_caudillos var:frca_front_caudillos >= 1 }
+		ca_frca_front_change = { FRONT = caudillos VALUE = -1 }
+	}
+}
+
+# Enmiendas que se eligieron durante la aprobacion de una ley: se aplican cuando la ley ya esta en vigor.
+# Si la ley no se aprobo, la marca se borra. Scope: el pais (pulso del diario y pulso anual).
+ca_route_apply_pending_amendments = {
+	if = {
+		limit = {
+			has_variable = ca_amend_pending_matrimonio_civil
+			OR = { has_law = law_type:law_total_separation has_law = law_type:law_freedom_of_conscience }
+		}
+		remove_variable = ca_amend_pending_matrimonio_civil
+		active_law:lawgroup_church_and_state ?= {
+			add_amendment = {
+				type = amendment_ca_matrimonio_civil
+				sponsor = root.ig:ig_intelligentsia
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_variable = ca_amend_pending_matrimonio_civil
+			NOT = { is_enacting_law = law_type:law_total_separation }
+		}
+		remove_variable = ca_amend_pending_matrimonio_civil
+	}
+	if = {
+		limit = {
+			has_variable = ca_amend_pending_concordato
+			OR = { has_law = law_type:law_state_religion has_law = law_type:law_theocracy }
+		}
+		remove_variable = ca_amend_pending_concordato
+		active_law:lawgroup_church_and_state ?= {
+			add_amendment = {
+				type = amendment_ca_concordato
+				sponsor = root.ig:ig_devout
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_variable = ca_amend_pending_concordato
+			NOT = { is_enacting_law = law_type:law_state_religion }
+		}
+		remove_variable = ca_amend_pending_concordato
+	}
+	if = {
+		limit = {
+			has_variable = ca_amend_pending_patronato
+			OR = { has_law = law_type:law_state_religion has_law = law_type:law_freedom_of_conscience }
+		}
+		remove_variable = ca_amend_pending_patronato
+		active_law:lawgroup_church_and_state ?= {
+			add_amendment = {
+				type = amendment_ca_patronato
+				sponsor = root.ig:ig_armed_forces
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_variable = ca_amend_pending_patronato
+			NOT = { is_enacting_law = law_type:law_state_religion }
+		}
+		remove_variable = ca_amend_pending_patronato
+	}
+}

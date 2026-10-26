@@ -1,0 +1,30 @@
+﻿# ============================================================================
+# CAFM - F6 - Modificadores de la secesion (common/static_modifiers/ca_secession_modifiers.txt)
+# ============================================================================
+
+# Estado (V1 b "Negociar concesiones")
+ca_autonomy_granted = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_radicals_from_political_movements_mult = -0.25
+	state_tax_collection_mult = -0.1
+}
+
+# Pais del estado (.64-.74 c "Negociar")
+ca_secession_concessions = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 5
+	country_authority_add = -25
+}
+
+# Pais del estado (.25, estado a "Consolidar la separacion")
+ca_secession_consolidated = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 10
+}
+
+# Pais del estado (Beats b "Mantenerlo como estado miembro")
+ca_federal_loyalty_restored = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 10
+	state_radicals_from_political_movements_mult = -0.1
+}

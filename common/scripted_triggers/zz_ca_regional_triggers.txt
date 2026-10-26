@@ -1,0 +1,10 @@
+﻿# CAFM - F14 - Regional
+
+# D1: dueno de la capital del Istmo (el estado grande de STATE_PANAMA, no Bocas sola). Scope: pais.
+ca_isthmus_holder = {
+	NOT = { is_country_type = decentralized }
+	any_scope_state = {
+		state_region = s:STATE_PANAMA
+		state_population >= 40000
+	}
+}

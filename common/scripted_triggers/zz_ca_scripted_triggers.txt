@@ -1,7 +1,6 @@
 ﻿state_is_in_ca_central_america = {
-	custom_description = {
+	custom_tooltip = {
 		text = state_is_in_ca_central_america_desc
-		subject = this
 
 		OR = {
 			region = sr:region_central_america
@@ -9,19 +8,15 @@
 	}
 }
 state_is_in_ca_caribbean = {
-	custom_description = {
+	custom_tooltip = {
 		text = state_is_in_ca_caribbean_desc
-		subject = this
 
-		OR = {
-			region = sr:region_caribbean
-		}
+		always = no # CAFM F22: sr:region_caribbean no existe en vanilla
 	}
 }
 only_latin_centralamericans_cultures = {
-	custom_description = {
+	custom_tooltip = {
 		text = state_is_in_ca_latin_centralamericans_cultures_desc
-		#subject = this
         OR = {
             country_has_primary_culture = cu:central_american
             country_has_primary_culture = cu:costa_rican
@@ -55,9 +50,8 @@ only_naive_centralamericans_cultures = {
 	}
 }
 only_centralamericans_cultures = {
-	custom_description = {
+	custom_tooltip = {
 		text = state_is_centralamericans_cultures_desc
-		#subject = this
         OR = {
 		
 		    country_has_primary_culture = cu:central_american
@@ -84,7 +78,7 @@ only_centralamericans_cultures = {
 }
 ca_centralamerican_share_primary_culture = {
 	custom_tooltip = {
-		text = ca_centralamerican_share_primary_cultur
+		text = ca_centralamerican_share_primary_culture_tt
 		scope:actor = {
 			any_primary_culture = {
 				is_primary_culture_of = scope:target_country
@@ -167,55 +161,11 @@ law_ca_valid_trigger = {
 	  
 }
 
-ideology_ca_liberal_monarchist_valid_trigger = {
-	OR = {
-		is_interest_group_type = ig_trade_unions
-		is_interest_group_type = ig_armed_forces
-		is_interest_group_type = ig_petty_bourgeoisie
-		is_interest_group_type = ig_intelligentsia
-		is_interest_group_type = ig_industrialists
-		is_interest_group_type = ig_rural_folk
-		is_interest_group_type = ig_landowners
-		#is_interest_group_type = ig_devout		
-	}
-}
-ideology_ca_unitarian_valid_trigger = {
-	OR = {
-		is_interest_group_type = ig_armed_forces
-		is_interest_group_type = ig_petty_bourgeoisie
-		is_interest_group_type = ig_intelligentsia
-		is_interest_group_type = ig_devout
-		is_interest_group_type = ig_landowners
-	}
-}
-ideology_ca_federalist_valid_trigger = {
-	OR = {
-		is_interest_group_type = ig_armed_forces
-		is_interest_group_type = ig_intelligentsia
-		is_interest_group_type = ig_petty_bourgeoisie		
-	}
-}
-ideology_ca_leader_autocratic_autonomist_valid_trigger = {
-	OR = {
-		is_interest_group_type = ig_armed_forces
-		is_interest_group_type = ig_petty_bourgeoisie
-		is_interest_group_type = ig_intelligentsia
-		is_interest_group_type = ig_rural_folk
-		is_interest_group_type = ig_devout
-		is_interest_group_type = ig_landowners		
-	}
-}
-ideology_central_america_caudillo_valid_trigger = {
-	OR = {
-		is_interest_group_type = ig_trade_unions
-		is_interest_group_type = ig_armed_forces
-		is_interest_group_type = ig_petty_bourgeoisie
-		is_interest_group_type = ig_intelligentsia
-		is_interest_group_type = ig_industrialists
-		is_interest_group_type = ig_rural_folk
-		is_interest_group_type = ig_landowners			
-	}
-}
+
+
+
+
+
 #law_ca_valid_trigger = {
 #	OR = {
 #		is_interest_group_type = ig_trade_unions

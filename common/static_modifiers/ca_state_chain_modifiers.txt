@@ -1,0 +1,42 @@
+﻿# CAFM - F15 - Cadenas de los estados (common/static_modifiers/ca_state_chain_modifiers.txt)
+
+nic_legado_zepeda = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 5
+	state_literacy_growth_add = 0.001
+}
+
+hon_ciudad_agraviada = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_radicals_from_political_movements_mult = 0.15
+}
+
+hon_mandato_vencido_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_legitimacy_base_add = -10
+}
+
+hon_gobierno_civil = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 10
+}
+
+ca_cos_castro_depuesto_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_legitimacy_base_add = -10
+}
+
+ca_cos_renuncia_rechazada_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 5
+}
+
+ca_cos_republica_unitaria_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 10
+}
+
+ca_cos_ciudades_agraviadas = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_radicals_from_political_movements_mult = 0.2
+}

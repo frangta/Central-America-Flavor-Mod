@@ -573,86 +573,86 @@ ca_setup_post_uca_political_movements_effect = {
 ca_remove_political_movements_effect = {
     s:STATE_SAN_SALVADOR.region_state:UCA = {
         
-            remove_modifier = { name = ca_uca_liberal_stronghold }
+            remove_modifier = ca_uca_liberal_stronghold
         
     }
 
     s:STATE_GUATEMALA.region_state:UCA = {
         
-            remove_modifier = { name = ca_uca_conservative_capital }
+            remove_modifier = ca_uca_conservative_capital
         
     }
 
     s:STATE_COSTA_RICA.region_state:UCA = {
         
-            remove_modifier = { name = ca_uca_isolated_autonomists }
+            remove_modifier = ca_uca_isolated_autonomists
         
     }
 
     s:STATE_HONDURAS.region_state:UCA = {
         
-            remove_modifier = { name = ca_uca_federalist_heartland }
+            remove_modifier = ca_uca_federalist_heartland
         
     }
 
     s:STATE_PANAMA.region_state:UCA = {
         
-            remove_modifier = { name = ca_uca_isthmian_liberalism }
+            remove_modifier = ca_uca_isthmian_liberalism
         
     }
 
     s:STATE_NICARAGUA.region_state:UCA = {
         
-            remove_modifier = { name = ca_uca_leones_vs_granadinos }
+            remove_modifier = ca_uca_leones_vs_granadinos
         
     }
 
     s:STATE_CHIAPAS.region_state:UCA = {
         
-            remove_modifier = { name = ca_uca_frontier_tensions }
+            remove_modifier = ca_uca_frontier_tensions
         
     }
 }
 ca_remove_post_uca_political_movements_effect = {
     s:STATE_SAN_SALVADOR.region_state:UCA = {
         
-            remove_modifier = { name = ca_liberal_stronghold }
+            remove_modifier = ca_liberal_stronghold
         
     }
 
     s:STATE_GUATEMALA.region_state:UCA = {
         
-            remove_modifier = { name = ca_conservative_capital }
+            remove_modifier = ca_conservative_capital
         
     }
 
     s:STATE_COSTA_RICA.region_state:UCA = {
         
-            remove_modifier = { name = ca_isolated_autonomists }
+            remove_modifier = ca_isolated_autonomists
         
     }
 
     s:STATE_HONDURAS.region_state:UCA = {
         
-            remove_modifier = { name = ca_federalist_heartland }
+            remove_modifier = ca_federalist_heartland
         
     }
 
     s:STATE_PANAMA.region_state:UCA = {
         
-            remove_modifier = { name = ca_isthmian_liberalism }
+            remove_modifier = ca_isthmian_liberalism
         
     }
 
     s:STATE_NICARAGUA.region_state:UCA = {
         
-            remove_modifier = { name = ca_leones_vs_granadinos }
+            remove_modifier = ca_leones_vs_granadinos
         
     }
 
     s:STATE_CHIAPAS.region_state:UCA = {
         
-            remove_modifier = { name = ca_frontier_tensions }
+            remove_modifier = ca_frontier_tensions
         
     }
 }

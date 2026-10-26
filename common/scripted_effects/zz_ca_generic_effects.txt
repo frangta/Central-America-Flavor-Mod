@@ -1,0 +1,241 @@
+﻿############################################################################
+# CAFM - F17 - Eventos genericos (grupo 16), cadenas C y P, y 20 dinamicos
+# (common/scripted_effects/zz_ca_generic_effects.txt)
+############################################################################
+
+# Barra de la Federacion: solo si el pais es la UCA o un estado miembro, y solo con el diario.
+ca_g16_bar = {
+	if = {
+		limit = {
+			exists = c:UCA
+			OR = {
+				this = c:UCA
+				is_subject_of = c:UCA
+			}
+		}
+		ca_frca_bar_add = { VALUE = $VALUE$ }
+	}
+}
+
+# Lealtad del estado (scope: estado). En la UCA, la del estado nucleo de esa region; en un miembro, la suya.
+ca_g16_state_loyalty_up = { ca_g16_state_loyalty = { DIR = up } }
+ca_g16_state_loyalty_down = { ca_g16_state_loyalty = { DIR = down } }
+ca_g16_state_loyalty = {
+	if = {
+		limit = { owner ?= c:UCA }
+		if = { limit = { state_region = s:STATE_GUATEMALA } ca_frca_loyalty_$DIR$ = { TAG = gua } }
+		else_if = { limit = { state_region = s:STATE_SAN_SALVADOR } ca_frca_loyalty_$DIR$ = { TAG = els } }
+		else_if = { limit = { state_region = s:STATE_HONDURAS } ca_frca_loyalty_$DIR$ = { TAG = hon } }
+		else_if = { limit = { state_region = s:STATE_NICARAGUA } ca_frca_loyalty_$DIR$ = { TAG = nic } }
+		else_if = { limit = { state_region = s:STATE_COSTA_RICA } ca_frca_loyalty_$DIR$ = { TAG = cos } }
+	}
+	else_if = {
+		limit = {
+			exists = c:UCA
+			owner = { is_subject_of = c:UCA }
+		}
+		owner = { ca_state_loyalty_$DIR$ = yes }
+	}
+}
+
+# Lealtad del pais miembro (scope: pais).
+ca_g16_country_loyalty_down = {
+	if = {
+		limit = {
+			exists = c:UCA
+			is_subject_of = c:UCA
+		}
+		ca_state_loyalty_down = yes
+	}
+}
+
+# .97: el frente segun el vecino (Mexico -> mexicano; Gran Bretana o Mosquitia -> britanico)
+ca_g16_border_front = {
+	if = {
+		limit = { scope:border_neighbor = c:MEX }
+		ca_frca_front_change = { FRONT = mexican VALUE = 1 }
+	}
+	else_if = {
+		limit = {
+			OR = {
+				scope:border_neighbor = c:GBR
+				scope:border_neighbor = c:MKT
+			}
+		}
+		ca_frca_front_change = { FRONT = british VALUE = 1 }
+	}
+}
+
+# .146: una disputa entre centroamericanos baja la Patria Grande de quien la tenga.
+ca_unity_change_all = {
+	if = {
+		limit = { has_journal_entry = je_ca_patria_grande }
+		ca_unity_change = { VALUE = -5 }
+	}
+}
+
+# C2: el caudillo crea su ciudad-estado en la provincia base del estado (tabla del grupo 16).
+ca_caudillo_create_city = {
+	if = {
+		limit = {
+			var:ca_caudillo_state ?= { state_region = s:STATE_GUATEMALA }
+			p:x0F5049.state.owner ?= root
+		}
+		create_country = {
+			origin = root
+			province = p:x0F5049
+			on_created = {
+				set_variable = ca_caudillo_city_country
+				set_variable = jefe_supremo_var # F19 (G6)
+				root = { set_variable = { name = ca_caudillo_city value = prev } }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			var:ca_caudillo_state ?= { state_region = s:STATE_SAN_SALVADOR }
+			p:x107040.state.owner ?= root
+		}
+		create_country = {
+			origin = root
+			province = p:x107040
+			on_created = {
+				set_variable = ca_caudillo_city_country
+				set_variable = jefe_supremo_var # F19 (G6)
+				root = { set_variable = { name = ca_caudillo_city value = prev } }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			var:ca_caudillo_state ?= { state_region = s:STATE_HONDURAS }
+			p:x907080.state.owner ?= root
+		}
+		create_country = {
+			origin = root
+			province = p:x907080
+			on_created = {
+				set_variable = ca_caudillo_city_country
+				set_variable = jefe_supremo_var # F19 (G6)
+				root = { set_variable = { name = ca_caudillo_city value = prev } }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			var:ca_caudillo_state ?= { state_region = s:STATE_NICARAGUA }
+			p:x68E7F3.state.owner ?= root
+		}
+		create_country = {
+			origin = root
+			province = p:x68E7F3
+			on_created = {
+				set_variable = ca_caudillo_city_country
+				set_variable = jefe_supremo_var # F19 (G6)
+				root = { set_variable = { name = ca_caudillo_city value = prev } }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			var:ca_caudillo_state ?= { state_region = s:STATE_COSTA_RICA }
+			p:x478109.state.owner ?= root
+		}
+		create_country = {
+			origin = root
+			province = p:x478109
+			on_created = {
+				set_variable = ca_caudillo_city_country
+				set_variable = jefe_supremo_var # F19 (G6)
+				root = { set_variable = { name = ca_caudillo_city value = prev } }
+			}
+		}
+	}
+	if = {
+		limit = { has_variable = ca_caudillo_city }
+		set_variable = { name = ca_caudillo_city_young days = 730 }
+		set_variable = { name = ca_caudillo_city_old days = 3650 }
+		var:ca_caudillo_char ?= {
+			transfer_character = root.var:ca_caudillo_city
+			set_character_as_ruler = yes
+		}
+	}
+}
+
+# P2: los pueblos crean sus "Comunidades" en la provincia base rural.
+ca_peasant_create_city = {
+	if = {
+		limit = {
+			var:ca_peasant_state ?= { state_region = s:STATE_GUATEMALA }
+			p:x464F6A.state.owner ?= root
+		}
+		create_country = {
+			origin = root
+			province = p:x464F6A
+			on_created = {
+				set_variable = ca_peasant_city_country
+				root = { set_variable = { name = ca_peasant_city value = prev } }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			var:ca_peasant_state ?= { state_region = s:STATE_SAN_SALVADOR }
+			p:xCC1FCA.state.owner ?= root
+		}
+		create_country = {
+			origin = root
+			province = p:xCC1FCA
+			on_created = {
+				set_variable = ca_peasant_city_country
+				root = { set_variable = { name = ca_peasant_city value = prev } }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			var:ca_peasant_state ?= { state_region = s:STATE_HONDURAS }
+			p:x90EF40.state.owner ?= root
+		}
+		create_country = {
+			origin = root
+			province = p:x90EF40
+			on_created = {
+				set_variable = ca_peasant_city_country
+				root = { set_variable = { name = ca_peasant_city value = prev } }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			var:ca_peasant_state ?= { state_region = s:STATE_NICARAGUA }
+			p:x10EFC0.state.owner ?= root
+		}
+		create_country = {
+			origin = root
+			province = p:x10EFC0
+			on_created = {
+				set_variable = ca_peasant_city_country
+				root = { set_variable = { name = ca_peasant_city value = prev } }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			var:ca_peasant_state ?= { state_region = s:STATE_COSTA_RICA }
+			p:xB0243F.state.owner ?= root
+		}
+		create_country = {
+			origin = root
+			province = p:xB0243F
+			on_created = {
+				set_variable = ca_peasant_city_country
+				root = { set_variable = { name = ca_peasant_city value = prev } }
+			}
+		}
+	}
+	if = {
+		limit = { has_variable = ca_peasant_city }
+		set_variable = { name = ca_peasant_city_old days = 3650 }
+	}
+}

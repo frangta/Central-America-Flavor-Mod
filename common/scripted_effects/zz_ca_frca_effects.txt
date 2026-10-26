@@ -1,0 +1,481 @@
+﻿############################################################################
+# CAFM - F1 - Efectos comunes del sistema federal
+# (common/scripted_effects/zz_ca_frca_effects.txt)
+# Siempre actuan sobre c:UCA ?= { }, se llamen desde donde se llamen
+# (la UCA, un estado o un evento de otro pais). Asi se evita el error de
+# "barra aplicada al pais equivocado" que tenian los eventos genericos.
+############################################################################
+
+# ---------------------------------------------------------------------------
+# Barra frca_support_bar
+# ---------------------------------------------------------------------------
+
+# Suma VALUE (puede ser un numero o un script value). Uso: ca_frca_bar_add = { VALUE = 10 }
+ca_frca_bar_add = {
+	c:UCA ?= {
+		je:je_historic_central_america_falls_apart ?= {
+			add_progress = { value = $VALUE$ name = frca_support_bar }
+		}
+	}
+}
+
+# Resta VALUE. Uso: ca_frca_bar_subtract = { VALUE = ca_frca_bar_minor_value }
+ca_frca_bar_subtract = {
+	c:UCA ?= {
+		je:je_historic_central_america_falls_apart ?= {
+			add_progress = {
+				value = {
+					value = $VALUE$
+					multiply = -1
+				}
+				name = frca_support_bar
+			}
+		}
+	}
+}
+
+# Escala comun (±10 / ±20 / ±30 / ±50)
+ca_frca_bar_minor_up = { ca_frca_bar_add = { VALUE = ca_frca_bar_minor_value } }
+ca_frca_bar_minor_down = { ca_frca_bar_subtract = { VALUE = ca_frca_bar_minor_value } }
+ca_frca_bar_moderate_up = { ca_frca_bar_add = { VALUE = ca_frca_bar_moderate_value } }
+ca_frca_bar_moderate_down = { ca_frca_bar_subtract = { VALUE = ca_frca_bar_moderate_value } }
+ca_frca_bar_major_up = { ca_frca_bar_add = { VALUE = ca_frca_bar_major_value } }
+ca_frca_bar_major_down = { ca_frca_bar_subtract = { VALUE = ca_frca_bar_major_value } }
+ca_frca_bar_critical_up = { ca_frca_bar_add = { VALUE = ca_frca_bar_critical_value } }
+ca_frca_bar_critical_down = { ca_frca_bar_subtract = { VALUE = ca_frca_bar_critical_value } }
+
+
+# ---------------------------------------------------------------------------
+# Lealtad frca_loyalty_<TAG> (0-3), guardada en la UCA
+# ---------------------------------------------------------------------------
+
+# Pone la lealtad inicial o un valor fijo. Uso: ca_frca_loyalty_set = { TAG = gua VALUE = 2 }
+ca_frca_loyalty_set = {
+	c:UCA ?= {
+		set_variable = { name = frca_loyalty_$TAG$ value = $VALUE$ }
+	}
+}
+
+# Cambia la lealtad y la mantiene entre 0 y 3. Solo si el estado ya tiene lealtad.
+# Uso: ca_frca_loyalty_change = { TAG = gua VALUE = -1 }
+ca_frca_loyalty_change = {
+	c:UCA ?= {
+		if = {
+			limit = { has_variable = frca_loyalty_$TAG$ }
+			change_variable = { name = frca_loyalty_$TAG$ add = $VALUE$ }
+			if = {
+				limit = { var:frca_loyalty_$TAG$ > ca_loyalty_loyal }
+				set_variable = { name = frca_loyalty_$TAG$ value = ca_loyalty_loyal }
+			}
+			if = {
+				limit = { var:frca_loyalty_$TAG$ < ca_loyalty_separated }
+				set_variable = { name = frca_loyalty_$TAG$ value = ca_loyalty_separated }
+			}
+		}
+	}
+}
+
+
+# ---------------------------------------------------------------------------
+# Frentes de la fase IV frca_front_<FRONT> (0-3)
+# FRONT: british, mexican, conservative, caudillos
+# ---------------------------------------------------------------------------
+
+# Uso: ca_frca_front_change = { FRONT = british VALUE = 1 }
+# Solo actua en la fase IV (antes, los frentes no existen).
+ca_frca_front_change = {
+	c:UCA ?= {
+		if = {
+			limit = {
+				has_variable = frca_phase
+				var:frca_phase >= 4
+			}
+			if = {
+				limit = { NOT = { has_variable = frca_front_$FRONT$ } }
+				set_variable = { name = frca_front_$FRONT$ value = 0 }
+			}
+			change_variable = { name = frca_front_$FRONT$ add = $VALUE$ }
+			if = {
+				limit = { var:frca_front_$FRONT$ > ca_front_lost }
+				set_variable = { name = frca_front_$FRONT$ value = ca_front_lost }
+			}
+			if = {
+				limit = { var:frca_front_$FRONT$ < 0 }
+				set_variable = { name = frca_front_$FRONT$ value = 0 }
+			}
+		}
+	}
+}
+
+
+# ===========================================================================
+# CAFM F3 - Nucleo del diario de la Federacion
+# ===========================================================================
+
+# Bajar la lealtad 1 nivel, respetando las protecciones. Nunca baja de Rebelde:
+# el paso a Separado (0) solo lo dan los eventos de secesion (.18-.23) con
+# ca_frca_loyalty_set. Uso: ca_frca_loyalty_down = { TAG = gua }
+ca_frca_loyalty_down = {
+	c:UCA ?= {
+		if = {
+			limit = {
+				has_variable = frca_loyalty_$TAG$
+				var:frca_loyalty_$TAG$ > ca_loyalty_rebel
+				NOT = { has_variable = frca_loyalty_lock_$TAG$ }
+				NOT = {
+					AND = {
+						has_variable = frca_loyalty_min2_$TAG$
+						var:frca_loyalty_$TAG$ <= ca_loyalty_wavering
+					}
+				}
+			}
+			change_variable = { name = frca_loyalty_$TAG$ add = -1 }
+		}
+	}
+}
+
+# Subir la lealtad 1 nivel (maximo Leal). Un estado Separado no sube asi: vuelve
+# con una intervencion o una guerra. Uso: ca_frca_loyalty_up = { TAG = gua }
+ca_frca_loyalty_up = {
+	c:UCA ?= {
+		if = {
+			limit = {
+				has_variable = frca_loyalty_$TAG$
+				var:frca_loyalty_$TAG$ >= ca_loyalty_rebel
+				var:frca_loyalty_$TAG$ < ca_loyalty_loyal
+			}
+			change_variable = { name = frca_loyalty_$TAG$ add = 1 }
+		}
+	}
+}
+
+# Un mes con turmoil > 0,2: a los 6 meses seguidos, lealtad -1.
+ca_frca_loyalty_turmoil_month = {
+	set_variable = { name = frca_calm_months_$TAG$ value = 0 }
+	if = {
+		limit = { NOT = { has_variable = frca_turmoil_months_$TAG$ } }
+		set_variable = { name = frca_turmoil_months_$TAG$ value = 0 }
+	}
+	change_variable = { name = frca_turmoil_months_$TAG$ add = 1 }
+	if = {
+		limit = { var:frca_turmoil_months_$TAG$ >= ca_loyalty_turmoil_months }
+		set_variable = { name = frca_turmoil_months_$TAG$ value = 0 }
+		ca_frca_loyalty_down = { TAG = $TAG$ }
+	}
+}
+
+# Un mes sin turmoil: a los 12 meses seguidos siendo Vacilante, sube a Leal.
+ca_frca_loyalty_calm_month = {
+	set_variable = { name = frca_turmoil_months_$TAG$ value = 0 }
+	if = {
+		limit = { var:frca_loyalty_$TAG$ = ca_loyalty_wavering }
+		if = {
+			limit = { NOT = { has_variable = frca_calm_months_$TAG$ } }
+			set_variable = { name = frca_calm_months_$TAG$ value = 0 }
+		}
+		change_variable = { name = frca_calm_months_$TAG$ add = 1 }
+		if = {
+			limit = { var:frca_calm_months_$TAG$ >= ca_loyalty_recovery_months }
+			set_variable = { name = frca_calm_months_$TAG$ value = 0 }
+			ca_frca_loyalty_up = { TAG = $TAG$ }
+		}
+	}
+	else = {
+		set_variable = { name = frca_calm_months_$TAG$ value = 0 }
+	}
+}
+
+# Pulso de un estado nucleo: cuenta el estado de su region que es de la UCA o de
+# la propia etiqueta (si ya es subdita). Scope: UCA.
+# Uso: ca_frca_loyalty_tick_core = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
+ca_frca_loyalty_tick_core = {
+	if = {
+		limit = {
+			has_variable = frca_loyalty_$TAG$
+			var:frca_loyalty_$TAG$ > ca_loyalty_separated
+		}
+		if = {
+			limit = {
+				s:$STATE$ = {
+					any_scope_state = {
+						turmoil > ca_loyalty_turmoil_threshold
+						owner = {
+							OR = {
+								this = c:UCA
+								c:$CTAG$ ?= this
+							}
+						}
+					}
+				}
+			}
+			ca_frca_loyalty_turmoil_month = { TAG = $TAG$ }
+		}
+		else_if = {
+			limit = {
+				s:$STATE$ = {
+					any_scope_state = {
+						owner = {
+							OR = {
+								this = c:UCA
+								c:$CTAG$ ?= this
+							}
+						}
+					}
+				}
+			}
+			ca_frca_loyalty_calm_month = { TAG = $TAG$ }
+		}
+	}
+}
+
+# Pulso de un estado miembro (Los Altos, Soconusco): solo cuenta el estado de la
+# propia etiqueta. Uso: ca_frca_loyalty_tick_member = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
+ca_frca_loyalty_tick_member = {
+	if = {
+		limit = {
+			has_variable = frca_loyalty_$TAG$
+			var:frca_loyalty_$TAG$ > ca_loyalty_separated
+		}
+		if = {
+			limit = {
+				s:$STATE$ = {
+					any_scope_state = {
+						turmoil > ca_loyalty_turmoil_threshold
+						owner = { c:$CTAG$ ?= this }
+					}
+				}
+			}
+			ca_frca_loyalty_turmoil_month = { TAG = $TAG$ }
+		}
+		else_if = {
+			limit = {
+				s:$STATE$ = {
+					any_scope_state = {
+						owner = { c:$CTAG$ ?= this }
+					}
+				}
+			}
+			ca_frca_loyalty_calm_month = { TAG = $TAG$ }
+		}
+	}
+}
+
+# Si la etiqueta ya existe y no es subdita de la UCA, su lealtad es 0 (Separado).
+# Si es un estado miembro y la etiqueta deja de existir, sale del diario.
+ca_frca_loyalty_separation_check = {
+	if = {
+		limit = {
+			has_variable = frca_loyalty_$TAG$
+			var:frca_loyalty_$TAG$ > ca_loyalty_separated
+			exists = c:$CTAG$
+			c:$CTAG$ = { NOT = { is_subject_of = c:UCA } }
+		}
+		set_variable = { name = frca_loyalty_$TAG$ value = ca_loyalty_separated }
+	}
+}
+ca_frca_member_removal_check = {
+	if = {
+		limit = {
+			has_variable = frca_loyalty_$TAG$
+			NOT = { exists = c:$CTAG$ }
+		}
+		remove_variable = frca_loyalty_$TAG$
+		remove_variable = frca_turmoil_months_$TAG$
+		remove_variable = frca_calm_months_$TAG$
+	}
+}
+
+# Alta de los estados miembros: Los Altos (Leal, 3) cuando es subdito
+# ca_dependency de la UCA; el Soconusco (Vacilante, 2) mientras sea subdito.
+ca_frca_member_check = {
+	if = {
+		limit = {
+			NOT = { has_variable = frca_loyalty_alt }
+			c:ALT ?= {
+				is_subject_of = c:UCA
+				is_subject_type = subject_type_ca_dependency
+			}
+		}
+		ca_frca_loyalty_set = { TAG = alt VALUE = 3 }
+	}
+	if = {
+		limit = {
+			NOT = { has_variable = frca_loyalty_cip }
+			NOT = { has_variable = frca_cip_left_federation }
+			c:CIP ?= { is_subject_of = c:UCA }
+		}
+		ca_frca_loyalty_set = { TAG = cip VALUE = 2 }
+	}
+	ca_frca_alt_lost_check = yes
+	ca_frca_member_removal_check = { TAG = alt CTAG = ALT }
+	ca_frca_member_removal_check = { TAG = cip CTAG = CIP }
+}
+
+# CAFM F5 - Los Altos miembro perdido (independiente o reabsorbido por Guatemala):
+# barra -30 y frente conservador +1 en la fase IV (el pretexto de Carrera). Una vez.
+ca_frca_alt_lost_check = {
+	if = {
+		limit = {
+			has_variable = frca_loyalty_alt
+			NOT = { has_variable = frca_alt_lost }
+			NOT = { has_variable = frca_alt_annexed } # F6: reincorporado como provincia (Beats a)
+			OR = {
+				NOT = { exists = c:ALT }
+				c:ALT = { NOT = { is_subject_of = c:UCA } }
+			}
+		}
+		set_variable = frca_alt_lost
+		ca_frca_bar_major_down = yes
+		if = {
+			limit = { var:frca_phase >= 4 }
+			ca_frca_front_change = { FRONT = conservative VALUE = 1 }
+		}
+	}
+}
+
+# CAFM F5 - Al entrar en la fase IV: frentes que ya venian cargados de antes.
+#   Los Altos perdido (frca_alt_lost) o dejado a Guatemala (.4 c): conservador +1.
+ca_frca_phase4_entry = {
+	if = {
+		limit = {
+			OR = {
+				has_variable = frca_alt_lost
+				has_variable = frca_alt_left_to_guatemala
+			}
+		}
+		ca_frca_front_change = { FRONT = conservative VALUE = 1 }
+	}
+	# F7: Carrera reforzado (intervencion fallida en Guatemala o rechazada)
+	if = {
+		limit = { has_variable = frca_carrera_strengthened }
+		ca_frca_front_change = { FRONT = conservative VALUE = 1 }
+	}
+}
+
+# Arranque del diario (immediate). Scope: UCA.
+ca_frca_journal_setup = {
+	set_variable = { name = frca_phase value = 1 }
+	ca_frca_loyalty_set = { TAG = els VALUE = 3 }
+	ca_frca_loyalty_set = { TAG = hon VALUE = 2 }
+	ca_frca_loyalty_set = { TAG = gua VALUE = 2 }
+	ca_frca_loyalty_set = { TAG = nic VALUE = 1 }
+	ca_frca_loyalty_set = { TAG = cos VALUE = 2 }
+	set_variable = { name = frca_front_british value = 0 }
+	set_variable = { name = frca_front_mexican value = 0 }
+	set_variable = { name = frca_front_conservative value = 0 }
+	set_variable = { name = frca_front_caudillos value = 0 }
+}
+
+# Al cerrar el diario (A, B, C, D1 o D2). Scope: UCA.
+ca_frca_journal_cleanup = {
+	remove_modifier = ca_federal_paralysis
+}
+
+# Gancho H1-H5 de las rutas (grupo C). Los espacios de nombres llegan en F11;
+# hasta entonces solo se guarda el ultimo gancho alcanzado.
+# Uso: ca_frca_fire_hook = { HOOK = 2 }
+ca_frca_fire_hook = {
+	c:UCA ?= {
+		set_variable = { name = frca_last_hook value = $HOOK$ }
+		# F11: ganchos H1-H5 (ca_federalist_events / ca_centralist_events .1-.5)
+		if = {
+			limit = {
+				is_ai = no
+				ca_frca_route_centralist = yes
+			}
+			trigger_event = { id = ca_centralist_events.$HOOK$ days = 3 popup = yes }
+		}
+		else = {
+			trigger_event = { id = ca_federalist_events.$HOOK$ days = 3 popup = yes }
+		}
+	}
+}
+
+# Cambio de fase. Uso: ca_frca_set_phase = { VALUE = 2 }
+# Tambien lo pueden llamar .79 (fase II), "Disolver el Congreso" y .44 (fase IV).
+ca_frca_set_phase = {
+	c:UCA ?= {
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_variable = frca_phase }
+					var:frca_phase < $VALUE$
+				}
+			}
+			set_variable = { name = frca_phase value = $VALUE$ }
+			if = {
+				limit = {
+					var:frca_phase >= 4
+					NOT = { has_variable = frca_phase4_entered }
+				}
+				set_variable = frca_phase4_entered
+				ca_frca_phase4_entry = yes
+			}
+			ca_frca_fire_hook = { HOOK = $VALUE$ }
+		}
+	}
+}
+
+# Paso automatico de una fase a la siguiente (una por mes). Scope: UCA.
+#   I -> II : decreto .79 o "Disolver el Congreso"; si no salio, a los 6 meses (30 nov 1838)
+#   II -> III: 1839.2.1 (fin del mandato de Morazan) o 2 estados nucleo separados
+#   III -> IV: victoria .44 (frca_won_war) o sin guerra federal hasta 1840.6.1
+ca_frca_phase_update = {
+	if = {
+		limit = {
+			var:frca_phase = 1
+			OR = {
+				has_variable = frca_decree_issued
+				has_variable = frca_congress_dissolved
+				has_variable = voting_ca_self_determination
+				has_variable = ca_self_determination
+				game_date >= 1838.11.30
+			}
+		}
+		ca_frca_set_phase = { VALUE = 2 }
+	}
+	else_if = {
+		limit = {
+			var:frca_phase = 2
+			OR = {
+				game_date >= 1839.2.1
+				ca_core_states_separated_count >= 2
+			}
+		}
+		ca_frca_set_phase = { VALUE = 3 }
+	}
+	else_if = {
+		limit = {
+			var:frca_phase = 3
+			OR = {
+				has_variable = frca_won_war
+				AND = {
+					game_date >= 1840.6.1
+					NOT = { has_variable = frca_federal_war_declared }
+					is_at_war = no
+				}
+			}
+		}
+		ca_frca_set_phase = { VALUE = 4 }
+	}
+}
+
+# Pulso mensual del diario. Scope: UCA.
+ca_frca_monthly_update = {
+	ca_frca_member_check = yes
+	ca_frca_loyalty_separation_check = { TAG = gua CTAG = GUA }
+	ca_frca_loyalty_separation_check = { TAG = els CTAG = ELS }
+	ca_frca_loyalty_separation_check = { TAG = hon CTAG = HON }
+	ca_frca_loyalty_separation_check = { TAG = nic CTAG = NIC }
+	ca_frca_loyalty_separation_check = { TAG = cos CTAG = COS }
+	ca_frca_loyalty_separation_check = { TAG = alt CTAG = ALT }
+	ca_frca_loyalty_separation_check = { TAG = cip CTAG = CIP }
+	ca_frca_loyalty_tick_core = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
+	ca_frca_loyalty_tick_core = { TAG = els CTAG = ELS STATE = STATE_SAN_SALVADOR }
+	ca_frca_loyalty_tick_core = { TAG = hon CTAG = HON STATE = STATE_HONDURAS }
+	ca_frca_loyalty_tick_core = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
+	ca_frca_loyalty_tick_core = { TAG = cos CTAG = COS STATE = STATE_COSTA_RICA }
+	ca_frca_loyalty_tick_member = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
+	ca_frca_loyalty_tick_member = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
+	ca_frca_phase_update = yes
+}

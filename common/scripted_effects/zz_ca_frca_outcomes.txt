@@ -1,0 +1,219 @@
+﻿############################################################################
+# CAFM - F8 - Guerra federal y desenlaces (common/scripted_effects/zz_ca_frca_outcomes.txt)
+# Diseno: CAFM_EVENTOS_REDEFINIDOS.md grupo 8 (.42-.44, "El exilio de Morazan") y
+# CAFM_JE_CAIDA_FEDERACION.md §9 (A, B, C, D1, D2 y "Republica de los Seis Estados").
+############################################################################
+
+# Guerra de reanexion contra un estado nucleo independiente (.42 a). Scope: UCA.
+# Uso: ca_frca_federal_war_target = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
+ca_frca_federal_war_target = {
+	if = {
+		limit = {
+			exists = c:$CTAG$
+			c:$CTAG$ = { NOT = { is_subject_of = c:UCA } }
+		}
+		set_variable = frca_fw_target_$TAG$
+		s:$STATE$ = { add_claim = c:UCA }
+		if = {
+			limit = {
+				c:ELS ?= { is_subject_of = c:UCA }
+				c:ALT ?= { is_subject_of = c:UCA }
+			}
+			create_diplomatic_play = {
+				name = ca_federal_war_play
+				type = dp_annex_war
+				target_country = c:$CTAG$
+				escalation = 80
+				add_initiator_backers = { c:ELS c:ALT }
+			}
+		}
+		else_if = {
+			limit = { c:ELS ?= { is_subject_of = c:UCA } }
+			create_diplomatic_play = {
+				name = ca_federal_war_play
+				type = dp_annex_war
+				target_country = c:$CTAG$
+				escalation = 80
+				add_initiator_backers = { c:ELS }
+			}
+		}
+		else_if = {
+			limit = { c:ALT ?= { is_subject_of = c:UCA } }
+			create_diplomatic_play = {
+				name = ca_federal_war_play
+				type = dp_annex_war
+				target_country = c:$CTAG$
+				escalation = 80
+				add_initiator_backers = { c:ALT }
+			}
+		}
+		else = {
+			create_diplomatic_play = {
+				name = ca_federal_war_play
+				type = dp_annex_war
+				target_country = c:$CTAG$
+				escalation = 80
+			}
+		}
+	}
+}
+
+# Fin de la guerra federal: con la UCA sin guerra ni jugada activa, victoria (.44) si ningun
+# estado nucleo es independiente; si no, derrota (.43). Scope: UCA, pulso del diario.
+ca_frca_federal_war_check = {
+	if = {
+		limit = {
+			has_variable = frca_federal_war_declared
+			NOT = { has_variable = frca_fw_resolved }
+			NOT = { has_variable = frca_fw_fresh }
+			is_at_war = no
+			is_active_in_diplomatic_play = no
+		}
+		set_variable = frca_fw_resolved
+		if = {
+			limit = { ca_core_states_independent_count = 0 }
+			trigger_event = { id = ca_central_america.44 popup = yes }
+		}
+		else = {
+			trigger_event = { id = ca_central_america.43 popup = yes }
+		}
+	}
+}
+
+# Variante "Republica de los Seis Estados": Los Altos sigue como miembro Leal. Scope: UCA.
+ca_frca_six_states_check = {
+	if = {
+		limit = {
+			c:ALT ?= { is_subject_of = c:UCA }
+			ca_frca_loyalty_ge = { TAG = alt VALUE = 3 }
+		}
+		set_variable = frca_six_states_republic
+		set_global_variable = ca_six_states_republic
+		add_modifier = { name = ca_frca_six_states months = 120 }
+		custom_tooltip = ca_frca_six_states_tt
+	}
+}
+
+# A. La Republica sobrevive. Scope: UCA.
+ca_frca_outcome_a = {
+	set_global_variable = ca_frca_republic_survived
+	add_modifier = { name = ca_frca_republic_consolidated months = 120 }
+	ca_frca_six_states_check = yes
+}
+
+# B. Union por la espada. Scope: UCA.
+ca_frca_outcome_b = {
+	set_global_variable = ca_frca_union_by_sword
+	add_modifier = { name = ca_frca_union_by_sword months = 60 }
+	add_modifier = { name = age_of_ca_caudillos_modifier months = 60 }
+	ig:ig_armed_forces ?= { add_ruling_interest_group = yes }
+	if = {
+		limit = { has_variable = frca_fw_target_nic }
+		s:STATE_NICARAGUA.region_state:UCA ?= { add_modifier = { name = ca_frca_reconquest_unrest months = 60 } }
+	}
+	if = {
+		limit = { has_variable = frca_fw_target_hon }
+		s:STATE_HONDURAS.region_state:UCA ?= { add_modifier = { name = ca_frca_reconquest_unrest months = 60 } }
+	}
+	if = {
+		limit = { has_variable = frca_fw_target_cos }
+		s:STATE_COSTA_RICA.region_state:UCA ?= { add_modifier = { name = ca_frca_reconquest_unrest months = 60 } }
+	}
+	if = {
+		limit = { has_variable = frca_fw_target_gua }
+		s:STATE_GUATEMALA.region_state:UCA ?= { add_modifier = { name = ca_frca_reconquest_unrest months = 60 } }
+	}
+	if = {
+		limit = { has_variable = frca_fw_target_els }
+		s:STATE_SAN_SALVADOR.region_state:UCA ?= { add_modifier = { name = ca_frca_reconquest_unrest months = 60 } }
+	}
+	ca_frca_six_states_check = yes
+}
+
+# C. La Confederacion (solo ruta federal). Los subditos pasan a socios confederados; ley
+# confederada; la Dieta se reune en San Vicente. El diario "La Confederacion 1842-1845" llega en F12.
+ca_frca_outcome_c = {
+	set_global_variable = ca_frca_confederation_founded
+	set_variable = frca_diet_san_vicente
+	every_country = {
+		limit = {
+			is_subject_of = c:UCA
+			is_subject_type = subject_type_ca_dependency
+		}
+		change_subject_type = subject_type_ca_confederative_partner
+	}
+	activate_law = law_type:law_ca_central_american_confederated
+	add_journal_entry = { type = je_ca_confederation } # F12
+}
+
+# D2. La Federacion se desvanece (.122): reparto por lealtad al 1845.1.1. Scope: UCA.
+# Uso: ca_frca_d2_state = { TAG = nic CTAG = NIC NAME = nicaragua STATE = STATE_NICARAGUA }
+ca_frca_d2_state = {
+	if = {
+		# Subdito ca_dependency: se independiza sin guerra
+		limit = {
+			c:$CTAG$ ?= {
+				is_subject_of = c:UCA
+				is_subject_type = subject_type_ca_dependency
+			}
+		}
+		remove_diplomatic_pact = { country = c:$CTAG$ type = ca_dependency }
+		c:$CTAG$ = {
+			make_independent = yes
+			change_relations = { country = c:UCA value = 30 }
+			ca_ai_$NAME$_effect = yes
+		}
+		s:$STATE$ = { add_claim = c:UCA }
+	}
+	else_if = {
+		# Provincia propia con lealtad <= 1: se libera sin guerra ni devastacion
+		limit = {
+			NOT = { exists = c:$CTAG$ }
+			exists = s:$STATE$.region_state:UCA
+			ca_frca_loyalty_le = { TAG = $TAG$ VALUE = 1 }
+			NOT = { capital = { state_region = s:$STATE$ } }
+		}
+		ca_create_$NAME$_effect = yes
+		remove_diplomatic_pact = { country = c:$CTAG$ type = ca_dependency }
+		c:$CTAG$ ?= {
+			make_independent = yes
+			change_relations = { country = c:UCA value = 30 }
+			ca_ai_$NAME$_effect = yes
+		}
+		s:$STATE$ = { add_claim = c:UCA }
+	}
+	# Con lealtad >= 2 se queda con la UCA
+}
+ca_frca_outcome_d2 = {
+	ca_frca_d2_state = { TAG = nic CTAG = NIC NAME = nicaragua STATE = STATE_NICARAGUA }
+	ca_frca_d2_state = { TAG = hon CTAG = HON NAME = honduras STATE = STATE_HONDURAS }
+	ca_frca_d2_state = { TAG = cos CTAG = COS NAME = costarica STATE = STATE_COSTA_RICA }
+	ca_frca_d2_state = { TAG = gua CTAG = GUA NAME = guatemala STATE = STATE_GUATEMALA }
+	ca_frca_d2_state = { TAG = els CTAG = ELS NAME = elsalvador STATE = STATE_SAN_SALVADOR }
+	# Los Altos miembro se reparte igual, pero no cuenta para la "Federacion menguada"
+	if = {
+		limit = {
+			c:ALT ?= { is_subject_of = c:UCA }
+			ca_frca_loyalty_le = { TAG = alt VALUE = 1 }
+		}
+		remove_diplomatic_pact = { country = c:ALT type = ca_dependency }
+		c:ALT = {
+			make_independent = yes
+			change_relations = { country = c:UCA value = 30 }
+		}
+	}
+	if = {
+		limit = { ca_frca_core_states_kept >= 2 }
+		add_modifier = { name = ca_frca_federation_diminished months = 120 }
+		set_global_variable = ca_frca_federation_diminished
+	}
+	else = {
+		# La UCA pasa a ser el estado que le queda, sin guerra
+		set_global_variable = ca_frca_dissolved_peacefully
+		if = { limit = { NOT = { exists = c:NIC } capital = { state_region = s:STATE_NICARAGUA } } change_tag = NIC }
+		else_if = { limit = { NOT = { exists = c:ELS } capital = { state_region = s:STATE_SAN_SALVADOR } } change_tag = ELS }
+		else_if = { limit = { NOT = { exists = c:COS } capital = { state_region = s:STATE_COSTA_RICA } } change_tag = COS }
+		else_if = { limit = { NOT = { exists = c:HON } capital = { state_region = s:STATE_HONDURAS } } change_tag = HON }
+		else_if = { limit = { NOT = { exists = c:GUA } capital = { state_region = s:STATE_GUATEMALA } } change_tag = GUA }
+	}
+}

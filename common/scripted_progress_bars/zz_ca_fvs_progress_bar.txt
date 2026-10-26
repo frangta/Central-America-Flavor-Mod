@@ -1,0 +1,10 @@
+﻿# CAFM F28: barra del diario je_ca_federalists_vs_separatists_situation.
+# No se mueve sola: refleja la variable ca_fvs_bar (efecto ca_fvs_bar_sync).
+ca_fvs_bar_display = {
+	name = "ca_fvs_bar_display_name"
+	desc = "ca_fvs_bar_display_desc"
+
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}

@@ -1,0 +1,58 @@
+﻿# CAFM - F17 - Eventos genericos (common/scripted_triggers/zz_ca_generic_triggers.txt)
+
+# Reglas comunes del grupo 16: paises centroamericanos, 1836-1880.
+ca_g16_eligible = {
+	ca_is_ca_national_country = yes
+	game_date >= 1836.1.1
+	game_date < 1880.1.1
+}
+
+# La provincia base del caudillo / de la rebelion es del pais.
+ca_caudillo_base_owned = {
+	OR = {
+		AND = {
+			var:ca_caudillo_state ?= { state_region = s:STATE_GUATEMALA }
+			p:x0F5049.state.owner ?= root
+		}
+		AND = {
+			var:ca_caudillo_state ?= { state_region = s:STATE_SAN_SALVADOR }
+			p:x107040.state.owner ?= root
+		}
+		AND = {
+			var:ca_caudillo_state ?= { state_region = s:STATE_HONDURAS }
+			p:x907080.state.owner ?= root
+		}
+		AND = {
+			var:ca_caudillo_state ?= { state_region = s:STATE_NICARAGUA }
+			p:x68E7F3.state.owner ?= root
+		}
+		AND = {
+			var:ca_caudillo_state ?= { state_region = s:STATE_COSTA_RICA }
+			p:x478109.state.owner ?= root
+		}
+	}
+}
+ca_peasant_base_owned = {
+	OR = {
+		AND = {
+			var:ca_peasant_state ?= { state_region = s:STATE_GUATEMALA }
+			p:x464F6A.state.owner ?= root
+		}
+		AND = {
+			var:ca_peasant_state ?= { state_region = s:STATE_SAN_SALVADOR }
+			p:xCC1FCA.state.owner ?= root
+		}
+		AND = {
+			var:ca_peasant_state ?= { state_region = s:STATE_HONDURAS }
+			p:x90EF40.state.owner ?= root
+		}
+		AND = {
+			var:ca_peasant_state ?= { state_region = s:STATE_NICARAGUA }
+			p:x10EFC0.state.owner ?= root
+		}
+		AND = {
+			var:ca_peasant_state ?= { state_region = s:STATE_COSTA_RICA }
+			p:xB0243F.state.owner ?= root
+		}
+	}
+}

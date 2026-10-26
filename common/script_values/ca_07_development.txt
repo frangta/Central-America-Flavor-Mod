@@ -1,0 +1,209 @@
+﻿############################################################################
+# CAFM - F13 - Diarios de desarrollo A1-A4 (common/script_values/ca_07_development.txt)
+# Cambio mensual de cada barra (0-100), con un desc por factor.
+############################################################################
+
+# Niveles de cafetal del pais
+ca_coffee_levels = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_coffee_plantation }
+		add = level
+	}
+}
+
+# La IA historica no empieza su auge antes de su fecha (Costa Rica 1830-40, Guatemala 1871,
+# El Salvador 1882, Nicaragua 1870s; Honduras y los demas, 1890).
+ca_coffee_historic_gate = {
+	value = 1
+	if = {
+		limit = {
+			is_ai = yes
+			has_global_variable = ca_world_historic
+			OR = {
+				AND = { c:GUA ?= this game_date < 1871.1.1 }
+				AND = { c:ELS ?= this game_date < 1882.1.1 }
+				AND = { c:NIC ?= this game_date < 1870.1.1 }
+				AND = {
+					NOT = { c:COS ?= this }
+					NOT = { c:GUA ?= this }
+					NOT = { c:ELS ?= this }
+					NOT = { c:NIC ?= this }
+					game_date < 1890.1.1
+				}
+			}
+		}
+		value = 0
+	}
+}
+
+ca_coffee_monthly_change = {
+	value = 0
+	add = {
+		value = ca_coffee_levels
+		multiply = 0.05
+		max = 1
+		desc = "CA_COFFEE_PLANTATIONS"
+	}
+	if = {
+		limit = {
+			market_capital.market ?= {
+				mg:coffee = { market_goods_pricier > 0.25 }
+			}
+		}
+		add = { value = 0.5 desc = "CA_COFFEE_HIGH_PRICE" }
+	}
+	if = {
+		limit = {
+			any_scope_building = {
+				is_building_type = building_port
+				level >= 3
+			}
+		}
+		add = { value = 0.25 desc = "CA_COFFEE_PORTS" }
+	}
+	if = {
+		limit = { has_variable = ca_european_colonists }
+		add = { value = 0.25 desc = "CA_COFFEE_COLONISTS" }
+	}
+	if = {
+		limit = { ig:ig_landowners ?= { is_powerful = yes } }
+		add = { value = 0.25 desc = "CA_COFFEE_LANDOWNERS" }
+	}
+	# Pausa: terratenientes marginales
+	if = {
+		limit = { ig:ig_landowners ?= { ig_counts_as_marginal = yes } }
+		multiply = 0
+	}
+	multiply = ca_coffee_historic_gate
+}
+
+ca_agro_monthly_change = {
+	value = 0
+	if = {
+		limit = {
+			any_scope_building = {
+				is_building_type = building_port
+				level >= 3
+			}
+		}
+		add = { value = 0.25 desc = "CA_AGRO_PORTS" }
+	}
+	if = {
+		limit = {
+			any_scope_building = { is_building_type = building_railway }
+		}
+		add = { value = 0.25 desc = "CA_AGRO_RAILWAY" }
+	}
+	if = {
+		limit = {
+			any_scope_building = { is_building_type = building_banana_plantation }
+		}
+		add = { value = 0.25 desc = "CA_AGRO_BANANAS" }
+	}
+	if = {
+		limit = { has_variable = ca_banana_concession }
+		add = { value = 0.5 desc = "CA_AGRO_COMPANIES" }
+	}
+	if = {
+		limit = { has_variable = ca_atlantic_railway }
+		add = { value = 0.25 desc = "CA_AGRO_ATLANTIC_RAILWAY" }
+	}
+	if = {
+		limit = { has_law_or_variant = law_type:law_free_trade }
+		add = { value = 0.25 desc = "CA_AGRO_FREE_TRADE" }
+	}
+	if = {
+		limit = { has_variable = ca_debt_crisis }
+		add = { value = -0.5 desc = "CA_AGRO_DEBT_CRISIS" }
+	}
+	if = {
+		limit = { has_law_or_variant = law_type:law_isolationism }
+		multiply = 0
+	}
+}
+
+ca_military_monthly_change = {
+	value = 0.1
+	if = {
+		limit = { has_variable = ca_military_academy }
+		add = { value = 0.5 desc = "CA_MIL_ACADEMY" }
+	}
+	if = {
+		limit = { has_variable = ca_foreign_instructors }
+		add = { value = 0.25 desc = "CA_MIL_FOREIGN_OFFICERS" }
+	}
+	if = {
+		limit = { has_modifier = ca_standing_army }
+		add = { value = 0.5 desc = "CA_MIL_STANDING_ARMY" }
+	}
+	if = {
+		limit = {
+			OR = {
+				has_law_or_variant = law_type:law_professional_army
+				has_law = law_type:law_ca_guardia_nacional
+			}
+		}
+		add = { value = 0.25 desc = "CA_MIL_PROFESSIONAL_LAW" }
+	}
+	if = {
+		limit = { ig:ig_armed_forces ?= { is_powerful = yes is_in_government = yes } }
+		add = { value = -0.5 desc = "CA_MIL_CAUDILLOS_IN_POWER" }
+	}
+	if = {
+		limit = { has_variable = recent_coup_or_revolution_var }
+		add = { value = -1 desc = "CA_MIL_RECENT_COUP" }
+	}
+}
+
+ca_enlightenment_monthly_change = {
+	value = 0
+	if = {
+		limit = { literacy_rate >= 0.4 }
+		add = { value = 0.5 desc = "CA_ENL_LITERACY_HIGH" }
+	}
+	else_if = {
+		limit = { literacy_rate >= 0.2 }
+		add = { value = 0.25 desc = "CA_ENL_LITERACY" }
+	}
+	if = {
+		limit = {
+			has_institution = institution_schools
+			institution_investment_level = {
+				institution = institution_schools
+				value >= 2
+			}
+		}
+		add = { value = 0.25 desc = "CA_ENL_SCHOOLS" }
+	}
+	if = {
+		limit = { any_scope_building = { is_building_type = building_university } }
+		add = { value = 0.25 desc = "CA_ENL_UNIVERSITY" }
+	}
+	if = {
+		limit = {
+			OR = {
+				has_law_or_variant = law_type:law_right_of_assembly
+				has_law_or_variant = law_type:law_protected_speech
+			}
+		}
+		add = { value = 0.25 desc = "CA_ENL_FREE_PRESS" }
+	}
+	if = {
+		limit = { has_variable = ca_liberal_press }
+		add = { value = 0.25 desc = "CA_ENL_LIBERAL_PRESS" }
+	}
+	if = {
+		limit = {
+			OR = {
+				has_law_or_variant = law_type:law_outlawed_dissent
+				has_modifier = ca_press_watch
+			}
+		}
+		add = { value = -0.5 desc = "CA_ENL_CENSORSHIP" }
+	}
+	if = {
+		limit = { has_modifier = ca_concordat }
+		add = { value = -0.25 desc = "CA_ENL_CONCORDAT" }
+	}
+}

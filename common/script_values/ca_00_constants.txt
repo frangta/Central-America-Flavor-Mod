@@ -1,0 +1,66 @@
+﻿############################################################################
+# CAFM - F1 - Constantes del mod (common/script_values/ca_00_constants.txt)
+# Un solo lugar para balancear. Todo lleva prefijo ca_.
+# Diseno: CAFM_JE_CAIDA_FEDERACION.md (v3.4) y CAFM_EVENTOS_REDEFINIDOS.md
+############################################################################
+
+# --- Duraciones (dias) ---
+ca_modifier_time_short = 730		# 2 anos
+ca_modifier_time_medium = 1825		# 5 anos
+ca_modifier_time_long = 3650		# 10 anos
+ca_generic_event_cooldown = 1825	# espera de los eventos genericos (5 anos)
+
+# --- Barra de la Federacion (frca_support_bar, 0-200) ---
+ca_frca_bar_start = 75
+ca_frca_bar_max = 200
+ca_frca_bar_threshold_a = 120		# desenlace A: La Republica sobrevive
+ca_frca_bar_threshold_b = 80		# desenlace B: Union por la espada
+ca_frca_bar_crisis = 50				# por debajo: status_desc de crisis
+ca_frca_bar_conf_min = 50			# desenlace C: barra entre 50 y 150
+ca_frca_bar_conf_max = 150
+
+# --- Escala comun de los eventos (efectos ca_frca_bar_*) ---
+ca_frca_bar_minor_value = 10
+ca_frca_bar_moderate_value = 20
+ca_frca_bar_major_value = 30
+ca_frca_bar_critical_value = 50
+
+# --- Factores mensuales de la barra (diario §3) ---
+ca_frca_monthly_loyal = 1			# estado nucleo Leal
+ca_frca_monthly_wavering = 0		# Vacilante
+ca_frca_monthly_rebel = -1			# Rebelde
+ca_frca_monthly_separated = -2		# Separado sin paz firmada
+ca_frca_monthly_separated_peace = -1	# Separado con paz firmada
+ca_frca_monthly_law_unitary = 1
+ca_frca_monthly_law_federal = 0
+ca_frca_monthly_law_confederated = -2
+ca_frca_monthly_lobby = 1			# lobby profederalista fuerte
+ca_frca_monthly_lobby_clout = 0.25	# peso minimo del lobby (25 %)
+ca_frca_monthly_front_critical = -1	# por frente en Critico (solo fase IV)
+ca_frca_monthly_front_lost = -2		# por frente Perdido (solo fase IV)
+
+# --- Lealtad (frca_loyalty_<x>: 0 Separado, 1 Rebelde, 2 Vacilante, 3 Leal) ---
+ca_loyalty_separated = 0
+ca_loyalty_rebel = 1
+ca_loyalty_wavering = 2
+ca_loyalty_loyal = 3
+ca_loyalty_turmoil_threshold = 0.2
+ca_loyalty_turmoil_months = 6		# meses con turmoil para bajar 1
+ca_loyalty_recovery_months = 12		# meses sin turmoil para subir 1 (Vacilante)
+
+# --- Fechas clave (anos) ---
+ca_uca_target_year = 1845
+ca_confederation_limit_year = 1850
+
+# --- Frentes de la fase IV (frca_front_<x>: 0 Calmo ... 3 Perdido) ---
+ca_front_critical = 2
+ca_front_lost = 3
+
+# --- Barras regionales (anillo 2) ---
+ca_fvs_start_loyal = 75				# barra del estado (federalistas vs separatistas)
+ca_fvs_start_wavering = 50
+ca_fvs_start_rebel = 25
+ca_confederal_cohesion_start = 50	# B1
+ca_soconusco_bar_start = 50			# D3
+ca_soconusco_chiapanecan_brake = 0.3	# chiapanecan >= 30 %: deriva a la mitad
+ca_soconusco_mexican_fail = 0.45	# mexican >= 45 %: fracaso del diario
