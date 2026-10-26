@@ -9,7 +9,6 @@
 je_ca_hon_caudillo = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	group = je_group_historical_content
-	should_be_pinned_by_default = yes
 
 	current_value = {
 		value = root.var:hon_caudillo
@@ -62,6 +61,7 @@ je_ca_hon_caudillo = {
 
 	on_fail = {
 		set_variable = hon_caudillo_perpetuo
+		set_variable = jefe_supremo_var # F19 (G6): Dictador perpetuo
 	}
 
 	on_weekly_pulse = {
@@ -127,6 +127,23 @@ je_ca_hon_caudillo = {
 			if = {
 				limit = { ig:ig_intelligentsia ?= { is_in_government = yes } }
 				change_variable = { name = hon_caudillo subtract = 1 }
+			}
+			# F15 (E2): capital alterna, +1 al mes durante 2 anos
+			if = {
+				limit = { has_variable = hon_sede_alterna_push }
+				change_variable = { name = hon_caudillo add = 1 }
+			}
+			# F15 (E2): meses seguidos con la barra por debajo de 40 (Pespire dinamico)
+			if = {
+				limit = { var:hon_caudillo < 40 }
+				if = {
+					limit = { NOT = { has_variable = hon_low_caudillo_months } }
+					set_variable = { name = hon_low_caudillo_months value = 0 }
+				}
+				change_variable = { name = hon_low_caudillo_months add = 1 }
+			}
+			else = {
+				remove_variable = hon_low_caudillo_months
 			}
 		}
 	}

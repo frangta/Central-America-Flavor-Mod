@@ -1,4 +1,4 @@
-# =========================================================================
+﻿# =========================================================================
 # CAFM - Diarios de Costa Rica (estructura madre + capitulos)
 #
 #   je_ca_historic_situation_in_costarica  Diario madre (1836-1842)
@@ -41,6 +41,7 @@ je_ca_historic_situation_in_costarica = {
 	on_monthly_pulse = {
 		effect = {
 			ca_cos_chapter_scheduler_effect = yes
+			ca_cos_consequences_monthly = yes # F15 (E3)
 		}
 		# CAFM fix: antes estaban en on_yearly_pulse_country (solo el 1 de enero)
 		events = {

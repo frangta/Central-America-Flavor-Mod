@@ -20,7 +20,7 @@ lawgroup_ca_state_structure = {
 	affected_by_regime_change = no
 
 	enable = {
-                #has_variable = ca_organization_apro.
+                # CAFM F22: sin la condicion de ca_organization_apro (tu copia local la tenia activa, con un punto al final)
 		only_latin_centralamericans_cultures = yes
 	}
 

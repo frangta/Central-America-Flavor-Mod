@@ -1,0 +1,1192 @@
+﻿############################################################################
+# CAFM - F18 (grupo F) - Movimientos nuevos (common/political_movements/ca_movements_v3.txt)
+# 8 de la 1.0 y 3 de despues de 1850 (colonial, pro-concesiones, nacionalizacion).
+############################################################################
+
+movement_ca_autocratic_autonomist = {
+    category = movement_category_ideological
+    ideology = ideology_ca_autocratic_autonomist_movement
+
+    character_ideologies = {
+        ideology_ca_leader_autocratic_autonomist
+        ideology_central_america_caudillo
+        ideology_authoritarian
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_autocratic_autonomist }
+        }
+        only_centralamericans_cultures = yes
+        has_variable = ca_organization_apro
+    }
+
+    creation_weight = {
+        value = 50
+        if = {
+            limit = { has_law_or_variant = law_type:law_ca_central_american_unitary }
+            multiply = 2
+        }
+        if = {
+            limit = { has_law_or_variant = law_type:law_ca_caudillismo }
+            multiply = 1.5
+        }
+        if = {
+            limit = { is_subject = yes }
+            multiply = 1.5
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+    disband_trigger = {
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_leader_autocratic_autonomist
+            has_ideology = ideology:ideology_central_america_caudillo
+            has_ideology = ideology:ideology_authoritarian
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_armed_forces
+                    is_interest_group_type = ig_landowners
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 100
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_ca_leader_autocratic_autonomist
+                    has_ideology = ideology:ideology_central_america_caudillo
+                    has_ideology = ideology:ideology_authoritarian
+                }
+            }
+            multiply = 4
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_aristocrats
+        movement_support_officers
+    }
+
+    pop_support_weight = {
+        value = 10
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_ca_central_american_unitary } }
+            multiply = { value = 2 desc = "CA_MOV_UNITARY_LAW" }
+        }
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_ca_caudillismo } }
+            multiply = { value = 1.5 desc = "CA_MOV_CAUDILLOS" }
+        }
+        if = {
+            limit = { owner ?= { is_subject = yes } }
+            multiply = { value = 1.5 desc = "CA_MOV_MEMBER_STATE" }
+        }
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_ca_central_american_federal } }
+            add = { value = 0.25 desc = "CA_RAD_AUTOCRATIC_AUTONOMIST" }
+        }
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.1 }
+        weight = { value = 50 }
+    }
+}
+
+movement_ca_constitutionalist = {
+    category = movement_category_ideological
+    ideology = ideology_ca_constitutionalist_movement
+
+    character_ideologies = {
+        ideology_ca_federalist
+        ideology_ca_reformer
+        ideology_liberal_leader
+        ideology_republican_leader
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_constitutionalist }
+        }
+        only_centralamericans_cultures = yes
+        has_variable = ca_organization_apro
+    }
+
+    creation_weight = {
+        value = 50
+        if = {
+            limit = { OR = { has_law_or_variant = law_type:law_autocracy has_law_or_variant = law_type:law_ca_junta } }
+            multiply = 2
+        }
+        if = {
+            limit = { has_variable = ca_cos_bases_garantias }
+            multiply = 1.5
+        }
+        if = {
+            limit = { has_variable = frca_congress_dissolved }
+            multiply = 1.5
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+    disband_trigger = {
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_federalist
+            has_ideology = ideology:ideology_ca_reformer
+            has_ideology = ideology:ideology_liberal_leader
+            has_ideology = ideology:ideology_republican_leader
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_intelligentsia
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 100
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_ca_federalist
+                    has_ideology = ideology:ideology_ca_reformer
+                    has_ideology = ideology:ideology_liberal_leader
+                    has_ideology = ideology:ideology_republican_leader
+                }
+            }
+            multiply = 4
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_academics
+        movement_support_clerks
+    }
+
+    pop_support_weight = {
+        value = 10
+        if = {
+            limit = { owner ?= { OR = { has_law_or_variant = law_type:law_autocracy has_law_or_variant = law_type:law_ca_junta } } }
+            multiply = { value = 2 desc = "CA_MOV_AUTOCRACY" }
+        }
+        if = {
+            limit = { owner ?= { has_variable = ca_cos_bases_garantias } }
+            multiply = { value = 1.5 desc = "CA_MOV_BASES" }
+        }
+        if = {
+            limit = { owner ?= { has_variable = frca_congress_dissolved } }
+            multiply = { value = 1.5 desc = "CA_MOV_CONGRESS_DISSOLVED" }
+        }
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_autocracy } }
+            add = { value = 0.25 desc = "CA_RAD_CONSTITUTIONALIST" }
+        }
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.1 }
+        weight = { value = 50 }
+    }
+}
+
+movement_ca_secularist = {
+    category = movement_category_ideological
+    ideology = ideology_ca_secularist_movement
+
+    character_ideologies = {
+        ideology_ca_federalist
+        ideology_ca_morazanista
+        ideology_ca_reformer
+        ideology_radical
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_secularist }
+        }
+        only_centralamericans_cultures = yes
+        has_variable = ca_organization_apro
+    }
+
+    creation_weight = {
+        value = 50
+        if = {
+            limit = { has_law_or_variant = law_type:law_state_religion }
+            multiply = 2
+        }
+        if = {
+            limit = { has_modifier = ca_concordat }
+            multiply = 1.5
+        }
+        if = {
+            limit = { ig:ig_devout ?= { is_in_government = yes } }
+            multiply = 1.5
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+    disband_trigger = {
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_federalist
+            has_ideology = ideology:ideology_ca_morazanista
+            has_ideology = ideology:ideology_ca_reformer
+            has_ideology = ideology:ideology_radical
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_intelligentsia
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 100
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_ca_federalist
+                    has_ideology = ideology:ideology_ca_morazanista
+                    has_ideology = ideology:ideology_ca_reformer
+                    has_ideology = ideology:ideology_radical
+                }
+            }
+            multiply = 4
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_academics
+        movement_support_clerks
+    }
+
+    pop_support_weight = {
+        value = 10
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_state_religion } }
+            multiply = { value = 2 desc = "CA_MOV_STATE_RELIGION" }
+        }
+        if = {
+            limit = { owner ?= { has_modifier = ca_concordat } }
+            multiply = { value = 1.5 desc = "CA_MOV_CONCORDAT" }
+        }
+        if = {
+            limit = { owner ?= { ig:ig_devout ?= { is_in_government = yes } } }
+            multiply = { value = 1.5 desc = "CA_MOV_CLERGY_GOV" }
+        }
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_state_religion } }
+            add = { value = 0.25 desc = "CA_RAD_SECULARIST" }
+        }
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.1 }
+        weight = { value = 50 }
+    }
+}
+
+movement_ca_criollo_liberal = {
+    category = movement_category_ideological
+    ideology = ideology_ca_criollo_liberal_movement
+
+    character_ideologies = {
+        ideology_ca_reformer
+        ideology_ca_morismo
+        ideology_market_liberal
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_criollo_liberal }
+        }
+        only_centralamericans_cultures = yes
+        has_variable = ca_organization_apro
+    }
+
+    creation_weight = {
+        value = 50
+        if = {
+            limit = { is_at_war = yes }
+            multiply = 1.5
+        }
+        if = {
+            limit = { any_scope_state = { turmoil >= 0.2 } }
+            multiply = 1.5
+        }
+        if = {
+            limit = { ig:ig_intelligentsia ?= { is_powerful = yes } }
+            multiply = 1.25
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+    disband_trigger = {
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_reformer
+            has_ideology = ideology:ideology_ca_morismo
+            has_ideology = ideology:ideology_market_liberal
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_industrialists
+                    is_interest_group_type = ig_petty_bourgeoisie
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 100
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_ca_reformer
+                    has_ideology = ideology:ideology_ca_morismo
+                    has_ideology = ideology:ideology_market_liberal
+                }
+            }
+            multiply = 4
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_shopkeepers
+        movement_support_bureaucrats
+        movement_support_capitalists
+    }
+
+    pop_support_weight = {
+        value = 10
+        if = {
+            limit = { owner ?= { is_at_war = yes } }
+            multiply = { value = 1.5 desc = "CA_MOV_WAR" }
+        }
+        if = {
+            limit = { owner ?= { any_scope_state = { turmoil >= 0.2 } } }
+            multiply = { value = 1.5 desc = "CA_MOV_TURMOIL" }
+        }
+        if = {
+            limit = { owner ?= { ig:ig_intelligentsia ?= { is_powerful = yes } } }
+            multiply = { value = 1.25 desc = "CA_MOV_LIBERAL_RADICALISM" }
+        }
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { always = yes } }
+            add = { value = 0.25 desc = "CA_RAD_CRIOLLO_LIBERAL" }
+        }
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.1 }
+        weight = { value = 50 }
+    }
+}
+
+movement_ca_communalist = {
+    category = movement_category_ideological
+    ideology = ideology_ca_communalist_movement
+
+    character_ideologies = {
+        ideology_ca_peasant_caudillismo
+        ideology_maya_autonomism
+        ideology_ca_agrarian_luddism
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_communalist }
+        }
+        only_centralamericans_cultures = yes
+        has_variable = ca_organization_apro
+    }
+
+    creation_weight = {
+        value = 50
+        if = {
+            limit = { has_law_or_variant = law_type:law_land_reform_coffee_oligarchy }
+            multiply = 2
+        }
+        if = {
+            limit = { has_variable = ca_ejidos_extinguished }
+            multiply = 2
+        }
+        if = {
+            limit = { has_law_or_variant = law_type:law_ca_mandamientos }
+            multiply = 1.5
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+    disband_trigger = {
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_peasant_caudillismo
+            has_ideology = ideology:ideology_maya_autonomism
+            has_ideology = ideology:ideology_ca_agrarian_luddism
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_rural_folk
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 100
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_ca_peasant_caudillismo
+                    has_ideology = ideology:ideology_maya_autonomism
+                    has_ideology = ideology:ideology_ca_agrarian_luddism
+                }
+            }
+            multiply = 4
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_peasants
+    }
+
+    pop_support_weight = {
+        value = 10
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_land_reform_coffee_oligarchy } }
+            multiply = { value = 2 desc = "CA_MOV_COFFEE_OLIGARCHY" }
+        }
+        if = {
+            limit = { owner ?= { has_variable = ca_ejidos_extinguished } }
+            multiply = { value = 2 desc = "CA_MOV_EJIDOS" }
+        }
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_ca_mandamientos } }
+            multiply = { value = 1.5 desc = "CA_MOV_MANDAMIENTOS" }
+        }
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_land_reform_coffee_oligarchy } }
+            add = { value = 0.25 desc = "CA_RAD_COMMUNALIST" }
+        }
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.1 }
+        weight = { value = 50 }
+    }
+}
+
+movement_ca_guilds = {
+    category = movement_category_ideological
+    ideology = ideology_ca_guilds_movement
+
+    character_ideologies = {
+        ideology_ca_peasant_caudillismo
+        ideology_ca_jesuit_theocracy
+        ideology_traditionalist
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_guilds }
+        }
+        only_centralamericans_cultures = yes
+        has_variable = ca_organization_apro
+    }
+
+    creation_weight = {
+        value = 50
+        if = {
+            limit = { has_law = law_type:law_ca_escuela_laica }
+            multiply = 2
+        }
+        if = {
+            limit = { has_law_or_variant = law_type:law_total_separation }
+            multiply = 1.5
+        }
+        if = {
+            limit = { any_scope_state = { OR = { has_modifier = uca_cholera has_modifier = ca_generic_cholera_mod } } }
+            multiply = 1.5
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+    disband_trigger = {
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_peasant_caudillismo
+            has_ideology = ideology:ideology_ca_jesuit_theocracy
+            has_ideology = ideology:ideology_traditionalist
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_rural_folk
+                    is_interest_group_type = ig_devout
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 100
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_ca_peasant_caudillismo
+                    has_ideology = ideology:ideology_ca_jesuit_theocracy
+                    has_ideology = ideology:ideology_traditionalist
+                }
+            }
+            multiply = 4
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_peasants
+        movement_support_clergymen
+    }
+
+    pop_support_weight = {
+        value = 10
+        if = {
+            limit = { owner ?= { has_law = law_type:law_ca_escuela_laica } }
+            multiply = { value = 2 desc = "CA_MOV_SECULAR_SCHOOL" }
+        }
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_total_separation } }
+            multiply = { value = 1.5 desc = "CA_MOV_SEPARATION" }
+        }
+        if = {
+            limit = { owner ?= { any_scope_state = { OR = { has_modifier = uca_cholera has_modifier = ca_generic_cholera_mod } } } }
+            multiply = { value = 1.5 desc = "CA_MOV_EPIDEMIC" }
+        }
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_law = law_type:law_ca_escuela_laica } }
+            add = { value = 0.25 desc = "CA_RAD_GUILDS" }
+        }
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.1 }
+        weight = { value = 50 }
+    }
+}
+
+movement_ca_artesanado = {
+    category = movement_category_ideological
+    ideology = ideology_ca_artesanado_movement
+
+    character_ideologies = {
+        ideology_ca_federalist
+        ideology_protectionist
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_artesanado }
+        }
+        only_centralamericans_cultures = yes
+        has_variable = ca_organization_apro
+    }
+
+    creation_weight = {
+        value = 50
+        if = {
+            limit = { has_law_or_variant = law_type:law_free_trade }
+            multiply = 2
+        }
+        if = {
+            limit = { has_law_or_variant = law_type:law_laissez_faire }
+            multiply = 1.25
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+    disband_trigger = {
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_federalist
+            has_ideology = ideology:ideology_protectionist
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_petty_bourgeoisie
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 100
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_ca_federalist
+                    has_ideology = ideology:ideology_protectionist
+                }
+            }
+            multiply = 4
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_shopkeepers
+        movement_support_laborers
+    }
+
+    pop_support_weight = {
+        value = 10
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_free_trade } }
+            multiply = { value = 2 desc = "CA_MOV_FREE_TRADE" }
+        }
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_laissez_faire } }
+            multiply = { value = 1.25 desc = "CA_MOV_LAISSEZ_FAIRE" }
+        }
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_free_trade } }
+            add = { value = 0.25 desc = "CA_RAD_ARTESANADO" }
+        }
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.1 }
+        weight = { value = 50 }
+    }
+}
+
+movement_ca_agroexportadores = {
+    category = movement_category_ideological
+    ideology = ideology_ca_agroexportadores_movement
+
+    character_ideologies = {
+        ideology_coffee_liberalism
+        ideology_ca_morismo
+        ideology_market_liberal
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_agroexportadores }
+        }
+        only_centralamericans_cultures = yes
+        has_variable = ca_organization_apro
+    }
+
+    creation_weight = {
+        value = 50
+        if = {
+            limit = { has_variable = ca_coffee_boom_consolidated }
+            multiply = 2
+        }
+        if = {
+            limit = { has_journal_entry = je_ca_agro_export_boom }
+            multiply = 1.5
+        }
+        if = {
+            limit = { has_law_or_variant = law_type:law_protectionism }
+            multiply = 1.5
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+    disband_trigger = {
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_coffee_liberalism
+            has_ideology = ideology:ideology_ca_morismo
+            has_ideology = ideology:ideology_market_liberal
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_industrialists
+                    is_interest_group_type = ig_landowners
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 100
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_coffee_liberalism
+                    has_ideology = ideology:ideology_ca_morismo
+                    has_ideology = ideology:ideology_market_liberal
+                }
+            }
+            multiply = 4
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_capitalists
+        movement_support_aristocrats
+    }
+
+    pop_support_weight = {
+        value = 10
+        if = {
+            limit = { owner ?= { has_variable = ca_coffee_boom_consolidated } }
+            multiply = { value = 2 desc = "CA_MOV_COFFEE_BOOM" }
+        }
+        if = {
+            limit = { owner ?= { has_journal_entry = je_ca_agro_export_boom } }
+            multiply = { value = 1.5 desc = "CA_MOV_AGRO_EXPORT" }
+        }
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_protectionism } }
+            multiply = { value = 1.5 desc = "CA_MOV_PROTECTIONISM" }
+        }
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_protectionism } }
+            add = { value = 0.25 desc = "CA_RAD_AGROEXPORTADORES" }
+        }
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.1 }
+        weight = { value = 50 }
+    }
+}
+
+movement_ca_colonialist = {
+    category = movement_category_ideological
+    ideology = ideology_ca_colonialist_movement
+
+    character_ideologies = {
+        ideology_ca_tropical_utopian
+        ideology_market_liberal
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_colonialist }
+        }
+        only_centralamericans_cultures = yes
+        has_variable = ca_organization_apro
+        game_date >= 1850.1.1
+    }
+
+    creation_weight = {
+        value = 50
+        if = {
+            limit = { has_variable = ca_european_colonists }
+            multiply = 1.5
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+    disband_trigger = {
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_tropical_utopian
+            has_ideology = ideology:ideology_market_liberal
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_industrialists
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 100
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_ca_tropical_utopian
+                    has_ideology = ideology:ideology_market_liberal
+                }
+            }
+            multiply = 4
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_capitalists
+    }
+
+    pop_support_weight = {
+        value = 10
+        if = {
+            limit = { owner ?= { has_variable = ca_european_colonists } }
+            multiply = { value = 1.5 desc = "CA_MOV_COLONISTS" }
+        }
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { always = yes } }
+            add = { value = 0.25 desc = "CA_RAD_COLONIALIST" }
+        }
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.1 }
+        weight = { value = 50 }
+    }
+}
+
+movement_ca_enclavist = {
+    category = movement_category_ideological
+    ideology = ideology_ca_enclavist_movement
+
+    character_ideologies = {
+        ideology_ca_canal_company_rule
+        ideology_market_liberal
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_enclavist }
+        }
+        only_centralamericans_cultures = yes
+        has_variable = ca_organization_apro
+        game_date >= 1870.1.1
+    }
+
+    creation_weight = {
+        value = 50
+        if = {
+            limit = { has_variable = ca_banana_concession }
+            multiply = 2
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+    disband_trigger = {
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_ca_canal_company_rule
+            has_ideology = ideology:ideology_market_liberal
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_industrialists
+                    is_interest_group_type = ig_landowners
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 100
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_ca_canal_company_rule
+                    has_ideology = ideology:ideology_market_liberal
+                }
+            }
+            multiply = 4
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_capitalists
+        movement_support_aristocrats
+    }
+
+    pop_support_weight = {
+        value = 10
+        if = {
+            limit = { owner ?= { has_variable = ca_banana_concession } }
+            multiply = { value = 2 desc = "CA_MOV_CONCESSIONS" }
+        }
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_variable = ca_banana_concession } }
+            add = { value = 0.25 desc = "CA_RAD_ENCLAVIST" }
+        }
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.1 }
+        weight = { value = 50 }
+    }
+}
+
+movement_ca_radical_enclavist = {
+    category = movement_category_ideological
+    ideology = ideology_ca_radical_enclavist_movement
+
+    character_ideologies = {
+        ideology_anti_imperialist_sovereigntism
+        ideology_ca_banana_socialism
+    }
+
+    creation_trigger = {
+        NOT = {
+            any_political_movement = { is_political_movement_type = movement_ca_radical_enclavist }
+        }
+        only_centralamericans_cultures = yes
+        has_variable = ca_organization_apro
+        game_date >= 1870.1.1
+    }
+
+    creation_weight = {
+        value = 50
+        if = {
+            limit = { has_variable = ca_banana_concession }
+            multiply = 2
+        }
+        if = {
+            limit = { has_variable = ca_canal_concession }
+            multiply = 1.5
+        }
+    }
+
+    on_created = {
+        add_movement_enthusiasm_modifier = yes
+    }
+
+    disband_trigger = {
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+    character_support_trigger = {
+        OR = {
+            has_ideology = ideology:ideology_anti_imperialist_sovereigntism
+            has_ideology = ideology:ideology_ca_banana_socialism
+            scope:interest_group ?= {
+                OR = {
+                    is_interest_group_type = ig_intelligentsia
+                    is_interest_group_type = ig_rural_folk
+                    is_interest_group_type = ig_trade_unions
+                }
+            }
+        }
+    }
+
+    character_support_weight = {
+        value = 100
+        if = {
+            limit = {
+                OR = {
+                    has_ideology = ideology:ideology_anti_imperialist_sovereigntism
+                    has_ideology = ideology:ideology_ca_banana_socialism
+                }
+            }
+            multiply = 4
+        }
+    }
+
+    pop_support_trigger = {
+        NOT = { is_pop_type = slaves }
+    }
+
+    pop_support_factors = {
+        movement_support_academics
+        movement_support_peasants
+        movement_support_laborers
+    }
+
+    pop_support_weight = {
+        value = 10
+        if = {
+            limit = { owner ?= { has_variable = ca_banana_concession } }
+            multiply = { value = 2 desc = "CA_MOV_CONCESSIONS" }
+        }
+        if = {
+            limit = { owner ?= { has_variable = ca_canal_concession } }
+            multiply = { value = 1.5 desc = "CA_MOV_CANAL" }
+        }
+        multiply = {
+            value = pop_radical_fraction
+            add = 1
+        }
+    }
+
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_variable = ca_banana_concession } }
+            add = { value = 0.25 desc = "CA_RAD_RADICAL_ENCLAVIST" }
+        }
+    }
+
+    revolution = {
+        possible = { political_movement_support >= 0.1 }
+        weight = { value = 50 }
+    }
+}

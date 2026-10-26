@@ -164,12 +164,38 @@ gov_ca_jefe_estado = {
 	male_ruler = "RULER_TITLE_CA_HEAD_OF_STATE"
 	female_ruler = "RULER_TITLE_CA_HEAD_OF_STATE_FEMALE"
 
+	# CAFM F19 (G6): todos los estados miembros o recien separados hasta que declaren su republica.
+	# Nicaragua tiene Director Supremo hasta 1854.
 	possible = {
 		only_latin_centralamericans_cultures = yes
-		c:COS ?= this
+		NOT = { c:UCA ?= this }
 		has_law_or_variant = law_type:law_presidential_republic
-		has_variable = costa_rica_1830s
-
+		NOT = { has_variable = ca_republic_declared }
+		# el dictador perpetuo y la junta militar van primero
+		NOT = {
+			AND = {
+				has_law_or_variant = law_type:law_autocracy
+				OR = {
+					has_variable = jefe_supremo_var
+					ruler ?= { has_ideology = ideology:ideology_central_america_caudillo }
+					ig:ig_armed_forces ?= { is_in_government = yes }
+				}
+			}
+		}
+		NOT = {
+			AND = {
+				c:NIC ?= this
+				game_date < 1854.4.30
+			}
+		}
+		OR = {
+			has_variable = costa_rica_1830s
+			AND = {
+				exists = c:UCA
+				is_subject_of = c:UCA
+			}
+			is_subject = no
+		}
 	}
 }
 
@@ -265,6 +291,33 @@ gov_ca_junta = {
 	on_post_government_type_change = { post_change_to_dictatorial = yes }
 }
 
+# Presidente de la Republica Federal (CAFM F19, G6: activado)
+gov_ca_uca_republic = {
+	transfer_of_power = presidential_elective
+	new_leader_on_reform_government = no
+
+	male_ruler = "ruler_title_uca_republic"
+	female_ruler = "ruler_title_uca_republic"
+
+	possible = {
+		c:UCA ?= this
+		has_law_or_variant = law_type:law_presidential_republic
+	}
+}
+
+# Talamanca (CAFM F19, G6: activado)
+gov_ca_talamanca_cacique = {
+	transfer_of_power = hereditary
+	new_leader_on_reform_government = no
+
+	male_ruler = "ruler_title_rdt_absolutist_monarchy"
+	female_ruler = "ruler_title_rdt_absolutist_monarchy"
+
+	possible = {
+		c:RDT ?= this
+	}
+}
+
 # Republica Bananera (Estado enclavista / corporativo)
 # CORREGIDO: exige cultura CA; transferencia electiva (el enclave manda, pero hay elecciones)
 gov_ca_republica_bananera = {
@@ -309,13 +362,12 @@ gov_ca_director_supremo = {
 	male_ruler = "RULER_TITLE_CA_SUPREME_DIRECTOR"
 	female_ruler = "RULER_TITLE_CA_SUPREME_DIRECTOR_FEMALE"
 
+	# CAFM F19 (G6): solo Nicaragua hasta 1854 (antes, la UCA y toda republica presidencial < 1855)
 	possible = {
 		only_latin_centralamericans_cultures = yes
-		game_date < 1855.1.1
-		OR = {
-			c:UCA ?= this
-			has_law_or_variant = law_type:law_presidential_republic
-		}
+		c:NIC ?= this
+		game_date < 1854.4.30
+		has_law_or_variant = law_type:law_presidential_republic
 	}
 }
 
@@ -371,19 +423,7 @@ gov_ca_presidential_democracy = {
 #	}
 #}
 #
-#gov_ca_talamanca_cacique = {
-#	transfer_of_power = hereditary
-#	male_ruler = "ruler_title_rdt_absolutist_monarchy"
-#	female_ruler = "ruler_title_rdt_absolutist_monarchy"
-#	
-#	possible = {
-#		this = c:RDT
-#		OR = {
-#			has_law_or_variant = law_type:law_monarchy
-#			has_law_or_variant = law_type:law_autocracy
-#		}
-#	}
-#}
+# (gov_ca_talamanca_cacique activado arriba, CAFM F19)
 #
 #gov_ca_talamanca_awa_council = {
 #	transfer_of_power = dictatorial
@@ -537,16 +577,7 @@ gov_ca_presidential_democracy = {
 #}
 #
 ## --- UCA / FEDERACIÓN CENTROAMERICANA ---
-#gov_ca_uca_republic = {
-#	transfer_of_power = presidential_elective
-#	male_ruler = "ruler_title_uca_republic"
-#	female_ruler = "ruler_title_uca_republic"
-#	
-#	possible = {
-#		this = c:UCA
-#		has_law_or_variant = law_type:law_presidential_republic
-#	}
-#}
+# (gov_ca_uca_republic activado arriba, CAFM F19)
 #
 #gov_ca_uca_empire = {
 #	transfer_of_power = hereditary

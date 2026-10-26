@@ -608,4 +608,93 @@ state_peasants_investment_pool_efficiency_mult={
 		ai_value=0
 	}
 }
+# CAFM F18: movimientos nuevos
 
+state_pop_support_movement_ca_autocratic_autonomist_add={
+
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_constitutionalist_add={
+
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_secularist_add={
+
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_criollo_liberal_add={
+
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_communalist_add={
+
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_guilds_add={
+
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_artesanado_add={
+
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_agroexportadores_add={
+
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_pop_support_movement_ca_carrillista_add={
+
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# CAFM F22: el juego no trae este tipo para las plantaciones de banano
+building_banana_plantation_throughput_add = {
+	decimals = 0
+	color = good
+	percent = yes
+	game_data = { ai_value = 0 }
+}

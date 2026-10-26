@@ -2,7 +2,7 @@
     icon = "gfx/interface/icons/event_icons/event_map.dds"
     group = je_group_historical_content
    
-    progressbar = ca_prospecting_bar
+    # progressbar = ca_prospecting_bar # CAFM F22: esa barra no existe (la prospeccion se rehace en la actualizacion)
     
 
     current_value = {
@@ -14,9 +14,7 @@
     }
     
     
-    active = {
-        is_ca_culture_country = yes
-    }
+    # (CAFM F22: bloque "active" quitado, no es un campo de diario)
     
     complete = {
 
@@ -33,7 +31,7 @@
         set_variable = ca_can_build_mines_globally # Ejemplo de variable maestra
         
 
-        trigger_event = { id = ca_prospecting.100 }
+        # trigger_event = { id = ca_prospecting.100 } # CAFM F20: ese evento no existe (la prospeccion queda para la actualizacion)
     }
     
     weight = 100

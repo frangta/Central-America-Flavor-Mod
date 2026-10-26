@@ -1,0 +1,123 @@
+﻿# =========================================================================
+# CAFM F2 - Formaciones militares de la UCA en 1836
+# Diseno: claude/CAFM_MILITAR_DIPLOMACIA_1836.md (13 batallones: Ejercito
+# Federal + milicias de los Estados). Vanilla no da ningun ejercito a la UCA.
+# Las formaciones cargan ANTES que los personajes, asi que los generales
+# (Morazan, Carlos Salazar) se asignan en ca_on_game_started con
+# ca_assign_starting_generals (zz_ca_history_effects.txt).
+# (CAFM F23: las formaciones no admiten variables; el Ejercito Federal se reconoce por sus husares.)
+# =========================================================================
+MILITARY_FORMATIONS = {
+	c:UCA ?= {
+		# Ejercito Federal: Morazan; el gobierno federal nunca alcanzo los 2 000 soldados previstos
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_central_america
+			name = ca_formation_ejercito_federal
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				service_type = regular
+				state_region = s:STATE_SAN_SALVADOR
+				count = 1
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				service_type = regular
+				state_region = s:STATE_HONDURAS
+				count = 1
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				service_type = regular
+				state_region = s:STATE_SAN_SALVADOR
+				count = 1
+			}
+			save_scope_as = ca_formation_federal_scope
+		}
+
+		# 1.a y 2.a divisiones de Guatemala (1836): Carlos Salazar
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_central_america
+			name = ca_formation_milicia_guatemala
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				service_type = regular
+				state_region = s:STATE_GUATEMALA
+				count = 2
+			}
+			save_scope_as = ca_formation_gua_scope
+		}
+
+		# Division de Quetzaltenango: base del ejercito de Los Altos (1838-1840)
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_central_america
+			name = ca_formation_division_quetzaltenango
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				service_type = regular
+				state_region = s:STATE_GUATEMALA
+				count = 1
+			}
+			save_scope_as = ca_formation_alt_scope
+		}
+
+		# Milicia de El Salvador
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_central_america
+			name = ca_formation_milicia_el_salvador
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				service_type = regular
+				state_region = s:STATE_SAN_SALVADOR
+				count = 1
+			}
+			save_scope_as = ca_formation_els_scope
+		}
+
+		# Milicia de Honduras
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_central_america
+			name = ca_formation_milicia_honduras
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				service_type = regular
+				state_region = s:STATE_HONDURAS
+				count = 2
+			}
+			save_scope_as = ca_formation_hon_scope
+		}
+
+		# Milicia de Nicaragua
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_central_america
+			name = ca_formation_milicia_nicaragua
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				service_type = regular
+				state_region = s:STATE_NICARAGUA
+				count = 2
+			}
+			save_scope_as = ca_formation_nic_scope
+		}
+
+		# Milicia de Costa Rica (batallones Legion de Honor, Terrible, Vencedor e Intrepido)
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_central_america
+			name = ca_formation_milicia_costa_rica
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				service_type = regular
+				state_region = s:STATE_COSTA_RICA
+				count = 2
+			}
+			save_scope_as = ca_formation_cos_scope
+		}
+
+	}
+}

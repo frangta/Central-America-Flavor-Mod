@@ -12,20 +12,17 @@
 	fail = {
 		
 	}
-        on_monthly_pulse = {
-            events = {
-            ca_nicaragua_events.2 #Rivalry between cities
-            ca_nicaragua_events.3 #Proposal for agrarian reform in Leon
-            ca_nicaragua_events.5 #Intentos de Fortalecimiento Militar en Nicaragua
-			ca_nicaragua_events.8 # La oferta condicional de Zepeda (primavera de 1836)
-            ca_central_america.48 # Nicaragua es afectada por una epidemia de cólera, lo que debilita aún más al gobierno y las estructuras locales.
-            ca_central_america.49 # Nicaragua declares independence Peaceful
-            ca_central_america.69 # Civilwar in Nicaragua
-            ca_central_america.70 # Nicaragua declares independence on Arms
-            ca_central_america.76 # Nicaragua War Escalation
-            ca_central_america.69 # Nicaragua Peace Talks
-            }
-        }
+	# CAFM F15 (E1): solo .6 y .8; .3 (Leon contra Granada) es dinamico
+	on_monthly_pulse = {
+		events = {
+			ca_nicaragua_events.6 # La audacia de Jose Zepeda (abr 1836)
+			ca_nicaragua_events.8 # La oferta condicional de Zepeda (15 mar - 20 jun 1836)
+		}
+		random_events = {
+			90 = 0
+			10 = ca_nicaragua_events.3 # Leon contra Granada
+		}
+	}
 
 
 	on_fail = {
@@ -47,100 +44,136 @@
 }
 
 je_ca_historic_situation_in_talamanca = {
-	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
-	
-	group = je_group_historical_content	
+	# CAFM F14 (D2): "La cuestion de Talamanca". Lo recibe el senor de RDT (la UCA; despues, Costa Rica).
+	# Tres caminos (botones): integrar, conquistar o coexistir. Barra "Influencia en Talamanca" 0-100.
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+	should_be_pinned_by_default_involved = yes
 
-	#1
-	
+	immediate = {
+		if = {
+			limit = { NOT = { has_variable = ca_talamanca_influence } }
+			set_variable = { name = ca_talamanca_influence value = 30 }
+		}
+	}
+
+	current_value = {
+		value = root.var:ca_talamanca_influence
+	}
+	goal_add_value = {
+		value = 100
+	}
+	progressbar = yes
+	weight = 100
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_talamanca_status_integrate
+				trigger = { has_variable = ca_talamanca_path_integrate }
+			}
+			triggered_desc = {
+				desc = je_ca_talamanca_status_conquer
+				trigger = { has_variable = ca_talamanca_path_conquer }
+			}
+			triggered_desc = {
+				desc = je_ca_talamanca_status_coexist
+				trigger = { has_variable = ca_talamanca_path_coexist }
+			}
+			triggered_desc = {
+				desc = je_ca_talamanca_status_none
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	scripted_button = ca_button_talamanca_integrate
+	scripted_button = ca_button_talamanca_conquer
+	scripted_button = ca_button_talamanca_coexist
+
+	on_monthly_pulse = {
+		effect = {
+			ca_talamanca_monthly = yes
+		}
+		events = {
+			ca_talamanca_events.1
+			ca_talamanca_events.2
+			ca_talamanca_events.3
+			ca_talamanca_events.4
+			ca_talamanca_events.5
+		}
+		random_events = {
+			100 = 0
+			4 = ca_talamanca_events.6
+			4 = ca_talamanca_events.7
+			4 = ca_talamanca_events.8
+			4 = ca_talamanca_events.9
+			4 = ca_talamanca_events.10
+		}
+	}
+
 	complete = {
-		
-	}
-	
-	fail = {
-		
-	}
-	
-	on_fail = {
-		
+		custom_tooltip = {
+			text = je_ca_talamanca_complete_tt
+			var:ca_talamanca_influence >= 100
+		}
+		custom_tooltip = {
+			text = je_ca_talamanca_path_tt
+			OR = {
+				has_variable = ca_talamanca_path_integrate
+				has_variable = ca_talamanca_path_conquer
+				has_variable = ca_talamanca_path_coexist
+			}
+		}
 	}
 
 	on_complete = {
-		
+		ca_talamanca_complete = yes
 	}
-	
-	weight = 100
-	
-	transferable = no
 
 	invalid = {
-		NOT = { exists = c:UCA }
+		NOT = { c:RDT ?= { is_subject_of = root } }
 	}
-	
+
+	transferable = no
 }
 je_ca_historic_situation_in_elsalvador = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
-	
-	group = je_group_historical_content	
+	group = je_group_historical_content
 
-	#1
-	
-	complete = {
-		
-	}
-	
-	fail = {
-		
-	}
-	
-	on_fail = {
-		
+	# CAFM F15 (E4): los eventos politicos salen en su fecha (antes, pulso anual de todos los paises).
+	# Lo anade ca_els_start_chain al nacer el estado (jugador o IA).
+	on_monthly_pulse = {
+		events = {
+			ca_el_salvador_events.9 # Silva y Menendez (feb 1838)
+			ca_el_salvador_events.10 # La primera eleccion constitucional (sep 1842)
+			ca_el_salvador_events.11 # El desafio de Malespin (feb 1844)
+			ca_el_salvador_events.12 # La caida de Malespin (feb 1846)
+			ca_el_salvador_events.13 # Vasconcelos (feb 1848)
+		}
 	}
 
-	on_complete = {
-		
-	}
-	
 	weight = 100
-	
 	transferable = no
-
-	invalid = {
-		NOT = { exists = c:UCA }
-	}
-	
 }
 je_ca_historic_situation_in_guatemala = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
-	
-	group = je_group_historical_content	
+	group = je_group_historical_content
 
-	#1
-	
-	complete = {
-		
-	}
-	
-	fail = {
-		
-	}
-	
-	on_fail = {
-		
+	# CAFM F15 (E4): los eventos politicos salen en su fecha (antes, pulso anual de todos los paises).
+	# Lo anade ca_gua_start_chain al nacer el estado (jugador o IA).
+	on_monthly_pulse = {
+		events = {
+			ca_central_america.15 # F16: el colera en Guatemala (si existe GUA)
+			ca_guatemala_events.5 # La caida de Galvez (1838)
+			ca_guatemala_events.6 # Ratificacion institucional (dic 1842)
+			ca_guatemala_events.7 # Carrera presidente (dic 1844)
+			ca_guatemala_events.8 # La renuncia de Carrera (ago 1848)
+		}
 	}
 
-	on_complete = {
-		
-	}
-	
 	weight = 100
-	
 	transferable = no
-
-	invalid = {
-		NOT = { exists = c:UCA }
-	}
-	
 }
 je_ca_situation_in_losaltos = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
@@ -175,36 +208,119 @@ je_ca_situation_in_losaltos = {
 	
 }
 je_ca_historic_situation_in_panama = {
-	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
-	
-	group = je_group_historical_content	
+	# CAFM F14 (D1): "La encrucijada del Istmo". Lo recibe el dueno de la capital del Istmo
+	# (Nueva Granada en 1836; PNM si se independiza). Barra "Autonomia del Istmo" 0-100 (ca_istmo_autonomy).
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+	should_be_pinned_by_default_involved = yes
 
-	#1
-	
+	immediate = {
+		if = {
+			limit = { NOT = { has_variable = ca_istmo_autonomy } }
+			set_variable = { name = ca_istmo_autonomy value = 40 }
+		}
+	}
+
+	current_value = {
+		value = root.var:ca_istmo_autonomy
+	}
+	goal_add_value = {
+		value = 100
+	}
+	progressbar = yes
+	weight = 100
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_istmo_status_high
+				trigger = { var:ca_istmo_autonomy >= 70 }
+			}
+			triggered_desc = {
+				desc = je_ca_istmo_status_low
+				trigger = { var:ca_istmo_autonomy <= 30 }
+			}
+			triggered_desc = {
+				desc = je_ca_istmo_status_mid
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_istmo_monthly = yes
+		}
+		events = {
+			ca_panama_events.1
+			ca_panama_events.2
+			ca_panama_events.3
+			ca_panama_events.4
+			ca_panama_events.5
+			ca_panama_events.6
+			ca_panama_events.7
+			ca_panama_events.8
+			ca_panama_events.9
+			ca_panama_events.10
+			ca_central_america.61 # El Estado Libre del Istmo
+			ca_central_america.76 # El Istmo toma las armas
+			ca_central_america.59 # Panama se consolida
+		}
+		random_events = {
+			100 = 0
+			5 = ca_panama_events.11
+			5 = ca_panama_events.12
+			5 = ca_panama_events.13
+			5 = ca_panama_events.14
+			5 = ca_panama_events.15
+			5 = ca_panama_events.16
+			5 = ca_panama_events.17
+			5 = ca_panama_events.18
+			5 = ca_panama_events.19
+			5 = ca_panama_events.20
+			5 = ca_panama_events.21
+			5 = ca_panama_events.22
+			5 = ca_panama_events.23
+			5 = ca_panama_events.24
+			5 = ca_panama_events.25
+			5 = ca_panama_events.26
+			5 = ca_panama_events.27
+			5 = ca_panama_events.28
+			5 = ca_panama_events.29
+			5 = ca_panama_events.30
+		}
+	}
+
+	# Federal State (1855) o Istmo absorbido (barra 0)
 	complete = {
-		
-	}
-	
-	fail = {
-		
-	}
-	
-	on_fail = {
-		
+		OR = {
+			has_variable = ca_istmo_federal_state
+			custom_tooltip = {
+				text = je_ca_istmo_absorbed_tt
+				AND = {
+					NOT = { c:PNM ?= this }
+					var:ca_istmo_autonomy <= 0
+				}
+			}
+		}
 	}
 
 	on_complete = {
-		
+		if = {
+			limit = { var:ca_istmo_autonomy <= 0 }
+			set_variable = ca_istmo_absorbed
+			every_scope_state = {
+				limit = { state_region = s:STATE_PANAMA }
+				add_modifier = { name = ca_isthmus_absorbed months = 120 }
+			}
+		}
 	}
-	
-	weight = 100
-	
-	transferable = no
 
 	invalid = {
-		NOT = { exists = c:UCA }
+		NOT = { ca_isthmus_holder = yes }
 	}
-	
+
+	transferable = no
 }
 je_ca_historic_situation_in_honduras = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
@@ -227,6 +343,8 @@ je_ca_historic_situation_in_honduras = {
 			ca_honduras_events.3 # La encrucijada de Rivera (jun–nov 1836)
 			ca_honduras_events.4 # La plata de Tegucigalpa (tras .3.a)
 			ca_honduras_events.5 # La caoba de la costa norte (desde ago 1836)
+			ca_honduras_events.41 # F15 (E2): el alzamiento (1849)
+			ca_honduras_events.42 # F15 (E2): el Pacto de Pespire (1850)
 		}
 	}
 
@@ -507,76 +625,6 @@ je_ca_historic_situation_in_honduras = {
 #    }
 #} 
 # 
-#je_central_american_fragile_unity = { #events 1836 - 1842
-#	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
-#
-#	group = je_group_internal_affairs
-#
-#	#1
-#    scripted_progress_bar = ca_core_progress_bar
-#	complete = {
-#		custom_tooltip = {
-#			text = "ca_je_fragile_unity_goal_tt"
-#			scope:journal_entry = {
-#				"scripted_bar_progress(ca_core_progress_bar)" >= 100
-#			}
-#		}
-#	 AND = {	   
-#    	any_scope_state = {
-#				OR = {
-#					state_region = s:STATE_GUATEMALA
-#					state_region = s:STATE_HONDURAS
-#					state_region = s:STATE_COSTA_RICA
-#					state_region = s:STATE_SAN_SALVADOR
-#					state_region = s:STATE_NICARAGUA
-#
-#				}
-#				count < 3
-#		}
-#	 }
-#		
-#	}
-#	on_complete = {
-#	trigger_event = { id = central_america.2 popup = yes }
-#	}	
-#	on_monthly_pulse = {
-#	    ca_core_progress_bar = yes
-#
-#		}
-#
-#	
-#	fail = {
-#	    text = "central_america_fail_tt"
-#		custom_tooltip = {
-#			text = "ca_gain_fragile_unity_points"
-#			scope:journal_entry = {
-#				"scripted_bar_progress(ca_core_progress_bar)" <= 0
-#			}
-#		}
-#    AND = {		
-#	    any_scope_state = {
-#				OR = {
-#					state_region = s:STATE_GUATEMALA
-#					state_region = s:STATE_HONDURAS
-#					state_region = s:STATE_COSTA_RICA
-#					state_region = s:STATE_SAN_SALVADOR
-#					state_region = s:STATE_NICARAGUA
-#
-#				}
-#				count < 5
-#		}	
-#	}
-#	
-#	}
-#	on_fail = {
-#	trigger_event = { id = central_america.2 popup = yes }
-#	}	
-#
-#	transferable = no
-#	invalid = {
-#	NOT = { exists = c:UCA }
-#	}
-#}
 #je_first_costa_rica_civil_war ={
 #	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 #
@@ -961,39 +1009,6 @@ je_ca_historic_situation_in_honduras = {
 #	}
 #	
 #}
-#je_ca_federalists_vs_separatists_situation = {
-#	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
-#	
-#	group = je_group_historical_content	
-#
-#	#1
-#	
-#	complete = {
-#		
-#	}
-#	
-#	fail = {
-#		
-#	}
-#	
-#	on_fail = {
-#		
-#	}
-#
-#	on_complete = {
-#		
-#	}
-#	
-#	weight = 100
-#	
-#	transferable = no
-#
-#	invalid = {
-#		NOT = { exists = c:UCA }
-#	}
-#	
-#}
-#
 #je_baj_usa = {
 #	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
 #
@@ -1080,3 +1095,105 @@ je_ca_historic_situation_in_honduras = {
 #	
 #	transferable = no
 #}
+
+je_ca_soconusco = {
+	# CAFM F14 (D3): "El Soconusco". Diario de CIP (jugador o IA) desde el primer dia.
+	# Barra "Centroamerica <-> Mexico" 0-100 (ca_soconusco_bar), movida por las culturas y la lealtad.
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+	should_be_pinned_by_default_involved = yes
+
+	immediate = {
+		if = {
+			limit = { NOT = { has_variable = ca_soconusco_bar } }
+			set_variable = { name = ca_soconusco_bar value = 50 }
+		}
+	}
+
+	current_value = {
+		value = root.var:ca_soconusco_bar
+	}
+	goal_add_value = {
+		value = 100
+	}
+	progressbar = yes
+	weight = 100
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_soconusco_status_ca
+				trigger = { var:ca_soconusco_bar >= 60 }
+			}
+			triggered_desc = {
+				desc = je_ca_soconusco_status_mex
+				trigger = { var:ca_soconusco_bar <= 40 }
+			}
+			triggered_desc = {
+				desc = je_ca_soconusco_status_neutral
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_soconusco_change = { VALUE = ca_soconusco_monthly_change }
+		}
+		events = {
+			ca_los_altos_soconusco_events.1
+			ca_los_altos_soconusco_events.2
+			ca_los_altos_soconusco_events.3
+			ca_los_altos_soconusco_events.4
+		}
+		random_events = {
+			100 = 0
+			5 = ca_los_altos_soconusco_events.6
+			5 = ca_los_altos_soconusco_events.7
+			5 = ca_los_altos_soconusco_events.8
+			5 = ca_los_altos_soconusco_events.9
+			5 = ca_los_altos_soconusco_events.10
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = je_ca_soconusco_complete_tt
+			var:ca_soconusco_bar >= 100
+		}
+		custom_tooltip = {
+			text = je_ca_soconusco_culture_tt
+			"culture_percent_country(cu:central_american)" >= "culture_percent_country(cu:mexican)"
+		}
+	}
+
+	fail = {
+		OR = {
+			custom_tooltip = {
+				text = je_ca_soconusco_fail_tt
+				var:ca_soconusco_bar <= 0
+			}
+			custom_tooltip = {
+				text = je_ca_soconusco_mexican_tt
+				"culture_percent_country(cu:mexican)" >= 0.45
+			}
+			has_variable = ca_soconusco_irrevocable
+		}
+	}
+
+	on_complete = {
+		set_variable = ca_soconusco_result_central
+		trigger_event = { id = ca_central_america.5 popup = yes }
+	}
+
+	on_fail = {
+		set_variable = ca_soconusco_result_mexico
+		trigger_event = { id = ca_central_america.5 popup = yes }
+	}
+
+	invalid = {
+		NOT = { c:CIP ?= this }
+	}
+
+	transferable = no
+}

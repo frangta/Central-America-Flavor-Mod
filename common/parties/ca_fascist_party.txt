@@ -8,11 +8,11 @@
 			}
 			triggered_desc = {
 				desc = party_ca_national_autocracy
-				trigger = { has_variable = ca_autocracy2 }
+				trigger = { has_law_or_variant = law_type:law_autocracy }
 			}
 			triggered_desc = {
 				desc = party_ca_supreme_party
-				trigger = { has_variable = ca_single_party_state2 }
+				trigger = { has_law_or_variant = law_type:law_single_party_state }
 			}
 			triggered_desc = {
 				desc = party_fascist

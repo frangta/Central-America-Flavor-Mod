@@ -1,0 +1,24 @@
+﻿# ============================================================================
+# CAFM - F12 - Bloqueo del diario vanilla de reunificacion de Centroamerica
+# (B3: "el diario vanilla de reunificacion se bloquea para la UCA y los estados
+#  centroamericanos; no se sustituye"). El mod usa je_ca_patria_grande.
+# Esta definicion sustituye a la vanilla con la misma clave: nunca se puede
+# tener y, si algo la anade, se invalida en el acto.
+# Si en tu version vanilla el diario tiene otro nombre, cambia solo la clave.
+# ============================================================================
+je_reunify_central_america = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	group = je_group_foreign_affairs
+
+	is_shown_when_inactive = {
+		always = no
+	}
+
+	possible = {
+		always = no
+	}
+
+	invalid = {
+		always = yes
+	}
+}

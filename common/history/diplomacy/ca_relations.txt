@@ -1,0 +1,22 @@
+﻿# =========================================================================
+# CAFM F2 - Relaciones iniciales (1836)
+# Diseno: claude/CAFM_MILITAR_DIPLOMACIA_1836.md §4. Las de vanilla (SPA -30,
+# USA +10) se mantienen; este archivo se suma, no reemplaza 00_relations.txt.
+# =========================================================================
+DIPLOMACY = {
+	c:UCA ?= {
+		set_relations = { country = c:GBR value = -20 }	# Belice, Mosquitia, deuda, Chatfield
+		set_relations = { country = c:MKT value = -40 }	# costa caribe y San Juan
+		set_relations = { country = c:MEX value = -30 }	# Chiapas y Soconusco
+		set_relations = { country = c:CLM value = -20 }	# Bocas del Toro
+		set_relations = { country = c:FRA value = 10 }	# comercio
+		set_relations = { country = c:RDT value = 20 }	# dependencia leal
+		set_relations = { country = c:CIP value = 10 }	# dependencia disputada
+	}
+	c:GBR ?= {
+		set_relations = { country = c:MKT value = 50 }	# protector del rey misquito
+	}
+	c:MEX ?= {
+		set_relations = { country = c:CIP value = -30 }	# Soconusco
+	}
+}

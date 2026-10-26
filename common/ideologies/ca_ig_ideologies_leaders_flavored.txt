@@ -39,61 +39,28 @@
     #    law_ca_central_american_federal = neutral
     #    law_ca_central_american_confederated = disapprove
     #}
-    country_trigger = {
-        # Restringido a culturas centroamericanas
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-        }
-        # Opcional: Solo si existe algún reclamo monárquico o es una monarquía
-        OR = {
-            has_law_or_variant = law_type:law_monarchy
-            has_technology_researched = egalitarianism # Requiere cierto avance político
-        }
-    }
 
-    interest_group_leader_trigger = {
-        # Típicamente aristócratas ilustrados o intelectuales conservadores
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		has_variable = ca_alt_ca_liberal_monarchist
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
 		ideology_ca_liberal_monarchist_valid_trigger = yes
-        OR = {
-            is_interest_group_type = ig_landowners
-            is_interest_group_type = ig_intelligentsia
-        }
-    }
-
-    non_interest_group_leader_trigger = {
-        # Los agitadores no suelen ser monárquicos en repúblicas, salvo excepciones
-        NOT = { has_role_of_type = agitator }
-    }
-
-    interest_group_leader_weight = {
-        value = 10
-        
-        # Más probable si ya hay monarquía
-        if = {
-            limit = { owner = { has_law_or_variant = law_type:law_monarchy } }
-            add = 50
-        }
-        
-        # Menos probable en repúblicas consolidadas
-        if = {
-            limit = { owner = { has_law_or_variant = law_type:law_presidential_republic } }
-            add = -50
-        }
-    }
-
-    non_interest_group_leader_weight = {
-        value = 5
-    }	
-		
+	}
+	interest_group_leader_weight = {
+		value = 0
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_liberal_monarchist_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 0
+	}
 }
 
 ideology_ca_unitarian = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/authoritarian.dds"
     character_ideology = yes
 
     lawgroup_ca_state_structure = {
@@ -107,47 +74,31 @@ ideology_ca_unitarian = {
         law_appointed_bureaucrats = strongly_approve
         law_elected_bureaucrats = strongly_disapprove
     }
-   country_trigger = {
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-        }
-    }
 
-    interest_group_leader_trigger = {
-	ideology_ca_unitarian_valid_trigger = yes
-        # Conservadores, Iglesia y Militares suelen preferir el centralismo
-        OR = {
-            is_interest_group_type = ig_landowners
-            is_interest_group_type = ig_devout
-            is_interest_group_type = ig_armed_forces
-        }
-    }
-
-    interest_group_leader_weight = {
-        value = 25 # Base sólida en el siglo XIX
-
-        # Más probable si el país ya es Unitario
-        if = {
-            limit = { owner = { has_law_or_variant = law_type:law_ca_central_american_unitary } }
-            add = 50
-        }
-
-        # Los Terratenientes aman el control central
-        if = {
-            limit = { is_interest_group_type = ig_landowners }
-            add = 25
-        }
-    }	
-	
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_unitarian_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 20
+		if = {
+			limit = { owner = { OR = { has_law_or_variant = law_type:law_ca_central_american_unitary has_variable = ca_faction_centralist } } }
+			add = 40
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_unitarian_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 
 ideology_ca_federalist = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/authoritarian.dds"
     character_ideology = yes
 
     lawgroup_ca_state_structure = {
@@ -161,43 +112,27 @@ ideology_ca_federalist = {
         law_appointed_bureaucrats = strongly_disapprove
         law_elected_bureaucrats = strongly_approve 
     }
+
+	# CAFM F18 (D): reglas de aparicion
 	country_trigger = {
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-        }
-    }
-
-    interest_group_leader_trigger = {
-	ideology_ca_federalist_valid_trigger = yes
-        # Intelectuales liberales y Burguesía comercial
-        OR = {
-            is_interest_group_type = ig_intelligentsia
-            is_interest_group_type = ig_petty_bourgeoisie
-            is_interest_group_type = ig_industrialists
-        }
-    }
-
-    interest_group_leader_weight = {
-        value = 25
-
-        # Más probable si hay leyes federales
-        if = {
-            limit = { owner = { has_law_or_variant = law_type:law_ca_central_american_federal } }
-            add = 50
-        }
-
-        # Intelectuales prefieren federación
-        if = {
-            limit = { is_interest_group_type = ig_intelligentsia }
-            add = 25
-        }
-    }
-	
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_federalist_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 25
+		if = {
+			limit = { owner = { has_law_or_variant = law_type:law_ca_central_american_federal } }
+			add = 50
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_federalist_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 
 ideology_ca_leader_autocratic_autonomist = {
@@ -241,93 +176,27 @@ ideology_ca_leader_autocratic_autonomist = {
         law_mass_conscription = disapprove
         law_peasant_levies = disapprove
     }
+
+	# CAFM F18 (D): reglas de aparicion
 	country_trigger = {
-        # Restringido a las culturas del mod
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-            country_has_primary_culture = cu:panamanian
-        }
-    }
-
-    interest_group_leader_trigger = {
-        # Típico de:
-        # 1. Rural Folk (Líderes campesinos regionalistas)
-        # 2. Armed Forces (Jefes de milicias locales)
-        # 3. Landowners (Patrones locales que no quieren gobierno central)
-
-        OR = {
-            is_interest_group_type = ig_rural_folk
-            is_interest_group_type = ig_armed_forces
-            is_interest_group_type = ig_landowners
-        }
-    }
-
-    non_interest_group_leader_trigger = {
-        # Aceptamos agitadores, ya que un autonomista suele empezar agitando contra el centro
-        ideology_ca_leader_autocratic_autonomist_valid_trigger = yes
-    }
-
-    interest_group_leader_weight = {
-        value = 10
-
-        # --- Lógica de Contexto Histórico ---
-        
-        # Más probable si el país ya es una Confederación (status quo)
-        if = {
-            limit = {
-                owner = { has_law_or_variant = law_type:law_ca_central_american_confederated }
-            }
-            add = 50
-        }
-
-        ## Más probable si hay caos (Radicalismo alto) -> Surgen hombres fuertes locales
-        #if = {
-        #    limit = {
-        #        owner = { any_political_movement = { ... } }
-        #    }
-        #    add = 25
-        #}
-
-        # Sinergia con Milicias Nacionales
-        if = {
-            limit = {
-                owner = { has_law_or_variant = law_type:law_national_militia }
-            }
-            add = 25
-        }
-
-        # Rural Folk tienden a ser más autonomistas/conservadores en este contexto (tipo Carrera)
-        if = {
-            limit = { is_interest_group_type = ig_rural_folk }
-            add = 20
-        }
-        
-        # Menos probable si el país es fuertemente Unitario (ya fueron derrotados o integrados)
-        if = {
-            limit = {
-                owner = { has_law_or_variant = law_type:law_ca_central_american_unitary }
-            }
-            add = -50
-        }
-    }
-
-    non_interest_group_leader_weight = {
-        value = 10
-        
-        # Agitadores autonomistas aparecen si hay descontento regional
-        #if = {
-        #    limit = {
-        #        owner = { radical_fraction > 0.15 }
-        #    }
-        #    add = 50
-        #}
-    }
-
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_leader_autocratic_autonomist_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 15
+		if = {
+			limit = { owner = { OR = { has_law_or_variant = law_type:law_ca_autonomous_state has_law_or_variant = law_type:law_ca_confederated_state } } }
+			add = 30
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_leader_autocratic_autonomist_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 ideology_ca_reformer = { 
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_reformer.dds"
@@ -365,157 +234,31 @@ ideology_ca_reformer = {
 		law_factory_councils = strongly_disapprove
 	}
 
-
+	# CAFM F18 (D): reglas de aparicion
 	country_trigger = {
-	    only_latin_centralamericans_cultures = yes
-		has_technology_researched = egalitarianism
-		NOT = {
-			has_technology_researched = feminism
-		}
+		ca_is_ca_national_country = yes
+		game_date >= 1831.1.1
+		game_date <= 1840.12.31
 	}
-
-	non_interest_group_leader_trigger = {
-		# Agitators should have an ideology at odds with current laws
-		NAND = {
-			has_role_of_type = agitator
-			owner = {
-				has_law_or_variant = law_type:law_cultural_exclusion
-				has_law_or_variant = law_type:law_compulsory_primary_school
-			}
-		}
+	interest_group_leader_trigger = {
+		ideology_ca_reformer_valid_trigger = yes
 	}
-
 	interest_group_leader_weight = {
-		value = {
-			add = 100
-			desc = "base_value"
-		}
-
-		# More likely if issues are relevant
+		value = 20
 		if = {
-			limit = {
-				owner.ideology_reformer_disfavoured_laws > 0
-			}
-			add = {
-				value = owner.ideology_reformer_disfavoured_laws
-				multiply = 12
-				desc = "DISFAVORED_LAWS"
-			}
+			limit = { owner = { ig:ig_intelligentsia ?= { is_in_government = yes } } }
+			add = 40
 		}
-		# Less likely if issues are not relevant
-		if = {
-			limit = {
-				owner.ideology_reformer_favoured_laws > 0
-			}
-			subtract = {
-				value = owner.ideology_reformer_favoured_laws
-				multiply = 12
-				desc = "FAVORED_LAWS"
-			}
-		}
-
-		# less likely among more progressive IG's if they're angry and socialism is researched
-		if = {
-			limit = {
-				owner = {
-					has_technology_researched = socialism
-				}
-				OR = {
-					is_interest_group_type = ig_intelligentsia
-					is_interest_group_type = ig_trade_unions
-				}
-				ig_approval < 0
-			}
-			add = {
-				value = ig_approval
-				multiply = 5
-				desc = "UNHAPPY_INTELLIGENTSIA_OR_TU"
-			}
-		}
-
-
-		#if = {
-		#	limit = {
-		#		OR = {
-		#			has_variable = communist_ig_var
-		#			has_variable = chose_vanguardism
-		#			has_variable = chose_anarchism
-		#			has_variable = chose_communism
-		#			has_variable = chose_ethno_nationalism
-		#			has_variable = chose_conservatism
-		#			has_variable = chose_fascism
-		#		}
-		#	}
-		#	multiply = {
-		#		value = 0.1
-		#		desc = "CHOSE_A_DIFFERENT_PATH"
-		#	}
-		#}
 	}
-
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_reformer_valid_trigger = yes }
+	}
 	non_interest_group_leader_weight = {
-		value = 100
-
-		# More likely if issues are relevant
-		if = {
-			limit = {
-				owner.ideology_reformer_disfavoured_laws > 0
-			}
-			add = {
-				value = owner.ideology_reformer_disfavoured_laws
-				multiply = 12
-			}
-		}
-		# Less likely if issues are not relevant
-		if = {
-			limit = {
-				owner.ideology_reformer_favoured_laws > 0
-			}
-			subtract = {
-				value = owner.ideology_reformer_favoured_laws
-				multiply = 12
-			}
-		}
-
-
-		# less likely among more progressive IG's if they're angry and socialism is researched
-		if = {
-			limit = {
-				owner = {
-					has_technology_researched = socialism
-				}
-				OR = {
-					is_interest_group_type = ig_intelligentsia
-					is_interest_group_type = ig_trade_unions
-				}
-				interest_group.ig_approval < 0
-			}
-			add = {
-				value = interest_group.ig_approval
-				multiply = 5
-			}
-		}
-
-		#if = {
-		#	limit = {
-		#		interest_group = {
-		#			OR = {
-		#				has_variable = communist_ig_var
-		#				has_variable = chose_vanguardism
-		#				has_variable = chose_anarchism
-		#				has_variable = chose_communism
-		#				has_variable = chose_ethno_nationalism
-		#				has_variable = chose_conservatism
-		#				has_variable = chose_fascism
-		#			}
-		#		}
-		#	}
-		#	multiply = 0.1
-		#}
+		value = 5
 	}
 }
 ideology_central_america_caudillo = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/unused/ideology_leader_caudillismo.dds"
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/authoritarian.dds"
     character_ideology = yes
 
 
@@ -552,48 +295,27 @@ ideology_central_america_caudillo = {
         law_dedicated_police = neutral
         law_no_police = strongly_disapprove
     }
-    country_trigger = {
-        # Típico de la era de la anarquía o post-federación
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-        }
-    }
 
-    interest_group_leader_trigger = {
-	ideology_central_america_caudillo_valid_trigger = yes
-        # Casi exclusivo de Militares y Terratenientes
-        OR = {
-            is_interest_group_type = ig_armed_forces
-            is_interest_group_type = ig_landowners
-        }
-    }
-
-    interest_group_leader_weight = {
-        value = 20
-
-        # Muy probable para las Fuerzas Armadas
-        if = {
-            limit = { is_interest_group_type = ig_armed_forces }
-            add = 100
-        }
-
-        # Más probable si hay inestabilidad o autocracia
-        #if = {
-        #    limit = { 
-        #        owner = { 
-        #            has_law_or_variant = law_type:law_autocracy 
-        #            radical_fraction > 0.2
-        #        } 
-        #    }
-        #    add = 50
-        #}
-    }	
-	
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
+		ideology_central_america_caudillo_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 20
+		if = {
+			limit = { owner = { has_law_or_variant = law_type:law_ca_caudillismo } }
+			add = 40
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_central_america_caudillo_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 15
+	}
 }
 # ====================================================================
 # IDEOLOGÍAS REGIONALES CENTROAMERICANAS
@@ -628,19 +350,28 @@ ideology_maya_autonomism = {
         law_collectivized_agriculture = strongly_approve
     }
 
-    interest_group_leader_weight = {
-        value = 0
-        if = {
-            limit = {
-                owner = { c:GUA = this }
-                OR = {
-                    is_interest_group_type = ig_rural_folk
-                    is_interest_group_type = ig_trade_unions
-                }
-            }
-            add = 100
-        }
-    }
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		OR = { country_has_primary_culture = cu:guatemalan c:ALT ?= this c:UCA ?= this }
+		game_date >= 1837.1.1
+		game_date <= 1850.12.31
+	}
+	interest_group_leader_trigger = {
+		ideology_maya_autonomism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 15
+		if = {
+			limit = { owner = { has_global_variable = ca_carrera_revolt_seed } }
+			add = 30
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_maya_autonomism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 15
+	}
 }
 
 # --------------------------------------------------------------------
@@ -671,19 +402,24 @@ ideology_coffee_liberalism = {
         law_commercialized_agriculture = strongly_approve
     }
 
-    interest_group_leader_weight = {
-        value = 0
-        if = {
-            limit = {
-                owner = { c:ELS = this }
-                OR = {
-                    is_interest_group_type = ig_landowners
-                    is_interest_group_type = ig_industrialists
-                }
-            }
-            add = 100
-        }
-    }
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1850.1.1
+		has_technology_researched = stock_exchange
+	}
+	interest_group_leader_trigger = {
+		ideology_coffee_liberalism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 20
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_coffee_liberalism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 5
+	}
 }
 
 ideology_cuscatleco_nationalism = {
@@ -705,19 +441,24 @@ ideology_cuscatleco_nationalism = {
         law_professional_army = approve
     }
 
-    interest_group_leader_weight = {
-        value = 0
-        if = {
-            limit = {
-                owner = { c:ELS = this }
-                OR = {
-                    is_interest_group_type = ig_armed_forces
-                    is_interest_group_type = ig_petty_bourgeoisie
-                }
-            }
-            add = 50
-        }
-    }
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		OR = { country_has_primary_culture = cu:el_salvadorian }
+		game_date >= 1850.1.1
+		has_technology_researched = nationalism
+	}
+	interest_group_leader_trigger = {
+		ideology_cuscatleco_nationalism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 20
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_cuscatleco_nationalism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 
 # --------------------------------------------------------------------
@@ -744,19 +485,28 @@ ideology_granadine_legitimism = {
         law_total_separation = strongly_disapprove
     }
 
-    interest_group_leader_weight = {
-        value = 0
-        if = {
-            limit = {
-                owner = { c:NIC = this }
-                OR = {
-                    is_interest_group_type = ig_landowners
-                    is_interest_group_type = ig_devout
-                }
-            }
-            add = 100
-        }
-    }
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		OR = { country_has_primary_culture = cu:nicaraguan }
+		game_date >= 1840.1.1
+		game_date <= 1857.12.31
+	}
+	interest_group_leader_trigger = {
+		ideology_granadine_legitimism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 25
+		if = {
+			limit = { owner = { is_subject = no } }
+			add = 50
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_granadine_legitimism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 
 ideology_anti_imperialist_sovereigntism = {
@@ -777,16 +527,24 @@ ideology_anti_imperialist_sovereigntism = {
         law_national_militia = strongly_approve
     }
 
-    interest_group_leader_weight = {
-        value = 0
-        if = {
-            limit = {
-                owner = { c:NIC = this }
-                is_interest_group_type = ig_rural_folk
-            }
-            add = 50
-        }
-    }
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1880.1.1
+		has_technology_researched = political_agitation
+	}
+	interest_group_leader_trigger = {
+		ideology_anti_imperialist_sovereigntism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 15
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_anti_imperialist_sovereigntism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 
 ideology_slaver_filibusterism = {
@@ -808,16 +566,24 @@ ideology_slaver_filibusterism = {
         law_colonial_exploitation = strongly_approve
     }
 
-    interest_group_leader_weight = {
-        value = 0
-        if = {
-            limit = {
-                owner = { c:NIC = this }
-                culture = cu:dixie # Solo aparece si el líder es gringo/sureño
-            }
-            add = 200
-        }
-    }
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		OR = { country_has_primary_culture = cu:dixie has_variable = ca_filibuster_state }
+		game_date >= 1855.1.1
+		game_date <= 1860.12.31
+	}
+	interest_group_leader_trigger = {
+		ideology_slaver_filibusterism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 20
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_slaver_filibusterism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 
 # --------------------------------------------------------------------
@@ -825,7 +591,7 @@ ideology_slaver_filibusterism = {
 # --------------------------------------------------------------------
 
 ideology_carrillismo = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_paternalistic.dds"
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_royalist.dds"
     character_ideology = yes
     lawgroup_ca_state_structure = {        
        law_ca_central_american_federal = strongly_disapprove
@@ -847,19 +613,28 @@ ideology_carrillismo = {
         law_appointed_bureaucrats = strongly_approve
     }
 
-    interest_group_leader_weight = {
-        value = 0
-        if = {
-            limit = {
-                owner = { c:COS = this }
-                OR = {
-                    is_interest_group_type = ig_intelligentsia
-                    is_interest_group_type = ig_armed_forces
-                }
-            }
-            add = 80
-        }
-    }
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		OR = { country_has_primary_culture = cu:costa_rican }
+		game_date >= 1838.1.1
+		game_date <= 1850.12.31
+	}
+	interest_group_leader_trigger = {
+		ideology_carrillismo_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 25
+		if = {
+			limit = { owner = { is_subject = no } }
+			add = 50
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_carrillismo_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 
 ideology_olympus_liberalism = {
@@ -882,16 +657,24 @@ ideology_olympus_liberalism = {
         law_universal_suffrage = disapprove
     }
 
-    interest_group_leader_weight = {
-        value = 0
-        if = {
-            limit = {
-                owner = { c:COS = this }
-                is_interest_group_type = ig_intelligentsia
-            }
-            add = 100
-        }
-    }
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1870.1.1
+		has_technology_researched = empiricism
+	}
+	interest_group_leader_trigger = {
+		ideology_olympus_liberalism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 20
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_olympus_liberalism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 5
+	}
 }
 
 ideology_chacara_social_democracy = {
@@ -917,19 +700,24 @@ ideology_chacara_social_democracy = {
         law_interventionism = strongly_approve
     }
 
-    interest_group_leader_weight = {
-        value = 0
-        if = {
-            limit = {
-                owner = { c:COS = this }
-                OR = {
-                    is_interest_group_type = ig_rural_folk
-                    is_interest_group_type = ig_trade_unions
-                }
-            }
-            add = 80
-        }
-    }
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1880.1.1
+		has_technology_researched = socialism
+	}
+	interest_group_leader_trigger = {
+		ideology_chacara_social_democracy_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 15
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_chacara_social_democracy_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 
 # --------------------------------------------------------------------
@@ -937,7 +725,7 @@ ideology_chacara_social_democracy = {
 # --------------------------------------------------------------------
 
 ideology_mercantile_transitism = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_utilitarian.dds.dds"
+    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_utilitarian.dds"
     character_ideology = yes
 
     lawgroup_trade_policy = {
@@ -955,19 +743,27 @@ ideology_mercantile_transitism = {
         law_laissez_faire = strongly_approve
     }
 
-    interest_group_leader_weight = {
-        value = 0
-        if = {
-            limit = {
-                owner = { c:PNM = this }
-                OR = {
-                    is_interest_group_type = ig_industrialists
-                    is_interest_group_type = ig_petty_bourgeoisie
-                }
-            }
-            add = 100
-        }
-    }
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		OR = { country_has_primary_culture = cu:panamanian country_has_primary_culture = cu:nicaraguan }
+		game_date >= 1848.1.1
+	}
+	interest_group_leader_trigger = {
+		ideology_mercantile_transitism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 20
+		if = {
+			limit = { owner = { has_global_variable = ca_isthmus_gold_rush } }
+			add = 40
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_mercantile_transitism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 5
+	}
 }
 
 ideology_isthmian_separatism = {
@@ -983,26 +779,30 @@ ideology_isthmian_separatism = {
         law_national_militia = approve
     }
 
-    interest_group_leader_weight = {
-        value = 0
-        if = {
-            limit = {
-                owner = { c:PNM = this }
-                OR = {
-                    is_interest_group_type = ig_intelligentsia
-                    is_interest_group_type = ig_landowners
-                }
-            }
-            add = 80
-        }
-    }
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		OR = { country_has_primary_culture = cu:panamanian }
+		game_date >= 1830.1.1
+		game_date <= 1850.12.31
+	}
+	interest_group_leader_trigger = {
+		ideology_isthmian_separatism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 25
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_isthmian_separatism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 #Morazanismo (Liberalismo Radical / Federalismo)
 ideology_ca_morazanista = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader_radical.dds"
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_radical.dds"
 	
 	character_ideology = yes
-	priority = 100 # Anulará la ideología base del IG si Morazán es el líder
 
 	lawgroup_church_and_state = {
 		law_total_separation = strongly_approve
@@ -1034,6 +834,29 @@ ideology_ca_morazanista = {
 	lawgroup_land_reform = {
 		law_serfdom = strongly_disapprove
 	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1829.1.1
+		game_date <= 1850.12.31
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_morazanista_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 15
+		if = {
+			limit = { owner = { has_law_or_variant = law_type:law_ca_central_american_federal } }
+			add = 30
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_morazanista_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 #Filibusterismo Esclavista (Destino Manifiesto Anglo)
 ideology_ca_filibuster = {
@@ -1050,6 +873,29 @@ ideology_ca_filibuster = {
 		law_national_supremacy = strongly_approve
 		law_ethnostate = strongly_approve
 		law_multicultural = strongly_disapprove
+	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1850.1.1
+		game_date <= 1860.12.31
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_filibuster_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 3
+		if = {
+			limit = { owner = { has_global_variable = ca_national_war_fired } }
+			add = 6
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_filibuster_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 5
 	}
 }
 
@@ -1071,6 +917,24 @@ ideology_ca_imperial_monarchist = {
 
 	lawgroup_distribution_of_power = {
 		law_autocracy = strongly_approve
+	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		has_variable = ca_alt_ca_imperial_monarchist
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_imperial_monarchist_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 0
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_imperial_monarchist_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 0
 	}
 }
 
@@ -1099,6 +963,25 @@ ideology_ca_banana_socialism = {
 	lawgroup_economic_system = {
 		law_laissez_faire = strongly_disapprove
 	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1880.1.1
+		has_technology_researched = socialism
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_banana_socialism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 15
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_banana_socialism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 
 #Teocracia Jesuita
@@ -1124,6 +1007,29 @@ ideology_ca_jesuit_theocracy = {
 		law_outlawed_dissent = strongly_approve
 		law_protected_speech = strongly_disapprove
 	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1843.1.1
+		game_date <= 1871.12.31
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_jesuit_theocracy_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 15
+		if = {
+			limit = { owner = { has_law_or_variant = law_type:law_state_religion } }
+			add = 30
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_jesuit_theocracy_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 5
+	}
 }
 
 #Imperio Marítimo Miskito (Hegemonía Indígena-Británica)
@@ -1141,6 +1047,25 @@ ideology_ca_miskito_hegemony = {
 
 	lawgroup_trade_policy = {
 		law_free_trade = strongly_approve
+	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		OR = { c:MKT ?= this }
+		game_date >= 1836.1.1
+		game_date <= 1860.12.31
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_miskito_hegemony_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 30
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_miskito_hegemony_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
 	}
 }
 
@@ -1161,6 +1086,24 @@ ideology_ca_neo_mayan_restoration = {
 	lawgroup_economic_system = {
 		law_traditionalism = strongly_approve
 		law_laissez_faire = strongly_disapprove
+	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		has_variable = ca_alt_ca_neo_mayan_restoration
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_neo_mayan_restoration_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 0
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_neo_mayan_restoration_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 0
 	}
 }
 
@@ -1185,6 +1128,24 @@ ideology_ca_hermit_isolationism = {
 
 	lawgroup_internal_security = {
 		law_secret_police = strongly_approve
+	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		has_variable = ca_alt_ca_hermit_isolationism
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_hermit_isolationism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 0
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_hermit_isolationism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 0
 	}
 }
 
@@ -1211,6 +1172,24 @@ ideology_ca_tropical_bonapartism = {
 
 	lawgroup_trade_policy = {
 		law_free_trade = strongly_approve
+	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		has_variable = ca_alt_ca_tropical_bonapartism
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_tropical_bonapartism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 0
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_tropical_bonapartism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 0
 	}
 }
 
@@ -1240,11 +1219,31 @@ ideology_ca_tropical_utopian = {
 		law_national_militia = strongly_disapprove
 		law_mass_conscription = strongly_disapprove
 	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1834.1.1
+		game_date <= 1855.12.31
+		has_variable = ca_european_colonists
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_tropical_utopian_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 5
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_tropical_utopian_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 5
+	}
 }
 
 #Dictadura Corporativa de la "Compañía del Canal"
 ideology_ca_canal_company_rule = {
-	icon = "gfx/interface/icons/ideology_icons/capitalist.dds"
+	icon = "gfx/interface/icons/ideology_icons/plutocratic.dds"
 	character_ideology = yes
 
 	lawgroup_distribution_of_power = {
@@ -1271,6 +1270,25 @@ ideology_ca_canal_company_rule = {
 	lawgroup_health_system = {
 		law_public_health_insurance = strongly_disapprove
 	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1850.1.1
+		has_variable = ca_canal_concession
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_canal_company_rule_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 10
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_canal_company_rule_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 5
+	}
 }
 
 #El Culto Sincretista (Milenarismo de la Cruz Parlante)
@@ -1293,6 +1311,29 @@ ideology_ca_syncretic_cult = {
 	lawgroup_church_and_state = {
 		law_state_religion = disapprove
 	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1837.1.1
+		game_date <= 1850.12.31
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_syncretic_cult_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 5
+		if = {
+			limit = { owner = { has_global_variable = ca_carrera_revolt_seed } }
+			add = 10
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_syncretic_cult_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 
 #Panamericanismo Bolivariano (Anexión a la Gran Colombia)
@@ -1307,6 +1348,24 @@ ideology_ca_bolivarian_integration = {
 	lawgroup_army_model = {
 		law_mass_conscription = strongly_approve
 		law_professional_army = strongly_approve
+	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		has_variable = ca_alt_ca_bolivarian_integration
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_bolivarian_integration_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 0
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_bolivarian_integration_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 0
 	}
 }
 
@@ -1324,6 +1383,24 @@ ideology_ca_corsair_republic = {
 		law_hereditary_bureaucrats = strongly_disapprove
 		law_elected_bureaucrats = strongly_disapprove
 	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		has_variable = ca_alt_ca_corsair_republic
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_corsair_republic_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 0
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_corsair_republic_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 0
+	}
 }
 
 #Ludismo Agrario (Destructores de Máquinas)
@@ -1337,6 +1414,26 @@ ideology_ca_agrarian_luddism = {
 		law_laissez_faire = strongly_disapprove
 		law_interventionism = strongly_disapprove
 		law_agrarianism = strongly_disapprove
+	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1837.1.1
+		game_date <= 1840.12.31
+		has_global_variable = ca_carrera_revolt_seed
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_agrarian_luddism_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 15
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_agrarian_luddism_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 15
 	}
 }
 
@@ -1359,6 +1456,25 @@ ideology_ca_cientifico_technocracy = {
 	lawgroup_church_and_state = {
 		law_state_atheism = strongly_approve
 	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1880.1.1
+		has_technology_researched = empiricism
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_cientifico_technocracy_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 15
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_cientifico_technocracy_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 5
+	}
 }
 #Unionismo Tardío (Unionismo Diplomático)
 ideology_ca_late_unionist = {
@@ -1377,13 +1493,31 @@ ideology_ca_late_unionist = {
 	lawgroup_internal_security = {
 		law_guaranteed_liberties = approve
 	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+		game_date >= 1850.1.1
+		has_technology_researched = pan-nationalism
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_late_unionist_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 15
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_late_unionist_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
+	}
 }
 #Caudillismo Campesino (Conservadurismo Popular)
 ideology_ca_peasant_caudillismo = {
-	icon = "gfx/interface/icons/ideology_leader/unused/ideology_leader_Agrarian.dds"
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_land_reformer.dds"
 	
 	character_ideology = yes
-	priority = 50
 
 	lawgroup_army_model = {
 		law_national_militia = strongly_approve
@@ -1402,7 +1536,28 @@ ideology_ca_peasant_caudillismo = {
 	}
 
 	lawgroup_taxation = {
-		law_per_capita_taxation = strongly_disapprove # Odian los impuestos liberales
+		law_per_capita_based_taxation = strongly_disapprove # Odian los impuestos liberales
+	}
+
+	# CAFM F18 (D): reglas de aparicion
+	country_trigger = {
+		ca_is_ca_national_country = yes
+	}
+	interest_group_leader_trigger = {
+		ideology_ca_peasant_caudillismo_valid_trigger = yes
+	}
+	interest_group_leader_weight = {
+		value = 10
+		if = {
+			limit = { owner = { any_scope_state = { turmoil >= 0.2 } } }
+			add = 20
+		}
+	}
+	non_interest_group_leader_trigger = {
+		interest_group ?= { ideology_ca_peasant_caudillismo_valid_trigger = yes }
+	}
+	non_interest_group_leader_weight = {
+		value = 10
 	}
 }
 # Pietismo Moravo: misiones moravas en la Mosquitia desde 1849
@@ -1425,39 +1580,23 @@ ideology_ca_moravian_pietism = {
 	lawgroup_citizenship = {
 		law_multicultural = approve
 	}
- 
+
+	# CAFM F18 (D): reglas de aparicion
 	country_trigger = {
-		OR = {
-			country_has_primary_culture = cu:miskito
-		}
+		OR = { c:MKT ?= this }
+		game_date >= 1849.1.1
 	}
- 
 	interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_devout
-			is_interest_group_type = ig_rural_folk
-			is_interest_group_type = ig_intelligentsia
-		}
+		ideology_ca_moravian_pietism_valid_trigger = yes
 	}
- 
 	interest_group_leader_weight = {
-		value = 20
-		if = {
-			limit = { is_interest_group_type = ig_devout }
-			add = 40
-		}
+		value = 25
 	}
- 
 	non_interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_devout
-			is_interest_group_type = ig_rural_folk
-			is_interest_group_type = ig_intelligentsia
-		}
+		interest_group ?= { ideology_ca_moravian_pietism_valid_trigger = yes }
 	}
- 
 	non_interest_group_leader_weight = {
-		value = 5
+		value = 10
 	}
 }
  
@@ -1491,52 +1630,24 @@ ideology_ca_barrismo = {
 		law_ca_central_american_unitary = approve
 		law_ca_central_american_confederated = strongly_disapprove
 	}
- 
+
+	# CAFM F18 (D): reglas de aparicion
 	country_trigger = {
-		OR = {
-			country_has_primary_culture = cu:guatemalan
-			country_has_primary_culture = cu:central_american
-		}
-		game_date >= 1865.1.1
+		OR = { country_has_primary_culture = cu:guatemalan }
+		game_date >= 1871.1.1
+		has_technology_researched = nationalism
 	}
- 
 	interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_armed_forces
-			is_interest_group_type = ig_landowners
-			is_interest_group_type = ig_industrialists
-			is_interest_group_type = ig_intelligentsia
-		}
+		ideology_ca_barrismo_valid_trigger = yes
 	}
- 
 	interest_group_leader_weight = {
-		value = 0
-		if = {
-			limit = { owner = { c:GUA ?= this } }
-			add = 60
-		}
-		if = {
-			limit = {
-				OR = {
-					is_interest_group_type = ig_armed_forces
-					is_interest_group_type = ig_landowners
-				}
-			}
-			add = 20
-		}
+		value = 25
 	}
- 
 	non_interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_armed_forces
-			is_interest_group_type = ig_landowners
-			is_interest_group_type = ig_industrialists
-			is_interest_group_type = ig_intelligentsia
-		}
+		interest_group ?= { ideology_ca_barrismo_valid_trigger = yes }
 	}
- 
 	non_interest_group_leader_weight = {
-		value = 5
+		value = 10
 	}
 }
  
@@ -1564,46 +1675,25 @@ ideology_ca_morismo = {
 		law_slave_trade = strongly_disapprove
 		law_legacy_slavery = strongly_disapprove
 	}
- 
+
+	# CAFM F18 (D): reglas de aparicion
 	country_trigger = {
-		OR = {
-			country_has_primary_culture = cu:costa_rican
-		}
+		OR = { country_has_primary_culture = cu:costa_rican }
+		game_date >= 1849.1.1
 	}
- 
 	interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_landowners
-			is_interest_group_type = ig_armed_forces
-			is_interest_group_type = ig_industrialists
-		}
+		ideology_ca_morismo_valid_trigger = yes
 	}
- 
 	interest_group_leader_weight = {
-		value = 0
+		value = 25
 		if = {
-			limit = { owner = { c:COS ?= this } }
+			limit = { owner = { is_subject = no } }
 			add = 50
-		}
-		# La Campaña Nacional: se fortalece en tiempos de guerra
-		if = {
-			limit = { owner = { is_at_war = yes } }
-			add = 50
-		}
-		if = {
-			limit = { is_interest_group_type = ig_armed_forces }
-			add = 20
 		}
 	}
- 
 	non_interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_landowners
-			is_interest_group_type = ig_armed_forces
-			is_interest_group_type = ig_industrialists
-		}
+		interest_group ?= { ideology_ca_morismo_valid_trigger = yes }
 	}
- 
 	non_interest_group_leader_weight = {
 		value = 5
 	}
@@ -1632,36 +1722,22 @@ ideology_ca_soto_rosa_reformism = {
 	lawgroup_trade_policy = {
 		law_free_trade = approve
 	}
- 
+
+	# CAFM F18 (D): reglas de aparicion
 	country_trigger = {
-		OR = {
-			country_has_primary_culture = cu:honduran
-		}
-		game_date >= 1870.1.1
+		OR = { country_has_primary_culture = cu:honduran }
+		game_date >= 1876.1.1
+		has_technology_researched = empiricism
 	}
- 
 	interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_intelligentsia
-			is_interest_group_type = ig_industrialists
-		}
+		ideology_ca_soto_rosa_reformism_valid_trigger = yes
 	}
- 
 	interest_group_leader_weight = {
-		value = 0
-		if = {
-			limit = { owner = { c:HON ?= this } }
-			add = 80
-		}
+		value = 25
 	}
- 
 	non_interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_intelligentsia
-			is_interest_group_type = ig_industrialists
-		}
+		interest_group ?= { ideology_ca_soto_rosa_reformism_valid_trigger = yes }
 	}
- 
 	non_interest_group_leader_weight = {
 		value = 5
 	}
@@ -1683,43 +1759,24 @@ ideology_ca_mexican_annexationist = {
 	lawgroup_distribution_of_power = {
 		law_oligarchy = approve
 	}
- 
+
+	# CAFM F18 (D): reglas de aparicion
 	country_trigger = {
-		OR = {
-			country_has_primary_culture = cu:chiapanecan
-			country_has_primary_culture = cu:guatemalan
-			country_has_primary_culture = cu:central_american
-		}
+		OR = { country_has_primary_culture = cu:chiapanecan c:ALT ?= this c:CIP ?= this }
+		game_date >= 1822.1.1
+		game_date <= 1850.12.31
 	}
- 
 	interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_landowners
-			is_interest_group_type = ig_devout
-		}
+		ideology_ca_mexican_annexationist_valid_trigger = yes
 	}
- 
 	interest_group_leader_weight = {
-		value = 0
-		if = {
-			limit = { owner = { c:ALT ?= this } }
-			add = 80
-		}
-		if = {
-			limit = { owner = { country_has_primary_culture = cu:chiapanecan } }
-			add = 60
-		}
+		value = 20
 	}
- 
 	non_interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_landowners
-			is_interest_group_type = ig_devout
-		}
+		interest_group ?= { ideology_ca_mexican_annexationist_valid_trigger = yes }
 	}
- 
 	non_interest_group_leader_weight = {
-		value = 5
+		value = 10
 	}
 }
  
@@ -1748,34 +1805,22 @@ ideology_crucismo = {
 	lawgroup_slavery = {
 		law_debt_slavery = strongly_disapprove
 	}
- 
+
+	# CAFM F18 (D): reglas de aparicion
 	country_trigger = {
-		country_has_primary_culture = cu:maya
+		OR = { country_has_primary_culture = cu:mayan any_primary_culture = { this = cu:mayan } }
+		game_date >= 1847.1.1
 	}
- 
 	interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_rural_folk
-			is_interest_group_type = ig_devout
-		}
+		ideology_crucismo_valid_trigger = yes
 	}
- 
 	interest_group_leader_weight = {
-		value = 0
-		if = {
-			limit = { is_interest_group_type = ig_rural_folk }
-			add = 50
-		}
+		value = 30
 	}
- 
 	non_interest_group_leader_trigger = {
-		OR = {
-			is_interest_group_type = ig_rural_folk
-			is_interest_group_type = ig_devout
-		}
+		interest_group ?= { ideology_crucismo_valid_trigger = yes }
 	}
- 
 	non_interest_group_leader_weight = {
-		value = 5
+		value = 20
 	}
 }

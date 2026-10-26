@@ -4,7 +4,7 @@
 		first_valid = {
 			triggered_desc = {
 				desc = party_ca_devout_union
-				trigger = { has_variable = ca_devout_on }
+				trigger = { ig:ig_devout ?= { is_in_government = yes } }
 			}
 			triggered_desc = {
 				desc = party_religious

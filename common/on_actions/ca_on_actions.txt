@@ -35,12 +35,37 @@ ca_on_game_started = {
 				value = 0
 			}
 		}
+		# CAFM F14: diarios regionales desde el primer dia (Istmo, Talamanca, Soconusco)
+		every_country = {
+			limit = {
+				OR = {
+					ca_isthmus_holder = yes
+					c:RDT ?= { is_subject_of = prev }
+					c:CIP ?= this
+				}
+			}
+			ca_regional_yearly = yes
+		}
+		# CAFM F13 (A4): la UCA recibe la Ilustracion al inicio
+		c:UCA ?= { ca_add_enlightenment_journal = yes }
+		# CAFM F2: generales de 1836 en sus formaciones
+		ca_assign_starting_generals = yes
+		# CAFM F3: respaldo por si el immediate del diario no corre al anadirlo desde la historia
+		c:UCA ?= {
+			if = {
+				limit = {
+					has_journal_entry = je_historic_central_america_falls_apart
+					NOT = { has_variable = frca_phase }
+				}
+				ca_frca_journal_setup = yes
+			}
+		}
 		# CAFM fix: eventos de arranque, una sola vez y solo para la UCA
 		# (antes estaban en el pulso anual: salian cada año en todos los paises del mundo)
 		c:UCA ?= {
 			trigger_event = { id = ca_setup_events.3 days = 1 } # variables iniciales
 			trigger_event = { id = ca_setup_events.4 days = 1 } # era de los caudillos
-			trigger_event = { id = ca_setup_events.1 days = 2 } # eleccion de cadena de eventos
+			# CAFM F20: fuera ca_setup_events.1 (la eleccion de camino la hace ca_central_america.119)
 		}
 	}
 }
@@ -50,6 +75,12 @@ on_yearly_pulse_country = {
 		ca_yearly_pulse_country
 		ca_yearly_flavor_country
 		ca_yearly_prospecting_country
+		ca_route_yearly_country # F11
+		ca_union_yearly_country # F12
+		ca_development_yearly_country # F13
+		ca_regional_yearly_country # F14
+		ca_cholera_yearly_country # F16
+		ca_ideology_yearly_country # F18
 	}
 }
 
@@ -58,66 +89,59 @@ ca_yearly_pulse_country = {
 	# Aqui solo quedan los historicos de una sola vez (fecha y/o variable de control).
 	# Quitados: .2 y .8 (los encadenan 120.a y 6.c) y ca_setup_events (van al inicio de partida).
 	events = {
-		ca_central_america.9
-		ca_central_america.10
-		ca_central_america.11
-		ca_central_america.16
-		ca_central_america.22
-		ca_central_america.43
-		ca_central_america.44
-		ca_central_america.52
-		ca_central_america.55
-		ca_central_america.58
-		ca_central_america.61
-		ca_central_america.65
-		ca_central_america.67
-		ca_central_america.71
-		ca_central_america.73
-		ca_central_america.75
-		ca_central_america.78
-		ca_central_america.120
-		ca_central_america.121
-		ca_central_america.122
-		ca_el_salvador_events.9
-		ca_el_salvador_events.10
-		ca_el_salvador_events.11
-		ca_el_salvador_events.12
-		ca_el_salvador_events.13
-		ca_guatemala_events.5
-		ca_guatemala_events.6
-		ca_guatemala_events.7
-		ca_guatemala_events.8
-		ca_honduras_events.14
-		ca_honduras_events.15
-		ca_honduras_events.16
-		ca_honduras_events.17
-		ca_honduras_events.18
-		ca_nicaragua_events.19
-		ca_nicaragua_events.20
-		ca_nicaragua_events.21
-		ca_nicaragua_events.22
-		ca_nicaragua_events.23
-		ca_nicaragua_events.24
-		ca_nicaragua_events.25
+		# CAFM F6/F7: .22 va al pulso del diario de la Federacion; .52 .55 .58 (declaraciones) y
+		# .65 .67 .71 .73 (guerras civiles) al pulso del diario del estado
+		# CAFM F5: .120 y .121 pasan al pulso del diario; .78 lo lanza la peticion de Los Altos (F6); .122 queda para D2 (F8)
 	}
 }
 
 # CAFM fix: eventos de ambientacion. Como mucho UNO por año y pais (antes salian todos a la vez).
 # "100 = 0" es el peso de "no pasa nada": con 11 eventos x 10 hay ~52 % de que salga uno cada año.
 ca_yearly_flavor_country = {
+	# CAFM F17: grupo 16 (.88-.98) y 20 dinamicos (.130-.149); 5 anos de espera por evento y pais
 	random_events = {
-		100 = 0
-		10 = ca_central_america.88
-		10 = ca_central_america.89
-		10 = ca_central_america.90
-		10 = ca_central_america.91
-		10 = ca_central_america.92
-		10 = ca_central_america.93
-		10 = ca_central_america.94
-		10 = ca_central_america.95
-		10 = ca_central_america.96
-		10 = ca_central_america.97
-		10 = ca_central_america.98
+		150 = 0
+		5 = ca_central_america.88
+		5 = ca_central_america.89
+		5 = ca_central_america.90
+		5 = ca_central_america.91
+		5 = ca_central_america.92
+		5 = ca_central_america.93
+		5 = ca_central_america.94
+		5 = ca_central_america.95
+		5 = ca_central_america.96
+		5 = ca_central_america.97
+		5 = ca_central_america.98
+		5 = ca_central_america.130
+		5 = ca_central_america.131
+		5 = ca_central_america.132
+		5 = ca_central_america.133
+		5 = ca_central_america.134
+		5 = ca_central_america.135
+		5 = ca_central_america.136
+		5 = ca_central_america.137
+		5 = ca_central_america.138
+		5 = ca_central_america.139
+		5 = ca_central_america.140
+		5 = ca_central_america.141
+		5 = ca_central_america.142
+		5 = ca_central_america.143
+		5 = ca_central_america.144
+		5 = ca_central_america.145
+		5 = ca_central_america.146
+		5 = ca_central_america.147
+		5 = ca_central_america.148
+		5 = ca_central_america.149
+	}
+	events = {
+		ca_central_america.168
+		ca_central_america.169
+		ca_central_america.170
+		ca_central_america.171
+		ca_central_america.172
+		ca_central_america.173
+		ca_central_america.174
+		ca_central_america.175
 	}
 }
 
@@ -159,12 +183,145 @@ ca_yearly_prospecting_country = {
 	}
 }
 on_election_campaign_start = {
-	on_actions = { ca_cos_on_election_campaign_start }
+	on_actions = { ca_cos_on_election_campaign_start ca_states_on_election_campaign_start }
 }
 
 ca_cos_on_election_campaign_start = {
 	# CAFM: las elecciones de Costa Rica de 1844, 1847 y 1849 (.22 .23 .24) salen
 	# ahora por fecha desde je_ca_cos_republica; se dejan aqui como referencia.
 	events = {
+	}
+}
+
+# CAFM F6 (grupo 9): las elecciones tambien resuelven la lucha interna de un estado miembro.
+# Se mira el gobierno que sale de la eleccion en el pulso del diario del estado (60 dias).
+on_election_campaign_end = {
+	on_actions = { ca_fvs_on_election_campaign_end ca_route_on_election_campaign_end }
+}
+ca_fvs_on_election_campaign_end = {
+	effect = {
+		if = {
+			limit = { has_journal_entry = je_ca_federalists_vs_separatists_situation }
+			set_variable = { name = ca_fvs_election_check days = 60 }
+		}
+	}
+}
+
+# ----------------------------------------------------------------------------
+# CAFM F11: rutas federal y centralista
+# ----------------------------------------------------------------------------
+# Eleccion federal (ca_federalist_events.20)
+ca_route_on_election_campaign_end = {
+	events = {
+		ca_federalist_events.20
+	}
+}
+
+# Eventos de aprobacion de leyes de las rutas (como los vanilla de distribution_of_power_laws)
+on_law_checkpoint_advance = {
+	on_actions = { ca_route_law_advance }
+}
+ca_route_law_advance = {
+	random_events = {
+		100 = ca_federalist_events.6
+		100 = ca_federalist_events.9
+		100 = ca_federalist_events.12
+		100 = ca_centralist_events.7
+		100 = ca_centralist_events.10
+		100 = ca_centralist_events.13
+	}
+}
+on_law_checkpoint_debate = {
+	on_actions = { ca_route_law_debate }
+}
+ca_route_law_debate = {
+	random_events = {
+		100 = ca_federalist_events.7
+		100 = ca_federalist_events.10
+		100 = ca_federalist_events.13
+		100 = ca_centralist_events.8
+		100 = ca_centralist_events.11
+		100 = ca_centralist_events.14
+	}
+}
+on_law_checkpoint_stall = {
+	on_actions = { ca_route_law_stall }
+}
+ca_route_law_stall = {
+	random_events = {
+		100 = ca_federalist_events.8
+		100 = ca_federalist_events.11
+		100 = ca_federalist_events.14
+		100 = ca_centralist_events.9
+		100 = ca_centralist_events.12
+		100 = ca_centralist_events.15
+	}
+}
+
+# Enmiendas pendientes de las rutas, para leyes aprobadas despues del diario
+ca_route_yearly_country = {
+	effect = {
+		ca_route_apply_pending_amendments = yes
+	}
+}
+
+# F12: quien recibe "La Patria Grande" (B3, punto 1)
+ca_union_yearly_country = {
+	effect = {
+		ca_patria_grande_check = yes
+	}
+}
+
+# F13: altas de los diarios de desarrollo (A1-A4)
+ca_development_yearly_country = {
+	effect = {
+		ca_development_yearly = yes
+	}
+}
+
+# F14: altas de los diarios regionales
+ca_regional_yearly_country = {
+	effect = {
+		ca_regional_yearly = yes
+	}
+}
+
+# F15 (E1, E2): elecciones de Nicaragua y Honduras (antes en el pulso anual: solo el 1 de enero)
+ca_states_on_election_campaign_start = {
+	events = {
+		ca_honduras_events.14
+		ca_honduras_events.15
+		ca_honduras_events.16
+		ca_honduras_events.17
+		ca_honduras_events.18
+		ca_nicaragua_events.19
+		ca_nicaragua_events.20
+		ca_nicaragua_events.21
+		ca_nicaragua_events.22
+		ca_nicaragua_events.23
+		ca_nicaragua_events.24
+		ca_nicaragua_events.25
+	}
+}
+
+# F16: colera generico de Centroamerica (.16, una vez cada 5-10 anos por pais) y su contagio (.17)
+ca_cholera_yearly_country = {
+	events = {
+		ca_central_america.16
+	}
+}
+on_monthly_pulse_country = {
+	on_actions = { ca_cholera_monthly_country }
+}
+ca_cholera_monthly_country = {
+	events = {
+		ca_central_america.17
+	}
+}
+
+# F18: mecanicas de las ideologias v3 y grupo dividido (una vez al ano)
+ca_ideology_yearly_country = {
+	effect = {
+		ca_ideology_yearly = yes
 	}
 }

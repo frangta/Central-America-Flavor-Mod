@@ -18,7 +18,7 @@
     }
     
     appeasement_factors_anti = {
-        appeasement_factors_anti_federalist
+        appeasement_federal_authority_challenged
     }
     
     join_weight = {
@@ -75,7 +75,7 @@
             if = {
                 limit = {
                     any_scope_state = {
-                        any_neighboring_state = {
+                        any_neighbouring_state = {
                             owner = { 
                                 any_political_movement = { is_political_movement_type = movement_ca_federalist } 
                             }
@@ -112,7 +112,7 @@ lobby_anti_federalist = {
     
     
     appeasement_factors_pro = {
-        appeasement_factors_anti_federalist 
+        appeasement_federal_authority_challenged 
     }
     
     appeasement_factors_anti = {
@@ -183,11 +183,11 @@ lobby_anti_federalist = {
             if = {
                 limit = {
                     any_scope_state = {
-                        any_neighboring_state = {
+                        any_neighbouring_state = {
                             owner = { 
                                 OR = {
                                     any_political_movement = { is_political_movement_type = movement_ca_reactionary }
-                                    any_political_movement = { is_political_movement_type = movement_ca_separatist_movement }
+                                    any_political_movement = { is_political_movement_type = movement_ca_carrillista }
                                     any_political_movement = { is_political_movement_type = movement_ca_unitarian }
                                 }
                             }

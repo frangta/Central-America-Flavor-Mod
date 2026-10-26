@@ -58,4 +58,74 @@
 			}
 		}
 	}
+	s:STATE_SAN_SALVADOR={
+		region_state:UCA={
+			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
+			if = {
+				limit = { NOT = { has_building = building_barrack } }
+				create_building={
+					building="building_barrack"
+					level=3
+					reserves=1
+					activate_production_methods={ "pm_no_organization" }
+				}
+			}
+		}
+	}
+	s:STATE_GUATEMALA={
+		region_state:UCA={
+			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
+			if = {
+				limit = { NOT = { has_building = building_barrack } }
+				create_building={
+					building="building_barrack"
+					level=3
+					reserves=1
+					activate_production_methods={ "pm_no_organization" }
+				}
+			}
+		}
+	}
+	s:STATE_HONDURAS={
+		region_state:UCA={
+			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
+			if = {
+				limit = { NOT = { has_building = building_barrack } }
+				create_building={
+					building="building_barrack"
+					level=3
+					reserves=1
+					activate_production_methods={ "pm_no_organization" }
+				}
+			}
+		}
+	}
+	s:STATE_NICARAGUA={
+		region_state:UCA={
+			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
+			if = {
+				limit = { NOT = { has_building = building_barrack } }
+				create_building={
+					building="building_barrack"
+					level=2
+					reserves=1
+					activate_production_methods={ "pm_no_organization" }
+				}
+			}
+		}
+	}
+	s:STATE_COSTA_RICA={
+		region_state:UCA={
+			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
+			if = {
+				limit = { NOT = { has_building = building_barrack } }
+				create_building={
+					building="building_barrack"
+					level=2
+					reserves=1
+					activate_production_methods={ "pm_no_organization" }
+				}
+			}
+		}
+	}
 }

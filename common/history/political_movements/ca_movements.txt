@@ -12,32 +12,7 @@
 			}
 			set_suppression = yes
 		}
-                        if = {
-			limit = {
-				any_political_movement = {
-					OR = {
-				is_political_movement_type = movement_liberal
-				is_political_movement_type = movement_cultural_majority
-				is_political_movement_type = movement_religious_majority
-					}
-				}
-			}
-			every_political_movement = {
-				limit = {
-					OR = {
-				is_political_movement_type = movement_liberal
-				is_political_movement_type = movement_cultural_majority
-				is_political_movement_type = movement_religious_majority
-					}
-				}
-				add_modifier = {
-					name = ca_modifier_total_debug
-					days = long_modifier_time
-				}
-			}
-
-
+		# CAFM F2: se quito ca_modifier_total_debug de los movimientos vanilla
+		# (liberal, mayoria cultural y mayoria religiosa): los apagaba toda la partida.
 	}
-
-}
 }

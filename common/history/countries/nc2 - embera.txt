@@ -1,0 +1,8 @@
+﻿COUNTRIES = {
+	# CAFM F2: Embera del Darien (NC2, provincia xB0A911). Mismo esquema que NC3 (guna).
+	c:NC2 ?= {
+		effect_starting_technology_tier_6_tech = yes
+		effect_native_conscription_10 = yes
+		effect_starting_politics_traditional = yes
+	}
+}

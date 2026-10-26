@@ -1,0 +1,7 @@
+﻿POPULATION = {
+	# CAFM F2: antes este archivo (nc4) apuntaba a c:RDT por error
+	c:NC2 ?= {
+		effect_starting_pop_wealth_low = yes
+		effect_starting_pop_literacy_baseline = yes
+	}
+}

@@ -8,11 +8,11 @@
 			}
 			triggered_desc = {
 				desc = party_ca_syndicalist_front
-				trigger = { has_variable = ca_syndicalist_in_gov }
+				trigger = { ig:ig_trade_unions ?= { is_in_government = yes } }
 			}
 			triggered_desc = {
 				desc = party_ca_popular_communes
-				trigger = { has_variable = ca_comunes_on }
+				trigger = { ig:ig_rural_folk ?= { is_in_government = yes } }
 			}
 			triggered_desc = {
 				desc = party_communist
@@ -37,8 +37,8 @@
 		if = { 
 			limit = {
 				OR = {
-					has_ideology = ideology:ideology_ca_banana_socialism
-					has_ideology = ideology:ideology_anti_imperialist_sovereigntism
+					leader ?= { has_ideology = ideology:ideology_ca_banana_socialism }
+					leader ?= { has_ideology = ideology:ideology_anti_imperialist_sovereigntism }
 				}
 			}
 			add = { value = 20 desc = "from_ca_communist_ig" }

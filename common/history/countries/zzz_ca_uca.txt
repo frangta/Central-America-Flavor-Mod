@@ -1,6 +1,7 @@
 ﻿COUNTRIES = {
 	c:UCA ?= {
-		set_next_election_date = 1837.4.9
+		# CAFM F2: mandato de Morazan 14 feb 1835 - 1 feb 1839; la eleccion de 1838 nunca se celebro
+		set_next_election_date = 1838.6.1
 		
 		set_variable = ca_organization_apro
 		set_variable = is_frca_var
@@ -19,7 +20,8 @@
         activate_law = law_type:law_interventionism                                        
         activate_law = law_type:law_right_of_assembly
         activate_law = law_type:law_per_capita_based_taxation
-        activate_law = law_type:law_charitable_health_system        
+        activate_law = law_type:law_no_health_system		# CAFM F2: sin sistema de salud (permite el colera de 1837)
+        activate_law = law_type:law_slavery_banned		# CAFM F2: abolida por la Federacion el 17 abr 1824
         activate_law = law_type:law_religious_schools
         activate_law = law_type:law_no_police
         activate_law = law_type:law_freedom_of_conscience
@@ -29,24 +31,29 @@
 		}
 		
 		ig:ig_intelligentsia ?= {
-		add_ruling_interest_group = yes
+			add_ruling_interest_group = yes
+		}
+
+		# CAFM F2: gobierno de 3 grupos (decidido el 8 oct 2026)
+		ig:ig_petty_bourgeoisie ?= {
+			add_ruling_interest_group = yes
 		}
 		
-		ig:ig_armed_forces = {
+		ig:ig_armed_forces ?= {
             remove_ideology = ideology_caudillismo
             remove_ideology = ideology_paternalistic
             add_ideology = ideology_central_american_federal
             set_interest_group_name = ig_ejercito_federal
         }
 
-        ig:ig_devout = {
+        ig:ig_devout ?= {
              remove_ideology = ideology_moralist
              add_ideology = ideology_ca_moralist	
              add_ideology = ideology_central_american_reactionary_2
              set_interest_group_name = ig_catholic_church
         }
         
-        ig:ig_landowners = {            
+        ig:ig_landowners ?= {            
             remove_ideology = ideology_republican_paternalistic
             remove_ideology = ideology_hierarchic
             remove_ideology = ideology_paternalistic
@@ -56,7 +63,7 @@
             set_interest_group_name = ig_hacendados
         }
         
-        ig:ig_industrialists = {
+        ig:ig_industrialists ?= {
             remove_ideology = ideology_plutocratic
             remove_ideology = ideology_laissez_faire
             add_ideology = ideology_ca_agroexportadores
@@ -64,7 +71,7 @@
             set_interest_group_name = ig_elite_comercial
         }
         
-        ig:ig_intelligentsia = {
+        ig:ig_intelligentsia ?= {
             remove_ideology = ideology_liberal
             remove_ideology = ideology_anti_clerical
             remove_ideology = ideology_republican
@@ -74,14 +81,14 @@
             set_interest_group_name = ig_liberales_morazanistas            
         }
         
-        ig:ig_petty_bourgeoisie = {
+        ig:ig_petty_bourgeoisie ?= {
             remove_ideology = ideology_patriotic
             add_ideology = ideology_central_american_federal
             add_ideology = ideology_ca_artesanado
             set_interest_group_name = ig_artesanos_urbanos
         }
         
-        ig:ig_rural_folk = {
+        ig:ig_rural_folk ?= {
             remove_ideology = ideology_isolationist
             remove_ideology = ideology_agrarian
             remove_ideology = ideology_particularist
@@ -90,20 +97,12 @@
         }
 
 		
-        trigger_event = { id = ca_central_america.119  day = 15}
-		trigger_event = { id = ca_el_salvador_events.1}
-		trigger_event = { id = ca_guatemala_events.1}
-		trigger_event = { id = ca_honduras_events.1}
-		trigger_event = { id = ca_nicaragua_events.1}
-		trigger_event = { id = ca_costa_rica_events.1}
+        # CAFM F4: solo .119; .119 lanza las 5 introducciones de los estados
+        trigger_event = { id = ca_central_america.119 }
  
 		set_variable = { name = historic_central_american}
 		set_variable = { name = frca_preserved }
-		set_variable = hon_support_var
-		set_variable = nic_support_var
-		set_variable = cos_support_var
-		#set_variable = gua_support_var
-		set_variable = els_support_var
+		# CAFM F3: sin <x>_support_var; la lealtad la pone el diario (frca_loyalty_<x>)
  
  		add_journal_entry = {
 			type = je_historic_central_america_falls_apart
@@ -115,16 +114,18 @@
         add_modifier = {
             name = age_of_caudillos_modifier
         }
+        # CAFM F2: hasta el decreto del 30 may 1838 (antes era permanente)
         add_modifier = {
             name = ca_federal_paralysis
+            days = 880
         }
-        add_modifier = {
-            name = ca_british_debt_crisis
-        }        
+        # CAFM F2: ca_british_debt_crisis eliminado; la deuda la lleva je_ca_british_debt
         add_modifier = {
             name = ca_military_disarray
             days = 1825 # 5 años
         } 
 		initialise_caciquismo_effect = yes
 	}
+	# CAFM F18 (E): configuracion de los grupos de interes, UCA federal (seccion 4.1)
+	c:UCA ?= { ca_ig_config_federal = yes }
 }

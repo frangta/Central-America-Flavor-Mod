@@ -12,7 +12,6 @@ movement_ca_liberal = {
         ideology_radical
         ideology_humanitarian
         ideology_ca_liberal_monarchist
-        ideology_ca_secularist
 
     }
 
@@ -30,7 +29,7 @@ movement_ca_liberal = {
         if = {
             limit = {
                 has_law_or_variant = law_type:law_monarchy
-                has_voting_franchise = no
+                country_has_voting_franchise = no
             }
             multiply = 0.1
         }
@@ -62,7 +61,6 @@ movement_ca_liberal = {
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_ca_liberal_monarchist 
-            has_ideology = ideology:ideology_ca_secularist 
             has_ideology = ideology:ideology_ca_criollo_liberal 
             has_ideology = ideology:ideology_ca_criollo_elite 
             scope:interest_group ?= {
@@ -186,6 +184,15 @@ movement_ca_liberal = {
             }
         }
         target_fraction_of_states = { value = 0.35 }
+    }
+
+    # CAFM F18 (grupo F): radicalismo propio
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_autocracy } }
+            add = { value = 0.25 desc = "CA_RAD_AUTOCRACY" }
+        }
     }
 }
 
@@ -405,7 +412,7 @@ movement_ca_reactionary = {
         possible = {
             political_movement_support >= 0.10
             NOT = {
-                any_supporting_interest_group = {
+                any_influenced_interest_group = {
                     is_in_government = yes
                 }
             }
@@ -414,6 +421,15 @@ movement_ca_reactionary = {
         state_weight = {
             value = state_urbanization_rate
             multiply = -1 
+        }
+    }
+
+    # CAFM F18 (grupo F): radicalismo propio
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_total_separation } }
+            add = { value = 0.25 desc = "CA_RAD_SEPARATION" }
         }
     }
 }
@@ -428,7 +444,6 @@ movement_ca_unitarian = {
     character_ideologies = {
         ideology_ca_unitarian
         ideology_authoritarian
-        ideology_ca_autocratic_autonomist
         ideology_central_america_caudillo
     }
 
@@ -560,6 +575,15 @@ movement_ca_unitarian = {
         possible = { political_movement_support >= 0.05 }
         weight = { value = 150 }
     }
+
+    # CAFM F18 (grupo F): radicalismo propio
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_ca_central_american_confederated } }
+            add = { value = 0.25 desc = "CA_RAD_CONFEDERATION" }
+        }
+    }
 }
 
 # ==============================================
@@ -571,10 +595,8 @@ movement_ca_federalist = {
 
     character_ideologies = {
         ideology_ca_federalist
-        ideology_ca_liberal
         ideology_republican_leader
         ideology_liberal_leader
-        ideology_ca_constitutionalist
     }
 
     creation_trigger = {
@@ -615,7 +637,6 @@ movement_ca_federalist = {
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_ca_federalist
-            has_ideology = ideology:ideology_ca_constitutionalist
             scope:interest_group ?= {
                 OR = {
                     has_ideology = ideology:ideology_liberal
@@ -714,6 +735,15 @@ movement_ca_federalist = {
         possible = { political_movement_support >= 0.05 }
         weight = { value = 100 }
     }
+
+    # CAFM F18 (grupo F): radicalismo propio
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { has_law_or_variant = law_type:law_ca_central_american_unitary } }
+            add = { value = 0.25 desc = "CA_RAD_UNITARY" }
+        }
+    }
 }
 # ==============================================
 # MOVIMIENTO CARRILLISTA (Autocracia Aislacionista de Costa Rica)
@@ -721,12 +751,11 @@ movement_ca_federalist = {
 # ==============================================
 movement_ca_carrillista = {
     category = movement_category_ideological
-    ideology = ideology_carrillismo 
+    ideology = ideology_ca_separatist_movement # F18: antes la ideologia de personaje carrillismo
 
     character_ideologies = {
         ideology_carrillismo
         ideology_authoritarian
-        ideology_ca_criollo_paternalistic
         ideology_central_america_caudillo
     }
 
@@ -756,7 +785,6 @@ movement_ca_carrillista = {
         OR = {
             has_ideology = ideology:ideology_carrillismo
             has_ideology = ideology:ideology_authoritarian
-            has_ideology = ideology:ideology_ca_criollo_paternalistic
             
             # Grupos pragmáticos y oligarcas que buscan estabilidad por encima de todo
             scope:interest_group ?= {
@@ -816,6 +844,15 @@ movement_ca_carrillista = {
         weight = { value = 1000 }
         state_weight = {
             value = 1
+        }
+    }
+
+    # CAFM F18 (grupo F): radicalismo propio
+    additional_radicalism_factors = {
+        value = 0
+        if = {
+            limit = { owner ?= { is_subject = yes } }
+            add = { value = 0.25 desc = "CA_RAD_SUBJECT" }
         }
     }
 }

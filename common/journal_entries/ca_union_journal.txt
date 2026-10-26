@@ -1,0 +1,198 @@
+﻿############################################################################
+# CAFM - F12 - Diarios tras la Federacion (common/journal_entries/ca_union_journal.txt)
+#   je_ca_confederation  : B1 La Confederacion Centroamericana (1842-1845)
+#   je_ca_patria_grande  : B3 La Patria Grande
+############################################################################
+
+je_ca_confederation = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	group = je_group_historical_content
+	should_be_pinned_by_default_involved = yes
+
+	immediate = {
+		ca_conf_setup = yes
+	}
+
+	current_value = {
+		value = root.var:ca_conf_cohesion
+	}
+	goal_add_value = {
+		value = 100
+	}
+	progressbar = yes
+	weight = 100
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_conf_status_strong
+				trigger = { var:ca_conf_cohesion >= 70 }
+			}
+			triggered_desc = {
+				desc = je_ca_conf_status_weak
+				trigger = { var:ca_conf_cohesion <= 30 }
+			}
+			triggered_desc = {
+				desc = je_ca_conf_status_normal
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	scripted_button = ca_button_conf_diet
+	scripted_button = ca_button_conf_defense
+	scripted_button = ca_button_conf_customs
+	scripted_button = ca_button_conf_invite
+
+	on_monthly_pulse = {
+		effect = {
+			ca_conf_monthly = yes
+		}
+		events = {
+			ca_central_america.159 # Guatemala y Costa Rica se niegan
+			ca_central_america.160 # El desafio del caudillo (Malespin, 1844)
+			ca_central_america.161 # El saqueo de Leon (ene 1845)
+			ca_central_america.158 # El Supremo Delegado (anual)
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = je_ca_conf_complete_tt
+			var:ca_conf_cohesion >= 100
+		}
+		custom_tooltip = {
+			text = je_ca_conf_partners_tt
+			ca_confederation_partners_count >= 3
+		}
+		NOT = { ca_conf_war_between_partners = yes }
+		game_date < 1850.1.1
+		NOT = { has_variable = ca_conf_rupture_now }
+	}
+
+	fail = {
+		OR = {
+			custom_tooltip = {
+				text = je_ca_conf_fail_tt
+				var:ca_conf_cohesion <= 0
+			}
+			AND = {
+				NOT = { has_variable = ca_conf_grace }
+				custom_tooltip = {
+					text = je_ca_conf_few_partners_tt
+					ca_confederation_partners_count < 2
+				}
+			}
+			ca_conf_war_between_partners = yes
+			has_variable = ca_conf_rupture_now
+			custom_tooltip = {
+				text = je_ca_conf_timeout_tt
+				game_date >= 1850.1.1
+			}
+		}
+	}
+
+	on_complete = {
+		ca_conf_consolidated = yes
+	}
+
+	on_fail = {
+		ca_conf_rupture = yes
+	}
+
+	invalid = {
+		NOT = { exists = c:UCA }
+	}
+}
+
+je_ca_patria_grande = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	group = je_group_foreign_affairs
+	should_be_pinned_by_default_involved = yes
+
+	immediate = {
+		if = {
+			limit = { NOT = { has_variable = ca_unity } }
+			if = {
+				limit = { has_variable = ca_conf_consolidated }
+				set_variable = { name = ca_unity value = 50 }
+			}
+			else = {
+				set_variable = { name = ca_unity value = 20 }
+			}
+			# Conexiones con Costa Rica (E3): Morazan fusilado -20 / exiliado +10
+			if = {
+				limit = { c:COS ?= { has_variable = ca_cos_morazan_fusilado } }
+				ca_unity_change = { VALUE = -20 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						c:COS ?= { has_variable = ca_cos_morazan_exiliado }
+						c:UCA ?= { has_variable = morazan_exiliado }
+					}
+				}
+				ca_unity_change = { VALUE = 10 }
+			}
+		}
+	}
+
+	current_value = {
+		value = root.var:ca_unity
+	}
+	goal_add_value = {
+		value = 100
+	}
+	progressbar = yes
+	weight = 100
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_patria_grande_status_close
+				trigger = { var:ca_unity >= 70 }
+			}
+			triggered_desc = {
+				desc = je_ca_patria_grande_status_far
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	scripted_button = ca_button_unionist_congress
+
+	on_monthly_pulse = {
+		effect = {
+			ca_unity_monthly = yes
+		}
+		events = {
+			ca_central_america.163 # La Guerra Nacional (1856-1857)
+			ca_central_america.164 # La campana de la Union (1885)
+			ca_central_america.165 # La Patria Mayor (1895)
+			ca_central_america.167 # La Patria Mayor se disuelve (1898)
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = je_ca_patria_grande_unity_tt
+			var:ca_unity >= 100
+		}
+		custom_tooltip = {
+			text = je_ca_patria_grande_states_tt
+			ca_patria_grande_states >= 4
+		}
+		NOT = { ca_patria_grande_ai_blocked = yes }
+	}
+
+	on_complete = {
+		ca_patria_grande_complete = yes
+	}
+
+	invalid = {
+		OR = {
+			is_subject = yes
+			has_global_variable = ca_reunification_completed
+		}
+	}
+}

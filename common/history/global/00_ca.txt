@@ -1,11 +1,5 @@
 ﻿# This is executed last among all history
 GLOBAL = {
-	
-on_game_start = {
-	effect = {
-		#ca_initial_game_start_setup = yes
-
-	}
-}
-	
+	# CAFM F2: se quito el bloque on_game_start (no es valido dentro de GLOBAL).
+	# El arranque del mod va en common/on_actions/ca_on_actions.txt (ca_on_game_started).
 }

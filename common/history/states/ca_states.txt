@@ -4,6 +4,7 @@
 STATES = {
 	s:STATE_GUATEMALA = {
 		add_homeland = cu:mayan
+		add_homeland = cu:ca_kiche			# CAFM F2: k'iche' del altiplano (Los Altos)
 		add_homeland = cu:central_american
 		add_homeland = cu:guatemalan
 		add_homeland = cu:garifuna_arawak 
@@ -18,6 +19,7 @@ STATES = {
 		}
 		add_homeland = cu:central_american
 		add_homeland = cu:honduran
+		add_homeland = cu:miskito			# CAFM F2: Mosquitia hondurena
 		add_homeland = cu:lenca             
 		add_homeland = cu:mangue_chorotega  
 		add_homeland = cu:garifuna_arawak
@@ -39,10 +41,7 @@ STATES = {
 			country = c:RDT
 			provinces = { x1A076A }
 		}
-		set_owner_of_provinces = {
-			country = c:CLM
-			provinces = { x10EF80 }
-		}
+		# CAFM F2: x10EF80 (Pacifico sur, Terraba/Coto) vuelve a la UCA, como en vanilla
 		add_homeland = cu:central_american
 		add_homeland = cu:costa_rican
 		add_homeland = cu:chibchan_central_america
@@ -96,7 +95,7 @@ STATES = {
 		add_homeland = cu:central_american
 		add_homeland = cu:el_salvadorian
 		add_homeland = cu:lenca
-		add_homeland = cu:ngabe_culture
+		add_homeland = cu:ca_pipil			# CAFM F2: pipiles en lugar de ngabe
 		
 	}
 	s:STATE_YUCATAN = {
@@ -113,7 +112,7 @@ STATES = {
 		add_homeland = cu:mexican
 		add_homeland = cu:mayan
 		add_claim = c:MEX
-                add_claim = c:UCA
+		# CAFM F2: sin claim de la UCA sobre Yucatan (sin base historica)
 	}
 	
 }
