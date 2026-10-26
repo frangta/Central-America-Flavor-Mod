@@ -1,0 +1,393 @@
+﻿namespace = ca_talamanca_events
+
+# CAFM F14 (D2): "La cuestion de Talamanca". .1-.5 historicos (1862-1885); .6-.10 dinamicos; .11 respuesta de Talamanca (jugador).
+
+ca_talamanca_events.1 = {
+	type = country_event
+	placement = root
+	title = ca_talamanca_events.1.t
+	desc = ca_talamanca_events.1.d
+	flavor = ca_talamanca_events.1.f
+	event_image = { video = "middleeast_jungle_expedition" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_global_variable = ca_tal_1_fired }
+		game_date >= 1862.1.1
+
+	}
+	option = {
+		name = ca_talamanca_events.1.a
+		default_option = yes
+		set_global_variable = ca_tal_1_fired
+		ca_talamanca_change = { VALUE = 10 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		c:RDT ?= { change_relations = { country = root value = 20 } }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_talamanca_events.1.b
+		set_global_variable = ca_tal_1_fired
+		ca_talamanca_change = { VALUE = -5 }
+		c:RDT ?= {
+			if = {
+				limit = { is_ai = no }
+				trigger_event = { id = ca_talamanca_events.11 days = 3 }
+			}
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_talamanca_events.2 = {
+	type = country_event
+	placement = root
+	title = ca_talamanca_events.2.t
+	desc = ca_talamanca_events.2.d
+	flavor = ca_talamanca_events.2.f
+	event_image = { video = "middleeast_jungle_expedition" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_global_variable = ca_tal_2_fired }
+		game_date >= 1867.1.1
+
+	}
+	option = {
+		name = ca_talamanca_events.2.a
+		default_option = yes
+		set_global_variable = ca_tal_2_fired
+		ca_talamanca_change = { VALUE = 15 }
+		set_variable = ca_tal_caciques_chiefs
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_talamanca_events.2.b
+		set_global_variable = ca_tal_2_fired
+		ca_talamanca_change = { VALUE = -5 }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_talamanca_events.3 = {
+	type = country_event
+	placement = root
+	title = ca_talamanca_events.3.t
+	desc = ca_talamanca_events.3.d
+	flavor = ca_talamanca_events.3.f
+	event_image = { video = "middleeast_jungle_expedition" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_global_variable = ca_tal_3_fired }
+		game_date >= 1871.1.1
+
+	}
+	option = {
+		name = ca_talamanca_events.3.a
+		default_option = yes
+		set_global_variable = ca_tal_3_fired
+		ca_talamanca_change = { VALUE = 10 }
+		c:RDT ?= { change_relations = { country = root value = 20 } }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_talamanca_events.3.b
+		set_global_variable = ca_tal_3_fired
+		ca_talamanca_change = { VALUE = -5 }
+		c:RDT ?= {
+			if = {
+				limit = { is_ai = no }
+				trigger_event = { id = ca_talamanca_events.11 days = 3 }
+			}
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_talamanca_events.4 = {
+	type = country_event
+	placement = root
+	title = ca_talamanca_events.4.t
+	desc = ca_talamanca_events.4.d
+	flavor = ca_talamanca_events.4.f
+	event_image = { video = "middleeast_jungle_expedition" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_global_variable = ca_tal_4_fired }
+		game_date >= 1872.6.1
+
+	}
+	option = {
+		name = ca_talamanca_events.4.a
+		default_option = yes
+		set_global_variable = ca_tal_4_fired
+		ca_talamanca_change = { VALUE = 15 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		c:RDT ?= { change_relations = { country = root value = -20 } }
+		c:RDT ?= {
+			if = {
+				limit = { is_ai = no }
+				trigger_event = { id = ca_talamanca_events.11 days = 3 }
+			}
+		}
+		ai_chance = { base = 50
+		modifier = { trigger = { has_global_variable = ca_world_historic } add = 100 } }
+	}
+	option = {
+		name = ca_talamanca_events.4.b
+		set_global_variable = ca_tal_4_fired
+		ca_talamanca_change = { VALUE = 5 }
+		ai_chance = { base = 30 }
+	}
+	option = {
+		name = ca_talamanca_events.4.c
+		set_global_variable = ca_tal_4_fired
+		ca_talamanca_change = { VALUE = -10 }
+		ai_chance = { base = 20 }
+	}
+}
+
+ca_talamanca_events.5 = {
+	type = country_event
+	placement = root
+	title = ca_talamanca_events.5.t
+	desc = ca_talamanca_events.5.d
+	flavor = ca_talamanca_events.5.f
+	event_image = { video = "middleeast_jungle_expedition" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_global_variable = ca_tal_5_fired }
+		game_date >= 1880.1.1
+
+	}
+	option = {
+		name = ca_talamanca_events.5.a
+		default_option = yes
+		set_global_variable = ca_tal_5_fired
+		ca_talamanca_change = { VALUE = 20 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		c:RDT ?= {
+			if = {
+				limit = { is_ai = no }
+				trigger_event = { id = ca_talamanca_events.11 days = 3 }
+			}
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_talamanca_events.5.b
+		set_global_variable = ca_tal_5_fired
+		ca_talamanca_change = { VALUE = -5 }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_talamanca_events.6 = {
+	type = country_event
+	placement = root
+	title = ca_talamanca_events.6.t
+	desc = ca_talamanca_events.6.d
+	event_image = { video = "middleeast_jungle_expedition" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_variable = ca_tal_6_cd }
+
+	}
+	option = {
+		name = ca_talamanca_events.6.a
+		default_option = yes
+		set_variable = { name = ca_tal_6_cd days = 1825 }
+		ca_talamanca_change = { VALUE = 5 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_talamanca_events.6.b
+		set_variable = { name = ca_tal_6_cd days = 1825 }
+		ca_talamanca_change = { VALUE = -5 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_talamanca_events.7 = {
+	type = country_event
+	placement = root
+	title = ca_talamanca_events.7.t
+	desc = ca_talamanca_events.7.d
+	event_image = { video = "middleeast_jungle_expedition" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_variable = ca_tal_7_cd }
+
+	}
+	option = {
+		name = ca_talamanca_events.7.a
+		default_option = yes
+		set_variable = { name = ca_tal_7_cd days = 1825 }
+		ca_talamanca_change = { VALUE = 5 }
+		c:RDT ?= { change_relations = { country = root value = 10 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_talamanca_events.7.b
+		set_variable = { name = ca_tal_7_cd days = 1825 }
+		ca_talamanca_change = { VALUE = -5 }
+		add_treasury = { value = ca_money_small }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_talamanca_events.8 = {
+	type = country_event
+	placement = root
+	title = ca_talamanca_events.8.t
+	desc = ca_talamanca_events.8.d
+	event_image = { video = "middleeast_jungle_expedition" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_variable = ca_tal_8_cd }
+		exists = c:MKT
+	}
+	option = {
+		name = ca_talamanca_events.8.a
+		default_option = yes
+		set_variable = { name = ca_tal_8_cd days = 1825 }
+		ca_talamanca_change = { VALUE = 10 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_talamanca_events.8.b
+		set_variable = { name = ca_tal_8_cd days = 1825 }
+		ca_talamanca_change = { VALUE = -10 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_talamanca_events.9 = {
+	type = country_event
+	placement = root
+	title = ca_talamanca_events.9.t
+	desc = ca_talamanca_events.9.d
+	event_image = { video = "middleeast_jungle_expedition" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_variable = ca_tal_9_cd }
+		OR = {
+			p:x47C5F8.state.owner ?= c:CLM
+			p:x47C5F8.state.owner ?= c:PNM
+		}
+	}
+	option = {
+		name = ca_talamanca_events.9.a
+		default_option = yes
+		set_variable = { name = ca_tal_9_cd days = 1825 }
+		ca_talamanca_change = { VALUE = 5 }
+		p:x47C5F8.state.owner ?= { change_relations = { country = root value = -20 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_talamanca_events.9.b
+		set_variable = { name = ca_tal_9_cd days = 1825 }
+		ca_talamanca_change = { VALUE = -5 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_talamanca_events.10 = {
+	type = country_event
+	placement = root
+	title = ca_talamanca_events.10.t
+	desc = ca_talamanca_events.10.d
+	event_image = { video = "middleeast_jungle_expedition" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_historic_situation_in_talamanca
+		NOT = { has_variable = ca_tal_10_cd }
+
+	}
+	option = {
+		name = ca_talamanca_events.10.a
+		default_option = yes
+		set_variable = { name = ca_tal_10_cd days = 1825 }
+		ca_talamanca_change = { VALUE = -5 }
+		add_treasury = { value = ca_money_small }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_talamanca_events.10.b
+		set_variable = { name = ca_tal_10_cd days = 1825 }
+		ca_talamanca_change = { VALUE = 5 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_talamanca_events.11 = {
+	type = country_event
+	placement = root
+	title = ca_talamanca_events.11.t
+	desc = ca_talamanca_events.11.d
+	flavor = ca_talamanca_events.11.f
+	event_image = { video = "middleeast_jungle_expedition" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:RDT
+		is_ai = no
+		is_subject = yes
+	}
+	immediate = {
+		overlord = { save_scope_as = ca_tal_lord }
+	}
+	option = {
+		name = ca_talamanca_events.11.a
+		default_option = yes
+		overlord = { ca_talamanca_change = { VALUE = 5 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_talamanca_events.11.b
+		overlord = { ca_talamanca_change = { VALUE = -10 } }
+		add_modifier = { name = ca_talamanca_resistance months = 24 }
+		ai_chance = { base = 50 }
+	}
+}
+

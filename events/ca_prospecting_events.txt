@@ -34,6 +34,7 @@ ca_prospecting.1 = {
 			}
 			add_radicals_in_state = { value = 0.05 pop_type = peasants } # CAFM fix
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -58,6 +59,7 @@ ca_prospecting.1 = {
 				months = 36
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -94,6 +96,7 @@ ca_prospecting.2 = {
 				amount = 2
 			}
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -116,6 +119,7 @@ ca_prospecting.2 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -146,6 +150,7 @@ ca_prospecting.3 = {
 				amount = 2
 			}
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -163,6 +168,7 @@ ca_prospecting.3 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -199,6 +205,7 @@ ca_prospecting.4 = {
 				amount = 1
 			}
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -207,6 +214,7 @@ ca_prospecting.4 = {
 			name = ca_survey_progress
 			add = 15
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -249,6 +257,7 @@ ca_prospecting.5 = {
 				amount = 5
 			}
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -266,6 +275,7 @@ ca_prospecting.5 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -307,6 +317,7 @@ ca_prospecting.6 = {
 			}
 		}
 		add_radicals = { value = 0.05 interest_group = ig:ig_landowners } # CAFM fix
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -321,6 +332,7 @@ ca_prospecting.6 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -357,6 +369,7 @@ ca_prospecting.7 = {
 				amount = 1
 			}
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -378,6 +391,7 @@ ca_prospecting.7 = {
 			name = ca_state_corruption_modifier
 			months = 60
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -415,6 +429,7 @@ ca_prospecting.8 = {
 				amount = 1
 			}
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -432,6 +447,7 @@ ca_prospecting.8 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -472,6 +488,7 @@ ca_prospecting.9 = {
 				months = 36
 			}
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -485,6 +502,7 @@ ca_prospecting.9 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -510,6 +528,7 @@ ca_prospecting.10 = {
 			}
 			add_radicals_in_state = { value = 0.05 } # CAFM fix: add_radicals es efecto de pais
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -518,6 +537,7 @@ ca_prospecting.10 = {
 			name = ca_survey_progress
 			subtract = 20
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -555,6 +575,7 @@ ca_prospecting.11 = {
 				months = 120
 			}
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -570,6 +591,7 @@ ca_prospecting.11 = {
 		scope:target_state = {
 			add_radicals_in_state = { value = 0.10 pop_type = peasants } # CAFM fix
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -603,6 +625,7 @@ ca_prospecting.12 = {
 		scope:target_state = {
 			add_resource_potential = building_silk_plantation
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -621,6 +644,7 @@ ca_prospecting.12 = {
 			name = ca_geological_innovation
 			months = 36
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -654,6 +678,7 @@ ca_prospecting.13 = {
 		scope:target_state = {
 			add_resource_potential = building_tea_plantation
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -662,6 +687,7 @@ ca_prospecting.13 = {
 			name = ca_survey_progress
 			add = 10
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -695,6 +721,7 @@ ca_prospecting.14 = {
 		scope:target_state = {
 			add_resource_potential = building_cotton_plantation
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -719,6 +746,7 @@ ca_prospecting.14 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -752,6 +780,7 @@ ca_prospecting.15 = {
 		scope:target_state = {
 			add_resource_potential = building_vineyard
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -762,6 +791,7 @@ ca_prospecting.15 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -796,6 +826,7 @@ ca_prospecting.16 = {
 		scope:target_state = {
 			add_resource_potential = building_opium_plantation
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	
@@ -814,6 +845,7 @@ ca_prospecting.16 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -848,6 +880,7 @@ ca_prospecting.17 = {
 		scope:target_state = {
 			state_region = { add_arable_land = 10 } # CAFM fix: es efecto de state_region
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	
@@ -860,6 +893,7 @@ ca_prospecting.17 = {
 				months = 24
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -895,6 +929,7 @@ ca_prospecting.18 = {
 			
 			add_radicals_in_state = { value = 0.15 pop_type = peasants } # CAFM fix
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	
@@ -910,6 +945,7 @@ ca_prospecting.18 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -947,6 +983,7 @@ ca_prospecting.19 = {
 			name = ca_survey_progress
 			subtract = 5
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	
@@ -965,6 +1002,7 @@ ca_prospecting.19 = {
 			add_radicals_in_state = { value = 0.20 pop_type = laborers } # CAFM fix
 			add_radicals_in_state = { value = 0.20 pop_type = peasants }
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1008,6 +1046,7 @@ ca_prospecting.20 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	
@@ -1020,6 +1059,7 @@ ca_prospecting.20 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1042,6 +1082,7 @@ ca_prospecting.21 = {
 			name = ca_survey_progress
 			subtract = 10
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -1055,6 +1096,7 @@ ca_prospecting.21 = {
 				}
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1096,6 +1138,7 @@ ca_prospecting.22 = {
 			state_region = { add_arable_land = 2 } # CAFM fix: es efecto de state_region
 			add_radicals_in_state = { value = 0.20 } # CAFM fix: is_discriminated no existe para pops
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -1108,6 +1151,7 @@ ca_prospecting.22 = {
 		scope:target_state = {
 			state_region = { add_arable_land = 2 } # CAFM fix: es efecto de state_region
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1140,6 +1184,7 @@ ca_prospecting.23 = {
 			add_devastation = 25
 			state_region = { add_arable_land = 2 } # CAFM fix: es efecto de state_region
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -1155,6 +1200,7 @@ ca_prospecting.23 = {
 			}
 			add_modifier = { name = ca_ig_strength_boost_modifier months = 60 } # CAFM fix: add_clout no existe
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1187,6 +1233,7 @@ ca_prospecting.24 = {
 			name = ca_survey_progress
 			subtract = 10
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -1211,6 +1258,7 @@ ca_prospecting.24 = {
 			}
 			add_radicals_in_state = { value = 0.15 pop_type = laborers } # CAFM fix
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1258,6 +1306,7 @@ ca_prospecting.25 = {
 			name = ca_foreign_monopoly_modifier
 			months = 120
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -1301,6 +1350,7 @@ ca_prospecting.25 = {
 				}
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1328,6 +1378,7 @@ ca_prospecting.26 = {
 			name = ca_funding_low_modifier
 			months = 120
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -1352,6 +1403,7 @@ ca_prospecting.26 = {
 				}
 			}
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1393,6 +1445,7 @@ ca_prospecting.27 = {
 		scope:target_state = {
 			add_radicals_in_state = { value = 0.20 pop_type = peasants } # CAFM fix
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -1413,6 +1466,7 @@ ca_prospecting.27 = {
 			name = ca_survey_progress
 			subtract = 10
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1439,6 +1493,7 @@ ca_prospecting.28 = {
 			name = ca_survey_progress
 			subtract = 5
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -1448,6 +1503,7 @@ ca_prospecting.28 = {
 			name = ca_state_corruption_modifier
 			months = 60
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1494,6 +1550,7 @@ ca_prospecting.29 = {
 				months = 60
 			}
 		}
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -1505,6 +1562,7 @@ ca_prospecting.29 = {
 		}
 		add_modifier = { name = ca_prestige_scandal_modifier months = 60 } # CAFM fix: add_prestige no existe
 		add_radicals = { value = 0.10 interest_group = ig:ig_intelligentsia } # CAFM fix
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1524,6 +1582,7 @@ ca_prospecting.30 = {
 		name = ca_prospecting.30.a
 		default_option = yes
 		add_treasury = -25000
+		ai_chance = { base = 10 } # F21
 	}
 	
 	option = {
@@ -1539,6 +1598,7 @@ ca_prospecting.30 = {
 			}
 			add_modifier = { name = ca_ig_strength_boost_modifier months = 60 } # CAFM fix: add_clout no existe
 		}
+		ai_chance = { base = 3 } # F21
 	}
 }
 
@@ -1559,7 +1619,7 @@ ca_prospecting.30 = {
 #    # Opción A: Financiación Precaria (Riesgo Alto)
 #    option = {
 #        name = ca_prospecting.1.a
-#        trigger = { treasury >= 1000 }
+#        trigger = { gold_reserves >= 1000 }
 #        add_treasury = -1000
 #        
 #        random_list = {
@@ -1572,7 +1632,7 @@ ca_prospecting.30 = {
 #    option = {
 #        name = ca_prospecting.1.b
 #        default_option = yes
-#        trigger = { treasury >= 10000 }
+#        trigger = { gold_reserves >= 10000 }
 #        add_treasury = -10000
 #        
 #        random_list = {
@@ -1588,7 +1648,7 @@ ca_prospecting.30 = {
 #    # Opción C: Contratar a los mejores expertos (Caro, Resultados Excelentes)
 #    option = {
 #        name = ca_prospecting.1.c
-#        trigger = { treasury >= 30000 }
+#        trigger = { gold_reserves >= 30000 }
 #        add_treasury = -30000
 #        
 #        change_variable = { name = ca_survey_progress add = 35 }
@@ -2009,7 +2069,7 @@ ca_prospecting.30 = {
 #
 #    option = {
 #        name = ca_prospecting.13.a
-#        trigger = { treasury >= 2000 }
+#        trigger = { gold_reserves >= 2000 }
 #        add_treasury = -2000
 #        change_variable = { name = ca_survey_progress add = 5 }
 #    }
@@ -2078,7 +2138,7 @@ ca_prospecting.30 = {
 #    title = ca_prospecting.16.t
 #    
 #    event_image = { video = "middleeast_engineer_blueprint" }
-#    icon = "gfx/interface/icons/event_icons/event_lightbulb.dds"
+#    icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 #    trigger = {}
 #
 #    option = {

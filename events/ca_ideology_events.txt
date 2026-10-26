@@ -1,0 +1,179 @@
+﻿namespace = ca_ideology_events
+
+# CAFM F18: .1 Una nueva constitucion (mecanica 8); .2 Grupo dividido (seccion 5).
+# Fechas historicas de las constituciones por confirmar (CAFM_IDEOLOGIES_RESTRUCTURE.md, seccion 6).
+
+ca_ideology_events.1 = {
+	type = country_event
+	placement = root
+	title = ca_ideology_events.1.t
+	desc = ca_ideology_events.1.d
+	flavor = ca_ideology_events.1.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_variable = ca_organization_apro
+		NOT = { has_variable = ca_constitution_cd }
+		OR = {
+			AND = {
+				has_global_variable = ca_world_historic
+				OR = {
+				AND = { c:HON ?= this game_date >= 1839.1.11 NOT = { has_variable = ca_constitution_1839 } }
+				AND = { c:HON ?= this game_date >= 1848.2.4 NOT = { has_variable = ca_constitution_1848 } }
+				AND = { c:NIC ?= this game_date >= 1838.11.12 NOT = { has_variable = ca_constitution_1838 } }
+				AND = { c:ELS ?= this game_date >= 1841.2.18 NOT = { has_variable = ca_constitution_1841 } }
+				AND = { c:GUA ?= this game_date >= 1851.10.19 NOT = { has_variable = ca_constitution_1851 } }
+				AND = { c:COS ?= this game_date >= 1844.4.9 NOT = { has_variable = ca_constitution_1844 } }
+				AND = { c:COS ?= this game_date >= 1848.10.22 NOT = { has_variable = ca_constitution_1848 } }
+				}
+			}
+			AND = {
+				NOT = { has_global_variable = ca_world_historic }
+				ig:ig_intelligentsia ?= {
+					has_ideology = ideology:ideology_ca_constitutionalist
+					is_powerful = yes
+					is_in_government = yes
+				}
+			}
+		}
+	}
+	option = {
+		name = ca_ideology_events.1.a
+		default_option = yes
+		ca_constitution_adopt = yes
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_ideology_events.1.b
+		ca_constitution_adopt = yes
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_ideology_events.2 = {
+	type = country_event
+	placement = root
+	title = ca_ideology_events.2.t
+	desc = ca_ideology_events.2.d
+	flavor = ca_ideology_events.2.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		scope:ca_divided_ig ?= {
+			has_modifier = ca_ig_divided
+			exists = leader
+		}
+	}
+	immediate = {
+		scope:ca_divided_ig.leader = { save_scope_as = ca_divided_leader }
+	}
+	option = {
+		name = ca_ideology_events.2.a
+		default_option = yes
+		scope:ca_divided_ig = {
+			remove_modifier = ca_ig_divided
+			remove_variable = ca_divided_years
+		}
+		scope:ca_divided_leader = { exile_character = yes }
+		ai_chance = { base = 50
+		modifier = { trigger = { scope:ca_divided_ig = { is_in_government = yes } } add = 40 } }
+	}
+	option = {
+		name = ca_ideology_events.2.b
+		scope:ca_divided_ig = {
+			remove_modifier = ca_ig_divided
+			remove_variable = ca_divided_years
+		}
+		scope:ca_divided_leader = { exile_character = yes }
+		every_scope_state = {
+			limit = { is_incorporated = yes }
+			add_modifier = { name = ca_split_rupture months = 60 }
+		}
+		ai_chance = { base = 50
+		modifier = { trigger = { scope:ca_divided_ig = { is_in_government = no } } add = 40 } }
+	}
+	option = {
+		name = ca_ideology_events.2.c
+		trigger = {
+			scope:ca_divided_ig = { var:ca_divided_years >= 5 }
+			scope:ca_divided_leader = { popularity >= 50 }
+		}
+		scope:ca_divided_ig = {
+			remove_modifier = ca_ig_divided
+			remove_variable = ca_divided_years
+			ca_ig_convert_to_leader_axis = yes
+		}
+		ai_chance = { base = 5 }
+	}
+}
+
+# CAFM F19 (G7): .3 La Republica de X (fin del "Estado de X")
+ca_ideology_events.3 = {
+	type = country_event
+	placement = root
+	title = ca_ideology_events.3.t
+	desc = ca_ideology_events.3.d
+	flavor = ca_ideology_events.3.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		ca_is_ca_national_country = yes
+		NOT = { c:UCA ?= this }
+		is_subject = no
+		NOT = { has_variable = ca_republic_declared }
+		NOT = { has_variable = ca_republic_wait }
+		OR = {
+			AND = {
+				has_global_variable = ca_world_historic
+				OR = {
+				AND = { c:GUA ?= this game_date >= 1847.3.21 }
+				AND = { c:COS ?= this game_date >= 1848.8.31 }
+				AND = { c:ELS ?= this game_date >= 1859.2.18 } # F21: decreto de 1859 (archontology)
+				AND = { c:NIC ?= this game_date >= 1854.4.30 } # F21: Chamorro, presidente de la Republica
+				AND = { c:HON ?= this game_date >= 1865.9.29 } # F21: constitucion de 1865, la primera con "Republica"
+				}
+			}
+			AND = {
+				NOT = { has_global_variable = ca_world_historic }
+				has_variable = ca_independent_years
+				var:ca_independent_years >= 10
+			}
+			AND = {
+				is_ai = no
+				NOT = { has_variable = ca_republic_wait }
+				has_variable = ca_independent_years
+				var:ca_independent_years >= 3
+			}
+		}
+	}
+	option = {
+		name = ca_ideology_events.3.a
+		default_option = yes
+		set_variable = ca_republic_declared
+		add_modifier = { name = ca_republic_proclaimed months = 60 }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_ideology_events.3.b
+		trigger = {
+			is_ai = no
+			NOT = { has_variable = ca_republic_wait }
+		}
+		set_variable = { name = ca_republic_wait days = 1825 }
+		ai_chance = { base = 0 }
+	}
+}
+

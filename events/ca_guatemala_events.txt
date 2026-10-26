@@ -26,7 +26,7 @@ ca_guatemala_events.1 = {
 	trigger = {
         exists = c:UCA
         this = c:UCA 
-        game_date <= 1836.1.1
+        game_date < 1836.2.1 # CAFM F4: la lanza .119
 	}
 	
 	immediate = {
@@ -44,65 +44,63 @@ ca_guatemala_events.1 = {
 		default_option = yes
 
 	}
-	option = {
-		name = ca_guatemala_events.2.a
-		trigger = {
-			c:UCA ?= {
-			has_variable = ca_state_selection_to_playing
-			}
-		}
-       ca_create_guatemala_effect = yes
-	ca_play_guatemala_effect = yes 
-    play_as = c:GUA
-	}
+	# CAFM F4: introduccion solo informativa; jugar como el estado esta en .119 c -> .80
 }
 
 
 # 1. 1837-1838: La Crisis de Gálvez y la Rebelión de la Montaña
+# CAFM F15 (E4): solo "La caida de Galvez" (1838); la rebelion esta en ca_central_america.121/.110
 ca_guatemala_events.5 = {
-    type = country_event
-    event_image = { video = "southamerica_election" } # CAFM fix: sin imagen el evento muestra el cuadro magenta
-    placement = ROOT
-    title = ca_guatemala_events.5.t
-    desc = ca_guatemala_events.5.d
-    icon = "gfx/interface/icons/event_icons/event_election.dds"
-    duration = 3
+	type = country_event
+	placement = root
+	title = ca_guatemala_events.5.t
+	desc = ca_guatemala_events.5.d
+	flavor = ca_guatemala_events.5.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
 
-    trigger = {
-        c:GUA ?= this
-        in_election_campaign = yes
-        NOT = { has_variable = gua_elec_1837_fired }
-        game_date >= 1837.1.1
-        game_date <= 1838.12.31
-    }
-    
-    immediate = { 
-        set_variable = { name = gua_elec_1837_fired value = yes } 
-    }
-
-    # Opción A (Histórica): Los conservadores designan a Pedro José Valenzuela / Rivera Paz
-    option = {
-        name = ca_guatemala_events.5.a
-        default_option = yes
-        ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
-        ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
-        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large_decrease } }
-    }
-
-    # Opción B (Alternativa): Mariano Gálvez resiste en el poder (Liberales)
-    option = {
-        name = ca_guatemala_events.5.b
-        ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
-        # Retener a Gálvez causa furia en el campo
-        add_radicals = { value = large_radicals pop_type = peasants }
-    }
-
-    # Opción C (Alternativa): Rafael Carrera toma el poder tempranamente
-    option = {
-        name = ca_guatemala_events.5.c
-        ig:ig_rural_folk ?= { party = { add_momentum = momentum_large } }
-        ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium } }
-    }
+	trigger = {
+		c:GUA ?= this
+		NOT = { has_variable = gua_elec_1837_fired }
+		game_date >= 1838.2.1
+		game_date <= 1838.12.31
+	}
+	immediate = {
+		set_variable = { name = gua_elec_1837_fired value = yes }
+	}
+	option = {
+		name = ca_guatemala_events.5.a
+		default_option = yes
+		ig:ig_landowners ?= { party ?= { add_momentum = momentum_large } }
+		ig:ig_devout ?= { party ?= { add_momentum = momentum_medium } }
+		ig:ig_intelligentsia ?= { party ?= { add_momentum = momentum_large_decrease } }
+		set_variable = gua_galvez_fallen
+		ai_chance = { base = 70
+		modifier = { trigger = { c:UCA ?= { has_variable = ca_gua_reforms_pushed } } add = 20 }
+		modifier = { trigger = { has_global_variable = ca_world_historic } add = 300 } }
+	}
+	option = {
+		name = ca_guatemala_events.5.b
+		trigger = {
+			NOT = { has_global_variable = ca_world_historic }
+		}
+		ig:ig_intelligentsia ?= { party ?= { add_momentum = momentum_large } }
+		add_radicals = { value = large_radicals pop_type = peasants }
+		ai_chance = { base = 20 }
+	}
+	option = {
+		name = ca_guatemala_events.5.c
+		trigger = {
+			ig:ig_rural_folk ?= { is_powerful = yes }
+		}
+		ig:ig_rural_folk ?= { party ?= { add_momentum = momentum_large } }
+		ig:ig_armed_forces ?= { party ?= { add_momentum = momentum_medium } }
+		set_variable = gua_galvez_fallen
+		c:UCA ?= { ca_frca_front_change = { FRONT = conservative VALUE = 1 } }
+		ai_chance = { base = 10 }
+	}
 }
 
 # 2. 1842: Ratificación Institucional
@@ -117,7 +115,6 @@ ca_guatemala_events.6 = {
 
     trigger = {
         c:GUA ?= this
-        in_election_campaign = yes
         NOT = { has_variable = gua_elec_1842_fired }
         game_date >= 1842.12.14
         game_date <= 1843.12.31
@@ -133,6 +130,7 @@ ca_guatemala_events.6 = {
         default_option = yes
         ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
         ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
+    	ai_chance = { base = 80 } # F21
     }
 
     # Opción B (Alternativa): Oposición Liberal intenta retomar el congreso
@@ -140,6 +138,7 @@ ca_guatemala_events.6 = {
         name = ca_guatemala_events.6.b
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
         ig:ig_landowners ?= { party = { add_momentum = momentum_small_decrease } }
+    	ai_chance = { base = 20 } # F21
     }
 }
 
@@ -155,7 +154,6 @@ ca_guatemala_events.7 = {
 
     trigger = {
         c:GUA ?= this
-        in_election_campaign = yes
         NOT = { has_variable = gua_elec_1844_fired }
         game_date >= 1844.12.11
         game_date <= 1845.12.31
@@ -171,6 +169,7 @@ ca_guatemala_events.7 = {
         default_option = yes
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_very_large } }
         ig:ig_rural_folk ?= { party = { add_momentum = momentum_large } }
+    	ai_chance = { base = 80 } # F21
     }
 
     # Opción B (Alternativa): Las élites conservadoras tratan de mantener a un civil (Rivera Paz)
@@ -180,6 +179,7 @@ ca_guatemala_events.7 = {
         # Ignorar al caudillo militar enfurece a las tropas
         add_radicals = { value = medium_radicals pop_type = soldiers }
         add_radicals = { value = medium_radicals pop_type = officers }
+    	ai_chance = { base = 20 } # F21
     }
 }
 
@@ -195,7 +195,6 @@ ca_guatemala_events.8 = {
 
     trigger = {
         c:GUA ?= this
-        in_election_campaign = yes
         NOT = { has_variable = gua_elec_1848_fired }
         game_date >= 1848.8.1
         game_date <= 1849.12.31
@@ -211,17 +210,20 @@ ca_guatemala_events.8 = {
         default_option = yes
         ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
         ig:ig_industrialists ?= { party = { add_momentum = momentum_medium } }
+    	ai_chance = { base = 80 } # F21
     }
 
     # Opción B (Histórica Tardía): El General Mariano Paredes toma el control
     option = {
         name = ca_guatemala_events.8.b
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
+    	ai_chance = { base = 10 } # F21
     }
 
     # Opción C (Alternativa): Los Liberales aprovechan el exilio de Carrera
     option = {
         name = ca_guatemala_events.8.c
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+    	ai_chance = { base = 10 } # F21
     }
 } 

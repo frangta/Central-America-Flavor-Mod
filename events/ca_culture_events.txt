@@ -1,0 +1,135 @@
+﻿namespace = ca_culture
+
+# CAFM F13 (A4): la Ilustracion. .1 La ilustracion centroamericana; .2 La universidad; .3 La imprenta liberal; .4 Las escuelas normales.
+
+ca_culture.1 = {
+	type = country_event
+	placement = root
+	title = ca_culture.1.t
+	desc = ca_culture.1.d
+	flavor = ca_culture.1.f
+	event_image = { video = "middleeast_middleclass_cafe" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_variable = ca_enlightenment_completed
+	}
+	option = {
+		name = ca_culture.1.a
+		default_option = yes
+		custom_tooltip = ca_culture.1.tt
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_culture.2 = {
+	type = country_event
+	placement = root
+	title = ca_culture.2.t
+	desc = ca_culture.2.d
+	flavor = ca_culture.2.f
+	event_image = { video = "unspecific_research" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_enlightenment
+		NOT = { has_variable = ca_university_founded }
+		OR = {
+			var:ca_enl_bar >= 20
+			AND = { c:ELS ?= this game_date >= 1841.2.16 }
+			AND = { c:COS ?= this game_date >= 1843.4.3 }
+			game_date >= 1850.1.1
+		}
+	}
+	option = {
+		name = ca_culture.2.a
+		default_option = yes
+		set_variable = ca_university_founded
+		ca_enl_bar_change = { VALUE = 15 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 50
+		modifier = { trigger = { ig:ig_intelligentsia ?= { is_in_government = yes } } add = 30 } }
+	}
+	option = {
+		name = ca_culture.2.b
+		set_variable = ca_university_founded
+		ca_enl_bar_change = { VALUE = 5 }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 50
+		modifier = { trigger = { ig:ig_devout ?= { is_in_government = yes } } add = 30 } }
+	}
+}
+
+ca_culture.3 = {
+	type = country_event
+	placement = root
+	title = ca_culture.3.t
+	desc = ca_culture.3.d
+	flavor = ca_culture.3.f
+	event_image = { video = "middleeast_middleclass_cafe" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_enlightenment
+		NOT = { has_variable = ca_liberal_press_decided }
+		var:ca_enl_bar >= 10
+	}
+	option = {
+		name = ca_culture.3.a
+		default_option = yes
+		set_variable = ca_liberal_press_decided
+		set_variable = ca_liberal_press
+		ca_enl_bar_change = { VALUE = 15 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_culture.3.b
+		set_variable = ca_liberal_press_decided
+		ca_enl_bar_change = { VALUE = -5 }
+		add_modifier = { name = ca_press_licensing months = 60 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_culture.4 = {
+	type = country_event
+	placement = root
+	title = ca_culture.4.t
+	desc = ca_culture.4.d
+	flavor = ca_culture.4.f
+	event_image = { video = "unspecific_research" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_enlightenment
+		NOT = { has_variable = ca_normal_schools_decided }
+		has_institution = institution_schools
+	}
+	option = {
+		name = ca_culture.4.a
+		default_option = yes
+		set_variable = ca_normal_schools_decided
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ca_enl_bar_change = { VALUE = 15 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_culture.4.b
+		set_variable = ca_normal_schools_decided
+		ca_enl_bar_change = { VALUE = 5 }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 40 }
+	}
+}
+

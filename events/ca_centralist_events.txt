@@ -1,0 +1,839 @@
+﻿namespace = ca_centralist_events
+
+# CAFM F11 (grupo C2): ruta centralista (solo jugador). 20 eventos dinamicos: 5 ganchos, 9 de leyes y 6 de ambiente.
+
+ca_centralist_events.1 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.1.t
+	desc = ca_centralist_events.1.d
+	flavor = ca_centralist_events.1.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		is_ai = no
+		ca_frca_route_centralist = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_cen_1_fired }
+	}
+
+	option = {
+		name = ca_centralist_events.1.a
+		trigger = { ig:ig_armed_forces ?= { is_powerful = yes } }
+		set_variable = ca_cen_1_fired
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_cen_pillar_army months = 60 } }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.1.b
+		trigger = { ig:ig_devout ?= { is_powerful = yes } }
+		set_variable = ca_cen_1_fired
+		ig:ig_devout ?= { add_modifier = { name = ca_cen_pillar_church months = 60 } }
+		ca_frca_loyalty_up = { TAG = gua }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.1.c
+		default_option = yes
+		set_variable = ca_cen_1_fired
+		ig:ig_landowners ?= { add_modifier = { name = ca_cen_pillar_landowners months = 60 } }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.2 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.2.t
+	desc = ca_centralist_events.2.d
+	flavor = ca_centralist_events.2.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		is_ai = no
+		ca_frca_route_centralist = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_cen_2_fired }
+	}
+
+	option = {
+		name = ca_centralist_events.2.a
+		default_option = yes
+		set_variable = ca_cen_2_fired
+		add_modifier = { name = ca_cen_rule_by_decree months = 60 }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.2.b
+		set_variable = ca_cen_2_fired
+		add_modifier = { name = ca_cen_council_of_state months = 60 }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.3 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.3.t
+	desc = ca_centralist_events.3.d
+	flavor = ca_centralist_events.3.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		is_ai = no
+		ca_frca_route_centralist = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_cen_3_fired }
+		any_scope_character = { has_role = character_role_general }
+	}
+	immediate = {
+		random_scope_character = {
+			limit = { has_role = character_role_general }
+			save_scope_as = ca_general
+		}
+	}
+
+	option = {
+		name = ca_centralist_events.3.a
+		default_option = yes
+		set_variable = ca_cen_3_fired
+		scope:ca_general = { add_modifier = { name = ca_fed_general_command months = 36 } }
+		add_modifier = { name = ca_fed_war_effort months = 36 }
+		ca_frca_front_change = { FRONT = caudillos VALUE = 1 }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.3.b
+		set_variable = ca_cen_3_fired
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.4 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.4.t
+	desc = ca_centralist_events.4.d
+	flavor = ca_centralist_events.4.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		is_ai = no
+		ca_frca_route_centralist = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_cen_4_fired }
+		exists = ruler
+	}
+	immediate = {
+		ruler = { save_scope_as = ca_ruler }
+	}
+
+	option = {
+		name = ca_centralist_events.4.a
+		default_option = yes
+		set_variable = ca_cen_4_fired
+		set_variable = jefe_supremo_var # F19 (G6)
+		add_modifier = { name = ca_cen_supreme_director months = 120 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.4.b
+		set_variable = ca_cen_4_fired
+		add_modifier = { name = ca_cen_council_of_state months = 36 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.5 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.5.t
+	desc = ca_centralist_events.5.d
+	flavor = ca_centralist_events.5.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		is_ai = no
+		ca_frca_route_centralist = yes
+		NOT = { has_variable = ca_cen_5_fired }
+	}
+
+	option = {
+		name = ca_centralist_events.5.a
+		default_option = yes
+		set_variable = ca_cen_5_fired
+		add_modifier = { name = ca_fed_republic_restored months = 60 }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.7 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.7.t
+	desc = ca_centralist_events.7.d
+	flavor = ca_centralist_events.7.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_central_american_unitary
+		is_ai = no
+		ca_frca_route_centralist = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_centralist_events.7.a
+		default_option = yes
+		add_enactment_modifier = { name = ca_enact_intendants_sworn }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.7.b
+		add_enactment_modifier = { name = ca_enact_compromise }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.8 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.8.t
+	desc = ca_centralist_events.8.d
+	flavor = ca_centralist_events.8.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_central_american_unitary
+		is_ai = no
+		ca_frca_route_centralist = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_centralist_events.8.a
+		default_option = yes
+		add_enactment_modifier = { name = ca_enact_firm_reform }
+		ca_frca_loyalty_up = { TAG = gua }
+		ca_frca_loyalty_down = { TAG = els }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.8.b
+		add_enactment_modifier = { name = ca_enact_compromise }
+		set_variable = frca_capital_rotativa
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.9 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.9.t
+	desc = ca_centralist_events.9.d
+	flavor = ca_centralist_events.9.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_central_american_unitary
+		is_ai = no
+		ca_frca_route_centralist = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+		ca_frca_save_weakest_state = yes
+	}
+
+	option = {
+		name = ca_centralist_events.9.a
+		default_option = yes
+		add_enactment_setback = 1
+		ca_frca_bar_minor_down = yes
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.9.b
+		add_enactment_modifier = { name = ca_enact_slow_support }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.10 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.10.t
+	desc = ca_centralist_events.10.d
+	flavor = ca_centralist_events.10.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_guardia_nacional
+		is_ai = no
+		ca_frca_route_centralist = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_centralist_events.10.a
+		default_option = yes
+		add_enactment_modifier = { name = ca_enact_career_officers }
+		if = {
+			limit = {
+				OR = {
+					has_law = law_type:law_ca_central_american_unitary
+					has_law = law_type:law_ca_central_american_federal
+				}
+			}
+			active_law:lawgroup_ca_state_structure ?= {
+				add_amendment = {
+					type = amendment_ca_ejercito_unico
+					sponsor = root.ig:ig_armed_forces
+				}
+			}
+		}
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.10.b
+		add_enactment_modifier = { name = ca_enact_compromise }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.11 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.11.t
+	desc = ca_centralist_events.11.d
+	flavor = ca_centralist_events.11.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_guardia_nacional
+		is_ai = no
+		ca_frca_route_centralist = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_centralist_events.11.a
+		default_option = yes
+		add_enactment_modifier = { name = ca_enact_firm_reform }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		if = {
+			limit = { has_law = law_type:law_ca_junta }
+			active_law:lawgroup_governance_principles ?= {
+				add_amendment = {
+					type = amendment_ca_leva_suprema
+					sponsor = root.ig:ig_armed_forces
+				}
+			}
+		}
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.11.b
+		add_enactment_modifier = { name = ca_enact_slow_support }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.12 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.12.t
+	desc = ca_centralist_events.12.d
+	flavor = ca_centralist_events.12.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_guardia_nacional
+		is_ai = no
+		ca_frca_route_centralist = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+		ca_frca_save_weakest_state = yes
+	}
+
+	option = {
+		name = ca_centralist_events.12.a
+		default_option = yes
+		add_enactment_setback = 1
+		ca_frca_front_change = { FRONT = caudillos VALUE = 1 }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.12.b
+		add_enactment_modifier = { name = ca_enact_slow_support }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.13 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.13.t
+	desc = ca_centralist_events.13.d
+	flavor = ca_centralist_events.13.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_state_religion
+		is_ai = no
+		ca_frca_route_centralist = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_centralist_events.13.a
+		default_option = yes
+		add_enactment_modifier = { name = ca_enact_concordat_talks }
+		set_variable = ca_amend_pending_concordato
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.13.b
+		add_enactment_modifier = { name = ca_enact_compromise }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.14 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.14.t
+	desc = ca_centralist_events.14.d
+	flavor = ca_centralist_events.14.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_state_religion
+		is_ai = no
+		ca_frca_route_centralist = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_centralist_events.14.a
+		default_option = yes
+		add_enactment_modifier = { name = ca_enact_firm_reform }
+		set_variable = ca_amend_pending_patronato
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.14.b
+		add_enactment_modifier = { name = ca_enact_concordat_talks }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.15 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.15.t
+	desc = ca_centralist_events.15.d
+	flavor = ca_centralist_events.15.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_state_religion
+		is_ai = no
+		ca_frca_route_centralist = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_centralist_events.15.a
+		default_option = yes
+		add_enactment_setback = 1
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.15.b
+		add_enactment_modifier = { name = ca_enact_slow_support }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.6 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.6.t
+	desc = ca_centralist_events.6.d
+	flavor = ca_centralist_events.6.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		is_ai = no
+		ca_frca_route_centralist = yes
+		ca_frca_journal_active = yes
+		any_country = {
+			is_subject_of = c:UCA
+			has_variable = ca_centralist_coup_ready
+			NOT = { has_variable = ca_centralist_coup_done }
+		}
+	}
+	immediate = {
+		random_country = {
+			limit = {
+				is_subject_of = c:UCA
+				has_variable = ca_centralist_coup_ready
+				NOT = { has_variable = ca_centralist_coup_done }
+			}
+			save_scope_as = ca_coup_state
+		}
+	}
+
+	option = {
+		name = ca_centralist_events.6.a
+		default_option = yes
+		scope:ca_coup_state = {
+			set_variable = ca_centralist_coup_done
+			set_variable = { name = recent_coup_or_revolution_var days = 730 } # F20
+			ca_state_loyalty_up = yes
+			ca_fvs_bar_change = { VALUE = 20 }
+			ig:ig_armed_forces ?= { add_ruling_interest_group = yes }
+		}
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.6.b
+		scope:ca_coup_state = {
+			set_variable = ca_centralist_coup_done
+			set_variable = { name = recent_coup_or_revolution_var days = 730 } # F20
+			ca_fvs_bar_change = { VALUE = 10 }
+		}
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.16 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.16.t
+	desc = ca_centralist_events.16.d
+	flavor = ca_centralist_events.16.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		is_ai = no
+		ca_frca_route_centralist = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_cen_16_cd }
+	}
+
+	option = {
+		name = ca_centralist_events.16.a
+		default_option = yes
+		set_variable = { name = ca_cen_16_cd days = 1825 }
+		add_modifier = { name = ca_press_watch months = 12 }
+		ca_frca_front_change = { FRONT = conservative VALUE = -1 }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.16.b
+		set_variable = { name = ca_cen_16_cd days = 1825 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ca_frca_bar_minor_down = yes
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.17 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.17.t
+	desc = ca_centralist_events.17.d
+	flavor = ca_centralist_events.17.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		is_ai = no
+		ca_frca_route_centralist = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_cen_17_cd }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+
+	option = {
+		name = ca_centralist_events.17.a
+		default_option = yes
+		set_variable = { name = ca_cen_17_cd days = 1825 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.17.b
+		set_variable = { name = ca_cen_17_cd days = 1825 }
+		ca_frca_bar_minor_down = yes
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.18 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.18.t
+	desc = ca_centralist_events.18.d
+	flavor = ca_centralist_events.18.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		is_ai = no
+		ca_frca_route_centralist = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_cen_18_cd }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+	immediate = {
+		ca_frca_save_weakest_state = yes
+	}
+
+	option = {
+		name = ca_centralist_events.18.a
+		default_option = yes
+		set_variable = { name = ca_cen_18_cd days = 1825 }
+		ca_frca_bar_minor_up = yes
+		add_radicals = { value = small_radicals }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.18.b
+		set_variable = { name = ca_cen_18_cd days = 1825 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.19 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.19.t
+	desc = ca_centralist_events.19.d
+	flavor = ca_centralist_events.19.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		is_ai = no
+		ca_frca_route_centralist = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_cen_19_cd }
+		has_variable = frca_congress_dissolved
+	}
+
+	option = {
+		name = ca_centralist_events.19.a
+		default_option = yes
+		set_variable = { name = ca_cen_19_cd days = 1825 }
+		add_modifier = { name = ca_cen_council_of_state months = 60 }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.19.b
+		set_variable = { name = ca_cen_19_cd days = 1825 }
+		add_modifier = { name = ca_cen_rule_by_decree months = 24 }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_centralist_events.20 = {
+	type = country_event
+	placement = root
+	title = ca_centralist_events.20.t
+	desc = ca_centralist_events.20.d
+	flavor = ca_centralist_events.20.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		is_ai = no
+		ca_frca_route_centralist = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_cen_20_cd }
+	}
+
+	option = {
+		name = ca_centralist_events.20.a
+		default_option = yes
+		set_variable = { name = ca_cen_20_cd days = 3650 }
+		if = {
+			limit = {
+				OR = {
+					has_law = law_type:law_presidential_republic
+					has_law = law_type:law_ca_coffeacracia
+					has_law = law_type:law_ca_tecnocracy
+					has_law = law_type:law_ca_consejo_junta
+				}
+			}
+			active_law:lawgroup_governance_principles ?= {
+				add_amendment = {
+					type = amendment_ca_continuismo
+					sponsor = root.ig:ig_armed_forces
+				}
+			}
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 1 }
+	}
+	option = {
+		name = ca_centralist_events.20.b
+		set_variable = { name = ca_cen_20_cd days = 3650 }
+		add_modifier = { name = ca_fed_clean_election months = 24 }
+		ai_chance = { base = 1 }
+	}
+}
+

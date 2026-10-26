@@ -49,6 +49,7 @@ ca_british_debt.1 = {
 			country = c:GBR
 			value = 20
 		}
+		ai_chance = { base = 70 } # F21
 	}
 
 	# Presumir la soberanía financiera
@@ -58,6 +59,7 @@ ca_british_debt.1 = {
 			name = modifier_ca_british_debt_sovereign_finances
 			days = very_long_modifier_time
 		}
+		ai_chance = { base = 30 } # F21
 	}
 }
 

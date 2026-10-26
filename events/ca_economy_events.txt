@@ -1,0 +1,124 @@
+﻿namespace = ca_economy
+
+# CAFM F13 (A2): la agroexportacion. .1 El milagro agroexportador; .2 Las companias bananeras; .3 El ferrocarril al Atlantico.
+
+ca_economy.1 = {
+	type = country_event
+	placement = root
+	title = ca_economy.1.t
+	desc = ca_economy.1.d
+	flavor = ca_economy.1.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_variable = ca_agro_export_miracle_completed
+	}
+	option = {
+		name = ca_economy.1.a
+		default_option = yes
+		add_treasury = { value = ca_money_medium }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_economy.2 = {
+	type = country_event
+	placement = root
+	title = ca_economy.2.t
+	desc = ca_economy.2.d
+	flavor = ca_economy.2.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_agro_export_boom
+		NOT = { has_variable = ca_banana_decided }
+		OR = {
+			game_date >= 1870.1.1
+			var:ca_agro_bar >= 40
+		}
+	}
+	option = {
+		name = ca_economy.2.a
+		default_option = yes
+		set_variable = ca_banana_decided
+		set_variable = ca_banana_concession
+		set_variable = ca_banana_republic_risk
+		ca_agro_bar_change = { VALUE = 20 }
+		add_treasury = { value = ca_money_medium }
+		add_modifier = { name = ca_banana_concession_mod months = 240 }
+		random_list = {
+			50 = { add_company = company_type:company_standard_fruit }
+			50 = { add_company = company_type:company_cuyamel_fruit }
+		}
+		ai_chance = { base = 60
+		modifier = { trigger = { ig:ig_industrialists ?= { is_in_government = yes } } add = 30 } }
+	}
+	option = {
+		name = ca_economy.2.b
+		set_variable = ca_banana_decided
+		ca_agro_bar_change = { VALUE = 5 }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_economy.3 = {
+	type = country_event
+	placement = root
+	title = ca_economy.3.t
+	desc = ca_economy.3.d
+	flavor = ca_economy.3.f
+	event_image = { video = "middleeast_engineer_blueprint" }
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_agro_export_boom
+		NOT = { has_variable = ca_atlantic_railway_decided }
+		any_scope_building = { is_building_type = building_port }
+		OR = {
+			game_date >= 1871.1.1
+			var:ca_agro_bar >= 50
+		}
+	}
+	option = {
+		name = ca_economy.3.a
+		default_option = yes
+		set_variable = ca_atlantic_railway_decided
+		set_variable = ca_atlantic_railway
+		ca_agro_bar_change = { VALUE = 20 }
+		if = {
+			limit = {
+				OR = {
+					has_law = law_type:law_land_reform_banana_republic
+					has_law = law_type:law_commercialized_agriculture
+				}
+			}
+			active_law:lawgroup_land_reform ?= {
+				add_amendment = {
+					type = amendment_ca_contrato_keith
+					sponsor = root.ig:ig_industrialists
+				}
+			}
+		}
+
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_economy.3.b
+		set_variable = ca_atlantic_railway_decided
+		set_variable = ca_atlantic_railway
+		add_treasury = { value = ca_money_large multiply = -1 }
+		ca_agro_bar_change = { VALUE = 10 }
+		add_modifier = { name = ca_national_railway_mod months = 120 }
+		ai_chance = { base = 40
+		modifier = { trigger = { gold_reserves < ca_money_large } factor = 0 } }
+	}
+}
+

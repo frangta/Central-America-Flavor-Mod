@@ -1,0 +1,814 @@
+﻿namespace = ca_federalist_events
+
+# CAFM F11 (grupo C1): ruta federal. 20 eventos dinamicos: 5 ganchos (H1-H5), 9 de leyes y 6 de ambiente.
+# Disparo: ganchos con ca_frca_fire_hook; leyes en on_law_checkpoint_*; ambiente en el pulso del diario.
+
+ca_federalist_events.1 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.1.t
+	desc = ca_federalist_events.1.d
+	flavor = ca_federalist_events.1.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		ca_frca_route_federal = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_fed_1_fired }
+	}
+
+	option = {
+		name = ca_federalist_events.1.a
+		trigger = { ig:ig_intelligentsia ?= { is_in_government = yes } }
+		set_variable = ca_fed_1_fired
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_fed_pact_liberal months = 36 } }
+		ca_frca_bar_minor_up = yes
+		ai_chance = { base = 40 modifier = { trigger = { ig:ig_intelligentsia ?= { is_in_government = yes } } add = 40 } }
+	}
+	option = {
+		name = ca_federalist_events.1.b
+		trigger = { ig:ig_landowners ?= { is_in_government = yes } }
+		set_variable = ca_fed_1_fired
+		ig:ig_landowners ?= { add_modifier = { name = ca_fed_pact_states months = 36 } }
+		ca_frca_bar_minor_up = yes
+		ai_chance = { base = 30 modifier = { trigger = { ig:ig_landowners ?= { is_in_government = yes } } add = 40 } }
+	}
+	option = {
+		name = ca_federalist_events.1.c
+		default_option = yes
+		set_variable = ca_fed_1_fired
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_fed_pact_army months = 36 } }
+		ca_frca_bar_minor_up = yes
+		ai_chance = { base = 30 modifier = { trigger = { ig:ig_armed_forces ?= { is_in_government = yes } } add = 40 } }
+	}
+}
+
+ca_federalist_events.2 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.2.t
+	desc = ca_federalist_events.2.d
+	flavor = ca_federalist_events.2.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		ca_frca_route_federal = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_fed_2_fired }
+	}
+
+	option = {
+		name = ca_federalist_events.2.a
+		default_option = yes
+		set_variable = ca_fed_2_fired
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ca_frca_bar_minor_up = yes
+		add_radicals = { value = small_radicals }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_federalist_events.2.b
+		set_variable = ca_fed_2_fired
+		set_variable = frca_federal_reform
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_fed_constitutional_reform months = 36 } }
+		ca_frca_bar_minor_down = yes
+		ca_frca_loyalty_up = { TAG = hon }
+		ca_frca_loyalty_up = { TAG = nic }
+		ca_frca_loyalty_up = { TAG = cos }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_federalist_events.2.c
+		set_variable = ca_fed_2_fired
+		ca_frca_bar_minor_down = yes
+		add_modifier = { name = ca_fed_realism months = 24 }
+		ai_chance = { base = 20 }
+	}
+}
+
+ca_federalist_events.3 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.3.t
+	desc = ca_federalist_events.3.d
+	flavor = ca_federalist_events.3.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		ca_frca_route_federal = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_fed_3_fired }
+		any_scope_character = { has_role = character_role_general }
+	}
+	immediate = {
+		random_scope_character = {
+			limit = { has_role = character_role_general }
+			save_scope_as = ca_general
+		}
+	}
+
+	option = {
+		name = ca_federalist_events.3.a
+		default_option = yes
+		set_variable = ca_fed_3_fired
+		scope:ca_general = { add_modifier = { name = ca_fed_general_command months = 36 } }
+		add_modifier = { name = ca_fed_war_effort months = 24 }
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_federalist_events.3.b
+		set_variable = ca_fed_3_fired
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_federalist_events.4 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.4.t
+	desc = ca_federalist_events.4.d
+	flavor = ca_federalist_events.4.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		ca_frca_route_federal = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_fed_4_fired }
+	}
+
+	option = {
+		name = ca_federalist_events.4.a
+		default_option = yes
+		set_variable = ca_fed_4_fired
+		ca_frca_calm_worst_front = yes
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_federalist_events.4.b
+		set_variable = ca_fed_4_fired
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		ca_frca_bar_minor_up = yes
+		add_modifier = { name = ca_fed_war_effort months = 24 }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_federalist_events.5 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.5.t
+	desc = ca_federalist_events.5.d
+	flavor = ca_federalist_events.5.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		ca_frca_route_federal = yes
+		NOT = { has_variable = ca_fed_5_fired }
+	}
+
+	option = {
+		name = ca_federalist_events.5.a
+		default_option = yes
+		set_variable = ca_fed_5_fired
+		add_modifier = { name = ca_fed_republic_restored months = 60 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_federalist_events.5.b
+		set_variable = ca_fed_5_fired
+		add_treasury = { value = ca_money_large multiply = -1 }
+		ca_frca_loyalty_up = { TAG = gua }
+		ca_frca_loyalty_up = { TAG = els }
+		ca_frca_loyalty_up = { TAG = hon }
+		ca_frca_loyalty_up = { TAG = nic }
+		ca_frca_loyalty_up = { TAG = cos }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_federalist_events.6 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.6.t
+	desc = ca_federalist_events.6.d
+	flavor = ca_federalist_events.6.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_escuela_laica
+		ca_frca_route_federal = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_federalist_events.6.a
+		default_option = yes
+		add_treasury = { value = ca_money_small multiply = -1 }
+		add_enactment_modifier = { name = ca_enact_teachers_arrive }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_federalist_events.6.b
+		add_enactment_modifier = { name = ca_enact_slow_support }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_federalist_events.7 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.7.t
+	desc = ca_federalist_events.7.d
+	flavor = ca_federalist_events.7.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_escuela_laica
+		ca_frca_route_federal = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_federalist_events.7.a
+		default_option = yes
+		add_enactment_modifier = { name = ca_enact_firm_reform }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_federalist_events.7.b
+		add_enactment_modifier = { name = ca_enact_compromise }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_federalist_events.8 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.8.t
+	desc = ca_federalist_events.8.d
+	flavor = ca_federalist_events.8.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_escuela_laica
+		ca_frca_route_federal = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_federalist_events.8.a
+		default_option = yes
+		add_enactment_setback = 1
+		add_radicals = { value = small_radicals interest_group = ig:ig_devout }
+		add_enactment_modifier = { name = ca_enact_firm_reform }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_federalist_events.8.b
+		add_enactment_modifier = { name = ca_enact_slow_support }
+		ai_chance = { base = 60 }
+	}
+}
+
+ca_federalist_events.9 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.9.t
+	desc = ca_federalist_events.9.d
+	flavor = ca_federalist_events.9.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_total_separation
+		ca_frca_route_federal = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_federalist_events.9.a
+		default_option = yes
+		set_variable = ca_amend_pending_matrimonio_civil
+		add_enactment_modifier = { name = ca_enact_civil_registry }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_federalist_events.9.b
+		add_enactment_modifier = { name = ca_enact_compromise }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_federalist_events.10 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.10.t
+	desc = ca_federalist_events.10.d
+	flavor = ca_federalist_events.10.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_total_separation
+		ca_frca_route_federal = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_federalist_events.10.a
+		default_option = yes
+		add_enactment_modifier = { name = ca_enact_firm_reform }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down_massive months = 24 } }
+		ca_frca_front_change = { FRONT = conservative VALUE = 1 }
+		set_variable = ca_church_clash # F18 (mecanica 3)
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_federalist_events.10.b
+		add_enactment_modifier = { name = ca_enact_compromise }
+		ai_chance = { base = 60 }
+	}
+}
+
+ca_federalist_events.11 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.11.t
+	desc = ca_federalist_events.11.d
+	flavor = ca_federalist_events.11.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_total_separation
+		ca_frca_route_federal = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_federalist_events.11.a
+		default_option = yes
+		add_treasury = { value = ca_money_small multiply = -1 }
+		add_enactment_modifier = { name = ca_enact_slow_support }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_federalist_events.11.b
+		add_enactment_setback = 1
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 12 } }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_federalist_events.12 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.12.t
+	desc = ca_federalist_events.12.d
+	flavor = ca_federalist_events.12.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_municipalismo
+		ca_frca_route_federal = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_federalist_events.12.a
+		default_option = yes
+		add_enactment_modifier = { name = ca_enact_open_councils }
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_federalist_events.12.b
+		add_enactment_modifier = { name = ca_enact_compromise }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_federalist_events.13 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.13.t
+	desc = ca_federalist_events.13.d
+	flavor = ca_federalist_events.13.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_municipalismo
+		ca_frca_route_federal = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+	}
+
+	option = {
+		name = ca_federalist_events.13.a
+		default_option = yes
+		add_enactment_modifier = { name = ca_enact_compromise }
+		if = {
+			limit = { has_law = law_type:law_ca_central_american_federal }
+		active_law:lawgroup_ca_state_structure ?= {
+			add_amendment = {
+				type = amendment_ca_senado_de_estados
+				sponsor = root.ig:ig_landowners
+			}
+		}
+		}
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_federalist_events.13.b
+		add_enactment_modifier = { name = ca_enact_compromise }
+		if = {
+			limit = { has_law = law_type:law_ca_central_american_federal }
+		active_law:lawgroup_ca_state_structure ?= {
+			add_amendment = {
+				type = amendment_ca_capital_rotativa
+				sponsor = root.ig:ig_landowners
+			}
+		}
+		}
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_federalist_events.14 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.14.t
+	desc = ca_federalist_events.14.d
+	flavor = ca_federalist_events.14.f
+	category = enactment
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	trigger = {
+		this = c:UCA
+		is_enacting_law = law_type:law_ca_municipalismo
+		ca_frca_route_federal = yes
+
+	}
+	immediate = {
+		currently_enacting_law = { save_scope_as = current_law_scope }
+		ca_frca_save_weakest_state = yes
+	}
+
+	option = {
+		name = ca_federalist_events.14.a
+		default_option = yes
+		add_enactment_setback = 1
+		ca_frca_bar_minor_down = yes
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_federalist_events.14.b
+		add_enactment_modifier = { name = ca_enact_slow_support }
+		ai_chance = { base = 60 }
+	}
+}
+
+ca_federalist_events.15 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.15.t
+	desc = ca_federalist_events.15.d
+	flavor = ca_federalist_events.15.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		ca_frca_route_federal = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_fed_15_cd }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+
+	option = {
+		name = ca_federalist_events.15.a
+		default_option = yes
+		set_variable = { name = ca_fed_15_cd days = 1825 }
+		add_treasury = { value = ca_money_medium }
+		ca_frca_front_change = { FRONT = british VALUE = 1 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_federalist_events.15.b
+		set_variable = { name = ca_fed_15_cd days = 1825 }
+		add_modifier = { name = ca_fed_national_pride months = 24 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_federalist_events.16 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.16.t
+	desc = ca_federalist_events.16.d
+	flavor = ca_federalist_events.16.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		ca_frca_route_federal = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_fed_16_cd }
+		gold_reserves < 5000
+	}
+
+	option = {
+		name = ca_federalist_events.16.a
+		default_option = yes
+		set_variable = { name = ca_fed_16_cd days = 1825 }
+		add_treasury = { value = ca_money_medium }
+		ig:ig_industrialists ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_federalist_events.16.b
+		set_variable = { name = ca_fed_16_cd days = 1825 }
+		ca_frca_bar_minor_down = yes
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		add_modifier = { name = ca_fed_austerity months = 24 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_federalist_events.17 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.17.t
+	desc = ca_federalist_events.17.d
+	flavor = ca_federalist_events.17.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		ca_frca_route_federal = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_fed_17_cd }
+		ca_core_states_rebel_count >= 2
+	}
+
+	option = {
+		name = ca_federalist_events.17.a
+		default_option = yes
+		set_variable = { name = ca_fed_17_cd days = 1825 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ca_frca_bar_minor_up = yes
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_federalist_events.17.b
+		set_variable = { name = ca_fed_17_cd days = 1825 }
+		add_modifier = { name = ca_fed_rule_by_decree months = 24 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ca_frca_bar_minor_down = yes
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_federalist_events.18 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.18.t
+	desc = ca_federalist_events.18.d
+	flavor = ca_federalist_events.18.f
+	event_image = { video = "unspecific_vandalized_storefront" }
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		ca_frca_route_federal = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_fed_18_cd }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+
+	option = {
+		name = ca_federalist_events.18.a
+		default_option = yes
+		set_variable = { name = ca_fed_18_cd days = 1825 }
+		ca_frca_bar_minor_up = yes
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_federalist_events.18.b
+		set_variable = { name = ca_fed_18_cd days = 1825 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ca_frca_front_change = { FRONT = conservative VALUE = -1 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_federalist_events.19 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.19.t
+	desc = ca_federalist_events.19.d
+	flavor = ca_federalist_events.19.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		ca_frca_route_federal = yes
+		ca_frca_journal_active = yes
+		NOT = { has_variable = ca_fed_19_cd }
+		ca_frca_phase_ge = { VALUE = 3 }
+	}
+
+	option = {
+		name = ca_federalist_events.19.a
+		default_option = yes
+		set_variable = { name = ca_fed_19_cd days = 1825 }
+		add_modifier = { name = ca_fed_civic_militia months = 60 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_federalist_events.19.b
+		set_variable = { name = ca_fed_19_cd days = 1825 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_federalist_events.20 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.20.t
+	desc = ca_federalist_events.20.d
+	flavor = ca_federalist_events.20.f
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		ca_frca_route_federal = yes
+		ca_frca_journal_active = yes
+		exists = ruler
+	}
+	immediate = {
+		ruler = { save_scope_as = ca_candidate }
+	}
+
+	option = {
+		name = ca_federalist_events.20.a
+		default_option = yes
+		add_modifier = { name = ca_fed_clean_election months = 36 }
+		ca_frca_bar_minor_up = yes
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_federalist_events.20.b
+		add_modifier = { name = ca_fed_rule_by_decree months = 12 }
+		ca_frca_bar_minor_down = yes
+		ai_chance = { base = 40 }
+	}
+}
+

@@ -1,3 +1,349 @@
 ﻿namespace = ca_los_altos_soconusco_events
 
+# CAFM F14 (D3): "El Soconusco". .1-.5 historicos; .6-.10 dinamicos. Diario de CIP: je_ca_soconusco.
+
+ca_los_altos_soconusco_events.1 = {
+	type = country_event
+	placement = root
+	title = ca_los_altos_soconusco_events.1.t
+	desc = ca_los_altos_soconusco_events.1.d
+	flavor = ca_los_altos_soconusco_events.1.f
+	event_image = { video = "asia_farmers_market" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:CIP
+		has_journal_entry = je_ca_soconusco
+		NOT = { has_variable = ca_soc_1_fired }
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.1.a
+		default_option = yes
+		set_variable = ca_soc_1_fired
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_los_altos_soconusco_events.2 = {
+	type = country_event
+	placement = root
+	title = ca_los_altos_soconusco_events.2.t
+	desc = ca_los_altos_soconusco_events.2.d
+	flavor = ca_los_altos_soconusco_events.2.f
+	event_image = { video = "asia_farmers_market" }
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:CIP
+		has_journal_entry = je_ca_soconusco
+		NOT = { has_variable = ca_soc_2_fired }
+		exists = c:ALT
+		game_date >= 1838.6.1
+		game_date < 1841.1.1
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.2.a
+		default_option = yes
+		set_variable = ca_soc_2_fired
+		ca_soconusco_change = { VALUE = 10 }
+		c:ALT = { change_relations = { country = root value = 30 } }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.2.b
+		set_variable = ca_soc_2_fired
+		ca_soconusco_change = { VALUE = -5 }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_los_altos_soconusco_events.3 = {
+	type = country_event
+	placement = root
+	title = ca_los_altos_soconusco_events.3.t
+	desc = ca_los_altos_soconusco_events.3.d
+	flavor = ca_los_altos_soconusco_events.3.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:CIP
+		has_journal_entry = je_ca_soconusco
+		NOT = { has_variable = ca_soc_3_fired }
+		exists = c:MEX
+		OR = {
+			AND = { has_global_variable = ca_world_historic game_date >= 1842.8.1 }
+			var:ca_soconusco_bar <= 30
+		}
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.3.a
+		default_option = yes
+		set_variable = ca_soc_3_fired
+		ca_soconusco_change = { VALUE = 5 }
+		c:MEX = { change_relations = { country = root value = -20 } }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.3.b
+		set_variable = ca_soc_3_fired
+		ca_soconusco_change = { VALUE = -20 }
+		ai_chance = { base = 60
+		modifier = { trigger = { has_global_variable = ca_world_historic } add = 300 } }
+	}
+}
+
+ca_los_altos_soconusco_events.4 = {
+	type = country_event
+	placement = root
+	title = ca_los_altos_soconusco_events.4.t
+	desc = ca_los_altos_soconusco_events.4.d
+	flavor = ca_los_altos_soconusco_events.4.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:CIP
+		has_journal_entry = je_ca_soconusco
+		NOT = { has_variable = ca_soconusco_irrevocable }
+		exists = c:MEX
+		is_ai = yes
+		has_global_variable = ca_world_historic
+		game_date >= 1842.9.11
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.4.a
+		default_option = yes
+		set_variable = ca_soconusco_irrevocable
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_los_altos_soconusco_events.5 = {
+	type = country_event
+	placement = root
+	title = ca_los_altos_soconusco_events.5.t
+	desc = ca_los_altos_soconusco_events.5.d
+	flavor = ca_los_altos_soconusco_events.5.f
+	event_image = { video = "africa_diplomats_negotiating" }
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		OR = {
+			this = c:GUA
+			AND = {
+				this = c:UCA
+				NOT = { exists = c:GUA }
+			}
+		}
+		has_global_variable = ca_soconusco_lost
+		NOT = { has_variable = ca_soc_5_fired }
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.5.a
+		default_option = yes
+		set_variable = ca_soc_5_fired
+		s:STATE_CHIAPAS = { add_claim = root }
+		c:MEX ?= { change_relations = { country = root value = -20 } }
+		ai_chance = { base = 70
+		modifier = { trigger = { has_global_variable = ca_world_historic } add = 300 } }
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.5.b
+		set_variable = ca_soc_5_fired
+		s:STATE_CHIAPAS = { add_claim = root }
+		c:MEX ?= {
+			change_relations = { country = root value = -50 }
+		}
+		add_modifier = { name = ca_soconusco_war_fever months = 24 }
+		ai_chance = { base = 30
+		modifier = { trigger = { has_global_variable = ca_world_historic } factor = 0 } }
+	}
+}
+
+ca_los_altos_soconusco_events.6 = {
+	type = country_event
+	placement = root
+	title = ca_los_altos_soconusco_events.6.t
+	desc = ca_los_altos_soconusco_events.6.d
+	event_image = { video = "asia_farmers_market" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:CIP
+		has_journal_entry = je_ca_soconusco
+		NOT = { has_variable = ca_soc_6_cd }
+
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.6.a
+		default_option = yes
+		set_variable = { name = ca_soc_6_cd days = 1095 }
+		ca_soconusco_change = { VALUE = 5 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.6.b
+		set_variable = { name = ca_soc_6_cd days = 1095 }
+		ca_soconusco_change = { VALUE = -5 }
+		add_treasury = { value = ca_money_small }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_los_altos_soconusco_events.7 = {
+	type = country_event
+	placement = root
+	title = ca_los_altos_soconusco_events.7.t
+	desc = ca_los_altos_soconusco_events.7.d
+	event_image = { video = "asia_farmers_market" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:CIP
+		has_journal_entry = je_ca_soconusco
+		NOT = { has_variable = ca_soc_7_cd }
+		exists = ruler
+	}
+	immediate = {
+		ruler = { save_scope_as = ca_soc_caudillo }
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.7.a
+		default_option = yes
+		set_variable = { name = ca_soc_7_cd days = 1095 }
+		ca_soconusco_change = { VALUE = 10 }
+		add_radicals = { value = small_radicals }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.7.b
+		set_variable = { name = ca_soc_7_cd days = 1095 }
+		ca_soconusco_change = { VALUE = -10 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_los_altos_soconusco_events.8 = {
+	type = country_event
+	placement = root
+	title = ca_los_altos_soconusco_events.8.t
+	desc = ca_los_altos_soconusco_events.8.d
+	event_image = { video = "asia_farmers_market" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:CIP
+		has_journal_entry = je_ca_soconusco
+		NOT = { has_variable = ca_soc_8_cd }
+
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.8.a
+		default_option = yes
+		set_variable = { name = ca_soc_8_cd days = 1095 }
+		ca_soconusco_change = { VALUE = 5 }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.8.b
+		set_variable = { name = ca_soc_8_cd days = 1095 }
+		ca_soconusco_change = { VALUE = -5 }
+		every_scope_state = {
+			every_scope_pop = {
+				limit = { has_pop_culture = chiapanecan }
+				change_pop_culture = { target = cu:mexican value = 0.03 }
+			}
+		}
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_los_altos_soconusco_events.9 = {
+	type = country_event
+	placement = root
+	title = ca_los_altos_soconusco_events.9.t
+	desc = ca_los_altos_soconusco_events.9.d
+	event_image = { video = "asia_farmers_market" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:CIP
+		has_journal_entry = je_ca_soconusco
+		NOT = { has_variable = ca_soc_9_cd }
+		exists = c:MEX
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.9.a
+		default_option = yes
+		set_variable = { name = ca_soc_9_cd days = 1095 }
+		ca_soconusco_change = { VALUE = 10 }
+		c:MEX = { change_relations = { country = root value = -10 } }
+		every_scope_state = {
+			every_scope_pop = {
+				limit = { has_pop_culture = chiapanecan }
+				change_pop_culture = { target = cu:central_american value = 0.03 }
+			}
+		}
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.9.b
+		set_variable = { name = ca_soc_9_cd days = 1095 }
+		ca_soconusco_change = { VALUE = -10 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_los_altos_soconusco_events.10 = {
+	type = country_event
+	placement = root
+	title = ca_los_altos_soconusco_events.10.t
+	desc = ca_los_altos_soconusco_events.10.d
+	event_image = { video = "asia_farmers_market" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:CIP
+		has_journal_entry = je_ca_soconusco
+		NOT = { has_variable = ca_soc_10_cd }
+
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.10.a
+		default_option = yes
+		set_variable = { name = ca_soc_10_cd days = 1095 }
+		ca_soconusco_change = { VALUE = 5 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_los_altos_soconusco_events.10.b
+		set_variable = { name = ca_soc_10_cd days = 1095 }
+		ca_soconusco_change = { VALUE = -10 }
+		ai_chance = { base = 50 }
+	}
+}
 

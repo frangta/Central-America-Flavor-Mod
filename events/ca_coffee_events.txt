@@ -1,46 +1,107 @@
 ﻿namespace = ca_coffee_events
 
-## Evento 1: El líder de los Terratenientes adopta la Ideología Criolla
-#ca_coffee_events.1 = {
-#	type = country_event
-#	title = ca_coffee_events.1.t
-#	desc = ca_coffee_events.1.d
-#	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
-#
-#	trigger = {
-#		is_involved_in_journal_entry = je_ca_coffee_boom
-#		ig:ig_landowners = {
-#			leader = {
-#				NOT = { has_ideology = ideology:ideology_ca_criollo_elite }
-#			}
-#		}
-#	}
-#
-#	option = {
-#		name = ca_coffee_events.1.a
-#        # Cambiamos la ideología usando la que creaste en ca_ig_ideologies_flavored.txt
-#		ig:ig_landowners = {
-#			leader = {
-#				add_ideology = ideology:ideology_ca_criollo_elite
-#			}
-#		}
-#        # Tensión social: los campesinos sufren la expropiación de tierras
-#		add_radicals = { value = medium_radicals culture = cu:central_american } 
-#	}
-#}
-#
-## Evento 2: Consolidación Final (Completar el Diario)
-#ca_coffee_events.2 = {
-#	type = country_event
-#	title = ca_coffee_events.2.t
-#	desc = ca_coffee_events.2.d
-#	icon = "gfx/interface/icons/event_icons/event_industry.dds"
-#
-#	trigger = { always = no } # Disparado estrictamente por el on_complete del JE
-#
-#	option = {
-#		name = ca_coffee_events.2.a
-#		add_modifier = { name = ca_coffee_republic_modifier years = 10 }
-#		add_loyalists = { value = medium_loyalists ig = ig_landowners }
-#	}
-#}
+# CAFM F13 (A1): el auge del cafe. .1 La elite cafetalera; .2 La republica del cafe; .3 Los ejidos.
+
+ca_coffee_events.1 = {
+	type = country_event
+	placement = root
+	title = ca_coffee_events.1.t
+	desc = ca_coffee_events.1.d
+	flavor = ca_coffee_events.1.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_coffee_boom
+		NOT = { has_variable = ca_coffee_1_fired }
+	}
+	option = {
+		name = ca_coffee_events.1.a
+		default_option = yes
+		set_variable = ca_coffee_1_fired
+		ca_coffee_bar_change = { VALUE = 15 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 60
+		modifier = { trigger = { ig:ig_landowners ?= { is_in_government = yes } } add = 30 } }
+	}
+	option = {
+		name = ca_coffee_events.1.b
+		set_variable = ca_coffee_1_fired
+		ca_coffee_bar_change = { VALUE = -5 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_coffee_events.2 = {
+	type = country_event
+	placement = root
+	title = ca_coffee_events.2.t
+	desc = ca_coffee_events.2.d
+	flavor = ca_coffee_events.2.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_variable = ca_coffee_boom_consolidated
+	}
+	option = {
+		name = ca_coffee_events.2.a
+		default_option = yes
+		add_modifier = { name = ca_coffee_republic_modifier months = 120 }
+		if = {
+			limit = {
+				NOT = { has_journal_entry = je_ca_agro_export_boom }
+				NOT = { has_variable = ca_agro_export_miracle_completed }
+			}
+			add_journal_entry = { type = je_ca_agro_export_boom }
+		}
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_coffee_events.3 = {
+	type = country_event
+	placement = root
+	title = ca_coffee_events.3.t
+	desc = ca_coffee_events.3.d
+	flavor = ca_coffee_events.3.f
+	event_image = { video = "asia_farmers_market" }
+	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_coffee_boom
+		NOT = { has_variable = ca_ejidos_decided }
+		OR = {
+			game_date >= 1860.1.1
+			var:ca_coffee_bar >= 60
+		}
+	}
+	option = {
+		name = ca_coffee_events.3.a
+		default_option = yes
+		set_variable = ca_ejidos_decided
+		set_variable = ca_ejidos_extinguished
+		ca_coffee_bar_change = { VALUE = 20 }
+		add_radicals = { value = medium_radicals strata = lower }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ai_chance = { base = 60
+		modifier = { trigger = { ig:ig_landowners ?= { is_powerful = yes } } add = 30 } }
+	}
+	option = {
+		name = ca_coffee_events.3.b
+		set_variable = ca_ejidos_decided
+		ca_coffee_bar_change = { VALUE = -10 }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 40 }
+	}
+}
+

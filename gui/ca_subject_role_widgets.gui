@@ -1,4 +1,4 @@
-# COPY-PASTED FOR NOW
+﻿# COPY-PASTED FOR NOW
 @panel_width_minus_10 = 530			# used to be 450
 @panel_width_minus_30 = 510
 @panel_width = 540  				# used to be 460
@@ -21,7 +21,7 @@ types ca_subject_role_types {
         # Estado Inactivo / Base (gris transparente)
         icon = {
             size = { 100% 100% }
-            texture = "gfx/interface/icons/generic_icons/radio_button_empty.dds"
+            texture = "gfx/interface/backgrounds/round_button_bg.dds" # CAFM fix: radio_button_empty.dds no existe
             alpha = 0.35
         }
 
@@ -31,15 +31,15 @@ types ca_subject_role_types {
                 visible = no
             }
             size = { 100% 100% }
-            texture = "gfx/interface/icons/generic_icons/radio_button_filled.dds"
+            texture = "gfx/interface/icons/generic_icons/green_checkmark.dds" # CAFM fix: radio_button_filled.dds no existe
         }
     }
 
     # Widget inyectado en custom_widget_container_2
     type ca_subject_role_widget = widget {
         name = "ca_subject_role_widget"
-        size = { 340 300 }
-        parentanchor = center
+        size = { 340 165 }          # CAFM fix: antes 300, se salia por debajo de los botones
+        parentanchor = top|hcenter  # CAFM fix: antes center, empujaba todo hacia abajo
 
         # Fondo del diagrama estilo Victoria 3
         background = {
@@ -53,12 +53,12 @@ types ca_subject_role_types {
 
         # Título superior del gráfico
         textbox = {
-            position = { 0 10 }
+            position = { 0 6 }
             parentanchor = top|hcenter
             autoresize = yes
             align = nobaseline
             using = fontsize_small
-            text = "ALINEAMIENTO DE FACCIÓN"
+            text = "CA_FACTION_ALIGNMENT_TITLE"
             default_format = "#title"
         }
 
@@ -66,7 +66,7 @@ types ca_subject_role_types {
         # VÉRTICE SUPERIOR: CENTRALISTAS
         # ====================================================
         container = {
-            position = { 0 38 }
+            position = { 0 26 }
             parentanchor = top|hcenter
 
             flowcontainer = {
@@ -91,24 +91,24 @@ types ca_subject_role_types {
 
                     ca_triangle_pip = {
                         blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_centralist_1')]"
+                            datacontext = "[GetScriptedGui('ca_sgui_centralist_lvl_1')]"
                             visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         }
-                        tooltip = "Nivel 1 de Influencia Centralista"
+                        tooltip = "CA_SGUI_CENTRALIST_1_TT"
                     }
                     ca_triangle_pip = {
                         blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_centralist_2')]"
+                            datacontext = "[GetScriptedGui('ca_sgui_centralist_lvl_2')]"
                             visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         }
-                        tooltip = "Nivel 2 de Influencia Centralista"
+                        tooltip = "CA_SGUI_CENTRALIST_2_TT"
                     }
                     ca_triangle_pip = {
                         blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_centralist_3')]"
+                            datacontext = "[GetScriptedGui('ca_sgui_centralist_lvl_3')]"
                             visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         }
-                        tooltip = "Nivel 3 (Máximo) de Influencia Centralista"
+                        tooltip = "CA_SGUI_CENTRALIST_3_TT"
                     }
                 }
             }
@@ -118,19 +118,19 @@ types ca_subject_role_types {
         # NÚCLEO CENTRAL / RETÍCULA
         # ====================================================
         icon = {
-            size = { 90 90 }
-            parentanchor = center
-            position = { 0 15 }
+            size = { 60 60 }
+            parentanchor = top|hcenter
+            position = { 0 72 }
             texture = "gfx/interface/icons/generic_icons/turns_into.dds"
-            alpha = 0.20
+            alpha = 0.45
         }
 
         # ====================================================
         # VÉRTICE INFERIOR IZQUIERDO: FEDERALISTAS
         # ====================================================
         container = {
-            position = { 15 220 }
-            parentanchor = left
+            position = { 15 -10 }
+            parentanchor = bottom|left
 
             flowcontainer = {
                 direction = vertical
@@ -151,24 +151,24 @@ types ca_subject_role_types {
 
                     ca_triangle_pip = {
                         blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_federalist_1')]"
+                            datacontext = "[GetScriptedGui('ca_sgui_federalist_lvl_1')]"
                             visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         }
-                        tooltip = "Nivel 1 de Influencia Federalista"
+                        tooltip = "CA_SGUI_FEDERALIST_1_TT"
                     }
                     ca_triangle_pip = {
                         blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_federalist_2')]"
+                            datacontext = "[GetScriptedGui('ca_sgui_federalist_lvl_2')]"
                             visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         }
-                        tooltip = "Nivel 2 de Influencia Federalista"
+                        tooltip = "CA_SGUI_FEDERALIST_2_TT"
                     }
                     ca_triangle_pip = {
                         blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_federalist_3')]"
+                            datacontext = "[GetScriptedGui('ca_sgui_federalist_lvl_3')]"
                             visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         }
-                        tooltip = "Nivel 3 (Máximo) de Influencia Federalista"
+                        tooltip = "CA_SGUI_FEDERALIST_3_TT"
                     }
                 }
             }
@@ -178,8 +178,8 @@ types ca_subject_role_types {
         # VÉRTICE INFERIOR DERECHO: SEPARATISTAS
         # ====================================================
         container = {
-            position = { -15 220 }
-            parentanchor = right
+            position = { -15 -10 }
+            parentanchor = bottom|right
 
             flowcontainer = {
                 direction = vertical
@@ -202,30 +202,40 @@ types ca_subject_role_types {
 
                     ca_triangle_pip = {
                         blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_separatist_1')]"
+                            datacontext = "[GetScriptedGui('ca_sgui_separatist_lvl_1')]"
                             visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         }
-                        tooltip = "Nivel 1 de Influencia Separatista"
+                        tooltip = "CA_SGUI_SEPARATIST_1_TT"
                     }
                     ca_triangle_pip = {
                         blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_separatist_2')]"
+                            datacontext = "[GetScriptedGui('ca_sgui_separatist_lvl_2')]"
                             visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         }
-                        tooltip = "Nivel 2 de Influencia Separatista"
+                        tooltip = "CA_SGUI_SEPARATIST_2_TT"
                     }
                     ca_triangle_pip = {
                         blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_separatist_3')]"
+                            datacontext = "[GetScriptedGui('ca_sgui_separatist_lvl_3')]"
                             visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         }
-                        tooltip = "Nivel 3 (Máximo) de Influencia Separatista"
+                        tooltip = "CA_SGUI_SEPARATIST_3_TT"
                     }
                 }
             }
         }
     }
 }
+
+# ====================================================================
+# CAFM fix: INSTANCIA RAIZ del widget.
+# El diario je_ca_state_role_in_federation pide un widget llamado
+# "ca_subject_role_widget". Solo existia como TIPO (dentro de types {}),
+# asi que el juego no lo encontraba ("Could not find widget") y
+# crasheaba al abrir el diario. Esta linea crea el widget real.
+# ====================================================================
+ca_subject_role_widget = {}
+
 #types ca_subject_role_types {
 #
 #    # Plantilla para los puntos/indicadores de nivel

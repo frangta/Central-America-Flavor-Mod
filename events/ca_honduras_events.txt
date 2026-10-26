@@ -27,7 +27,7 @@ ca_honduras_events.1 = {
 	trigger = {
         exists = c:UCA
         this = c:UCA 
-        game_date <= 1836.1.1
+        game_date < 1836.2.1 # CAFM F4: la lanza .119
 	}
 	
 	immediate = {
@@ -52,18 +52,7 @@ ca_honduras_events.1 = {
 		}
 		ai_chance = { base = 30 }
 	}
-	option = {
-		name = ca_honduras_events.1.c # CAFM Fase 1: texto propio (antes usaba .2.a, «declarar la independencia»)
-		trigger = {
-			c:UCA ?= {
-			has_variable = ca_state_selection_to_playing
-			}
-		}
-        ca_create_honduras_effect = yes 
-		ca_play_honduras_effect = yes
-        play_as = c:HON
-		ai_chance = { base = 0 }
-	}
+	# CAFM F4: introduccion solo informativa; jugar como el estado esta en .119 c -> .80
 }
 
 # =====================================================================
@@ -116,6 +105,9 @@ ca_honduras_events.2 = {
 		name = ca_honduras_events.2.a
 		default_option = yes
 		set_variable = hon_seat_comayagua
+		# F15 (E2): terratenientes y clero contentos; Tegucigalpa agraviada 2 anos
+		ca_fvs_bar_change = { VALUE = 5 }
+		s:STATE_HONDURAS.region_state:HON ?= { add_modifier = { name = hon_ciudad_agraviada months = 24 } }
 		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
 		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
 		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
@@ -126,6 +118,11 @@ ca_honduras_events.2 = {
 	option = {
 		name = ca_honduras_events.2.b
 		set_variable = hon_seat_tegucigalpa
+		# F15 (E2): mineros y comerciantes contentos; Comayagua agraviada 2 anos; gancho de la capital (1880)
+		ig:ig_industrialists ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		s:STATE_HONDURAS.region_state:HON ?= { add_modifier = { name = hon_ciudad_agraviada months = 24 } }
+		set_variable = hon_capital_question_1880
 		add_modifier = { name = hon_sede_tegucigalpa months = 60 }
 		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
 		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
@@ -140,6 +137,7 @@ ca_honduras_events.2 = {
 	option = {
 		name = ca_honduras_events.2.c
 		set_variable = hon_seat_alterna
+		set_variable = { name = hon_sede_alterna_push days = 730 } # F15 (E2): barra del caudillo +1 al mes, 2 anos
 		add_modifier = { name = hon_sede_alterna months = 60 }
 		ai_chance = { base = 5 }
 	}
@@ -184,6 +182,7 @@ ca_honduras_events.3 = {
 	option = {
 		name = ca_honduras_events.3.b
 		set_variable = hon_clero_expropiado
+		c:UCA ?= { ca_frca_front_change = { FRONT = conservative VALUE = 1 } } # F15 (E2)
 		add_treasury = 8000
 		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
 		add_radicals = { value = medium_radicals pop_type = clergymen }
@@ -305,6 +304,7 @@ ca_honduras_events.5 = {
 		name = ca_honduras_events.5.a
 		default_option = yes
 		add_modifier = { name = hon_contrata_caoba months = 46 }
+		c:UCA ?= { ca_frca_front_change = { FRONT = british VALUE = -1 } } # F15 (E2)
 		change_variable = { name = hon_british add = 10 }
 		c:UCA ?= { change_relations = { country = ROOT value = 10 } }
 		ai_chance = { base = 70 }
@@ -314,6 +314,8 @@ ca_honduras_events.5 = {
 	option = {
 		name = ca_honduras_events.5.b
 		set_variable = hon_caoba_reclamada
+		c:UCA ?= { ca_frca_front_change = { FRONT = british VALUE = 1 } } # F15 (E2)
+		ca_agro_bar_change = { VALUE = 5 } # la tala de la costa norte (A2)
 		add_treasury = 5000
 		change_variable = { name = hon_british add = 5 }
 		c:UCA ?= { change_relations = { country = ROOT value = -15 } }
@@ -355,6 +357,7 @@ ca_honduras_events.6 = {
 			text = hon_caudillo_down_5_tt
 			change_variable = { name = hon_caudillo subtract = 5 }
 		}
+		change_variable = { name = hon_caudillo subtract = 5 } # F15 (E2): la amnistia resta 10 en total
 		ai_chance = { base = 70 }
 	}
 
@@ -403,6 +406,7 @@ ca_honduras_events.7 = {
 	immediate = {
 		set_variable = hon_e7_fired
 		set_variable = hon_mandato_vencido
+		add_modifier = { name = hon_mandato_vencido_mod } # F15 (E2): hasta la eleccion de 1837 (.14)
 	}
 
 	# Histórica: Rivera deposita el poder en el consejero Martínez Salinas
@@ -505,6 +509,10 @@ ca_honduras_events.14 = {
     
     immediate = { 
         set_variable = { name = hon_elec_1837_fired value = yes } 
+        if = {
+            limit = { has_modifier = hon_mandato_vencido_mod }
+            remove_modifier = hon_mandato_vencido_mod
+        }
     }
 
     # Opción A (Histórica): Justo José de Herrera asume como civil moderado
@@ -530,6 +538,7 @@ ca_honduras_events.14 = {
         }
         ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_medium } }
+    	ai_chance = { base = 80 } # F21
     }
 
     # Opción B (Alternativa): Los militares exigen un líder de armas
@@ -537,6 +546,7 @@ ca_honduras_events.14 = {
         name = ca_honduras_events.14.b
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
         add_radicals = { value = small_radicals pop_type = academics }
+    	ai_chance = { base = 10 } # F21
     }
 
     # Opción C (Alternativa): Los liberales radicales intentan tomar la Asamblea
@@ -544,6 +554,7 @@ ca_honduras_events.14 = {
         name = ca_honduras_events.14.c
         ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
         ig:ig_landowners ?= { party = { add_momentum = momentum_small_decrease } }
+    	ai_chance = { base = 10 } # F21
     }
 }
 
@@ -575,12 +586,25 @@ ca_honduras_events.15 = {
         default_option = yes
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_very_large } }
         ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
+        # F15 (E2): con el clero expropiado, el caudillo se alia con la Iglesia
+        if = {
+            limit = { has_variable = hon_clero_expropiado }
+            ig:ig_devout ?= { party = { add_momentum = momentum_medium } }
+        }
+        ai_chance = {
+            base = 70
+            modifier = { trigger = { has_variable = hon_amnistia_1836 } add = -20 }
+        }
     }
 
     # Opción B (Alternativa): Resistencia civil liberal contra Ferrera
     option = {
         name = ca_honduras_events.15.b
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
+        ai_chance = {
+            base = 30
+            modifier = { trigger = { has_variable = hon_amnistia_1836 } add = 20 }
+        }
         add_radicals = { value = medium_radicals pop_type = soldiers } # El ejército no acepta perder
     }
 }
@@ -612,6 +636,7 @@ ca_honduras_events.16 = {
         name = ca_honduras_events.16.a
         default_option = yes
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
+    	ai_chance = { base = 80 } # F21
     }
 
     # Opción B (Alternativa): Los hacendados se cansan del militarismo y buscan un civil
@@ -619,6 +644,7 @@ ca_honduras_events.16 = {
         name = ca_honduras_events.16.b
         ig:ig_landowners ?= { party = { add_momentum = momentum_large } }
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_medium_decrease } }
+    	ai_chance = { base = 10 } # F21
     }
 
     # Opción C (Alternativa): Levantamiento urbano contra la dictadura
@@ -627,6 +653,7 @@ ca_honduras_events.16 = {
         ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_large } }
         add_radicals = { value = large_radicals pop_type = clerks }
         add_radicals = { value = medium_radicals pop_type = shopkeepers }
+    	ai_chance = { base = 10 } # F21
     }
 }
 
@@ -658,6 +685,7 @@ ca_honduras_events.17 = {
         default_option = yes
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_very_large } }
         ig:ig_landowners ?= { party = { add_momentum = momentum_medium } }
+    	ai_chance = { base = 80 } # F21
     }
 
     # Opción B (Alternativa): Ferrera intenta sabotear a Lindo desde las sombras
@@ -665,6 +693,7 @@ ca_honduras_events.17 = {
         name = ca_honduras_events.17.b
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_large } }
         add_radicals = { value = medium_radicals pop_type = academics }
+    	ai_chance = { base = 20 } # F21
     }
 }
 
@@ -696,6 +725,7 @@ ca_honduras_events.18 = {
         default_option = yes
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large } }
         ig:ig_petty_bourgeoisie ?= { party = { add_momentum = momentum_medium } }
+    	ai_chance = { base = 80 } # F21
     }
 
     # Opción B (Alternativa): Los militares se rebelan contra la nueva constitución
@@ -704,5 +734,151 @@ ca_honduras_events.18 = {
         ig:ig_armed_forces ?= { party = { add_momentum = momentum_very_large } }
         ig:ig_intelligentsia ?= { party = { add_momentum = momentum_large_decrease } }
         add_radicals = { value = medium_radicals pop_type = officers }
+    	ai_chance = { base = 20 } # F21
     }
 }
+
+# =====================================================================
+# CAFM F15 (E2): El Pacto de Pespire (.41 y .42)
+# Fuentes: El Heraldo (gobierno de Lindo; Constitucion de 4 feb 1848; asambleas de Guardiola en
+# La Paz y Cedros, nov 1848; alzamiento un ano despues; mediacion salvadorena). Dia exacto por verificar.
+# =====================================================================
+ca_honduras_events.41 = {
+	type = country_event
+	placement = root
+	title = ca_honduras_events.41.t
+	desc = ca_honduras_events.41.d
+	flavor = ca_honduras_events.41.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:HON ?= this
+		has_journal_entry = je_ca_hon_caudillo
+		NOT = { has_variable = hon_e41_fired }
+		OR = {
+			AND = {
+				has_variable = hon_historic_mode
+				game_date >= 1849.11.1
+			}
+			AND = {
+				NOT = { has_variable = hon_historic_mode }
+				game_date >= 1847.1.1
+				var:hon_caudillo >= 40
+				any_scope_character = { has_role = character_role_general }
+			}
+		}
+	}
+	immediate = {
+		if = {
+			limit = { has_global_variable = cafm_hc_guardiola }
+			global_var:cafm_hc_guardiola = { save_scope_as = hon_rebel }
+		}
+		else = {
+			ordered_scope_character = {
+				limit = { has_role = character_role_general }
+				order_by = popularity
+				save_scope_as = hon_rebel
+			}
+		}
+	}
+	option = {
+		name = ca_honduras_events.41.a
+		default_option = yes
+		set_variable = hon_e41_fired
+		set_variable = hon_pespire_talks
+		trigger_event = { id = ca_honduras_events.42 days = 60 }
+		ai_chance = { base = 70
+		modifier = { trigger = { has_variable = hon_historic_mode } add = 300 } }
+	}
+	option = {
+		name = ca_honduras_events.41.b
+		set_variable = hon_e41_fired
+		change_variable = { name = hon_caudillo add = 10 }
+		add_radicals = { value = small_radicals }
+		ai_chance = { base = 30
+		modifier = { trigger = { has_variable = hon_historic_mode } factor = 0 } }
+	}
+}
+
+ca_honduras_events.42 = {
+	type = country_event
+	placement = root
+	title = ca_honduras_events.42.t
+	desc = ca_honduras_events.42.d
+	flavor = ca_honduras_events.42.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:HON ?= this
+		has_journal_entry = je_ca_hon_caudillo
+		NOT = { has_variable = hon_pespire }
+		OR = {
+			has_variable = hon_pespire_talks
+			AND = {
+				has_variable = hon_historic_mode
+				game_date >= 1850.1.1
+			}
+			AND = {
+				NOT = { has_variable = hon_historic_mode }
+				game_date >= 1847.1.1
+				has_variable = hon_low_caudillo_months
+				var:hon_low_caudillo_months >= 12
+				NOT = { ruler ?= { interest_group = { is_interest_group_type = ig_armed_forces } } }
+			}
+		}
+		any_scope_character = { has_role = character_role_general }
+	}
+	immediate = {
+		if = {
+			limit = {
+				has_variable = hon_historic_mode
+				has_global_variable = cafm_hc_guardiola
+			}
+			global_var:cafm_hc_guardiola = { save_scope_as = hon_exile }
+		}
+		else = {
+			ordered_scope_character = {
+				limit = { has_role = character_role_general }
+				order_by = popularity
+				save_scope_as = hon_exile
+			}
+		}
+		if = {
+			limit = { has_variable = hon_historic_mode exists = c:ELS }
+			c:ELS = { save_scope_as = hon_mediator }
+		}
+		else = {
+			ordered_country = {
+				limit = {
+					ca_is_ca_national_country = yes
+					NOT = { this = root }
+					"relations(root)" >= relations_threshold:cordial
+				}
+				order_by = "relations(root)"
+				save_scope_as = hon_mediator
+			}
+		}
+	}
+	option = {
+		name = ca_honduras_events.42.a
+		default_option = yes
+		set_variable = hon_pespire
+		remove_variable = hon_pespire_talks
+		add_modifier = { name = hon_gobierno_civil months = 60 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		scope:hon_exile = { exile_character = yes }
+		set_variable = { name = hon_exile_may_return days = 1825 }
+		if = {
+			limit = { exists = scope:hon_mediator }
+			change_relations = { country = scope:hon_mediator value = 30 }
+		}
+		ai_chance = { base = 1 }
+	}
+}
+

@@ -1,0 +1,128 @@
+﻿namespace = ca_military
+
+# CAFM F13 (A3): la reforma militar. .1 Fin de la era de los caudillos; .2 Los caudillos se atrincheran; .3 La academia militar; .4 El caudillo se niega a licenciar sus tropas.
+
+ca_military.1 = {
+	type = country_event
+	placement = root
+	title = ca_military.1.t
+	desc = ca_military.1.d
+	flavor = ca_military.1.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_variable = ca_military_reform_completed
+	}
+	option = {
+		name = ca_military.1.a
+		default_option = yes
+		add_modifier = { name = ca_civilian_supremacy months = 120 }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_military.2 = {
+	type = country_event
+	placement = root
+	title = ca_military.2.t
+	desc = ca_military.2.d
+	flavor = ca_military.2.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_variable = ca_military_reform_failed
+	}
+	option = {
+		name = ca_military.2.a
+		default_option = yes
+		add_radicals = { value = small_radicals }
+		ai_chance = { base = 1 }
+	}
+}
+
+ca_military.3 = {
+	type = country_event
+	placement = root
+	title = ca_military.3.t
+	desc = ca_military.3.d
+	flavor = ca_military.3.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_military_reform
+		NOT = { has_variable = ca_military_academy }
+		OR = {
+			var:ca_military_bar >= 20
+			game_date >= 1870.1.1
+		}
+	}
+	option = {
+		name = ca_military.3.a
+		default_option = yes
+		set_variable = ca_military_academy
+		set_variable = ca_foreign_instructors
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		ca_military_bar_change = { VALUE = 20 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 50
+		modifier = { trigger = { gold_reserves < ca_money_medium } factor = 0 } }
+	}
+	option = {
+		name = ca_military.3.b
+		set_variable = ca_military_academy
+		ca_military_bar_change = { VALUE = 10 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_military.4 = {
+	type = country_event
+	placement = root
+	title = ca_military.4.t
+	desc = ca_military.4.d
+	flavor = ca_military.4.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_ca_military_reform
+		NOT = { has_variable = ca_military_4_cd }
+		any_scope_character = { has_role = character_role_general }
+	}
+	immediate = {
+		ordered_scope_character = {
+			limit = { has_role = character_role_general }
+			order_by = popularity
+			save_scope_as = ca_caudillo_general
+		}
+	}
+	option = {
+		name = ca_military.4.a
+		default_option = yes
+		set_variable = { name = ca_military_4_cd days = 1825 }
+		ca_military_bar_change = { VALUE = 10 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		add_radicals = { value = small_radicals interest_group = ig:ig_armed_forces }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_military.4.b
+		set_variable = { name = ca_military_4_cd days = 1825 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ca_military_bar_change = { VALUE = -5 }
+		ai_chance = { base = 50 }
+	}
+}
+

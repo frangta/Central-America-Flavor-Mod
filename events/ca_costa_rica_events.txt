@@ -33,7 +33,7 @@ ca_costa_rica_events.1 = {
 	trigger = {
         exists = c:UCA
         this = c:UCA 
-        game_date <= 1836.1.1
+        game_date < 1836.2.1 # CAFM F4: la lanza .119
 	}
 	
 	immediate = {
@@ -51,20 +51,7 @@ ca_costa_rica_events.1 = {
 		ai_chance = { base = 100 }
 
 	}
-	option = {
-		name = ca_costa_rica_events.1.b
-		trigger = {
-			c:UCA ?= {
-			has_variable = ca_state_selection_to_playing
-			}
-		}
-        ca_create_costarica_effect = yes
-		ca_play_costarica_effect = yes
-		# CAFM fix: COS ya existe aqui (antes se ponia en el immediate, cuando COS aun no existia)
-		c:COS ?= { set_variable = ca_ecos_federacion_fired }
-		ai_chance = { base = 0 }
-        play_as = c:COS
-	}
+	# CAFM F4: introduccion solo informativa; jugar como el estado esta en .119 c -> .80
 } 
 # Evento 2: Las Cicatrices de la Ley de la Ambulancia
 ca_costa_rica_events.2 = {
@@ -809,7 +796,7 @@ ca_costa_rica_events.99 = {
         }
         
         # Penalización masiva de prestigio y radicales
-        add_prestige = -20
+        add_modifier = { name = ca_economic_chaos_prestige_loss months = 60 } # CAFM F22 (add_prestige no existe)
         add_radicals = { value = 0.20 culture = cu:costa_rican }
     }
 }
@@ -1094,6 +1081,7 @@ ca_costa_rica_events.161 = {
         c:CLM ?= {
             add_modifier = { name = ca_cos_prestige_gain months = 60 }
         }
+    	ai_chance = { base = 1 } # F21
     }
 
     # Alternativa: Paredes encuentra el distrito defendido y se retira
@@ -1107,6 +1095,7 @@ ca_costa_rica_events.161 = {
             limit = { exists = c:CLM }
             change_relations = { country = c:CLM value = -50 }
         }
+    	ai_chance = { base = 1 } # F21
     }
 }
 
@@ -1524,7 +1513,6 @@ ca_costa_rica_events.195 = {
     # Aceptarla: gobierna el vicejefe Juan Mora Fernandez
     option = {
         name = ca_costa_rica_events.195.b
-        set_variable = ca_cos_gobierno_mora
         create_character = {
             template = cafm_juan_mora_fernandez
             ruler = yes
@@ -1712,7 +1700,7 @@ ca_costa_rica_events.198 = {
     desc = ca_costa_rica_events.198.d
     flavor = ca_costa_rica_events.198.f
 
-    icon = "gfx/interface/icons/event_icons/event_ship.dds"
+    icon = "gfx/interface/icons/event_icons/event_map.dds"
 
     duration = 3
 
@@ -1965,6 +1953,7 @@ ca_costa_rica_events.203 = {
         default_option = yes
         trigger = { var:ca_morazan_invasion_prep >= 0 }
         set_variable = ca_morazan_is_coming
+    	ai_chance = { base = 1 } # F21
     }
 
     # Alternativa: Morazan acepta el mando en Peru
@@ -1973,6 +1962,7 @@ ca_costa_rica_events.203 = {
         trigger = { var:ca_morazan_invasion_prep < 0 }
         set_variable = ca_morazan_stayed_in_peru
         add_modifier = { name = ca_cos_estabilidad_carrillista years = 5 }
+    	ai_chance = { base = 1 } # F21
     }
 }
 # =========================================================================
@@ -2106,7 +2096,21 @@ ca_costa_rica_events.22 = {
     icon = "gfx/interface/icons/event_icons/event_election.dds"
     duration = 3
     trigger = { always = no } # Lo dispara je_ca_cos_republica
-    immediate = { set_variable = cos_elec_1844_fired }
+    immediate = {
+        set_variable = cos_elec_1844_fired
+        # F15 (E3): la Ley de Bases sin derogar empuja a los terratenientes; el fusilamiento de Morazan, a los antimorazanistas
+        if = {
+            limit = {
+                has_variable = ca_cos_bases_garantias
+                NOT = { has_variable = ca_cos_bases_derogadas }
+            }
+            ig:ig_landowners ?= { party ?= { add_momentum = momentum_medium } }
+        }
+        if = {
+            limit = { has_variable = ca_cos_morazan_fusilado }
+            ig:ig_intelligentsia ?= { party ?= { add_momentum = momentum_small_decrease } }
+        }
+    }
 
     # Historica: Oreamuno, 1,541 votos
     option = {
@@ -2114,7 +2118,10 @@ ca_costa_rica_events.22 = {
         default_option = yes
         set_variable = ca_cos_gobierno_oreamuno
         add_loyalists = { value = 0.05 interest_group = ig:ig_landowners }
-        ai_chance = { base = 80 }
+        ai_chance = {
+            base = 80
+            modifier = { trigger = { has_variable = ca_cos_morazan_fusilado } add = 20 }
+        }
     }
 
     # Alfaro sigue en el poder (486 votos en la historia)
@@ -2122,13 +2129,16 @@ ca_costa_rica_events.22 = {
         name = ca_costa_rica_events.22.b
         set_variable = ca_cos_gobierno_alfaro
         add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia }
-        ai_chance = { base = 15 }
+        ai_chance = {
+            base = 15
+            modifier = { trigger = { has_variable = ca_cos_alfaro_1842 } add = 30 }
+            modifier = { trigger = { has_variable = ca_cos_morazan_fusilado } add = -10 }
+        }
     }
 
     # El viejo Juan Mora Fernandez (97 votos en la historia)
     option = {
         name = ca_costa_rica_events.22.c
-        set_variable = ca_cos_gobierno_juan_mora
         create_character = {
             template = cafm_juan_mora_fernandez
             ruler = yes
@@ -2454,7 +2464,6 @@ ca_costa_rica_events.24 = {
     option = {
         name = ca_costa_rica_events.24.a
         default_option = yes
-        set_variable = ca_cos_gobierno_mora_porras
         create_character = {
             template = cos_juan_rafael_mora_character_template
             ruler = yes
@@ -2466,7 +2475,6 @@ ca_costa_rica_events.24 = {
     # Rafael Moya (32 votos en la historia)
     option = {
         name = ca_costa_rica_events.24.b
-        set_variable = ca_cos_gobierno_moya
         create_character = {
             template = cafm_rafael_moya
             ruler = yes
@@ -2477,7 +2485,6 @@ ca_costa_rica_events.24 = {
     # Manuel Antonio Bonilla, el carrillista (9 votos en la historia)
     option = {
         name = ca_costa_rica_events.24.c
-        set_variable = ca_cos_gobierno_bonilla
         create_character = {
             template = cafm_manuel_antonio_bonilla
             ruler = yes
@@ -2584,6 +2591,7 @@ ca_costa_rica_events.300 = {
 			name = ca_cos_estabilidad_carrillista
 			years = 10
 		}
+		ai_chance = { base = 1 } # F21
 	}
 
 	# Ruta federal: el Estado leal a la Federacion
@@ -2598,6 +2606,7 @@ ca_costa_rica_events.300 = {
 			limit = { exists = c:UCA }
 			change_relations = { country = c:UCA value = 30 }
 		}
+		ai_chance = { base = 1 } # F21
 	}
 }
 
@@ -2679,6 +2688,10 @@ ca_costa_rica_events.320 = {
 
 	immediate = {
 		set_variable = ca_cos_gobierno_morazan
+		if = {
+			limit = { has_variable = ca_cos_bases_garantias }
+			set_variable = ca_cos_bases_derogadas # F15 (E3): Morazan deroga la Ley de Bases y Garantias
+		}
 	}
 
 	option = {
@@ -2943,6 +2956,7 @@ ca_costa_rica_events.341 = {
 		default_option = yes
 		trigger = { NOT = { ca_cos_soberania_min_trigger = { VALUE = 60 } } }
 		set_variable = ca_cos_morazan_victorioso
+		ai_chance = { base = 1 } # F21
 	}
 
 	# Alternativa (soberania >= 60): Villasenor se mantiene leal
@@ -2951,6 +2965,7 @@ ca_costa_rica_events.341 = {
 		trigger = { ca_cos_soberania_min_trigger = { VALUE = 60 } }
 		set_variable = ca_cos_morazan_derrotado
 		add_modifier = { name = ca_frontier_tensions months = 12 }
+		ai_chance = { base = 1 } # F21
 	}
 }
 
