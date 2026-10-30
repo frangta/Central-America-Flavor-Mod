@@ -1159,6 +1159,7 @@ ca_central_america.6 = {
 	immediate = {
 		set_global_variable = ca_bocas_intro_fired
 		set_global_variable = bocas_del_toro_crisis_fired
+		set_global_variable = { name = ca_bocas_control value = 20 } # P4: control efectivo de Bocas
 	}
 	option = {
 		name = ca_central_america.6.a
@@ -1166,7 +1167,38 @@ ca_central_america.6 = {
 		c:GBR = { trigger_event = { id = ca_central_america.7 days = 60 } }
 		c:CLM = { trigger_event = { id = ca_central_america.8 days = 320 } }
 		custom_tooltip = ca_central_america.6.a.tt
-		ai_chance = { base = 1 }
+		ca_bocas_control_change = { VALUE = 5 }
+		ai_chance = { base = 40 }
+	}
+	# P4 (punto 5): mas opciones para la UCA
+	option = {
+		name = ca_central_america.6.opt_b
+		trigger = { gold_reserves >= ca_money_medium }
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		set_variable = { name = ca_bocas_garrison days = 730 }
+		ca_bocas_control_change = { VALUE = 25 }
+		c:GBR = { trigger_event = { id = ca_central_america.7 days = 60 } }
+		c:CLM = { trigger_event = { id = ca_central_america.8 days = 320 } }
+		ai_chance = { base = 30 }
+	}
+	option = {
+		name = ca_central_america.6.opt_c
+		trigger = { gold_reserves >= ca_money_large }
+		add_treasury = { value = ca_money_large multiply = -1 }
+		ca_bocas_control_change = { VALUE = 35 }
+		ca_cohesion_change = { VALUE = -5 }
+		c:GBR = { trigger_event = { id = ca_central_america.7 days = 60 } }
+		c:CLM = { trigger_event = { id = ca_central_america.8 days = 320 } }
+		ai_chance = { base = 15 }
+	}
+	option = {
+		name = ca_central_america.6.opt_d
+		set_global_variable = ca_bocas_native_pact
+		ca_bocas_control_change = { VALUE = 15 }
+		ca_cohesion_change = { VALUE = -5 }
+		c:GBR = { trigger_event = { id = ca_central_america.7 days = 60 } }
+		c:CLM = { trigger_event = { id = ca_central_america.8 days = 320 } }
+		ai_chance = { base = 15 }
 	}
 }
 
@@ -1219,6 +1251,7 @@ ca_central_america.7 = {
 				p:x47C5F8.state.owner ?= c:UCA
 				p:x47C5F8.state.owner ?= c:PP1
 			}
+			NOT = { ca_bocas_control_high = yes } # P4: con control alto la usurpacion fracasa
 			}
 		s:STATE_PANAMA = {
 			set_owner_of_provinces = {
@@ -1243,7 +1276,7 @@ ca_central_america.7 = {
 			change_relations = { country = root value = -30 }
 		}
 		}
-		ai_chance = { base = 20 }
+		ai_chance = { base = 20 modifier = { trigger = { OR = { has_global_variable = ca_bocas_native_pact has_global_variable = ca_bocas_protested } } add = -40 } modifier = { trigger = { ca_bocas_control_high = yes } add = -60 } }
 	}
 }
 
@@ -1275,6 +1308,7 @@ ca_central_america.8 = {
 				p:x47C5F8.state.owner ?= c:UCA
 				p:x47C5F8.state.owner ?= c:PP1
 			}
+			NOT = { ca_bocas_control_high = yes } # P4: con control alto la usurpacion fracasa
 			}
 		s:STATE_PANAMA = {
 			set_owner_of_provinces = {
@@ -1295,7 +1329,7 @@ ca_central_america.8 = {
 			change_relations = { country = root value = -30 }
 		}
 		}
-		ai_chance = { base = 80 }
+		ai_chance = { base = 80 modifier = { trigger = { has_global_variable = ca_bocas_border_pact } add = -50 } modifier = { trigger = { ca_bocas_control_high = yes } add = -60 } }
 	}
 	option = {
 		name = ca_central_america.8.b
@@ -9824,9 +9858,10 @@ ca_central_america.119 = {
     # A. Federalistas (historica). La barra no cambia (75); los efectos del decreto estan en .79.
     option = {
         name = ca_central_america.119.a
+        custom_tooltip = ca_central_america.119.a_guide_tt # P5: dificultad, objetivo y mecanicas
         default_option = yes
         ca_frca_choose_route = { ROUTE = federal }
-		    rigger_event = { id = ca_guatemala_events.1 }
+		    trigger_event = { id = ca_guatemala_events.1 }
             trigger_event = { id = ca_el_salvador_events.1 }
             trigger_event = { id = ca_honduras_events.1 }
             trigger_event = { id = ca_nicaragua_events.1 }
@@ -9837,6 +9872,7 @@ ca_central_america.119 = {
     # B. Centralistas (solo jugador)
     option = {
         name = ca_central_america.119.b
+        custom_tooltip = ca_central_america.119.b_guide_tt # P5: dificultad, objetivo y mecanicas
         trigger = { is_ai = no }
         ca_frca_choose_route = { ROUTE = centralist }
         add_modifier = { name = unitary_stronghold }
@@ -9857,9 +9893,11 @@ ca_central_america.119 = {
     # C. Jugar con un estado (solo jugador): abre el selector .80
     option = {
         name = ca_central_america.119.c
+        custom_tooltip = ca_central_america.119.c_guide_tt # P5: dificultad, objetivo y mecanicas
         trigger = { is_ai = no }
         remove_variable = ca_faction_federal
         remove_variable = ca_faction_centralist
+            trigger_event = { id = ca_guatemala_events.1 }
             trigger_event = { id = ca_el_salvador_events.1 }
             trigger_event = { id = ca_honduras_events.1 }
             trigger_event = { id = ca_nicaragua_events.1 }
@@ -12220,3 +12258,45 @@ ca_central_america.175 = {
 	}
 }
 
+# CAFM P4 (punto 5): los britanicos desembarcan desde la Mosquitia (control de Bocas bajo).
+# Lo lanza ca_bocas_monthly.
+ca_central_america.176 = {
+	type = country_event
+	placement = root
+	title = ca_central_america.176.t
+	desc = ca_central_america.176.d
+	flavor = ca_central_america.176.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		this = c:UCA
+		exists = c:GBR
+		ca_bocas_held_by_uca = yes
+		NOT = { ca_bocas_control_ge = { VALUE = 30 } }
+		NOT = { has_variable = ca_bocas_landing_cd }
+	}
+
+	immediate = {
+		set_variable = { name = ca_bocas_landing_cd years = 5 }
+	}
+
+	option = {
+		name = ca_central_america.176.a
+		default_option = yes
+		trigger = { gold_reserves >= ca_money_medium }
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		ca_bocas_control_change = { VALUE = 10 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_central_america.176.b
+		ca_bocas_control_change = { VALUE = -20 }
+		ca_frca_front_change = { FRONT = british VALUE = 1 }
+		c:GBR = { save_scope_as = ca_gbr }
+		change_relations = { country = scope:ca_gbr value = -15 }
+		ai_chance = { base = 40 }
+	}
+}

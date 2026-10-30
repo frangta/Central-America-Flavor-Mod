@@ -812,3 +812,345 @@ ca_federalist_events.20 = {
 	}
 }
 
+
+# CAFM P3 (punto 3): "El Congreso propone...". Leyes federalistas que el Congreso abre por evento.
+# Las dispara ca_fed_congress_monthly (zz_ca_p3_effects.txt) desde el pulso del diario de la Federacion.
+# La paralisis federal sigue bloqueando al jugador y a la IA; solo estos eventos abren leyes.
+# Los eventos de promulgacion .6-.14 siguen saliendo durante la ley.
+
+ca_federalist_events.21 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.21.t
+	desc = ca_federalist_events.21.d
+	flavor = ca_federalist_events.21.f
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		ca_fed_congress_can_propose = yes
+		NOT = { has_law = law_type:law_ca_escuela_laica }
+	}
+
+	# a. Presentar al Congreso
+	option = {
+		name = ca_federalist_events.21.a
+		default_option = yes
+		ca_fed_congress_present = { LAW = law_ca_escuela_laica }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { ig:ig_intelligentsia ?= { is_in_government = yes } } add = 20 }
+		}
+	}
+	# b. Negociar con los Estados (cohesion >= 50; cuesta 15)
+	option = {
+		name = ca_federalist_events.21.b
+		trigger = { ca_cohesion_ge = { VALUE = 50 } }
+		ca_fed_congress_states_pact = { LAW = law_ca_escuela_laica }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { ca_cohesion_ge = { VALUE = 65 } } add = 30 }
+		}
+	}
+	# c. Aplazar (no vuelve en 3 anos)
+	option = {
+		name = ca_federalist_events.21.c
+		ca_fed_congress_postpone = { N = 21 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { ig:ig_landowners ?= { is_powerful = yes } } add = 20 }
+		}
+	}
+}
+
+ca_federalist_events.22 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.22.t
+	desc = ca_federalist_events.22.d
+	flavor = ca_federalist_events.22.f
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		ca_fed_congress_can_propose = yes
+		NOT = { has_law = law_type:law_total_separation }
+	}
+
+	# a. Presentar al Congreso
+	option = {
+		name = ca_federalist_events.22.a
+		default_option = yes
+		ca_fed_congress_present = { LAW = law_total_separation }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { ig:ig_intelligentsia ?= { is_in_government = yes } } add = 20 }
+		}
+	}
+	# b. Negociar con los Estados (cohesion >= 50; cuesta 15)
+	option = {
+		name = ca_federalist_events.22.b
+		trigger = { ca_cohesion_ge = { VALUE = 50 } }
+		ca_fed_congress_states_pact = { LAW = law_total_separation }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { ca_cohesion_ge = { VALUE = 65 } } add = 30 }
+		}
+	}
+	# c. Aplazar (no vuelve en 3 anos)
+	option = {
+		name = ca_federalist_events.22.c
+		ca_fed_congress_postpone = { N = 22 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { ig:ig_landowners ?= { is_powerful = yes } } add = 20 }
+		}
+	}
+}
+
+ca_federalist_events.23 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.23.t
+	desc = ca_federalist_events.23.d
+	flavor = ca_federalist_events.23.f
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		ca_fed_congress_can_propose = yes
+		NOT = { has_law = law_type:law_ca_municipalismo }
+	}
+
+	# a. Presentar al Congreso
+	option = {
+		name = ca_federalist_events.23.a
+		default_option = yes
+		ca_fed_congress_present = { LAW = law_ca_municipalismo }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { ig:ig_intelligentsia ?= { is_in_government = yes } } add = 20 }
+		}
+	}
+	# b. Negociar con los Estados (cohesion >= 50; cuesta 15)
+	option = {
+		name = ca_federalist_events.23.b
+		trigger = { ca_cohesion_ge = { VALUE = 50 } }
+		ca_fed_congress_states_pact = { LAW = law_ca_municipalismo }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { ca_cohesion_ge = { VALUE = 65 } } add = 30 }
+		}
+	}
+	# c. Aplazar (no vuelve en 3 anos)
+	option = {
+		name = ca_federalist_events.23.c
+		ca_fed_congress_postpone = { N = 23 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { ig:ig_landowners ?= { is_powerful = yes } } add = 20 }
+		}
+	}
+}
+
+ca_federalist_events.24 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.24.t
+	desc = ca_federalist_events.24.d
+	flavor = ca_federalist_events.24.f
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		ca_fed_congress_can_propose = yes
+		NOT = { has_law = law_type:law_protected_speech }
+	}
+
+	# a. Presentar al Congreso
+	option = {
+		name = ca_federalist_events.24.a
+		default_option = yes
+		ca_fed_congress_present = { LAW = law_protected_speech }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { ig:ig_intelligentsia ?= { is_in_government = yes } } add = 20 }
+		}
+	}
+	# b. Negociar con los Estados (cohesion >= 50; cuesta 15)
+	option = {
+		name = ca_federalist_events.24.b
+		trigger = { ca_cohesion_ge = { VALUE = 50 } }
+		ca_fed_congress_states_pact = { LAW = law_protected_speech }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { ca_cohesion_ge = { VALUE = 65 } } add = 30 }
+		}
+	}
+	# c. Aplazar (no vuelve en 3 anos)
+	option = {
+		name = ca_federalist_events.24.c
+		ca_fed_congress_postpone = { N = 24 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { ig:ig_landowners ?= { is_powerful = yes } } add = 20 }
+		}
+	}
+}
+
+ca_federalist_events.25 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.25.t
+	desc = ca_federalist_events.25.d
+	flavor = ca_federalist_events.25.f
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		ca_fed_congress_can_propose = yes
+		NOT = { has_law = law_type:law_proportional_taxation }
+	}
+
+	# a. Presentar al Congreso
+	option = {
+		name = ca_federalist_events.25.a
+		default_option = yes
+		ca_fed_congress_present = { LAW = law_proportional_taxation }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { ig:ig_intelligentsia ?= { is_in_government = yes } } add = 20 }
+		}
+	}
+	# b. Negociar con los Estados (cohesion >= 50; cuesta 15)
+	option = {
+		name = ca_federalist_events.25.b
+		trigger = { ca_cohesion_ge = { VALUE = 50 } }
+		ca_fed_congress_states_pact = { LAW = law_proportional_taxation }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { ca_cohesion_ge = { VALUE = 65 } } add = 30 }
+		}
+	}
+	# c. Aplazar (no vuelve en 3 anos)
+	option = {
+		name = ca_federalist_events.25.c
+		ca_fed_congress_postpone = { N = 25 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { ig:ig_landowners ?= { is_powerful = yes } } add = 20 }
+		}
+	}
+}
+
+ca_federalist_events.26 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.26.t
+	desc = ca_federalist_events.26.d
+	flavor = ca_federalist_events.26.f
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		ca_fed_congress_can_propose = yes
+		NOT = { has_law = law_type:law_free_trade }
+	}
+
+	# a. Presentar al Congreso
+	option = {
+		name = ca_federalist_events.26.a
+		default_option = yes
+		ca_fed_congress_present = { LAW = law_free_trade }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { ig:ig_intelligentsia ?= { is_in_government = yes } } add = 20 }
+		}
+	}
+	# b. Negociar con los Estados (cohesion >= 50; cuesta 15)
+	option = {
+		name = ca_federalist_events.26.b
+		trigger = { ca_cohesion_ge = { VALUE = 50 } }
+		ca_fed_congress_states_pact = { LAW = law_free_trade }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { ca_cohesion_ge = { VALUE = 65 } } add = 30 }
+		}
+	}
+	# c. Aplazar (no vuelve en 3 anos)
+	option = {
+		name = ca_federalist_events.26.c
+		ca_fed_congress_postpone = { N = 26 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { ig:ig_landowners ?= { is_powerful = yes } } add = 20 }
+		}
+	}
+}
+
+ca_federalist_events.27 = {
+	type = country_event
+	placement = root
+	title = ca_federalist_events.27.t
+	desc = ca_federalist_events.27.d
+	flavor = ca_federalist_events.27.f
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		ca_fed_congress_can_propose = yes
+		NOT = { has_law = law_type:law_universal_suffrage }
+	}
+
+	# a. Presentar al Congreso
+	option = {
+		name = ca_federalist_events.27.a
+		default_option = yes
+		ca_fed_congress_present = { LAW = law_universal_suffrage }
+		ai_chance = {
+			base = 60
+			modifier = { trigger = { ig:ig_intelligentsia ?= { is_in_government = yes } } add = 20 }
+		}
+	}
+	# b. Negociar con los Estados (cohesion >= 50; cuesta 15)
+	option = {
+		name = ca_federalist_events.27.b
+		trigger = { ca_cohesion_ge = { VALUE = 50 } }
+		ca_fed_congress_states_pact = { LAW = law_universal_suffrage }
+		ai_chance = {
+			base = 30
+			modifier = { trigger = { ca_cohesion_ge = { VALUE = 65 } } add = 30 }
+		}
+	}
+	# c. Aplazar (no vuelve en 3 anos)
+	option = {
+		name = ca_federalist_events.27.c
+		ca_fed_congress_postpone = { N = 27 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { ig:ig_landowners ?= { is_powerful = yes } } add = 20 }
+		}
+	}
+}
+

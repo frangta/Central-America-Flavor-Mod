@@ -1,5 +1,5 @@
 ﻿# ============================================================================
-# CAFM - F9/F26 - Minimapa de lealtad en el diario de la Federacion
+# CAFM - F9/F26/P4 - Minimapa de lealtad en el diario de la Federacion
 # (gui/ca_frca_minimap.gui). Cada estado es un boton (pin). El color de cada estado
 # sigue su lealtad: Leal verde, Vacilante amarillo, Rebelde naranja, Separado gris.
 # Al pulsar un estado se abre su panel con la lealtad y los botones de la ruta.
@@ -9,478 +9,623 @@
 types ca_frca_minimap_types {
 	type ca_frca_minimap_type = widget {
 		name = "ca_frca_minimap_widget"
-		size = { 530 262 }
-		# F28: sin parentanchor; el contenedor del diario toma el tamano del widget (530 x 262)
+		size = { 530 332 }
+		# F28: sin parentanchor; el contenedor del diario toma el tamano del widget
+		# P7: 530 x 332 (contador de cohesion arriba, mapa al centro, ventana del estado encima)
 
 		background = {
 			using = entry_bg_simple
 		}
 
+		# --- P7: contador de Cohesion federal (solo ruta federal) ---
+		widget = {
+			name = "ca_mm_cohesion"
+			position = { 10 8 }
+			size = { 510 24 }
+			datacontext = "[GetScriptedGui('ca_mm_cohesion_on')]"
+			visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			tooltip = "CA_MM_COHESION_TT"
+
+			textbox = {
+				position = { 0 2 }
+				size = { 300 20 }
+				align = left|nobaseline
+				using = fontsize_small
+				text = "CA_MM_COHESION_COUNTER"
+			}
+			icon = {
+				position = { 306 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_empty.dds"
+			}
+			icon = {
+				position = { 306 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_full.dds"
+				datacontext = "[GetScriptedGui('ca_mm_coh_seg_1')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			icon = {
+				position = { 326 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_empty.dds"
+			}
+			icon = {
+				position = { 326 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_full.dds"
+				datacontext = "[GetScriptedGui('ca_mm_coh_seg_2')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			icon = {
+				position = { 346 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_empty.dds"
+			}
+			icon = {
+				position = { 346 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_full.dds"
+				datacontext = "[GetScriptedGui('ca_mm_coh_seg_3')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			icon = {
+				position = { 366 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_empty.dds"
+			}
+			icon = {
+				position = { 366 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_full.dds"
+				datacontext = "[GetScriptedGui('ca_mm_coh_seg_4')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			icon = {
+				position = { 386 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_empty.dds"
+			}
+			icon = {
+				position = { 386 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_full.dds"
+				datacontext = "[GetScriptedGui('ca_mm_coh_seg_5')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			icon = {
+				position = { 406 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_empty.dds"
+			}
+			icon = {
+				position = { 406 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_full.dds"
+				datacontext = "[GetScriptedGui('ca_mm_coh_seg_6')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			icon = {
+				position = { 426 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_empty.dds"
+			}
+			icon = {
+				position = { 426 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_full.dds"
+				datacontext = "[GetScriptedGui('ca_mm_coh_seg_7')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			icon = {
+				position = { 446 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_empty.dds"
+			}
+			icon = {
+				position = { 446 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_full.dds"
+				datacontext = "[GetScriptedGui('ca_mm_coh_seg_8')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			icon = {
+				position = { 466 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_empty.dds"
+			}
+			icon = {
+				position = { 466 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_full.dds"
+				datacontext = "[GetScriptedGui('ca_mm_coh_seg_9')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			icon = {
+				position = { 486 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_empty.dds"
+			}
+			icon = {
+				position = { 486 6 }
+				size = { 20 12 }
+				texture = "gfx/interface/ca_minimap/ca_coh_seg_full.dds"
+				datacontext = "[GetScriptedGui('ca_mm_coh_seg_10')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+		}
+		textbox = {
+			position = { 10 10 }
+			size = { 510 20 }
+			align = hcenter|nobaseline
+			using = fontsize_small
+			text = "CA_MM_PANEL_HINT_SHORT"
+			datacontext = "[GetScriptedGui('ca_mm_cohesion_on')]"
+			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+		}
+
 		# --- Mapa (F26: estilo de mapa antiguo, 12 zonas, texturas a 2x) ---
 		widget = {
 			name = "ca_mm_map"
-			position = { 8 12 }
-			size = { 300 239 }
+			position = { 85 38 }
+			size = { 360 287 }
 
 			icon = {
 				position = { 0 0 }
-				size = { 300 239 }
+				size = { 360 287 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_base.dds"
 			}
 			icon = {
-				position = { 18 55 }
-				size = { 50 38 }
+				position = { 22 66 }
+				size = { 60 46 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_cip_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cip_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 18 55 }
-				size = { 50 38 }
+				position = { 22 66 }
+				size = { 60 46 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_cip_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cip_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 18 55 }
-				size = { 50 38 }
+				position = { 22 66 }
+				size = { 60 46 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_cip_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cip_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 18 55 }
-				size = { 50 38 }
+				position = { 22 66 }
+				size = { 60 46 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_cip_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cip_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 46 57 }
-				size = { 40 50 }
+				position = { 55 68 }
+				size = { 48 60 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_alt_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_alt_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 46 57 }
-				size = { 40 50 }
+				position = { 55 68 }
+				size = { 48 60 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_alt_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_alt_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 46 57 }
-				size = { 40 50 }
+				position = { 55 68 }
+				size = { 48 60 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_alt_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_alt_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 46 57 }
-				size = { 40 50 }
+				position = { 55 68 }
+				size = { 48 60 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_alt_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_alt_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 64 16 }
-				size = { 72 96 }
+				position = { 77 19 }
+				size = { 86 115 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_gua_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_gua_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 64 16 }
-				size = { 72 96 }
+				position = { 77 19 }
+				size = { 86 115 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_gua_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_gua_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 64 16 }
-				size = { 72 96 }
+				position = { 77 19 }
+				size = { 86 115 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_gua_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_gua_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 64 16 }
-				size = { 72 96 }
+				position = { 77 19 }
+				size = { 86 115 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_gua_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_gua_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 79 18 }
-				size = { 46 31 }
+				position = { 95 22 }
+				size = { 55 37 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_pet_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_gua_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 79 18 }
-				size = { 46 31 }
+				position = { 95 22 }
+				size = { 55 37 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_pet_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_gua_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 79 18 }
-				size = { 46 31 }
+				position = { 95 22 }
+				size = { 55 37 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_pet_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_gua_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 79 18 }
-				size = { 46 31 }
+				position = { 95 22 }
+				size = { 55 37 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_pet_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_gua_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 114 16 }
-				size = { 47 55 }
+				position = { 137 19 }
+				size = { 56 66 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_blz_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_blz_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 114 16 }
-				size = { 47 55 }
+				position = { 137 19 }
+				size = { 56 66 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_blz_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_blz_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 114 16 }
-				size = { 47 55 }
+				position = { 137 19 }
+				size = { 56 66 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_blz_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_blz_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 114 16 }
-				size = { 47 55 }
+				position = { 137 19 }
+				size = { 56 66 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_blz_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_blz_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 114 16 }
-				size = { 47 55 }
+				position = { 137 19 }
+				size = { 56 66 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_blz_foreign.dds"
 				datacontext = "[GetScriptedGui('ca_mm_blz_foreign')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 91 101 }
-				size = { 70 31 }
+				position = { 109 121 }
+				size = { 84 37 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_els_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_els_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 91 101 }
-				size = { 70 31 }
+				position = { 109 121 }
+				size = { 84 37 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_els_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_els_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 91 101 }
-				size = { 70 31 }
+				position = { 109 121 }
+				size = { 84 37 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_els_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_els_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 91 101 }
-				size = { 70 31 }
+				position = { 109 121 }
+				size = { 84 37 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_els_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_els_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 115 62 }
-				size = { 142 69 }
+				position = { 138 74 }
+				size = { 170 83 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_hon_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_hon_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 115 62 }
-				size = { 142 69 }
+				position = { 138 74 }
+				size = { 170 83 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_hon_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_hon_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 115 62 }
-				size = { 142 69 }
+				position = { 138 74 }
+				size = { 170 83 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_hon_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_hon_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 115 62 }
-				size = { 142 69 }
+				position = { 138 74 }
+				size = { 170 83 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_hon_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_hon_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 216 84 }
-				size = { 40 78 }
+				position = { 259 101 }
+				size = { 48 94 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_mos_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_mos_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 216 84 }
-				size = { 40 78 }
+				position = { 259 101 }
+				size = { 48 94 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_mos_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_mos_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 216 84 }
-				size = { 40 78 }
+				position = { 259 101 }
+				size = { 48 94 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_mos_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_mos_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 216 84 }
-				size = { 40 78 }
+				position = { 259 101 }
+				size = { 48 94 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_mos_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_mos_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 216 84 }
-				size = { 40 78 }
+				position = { 259 101 }
+				size = { 48 94 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_mos_foreign.dds"
 				datacontext = "[GetScriptedGui('ca_mm_mos_foreign')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 153 88 }
-				size = { 101 90 }
+				position = { 184 106 }
+				size = { 121 108 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_nic_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_nic_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 153 88 }
-				size = { 101 90 }
+				position = { 184 106 }
+				size = { 121 108 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_nic_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_nic_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 153 88 }
-				size = { 101 90 }
+				position = { 184 106 }
+				size = { 121 108 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_nic_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_nic_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 153 88 }
-				size = { 101 90 }
+				position = { 184 106 }
+				size = { 121 108 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_nic_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_nic_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 193 171 }
-				size = { 24 33 }
+				position = { 232 205 }
+				size = { 29 40 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_gnc_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cos_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 193 171 }
-				size = { 24 33 }
+				position = { 232 205 }
+				size = { 29 40 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_gnc_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cos_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 193 171 }
-				size = { 24 33 }
+				position = { 232 205 }
+				size = { 29 40 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_gnc_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cos_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 193 171 }
-				size = { 24 33 }
+				position = { 232 205 }
+				size = { 29 40 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_gnc_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cos_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 193 168 }
-				size = { 78 71 }
+				position = { 232 202 }
+				size = { 94 85 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_cos_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cos_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 193 168 }
-				size = { 78 71 }
+				position = { 232 202 }
+				size = { 94 85 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_cos_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cos_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 193 168 }
-				size = { 78 71 }
+				position = { 232 202 }
+				size = { 94 85 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_cos_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cos_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 193 168 }
-				size = { 78 71 }
+				position = { 232 202 }
+				size = { 94 85 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_cos_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_cos_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 258 206 }
-				size = { 29 26 }
+				position = { 310 247 }
+				size = { 35 31 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_boc_loyal.dds"
 				datacontext = "[GetScriptedGui('ca_mm_boc_loyal')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 258 206 }
-				size = { 29 26 }
+				position = { 310 247 }
+				size = { 35 31 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_boc_wavering.dds"
 				datacontext = "[GetScriptedGui('ca_mm_boc_wavering')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 258 206 }
-				size = { 29 26 }
+				position = { 310 247 }
+				size = { 35 31 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_boc_rebel.dds"
 				datacontext = "[GetScriptedGui('ca_mm_boc_rebel')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
-				position = { 258 206 }
-				size = { 29 26 }
+				position = { 310 247 }
+				size = { 35 31 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_boc_separated.dds"
 				datacontext = "[GetScriptedGui('ca_mm_boc_separated')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 			}
 			icon = {
 				position = { 0 0 }
-				size = { 300 239 }
+				size = { 360 287 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_labels.dds"
 			}
 			icon = {
 				position = { 0 0 }
-				size = { 300 239 }
+				size = { 360 287 }
 				texture = "gfx/interface/ca_minimap/ca_minimap_frame.dds"
 			}
 			button = {
-				position = { 34 65 }
+				position = { 42 79 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_cip')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','cip')]"
 				tooltip = "CA_MM_CIP_TT"
 			}
 			button = {
-				position = { 59 70 }
+				position = { 72 85 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_alt')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','alt')]"
+				datacontext = "[GetScriptedGui('ca_mm_alt_present')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 				tooltip = "CA_MM_ALT_TT"
 			}
 			button = {
-				position = { 94 59 }
+				position = { 114 72 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_gua')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','gua')]"
 				tooltip = "CA_MM_GUA_TT"
 			}
 			button = {
-				position = { 87 20 }
+				position = { 106 25 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_gua')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','pet')]"
 				tooltip = "CA_MM_PET_TT"
 			}
 			button = {
-				position = { 125 20 }
+				position = { 151 25 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_gua')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','pet')]"
 				tooltip = "CA_MM_BLZ_TT"
 			}
 			button = {
-				position = { 114 105 }
+				position = { 138 127 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_els')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','els')]"
 				tooltip = "CA_MM_ELS_TT"
 			}
 			button = {
-				position = { 160 83 }
+				position = { 193 101 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_hon')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','hon')]"
 				tooltip = "CA_MM_HON_TT"
 			}
 			button = {
-				position = { 238 89 }
+				position = { 287 108 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_nic')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','mos')]"
 				tooltip = "CA_MM_MOS_TT"
 			}
 			button = {
-				position = { 185 125 }
+				position = { 223 151 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_nic')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','nic')]"
 				tooltip = "CA_MM_NIC_TT"
 			}
 			button = {
-				position = { 199 178 }
+				position = { 240 215 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_cos')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','gnc')]"
 				tooltip = "CA_MM_GNC_TT"
 			}
 			button = {
-				position = { 227 181 }
+				position = { 274 218 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_cos')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','cos')]"
 				tooltip = "CA_MM_COS_TT"
 			}
 			button = {
-				position = { 260 206 }
+				position = { 289 236 }
 				size = { 12 12 }
 				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
-				datacontext = "[GetScriptedGui('ca_mm_select_boc')]"
-				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','tal')]"
+				tooltip = "CA_MM_TAL_TT"
+			}
+			button = {
+				position = { 313 248 }
+				size = { 12 12 }
+				texture = "gfx/interface/ca_minimap/ca_dot_filled.dds"
+				onclick = "[GetVariableSystem.Set('ca_mm_sel','boc')]"
 				tooltip = "CA_MM_BOC_TT"
 			}
 		}
@@ -488,41 +633,40 @@ types ca_frca_minimap_types {
 		# --- Panel del estado ---
 		widget = {
 			name = "ca_mm_panel"
-			position = { 316 12 }
-			size = { 206 239 }
+			# P7: ventana del estado. Se abre al pulsar un estado del mapa y se cierra con la X.
+			position = { 115 58 }
+			size = { 300 252 }
+			visible = "[GetVariableSystem.Exists('ca_mm_sel')]"
 
-			textbox = {
-				position = { 0 4 }
-				size = { 206 40 }
-				align = hcenter|nobaseline
-				multiline = yes
-				using = fontsize_small
-				text = "CA_MM_PANEL_HINT"
+			icon = {
+				position = { 0 0 }
+				size = { 300 252 }
+				texture = "gfx/interface/ca_minimap/ca_mm_popup_bg.dds"
 			}
 			widget = {
-				size = { 206 239 }
-				datacontext = "[GetScriptedGui('ca_mm_panel_gua')]"
-				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				background = { using = entry_bg_simple }
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','gua')]"
 
 				textbox = {
 					position = { 0 6 }
-					size = { 206 24 }
+					size = { 300 24 }
 					align = hcenter|nobaseline
 					using = fontsize_small
-					default_format = "#title"
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_GUA_NAME"
 				}
 				textbox = {
 					position = { 8 34 }
-					size = { 190 70 }
+					size = { 284 70 }
 					multiline = yes
 					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_GUA_INFO"
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_CAMPAIGN"
 					datacontext = "[GetScriptedGui('ca_mm_gua_campaign')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -532,7 +676,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_NEGOTIATE"
 					datacontext = "[GetScriptedGui('ca_mm_gua_negotiate')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -542,7 +686,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_INTENDANT"
 					datacontext = "[GetScriptedGui('ca_mm_gua_intendant')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -552,7 +696,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_SIEGE"
 					datacontext = "[GetScriptedGui('ca_mm_gua_siege')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -562,7 +706,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 164 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_COOPT"
 					datacontext = "[GetScriptedGui('ca_mm_gua_coopt')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -572,29 +716,29 @@ types ca_frca_minimap_types {
 				}
 			}
 			widget = {
-				size = { 206 239 }
-				datacontext = "[GetScriptedGui('ca_mm_panel_els')]"
-				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				background = { using = entry_bg_simple }
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','els')]"
 
 				textbox = {
 					position = { 0 6 }
-					size = { 206 24 }
+					size = { 300 24 }
 					align = hcenter|nobaseline
 					using = fontsize_small
-					default_format = "#title"
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_ELS_NAME"
 				}
 				textbox = {
 					position = { 8 34 }
-					size = { 190 70 }
+					size = { 284 70 }
 					multiline = yes
 					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_ELS_INFO"
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_CAMPAIGN"
 					datacontext = "[GetScriptedGui('ca_mm_els_campaign')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -604,7 +748,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_NEGOTIATE"
 					datacontext = "[GetScriptedGui('ca_mm_els_negotiate')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -614,7 +758,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_INTENDANT"
 					datacontext = "[GetScriptedGui('ca_mm_els_intendant')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -624,7 +768,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_SIEGE"
 					datacontext = "[GetScriptedGui('ca_mm_els_siege')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -634,7 +778,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 164 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_COOPT"
 					datacontext = "[GetScriptedGui('ca_mm_els_coopt')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -644,29 +788,29 @@ types ca_frca_minimap_types {
 				}
 			}
 			widget = {
-				size = { 206 239 }
-				datacontext = "[GetScriptedGui('ca_mm_panel_hon')]"
-				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				background = { using = entry_bg_simple }
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','hon')]"
 
 				textbox = {
 					position = { 0 6 }
-					size = { 206 24 }
+					size = { 300 24 }
 					align = hcenter|nobaseline
 					using = fontsize_small
-					default_format = "#title"
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_HON_NAME"
 				}
 				textbox = {
 					position = { 8 34 }
-					size = { 190 70 }
+					size = { 284 70 }
 					multiline = yes
 					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_HON_INFO"
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_CAMPAIGN"
 					datacontext = "[GetScriptedGui('ca_mm_hon_campaign')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -676,7 +820,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_NEGOTIATE"
 					datacontext = "[GetScriptedGui('ca_mm_hon_negotiate')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -686,7 +830,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_INTENDANT"
 					datacontext = "[GetScriptedGui('ca_mm_hon_intendant')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -696,7 +840,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_SIEGE"
 					datacontext = "[GetScriptedGui('ca_mm_hon_siege')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -706,7 +850,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 164 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_COOPT"
 					datacontext = "[GetScriptedGui('ca_mm_hon_coopt')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -716,29 +860,29 @@ types ca_frca_minimap_types {
 				}
 			}
 			widget = {
-				size = { 206 239 }
-				datacontext = "[GetScriptedGui('ca_mm_panel_nic')]"
-				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				background = { using = entry_bg_simple }
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','nic')]"
 
 				textbox = {
 					position = { 0 6 }
-					size = { 206 24 }
+					size = { 300 24 }
 					align = hcenter|nobaseline
 					using = fontsize_small
-					default_format = "#title"
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_NIC_NAME"
 				}
 				textbox = {
 					position = { 8 34 }
-					size = { 190 70 }
+					size = { 284 70 }
 					multiline = yes
 					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_NIC_INFO"
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_CAMPAIGN"
 					datacontext = "[GetScriptedGui('ca_mm_nic_campaign')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -748,7 +892,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_NEGOTIATE"
 					datacontext = "[GetScriptedGui('ca_mm_nic_negotiate')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -758,7 +902,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_INTENDANT"
 					datacontext = "[GetScriptedGui('ca_mm_nic_intendant')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -768,7 +912,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_SIEGE"
 					datacontext = "[GetScriptedGui('ca_mm_nic_siege')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -778,7 +922,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 164 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_COOPT"
 					datacontext = "[GetScriptedGui('ca_mm_nic_coopt')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -788,29 +932,29 @@ types ca_frca_minimap_types {
 				}
 			}
 			widget = {
-				size = { 206 239 }
-				datacontext = "[GetScriptedGui('ca_mm_panel_cos')]"
-				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				background = { using = entry_bg_simple }
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','cos')]"
 
 				textbox = {
 					position = { 0 6 }
-					size = { 206 24 }
+					size = { 300 24 }
 					align = hcenter|nobaseline
 					using = fontsize_small
-					default_format = "#title"
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_COS_NAME"
 				}
 				textbox = {
 					position = { 8 34 }
-					size = { 190 70 }
+					size = { 284 70 }
 					multiline = yes
 					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_COS_INFO"
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_CAMPAIGN"
 					datacontext = "[GetScriptedGui('ca_mm_cos_campaign')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -820,7 +964,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_NEGOTIATE"
 					datacontext = "[GetScriptedGui('ca_mm_cos_negotiate')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -830,7 +974,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_INTENDANT"
 					datacontext = "[GetScriptedGui('ca_mm_cos_intendant')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -840,7 +984,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_SIEGE"
 					datacontext = "[GetScriptedGui('ca_mm_cos_siege')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -850,7 +994,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 164 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_COOPT"
 					datacontext = "[GetScriptedGui('ca_mm_cos_coopt')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -860,29 +1004,29 @@ types ca_frca_minimap_types {
 				}
 			}
 			widget = {
-				size = { 206 239 }
-				datacontext = "[GetScriptedGui('ca_mm_panel_alt')]"
-				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				background = { using = entry_bg_simple }
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','alt')]"
 
 				textbox = {
 					position = { 0 6 }
-					size = { 206 24 }
+					size = { 300 24 }
 					align = hcenter|nobaseline
 					using = fontsize_small
-					default_format = "#title"
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_ALT_NAME"
 				}
 				textbox = {
 					position = { 8 34 }
-					size = { 190 70 }
+					size = { 284 70 }
 					multiline = yes
 					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_ALT_INFO"
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_CAMPAIGN"
 					datacontext = "[GetScriptedGui('ca_mm_alt_campaign')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -892,7 +1036,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_NEGOTIATE"
 					datacontext = "[GetScriptedGui('ca_mm_alt_negotiate')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -902,7 +1046,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_INTENDANT"
 					datacontext = "[GetScriptedGui('ca_mm_alt_intendant')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -912,7 +1056,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_SIEGE"
 					datacontext = "[GetScriptedGui('ca_mm_alt_siege')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -922,7 +1066,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 164 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_COOPT"
 					datacontext = "[GetScriptedGui('ca_mm_alt_coopt')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -932,29 +1076,29 @@ types ca_frca_minimap_types {
 				}
 			}
 			widget = {
-				size = { 206 239 }
-				datacontext = "[GetScriptedGui('ca_mm_panel_cip')]"
-				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				background = { using = entry_bg_simple }
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','cip')]"
 
 				textbox = {
 					position = { 0 6 }
-					size = { 206 24 }
+					size = { 300 24 }
 					align = hcenter|nobaseline
 					using = fontsize_small
-					default_format = "#title"
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_CIP_NAME"
 				}
 				textbox = {
 					position = { 8 34 }
-					size = { 190 70 }
+					size = { 284 70 }
 					multiline = yes
 					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_CIP_INFO"
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_CAMPAIGN"
 					datacontext = "[GetScriptedGui('ca_mm_cip_campaign')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -964,7 +1108,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_NEGOTIATE"
 					datacontext = "[GetScriptedGui('ca_mm_cip_negotiate')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -974,7 +1118,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 108 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_INTENDANT"
 					datacontext = "[GetScriptedGui('ca_mm_cip_intendant')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -984,7 +1128,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 136 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_SIEGE"
 					datacontext = "[GetScriptedGui('ca_mm_cip_siege')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -994,7 +1138,7 @@ types ca_frca_minimap_types {
 				}
 				button_standard = {
 					position = { 8 164 }
-					size = { 190 24 }
+					size = { 284 24 }
 					text = "CA_MM_ACTION_COOPT"
 					datacontext = "[GetScriptedGui('ca_mm_cip_coopt')]"
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1004,26 +1148,312 @@ types ca_frca_minimap_types {
 				}
 			}
 			widget = {
-				size = { 206 239 }
-				datacontext = "[GetScriptedGui('ca_mm_panel_boc')]"
-				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				background = { using = entry_bg_simple }
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','boc')]"
 
 				textbox = {
 					position = { 0 6 }
-					size = { 206 24 }
+					size = { 300 24 }
 					align = hcenter|nobaseline
 					using = fontsize_small
-					default_format = "#title"
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_BOC_NAME"
 				}
 				textbox = {
 					position = { 8 34 }
-					size = { 190 70 }
+					size = { 284 70 }
 					multiline = yes
 					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
 					text = "CA_MM_BOC_INFO"
 				}
+				button_standard = {
+					position = { 8 100 }
+					size = { 284 21 }
+					text = "CA_MM_ACT_BOC_GARRISON"
+					datacontext = "[GetScriptedGui('ca_mm_boc_garrison')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 122 }
+					size = { 284 21 }
+					text = "CA_MM_ACT_BOC_COLONISTS"
+					datacontext = "[GetScriptedGui('ca_mm_boc_colonists')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 144 }
+					size = { 284 21 }
+					text = "CA_MM_ACT_BOC_NATIVE_PACT"
+					datacontext = "[GetScriptedGui('ca_mm_boc_native_pact')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 166 }
+					size = { 284 21 }
+					text = "CA_MM_ACT_BOC_PROTEST"
+					datacontext = "[GetScriptedGui('ca_mm_boc_protest')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 188 }
+					size = { 284 21 }
+					text = "CA_MM_ACT_BOC_BORDER"
+					datacontext = "[GetScriptedGui('ca_mm_boc_border')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 210 }
+					size = { 284 21 }
+					text = "CA_MM_ACT_BOC_DISTRICT"
+					datacontext = "[GetScriptedGui('ca_mm_boc_district')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+			}
+			widget = {
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','mos')]"
+
+				textbox = {
+					position = { 0 6 }
+					size = { 300 24 }
+					align = hcenter|nobaseline
+					using = fontsize_small
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
+					text = "CA_MM_MOS_NAME"
+				}
+				textbox = {
+					position = { 8 30 }
+					size = { 284 74 }
+					multiline = yes
+					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
+					text = "CA_MM_MOS_INFO"
+				}
+				button_standard = {
+					position = { 8 104 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_MOS_COMMISSIONER"
+					datacontext = "[GetScriptedGui('ca_mm_mos_commissioner')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 130 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_MOS_COLONY"
+					datacontext = "[GetScriptedGui('ca_mm_mos_colony')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 156 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_MOS_KING"
+					datacontext = "[GetScriptedGui('ca_mm_mos_king')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 182 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_MOS_PROTEST"
+					datacontext = "[GetScriptedGui('ca_mm_mos_protest')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+			}
+			widget = {
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','pet')]"
+
+				textbox = {
+					position = { 0 6 }
+					size = { 300 24 }
+					align = hcenter|nobaseline
+					using = fontsize_small
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
+					text = "CA_MM_PET_NAME"
+				}
+				textbox = {
+					position = { 8 30 }
+					size = { 284 74 }
+					multiline = yes
+					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
+					text = "CA_MM_PET_INFO"
+				}
+				button_standard = {
+					position = { 8 104 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_PET_MISSIONS"
+					datacontext = "[GetScriptedGui('ca_mm_pet_missions')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 130 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_PET_MILITARY_COLONY"
+					datacontext = "[GetScriptedGui('ca_mm_pet_military_colony')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 156 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_PET_TREATY"
+					datacontext = "[GetScriptedGui('ca_mm_pet_treaty')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+			}
+			widget = {
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','gnc')]"
+
+				textbox = {
+					position = { 0 6 }
+					size = { 300 24 }
+					align = hcenter|nobaseline
+					using = fontsize_small
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
+					text = "CA_MM_GNC_NAME"
+				}
+				textbox = {
+					position = { 8 30 }
+					size = { 284 74 }
+					multiline = yes
+					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
+					text = "CA_MM_GNC_INFO"
+				}
+				button_standard = {
+					position = { 8 104 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_GNC_GARRISON"
+					datacontext = "[GetScriptedGui('ca_mm_gnc_garrison')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 130 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_GNC_PLEBISCITE"
+					datacontext = "[GetScriptedGui('ca_mm_gnc_plebiscite')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 156 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_GNC_NEGOTIATE_NIC"
+					datacontext = "[GetScriptedGui('ca_mm_gnc_negotiate_nic')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+			}
+			widget = {
+				size = { 300 252 }
+				visible = "[GetVariableSystem.HasValue('ca_mm_sel','tal')]"
+
+				textbox = {
+					position = { 0 6 }
+					size = { 300 24 }
+					align = hcenter|nobaseline
+					using = fontsize_small
+					default_format = "#bold"
+					color = { 0.24 0.15 0.07 1 }
+					text = "CA_MM_TAL_NAME"
+				}
+				textbox = {
+					position = { 8 30 }
+					size = { 284 74 }
+					multiline = yes
+					using = fontsize_small
+					color = { 0.24 0.15 0.07 1 }
+					text = "CA_MM_TAL_INFO"
+				}
+				button_standard = {
+					position = { 8 104 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_TAL_INTEGRATE"
+					datacontext = "[GetScriptedGui('ca_mm_tal_integrate')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 130 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_TAL_COEXIST"
+					datacontext = "[GetScriptedGui('ca_mm_tal_coexist')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				button_standard = {
+					position = { 8 156 }
+					size = { 284 24 }
+					text = "CA_MM_ACT_TAL_CONQUER"
+					datacontext = "[GetScriptedGui('ca_mm_tal_conquer')]"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+			}
+			# P7: cerrar la ventana
+			button = {
+				position = { 270 6 }
+				size = { 24 24 }
+				texture = "gfx/interface/ca_minimap/ca_mm_close.dds"
+				onclick = "[GetVariableSystem.Clear('ca_mm_sel')]"
+				tooltip = "CA_MM_CLOSE_TT"
 			}
 		}
 	}

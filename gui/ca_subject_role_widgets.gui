@@ -1,439 +1,89 @@
-﻿# COPY-PASTED FOR NOW
-@panel_width_minus_10 = 530			# used to be 450
-@panel_width_minus_30 = 510
-@panel_width = 540  				# used to be 460
-@panel_width_half = 270				# used to be 230
-@panel_width_plus_10 = 550  		# used to be 470
-@panel_width_plus_14 = 554			# used to be 474
-@panel_width_plus_14_half = 277		# used to be 237
-@panel_width_plus_20 = 560			# used to be 480
-@panel_width_plus_30 = 570			# used to be 490
-@panel_width_plus_70 = 610			# used to be 530
-
-# game/gui/ca_subject_role_widgets.gui
+﻿# ============================================================================
+# CAFM P1 punto 1 - Widget de je_ca_state_role_in_federation (gui/ca_subject_role_widgets.gui)
+# Va en custom_widget_container_1 (el mismo del minimapa), sin parentanchor, para que el
+# diario le reserve su alto. Orden: la barra del diario (ca_federal_spectrum_bar) arriba,
+# luego este recuadro con el estado y sus facciones, y abajo los 4 botones en rejilla 2x2.
+# Los 4 scripted_button se quitaron del diario para que no se pinten aparte.
+# ============================================================================
 
 types ca_subject_role_types {
+	type ca_subject_role_widget = widget {
+		name = "ca_subject_role_widget"
+		size = { 530 172 }
 
-    # Componente reutilizable para cada nivel del triángulo
-    type ca_triangle_pip = widget {
-        size = { 18 18 }
+		background = {
+			using = entry_bg_simple
+		}
 
-        # Estado Inactivo / Base (gris transparente)
-        icon = {
-            size = { 100% 100% }
-            texture = "gfx/interface/backgrounds/round_button_bg.dds" # CAFM fix: radio_button_empty.dds no existe
-            alpha = 0.35
-        }
+		# --- Recuadro del estado ---
+		widget = {
+			position = { 8 6 }
+			size = { 514 92 }
 
-        # Estado Activo (iluminado si la condición se cumple)
-        icon = {
-            block "active_condition" {
-                visible = no
-            }
-            size = { 100% 100% }
-            texture = "gfx/interface/icons/generic_icons/green_checkmark.dds" # CAFM fix: radio_button_filled.dds no existe
-        }
-    }
+			background = {
+				using = entry_bg_simple
+			}
 
-    # Widget inyectado en custom_widget_container_2
-    type ca_subject_role_widget = widget {
-        name = "ca_subject_role_widget"
-        size = { 340 165 }          # CAFM fix: antes 300, se salia por debajo de los botones
-        parentanchor = top|hcenter  # CAFM fix: antes center, empujaba todo hacia abajo
+			textbox = {
+				position = { 8 4 }
+				size = { 498 84 }
+				multiline = yes
+				align = left|nobaseline
+				using = fontsize_small
+				text = "CA_ROLE_BOX"
+			}
+		}
 
-        # Fondo del diagrama estilo Victoria 3
-        background = {
-            using = entry_bg_simple
-        }
+		# --- Botones (2 x 2) ---
+		widget = {
+			position = { 0 104 }
+			size = { 530 64 }
 
-        icon = {
-            size = { 100% 100% }
-            using = simple_frame
-        }
-
-        # Título superior del gráfico
-        textbox = {
-            position = { 0 6 }
-            parentanchor = top|hcenter
-            autoresize = yes
-            align = nobaseline
-            using = fontsize_small
-            text = "CA_FACTION_ALIGNMENT_TITLE"
-            default_format = "#title"
-        }
-
-        # ====================================================
-        # VÉRTICE SUPERIOR: CENTRALISTAS
-        # ====================================================
-        container = {
-            position = { 0 26 }
-            parentanchor = top|hcenter
-
-            flowcontainer = {
-                direction = vertical
-                spacing = 4
-                parentanchor = hcenter
-
-                textbox = {
-                     text = "CA_FACTION_CENTRALISTAS" # Antes decía "CENTRALISTAS"
-                     align = hcenter|nobaseline
-                     autoresize = yes
-                     using = fontsize_small
-                     parentanchor = hcenter
-                     default_format = "#header"
-                 }
-
-                # 3 Niveles hacia el vértice superior
-                flowcontainer = {
-                    direction = horizontal
-                    spacing = 8
-                    parentanchor = hcenter
-
-                    ca_triangle_pip = {
-                        blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_centralist_lvl_1')]"
-                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        }
-                        tooltip = "CA_SGUI_CENTRALIST_1_TT"
-                    }
-                    ca_triangle_pip = {
-                        blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_centralist_lvl_2')]"
-                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        }
-                        tooltip = "CA_SGUI_CENTRALIST_2_TT"
-                    }
-                    ca_triangle_pip = {
-                        blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_centralist_lvl_3')]"
-                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        }
-                        tooltip = "CA_SGUI_CENTRALIST_3_TT"
-                    }
-                }
-            }
-        }
-
-        # ====================================================
-        # NÚCLEO CENTRAL / RETÍCULA
-        # ====================================================
-        icon = {
-            size = { 60 60 }
-            parentanchor = top|hcenter
-            position = { 0 72 }
-            texture = "gfx/interface/icons/generic_icons/turns_into.dds"
-            alpha = 0.45
-        }
-
-        # ====================================================
-        # VÉRTICE INFERIOR IZQUIERDO: FEDERALISTAS
-        # ====================================================
-        container = {
-            position = { 15 -10 }
-            parentanchor = bottom|left
-
-            flowcontainer = {
-                direction = vertical
-                spacing = 4
-
-                textbox = {
-                    text = "CA_FACTION_FEDERALISTAS"
-                    align = left|nobaseline
-                    autoresize = yes
-                    using = fontsize_small
-                    default_format = "#header"
-                }
-
-                # 3 Niveles hacia el vértice inferior izquierdo
-                flowcontainer = {
-                    direction = horizontal
-                    spacing = 8
-
-                    ca_triangle_pip = {
-                        blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_federalist_lvl_1')]"
-                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        }
-                        tooltip = "CA_SGUI_FEDERALIST_1_TT"
-                    }
-                    ca_triangle_pip = {
-                        blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_federalist_lvl_2')]"
-                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        }
-                        tooltip = "CA_SGUI_FEDERALIST_2_TT"
-                    }
-                    ca_triangle_pip = {
-                        blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_federalist_lvl_3')]"
-                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        }
-                        tooltip = "CA_SGUI_FEDERALIST_3_TT"
-                    }
-                }
-            }
-        }
-
-        # ====================================================
-        # VÉRTICE INFERIOR DERECHO: SEPARATISTAS
-        # ====================================================
-        container = {
-            position = { -15 -10 }
-            parentanchor = bottom|right
-
-            flowcontainer = {
-                direction = vertical
-                spacing = 4
-
-                textbox = {
-                    text = "CA_FACTION_SEPARATISTAS"
-                    align = right|nobaseline
-                    autoresize = yes
-                    using = fontsize_small
-                    parentanchor = right
-                    default_format = "#header"
-                }
-
-                # 3 Niveles hacia el vértice inferior derecho
-                flowcontainer = {
-                    direction = horizontal
-                    spacing = 8
-                    parentanchor = right
-
-                    ca_triangle_pip = {
-                        blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_separatist_lvl_1')]"
-                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        }
-                        tooltip = "CA_SGUI_SEPARATIST_1_TT"
-                    }
-                    ca_triangle_pip = {
-                        blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_separatist_lvl_2')]"
-                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        }
-                        tooltip = "CA_SGUI_SEPARATIST_2_TT"
-                    }
-                    ca_triangle_pip = {
-                        blockoverride "active_condition" {
-                            datacontext = "[GetScriptedGui('ca_sgui_separatist_lvl_3')]"
-                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        }
-                        tooltip = "CA_SGUI_SEPARATIST_3_TT"
-                    }
-                }
-            }
-        }
-    }
+			button_standard = {
+				position = { 8 0 }
+				size = { 255 28 }
+				text = "ca_button_support_federation"
+				datacontext = "[GetScriptedGui('ca_role_support_federation')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			button_standard = {
+				position = { 267 0 }
+				size = { 255 28 }
+				text = "ca_button_support_confederation"
+				datacontext = "[GetScriptedGui('ca_role_support_confederation')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			button_standard = {
+				position = { 8 32 }
+				size = { 255 28 }
+				text = "ca_button_sabotage_federation"
+				datacontext = "[GetScriptedGui('ca_role_sabotage_federation')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			button_standard = {
+				position = { 267 32 }
+				size = { 255 28 }
+				text = "ca_button_support_centralistas"
+				datacontext = "[GetScriptedGui('ca_role_support_centralists')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+		}
+	}
 }
 
-# ====================================================================
-# CAFM fix: INSTANCIA RAIZ del widget.
-# El diario je_ca_state_role_in_federation pide un widget llamado
-# "ca_subject_role_widget". Solo existia como TIPO (dentro de types {}),
-# asi que el juego no lo encontraba ("Could not find widget") y
-# crasheaba al abrir el diario. Esta linea crea el widget real.
-# ====================================================================
-ca_subject_role_widget = {}
-
-#types ca_subject_role_types {
-#
-#    # Plantilla para los puntos/indicadores de nivel
-#    type ca_influence_pip = widget {
-#        size = { 16 16 }
-#
-#        # Icono apagado (base)
-#        icon = {
-#            size = { 100% 100% }
-#            texture = "gfx/interface/icons/generic_icons/radio_button_empty.dds"
-#            alpha = 0.4
-#        }
-#
-#        # Icono encendido (se activa si la condición del Scripted GUI es verdadera)
-#        icon = {
-#            block "active_condition" {
-#                visible = no
-#            }
-#            size = { 100% 100% }
-#            texture = "gfx/interface/icons/generic_icons/radio_button_filled.dds"
-#        }
-#    }
-#
-#    # Widget principal conectado a custom_widget_container_2
-#    type ca_subject_role_widget = widget {
-#        name = "ca_subject_role_widget"
-#        size = { 320 280 }
-#        parentanchor = center
-#
-#        # Fondo del panel con marco decorativo
-#        background = {
-#            using = entry_bg_simple
-#        }
-#
-#        # Marco del diagrama
-#        icon = {
-#            size = { 100% 100% }
-#            using = simple_frame
-#        }
-#
-#        # ----------------------------------------------------
-#        # VÉRTICE SUPERIOR: CENTRALISTAS
-#        # ----------------------------------------------------
-#        container = {
-#            position = { 0 15 }
-#            parentanchor = hcenter
-#
-#            flowcontainer = {
-#                direction = vertical
-#                spacing = 4
-#                parentanchor = hcenter
-#
-#                textbox = {
-#                    text = "CENTRALISTAS"
-#                    align = hcenter|nobaseline
-#                    autoresize = yes
-#                    using = fontsize_small
-#                    parentanchor = hcenter
-#                    default_format = "#header"
-#                }
-#
-#                # 3 niveles hacia la punta (1, 2 y 3)
-#                flowcontainer = {
-#                    direction = horizontal
-#                    spacing = 6
-#                    parentanchor = hcenter
-#
-#                    ca_influence_pip = {
-#                        blockoverride "active_condition" {
-#                            datacontext = "[GetScriptedGui('ca_sgui_centralist_lvl_1')]"
-#                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-#                        }
-#                        tooltip = "CENTRALISTA_NIVEL_1_TOOLTIP"
-#                    }
-#                    ca_influence_pip = {
-#                        blockoverride "active_condition" {
-#                            datacontext = "[GetScriptedGui('ca_sgui_centralist_lvl_2')]"
-#                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-#                        }
-#                        tooltip = "CENTRALISTA_NIVEL_2_TOOLTIP"
-#                    }
-#                    ca_influence_pip = {
-#                        blockoverride "active_condition" {
-#                            datacontext = "[GetScriptedGui('ca_sgui_centralist_lvl_3')]"
-#                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-#                        }
-#                        tooltip = "CENTRALISTA_NIVEL_3_TOOLTIP"
-#                    }
-#                }
-#            }
-#        }
-#
-#        # ----------------------------------------------------
-#        # CENTRO: LÍNEAS GUÍA Y BALANCE
-#        # ----------------------------------------------------
-#        icon = {
-#            size = { 80 80 }
-#            parentanchor = center
-#            texture = "gfx/interface/icons/generic_icons/turns_into.dds"
-#            alpha = 0.25
-#        }
-#
-#        # ----------------------------------------------------
-#        # VÉRTICE INFERIOR IZQUIERDO: FEDERALISTAS
-#        # ----------------------------------------------------
-#        container = {
-#            position = { 15 205 }
-#            parentanchor = left
-#
-#            flowcontainer = {
-#                direction = vertical
-#                spacing = 4
-#
-#                textbox = {
-#                    text = "FEDERALISTAS"
-#                    align = left|nobaseline
-#                    autoresize = yes
-#                    using = fontsize_small
-#                    default_format = "#header"
-#                }
-#
-#                flowcontainer = {
-#                    direction = horizontal
-#                    spacing = 6
-#
-#                    ca_influence_pip = {
-#                        blockoverride "active_condition" {
-#                            datacontext = "[GetScriptedGui('ca_sgui_federalist_lvl_1')]"
-#                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-#                        }
-#                        tooltip = "FEDERALISTA_NIVEL_1_TOOLTIP"
-#                    }
-#                    ca_influence_pip = {
-#                        blockoverride "active_condition" {
-#                            datacontext = "[GetScriptedGui('ca_sgui_federalist_lvl_2')]"
-#                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-#                        }
-#                        tooltip = "FEDERALISTA_NIVEL_2_TOOLTIP"
-#                    }
-#                    ca_influence_pip = {
-#                        blockoverride "active_condition" {
-#                            datacontext = "[GetScriptedGui('ca_sgui_federalist_lvl_3')]"
-#                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-#                        }
-#                        tooltip = "FEDERALISTA_NIVEL_3_TOOLTIP"
-#                    }
-#                }
-#            }
-#        }
-#
-#        # ----------------------------------------------------
-#        # VÉRTICE INFERIOR DERECHO: SEPARATISTAS
-#        # ----------------------------------------------------
-#        container = {
-#            position = { -15 205 }
-#            parentanchor = right
-#
-#            flowcontainer = {
-#                direction = vertical
-#                spacing = 4
-#
-#                textbox = {
-#                    text = "SEPARATISTAS"
-#                    align = right|nobaseline
-#                    autoresize = yes
-#                    using = fontsize_small
-#                    parentanchor = right
-#                    default_format = "#header"
-#                }
-#
-#                flowcontainer = {
-#                    direction = horizontal
-#                    spacing = 6
-#                    parentanchor = right
-#
-#                    ca_influence_pip = {
-#                        blockoverride "active_condition" {
-#                            datacontext = "[GetScriptedGui('ca_sgui_separatist_lvl_1')]"
-#                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-#                        }
-#                        tooltip = "SEPARATISTA_NIVEL_1_TOOLTIP"
-#                    }
-#                    ca_influence_pip = {
-#                        blockoverride "active_condition" {
-#                            datacontext = "[GetScriptedGui('ca_sgui_separatist_lvl_2')]"
-#                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-#                        }
-#                        tooltip = "SEPARATISTA_NIVEL_2_TOOLTIP"
-#                    }
-#                    ca_influence_pip = {
-#                        blockoverride "active_condition" {
-#                            datacontext = "[GetScriptedGui('ca_sgui_separatist_lvl_3')]"
-#                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-#                        }
-#                        tooltip = "SEPARATISTA_NIVEL_3_TOOLTIP"
-#                    }
-#                }
-#            }
-#        }
-#    }
-#}
+# El diario busca un widget con este nombre a nivel superior del archivo (F30).
+ca_subject_role_widget = {
+	name = "ca_subject_role_widget"
+}

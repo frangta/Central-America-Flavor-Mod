@@ -66,8 +66,10 @@ ca_costa_rica_events.2 = {
     
     trigger = {
         this = c:COS
+		game_date < 1836.1.1
         has_variable = ca_ecos_federacion_fired
         NOT = { has_variable = ca_cicatrices_ambulancia_fired }
+		
     }
     
     immediate = {

@@ -78,7 +78,7 @@ ca_honduras_events.2 = {
 
 	trigger = {
 		c:HON ?= this
-		game_date < 1837.1.1
+		game_date < 1836.1.1
 		NOT = { has_variable = hon_e2_fired }
 	}
 

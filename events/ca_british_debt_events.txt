@@ -301,4 +301,654 @@ ca_british_debt.6 = {
 			base = 30
 		}
 	}
+
+	# CAFM P3: Diplomacia de canonero (guerra por la deuda, con la IA historica o la dinamica)
+	option = {
+		name = ca_british_debt.6.c
+		trigger = { scope:ca_debtor_scope = { ca_debt_war_possible = yes } }
+		ca_debt_gbr_launch_war = yes
+		ai_chance = {
+			base = 25
+			modifier = { trigger = { scope:ca_debtor_scope = { ca_debt_debtor_weak = yes } } add = 25 }
+		}
+	}
 }
+
+# ============================================================
+# CAFM P3 (punto 2) - La deuda inglesa: presion, impago y guerra britanica
+# .7-.20 salen en el deudor desde el pulso mensual de je_ca_british_debt; .21 al estallar la guerra.
+# Presion de los bonistas en var:ca_debt_pressure (0-5). Frenos de la guerra en ca_debt_war_possible.
+# Hechos historicos (Chatfield, isla del Tigre 1849, bloqueos de 1842 y 1851): por verificar.
+# ============================================================
+
+# ------------------------------------------------------------
+ca_british_debt.7 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.7.t
+	desc = ca_british_debt.7.d
+	flavor = ca_british_debt.7.f
+	event_image = { video = "europenorthamerica_london_center" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 3
+
+	trigger = {
+		ca_debt_active = yes
+		NOT = { has_variable = ca_debt_evt_7_cd }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_7_cd years = 1 }
+	}
+
+	option = {
+		name = ca_british_debt.7.a
+		default_option = yes
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ca_debt_pressure_change = { VALUE = -1 }
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = ca_british_debt.7.b
+		ca_debt_pressure_change = { VALUE = 1 }
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = ca_british_debt.7.c
+		ca_debt_pressure_change = { VALUE = 2 }
+		c:GBR ?= { save_scope_as = ca_debt_gbr }
+		change_relations = { country = scope:ca_debt_gbr value = -15 }
+		ca_debt_front_british = { VALUE = 1 }
+		ai_chance = { base = 20 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.8 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.8.t
+	desc = ca_british_debt.8.d
+	flavor = ca_british_debt.8.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 3
+
+	trigger = {
+		ca_debt_active = yes
+		NOT = { has_variable = ca_debt_evt_8_cd }
+		ca_debt_pressure_ge = { VALUE = 1 }
+		NOT = { has_modifier = ca_debt_customs_mortgaged }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_8_cd years = 5 }
+	}
+
+	option = {
+		name = ca_british_debt.8.a
+		default_option = yes
+		add_modifier = { name = ca_debt_customs_mortgaged years = 10 }
+		ca_british_debt_reduce_tier_effect = yes
+		ca_debt_pressure_change = { VALUE = -2 }
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = ca_british_debt.8.b
+		ca_debt_pressure_change = { VALUE = 1 }
+		c:GBR ?= { save_scope_as = ca_debt_gbr }
+		change_relations = { country = scope:ca_debt_gbr value = -10 }
+		ai_chance = { base = 50 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.9 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.9.t
+	desc = ca_british_debt.9.d
+	flavor = ca_british_debt.9.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 3
+
+	trigger = {
+		ca_debt_active = yes
+		NOT = { has_variable = ca_debt_evt_9_cd }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_9_cd years = 10 }
+	}
+
+	option = {
+		name = ca_british_debt.9.a
+		default_option = yes
+		add_modifier = { name = ca_debt_paid_in_kind years = 5 }
+		ca_british_debt_reduce_tier_effect = yes
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = ca_british_debt.9.b
+		ca_debt_pressure_change = { VALUE = 1 }
+		ai_chance = { base = 50 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.10 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.10.t
+	desc = ca_british_debt.10.d
+	flavor = ca_british_debt.10.f
+	event_image = { video = "africa_diplomats_negotiating" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+
+	trigger = {
+		ca_debt_active = yes
+		NOT = { has_variable = ca_debt_evt_10_cd }
+		ca_debt_pressure_ge = { VALUE = 2 }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_10_cd years = 10 }
+	}
+
+	option = {
+		name = ca_british_debt.10.a
+		default_option = yes
+		random_scope_state = {
+			limit = { is_incorporated = yes }
+			add_modifier = { name = ca_debt_land_concession years = 20 }
+		}
+		ca_british_debt_reduce_tier_effect = yes
+		ca_debt_pressure_change = { VALUE = -1 }
+		ca_cohesion_change = { VALUE = -5 }
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = ca_british_debt.10.b
+		ca_debt_pressure_change = { VALUE = 1 }
+		ai_chance = { base = 60 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.11 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.11.t
+	desc = ca_british_debt.11.d
+	flavor = ca_british_debt.11.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 3
+
+	trigger = {
+		ca_debt_active = yes
+		NOT = { has_variable = ca_debt_evt_11_cd }
+		OR = { exists = c:FRA exists = c:USA }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_11_cd years = 10 }
+	}
+
+	option = {
+		name = ca_british_debt.11.a
+		trigger = { exists = c:FRA }
+		c:FRA = { save_scope_as = ca_rival_banker }
+		set_owes_obligation_to = { country = scope:ca_rival_banker setting = yes }
+		ca_british_debt_reduce_tier_effect = yes
+		ca_debt_pressure_change = { VALUE = 1 }
+		c:GBR ?= { save_scope_as = ca_debt_gbr }
+		change_relations = { country = scope:ca_debt_gbr value = -20 }
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = ca_british_debt.11.b
+		trigger = { exists = c:USA }
+		c:USA = { save_scope_as = ca_rival_banker }
+		set_owes_obligation_to = { country = scope:ca_rival_banker setting = yes }
+		ca_british_debt_reduce_tier_effect = yes
+		ca_debt_pressure_change = { VALUE = 1 }
+		c:GBR ?= { save_scope_as = ca_debt_gbr }
+		change_relations = { country = scope:ca_debt_gbr value = -20 }
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = ca_british_debt.11.c
+		default_option = yes
+		c:GBR ?= { save_scope_as = ca_debt_gbr }
+		change_relations = { country = scope:ca_debt_gbr value = 10 }
+		ai_chance = { base = 40 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.12 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.12.t
+	desc = ca_british_debt.12.d
+	flavor = ca_british_debt.12.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+
+	trigger = {
+		ca_debt_active = yes
+		c:UCA ?= this
+		NOT = { has_variable = ca_debt_division_asked }
+		ca_frca_phase_ge = { VALUE = 2 }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = ca_debt_division_asked
+	}
+
+	option = {
+		name = ca_british_debt.12.a
+		default_option = yes
+		ca_british_debt_reduce_tier_effect = yes
+		ca_cohesion_change = { VALUE = -10 }
+		ca_frca_bar_minor_down = yes
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = ca_british_debt.12.b
+		ca_debt_pressure_change = { VALUE = 1 }
+		ca_cohesion_change = { VALUE = 5 }
+		ai_chance = { base = 60 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.13 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.13.t
+	desc = ca_british_debt.13.d
+	flavor = ca_british_debt.13.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	duration = 3
+
+	trigger = {
+		ca_debt_active = yes
+		NOT = { has_variable = ca_debt_evt_13_cd }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_13_cd years = 20 }
+	}
+
+	option = {
+		name = ca_british_debt.13.a
+		default_option = yes
+		add_modifier = { name = ca_debt_commission years = 5 }
+		ca_debt_pressure_change = { VALUE = -1 }
+		c:GBR ?= { save_scope_as = ca_debt_gbr }
+		change_relations = { country = scope:ca_debt_gbr value = -10 }
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = ca_british_debt.13.b
+		c:GBR ?= { save_scope_as = ca_debt_gbr }
+		change_relations = { country = scope:ca_debt_gbr value = 5 }
+		ai_chance = { base = 50 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.14 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.14.t
+	desc = ca_british_debt.14.d
+	flavor = ca_british_debt.14.f
+	event_image = { video = "europenorthamerica_london_center" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 3
+
+	trigger = {
+		ca_debt_active = yes
+		ca_debt_pressure_ge = { VALUE = ca_debt_pressure_default }
+		OR = {
+			in_default = yes
+			gold_reserves < 5000
+		}
+		NOT = { has_variable = ca_debt_evt_14_cd }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_14_cd years = 2 }
+	}
+
+	option = {
+		name = ca_british_debt.14.a
+		default_option = yes
+		set_variable = ca_british_debt_default
+		custom_tooltip = ca_british_debt.14.a_tt
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = ca_british_debt.14.b
+		add_treasury = { value = ca_money_large multiply = -1 }
+		ca_debt_pressure_change = { VALUE = -2 }
+		ai_chance = { base = 60 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.15 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.15.t
+	desc = ca_british_debt.15.d
+	flavor = ca_british_debt.15.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+
+	trigger = {
+		exists = c:GBR
+		ca_debt_pressure_ge = { VALUE = 4 }
+		NOT = { has_variable = ca_debt_evt_15_cd }
+		NOT = { has_modifier = ca_debt_blockade }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_15_cd years = 5 }
+	}
+
+	option = {
+		name = ca_british_debt.15.a
+		default_option = yes
+		add_modifier = { name = ca_debt_blockade months = 12 }
+		ca_debt_front_british = { VALUE = 1 }
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = ca_british_debt.15.b
+		add_treasury = { value = ca_money_large multiply = -1 }
+		ca_debt_pressure_change = { VALUE = -2 }
+		ai_chance = { base = 50 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.16 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.16.t
+	desc = ca_british_debt.16.d
+	flavor = ca_british_debt.16.f
+	event_image = { video = "europenorthamerica_london_center" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+
+	trigger = {
+		ca_debt_pressure_ge = { VALUE = 5 }
+		ca_debt_war_possible = yes
+		NOT = { has_variable = ca_debt_evt_16_cd }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_16_cd years = 10 }
+	}
+
+	option = {
+		name = ca_british_debt.16.a
+		default_option = yes
+		add_treasury = { value = ca_money_large multiply = -1 }
+		ca_british_debt_reduce_tier_effect = yes
+		set_variable = { name = ca_debt_pressure value = 0 }
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = ca_british_debt.16.b
+		save_scope_as = ca_debtor_scope
+		c:GBR ?= { ca_debt_gbr_launch_war = yes }
+		ai_chance = { base = 50 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.17 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.17.t
+	desc = ca_british_debt.17.d
+	flavor = ca_british_debt.17.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+
+	trigger = {
+		exists = c:GBR
+		ca_debt_pressure_ge = { VALUE = 3 }
+		OR = {
+			c:UCA ?= this
+			c:HON ?= this
+			c:NIC ?= this
+			c:ELS ?= this
+		}
+		NOT = { has_variable = ca_debt_evt_17_cd }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_17_cd years = 10 }
+	}
+
+	option = {
+		name = ca_british_debt.17.a
+		default_option = yes
+		add_modifier = { name = ca_debt_island_occupied years = 5 }
+		ca_debt_front_british = { VALUE = 1 }
+		c:GBR ?= { save_scope_as = ca_debt_gbr }
+		change_relations = { country = scope:ca_debt_gbr value = -20 }
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = ca_british_debt.17.b
+		add_modifier = { name = ca_debt_island_occupied years = 5 }
+		ca_debt_pressure_change = { VALUE = -1 }
+		ai_chance = { base = 50 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.18 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.18.t
+	desc = ca_british_debt.18.d
+	flavor = ca_british_debt.18.f
+	event_image = { video = "europenorthamerica_london_center" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	duration = 3
+
+	trigger = {
+		exists = c:GBR
+		OR = {
+			c:UCA ?= this
+			c:HON ?= this
+			c:NIC ?= this
+		}
+		NOT = { has_variable = ca_debt_evt_18_cd }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_18_cd years = 10 }
+	}
+
+	option = {
+		name = ca_british_debt.18.a
+		default_option = yes
+		c:GBR ?= { save_scope_as = ca_debt_gbr }
+		change_relations = { country = scope:ca_debt_gbr value = -20 }
+		ca_debt_front_british = { VALUE = 1 }
+		if = {
+			limit = { c:UCA ?= this }
+			trigger_event = { id = ca_central_america.151 days = 1 popup = yes }
+		}
+		ai_chance = { base = 50 }
+	}
+
+	option = {
+		name = ca_british_debt.18.b
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ca_debt_pressure_change = { VALUE = -1 }
+		ai_chance = { base = 50 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.19 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.19.t
+	desc = ca_british_debt.19.d
+	flavor = ca_british_debt.19.f
+	event_image = { video = "africa_diplomats_negotiating" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+
+	trigger = {
+		exists = c:GBR
+		has_variable = ca_debt_gbr_casus
+		NOT = { has_war_with = c:GBR }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+
+	}
+
+	option = {
+		name = ca_british_debt.19.a
+		default_option = yes
+		remove_variable = ca_debt_gbr_casus
+		if = { limit = { has_modifier = ca_debt_blockade } remove_modifier = ca_debt_blockade }
+		if = {
+			limit = { has_journal_entry = je_ca_british_debt }
+			ca_british_debt_reduce_tier_effect = yes
+		}
+		set_variable = { name = ca_debt_pressure value = 0 }
+		c:GBR ?= { save_scope_as = ca_debt_gbr }
+		change_relations = { country = scope:ca_debt_gbr value = 20 }
+		ai_chance = { base = 100 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.20 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.20.t
+	desc = ca_british_debt.20.d
+	flavor = ca_british_debt.20.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 3
+
+	trigger = {
+		ca_debt_active = yes
+		je:je_ca_british_debt ?= { has_modifier = modifier_ca_british_debt_1 }
+		NOT = { ca_debt_pressure_ge = { VALUE = 2 } }
+		NOT = { has_variable = ca_debt_evt_20_cd }
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+		set_variable = { name = ca_debt_evt_20_cd years = 3 }
+	}
+
+	option = {
+		name = ca_british_debt.20.a
+		default_option = yes
+		trigger = { gold_reserves >= ca_money_medium }
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		ca_british_debt_reduce_tier_effect = yes
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_british_debt.20.b
+		custom_tooltip = ca_british_debt.20.b_tt
+		ai_chance = { base = 30 }
+	}
+}
+
+# ------------------------------------------------------------
+ca_british_debt.21 = {
+	type = country_event
+	placement = root
+	title = ca_british_debt.21.t
+	desc = ca_british_debt.21.d
+	flavor = ca_british_debt.21.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	duration = 3
+
+	trigger = {
+		exists = c:GBR
+	}
+
+	immediate = {
+		c:GBR ?= { save_scope_as = britain_scope }
+
+	}
+
+	option = {
+		name = ca_british_debt.21.a
+		default_option = yes
+		custom_tooltip = ca_british_debt.21.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+

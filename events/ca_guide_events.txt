@@ -1,0 +1,228 @@
+﻿namespace = ca_guide
+
+# CAFM P5 (punto 9) - Mini guia "How to play the Federation". Se abre con la decision
+# ca_decision_federation_guide. Solo texto: no cambia nada en la partida.
+
+ca_guide.1 = {
+	type = country_event
+	placement = root
+	title = ca_guide.1.t
+	desc = ca_guide.1.d
+	flavor = ca_guide.1.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	trigger = { is_ai = no }
+	option = {
+		name = ca_guide.1.loyalty
+		trigger_event = { id = ca_guide.2 popup = yes }
+	}
+	option = {
+		name = ca_guide.1.bar
+		trigger_event = { id = ca_guide.3 popup = yes }
+	}
+	option = {
+		name = ca_guide.1.cohesion
+		trigger_event = { id = ca_guide.4 popup = yes }
+	}
+	option = {
+		name = ca_guide.1.routes
+		trigger_event = { id = ca_guide.5 popup = yes }
+	}
+	option = {
+		name = ca_guide.1.fronts
+		trigger_event = { id = ca_guide.6 popup = yes }
+	}
+	option = {
+		name = ca_guide.1.debt
+		trigger_event = { id = ca_guide.7 popup = yes }
+	}
+	option = {
+		name = ca_guide.1.regions
+		trigger_event = { id = ca_guide.8 popup = yes }
+	}
+	option = {
+		name = ca_guide.1.outcomes
+		trigger_event = { id = ca_guide.9 popup = yes }
+	}
+	option = {
+		name = ca_guide.1.after
+		trigger_event = { id = ca_guide.10 popup = yes }
+	}
+	option = {
+		name = ca_guide.close
+		default_option = yes
+	}
+}
+
+ca_guide.2 = {
+	type = country_event
+	placement = root
+	title = ca_guide.2.t
+	desc = ca_guide.2.d
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	trigger = { is_ai = no }
+	option = {
+		name = ca_guide.back
+		trigger_event = { id = ca_guide.1 popup = yes }
+	}
+	option = {
+		name = ca_guide.close
+		default_option = yes
+	}
+}
+
+ca_guide.3 = {
+	type = country_event
+	placement = root
+	title = ca_guide.3.t
+	desc = ca_guide.3.d
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	trigger = { is_ai = no }
+	option = {
+		name = ca_guide.back
+		trigger_event = { id = ca_guide.1 popup = yes }
+	}
+	option = {
+		name = ca_guide.close
+		default_option = yes
+	}
+}
+
+ca_guide.4 = {
+	type = country_event
+	placement = root
+	title = ca_guide.4.t
+	desc = ca_guide.4.d
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	trigger = { is_ai = no }
+	option = {
+		name = ca_guide.back
+		trigger_event = { id = ca_guide.1 popup = yes }
+	}
+	option = {
+		name = ca_guide.close
+		default_option = yes
+	}
+}
+
+ca_guide.5 = {
+	type = country_event
+	placement = root
+	title = ca_guide.5.t
+	desc = ca_guide.5.d
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	trigger = { is_ai = no }
+	option = {
+		name = ca_guide.back
+		trigger_event = { id = ca_guide.1 popup = yes }
+	}
+	option = {
+		name = ca_guide.close
+		default_option = yes
+	}
+}
+
+ca_guide.6 = {
+	type = country_event
+	placement = root
+	title = ca_guide.6.t
+	desc = ca_guide.6.d
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	trigger = { is_ai = no }
+	option = {
+		name = ca_guide.back
+		trigger_event = { id = ca_guide.1 popup = yes }
+	}
+	option = {
+		name = ca_guide.close
+		default_option = yes
+	}
+}
+
+ca_guide.7 = {
+	type = country_event
+	placement = root
+	title = ca_guide.7.t
+	desc = ca_guide.7.d
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	trigger = { is_ai = no }
+	option = {
+		name = ca_guide.back
+		trigger_event = { id = ca_guide.1 popup = yes }
+	}
+	option = {
+		name = ca_guide.close
+		default_option = yes
+	}
+}
+
+ca_guide.8 = {
+	type = country_event
+	placement = root
+	title = ca_guide.8.t
+	desc = ca_guide.8.d
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	trigger = { is_ai = no }
+	option = {
+		name = ca_guide.back
+		trigger_event = { id = ca_guide.1 popup = yes }
+	}
+	option = {
+		name = ca_guide.close
+		default_option = yes
+	}
+}
+
+ca_guide.9 = {
+	type = country_event
+	placement = root
+	title = ca_guide.9.t
+	desc = ca_guide.9.d
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	trigger = { is_ai = no }
+	option = {
+		name = ca_guide.back
+		trigger_event = { id = ca_guide.1 popup = yes }
+	}
+	option = {
+		name = ca_guide.close
+		default_option = yes
+	}
+}
+
+ca_guide.10 = {
+	type = country_event
+	placement = root
+	title = ca_guide.10.t
+	desc = ca_guide.10.d
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+	trigger = { is_ai = no }
+	option = {
+		name = ca_guide.back
+		trigger_event = { id = ca_guide.1 popup = yes }
+	}
+	option = {
+		name = ca_guide.close
+		default_option = yes
+	}
+}
+
