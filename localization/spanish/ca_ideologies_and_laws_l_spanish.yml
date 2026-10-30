@@ -1,0 +1,699 @@
+﻿l_spanish:
+
+ # ==========================================
+ # 1. INTEREST GROUPS (IGs)
+ # ==========================================
+ ig_huasos:0 "Huasos"
+ ig_huasos_desc:0 "Los huasos son los campesinos y hábiles jinetes chilenos, que se encuentran generalmente en el valle central. Su vida gira en torno a la actividad agrícola."
+ ig_gauchos:0 "Gauchos"
+ ig_gauchos_desc:0 "Jinetes migratorios expertos en la ganadería tradicional. Dedican su vida a enlazar y criar ganado y caballos."
+ ig_boulbon_filibusters:0 "Filibusteros de Raousset-Boulbon"
+ ig_walker_filibusters:0 "Filibusteros de Walker"
+ ig_nic_convervador:0 "Serviles"
+ ig_nic_liberal:0 "Fiebres"
+ ig_nic_convervador2:0 "Timbucos"
+ ig_nic_liberal2:0 "Calandracas"
+ ig_hon_convervador:0 "Cachurecos"
+ ig_hon_liberal:0 "Colorados"
+ ig_els_convervador:0 "Clericales"
+ ig_els_liberal:0 "Coquimbos"
+ ig_gua_convervador:0 "Cachurecos"
+ ig_gua_liberal:0 "Fiebres"
+ ig_cos_convervador:0 "Imperialistas"
+ ig_cos_convervador2:0 "Imperialistas / Cartagos"
+ ig_cos_convervador3:0 "Cartagos"
+ ig_cos_liberal:0 "Alajuelenses"
+ ig_cos_liberal2:0 "Josefinos"
+ ig_cos_liberal3:0 "Josefinos / Alajuelenses"
+ ig_cos_liberal4:0 "Republicanos"
+ ig_uca_convervador:0 "Serviles"
+ ig_uca_liberal:0 "Fiebres"
+ ig_liberales_morazanistas:0 "Federalistas"
+ ig_alt_conservative:0 "Serviles"
+ ig_alt_liberal:0 "Fiebres"
+ ig_hacendados:0 "Hacendados"
+ ig_unionistas:0 "Unionistas"
+ ig_confederados:0 "Confederados"
+ ig_campesinos:0 "Campesinos"
+ ig_pequenos_campesinos:0 "Pequeños Campesinos"
+ ig_oligarquia_cafedadera:0 "Oligarquía Cafetalera"
+ ig_artesanos_urbanos:0 "Artesanos Urbanos"
+ ig_elite_comercial:0 "Élite Comercial"
+ ig_ejercito_federal:0 "Ejército Federal"
+
+ # ==========================================
+ # 2. IDEOLOGIES
+ # ==========================================
+ ideology_taiping_moralist:0 "Moralismo Taiping"
+ ideology_taiping_king:0 "Hijo de Shangdi"
+ ideology_guilds:0 "Tradicionalistas Económicos"
+ ideology_guilds_desc:0 "#lore Los gremios ven las leyes económicas progresistas como una amenaza para su existencia.#!"
+ ideology_communalist:0 "Comunalista"
+ ideology_communalist_desc:0 "Este grupo quiere autonomía comunal en su trabajo, libre de la opresión de las élites."
+ ideology_silhak:0 "Silhak"
+ ideology_donghak:0 "Donghak"
+
+ # Central American Ideologies
+ ideology_central_american_reactionary:0 "Regionalista"
+ ideology_central_american_reactionary_desc:0 "Este grupo cree que el gobierno debe reformarse en una confederación, o disolverse por completo, y que las provincias deben volverse plenamente independientes."
+ ideology_central_american_reactionary_2:0 "Centralistas"
+ ideology_central_american_reactionary_2_desc:0 "Este grupo cree que el gobierno debe reformarse en una república unitaria, o disolverse por completo."
+ ideology_central_america_caudillo:0 "Disolucionista"
+ ideology_central_america_caudillo_desc:0 "Este líder quiere la plena independencia de cada región del país, libre de cualquier gobierno desigual o federal."
+ ideology_liberalismo:0 "Liberalismo"
+ ideology_liberalismo_desc:0 "Este grupo se opone a un gobierno fuertemente centralizado y cree en cierto grado de reforma social acorde con las ideologías europeas. Apoya el libre comercio y la restricción del poder de las corporaciones."
+ ideology_conservadurismo:0 "Conservadurismo"
+ ideology_conservadurismo_desc:0 "Este grupo apoya un Estado fuertemente centralizado con políticas comerciales proteccionistas y el mantenimiento de la configuración aristocrática de la sociedad. Recelan de los extranjeros, a menudo con tendencias xenófobas, y critican la importación de ideologías foráneas."
+ ideology_soberania_aristocratica:0 "Soberanía Aristocrática"
+ ideology_soberania_aristocratica_desc:0 "Este grupo tiene una visión esencialmente jerárquica y elitista de la organización social."
+ ideology_crucismo:0 "Crucismo"
+ ideology_crucismo_desc:0 "La Cruz Parlante de Chan Santa Cruz ha ordenado a los mayas alzarse contra sus amos. Sacerdote, oráculo y general son uno solo; los cruzoob cambian caoba por rifles británicos y nunca más se inclinarán ante el dzul."
+ ideology_agroexportadores:0 "Agroexportadores"
+ ideology_agroexportadores_desc:0 "Este grupo cree que la política económica debe centrarse en la agricultura y en los intereses de los agricultores, que ven en los mercados vecinos lugares lucrativos para vender sus productos."
+ ideology_artesanado:0 "Artesanado"
+ ideology_artesanado_desc:0 "Este grupo cree que la política económica debe orientarse a los intereses de los artesanos y proteger sus ganancias de los productos extranjeros baratos."
+ ideology_unitarian:0 "Unitario"
+ ideology_unitarian_desc:0 "Este líder cree fervientemente que la mejor forma de organización para la nación es un gobierno general fuerte que pueda aprovechar el potencial nacional en beneficio de todos sus ciudadanos."
+ ideology_federalist:0 "Federalista"
+ ideology_federalist_desc:0 "Este líder cree fervientemente que la mejor forma de organización para la nación es un gobierno general limitado por la autonomía local."
+ ideology_incan_reclaimer:0 "Restaurador Inca"
+ ideology_incan_reclaimer_desc:0 "Este líder busca liberar a la población indígena de la opresión colonial y reclamar su herencia imperial."
+ ideology_liberal_monarchist:0 "Monárquico Liberal"
+ ideology_liberal_monarchist_desc:0 "Este líder cree que la mejor manera de lograr estabilidad para un Estado liberal es tener una monarquía que sirva como figura cohesionadora en torno a la cual la nación pueda unirse."
+ ideology_autocratic_autonomist:0 "Autonomista Autocrático"
+ ideology_autocratic_autonomist_desc:0 "Este líder cree en la primacía de un gobierno central estable y poderoso que proteja la autonomía local de la anarquía y del gobierno de la turba."
+ ideology_ca_leader_autocratic_autonomist:0 "Autonomista Autocrático"
+ ideology_ca_leader_autocratic_autonomist_desc:0 "Este líder cree en la primacía de un gobierno central estable y poderoso que proteja la autonomía local de la anarquía y del gobierno de la turba."
+ ca_ideology_constitutionalist:0 "Constitucionalista"
+ ca_ideology_constitutionalist_desc:0 "#lore Este grupo cree en el gobierno constitucional y en el papel de instituciones democráticas fuertes en el arte de gobernar.#!"
+ 
+ # Guatemala Flavor Ideologies
+ ideology_maya_autonomism:0 "Autonomía Maya"
+ ideology_maya_autonomism_desc:0 "Esta facción rechaza las repúblicas criollas y busca recuperar las tierras comunales, proteger sus lenguas nativas y establecer un gobierno de consejos agrarios sin injerencia de la capital."
+ 
+ # El Salvador Flavor Ideologies
+ ideology_coffee_liberalism:0 "Liberalismo Cafetalero"
+ ideology_coffee_liberalism_desc:0 "Movidos por la fiebre del «grano de oro», estos oligarcas creen que el progreso de la nación reside en la privatización total de la tierra, el libre comercio y un gobierno reservado estrictamente a los más ricos."
+ ideology_cuscatleco_nationalism:0 "Nacionalismo Cuscatleco"
+ ideology_cuscatleco_nationalism_desc:0 "Convencida de que la densidad poblacional y la disciplina salvadoreñas los hacen superiores, esta facción promueve la expansión territorial mediante una dictadura militarizada y el reclutamiento masivo."
+ 
+ # Nicaragua Flavor Ideologies
+ ideology_granadine_legitimism:0 "Legitimismo Granadino"
+ ideology_granadine_legitimism_desc:0 "La élite conservadora de Granada aborrece las ideas ilustradas de sus rivales leoneses. Defiende un orden paternalista, rígidamente católico y autoritario para salvar a la nación de la anarquía moral."
+ ideology_anti_imperialist_sovereigntism:0 "Soberanismo Antiimperialista"
+ ideology_anti_imperialist_sovereigntism_desc:0 "Forjados en las cenizas de las intervenciones extranjeras, exigen la expulsión inmediata de los intereses corporativos imperialistas. Apoyan una economía cooperativa sostenida por movimientos guerrilleros populares."
+ ideology_slaver_filibusterism:0 "Filibusterismo Esclavista"
+ ideology_slaver_filibusterism_desc:0 "Un destino manifiesto oscuro y rapaz. Esta facción extranjera busca subyugar repúblicas enteras, reintroducir instituciones esclavistas y gobernar mediante una jerarquía racial absoluta."
+ 
+ # Costa Rica Flavor Ideologies
+ ideology_carrillismo:0 "Carrillismo"
+ ideology_carrillismo_desc:0 "Inspirados en Braulio Carrillo, sostienen que el aislamiento pacífico y una mano institucional firme son la única manera de evitar que Costa Rica sea arrastrada a las interminables guerras civiles del resto de Centroamérica."
+ ideology_olympus_liberalism:0 "Liberalismo del Olimpo"
+ ideology_olympus_liberalism_desc:0 "Una generación de pensadores que busca erradicar la influencia de la Iglesia mediante una educación pública agresiva. Promueven el avance científico, pero creen que solo la élite educada debe tener derecho al voto."
+ ideology_chacara_social_democracy:0 "Socialdemocracia Chacarera"
+ ideology_chacara_social_democracy_desc:0 "Basada en la tradición del pequeño agricultor independiente (el chacarero), esta facción promueve reformas agrarias pacíficas, un sufragio verdaderamente universal y un Estado de bienestar temprano."
+ 
+ # Panama Flavor Ideologies
+ ideology_mercantile_transitism:0 "Transitismo Mercantil"
+ ideology_mercantile_transitism_desc:0 "El istmo de Panamá debe su existencia al comercio mundial. Esta facción exige fronteras totalmente abiertas y cero aranceles, haciendo del país el puente definitivo del capitalismo global."
+ ideology_isthmian_separatism:0 "Separatismo Istmeño"
+ ideology_isthmian_separatism_desc:0 "Hartos del abandono y del centralismo lejano, los separatistas buscan cortar lazos y establecer una república soberana, aunque eso implique depender militarmente de potencias navales extranjeras."
+
+ ideology_ca_criollo_elite:0 "Élite Criolla"
+ ideology_ca_criollo_elite_desc:0 "Este grupo busca mantener las estructuras de poder tradicionales heredadas de la época colonial, favoreciendo la oligarquía y el agrarismo."
+ 
+ ideology_ca_liberal:0 "Liberalismo Radical"
+ ideology_ca_liberal_desc:0 "Un feroz movimiento liberal que exige una economía de laissez-faire, sufragio universal y el desmantelamiento del viejo orden aristocrático."
+ 
+ ideology_ca_constitutionalist:0 "Constitucionalista"
+ ideology_ca_constitutionalist_desc:0 "Este grupo cree en el gobierno constitucional y en el papel de instituciones democráticas fuertes en el arte de gobernar."
+
+ ideology_central_american_federal:0 "Federalista"
+ ideology_central_american_federal_desc:0 "Aboga por un sistema federal fuerte en el que los estados conserven una autonomía significativa bajo una bandera centroamericana unida."
+
+ ideology_ca_isolationist_expansionism:0 "Expansionismo Aislacionista"
+ ideology_ca_isolationist_expansionism_desc:0 "Promueve la colonización de la frontera y la autosuficiencia, al tiempo que cierra agresivamente las fronteras a la influencia extranjera."
+
+ ideology_ca_guilds:0 "Tradicionalismo Gremial"
+ ideology_ca_guilds_desc:0 "Los gremios ven las leyes económicas progresistas como una amenaza para su existencia y exigen estrictas protecciones mercantilistas."
+
+ ideology_ca_communalist:0 "Comunalista"
+ ideology_ca_communalist_desc:0 "Este grupo quiere autonomía comunal en su trabajo, libre de la opresión de las élites, y aboga por milicias locales y la abolición de la esclavitud."
+
+ ideology_ca_secularist:0 "Secularista"
+ ideology_ca_secularist_desc:0 "Dedicado a apartar a la Iglesia de todos los asuntos del Estado, defiende la educación pública y la separación total entre Iglesia y Estado."
+
+ ideology_ca_soberania_aristocratica:0 "Soberanía Aristocrática"
+ ideology_ca_soberania_aristocratica_desc:0 "Este grupo tiene una visión esencialmente jerárquica y elitista de la organización social."
+
+ ideology_ca_criollo_liberal:0 "Liberalismo Criollo"
+ ideology_ca_criollo_liberal_desc:0 "Apoya la modernización económica y las libertades civiles, pero estrictamente para la élite culturalmente aceptada."
+
+ ideology_ca_criollo_paternalistic:0 "Paternalismo Criollo"
+ ideology_ca_criollo_paternalistic_desc:0 "Un enfoque conservador que combina el agrarismo tradicional con una autoridad estatal fuerte y tutelar sobre las clases bajas."
+
+ ideology_ca_criollo_stratocratic:0 "Estratocracia Criolla"
+ ideology_ca_criollo_stratocratic_desc:0 "Cree que solo una casta militar fuerte surgida de la élite tradicional puede mantener el orden y la supremacía nacional."
+
+ ideology_ca_artesanado:0 "Artesanado"
+ ideology_ca_artesanado_desc:0 "Este grupo cree que la política económica debe orientarse a los intereses de los artesanos y proteger sus ganancias de los productos extranjeros baratos."
+
+ ideology_ca_agroexportadores:0 "Agroexportadores"
+ ideology_ca_agroexportadores_desc:0 "Este grupo cree que la política económica debe centrarse en la agricultura de exportación y el libre comercio para acceder a lucrativos mercados extranjeros."
+
+ ideology_ca_colonialist:0 "Colonialista"
+ ideology_ca_colonialist_desc:0 "Busca expandir agresivamente las fronteras nacionales y explotar los territorios fronterizos aún sin aprovechar para obtener recursos."
+
+ ideology_ca_enclavist:0 "Enclavista"
+ ideology_ca_enclavist_desc:0 "Dispuesto a arrendar la soberanía y los recursos nacionales a corporaciones extranjeras a cambio de capital e infraestructura."
+
+ ideology_ca_radical_enclavist:0 "Enclavista Nacional"
+ ideology_ca_radical_enclavist_desc:0 "Una postura paradójica que combina la explotación corporativa extranjera extrema con duras políticas etnoestatales y segregacionistas."
+
+ ideology_ca_autocratic_autonomist:0 "Autonomista Autocrático"
+ ideology_ca_autocratic_autonomist_desc:0 "Este líder cree en la primacía de un gobierno central estable y poderoso que proteja la autonomía local de la anarquía."
+
+ ideology_ca_servile:0 "Conservadurismo Servil"
+ ideology_ca_servile_desc:0 "Profundamente tradicionalista, busca una oligarquía autoritaria estrechamente entrelazada con la religión del Estado."
+
+ ideology_ca_coffee_liberal:0 "Liberalismo Cafetalero"
+ ideology_ca_coffee_liberal_desc:0 "Movidos por la fiebre del «grano de oro», estos oligarcas creen que el progreso de la nación reside en la privatización total de la tierra y el libre comercio."
+
+ ideology_ca_indigenous_communalism:0 "Comunalismo Indígena"
+ ideology_ca_indigenous_communalism_desc:0 "Lucha por la restitución de las tierras ancestrales, la aceptación multicultural y el desmantelamiento de la agricultura comercial explotadora."
+
+ ideology_ca_separatist:0 "Separatismo Soberanista"
+ ideology_ca_separatist_desc:0 "Aboga por la independencia y el aislamiento totales de la región, rechazando los ejércitos profesionales en favor de milicias nacionales."
+
+ ideology_ca_enclavist_pick:0 "Enclavista Colaboracionista"
+ ideology_ca_enclavist_pick_desc:0 "Corteja activamente al capital extranjero y el libre comercio, eliminando los controles migratorios para facilitar las operaciones de corporaciones internacionales."
+
+ ideology_ca_moralist:0 "Moralista"
+ ideology_ca_moralist_desc:0 "Una ideología estrictamente religiosa que exige que las leyes del Estado reflejen la ley divina, oponiéndose al secularismo a cada paso."
+
+ ideology_ca_papal_moralist:0 "Moralista Papal"
+ ideology_ca_papal_moralist_desc:0 "Jura lealtad suprema al Papa y exige un Estado teocrático o una monarquía profundamente devota que imponga la supremacía católica."
+
+ # ==========================================
+ # SPECIFIC LEADER FLAVOR IDEOLOGIES
+ # ==========================================
+ ideology_ca_liberal_monarchist:0 "Monárquico Liberal"
+ ideology_ca_liberal_monarchist_desc:0 "Este líder cree que la mejor manera de lograr estabilidad para un Estado liberal es tener una monarquía que sirva como figura cohesionadora en torno a la cual la nación pueda unirse."
+
+ ideology_ca_unitarian:0 "Unitario"
+ ideology_ca_unitarian_desc:0 "Este líder cree fervientemente que la mejor forma de organización es un gobierno fuerte y altamente centralizado."
+
+ ideology_ca_federalist:0 "Federalista"
+ ideology_ca_federalist_desc:0 "Este líder cree fervientemente que la mejor forma de organización es un gobierno general limitado por una fuerte autonomía local."
+
+ ideology_ca_reformer:0 "Reformista"
+ ideology_ca_reformer_desc:0 "Dedicado a mejorar gradualmente la sociedad mediante cambios constitucionales, educación y la ampliación de las libertades."
+
+ ideology_ca_morazanista:0 "Morazanista"
+ ideology_ca_morazanista_desc:0 "Seguidores de la visión radical de Francisco Morazán: una Federación Centroamericana férreamente unida, laica y progresista."
+
+ ideology_ca_filibuster:0 "Filibustero"
+ ideology_ca_filibuster_desc:0 "Impulsado por un oscuro destino manifiesto, busca conquistar territorios para imponer una jerarquía racial absoluta y reintroducir la esclavitud."
+
+ ideology_ca_imperial_monarchist:0 "Panhispanista Imperial"
+ ideology_ca_imperial_monarchist_desc:0 "Sueña con reunir el fracturado mundo hispanohablante bajo una monarquía fuerte, devota y autocrática."
+
+ ideology_ca_banana_socialism:0 "Socialismo Bananero"
+ ideology_ca_banana_socialism_desc:0 "Una variante tropical del comunismo centrada en colectivizar las vastas plantaciones de propiedad extranjera y establecer una república de consejos."
+
+ ideology_ca_jesuit_theocracy:0 "Teocracia Jesuita"
+ ideology_ca_jesuit_theocracy_desc:0 "Exige el gobierno absoluto de la orden religiosa sobre el Estado, proscribiendo la disidencia e imponiendo una estricta educación católica."
+
+ ideology_ca_miskito_hegemony:0 "Hegemonía Misquita"
+ ideology_ca_miskito_hegemony_desc:0 "Busca establecer un poderoso reino marítimo indígena-británico a lo largo de la costa, dominando el comercio y la política regional."
+
+ ideology_ca_neo_mayan_restoration:0 "Restauración Neomaya"
+ ideology_ca_neo_mayan_restoration_desc:0 "Un levantamiento indígena tradicionalista que busca expulsar la influencia colonial, recuperar las tierras ancestrales y establecer un etnoestado."
+
+ ideology_ca_hermit_isolationism:0 "Aislacionismo Ermitaño"
+ ideology_ca_hermit_isolationism_desc:0 "Inspirado en el modelo del «Dr. Francia», exige el cierre total de fronteras, comercio y diplomacia para forjar una autocracia completamente autosuficiente."
+
+ ideology_ca_tropical_bonapartism:0 "Bonapartismo Tropical"
+ ideology_ca_tropical_bonapartism_desc:0 "Combina el gobierno militar autocrático con reformas ilustradas, buscando construir un Estado moderno y laico por la pura voluntad de un emperador carismático."
+
+ ideology_ca_tropical_utopian:0 "Utopismo Selvático"
+ ideology_ca_tropical_utopian_desc:0 "Inspirados en los socialistas utópicos europeos, intentan construir comunas igualitarias y cooperativas lejos de la capital corrupta."
+
+ ideology_ca_canal_company_rule:0 "Gobierno de la Compañía del Canal"
+ ideology_ca_canal_company_rule_desc:0 "Una dictadura corporativa en la que el aparato estatal existe únicamente para facilitar la construcción, operación y rentabilidad de la ruta de tránsito interoceánico."
+
+ ideology_ca_syncretic_cult:0 "Culto Sincrético"
+ ideology_ca_syncretic_cult_desc:0 "Un movimiento religioso milenarista que combina creencias indígenas con misticismo cristiano y busca una teocracia guiada por la profecía divina."
+
+ ideology_ca_bolivarian_integration:0 "Integracionista Bolivariano"
+ ideology_ca_bolivarian_integration_desc:0 "Aboga por la integración política y militar total de Centroamérica en la visión más amplia de la Gran Colombia."
+
+ ideology_ca_corsair_republic:0 "República Corsaria"
+ ideology_ca_corsair_republic_desc:0 "Una ideología caótica impulsada por contrabandistas, que rechaza el arte de gobernar burocrático en favor del libre comercio absoluto y el oportunismo marítimo."
+
+ ideology_ca_agrarian_luddism:0 "Ludismo Agrario"
+ ideology_ca_agrarian_luddism_desc:0 "Ferozmente opuestos a la industrialización, estos rompemáquinas buscan mantener una sociedad agraria puramente tradicional y de baja tecnología."
+
+ ideology_ca_cientifico_technocracy:0 "Tecnocracia Científica"
+ ideology_ca_cientifico_technocracy_desc:0 "Pensadores positivistas que creen que la nación debe regirse por principios científicos, una eficiencia implacable y una élite ilustrada."
+
+ ideology_ca_late_unionist:0 "Unionista Diplomático"
+ ideology_ca_late_unionist_desc:0 "Un reformista moderado que busca la reunificación pacífica y diplomática de Centroamérica mediante el comercio compartido y la cooperación burocrática."
+
+ ideology_ca_peasant_caudillismo:0 "Caudillismo Campesino"
+ ideology_ca_peasant_caudillismo_desc:0 "Un caudillo populista profundamente tradicional que se apoya en levas campesinas leales y en el fervor religioso para mantener un control local absoluto."
+
+ ideology_ca_creole_caribbean:0 "Creole Afrocaribeño"
+ ideology_ca_creole_caribbean_desc:0 "Las comunidades creoles anglófonas y protestantes de la costa caribeña, de Bluefields a Belice y más tarde Limón, más ligadas a Kingston y Nueva Orleans que a las capitales del altiplano. Quieren puertos abiertos, libertad de culto y que los gobiernos hispanos los dejen en paz."
+ 
+ ideology_ca_masonic_liberal:0 "Liberalismo Masónico"
+ ideology_ca_masonic_liberal_desc:0 "Las logias masónicas fueron la verdadera red organizativa del liberalismo centroamericano: una hermandad de abogados, oficiales y comerciantes juramentados a la educación laica, el libre pensamiento y el fin del privilegio clerical."
+ 
+ ideology_ca_mutualism:0 "Mutualismo Artesano"
+ ideology_ca_mutualism_desc:0 "Sociedades de artesanos y asociaciones de socorro mutuo que reúnen los ahorros de sus miembros contra la enfermedad, la muerte y los tiempos difíciles. Ni gremio ni sindicato, son el semillero del que crecerá el movimiento obrero organizado."
+ 
+ ideology_ca_pact_confederalist:0 "Confederalismo del Pacto"
+ ideology_ca_pact_confederalist_desc:0 "Herederos del Pacto de Chinandega, creen que Centroamérica puede reunificarse pacíficamente, por tratado entre Estados soberanos, sin las bayonetas de ningún caudillo."
+ 
+ ideology_ca_moravian_pietism:0 "Pietismo Moravo"
+ ideology_ca_moravian_pietism_desc:0 "Desde 1849, los misioneros moravos de Herrnhut predican, enseñan e imprimen biblias a lo largo de la Costa de los Mosquitos. Sus conversos quieren escuelas, sobriedad, libertad de culto y mantener el Reino de la Mosquitia fuera de manos católicas."
+ 
+ ideology_ca_barrismo:0 "Barrismo"
+ ideology_ca_barrismo_desc:0 "La Reforma Liberal con la espada en la mano. Las tierras de la Iglesia y las tierras comunales se confiscan para el café, el trabajo indígena se recluta por decreto, las escuelas se secularizan y Centroamérica será reunificada, quiera o no."
+ 
+ ideology_ca_morismo:0 "Morismo"
+ ideology_ca_morismo_desc:0 "El credo de la Campaña Nacional: la riqueza del café paga un ejército ciudadano, y ese ejército marcha más allá de la frontera para expulsar a los filibusteros del istmo. Prosperidad en casa, soberanía para toda Centroamérica."
+ 
+ ideology_ca_soto_rosa_reformism:0 "Reformismo Positivista"
+ ideology_ca_soto_rosa_reformism_desc:0 "Orden y progreso para una nación de caudillos: códigos civiles, una burocracia asalariada, escuelas laicas y concesiones mineras al capital extranjero para financiar un Estado moderno donde nunca lo hubo."
+ 
+ ideology_ca_mexican_annexationist:0 "Anexionismo Mexicano"
+ ideology_ca_mexican_annexationist_desc:0 "Ciudad de Guatemala está lejos y es hostil; México está cerca y es generoso. Desde los días del imperio de Iturbide, el altiplano occidental alberga una facción que preferiría ser un estado mexicano antes que una provincia guatemalteca."
+ 
+
+ # ==========================================
+ # 3. LAWS & GOVERNMENT TYPES
+ # ==========================================
+ #law_land_reform_coffee_oligarchy: "Coffee Oligarchy Land Regime"
+ #law_land_reform_coffee_oligarchy_desc: "Large coffee haciendas keep legal control of land and property; smallholders face high barriers to land ownership."
+ #law_land_reform_communal_lands: "Communal Lands"
+ #law_land_reform_communal_lands_desc: "Recognises community/communal land rights and customary tenure; reduces large-scale enclosure."
+ #law_land_reform_banana_republic: "Banana Export Concessions"
+ #law_land_reform_banana_republic_desc: "Legal framework that privileges export concessions and foreign companies in plantation agriculture."
+ #law_land_reform_hacienda_system: "Hacienda Land Regime"
+ #law_land_reform_hacienda_system_desc: "Large landed estates (haciendas) legally structured to supply regional markets and the export economy."
+ # ==========================================
+ # Law Group
+ # ==========================================
+ lawgroup_ca_state_structure:0 "Estructura del Estado"
+ law_ca_departmental_state:0 "Departamento"
+ law_ca_departmental_state_desc:0 "Bajo una república unitaria, este antiguo estado se gobierna como un departamento de la Unión. Sus gobernadores son nombrados por la capital, sus rentas fluyen al tesoro central y el resentimiento local crece."
+ law_ca_sovereign_state:0 "Estado Soberano"
+ law_ca_sovereign_state_desc:0 "Esta nación centroamericana se mantiene fuera de cualquier Unión y no responde a ninguna autoridad federal ni confederal."
+ 
+ # ==========================================
+ # Economic System (Source 9)
+ # ==========================================
+ law_central_american_agrarianism:0 "Agrarismo Agroexportador"
+ law_central_american_agrarianism_desc:0 "Un modelo económico centrado en las exportaciones agrícolas, que beneficia principalmente a la élite terrateniente adinerada y a los agricultores comerciales que venden cultivos comerciales a mercados extranjeros."
+
+ # ==========================================
+ # Governance Principles (Source 10)
+ # ==========================================
+ law_ca_coffeacracia:0 "Cafetocracia"
+ law_ca_coffeacracia_desc:0 "Un sistema político dominado por completo por la acaudalada oligarquía cafetalera exportadora, donde el Estado existe principalmente para servir a los intereses de las plantaciones y reprimir el descontento rural."
+
+ law_ca_tecnocracy:0 "Tecnocracia Positivista"
+ law_ca_tecnocracy_desc:0 "Un gobierno dirigido por élites intelectuales y científicos que impulsan la doctrina de «Orden y Progreso». Prioriza la modernización rápida y la asimilación cultural desde arriba."
+
+ law_ca_junta:0 "Junta Militar Absoluta"
+ law_ca_junta_desc:0 "Un duro régimen autoritario en el que las fuerzas armadas ostentan el poder absoluto, gobiernan por decreto y reprimen toda oposición política con puño de hierro."
+
+ law_ca_consejo_junta:0 "Consejo de Junta"
+ law_ca_consejo_junta_desc:0 "Un gobierno cívico-militar de transición que equilibra el poder de las fuerzas armadas con élites civiles e intelectuales, lo que da mayor estabilidad pero procesos políticos más lentos."
+
+ # ==========================================
+ # Land Reform (Source 11)
+ # ==========================================
+ law_land_reform_coffee_oligarchy:0 "Oligarquía Cafetalera"
+ law_land_reform_coffee_oligarchy_desc:0 "Políticas agrarias diseñadas para consolidar el territorio en enormes y muy rentables plantaciones de café y tabaco, restringiendo la movilidad campesina para asegurar mano de obra barata."
+
+ law_land_reform_communal_lands:0 "Tierras Comunales"
+ law_land_reform_communal_lands_desc:0 "Un sistema tradicional en el que la tierra es poseída y trabajada comunalmente por el campesinado rural, protegiéndolo del avance de las grandes haciendas agrícolas."
+
+ law_land_reform_banana_republic:0 "Concesiones Bananeras"
+ law_land_reform_banana_republic_desc:0 "Vastas extensiones de tierra e infraestructura se conceden a compañías fruteras extranjeras, abaratando la construcción pero mermando el poder de los terratenientes nacionales tradicionales."
+
+ law_land_reform_hacienda_system:0 "Sistema de Haciendas"
+ law_land_reform_hacienda_system_desc:0 "Un sistema arcaico de propiedad de la tierra que restringe fuertemente la migración campesina, asegurando una mano de obra cautiva y local para las grandes haciendas aristocráticas."
+
+ # ==========================================
+ # Policing (Source 13)
+ # ==========================================
+ law_ca_policia_comunal:0 "Policía Comunal"
+ law_ca_policia_comunal_desc:0 "El orden público lo gestionan localmente las comunidades rurales según sus costumbres tradicionales, empoderando al campesinado en lugar de a las autoridades del Estado central."
+
+ # ==========================================
+ # State Structure (Source 14)
+ # ==========================================
+ law_ca_central_american_federal:0 "República Federal"
+ law_ca_central_american_federal_desc:0 "Una estructura estatal equilibrada en la que las provincias gozan de una autonomía local significativa sin dejar de ser leales a un gobierno federal central."
+
+ law_ca_central_american_unitary:0 "República Unitaria"
+ law_ca_central_american_unitary_desc:0 "Una estructura estatal altamente centralizada en la que toda autoridad emana de la capital. Otorga un gran poder central, pero a menudo provoca disturbios en las provincias periféricas."
+
+ law_ca_central_american_confederated:0 "Confederación"
+ law_ca_central_american_confederated_desc:0 "Una asociación laxa de Estados soberanos en la que el gobierno central prácticamente no tiene autoridad ni base tributaria; a menudo es el preludio de la disolución total."
+
+ law_ca_federal_state:0 "Estado Federal"
+ law_ca_federal_state_desc:0 "Esta nación funciona como un estado constituyente dentro de un sistema federal más amplio, equilibrando su autonomía local con sus obligaciones hacia el gobierno central."
+
+ law_ca_confederated_state:0 "Estado Confederado"
+ law_ca_confederated_state_desc:0 "Esta nación actúa como un estado muy independiente dentro de una confederación laxa, conservando sus ingresos fiscales y aportando muy poco a la autoridad central."
+
+ law_ca_autonomous_state:0 "Estado Autónomo"
+ law_ca_autonomous_state_desc:0 "Este estado goza de un autogobierno y una autonomía casi totales, y actúa de forma prácticamente independiente del poder central."
+
+ # ==========================================
+ # Army Model (Source 15)
+ # ==========================================
+ law_ca_comunal_milicia:0 "Milicia Comunal"
+ law_ca_comunal_milicia_desc:0 "Las fuerzas armadas dependen de levas de campesinos locales reunidas a toda prisa y comandadas por la aristocracia terrateniente, lo que da una fuerza de combate barata pero inexperta."
+
+ law_ca_caudillismo:0 "Caudillismo"
+ law_ca_caudillismo_desc:0 "El ejército gira en torno a caudillos regionales carismáticos y sus leales levas campesinas, creando ejércitos privados fragmentados pero ferozmente leales que empoderan a la aristocracia."
+
+ law_regionalist_militia:0 "Milicia Regionalista"
+ law_regionalist_militia_desc:0 "La defensa se apoya en milicias regionales organizadas en lugar de un ejército federal profesional, fomentando la capacidad de defensa local y resistiendo la influencia del gobierno central."
+ 
+
+ # ==========================================
+ # MOVEMENT IDEOLOGIES (CENTRAL AMERICA)
+ # ==========================================
+ ideology_ca_unitarian_movement:0 "Movimiento Unitario"
+ ideology_ca_unitarian_movement_desc:0 "#lore Este movimiento aboga por un Estado altamente centralizado gobernado directamente desde la capital, rechazando por completo el federalismo.#!"
+
+ ideology_ca_federalist_movement:0 "Movimiento Federalista"
+ ideology_ca_federalist_movement_desc:0 "#lore Esta facción busca mantener o restaurar la estructura federal, equilibrando un gobierno general con una fuerte autonomía local.#!"
+
+ ideology_ca_autocratic_autonomist_movement:0 "Movimiento Autonomista Autocrático"
+ ideology_ca_autocratic_autonomist_movement_desc:0 "#lore Un movimiento impulsado por caudillos locales que desean una soberanía regional gestionada con puño de hierro, libre de la supervisión central.#!"
+
+ ideology_ca_separatist_movement:0 "Movimiento Separatista"
+ ideology_ca_separatist_movement_desc:0 "#lore Localistas radicales que exigen la plena independencia de cualquier unión o confederación, priorizando las milicias y el gobierno locales.#!"
+
+ ideology_central_american_reactionary_movement:0 "Movimiento Reaccionario"
+ ideology_central_american_reactionary_movement_desc:0 "#lore Tradicionalistas que desean que la sociedad vuelva a sus raíces coloniales, empoderando a la Iglesia y a la policía local.#!"
+
+ ideology_ca_liberal_movement:0 "Movimiento Reformista Radical"
+ ideology_ca_liberal_movement_desc:0 "#lore Un feroz movimiento liberal que exige una economía de laissez-faire, sufragio universal y el desmantelamiento del viejo orden aristocrático.#!"
+
+ ideology_ca_guilds_movement:0 "Movimiento Gremial"
+ ideology_ca_guilds_movement_desc:0 "#lore Un movimiento económico tradicionalista que busca proteger a los artesanos y gremios locales mediante un estricto mercantilismo y proteccionismo.#!"
+
+ ideology_ca_communalist_movement:0 "Movimiento Comunalista"
+ ideology_ca_communalist_movement_desc:0 "#lore Un movimiento igualitario que lucha por abolir la esclavitud y el ejército profesional, favoreciendo las milicias locales y la justicia comunal.#!"
+
+ ideology_ca_secularist_movement:0 "Movimiento Secularista"
+ ideology_ca_secularist_movement_desc:0 "#lore Pensadores liberales centrados por completo en apartar a la Iglesia de los asuntos del Estado y promover la educación pública y laica.#!"
+
+ ideology_ca_criollo_liberal_movement:0 "Movimiento Liberal Criollo"
+ ideology_ca_criollo_liberal_movement_desc:0 "#lore Una facción liberal elitista que apoya reformas económicas y laborales, pero mantiene la exclusividad cultural para la clase criolla.#!"
+
+ ideology_ca_artesanado_movement:0 "Movimiento Artesano"
+ ideology_ca_artesanado_movement_desc:0 "#lore Muy centrado en proteger las industrias y los artesanos locales mediante el intervencionismo y aranceles elevados.#!"
+
+ ideology_ca_agroexportadores_movement:0 "Movimiento Agroexportador"
+ ideology_ca_agroexportadores_movement_desc:0 "#lore Impulsado por las élites del sector primario, este movimiento exige libre comercio para exportar sus cultivos comerciales a los mercados mundiales.#!"
+
+ ideology_ca_colonialist_movement:0 "Movimiento Colonialista"
+ ideology_ca_colonialist_movement_desc:0 "#lore Expansionistas que buscan explotar los territorios fronterizos y extraer riqueza mediante una colonización agresiva.#!"
+
+ ideology_ca_enclavist_movement:0 "Movimiento Enclavista"
+ ideology_ca_enclavist_movement_desc:0 "#lore Una facción totalmente dispuesta a entregar los recursos y la soberanía nacionales a corporaciones extranjeras a cambio de riqueza.#!"
+
+ ideology_ca_radical_enclavist_movement:0 "Movimiento Enclavista Nacional"
+ ideology_ca_radical_enclavist_movement_desc:0 "#lore Un movimiento corporativista extremo que exige la explotación total de los recursos por entidades extranjeras, unida a feroces políticas etnoestatales.#!"
+
+ ideology_ca_constitutionalist_movement:0 "Movimiento Constitucionalista"
+ ideology_ca_constitutionalist_movement_desc:0 "#lore Reformistas que priorizan el establecimiento de una constitución fuerte y democrática con sufragio ampliado y libertades civiles.#!"
+ # ==========================================
+ # Central American Political Parties (Dynamic)
+ # ==========================================
+ party_ca_armed_forces_league:0 "Liga de las Fuerzas Armadas"
+ party_ca_authoritarian_corporatists:0 "Corporativistas Autoritarios"
+ party_ca_capitalist_technocrats:0 "Tecnócratas Capitalistas"
+ party_ca_democratic_corporatists:0 "Corporativistas Democráticos"
+ party_ca_democratic_technocrats:0 "Tecnócratas Democráticos"
+ party_ca_devout_union:0 "Unión Devota"
+ party_ca_industrial_oligarchy:0 "Oligarquía Industrial"
+ party_ca_industrialists_league:0 "Liga de Industriales"
+ party_ca_junta_council:0 "Consejo de Junta"
+ party_ca_national_autocracy:0 "Autocracia Nacional"
+ party_ca_popular_communes:0 "Comunas Populares"
+ party_ca_self_determination_front:0 "Frente de Autodeterminación"
+ party_ca_socialist_technocrats:0 "Tecnócratas Socialistas"
+ party_ca_supreme_junta:0 "Junta Suprema"
+ party_ca_supreme_party:0 "Partido Supremo"
+ party_ca_syndicalist_front:0 "Frente Sindicalista"
+ 
+ # ca_liberal_party
+ party_ca_liberal_uca_federal:0 "Partido de la Unión Federal"
+ party_ca_liberal_uca:0 "Partido de la Unión Nacional"
+ party_ca_liberal_gua:0 "Partido Liberal (Fiebres)"
+ party_ca_liberal_els:0 "Partido Liberal Salvadoreño"
+ party_ca_liberal_hon:0 "Liberales Coquimbos"
+ party_ca_liberal_nic:0 "Partido Democrático (Calandracas)"
+ party_ca_liberal_cos:0 "Partido Liberal Progresista"
+ party_ca_liberal_alt:0 "Partido Liberal Altense"
+ party_ca_liberal_pnm:0 "Partido Liberal Istmeño"
+ party_ca_liberal_generic:0 "Partido Liberal Centroamericano"
+ 
+ # ca_conservative_party
+ party_ca_conservative_uca:0 "Partido del Orden"
+ party_ca_conservative_gua:0 "Partido Servil"
+ party_ca_conservative_els:0 "Partido Conservador Salvadoreño"
+ party_ca_conservative_hon:0 "Partido Cachureco"
+ party_ca_conservative_nic:0 "Partido Legitimista (Timbucos)"
+ party_ca_conservative_cos:0 "Unión Católica"
+ party_ca_conservative_pnm:0 "Partido Conservador Istmeño"
+ party_ca_conservative_generic:0 "Partido Conservador Centroamericano"
+ 
+ # ca_radical_party
+ party_ca_radical_uca:0 "Liberales Exaltados"
+ party_ca_radical_gua:0 "Partido de la Reforma Liberal"
+ party_ca_radical_els:0 "Partido Demócrata Radical"
+ party_ca_radical_hon:0 "Partido Progresista"
+ party_ca_radical_nic:0 "Partido Liberal Radical"
+ party_ca_radical_cos:0 "Partido Republicano"
+ party_ca_radical_generic:0 "Partido Radical Centroamericano"
+ 
+ # ca_free_trade_party
+ party_ca_free_trade_uca:0 "Liga del Libre Comercio"
+ party_ca_free_trade_gua:0 "Partido Agroexportador"
+ party_ca_free_trade_els:0 "Partido de los Añileros"
+ party_ca_free_trade_hon:0 "Partido Minero y Comercial"
+ party_ca_free_trade_nic:0 "Partido de la Ruta del Tránsito"
+ party_ca_free_trade_cos:0 "Partido de los Barones del Café"
+ party_ca_free_trade_pnm:0 "Partido de los Comerciantes del Tránsito"
+ party_ca_free_trade_generic:0 "Partido Centroamericano del Libre Comercio"
+ 
+ # ca_agrarian_party
+ party_ca_agrarian_uca:0 "Liga de Comunidades Rurales"
+ party_ca_agrarian_gua:0 "Liga Montañesa"
+ party_ca_agrarian_els:0 "Liga Campesina Nonualca"
+ party_ca_agrarian_hon:0 "Liga de Ganaderos de Olancho"
+ party_ca_agrarian_nic:0 "Liga Campesina Segoviana"
+ party_ca_agrarian_cos:0 "Partido de los Pequeños Propietarios"
+ party_ca_agrarian_alt:0 "Liga Campesina del Altiplano"
+ party_ca_agrarian_generic:0 "Partido Agrario Centroamericano"
+ 
+ # ca_military_party
+ party_ca_military_uca:0 "Facción del Ejército Federal"
+ party_ca_military_gua:0 "Partido Caudillista"
+ party_ca_military_els:0 "Partido del Ejército Salvadoreño"
+ party_ca_military_hon:0 "Partido de las Guarniciones Hondureñas"
+ party_ca_military_nic:0 "Partido del Ejército Nicaragüense"
+ party_ca_military_generic:0 "Partido Militar Centroamericano"
+ 
+ # ca_revolutionary_party
+ party_ca_revolutionary_uca:0 "Comités Secesionistas"
+ party_ca_revolutionary_gua:0 "Partido Unionista"
+ party_ca_revolutionary_els:0 "Junta Revolucionaria"
+ party_ca_revolutionary_hon:0 "Comité Revolucionario de Honduras"
+ party_ca_revolutionary_nic:0 "Defensores de la Soberanía"
+ party_ca_revolutionary_pnm:0 "Partido de la Independencia Istmeña"
+ party_ca_revolutionary_generic:0 "Partido Revolucionario Centroamericano"
+ 
+ # ca_anarchist_party
+ party_ca_anarchist_gua:0 "Federación Obrera Guatemalteca"
+ party_ca_anarchist_els:0 "Federación Regional de Trabajadores"
+ party_ca_anarchist_hon:0 "Federación Sindicalista Hondureña"
+ party_ca_anarchist_nic:0 "Liga Obrera Nicaragüense"
+ party_ca_anarchist_cos:0 "Confederación General de Trabajadores"
+ party_ca_anarchist_generic:0 "Confederación Centroamericana de Trabajadores"
+ 
+ # join_weight tooltips
+ ca_party_join_base:0 "Valor base"
+ ca_party_join_ig_core:0 "La ideología del grupo de interés es central para este partido"
+ ca_party_join_ig_affinity:0 "La ideología del grupo de interés simpatiza con este partido"
+ ca_party_join_ig_hostile:0 "La ideología del grupo de interés se opone a este partido"
+ ca_party_join_leader_core:0 "La ideología del líder es central para este partido"
+ ca_party_join_leader_affinity:0 "La ideología del líder simpatiza con este partido"
+ ca_party_join_leader_hostile:0 "La ideología del líder se opone a este partido"
+ ca_party_join_ig_type:0 "Base tradicional de este partido"
+ ca_party_join_federal_context:0 "Los federalistas se unen bajo una república federal"
+ ca_party_join_unitary_context:0 "Los centralistas cierran filas bajo un Estado unitario"
+ ca_party_join_suffrage_context:0 "Excluidos de un sufragio restringido"
+ ca_party_join_trade_context:0 "Los exportadores se irritan bajo las restricciones comerciales"
+ ca_party_join_caudillo_context:0 "Los ejércitos caudillistas llevan a sus oficiales a la política"
+ ca_party_join_disaffected:0 "Descontentos y excluidos del gobierno"
+ # ===================================================================
+ # INDEPENDENT AND VARIANTS
+ # ===================================================================
+ law_ca_mandamientos:0 "Mandamientos"
+ law_ca_mandamientos_desc:0 "Los pueblos indígenas están obligados a suministrar cuotas de jornaleros a las plantaciones. La cosecha queda asegurada, pero a un costo terrible para las comunidades."
+ law_ca_municipalismo:0 "Municipalismo"
+ law_ca_municipalismo_desc:0 "Los concejos municipales administran y gravan sus propios distritos. Los viejos cabildos actúan como contrapeso del poder de la capital."
+ law_ca_escuela_laica:0 "Escuela Laica, Gratuita y Obligatoria"
+ law_ca_escuela_laica_desc:0 "La educación primaria es gratuita, obligatoria y costeada por el Estado, con independencia de la Iglesia."
+ law_ca_guardia_nacional:0 "Guardia Nacional"
+ law_ca_guardia_nacional_desc:0 "Una fuerza militar y policial combinada, entrenada y armada por una potencia extranjera. Eficaz para mantener el orden, pero abre la puerta a la influencia extranjera."
+ law_ca_federal_army:0 "Ejército Federal"
+ law_ca_federal_army_desc:0 "Un ejército profesional que responde al gobierno federal y no a cada uno de los estados."
+
+ # ===================================================================
+ # AMENDMENTS - GENERIC
+ # ===================================================================
+ amendment_vagrancy_laws:0 "Leyes contra la Vagancia"
+ amendment_vagrancy_laws_desc:0 "Quien no pueda demostrar que tiene empleo puede ser obligado a trabajar en las haciendas."
+ amendment_jefes_politicos:0 "Jefes Políticos"
+ amendment_jefes_politicos_desc:0 "Cada departamento está gobernado por un agente del Ejecutivo que manda su policía y su milicia."
+
+ # ===================================================================
+ # AMENDMENTS - HISTORICAL CONSTITUTIONS
+ # ===================================================================
+ amendment_costa_rica_1830s:0 "Ley Fundamental del Estado Libre"
+ amendment_costa_rica_1830s_desc:0 "La carta fundacional del Estado Libre de Costa Rica."
+ amendment_ca_bases_y_garantias:0 "Decreto de Bases y Garantías"
+ amendment_ca_bases_y_garantias_desc:0 "El decreto de Braulio Carrillo de 1841 suprime las municipalidades y concentra el poder en un jefe de Estado perpetuo."
+ amendment_free_costa_rica_reform:0 "Constitución de 1844"
+ amendment_free_costa_rica_reform_desc:0 "Una nueva carta para el Estado Libre de Costa Rica que restablece el gobierno representativo."
+ amendment_costa_rica_1st_republic:0 "Constitución de 1847"
+ amendment_costa_rica_1st_republic_desc:0 "Costa Rica se proclama república, plenamente independiente de cualquier Unión."
+ amendment_costa_rica_socialist_republic:0 "Pacto Nacional de los Trabajadores"
+ amendment_costa_rica_socialist_republic_desc:0 "Obreros y campesinos se unen en un nuevo pacto social."
+ amendment_nicaragua_1826:0 "Constitución de 1826"
+ amendment_nicaragua_1826_desc:0 "La primera constitución del Estado de Nicaragua, inspirada en la Constitución de Cádiz."
+ amendment_nicaragua_1838:0 "Constitución de 1838"
+ amendment_nicaragua_1838_desc:0 "Una carta conservadora que separa a Nicaragua de la Federación."
+ amendment_nicaragua_1858:0 "Constitución de 1858"
+ amendment_nicaragua_1858_desc:0 "Tras la Guerra Nacional, los conservadores inauguran tres décadas de gobierno estable."
+ amendment_nicaragua_1893:0 "La Libérrima"
+ amendment_nicaragua_1893_desc:0 "La constitución liberal de José Santos Zelaya seculariza el Estado."
+ amendment_nicaragua_1905:0 "Constitución de 1905"
+ amendment_nicaragua_1905_desc:0 "Zelaya reescribe la constitución para mantenerse en el poder."
+ amendment_nicaragua_1911:0 "Constitución de 1911"
+ amendment_nicaragua_1911_desc:0 "Una restauración conservadora respaldada por los Estados Unidos."
+ amendment_honduras_1839:0 "Constitución de 1839"
+ amendment_honduras_1839_desc:0 "La primera carta de Honduras tras abandonar la Federación."
+ amendment_honduras_1880:0 "Constitución de 1880"
+ amendment_honduras_1880_desc:0 "La reforma liberal de Marco Aurelio Soto abre el país a la minería y la modernización."
+ amendment_el_salvador_1824:0 "Constitución de 1824"
+ amendment_el_salvador_1824_desc:0 "La primera constitución liberal del Estado de El Salvador dentro de la Federación."
+ amendment_el_salvador_1841:0 "Constitución de 1841"
+ amendment_el_salvador_1841_desc:0 "El Salvador abandona la Federación bajo la influencia de sus generales."
+ amendment_el_salvador_1886:0 "Constitución de 1886"
+ amendment_el_salvador_1886_desc:0 "La república cafetalera consolida el poder de las grandes familias."
+ amendment_guatemala_1825:0 "Constitución de 1825"
+ amendment_guatemala_1825_desc:0 "La constitución liberal del Estado de Guatemala durante la época federal."
+ amendment_guatemala_1851:0 "Acta Constitutiva de 1851"
+ amendment_guatemala_1851_desc:0 "El orden conservador de Rafael Carrera, aliado con la Iglesia."
+ amendment_guatemala_1879:0 "Constitución de 1879"
+ amendment_guatemala_1879_desc:0 "La reforma liberal de Justo Rufino Barrios: anticlericalismo y ferrocarriles."
+ amendment_los_altos_1838:0 "Constitución de Los Altos"
+ amendment_los_altos_1838_desc:0 "Quetzaltenango y el altiplano occidental proclaman su propio estado."
+ amendment_chiapas_1826:0 "Constitución de Chiapas"
+ amendment_chiapas_1826_desc:0 "La primera constitución de Chiapas."
+
+ # ===================================================================
+ # AMENDMENTS - CENTRAL AMERICAN LAWS
+ # ===================================================================
+ amendment_ca_libretas_jornaleros:0 "Libretas de Jornaleros"
+ amendment_ca_libretas_jornaleros_desc:0 "Todo jornalero debe portar una libreta que registra sus deudas y su patrón."
+ amendment_ca_exencion_fiscal:0 "Exención Fiscal a los Finqueros"
+ amendment_ca_exencion_fiscal_desc:0 "Las fincas cafetaleras quedan exentas de la mayoría de los impuestos."
+ amendment_ca_inversion_barones:0 "Inversión de los Barones del Café"
+ amendment_ca_inversion_barones_desc:0 "Los barones del café pagan los caminos y puertos que transportan su cosecha."
+ amendment_ca_darwinismo_social:0 "Darwinismo Social"
+ amendment_ca_darwinismo_social_desc:0 "El Estado favorece la inmigración europea y trata a la mayoría indígena como un obstáculo para el progreso."
+ amendment_ca_educacion_positivista:0 "Educación Positivista"
+ amendment_ca_educacion_positivista_desc:0 "Las escuelas enseñan ciencia y deber cívico en lugar del catecismo."
+ amendment_ca_fomento_cientifico:0 "Fomento Científico"
+ amendment_ca_fomento_cientifico_desc:0 "Ingenieros del Estado dirigen el desarrollo de minas y talleres."
+ amendment_ca_tribunales_militares:0 "Tribunales Militares"
+ amendment_ca_tribunales_militares_desc:0 "Los civiles acusados de sedición son juzgados por consejos de guerra."
+ amendment_ca_presupuesto_negro:0 "Presupuesto Negro"
+ amendment_ca_presupuesto_negro_desc:0 "Una parte oculta del tesoro va a parar a los oficiales."
+ amendment_ca_leva_suprema:0 "Leva Suprema"
+ amendment_ca_leva_suprema_desc:0 "Todo hombre apto puede ser reclutado a la fuerza."
+ amendment_ca_gabinete_transicion:0 "Gabinete de Transición"
+ amendment_ca_gabinete_transicion_desc:0 "Ministros civiles comparten el gabinete con los generales."
+ amendment_ca_pacto_generales:0 "Pacto de Generales"
+ amendment_ca_pacto_generales_desc:0 "A los oficiales se les paga bien para que permanezcan en sus cuarteles."
+ amendment_ca_amnistia_politica:0 "Amnistía Política"
+ amendment_ca_amnistia_politica_desc:0 "Se permite el regreso de los exiliados y se libera a los presos."
+ amendment_ca_justicia_consuetudinaria:0 "Justicia Consuetudinaria"
+ amendment_ca_justicia_consuetudinaria_desc:0 "Los ancianos de los pueblos resuelven las disputas según la costumbre local."
+ amendment_ca_milicias_autodefensa:0 "Milicias de Autodefensa"
+ amendment_ca_milicias_autodefensa_desc:0 "Los pueblos se arman para defender sus tierras."
+ amendment_ca_patrullajes_agricolas:0 "Patrullajes Agrícolas"
+ amendment_ca_patrullajes_agricolas_desc:0 "Patrullas comunitarias custodian los cultivos y los graneros."
+
+ # ===================================================================
+ # AMENDMENTS - HISTORICAL
+ # ===================================================================
+ amendment_ca_extincion_ejidos:0 "Extinción de los Ejidos"
+ amendment_ca_extincion_ejidos_desc:0 "Las tierras comunales se suprimen y se venden para ampliar las fincas cafetaleras."
+ amendment_ca_reglamento_jornaleros:0 "Reglamento de Jornaleros"
+ amendment_ca_reglamento_jornaleros_desc:0 "Las libretas y las deudas atan a los jornaleros a las fincas."
+ amendment_ca_matrimonio_civil:0 "Matrimonio Civil"
+ amendment_ca_matrimonio_civil_desc:0 "El matrimonio se convierte en un contrato civil registrado por el Estado."
+ amendment_ca_expulsion_jesuitas:0 "Expulsión de los Jesuitas"
+ amendment_ca_expulsion_jesuitas_desc:0 "La Compañía de Jesús es expulsada y sus bienes confiscados."
+ amendment_ca_concordato:0 "Concordato con la Santa Sede"
+ amendment_ca_concordato_desc:0 "La Iglesia recupera sus privilegios y su papel en la educación."
+ amendment_ca_patronato:0 "Patronato Nacional"
+ amendment_ca_patronato_desc:0 "El Estado nombra a los obispos y a los párrocos."
+ amendment_ca_contrato_keith:0 "Contrato de Concesión Ferroviaria"
+ amendment_ca_contrato_keith_desc:0 "Un empresario extranjero construye el ferrocarril al Atlántico a cambio de vastas extensiones de tierra."
+ amendment_ca_abolicion_pena_muerte:0 "Abolición de la Pena de Muerte"
+ amendment_ca_abolicion_pena_muerte_desc:0 "Se suprime la pena capital."
+ amendment_ca_estanco:0 "Estanco de Licores y Tabaco"
+ amendment_ca_estanco_desc:0 "El Estado mantiene su monopolio colonial sobre el licor y el tabaco."
+
+ # ===================================================================
+ # AMENDMENTS -DYNAMIC
+ # ===================================================================
+ amendment_ca_continuismo:0 "Continuismo"
+ amendment_ca_continuismo_desc:0 "El presidente es reelegido desafiando la constitución."
+ amendment_ca_estado_de_sitio:0 "Estado de Sitio"
+ amendment_ca_estado_de_sitio_desc:0 "Las garantías constitucionales quedan suspendidas mientras dure la emergencia."
+ amendment_ca_intervencion_aduanera:0 "Intervención Aduanera"
+ amendment_ca_intervencion_aduanera_desc:0 "Los acreedores extranjeros cobran sus deudas directamente en las aduanas."
+
+ # ===================================================================
+ # AMENDMENTS - ALTERNATE HISTORY
+ # ===================================================================
+ amendment_ca_senado_de_estados:0 "Senado de los Estados"
+ amendment_ca_senado_de_estados_desc:0 "Cada estado tiene el mismo número de escaños en el senado federal."
+ amendment_ca_capital_rotativa:0 "Capital Rotativa"
+ amendment_ca_capital_rotativa_desc:0 "La capital federal se traslada entre los estados para que ninguno pueda dominar la Unión."
+ amendment_ca_dieta_confederal:0 "Dieta Confederal"
+ amendment_ca_dieta_confederal_desc:0 "Una dieta común de delegados coordina la política de los estados confederados."
+ amendment_ca_ejercito_unico:0 "Ejército Único"
+ amendment_ca_ejercito_unico_desc:0 "Las milicias de los estados se disuelven en un único ejército nacional."
+ amendment_ca_ciudadania_centroamericana:0 "Ciudadanía Centroamericana"
+ amendment_ca_ciudadania_centroamericana_desc:0 "Todo centroamericano es ciudadano en cualquier estado de la Unión."
+
+ 

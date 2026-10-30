@@ -1,0 +1,111 @@
+﻿l_spanish:
+ # =========================================================================
+ # CAFM - Costa Rica journals (mother journal + chapters)
+ # je_ca_historic_situation_in_costarica and je_ca_pacificacion_norte keep
+ # their existing name/_reason keys in content_ca_flavor_1_l_english.yml
+ # =========================================================================
+
+ # --- Mother journal: status and goals ---
+ je_ca_historic_situation_in_costarica_status_inicio:0 "San José gobierna el Estado Libre, pero Cartago, Heredia y Alajuela no han olvidado la Guerra de la Liga."
+ je_ca_historic_situation_in_costarica_status_separatista:0 "Costa Rica sigue su propio camino. El orden de Carrillo debe sobrevivir ahora a los campeones de la Federación."
+ je_ca_historic_situation_in_costarica_status_federal:0 "Costa Rica sigue dentro de la Federación. Sus instituciones deben demostrar que pueden gobernar sin un hombre fuerte."
+ je_ca_historic_situation_in_costarica_goal_carrillo:0 "Se ha superado la amenaza del regreso de Morazán"
+ je_ca_historic_situation_in_costarica_goal_federal:0 "Seguir en la Federación con al menos #v 60#! de Soberanía después de 1840"
+ je_ca_historic_situation_in_costarica_fail_colapso:0 "La Soberanía de San José cae a #v 0#!"
+ je_ca_historic_situation_in_costarica_fail_morazan:0 "Morazán toma el poder en San José"
+
+ # --- Sovereignty bar ---
+ ca_cos_soberania_bar_name:0 "Soberanía de San José"
+ ca_cos_soberania_bar_desc:0 "Qué tan firmemente mantiene San José unido el Estado Libre. Si llega a cero, la Liga volverá a alzarse."
+ ca_cos_soberania_carrillo_desc:0 "Gobierna Braulio Carrillo"
+ ca_cos_soberania_army_desc:0 "Las Fuerzas Armadas están en el gobierno"
+ ca_cos_soberania_bases_desc:0 "Está en vigor la Ley de Bases y Garantías"
+ ca_cos_soberania_federalists_desc:0 "Los liberales federalistas son poderosos"
+ ca_cos_soberania_turmoil_desc:0 "Agitación en Costa Rica"
+ ca_cos_soberania_guanacaste_desc:0 "Se ha perdido Guanacaste"
+
+ # --- Chapter B: Bocas del Toro ---
+ je_ca_cos_bocas_del_toro:0 "La cuestión de Bocas del Toro"
+ je_ca_cos_bocas_del_toro_reason:0 "Cortadores de madera británicos y guarniciones neogranadinas disputan la costa caribe que Costa Rica reclama por la Real Orden de 1803. Que la Federación nos respalde o no marcará cómo ve San José a la Unión."
+ je_ca_cos_bocas_del_toro_status_inicio:0 "Nuestro reclamo sobre Bocas del Toro espera respuesta."
+ je_ca_cos_bocas_del_toro_status_reclamo:0 "La expedición de Galindo ha plantado nuestro reclamo en la costa caribe."
+ je_ca_cos_bocas_del_toro_status_perdido:0 "La Nueva Granada ha expulsado a nuestros funcionarios. San José espera la respuesta de la Federación."
+
+ # --- Chapter C: The Ballot and the Barracks ---
+ je_ca_cos_urnas_y_cuartel:0 "Las urnas y el cuartel"
+ je_ca_cos_urnas_y_cuartel_reason:0 "El mandato de Carrillo termina. Los electores de 1837 elegirán entre el orden constitucional de Manuel Aguilar y la mano de hierro del Arquitecto del Estado, pero los cuarteles de San José pueden tener la última palabra."
+
+ # --- Chapter D: The Return of the Eagle ---
+ je_ca_cos_regreso_aguila:0 "El regreso del Águila"
+ je_ca_cos_regreso_aguila_reason:0 "Francisco Morazán no ha aceptado la derrota. Desde el exilio planea su regreso a Centroamérica, y Costa Rica, gobernada por el hombre que rompió con la Federación, es su desembarco más probable."
+
+ # --- Light failure: The Fall of Morazán ---
+ je_ca_cos_caida_morazan:0 "La caída de Morazán"
+ je_ca_cos_caida_morazan_reason:0 "Morazán gobierna en San José y exige hombres y dinero para reconstruir la Federación por la fuerza. Cada préstamo forzoso y cada leva ponen a los josefinos en su contra."
+ ca_cos_descontento_bar_name:0 "Descontento josefino"
+ ca_cos_descontento_bar_desc:0 "Cuando el descontento sea total, San José se alzará contra Morazán."
+ ca_cos_descontento_base_desc:0 "Préstamos forzosos y reclutamiento para la guerra federal"
+ ca_cos_descontento_war_desc:0 "Estamos en guerra"
+ ca_cos_descontento_liberals_desc:0 "Los liberales están en el gobierno"
+
+ # --- Severe failure: The New League ---
+ je_ca_cos_nueva_liga:0 "La nueva Liga"
+ je_ca_cos_nueva_liga_reason:0 "Cartago, Heredia y Alajuela se han separado, como intentaron en 1835, y Guanacaste ha seguido su propio camino. San José puede reunificar el país por las armas o mediante un pacto entre iguales."
+ je_ca_cos_nueva_liga_goal_armas:0 "Por las armas: ninguna ciudad de la Liga sigue independiente"
+ je_ca_cos_nueva_liga_goal_pacto:0 "Por pacto: la Reunificación llega a #v 100#!"
+ ca_cos_reunificacion_bar_name:0 "Reunificación por pacto"
+ ca_cos_reunificacion_bar_desc:0 "Negociaciones con las ciudades de la Liga hacia una Confederación de Costa Rica."
+ ca_cos_reunificacion_base_desc:0 "Negociaciones en curso"
+ ca_cos_reunificacion_liberals_desc:0 "Los liberales prefieren un pacto entre iguales"
+ ca_cos_reunificacion_war_desc:0 "La guerra envenena las negociaciones"
+
+ # --- Events ---
+ ca_costa_rica_events.300.t:0 "El Estado consolidado"
+ ca_costa_rica_events.300.d_carrillo:0 "La sombra del Águila ha pasado y la Ley de Bases y Garantías sigue en pie. Diga lo que diga la historia de Braulio Carrillo, deja un Estado que solo responde a San José: caminos, tribunales, café y orden."
+ ca_costa_rica_events.300.d_federal:0 "Contra todo pronóstico, Costa Rica ha seguido dentro de la Federación sin caer en la anarquía. Sus instituciones han resistido y San José habla en el congreso federal con voz propia."
+ ca_costa_rica_events.300.f:0 "La era de la Liga ha terminado."
+ ca_costa_rica_events.300.a:0 "La obra del Arquitecto perdura."
+ ca_costa_rica_events.300.b:0 "Un Estado leal y estable."
+
+ ca_costa_rica_events.310.t:0 "La Liga resurge"
+ ca_costa_rica_events.310.d:0 "La autoridad de San José se ha derrumbado. Cartago ha proclamado su independencia y Heredia y Alajuela la han seguido, igual que en 1835. Guanacaste ya no responde a nuestros mensajeros. El Estado Libre de Costa Rica es ahora un puñado de ciudades enfrentadas."
+ ca_costa_rica_events.310.f:0 "Cuatro ciudades, cuatro banderas."
+ ca_costa_rica_events.310.a:0 "San José reunificará Costa Rica."
+
+ ca_costa_rica_events.320.t:0 "El Águila en San José"
+ ca_costa_rica_events.320.d:0 "13 de abril de 1842. Francisco Morazán ha entrado en San José al frente del mismo ejército que fue enviado a detenerlo. La Asamblea Constituyente lo ha nombrado Jefe Supremo. Carrillo zarpará de Puntarenas hacia el exilio en El Salvador."
+ ca_costa_rica_events.320.f:0 "La Federación vuelve, cargada en bayonetas."
+ ca_costa_rica_events.320.a:0 "Costa Rica se somete al Águila."
+
+ ca_costa_rica_events.330.t:0 "El golpe fallido"
+ ca_costa_rica_events.330.d:0 "27 de mayo de 1838. La guarnición de San José se negó a seguir a Carrillo. Manuel Aguilar sigue siendo jefe de Estado y el orden constitucional ha superado su prueba más dura."
+ ca_costa_rica_events.330.f:0 "La ley ha resistido."
+ ca_costa_rica_events.330.a:0 "La constitución prevalece. Carrillo se va al exilio."
+ ca_costa_rica_events.330.b:0 "Indultar a los conspiradores para calmar los cuarteles."
+
+ ca_costa_rica_events.340.t:0 "El desembarco en Caldera"
+ ca_costa_rica_events.340.d:0 "7 de abril de 1842. Morazán ha desembarcado en Caldera con sus veteranos. Carrillo envía al general Vicente Villaseñor con cuatrocientos hombres a su encuentro."
+ ca_costa_rica_events.340.f:0 "Todo depende de la lealtad de un solo ejército."
+ ca_costa_rica_events.340.a:0 "Villaseñor, marche a la costa."
+ ca_costa_rica_events.340.b:0 "El Pacto de El Jocote: el ejército se pasa a Morazán."
+
+ ca_costa_rica_events.350.t:0 "La revuelta de septiembre"
+ ca_costa_rica_events.350.d:0 "11 de septiembre de 1842. San José se ha alzado contra Morazán. António Pinto Soares encabeza a unos cuatrocientos hombres contra la guardia de cuarenta del Águila. Tras ochenta y ocho horas de combate, Morazán huyó hacia Cartago, donde Pedro Mayorga lo traicionó. Ha sido capturado junto con Villaseñor, Saravia y Cabañas."
+ ca_costa_rica_events.350.f:0 "El Águila cae en San José."
+ ca_costa_rica_events.350.a:0 "El paredón, como el 15 de septiembre de 1842."
+ ca_costa_rica_events.350.b:0 "Desterrar al Águila y ahorrarle al país un mártir."
+
+ ca_costa_rica_events.360.t:0 "El Pacto de Confederación"
+ ca_costa_rica_events.360.d:0 "Los delegados de San José, Cartago, Heredia y Alajuela han firmado un pacto entre iguales. Cada ciudad conserva sus concejos, pero todas responden ahora a una sola Confederación."
+ ca_costa_rica_events.360.f:0 "Costa Rica renace como confederación."
+ ca_costa_rica_events.360.a:0 "¡Viva la Confederación de Costa Rica!"
+
+ ca_costa_rica_events.361.t:0 "La unidad por las armas"
+ ca_costa_rica_events.361.d:0 "La última ciudad rebelde se ha rendido. Costa Rica vuelve a ser una, unida bajo San José como Carrillo siempre quiso."
+ ca_costa_rica_events.361.f:0 "Un Estado, una capital."
+ ca_costa_rica_events.361.a:0 "Nunca más."
+
+ ca_costa_rica_events.362.t:0 "Las ciudades soberanas"
+ ca_costa_rica_events.362.d:0 "Ha pasado una década y las ciudades de la Liga han aprendido a vivir separadas. El sueño de una sola Costa Rica se desvanece."
+ ca_costa_rica_events.362.f:0 "Algunas heridas se convierten en fronteras."
+ ca_costa_rica_events.362.a:0 "Así sea."
