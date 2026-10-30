@@ -17,8 +17,8 @@ nic_jose_zepeda_character_template = {
 	#        efectos de creación de NIC como gobernante.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jose"
-	last_name = "ca_Zepeda"
+	first_name = "cafm_Jose"
+	last_name = "cafm_Zepeda"
 	historical = yes
 	female = no
 	birth_date = 1784.1.1			# M: confirmar fecha
@@ -58,8 +58,8 @@ nic_braulio_mendiola_character_template = {
 	#        «Mendieta» y con TRY_REPLACE, que solo reemplaza plantillas existentes.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Braulio"
-	last_name = "Mendiola"
+	first_name = "cafm_Braulio"
+	last_name = "cafm_Mendiola"
 	historical = yes
 	female = no
 	birth_date = 1800.1.1			# M: fecha desconocida
@@ -105,8 +105,8 @@ nic_bernardo_mendez_character_template = {
 	#        ca_nicaragua_events.14 (Fase 1).
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Bernardo"
-	last_name = "ca_Mendez"
+	first_name = "cafm_Bernardo"
+	last_name = "cafm_Mendez"
 	historical = yes
 	female = no
 	birth_date = 1782.1.1			# P: año verificado, día no
@@ -146,8 +146,8 @@ jose_nunez_character_template = {
 	# NOTAS: Jefe de Estado (1834–1835 y 1837–1839).
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jose"
-	last_name = "Nunez"
+	first_name = "cafm_Jose"
+	last_name = "cafm_Nunez"
 	historical = yes
 	female = no
 	birth_date = 1800.2.2			# M: confirmar fecha
@@ -183,7 +183,7 @@ jose_nunez_character_template = {
 			NOT = { has_global_variable = cafm_hc_jose_nunez }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1836.1.1
@@ -196,8 +196,8 @@ cafm_pablo_buitrago = {
 	# NOTAS: Jefe de Estado 1841–1843.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Pablo"
-	last_name = "Buitrago"
+	first_name = "cafm_Pablo"
+	last_name = "cafm_Buitrago"
 	historical = yes
 	female = no
 	birth_date = 1807.1.1			# M: confirmar fecha
@@ -233,7 +233,7 @@ cafm_pablo_buitrago = {
 			NOT = { has_global_variable = cafm_hc_buitrago }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1840.1.1
@@ -246,8 +246,8 @@ cafm_patricio_rivas = {
 	# NOTAS: Político liberal de León; jefe interino en 1839–1840; presidente títere de Walker (1855–1857).
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Patricio"
-	last_name = "Rivas"
+	first_name = "cafm_Patricio"
+	last_name = "cafm_Rivas"
 	historical = yes
 	female = no
 	birth_date = 1810.1.1			# M: confirmar fecha
@@ -284,7 +284,7 @@ cafm_patricio_rivas = {
 			NOT = { has_global_variable = cafm_hc_patricio_rivas }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1839.1.1
@@ -299,8 +299,8 @@ nic_fruto_chamorro_character_template = {
 	#        (decisión del autor).
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Fruto"
-	last_name = "Chamorro"
+	first_name = "cafm_Fruto"
+	last_name = "cafm_Chamorro"
 	historical = yes
 	female = no
 	birth_date = 1804.10.20
@@ -340,7 +340,7 @@ nic_fruto_chamorro_character_template = {
 			NOT = { has_global_variable = cafm_hc_fruto_chamorro }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1840.1.1
@@ -353,8 +353,8 @@ cafm_casto_fonseca = {
 	# NOTAS: Comandante de armas de León en la década de 1840.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Casto"
-	last_name = "Fonseca"
+	first_name = "cafm_Casto"
+	last_name = "cafm_Fonseca"
 	historical = yes
 	female = no
 	birth_date = 1800.1.1			# M: confirmar fecha
@@ -405,8 +405,8 @@ cafm_jose_leon_sandoval = {
 	# NOTAS: Supremo director 1845–1847.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jose_Leon"
-	last_name = "Sandoval"
+	first_name = "cafm_Jose_Leon"
+	last_name = "cafm_Sandoval"
 	historical = yes
 	female = no
 	birth_date = 1789.1.1			# M: confirmar fecha
@@ -442,7 +442,7 @@ cafm_jose_leon_sandoval = {
 			NOT = { has_global_variable = cafm_hc_leon_sandoval }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1845.1.1
@@ -455,8 +455,8 @@ cafm_trinidad_munoz = {
 	# NOTAS: General de León en la década de 1840.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Trinidad"
-	last_name = "Munoz"
+	first_name = "cafm_Trinidad"
+	last_name = "cafm_Munoz"
 	historical = yes
 	female = no
 	birth_date = 1795.1.1			# M: confirmar fecha
@@ -507,8 +507,8 @@ cafm_francisco_castellon = {
 	# NOTAS: Diplomático y líder democrático de León; en 1854 contrató a Walker.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Francisco"
-	last_name = "Castellon"
+	first_name = "cafm_Francisco"
+	last_name = "cafm_Castellon"
 	historical = yes
 	female = no
 	birth_date = 1815.1.1			# M: confirmar fecha
@@ -544,7 +544,7 @@ cafm_francisco_castellon = {
 			NOT = { has_global_variable = cafm_hc_castellon }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1845.1.1
@@ -557,8 +557,8 @@ nic_maximo_jerez_character_template = {
 	# NOTAS: Líder liberal de León; borde de la versión 1.0.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Maximo"
-	last_name = "Jerez"
+	first_name = "cafm_Maximo"
+	last_name = "cafm_Jerez"
 	historical = yes
 	female = no
 	birth_date = 1818.6.8
@@ -615,8 +615,8 @@ nic_william_walker_character_template = {
 	#        no personal.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "William"
-	last_name = "Walker"
+	first_name = "cafm_William"
+	last_name = "cafm_Walker"
 	historical = yes
 	female = no
 	birth_date = 1824.5.8
@@ -648,77 +648,5 @@ nic_william_walker_character_template = {
 	on_created = {
 		set_variable = cafm_cast_nic
 		set_global_variable = { name = cafm_hc_walker value = this }
-	}
-}
-
-
-# ---------------------------------------------------------------------
-# CAFM F6 - Gobernantes de 1839-1840 (tabla de CAFM_F0_VERIFICACIONES.md §3)
-# Certeza M: confirmar fechas de nacimiento e ideologia.
-# ---------------------------------------------------------------------
-
-cafm_evaristo_rocha = {
-	# Evaristo Rocha — cast NIC · nivel C · certeza M
-	# NOTAS: Jefe de Estado de Nicaragua (5 ene – 30 jun 1839).
-	first_name = "Evaristo"
-	last_name = "Rocha"
-	historical = yes
-	female = no
-	birth_date = 1795.1.1			# M: confirmar
-	culture = cu:nicaraguan
-	religion = rel:catholic
-	home_region = STATE_NICARAGUA
-	role = character_role_politician
-	interest_group = ig_landowners
-	ideology = ideology_moderate
-	traits = { cautious }
-	trait_generation = { }
-	on_created = {
-		set_variable = cafm_cast_nic
-		set_global_variable = { name = cafm_hc_evaristo_rocha value = this }
-	}
-}
-
-cafm_joaquin_cossio = {
-	# Joaquín del Cossío — cast NIC · nivel C · certeza M
-	# NOTAS: Jefe de Estado de Nicaragua (30 jun – 20 oct 1839; se funde el interinato de Patricio Rivas).
-	first_name = "Joaquin"
-	last_name = "del_Cossio"
-	historical = yes
-	female = no
-	birth_date = 1790.1.1			# M: confirmar
-	culture = cu:nicaraguan
-	religion = rel:catholic
-	home_region = STATE_NICARAGUA
-	role = character_role_politician
-	interest_group = ig_landowners
-	ideology = ideology_moderate
-	traits = { cautious }
-	trait_generation = { }
-	on_created = {
-		set_variable = cafm_cast_nic
-		set_global_variable = { name = cafm_hc_joaquin_cossio value = this }
-	}
-}
-
-cafm_tomas_valladares = {
-	# Tomás Valladares — cast NIC · nivel C · certeza M
-	# NOTAS: Jefe de Estado de Nicaragua (20 oct 1839 – 21 sep 1840; se funde el interinato de Hilario Ulloa).
-	first_name = "Tomas"
-	last_name = "Valladares"
-	historical = yes
-	female = no
-	birth_date = 1790.1.1			# M: confirmar
-	culture = cu:nicaraguan
-	religion = rel:catholic
-	home_region = STATE_NICARAGUA
-	role = character_role_politician
-	interest_group = ig_landowners
-	ideology = ideology_moderate
-	traits = { cautious }
-	trait_generation = { }
-	on_created = {
-		set_variable = cafm_cast_nic
-		set_global_variable = { name = cafm_hc_tomas_valladares value = this }
 	}
 }

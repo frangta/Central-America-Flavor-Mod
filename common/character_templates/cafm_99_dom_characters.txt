@@ -17,8 +17,8 @@ dom_pedro_santana_character_template = {
 	# NOTAS: Caudillo, anexión a España (1861). Antes llevaba ideology_ca_enclavist (ideología de grupo).
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Pedro"
-	last_name = "Santana"
+	first_name = "cafm_Pedro"
+	last_name = "cafm_Santana"
 	historical = yes
 	female = no
 	birth_date = 1801.6.29			# M: confirmar fecha
@@ -55,8 +55,8 @@ dom_buenaventura_baez_character_template = {
 	# NOTAS: Líder de los Rojos. Antes llevaba ideology_meritocratic (ideología de grupo).
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Buenaventura"
-	last_name = "Baez"
+	first_name = "cafm_Buenaventura"
+	last_name = "cafm_Baez"
 	historical = yes
 	female = no
 	birth_date = 1812.7.14			# M: confirmar fecha
@@ -91,8 +91,8 @@ dom_gregorio_luperon_character_template = {
 	# NOTAS: Guerra de la Restauración. Rasgos inexistentes sustituidos.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Gregorio"
-	last_name = "Luperon"
+	first_name = "cafm_Gregorio"
+	last_name = "cafm_Luperon"
 	historical = yes
 	female = no
 	birth_date = 1839.9.8			# M: confirmar fecha
@@ -127,8 +127,8 @@ dom_salcedo_character_template = {
 	# NOTAS: Presidente durante la Restauración.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jose_Antonio"
-	last_name = "Salcedo"
+	first_name = "cafm_Jose_Antonio"
+	last_name = "cafm_Salcedo"
 	historical = yes
 	female = no
 	birth_date = 1816.11.5			# M: confirmar fecha
@@ -166,7 +166,7 @@ dom_salcedo_character_template = {
 			NOT = { has_global_variable = cafm_hc_salcedo }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			OR = {
 				is_interest_group_type = ig_landowners
 				is_interest_group_type = ig_armed_forces
@@ -183,8 +183,8 @@ dom_duarte_character_template = {
 	# NOTAS: Padre de la patria dominicana.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Juan_Pablo"
-	last_name = "Duarte"
+	first_name = "cafm_Juan_Pablo"
+	last_name = "cafm_Duarte"
 	historical = yes
 	female = no
 	birth_date = 1813.1.26
@@ -221,7 +221,7 @@ dom_duarte_character_template = {
 			NOT = { has_global_variable = cafm_hc_duarte }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			OR = {
 				is_interest_group_type = ig_petty_bourgeoisie
 				is_interest_group_type = ig_intelligentsia
@@ -238,8 +238,8 @@ dom_polanco_character_template = {
 	# NOTAS: General de la Restauración.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Gaspar"
-	last_name = "Polanco"
+	first_name = "cafm_Gaspar"
+	last_name = "cafm_Polanco"
 	historical = yes
 	female = no
 	birth_date = 1816.10.10			# M: confirmar fecha

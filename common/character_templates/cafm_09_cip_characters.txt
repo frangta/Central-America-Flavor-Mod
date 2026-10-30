@@ -17,8 +17,8 @@ cafm_joaquin_miguel_gutierrez = {
 	#        (8.6.1838).
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Joaquin_Miguel"
-	last_name = "Gutierrez"
+	first_name = "cafm_Joaquin_Miguel"
+	last_name = "cafm_Gutierrez"
 	historical = yes
 	female = no
 	birth_date = 1796.8.21
@@ -59,7 +59,7 @@ cafm_joaquin_miguel_gutierrez = {
 			NOT = { has_global_variable = cafm_hc_joaquin_miguel_gutierrez }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1836.1.1
@@ -72,8 +72,8 @@ cafm_angel_albino_corzo = {
 	# NOTAS: Liberal chiapaneco; gobernador desde 1855.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Angel_Albino"
-	last_name = "Corzo"
+	first_name = "cafm_Angel_Albino"
+	last_name = "cafm_Corzo"
 	historical = yes
 	female = no
 	birth_date = 1816.3.1
@@ -110,7 +110,7 @@ cafm_angel_albino_corzo = {
 			NOT = { has_global_variable = cafm_hc_corzo }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1846.1.1

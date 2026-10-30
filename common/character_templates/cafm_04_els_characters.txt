@@ -19,8 +19,8 @@ els_francisco_gomez_character_template = {
 	#        de 1852.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Francisco"
-	last_name = "Gomez"
+	first_name = "cafm_Francisco"
+	last_name = "cafm_Gomez"
 	historical = yes
 	female = no
 	birth_date = 1796.8.5			# V
@@ -60,8 +60,8 @@ els_diego_vigil_character_template = {
 	#        Si la UCA lo necesita como presidente en 1839, un evento lo devuelve a la UCA.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Diego"
-	last_name = "Vigil_y_Cocana"
+	first_name = "cafm_Diego"
+	last_name = "cafm_Vigil_y_Cocana"
 	historical = yes
 	female = no
 	birth_date = 1799.1.1			# V: año 1799 (Tegucigalpa); día desconocido
@@ -101,7 +101,7 @@ els_diego_vigil_character_template = {
 			NOT = { has_global_variable = cafm_hc_vigil }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1836.1.1
@@ -114,8 +114,8 @@ els_francisco_malespin_character_template = {
 	# NOTAS: Caudillo militar; presidente 1844–1845; chocó con el obispo Viteri.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Francisco"
-	last_name = "Malespin"
+	first_name = "cafm_Francisco"
+	last_name = "cafm_Malespin"
 	historical = yes
 	female = no
 	birth_date = 1806.1.1			# M: confirmar fecha
@@ -167,8 +167,8 @@ cafm_pedro_jose_arce = {
 	# NOTAS: Terrateniente del añil; presidente interino en 1841 y 1843, vicepresidente 1842–1844.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Pedro_Jose"
-	last_name = "Arce"
+	first_name = "cafm_Pedro_Jose"
+	last_name = "cafm_Arce"
 	historical = yes
 	female = no
 	birth_date = 1801.8.28
@@ -206,7 +206,7 @@ cafm_pedro_jose_arce = {
 			NOT = { has_global_variable = cafm_hc_arce }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1840.1.1
@@ -219,8 +219,8 @@ cafm_juan_jose_guzman = {
 	# NOTAS: Jefe/presidente de El Salvador 1842–1844.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Juan_Jose"
-	last_name = "Guzman"
+	first_name = "cafm_Juan_Jose"
+	last_name = "cafm_Guzman"
 	historical = yes
 	female = no
 	birth_date = 1797.1.1			# M: confirmar fecha
@@ -256,7 +256,7 @@ cafm_juan_jose_guzman = {
 			NOT = { has_global_variable = cafm_hc_juan_jose_guzman }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1842.1.1
@@ -269,8 +269,8 @@ cafm_jorge_viteri = {
 	# NOTAS: Primer obispo de San Salvador (1842); después obispo de León (Nicaragua). Multinacional.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jorge"
-	last_name = "Viteri_y_Ungo"
+	first_name = "cafm_Jorge"
+	last_name = "cafm_Viteri_y_Ungo"
 	historical = yes
 	female = no
 	birth_date = 1802.4.23			# M: confirmar fecha
@@ -307,7 +307,7 @@ cafm_jorge_viteri = {
 			NOT = { has_global_variable = cafm_hc_viteri }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_devout
 		}
 		earliest_usage_date = 1842.1.1
@@ -320,8 +320,8 @@ cafm_eugenio_aguilar = {
 	# NOTAS: Presidente 1846–1848.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Eugenio"
-	last_name = "Aguilar"
+	first_name = "cafm_Eugenio"
+	last_name = "cafm_Aguilar"
 	historical = yes
 	female = no
 	birth_date = 1804.1.1			# M: confirmar fecha
@@ -357,7 +357,7 @@ cafm_eugenio_aguilar = {
 			NOT = { has_global_variable = cafm_hc_eugenio_aguilar }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1846.1.1
@@ -370,8 +370,8 @@ els_doroteo_vasconcelos_character_template = {
 	# NOTAS: Liberal unionista; presidente 1848–1851.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Doroteo"
-	last_name = "Vasconcelos"
+	first_name = "cafm_Doroteo"
+	last_name = "cafm_Vasconcelos"
 	historical = yes
 	female = no
 	birth_date = 1803.1.1			# M: confirmar fecha
@@ -408,7 +408,7 @@ els_doroteo_vasconcelos_character_template = {
 			NOT = { has_global_variable = cafm_hc_vasconcelos }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1846.1.1
@@ -421,8 +421,8 @@ els_gerardo_barrios_character_template = {
 	# NOTAS: General liberal morazanista; presidente 1859–1863; fusilado en 1865. Multinacional.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Gerardo"
-	last_name = "Barrios"
+	first_name = "cafm_Gerardo"
+	last_name = "cafm_Barrios"
 	historical = yes
 	female = no
 	birth_date = 1813.9.24			# M: confirmar fecha
@@ -477,8 +477,8 @@ els_francisco_duenas_character_template = {
 	# NOTAS: Conservador; presidente 1851–1854 y 1863–1871. Fuera de la versión 1.0.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Francisco"
-	last_name = "Duenas"
+	first_name = "cafm_Francisco"
+	last_name = "cafm_Duenas"
 	historical = yes
 	female = no
 	birth_date = 1810.12.3			# M: confirmar fecha
@@ -505,77 +505,5 @@ els_francisco_duenas_character_template = {
 	on_created = {
 		set_variable = cafm_cast_els
 		set_global_variable = { name = cafm_hc_duenas value = this }
-	}
-}
-
-
-# ---------------------------------------------------------------------
-# CAFM F6 - Gobernantes de 1838-1841 (tabla de CAFM_F0_VERIFICACIONES.md §3)
-# Certeza M: confirmar fechas de nacimiento e ideologia.
-# ---------------------------------------------------------------------
-
-cafm_timoteo_menendez = {
-	# Timoteo Menéndez — cast ELS · nivel C · certeza M
-	# NOTAS: Jefe de Estado interino de El Salvador (6 ene 1838 – 23 may 1839).
-	first_name = "Timoteo"
-	last_name = "Menendez"
-	historical = yes
-	female = no
-	birth_date = 1790.1.1			# M: confirmar
-	culture = cu:el_salvadorian
-	religion = rel:catholic
-	home_region = STATE_SAN_SALVADOR
-	role = character_role_politician
-	interest_group = ig_intelligentsia
-	ideology = ideology_moderate
-	traits = { cautious }
-	trait_generation = { }
-	on_created = {
-		set_variable = cafm_cast_els
-		set_global_variable = { name = cafm_hc_timoteo_menendez value = this }
-	}
-}
-
-cafm_antonio_jose_canas = {
-	# Antonio José Cañas — cast ELS · nivel C · certeza M
-	# NOTAS: Jefe de Estado de El Salvador (23 may – 11 jul 1839; 16 feb – 20 sep 1840).
-	first_name = "Antonio_Jose"
-	last_name = "Canas"
-	historical = yes
-	female = no
-	birth_date = 1785.1.1			# M: confirmar
-	culture = cu:el_salvadorian
-	religion = rel:catholic
-	home_region = STATE_SAN_SALVADOR
-	role = character_role_politician
-	interest_group = ig_intelligentsia
-	ideology = ideology_ca_federalist
-	traits = { honorable }
-	trait_generation = { }
-	on_created = {
-		set_variable = cafm_cast_els
-		set_global_variable = { name = cafm_hc_antonio_jose_canas value = this }
-	}
-}
-
-cafm_norberto_ramirez = {
-	# Norberto Ramírez — cast ELS · nivel C · certeza M
-	# NOTAS: Jefe de Estado de El Salvador (20 sep 1840 – 7 ene 1841); luego Director de Nicaragua (1849–1851).
-	first_name = "Norberto"
-	last_name = "Ramirez"
-	historical = yes
-	female = no
-	birth_date = 1800.1.1			# M: confirmar
-	culture = cu:el_salvadorian
-	religion = rel:catholic
-	home_region = STATE_SAN_SALVADOR
-	role = character_role_politician
-	interest_group = ig_intelligentsia
-	ideology = ideology_moderate
-	traits = { cautious }
-	trait_generation = { }
-	on_created = {
-		set_variable = cafm_cast_els
-		set_global_variable = { name = cafm_hc_norberto_ramirez value = this }
 	}
 }

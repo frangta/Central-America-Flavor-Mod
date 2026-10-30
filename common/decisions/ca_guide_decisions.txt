@@ -1,0 +1,22 @@
+﻿# CAFM P5 (punto 9) - Abre la mini guia de la Federacion. Solo para el jugador.
+ca_decision_federation_guide = {
+	is_shown = {
+		is_ai = no
+		OR = {
+			c:UCA ?= this
+			AND = {
+				exists = c:UCA
+				is_subject_of = c:UCA
+			}
+		}
+	}
+	possible = {
+		always = yes
+	}
+	when_taken = {
+		trigger_event = { id = ca_guide.1 popup = yes }
+	}
+	ai_chance = {
+		value = 0
+	}
+}

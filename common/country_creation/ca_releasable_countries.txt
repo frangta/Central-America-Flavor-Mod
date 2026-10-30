@@ -1,36 +1,78 @@
 ﻿REPLACE:ELS = {
 	states = { STATE_SAN_SALVADOR }
-
+	possible = {
+              c:UCA = {
+			   NOT = {
+			   has_variable = is_frca_var
+			   }
+			  
+			  }
+	}
 	ai_will_do = { always = no }
 }
 
 REPLACE:GUA = {
 	states = { STATE_GUATEMALA }
-
+	possible = {
+              c:UCA = {
+			   NOT = {
+			   has_variable = is_frca_var
+			   }
+			  
+			  }
+	}
 	ai_will_do = { always = no }
 }
 
 REPLACE:ALT = {
 	provinces = { xD9BEFE x78C465 xBD8628  }
-
+	possible = {
+              c:UCA = {
+			   NOT = {
+			   has_variable = is_frca_var
+			   }
+			  
+			  }
+	}
 	ai_will_do = { always = no }
 }
 
 REPLACE:NIC = {
 	states = { STATE_NICARAGUA }
-
+	possible = {
+              c:UCA = {
+			   NOT = {
+			   has_variable = is_frca_var
+			   }
+			  
+			  }
+	}
 	ai_will_do = { always = no }
 }
 
 REPLACE:HON = {
 	states = { STATE_HONDURAS }
-
+	possible = {
+              c:UCA = {
+			   NOT = {
+			   has_variable = is_frca_var
+			   }
+			  
+			  }
+	}
 	ai_will_do = { always = no }
 }
 
 REPLACE:COS = {
 	states = { STATE_COSTA_RICA }
-
+	possible = {
+              c:UCA = {
+			   NOT = {
+			   has_variable = is_frca_var
+			   }
+			  
+			  }
+	}
 	ai_will_do = { always = no }
 }
 CIP = {

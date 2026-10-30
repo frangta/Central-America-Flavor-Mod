@@ -17,8 +17,8 @@ gua_mariano_galvez_character_template = {
 	#        Intelectuales) y lo transfiere el cast al separarse Guatemala.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Mariano"
-	last_name = "Galvez"
+	first_name = "cafm_Mariano"
+	last_name = "cafm_Galvez"
 	historical = yes
 	female = no
 	birth_date = 1794.5.26
@@ -56,8 +56,8 @@ gua_rafael_carrera_character_template = {
 	#        (1840). Nivel C: lo crea el evento de la revuelta.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Rafael"
-	last_name = "Carrera"
+	first_name = "cafm_Rafael"
+	last_name = "cafm_Carrera"
 	historical = yes
 	female = no
 	birth_date = 1814.10.24
@@ -102,8 +102,8 @@ gua_mariano_rivera_paz_character_template = {
 	#        1839, 13 abr 1839–25 feb 1842 y 14 may 1842–11 dic 1844. Muerto en Jalapa el 26 feb 1849.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Mariano"
-	last_name = "Rivera_Paz"
+	first_name = "cafm_Mariano"
+	last_name = "cafm_Rivera_Paz"
 	historical = yes
 	female = no
 	birth_date = 1804.12.24			# V
@@ -140,7 +140,7 @@ gua_mariano_rivera_paz_character_template = {
 			NOT = { has_global_variable = cafm_hc_rivera_paz }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1838.1.1
@@ -155,8 +155,8 @@ gua_mariano_aycinena_character_template = {
 	#        Guatemala. Diputado y jefe del Consulado de Comercio. Muere el 29 mar 1855.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Mariano"
-	last_name = "de_Aycinena_y_Pinol"
+	first_name = "cafm_Mariano"
+	last_name = "cafm_de_Aycinena_y_Pinol"
 	historical = yes
 	female = no
 	birth_date = 1789.9.16
@@ -199,7 +199,7 @@ gua_mariano_aycinena_character_template = {
 			NOT = { has_global_variable = cafm_hc_mariano_aycinena }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1837.1.1
@@ -212,8 +212,8 @@ cafm_juan_jose_aycinena = {
 	# NOTAS: Obispo, rector de San Carlos y ministro de Carrera; negoció el Concordato de 1852.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Juan_Jose"
-	last_name = "de_Aycinena_y_Pinol"
+	first_name = "cafm_Juan_Jose"
+	last_name = "cafm_de_Aycinena_y_Pinol"
 	historical = yes
 	female = no
 	birth_date = 1792.6.29			# M: confirmar fecha
@@ -250,7 +250,7 @@ cafm_juan_jose_aycinena = {
 			NOT = { has_global_variable = cafm_hc_juan_jose_aycinena }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_devout
 		}
 		earliest_usage_date = 1840.1.1
@@ -263,8 +263,8 @@ cafm_antonio_larrazabal = {
 	# NOTAS: Provisor del arzobispado durante el exilio de Casaús; desmanteló la Iglesia altense en 1840.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Antonio"
-	last_name = "Larrazabal"
+	first_name = "cafm_Antonio"
+	last_name = "cafm_Larrazabal"
 	historical = yes
 	female = no
 	birth_date = 1769.6.18			# M: confirmar fecha
@@ -301,7 +301,7 @@ cafm_antonio_larrazabal = {
 			NOT = { has_global_variable = cafm_hc_larrazabal }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_devout
 		}
 		earliest_usage_date = 1838.1.1
@@ -314,8 +314,8 @@ cafm_francisco_garcia_pelaez = {
 	# NOTAS: Arzobispo de Guatemala, sucesor de Casaús (1846).
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Francisco_de_Paula"
-	last_name = "Garcia_Pelaez"
+	first_name = "cafm_Francisco_de_Paula"
+	last_name = "cafm_Garcia_Pelaez"
 	historical = yes
 	female = no
 	birth_date = 1785.1.1			# M: confirmar fecha
@@ -352,7 +352,7 @@ cafm_francisco_garcia_pelaez = {
 			NOT = { has_global_variable = cafm_hc_garcia_pelaez }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_devout
 		}
 		earliest_usage_date = 1846.1.1
@@ -365,8 +365,8 @@ cafm_luis_batres = {
 	# NOTAS: Secretario general del gobierno conservador (1840); figura del 'clan'.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Luis"
-	last_name = "Batres_Juarros"
+	first_name = "cafm_Luis"
+	last_name = "cafm_Batres_Juarros"
 	historical = yes
 	female = no
 	birth_date = 1802.1.1			# M: confirmar fecha
@@ -403,7 +403,7 @@ cafm_luis_batres = {
 			NOT = { has_global_variable = cafm_hc_batres }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1838.1.1
@@ -416,8 +416,8 @@ cafm_manuel_pavon = {
 	# NOTAS: Ministro de Carrera, comerciante conservador.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Manuel_Francisco"
-	last_name = "Pavon_Aycinena"
+	first_name = "cafm_Manuel_Francisco"
+	last_name = "cafm_Pavon_Aycinena"
 	historical = yes
 	female = no
 	birth_date = 1798.1.1			# M: confirmar fecha
@@ -454,7 +454,7 @@ cafm_manuel_pavon = {
 			NOT = { has_global_variable = cafm_hc_pavon }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_petty_bourgeoisie
 		}
 		earliest_usage_date = 1840.1.1
@@ -468,8 +468,8 @@ cafm_pedro_valenzuela = {
 	#        de la caída de Gálvez.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Pedro_Jose"
-	last_name = "Valenzuela"
+	first_name = "cafm_Pedro_Jose"
+	last_name = "cafm_Valenzuela"
 	historical = yes
 	female = no
 	birth_date = 1797.1.1			# M: confirmar fecha
@@ -504,8 +504,8 @@ cafm_mariano_paredes = {
 	# NOTAS: General conservador; presidente 1849–1851.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Mariano"
-	last_name = "Paredes"
+	first_name = "cafm_Mariano"
+	last_name = "cafm_Paredes"
 	historical = yes
 	female = no
 	birth_date = 1800.1.1			# M: confirmar fecha
@@ -556,8 +556,8 @@ cafm_serapio_cruz = {
 	# NOTAS: 'Tata Lapo', caudillo rebelde del oriente; enemigo de Carrera desde 1848.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Serapio"
-	last_name = "Cruz"
+	first_name = "cafm_Serapio"
+	last_name = "cafm_Cruz"
 	historical = yes
 	female = no
 	birth_date = 1810.1.1			# M: confirmar fecha
@@ -610,8 +610,8 @@ gua_pedro_aycinena_character_template = {
 	# NOTAS: Canciller de Carrera, presidente interino 1865. Fuera de la versión 1.0.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Pedro"
-	last_name = "de_Aycinena_y_Pinol"
+	first_name = "cafm_Pedro"
+	last_name = "cafm_de_Aycinena_y_Pinol"
 	historical = yes
 	female = no
 	birth_date = 1802.1.1			# M: confirmar fecha
@@ -647,8 +647,8 @@ gua_vicente_cerna_character_template = {
 	# NOTAS: Presidente 1865–1871. Fuera de la versión 1.0.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Vicente"
-	last_name = "Cerna"
+	first_name = "cafm_Vicente"
+	last_name = "cafm_Cerna"
 	historical = yes
 	female = no
 	birth_date = 1810.1.1			# M: confirmar fecha
@@ -684,8 +684,8 @@ gua_miguel_garcia_granados_character_template = {
 	# NOTAS: Líder de la Revolución Liberal de 1871. Fuera de la versión 1.0.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Miguel"
-	last_name = "Garcia_Granados"
+	first_name = "cafm_Miguel"
+	last_name = "cafm_Garcia_Granados"
 	historical = yes
 	female = no
 	birth_date = 1809.1.1			# M: confirmar fecha
@@ -721,8 +721,8 @@ gua_alejandro_sinibaldi_character_template = {
 	# NOTAS: Presidente interino 1885. Fuera de la versión 1.0.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Alejandro"
-	last_name = "M_Sinibaldi"
+	first_name = "cafm_Alejandro"
+	last_name = "cafm_M_Sinibaldi"
 	historical = yes
 	female = no
 	birth_date = 1825.1.1			# M: confirmar fecha
@@ -758,8 +758,8 @@ gua_manuel_lisandro_barillas_character_template = {
 	# NOTAS: Presidente 1885–1892. Fuera de la versión 1.0.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Manuel_Lisandro"
-	last_name = "Barillas"
+	first_name = "cafm_Manuel_Lisandro"
+	last_name = "cafm_Barillas"
 	historical = yes
 	female = no
 	birth_date = 1845.1.17
@@ -796,8 +796,8 @@ gua_barrios_character_template = {
 	# NOTAS: Reforma Liberal de 1871; presidente 1873–1885. Fuera de la versión 1.0.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Justo_Rufino"
-	last_name = "Barrios"
+	first_name = "cafm_Justo_Rufino"
+	last_name = "cafm_Barrios"
 	historical = yes
 	female = no
 	birth_date = 1835.7.19
@@ -836,7 +836,7 @@ gua_barrios_character_template = {
 			NOT = { has_global_variable = cafm_hc_justo_rufino_barrios }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			OR = {
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_armed_forces

@@ -17,8 +17,8 @@ TRY_REPLACE:UCA_francisco_morazan = {
 	#        Plantilla vanilla: se edita con TRY_REPLACE.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Francisco"
-	last_name = "Morazan"
+	first_name = "cafm_Francisco"
+	last_name = "cafm_Morazan"
 	historical = yes
 	female = no
 	birth_date = 1792.10.3
@@ -64,8 +64,8 @@ uca_francisco_barrundia_character_template = {
 	# NOTAS: Liberal radical ('fiebre'), líder de la Pequeña Burguesía. Lo crea el historial de la UCA.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jose_Francisco"
-	last_name = "Barrundia"
+	first_name = "cafm_Jose_Francisco"
+	last_name = "cafm_Barrundia"
 	historical = yes
 	female = no
 	birth_date = 1787.5.12			# M: confirmar fecha
@@ -102,8 +102,8 @@ uca_ramon_casaus_character_template = {
 	#        1845): el historial de la UCA lo crea y lo envía al exilio el día 1.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Ramon"
-	last_name = "Casaus_y_Torres"
+	first_name = "cafm_Ramon"
+	last_name = "cafm_Casaus_y_Torres"
 	historical = yes
 	female = no
 	birth_date = 1765.2.13
@@ -141,8 +141,8 @@ cafm_gregorio_salazar = {
 	#        muertes). Nacimiento: 1773 en San Salvador según la mayoría de fuentes (es.wiki da 1795).
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jose_Gregorio"
-	last_name = "Salazar"
+	first_name = "cafm_Jose_Gregorio"
+	last_name = "cafm_Salazar"
 	historical = yes
 	female = no
 	birth_date = 1773.1.1			# P: año 1773 (San Salvador); día desconocido
@@ -180,8 +180,8 @@ cafm_carlos_salazar = {
 	#        Muere en San José (Costa Rica) el 23 jul 1867.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Carlos"
-	last_name = "Salazar"
+	first_name = "cafm_Carlos"
+	last_name = "cafm_Salazar"
 	historical = yes
 	female = no
 	birth_date = 1800.1.1			# V: año 1800 (San Salvador); día desconocido
@@ -234,8 +234,8 @@ cafm_juan_galindo = {
 	#        la cuestión de Belice. Muere en Honduras en 1840.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Juan"
-	last_name = "Galindo"
+	first_name = "cafm_Juan"
+	last_name = "cafm_Galindo"
 	historical = yes
 	female = no
 	birth_date = 1802.1.1			# V: año 1802 (Dublín); día desconocido
@@ -287,8 +287,8 @@ cafm_pedro_molina = {
 	#        diputado en Guatemala (1838) y en El Salvador (1840). Muere el 21 sep 1854.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Pedro"
-	last_name = "Molina"
+	first_name = "cafm_Pedro"
+	last_name = "cafm_Molina"
 	historical = yes
 	female = no
 	birth_date = 1777.4.29			# V
@@ -325,7 +325,7 @@ cafm_pedro_molina = {
 			NOT = { has_global_variable = cafm_hc_pedro_molina }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1836.1.1

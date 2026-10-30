@@ -17,8 +17,8 @@ cafm_marcelo_molina = {
 	#        plantilla (hoy lo crea en línea).
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Marcelo"
-	last_name = "Molina_Mata"
+	first_name = "cafm_Marcelo"
+	last_name = "cafm_Molina_Mata"
 	historical = yes
 	female = no
 	birth_date = 1800.1.1			# M: confirmar fecha
@@ -55,8 +55,8 @@ cafm_agustin_guzman = {
 	#        1840; muere atacando Guatemala en 1848. Multinacional.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Agustin"
-	last_name = "Guzman"
+	first_name = "cafm_Agustin"
+	last_name = "cafm_Guzman"
 	historical = yes
 	female = no
 	birth_date = 1800.1.1			# M: confirmar fecha
@@ -107,8 +107,8 @@ cafm_joaquin_mont = {
 	# NOTAS: Hacendado de Totonicapán, miembro del ejecutivo provisional de 1838.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Joaquin"
-	last_name = "Mont"
+	first_name = "cafm_Joaquin"
+	last_name = "cafm_Mont"
 	historical = yes
 	female = no
 	birth_date = 1790.1.1			# M: confirmar fecha
@@ -146,7 +146,7 @@ cafm_joaquin_mont = {
 			NOT = { has_global_variable = cafm_hc_joaquin_mont }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1838.1.1
@@ -159,8 +159,8 @@ cafm_felix_juarez = {
 	# NOTAS: Agricultor de Sololá, miembro del ejecutivo provisional de 1838.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Felix"
-	last_name = "Juarez"
+	first_name = "cafm_Felix"
+	last_name = "cafm_Juarez"
 	historical = yes
 	female = no
 	birth_date = 1790.1.1			# M: confirmar fecha
@@ -196,7 +196,7 @@ cafm_felix_juarez = {
 			NOT = { has_global_variable = cafm_hc_felix_juarez }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_rural_folk
 		}
 		earliest_usage_date = 1838.1.1
@@ -209,8 +209,8 @@ cafm_jose_tomas_sacasa = {
 	# NOTAS: Nicaragüense, miembro del ejecutivo provisional por Suchitepéquez (1838). Multinacional.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jose_Tomas"
-	last_name = "Sacasa"
+	first_name = "cafm_Jose_Tomas"
+	last_name = "cafm_Sacasa"
 	historical = yes
 	female = no
 	birth_date = 1790.1.1			# M: confirmar fecha
@@ -246,7 +246,7 @@ cafm_jose_tomas_sacasa = {
 			NOT = { has_global_variable = cafm_hc_sacasa }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1838.1.1
@@ -259,8 +259,8 @@ cafm_urbano_ugarte = {
 	# NOTAS: Cura interino de Quetzaltenango; víctima del desmantelamiento de la Iglesia altense (1840).
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Urbano"
-	last_name = "Ugarte"
+	first_name = "cafm_Urbano"
+	last_name = "cafm_Ugarte"
 	historical = yes
 	female = no
 	birth_date = 1800.1.1			# M: confirmar fecha
@@ -296,7 +296,7 @@ cafm_urbano_ugarte = {
 			NOT = { has_global_variable = cafm_hc_ugarte }
 		}
 		interest_group_trigger = {
-			ig_counts_as_marginal = no
+			is_marginal = no
 			is_interest_group_type = ig_devout
 		}
 		earliest_usage_date = 1838.1.1

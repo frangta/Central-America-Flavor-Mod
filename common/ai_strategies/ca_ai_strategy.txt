@@ -60,7 +60,7 @@ ai_strategy_unify_central_america = {
         # Si el target es candidato de unificación, sube agresividad
         if = {
             limit = {
-                scope:target_country = { is_unification_candidate = UCA }
+                scope:target_country = { is_unification_candidate = GCA }
             }
             add = 1.5
         }
@@ -78,7 +78,7 @@ ai_strategy_unify_central_america = {
                         country_has_primary_culture = cu:costa_rican
                         country_has_primary_culture = cu:panamanian
                     }
-                    NOT = { is_unification_candidate = UCA }
+                    NOT = { is_unification_candidate = GCA }
                 }
             }
             add = 0.35
@@ -127,8 +127,12 @@ ai_strategy_unify_central_america = {
                         state_region = s:STATE_YUCATAN
                     }
                 }
+                can_reach_target_state = { TARGET_STATE = scope:target_state }
             }
-            add = 90
+            add = {
+                value = 90
+                desc = "STATE_VALUE_UNIFY_CENTRAL_AMERICA"
+            }
         }
     }
 
@@ -164,8 +168,9 @@ ai_strategy_unify_central_america = {
             if = {
                 limit = {
                     scope:target_country = {
-                        is_unification_candidate = UCA
+                        is_unification_candidate = GCA
                     }
+                    can_reach_target_country = { TARGET_COUNTRY = scope:target_country }
                 }
                 add = 250
             }
@@ -186,9 +191,9 @@ ai_strategy_unify_central_america = {
                         country_has_primary_culture = cu:costa_rican
                         country_has_primary_culture = cu:panamanian
                     }
-                    NOT = { is_unification_candidate = UCA }
+                    NOT = { is_unification_candidate = GCA }
                     OR = {
-                        is_supporting_unification_candidate = { who = root country_formation = UCA }
+                        is_supporting_unification_candidate = { who = root country_formation = GCA }
                         is_subject_of = root
                         is_in_customs_union_with = root
                     }
@@ -209,9 +214,9 @@ ai_strategy_unify_central_america = {
                         country_has_primary_culture = cu:costa_rican
                         country_has_primary_culture = cu:panamanian
                     }
-                    NOT = { is_unification_candidate = UCA }
+                    NOT = { is_unification_candidate = GCA }
                     NOR = {
-                        is_supporting_unification_candidate = { who = root country_formation = UCA }
+                        is_supporting_unification_candidate = { who = root country_formation = GCA }
                         is_subject_of = root
                         is_in_customs_union_with = root
                     }
@@ -223,7 +228,7 @@ ai_strategy_unify_central_america = {
         conquer = {
             trigger = {
                 scope:target_country = {
-                    is_unification_candidate = UCA
+                    is_unification_candidate = GCA
                 }
             }
             score = { value = 900 }
@@ -233,13 +238,13 @@ ai_strategy_unify_central_america = {
     # Quién puede elegirla
     possible = {
         is_subject = no
-        is_unification_candidate = UCA
+        is_unification_candidate = GCA
         NOT = { country_tier = empire }
     }
 
     # Peso base para elegir la strategy
     weight = {
-        value = 6
+        value = 100 # CAFM P1: antes 6 (las demas estrategias del mod pesan 100-500)
         if = {
             limit = { has_technology_researched = pan-nationalism } # placeholder
             add = {
@@ -288,7 +293,7 @@ ai_strategy_cos_agro_export_focus = {
         bg_plantations = 4.0
         bg_logging = 2.0
         bg_agriculture = 1.5
-        bg_military = 0.1 # Descuida el ejército histórico
+        bg_army = 0.75 # CAFM P1: antes bg_military = 0.1 (clave inexistente y sin ejercito); Carrillo y Mora si lo usaron
     }
 
     # Posturas comerciales 1.13
@@ -340,10 +345,11 @@ ai_strategy_cos_autocratic_autonomist = {
     possible = {
         c:COS ?= THIS
         # Se activa si el líder tiene las ideologías clave
-        ruler = {
-		
-            OR = {
-                has_ideology = ideology:ideology_ca_leader_autocratic_autonomist
+        # CAFM P1: ideology_ca_criollo_elite es de grupo de interes, no de personaje
+        OR = {
+            ruler ?= { has_ideology = ideology:ideology_ca_leader_autocratic_autonomist }
+            ig:ig_landowners ?= {
+                is_in_government = yes
                 has_ideology = ideology:ideology_ca_criollo_elite
             }
         }
@@ -366,10 +372,51 @@ ai_strategy_cos_isolated_autonomist = {
     diplomatic_play_neutrality = { value = 100 }
     diplomatic_play_boldness = { value = -50 }
 
-    # Condición de oportunidad para Panamá/Bocas del Toro
-    wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
-		conquer_state = 2.0
-	}
+    # Condicion de oportunidad para Panama/Bocas del Toro (CAFM P1: solo ese estado)
+
+    # CAFM P1: sello de seguridad (zz_ca_ai_triggers.txt). Con el sello activo, un estado
+    # miembro no apunta a otro miembro; fuera de eso, solo cuentan los objetivos de la region.
+    aggression = {
+        value = 0
+        if = {
+            limit = { ca_ai_member_seal = yes }
+            add = -10
+        }
+    }
+    wargoal_scores = {
+        conquer_state = {
+            value = 0
+            if = {
+                limit = {
+                    can_reach_target_state = { TARGET_STATE = scope:target_state }
+                    scope:target_state = {
+                        OR = {
+                            state_region = s:STATE_PANAMA
+                        }
+                    }
+                }
+                add = 60
+            }
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        regime_change = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        annex_country = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+    }
 
     possible = {
         c:COS ?= THIS
@@ -388,15 +435,56 @@ ai_strategy_cos_antagonize_uca = {
     icon = "gfx/interface/icons/ai_strategy_icons/subject_break_free.dds"
     type = diplomatic
 
-    # Objetivos Secretos 1.13
     secret_goal_scores = {
+        # CAFM P1: solo contra la UCA; el odio depende de la lealtad y, en modo historico, de la fecha
         antagonize = {
-            trigger = { is_subject_of = c:UCA }
-            score = { value = 10000 } # Odio activo
+            trigger = {
+                ca_ai_is_member_now = yes
+                scope:target_country = { c:UCA ?= this }
+            }
+            score = {
+                value = 200
+                if = {
+                    limit = { ca_ai_own_loyalty_le = { VALUE = 1 } }
+                    add = 3000
+                }
+                else_if = {
+                    limit = { ca_ai_own_loyalty_le = { VALUE = 2 } }
+                    add = 800
+                }
+                if = {
+                    limit = { ca_ai_historic_separation_due = yes }
+                    add = 5000
+                }
+                if = {
+                    limit = {
+                        has_global_variable = ca_world_historic
+                        NOT = { ca_ai_historic_separation_due = yes }
+                    }
+                    multiply = 0.25
+                }
+            }
         }
         comply = {
-            trigger = { is_subject_of = c:UCA }
-            score = { value = -5000 } # Jamás será leal
+            trigger = {
+                ca_ai_is_member_now = yes
+                scope:target_country = { c:UCA ?= this }
+            }
+            score = {
+                value = 0
+                if = {
+                    limit = { ca_ai_own_loyalty_ge = { VALUE = 3 } }
+                    add = 500
+                }
+                if = {
+                    limit = { ca_ai_own_loyalty_le = { VALUE = 1 } }
+                    add = -3000
+                }
+                if = {
+                    limit = { ca_ai_historic_separation_due = yes }
+                    add = -5000
+                }
+            }
         }
     }
 
@@ -406,9 +494,42 @@ ai_strategy_cos_antagonize_uca = {
 		increase_autonomy = 10.0
 	}
 
+    # CAFM P1: sello de seguridad (zz_ca_ai_triggers.txt). Con el sello activo, un estado
+    # miembro no apunta a otro miembro; fuera de eso, solo cuentan los objetivos de la region.
+    aggression = {
+        value = 0
+        if = {
+            limit = { ca_ai_member_seal = yes }
+            add = -10
+        }
+    }
+    wargoal_scores = {
+        conquer_state = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        regime_change = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        annex_country = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+    }
+
     possible = {
         c:COS ?= THIS
-        is_subject = yes
+        ca_ai_is_member_now = yes
     }
 
     weight = {
@@ -437,21 +558,95 @@ ai_strategy_nic_uca_antagonize = {
 		increase_autonomy = 5.0
 	}
 
-    # SISTEMA 1.13: Objetivos Secretos como Sujeto
     secret_goal_scores = {
+        # CAFM P1: solo contra la UCA; el odio depende de la lealtad y, en modo historico, de la fecha
         antagonize = {
-            trigger = { is_subject_of = c:UCA }
-            score = { value = 10000 } # Odio absoluto a la Federación
+            trigger = {
+                ca_ai_is_member_now = yes
+                scope:target_country = { c:UCA ?= this }
+            }
+            score = {
+                value = 200
+                if = {
+                    limit = { ca_ai_own_loyalty_le = { VALUE = 1 } }
+                    add = 3000
+                }
+                else_if = {
+                    limit = { ca_ai_own_loyalty_le = { VALUE = 2 } }
+                    add = 800
+                }
+                if = {
+                    limit = { ca_ai_historic_separation_due = yes }
+                    add = 5000
+                }
+                if = {
+                    limit = {
+                        has_global_variable = ca_world_historic
+                        NOT = { ca_ai_historic_separation_due = yes }
+                    }
+                    multiply = 0.25
+                }
+            }
         }
         comply = {
-            trigger = { is_subject_of = c:UCA }
-            score = { value = -5000 } # Nunca cooperará
+            trigger = {
+                ca_ai_is_member_now = yes
+                scope:target_country = { c:UCA ?= this }
+            }
+            score = {
+                value = 0
+                if = {
+                    limit = { ca_ai_own_loyalty_ge = { VALUE = 3 } }
+                    add = 500
+                }
+                if = {
+                    limit = { ca_ai_own_loyalty_le = { VALUE = 1 } }
+                    add = -3000
+                }
+                if = {
+                    limit = { ca_ai_historic_separation_due = yes }
+                    add = -5000
+                }
+            }
+        }
+    }
+
+    # CAFM P1: sello de seguridad (zz_ca_ai_triggers.txt). Con el sello activo, un estado
+    # miembro no apunta a otro miembro; fuera de eso, solo cuentan los objetivos de la region.
+    aggression = {
+        value = 0
+        if = {
+            limit = { ca_ai_member_seal = yes }
+            add = -10
+        }
+    }
+    wargoal_scores = {
+        conquer_state = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        regime_change = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        annex_country = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
         }
     }
 
     possible = {
         c:NIC ?= THIS
-        is_subject_of = c:UCA
+        ca_ai_is_member_now = yes
     }
     weight = { value = 100 }
 }
@@ -483,7 +678,7 @@ ai_strategy_nic_historic_chaos = {
     weight = { 
         value = 100 
         # Si Walker toma el poder, esta estrategia se desactiva
-        if = { limit = { ruler ?= { has_ideology = ideology:ideology_jingoist } } multiply = 0 }
+        if = { limit = { ruler ?= { OR = { has_ideology = ideology:ideology_ca_filibuster has_ideology = ideology:ideology_slaver_filibusterism } } } multiply = 0 } # CAFM P1: jingoist es de grupo de interes
     }
 }
 
@@ -510,9 +705,42 @@ ai_strategy_nic_filibuster_state = {
 		make_protectorate = 5.0
 	}
 
+    # CAFM P1: sello de seguridad (zz_ca_ai_triggers.txt). Con el sello activo, un estado
+    # miembro no apunta a otro miembro; fuera de eso, solo cuentan los objetivos de la region.
+    aggression = {
+        value = 0
+        if = {
+            limit = { ca_ai_member_seal = yes }
+            add = -10
+        }
+    }
+    wargoal_scores = {
+        conquer_state = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        regime_change = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        annex_country = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+    }
+
     possible = {
         c:NIC ?= THIS
-        ruler ?= { has_ideology = ideology:ideology_jingoist } # Solo si un Jingoísta (Walker) gobierna
+        ruler ?= { OR = { has_ideology = ideology:ideology_ca_filibuster has_ideology = ideology:ideology_slaver_filibusterism } } # CAFM P1: Walker (antes jingoist, que es de grupo de interes)
     }
     weight = { value = 200 } # Sobrescribe cualquier otra estrategia
 }
@@ -550,7 +778,7 @@ ai_strategy_nic_canal_empire = {
         c:NIC ?= THIS
         is_at_war = no
         OR = {
-            ig:ig_industrialists = { is_in_government = yes is_powerful = yes }
+            ig:ig_industrialists ?= { is_in_government = yes is_powerful = yes }
             has_law = law_type:law_technocracy
         }
     }
@@ -568,11 +796,17 @@ ai_strategy_nic_mosquitia_loyalist = {
     # Objetivos Secretos: Amor a la Corona Británica
     secret_goal_scores = {
         comply = {
-            trigger = { is_subject_of = c:GBR }
+            trigger = {
+                is_subject_of = c:GBR
+                scope:target_country = { c:GBR ?= this }
+            }
             score = { value = 10000 }
         }
         antagonize = {
-            trigger = { is_subject_of = c:GBR }
+            trigger = {
+                is_subject_of = c:GBR
+                scope:target_country = { c:GBR ?= this }
+            }
             score = { value = -10000 }
         }
     }
@@ -585,6 +819,7 @@ ai_strategy_nic_mosquitia_loyalist = {
 
     possible = {
         c:NIC ?= THIS
+        exists = c:GBR
         is_subject_of = c:GBR
         # Se activa si las culturas nativas toman el control
         OR = {
@@ -646,14 +881,17 @@ ai_strategy_gua_unitary_stronghold = {
 	anti_movements = {
 		movement_ca_liberal
 		movement_ca_federalist
-		movement_ca_carrillista # Odia a muerte la secesión
+		movement_ca_los_altos_national # CAFM P1: odia a muerte la secesion de Los Altos (carrillista solo existe en COS)
 	}
 
 	possible = {
 		c:GUA ?= THIS
-		OR = {
-			has_modifier = ca_conservative_capital
-			has_modifier = reactionary_stronghold
+		# CAFM P1: son modificadores de estado, no del pais
+		any_scope_state = {
+			OR = {
+				has_modifier = ca_conservative_capital
+				has_modifier = reactionary_stronghold
+			}
 		}
 	}
 
@@ -673,9 +911,55 @@ ai_strategy_gua_aggressive_hegemon = {
 
 	# Prioridades de Guerra
 	wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
-		conquer_state = 3.0
+		conquer_state = 1.5
 		regime_change = 2.0
 	}
+
+    # CAFM P1: sello de seguridad (zz_ca_ai_triggers.txt). Con el sello activo, un estado
+    # miembro no apunta a otro miembro; fuera de eso, solo cuentan los objetivos de la region.
+    aggression = {
+        value = 0
+        if = {
+            limit = { ca_ai_member_seal = yes }
+            add = -10
+        }
+    }
+    wargoal_scores = {
+        conquer_state = {
+            value = 0
+            if = {
+                limit = {
+                    can_reach_target_state = { TARGET_STATE = scope:target_state }
+                    scope:target_state = {
+                        OR = {
+                            state_region = s:STATE_SAN_SALVADOR
+                            state_region = s:STATE_HONDURAS
+                            state_region = s:STATE_CHIAPAS
+                        }
+                    }
+                }
+                add = 50
+            }
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        regime_change = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        annex_country = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+    }
 
 	possible = {
 		c:GUA ?= THIS
@@ -687,22 +971,30 @@ ai_strategy_gua_aggressive_hegemon = {
 }
 # Estrategia de Sujeto: El Usurpador
 ai_strategy_gua_antagonize_uca = {
+	icon = "gfx/interface/icons/ai_strategy_icons/subject_break_free.dds" # CAFM P1: faltaba
 	type = diplomatic
 
 	secret_goal_scores = {
 		# Guatemala no quiere irse (separarse), quiere MANDAR (antagonizar al líder actual)
 		antagonize = {
-			trigger = { 
-				is_subject_of = c:UCA 
-				NOT = { c:UCA = { has_law = law_type:law_ca_central_american_unitary } }
+			trigger = {
+				ca_ai_is_member_now = yes
+				scope:target_country = { c:UCA ?= this }
+				c:UCA ?= { NOT = { has_law = law_type:law_ca_central_american_unitary } }
 			}
-			score = { value = 8000 }
+			score = {
+				value = 1000
+				if = {
+					limit = { ca_ai_historic_separation_due = yes }
+					add = 7000
+				}
+			}
 		}
 	}
 
 	possible = {
 		c:GUA ?= THIS
-		is_subject = yes
+		ca_ai_is_member_now = yes
 	}
 
 	weight = {
@@ -738,12 +1030,12 @@ ai_strategy_els_morazanist_crusade = {
     anti_movements = {
         movement_ca_reactionary
         movement_ca_unitarian
-        movement_ca_carrillista
+        movement_ca_elsalvador_national # CAFM P1: antes carrillista (solo existe en COS)
     }
 
     possible = {
         c:ELS ?= THIS
-        ig:ig_intelligentsia = { is_powerful = yes }
+        ig:ig_intelligentsia ?= { is_powerful = yes }
     }
 
     weight = {
@@ -770,6 +1062,39 @@ ai_strategy_els_export_revolution = {
 		regime_change = 3.0
 		conquer_state = 0.0
 	}
+
+    # CAFM P1: sello de seguridad (zz_ca_ai_triggers.txt). Con el sello activo, un estado
+    # miembro no apunta a otro miembro; fuera de eso, solo cuentan los objetivos de la region.
+    aggression = {
+        value = 0
+        if = {
+            limit = { ca_ai_member_seal = yes }
+            add = -10
+        }
+    }
+    wargoal_scores = {
+        conquer_state = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        regime_change = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        annex_country = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+    }
 
     possible = {
         c:ELS ?= THIS
@@ -803,8 +1128,8 @@ ai_strategy_els_14_families = {
 
     possible = {
         c:ELS ?= THIS
-        ig:ig_landowners = { 
-            is_in_government = yes 
+        ig:ig_landowners ?= {
+            is_in_government = yes
             is_powerful = yes
         }
     }
@@ -831,13 +1156,59 @@ ai_strategy_els_central_american_prussia = {
 
     # Ya no quiere cambiar de régimen; quiere pintar el mapa.
     wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
-		conquer_state = 3.0
+		conquer_state = 1.5
 	}
+
+    # CAFM P1: sello de seguridad (zz_ca_ai_triggers.txt). Con el sello activo, un estado
+    # miembro no apunta a otro miembro; fuera de eso, solo cuentan los objetivos de la region.
+    aggression = {
+        value = 0
+        if = {
+            limit = { ca_ai_member_seal = yes }
+            add = -10
+        }
+    }
+    wargoal_scores = {
+        conquer_state = {
+            value = 0
+            if = {
+                limit = {
+                    can_reach_target_state = { TARGET_STATE = scope:target_state }
+                    scope:target_state = {
+                        OR = {
+                            state_region = s:STATE_GUATEMALA
+                            state_region = s:STATE_HONDURAS
+                            state_region = s:STATE_NICARAGUA
+                        }
+                    }
+                }
+                add = 50
+            }
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        regime_change = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        annex_country = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+    }
 
     possible = {
         c:ELS ?= THIS
-        ig:ig_armed_forces = { is_in_government = yes }
-        ig:ig_industrialists = { is_powerful = yes }
+        ig:ig_armed_forces ?= { is_in_government = yes }
+        ig:ig_industrialists ?= { is_powerful = yes }
         has_journal_entry = je_ca_military_reform # Tu diario de profesionalización
     }
 
@@ -873,7 +1244,7 @@ ai_strategy_els_nonualco_rebellion = {
 
     possible = {
         c:ELS ?= THIS
-        ig:ig_rural_folk = { is_in_government = yes }
+        ig:ig_rural_folk ?= { is_in_government = yes }
     }
 
     weight = {
@@ -917,11 +1288,11 @@ ai_strategy_hon_mining_banana_enclave = {
         value = 100
         # Aumenta masivamente si gobierna la élite vende-patrias
         if = {
-            limit = { 
-                ig:ig_landowners = { 
-                    is_in_government = yes 
-                    has_ideology = ideology:ideology_ca_criollo_elite 
-                } 
+            limit = {
+                ig:ig_landowners ?= {
+                    is_in_government = yes
+                    has_ideology = ideology:ideology_ca_criollo_elite
+                }
             }
             add = 200
         }
@@ -944,6 +1315,39 @@ ai_strategy_hon_opportunist_buffer = {
     wargoal_weights = { # CAFM F22: pesos simples (el juego no acepta trigger/score aqui)
 		conquer_state = 0.0
 	}
+
+    # CAFM P1: sello de seguridad (zz_ca_ai_triggers.txt). Con el sello activo, un estado
+    # miembro no apunta a otro miembro; fuera de eso, solo cuentan los objetivos de la region.
+    aggression = {
+        value = 0
+        if = {
+            limit = { ca_ai_member_seal = yes }
+            add = -10
+        }
+    }
+    wargoal_scores = {
+        conquer_state = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        regime_change = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        annex_country = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+    }
 
     possible = {
         c:HON ?= THIS
@@ -972,9 +1376,42 @@ ai_strategy_hon_morazanist_revival = {
 		regime_change = 3.0
 	}
 
+    # CAFM P1: sello de seguridad (zz_ca_ai_triggers.txt). Con el sello activo, un estado
+    # miembro no apunta a otro miembro; fuera de eso, solo cuentan los objetivos de la region.
+    aggression = {
+        value = 0
+        if = {
+            limit = { ca_ai_member_seal = yes }
+            add = -10
+        }
+    }
+    wargoal_scores = {
+        conquer_state = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        regime_change = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+        annex_country = {
+            value = 0
+            if = {
+                limit = { ca_ai_member_seal = yes }
+                add = -1000
+            }
+        }
+    }
+
     possible = {
         c:HON ?= THIS
-        ig:ig_intelligentsia = { is_powerful = yes }
+        ig:ig_intelligentsia ?= { is_powerful = yes }
         any_political_movement = { is_political_movement_type = movement_ca_federalist }
     }
 
@@ -992,23 +1429,30 @@ ai_strategy_hon_submissive_vanguard = {
     type = diplomatic
 
     secret_goal_scores = {
-        # Si Guatemala la domina, Honduras será su perro de ataque
+        # CAFM P1: un solo comply (antes habia dos) y siempre hacia su señor
+        # Si Guatemala la domina, Honduras sera su perro de ataque;
+        # si una potencia la hace protectorado para proteger las minas, tambien obedece.
         comply = {
-            trigger = { is_subject_of = c:GUA }
-            score = { value = 10000 } 
-        }
-        antagonize = {
-            trigger = { is_subject_of = c:GUA }
-            score = { value = -10000 }
-        }
-        # Si una potencia la hace protectorado para proteger las minas
-        comply = {
-            trigger = { 
+            trigger = {
+                is_subject_of = scope:target_country
                 scope:target_country = {
-                    OR = { c:GBR ?= THIS c:USA ?= THIS }
+                    OR = { c:GUA ?= THIS c:GBR ?= THIS c:USA ?= THIS }
                 }
             }
-            score = { value = 8000 }
+            score = {
+                value = 8000
+                if = {
+                    limit = { scope:target_country = { c:GUA ?= THIS } }
+                    add = 2000
+                }
+            }
+        }
+        antagonize = {
+            trigger = {
+                is_subject_of = scope:target_country
+                scope:target_country = { c:GUA ?= THIS }
+            }
+            score = { value = -10000 }
         }
     }
 
@@ -1020,6 +1464,7 @@ ai_strategy_hon_submissive_vanguard = {
     possible = {
         c:HON ?= THIS
         is_subject = yes
+        NOT = { ca_ai_is_member_now = yes } # CAFM P1: dentro de la UCA no es "sumisa"
     }
 
     weight = {
@@ -1062,7 +1507,7 @@ ai_strategy_hon_indigenous_republic = {
 
     possible = {
         c:HON ?= THIS
-        ig:ig_rural_folk = { is_in_government = yes }
+        ig:ig_rural_folk ?= { is_in_government = yes }
     }
 
     weight = {
@@ -1091,9 +1536,8 @@ ai_strategy_alt_desperate_survival = {
         value = 20
         if = {
             limit = {
-                OR = {
-                    scope:target_country = c:MEX
-                    scope:target_country = c:ELS
+                scope:target_country = {
+                    OR = { c:MEX ?= this c:ELS ?= this }
                 }
             }
             add = 100 # Sobrevalora enormemente aliarse con los enemigos de Guatemala
@@ -1202,20 +1646,16 @@ ai_strategy_alt_loyal_subject = {
     secret_goal_scores = {
         # Si México o ELS son sus amos, obedecerá ciegamente para no ser devorado por Guatemala
         comply = {
-            trigger = { 
-                OR = {
-                    is_subject_of = c:MEX
-                    is_subject_of = c:ELS
-                }
+            trigger = {
+                is_subject_of = scope:target_country
+                scope:target_country = { OR = { c:MEX ?= this c:ELS ?= this } }
             }
             score = { value = 10000 }
         }
         antagonize = {
-            trigger = { 
-                OR = {
-                    is_subject_of = c:MEX
-                    is_subject_of = c:ELS
-                }
+            trigger = {
+                is_subject_of = scope:target_country
+                scope:target_country = { OR = { c:MEX ?= this c:ELS ?= this } }
             }
             score = { value = -10000 }
         }
@@ -1259,14 +1699,21 @@ ai_strategy_uca_desperate_survival = {
 
     # Trata de bloquear movimientos que generen fricción entre estados
     anti_movements = {
-        movement_ca_carrillista
         movement_ca_autocratic_autonomist
+        # CAFM P1: antes movement_ca_carrillista (solo existe en COS); ahora los nacionalismos de los estados
+        movement_ca_guatemala_national
+        movement_ca_elsalvador_national
+        movement_ca_honduras_national
+        movement_ca_nicaragua_national
+        movement_ca_costarica_national
+        movement_ca_los_altos_national
     }
 
     possible = {
         c:UCA ?= THIS
         # Se activa especialmente si el apoyo federal es bajo
-        je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" < 100 }
+        # CAFM P1: la barra va de 0 a 200 y empieza en 75; "< 100" la activaba casi siempre
+        je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" < ca_frca_bar_crisis }
     }
 
     weight = {
@@ -1351,13 +1798,24 @@ ai_strategy_uca_authority_management = {
 # La UCA tratará de que sus sujetos (GUA, COS, etc.) no la odien.
 # ------------------------------------------------------------------------------
 ai_strategy_uca_overlord_appeasement = {
+    icon = "gfx/interface/icons/ai_strategy_icons/protect_region.dds" # CAFM P1: faltaba
     type = diplomatic
 
     # Objetivos de la 1.13 hacia sus sujetos
     # Intentará que los estados "cumplan" bajándoles los impuestos federales
+    # CAFM P1: "comply" es la meta de un subdito hacia su señor; la UCA protege a sus estados
     secret_goal_scores = {
-        comply = {
-            score = { value = 5000 }
+        protect = {
+            trigger = {
+                scope:target_country = { is_subject_of = root }
+            }
+            score = {
+                value = 1000
+                if = {
+                    limit = { scope:target_country = { ca_ai_member_separated = yes } }
+                    multiply = 0.2
+                }
+            }
         }
     }
 

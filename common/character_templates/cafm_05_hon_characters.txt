@@ -16,8 +16,8 @@ hon_joaquin_rivera_character_template = {
 	# NOTAS: Jefe de Estado de Honduras 1833–1836. Lo crean los efectos de creación de HON como gobernante.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Joaquin"
-	last_name = "Rivera_Bragas"
+	first_name = "cafm_Joaquin"
+	last_name = "cafm_Rivera_Bragas"
 	historical = yes
 	female = no
 	birth_date = 1795.10.20			# M: confirmar fecha
@@ -54,8 +54,8 @@ hon_jose_maria_martinez_character_template = {
 	# NOTAS: Jefe de Estado 1837–1838.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jose_Maria"
-	last_name = "Martinez_Salinas"
+	first_name = "cafm_Jose_Maria"
+	last_name = "cafm_Martinez_Salinas"
 	historical = yes
 	female = no
 	birth_date = 1794.1.1			# M: confirmar fecha
@@ -91,7 +91,7 @@ hon_jose_maria_martinez_character_template = {
 			NOT = { has_global_variable = cafm_hc_martinez_salinas }
 		}
 		interest_group_trigger = {
-			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
+			is_marginal = no			# CAFM Fase 1: is_marginal no existe en triggers.log
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1836.1.1
@@ -104,8 +104,8 @@ juan_franscisco_de_molina_character_template = {
 	# NOTAS: Jefe de Estado 1839.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Juan_Francisco"
-	last_name = "de_Molina"
+	first_name = "cafm_Juan_Francisco"
+	last_name = "cafm_de_Molina"
 	historical = yes
 	female = no
 	birth_date = 1779.4.4			# M: confirmar fecha
@@ -141,7 +141,7 @@ juan_franscisco_de_molina_character_template = {
 			NOT = { has_global_variable = cafm_hc_juan_francisco_molina }
 		}
 		interest_group_trigger = {
-			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
+			is_marginal = no			# CAFM Fase 1: is_marginal no existe en triggers.log
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1838.1.1
@@ -154,8 +154,8 @@ hon_jose_zelaya_character_template = {
 	# NOTAS: Jefe de Estado 1839–1841.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jose_Francisco"
-	last_name = "Zelaya"
+	first_name = "cafm_Jose_Francisco"
+	last_name = "cafm_Zelaya"
 	historical = yes
 	female = no
 	birth_date = 1798.1.1			# M: confirmar fecha
@@ -191,7 +191,7 @@ hon_jose_zelaya_character_template = {
 			NOT = { has_global_variable = cafm_hc_zelaya_ayes }
 		}
 		interest_group_trigger = {
-			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
+			is_marginal = no			# CAFM Fase 1: is_marginal no existe en triggers.log
 			is_interest_group_type = ig_landowners
 		}
 		earliest_usage_date = 1839.1.1
@@ -204,8 +204,8 @@ hon_francisco_ferrera_character_template = {
 	# NOTAS: Caudillo conservador; primer presidente de Honduras 1841–1845.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Francisco"
-	last_name = "Ferrera"
+	first_name = "cafm_Francisco"
+	last_name = "cafm_Ferrera"
 	historical = yes
 	female = no
 	birth_date = 1794.4.4			# M: confirmar fecha
@@ -259,8 +259,8 @@ cafm_coronado_chavez = {
 	#        la Universidad.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Coronado"
-	last_name = "Chavez"
+	first_name = "cafm_Coronado"
+	last_name = "cafm_Chavez"
 	historical = yes
 	female = no
 	birth_date = 1807.1.1			# M: confirmar fecha
@@ -297,7 +297,7 @@ cafm_coronado_chavez = {
 			NOT = { has_global_variable = cafm_hc_coronado_chavez }
 		}
 		interest_group_trigger = {
-			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
+			is_marginal = no			# CAFM Fase 1: is_marginal no existe en triggers.log
 			is_interest_group_type = ig_intelligentsia
 		}
 		earliest_usage_date = 1841.1.1
@@ -312,8 +312,8 @@ juan_lindo_character_template = {
 	#        CORREGIDO: antes estaba en Los Altos.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Juan"
-	last_name = "Lindo"
+	first_name = "cafm_Juan"
+	last_name = "cafm_Lindo"
 	historical = yes
 	female = no
 	birth_date = 1790.5.16			# M: confirmar fecha
@@ -353,8 +353,8 @@ hon_justo_jose_herrera_character_template = {
 	#        moderado. Lo crea ca_honduras_events.14 (opción a). Sin bloque de uso: solo por evento.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Justo_Jose"
-	last_name = "de_Herrera"
+	first_name = "cafm_Justo_Jose"
+	last_name = "cafm_de_Herrera"
 	historical = yes
 	female = no
 	birth_date = 1786.7.19			# P: fuentes en conflicto (1786 o 1789)
@@ -390,8 +390,8 @@ hon_de_herrera_character_template = {
 	#        Salvador) desde 1838. Multinacional.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Dionisio"
-	last_name = "de_Herrera"
+	first_name = "cafm_Dionisio"
+	last_name = "cafm_de_Herrera"
 	historical = yes
 	female = no
 	birth_date = 1781.10.9
@@ -428,7 +428,7 @@ hon_de_herrera_character_template = {
 			NOT = { has_global_variable = cafm_hc_dionisio_herrera }
 		}
 		interest_group_trigger = {
-			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
+			is_marginal = no			# CAFM Fase 1: is_marginal no existe en triggers.log
 			OR = {
 				is_interest_group_type = ig_intelligentsia
 				is_interest_group_type = ig_landowners
@@ -445,8 +445,8 @@ hon_cabanas_character_template = {
 	# NOTAS: General liberal morazanista; presidente 1852–1855.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jose_Trinidad"
-	last_name = "Cabanas"
+	first_name = "cafm_Jose_Trinidad"
+	last_name = "cafm_Cabanas"
 	historical = yes
 	female = no
 	birth_date = 1805.6.9
@@ -499,8 +499,8 @@ hon_jose_santos_guardiola_character_template = {
 	# NOTAS: General conservador; presidente 1856–1862.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Jose_Santos"
-	last_name = "Guardiola"
+	first_name = "cafm_Jose_Santos"
+	last_name = "cafm_Guardiola"
 	historical = yes
 	female = no
 	birth_date = 1816.11.1			# M: confirmar fecha
@@ -555,8 +555,8 @@ hon_bogran_character_template = {
 	# NOTAS: Presidente 1883–1891. Fuera de la versión 1.0.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Luis"
-	last_name = "Bogran"
+	first_name = "cafm_Luis"
+	last_name = "cafm_Bogran"
 	historical = yes
 	female = no
 	birth_date = 1849.6.3
@@ -593,7 +593,7 @@ hon_bogran_character_template = {
 			NOT = { has_global_variable = cafm_hc_bogran }
 		}
 		interest_group_trigger = {
-			is_marginal = no			# CAFM Fase 1: ig_counts_as_marginal no existe en triggers.log
+			is_marginal = no			# CAFM Fase 1: is_marginal no existe en triggers.log
 			OR = {
 				is_interest_group_type = ig_landowners
 				is_interest_group_type = ig_rural_folk
@@ -610,8 +610,8 @@ hon_marco_aurelio_soto_character_template = {
 	# NOTAS: Reforma Liberal 1876–1883. Fuera de la versión 1.0.
 
 	# --- DATOS BÁSICOS ---
-	first_name = "Marco_Aurelio"
-	last_name = "Soto"
+	first_name = "cafm_Marco_Aurelio"
+	last_name = "cafm_Soto"
 	historical = yes
 	female = no
 	birth_date = 1846.11.13
