@@ -1,6 +1,6 @@
 ﻿l_english:
  # CAFM - F9 - Botones de las rutas y minimapa de lealtad
- CA_MM_PANEL_HINT:0 "Click a State on the map to see its loyalty and the actions available."
+ CA_MM_PANEL_HINT:0 "Click a State on the map to see its loyalty and the actions available.\n\n#bold Federal Cohesion#! (federal path): #bold [GetPlayer.MakeScope.Var('ca_federal_cohesion').GetValue|0]#! / 100\nMonthly change: #bold [GetPlayer.MakeScope.ScriptValue('ca_cohesion_monthly_change')|+1]#!"
  CA_MM_GUA_NAME:0 "Guatemala"
  CA_MM_GUA_TT:0 "#bold Guatemala#!\nLoyalty: #bold [GetPlayer.MakeScope.Var('frca_loyalty_gua').GetValue|0]#! / 3\n(0 Separated, 1 Rebel, 2 Wavering, 3 Loyal)\nClick to see its panel."
  CA_MM_GUA_INFO:0 "Loyalty: #bold [GetPlayer.MakeScope.Var('frca_loyalty_gua').GetValue|0]#! / 3\nLoyal: +1 to the Federation bar each month. Rebel: -1. Separated: -2 (-1 with peace)."
@@ -24,11 +24,21 @@
  CA_MM_CIP_INFO:0 "Loyalty: #bold [GetPlayer.MakeScope.Var('frca_loyalty_cip').GetValue|0]#! / 3\nLoyal: +1 to the Federation bar each month. Rebel: -1. Separated: -2 (-1 with peace)."
  CA_MM_BOC_NAME:0 "Bocas del Toro"
  CA_MM_BOC_TT:0 "#bold Bocas del Toro#!\nThe Caribbean coast disputed with New Granada. Green: held by the Federation. Grey: lost."
- CA_MM_BOC_INFO:0 "The Caribbean coast disputed with New Granada. Its fate is decided by the Bocas del Toro crisis."
- CA_MM_PET_TT:0 "#bold Petén#!\nPart of the State of Guatemala; it shares its loyalty.\nClick to see the Guatemala panel."
- CA_MM_GNC_TT:0 "#bold Guanacaste#!\nThe Nicoya district, part of the State of Costa Rica since 1824; it shares its loyalty.\nClick to see the Costa Rica panel."
- CA_MM_MOS_TT:0 "#bold Mosquito Coast#!\nRed: held by the Miskito Kingdom under British protection. Otherwise it follows Nicaragua.\nClick to see the Nicaragua panel."
- CA_MM_BLZ_TT:0 "#bold Belize#!\nRed: British settlement. Otherwise it follows Guatemala.\nClick to see the Guatemala panel."
+ CA_MM_BOC_INFO:0 "The Caribbean coast disputed with New Granada and Britain.
+Effective control: #bold [GetGlobalVariable('ca_bocas_control').GetValue|0]#! / 100
+With 60 or more, a British or Granadine seizure fails."
+ CA_MM_PET_TT:0 "#bold Petén#!
+Part of the State of Guatemala; it shares its loyalty.
+Click to see its panel."
+ CA_MM_GNC_TT:0 "#bold Guanacaste#!
+The Nicoya district, part of the State of Costa Rica since 1824; it shares its loyalty.
+Click to see its panel."
+ CA_MM_MOS_TT:0 "#bold Mosquito Coast#!
+Red: held by the Miskito Kingdom under British protection. Otherwise it follows Nicaragua.
+Click to see its panel."
+ CA_MM_BLZ_TT:0 "#bold Belize#!
+Red: British settlement. Otherwise it follows Guatemala.
+Click to see the Petén panel."
  CA_MM_ACTION_CAMPAIGN:0 "Federal campaign"
  CA_MM_ACTION_NEGOTIATE:0 "Negotiate autonomy"
  CA_MM_ACTION_INTENDANT:0 "Military intendant"
