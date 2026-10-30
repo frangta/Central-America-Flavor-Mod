@@ -1,0 +1,281 @@
+﻿############################################################################
+# CAFM P3 - Efectos del paquete 3
+# (common/scripted_effects/zz_ca_p3_effects.txt)
+#   A. "El Congreso propone..." (punto 3): leyes federalistas abiertas por evento.
+#   B. La deuda inglesa (punto 2): presion de los acreedores, impago y guerra britanica.
+############################################################################
+
+# ===========================================================================
+# A. El Congreso propone una ley (ca_federalist_events.21-.27)
+# ===========================================================================
+
+# Abre la promulgacion de una ley desde un evento. La paralisis federal sigue
+# bloqueando al jugador y a la IA: si esta puesta, se quita un instante y se
+# vuelve a poner con los dias que le quedan. Scope: UCA.
+# Uso: ca_fed_congress_open_law = { LAW = law_ca_escuela_laica }
+ca_fed_congress_open_law = {
+	if = {
+		limit = { has_modifier = ca_federal_paralysis }
+		remove_modifier = ca_federal_paralysis
+		start_enactment = law_type:$LAW$
+		add_modifier = { name = ca_federal_paralysis days = ca_paralysis_days_left }
+	}
+	else = {
+		start_enactment = law_type:$LAW$
+	}
+	post_notification = ca_notif_congress_law # P5
+}
+
+# Cada mes, con un 20 %, el Congreso propone la primera ley de la lista que la UCA
+# todavia no tiene (orden historico). Espera de un ano entre propuestas; una ley
+# aplazada no vuelve en 3 anos. Scope: UCA (lo llama ca_frca_monthly_update).
+ca_fed_congress_monthly = {
+	if = {
+		limit = {
+			ca_fed_congress_can_propose = yes
+			NOT = { has_variable = ca_fed_congress_cd }
+		}
+		random = {
+			chance = 20
+			if = {
+				limit = {
+					NOT = { has_law = law_type:law_ca_escuela_laica }
+					NOT = { has_variable = ca_fed_congress_postponed_21 }
+				}
+				set_variable = { name = ca_fed_congress_cd days = 365 }
+				trigger_event = { id = ca_federalist_events.21 popup = yes }
+			}
+			else_if = {
+				limit = {
+					NOT = { has_law = law_type:law_total_separation }
+					NOT = { has_variable = ca_fed_congress_postponed_22 }
+				}
+				set_variable = { name = ca_fed_congress_cd days = 365 }
+				trigger_event = { id = ca_federalist_events.22 popup = yes }
+			}
+			else_if = {
+				limit = {
+					NOT = { has_law = law_type:law_ca_municipalismo }
+					NOT = { has_variable = ca_fed_congress_postponed_23 }
+				}
+				set_variable = { name = ca_fed_congress_cd days = 365 }
+				trigger_event = { id = ca_federalist_events.23 popup = yes }
+			}
+			else_if = {
+				limit = {
+					NOT = { has_law = law_type:law_protected_speech }
+					NOT = { has_variable = ca_fed_congress_postponed_24 }
+				}
+				set_variable = { name = ca_fed_congress_cd days = 365 }
+				trigger_event = { id = ca_federalist_events.24 popup = yes }
+			}
+			else_if = {
+				limit = {
+					NOT = { has_law = law_type:law_proportional_taxation }
+					NOT = { has_variable = ca_fed_congress_postponed_25 }
+				}
+				set_variable = { name = ca_fed_congress_cd days = 365 }
+				trigger_event = { id = ca_federalist_events.25 popup = yes }
+			}
+			else_if = {
+				limit = {
+					NOT = { has_law = law_type:law_free_trade }
+					NOT = { has_variable = ca_fed_congress_postponed_26 }
+				}
+				set_variable = { name = ca_fed_congress_cd days = 365 }
+				trigger_event = { id = ca_federalist_events.26 popup = yes }
+			}
+			else_if = {
+				limit = {
+					NOT = { has_law = law_type:law_universal_suffrage }
+					NOT = { has_variable = ca_fed_congress_postponed_27 }
+				}
+				set_variable = { name = ca_fed_congress_cd days = 365 }
+				trigger_event = { id = ca_federalist_events.27 popup = yes }
+			}
+		}
+	}
+}
+
+# Opciones comunes de los eventos .21-.27. Scope: UCA.
+# a. Presentar al Congreso: la ley se abre; con cohesion >= 50 tiene un buen arranque.
+ca_fed_congress_present = {
+	ca_fed_congress_open_law = { LAW = $LAW$ }
+	if = {
+		limit = { ca_cohesion_ge = { VALUE = 50 } }
+		add_enactment_modifier = { name = ca_enact_firm_reform }
+	}
+}
+# b. Negociar con los Estados: cuesta cohesion y da un empuje fuerte.
+ca_fed_congress_states_pact = {
+	ca_cohesion_spend = { VALUE = ca_cohesion_cost_states_pact }
+	ca_fed_congress_open_law = { LAW = $LAW$ }
+	add_enactment_modifier = { name = ca_enact_states_pact }
+}
+# c. Aplazar: la ley no vuelve en 3 anos.
+ca_fed_congress_postpone = {
+	set_variable = { name = ca_fed_congress_postponed_$N$ years = 3 }
+}
+
+
+# ===========================================================================
+# B. La deuda inglesa (ca_british_debt.7-.21)
+# Variables en el deudor:
+#   ca_debt_pressure           0-5, presion de los bonistas y del consul
+#   ca_british_debt_default    impago (el diario falla)
+#   ca_debt_gbr_casus          Gran Bretana tiene motivo de guerra (lo piden las jugadas)
+# Variable global ca_debt_crisis_cd: 10 anos entre crisis.
+# ===========================================================================
+
+# Subir o bajar la presion (0-5). Scope: deudor. Uso: ca_debt_pressure_change = { VALUE = 1 }
+ca_debt_pressure_change = {
+	if = {
+		limit = { NOT = { has_variable = ca_debt_pressure } }
+		set_variable = { name = ca_debt_pressure value = 0 }
+	}
+	change_variable = { name = ca_debt_pressure add = $VALUE$ }
+	if = {
+		limit = { var:ca_debt_pressure > ca_debt_pressure_max }
+		set_variable = { name = ca_debt_pressure value = ca_debt_pressure_max }
+	}
+	if = {
+		limit = { var:ca_debt_pressure < 0 }
+		set_variable = { name = ca_debt_pressure value = 0 }
+	}
+}
+
+# Si el deudor es la UCA en la fase IV, el frente britanico se mueve. Scope: deudor.
+ca_debt_front_british = {
+	if = {
+		limit = { c:UCA ?= this }
+		ca_frca_front_change = { FRONT = british VALUE = $VALUE$ }
+	}
+}
+
+# Gran Bretana lanza la guerra de la deuda. Scope: GBR, con scope:ca_debtor_scope.
+# Objetivo segun la situacion (punto 2):
+#   historico: Honduras (isla del Tigre, Islas de la Bahia) o Nicaragua (San Juan) -> puerto de tratado;
+#              si no, humillacion y reparaciones (cobro de reclamaciones)
+#   dinamico:  UCA debil -> protectorado; Mosquitia (MKT o la UCA con Nicaragua) o costa caribe -> puerto de tratado;
+#              si no, humillacion y reparaciones
+ca_debt_gbr_launch_war = {
+	save_scope_as = ca_debt_gbr_scope
+	scope:ca_debtor_scope = {
+		set_variable = { name = ca_debt_gbr_casus years = 3 }
+	}
+	set_global_variable = { name = ca_debt_crisis_cd years = 10 } # ca_debt_crisis_cooldown_years
+	if = {
+		limit = {
+			NOT = { has_global_variable = ca_world_historic }
+			scope:ca_debtor_scope = { ca_debt_debtor_weak = yes }
+		}
+		create_diplomatic_play = {
+			name = ca_debt_war_play
+			type = dp_ca_debt_protectorate
+			target_country = scope:ca_debtor_scope
+			escalation = 60
+			add_war_goal = {
+				holder = scope:ca_debt_gbr_scope
+				type = war_reparations
+				target_country = scope:ca_debtor_scope
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			scope:ca_debtor_scope = {
+				OR = {
+					c:HON ?= this
+					NOT = { has_global_variable = ca_world_historic }
+				}
+				any_scope_state = { state_region = s:STATE_HONDURAS }
+			}
+		}
+		scope:ca_debtor_scope = {
+			random_scope_state = {
+				limit = { state_region = s:STATE_HONDURAS }
+				save_scope_as = ca_debt_target_state
+			}
+		}
+		ca_debt_gbr_play_treaty_port = yes
+	}
+	else_if = {
+		limit = {
+			scope:ca_debtor_scope = {
+				OR = {
+					c:NIC ?= this
+					AND = {
+						NOT = { has_global_variable = ca_world_historic }
+						OR = {
+							exists = c:MKT
+							any_scope_state = { state_region = s:STATE_NICARAGUA }
+						}
+					}
+				}
+				any_scope_state = { state_region = s:STATE_NICARAGUA }
+			}
+		}
+		scope:ca_debtor_scope = {
+			random_scope_state = {
+				limit = { state_region = s:STATE_NICARAGUA }
+				save_scope_as = ca_debt_target_state
+			}
+		}
+		ca_debt_gbr_play_treaty_port = yes
+	}
+	else_if = {
+		limit = {
+			NOT = { has_global_variable = ca_world_historic }
+			scope:ca_debtor_scope = {
+				any_scope_state = { state_region = s:STATE_GUATEMALA }
+			}
+		}
+		scope:ca_debtor_scope = {
+			random_scope_state = {
+				limit = { state_region = s:STATE_GUATEMALA }
+				save_scope_as = ca_debt_target_state
+			}
+		}
+		ca_debt_gbr_play_treaty_port = yes
+	}
+	else = {
+		create_diplomatic_play = {
+			name = ca_debt_war_play
+			type = dp_ca_debt_gunboat
+			target_country = scope:ca_debtor_scope
+			escalation = 60
+			add_war_goal = {
+				holder = scope:ca_debt_gbr_scope
+				type = war_reparations
+				target_country = scope:ca_debtor_scope
+			}
+		}
+	}
+	scope:ca_debtor_scope = {
+		ca_debt_front_british = { VALUE = 3 }
+		trigger_event = { id = ca_british_debt.21 popup = yes }
+		# La paz de los bonistas (.19) se ofrece cuando acaba la guerra (si sigue, el evento no sale)
+		trigger_event = { id = ca_british_debt.19 days = 365 popup = yes }
+		trigger_event = { id = ca_british_debt.19 days = 730 popup = yes }
+	}
+}
+
+# Jugada de canonero con un puerto de tratado en scope:ca_debt_target_state. Scope: GBR.
+ca_debt_gbr_play_treaty_port = {
+	create_diplomatic_play = {
+		name = ca_debt_war_play
+		type = dp_ca_debt_gunboat
+		target_country = scope:ca_debtor_scope
+		escalation = 60
+		add_war_goal = {
+			holder = scope:ca_debt_gbr_scope
+			type = take_treaty_port
+			target_state = scope:ca_debt_target_state
+		}
+		add_war_goal = {
+			holder = scope:ca_debt_gbr_scope
+			type = war_reparations
+			target_country = scope:ca_debtor_scope
+		}
+	}
+}

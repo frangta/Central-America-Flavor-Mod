@@ -1,0 +1,118 @@
+﻿############################################################################
+# CAFM P1 - Triggers de la IA (common/scripted_triggers/zz_ca_ai_triggers.txt)
+# Los usa common/ai_strategies/ca_ai_strategy.txt.
+#
+# "Sello de seguridad": mientras exista la UCA, un estado miembro de la IA
+# no apunta a otro miembro con conquista, cambio de regimen o anexion.
+# El sello se levanta si se da cualquiera de estas condiciones:
+#   1. el atacante o el objetivo ya se separo (lealtad 0) o es independiente;
+#   2. la Federacion esta en guerra civil (.42) o en fase IV;
+#   3. la UCA ya no existe;
+#   4. modo historico y fecha de una guerra real entre estados.
+############################################################################
+
+# El pais es hoy miembro de la UCA. Scope: pais.
+ca_ai_is_member_now = {
+	exists = c:UCA
+	is_subject_of = c:UCA
+}
+
+# El pais es un estado con lealtad 0 (separado) en el diario de la Federacion. Scope: pais.
+ca_ai_member_separated = {
+	OR = {
+		AND = { c:GUA ?= this ca_frca_loyalty_le = { TAG = gua VALUE = 0 } }
+		AND = { c:ELS ?= this ca_frca_loyalty_le = { TAG = els VALUE = 0 } }
+		AND = { c:HON ?= this ca_frca_loyalty_le = { TAG = hon VALUE = 0 } }
+		AND = { c:NIC ?= this ca_frca_loyalty_le = { TAG = nic VALUE = 0 } }
+		AND = { c:COS ?= this ca_frca_loyalty_le = { TAG = cos VALUE = 0 } }
+		AND = { c:ALT ?= this ca_frca_loyalty_le = { TAG = alt VALUE = 0 } }
+		AND = { c:CIP ?= this ca_frca_loyalty_le = { TAG = cip VALUE = 0 } }
+	}
+}
+
+# Guerras reales entre estados (modo historico). Scope: el atacante; usa scope:target_country.
+#   1839: Honduras y Nicaragua contra El Salvador de Morazan.
+#   1840: Guatemala de Carrera contra El Salvador de Morazan.
+# (Fechas aproximadas, por verificar con la cronologia del mod.)
+ca_ai_historic_member_war = {
+	has_global_variable = ca_world_historic
+	OR = {
+		AND = {
+			game_date >= 1839.1.1
+			OR = {
+				AND = {
+					OR = { c:HON ?= this c:NIC ?= this }
+					scope:target_country = { c:ELS ?= this }
+				}
+				AND = {
+					c:ELS ?= this
+					scope:target_country = { OR = { c:HON ?= this c:NIC ?= this } }
+				}
+			}
+		}
+		AND = {
+			game_date >= 1840.1.1
+			OR = {
+				AND = { c:GUA ?= this scope:target_country = { c:ELS ?= this } }
+				AND = { c:ELS ?= this scope:target_country = { c:GUA ?= this } }
+			}
+		}
+	}
+}
+
+# El sello esta levantado. Scope: el atacante; usa scope:target_country.
+ca_ai_member_seal_lifted = {
+	OR = {
+		ca_ai_member_separated = yes
+		scope:target_country = { ca_ai_member_separated = yes }
+		c:UCA ?= { has_variable = frca_fw_event_fired }
+		ca_frca_phase_ge = { VALUE = 4 }
+		ca_ai_historic_member_war = yes
+	}
+}
+
+# El sello esta activo: los dos son miembros y no se cumple ninguna condicion para levantarlo.
+# Scope: el atacante; usa scope:target_country.
+ca_ai_member_seal = {
+	ca_ai_is_member_now = yes
+	scope:target_country = { ca_ai_is_member_now = yes }
+	NOT = { ca_ai_member_seal_lifted = yes }
+}
+
+# Lealtad del propio estado hacia la UCA (para las metas secretas). Scope: pais del estado.
+ca_ai_own_loyalty_le = {
+	OR = {
+		AND = { c:GUA ?= this ca_frca_loyalty_le = { TAG = gua VALUE = $VALUE$ } }
+		AND = { c:ELS ?= this ca_frca_loyalty_le = { TAG = els VALUE = $VALUE$ } }
+		AND = { c:HON ?= this ca_frca_loyalty_le = { TAG = hon VALUE = $VALUE$ } }
+		AND = { c:NIC ?= this ca_frca_loyalty_le = { TAG = nic VALUE = $VALUE$ } }
+		AND = { c:COS ?= this ca_frca_loyalty_le = { TAG = cos VALUE = $VALUE$ } }
+		AND = { c:ALT ?= this ca_frca_loyalty_le = { TAG = alt VALUE = $VALUE$ } }
+		AND = { c:CIP ?= this ca_frca_loyalty_le = { TAG = cip VALUE = $VALUE$ } }
+	}
+}
+ca_ai_own_loyalty_ge = {
+	OR = {
+		AND = { c:GUA ?= this ca_frca_loyalty_ge = { TAG = gua VALUE = $VALUE$ } }
+		AND = { c:ELS ?= this ca_frca_loyalty_ge = { TAG = els VALUE = $VALUE$ } }
+		AND = { c:HON ?= this ca_frca_loyalty_ge = { TAG = hon VALUE = $VALUE$ } }
+		AND = { c:NIC ?= this ca_frca_loyalty_ge = { TAG = nic VALUE = $VALUE$ } }
+		AND = { c:COS ?= this ca_frca_loyalty_ge = { TAG = cos VALUE = $VALUE$ } }
+		AND = { c:ALT ?= this ca_frca_loyalty_ge = { TAG = alt VALUE = $VALUE$ } }
+		AND = { c:CIP ?= this ca_frca_loyalty_ge = { TAG = cip VALUE = $VALUE$ } }
+	}
+}
+
+# Modo historico: el estado ya paso la fecha de su separacion real. Scope: pais del estado.
+#   Nicaragua 30 abr 1838 · Honduras 26 oct 1838 · Costa Rica 14 nov 1838 · Guatemala 17 abr 1839
+#   (fechas por verificar; El Salvador sigue con Morazan hasta 1840)
+ca_ai_historic_separation_due = {
+	has_global_variable = ca_world_historic
+	OR = {
+		AND = { c:NIC ?= this game_date >= 1838.4.30 }
+		AND = { c:HON ?= this game_date >= 1838.10.26 }
+		AND = { c:COS ?= this game_date >= 1838.11.14 }
+		AND = { c:GUA ?= this game_date >= 1839.4.17 }
+		AND = { c:ELS ?= this game_date >= 1841.2.1 }
+	}
+}

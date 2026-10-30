@@ -23,6 +23,7 @@ ca_frca_ai_roll = {
 			remove_global_variable = ca_world_historic
 		}
 	}
+	ca_cohesion_hardcore_roll = yes # P2: modo hardcore de la cohesion (10:2)
 }
 
 # Un jugador lleva la UCA: no hay modo de IA. Scope: UCA.
@@ -51,6 +52,15 @@ ca_frca_choose_route = {
 	}
 	else = {
 		ca_frca_ai_clear = yes
+		remove_variable = ca_cohesion_hardcore # P2: el jugador nunca juega en hardcore
+	}
+	# P2: la cohesion federal solo existe en la ruta federal
+	if = {
+		limit = { has_variable = ca_faction_federal }
+		ca_cohesion_start = yes
+	}
+	else = {
+		ca_cohesion_end = yes
 	}
 	ca_frca_fire_hook = { HOOK = 1 }
 }
@@ -65,6 +75,7 @@ ca_frca_selector_leave_uca = {
 	remove_variable = frca_selector_from_79
 	set_variable = ca_faction_federal
 	ca_frca_ai_roll = yes
+	ca_cohesion_start = yes # P2
 	if = {
 		limit = {
 			NOT = { has_variable = frca_last_hook }

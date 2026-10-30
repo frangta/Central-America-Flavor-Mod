@@ -266,30 +266,79 @@ ca_mm_panel_cos = {
 ca_mm_alt_loyal = {
 	scope = country
 	is_shown = {
-		has_variable = frca_loyalty_alt
-		var:frca_loyalty_alt = 3
+		OR = {
+			AND = {
+				has_variable = frca_loyalty_alt
+				var:frca_loyalty_alt = 3
+			}
+			# P4: en 1836 Los Altos se dibuja como parte de Guatemala
+			AND = {
+				NOT = { has_variable = frca_loyalty_alt }
+				NOT = { exists = c:ALT }
+				has_variable = frca_loyalty_gua
+				var:frca_loyalty_gua = 3
+			}
+		}
 	}
 }
 ca_mm_alt_wavering = {
 	scope = country
 	is_shown = {
-		has_variable = frca_loyalty_alt
-		var:frca_loyalty_alt = 2
+		OR = {
+			AND = {
+				has_variable = frca_loyalty_alt
+				var:frca_loyalty_alt = 2
+			}
+			# P4: en 1836 Los Altos se dibuja como parte de Guatemala
+			AND = {
+				NOT = { has_variable = frca_loyalty_alt }
+				NOT = { exists = c:ALT }
+				has_variable = frca_loyalty_gua
+				var:frca_loyalty_gua = 2
+			}
+		}
 	}
 }
 ca_mm_alt_rebel = {
 	scope = country
 	is_shown = {
-		has_variable = frca_loyalty_alt
-		var:frca_loyalty_alt = 1
+		OR = {
+			AND = {
+				has_variable = frca_loyalty_alt
+				var:frca_loyalty_alt = 1
+			}
+			# P4: en 1836 Los Altos se dibuja como parte de Guatemala
+			AND = {
+				NOT = { has_variable = frca_loyalty_alt }
+				NOT = { exists = c:ALT }
+				has_variable = frca_loyalty_gua
+				var:frca_loyalty_gua = 1
+			}
+		}
 	}
 }
 ca_mm_alt_separated = {
 	scope = country
 	is_shown = {
 		OR = {
-			NOT = { has_variable = frca_loyalty_alt }
-			var:frca_loyalty_alt <= 0
+			AND = {
+				has_variable = frca_loyalty_alt
+				var:frca_loyalty_alt <= 0
+			}
+			# P4: Los Altos existe pero ya no esta en el diario
+			AND = {
+				NOT = { has_variable = frca_loyalty_alt }
+				exists = c:ALT
+			}
+			# P4: antes de que exista, sigue a Guatemala
+			AND = {
+				NOT = { has_variable = frca_loyalty_alt }
+				NOT = { exists = c:ALT }
+				OR = {
+					NOT = { has_variable = frca_loyalty_gua }
+					var:frca_loyalty_gua <= 0
+				}
+			}
 		}
 	}
 }

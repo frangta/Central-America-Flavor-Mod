@@ -12,6 +12,7 @@ movement_ca_liberal = {
         ideology_radical
         ideology_humanitarian
         ideology_ca_liberal_monarchist
+        ideology_ca_secularist
 
     }
 
@@ -29,7 +30,7 @@ movement_ca_liberal = {
         if = {
             limit = {
                 has_law_or_variant = law_type:law_monarchy
-                country_has_voting_franchise = no
+                has_voting_franchise = no
             }
             multiply = 0.1
         }
@@ -38,21 +39,21 @@ movement_ca_liberal = {
     on_created = {
         add_movement_enthusiasm_modifier = yes
     }
-    #disband_trigger = {
-    #    
-    #    OR = {
-    #        country_has_primary_culture = cu:central_american
-    #        country_has_primary_culture = cu:guatemalan
-    #        country_has_primary_culture = cu:el_salvadorian
-    #        country_has_primary_culture = cu:honduran
-    #        country_has_primary_culture = cu:nicaraguan
-    #        country_has_primary_culture = cu:costa_rican
-    #        country_has_primary_culture = cu:panamanian
-    #    }
-    #    
-    #    NOT = { has_variable = ca_organization_apro }
-    #}
-	#
+    disband_trigger = {
+        
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+        }
+        
+        NOT = { has_variable = ca_organization_apro }
+    }
+	
     #on_disbanded = {
     #    
     #    #hidden_effect = { remove_modifier = fervor_ideologico }
@@ -61,6 +62,7 @@ movement_ca_liberal = {
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_ca_liberal_monarchist 
+            has_ideology = ideology:ideology_ca_secularist 
             has_ideology = ideology:ideology_ca_criollo_liberal 
             has_ideology = ideology:ideology_ca_criollo_elite 
             scope:interest_group ?= {
@@ -184,15 +186,6 @@ movement_ca_liberal = {
             }
         }
         target_fraction_of_states = { value = 0.35 }
-    }
-
-    # CAFM F18 (grupo F): radicalismo propio
-    additional_radicalism_factors = {
-        value = 0
-        if = {
-            limit = { owner ?= { has_law_or_variant = law_type:law_autocracy } }
-            add = { value = 0.25 desc = "CA_RAD_AUTOCRACY" }
-        }
     }
 }
 
@@ -412,7 +405,7 @@ movement_ca_reactionary = {
         possible = {
             political_movement_support >= 0.10
             NOT = {
-                any_influenced_interest_group = {
+                any_supporting_interest_group = {
                     is_in_government = yes
                 }
             }
@@ -421,15 +414,6 @@ movement_ca_reactionary = {
         state_weight = {
             value = state_urbanization_rate
             multiply = -1 
-        }
-    }
-
-    # CAFM F18 (grupo F): radicalismo propio
-    additional_radicalism_factors = {
-        value = 0
-        if = {
-            limit = { owner ?= { has_law_or_variant = law_type:law_total_separation } }
-            add = { value = 0.25 desc = "CA_RAD_SEPARATION" }
         }
     }
 }
@@ -444,6 +428,7 @@ movement_ca_unitarian = {
     character_ideologies = {
         ideology_ca_unitarian
         ideology_authoritarian
+        ideology_ca_autocratic_autonomist
         ideology_central_america_caudillo
     }
 
@@ -515,6 +500,8 @@ movement_ca_unitarian = {
         movement_support_officers
         movement_support_bureaucrats
         movement_support_aristocrats
+        movement_support_peasants
+        movement_support_laborers
     }
 
     pop_support_weight = {
@@ -558,6 +545,15 @@ movement_ca_unitarian = {
             limit = { is_pop_type = aristocrats }
             add = 20
         }
+        # CAFM: base rural del orden conservador (Rebelion de la Montana, 1837-1838)
+        else_if = {
+            limit = { is_pop_type = peasants }
+            add = 20
+        }
+        else_if = {
+            limit = { is_pop_type = laborers }
+            add = 10
+        }
 
         # 3. Fuerte en la capital
         if = {
@@ -575,15 +571,6 @@ movement_ca_unitarian = {
         possible = { political_movement_support >= 0.05 }
         weight = { value = 150 }
     }
-
-    # CAFM F18 (grupo F): radicalismo propio
-    additional_radicalism_factors = {
-        value = 0
-        if = {
-            limit = { owner ?= { has_law_or_variant = law_type:law_ca_central_american_confederated } }
-            add = { value = 0.25 desc = "CA_RAD_CONFEDERATION" }
-        }
-    }
 }
 
 # ==============================================
@@ -595,8 +582,10 @@ movement_ca_federalist = {
 
     character_ideologies = {
         ideology_ca_federalist
+        ideology_ca_liberal
         ideology_republican_leader
         ideology_liberal_leader
+        ideology_ca_constitutionalist
     }
 
     creation_trigger = {
@@ -637,6 +626,7 @@ movement_ca_federalist = {
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_ca_federalist
+            has_ideology = ideology:ideology_ca_constitutionalist
             scope:interest_group ?= {
                 OR = {
                     has_ideology = ideology:ideology_liberal
@@ -667,7 +657,10 @@ movement_ca_federalist = {
     pop_support_factors = {
         movement_support_academics
         movement_support_clerks
-        movement_support_shopkeepers 
+        movement_support_shopkeepers
+        movement_support_bureaucrats
+        movement_support_laborers
+        movement_support_peasants
     }
 
     pop_support_weight = {
@@ -717,11 +710,30 @@ movement_ca_federalist = {
             limit = { is_pop_type = bureaucrats }
             add = 15
         }
+        # CAFM: jornaleros y artesanos urbanos, tropa de las milicias liberales
+        else_if = {
+            limit = { is_pop_type = laborers }
+            add = 15
+        }
+        else_if = {
+            limit = { is_pop_type = peasants }
+            add = 8
+        }
 
         # 4. Multiplicador de Alfabetización
-        multiply = {
-            value = literacy_rate
-            add = 0.15
+        # CAFM: no se aplica a campesinos ni jornaleros (casi todos analfabetos
+        # en 1836; con el multiplicador su apoyo quedaba en ~1/5)
+        if = {
+            limit = {
+                NOR = {
+                    is_pop_type = peasants
+                    is_pop_type = laborers
+                }
+            }
+            multiply = {
+                value = literacy_rate
+                add = 0.15
+            }
         }
 
         # 5. Multiplicador de Radicalismo
@@ -735,15 +747,6 @@ movement_ca_federalist = {
         possible = { political_movement_support >= 0.05 }
         weight = { value = 100 }
     }
-
-    # CAFM F18 (grupo F): radicalismo propio
-    additional_radicalism_factors = {
-        value = 0
-        if = {
-            limit = { owner ?= { has_law_or_variant = law_type:law_ca_central_american_unitary } }
-            add = { value = 0.25 desc = "CA_RAD_UNITARY" }
-        }
-    }
 }
 # ==============================================
 # MOVIMIENTO CARRILLISTA (Autocracia Aislacionista de Costa Rica)
@@ -751,11 +754,12 @@ movement_ca_federalist = {
 # ==============================================
 movement_ca_carrillista = {
     category = movement_category_ideological
-    ideology = ideology_ca_separatist_movement # F18: antes la ideologia de personaje carrillismo
+    ideology = ideology_carrillismo 
 
     character_ideologies = {
         ideology_carrillismo
         ideology_authoritarian
+        ideology_ca_criollo_paternalistic
         ideology_central_america_caudillo
     }
 
@@ -785,6 +789,7 @@ movement_ca_carrillista = {
         OR = {
             has_ideology = ideology:ideology_carrillismo
             has_ideology = ideology:ideology_authoritarian
+            has_ideology = ideology:ideology_ca_criollo_paternalistic
             
             # Grupos pragmáticos y oligarcas que buscan estabilidad por encima de todo
             scope:interest_group ?= {
@@ -844,15 +849,6 @@ movement_ca_carrillista = {
         weight = { value = 1000 }
         state_weight = {
             value = 1
-        }
-    }
-
-    # CAFM F18 (grupo F): radicalismo propio
-    additional_radicalism_factors = {
-        value = 0
-        if = {
-            limit = { owner ?= { is_subject = yes } }
-            add = { value = 0.25 desc = "CA_RAD_SUBJECT" }
         }
     }
 }

@@ -1,0 +1,201 @@
+﻿############################################################################
+# CAFM P2 - Cohesion federal (common/script_values/ca_06_cohesion.txt)
+# Diseno: CAFM_LISTA_10_ARREGLOS.md, punto 10.
+#
+# Variable ca_federal_cohesion en la UCA, de 0 a 100. Solo existe en la ruta federal
+# (ca_faction_federal) y mientras dure el diario de la Federacion.
+# Es independiente de la barra frca_support_bar y de la cohesion confederal (B1).
+# Scope de todo el archivo: pais UCA.
+############################################################################
+
+ca_cohesion_start_value = 40
+ca_cohesion_max = 100
+
+# Umbrales (bandas): 3 = >= 75 · 2 = 50-74 · 1 = 25-49 · 0 = < 25
+ca_cohesion_band_high = 75
+ca_cohesion_band_normal = 50
+ca_cohesion_band_low = 25
+
+# Costos de las acciones del minimapa (ruta federal)
+ca_cohesion_cost_campaign = 10
+ca_cohesion_cost_negotiate = 5
+
+# Estados miembros con poder regional alto (>= 2) y leales (>= 2): cada uno suma.
+ca_cohesion_regional_partners = {
+	value = 0
+	if = { limit = { has_variable = frca_regpow_gua var:frca_regpow_gua >= 2 ca_frca_loyalty_ge = { TAG = gua VALUE = 2 } } add = 1 }
+	if = { limit = { has_variable = frca_regpow_els var:frca_regpow_els >= 2 ca_frca_loyalty_ge = { TAG = els VALUE = 2 } } add = 1 }
+	if = { limit = { has_variable = frca_regpow_hon var:frca_regpow_hon >= 2 ca_frca_loyalty_ge = { TAG = hon VALUE = 2 } } add = 1 }
+	if = { limit = { has_variable = frca_regpow_nic var:frca_regpow_nic >= 2 ca_frca_loyalty_ge = { TAG = nic VALUE = 2 } } add = 1 }
+	if = { limit = { has_variable = frca_regpow_cos var:frca_regpow_cos >= 2 ca_frca_loyalty_ge = { TAG = cos VALUE = 2 } } add = 1 }
+}
+
+# Estados miembros sin deficit de infraestructura (todos sus estados cubiertos).
+ca_cohesion_connected_members = {
+	value = 0
+	every_subject_or_below = {
+		limit = {
+			ca_is_member_state = yes
+			NOT = {
+				any_scope_state = {
+					infrastructure_usage > infrastructure
+				}
+			}
+		}
+		add = 1
+	}
+}
+
+# Estados miembros pobres (nivel de vida medio de su cultura principal bajo).
+ca_cohesion_poor_members = {
+	value = 0
+	every_subject_or_below = {
+		limit = {
+			ca_is_member_state = yes
+			average_sol_for_primary_cultures < 8
+		}
+		add = 1
+	}
+}
+
+# Cambio mensual, con desglose para el tooltip.
+ca_cohesion_monthly_change = {
+	value = 0
+
+	# ---------------------------- SUBE ----------------------------
+	if = {
+		limit = { government_legitimacy >= 80 }
+		add = { value = 1 desc = "CA_COH_LEGITIMACY_HIGH" }
+	}
+	else_if = {
+		limit = { government_legitimacy >= 60 }
+		add = { value = 0.5 desc = "CA_COH_LEGITIMACY_GOOD" }
+	}
+	if = {
+		limit = {
+			OR = {
+				has_law_or_variant = law_type:law_multicultural
+				has_law_or_variant = law_type:law_cultural_exclusion
+			}
+		}
+		add = { value = 0.5 desc = "CA_COH_CITIZENSHIP" }
+	}
+	if = {
+		limit = { ca_cohesion_connected_members > 0 }
+		add = { value = ca_cohesion_connected_members multiply = 0.25 desc = "CA_COH_INFRASTRUCTURE" }
+	}
+	if = {
+		limit = {
+			ca_cohesion_poor_members = 0
+			any_subject_or_below = { ca_is_member_state = yes }
+		}
+		add = { value = 0.5 desc = "CA_COH_BALANCED_INVESTMENT" }
+	}
+	if = {
+		limit = {
+			OR = {
+				has_law_or_variant = law_type:law_proportional_taxation
+				has_law_or_variant = law_type:law_graduated_taxation
+			}
+		}
+		add = { value = 0.5 desc = "CA_COH_FAIR_TAXES" }
+	}
+	if = {
+		limit = { has_law_or_variant = law_type:law_ca_federal_army }
+		add = { value = 0.5 desc = "CA_COH_FEDERAL_ARMY" }
+	}
+	if = {
+		limit = {
+			OR = {
+				has_law_or_variant = law_type:law_census_voting
+				has_law_or_variant = law_type:law_universal_suffrage
+			}
+		}
+		add = { value = 0.5 desc = "CA_COH_REPRESENTATION" }
+	}
+	if = {
+		limit = { capital ?= { NOT = { state_region = s:STATE_GUATEMALA } } }
+		add = { value = 0.5 desc = "CA_COH_NEUTRAL_CAPITAL" }
+	}
+	if = {
+		limit = { has_variable = ca_cohesion_crisis_resolved }
+		add = { value = 1 desc = "CA_COH_CRISIS_RESOLVED" }
+	}
+	if = {
+		limit = { ca_federal_favoured_laws > 0 }
+		add = { value = ca_federal_favoured_laws multiply = 0.25 desc = "CA_COH_FEDERAL_LAWS" }
+	}
+	if = {
+		limit = { ca_cohesion_regional_partners > 0 }
+		add = { value = ca_cohesion_regional_partners multiply = 0.25 desc = "CA_COH_REGIONAL_PARTNERS" }
+	}
+
+	# ---------------------------- BAJA ----------------------------
+	if = {
+		limit = { in_default = yes }
+		add = { value = -1 desc = "CA_COH_DEFAULT" }
+	}
+	else_if = {
+		limit = { has_journal_entry = je_ca_british_debt }
+		add = { value = -0.25 desc = "CA_COH_DEBT" }
+	}
+	if = {
+		limit = {
+			OR = {
+				has_revolution = yes
+				AND = {
+					has_variable = frca_federal_war_declared
+					is_at_war = yes
+				}
+			}
+		}
+		add = { value = -2 desc = "CA_COH_CIVIL_WAR" }
+	}
+	if = {
+		limit = { ca_cohesion_poor_members >= 2 }
+		add = { value = -0.5 desc = "CA_COH_REGIONAL_INEQUALITY" }
+	}
+	if = {
+		limit = {
+			OR = {
+				has_law_or_variant = law_type:law_ethnostate
+				has_law_or_variant = law_type:law_national_supremacy
+				has_law_or_variant = law_type:law_racial_segregation
+			}
+		}
+		add = { value = -0.5 desc = "CA_COH_DISCRIMINATION" }
+	}
+	if = {
+		limit = { has_variable = frca_front_british var:frca_front_british > 0 }
+		add = { value = var:frca_front_british multiply = -0.25 desc = "CA_COH_FRONT_BRITISH" }
+	}
+	if = {
+		limit = { has_variable = frca_front_mexican var:frca_front_mexican > 0 }
+		add = { value = var:frca_front_mexican multiply = -0.25 desc = "CA_COH_FRONT_MEXICAN" }
+	}
+	if = {
+		limit = { ca_federal_disfavoured_laws > 0 }
+		add = { value = ca_federal_disfavoured_laws multiply = -0.5 desc = "CA_COH_CENTRALISM" }
+	}
+	if = {
+		limit = { ca_core_states_rebel_count > 0 }
+		add = { value = ca_core_states_rebel_count multiply = -0.5 desc = "CA_COH_SEPARATISM" }
+	}
+	if = {
+		limit = {
+			OR = {
+				government_legitimacy < 40
+				bureaucracy < 0
+			}
+		}
+		add = { value = -0.5 desc = "CA_COH_WEAK_INSTITUTIONS" }
+	}
+	if = {
+		limit = { has_variable = ca_foreign_agitators }
+		add = { value = -0.5 desc = "CA_COH_FOREIGN_AGITATORS" }
+	}
+	if = {
+		limit = { has_journal_entry = je_ca_chartered_company }
+		add = { value = -0.25 desc = "CA_COH_CONCESSIONS" }
+	}
+}

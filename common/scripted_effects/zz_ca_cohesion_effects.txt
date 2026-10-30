@@ -1,0 +1,297 @@
+﻿############################################################################
+# CAFM P2 - Cohesion federal (common/scripted_effects/zz_ca_cohesion_effects.txt)
+# Diseno: CAFM_LISTA_10_ARREGLOS.md, punto 10. Scope: pais UCA salvo que se diga otra cosa.
+#
+# Variables en la UCA:
+#   ca_federal_cohesion        0-100 (inicio 40). Solo en la ruta federal.
+#   ca_cohesion_band           3 = >= 75 · 2 = 50-74 · 1 = 25-49 · 0 = < 25
+#   ca_cohesion_hardcore       modo hardcore (UCA de la IA, sorteo 10:2)
+#   ca_cohesion_crisis_resolved +1 al mes mientras dure (la ponen eventos e intervenciones con exito)
+#   frca_regpow_<x>            poder regional del estado (0-3)
+############################################################################
+
+# Empieza la cohesion (al elegir la ruta federal). No hace nada si ya existe.
+ca_cohesion_start = {
+	if = {
+		limit = {
+			NOT = { has_variable = ca_federal_cohesion }
+		}
+		set_variable = { name = ca_federal_cohesion value = ca_cohesion_start_value }
+		set_variable = { name = ca_cohesion_band value = 1 }
+		custom_tooltip = ca_cohesion_start_tt
+	}
+}
+
+# Termina la cohesion (al cerrar el diario o al pasar a la ruta centralista).
+ca_cohesion_end = {
+	remove_variable = ca_federal_cohesion
+	remove_variable = ca_cohesion_band
+	remove_variable = ca_cohesion_crisis_resolved
+	remove_variable = ca_coh_interv_seen
+	remove_variable = frca_regpow_gua
+	remove_variable = frca_regpow_els
+	remove_variable = frca_regpow_hon
+	remove_variable = frca_regpow_nic
+	remove_variable = frca_regpow_cos
+	if = { limit = { has_modifier = ca_cohesion_prosperity } remove_modifier = ca_cohesion_prosperity }
+	if = { limit = { has_modifier = ca_cohesion_breakdown } remove_modifier = ca_cohesion_breakdown }
+}
+
+# Sorteo del modo hardcore: 10 normal / 2 hardcore (~17 %). Solo para la UCA de la IA.
+ca_cohesion_hardcore_roll = {
+	remove_variable = ca_cohesion_hardcore
+	if = {
+		limit = { is_ai = yes }
+		random_list = {
+			10 = { }
+			2 = { set_variable = ca_cohesion_hardcore }
+		}
+	}
+}
+
+# Sumar o restar cohesion, con tope 0-100. Uso: ca_cohesion_change = { VALUE = -5 }
+ca_cohesion_change = {
+	c:UCA ?= {
+		if = {
+			limit = { has_variable = ca_federal_cohesion }
+			change_variable = { name = ca_federal_cohesion add = $VALUE$ }
+			if = {
+				limit = { var:ca_federal_cohesion > ca_cohesion_max }
+				set_variable = { name = ca_federal_cohesion value = ca_cohesion_max }
+			}
+			if = {
+				limit = { var:ca_federal_cohesion < 0 }
+				set_variable = { name = ca_federal_cohesion value = 0 }
+			}
+		}
+	}
+}
+
+# Gastar cohesion en una accion (no hace nada si la cohesion no esta en juego).
+# Uso: ca_cohesion_spend = { VALUE = 10 }
+ca_cohesion_spend = {
+	if = {
+		limit = { ca_cohesion_active = yes }
+		custom_tooltip = {
+			text = ca_cohesion_spend_tt
+			c:UCA ?= {
+				change_variable = { name = ca_federal_cohesion subtract = $VALUE$ }
+				if = {
+					limit = { var:ca_federal_cohesion < 0 }
+					set_variable = { name = ca_federal_cohesion value = 0 }
+				}
+			}
+		}
+	}
+}
+
+# Crisis resuelta: +1 al mes durante 12 meses. La llaman las intervenciones con exito.
+ca_cohesion_crisis_resolved = {
+	c:UCA ?= {
+		if = {
+			limit = { has_variable = ca_federal_cohesion }
+			set_variable = { name = ca_cohesion_crisis_resolved days = 365 }
+		}
+	}
+}
+
+# Poder regional de un estado (0-3) y su riesgo. Uso:
+# ca_cohesion_regpow_set = { TAG = gua CTAG = GUA FRONT = mexican }
+ca_cohesion_regpow_set = {
+	set_variable = { name = frca_regpow_$TAG$ value = 0 }
+	if = {
+		limit = { has_law_or_variant = law_type:law_ca_municipalismo }
+		change_variable = { name = frca_regpow_$TAG$ add = 1 }
+	}
+	if = {
+		limit = {
+			c:$CTAG$ ?= {
+				OR = {
+					has_law_or_variant = law_type:law_ca_federal_state
+					has_law_or_variant = law_type:law_ca_autonomous_state
+				}
+			}
+		}
+		change_variable = { name = frca_regpow_$TAG$ add = 1 }
+	}
+	if = {
+		limit = { c:$CTAG$ ?= { has_law_or_variant = law_type:law_ca_municipalismo } }
+		change_variable = { name = frca_regpow_$TAG$ add = 1 }
+	}
+	# Riesgo: poder regional alto y lealtad baja. El estado queda abierto a un rival
+	# (Gran Bretana, Mexico o los caudillos). Los frentes solo se mueven en la fase IV.
+	if = {
+		limit = {
+			var:frca_regpow_$TAG$ >= 2
+			ca_frca_loyalty_le = { TAG = $TAG$ VALUE = 1 }
+		}
+		random = {
+			chance = 3
+			ca_frca_front_change = { FRONT = $FRONT$ VALUE = 1 }
+		}
+	}
+}
+
+# Paso de banda (cruzar 75 / 50 / 25). Scope: UCA.
+ca_cohesion_band_update = {
+	set_variable = { name = ca_cohesion_band_old value = var:ca_cohesion_band }
+	if = {
+		limit = { var:ca_federal_cohesion >= ca_cohesion_band_high }
+		set_variable = { name = ca_cohesion_band value = 3 }
+	}
+	else_if = {
+		limit = { var:ca_federal_cohesion >= ca_cohesion_band_normal }
+		set_variable = { name = ca_cohesion_band value = 2 }
+	}
+	else_if = {
+		limit = { var:ca_federal_cohesion >= ca_cohesion_band_low }
+		set_variable = { name = ca_cohesion_band value = 1 }
+	}
+	else = {
+		set_variable = { name = ca_cohesion_band value = 0 }
+	}
+
+	# P5: avisos al cruzar los umbrales
+	if = {
+		limit = { var:ca_cohesion_band = 3 var:ca_cohesion_band_old < 3 }
+		post_notification = ca_notif_cohesion_high
+	}
+	else_if = {
+		limit = { var:ca_cohesion_band = 1 var:ca_cohesion_band_old >= 2 }
+		post_notification = ca_notif_cohesion_low
+	}
+	else_if = {
+		limit = { var:ca_cohesion_band = 0 var:ca_cohesion_band_old >= 1 }
+		post_notification = ca_notif_cohesion_crisis
+	}
+	else_if = {
+		limit = { var:ca_cohesion_band = 2 var:ca_cohesion_band_old < 2 }
+		post_notification = ca_notif_cohesion_recovered
+	}
+
+	# >= 75: el ejercito jura la Constitucion (se renueva mientras siga alta)
+	if = {
+		limit = { var:ca_cohesion_band = 3 }
+		ig:ig_armed_forces ?= {
+			if = {
+				limit = { NOT = { has_modifier = ca_cohesion_army_oath } }
+				add_modifier = { name = ca_cohesion_army_oath months = 12 }
+			}
+		}
+	}
+
+	# Baja a 25-49: un grupo de interes unionista se divide (cadena del grupo dividido)
+	if = {
+		limit = {
+			var:ca_cohesion_band = 1
+			var:ca_cohesion_band_old >= 2
+		}
+		random = {
+			chance = 50
+			ig:ig_intelligentsia ?= {
+				if = {
+					limit = {
+						exists = leader
+						NOT = { has_modifier = ca_ig_divided }
+					}
+					add_modifier = { name = ca_ig_divided }
+					set_variable = { name = ca_divided_years value = 0 }
+					save_scope_as = ca_divided_ig
+					owner = { trigger_event = { id = ca_ideology_events.2 days = 1 } }
+				}
+			}
+		}
+	}
+
+	# Baja de 25: los caudillos se crecen (frente +1; en la fase IV puede salir .156)
+	if = {
+		limit = {
+			var:ca_cohesion_band = 0
+			var:ca_cohesion_band_old >= 1
+		}
+		ca_frca_front_change = { FRONT = caudillos VALUE = 1 }
+		trigger_event = { id = ca_central_america.156 days = 1 popup = yes }
+	}
+	remove_variable = ca_cohesion_band_old
+}
+
+# Modo hardcore: efectos extra segun la banda. Scope: UCA.
+ca_cohesion_hardcore_monthly = {
+	if = {
+		limit = { var:ca_cohesion_band = 3 }
+		if = {
+			limit = { NOT = { has_modifier = ca_cohesion_prosperity } }
+			add_modifier = { name = ca_cohesion_prosperity }
+		}
+	}
+	else = {
+		if = { limit = { has_modifier = ca_cohesion_prosperity } remove_modifier = ca_cohesion_prosperity }
+	}
+	if = {
+		limit = { var:ca_cohesion_band = 0 }
+		if = {
+			limit = { NOT = { has_modifier = ca_cohesion_breakdown } }
+			add_modifier = { name = ca_cohesion_breakdown }
+		}
+		# Los estados bloquean las reformas
+		if = {
+			limit = { enacting_any_law = yes }
+			random = {
+				chance = 10
+				add_enactment_setback = 1
+			}
+		}
+		# Los estados exigen autonomia, eligen separatistas e intentan irse
+		random = { chance = 5 ca_frca_loyalty_down = { TAG = gua } }
+		random = { chance = 5 ca_frca_loyalty_down = { TAG = els } }
+		random = { chance = 5 ca_frca_loyalty_down = { TAG = hon } }
+		random = { chance = 5 ca_frca_loyalty_down = { TAG = nic } }
+		random = { chance = 5 ca_frca_loyalty_down = { TAG = cos } }
+		every_subject_or_below = {
+			limit = { ca_is_member_state = yes }
+			ca_fvs_bar_change = { VALUE = -1 }
+		}
+	}
+	else = {
+		if = { limit = { has_modifier = ca_cohesion_breakdown } remove_modifier = ca_cohesion_breakdown }
+	}
+}
+
+# Pulso mensual (lo llama ca_frca_monthly_update). Scope: UCA.
+ca_cohesion_monthly = {
+	if = {
+		limit = { has_variable = ca_federal_cohesion }
+		ca_cohesion_regpow_set = { TAG = gua CTAG = GUA FRONT = mexican }
+		ca_cohesion_regpow_set = { TAG = els CTAG = ELS FRONT = caudillos }
+		ca_cohesion_regpow_set = { TAG = hon CTAG = HON FRONT = british }
+		ca_cohesion_regpow_set = { TAG = nic CTAG = NIC FRONT = british }
+		ca_cohesion_regpow_set = { TAG = cos CTAG = COS FRONT = caudillos }
+		change_variable = { name = ca_federal_cohesion add = ca_cohesion_monthly_change }
+		if = {
+			limit = { var:ca_federal_cohesion > ca_cohesion_max }
+			set_variable = { name = ca_federal_cohesion value = ca_cohesion_max }
+		}
+		if = {
+			limit = { var:ca_federal_cohesion < 0 }
+			set_variable = { name = ca_federal_cohesion value = 0 }
+		}
+		ca_cohesion_band_update = yes
+		# Intervencion federal con exito (.35-.40): +1 al mes durante 12 meses
+		if = {
+			limit = {
+				has_variable = frca_interv_success
+				NOT = { has_variable = ca_coh_interv_seen }
+			}
+			set_variable = ca_coh_interv_seen
+			ca_cohesion_crisis_resolved = yes
+		}
+		else_if = {
+			limit = { NOT = { has_variable = frca_interv_success } }
+			remove_variable = ca_coh_interv_seen
+		}
+		if = {
+			limit = { has_variable = ca_cohesion_hardcore }
+			ca_cohesion_hardcore_monthly = yes
+		}
+	}
+}

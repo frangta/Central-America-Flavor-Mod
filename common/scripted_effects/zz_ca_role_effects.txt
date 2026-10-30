@@ -1,0 +1,88 @@
+﻿############################################################################
+# CAFM P1 punto 1 - Acciones del diario del estado (je_ca_state_role_in_federation)
+# Las mismas que los 4 scripted_button de ca_flavor_buttons.txt, pero como efectos para
+# los botones del widget (ca_role_sgui.txt) y para la IA (ca_role_ai_monthly).
+# Scope: el pais del estado.
+############################################################################
+
+ca_role_do_support_federation = {
+	set_variable = { name = support_cooldown days = 365 }
+	change_variable = { name = ca_federalist_influence add = 1 }
+	ca_fvs_bar_change = { VALUE = 10 }
+	if = {
+		limit = { var:ca_federalist_influence >= 2 }
+		ca_state_loyalty_up = yes
+	}
+}
+
+ca_role_do_support_confederation = {
+	set_variable = { name = confederation_cooldown days = 365 }
+	if = {
+		limit = { var:ca_separatist_influence < 2 }
+		change_variable = { name = ca_separatist_influence add = 1 }
+	}
+	ca_fvs_bar_change = { VALUE = -5 }
+	set_variable = ca_confederation_candidate
+}
+
+ca_role_do_sabotage_federation = {
+	set_variable = { name = sabotage_cooldown days = 180 }
+	change_variable = { name = ca_separatist_influence add = 1 }
+	ca_fvs_bar_change = { VALUE = -10 }
+	ca_state_loyalty_down = yes
+	if = {
+		limit = { var:ca_separatist_influence >= 3 }
+		set_variable = ca_role_separatist
+		custom_tooltip = ca_button_sabotage_role_tt
+	}
+}
+
+ca_role_do_support_centralists = {
+	set_variable = { name = pretorian_cooldown days = 730 }
+	change_variable = { name = ca_centralist_influence add = 1 }
+	add_radicals = {
+		value = small_radicals
+		strata = lower
+	}
+	if = {
+		limit = { var:ca_centralist_influence >= 3 }
+		set_variable = ca_centralist_coup_ready
+		custom_tooltip = ca_button_centralist_coup_tt
+		c:UCA ?= { trigger_event = { id = ca_centralist_events.6 days = 7 } }
+	}
+}
+
+# La IA usa los botones con los mismos pesos que tenian los scripted_button (una vez al mes, 25 %).
+ca_role_ai_monthly = {
+	if = {
+		limit = { is_ai = yes }
+		random = {
+			chance = 25
+			random_list = {
+				30 = {
+					trigger = { ca_role_can_support_federation = yes }
+					modifier = { if = { limit = { ig:ig_intelligentsia ?= { is_in_government = yes } } add = 30 } }
+					modifier = { if = { limit = { has_variable = ca_role_separatist } multiply = 0 } }
+					ca_role_do_support_federation = yes
+				}
+				20 = {
+					trigger = { ca_role_can_support_confederation = yes }
+					modifier = { if = { limit = { ig:ig_landowners ?= { is_in_government = yes } } add = 10 } }
+					ca_role_do_support_confederation = yes
+				}
+				10 = {
+					trigger = { ca_role_can_sabotage_federation = yes }
+					modifier = { if = { limit = { has_variable = ca_carrilo_decret } add = 80 } }
+					modifier = { if = { limit = { ig:ig_landowners ?= { is_in_government = yes } } add = 20 } }
+					ca_role_do_sabotage_federation = yes
+				}
+				5 = {
+					trigger = { ca_role_can_support_centralists = yes }
+					modifier = { if = { limit = { overlord ?= { has_law_or_variant = law_type:law_state_religion } } add = 30 } }
+					ca_role_do_support_centralists = yes
+				}
+				60 = { }
+			}
+		}
+	}
+}

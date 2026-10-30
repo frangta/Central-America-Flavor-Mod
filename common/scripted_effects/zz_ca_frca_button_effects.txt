@@ -27,6 +27,7 @@ ca_frca_state_modifier = {
 # Campana federal: lealtad +1; dinero; turmoil en el estado; 180 dias.
 ca_frca_action_campaign = {
 	add_treasury = { value = ca_federal_campaign_cost multiply = -1 }
+	ca_cohesion_spend = { VALUE = ca_cohesion_cost_campaign } # P2
 	ca_frca_loyalty_up = { TAG = $TAG$ }
 	ca_frca_state_modifier = { CTAG = $CTAG$ STATE = $STATE$ NAME = ca_federal_campaign_unrest MONTHS = 6 }
 	set_variable = { name = frca_campaign_cd_$TAG$ days = 180 }
@@ -34,6 +35,7 @@ ca_frca_action_campaign = {
 
 # Negociar autonomia: lealtad +1; barra -10.
 ca_frca_action_negotiate = {
+	ca_cohesion_spend = { VALUE = ca_cohesion_cost_negotiate } # P2
 	ca_frca_loyalty_up = { TAG = $TAG$ }
 	ca_frca_bar_minor_down = yes
 	set_variable = { name = frca_negotiate_cd_$TAG$ days = 365 }

@@ -1,0 +1,75 @@
+﻿############################################################################
+# CAFM P4 - Bocas del Toro y acciones regionales del minimapa (puntos 4a y 5)
+# Variables globales:
+#   ca_bocas_control           0-100, control efectivo de Bocas (empieza en 20 con .6)
+#   ca_bocas_native_pact       pacto con guaymies y miskitos (quita a GBR el pretexto)
+#   ca_bocas_protested         protesta en Londres o acudir a EE. UU.
+#   ca_bocas_border_pact       limites pactados con Nueva Granada
+#   ca_bocas_federal_district  Bocas es distrito federal
+# Scope: UCA salvo que se diga otra cosa.
+############################################################################
+
+# Cambiar el control de Bocas (0-100). Uso: ca_bocas_control_change = { VALUE = 10 }
+ca_bocas_control_change = {
+	if = {
+		limit = { NOT = { has_global_variable = ca_bocas_control } }
+		set_global_variable = { name = ca_bocas_control value = 20 }
+	}
+	change_global_variable = { name = ca_bocas_control add = $VALUE$ }
+	if = {
+		limit = {
+			has_global_variable = ca_bocas_control
+			global_var:ca_bocas_control > 100
+		}
+		set_global_variable = { name = ca_bocas_control value = 100 }
+	}
+	if = {
+		limit = {
+			has_global_variable = ca_bocas_control
+			global_var:ca_bocas_control < 0
+		}
+		set_global_variable = { name = ca_bocas_control value = 0 }
+	}
+}
+
+# Pulso mensual (lo llama ca_frca_monthly_update). Sin guarnicion el control se pierde poco a poco;
+# con el control bajo, los britanicos pueden desembarcar desde la Mosquitia (.176).
+ca_bocas_monthly = {
+	if = {
+		limit = {
+			has_global_variable = ca_bocas_control
+			ca_bocas_held_by_uca = yes
+		}
+		if = {
+			limit = {
+				NOT = { has_variable = ca_bocas_garrison }
+				NOT = { has_global_variable = ca_bocas_federal_district }
+			}
+			random = {
+				chance = 50
+				ca_bocas_control_change = { VALUE = -1 }
+			}
+		}
+		if = {
+			limit = {
+				NOT = { ca_bocas_control_ge = { VALUE = 30 } }
+				NOT = { has_global_variable = ca_bocas_native_pact }
+			}
+			random = {
+				chance = 5
+				trigger_event = { id = ca_central_america.176 popup = yes }
+			}
+		}
+	}
+}
+
+# Estado de una region (para modificadores de las acciones). Uso:
+# ca_mm_region_modifier = { CTAG = NIC STATE = STATE_NICARAGUA NAME = ca_coast_colony MONTHS = 120 }
+ca_mm_region_modifier = {
+	ca_frca_state_modifier = { CTAG = $CTAG$ STATE = $STATE$ NAME = $NAME$ MONTHS = $MONTHS$ }
+}
+
+# Espera de una accion regional. Uso: ca_mm_region_cooldown = { KEY = mos_colony DAYS = 730 }
+ca_mm_region_cooldown = {
+	set_variable = { name = ca_mm_cd_$KEY$ days = $DAYS$ }
+}

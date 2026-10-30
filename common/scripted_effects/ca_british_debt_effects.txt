@@ -6,6 +6,7 @@
 # Baja un tramo de deuda (4 -> 3 -> 2 -> 1 -> saldada)
 # Mismo patrón que hispaniola_events.4
 ca_british_debt_reduce_tier_effect = {
+	post_notification = ca_notif_debt_tier_paid # P5
 	if = {
 		limit = { je:je_ca_british_debt ?= { has_modifier = modifier_ca_british_debt_4 } }
 		je:je_ca_british_debt ?= {

@@ -1,39 +1,78 @@
-﻿lobby_pro_federalist = {
+﻿# ====================================================================
+# CAFM - Lobbies pro y anti Federacion (actualizados 2026-10-27)
+# --------------------------------------------------------------------
+# Antes solo podian nacer si el pais era dependencia (subject_type_ca_dependency)
+# de la UCA, asi que en 1836 nunca aparecian. Ahora tambien nacen en los
+# Estados ya separados (ley law_ca_sovereign_state) mirando a la UCA.
+# Otros cambios:
+#   - appeasement_factors_anti_federalist no existia: se usan los 6
+#     factores de common/political_lobby_appeasement en su lado correcto.
+#   - movement_ca_separatist_movement no existia: se usan los movimientos
+#     nacionales del mod.
+#   - join_weight: cada "add" va dentro de un if con limit (patron vanilla)
+#     en vez de owner = { if = { ... add } }.
+#   - requirement_to_maintain (tomado del borrador comentado de abajo).
+# ====================================================================
+
+lobby_pro_federalist = {
     category = foreign_pro_country
     texture = "gfx/interface/icons/political_lobby_icons/lobby_pro.dds"
-    
+
     can_create = {
-        only_centralamericans_cultures = yes 
-        scope:target_country = { c:UCA ?= this }
-        is_subject_of = scope:target_country
-        is_subject_type = subject_type_ca_dependency 
+        only_centralamericans_cultures = yes
+        NOT = { is_country_type = decentralized }
         is_revolutionary = no
+        scope:target_country = {
+            c:UCA ?= this
+            is_revolutionary = no
+        }
+        OR = {
+            is_subject_of = scope:target_country
+            AND = {
+                is_subject = no
+                has_law_or_variant = law_type:law_ca_sovereign_state
+            }
+        }
     }
-    
-    
+
+    requirement_to_maintain = {
+        trigger = {
+            exists = scope:target_country
+            OR = {
+                is_subject_of = scope:target_country
+                is_subject = no
+            }
+        }
+        on_failed = { }
+    }
+
+    # Lo que agrada al lobby pro-Federacion
     appeasement_factors_pro = {
         appeasement_laws_harmonized
-		appeasement_federal_aid_received
-		appeasement_local_autonomy_respected 
+        appeasement_federal_aid_received
+        appeasement_local_autonomy_respected
     }
-    
+
+    # Lo que lo enfada
     appeasement_factors_anti = {
+        appeasement_centralization_resisted
         appeasement_federal_authority_challenged
+        appeasement_federal_incompetence
     }
-    
+
     join_weight = {
         value = 0
 
-        # 1. Adherencia: Si ya es miembro, tiende a quedarse
+        # 1. Si ya es miembro, tiende a quedarse
         if = {
-            limit = { 
+            limit = {
                 exists = scope:political_lobby
                 scope:political_lobby = { any_lobby_member = { this = root } }
-            }    
+            }
             add = { value = 50 desc = "member_of_lobby" }
-        }    
+        }
 
-        # 2. Ideologías Pro-Federación
+        # 2. Ideologias pro-Federacion
         if = {
             limit = {
                 OR = {
@@ -47,54 +86,60 @@
             add = { value = 100 desc = "ideologically_federalist" }
         }
 
-        # 3. Postura de Leyes Locales
-        owner = {
-            if = { 
-                limit = { has_law_or_variant = law_type:law_ca_central_american_federal } 
-                add = { value = 25 desc = "supports_federal_law" } 
-            }
-        }
-
-        # 4. Modificadores de Estado (Bastión Liberal)
-        owner = {
-            if = {
-                limit = { 
-                    any_scope_state = { 
-                        OR = { 
-                            has_modifier = ca_liberal_stronghold 
-                            has_modifier = ca_federalist_heartland 
-                        } 
-                    } 
+        # 3. Leyes de estructura del Estado que mantienen el pacto federal
+        if = {
+            limit = {
+                owner = {
+                    OR = {
+                        has_law_or_variant = law_type:law_ca_central_american_federal
+                        has_law_or_variant = law_type:law_ca_federal_state
+                    }
                 }
-                add = { value = 30 desc = "liberal_state_modifier" }
             }
+            add = { value = 25 desc = "supports_federal_law" }
         }
 
-        # 5. Influencia (Contagio) de Movimientos Vecinos
-        owner = {
-            if = {
-                limit = {
+        # 4. Bastiones liberales en el pais
+        if = {
+            limit = {
+                owner = {
                     any_scope_state = {
+                        OR = {
+                            has_modifier = ca_liberal_stronghold
+                            has_modifier = ca_federalist_heartland
+                        }
+                    }
+                }
+            }
+            add = { value = 30 desc = "liberal_state_modifier" }
+        }
+
+        # 5. Movimiento federalista activo en el pais o en un vecino
+        if = {
+            limit = {
+                owner = {
+                    OR = {
+                        any_political_movement = { is_political_movement_type = movement_ca_federalist }
                         any_neighbouring_state = {
-                            owner = { 
-                                any_political_movement = { is_political_movement_type = movement_ca_federalist } 
+                            owner = {
+                                any_political_movement = { is_political_movement_type = movement_ca_federalist }
                             }
                         }
                     }
                 }
-                add = { value = 15 desc = "neighboring_federalist_movement" }
             }
+            add = { value = 15 desc = "neighboring_federalist_movement" }
         }
     }
-    
+
     on_created = {
         save_temporary_scope_as = lobby_country
         scope:political_lobby ?= {
             change_appeasement = {
-                amount = pro_overlord_lobby_starting_appeasement 
+                amount = pro_overlord_lobby_starting_appeasement
                 factor = appeasement_diplomatic_status_quo
             }
-            initialize_lobby_custom_name = yes        
+            initialize_lobby_custom_name = yes
         }
     }
 }
@@ -102,38 +147,62 @@
 lobby_anti_federalist = {
     category = foreign_anti_country
     texture = "gfx/interface/icons/political_lobby_icons/lobby_anti.dds"
-    
+
     can_create = {
         only_centralamericans_cultures = yes
-        scope:target_country = { c:UCA ?= this }
-        is_subject_type = subject_type_ca_dependency
+        NOT = { is_country_type = decentralized }
         is_revolutionary = no
+        scope:target_country = {
+            c:UCA ?= this
+            is_revolutionary = no
+        }
+        OR = {
+            is_subject_of = scope:target_country
+            AND = {
+                is_subject = no
+                has_law_or_variant = law_type:law_ca_sovereign_state
+            }
+        }
     }
-    
-    
+
+    requirement_to_maintain = {
+        trigger = {
+            exists = scope:target_country
+            OR = {
+                is_subject_of = scope:target_country
+                is_subject = no
+            }
+        }
+        on_failed = { }
+    }
+
+    # Lo que agrada al lobby separatista
     appeasement_factors_pro = {
-        appeasement_federal_authority_challenged 
-    }
-    
-    appeasement_factors_anti = {
-        appeasement_centralization_resisted 
+        appeasement_centralization_resisted
         appeasement_federal_authority_challenged
-        appeasement_federal_incompetence 
+        appeasement_federal_incompetence
+        appeasement_local_autonomy_respected
     }
-    
+
+    # Lo que lo enfada
+    appeasement_factors_anti = {
+        appeasement_laws_harmonized
+        appeasement_federal_aid_received
+    }
+
     join_weight = {
         value = 0
-        
-        # 1. Adherencia al lobby
+
+        # 1. Si ya es miembro, tiende a quedarse
         if = {
-            limit = { 
+            limit = {
                 exists = scope:political_lobby
                 scope:political_lobby = { any_lobby_member = { this = root } }
-            }    
+            }
             add = { value = 50 desc = "member_of_lobby" }
         }
 
-        # 2. Ideologías Anti-Federación (Centralistas, Reaccionarios o Separatistas)
+        # 2. Ideologias anti-Federacion (centralistas, reaccionarias o separatistas)
         if = {
             limit = {
                 OR = {
@@ -149,56 +218,56 @@ lobby_anti_federalist = {
             add = { value = 100 desc = "ideologically_anti_federalist" }
         }
 
-        # 3. Postura de Leyes Locales (Centralismo o Confederación laxa)
-        owner = {
-            if = {
-                limit = { 
-                    OR = { 
-                        has_law_or_variant = law_type:law_ca_central_american_unitary 
-                        has_law_or_variant = law_type:law_ca_central_american_confederated 
-                    } 
+        # 3. Leyes de estructura del Estado contrarias al pacto federal
+        if = {
+            limit = {
+                owner = {
+                    OR = {
+                        has_law_or_variant = law_type:law_ca_central_american_unitary
+                        has_law_or_variant = law_type:law_ca_central_american_confederated
+                        has_law_or_variant = law_type:law_ca_confederated_state
+                        has_law_or_variant = law_type:law_ca_autonomous_state
+                        has_law_or_variant = law_type:law_ca_sovereign_state
+                    }
                 }
-                add = { value = 25 desc = "supports_anti_federal_law" }
             }
+            add = { value = 25 desc = "supports_anti_federal_law" }
         }
 
-        # 4. Modificadores de Estado (Capital Conservadora o Autonomismo Aislado)
-        owner = {
-            if = {
-                limit = { 
-                    any_scope_state = { 
-                        OR = { 
-                            has_modifier = ca_conservative_capital 
-                            has_modifier = ca_isolated_autonomists 
-                            has_modifier = ca_regional_resentment_modifier 
-                        } 
-                    } 
-                }
-                add = { value = 30 desc = "conservative_state_modifier" }
-            }
-        }
-
-        # 5. Influencia (Contagio) de Movimientos Vecinos (Separatismo o Unitarismo)
-        owner = {
-            if = {
-                limit = {
+        # 4. Capital conservadora o autonomismo aislado
+        if = {
+            limit = {
+                owner = {
                     any_scope_state = {
+                        OR = {
+                            has_modifier = ca_conservative_capital
+                            has_modifier = ca_isolated_autonomists
+                            has_modifier = ca_regional_resentment_modifier
+                        }
+                    }
+                }
+            }
+            add = { value = 30 desc = "conservative_state_modifier" }
+        }
+
+        # 5. Movimientos unitarios, reaccionarios o nacionales en el pais o en un vecino
+        if = {
+            limit = {
+                owner = {
+                    OR = {
+                        any_political_movement = { ca_is_anti_federal_movement = yes }
                         any_neighbouring_state = {
-                            owner = { 
-                                OR = {
-                                    any_political_movement = { is_political_movement_type = movement_ca_reactionary }
-                                    any_political_movement = { is_political_movement_type = movement_ca_carrillista }
-                                    any_political_movement = { is_political_movement_type = movement_ca_unitarian }
-                                }
+                            owner = {
+                                any_political_movement = { ca_is_anti_federal_movement = yes }
                             }
                         }
                     }
                 }
-                add = { value = 15 desc = "neighboring_anti_federalist_movement" }
             }
+            add = { value = 15 desc = "neighboring_anti_federalist_movement" }
         }
     }
-    
+
     on_created = {
         save_temporary_scope_as = lobby_country
         scope:political_lobby ?= {
@@ -206,11 +275,12 @@ lobby_anti_federalist = {
                 amount = anti_overlord_lobby_starting_appeasement
                 factor = appeasement_diplomatic_status_quo
             }
-            initialize_lobby_custom_name = yes            
-        }    
+            initialize_lobby_custom_name = yes
+        }
     }
 }
 
+# --- Borrador antiguo (comentado, sin cambios) ---
 #lobby_pro_federalist = {
 #	category = foreign_pro_country
 #

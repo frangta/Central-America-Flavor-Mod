@@ -355,6 +355,10 @@ ca_frca_phase4_entry = {
 # Arranque del diario (immediate). Scope: UCA.
 ca_frca_journal_setup = {
 	set_variable = { name = frca_phase value = 1 }
+	if = { # P4: control efectivo de Bocas
+		limit = { NOT = { has_global_variable = ca_bocas_control } }
+		set_global_variable = { name = ca_bocas_control value = 20 }
+	}
 	ca_frca_loyalty_set = { TAG = els VALUE = 3 }
 	ca_frca_loyalty_set = { TAG = hon VALUE = 2 }
 	ca_frca_loyalty_set = { TAG = gua VALUE = 2 }
@@ -369,6 +373,7 @@ ca_frca_journal_setup = {
 # Al cerrar el diario (A, B, C, D1 o D2). Scope: UCA.
 ca_frca_journal_cleanup = {
 	remove_modifier = ca_federal_paralysis
+	ca_cohesion_end = yes # P2: la cohesion federal termina con el diario
 }
 
 # Gancho H1-H5 de las rutas (grupo C). Los espacios de nombres llegan en F11;
@@ -411,6 +416,7 @@ ca_frca_set_phase = {
 				set_variable = frca_phase4_entered
 				ca_frca_phase4_entry = yes
 			}
+			post_notification = ca_notif_phase_change # P5
 			ca_frca_fire_hook = { HOOK = $VALUE$ }
 		}
 	}
@@ -478,4 +484,8 @@ ca_frca_monthly_update = {
 	ca_frca_loyalty_tick_member = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
 	ca_frca_loyalty_tick_member = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
 	ca_frca_phase_update = yes
+	ca_cohesion_monthly = yes # P2: cohesion federal
+	ca_fed_congress_monthly = yes # P3: "El Congreso propone..."
+	ca_bocas_monthly = yes # P4: control de Bocas
+	ca_notif_monthly = yes # P5: notificaciones
 }

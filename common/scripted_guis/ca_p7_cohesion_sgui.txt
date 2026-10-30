@@ -1,0 +1,68 @@
+﻿# CAFM P7 - Contador de Cohesion federal en el diario de la Federacion (gui/ca_frca_minimap.gui).
+# Scope: el jugador. Solo se ve en la ruta federal (mientras exista ca_federal_cohesion en la UCA).
+ca_mm_cohesion_on = {
+	scope = country
+	is_shown = {
+		ca_cohesion_active = yes
+	}
+}
+ca_mm_coh_seg_1 = {
+	scope = country
+	is_shown = {
+		ca_cohesion_ge = { VALUE = 5 }
+	}
+}
+ca_mm_coh_seg_2 = {
+	scope = country
+	is_shown = {
+		ca_cohesion_ge = { VALUE = 15 }
+	}
+}
+ca_mm_coh_seg_3 = {
+	scope = country
+	is_shown = {
+		ca_cohesion_ge = { VALUE = 25 }
+	}
+}
+ca_mm_coh_seg_4 = {
+	scope = country
+	is_shown = {
+		ca_cohesion_ge = { VALUE = 35 }
+	}
+}
+ca_mm_coh_seg_5 = {
+	scope = country
+	is_shown = {
+		ca_cohesion_ge = { VALUE = 45 }
+	}
+}
+ca_mm_coh_seg_6 = {
+	scope = country
+	is_shown = {
+		ca_cohesion_ge = { VALUE = 55 }
+	}
+}
+ca_mm_coh_seg_7 = {
+	scope = country
+	is_shown = {
+		ca_cohesion_ge = { VALUE = 65 }
+	}
+}
+ca_mm_coh_seg_8 = {
+	scope = country
+	is_shown = {
+		ca_cohesion_ge = { VALUE = 75 }
+	}
+}
+ca_mm_coh_seg_9 = {
+	scope = country
+	is_shown = {
+		ca_cohesion_ge = { VALUE = 85 }
+	}
+}
+ca_mm_coh_seg_10 = {
+	scope = country
+	is_shown = {
+		ca_cohesion_ge = { VALUE = 95 }
+	}
+}

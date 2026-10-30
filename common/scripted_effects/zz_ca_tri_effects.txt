@@ -1,60 +1,33 @@
-﻿# CAFM F29: guarda cada estado miembro en una variable global para que el triangulo
-# del diario pueda mostrar su bandera (GetGlobalVariable('ca_tri_gua').GetCountry).
-# Lo llama je_ca_state_role_in_federation al empezar y cada mes.
+﻿# CAFM P1: el triangulo con banderas (F29) se descarto: el motor no permite colocar
+# banderas en posiciones calculadas por script. Este efecto queda solo para borrar las
+# variables globales que dejo F29 en partidas guardadas. Se elimina junto con sus dos
+# llamadas en je_ca_state_role_in_federation cuando se rehaga ese diario (punto 1).
 ca_tri_set_globals = {
 	if = {
-		limit = { exists = c:GUA }
-		set_global_variable = { name = ca_tri_gua value = c:GUA }
-	}
-	else_if = {
 		limit = { has_global_variable = ca_tri_gua }
 		remove_global_variable = ca_tri_gua
 	}
 	if = {
-		limit = { exists = c:ELS }
-		set_global_variable = { name = ca_tri_els value = c:ELS }
-	}
-	else_if = {
 		limit = { has_global_variable = ca_tri_els }
 		remove_global_variable = ca_tri_els
 	}
 	if = {
-		limit = { exists = c:HON }
-		set_global_variable = { name = ca_tri_hon value = c:HON }
-	}
-	else_if = {
 		limit = { has_global_variable = ca_tri_hon }
 		remove_global_variable = ca_tri_hon
 	}
 	if = {
-		limit = { exists = c:NIC }
-		set_global_variable = { name = ca_tri_nic value = c:NIC }
-	}
-	else_if = {
 		limit = { has_global_variable = ca_tri_nic }
 		remove_global_variable = ca_tri_nic
 	}
 	if = {
-		limit = { exists = c:COS }
-		set_global_variable = { name = ca_tri_cos value = c:COS }
-	}
-	else_if = {
 		limit = { has_global_variable = ca_tri_cos }
 		remove_global_variable = ca_tri_cos
 	}
 	if = {
-		limit = { exists = c:ALT }
-		set_global_variable = { name = ca_tri_alt value = c:ALT }
-	}
-	else_if = {
 		limit = { has_global_variable = ca_tri_alt }
 		remove_global_variable = ca_tri_alt
 	}
 	if = {
-		limit = { exists = c:CIP }
-		set_global_variable = { name = ca_tri_cip value = c:CIP }
-	}
-	else_if = {
 		limit = { has_global_variable = ca_tri_cip }
 		remove_global_variable = ca_tri_cip
 	}

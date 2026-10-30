@@ -1,0 +1,160 @@
+﻿# ====================================================================
+# CAFM - ESPECTRO FEDERAL (sustituye al triangulo del diario
+# je_ca_state_role_in_federation)
+# --------------------------------------------------------------------
+# Una sola barra de -50 a +50, vista desde el Estado miembro:
+#   -50 ........ -17 | -16 ...... 0 ...... +16 | +17 ........ +50
+#    CENTRALISMO     |        FEDERALISMO       |     SEPARATISMO
+# Negativo = el Estado se somete a la capital (unitarios/serviles).
+# Cero     = pacto federal de 1824.
+# Positivo = soberania del Estado (confederacion o ruptura).
+# Los botones del diario mueven la aguja; aqui va la deriva mensual.
+# El alcance (root) es el pais del Estado miembro.
+# ====================================================================
+
+ca_federal_spectrum_bar = {
+	name = "ca_federal_spectrum_bar_name"
+	desc = "ca_federal_spectrum_bar_desc"
+
+	double_sided_gold = yes
+
+	start_value = 0
+	min_value = -50
+	max_value = 50
+
+	monthly_progress = {
+		# ---------------- Hacia el CENTRALISMO (-) ----------------
+		if = {
+			limit = { ig:ig_armed_forces ?= { is_powerful = yes } }
+			add = {
+				desc = "ca_spectrum_armed_forces_powerful"
+				value = -1
+			}
+		}
+		if = {
+			limit = { ig:ig_devout ?= { is_in_government = yes } }
+			add = {
+				desc = "ca_spectrum_church_in_government"
+				value = -1
+			}
+		}
+		if = {
+			limit = {
+				overlord ?= { has_law_or_variant = law_type:law_ca_central_american_unitary }
+			}
+			add = {
+				desc = "ca_spectrum_overlord_unitary"
+				value = -2
+			}
+		}
+
+		# ---------------- Hacia el FEDERALISMO (centro) ----------------
+		# Estos factores empujan la aguja hacia el 0 desde cualquier lado.
+		if = {
+			limit = {
+				ig:ig_intelligentsia ?= { is_in_government = yes }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" > 5 }
+			}
+			add = {
+				desc = "ca_spectrum_liberals_in_government"
+				value = -1
+			}
+		}
+		else_if = {
+			limit = {
+				ig:ig_intelligentsia ?= { is_in_government = yes }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" < -5 }
+			}
+			add = {
+				desc = "ca_spectrum_liberals_in_government"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_petty_bourgeoisie ?= { is_in_government = yes }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" > 5 }
+			}
+			add = {
+				desc = "ca_spectrum_artisans_in_government"
+				value = -1
+			}
+		}
+		else_if = {
+			limit = {
+				ig:ig_petty_bourgeoisie ?= { is_in_government = yes }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" < -5 }
+			}
+			add = {
+				desc = "ca_spectrum_artisans_in_government"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				overlord ?= { has_law_or_variant = law_type:law_ca_central_american_federal }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" > 5 }
+			}
+			add = {
+				desc = "ca_spectrum_overlord_federal"
+				value = -1
+			}
+		}
+		else_if = {
+			limit = {
+				overlord ?= { has_law_or_variant = law_type:law_ca_central_american_federal }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" < -5 }
+			}
+			add = {
+				desc = "ca_spectrum_overlord_federal"
+				value = 1
+			}
+		}
+
+		# ---------------- Hacia el SEPARATISMO (+) ----------------
+		if = {
+			limit = { liberty_desire >= 50 }
+			add = {
+				desc = "ca_spectrum_high_liberty_desire"
+				value = 2
+			}
+		}
+		else_if = {
+			limit = { liberty_desire >= 25 }
+			add = {
+				desc = "ca_spectrum_liberty_desire"
+				value = 1
+			}
+		}
+		if = {
+			limit = { ig:ig_landowners ?= { is_powerful = yes } }
+			add = {
+				desc = "ca_spectrum_local_elites_powerful"
+				value = 1
+			}
+		}
+		if = {
+			limit = { ig:ig_rural_folk ?= { is_powerful = yes } }
+			add = {
+				desc = "ca_spectrum_rural_particularism"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				overlord ?= { has_law_or_variant = law_type:law_ca_central_american_confederated }
+			}
+			add = {
+				desc = "ca_spectrum_overlord_confederated"
+				value = 1
+			}
+		}
+		if = {
+			limit = { has_technology_researched = nationalism }
+			add = {
+				desc = "ca_spectrum_nationalism"
+				value = 1
+			}
+		}
+	}
+}

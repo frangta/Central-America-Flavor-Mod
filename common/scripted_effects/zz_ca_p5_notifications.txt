@@ -1,0 +1,92 @@
+﻿############################################################################
+# CAFM P5 (punto 7) - Avisos que se comparan mes a mes (scope: UCA).
+# Guarda el valor del mes anterior en ca_last_<x> y avisa al cruzar un umbral.
+############################################################################
+
+ca_notif_loyalty_check = {
+	if = {
+		limit = { has_variable = frca_loyalty_$TAG$ }
+		if = {
+			limit = {
+				has_variable = ca_last_loyalty_$TAG$
+				var:frca_loyalty_$TAG$ < var:ca_last_loyalty_$TAG$
+				var:frca_loyalty_$TAG$ = 1
+			}
+			post_notification = ca_notif_state_rebel
+		}
+		else_if = {
+			limit = {
+				has_variable = ca_last_loyalty_$TAG$
+				var:frca_loyalty_$TAG$ < var:ca_last_loyalty_$TAG$
+				var:frca_loyalty_$TAG$ <= 0
+			}
+			post_notification = ca_notif_state_separated
+		}
+		set_variable = { name = ca_last_loyalty_$TAG$ value = var:frca_loyalty_$TAG$ }
+	}
+}
+
+ca_notif_front_check = {
+	if = {
+		limit = { has_variable = frca_front_$FRONT$ }
+		if = {
+			limit = {
+				var:frca_front_$FRONT$ >= 2
+				OR = {
+					NOT = { has_variable = ca_last_front_$FRONT$ }
+					var:ca_last_front_$FRONT$ < 2
+				}
+			}
+			post_notification = ca_notif_front_critical
+		}
+		set_variable = { name = ca_last_front_$FRONT$ value = var:frca_front_$FRONT$ }
+	}
+}
+
+ca_notif_monthly = {
+	ca_notif_loyalty_check = { TAG = gua }
+	ca_notif_loyalty_check = { TAG = els }
+	ca_notif_loyalty_check = { TAG = hon }
+	ca_notif_loyalty_check = { TAG = nic }
+	ca_notif_loyalty_check = { TAG = cos }
+	ca_notif_loyalty_check = { TAG = alt }
+	ca_notif_loyalty_check = { TAG = cip }
+	ca_notif_front_check = { FRONT = british }
+	ca_notif_front_check = { FRONT = mexican }
+	ca_notif_front_check = { FRONT = conservative }
+	ca_notif_front_check = { FRONT = caudillos }
+	# Barra de la Federacion por debajo de 50
+	if = {
+		limit = {
+			je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" < ca_frca_bar_crisis }
+			NOT = { has_variable = ca_notif_bar_low }
+		}
+		set_variable = ca_notif_bar_low
+		post_notification = ca_notif_bar_crisis
+	}
+	else_if = {
+		limit = {
+			has_variable = ca_notif_bar_low
+			je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_crisis }
+		}
+		remove_variable = ca_notif_bar_low
+	}
+	# Bocas del Toro: control por debajo de 30
+	if = {
+		limit = {
+			ca_bocas_held_by_uca = yes
+			has_global_variable = ca_bocas_control
+			NOT = { ca_bocas_control_ge = { VALUE = 30 } }
+			NOT = { has_variable = ca_notif_bocas_low_seen }
+		}
+		set_variable = ca_notif_bocas_low_seen
+		post_notification = ca_notif_bocas_low
+	}
+	else_if = {
+		limit = {
+			has_variable = ca_notif_bocas_low_seen
+			ca_bocas_control_ge = { VALUE = 30 }
+		}
+		remove_variable = ca_notif_bocas_low_seen
+	}
+}

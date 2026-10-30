@@ -1,0 +1,53 @@
+﻿# CAFM P1 punto 1 - Botones del widget de je_ca_state_role_in_federation (gui/ca_subject_role_widgets.gui)
+ca_role_support_federation = {
+	scope = country
+	is_shown = {
+		has_journal_entry = je_ca_state_role_in_federation
+	}
+	is_valid = {
+		ca_role_can_support_federation = yes
+	}
+	effect = {
+		ca_role_do_support_federation = yes
+	}
+	ai_is_valid = { always = no }
+}
+ca_role_support_confederation = {
+	scope = country
+	is_shown = {
+		has_journal_entry = je_ca_state_role_in_federation
+	}
+	is_valid = {
+		ca_role_can_support_confederation = yes
+	}
+	effect = {
+		ca_role_do_support_confederation = yes
+	}
+	ai_is_valid = { always = no }
+}
+ca_role_sabotage_federation = {
+	scope = country
+	is_shown = {
+		has_journal_entry = je_ca_state_role_in_federation
+	}
+	is_valid = {
+		ca_role_can_sabotage_federation = yes
+	}
+	effect = {
+		ca_role_do_sabotage_federation = yes
+	}
+	ai_is_valid = { always = no }
+}
+ca_role_support_centralists = {
+	scope = country
+	is_shown = {
+		has_journal_entry = je_ca_state_role_in_federation
+	}
+	is_valid = {
+		ca_role_can_support_centralists = yes
+	}
+	effect = {
+		ca_role_do_support_centralists = yes
+	}
+	ai_is_valid = { always = no }
+}

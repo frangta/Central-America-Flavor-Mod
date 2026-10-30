@@ -72,7 +72,7 @@ ca_coffee_monthly_change = {
 	}
 	# Pausa: terratenientes marginales
 	if = {
-		limit = { ig:ig_landowners ?= { ig_counts_as_marginal = yes } }
+		limit = { ig:ig_landowners ?= { is_marginal = yes } }
 		multiply = 0
 	}
 	multiply = ca_coffee_historic_gate

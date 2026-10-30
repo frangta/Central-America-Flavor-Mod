@@ -1,0 +1,52 @@
+﻿############################################################################
+# CAFM P2 - Triggers de la cohesion federal (punto 10)
+############################################################################
+
+# La cohesion esta en juego (ruta federal, diario activo). Scope: cualquiera.
+ca_cohesion_active = {
+	c:UCA ?= { has_variable = ca_federal_cohesion }
+}
+
+# Hay cohesion suficiente para una accion. Si la cohesion no esta en juego
+# (ruta centralista, diario cerrado), no hay costo. Uso: ca_cohesion_can_spend = { VALUE = 10 }
+ca_cohesion_can_spend = {
+	custom_tooltip = {
+		text = ca_cohesion_enough_tt
+		OR = {
+			NOT = { ca_cohesion_active = yes }
+			c:UCA ?= { var:ca_federal_cohesion >= $VALUE$ }
+		}
+	}
+}
+
+# Cohesion mayor o igual / menor que VALUE (falso si no esta en juego).
+ca_cohesion_ge = {
+	c:UCA ?= {
+		trigger_if = {
+			limit = { has_variable = ca_federal_cohesion }
+			var:ca_federal_cohesion >= $VALUE$
+		}
+		trigger_else = {
+			always = no
+		}
+	}
+}
+ca_cohesion_lt = {
+	c:UCA ?= {
+		trigger_if = {
+			limit = { has_variable = ca_federal_cohesion }
+			var:ca_federal_cohesion < $VALUE$
+		}
+		trigger_else = {
+			always = no
+		}
+	}
+}
+
+# Modo hardcore de la cohesion (solo la UCA de la IA, sorteo 10:2).
+ca_cohesion_hardcore = {
+	c:UCA ?= {
+		has_variable = ca_federal_cohesion
+		has_variable = ca_cohesion_hardcore
+	}
+}

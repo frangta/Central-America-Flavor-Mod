@@ -1,0 +1,346 @@
+﻿# CAFM P4 - Acciones de las zonas nuevas del minimapa (Mosquitia, Peten, Guanacaste, Talamanca) y de Bocas.
+# Scope: UCA (el jugador que mira el diario de la Federacion).
+
+ca_mm_mos_commissioner = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = mos_commissioner }
+		ca_cohesion_can_spend = { VALUE = 10 }
+		ca_mm_can_pay = { VALUE = ca_money_small }
+	}
+	effect = {
+		ca_cohesion_spend = { VALUE = 10 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ca_mm_region_cooldown = { KEY = mos_commissioner DAYS = 365 }
+		set_global_variable = { name = ca_mos_commissioner years = 5 }
+		ca_frca_front_change = { FRONT = british VALUE = -1 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_mos_colony = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = mos_colony }
+		ca_mm_can_pay = { VALUE = ca_money_large }
+	}
+	effect = {
+		add_treasury = { value = ca_money_large multiply = -1 }
+		ca_mm_region_cooldown = { KEY = mos_colony DAYS = 730 }
+		ca_mm_region_modifier = { CTAG = NIC STATE = STATE_NICARAGUA NAME = ca_coast_colony MONTHS = 120 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_mos_king = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+		exists = c:MKT
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = mos_king }
+		ca_cohesion_can_spend = { VALUE = 5 }
+	}
+	effect = {
+		ca_cohesion_spend = { VALUE = 5 }
+		ca_mm_region_cooldown = { KEY = mos_king DAYS = 730 }
+		c:MKT = { save_scope_as = ca_mkt }
+		change_relations = { country = scope:ca_mkt value = 30 }
+		ca_frca_front_change = { FRONT = british VALUE = -1 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_mos_protest = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+		exists = c:GBR
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = mos_protest }
+	}
+	effect = {
+		ca_mm_region_cooldown = { KEY = mos_protest DAYS = 730 }
+		c:GBR = { save_scope_as = ca_gbr }
+		change_relations = { country = scope:ca_gbr value = -20 }
+		ca_frca_front_change = { FRONT = british VALUE = -1 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_pet_missions = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = pet_missions }
+		ca_cohesion_can_spend = { VALUE = 5 }
+	}
+	effect = {
+		ca_cohesion_spend = { VALUE = 5 }
+		ca_mm_region_cooldown = { KEY = pet_missions DAYS = 730 }
+		ca_mm_region_modifier = { CTAG = GUA STATE = STATE_GUATEMALA NAME = ca_frontier_missions MONTHS = 120 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_pet_military_colony = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = pet_military_colony }
+		ca_mm_can_pay = { VALUE = ca_money_medium }
+	}
+	effect = {
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		ca_mm_region_cooldown = { KEY = pet_military_colony DAYS = 730 }
+		ca_mm_region_modifier = { CTAG = GUA STATE = STATE_GUATEMALA NAME = ca_military_colony MONTHS = 120 }
+		ca_frca_front_change = { FRONT = mexican VALUE = -1 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_pet_treaty = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+		exists = c:GBR
+		NOT = { has_global_variable = ca_peten_border_treaty }
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = pet_treaty }
+		ca_cohesion_can_spend = { VALUE = 10 }
+	}
+	effect = {
+		ca_cohesion_spend = { VALUE = 10 }
+		ca_mm_region_cooldown = { KEY = pet_treaty DAYS = 1825 }
+		set_global_variable = ca_peten_border_treaty
+		c:GBR = { save_scope_as = ca_gbr }
+		change_relations = { country = scope:ca_gbr value = 15 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_gnc_garrison = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = gnc_garrison }
+		ca_mm_can_pay = { VALUE = ca_money_medium }
+	}
+	effect = {
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		ca_mm_region_cooldown = { KEY = gnc_garrison DAYS = 730 }
+		ca_mm_region_modifier = { CTAG = COS STATE = STATE_COSTA_RICA NAME = ca_federal_garrison_region MONTHS = 24 }
+		set_variable = { name = frca_loyalty_min2_cos days = 365 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_gnc_plebiscite = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+		NOT = { has_global_variable = ca_gnc_plebiscite }
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = gnc_plebiscite }
+		ca_cohesion_can_spend = { VALUE = 10 }
+	}
+	effect = {
+		ca_cohesion_spend = { VALUE = 10 }
+		ca_mm_region_cooldown = { KEY = gnc_plebiscite DAYS = 1825 }
+		set_global_variable = ca_gnc_plebiscite
+		ca_frca_loyalty_up = { TAG = cos }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_gnc_negotiate_nic = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = gnc_negotiate_nic }
+		ca_cohesion_can_spend = { VALUE = 5 }
+	}
+	effect = {
+		ca_cohesion_spend = { VALUE = 5 }
+		ca_mm_region_cooldown = { KEY = gnc_negotiate_nic DAYS = 1825 }
+		ca_frca_loyalty_up = { TAG = nic }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_tal_integrate = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+		exists = c:RDT
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = tal_integrate }
+		ca_cohesion_can_spend = { VALUE = 10 }
+	}
+	effect = {
+		ca_cohesion_spend = { VALUE = 10 }
+		ca_mm_region_cooldown = { KEY = tal_integrate DAYS = 1825 }
+		c:RDT = { save_scope_as = ca_rdt }
+		change_relations = { country = scope:ca_rdt value = 30 }
+		set_global_variable = ca_tal_integration
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_tal_coexist = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+		exists = c:RDT
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = tal_coexist }
+	}
+	effect = {
+		ca_mm_region_cooldown = { KEY = tal_coexist DAYS = 730 }
+		c:RDT = { save_scope_as = ca_rdt }
+		change_relations = { country = scope:ca_rdt value = 15 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_tal_conquer = {
+	scope = country
+	is_shown = {
+		ca_frca_journal_active = yes
+		exists = c:RDT
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = tal_conquer }
+	}
+	effect = {
+		ca_mm_region_cooldown = { KEY = tal_conquer DAYS = 1825 }
+		c:RDT = { save_scope_as = ca_rdt }
+		change_relations = { country = scope:ca_rdt value = -40 }
+		c:RDT = { every_scope_state = { state_region = { add_claim = root } } }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_boc_garrison = {
+	scope = country
+	is_shown = {
+		ca_bocas_held_by_uca = yes
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = boc_garrison }
+		ca_mm_can_pay = { VALUE = ca_money_medium }
+	}
+	effect = {
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		ca_mm_region_cooldown = { KEY = boc_garrison DAYS = 365 }
+		set_variable = { name = ca_bocas_garrison days = 730 }
+		ca_bocas_control_change = { VALUE = 15 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_boc_colonists = {
+	scope = country
+	is_shown = {
+		ca_bocas_held_by_uca = yes
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = boc_colonists }
+		ca_mm_can_pay = { VALUE = ca_money_large }
+	}
+	effect = {
+		add_treasury = { value = ca_money_large multiply = -1 }
+		ca_mm_region_cooldown = { KEY = boc_colonists DAYS = 730 }
+		ca_bocas_control_change = { VALUE = 20 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_boc_native_pact = {
+	scope = country
+	is_shown = {
+		ca_bocas_held_by_uca = yes
+		NOT = { has_global_variable = ca_bocas_native_pact }
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = boc_native_pact }
+		ca_cohesion_can_spend = { VALUE = 5 }
+	}
+	effect = {
+		ca_cohesion_spend = { VALUE = 5 }
+		ca_mm_region_cooldown = { KEY = boc_native_pact DAYS = 1825 }
+		set_global_variable = ca_bocas_native_pact
+		ca_bocas_control_change = { VALUE = 10 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_boc_protest = {
+	scope = country
+	is_shown = {
+		ca_bocas_held_by_uca = yes
+		exists = c:GBR
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = boc_protest }
+	}
+	effect = {
+		ca_mm_region_cooldown = { KEY = boc_protest DAYS = 1825 }
+		set_global_variable = { name = ca_bocas_protested years = 5 }
+		c:GBR = { save_scope_as = ca_gbr }
+		change_relations = { country = scope:ca_gbr value = -10 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_boc_border = {
+	scope = country
+	is_shown = {
+		ca_bocas_held_by_uca = yes
+		exists = c:CLM
+		NOT = { has_global_variable = ca_bocas_border_pact }
+	}
+	is_valid = {
+		ca_mm_region_ready = { KEY = boc_border }
+		ca_cohesion_can_spend = { VALUE = 10 }
+	}
+	effect = {
+		ca_cohesion_spend = { VALUE = 10 }
+		ca_mm_region_cooldown = { KEY = boc_border DAYS = 1825 }
+		set_global_variable = ca_bocas_border_pact
+		c:CLM = { save_scope_as = ca_clm }
+		change_relations = { country = scope:ca_clm value = 20 }
+	}
+	ai_is_valid = { always = no }
+}
+ca_mm_boc_district = {
+	scope = country
+	is_shown = {
+		ca_bocas_held_by_uca = yes
+		NOT = { has_global_variable = ca_bocas_federal_district }
+	}
+	is_valid = {
+		ca_bocas_control_ge = { VALUE = 50 }
+		ca_cohesion_can_spend = { VALUE = 15 }
+	}
+	effect = {
+		ca_cohesion_spend = { VALUE = 15 }
+		set_global_variable = ca_bocas_federal_district
+		ca_bocas_control_change = { VALUE = 20 }
+	}
+	ai_is_valid = { always = no }
+}
+
+# Los Altos existe como estado propio (pais ALT o lealtad propia en el diario): su boton se ve.
+ca_mm_alt_present = {
+	scope = country
+	is_shown = {
+		OR = {
+			exists = c:ALT
+			has_variable = frca_loyalty_alt
+		}
+	}
+}

@@ -20,6 +20,7 @@ ca_play_guatemala_effect = {
 	# CAFM F6: grupos de interes y leyes de 1836 en ca_gua_member_setup (los usa tambien la IA)
 	ca_gua_member_setup = yes
 	ca_gua_set_election_date = yes
+	#trigger_event = { id = ca_guatemala_events.2 }
 	}
 }
 
@@ -37,6 +38,7 @@ ca_play_elsalvador_effect = {
 	# CAFM F6: grupos de interes y leyes de 1836 en ca_els_member_setup (los usa tambien la IA)
 	ca_els_member_setup = yes
 	ca_els_set_election_date = yes
+	#trigger_event = { id = ca_el_salvador_events.2 }
 	}
 }
 
@@ -55,6 +57,7 @@ ca_play_honduras_effect = {
 	# CAFM F6: grupos de interes y leyes de 1836 en ca_hon_member_setup (los usa tambien la IA)
 	ca_hon_member_setup = yes
 	ca_hon_set_election_date = yes
+	#trigger_event = { id = ca_honduras_events.2 }
 	}
 }
 
@@ -72,6 +75,7 @@ ca_play_nicaragua_effect = {
 	# CAFM F6: grupos de interes y leyes de 1836 en ca_nic_member_setup (los usa tambien la IA)
 	ca_nic_member_setup = yes
 	ca_nic_set_election_date = yes
+	trigger_event = { id = ca_nicaragua_events.2 }
 	}
 }
 
@@ -80,9 +84,9 @@ ca_play_costarica_effect = {
 	c:COS ?= {
     #add_modifier = { name = ca_starting_costarica_modifier months = 60 }
     add_journal_entry = { type = je_ca_historic_situation_in_costarica }
-    set_variable = ca_ecos_federacion_fired # CAFM F4: antes en ca_costa_rica_events.1, cuando COS aun no existia
-    ca_role_add_journal = yes # CAFM F6
-    ca_fvs_add_journal = yes # CAFM F6: barra inicial segun la lealtad	
+    set_variable = ca_ecos_federacion_fired 
+    ca_role_add_journal = yes 
+    ca_fvs_add_journal = yes 
     #remove_variable = ca_secession_country
     # CAFM cast (fase 1): traslada el cast desde la UCA y pone al gobernante por fecha
     cafm_cast_activate_cos = yes
@@ -90,6 +94,7 @@ ca_play_costarica_effect = {
 	# CAFM F6: grupos de interes y leyes de 1836 en ca_cos_member_setup (los usa tambien la IA)
 	ca_cos_member_setup = yes
 	ca_cos_set_election_date = yes
+	trigger_event = { id = ca_costa_rica_events.2 }
 	}
 }
 
@@ -107,6 +112,7 @@ ca_play_losaltos_effect = {
 	# CAFM F6: grupos de interes y leyes de 1836 en ca_alt_member_setup (los usa tambien la IA)
 	ca_alt_member_setup = yes
 	ca_alt_set_election_date = yes
+	#trigger_event = { id = ca_los_altos_soconusco_events.2 }
 	}
 }
 

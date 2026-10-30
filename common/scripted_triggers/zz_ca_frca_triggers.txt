@@ -35,14 +35,24 @@ ca_frca_journal_active = {
 # Uso: ca_frca_loyalty_le = { TAG = gua VALUE = 1 }
 ca_frca_loyalty_le = {
 	c:UCA ?= {
-		has_variable = frca_loyalty_$TAG$
-		var:frca_loyalty_$TAG$ <= $VALUE$
+		trigger_if = {
+			limit = { has_variable = frca_loyalty_$TAG$ }
+			var:frca_loyalty_$TAG$ <= $VALUE$
+		}
+		trigger_else = {
+			always = no
+		}
 	}
 }
 ca_frca_loyalty_ge = {
 	c:UCA ?= {
-		has_variable = frca_loyalty_$TAG$
-		var:frca_loyalty_$TAG$ >= $VALUE$
+		trigger_if = {
+			limit = { has_variable = frca_loyalty_$TAG$ }
+			var:frca_loyalty_$TAG$ >= $VALUE$
+		}
+		trigger_else = {
+			always = no
+		}
 	}
 }
 
@@ -119,42 +129,68 @@ ca_frca_core_independence_recognized = {
 ca_frca_action_possible_campaign = {
 	custom_tooltip = {
 		text = ca_mm_member_tt
-		has_variable = frca_loyalty_$TAG$
-		var:frca_loyalty_$TAG$ >= 1
+		trigger_if = {
+			limit = { has_variable = frca_loyalty_$TAG$ }
+			var:frca_loyalty_$TAG$ >= 1
+		}
+		trigger_else = {
+			always = no
+		}
 	}
 	trigger_if = {
 		limit = { has_variable = frca_loyalty_$TAG$ }
-		var:frca_loyalty_$TAG$ < 3
+		custom_tooltip = { # CAFM P1: antes salia "country_var_less_than has no localization"
+			text = ca_mm_already_loyal_tt
+			var:frca_loyalty_$TAG$ < 3
+		}
 	}
 	custom_tooltip = {
 		text = ca_mm_cooldown_tt
 		NOT = { has_variable = frca_campaign_cd_$TAG$ }
 	}
+	ca_cohesion_can_spend = { VALUE = ca_cohesion_cost_campaign } # P2
 }
 ca_frca_action_possible_negotiate = {
 	custom_tooltip = {
 		text = ca_mm_member_tt
-		has_variable = frca_loyalty_$TAG$
-		var:frca_loyalty_$TAG$ >= 1
+		trigger_if = {
+			limit = { has_variable = frca_loyalty_$TAG$ }
+			var:frca_loyalty_$TAG$ >= 1
+		}
+		trigger_else = {
+			always = no
+		}
 	}
 	trigger_if = {
 		limit = { has_variable = frca_loyalty_$TAG$ }
-		var:frca_loyalty_$TAG$ < 3
+		custom_tooltip = { # CAFM P1: antes salia "country_var_less_than has no localization"
+			text = ca_mm_already_loyal_tt
+			var:frca_loyalty_$TAG$ < 3
+		}
 	}
 	custom_tooltip = {
 		text = ca_mm_cooldown_tt
 		NOT = { has_variable = frca_negotiate_cd_$TAG$ }
 	}
+	ca_cohesion_can_spend = { VALUE = ca_cohesion_cost_negotiate } # P2
 }
 ca_frca_action_possible_intendant = {
 	custom_tooltip = {
 		text = ca_mm_member_tt
-		has_variable = frca_loyalty_$TAG$
-		var:frca_loyalty_$TAG$ >= 1
+		trigger_if = {
+			limit = { has_variable = frca_loyalty_$TAG$ }
+			var:frca_loyalty_$TAG$ >= 1
+		}
+		trigger_else = {
+			always = no
+		}
 	}
 	trigger_if = {
 		limit = { has_variable = frca_loyalty_$TAG$ }
-		var:frca_loyalty_$TAG$ < 3
+		custom_tooltip = { # CAFM P1: antes salia "country_var_less_than has no localization"
+			text = ca_mm_already_loyal_tt
+			var:frca_loyalty_$TAG$ < 3
+		}
 	}
 	custom_tooltip = {
 		text = ca_mm_cooldown_tt
@@ -164,10 +200,18 @@ ca_frca_action_possible_intendant = {
 ca_frca_action_possible_siege = {
 	custom_tooltip = {
 		text = ca_mm_member_tt
-		has_variable = frca_loyalty_$TAG$
-		var:frca_loyalty_$TAG$ >= 1
+		trigger_if = {
+			limit = { has_variable = frca_loyalty_$TAG$ }
+			var:frca_loyalty_$TAG$ >= 1
+		}
+		trigger_else = {
+			always = no
+		}
 	}
-	NOT = { has_variable = frca_loyalty_lock_$TAG$ }
+	custom_tooltip = { # CAFM P1
+		text = ca_mm_loyalty_locked_tt
+		NOT = { has_variable = frca_loyalty_lock_$TAG$ }
+	}
 	custom_tooltip = {
 		text = ca_mm_cooldown_tt
 		NOT = { has_variable = frca_siege_cd_$TAG$ }
@@ -176,12 +220,20 @@ ca_frca_action_possible_siege = {
 ca_frca_action_possible_coopt = {
 	custom_tooltip = {
 		text = ca_mm_member_tt
-		has_variable = frca_loyalty_$TAG$
-		var:frca_loyalty_$TAG$ >= 1
+		trigger_if = {
+			limit = { has_variable = frca_loyalty_$TAG$ }
+			var:frca_loyalty_$TAG$ >= 1
+		}
+		trigger_else = {
+			always = no
+		}
 	}
 	trigger_if = {
 		limit = { has_variable = frca_loyalty_$TAG$ }
-		var:frca_loyalty_$TAG$ < 3
+		custom_tooltip = { # CAFM P1: antes salia "country_var_less_than has no localization"
+			text = ca_mm_already_loyal_tt
+			var:frca_loyalty_$TAG$ < 3
+		}
 	}
 	custom_tooltip = {
 		text = ca_mm_cooldown_tt

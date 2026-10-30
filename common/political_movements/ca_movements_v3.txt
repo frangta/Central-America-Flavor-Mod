@@ -41,8 +41,10 @@ movement_ca_autocratic_autonomist = {
         add_movement_enthusiasm_modifier = yes
     }
 
+    
+	
     disband_trigger = {
-        NOT = { has_variable = ca_organization_apro }
+                has_variable = ca_organization_apro
     }
 
     character_support_trigger = {
@@ -155,8 +157,10 @@ movement_ca_constitutionalist = {
         add_movement_enthusiasm_modifier = yes
     }
 
+
+	
     disband_trigger = {
-        NOT = { has_variable = ca_organization_apro }
+                has_variable = ca_organization_apro
     }
 
     character_support_trigger = {
@@ -270,8 +274,10 @@ movement_ca_secularist = {
         add_movement_enthusiasm_modifier = yes
     }
 
+    
+
     disband_trigger = {
-        NOT = { has_variable = ca_organization_apro }
+                has_variable = ca_organization_apro
     }
 
     character_support_trigger = {
@@ -383,9 +389,11 @@ movement_ca_criollo_liberal = {
     on_created = {
         add_movement_enthusiasm_modifier = yes
     }
+	
+	
 
     disband_trigger = {
-        NOT = { has_variable = ca_organization_apro }
+                has_variable = ca_organization_apro
     }
 
     character_support_trigger = {
@@ -498,8 +506,9 @@ movement_ca_communalist = {
         add_movement_enthusiasm_modifier = yes
     }
 
+
     disband_trigger = {
-        NOT = { has_variable = ca_organization_apro }
+                has_variable = ca_organization_apro
     }
 
     character_support_trigger = {
@@ -610,6 +619,22 @@ movement_ca_guilds = {
     }
 
     disband_trigger = {
+        
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+        }
+        
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+
+    disband_trigger = {
         NOT = { has_variable = ca_organization_apro }
     }
 
@@ -718,6 +743,22 @@ movement_ca_artesanado = {
     }
 
     disband_trigger = {
+        
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+        }
+        
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+
+    disband_trigger = {
         NOT = { has_variable = ca_organization_apro }
     }
 
@@ -823,7 +864,23 @@ movement_ca_agroexportadores = {
         add_movement_enthusiasm_modifier = yes
     }
 
-    disband_trigger = {
+     disband_trigger = {
+        
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+        }
+        
+        NOT = { has_variable = ca_organization_apro }
+    }
+ 
+ 
+   disband_trigger = {
         NOT = { has_variable = ca_organization_apro }
     }
 
@@ -929,6 +986,22 @@ movement_ca_colonialist = {
     }
 
     disband_trigger = {
+        
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+        }
+        
+        NOT = { has_variable = ca_organization_apro }
+    }
+
+
+    disband_trigger = {
         NOT = { has_variable = ca_organization_apro }
     }
 
@@ -1020,6 +1093,22 @@ movement_ca_enclavist = {
     on_created = {
         add_movement_enthusiasm_modifier = yes
     }
+
+    disband_trigger = {
+        
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+        }
+        
+        NOT = { has_variable = ca_organization_apro }
+    }
+
 
     disband_trigger = {
         NOT = { has_variable = ca_organization_apro }
@@ -1119,6 +1208,22 @@ movement_ca_radical_enclavist = {
     on_created = {
         add_movement_enthusiasm_modifier = yes
     }
+
+    disband_trigger = {
+        
+        OR = {
+            country_has_primary_culture = cu:central_american
+            country_has_primary_culture = cu:guatemalan
+            country_has_primary_culture = cu:el_salvadorian
+            country_has_primary_culture = cu:honduran
+            country_has_primary_culture = cu:nicaraguan
+            country_has_primary_culture = cu:costa_rican
+            country_has_primary_culture = cu:panamanian
+        }
+        
+        NOT = { has_variable = ca_organization_apro }
+    }
+
 
     disband_trigger = {
         NOT = { has_variable = ca_organization_apro }
