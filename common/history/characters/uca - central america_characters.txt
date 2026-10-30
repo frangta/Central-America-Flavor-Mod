@@ -34,7 +34,17 @@ CHARACTERS = {
 			template = uca_francisco_barrundia_character_template
 			ig_leader = yes
 		}
-
+                # La Oposicion:
+                create_character = { 
+		interest_group = ig_landowners
+	        ideology = ideology_ca_unitarian
+                ig_leader = yes				
+		}
+                create_character = { 
+                interest_group = ig_devout
+	        ideology = ideology_moderate
+                ig_leader = yes		
+		}
 		# Generales federales
 		create_character = { template = cafm_carlos_salazar }
 		create_character = { template = cafm_juan_galindo }

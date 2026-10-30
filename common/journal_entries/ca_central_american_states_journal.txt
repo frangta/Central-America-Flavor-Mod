@@ -49,12 +49,16 @@ je_ca_historic_situation_in_talamanca = {
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 	group = je_group_historical_content
 	should_be_pinned_by_default_involved = yes
-
+        should_be_pinned_by_default_uninvolved_or_context = yes
 	immediate = {
 		if = {
 			limit = { NOT = { has_variable = ca_talamanca_influence } }
 			set_variable = { name = ca_talamanca_influence value = 30 }
 		}
+	}
+
+	is_shown_in_lobby = {
+		c:UCA ?= THIS
 	}
 
 	current_value = {

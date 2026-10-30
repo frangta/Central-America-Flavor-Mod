@@ -1,0 +1,86 @@
+﻿# CAFM P5 (punto 7) - Notificaciones del mod. Se lanzan con post_notification desde los efectos.
+
+ca_notif_phase_change = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/diplomatic_play.dds"
+	notification_type = feed
+	days = 28
+}
+
+ca_notif_state_rebel = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/secession.dds"
+	notification_type = toast
+	days = 28
+}
+
+ca_notif_state_separated = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/secession.dds"
+	notification_type = toast
+	days = 28
+}
+
+ca_notif_front_critical = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/military.dds"
+	notification_type = feed
+	days = 28
+}
+
+ca_notif_bar_crisis = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/influence_bad.dds"
+	notification_type = toast
+	days = 28
+}
+
+ca_notif_cohesion_high = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/interest_group.dds"
+	notification_type = feed
+	days = 28
+}
+
+ca_notif_cohesion_low = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/interest_group_bad.dds"
+	notification_type = feed
+	days = 28
+}
+
+ca_notif_cohesion_crisis = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/interest_group_bad.dds"
+	notification_type = toast
+	days = 28
+}
+
+ca_notif_cohesion_recovered = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/interest_group.dds"
+	notification_type = feed
+	days = 28
+}
+
+ca_notif_congress_law = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/interest.dds"
+	notification_type = feed
+	days = 28
+}
+
+ca_notif_debt_tier_paid = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/interest.dds"
+	notification_type = feed
+	days = 28
+}
+
+ca_notif_bocas_low = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/colonial.dds"
+	notification_type = feed
+	days = 28
+}
+

@@ -1,6 +1,6 @@
 ﻿COUNTRIES = {
 	c:UCA ?= {
-		# CAFM F2: mandato de Morazan 14 feb 1835 - 1 feb 1839; la eleccion de 1838 nunca se celebro
+		
 		set_next_election_date = 1838.6.1
 		
 		set_variable = ca_organization_apro
@@ -20,8 +20,8 @@
         activate_law = law_type:law_interventionism                                        
         activate_law = law_type:law_right_of_assembly
         activate_law = law_type:law_per_capita_based_taxation
-        activate_law = law_type:law_no_health_system		# CAFM F2: sin sistema de salud (permite el colera de 1837)
-        activate_law = law_type:law_slavery_banned		# CAFM F2: abolida por la Federacion el 17 abr 1824
+        activate_law = law_type:law_no_health_system		
+        activate_law = law_type:law_slavery_banned		
         activate_law = law_type:law_religious_schools
         activate_law = law_type:law_no_police
         activate_law = law_type:law_freedom_of_conscience
@@ -97,12 +97,12 @@
         }
 
 		
-        # CAFM F4: solo .119; .119 lanza las 5 introducciones de los estados
+
         trigger_event = { id = ca_central_america.119 }
  
 		set_variable = { name = historic_central_american}
 		set_variable = { name = frca_preserved }
-		# CAFM F3: sin <x>_support_var; la lealtad la pone el diario (frca_loyalty_<x>)
+
  
  		add_journal_entry = {
 			type = je_historic_central_america_falls_apart
@@ -110,22 +110,24 @@
 		add_journal_entry = {
 			type = je_ca_british_debt
 		}
- 
         add_modifier = {
-            name = age_of_caudillos_modifier
+            name = ca_peasant_low_time
+            days = 850
+			is_decaying = yes
         }
-        # CAFM F2: hasta el decreto del 30 may 1838 (antes era permanente)
+
+        
         add_modifier = {
             name = ca_federal_paralysis
-            days = 880
+            days = 1825
         }
-        # CAFM F2: ca_british_debt_crisis eliminado; la deuda la lleva je_ca_british_debt
+        
         add_modifier = {
             name = ca_military_disarray
             days = 1825 # 5 años
         } 
 		initialise_caciquismo_effect = yes
 	}
-	# CAFM F18 (E): configuracion de los grupos de interes, UCA federal (seccion 4.1)
+	
 	c:UCA ?= { ca_ig_config_federal = yes }
 }

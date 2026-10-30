@@ -335,6 +335,7 @@ je_ca_coffee_boom = {
 	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
 	group = je_group_internal_affairs
 	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
 
 	# F13 (A1): lo anade el pulso anual (ca_development_yearly). Empieza con terratenientes poderosos.
 	possible = {
@@ -361,7 +362,7 @@ je_ca_coffee_boom = {
 		first_valid = {
 			triggered_desc = {
 				desc = je_ca_coffee_boom_status_paused
-				trigger = { ig:ig_landowners ?= { ig_counts_as_marginal = yes } }
+				trigger = { ig:ig_landowners ?= { is_marginal = yes } }
 			}
 			triggered_desc = {
 				desc = je_ca_coffee_boom_status_normal
@@ -447,15 +448,40 @@ je_ca_coffee_boom = {
 # alineamiento (centralista / federalista / separatista, 1-3). Termina cuando deja de ser
 # subdito, sin exito ni fracaso. Su pulso lanza el separatismo del lado del estado (V2) y la
 # declaracion de independencia.
+
 je_ca_state_role_in_federation = {
 	icon = "gfx/interface/icons/event_icons/event_protest.dds"
 	group = je_group_historical_content
 	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
 
-	scripted_button = ca_button_support_federation
-	scripted_button = ca_button_support_confederation
-	scripted_button = ca_button_sabotage_federation
-	scripted_button = ca_button_support_centralistas
+	# CAFM P1 punto 1: los 4 botones van ahora en el widget (rejilla 2x2, ca_role_sgui.txt).
+	# La IA los usa desde ca_role_ai_monthly.
+	widget = {
+		gui = "gui/ca_subject_role_widgets.gui"
+		name = "ca_subject_role_widget"
+		container = "custom_widget_container_1"
+	}
+
+	# CAFM P1 punto 1: antes el primer texto tenia "always = yes" y los demas no salian nunca.
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_state_role_in_federation_support_federation
+				trigger = {
+					has_variable = ca_federalist_influence
+					OR = {
+						NOT = { has_variable = ca_separatist_influence }
+						var:ca_federalist_influence >= var:ca_separatist_influence
+					}
+				}
+			}
+			triggered_desc = {
+				desc = je_ca_state_role_in_federation_support_confederation
+				trigger = { always = yes }
+			}
+		}
+	}
 
 	is_shown_in_lobby = {
 		OR = {
@@ -474,26 +500,18 @@ je_ca_state_role_in_federation = {
 		is_subject_of = c:UCA
 	}
 
-	widget = {
-		gui = "gui/ca_subject_role_widgets.gui"
-		name = "ca_subject_role_widget"
-		container = "custom_widget_container_2"
-	}
-
-	immediate = {
-		ca_tri_set_globals = yes # F29: banderas del triangulo
-	}
+	scripted_progress_bar = ca_federal_spectrum_bar
 
 	on_monthly_pulse = {
 		effect = {
-			ca_tri_set_globals = yes
+			ca_role_ai_monthly = yes # P1 punto 1
 		}
 		events = {
-			ca_central_america.18 # Separatismo en Costa Rica (V2)
-			ca_central_america.19 # Separatismo en Nicaragua (V2)
-			ca_central_america.20 # Separatismo en Guatemala (V2)
-			ca_central_america.21 # Separatismo en Honduras (V2)
-			ca_central_america.22 # Separatismo en El Salvador (V2)
+			ca_central_america.18 # Separatismo en Costa Rica 
+			ca_central_america.19 # Separatismo en Nicaragua 
+			ca_central_america.20 # Separatismo en Guatemala 
+			ca_central_america.21 # Separatismo en Honduras 
+			ca_central_america.22 # Separatismo en El Salvador 
 			ca_central_america.23 # La cuestion de Los Altos
 			ca_central_america.26 # Declaracion de Costa Rica
 			ca_central_america.27 # Declaracion de Nicaragua
@@ -501,7 +519,7 @@ je_ca_state_role_in_federation = {
 			ca_central_america.52 # Declaracion de El Salvador
 			ca_central_america.55 # Declaracion de Guatemala
 			ca_central_america.58 # Declaracion de Los Altos
-			ca_central_america.63 # Guerra civil en Nicaragua (F7)
+			ca_central_america.63 # Guerra civil en Nicaragua 
 			ca_central_america.65 # Guerra civil en Costa Rica
 			ca_central_america.67 # Guerra civil en Honduras
 			ca_central_america.69 # Guerra civil en Guatemala
@@ -526,10 +544,14 @@ je_ca_state_role_in_federation = {
 # (Leal 75 / Vacilante 50 / Rebelde 25). La mueven los botones del diario 1, las elecciones,
 # los golpes, las guerras civiles, los eventos y +-1 al mes segun quien gobierna.
 # 100 -> Beats, 0 -> Falls (ca_fvs_resolve, grupo 9). Sin pulso de eventos.
+
 je_ca_federalists_vs_separatists_situation = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
 	group = je_group_historical_content
+	
+	
 	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
 
 	immediate = {
 		if = {
@@ -618,6 +640,7 @@ je_ca_agro_export_boom = {
 	icon = "gfx/interface/icons/goods_icons/coffee.dds"
 	group = je_group_internal_affairs
 	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
 
 	# F13 (A2): lo anade el pulso anual tras el cafe o desde 1870 (o ca_costa_rica_events.21 a).
 	possible = {
@@ -700,6 +723,7 @@ je_ca_military_reform = {
 	icon = "gfx/interface/icons/law_icons/professional_army.dds"
 	group = je_group_internal_affairs
 	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
 
 	# F13 (A3): lo anade el pulso anual desde 1845 con la ley de caudillismo.
 	possible = {
@@ -821,6 +845,7 @@ je_ca_enlightenment = {
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 	group = je_group_internal_affairs
 	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
 
 	# F13 (A4): la UCA al inicio y cada estado al nacer (ca_add_enlightenment_journal).
 	possible = {

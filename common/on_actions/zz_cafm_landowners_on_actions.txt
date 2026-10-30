@@ -1,0 +1,31 @@
+﻿# CAFM - limpieza de ideologias vanilla de los terratenientes
+on_game_started = {
+	on_actions = { cafm_on_game_started_landowners }
+}
+
+on_monthly_pulse_country = {
+	on_actions = { cafm_monthly_landowners }
+}
+
+cafm_on_game_started_landowners = {
+	effect = {
+		every_country = {
+			limit = {
+				ig:ig_landowners ?= { has_ideology = ideology:ideology_ca_criollo_paternalistic }
+			}
+			cafm_clean_landowner_ideologies = yes
+		}
+	}
+}
+
+# Los Estados creados al separarse (GUA, ELS, HON, NIC, COS, ALT) reciben las
+# ideologias del mod en ca_play_*_effect; el pulso mensual limpia lo que vanilla
+# les ponga despues.
+cafm_monthly_landowners = {
+	trigger = {
+		ig:ig_landowners ?= { has_ideology = ideology:ideology_ca_criollo_paternalistic }
+	}
+	effect = {
+		cafm_clean_landowner_ideologies = yes
+	}
+}

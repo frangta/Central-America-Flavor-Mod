@@ -6,7 +6,7 @@
 # tener y, si algo la anade, se invalida en el acto.
 # Si en tu version vanilla el diario tiene otro nombre, cambia solo la clave.
 # ============================================================================
-je_reunify_central_america = {
+TRY_REPLACE:je_reunify_central_america = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 	group = je_group_foreign_affairs
 
@@ -20,5 +20,83 @@ je_reunify_central_america = {
 
 	invalid = {
 		always = yes
+	}
+}
+TRY_REPLACE:central_america_falls_apart = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	group = je_group_historical_content
+
+		
+	should_be_pinned_by_default_uninvolved_or_context = yes
+
+
+	is_shown_in_lobby = {
+		always = no
+	}
+	possible = {
+		always = no
+	}
+
+	invalid = {
+		always = yes
+	}
+	on_monthly_pulse = {
+		random_events = {
+			10 = 0
+			1 = central_america.3
+		}
+	}
+
+	complete = {
+		any_scope_state = {
+			state_region = s:STATE_GUATEMALA
+			turmoil < 0.2
+		}
+		any_scope_state = {
+			state_region = s:STATE_GUATEMALA
+			turmoil < 0.2
+		}
+		any_scope_state = {
+			state_region = s:STATE_COSTA_RICA
+			turmoil < 0.2
+		}
+		any_scope_state = {
+			state_region = s:STATE_SAN_SALVADOR
+			turmoil < 0.2
+		}
+		any_scope_state = {
+			state_region = s:STATE_NICARAGUA
+			turmoil < 0.2
+		}
+	}
+
+	fail = {
+		custom_tooltip = {
+			text = central_america_fail_tt
+			any_scope_state = {
+				OR = {
+					state_region = s:STATE_GUATEMALA
+					state_region = s:STATE_HONDURAS
+					state_region = s:STATE_COSTA_RICA
+					state_region = s:STATE_SAN_SALVADOR
+					state_region = s:STATE_NICARAGUA
+				}
+				count < 3
+			}
+		}
+	}
+
+	on_fail = {
+		trigger_event = { id = central_america.2 popup = yes }
+		custom_tooltip = central_america_capital_tt
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = central_america_breakup_status
+			}
+		}
 	}
 }
