@@ -1,0 +1,40 @@
+﻿############################################################################
+# CAFM P4 - Triggers del minimapa (puntos 4 y 5)
+############################################################################
+
+# La UCA tiene Bocas del Toro (provincia x47C5F8).
+ca_bocas_held_by_uca = {
+	p:x47C5F8.state.owner ?= c:UCA
+}
+
+# Control efectivo de Bocas (0-100) mayor o igual que VALUE.
+ca_bocas_control_ge = {
+	trigger_if = {
+		limit = { has_global_variable = ca_bocas_control }
+		global_var:ca_bocas_control >= $VALUE$
+	}
+	trigger_else = {
+		always = no
+	}
+}
+
+# Control alto: la usurpacion britanica o granadina fracasa.
+ca_bocas_control_high = {
+	ca_bocas_control_ge = { VALUE = 60 }
+}
+
+# Accion regional del minimapa: no se hizo hace poco. Uso: ca_mm_region_ready = { KEY = mos_colony }
+ca_mm_region_ready = {
+	custom_tooltip = {
+		text = ca_mm_cooldown_tt
+		NOT = { has_variable = ca_mm_cd_$KEY$ }
+	}
+}
+
+# Hay dinero suficiente. Uso: ca_mm_can_pay = { VALUE = ca_money_medium }
+ca_mm_can_pay = {
+	custom_tooltip = {
+		text = ca_mm_money_tt
+		gold_reserves >= $VALUE$
+	}
+}

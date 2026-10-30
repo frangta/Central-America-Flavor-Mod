@@ -153,6 +153,8 @@ ca_military_disarray = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	character_command_limit_mult = -0.25              # país -> formación -> general: sí llega
 	military_formation_organization_gain_mult = -0.25
+        unit_defense_mult = -0.25
+        unit_offense_mult = -0.25
 }
 
 ca_separatist_agitation_modifier = {

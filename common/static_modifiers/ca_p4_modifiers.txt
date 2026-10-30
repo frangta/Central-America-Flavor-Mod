@@ -1,0 +1,22 @@
+﻿# CAFM P4 - Modificadores de las acciones regionales del minimapa (estado)
+
+ca_coast_colony = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_construction_mult = 0.1
+	state_loyalists_from_political_movements_mult = 0.1
+}
+
+ca_frontier_missions = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_loyalists_from_political_movements_mult = 0.15
+}
+
+ca_military_colony = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_turmoil_effects_mult = -0.15
+}
+
+ca_federal_garrison_region = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_turmoil_effects_mult = -0.2
+}

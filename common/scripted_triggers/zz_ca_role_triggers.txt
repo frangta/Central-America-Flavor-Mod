@@ -1,0 +1,56 @@
+﻿############################################################################
+# CAFM P1 punto 1 - Condiciones de las acciones del diario del estado. Scope: pais del estado.
+############################################################################
+ca_role_can_support_federation = {
+	custom_tooltip = {
+		text = ca_button_cooldown_tt
+		NOT = { has_variable = support_cooldown }
+	}
+	custom_tooltip = {
+		text = ca_button_alignment_max_tt
+		OR = {
+			NOT = { has_variable = ca_federalist_influence }
+			var:ca_federalist_influence < 3
+		}
+	}
+}
+ca_role_can_support_confederation = {
+	custom_tooltip = {
+		text = ca_button_cooldown_tt
+		NOT = { has_variable = confederation_cooldown }
+	}
+	custom_tooltip = {
+		text = ca_button_alignment_max_tt
+		OR = {
+			NOT = { has_variable = ca_separatist_influence }
+			var:ca_separatist_influence < 3
+		}
+	}
+}
+ca_role_can_sabotage_federation = {
+	custom_tooltip = {
+		text = ca_button_cooldown_tt
+		NOT = { has_variable = sabotage_cooldown }
+	}
+	custom_tooltip = {
+		text = ca_button_alignment_max_tt
+		OR = {
+			NOT = { has_variable = ca_separatist_influence }
+			var:ca_separatist_influence < 3
+		}
+	}
+}
+ca_role_can_support_centralists = {
+	custom_tooltip = {
+		text = ca_button_cooldown_tt
+		NOT = { has_variable = pretorian_cooldown }
+	}
+	custom_tooltip = {
+		text = ca_button_alignment_max_tt
+		OR = {
+			NOT = { has_variable = ca_centralist_influence }
+			var:ca_centralist_influence < 3
+		}
+	}
+	ig:ig_armed_forces ?= { is_powerful = yes }
+}

@@ -1,0 +1,55 @@
+﻿############################################################################
+# CAFM P3 - Triggers del paquete 3 (leyes federalistas y deuda inglesa)
+############################################################################
+
+# El Congreso federal puede proponer una ley. Scope: UCA.
+ca_fed_congress_can_propose = {
+	this = c:UCA
+	ca_frca_route_federal = yes
+	ca_frca_journal_active = yes
+	enacting_any_law = no
+}
+
+# El deudor tiene la deuda abierta. Scope: pais deudor.
+ca_debt_active = {
+	has_journal_entry = je_ca_british_debt
+	NOT = { has_variable = ca_british_debt_closed }
+}
+
+# Presion de los acreedores mayor o igual que VALUE. Scope: pais deudor.
+ca_debt_pressure_ge = {
+	has_variable = ca_debt_pressure
+	var:ca_debt_pressure >= $VALUE$
+}
+
+# Gran Bretana puede ir a la guerra por la deuda (frenos del punto 2).
+# Scope: el deudor.
+ca_debt_war_possible = {
+	exists = c:GBR
+	NOT = { is_subject_of = c:GBR }
+	NOT = { has_global_variable = ca_debt_crisis_cd }
+	c:GBR ?= { is_at_war = no }
+	NOT = { has_war_with = c:GBR }
+}
+
+# La UCA es debil (para el protectorado, solo en el modo dinamico). Scope: el deudor.
+ca_debt_debtor_weak = {
+	c:UCA ?= this
+	OR = {
+		je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" < ca_frca_bar_crisis }
+		has_variable = frca_federal_war_declared
+		has_revolution = yes
+	}
+}
+
+# El deudor tiene costa caribe expuesta: Honduras e Islas de la Bahia, la Mosquitia
+# o el Peten junto a Belice. Scope: el deudor.
+ca_debt_debtor_caribbean = {
+	any_scope_state = {
+		OR = {
+			state_region = s:STATE_HONDURAS
+			state_region = s:STATE_NICARAGUA
+			state_region = s:STATE_GUATEMALA
+		}
+	}
+}

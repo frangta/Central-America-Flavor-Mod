@@ -5,6 +5,12 @@ ca_peasant_concessions = {
 	state_radicals_from_political_movements_mult = -0.1
 	interest_group_ig_rural_folk_pol_str_mult = 0.1
 }
+ca_peasant_low_time = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	#state_radicals_from_political_movements_mult = -0.1
+	interest_group_ig_rural_folk_pol_str_mult = -0.99
+        interest_group_ig_rural_folk_pop_attraction_mult = -0.99
+}
 ca_peasant_guerrilla = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
 	country_expenses_add = 200

@@ -1,0 +1,15 @@
+﻿# CAFM - usado por lobby_anti_federalist (alcance: movimiento politico)
+ca_is_anti_federal_movement = {
+	OR = {
+		is_political_movement_type = movement_ca_unitarian
+		is_political_movement_type = movement_ca_reactionary
+		is_political_movement_type = movement_ca_guatemala_national
+		is_political_movement_type = movement_ca_elsalvador_national
+		is_political_movement_type = movement_ca_honduras_national
+		is_political_movement_type = movement_ca_nicaragua_national
+		is_political_movement_type = movement_ca_costarica_national
+		is_political_movement_type = movement_ca_panama_national
+		is_political_movement_type = movement_ca_chiapas_national
+		is_political_movement_type = movement_ca_los_altos_national
+	}
+}
