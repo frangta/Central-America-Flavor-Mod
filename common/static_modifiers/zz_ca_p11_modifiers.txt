@@ -1,0 +1,120 @@
+﻿# CAFM P11: modificadores nuevos.
+# 1) Niveles nuevos de bastion (se aplican a ESTADOS, solo claves state_).
+# 2) Companeros de PAIS de los bastiones: llevan las claves country_ e interest_group_
+#    que en un estado no hacen nada. Los pone/quita ca_sh_refresh_country cada mes.
+# 3) Modificadores de los eventos P11.
+
+# --- 1. Niveles nuevos de bastion (estado) ---
+age_of_federal_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	state_pop_support_movement_ca_federalist_add = 40
+	state_loyalists_from_political_movements_mult = 0.15
+	state_bureaucracy_population_base_cost_factor_mult = -0.10
+}
+age_of_unitary_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds"
+	state_pop_support_movement_ca_unitarian_add = 40
+	state_loyalists_from_political_movements_mult = 0.15
+	state_tax_capacity_add = 10
+}
+age_of_reactionary_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_speech_positive.dds"
+	state_pop_support_movement_ca_reactionary_add = 50
+	state_loyalists_from_political_movements_mult = 0.10
+}
+fading_liberal_stronghold = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_tech_negative.dds"
+	state_pop_support_movement_ca_liberal_add = -30
+}
+
+# --- 2. Companeros de pais ---
+ca_sh_federal_country = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	country_legitimacy_govt_size_add = 5
+	interest_group_ig_intelligentsia_pol_str_mult = 0.10
+}
+ca_sh_unitary_country = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds"
+	country_authority_add = 15
+}
+ca_sh_waning_country = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_negative.dds"
+	country_authority_add = -10
+	country_legitimacy_govt_size_add = -3
+}
+ca_sh_liberal_country = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_tech_positive.dds"
+	interest_group_ig_intelligentsia_pop_attraction_mult = 0.15
+	interest_group_ig_intelligentsia_pol_str_mult = 0.10
+}
+ca_sh_reactionary_country = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_speech_positive.dds"
+	interest_group_ig_petty_bourgeoisie_pop_attraction_mult = 0.15
+	interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.10
+}
+ca_sh_conservative_country = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	interest_group_ig_landowners_pop_attraction_mult = 0.15
+	interest_group_ig_landowners_pol_str_mult = 0.20
+}
+
+# --- 3. Eventos P11 ---
+# Grupos de interes (scope IG)
+ca_p11_ig_emboldened = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_pol_str_mult = 0.15
+	interest_group_approval_add = 2
+}
+ca_p11_ig_humiliated = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	interest_group_pol_str_mult = -0.10
+	interest_group_approval_add = -3
+}
+ca_p11_ig_purged = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds"
+	interest_group_pol_str_mult = -0.30
+	interest_group_approval_add = -5
+}
+ca_p11_ig_coopted = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_handshake_positive.dds"
+	interest_group_approval_add = 3
+}
+# Pais
+ca_p11_civil_peace = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_handshake_positive.dds"
+	state_radicals_from_political_movements_mult = -0.15
+}
+ca_p11_martial_law = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_negative.dds"
+	country_authority_add = -25
+	state_turmoil_effects_mult = -0.30
+}
+ca_p11_coup_regime = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds"
+	country_authority_add = 50
+	country_legitimacy_base_add = -10
+}
+ca_p11_plot_paranoia = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds"
+	country_authority_add = -10
+	state_radicals_from_political_movements_mult = 0.05
+}
+ca_p11_army_split = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds"
+	unit_offense_mult = -0.10
+	unit_defense_mult = -0.10
+}
+ca_p11_lost_revenue = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds"
+	country_expenses_add = 150
+}
+ca_p11_foreign_mediation = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_prestige_add = -10
+}
+# Estado
+ca_p11_state_barricades = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds"
+	state_construction_mult = -0.25
+	state_tax_waste_add = 0.15
+}

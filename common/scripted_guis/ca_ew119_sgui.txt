@@ -1,0 +1,22 @@
+﻿############################################################################
+# CAFM Z4 - Ventana del evento ca_central_america.119 (gui/ca_event_window_119.gui)
+############################################################################
+ca_ew119_paralysis_on = {
+	scope = country
+	is_shown = {
+		has_modifier = ca_federal_paralysis
+	}
+}
+ca_ew119_disarray_on = {
+	scope = country
+	is_shown = {
+		has_modifier = ca_military_disarray
+	}
+}
+# Boton "How to play": abre la mini guia (ca_guide.1)
+ca_ew119_open_guide = {
+	scope = country
+	effect = {
+		trigger_event = { id = ca_guide.1 popup = yes }
+	}
+}

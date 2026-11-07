@@ -1,0 +1,46 @@
+﻿cafm_era_rights_of_man = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_ig_intelligentsia_pol_str_mult = 0.1
+	country_tech_spread_mult = 0.05
+	state_education_access_add = 0.02
+	state_pop_support_movement_liberal_mult = 0.1
+}
+
+cafm_era_political_ideology = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_ig_intelligentsia_pop_attraction_mult = 0.1
+	interest_group_ig_devout_pol_str_mult = 0.1
+	political_movement_pop_attraction_mult = 0.1
+	country_tech_spread_mult = 0.05
+}
+
+cafm_era_state_and_government = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	country_bureaucracy_mult = 0.05
+	country_legitimacy_base_add = 5
+	state_tax_collection_mult = 0.05
+	state_radicals_from_political_movements_mult = -0.1
+}
+
+cafm_era_dreams_of_empire = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_prestige_mult = 0.1
+	interest_group_ig_armed_forces_pol_str_mult = 0.1
+	military_formation_organization_gain_mult = 0.05
+}
+
+cafm_era_means_of_production = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
+	state_construction_mult = 0.05
+	building_coffee_plantation_throughput_add = 0.05
+	interest_group_ig_industrialists_approval_add = 1
+}
+
+cafm_era_flaws_of_democracy = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_ig_armed_forces_pol_str_mult = 0.1
+	state_turmoil_effects_mult = -0.05
+	state_radicals_from_political_movements_mult = -0.1
+	political_movement_radicalism_add = 0.05
+}
+

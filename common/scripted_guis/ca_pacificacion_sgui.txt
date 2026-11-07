@@ -1,0 +1,81 @@
+﻿############################################################################
+# CAFM Z5 - Mapa de la Pacificacion del Norte (gui/ca_pacificacion_map.gui)
+############################################################################
+ca_pn_beat_1 = {
+	scope = country
+	is_shown = {
+		has_variable = ca_cos_pn_comisionado_fired
+	}
+}
+ca_pn_beat_2 = {
+	scope = country
+	is_shown = {
+		has_variable = ca_cos_pn_ligueros_fired
+	}
+}
+ca_pn_beat_3 = {
+	scope = country
+	is_shown = {
+		has_variable = ca_motin_villa_fired
+	}
+}
+ca_pn_beat_4 = {
+	scope = country
+	is_shown = {
+		has_variable = ca_saqueo_bagaces_fired
+	}
+}
+ca_pn_beat_5 = {
+	scope = country
+	is_shown = {
+		has_variable = ca_cos_pn_segundo_asalto_fired
+	}
+}
+ca_pn_beat_6 = {
+	scope = country
+	is_shown = {
+		has_variable = ca_desembarco_bolson_fired
+	}
+}
+ca_pn_beat_7 = {
+	scope = country
+	is_shown = {
+		has_variable = ca_cos_pn_sapoa_fired
+	}
+}
+ca_pn_beat_8 = {
+	scope = country
+	is_shown = {
+		has_variable = ca_cos_pn_mediacion_pedida
+	}
+}
+ca_pn_zone_low = {
+	scope = country
+	is_shown = {
+		OR = {
+			NOT = { has_variable = ca_pacificacion_progress }
+			var:ca_pacificacion_progress < 34
+		}
+	}
+}
+ca_pn_zone_mid = {
+	scope = country
+	is_shown = {
+		has_variable = ca_pacificacion_progress
+		var:ca_pacificacion_progress >= 34
+		var:ca_pacificacion_progress < 67
+	}
+}
+ca_pn_zone_high = {
+	scope = country
+	is_shown = {
+		has_variable = ca_pacificacion_progress
+		var:ca_pacificacion_progress >= 67
+	}
+}
+ca_pn_expedition_on = {
+	scope = country
+	is_shown = {
+		has_variable = ca_cos_expedicion_en_campo
+	}
+}

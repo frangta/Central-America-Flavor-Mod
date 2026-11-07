@@ -471,9 +471,24 @@ ca_mm_gua_campaign = {
 		ca_frca_action_possible_campaign = { TAG = gua }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_campaign = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_gua
+		var:frca_loyalty_gua >= 1
+		var:frca_loyalty_gua <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_gua = 1
+			add = 40
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_gua_negotiate = {
 	scope = country
@@ -484,9 +499,28 @@ ca_mm_gua_negotiate = {
 		ca_frca_action_possible_negotiate = { TAG = gua }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_negotiate = { TAG = gua }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_gua
+		var:frca_loyalty_gua >= 1
+		var:frca_loyalty_gua <= 2
+	}
+	ai_chance = {
+		base = 15
+		modifier = {
+			var:frca_loyalty_gua = 1
+			add = 25
+		}
+		modifier = {
+			gold_reserves < ca_money_medium
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_gua_intendant = {
 	scope = country
@@ -497,9 +531,24 @@ ca_mm_gua_intendant = {
 		ca_frca_action_possible_intendant = { TAG = gua }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_intendant = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_gua
+		var:frca_loyalty_gua >= 1
+		var:frca_loyalty_gua <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_gua = 1
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_gua_siege = {
 	scope = country
@@ -510,9 +559,20 @@ ca_mm_gua_siege = {
 		ca_frca_action_possible_siege = { TAG = gua }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_siege = { TAG = gua }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_gua
+		var:frca_loyalty_gua >= 1
+		var:frca_loyalty_gua <= 1
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_gua_coopt = {
 	scope = country
@@ -524,9 +584,21 @@ ca_mm_gua_coopt = {
 		ca_frca_phase_ge = { VALUE = 2 }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_coopt = { TAG = gua }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_gua
+		var:frca_loyalty_gua >= 1
+		var:frca_loyalty_gua <= 2
+		ca_frca_front_ge = { FRONT = caudillos VALUE = 1 }
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_els_campaign = {
 	scope = country
@@ -537,9 +609,24 @@ ca_mm_els_campaign = {
 		ca_frca_action_possible_campaign = { TAG = els }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_campaign = { TAG = els CTAG = ELS STATE = STATE_SAN_SALVADOR }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_els
+		var:frca_loyalty_els >= 1
+		var:frca_loyalty_els <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_els = 1
+			add = 40
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_els_negotiate = {
 	scope = country
@@ -550,9 +637,28 @@ ca_mm_els_negotiate = {
 		ca_frca_action_possible_negotiate = { TAG = els }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_negotiate = { TAG = els }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_els
+		var:frca_loyalty_els >= 1
+		var:frca_loyalty_els <= 2
+	}
+	ai_chance = {
+		base = 15
+		modifier = {
+			var:frca_loyalty_els = 1
+			add = 25
+		}
+		modifier = {
+			gold_reserves < ca_money_medium
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_els_intendant = {
 	scope = country
@@ -563,9 +669,24 @@ ca_mm_els_intendant = {
 		ca_frca_action_possible_intendant = { TAG = els }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_intendant = { TAG = els CTAG = ELS STATE = STATE_SAN_SALVADOR }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_els
+		var:frca_loyalty_els >= 1
+		var:frca_loyalty_els <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_els = 1
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_els_siege = {
 	scope = country
@@ -576,9 +697,20 @@ ca_mm_els_siege = {
 		ca_frca_action_possible_siege = { TAG = els }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_siege = { TAG = els }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_els
+		var:frca_loyalty_els >= 1
+		var:frca_loyalty_els <= 1
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_els_coopt = {
 	scope = country
@@ -590,9 +722,21 @@ ca_mm_els_coopt = {
 		ca_frca_phase_ge = { VALUE = 2 }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_coopt = { TAG = els }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_els
+		var:frca_loyalty_els >= 1
+		var:frca_loyalty_els <= 2
+		ca_frca_front_ge = { FRONT = caudillos VALUE = 1 }
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_hon_campaign = {
 	scope = country
@@ -603,9 +747,24 @@ ca_mm_hon_campaign = {
 		ca_frca_action_possible_campaign = { TAG = hon }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_campaign = { TAG = hon CTAG = HON STATE = STATE_HONDURAS }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_hon
+		var:frca_loyalty_hon >= 1
+		var:frca_loyalty_hon <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_hon = 1
+			add = 40
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_hon_negotiate = {
 	scope = country
@@ -616,9 +775,28 @@ ca_mm_hon_negotiate = {
 		ca_frca_action_possible_negotiate = { TAG = hon }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_negotiate = { TAG = hon }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_hon
+		var:frca_loyalty_hon >= 1
+		var:frca_loyalty_hon <= 2
+	}
+	ai_chance = {
+		base = 15
+		modifier = {
+			var:frca_loyalty_hon = 1
+			add = 25
+		}
+		modifier = {
+			gold_reserves < ca_money_medium
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_hon_intendant = {
 	scope = country
@@ -629,9 +807,24 @@ ca_mm_hon_intendant = {
 		ca_frca_action_possible_intendant = { TAG = hon }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_intendant = { TAG = hon CTAG = HON STATE = STATE_HONDURAS }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_hon
+		var:frca_loyalty_hon >= 1
+		var:frca_loyalty_hon <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_hon = 1
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_hon_siege = {
 	scope = country
@@ -642,9 +835,20 @@ ca_mm_hon_siege = {
 		ca_frca_action_possible_siege = { TAG = hon }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_siege = { TAG = hon }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_hon
+		var:frca_loyalty_hon >= 1
+		var:frca_loyalty_hon <= 1
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_hon_coopt = {
 	scope = country
@@ -656,9 +860,21 @@ ca_mm_hon_coopt = {
 		ca_frca_phase_ge = { VALUE = 2 }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_coopt = { TAG = hon }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_hon
+		var:frca_loyalty_hon >= 1
+		var:frca_loyalty_hon <= 2
+		ca_frca_front_ge = { FRONT = caudillos VALUE = 1 }
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_nic_campaign = {
 	scope = country
@@ -669,9 +885,24 @@ ca_mm_nic_campaign = {
 		ca_frca_action_possible_campaign = { TAG = nic }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_campaign = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_nic
+		var:frca_loyalty_nic >= 1
+		var:frca_loyalty_nic <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_nic = 1
+			add = 40
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_nic_negotiate = {
 	scope = country
@@ -682,9 +913,28 @@ ca_mm_nic_negotiate = {
 		ca_frca_action_possible_negotiate = { TAG = nic }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_negotiate = { TAG = nic }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_nic
+		var:frca_loyalty_nic >= 1
+		var:frca_loyalty_nic <= 2
+	}
+	ai_chance = {
+		base = 15
+		modifier = {
+			var:frca_loyalty_nic = 1
+			add = 25
+		}
+		modifier = {
+			gold_reserves < ca_money_medium
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_nic_intendant = {
 	scope = country
@@ -695,9 +945,24 @@ ca_mm_nic_intendant = {
 		ca_frca_action_possible_intendant = { TAG = nic }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_intendant = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_nic
+		var:frca_loyalty_nic >= 1
+		var:frca_loyalty_nic <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_nic = 1
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_nic_siege = {
 	scope = country
@@ -708,9 +973,20 @@ ca_mm_nic_siege = {
 		ca_frca_action_possible_siege = { TAG = nic }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_siege = { TAG = nic }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_nic
+		var:frca_loyalty_nic >= 1
+		var:frca_loyalty_nic <= 1
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_nic_coopt = {
 	scope = country
@@ -722,9 +998,21 @@ ca_mm_nic_coopt = {
 		ca_frca_phase_ge = { VALUE = 2 }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_coopt = { TAG = nic }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_nic
+		var:frca_loyalty_nic >= 1
+		var:frca_loyalty_nic <= 2
+		ca_frca_front_ge = { FRONT = caudillos VALUE = 1 }
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_cos_campaign = {
 	scope = country
@@ -735,9 +1023,24 @@ ca_mm_cos_campaign = {
 		ca_frca_action_possible_campaign = { TAG = cos }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_campaign = { TAG = cos CTAG = COS STATE = STATE_COSTA_RICA }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_cos
+		var:frca_loyalty_cos >= 1
+		var:frca_loyalty_cos <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_cos = 1
+			add = 40
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_cos_negotiate = {
 	scope = country
@@ -748,9 +1051,28 @@ ca_mm_cos_negotiate = {
 		ca_frca_action_possible_negotiate = { TAG = cos }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_negotiate = { TAG = cos }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_cos
+		var:frca_loyalty_cos >= 1
+		var:frca_loyalty_cos <= 2
+	}
+	ai_chance = {
+		base = 15
+		modifier = {
+			var:frca_loyalty_cos = 1
+			add = 25
+		}
+		modifier = {
+			gold_reserves < ca_money_medium
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_cos_intendant = {
 	scope = country
@@ -761,9 +1083,24 @@ ca_mm_cos_intendant = {
 		ca_frca_action_possible_intendant = { TAG = cos }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_intendant = { TAG = cos CTAG = COS STATE = STATE_COSTA_RICA }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_cos
+		var:frca_loyalty_cos >= 1
+		var:frca_loyalty_cos <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_cos = 1
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_cos_siege = {
 	scope = country
@@ -774,9 +1111,20 @@ ca_mm_cos_siege = {
 		ca_frca_action_possible_siege = { TAG = cos }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_siege = { TAG = cos }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_cos
+		var:frca_loyalty_cos >= 1
+		var:frca_loyalty_cos <= 1
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_cos_coopt = {
 	scope = country
@@ -788,9 +1136,21 @@ ca_mm_cos_coopt = {
 		ca_frca_phase_ge = { VALUE = 2 }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_coopt = { TAG = cos }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_cos
+		var:frca_loyalty_cos >= 1
+		var:frca_loyalty_cos <= 2
+		ca_frca_front_ge = { FRONT = caudillos VALUE = 1 }
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_alt_campaign = {
 	scope = country
@@ -801,9 +1161,24 @@ ca_mm_alt_campaign = {
 		ca_frca_action_possible_campaign = { TAG = alt }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_campaign = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_alt
+		var:frca_loyalty_alt >= 1
+		var:frca_loyalty_alt <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_alt = 1
+			add = 40
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_alt_negotiate = {
 	scope = country
@@ -814,9 +1189,28 @@ ca_mm_alt_negotiate = {
 		ca_frca_action_possible_negotiate = { TAG = alt }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_negotiate = { TAG = alt }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_alt
+		var:frca_loyalty_alt >= 1
+		var:frca_loyalty_alt <= 2
+	}
+	ai_chance = {
+		base = 15
+		modifier = {
+			var:frca_loyalty_alt = 1
+			add = 25
+		}
+		modifier = {
+			gold_reserves < ca_money_medium
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_alt_intendant = {
 	scope = country
@@ -827,9 +1221,24 @@ ca_mm_alt_intendant = {
 		ca_frca_action_possible_intendant = { TAG = alt }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_intendant = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_alt
+		var:frca_loyalty_alt >= 1
+		var:frca_loyalty_alt <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_alt = 1
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_alt_siege = {
 	scope = country
@@ -840,9 +1249,20 @@ ca_mm_alt_siege = {
 		ca_frca_action_possible_siege = { TAG = alt }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_siege = { TAG = alt }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_alt
+		var:frca_loyalty_alt >= 1
+		var:frca_loyalty_alt <= 1
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_alt_coopt = {
 	scope = country
@@ -854,9 +1274,21 @@ ca_mm_alt_coopt = {
 		ca_frca_phase_ge = { VALUE = 2 }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_coopt = { TAG = alt }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_alt
+		var:frca_loyalty_alt >= 1
+		var:frca_loyalty_alt <= 2
+		ca_frca_front_ge = { FRONT = caudillos VALUE = 1 }
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_cip_campaign = {
 	scope = country
@@ -867,9 +1299,24 @@ ca_mm_cip_campaign = {
 		ca_frca_action_possible_campaign = { TAG = cip }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_campaign = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_cip
+		var:frca_loyalty_cip >= 1
+		var:frca_loyalty_cip <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_cip = 1
+			add = 40
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_cip_negotiate = {
 	scope = country
@@ -880,9 +1327,28 @@ ca_mm_cip_negotiate = {
 		ca_frca_action_possible_negotiate = { TAG = cip }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_negotiate = { TAG = cip }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_cip
+		var:frca_loyalty_cip >= 1
+		var:frca_loyalty_cip <= 2
+	}
+	ai_chance = {
+		base = 15
+		modifier = {
+			var:frca_loyalty_cip = 1
+			add = 25
+		}
+		modifier = {
+			gold_reserves < ca_money_medium
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_cip_intendant = {
 	scope = country
@@ -893,9 +1359,24 @@ ca_mm_cip_intendant = {
 		ca_frca_action_possible_intendant = { TAG = cip }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_intendant = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_cip
+		var:frca_loyalty_cip >= 1
+		var:frca_loyalty_cip <= 2
+	}
+	ai_chance = {
+		base = 40
+		modifier = {
+			var:frca_loyalty_cip = 1
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_mm_cip_siege = {
 	scope = country
@@ -906,9 +1387,20 @@ ca_mm_cip_siege = {
 		ca_frca_action_possible_siege = { TAG = cip }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_siege = { TAG = cip }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_cip
+		var:frca_loyalty_cip >= 1
+		var:frca_loyalty_cip <= 1
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 ca_mm_cip_coopt = {
 	scope = country
@@ -920,9 +1412,21 @@ ca_mm_cip_coopt = {
 		ca_frca_phase_ge = { VALUE = 2 }
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_frca_action_coopt = { TAG = cip }
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+		has_variable = frca_loyalty_cip
+		var:frca_loyalty_cip >= 1
+		var:frca_loyalty_cip <= 2
+		ca_frca_front_ge = { FRONT = caudillos VALUE = 1 }
+	}
+	ai_chance = {
+		base = 30
+	}
+	ai_frequency = 3
 }
 
 ############################################################################

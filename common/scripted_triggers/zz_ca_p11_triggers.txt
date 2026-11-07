@@ -1,0 +1,31 @@
+﻿# CAFM P11: triggers de los eventos de movimientos, agitadores, revolucion, golpes y bastiones.
+
+# Paises donde corren los eventos P11: la UCA y cualquier estado o pais centroamericano.
+ca_p11_country = {
+	is_ca_culture_country = yes
+}
+
+# El movimiento TYPE existe en el pais con apoyo >= VALUE.
+# Uso: ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.05 }
+ca_p11_movement_ge = {
+	any_political_movement = {
+		is_political_movement_type = $TYPE$
+		political_movement_support >= $VALUE$
+	}
+}
+
+# Scope: estado. Tiene algun nivel activo del bastion federal / unitario (no cuenta el "waning").
+ca_p11_state_has_fed_sh = {
+	OR = {
+		has_modifier = federal_stronghold_small_nation
+		has_modifier = federal_stronghold
+		has_modifier = age_of_federal_stronghold
+	}
+}
+ca_p11_state_has_uni_sh = {
+	OR = {
+		has_modifier = unitary_stronghold_small_nation
+		has_modifier = unitary_stronghold
+		has_modifier = age_of_unitary_stronghold
+	}
+}

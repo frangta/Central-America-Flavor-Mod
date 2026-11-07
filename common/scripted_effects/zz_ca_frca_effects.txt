@@ -372,9 +372,13 @@ ca_frca_journal_setup = {
 
 # Al cerrar el diario (A, B, C, D1 o D2). Scope: UCA.
 ca_frca_journal_cleanup = {
-	remove_modifier = ca_federal_paralysis
+	if = {
+		limit = { has_modifier = ca_federal_paralysis } # CAFM P9: sin error si ya no esta
+		remove_modifier = ca_federal_paralysis
+	}
 	ca_cohesion_end = yes # P2: la cohesion federal termina con el diario
 }
+
 
 # Gancho H1-H5 de las rutas (grupo C). Los espacios de nombres llegan en F11;
 # hasta entonces solo se guarda el ultimo gancho alcanzado.

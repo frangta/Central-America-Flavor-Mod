@@ -1,0 +1,191 @@
+﻿# =====================================================================
+# CAFM — Crear el cast de cada país centroamericano
+#
+# Un efecto por país: cafm_create_cast_<país> = { ALL = no }
+#   ALL = no  -> crea solo a los personajes vivos y activos en la fecha
+#                (dentro de su ventana "desde–hasta").
+#   ALL = yes -> crea de golpe a todos los que ya son adultos (18 años) y no
+#                han pasado su fecha "hasta" (no revive a los que ya salieron).
+#   La variable global cafm_cast_create_all hace lo mismo que ALL = yes
+#   para todos los países (set_global_variable = cafm_cast_create_all).
+#
+# Protección contra duplicados: no crea a quien ya existe (cafm_hc_<clave>)
+# ni a quien murió (cafm_dead_<clave>).
+#
+# Se llama al nacer el país, desde cafm_cast_activate_<país>
+# (zz_cafm_cast_effects.txt), después de traer al cast que vivía en la UCA
+# y antes de poner al gobernante de la fecha.
+#
+# Ventanas: los bloques de uso de cada plantilla o, si no tiene, las fechas
+# de claude/CAFM_NATIONAL_CAST_1836_1850.md.
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# cafm_create_cast_member
+#   KEY      = clave del registro (cafm_hc_<KEY>)
+#   TEMPLATE = plantilla
+#   FROM, TO = ventana de actividad (desde, hasta sin incluir)
+#   ADULT    = fecha en que cumple 18 años (para ALL = yes)
+#   ALL      = yes / no
+# ---------------------------------------------------------------------
+cafm_create_cast_member = {
+	if = {
+		limit = {
+			NOT = { has_global_variable = cafm_dead_$KEY$ }
+			NOT = { global_var:cafm_hc_$KEY$ ?= { always = yes } }
+			game_date < $TO$
+			OR = {
+				game_date >= $FROM$
+				AND = {
+					OR = {
+						always = $ALL$
+						has_global_variable = cafm_cast_create_all
+					}
+					game_date >= $ADULT$
+				}
+			}
+		}
+		create_character = { template = $TEMPLATE$ }
+	}
+}
+
+
+# --- República Federal (UCA) (7) ---
+cafm_create_cast_uca = {
+	cafm_create_cast_member = { KEY = morazan TEMPLATE = UCA_francisco_morazan FROM = 1836.1.1 TO = 1842.9.15 ADULT = 1810.10.3 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = barrundia TEMPLATE = uca_francisco_barrundia_character_template FROM = 1836.1.1 TO = 1854.8.4 ADULT = 1805.5.12 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = casaus TEMPLATE = uca_ramon_casaus_character_template FROM = 1836.1.1 TO = 1845.11.10 ADULT = 1783.2.13 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = gregorio_salazar TEMPLATE = cafm_gregorio_salazar FROM = 1836.1.1 TO = 1838.2.1 ADULT = 1791.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = carlos_salazar TEMPLATE = cafm_carlos_salazar FROM = 1836.1.1 TO = 1840.6.1 ADULT = 1818.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = galindo TEMPLATE = cafm_juan_galindo FROM = 1836.1.1 TO = 1840.6.1 ADULT = 1820.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = pedro_molina TEMPLATE = cafm_pedro_molina FROM = 1836.1.1 TO = 1850.1.1 ADULT = 1795.4.29 ALL = $ALL$ }
+}
+
+# --- Guatemala (19) ---
+cafm_create_cast_gua = {
+	cafm_create_cast_member = { KEY = galvez TEMPLATE = gua_mariano_galvez_character_template FROM = 1836.1.1 TO = 1838.2.1 ADULT = 1812.5.26 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = mariano_aycinena TEMPLATE = gua_mariano_aycinena_character_template FROM = 1837.1.1 TO = 1850.1.1 ADULT = 1807.9.16 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = carrera TEMPLATE = gua_rafael_carrera_character_template FROM = 1837.6.1 TO = 1865.4.14 ADULT = 1832.10.24 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = rivera_paz TEMPLATE = gua_mariano_rivera_paz_character_template FROM = 1838.1.1 TO = 1850.1.1 ADULT = 1822.12.24 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = larrazabal TEMPLATE = cafm_antonio_larrazabal FROM = 1838.1.1 TO = 1846.1.1 ADULT = 1787.6.18 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = batres TEMPLATE = cafm_luis_batres FROM = 1838.1.1 TO = 1850.1.1 ADULT = 1820.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = valenzuela TEMPLATE = cafm_pedro_valenzuela FROM = 1838.2.1 TO = 1838.7.29 ADULT = 1815.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = juan_jose_aycinena TEMPLATE = cafm_juan_jose_aycinena FROM = 1840.1.1 TO = 1850.1.1 ADULT = 1810.6.29 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = pavon TEMPLATE = cafm_manuel_pavon FROM = 1840.1.1 TO = 1850.1.1 ADULT = 1816.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = garcia_granados TEMPLATE = gua_miguel_garcia_granados_character_template FROM = 1840.1.1 TO = 1878.9.8 ADULT = 1827.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = juan_antonio_martinez_gua TEMPLATE = cafm_juan_antonio_martinez FROM = 1840.1.1 TO = 1851.1.1 ADULT = 1818.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = mariano_paredes_gua TEMPLATE = cafm_mariano_paredes FROM = 1844.1.1 TO = 1851.1.1 ADULT = 1818.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = pedro_aycinena TEMPLATE = gua_pedro_aycinena_character_template FROM = 1845.1.1 TO = 1865.1.1 ADULT = 1820.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = garcia_pelaez TEMPLATE = cafm_francisco_garcia_pelaez FROM = 1846.1.1 TO = 1850.1.1 ADULT = 1803.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = serapio_cruz TEMPLATE = cafm_serapio_cruz FROM = 1848.1.1 TO = 1850.1.1 ADULT = 1828.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = sinibaldi TEMPLATE = gua_alejandro_sinibaldi_character_template FROM = 1850.1.1 TO = 1885.1.1 ADULT = 1843.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = cerna TEMPLATE = gua_vicente_cerna_character_template FROM = 1851.1.1 TO = 1871.6.30 ADULT = 1828.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = justo_rufino_barrios TEMPLATE = gua_barrios_character_template FROM = 1870.1.1 TO = 1885.4.2 ADULT = 1853.7.19 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = barillas TEMPLATE = gua_manuel_lisandro_barillas_character_template FROM = 1880.1.1 TO = 1892.3.15 ADULT = 1863.1.17 ALL = $ALL$ }
+}
+
+# --- Los Altos (7) ---
+cafm_create_cast_alt = {
+	cafm_create_cast_member = { KEY = agustin_guzman TEMPLATE = cafm_agustin_guzman FROM = 1838.1.1 TO = 1848.12.1 ADULT = 1818.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = joaquin_mont TEMPLATE = cafm_joaquin_mont FROM = 1838.1.1 TO = 1840.6.1 ADULT = 1808.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = felix_juarez TEMPLATE = cafm_felix_juarez FROM = 1838.1.1 TO = 1840.6.1 ADULT = 1808.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = sacasa TEMPLATE = cafm_jose_tomas_sacasa FROM = 1838.1.1 TO = 1840.6.1 ADULT = 1808.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = ugarte TEMPLATE = cafm_urbano_ugarte FROM = 1838.1.1 TO = 1840.6.1 ADULT = 1818.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = marcelo_molina TEMPLATE = cafm_marcelo_molina FROM = 1838.2.2 TO = 1840.6.1 ADULT = 1818.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = fernando_antonio_martinez TEMPLATE = cafm_fernando_antonio_martinez FROM = 1848.8.26 TO = 1849.5.8 ADULT = 1818.1.1 ALL = $ALL$ }
+}
+
+# --- El Salvador (14) ---
+cafm_create_cast_els = {
+	cafm_create_cast_member = { KEY = francisco_gomez_els TEMPLATE = els_francisco_gomez_character_template FROM = 1836.1.1 TO = 1838.5.17 ADULT = 1814.8.5 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = vigil TEMPLATE = els_diego_vigil_character_template FROM = 1836.1.1 TO = 1845.1.10 ADULT = 1817.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = timoteo_menendez TEMPLATE = cafm_timoteo_menendez FROM = 1837.1.1 TO = 1840.1.1 ADULT = 1808.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = antonio_jose_canas TEMPLATE = cafm_antonio_jose_canas FROM = 1839.1.1 TO = 1842.1.1 ADULT = 1803.10.26 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = malespin TEMPLATE = els_francisco_malespin_character_template FROM = 1840.1.1 TO = 1846.6.1 ADULT = 1824.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = arce TEMPLATE = cafm_pedro_jose_arce FROM = 1840.1.1 TO = 1850.1.1 ADULT = 1819.8.28 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = gerardo_barrios TEMPLATE = els_gerardo_barrios_character_template FROM = 1840.1.1 TO = 1865.1.1 ADULT = 1831.9.24 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = norberto_ramirez TEMPLATE = cafm_norberto_ramirez FROM = 1840.1.1 TO = 1856.1.1 ADULT = 1820.4.15 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = juan_jose_guzman TEMPLATE = cafm_juan_jose_guzman FROM = 1842.1.1 TO = 1846.1.1 ADULT = 1815.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = viteri TEMPLATE = cafm_jorge_viteri FROM = 1842.1.1 TO = 1850.1.1 ADULT = 1820.4.23 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = joaquin_eufrasio_guzman TEMPLATE = cafm_joaquin_eufrasio_guzman FROM = 1844.1.1 TO = 1851.1.1 ADULT = 1819.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = duenas TEMPLATE = els_francisco_duenas_character_template FROM = 1845.1.1 TO = 1884.3.31 ADULT = 1828.12.3 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = eugenio_aguilar TEMPLATE = cafm_eugenio_aguilar FROM = 1846.1.1 TO = 1850.1.1 ADULT = 1822.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = vasconcelos TEMPLATE = els_doroteo_vasconcelos_character_template FROM = 1846.1.1 TO = 1852.1.1 ADULT = 1821.1.1 ALL = $ALL$ }
+}
+
+# --- Honduras (13) ---
+cafm_create_cast_hon = {
+	cafm_create_cast_member = { KEY = joaquin_rivera TEMPLATE = hon_joaquin_rivera_character_template FROM = 1836.1.1 TO = 1845.1.6 ADULT = 1813.10.20 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = martinez_salinas TEMPLATE = hon_jose_maria_martinez_character_template FROM = 1836.1.1 TO = 1840.1.1 ADULT = 1812.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = dionisio_herrera TEMPLATE = hon_de_herrera_character_template FROM = 1836.1.1 TO = 1850.6.13 ADULT = 1799.10.9 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = cabanas TEMPLATE = hon_cabanas_character_template FROM = 1836.1.1 TO = 1871.1.8 ADULT = 1823.6.9 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = justo_herrera TEMPLATE = hon_justo_jose_herrera_character_template FROM = 1837.1.1 TO = 1840.1.1 ADULT = 1804.7.19 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = juan_francisco_molina TEMPLATE = juan_franscisco_de_molina_character_template FROM = 1838.1.1 TO = 1841.1.1 ADULT = 1797.4.4 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = ferrera TEMPLATE = hon_francisco_ferrera_character_template FROM = 1838.1.1 TO = 1848.1.1 ADULT = 1812.4.4 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = zelaya_ayes TEMPLATE = hon_jose_zelaya_character_template FROM = 1839.1.1 TO = 1842.1.1 ADULT = 1816.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = lindo TEMPLATE = juan_lindo_character_template FROM = 1840.1.1 TO = 1857.4.23 ADULT = 1808.5.16 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = coronado_chavez TEMPLATE = cafm_coronado_chavez FROM = 1841.1.1 TO = 1850.1.1 ADULT = 1825.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = guardiola TEMPLATE = hon_jose_santos_guardiola_character_template FROM = 1844.1.1 TO = 1862.1.11 ADULT = 1834.11.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = marco_aurelio_soto TEMPLATE = hon_marco_aurelio_soto_character_template FROM = 1870.1.1 TO = 1885.1.1 ADULT = 1864.11.13 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = bogran TEMPLATE = hon_bogran_character_template FROM = 1880.1.1 TO = 1895.7.9 ADULT = 1867.6.3 ALL = $ALL$ }
+}
+
+# --- Nicaragua (18) ---
+cafm_create_cast_nic = {
+	cafm_create_cast_member = { KEY = zepeda TEMPLATE = nic_jose_zepeda_character_template FROM = 1836.1.1 TO = 1837.1.25 ADULT = 1802.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = mendiola TEMPLATE = nic_braulio_mendiola_character_template FROM = 1836.1.1 TO = 1837.6.1 ADULT = 1818.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = jose_nunez TEMPLATE = jose_nunez_character_template FROM = 1836.1.1 TO = 1840.1.1 ADULT = 1818.2.2 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = bernardo_mendez TEMPLATE = nic_bernardo_mendez_character_template FROM = 1837.1.1 TO = 1839.6.1 ADULT = 1800.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = patricio_rivas TEMPLATE = cafm_patricio_rivas FROM = 1839.1.1 TO = 1857.1.1 ADULT = 1828.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = joaquin_cossio TEMPLATE = cafm_joaquin_cossio FROM = 1839.1.1 TO = 1841.1.1 ADULT = 1808.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = tomas_valladares TEMPLATE = cafm_tomas_valladares FROM = 1839.1.1 TO = 1841.1.1 ADULT = 1798.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = quijano TEMPLATE = cafm_manuel_quijano FROM = 1839.6.1 TO = 1846.1.1 ADULT = 1819.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = buitrago TEMPLATE = cafm_pablo_buitrago FROM = 1840.1.1 TO = 1845.1.1 ADULT = 1825.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = fruto_chamorro TEMPLATE = nic_fruto_chamorro_character_template FROM = 1840.1.1 TO = 1855.3.12 ADULT = 1822.10.20 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = casto_fonseca TEMPLATE = cafm_casto_fonseca FROM = 1840.1.1 TO = 1845.6.1 ADULT = 1818.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = manuel_perez TEMPLATE = cafm_manuel_perez FROM = 1843.1.1 TO = 1846.1.1 ADULT = 1808.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = leon_sandoval TEMPLATE = cafm_jose_leon_sandoval FROM = 1845.1.1 TO = 1850.1.1 ADULT = 1807.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = trinidad_munoz TEMPLATE = cafm_trinidad_munoz FROM = 1845.1.1 TO = 1851.1.1 ADULT = 1813.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = castellon TEMPLATE = cafm_francisco_castellon FROM = 1845.1.1 TO = 1855.9.2 ADULT = 1833.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = jose_guerrero TEMPLATE = cafm_jose_guerrero FROM = 1846.1.1 TO = 1850.1.1 ADULT = 1817.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = jerez TEMPLATE = nic_maximo_jerez_character_template FROM = 1849.1.1 TO = 1881.1.1 ADULT = 1836.6.8 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = walker TEMPLATE = nic_william_walker_character_template FROM = 1855.6.1 TO = 1857.5.1 ADULT = 1842.5.8 ALL = $ALL$ }
+}
+
+# --- Costa Rica (18) ---
+cafm_create_cast_cos = {
+	cafm_create_cast_member = { KEY = carrillo TEMPLATE = cos_braulio_carrillo_character_template FROM = 1836.1.1 TO = 1845.5.15 ADULT = 1818.3.20 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = juan_mora_fernandez TEMPLATE = cafm_juan_mora_fernandez FROM = 1836.1.1 TO = 1850.1.1 ADULT = 1802.7.12 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = joaquin_mora TEMPLATE = joaquin_mora_character_template FROM = 1836.1.1 TO = 1840.1.1 ADULT = 1804.1.16 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = gallegos TEMPLATE = cafm_jose_rafael_gallegos FROM = 1836.1.1 TO = 1850.1.1 ADULT = 1802.10.9 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = villasenor TEMPLATE = cafm_vicente_villasenor FROM = 1836.1.1 TO = 1842.9.15 ADULT = 1808.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = aguilar_chacon TEMPLATE = cos_manuel_aguilar_character_template FROM = 1837.1.1 TO = 1839.1.1 ADULT = 1815.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = bonilla_nava TEMPLATE = cafm_manuel_antonio_bonilla FROM = 1838.1.1 TO = 1850.1.1 ADULT = 1824.10.15 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = jose_manuel_quiros TEMPLATE = cafm_jose_manuel_quiros FROM = 1838.1.1 TO = 1850.1.1 ADULT = 1818.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = pinto_soares TEMPLATE = cafm_antonio_pinto_soares FROM = 1842.1.1 TO = 1850.1.1 ADULT = 1798.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = pancha_carrasco TEMPLATE = cafm_pancha_carrasco FROM = 1842.1.1 TO = 1856.1.1 ADULT = 1834.4.8 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = alfaro_zamora TEMPLATE = cos_jose_maria_alfaro_character_template FROM = 1842.1.1 TO = 1848.1.1 ADULT = 1817.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = oreamuno TEMPLATE = cafm_francisco_maria_oreamuno FROM = 1843.1.1 TO = 1846.1.1 ADULT = 1819.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = castro_madriz TEMPLATE = cos_castro_character_template FROM = 1844.1.1 TO = 1892.4.4 ADULT = 1836.9.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = rafael_moya TEMPLATE = cafm_rafael_moya FROM = 1844.1.1 TO = 1849.1.1 ADULT = 1817.1.1 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = juan_rafael_mora TEMPLATE = cos_juan_rafael_mora_character_template FROM = 1846.1.1 TO = 1860.9.30 ADULT = 1832.2.8 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = prospero_fernandez TEMPLATE = cos_prospero_fernandez_character_template FROM = 1860.1.1 TO = 1885.3.12 ADULT = 1852.2.18 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = tomas_guardia TEMPLATE = cos_tomas_guardia_character_template FROM = 1870.4.27 TO = 1882.7.6 ADULT = 1849.12.16 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = bernardo_soto TEMPLATE = cos_bernardo_soto_character_template FROM = 1880.1.1 TO = 1890.5.8 ADULT = 1872.2.12 ALL = $ALL$ }
+}
+
+# --- Panamá (Estado del Istmo) (6) ---
+cafm_create_cast_pnm = {
+	cafm_create_cast_member = { KEY = tomas_herrera TEMPLATE = pnm_tomas_de_herrera_character_template FROM = 1840.1.1 TO = 1854.12.4 ADULT = 1822.12.21 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = mariano_arosemena TEMPLATE = cafm_mariano_arosemena FROM = 1840.1.1 TO = 1850.1.1 ADULT = 1812.7.26 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = obaldia TEMPLATE = pnm_jose_de_obaldia_character_template FROM = 1840.1.1 TO = 1860.1.1 ADULT = 1824.7.19 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = justo_arosemena TEMPLATE = pnm_justo_arosemena_character_template FROM = 1845.1.1 TO = 1880.1.1 ADULT = 1835.8.9 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = calvo TEMPLATE = pnm_bartolome_calvo_character_template FROM = 1855.1.1 TO = 1862.1.1 ADULT = 1833.8.24 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = santiago_guardia TEMPLATE = pnm_santiago_guardia_character_template FROM = 1855.1.1 TO = 1859.1.1 ADULT = 1847.1.1 ALL = $ALL$ }
+}
+
+# --- Chiapas (2) ---
+cafm_create_cast_cip = {
+	cafm_create_cast_member = { KEY = joaquin_miguel_gutierrez TEMPLATE = cafm_joaquin_miguel_gutierrez FROM = 1836.1.1 TO = 1838.6.8 ADULT = 1814.8.21 ALL = $ALL$ }
+	cafm_create_cast_member = { KEY = corzo TEMPLATE = cafm_angel_albino_corzo FROM = 1846.1.1 TO = 1875.8.12 ADULT = 1834.3.1 ALL = $ALL$ }
+}

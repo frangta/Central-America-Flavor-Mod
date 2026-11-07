@@ -82,6 +82,7 @@ ca_frca_ai_state_actions = {
 		limit = {
 			ca_frca_ai_dynamic = yes
 			ca_frca_route_federal = yes
+			NOT = { has_global_variable = ca_ai_sgui_works } # CAFM P8: respaldo si la IA no usa la GUI
 		}
 		random = {
 			chance = 25

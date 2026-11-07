@@ -113,6 +113,78 @@ ca_ai_historic_separation_due = {
 		AND = { c:HON ?= this game_date >= 1838.10.26 }
 		AND = { c:COS ?= this game_date >= 1838.11.14 }
 		AND = { c:GUA ?= this game_date >= 1839.4.17 }
-		AND = { c:ELS ?= this game_date >= 1841.2.1 }
+		AND = { c:ELS ?= this game_date >= 1841.2.2 }
+	}
+}
+
+# Z2 (A5): puede ser dependencia (pacto ca_dependency). Los paises centroamericanos
+# y Talamanca: Talamanca no cuenta como centroamericana, pero si puede tener el pacto.
+ca_dependency_valid_target = {
+	OR = {
+		is_ca_culture_country = yes
+		country_has_primary_culture = cu:bribri_talamanca
+		country_has_primary_culture = cu:cabecar
+		country_has_primary_culture = cu:chibchan_central_america
+	}
+}
+
+# Z2 (A7): la unificacion agresiva (GCA) solo despues de la Federacion
+# y, ademas, desde 1850 o con un gobernante unionista o caudillo.
+ca_ai_federation_over = {
+	OR = {
+		NOT = { exists = c:UCA }
+		has_global_variable = ca_dissolution_fired
+		has_global_variable = ca_frca_dissolved_peacefully
+		c:UCA ?= {
+			OR = {
+				has_variable = frca_outcome_d1
+				has_variable = frca_outcome_d2
+				has_variable = frca_lost_war
+			}
+		}
+	}
+}
+ca_ai_unionist_ruler = {
+	ruler ?= {
+		OR = {
+			has_ideology = ideology:ideology_ca_morazanista
+			has_ideology = ideology:ideology_ca_barrismo
+			has_ideology = ideology:ideology_ca_late_unionist
+			has_ideology = ideology:ideology_ca_federalist
+			has_ideology = ideology:ideology_central_america_caudillo
+		}
+	}
+}
+ca_ai_unification_allowed = {
+	ca_ai_federation_over = yes
+	OR = {
+		game_date >= 1850.1.1
+		ca_ai_unionist_ruler = yes
+	}
+}
+
+# Z2 (F): la UCA de la IA puede actuar sobre el estado $TAG$ (eventos ca_frca_ai.1).
+ca_ai_can_act_state = {
+	OR = {
+		AND = {
+			ca_frca_route_federal = yes
+			OR = {
+				AND = {
+					ca_frca_action_possible_campaign = { TAG = $TAG$ }
+					gold_reserves >= ca_federal_campaign_cost
+				}
+				ca_frca_action_possible_negotiate = { TAG = $TAG$ }
+			}
+		}
+		AND = {
+			ca_frca_route_centralist = yes
+			OR = {
+				ca_frca_action_possible_intendant = { TAG = $TAG$ }
+				AND = {
+					ca_frca_action_possible_coopt = { TAG = $TAG$ }
+					gold_reserves >= ca_bribe_caudillo_cost
+				}
+			}
+		}
 	}
 }

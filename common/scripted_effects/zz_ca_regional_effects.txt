@@ -19,6 +19,7 @@ ca_bocas_fate_send = {
 # Nace PNM: pide reconocimiento a la UCA o, si no existe, a Costa Rica con Bocas. Scope: cualquiera.
 ca_isthmus_ask_recognition = {
 	c:PNM ?= { set_variable = { name = ca_pnm_young days = 1825 } }
+	c:PNM ?= { cafm_cast_activate_pnm = yes }	# CAFM Z13: Tomás Herrera al frente del Istmo
 	if = {
 		limit = { exists = c:UCA }
 		c:UCA = { trigger_event = { id = ca_central_america.34 days = 15 } }
@@ -59,6 +60,18 @@ ca_istmo_monthly = {
 		limit = {
 			var:ca_istmo_autonomy >= 100
 			NOT = { c:PNM ?= this }
+			NOT = { has_variable = ca_istmo_crisis }
+			NOT = { has_global_variable = ca_pnm_born }
+		}
+		set_variable = ca_istmo_crisis
+	}
+	# CAFM Z13: en el mundo histórico, el Estado Libre del Istmo nace el 18 nov 1840
+	if = {
+		limit = {
+			has_global_variable = ca_world_historic
+			c:CLM ?= this
+			game_date >= 1840.11.18
+			NOT = { exists = c:PNM }
 			NOT = { has_variable = ca_istmo_crisis }
 			NOT = { has_global_variable = ca_pnm_born }
 		}

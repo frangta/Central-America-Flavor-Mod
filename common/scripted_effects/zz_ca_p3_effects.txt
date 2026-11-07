@@ -18,7 +18,7 @@ ca_fed_congress_open_law = {
 		limit = { has_modifier = ca_federal_paralysis }
 		remove_modifier = ca_federal_paralysis
 		start_enactment = law_type:$LAW$
-		add_modifier = { name = ca_federal_paralysis days = ca_paralysis_days_left }
+		add_modifier = { name = ca_federal_paralysis } #days = ca_paralysis_days_left 
 	}
 	else = {
 		start_enactment = law_type:$LAW$

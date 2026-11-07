@@ -8,9 +8,21 @@ ca_role_support_federation = {
 		ca_role_can_support_federation = yes
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_role_do_support_federation = yes
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+		NOT = { has_variable = ca_role_separatist }
+	}
+	ai_chance = {
+		base = 30
+		modifier = {
+			ig:ig_intelligentsia ?= { is_in_government = yes }
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }
 ca_role_support_confederation = {
 	scope = country
@@ -21,9 +33,20 @@ ca_role_support_confederation = {
 		ca_role_can_support_confederation = yes
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_role_do_support_confederation = yes
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+	}
+	ai_chance = {
+		base = 20
+		modifier = {
+			ig:ig_landowners ?= { is_in_government = yes }
+			add = 10
+		}
+	}
+	ai_frequency = 1
 }
 ca_role_sabotage_federation = {
 	scope = country
@@ -34,9 +57,24 @@ ca_role_sabotage_federation = {
 		ca_role_can_sabotage_federation = yes
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_role_do_sabotage_federation = yes
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+	}
+	ai_chance = {
+		base = 10
+		modifier = {
+			has_variable = ca_carrilo_decret
+			add = 80
+		}
+		modifier = {
+			ig:ig_landowners ?= { is_in_government = yes }
+			add = 20
+		}
+	}
+	ai_frequency = 1
 }
 ca_role_support_centralists = {
 	scope = country
@@ -47,7 +85,18 @@ ca_role_support_centralists = {
 		ca_role_can_support_centralists = yes
 	}
 	effect = {
+		ca_ai_sgui_mark = yes # CAFM P8: marca que la IA usa los scripted_gui
 		ca_role_do_support_centralists = yes
 	}
-	ai_is_valid = { always = no }
+	ai_is_valid = {
+		is_ai = yes
+	}
+	ai_chance = {
+		base = 5
+		modifier = {
+			overlord ?= { has_law_or_variant = law_type:law_state_religion }
+			add = 30
+		}
+	}
+	ai_frequency = 1
 }

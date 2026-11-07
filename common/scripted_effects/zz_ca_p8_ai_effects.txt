@@ -1,0 +1,16 @@
+﻿############################################################################
+# CAFM P8 - La IA usa los botones de la GUI (scripted_gui con ai_is_valid, ai_chance, ai_frequency).
+# La primera vez que la IA pulsa un boton se pone ca_ai_sgui_works: desde ahi se apagan
+# los efectos mensuales de respaldo (ca_frca_ai_state_actions y ca_role_ai_monthly),
+# para que la IA no actue dos veces.
+############################################################################
+ca_ai_sgui_mark = {
+	if = {
+		limit = {
+			is_ai = yes
+			NOT = { has_global_variable = ca_ai_sgui_works }
+		}
+		set_global_variable = ca_ai_sgui_works
+		debug_log = "CAFM P8: la IA usa los scripted_gui; se apagan los efectos de respaldo"
+	}
+}

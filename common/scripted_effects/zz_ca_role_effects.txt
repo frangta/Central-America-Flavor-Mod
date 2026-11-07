@@ -55,7 +55,10 @@ ca_role_do_support_centralists = {
 # La IA usa los botones con los mismos pesos que tenian los scripted_button (una vez al mes, 25 %).
 ca_role_ai_monthly = {
 	if = {
-		limit = { is_ai = yes }
+		limit = {
+			is_ai = yes
+			NOT = { has_global_variable = ca_ai_sgui_works } # CAFM P8: respaldo si la IA no usa la GUI
+		}
 		random = {
 			chance = 25
 			random_list = {

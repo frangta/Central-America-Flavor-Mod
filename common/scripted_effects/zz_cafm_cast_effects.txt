@@ -59,7 +59,10 @@ cafm_spawn_or_transfer = {
 				transfer_character = scope:cafm_cast_target
 			}
 			if = {
-				limit = { always = $RULER$ }
+				limit = {
+					always = $RULER$
+					NOT = { scope:cafm_cast_target.ruler ?= this }	# CAFM Z7: ya gobierna, no se repite
+				}
 				set_character_as_ruler = yes
 			}
 		}
@@ -171,6 +174,7 @@ cafm_cast_activate_gua = {
 	if = {
 		limit = { c:GUA ?= this }		# solo en el propio país (nunca en la UCA)
 		cafm_cast_transfer_from_uca = { CAST = gua }
+		cafm_create_cast_gua = { ALL = no }		# CAFM Z15: crea a los activos en la fecha (zz_cafm_create_cast.txt)
 		cafm_cast_set_ruler_gua = yes
 	}
 }
@@ -178,6 +182,7 @@ cafm_cast_activate_els = {
 	if = {
 		limit = { c:ELS ?= this }		# solo en el propio país (nunca en la UCA)
 		cafm_cast_transfer_from_uca = { CAST = els }
+		cafm_create_cast_els = { ALL = no }		# CAFM Z15: crea a los activos en la fecha (zz_cafm_create_cast.txt)
 		cafm_cast_set_ruler_els = yes
 	}
 }
@@ -185,6 +190,7 @@ cafm_cast_activate_hon = {
 	if = {
 		limit = { c:HON ?= this }		# solo en el propio país (nunca en la UCA)
 		cafm_cast_transfer_from_uca = { CAST = hon }
+		cafm_create_cast_hon = { ALL = no }		# CAFM Z15: crea a los activos en la fecha (zz_cafm_create_cast.txt)
 		cafm_cast_set_ruler_hon = yes
 	}
 }
@@ -192,6 +198,7 @@ cafm_cast_activate_nic = {
 	if = {
 		limit = { c:NIC ?= this }		# solo en el propio país (nunca en la UCA)
 		cafm_cast_transfer_from_uca = { CAST = nic }
+		cafm_create_cast_nic = { ALL = no }		# CAFM Z15: crea a los activos en la fecha (zz_cafm_create_cast.txt)
 		cafm_cast_set_ruler_nic = yes
 	}
 }
@@ -199,6 +206,7 @@ cafm_cast_activate_cos = {
 	if = {
 		limit = { c:COS ?= this }		# solo en el propio país (nunca en la UCA)
 		cafm_cast_transfer_from_uca = { CAST = cos }
+		cafm_create_cast_cos = { ALL = no }		# CAFM Z15: crea a los activos en la fecha (zz_cafm_create_cast.txt)
 		cafm_cast_set_ruler_cos = yes
 	}
 }
@@ -206,6 +214,7 @@ cafm_cast_activate_alt = {
 	if = {
 		limit = { c:ALT ?= this }		# solo en el propio país (nunca en la UCA)
 		cafm_cast_transfer_from_uca = { CAST = alt }
+		cafm_create_cast_alt = { ALL = no }		# CAFM Z15: crea a los activos en la fecha (zz_cafm_create_cast.txt)
 		cafm_cast_set_ruler_alt = yes
 	}
 }
@@ -222,7 +231,9 @@ cafm_cast_activate_alt = {
 # Gálvez 1831–feb 1838 · Valenzuela feb–jul 1838 (P) ·
 # Rivera Paz 29 jul 1838–11 dic 1844 (se omiten los interinatos de Carlos
 # Salazar, ene–abr 1839, y de Venancio López, feb–may 1842) ·
-# Carrera 11 dic 1844–15 ago 1848
+# Carrera 11 dic 1844–16 ago 1848 · CAFM Z7: Juan Antonio Martínez 16 ago 1848–
+# 1 ene 1849 (se funde José Bernardo Escobar, 28 nov 1848–1 ene 1849) ·
+# Mariano Paredes 1 ene 1849–6 nov 1851
 cafm_cast_set_ruler_gua = {
 	if = {
 		limit = { game_date < 1838.2.1 }
@@ -237,19 +248,31 @@ cafm_cast_set_ruler_gua = {
 		cafm_spawn_or_transfer = { KEY = rivera_paz TEMPLATE = gua_mariano_rivera_paz_character_template RULER = yes }
 	}
 	else_if = {
-		limit = { game_date < 1848.8.15 }
+		limit = { game_date < 1848.8.16 }
 		cafm_spawn_or_transfer = { KEY = carrera TEMPLATE = gua_rafael_carrera_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1849.1.1 }
+		cafm_spawn_or_transfer = { KEY = juan_antonio_martinez_gua TEMPLATE = cafm_juan_antonio_martinez RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1851.11.6 }
+		cafm_spawn_or_transfer = { KEY = mariano_paredes_gua TEMPLATE = cafm_mariano_paredes RULER = yes }
 	}
 }
 
 # --- El Salvador ---
 # Francisco Gómez (interino) 15 nov 1835–1 feb 1836 ·
 # Diego Vigil 1 feb 1836–6 ene 1838 (se omite el interinato de Timoteo
-# Menéndez, 23 may–7 jun 1837) · CAFM F6 (tabla 1838–1842):
-# Timoteo Menéndez (interino) 6 ene 1838–23 may 1839 · Antonio José Cañas
-# 23 may–11 jul 1839 · Morazán 11 jul 1839–16 feb 1840 (solo si ya no gobierna
-# la UCA; si no, Cañas) · Cañas 16 feb–20 sep 1840 · Norberto Ramírez
-# 20 sep 1840–7 ene 1841 · Juan Lindo 7 ene 1841–1 feb 1842
+# Menéndez, 23 may–7 jun 1837) · Timoteo Menéndez (interino) 6 ene 1838–23 may 1839 ·
+# Antonio José Cañas 23 may–11 jul 1839 · Morazán 11 jul 1839–16 feb 1840 (solo si
+# ya no gobierna la UCA; si no, Cañas) · Cañas 16 feb–20 sep 1840 (se funde Silva) ·
+# Norberto Ramírez 20 sep 1840–7 ene 1841 · Juan Lindo 7 ene 1841–12 abr 1842 (se
+# funde Marín) · CAFM Z8: Juan José Guzmán 12 abr 1842–1 feb 1844 (se funden
+# Villacorta, Marín, Arce y Palacios) · Francisco Malespín 1 feb–25 oct 1844 (se
+# funde J. E. Guzmán, may–jun 1844) · Joaquín Eufrasio Guzmán 25 oct 1844–21 feb 1846
+# (se funde Palacios) · Eugenio Aguilar 21 feb 1846–7 feb 1848 · Doroteo
+# Vasconcelos 7 feb 1848–12 ene 1851
 cafm_cast_set_ruler_els = {
 	if = {
 		limit = { game_date < 1836.2.1 }
@@ -284,18 +307,39 @@ cafm_cast_set_ruler_els = {
 		cafm_spawn_or_transfer = { KEY = norberto_ramirez TEMPLATE = cafm_norberto_ramirez RULER = yes }
 	}
 	else_if = {
-		limit = { game_date < 1842.2.1 }
+		limit = { game_date < 1842.4.12 }
 		cafm_spawn_or_transfer = { KEY = lindo TEMPLATE = juan_lindo_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1844.2.1 }
+		cafm_spawn_or_transfer = { KEY = juan_jose_guzman TEMPLATE = cafm_juan_jose_guzman RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1844.10.25 }
+		cafm_spawn_or_transfer = { KEY = malespin TEMPLATE = els_francisco_malespin_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1846.2.21 }
+		cafm_spawn_or_transfer = { KEY = joaquin_eufrasio_guzman TEMPLATE = cafm_joaquin_eufrasio_guzman RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1848.2.7 }
+		cafm_spawn_or_transfer = { KEY = eugenio_aguilar TEMPLATE = cafm_eugenio_aguilar RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1851.1.12 }
+		cafm_spawn_or_transfer = { KEY = vasconcelos TEMPLATE = els_doroteo_vasconcelos_character_template RULER = yes }
 	}
 }
 
 # --- Honduras ---
-# Joaquín Rivera hasta el 31 dic 1836 · CAFM F6 (tabla 1837–1842):
-# José María Martínez Salinas (provisional) 1 ene–28 may 1837 · Justo José Herrera
-# 28 may 1837–3 sep 1838 · Martínez Salinas 3 sep 1838–11 ene 1839 (se funde
-# Lino Matute) · Juan Francisco de Molina 11 ene–21 sep 1839 (se funden los
-# interinatos de abr–sep 1839) · Francisco Zelaya y Ayes 21 sep 1839–1 ene 1841 ·
-# Francisco Ferrera 1 ene 1841–1847 (ver cast)
+# Joaquín Rivera hasta el 31 dic 1836 · José María Martínez Salinas (provisional)
+# 1 ene–28 may 1837 · Justo José Herrera 28 may 1837–3 sep 1838 · Martínez Salinas
+# 3 sep 1838–11 ene 1839 (se funde Lino Matute) · Juan Francisco de Molina 11 ene–
+# 21 sep 1839 (se funden los interinatos de abr–sep 1839) · Francisco Zelaya y Ayes
+# 21 sep 1839–1 ene 1841 · CAFM Z9: Francisco Ferrera 1 ene 1841–8 ene 1845 (se funden
+# los Consejos de Ministros) · Coronado Chávez 8 ene 1845–12 feb 1847 · Juan Lindo
+# 12 feb 1847–1 feb 1852
 cafm_cast_set_ruler_hon = {
 	if = {
 		limit = { game_date < 1837.1.1 }
@@ -322,17 +366,31 @@ cafm_cast_set_ruler_hon = {
 		cafm_spawn_or_transfer = { KEY = zelaya_ayes TEMPLATE = hon_jose_zelaya_character_template RULER = yes }
 	}
 	else_if = {
-		limit = { game_date < 1847.1.1 }
+		limit = { game_date < 1845.1.8 }
 		cafm_spawn_or_transfer = { KEY = ferrera TEMPLATE = hon_francisco_ferrera_character_template RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1847.2.12 }
+		cafm_spawn_or_transfer = { KEY = coronado_chavez TEMPLATE = cafm_coronado_chavez RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1852.2.1 }
+		cafm_spawn_or_transfer = { KEY = lindo TEMPLATE = juan_lindo_character_template RULER = yes }
 	}
 }
 
 # --- Nicaragua ---
-# José Zepeda hasta su asesinato (25 ene 1837) · CAFM F6 (tabla 1837–1843):
-# José Núñez 25 ene 1837–5 ene 1839 (se funde Jiménez Rubio) · Evaristo Rocha
-# 5 ene–30 jun 1839 · Joaquín del Cossío 30 jun–20 oct 1839 · Tomás Valladares
-# 20 oct 1839–21 sep 1840 · Patricio Rivas 21 sep 1840–4 mar 1841 · Pablo
-# Buitrago 4 mar 1841–1 abr 1843. (En la Fase 1, Núñez lo pone ca_nicaragua_events.14.)
+# CAFM Z10: fechas de la «Lista cronológica de gobernantes desde 1838» (Fundación
+# Enrique Bolaños). Mandatos de menos de ~3 meses se funden con el anterior.
+# José Zepeda hasta su asesinato (25 ene 1837) · José Núñez 25 ene 1837–5 ene 1839
+# (se funde Evaristo Rocha, may 1838) · Joaquín del Cosío 5 ene–21 nov 1839 (se funden
+# Patricio Rivas e Hilario Ulloa) · Tomás Valladares 21 nov 1839–27 ago 1840 ·
+# Patricio Rivas 27 ago 1840–1 abr 1841 · Pablo Buitrago 1 abr 1841–31 may 1843 (se
+# funde Orozco) · Manuel Pérez 31 may 1843–4 abr 1845 (se funden Madriz, Selva y
+# Sáenz) · José León Sandoval 4 abr 1845–6 abr 1847 (se funden Sandres, H. Zepeda y
+# Morales) · José Guerrero 6 abr 1847–1 abr 1849 (se funden Terán y Rosales) ·
+# Norberto Ramírez 1 abr 1849–1 abr 1851 (se funde Abaúnza).
+# (En la Fase 1, Núñez lo pone ca_nicaragua_events.14.)
 cafm_cast_set_ruler_nic = {
 	if = {
 		limit = {
@@ -346,24 +404,36 @@ cafm_cast_set_ruler_nic = {
 		cafm_spawn_or_transfer = { KEY = jose_nunez TEMPLATE = jose_nunez_character_template RULER = yes }
 	}
 	else_if = {
-		limit = { game_date < 1839.6.30 }
-		cafm_spawn_or_transfer = { KEY = evaristo_rocha TEMPLATE = cafm_evaristo_rocha RULER = yes }
-	}
-	else_if = {
-		limit = { game_date < 1839.10.20 }
+		limit = { game_date < 1839.11.21 }
 		cafm_spawn_or_transfer = { KEY = joaquin_cossio TEMPLATE = cafm_joaquin_cossio RULER = yes }
 	}
 	else_if = {
-		limit = { game_date < 1840.9.21 }
+		limit = { game_date < 1840.8.27 }
 		cafm_spawn_or_transfer = { KEY = tomas_valladares TEMPLATE = cafm_tomas_valladares RULER = yes }
 	}
 	else_if = {
-		limit = { game_date < 1841.3.4 }
+		limit = { game_date < 1841.4.1 }
 		cafm_spawn_or_transfer = { KEY = patricio_rivas TEMPLATE = cafm_patricio_rivas RULER = yes }
 	}
 	else_if = {
-		limit = { game_date < 1843.4.1 }
+		limit = { game_date < 1843.5.31 }
 		cafm_spawn_or_transfer = { KEY = buitrago TEMPLATE = cafm_pablo_buitrago RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1845.4.4 }
+		cafm_spawn_or_transfer = { KEY = manuel_perez TEMPLATE = cafm_manuel_perez RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1847.4.6 }
+		cafm_spawn_or_transfer = { KEY = leon_sandoval TEMPLATE = cafm_jose_leon_sandoval RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1849.4.1 }
+		cafm_spawn_or_transfer = { KEY = jose_guerrero TEMPLATE = cafm_jose_guerrero RULER = yes }
+	}
+	else_if = {
+		limit = { game_date < 1851.4.1 }
+		cafm_spawn_or_transfer = { KEY = norberto_ramirez TEMPLATE = cafm_norberto_ramirez RULER = yes }
 	}
 }
 
@@ -391,7 +461,271 @@ cafm_cast_set_ruler_cos = {
 }
 
 # --- Los Altos ---
-# Marcelo Molina (antes se creaba en línea, sin plantilla) · Fechas: fase Los Altos
+# CAFM Z12: Marcelo Molina, jefe del Estado de Los Altos (2 feb 1838–29 ene 1840) ·
+# Fernando Antonio Martínez, gobierno provisional restaurado (5 sep 1848–8 may 1849).
+# CAFM Z14: Agustín Guzmán, presidente interino al proclamarse la restauración
+# (26 ago–5 sep 1848).
+# Si Los Altos sigue vivo en otras fechas, gobierna Molina.
 cafm_cast_set_ruler_alt = {
-	cafm_spawn_or_transfer = { KEY = marcelo_molina TEMPLATE = cafm_marcelo_molina RULER = yes }
+	if = {
+		limit = {
+			game_date >= 1848.8.26
+			game_date < 1848.9.5
+		}
+		cafm_spawn_or_transfer = { KEY = agustin_guzman TEMPLATE = cafm_agustin_guzman RULER = yes }
+	}
+	else_if = {
+		limit = {
+			game_date >= 1848.9.5
+			game_date < 1849.5.8
+		}
+		cafm_spawn_or_transfer = { KEY = fernando_antonio_martinez TEMPLATE = cafm_fernando_antonio_martinez RULER = yes }
+	}
+	else = {
+		cafm_spawn_or_transfer = { KEY = marcelo_molina TEMPLATE = cafm_marcelo_molina RULER = yes }
+	}
+}
+
+# --- Panamá ---
+# CAFM Z13: Tomás Herrera, jefe del Estado Libre del Istmo (18 nov 1840–31 dic 1841).
+# Si el Istmo nace en otra fecha (camino dinámico), también lo encabeza Herrera hasta 1851.
+cafm_cast_set_ruler_pnm = {
+	if = {
+		limit = { game_date < 1851.1.1 }
+		cafm_spawn_or_transfer = { KEY = tomas_herrera TEMPLATE = pnm_tomas_de_herrera_character_template RULER = yes }
+	}
+}
+
+cafm_cast_activate_pnm = {
+	if = {
+		limit = { c:PNM ?= this }
+		cafm_create_cast_pnm = { ALL = no }		# CAFM Z15
+		cafm_cast_set_ruler_pnm = yes
+	}
+}
+
+# =====================================================================
+# CAFM Z7 — SUCESIÓN HISTÓRICA (pulso mensual, solo IA en modo histórico)
+# La tabla de gobernantes se aplicaba solo al separarse el estado. Ahora,
+# si el mundo es histórico (ca_world_historic) y el país es IA, cada mes se
+# pone al gobernante de la fecha. Nunca toca a un jugador.
+# =====================================================================
+cafm_cast_historic_succession = {
+	if = {
+		limit = {
+			is_ai = yes
+			has_global_variable = ca_world_historic
+		}
+		if = {
+			limit = { c:GUA ?= this }
+			cafm_cast_set_ruler_gua = yes
+		}
+		else_if = {
+			limit = { c:ELS ?= this }
+			cafm_cast_set_ruler_els = yes
+		}
+		else_if = {
+			limit = { c:HON ?= this }
+			cafm_cast_set_ruler_hon = yes
+		}
+		else_if = {
+			limit = { c:NIC ?= this }
+			cafm_cast_set_ruler_nic = yes
+		}
+		else_if = {
+			limit = { c:ALT ?= this }
+			cafm_cast_set_ruler_alt = yes
+		}
+		else_if = {
+			limit = { c:PNM ?= this }
+			cafm_cast_set_ruler_pnm = yes
+		}
+		# CAFM Z14: viajes de los que no gobiernan y muertes fuera de la UCA
+		cafm_cast_historic_travels = yes
+		cafm_cast_world_historical_deaths = yes
+	}
+}
+
+
+# =====================================================================
+# CAFM Z14 — VIAJES DE LOS PERSONAJES QUE NO GOBIERNAN
+# (pulso mensual, solo en el mundo histórico y hacia países IA)
+# Diseño: claude/CAFM_NATIONAL_CAST_1836_1850.md, §5.
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# cafm_cast_move
+# Lleva al país del scope a un personaje que ya existe. No hace nada si:
+#  - murió (cafm_dead_<KEY>);
+#  - gobierna algún país;
+#  - ya está aquí;
+#  - está en el exilio (no está en ningún país);
+#  - lo tiene un jugador.
+#   KEY = clave del registro (cafm_hc_<KEY>)
+# ---------------------------------------------------------------------
+cafm_cast_move = {
+	save_scope_as = cafm_cast_target
+	if = {
+		limit = {
+			NOT = { has_global_variable = cafm_dead_$KEY$ }
+			global_var:cafm_hc_$KEY$ ?= { is_ruler = no }
+			NOT = { any_scope_character = { this = global_var:cafm_hc_$KEY$ } }
+			any_country = {
+				is_ai = yes
+				any_scope_character = { this = global_var:cafm_hc_$KEY$ }
+			}
+		}
+		global_var:cafm_hc_$KEY$ = { transfer_character = scope:cafm_cast_target }
+	}
+}
+
+# ---------------------------------------------------------------------
+# Itinerarios (scope: el país de destino; lo llama cafm_cast_historic_succession)
+# Certeza: V verificado · P en parte (solo el año o la etapa).
+#  Barrundia (UCA): Los Altos tras el triunfo de Carrera (1838, P) · El Salvador
+#    (1839, P) · exilio de abr 1840 (ca_central_america.77) · Guatemala (P; en la
+#    Asamblea en mar 1847) · El Salvador, asilo de Vasconcelos (8 ago 1849, V).
+#  Pedro Molina (UCA): diputado en Guatemala (1838, V) · El Salvador (1839–40; diputado
+#    en 1840, V) · exilio de abr 1840 (.77) · con Morazán en Costa Rica (1842, V) ·
+#    Guatemala hasta su muerte en 1854 (P).
+#  Carlos Salazar (UCA): jefe interino de Guatemala (30 ene–13 abr 1839, V) · El Salvador
+#    (P) · Costa Rica con Morazán (abr 1842, V); muere en San José en 1867.
+#  Cabañas (HON): Costa Rica con Morazán (1842, V) · El Salvador tras la muerte de
+#    Morazán (V, sin fecha exacta) hasta 1851.
+#  Diego Vigil (ELS): sale con Morazán el 8 abr 1840; vive en Granada (V); muere el
+#    10 ene 1845 (V).
+#  Sacasa: sin datos fiables después de 1840; se queda donde esté.
+# ---------------------------------------------------------------------
+cafm_cast_historic_travels = {
+	# --- Los Altos ---
+	if = {
+		limit = { c:ALT ?= this }
+		if = {
+			limit = { game_date >= 1838.8.1 game_date < 1839.3.1 }
+			cafm_cast_move = { KEY = barrundia }
+		}
+	}
+	# --- El Salvador ---
+	else_if = {
+		limit = { c:ELS ?= this }
+		if = {
+			limit = {
+				OR = {
+					AND = { game_date >= 1839.3.1 game_date < 1840.4.8 }
+					AND = { game_date >= 1849.8.8 game_date < 1851.1.1 }
+				}
+			}
+			cafm_cast_move = { KEY = barrundia }
+		}
+		if = {
+			limit = { game_date >= 1839.4.13 game_date < 1840.4.8 }
+			cafm_cast_move = { KEY = pedro_molina }
+			cafm_cast_move = { KEY = carlos_salazar }
+		}
+		if = {
+			limit = { game_date >= 1842.10.1 game_date < 1851.1.1 }
+			cafm_cast_move = { KEY = cabanas }
+		}
+	}
+	# --- Guatemala ---
+	else_if = {
+		limit = { c:GUA ?= this }
+		if = {
+			limit = { game_date >= 1842.6.1 game_date < 1849.8.8 }
+			cafm_cast_move = { KEY = barrundia }
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = { game_date >= 1838.3.1 game_date < 1839.4.13 }
+					AND = { game_date >= 1843.1.1 game_date < 1851.1.1 }
+				}
+			}
+			cafm_cast_move = { KEY = pedro_molina }
+		}
+		if = {
+			limit = { game_date >= 1839.1.30 game_date < 1839.4.13 }
+			cafm_cast_move = { KEY = carlos_salazar }
+		}
+	}
+	# --- Costa Rica ---
+	else_if = {
+		limit = { c:COS ?= this }
+		if = {
+			limit = { game_date >= 1842.4.13 game_date < 1842.9.15 }
+			cafm_cast_move = { KEY = pedro_molina }
+			cafm_cast_move = { KEY = cabanas }
+		}
+		if = {
+			limit = { game_date >= 1842.4.13 game_date < 1851.1.1 }
+			cafm_cast_move = { KEY = carlos_salazar }
+		}
+	}
+	# --- Nicaragua ---
+	else_if = {
+		limit = { c:NIC ?= this }
+		if = {
+			limit = { game_date >= 1840.4.8 game_date < 1845.1.10 }
+			cafm_cast_move = { KEY = vigil }
+		}
+	}
+}
+
+# Muertes históricas fuera de la UCA (scope: el país IA que tiene al personaje)
+cafm_cast_world_historical_deaths = {
+	# Diego Vigil, en Granada (10 ene 1845)
+	if = {
+		limit = { game_date >= 1845.1.10 }
+		cafm_cast_historical_death = { KEY = vigil }
+	}
+	# Agustín Guzmán, herido en el ataque a la Ciudad de Guatemala (oct 1849; día desconocido)
+	if = {
+		limit = { game_date >= 1849.10.1 }
+		cafm_cast_historical_death = { KEY = agustin_guzman }
+	}
+}
+
+
+# =====================================================================
+# CAFM Z14 — LA RESTAURACIÓN DE LOS ALTOS (1848–1849)
+# Scope: GUA (pulso mensual). Solo en el mundo histórico.
+#  26 ago 1848: Quetzaltenango se separa otra vez (ca_los_altos_1848.1, jugador o IA).
+#  8 may 1849: si Guatemala y Los Altos son IA, Guatemala reincorpora Los Altos.
+#  Guzmán pasa antes a Guatemala; su muerte (oct 1849) la lleva el pulso de muertes.
+# =====================================================================
+cafm_altos_1848_pulse = {
+	if = {
+		limit = {
+			c:GUA ?= this
+			has_global_variable = ca_world_historic
+			game_date >= 1848.8.26
+			game_date < 1849.5.8
+			NOT = { exists = c:ALT }
+			NOT = { has_global_variable = ca_altos_1848_fired }
+			p:x42124E.state.owner ?= this
+			p:x78C465.state.owner ?= this
+			p:xD9BEFE.state.owner ?= this
+			p:xBD8628.state.owner ?= this
+		}
+		set_global_variable = ca_altos_1848_fired
+		trigger_event = { id = ca_los_altos_1848.1 popup = yes }
+	}
+	else_if = {
+		limit = {
+			c:GUA ?= this
+			is_ai = yes
+			is_at_war = no
+			has_global_variable = ca_world_historic
+			has_global_variable = ca_altos_1848_fired
+			NOT = { has_global_variable = ca_altos_1848_ended }
+			game_date >= 1849.5.8
+			c:ALT ?= {
+				is_ai = yes
+				is_at_war = no
+			}
+		}
+		set_global_variable = ca_altos_1848_ended
+		cafm_spawn_or_transfer = { KEY = agustin_guzman TEMPLATE = cafm_agustin_guzman RULER = no }
+		annex = c:ALT
+	}
 }

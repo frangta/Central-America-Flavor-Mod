@@ -16,7 +16,11 @@ ca_federal_spectrum_bar = {
 	name = "ca_federal_spectrum_bar_name"
 	desc = "ca_federal_spectrum_bar_desc"
 
-	double_sided_gold = yes
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_bad.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+	marker = yes
 
 	start_value = 0
 	min_value = -50

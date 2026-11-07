@@ -1,0 +1,26 @@
+﻿cafm_clear_era_modifiers = {
+	if = {
+		limit = { has_modifier = cafm_era_rights_of_man }
+		remove_modifier = cafm_era_rights_of_man
+	}
+	if = {
+		limit = { has_modifier = cafm_era_political_ideology }
+		remove_modifier = cafm_era_political_ideology
+	}
+	if = {
+		limit = { has_modifier = cafm_era_state_and_government }
+		remove_modifier = cafm_era_state_and_government
+	}
+	if = {
+		limit = { has_modifier = cafm_era_dreams_of_empire }
+		remove_modifier = cafm_era_dreams_of_empire
+	}
+	if = {
+		limit = { has_modifier = cafm_era_means_of_production }
+		remove_modifier = cafm_era_means_of_production
+	}
+	if = {
+		limit = { has_modifier = cafm_era_flaws_of_democracy }
+		remove_modifier = cafm_era_flaws_of_democracy
+	}
+}

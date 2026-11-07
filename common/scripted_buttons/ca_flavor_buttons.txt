@@ -337,9 +337,9 @@ fund_survey_expedition = {
     }
 
     ai_chance = {
-        base = 10
-        modifier = {
-            trigger = { gold_reserves >= 10000 }
+        value = 10
+        if = {
+            limit = { gold_reserves >= 10000 }
             add = 40
         }
     }
@@ -362,13 +362,8 @@ hire_foreign_geologists = {
     effect = {
         add_treasury = -5000
         
-        # Genera radicales mediante un pop scope
-        every_state_pop = {
-            limit = {
-                is_pop_type = laborers
-            }
-            add_radicals = { value = 0.05 } # Los locales se enojan
-        }
+        # CAFM: los geologos extranjeros enojan a los campesinos (antes every_state_pop, que no existe)
+        add_radicals = { value = 0.05 interest_group = ig:ig_rural_folk }
         
         change_variable = {
             name = ca_survey_progress
@@ -377,10 +372,9 @@ hire_foreign_geologists = {
     }
 
     ai_chance = {
-        base = 5
-        # La IA rara vez tomará esta decisión a menos que tenga muchísimo oro
-        modifier = {
-            trigger = { gold_reserves >= 30000 }
+        value = 5
+        if = {
+            limit = { gold_reserves >= 30000 }
             add = 20
         }
     }

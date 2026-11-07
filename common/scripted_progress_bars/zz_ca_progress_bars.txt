@@ -11,7 +11,11 @@ frca_support_bar = {
 	name = "my_frca_support_bar_name"
 	desc = "my_frca_support_bar_desc"
 	second_desc = "my_frca_support_bar_desc2"
-	double_sided_bad = yes
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_bad.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+	marker = yes
 
 	monthly_progress = {
 		add = ca_frca_monthly_change
@@ -210,22 +214,7 @@ ca_golden_grain_bar = {
 		}
 
 		# 5. Penalización: Falta de Mano de Obra
-		if = {
-			limit = {
-				
-				any_scope_state = {
-					has_building = building_coffee_plantation
-					pop_employment_building = {
-						building = building_coffee_plantation
-						
-					}
-				}
-			}
-			add = {
-				desc = "golden_grain_labor_shortage"
-				value = -2
-			}
-		}
+		# CAFM: quitada. pop_employment_building es un trigger de pop y aquí el scope es un estado.
 	}
 }
 
@@ -234,7 +223,11 @@ federalists_vs_separatists_progress_core_progress_bar = {
 	desc = "federalists_vs_separatists_progress_core_progress_bar_federalists_desc"
 	second_desc = "federalists_vs_separatists_progress_core_progress_bar_separatists_desc"
 
-	double_sided_gold = yes
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_bad.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+	marker = yes
 
 	start_value = 100
 	min_value = 0

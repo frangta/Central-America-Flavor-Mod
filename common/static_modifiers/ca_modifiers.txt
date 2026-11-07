@@ -91,6 +91,7 @@ ca_federal_paralysis = {
 	state_pop_support_movement_liberal_mult = -0.90
 	state_pop_support_movement_radical_mult = -0.90
 	state_pop_support_movement_modernizer_mult = -0.90
+	state_pop_support_movement_religious_majority_mult = -0.90
 	country_legitimacy_govt_size_add = -1
 	political_movement_radicalism_add = 0.30
 }
@@ -158,7 +159,7 @@ ca_military_disarray = {
 }
 
 ca_separatist_agitation_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_unrest_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
 	state_turmoil_effects_mult = 0.20
 	state_radicals_and_loyalists_from_sol_change_mult = 0.15
 }
