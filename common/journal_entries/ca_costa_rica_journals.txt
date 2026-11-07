@@ -22,7 +22,29 @@ je_ca_historic_situation_in_costarica = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
 	group = je_group_historical_content
 
+	activation_description = {
+		always = yes
+	}
+
 	scripted_progress_bar = ca_cos_soberania_bar
+
+	# Mapa del diario: el istmo segun su inestabilidad (gris = fuera del istmo)
+	map_color = {
+		lerp = {
+			min_color = "grey"
+			max_color = "red"
+			factor = ca_jemap_isthmus_unrest
+		}
+	}
+	map_tooltip = {
+		if = {
+			limit = { region = sr:region_central_america }
+			custom_tooltip_no_bullet = CA_JEMAP_ISTHMUS_TT
+		}
+		else = {
+			custom_tooltip_no_bullet = CA_JEMAP_OUTSIDE_TT
+		}
+	}
 
 	#CAFM FIX
 
@@ -67,84 +89,109 @@ je_ca_historic_situation_in_costarica = {
 		}
 	}
 
-	complete = {
-		OR = {
-			# Ruta separatista (Carrillo): la amenaza de Morazan quedo resuelta
-			custom_tooltip = {
-				text = je_ca_historic_situation_in_costarica_goal_carrillo
-				has_variable = ca_cos_cap_d_exito
-			}
-			# Ruta federal: Costa Rica sigue en la Federacion con un gobierno estable
-			custom_tooltip = {
-				text = je_ca_historic_situation_in_costarica_goal_federal
-				has_variable = ca_cos_ruta_federal
-				game_date >= 1840.1.1
-				scope:journal_entry = {
-					scripted_bar_progress = { name = ca_cos_soberania_bar value >= 60 }
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { c:COS ?= this }
+		}
+		effect = {
+			ca_cos_close_mother_effect = yes
+		}
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				# Ruta separatista (Carrillo): la amenaza de Morazan quedo resuelta
+				custom_tooltip = {
+					text = je_ca_historic_situation_in_costarica_goal_carrillo
+					has_variable = ca_cos_cap_d_exito
 				}
+				# Ruta federal: Costa Rica sigue en la Federacion con un gobierno estable
+				custom_tooltip = {
+					text = je_ca_historic_situation_in_costarica_goal_federal
+					has_variable = ca_cos_ruta_federal
+					game_date >= 1840.1.1
+					scope:journal_entry = {
+						scripted_bar_progress = { name = ca_cos_soberania_bar value >= 60 }
+					}
+				}
+			}
+		}
+		effect = {
+			ca_cos_close_mother_effect = yes
+			trigger_event = { id = ca_costa_rica_events.300 popup = yes }
+		}
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			OR = {
+				custom_tooltip = {
+					text = je_ca_historic_situation_in_costarica_fail_colapso
+					scope:journal_entry = {
+						scripted_bar_progress = { name = ca_cos_soberania_bar value <= 0 }
+					}
+				}
+				custom_tooltip = {
+					text = je_ca_historic_situation_in_costarica_fail_morazan
+					has_variable = ca_cos_morazan_victorioso
+				}
+			}
+		}
+		effect = {
+			ca_cos_close_mother_effect = yes
+			# Fracaso gradual: la barra decide cuan grave es la caida
+			if = {
+				limit = {
+					scope:journal_entry = {
+						scripted_bar_progress = { name = ca_cos_soberania_bar value <= 25 }
+					}
+				}
+				# Fracaso grave: la Liga renace
+				trigger_event = { id = ca_costa_rica_events.310 popup = yes }
+			}
+			else = {
+				# Fracaso leve: Morazan gobierna Costa Rica
+				trigger_event = { id = ca_costa_rica_events.320 popup = yes }
 			}
 		}
 	}
 
-	on_complete = {
-		ca_cos_close_mother_effect = yes
-		trigger_event = { id = ca_costa_rica_events.300 popup = yes }
-	}
-
-	fail = {
-		OR = {
-			custom_tooltip = {
-				text = je_ca_historic_situation_in_costarica_fail_colapso
-				scope:journal_entry = {
-					scripted_bar_progress = { name = ca_cos_soberania_bar value <= 0 }
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = JOURNAL_ENTRY_TIMEOUT_CONCLUSION_DESC
+		flags = { timeout }
+		effect = {
+			ca_cos_close_mother_effect = yes
+			# La era de Carrillo termina: empieza la Republica de los cafetaleros
+			if = {
+				limit = {
+					game_date < 1850.6.1
+					NOT = { has_journal_entry = je_ca_cos_republica }
 				}
-			}
-			custom_tooltip = {
-				text = je_ca_historic_situation_in_costarica_fail_morazan
-				has_variable = ca_cos_morazan_victorioso
+				add_journal_entry = { type = je_ca_cos_republica }
 			}
 		}
 	}
 
-	on_fail = {
-		ca_cos_close_mother_effect = yes
-		# Fracaso gradual: la barra decide cuan grave es la caida
-		if = {
-			limit = {
-				scope:journal_entry = {
-					scripted_bar_progress = { name = ca_cos_soberania_bar value <= 25 }
-				}
-			}
-			# Fracaso grave: la Liga renace
-			trigger_event = { id = ca_costa_rica_events.310 popup = yes }
-		}
-		else = {
-			# Fracaso leve: Morazan gobierna Costa Rica
-			trigger_event = { id = ca_costa_rica_events.320 popup = yes }
-		}
-	}
+
+
 
 	# Sobrevive a la caida de la UCA (antes se invalidaba al desaparecer la UCA)
-	invalid = {
-		NOT = { c:COS ?= this }
-	}
-	on_invalid = {
-		ca_cos_close_mother_effect = yes
-	}
 
 	# Fin de la era de Carrillo: ~7 anos desde 1836
 	timeout = 2555
-	on_timeout = {
-		ca_cos_close_mother_effect = yes
-		# La era de Carrillo termina: empieza la Republica de los cafetaleros
-		if = {
-			limit = {
-				game_date < 1850.6.1
-				NOT = { has_journal_entry = je_ca_cos_republica }
-			}
-			add_journal_entry = { type = je_ca_cos_republica }
-		}
-	}
 
 	weight = 200
 	transferable = no
@@ -160,6 +207,17 @@ je_ca_historic_situation_in_costarica = {
 je_ca_pacificacion_norte = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	# Mapa de la frontera norte (gui/ca_pacificacion_map.gui)
+	widget = {
+		gui = "gui/ca_pacificacion_map.gui"
+		name = "ca_pacificacion_map_widget"
+		container = "custom_widget_container_1"
+	}
 
 	progressbar = yes
 	current_value = {
@@ -188,35 +246,53 @@ je_ca_pacificacion_norte = {
 		}
 	}
 
-	complete = {
-		scope:journal_entry = { is_goal_complete = yes }
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { ca_cos_capitulo_valido_trigger = yes }
+		}
+		effect = {
+			remove_variable = ca_crisis_guanacaste_active
+		}
 	}
 
-	on_complete = {
-		remove_variable = ca_crisis_guanacaste_active
-		set_variable = ca_cos_cap_a_exito
-		ca_cos_change_soberania_effect = { VALUE = 20 }
-		# Fase 3 en orden historico: ciudad heroica (3 sep) -> Informe Jimenez (10 sep) -> Maniobra maestra
-		trigger_event = { id = ca_costa_rica_events.10 days = 20 }
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			scope:journal_entry = { is_goal_complete = yes }
+		}
+		effect = {
+			remove_variable = ca_crisis_guanacaste_active
+			set_variable = ca_cos_cap_a_exito
+			ca_cos_change_soberania_effect = { VALUE = 20 }
+			# Fase 3 en orden historico: ciudad heroica (3 sep) -> Informe Jimenez (10 sep) -> Maniobra maestra
+			trigger_event = { id = ca_costa_rica_events.10 days = 20 }
+		}
 	}
 
-	fail = {
-		game_date >= 1837.1.1
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			game_date >= 1837.1.1
+		}
+		effect = {
+			remove_variable = ca_crisis_guanacaste_active
+			set_variable = ca_cos_guanacaste_perdido
+			ca_cos_change_soberania_effect = { VALUE = -30 }
+			trigger_event = { id = ca_costa_rica_events.99 popup = yes }
+		}
 	}
 
-	on_fail = {
-		remove_variable = ca_crisis_guanacaste_active
-		set_variable = ca_cos_guanacaste_perdido
-		ca_cos_change_soberania_effect = { VALUE = -30 }
-		trigger_event = { id = ca_costa_rica_events.99 popup = yes }
-	}
 
-	invalid = {
-		NOT = { ca_cos_capitulo_valido_trigger = yes }
-	}
-	on_invalid = {
-		remove_variable = ca_crisis_guanacaste_active
-	}
+
+
 
 	weight = 150
 	transferable = no
@@ -231,6 +307,10 @@ je_ca_pacificacion_norte = {
 je_ca_cos_bocas_del_toro = {
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
 
 	# Las etapas historicas salen por semana y en orden (ver ca_cos_bocas_beats_effect)
 	on_weekly_pulse = {
@@ -260,53 +340,73 @@ je_ca_cos_bocas_del_toro = {
 		}
 	}
 
-	complete = {
-		OR = {
-			has_variable = ca_epifania_tragica          # 18.a: la Federacion calla
-			has_variable = ca_cos_bocas_apoyo_federal   # 18.b: la Federacion va a la guerra
-			has_variable = ca_cos_bocas_rechazo_temprano # 14.b: la UCA no financia a Galindo
-			has_variable = ca_cos_bocas_renuncia        # 13.b / 162.c: Costa Rica renuncia
-			has_variable = ca_cos_bocas_reclamo_propio  # 162.b: Carrillo responde solo
-			has_variable = ca_cos_bocas_defendida       # 161.b: Paredes se retira
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { ca_cos_capitulo_valido_trigger = yes }
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				has_variable = ca_epifania_tragica          # 18.a: la Federacion calla
+				has_variable = ca_cos_bocas_apoyo_federal   # 18.b: la Federacion va a la guerra
+				has_variable = ca_cos_bocas_rechazo_temprano # 14.b: la UCA no financia a Galindo
+				has_variable = ca_cos_bocas_renuncia        # 13.b / 162.c: Costa Rica renuncia
+				has_variable = ca_cos_bocas_reclamo_propio  # 162.b: Carrillo responde solo
+				has_variable = ca_cos_bocas_defendida       # 161.b: Paredes se retira
+			}
+		}
+		effect = {
+			if = {
+				limit = { has_variable = ca_epifania_tragica }
+				# La humillacion alimenta el orgullo de San Jose frente a la Federacion
+				ca_cos_change_soberania_effect = { VALUE = 10 }
+			}
+			else_if = {
+				limit = { has_variable = ca_cos_bocas_apoyo_federal }
+				# San Jose queda en deuda con la Federacion
+				ca_cos_change_soberania_effect = { VALUE = -10 }
+			}
+			else_if = {
+				limit = { has_variable = ca_cos_bocas_defendida }
+				# El distrito resistio: San Jose sale reforzada
+				ca_cos_change_soberania_effect = { VALUE = 15 }
+			}
+			else_if = {
+				limit = { has_variable = ca_cos_bocas_reclamo_propio }
+				# Carrillo actua sin la Federacion
+				ca_cos_change_soberania_effect = { VALUE = 10 }
+			}
+			else_if = {
+				limit = { has_variable = ca_cos_bocas_renuncia }
+				ca_cos_change_soberania_effect = { VALUE = -5 }
+			}
+			else = {
+				ca_cos_change_soberania_effect = { VALUE = 5 }
+			}
 		}
 	}
 
-	on_complete = {
-		if = {
-			limit = { has_variable = ca_epifania_tragica }
-			# La humillacion alimenta el orgullo de San Jose frente a la Federacion
-			ca_cos_change_soberania_effect = { VALUE = 10 }
-		}
-		else_if = {
-			limit = { has_variable = ca_cos_bocas_apoyo_federal }
-			# San Jose queda en deuda con la Federacion
-			ca_cos_change_soberania_effect = { VALUE = -10 }
-		}
-		else_if = {
-			limit = { has_variable = ca_cos_bocas_defendida }
-			# El distrito resistio: San Jose sale reforzada
-			ca_cos_change_soberania_effect = { VALUE = 15 }
-		}
-		else_if = {
-			limit = { has_variable = ca_cos_bocas_reclamo_propio }
-			# Carrillo actua sin la Federacion
-			ca_cos_change_soberania_effect = { VALUE = 10 }
-		}
-		else_if = {
-			limit = { has_variable = ca_cos_bocas_renuncia }
-			ca_cos_change_soberania_effect = { VALUE = -5 }
-		}
-		else = {
-			ca_cos_change_soberania_effect = { VALUE = 5 }
-		}
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = JOURNAL_ENTRY_TIMEOUT_CONCLUSION_DESC
+		flags = { timeout }
+		effect = { }
 	}
+
 
 	# Si la cadena se corta, el capitulo se cierra solo a inicios de 1838
 	timeout = 700
 
-	invalid = {
-		NOT = { ca_cos_capitulo_valido_trigger = yes }
-	}
 
 	weight = 120
 	transferable = no
@@ -322,6 +422,10 @@ je_ca_cos_urnas_y_cuartel = {
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	group = je_group_historical_content
 
+	activation_description = {
+		always = yes
+	}
+
 	# Las etapas historicas salen por semana y en orden (ver ca_cos_urnas_beats_effect)
 	on_weekly_pulse = {
 		effect = {
@@ -329,46 +433,65 @@ je_ca_cos_urnas_y_cuartel = {
 		}
 	}
 
-	complete = {
-		OR = {
-			has_variable = ca_golpe_josefino_fired   # 20: golpe triunfante
-			has_variable = ca_gobierno_carrillo_2    # 19.b: Carrillo gana en las urnas
-			has_variable = ca_gobierno_arguello      # 19.c: Arguello y alianza federal
-			has_variable = ca_cos_golpe_frustrado    # 330: golpe fallido
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { ca_cos_capitulo_valido_trigger = yes }
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				has_variable = ca_golpe_josefino_fired   # 20: golpe triunfante
+				has_variable = ca_gobierno_carrillo_2    # 19.b: Carrillo gana en las urnas
+				has_variable = ca_gobierno_arguello      # 19.c: Arguello y alianza federal
+				has_variable = ca_cos_golpe_frustrado    # 330: golpe fallido
+			}
+		}
+		effect = {
+			if = {
+				limit = { has_variable = ca_golpe_josefino_fired }
+				set_variable = ca_cos_ruta_separatista
+				ca_cos_change_soberania_effect = { VALUE = 25 }
+			}
+			else_if = {
+				limit = { has_variable = ca_gobierno_carrillo_2 }
+				set_variable = ca_cos_ruta_separatista
+				ca_cos_change_soberania_effect = { VALUE = 15 }
+			}
+			else_if = {
+				limit = { has_variable = ca_gobierno_arguello }
+				set_variable = ca_cos_ruta_federal
+				ca_cos_change_soberania_effect = { VALUE = -10 }
+			}
+			else = {
+				set_variable = ca_cos_ruta_federal
+				ca_cos_change_soberania_effect = { VALUE = -15 }
+			}
 		}
 	}
 
-	on_complete = {
-		if = {
-			limit = { has_variable = ca_golpe_josefino_fired }
-			set_variable = ca_cos_ruta_separatista
-			ca_cos_change_soberania_effect = { VALUE = 25 }
-		}
-		else_if = {
-			limit = { has_variable = ca_gobierno_carrillo_2 }
-			set_variable = ca_cos_ruta_separatista
-			ca_cos_change_soberania_effect = { VALUE = 15 }
-		}
-		else_if = {
-			limit = { has_variable = ca_gobierno_arguello }
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = JOURNAL_ENTRY_TIMEOUT_CONCLUSION_DESC
+		flags = { timeout }
+		effect = {
 			set_variable = ca_cos_ruta_federal
-			ca_cos_change_soberania_effect = { VALUE = -10 }
-		}
-		else = {
-			set_variable = ca_cos_ruta_federal
-			ca_cos_change_soberania_effect = { VALUE = -15 }
 		}
 	}
+
 
 	# Si nada se resolvio para agosto de 1838, Costa Rica sigue en la Federacion
 	timeout = 600
-	on_timeout = {
-		set_variable = ca_cos_ruta_federal
-	}
 
-	invalid = {
-		NOT = { ca_cos_capitulo_valido_trigger = yes }
-	}
 
 	weight = 150
 	transferable = no
@@ -384,6 +507,10 @@ je_ca_cos_regreso_aguila = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	group = je_group_historical_content
 
+	activation_description = {
+		always = yes
+	}
+
 	# Las etapas historicas salen por semana y en orden (ver ca_cos_aguila_beats_effect)
 	on_weekly_pulse = {
 		effect = {
@@ -391,32 +518,59 @@ je_ca_cos_regreso_aguila = {
 		}
 	}
 
-	complete = {
-		OR = {
-			has_variable = ca_morazan_stayed_in_peru  # 203.b: Morazan se queda en Peru
-			has_variable = ca_cos_morazan_derrotado   # 340.a: Carrillo resiste
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { ca_cos_capitulo_valido_trigger = yes }
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				has_variable = ca_morazan_stayed_in_peru  # 203.b: Morazan se queda en Peru
+				has_variable = ca_cos_morazan_derrotado   # 340.a: Carrillo resiste
+			}
+		}
+		effect = {
+			set_variable = ca_cos_cap_d_exito
+			ca_cos_change_soberania_effect = { VALUE = 15 }
 		}
 	}
 
-	on_complete = {
-		set_variable = ca_cos_cap_d_exito
-		ca_cos_change_soberania_effect = { VALUE = 15 }
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			has_variable = ca_cos_morazan_victorioso
+		}
+		effect = { }
 	}
 
-	# 340.b: el ejercito se pasa al Aguila -> falla tambien el diario madre
-	fail = {
-		has_variable = ca_cos_morazan_victorioso
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = JOURNAL_ENTRY_TIMEOUT_CONCLUSION_DESC
+		flags = { timeout }
+		effect = {
+			set_variable = ca_cos_cap_d_exito
+		}
 	}
+
+
+	# 340.b: el ejercito se pasa al Aguila -> falla tambien el diario madre
 
 	# Si Morazan nunca llega, la amenaza se da por superada a mediados de 1842
 	timeout = 1300
-	on_timeout = {
-		set_variable = ca_cos_cap_d_exito
-	}
 
-	invalid = {
-		NOT = { ca_cos_capitulo_valido_trigger = yes }
-	}
 
 	weight = 160
 	transferable = no
@@ -431,6 +585,10 @@ je_ca_cos_caida_morazan = {
 	icon = "gfx/interface/icons/event_icons/event_protest.dds"
 	group = je_group_historical_content
 
+	activation_description = {
+		always = yes
+	}
+
 	scripted_progress_bar = ca_cos_descontento_bar
 
 	#CAFM FIX
@@ -443,21 +601,41 @@ je_ca_cos_caida_morazan = {
 		}
 	}
 
-	complete = {
-		has_variable = ca_cos_revuelta_fired
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { c:COS ?= this }
+		}
+		effect = { }
 	}
 
-	timeout = 365
-	on_timeout = {
-		if = {
-			limit = { NOT = { has_variable = ca_cos_revuelta_fired } }
-			trigger_event = { id = ca_costa_rica_events.350 popup = yes }
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			has_variable = ca_cos_revuelta_fired
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = JOURNAL_ENTRY_TIMEOUT_CONCLUSION_DESC
+		flags = { timeout }
+		effect = {
+			if = {
+				limit = { NOT = { has_variable = ca_cos_revuelta_fired } }
+				trigger_event = { id = ca_costa_rica_events.350 popup = yes }
+			}
 		}
 	}
 
-	invalid = {
-		NOT = { c:COS ?= this }
-	}
+	timeout = 365
+
 
 	weight = 180
 	transferable = no
@@ -474,60 +652,83 @@ je_ca_cos_nueva_liga = {
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 	group = je_group_historical_content
 
+	activation_description = {
+		always = yes
+	}
+
 	scripted_progress_bar = ca_cos_reunificacion_bar
 
 	#CAFM FIX
 
-	complete = {
-		OR = {
-			custom_tooltip = {
-				text = je_ca_cos_nueva_liga_goal_armas
-				NOR = {
-					exists = c:PC8
-					exists = c:PC5
-					exists = c:PC6
-					AND = {
-						exists = c:PC2
-						c:PC2 = { has_variable = ca_cos_ciudad_liga }
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { c:COS ?= this }
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				custom_tooltip = {
+					text = je_ca_cos_nueva_liga_goal_armas
+					NOR = {
+						exists = c:PC8
+						exists = c:PC5
+						exists = c:PC6
+						AND = {
+							exists = c:PC2
+							c:PC2 = { has_variable = ca_cos_ciudad_liga }
+						}
+					}
+				}
+				custom_tooltip = {
+					text = je_ca_cos_nueva_liga_goal_pacto
+					scope:journal_entry = {
+						scripted_bar_progress = { name = ca_cos_reunificacion_bar value >= 100 }
 					}
 				}
 			}
-			custom_tooltip = {
-				text = je_ca_cos_nueva_liga_goal_pacto
-				scope:journal_entry = {
-					scripted_bar_progress = { name = ca_cos_reunificacion_bar value >= 100 }
+		}
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						exists = c:PC8
+						exists = c:PC5
+						exists = c:PC6
+					}
 				}
+				# Quedan ciudades: se reunen por pacto
+				trigger_event = { id = ca_costa_rica_events.360 popup = yes }
+			}
+			else = {
+				# Todas fueron reconquistadas
+				trigger_event = { id = ca_costa_rica_events.361 popup = yes }
 			}
 		}
 	}
 
-	on_complete = {
-		if = {
-			limit = {
-				OR = {
-					exists = c:PC8
-					exists = c:PC5
-					exists = c:PC6
-				}
-			}
-			# Quedan ciudades: se reunen por pacto
-			trigger_event = { id = ca_costa_rica_events.360 popup = yes }
-		}
-		else = {
-			# Todas fueron reconquistadas
-			trigger_event = { id = ca_costa_rica_events.361 popup = yes }
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = JOURNAL_ENTRY_TIMEOUT_CONCLUSION_DESC
+		flags = { timeout }
+		effect = {
+			trigger_event = { id = ca_costa_rica_events.362 popup = yes }
 		}
 	}
+
 
 	# Diez anos sin reunificacion: la fragmentacion se vuelve permanente
 	timeout = 3650
-	on_timeout = {
-		trigger_event = { id = ca_costa_rica_events.362 popup = yes }
-	}
 
-	invalid = {
-		NOT = { c:COS ?= this }
-	}
 
 	weight = 200
 	transferable = no
@@ -710,6 +911,10 @@ je_ca_cos_republica = {
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	group = je_group_historical_content
 
+	activation_description = {
+		always = yes
+	}
+
 	#CAFM FIX
 
 	# Las etapas historicas salen por semana y en orden (ver ca_cos_republica_beats_effect)
@@ -719,18 +924,38 @@ je_ca_cos_republica = {
 		}
 	}
 
-	complete = {
-		has_variable = ca_cos_quiros_1850_fired
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { c:COS ?= this }
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			has_variable = ca_cos_quiros_1850_fired
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = JOURNAL_ENTRY_TIMEOUT_CONCLUSION_DESC
+		flags = { timeout }
+		effect = {
+			set_variable = ca_cos_republica_cerrada
+		}
 	}
 
 	timeout = 3650
-	on_timeout = {
-		set_variable = ca_cos_republica_cerrada
-	}
 
-	invalid = {
-		NOT = { c:COS ?= this }
-	}
 
 	weight = 150
 	transferable = no

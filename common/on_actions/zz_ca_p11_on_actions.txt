@@ -1,0 +1,121 @@
+﻿# CAFM P11: pulsos de los eventos de movimientos, agitadores, revolucion, golpes y bastiones.
+
+on_monthly_pulse_country = {
+	on_actions = {
+		ca_p11_monthly
+		ca_p11_revolution_monthly
+		ca_p11_coup_start_monthly
+		ca_p11_coup_plot_monthly
+	}
+}
+
+on_yearly_pulse_country = {
+	on_actions = { ca_p11_yearly }
+}
+
+# Bastiones (companeros), identidad post-UCA, movimientos y agitadores.
+ca_p11_monthly = {
+	trigger = { ca_p11_country = yes }
+	effect = {
+		ca_sh_refresh_country = yes
+		ca_p11_post_uca_setup = yes
+	}
+	random_events = {
+		150 = 0
+		1 = ca_movement_events.1
+		1 = ca_movement_events.2
+		1 = ca_movement_events.3
+		1 = ca_movement_events.4
+		1 = ca_movement_events.5
+		1 = ca_movement_events.6
+		1 = ca_movement_events.7
+		1 = ca_movement_events.8
+		1 = ca_movement_events.9
+		1 = ca_movement_events.10
+		1 = ca_agitator_events.1
+		1 = ca_agitator_events.2
+		1 = ca_agitator_events.3
+		1 = ca_agitator_events.4
+		1 = ca_agitator_events.5
+		1 = ca_agitator_events.6
+		1 = ca_agitator_events.7
+		1 = ca_agitator_events.8
+	}
+}
+
+# Guerra civil en curso (revolucion federalista/unitaria o secesion).
+ca_p11_revolution_monthly = {
+	trigger = {
+		ca_p11_country = yes
+		any_civil_war = { }
+	}
+	random_events = {
+		8 = 0
+		1 = ca_revolution_events.1
+		1 = ca_revolution_events.2
+		1 = ca_revolution_events.3
+		1 = ca_revolution_events.4
+		1 = ca_revolution_events.5
+		1 = ca_revolution_events.6
+		1 = ca_revolution_events.7
+		1 = ca_revolution_events.8
+		1 = ca_revolution_events.9
+		1 = ca_revolution_events.10
+		1 = ca_revolution_events.11
+		1 = ca_revolution_events.12
+	}
+}
+
+# Arranque de un complot (sin complot en curso).
+ca_p11_coup_start_monthly = {
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_coup_plot }
+	}
+	random_events = {
+		60 = 0
+		1 = ca_coup_events.1
+		1 = ca_coup_events.2
+	}
+}
+
+# Complot en curso: avance mensual y episodios.
+ca_p11_coup_plot_monthly = {
+	trigger = {
+		ca_p11_country = yes
+		has_variable = ca_coup_plot
+	}
+	effect = { ca_p11_coup_tick = yes }
+	random_events = {
+		10 = 0
+		1 = ca_coup_events.3
+		1 = ca_coup_events.4
+		1 = ca_coup_events.5
+		1 = ca_coup_events.6
+		1 = ca_coup_events.7
+	}
+}
+
+# Ciclo anual de los bastiones.
+ca_p11_yearly = {
+	trigger = { ca_p11_country = yes }
+	random_events = {
+		20 = 0
+		1 = ca_stronghold_events.1
+		1 = ca_stronghold_events.2
+		1 = ca_stronghold_events.3
+		1 = ca_stronghold_events.4
+		1 = ca_stronghold_events.5
+		1 = ca_stronghold_events.6
+		1 = ca_stronghold_events.7
+		1 = ca_stronghold_events.8
+		1 = ca_stronghold_events.9
+		1 = ca_stronghold_events.10
+		1 = ca_stronghold_events.11
+		1 = ca_stronghold_events.12
+		1 = ca_stronghold_events.13
+		1 = ca_stronghold_events.14
+		1 = ca_stronghold_events.15
+		1 = ca_stronghold_events.16
+	}
+}

@@ -8,6 +8,10 @@
 je_ca_nic_conspiracy = {
 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
 	#CAFM FIX
 
 	current_value = {
@@ -36,40 +40,58 @@ je_ca_nic_conspiracy = {
 	}
 
 	# Zepeda sobrevive al golpe, o (fuera del modo histórico) llega 1838 sin golpe
-	complete = {
-		OR = {
-			has_variable = nic_zepeda_survived
-			AND = {
-				NOT = { has_variable = nic_historic_mode }
-				game_date >= 1838.1.1
-				var:nic_conspiracy < 100
-			}
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { has_variable = nic_zepeda_murdered }
+			NOT = { has_variable = nic_zepeda_survived }
+			NOT = { ruler ?= { has_variable = is_zepeda } }
+		}
+		effect = {
+			remove_variable = nic_conspiracy
 		}
 	}
 
-	on_complete = {
-		remove_variable = nic_conspiracy
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				has_variable = nic_zepeda_survived
+				AND = {
+					NOT = { has_variable = nic_historic_mode }
+					game_date >= 1838.1.1
+					var:nic_conspiracy < 100
+				}
+			}
+		}
+		effect = {
+			remove_variable = nic_conspiracy
+		}
 	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			has_variable = nic_zepeda_murdered
+		}
+		effect = {
+			remove_variable = nic_conspiracy
+		}
+	}
+
 
 	# Zepeda muere: .13 ya dispara .14 (El vacío de poder)
-	fail = {
-		has_variable = nic_zepeda_murdered
-	}
 
-	on_fail = {
-		remove_variable = nic_conspiracy
-	}
 
 	# Zepeda deja el poder por otra vía (elecciones, otro evento)
-	invalid = {
-		NOT = { has_variable = nic_zepeda_murdered }
-		NOT = { has_variable = nic_zepeda_survived }
-		NOT = { ruler ?= { has_variable = is_zepeda } }
-	}
 
-	on_invalid = {
-		remove_variable = nic_conspiracy
-	}
 
 	on_weekly_pulse = {
 		effect = {

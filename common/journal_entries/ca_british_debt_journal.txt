@@ -19,6 +19,10 @@ je_ca_british_debt = {
 
 	group = je_group_historical_content
 
+	activation_description = {
+		always = yes
+	}
+
 	is_shown_in_lobby = {
 		c:UCA ?= THIS
 	}
@@ -99,43 +103,81 @@ je_ca_british_debt = {
 		}
 	}
 
-	complete = {
-		# Guarda: evita que se complete antes de que immediate ponga el primer tramo
-		has_variable = ca_british_debt_initialized
-		NOT = { has_modifier = modifier_ca_british_debt_repudiated }
-		custom_tooltip = {
-			text = je_ca_british_debt_paid_tt
-			scope:journal_entry = {
-				NOR = {
-					has_modifier = modifier_ca_british_debt_4
-					has_modifier = modifier_ca_british_debt_3
-					has_modifier = modifier_ca_british_debt_2
-					has_modifier = modifier_ca_british_debt_1
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				NOT = { exists = c:GBR }
+				# Si GBR absorbe al deudor como súbdito, la deuda deja de tener sentido
+				is_subject_of = c:GBR
+				# Un sucesor pierde su parte si la Federación se reconstituye
+				AND = {
+					exists = c:UCA
+					NOT = { c:UCA ?= THIS }
 				}
 			}
 		}
-	}
-
-	on_complete = {
-		set_variable = ca_british_debt_closed
-		save_scope_as = ca_debtor_scope
-		trigger_event = { id = ca_british_debt.1 popup = yes }
-		c:GBR ?= { trigger_event = { id = ca_british_debt.2 popup = yes } }
-	}
-
-	fail = {
-		OR = {
-			custom_tooltip = {
-				text = je_ca_british_debt_repudiated_tt
-				has_modifier = modifier_ca_british_debt_repudiated
-			}
-			# CAFM P3: impago (ca_british_debt.14)
-			custom_tooltip = {
-				text = je_ca_british_debt_default_tt
-				has_variable = ca_british_debt_default
-			}
+		effect = {
+			remove_variable = ca_british_debt_initialized
 		}
 	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			# Guarda: evita que se complete antes de que immediate ponga el primer tramo
+			has_variable = ca_british_debt_initialized
+			NOT = { has_modifier = modifier_ca_british_debt_repudiated }
+			custom_tooltip = {
+				text = je_ca_british_debt_paid_tt
+				scope:journal_entry = {
+					NOR = {
+						has_modifier = modifier_ca_british_debt_4
+						has_modifier = modifier_ca_british_debt_3
+						has_modifier = modifier_ca_british_debt_2
+						has_modifier = modifier_ca_british_debt_1
+					}
+				}
+			}
+		}
+		effect = {
+			set_variable = ca_british_debt_closed
+			save_scope_as = ca_debtor_scope
+			trigger_event = { id = ca_british_debt.1 popup = yes }
+			c:GBR ?= { trigger_event = { id = ca_british_debt.2 popup = yes } }
+		}
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			OR = {
+				custom_tooltip = {
+					text = je_ca_british_debt_repudiated_tt
+					has_modifier = modifier_ca_british_debt_repudiated
+				}
+				# CAFM P3: impago (ca_british_debt.14)
+				custom_tooltip = {
+					text = je_ca_british_debt_default_tt
+					has_variable = ca_british_debt_default
+				}
+			}
+		}
+		effect = {
+			set_variable = ca_british_debt_closed
+			save_scope_as = ca_debtor_scope
+			c:GBR ?= { trigger_event = { id = ca_british_debt.6 popup = yes } }
+		}
+	}
+
+
 
 	# CAFM P3 (punto 2): presion de los bonistas y del consul. Cada evento tiene su propio trigger.
 	on_monthly_pulse = {
@@ -158,28 +200,8 @@ je_ca_british_debt = {
 		}
 	}
 
-	on_fail = {
-		set_variable = ca_british_debt_closed
-		save_scope_as = ca_debtor_scope
-		c:GBR ?= { trigger_event = { id = ca_british_debt.6 popup = yes } }
-	}
 
-	invalid = {
-		OR = {
-			NOT = { exists = c:GBR }
-			# Si GBR absorbe al deudor como súbdito, la deuda deja de tener sentido
-			is_subject_of = c:GBR
-			# Un sucesor pierde su parte si la Federación se reconstituye
-			AND = {
-				exists = c:UCA
-				NOT = { c:UCA ?= THIS }
-			}
-		}
-	}
 
-	on_invalid = {
-		remove_variable = ca_british_debt_initialized
-	}
 
 	status_desc = {
 		first_valid = {

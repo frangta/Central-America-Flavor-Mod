@@ -54,10 +54,15 @@ CHARACTERS = {
 			template = uca_ramon_casaus_character_template
 			save_scope_as = cafm_casaus_scope
 		}
-		scope:cafm_casaus_scope = { exile_character = yes }
+		scope:cafm_casaus_scope = { exile_character = { exile_pool = ca_exile_pool } }	# CAFM Z6: no vuelve (muere en La Habana en 1845)
 
-		# Mariano de Aycinena (Terratenientes) está exiliado en Comitán:
-		# vuelve en 1837 por su bloque de uso (cafm_02_gua_characters.txt).
+		# Mariano de Aycinena (Terratenientes) está exiliado en Comitán.
+		# CAFM Z6: empieza en el exilio centroamericano y vuelve solo a los 12 meses (1837)
+		create_character = {
+			template = gua_mariano_aycinena_character_template
+			save_scope_as = cafm_aycinena_scope
+		}
+		scope:cafm_aycinena_scope = { exile_character = { exile_pool = ca_exile_pool months = 12 } }
 
 		# =============================================================
 		# LÍDERES DE LOS ESTADOS (políticos de la UCA)

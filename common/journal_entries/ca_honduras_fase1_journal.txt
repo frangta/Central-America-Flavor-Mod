@@ -10,6 +10,10 @@ je_ca_hon_caudillo = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	group = je_group_historical_content
 
+	activation_description = {
+		always = yes
+	}
+
 	current_value = {
 		value = root.var:hon_caudillo
 	}
@@ -36,33 +40,46 @@ je_ca_hon_caudillo = {
 	}
 
 	# Pespire: el caudillo sale al exilio (lo pone .42 en la Fase 5)
-	complete = {
-		has_variable = hon_pespire
-	}
-
-	on_complete = {
-		remove_variable = hon_caudillo
-		if = {
-			limit = { has_modifier = hon_regimen_comandante }
-			remove_modifier = hon_regimen_comandante
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			has_variable = hon_pespire
 		}
-	}
-
-	# El caudillo perpetuo: 100 desde 1847, o Ferrera acepta en .17 (Fase 5)
-	fail = {
-		OR = {
-			has_variable = hon_caudillo_perpetuo
-			AND = {
-				game_date >= 1847.1.1
-				var:hon_caudillo >= 100
+		effect = {
+			remove_variable = hon_caudillo
+			if = {
+				limit = { has_modifier = hon_regimen_comandante }
+				remove_modifier = hon_regimen_comandante
 			}
 		}
 	}
 
-	on_fail = {
-		set_variable = hon_caudillo_perpetuo
-		set_variable = jefe_supremo_var # F19 (G6): Dictador perpetuo
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			OR = {
+				has_variable = hon_caudillo_perpetuo
+				AND = {
+					game_date >= 1847.1.1
+					var:hon_caudillo >= 100
+				}
+			}
+		}
+		effect = {
+			set_variable = hon_caudillo_perpetuo
+			set_variable = jefe_supremo_var # F19 (G6): Dictador perpetuo
+		}
 	}
+
+
+	# El caudillo perpetuo: 100 desde 1847, o Ferrera acepta en .17 (Fase 5)
+
 
 	on_weekly_pulse = {
 		effect = {

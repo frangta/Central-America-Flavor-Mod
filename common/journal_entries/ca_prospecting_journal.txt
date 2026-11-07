@@ -1,12 +1,19 @@
 ﻿je_ca_national_geological_survey = {
+
+	activation_description = {
+		always = yes
+	}
     icon = "gfx/interface/icons/event_icons/event_map.dds"
     group = je_group_historical_content
    
-    progressbar = ca_prospecting_bar 
+    progressbar = yes
     
 
     current_value = {
         value = root.var:ca_survey_progress
+    }
+    goal_add_value = {
+        add = 100
     }
     possible = {
         is_ca_culture_country = yes
@@ -16,23 +23,29 @@
     
     # (CAFM F22: bloque "active" quitado, no es un campo de diario)
     
-    complete = {
+    outcome = {
+    	header = je_standard_completion_header
+    	effect_header = je_standard_on_completion_header
+    	conclusion_desc = je_standard_completion_conclusion_desc
+    	color = "gold_positive"
+    	trigger = {
 
-        has_variable = ca_survey_progress
-        var:ca_survey_progress >= 100
+	        has_variable = ca_survey_progress
+	        var:ca_survey_progress >= 100
+    	}
+    	effect = {
+  
+	        set_variable = ca_can_build_mines_globally # Ejemplo de variable maestra
+        
+
+	        # trigger_event = { id = ca_prospecting.100 } # CAFM F20: ese evento no existe (la prospeccion queda para la actualizacion)
+    	}
     }
     
 
     scripted_button = "fund_survey_expedition"
     scripted_button = "hire_foreign_geologists"
 
-    on_complete = {
-  
-        set_variable = ca_can_build_mines_globally # Ejemplo de variable maestra
-        
-
-        # trigger_event = { id = ca_prospecting.100 } # CAFM F20: ese evento no existe (la prospeccion queda para la actualizacion)
-    }
     
     weight = 100
-}
+}

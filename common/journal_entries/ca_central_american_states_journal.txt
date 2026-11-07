@@ -3,15 +3,23 @@
 	
 	group = je_group_historical_content	
 
+	activation_description = {
+		always = yes
+	}
+
 	#1
 	
-	complete = {
-		
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { exists = c:UCA }
+		}
+		effect = { }
 	}
+
+
 	
-	fail = {
-		
-	}
 	# CAFM F15 (E1): solo .6 y .8; .3 (Leon contra Granada) es dinamico
 	on_monthly_pulse = {
 		events = {
@@ -25,21 +33,12 @@
 	}
 
 
-	on_fail = {
-		
-	}
 
-	on_complete = {
-		
-	}
 	
 	weight = 100
 	
 	transferable = no
 
-	invalid = {
-		NOT = { exists = c:UCA }
-	}
 	
 }
 
@@ -48,6 +47,10 @@ je_ca_historic_situation_in_talamanca = {
 	# Tres caminos (botones): integrar, conquistar o coexistir. Barra "Influencia en Talamanca" 0-100.
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
 	should_be_pinned_by_default_involved = yes
         should_be_pinned_by_default_uninvolved_or_context = yes
 	immediate = {
@@ -116,34 +119,50 @@ je_ca_historic_situation_in_talamanca = {
 		}
 	}
 
-	complete = {
-		custom_tooltip = {
-			text = je_ca_talamanca_complete_tt
-			var:ca_talamanca_influence >= 100
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { c:RDT ?= { is_subject_of = root } }
 		}
-		custom_tooltip = {
-			text = je_ca_talamanca_path_tt
-			OR = {
-				has_variable = ca_talamanca_path_integrate
-				has_variable = ca_talamanca_path_conquer
-				has_variable = ca_talamanca_path_coexist
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_talamanca_complete_tt
+				var:ca_talamanca_influence >= 100
+			}
+			custom_tooltip = {
+				text = je_ca_talamanca_path_tt
+				OR = {
+					has_variable = ca_talamanca_path_integrate
+					has_variable = ca_talamanca_path_conquer
+					has_variable = ca_talamanca_path_coexist
+				}
 			}
 		}
+		effect = {
+			ca_talamanca_complete = yes
+		}
 	}
 
-	on_complete = {
-		ca_talamanca_complete = yes
-	}
 
-	invalid = {
-		NOT = { c:RDT ?= { is_subject_of = root } }
-	}
 
 	transferable = no
 }
 je_ca_historic_situation_in_elsalvador = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
 
 	# CAFM F15 (E4): los eventos politicos salen en su fecha (antes, pulso anual de todos los paises).
 	# Lo anade ca_els_start_chain al nacer el estado (jugador o IA).
@@ -163,6 +182,10 @@ je_ca_historic_situation_in_elsalvador = {
 je_ca_historic_situation_in_guatemala = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
 
 	# CAFM F15 (E4): los eventos politicos salen en su fecha (antes, pulso anual de todos los paises).
 	# Lo anade ca_gua_start_chain al nacer el estado (jugador o IA).
@@ -184,31 +207,30 @@ je_ca_situation_in_losaltos = {
 	
 	group = je_group_historical_content	
 
-	#1
-	
-	complete = {
-		
-	}
-	
-	fail = {
-		
-	}
-	
-	on_fail = {
-		
+	activation_description = {
+		always = yes
 	}
 
-	on_complete = {
-		
+	#1
+	
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { exists = c:UCA }
+		}
+		effect = { }
 	}
+
+
+	
+	
+
 	
 	weight = 100
 	
 	transferable = no
 
-	invalid = {
-		NOT = { exists = c:UCA }
-	}
 	
 }
 je_ca_historic_situation_in_panama = {
@@ -216,6 +238,10 @@ je_ca_historic_situation_in_panama = {
 	# (Nueva Granada en 1836; PNM si se independiza). Barra "Autonomia del Istmo" 0-100 (ca_istmo_autonomy).
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
 	should_be_pinned_by_default_involved = yes
 
 	immediate = {
@@ -296,33 +322,45 @@ je_ca_historic_situation_in_panama = {
 	}
 
 	# Federal State (1855) o Istmo absorbido (barra 0)
-	complete = {
-		OR = {
-			has_variable = ca_istmo_federal_state
-			custom_tooltip = {
-				text = je_ca_istmo_absorbed_tt
-				AND = {
-					NOT = { c:PNM ?= this }
-					var:ca_istmo_autonomy <= 0
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { ca_isthmus_holder = yes }
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				has_variable = ca_istmo_federal_state
+				custom_tooltip = {
+					text = je_ca_istmo_absorbed_tt
+					AND = {
+						NOT = { c:PNM ?= this }
+						var:ca_istmo_autonomy <= 0
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = { var:ca_istmo_autonomy <= 0 }
+				set_variable = ca_istmo_absorbed
+				every_scope_state = {
+					limit = { state_region = s:STATE_PANAMA }
+					add_modifier = { name = ca_isthmus_absorbed months = 120 }
 				}
 			}
 		}
 	}
 
-	on_complete = {
-		if = {
-			limit = { var:ca_istmo_autonomy <= 0 }
-			set_variable = ca_istmo_absorbed
-			every_scope_state = {
-				limit = { state_region = s:STATE_PANAMA }
-				add_modifier = { name = ca_isthmus_absorbed months = 120 }
-			}
-		}
-	}
 
-	invalid = {
-		NOT = { ca_isthmus_holder = yes }
-	}
 
 	transferable = no
 }
@@ -331,15 +369,23 @@ je_ca_historic_situation_in_honduras = {
 	
 	group = je_group_historical_content	
 
+	activation_description = {
+		always = yes
+	}
+
 	#1
 	
-	complete = {
-		
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { exists = c:UCA }
+		}
+		effect = { }
 	}
+
+
 	
-	fail = {
-		
-	}
 
 	# CAFM Fase 1 (Honduras): eventos de 1836
 	on_monthly_pulse = {
@@ -390,21 +436,12 @@ je_ca_historic_situation_in_honduras = {
 		}
 	}
 	
-	on_fail = {
-		
-	}
 
-	on_complete = {
-		
-	}
 	
 	weight = 100
 	
 	transferable = no
 
-	invalid = {
-		NOT = { exists = c:UCA }
-	}
 	
 }
 
@@ -1105,6 +1142,10 @@ je_ca_soconusco = {
 	# Barra "Centroamerica <-> Mexico" 0-100 (ca_soconusco_bar), movida por las culturas y la lealtad.
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
 	should_be_pinned_by_default_involved = yes
 
 	immediate = {
@@ -1160,44 +1201,63 @@ je_ca_soconusco = {
 		}
 	}
 
-	complete = {
-		custom_tooltip = {
-			text = je_ca_soconusco_complete_tt
-			var:ca_soconusco_bar >= 100
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { c:CIP ?= this }
 		}
-		custom_tooltip = {
-			text = je_ca_soconusco_culture_tt
-			"culture_percent_country(cu:central_american)" >= "culture_percent_country(cu:mexican)"
-		}
+		effect = { }
 	}
 
-	fail = {
-		OR = {
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
 			custom_tooltip = {
-				text = je_ca_soconusco_fail_tt
-				var:ca_soconusco_bar <= 0
+				text = je_ca_soconusco_complete_tt
+				var:ca_soconusco_bar >= 100
 			}
 			custom_tooltip = {
-				text = je_ca_soconusco_mexican_tt
-				"culture_percent_country(cu:mexican)" >= 0.45
+				text = je_ca_soconusco_culture_tt
+				"culture_percent_country(cu:central_american)" >= "culture_percent_country(cu:mexican)"
 			}
-			has_variable = ca_soconusco_irrevocable
+		}
+		effect = {
+			set_variable = ca_soconusco_result_central
+			trigger_event = { id = ca_central_america.5 popup = yes }
 		}
 	}
 
-	on_complete = {
-		set_variable = ca_soconusco_result_central
-		trigger_event = { id = ca_central_america.5 popup = yes }
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			OR = {
+				custom_tooltip = {
+					text = je_ca_soconusco_fail_tt
+					var:ca_soconusco_bar <= 0
+				}
+				custom_tooltip = {
+					text = je_ca_soconusco_mexican_tt
+					"culture_percent_country(cu:mexican)" >= 0.45
+				}
+				has_variable = ca_soconusco_irrevocable
+			}
+		}
+		effect = {
+			set_variable = ca_soconusco_result_mexico
+			trigger_event = { id = ca_central_america.5 popup = yes }
+		}
 	}
 
-	on_fail = {
-		set_variable = ca_soconusco_result_mexico
-		trigger_event = { id = ca_central_america.5 popup = yes }
-	}
 
-	invalid = {
-		NOT = { c:CIP ?= this }
-	}
+
+
 
 	transferable = no
 }

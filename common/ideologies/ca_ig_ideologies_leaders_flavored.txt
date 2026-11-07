@@ -1,5 +1,5 @@
 ﻿ideology_ca_liberal_monarchist = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_royalist.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_liberal_monarchy_leader.dds"
     character_ideology = yes
     
     lawgroup_governance_principles = {
@@ -60,7 +60,7 @@
 }
 
 ideology_ca_unitarian = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/authoritarian.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_centralist_leader.dds"
     character_ideology = yes
 
     lawgroup_ca_state_structure = {
@@ -98,7 +98,7 @@ ideology_ca_unitarian = {
 }
 
 ideology_ca_federalist = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/authoritarian.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_federalist_leader.dds"
     character_ideology = yes
 
     lawgroup_ca_state_structure = {
@@ -136,7 +136,7 @@ ideology_ca_federalist = {
 }
 
 ideology_ca_leader_autocratic_autonomist = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_sovereignist.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_autocratic_autonomist_leader.dds"
     character_ideology = yes
 
     lawgroup_ca_state_structure = {
@@ -199,7 +199,7 @@ ideology_ca_leader_autocratic_autonomist = {
 	}
 }
 ideology_ca_reformer = { 
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_reformer.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_constitution_leader.dds"
 
 	character_ideology = yes
     # Average Progressiveness - 10
@@ -258,7 +258,7 @@ ideology_ca_reformer = {
 	}
 }
 ideology_central_america_caudillo = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/authoritarian.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_caudillo_leader.dds"
     character_ideology = yes
 
 
@@ -326,7 +326,7 @@ ideology_central_america_caudillo = {
 # --------------------------------------------------------------------
 
 ideology_maya_autonomism = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_radical.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_indigenous_leader.dds"
     character_ideology = yes
 
     lawgroup_governance_principles = {
@@ -379,7 +379,7 @@ ideology_maya_autonomism = {
 # --------------------------------------------------------------------
 
 ideology_coffee_liberalism = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_market_liberal.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_coffee_leader.dds"
     character_ideology = yes
 
     lawgroup_distribution_of_power = {
@@ -423,7 +423,7 @@ ideology_coffee_liberalism = {
 }
 
 ideology_cuscatleco_nationalism = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_fascist.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_separatist_leader.dds"
     character_ideology = yes
 
     lawgroup_distribution_of_power = {
@@ -466,7 +466,7 @@ ideology_cuscatleco_nationalism = {
 # --------------------------------------------------------------------
 
 ideology_granadine_legitimism = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/authoritarian.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_servile_leader.dds"
     character_ideology = yes
 
     lawgroup_governance_principles = {
@@ -510,7 +510,7 @@ ideology_granadine_legitimism = {
 }
 
 ideology_anti_imperialist_sovereigntism = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_vanguardist.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_sovereignty_leader.dds"
     character_ideology = yes
 
     lawgroup_trade_policy = {
@@ -548,7 +548,7 @@ ideology_anti_imperialist_sovereigntism = {
 }
 
 ideology_slaver_filibusterism = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_slaver.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_filibuster_leader.dds"
     character_ideology = yes
 
     lawgroup_slavery = {
@@ -591,7 +591,7 @@ ideology_slaver_filibusterism = {
 # --------------------------------------------------------------------
 
 ideology_carrillismo = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_royalist.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_centralist_leader.dds"
     character_ideology = yes
     lawgroup_ca_state_structure = {        
        law_ca_central_american_federal = strongly_disapprove
@@ -638,7 +638,7 @@ ideology_carrillismo = {
 }
 
 ideology_olympus_liberalism = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_positivist.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_technocracy_leader.dds"
     character_ideology = yes
 
     lawgroup_church_and_state = {
@@ -678,7 +678,7 @@ ideology_olympus_liberalism = {
 }
 
 ideology_chacara_social_democracy = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_social_democrat.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_constitution_leader.dds"
     character_ideology = yes
 
     lawgroup_land_reform = {
@@ -725,7 +725,7 @@ ideology_chacara_social_democracy = {
 # --------------------------------------------------------------------
 
 ideology_mercantile_transitism = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_utilitarian.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_enclave_leader.dds"
     character_ideology = yes
 
     lawgroup_trade_policy = {
@@ -767,7 +767,7 @@ ideology_mercantile_transitism = {
 }
 
 ideology_isthmian_separatism = {
-    icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_sovereignist.dds"
+    icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_separatist_leader.dds"
     character_ideology = yes
 
     lawgroup_governance_principles = {
@@ -800,7 +800,7 @@ ideology_isthmian_separatism = {
 }
 #Morazanismo (Liberalismo Radical / Federalismo)
 ideology_ca_morazanista = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_radical.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_morazan_leader.dds"
 	
 	character_ideology = yes
 
@@ -860,7 +860,7 @@ ideology_ca_morazanista = {
 }
 #Filibusterismo Esclavista (Destino Manifiesto Anglo)
 ideology_ca_filibuster = {
-	icon = "gfx/interface/icons/ideology_icons/slaver.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_filibuster_leader.dds"
 	character_ideology = yes
 	
 	lawgroup_slavery = {
@@ -901,7 +901,7 @@ ideology_ca_filibuster = {
 
 #Pan-Hispanismo Imperial (Monarquismo Centroamericano)
 ideology_ca_imperial_monarchist = {
-	icon = "gfx/interface/icons/ideology_icons/royalist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_imperial_monarchy_leader.dds"
 	character_ideology = yes
 
 	lawgroup_governance_principles = {
@@ -940,7 +940,7 @@ ideology_ca_imperial_monarchist = {
 
 #Socialismo Bananero (Comunismo Tropical)
 ideology_ca_banana_socialism = {
-	icon = "gfx/interface/icons/ideology_icons/communist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_banana_socialism_leader.dds"
 	character_ideology = yes
 
 	lawgroup_land_reform = {
@@ -986,7 +986,7 @@ ideology_ca_banana_socialism = {
 
 #Teocracia Jesuita
 ideology_ca_jesuit_theocracy = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_theocrat.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_clergy_leader.dds"
 	character_ideology = yes
 
 	lawgroup_governance_principles = {
@@ -1034,7 +1034,7 @@ ideology_ca_jesuit_theocracy = {
 
 #Imperio Marítimo Miskito (Hegemonía Indígena-Británica)
 ideology_ca_miskito_hegemony = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_ethno_nationalist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_miskito_leader.dds"
 	character_ideology = yes
 
 	lawgroup_governance_principles = {
@@ -1071,7 +1071,7 @@ ideology_ca_miskito_hegemony = {
 
 #Restauración Neo-Maya (Supremacía Indígena)
 ideology_ca_neo_mayan_restoration = {
-	icon = "gfx/interface/icons/ideology_icons/traditionalist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_indigenous_leader.dds"
 	character_ideology = yes
 
 	lawgroup_citizenship = {
@@ -1109,7 +1109,7 @@ ideology_ca_neo_mayan_restoration = {
 
 #Aislacionismo Supremo (El Modelo "Dr. Francia")
 ideology_ca_hermit_isolationism = {
-	icon = "gfx/interface/icons/ideology_icons/authoritarian.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_isolation_leader.dds"
 	character_ideology = yes
 
 	lawgroup_trade_policy = {
@@ -1151,7 +1151,7 @@ ideology_ca_hermit_isolationism = {
 
 #Bonapartismo Tropical (Imperialismo Afrancesado)
 ideology_ca_tropical_bonapartism = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_bonapartist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_militia_leader.dds"
 	character_ideology = yes
 
 	lawgroup_governance_principles = {
@@ -1195,7 +1195,7 @@ ideology_ca_tropical_bonapartism = {
 
 #Utopismo Selvático (Falansterios Europeos)
 ideology_ca_tropical_utopian = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_land_reformer.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_banana_socialism_leader.dds"
 	character_ideology = yes
 
 	lawgroup_economic_system = {
@@ -1243,7 +1243,7 @@ ideology_ca_tropical_utopian = {
 
 #Dictadura Corporativa de la "Compañía del Canal"
 ideology_ca_canal_company_rule = {
-	icon = "gfx/interface/icons/ideology_icons/plutocratic.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_enclave_leader.dds"
 	character_ideology = yes
 
 	lawgroup_distribution_of_power = {
@@ -1293,7 +1293,7 @@ ideology_ca_canal_company_rule = {
 
 #El Culto Sincretista (Milenarismo de la Cruz Parlante)
 ideology_ca_syncretic_cult = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_theocrat.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_clergy_leader.dds"
 	character_ideology = yes
 
 	lawgroup_governance_principles = {
@@ -1338,7 +1338,7 @@ ideology_ca_syncretic_cult = {
 
 #Panamericanismo Bolivariano (Anexión a la Gran Colombia)
 ideology_ca_bolivarian_integration = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_social_democrat.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_unionist_leader.dds"
 	character_ideology = yes
 
 	lawgroup_citizenship = {
@@ -1371,7 +1371,7 @@ ideology_ca_bolivarian_integration = {
 
 #República Corsaria del Caribe (Estado Contrabandista)
 ideology_ca_corsair_republic = {
-	icon = "gfx/interface/icons/ideology_icons/nihilist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_corsair_leader.dds"
 	character_ideology = yes
 
 	lawgroup_trade_policy = {
@@ -1405,7 +1405,7 @@ ideology_ca_corsair_republic = {
 
 #Ludismo Agrario (Destructores de Máquinas)
 ideology_ca_agrarian_luddism = {
-	icon = "gfx/interface/icons/ideology_icons/traditionalist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_isolation_leader.dds"
 	character_ideology = yes
 
 	lawgroup_economic_system = {
@@ -1439,7 +1439,7 @@ ideology_ca_agrarian_luddism = {
 
 #Tecnocracia de los "Científicos"
 ideology_ca_cientifico_technocracy = {
-	icon = "gfx/interface/icons/ideology_icons/vanguardist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_technocracy_leader.dds"
 	character_ideology = yes
 
 	lawgroup_distribution_of_power = {
@@ -1478,7 +1478,7 @@ ideology_ca_cientifico_technocracy = {
 }
 #Unionismo Tardío (Unionismo Diplomático)
 ideology_ca_late_unionist = {
-	icon = "gfx/interface/icons/ideology_icons/reformer.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_unionist_leader.dds"
 	
 	character_ideology = yes
 
@@ -1515,7 +1515,7 @@ ideology_ca_late_unionist = {
 }
 #Caudillismo Campesino (Conservadurismo Popular)
 ideology_ca_peasant_caudillismo = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_land_reformer.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_peasant_leader.dds"
 	
 	character_ideology = yes
 
@@ -1562,7 +1562,7 @@ ideology_ca_peasant_caudillismo = {
 }
 # Pietismo Moravo: misiones moravas en la Mosquitia desde 1849
 ideology_ca_moravian_pietism = {
-	icon = "gfx/interface/icons/ideology_icons/moralist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_clergy_leader.dds"
 	character_ideology = yes
  
 	lawgroup_church_and_state = {
@@ -1602,7 +1602,7 @@ ideology_ca_moravian_pietism = {
  
 # Barrismo: Reforma Liberal autoritaria de Justo Rufino Barrios (Guatemala, 1871)
 ideology_ca_barrismo = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/authoritarian.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_caudillo_leader.dds"
 	character_ideology = yes
  
 	lawgroup_church_and_state = {
@@ -1653,7 +1653,7 @@ ideology_ca_barrismo = {
  
 # Morismo: Juan Rafael Mora y la Campaña Nacional contra Walker (1856-57)
 ideology_ca_morismo = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_sovereignist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_sovereignty_leader.dds"
 	character_ideology = yes
  
 	lawgroup_distribution_of_power = {
@@ -1701,7 +1701,7 @@ ideology_ca_morismo = {
  
 # Reformismo Positivista Hondureño: Marco Aurelio Soto y Ramón Rosa (1876)
 ideology_ca_soto_rosa_reformism = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_positivist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_technocracy_leader.dds"
 	character_ideology = yes
  
 	lawgroup_bureaucracy = {
@@ -1745,7 +1745,7 @@ ideology_ca_soto_rosa_reformism = {
  
 # Anexionismo Mexicano: Chiapas, Soconusco y Los Altos (1822, 1842)
 ideology_ca_mexican_annexationist = {
-	icon = "gfx/interface/icons/ideology_icons/traditionalist.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_mexican_leader.dds"
 	character_ideology = yes
  
 	lawgroup_ca_state_structure = {
@@ -1782,7 +1782,7 @@ ideology_ca_mexican_annexationist = {
  
 # Crucismo: culto de la Cruz Parlante de Chan Santa Cruz (Guerra de Castas, 1847-1901)
 ideology_crucismo = {
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_theocrat.dds"
+	icon = "gfx/interface/icons/ideology_icons/cafm/cafm_ideology_clergy_leader.dds"
 	character_ideology = yes
  
 	lawgroup_governance_principles = {

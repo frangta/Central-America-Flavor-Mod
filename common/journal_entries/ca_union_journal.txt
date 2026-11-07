@@ -7,6 +7,10 @@
 je_ca_confederation = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
 	should_be_pinned_by_default_involved = yes
 
 	immediate = {
@@ -56,58 +60,81 @@ je_ca_confederation = {
 		}
 	}
 
-	complete = {
-		custom_tooltip = {
-			text = je_ca_conf_complete_tt
-			var:ca_conf_cohesion >= 100
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { exists = c:UCA }
 		}
-		custom_tooltip = {
-			text = je_ca_conf_partners_tt
-			ca_confederation_partners_count >= 3
-		}
-		NOT = { ca_conf_war_between_partners = yes }
-		game_date < 1850.1.1
-		NOT = { has_variable = ca_conf_rupture_now }
+		effect = { }
 	}
 
-	fail = {
-		OR = {
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
 			custom_tooltip = {
-				text = je_ca_conf_fail_tt
-				var:ca_conf_cohesion <= 0
+				text = je_ca_conf_complete_tt
+				var:ca_conf_cohesion >= 100
 			}
-			AND = {
-				NOT = { has_variable = ca_conf_grace }
+			custom_tooltip = {
+				text = je_ca_conf_partners_tt
+				ca_confederation_partners_count >= 3
+			}
+			NOT = { ca_conf_war_between_partners = yes }
+			game_date < 1850.1.1
+			NOT = { has_variable = ca_conf_rupture_now }
+		}
+		effect = {
+			ca_conf_consolidated = yes
+		}
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			OR = {
 				custom_tooltip = {
-					text = je_ca_conf_few_partners_tt
-					ca_confederation_partners_count < 2
+					text = je_ca_conf_fail_tt
+					var:ca_conf_cohesion <= 0
+				}
+				AND = {
+					NOT = { has_variable = ca_conf_grace }
+					custom_tooltip = {
+						text = je_ca_conf_few_partners_tt
+						ca_confederation_partners_count < 2
+					}
+				}
+				ca_conf_war_between_partners = yes
+				has_variable = ca_conf_rupture_now
+				custom_tooltip = {
+					text = je_ca_conf_timeout_tt
+					game_date >= 1850.1.1
 				}
 			}
-			ca_conf_war_between_partners = yes
-			has_variable = ca_conf_rupture_now
-			custom_tooltip = {
-				text = je_ca_conf_timeout_tt
-				game_date >= 1850.1.1
-			}
+		}
+		effect = {
+			ca_conf_rupture = yes
 		}
 	}
 
-	on_complete = {
-		ca_conf_consolidated = yes
-	}
 
-	on_fail = {
-		ca_conf_rupture = yes
-	}
 
-	invalid = {
-		NOT = { exists = c:UCA }
-	}
+
 }
 
 je_ca_patria_grande = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 	group = je_group_foreign_affairs
+
+	activation_description = {
+		always = yes
+	}
 	should_be_pinned_by_default_involved = yes
 
 	immediate = {
@@ -173,26 +200,38 @@ je_ca_patria_grande = {
 		}
 	}
 
-	complete = {
-		custom_tooltip = {
-			text = je_ca_patria_grande_unity_tt
-			var:ca_unity >= 100
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				is_subject = yes
+				has_global_variable = ca_reunification_completed
+			}
 		}
-		custom_tooltip = {
-			text = je_ca_patria_grande_states_tt
-			ca_patria_grande_states >= 4
-		}
-		NOT = { ca_patria_grande_ai_blocked = yes }
+		effect = { }
 	}
 
-	on_complete = {
-		ca_patria_grande_complete = yes
-	}
-
-	invalid = {
-		OR = {
-			is_subject = yes
-			has_global_variable = ca_reunification_completed
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_patria_grande_unity_tt
+				var:ca_unity >= 100
+			}
+			custom_tooltip = {
+				text = je_ca_patria_grande_states_tt
+				ca_patria_grande_states >= 4
+			}
+			NOT = { ca_patria_grande_ai_blocked = yes }
+		}
+		effect = {
+			ca_patria_grande_complete = yes
 		}
 	}
+
+
 }

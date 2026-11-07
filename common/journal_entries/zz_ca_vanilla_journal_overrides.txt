@@ -7,8 +7,15 @@
 # Si en tu version vanilla el diario tiene otro nombre, cambia solo la clave.
 # ============================================================================
 TRY_REPLACE:je_reunify_central_america = {
+	disable_evaluation = {
+		always = yes
+	}
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 	group = je_group_foreign_affairs
+
+	activation_description = {
+		always = yes
+	}
 
 	is_shown_when_inactive = {
 		always = no
@@ -18,14 +25,26 @@ TRY_REPLACE:je_reunify_central_america = {
 		always = no
 	}
 
-	invalid = {
-		always = yes
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			always = yes
+		}
+		effect = { }
 	}
 }
 TRY_REPLACE:central_america_falls_apart = {
+	disable_evaluation = {
+		always = yes
+	}
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
 
 		
 	should_be_pinned_by_default_uninvolved_or_context = yes
@@ -38,8 +57,69 @@ TRY_REPLACE:central_america_falls_apart = {
 		always = no
 	}
 
-	invalid = {
-		always = yes
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			always = yes
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			any_scope_state = {
+				state_region = s:STATE_GUATEMALA
+				turmoil < 0.2
+			}
+			any_scope_state = {
+				state_region = s:STATE_GUATEMALA
+				turmoil < 0.2
+			}
+			any_scope_state = {
+				state_region = s:STATE_COSTA_RICA
+				turmoil < 0.2
+			}
+			any_scope_state = {
+				state_region = s:STATE_SAN_SALVADOR
+				turmoil < 0.2
+			}
+			any_scope_state = {
+				state_region = s:STATE_NICARAGUA
+				turmoil < 0.2
+			}
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			custom_tooltip = {
+				text = central_america_fail_tt
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_GUATEMALA
+						state_region = s:STATE_HONDURAS
+						state_region = s:STATE_COSTA_RICA
+						state_region = s:STATE_SAN_SALVADOR
+						state_region = s:STATE_NICARAGUA
+					}
+					count < 3
+				}
+			}
+		}
+		effect = {
+			trigger_event = { id = central_america.2 popup = yes }
+			custom_tooltip = central_america_capital_tt
+		}
 	}
 	on_monthly_pulse = {
 		random_events = {
@@ -48,49 +128,8 @@ TRY_REPLACE:central_america_falls_apart = {
 		}
 	}
 
-	complete = {
-		any_scope_state = {
-			state_region = s:STATE_GUATEMALA
-			turmoil < 0.2
-		}
-		any_scope_state = {
-			state_region = s:STATE_GUATEMALA
-			turmoil < 0.2
-		}
-		any_scope_state = {
-			state_region = s:STATE_COSTA_RICA
-			turmoil < 0.2
-		}
-		any_scope_state = {
-			state_region = s:STATE_SAN_SALVADOR
-			turmoil < 0.2
-		}
-		any_scope_state = {
-			state_region = s:STATE_NICARAGUA
-			turmoil < 0.2
-		}
-	}
 
-	fail = {
-		custom_tooltip = {
-			text = central_america_fail_tt
-			any_scope_state = {
-				OR = {
-					state_region = s:STATE_GUATEMALA
-					state_region = s:STATE_HONDURAS
-					state_region = s:STATE_COSTA_RICA
-					state_region = s:STATE_SAN_SALVADOR
-					state_region = s:STATE_NICARAGUA
-				}
-				count < 3
-			}
-		}
-	}
 
-	on_fail = {
-		trigger_event = { id = central_america.2 popup = yes }
-		custom_tooltip = central_america_capital_tt
-	}
 
 	status_desc = {
 		first_valid = {

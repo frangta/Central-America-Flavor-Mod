@@ -21,6 +21,10 @@ je_historic_central_america_falls_apart = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	group = je_group_historical_content
 
+	activation_description = {
+		always = yes
+	}
+
 	should_be_pinned_by_default_involved = yes
 	should_be_pinned_by_default_uninvolved_or_context = yes
 
@@ -120,7 +124,15 @@ je_historic_central_america_falls_apart = {
 			ca_frca_monthly_update = yes
 			ca_frca_secession_monthly = yes
 			ca_frca_federal_war_check = yes
-			ca_frca_ai_state_actions = yes
+			# Z2 (F): la UCA de la IA usa el minimapa (events/ca_frca_ai_events.txt)
+			if = {
+				limit = { is_ai = yes ca_frca_ai_dynamic = yes }
+				random = { chance = 33 trigger_event = { id = ca_frca_ai.1 } }
+			}
+			if = {
+				limit = { is_ai = yes }
+				random = { chance = 33 trigger_event = { id = ca_frca_ai.2 } }
+			}
 			ca_route_apply_pending_amendments = yes # F11
 			ca_livingston_historic_repeal = yes # F16
 		}
@@ -179,161 +191,191 @@ je_historic_central_america_falls_apart = {
 	}
 
 	# A y B se evaluan el 1845.1.1; C en cuanto se firma la Dieta (solo ruta federal).
-	complete = {
-		OR = {
-			# A. La Republica sobrevive
-			AND = {
-				custom_tooltip = { text = je_frca_outcome_a_tt always = yes }
-				custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
-				custom_tooltip = {
-					text = je_frca_not_won_war_tt
-					NOT = { has_variable = frca_won_war }
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { exists = c:UCA }
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				# A. La Republica sobrevive
+				AND = {
+					custom_tooltip = { text = je_frca_outcome_a_tt always = yes }
+					custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
+					custom_tooltip = {
+						text = je_frca_not_won_war_tt
+						NOT = { has_variable = frca_won_war }
+					}
+					custom_tooltip = {
+						text = je_frca_core_regions_tt
+						ca_frca_holds_core_regions = yes
+					}
+					custom_tooltip = {
+						text = je_frca_bar_threshold_a_tt
+						scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_threshold_a }
+					}
+					custom_tooltip = {
+						text = je_frca_fronts_lost_max_1_tt
+						ca_frca_fronts_lost_count <= 1
+					}
+					is_at_war = no
 				}
-				custom_tooltip = {
-					text = je_frca_core_regions_tt
-					ca_frca_holds_core_regions = yes
+				# B. Union por la espada
+				AND = {
+					custom_tooltip = { text = je_frca_outcome_b_tt always = yes }
+					custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
+					custom_tooltip = {
+						text = uca_won_war_tt
+						has_variable = frca_won_war
+					}
+					custom_tooltip = {
+						text = je_frca_core_regions_tt
+						ca_frca_holds_core_regions = yes
+					}
+					custom_tooltip = {
+						text = je_frca_bar_threshold_b_tt
+						scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_threshold_b }
+					}
+					custom_tooltip = {
+						text = je_frca_fronts_lost_max_2_tt
+						ca_frca_fronts_lost_count <= 2
+					}
 				}
-				custom_tooltip = {
-					text = je_frca_bar_threshold_a_tt
-					scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_threshold_a }
+				# C. La Confederacion (la marca la pone "Convocar la Dieta", F9/F12)
+				AND = {
+					custom_tooltip = { text = je_frca_outcome_c_tt always = yes }
+					custom_tooltip = {
+						text = je_frca_route_federal_tt
+						ca_frca_route_federal = yes
+					}
+					custom_tooltip = {
+						text = je_frca_diet_signed_tt
+						has_variable = frca_diet_signed
+					}
 				}
-				custom_tooltip = {
-					text = je_frca_fronts_lost_max_1_tt
-					ca_frca_fronts_lost_count <= 1
-				}
-				is_at_war = no
 			}
-			# B. Union por la espada
-			AND = {
-				custom_tooltip = { text = je_frca_outcome_b_tt always = yes }
-				custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
+		}
+		effect = {
+			ca_frca_journal_cleanup = yes
+			if = {
+				limit = { has_variable = frca_diet_signed }
+				set_variable = frca_outcome_c
+				ca_frca_outcome_c = yes
+			}
+			else_if = {
+				limit = { has_variable = frca_won_war }
+				set_variable = frca_outcome_b
+				ca_frca_outcome_b = yes
+			}
+			else = {
+				set_variable = frca_outcome_a
+				ca_frca_outcome_a = yes
+			}
+			ca_frca_fire_hook = { HOOK = 5 }
+		}
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			OR = {
 				custom_tooltip = {
-					text = uca_won_war_tt
-					has_variable = frca_won_war
+					text = frca_support_failed_tt
+					scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" <= 0 }
+				}
+				# CAFM F6: con la IA historica, la Federacion sigue hasta "El exilio de Morazan"
+				# aunque los estados se separen y se reconozcan (como en 1838-1840)
+				custom_tooltip = {
+					text = je_frca_fail_independent_tt
+					NOT = { ca_frca_ai_historic = yes }
+					ca_core_states_independent_count >= 3
 				}
 				custom_tooltip = {
-					text = je_frca_core_regions_tt
-					ca_frca_holds_core_regions = yes
+					text = frca_lost_war_tt
+					has_variable = frca_lost_war
 				}
 				custom_tooltip = {
-					text = je_frca_bar_threshold_b_tt
-					scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_threshold_b }
+					text = je_frca_fail_recognized_tt
+					NOT = { ca_frca_ai_historic = yes }
+					ca_frca_core_independence_recognized = yes
 				}
 				custom_tooltip = {
-					text = je_frca_fronts_lost_max_2_tt
-					ca_frca_fronts_lost_count <= 2
+					text = je_frca_fail_exile_tt
+					has_variable = frca_morazan_exiled
 				}
 			}
-			# C. La Confederacion (la marca la pone "Convocar la Dieta", F9/F12)
-			AND = {
-				custom_tooltip = { text = je_frca_outcome_c_tt always = yes }
-				custom_tooltip = {
-					text = je_frca_route_federal_tt
-					ca_frca_route_federal = yes
+		}
+		effect = {
+			set_variable = frca_outcome_d1
+			ca_frca_journal_cleanup = yes
+			activate_law = law_type:law_ca_caudillismo # F13 (A3): D1 trae la era de los caudillos
+			trigger_event = { id = ca_central_america.13 popup = yes }
+			custom_tooltip = central_america_capital_tt
+
+			hidden_effect = {
+				ig:ig_landowners ?= {
+					remove_ideology = ideology_central_american_reactionary
+					add_ideology = ideology_caudillismo
 				}
-				custom_tooltip = {
-					text = je_frca_diet_signed_tt
-					has_variable = frca_diet_signed
+				ig:ig_armed_forces ?= {
+					remove_ideology = ideology_central_american_reactionary
 				}
+				ig:ig_devout ?= {
+					add_ideology = ideology_paternalistic
+					remove_ideology = ideology_central_american_reactionary
+				}
+				remove_variable = is_frca_var
 			}
 		}
 	}
 
-	# D1. Disolucion violenta
-	fail = {
-		OR = {
-			custom_tooltip = {
-				text = frca_support_failed_tt
-				scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" <= 0 }
-			}
-			# CAFM F6: con la IA historica, la Federacion sigue hasta "El exilio de Morazan"
-			# aunque los estados se separen y se reconozcan (como en 1838-1840)
-			custom_tooltip = {
-				text = je_frca_fail_independent_tt
-				NOT = { ca_frca_ai_historic = yes }
-				ca_core_states_independent_count >= 3
-			}
-			custom_tooltip = {
-				text = frca_lost_war_tt
-				has_variable = frca_lost_war
-			}
-			custom_tooltip = {
-				text = je_frca_fail_recognized_tt
-				NOT = { ca_frca_ai_historic = yes }
-				ca_frca_core_independence_recognized = yes
-			}
-			custom_tooltip = {
-				text = je_frca_fail_exile_tt
-				has_variable = frca_morazan_exiled
-			}
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = JOURNAL_ENTRY_TIMEOUT_CONCLUSION_DESC
+		flags = { timeout }
+		effect = {
+			custom_tooltip = je_frca_timeout_d2_tt
+			set_variable = frca_outcome_d2
+			ca_frca_journal_cleanup = yes
+			trigger_event = { id = ca_central_america.122 popup = yes } # La Federacion se desvanece
+			ca_frca_fire_hook = { HOOK = 5 }
 		}
 	}
+
+	# D1. Disolucion violenta
 
 	# Vic3 no tiene anos bisiestos: 1836.1.1 + 3285 dias = 1845.1.1.
 	# Se dejan 7 dias de margen para que A y B se comprueben antes del timeout.
 	timeout = 3292
 
 	# D2. Disolucion pacifica: 1845 sin A ni B y sin la Dieta firmada.
-	on_timeout = {
-		custom_tooltip = je_frca_timeout_d2_tt
-		set_variable = frca_outcome_d2
-		ca_frca_journal_cleanup = yes
-		trigger_event = { id = ca_central_america.122 popup = yes } # La Federacion se desvanece
-		ca_frca_fire_hook = { HOOK = 5 }
-	}
 
-	on_fail = {
-		set_variable = frca_outcome_d1
-		ca_frca_journal_cleanup = yes
-		activate_law = law_type:law_ca_caudillismo # F13 (A3): D1 trae la era de los caudillos
-		trigger_event = { id = ca_central_america.13 popup = yes }
-		custom_tooltip = central_america_capital_tt
 
-		hidden_effect = {
-			ig:ig_landowners ?= {
-				remove_ideology = ideology_central_american_reactionary
-				add_ideology = ideology_caudillismo
-			}
-			ig:ig_armed_forces ?= {
-				remove_ideology = ideology_central_american_reactionary
-			}
-			ig:ig_devout ?= {
-				add_ideology = ideology_paternalistic
-				remove_ideology = ideology_central_american_reactionary
-			}
-			remove_variable = is_frca_var
-		}
-	}
-
-	on_complete = {
-		ca_frca_journal_cleanup = yes
-		if = {
-			limit = { has_variable = frca_diet_signed }
-			set_variable = frca_outcome_c
-			ca_frca_outcome_c = yes
-		}
-		else_if = {
-			limit = { has_variable = frca_won_war }
-			set_variable = frca_outcome_b
-			ca_frca_outcome_b = yes
-		}
-		else = {
-			set_variable = frca_outcome_a
-			ca_frca_outcome_a = yes
-		}
-		ca_frca_fire_hook = { HOOK = 5 }
-	}
 
 	transferable = no
 
-	invalid = {
-		NOT = { exists = c:UCA }
-	}
 }
 
 je_ca_coffee_boom = {
 	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
 	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
 	should_be_pinned_by_default_involved = yes
 	should_be_pinned_by_default_uninvolved_or_context = yes
 
@@ -384,24 +426,36 @@ je_ca_coffee_boom = {
 		}
 	}
 
-	complete = {
-		OR = {
-			has_law_or_variant = law_type:law_land_reform_coffee_oligarchy
-			custom_tooltip = {
-				text = je_ca_coffee_boom_bar_tt
-				var:ca_coffee_bar >= 100
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			is_subject = yes
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				has_law_or_variant = law_type:law_land_reform_coffee_oligarchy
+				custom_tooltip = {
+					text = je_ca_coffee_boom_bar_tt
+					var:ca_coffee_bar >= 100
+				}
 			}
+		}
+		effect = {
+			set_variable = ca_coffee_boom_consolidated
+			trigger_event = { id = ca_coffee_events.2 popup = yes }
 		}
 	}
 
-	on_complete = {
-		set_variable = ca_coffee_boom_consolidated
-		trigger_event = { id = ca_coffee_events.2 popup = yes }
-	}
 
-	invalid = {
-		is_subject = yes
-	}
 }
 
 #je_reunify_central_america = {
@@ -452,6 +506,10 @@ je_ca_coffee_boom = {
 je_ca_state_role_in_federation = {
 	icon = "gfx/interface/icons/event_icons/event_protest.dds"
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
 	should_be_pinned_by_default_involved = yes
 	should_be_pinned_by_default_uninvolved_or_context = yes
 
@@ -530,11 +588,16 @@ je_ca_state_role_in_federation = {
 
 	transferable = no
 
-	invalid = {
-		OR = {
-			NOT = { exists = c:UCA }
-			NOT = { is_subject_of = c:UCA }
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				NOT = { exists = c:UCA }
+				NOT = { is_subject_of = c:UCA }
+			}
 		}
+		effect = { }
 	}
 }
 
@@ -548,6 +611,10 @@ je_ca_state_role_in_federation = {
 je_ca_federalists_vs_separatists_situation = {
 	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
 	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
 	
 	
 	should_be_pinned_by_default_involved = yes
@@ -590,48 +657,67 @@ je_ca_federalists_vs_separatists_situation = {
 		}
 	}
 
-	complete = {
-		OR = {
-			custom_tooltip = {
-				text = je_ca_fvs_complete_tt
-				var:ca_fvs_bar >= 100
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				NOT = { exists = c:UCA }
+				NOT = { is_subject_of = c:UCA }
 			}
-			custom_tooltip = {
-				text = je_ca_fvs_result_beats_tt
-				has_variable = ca_fvs_result_beats
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				custom_tooltip = {
+					text = je_ca_fvs_complete_tt
+					var:ca_fvs_bar >= 100
+				}
+				custom_tooltip = {
+					text = je_ca_fvs_result_beats_tt
+					has_variable = ca_fvs_result_beats
+				}
 			}
+		}
+		effect = {
+			ca_fvs_resolve_self = { RESULT = beats CAUSE = journal }
 		}
 	}
 
-	fail = {
-		OR = {
-			custom_tooltip = {
-				text = je_ca_fvs_fail_tt
-				var:ca_fvs_bar <= 0
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			OR = {
+				custom_tooltip = {
+					text = je_ca_fvs_fail_tt
+					var:ca_fvs_bar <= 0
+				}
+				custom_tooltip = {
+					text = je_ca_fvs_result_falls_tt
+					has_variable = ca_fvs_result_falls
+				}
 			}
-			custom_tooltip = {
-				text = je_ca_fvs_result_falls_tt
-				has_variable = ca_fvs_result_falls
-			}
+		}
+		effect = {
+			ca_fvs_resolve_self = { RESULT = falls CAUSE = journal }
 		}
 	}
 
-	on_complete = {
-		ca_fvs_resolve_self = { RESULT = beats CAUSE = journal }
-	}
 
-	on_fail = {
-		ca_fvs_resolve_self = { RESULT = falls CAUSE = journal }
-	}
+
 
 	transferable = no
 
-	invalid = {
-		OR = {
-			NOT = { exists = c:UCA }
-			NOT = { is_subject_of = c:UCA }
-		}
-	}
 }
 # =========================================================
 # 1. ECONÓMICO: EL BOOM AGROEXPORTADOR
@@ -639,6 +725,10 @@ je_ca_federalists_vs_separatists_situation = {
 je_ca_agro_export_boom = {
 	icon = "gfx/interface/icons/goods_icons/coffee.dds"
 	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
 	should_be_pinned_by_default_involved = yes
 	should_be_pinned_by_default_uninvolved_or_context = yes
 
@@ -675,45 +765,57 @@ je_ca_agro_export_boom = {
 		}
 	}
 
-	complete = {
-		NOT = { has_law_or_variant = law_type:law_isolationism }
-		OR = {
-			AND = {
-				any_scope_building = {
-					is_building_type = building_coffee_plantation
-					level >= 5
-					occupancy > 0.9
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			is_subject = yes
+		}
+		effect = { }
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			NOT = { has_law_or_variant = law_type:law_isolationism }
+			OR = {
+				AND = {
+					any_scope_building = {
+						is_building_type = building_coffee_plantation
+						level >= 5
+						occupancy > 0.9
+					}
+					any_scope_building = {
+						is_building_type = building_banana_plantation
+						level >= 5
+						occupancy > 0.9
+					}
+					any_scope_building = {
+						is_building_type = building_port
+						level >= 5
+						occupancy > 0.9
+					}
 				}
-				any_scope_building = {
-					is_building_type = building_banana_plantation
-					level >= 5
-					occupancy > 0.9
-				}
-				any_scope_building = {
-					is_building_type = building_port
-					level >= 5
-					occupancy > 0.9
+				custom_tooltip = {
+					text = je_ca_agro_export_bar_tt
+					var:ca_agro_bar >= 100
 				}
 			}
-			custom_tooltip = {
-				text = je_ca_agro_export_bar_tt
-				var:ca_agro_bar >= 100
+		}
+		effect = {
+			set_variable = ca_agro_export_miracle_completed
+			trigger_event = { id = ca_economy.1 popup = yes }
+			add_modifier = {
+				name = ca_agro_export_miracle_modifier
+				months = 180
 			}
 		}
 	}
 
-	on_complete = {
-		set_variable = ca_agro_export_miracle_completed
-		trigger_event = { id = ca_economy.1 popup = yes }
-		add_modifier = {
-			name = ca_agro_export_miracle_modifier
-			months = 180
-		}
-	}
 
-	invalid = {
-		is_subject = yes
-	}
 }
 
 # =========================================================
@@ -722,6 +824,10 @@ je_ca_agro_export_boom = {
 je_ca_military_reform = {
 	icon = "gfx/interface/icons/law_icons/professional_army.dds"
 	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
 	should_be_pinned_by_default_involved = yes
 	should_be_pinned_by_default_uninvolved_or_context = yes
 
@@ -763,79 +869,105 @@ je_ca_military_reform = {
 		}
 	}
 
-	complete = {
-		custom_tooltip = {
-			text = je_ca_military_reform_bar_tt
-			var:ca_military_bar >= 100
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			is_subject = yes
 		}
-		OR = {
-			has_law_or_variant = law_type:law_professional_army
-			has_law_or_variant = law_type:law_national_militia
-			has_law_or_variant = law_type:law_mass_conscription
-			has_law = law_type:law_ca_guardia_nacional
-		}
-		has_technology_researched = general_staff
-		# Ningun caudillo como gobernante
-		custom_tooltip = {
-			text = je_ca_military_reform_no_caudillo_ruler_tt
-			NOT = {
-				ruler ?= {
-					OR = {
-						has_ideology = ideology:ideology_central_america_caudillo
-						has_ideology = ideology:ideology_ca_peasant_caudillismo
-						has_ideology = ideology:ideology_ca_tropical_bonapartism
-						has_ideology = ideology:ideology_ca_tropical_utopian
-					}
-				}
-			}
-		}
-		# Ningun grupo caudillista en el gobierno
-		custom_tooltip = {
-			text = je_ca_military_reform_no_caudillo_gov_tt
-			NOT = {
-				any_interest_group = {
-					is_in_government = yes
-					OR = {
-						has_ideology = ideology:ideology_ca_caudillismo_jingoist
-						has_ideology = ideology:ideology_ca_autocratic_autonomist
-						has_ideology = ideology:ideology_caudillismo
-					}
-				}
-			}
-		}
-		ig:ig_armed_forces ?= { is_powerful = no }
+		effect = { }
 	}
 
-	on_complete = {
-		set_variable = ca_military_reform_completed
-		remove_variable = ca_military_reform_active_var
-		trigger_event = { id = ca_military.1 popup = yes }
-		add_modifier = {
-			name = ca_professional_army_bonus_modifier
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_military_reform_bar_tt
+				var:ca_military_bar >= 100
+			}
+			OR = {
+				has_law_or_variant = law_type:law_professional_army
+				has_law_or_variant = law_type:law_national_militia
+				has_law_or_variant = law_type:law_mass_conscription
+				has_law = law_type:law_ca_guardia_nacional
+			}
+			has_technology_researched = general_staff
+			# Ningun caudillo como gobernante
+			custom_tooltip = {
+				text = je_ca_military_reform_no_caudillo_ruler_tt
+				NOT = {
+					ruler ?= {
+						OR = {
+							has_ideology = ideology:ideology_central_america_caudillo
+							has_ideology = ideology:ideology_ca_peasant_caudillismo
+							has_ideology = ideology:ideology_ca_tropical_bonapartism
+							has_ideology = ideology:ideology_ca_tropical_utopian
+						}
+					}
+				}
+			}
+			# Ningun grupo caudillista en el gobierno
+			custom_tooltip = {
+				text = je_ca_military_reform_no_caudillo_gov_tt
+				NOT = {
+					any_interest_group = {
+						is_in_government = yes
+						OR = {
+							has_ideology = ideology:ideology_ca_caudillismo_jingoist
+							has_ideology = ideology:ideology_ca_autocratic_autonomist
+							has_ideology = ideology:ideology_caudillismo
+						}
+					}
+				}
+			}
+			ig:ig_armed_forces ?= { is_powerful = no }
+		}
+		effect = {
+			set_variable = ca_military_reform_completed
+			remove_variable = ca_military_reform_active_var
+			trigger_event = { id = ca_military.1 popup = yes }
+			add_modifier = {
+				name = ca_professional_army_bonus_modifier
+			}
 		}
 	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_military_reform_fail_tt
+				var:ca_caudillo_coups >= 2
+			}
+		}
+		effect = {
+			ca_military_reform_failure = yes
+		}
+	}
+
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = JOURNAL_ENTRY_TIMEOUT_CONCLUSION_DESC
+		flags = { timeout }
+		effect = {
+			ca_military_reform_failure = yes
+		}
+	}
+
 
 	# Fracaso: dos golpes de caudillo, o 30 anos
-	fail = {
-		custom_tooltip = {
-			text = je_ca_military_reform_fail_tt
-			var:ca_caudillo_coups >= 2
-		}
-	}
 
 	timeout = 10950
 
-	on_fail = {
-		ca_military_reform_failure = yes
-	}
 
-	on_timeout = {
-		ca_military_reform_failure = yes
-	}
 
-	invalid = {
-		is_subject = yes
-	}
 }
 
 # =========================================================
@@ -844,6 +976,10 @@ je_ca_military_reform = {
 je_ca_enlightenment = {
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
 	should_be_pinned_by_default_involved = yes
 	should_be_pinned_by_default_uninvolved_or_context = yes
 
@@ -880,32 +1016,38 @@ je_ca_enlightenment = {
 		}
 	}
 
-	complete = {
-		custom_tooltip = {
-			text = je_ca_enlightenment_bar_tt
-			var:ca_enl_bar >= 100
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_enlightenment_bar_tt
+				var:ca_enl_bar >= 100
+			}
+			literacy_rate >= 0.50
+			any_scope_building = {
+				is_building_type = building_university
+				level >= 3
+			}
+			OR = {
+				has_law_or_variant = law_type:law_right_of_assembly
+				has_law_or_variant = law_type:law_protected_speech
+			}
+			OR = {
+				has_law_or_variant = law_type:law_freedom_of_conscience
+				has_law_or_variant = law_type:law_total_separation
+			}
+			ig:ig_intelligentsia ?= { is_in_government = yes }
 		}
-		literacy_rate >= 0.50
-		any_scope_building = {
-			is_building_type = building_university
-			level >= 3
+		effect = {
+			set_variable = ca_enlightenment_completed
+			trigger_event = { id = ca_culture.1 popup = yes }
+			add_modifier = {
+				name = ca_enlightenment_era_modifier
+			}
 		}
-		OR = {
-			has_law_or_variant = law_type:law_right_of_assembly
-			has_law_or_variant = law_type:law_protected_speech
-		}
-		OR = {
-			has_law_or_variant = law_type:law_freedom_of_conscience
-			has_law_or_variant = law_type:law_total_separation
-		}
-		ig:ig_intelligentsia ?= { is_in_government = yes }
 	}
 
-	on_complete = {
-		set_variable = ca_enlightenment_completed
-		trigger_event = { id = ca_culture.1 popup = yes }
-		add_modifier = {
-			name = ca_enlightenment_era_modifier
-		}
-	}
 }

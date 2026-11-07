@@ -2,6 +2,7 @@
 # CAFM — Cast nacional: pulso mensual (fase 1)
 # Muertes históricas de los personajes que siguen en la UCA, solo en
 # modo histórico (variable historic_central_american en la UCA).
+# CAFM Z7: y gobernantes por fecha de los estados (cafm_cast_historic_succession).
 # =====================================================================
 
 on_monthly_pulse_country = {
@@ -17,5 +18,7 @@ cafm_cast_monthly_pulse_country = {
 			}
 			cafm_cast_uca_historical_deaths = yes
 		}
+		# CAFM Z7: sucesión histórica de los estados (solo IA, mundo histórico)
+		cafm_cast_historic_succession = yes
 	}
 }

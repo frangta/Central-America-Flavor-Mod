@@ -1,6 +1,10 @@
 ﻿
 je_annex_subject_overlord = {
 	icon = "gfx/interface/icons/event_icons/event_centralization.dds"
+
+	activation_description = {
+		always = yes
+	}
     group = je_group_internal_affairs
 	immediate = {
 		random_country = {
@@ -51,29 +55,43 @@ je_annex_subject_overlord = {
 
 	progressbar = yes
 
-	complete = {
-		scope:journal_entry = {
-			is_goal_complete = yes
-		}
-	}	
-
-    on_complete = {
-		if = {
-			limit = {
-				exists = scope:annex_target_scope
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			scope:journal_entry = {
+				is_goal_complete = yes
 			}
-			annex = scope:annex_target_scope
 		}
-    }
-
-	fail = {
-		OR = {
-			has_war_with = scope:annex_target_scope
-			scope:annex_target_scope = {
-				NOT = { is_subject_of = ROOT }
+		effect = {
+			if = {
+				limit = {
+					exists = scope:annex_target_scope
+				}
+				annex = scope:annex_target_scope
 			}
 		}
 	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			OR = {
+				has_war_with = scope:annex_target_scope
+				scope:annex_target_scope = {
+					NOT = { is_subject_of = ROOT }
+				}
+			}
+		}
+		effect = { }
+	}
+
+
 
 	status_desc = {
 		first_valid = {
@@ -106,6 +124,10 @@ je_annex_subject_overlord = {
 
 je_annex_subject_junior = {
 	icon = "gfx/interface/icons/event_icons/event_centralization.dds"
+
+	activation_description = {
+		always = yes
+	}
     group = je_group_internal_affairs
 	immediate = {
 		overlord = {
@@ -150,24 +172,38 @@ je_annex_subject_junior = {
 
 	progressbar = yes
 
-	complete = {
-		scope:journal_entry = {
-			is_goal_complete = yes
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			scope:journal_entry = {
+				is_goal_complete = yes
+			}
 		}
-	}	
-
-    on_complete = {
-		overlord = {
-			annex = ROOT
-		}
-    }
-
-	fail = {
-		OR = {
-			has_war_with = overlord
-			NOT = { is_subject_of = scope:overlord_scope }
+		effect = {
+			overlord = {
+				annex = ROOT
+			}
 		}
 	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			OR = {
+				has_war_with = overlord
+				NOT = { is_subject_of = scope:overlord_scope }
+			}
+		}
+		effect = { }
+	}
+
+
 
 	status_desc = {
 		first_valid = {
