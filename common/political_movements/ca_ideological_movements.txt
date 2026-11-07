@@ -30,7 +30,7 @@ movement_ca_liberal = {
         if = {
             limit = {
                 has_law_or_variant = law_type:law_monarchy
-                has_voting_franchise = no
+                country_has_voting_franchise = no
             }
             multiply = 0.1
         }
@@ -405,7 +405,7 @@ movement_ca_reactionary = {
         possible = {
             political_movement_support >= 0.10
             NOT = {
-                any_supporting_interest_group = {
+                any_influenced_interest_group = {
                     is_in_government = yes
                 }
             }

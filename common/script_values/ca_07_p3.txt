@@ -5,38 +5,38 @@
 # Dias que le quedan a ca_federal_paralysis (puesta el 1 ene 1836 con 880 dias: termina el 30 may 1838).
 # Se usa para volver a ponerla tras abrir una ley por evento. Se cuenta desde el final de cada mes,
 # asi que la paralisis puede terminar hasta un mes antes, nunca despues. Minimo 30 dias.
-ca_paralysis_days_left = {
-	value = 30
-	if = { limit = { game_date >= 1836.1.1 game_date < 1836.2.1 } value = 850 }
-	if = { limit = { game_date >= 1836.2.1 game_date < 1836.3.1 } value = 821 }
-	if = { limit = { game_date >= 1836.3.1 game_date < 1836.4.1 } value = 790 }
-	if = { limit = { game_date >= 1836.4.1 game_date < 1836.5.1 } value = 760 }
-	if = { limit = { game_date >= 1836.5.1 game_date < 1836.6.1 } value = 729 }
-	if = { limit = { game_date >= 1836.6.1 game_date < 1836.7.1 } value = 699 }
-	if = { limit = { game_date >= 1836.7.1 game_date < 1836.8.1 } value = 668 }
-	if = { limit = { game_date >= 1836.8.1 game_date < 1836.9.1 } value = 637 }
-	if = { limit = { game_date >= 1836.9.1 game_date < 1836.10.1 } value = 607 }
-	if = { limit = { game_date >= 1836.10.1 game_date < 1836.11.1 } value = 576 }
-	if = { limit = { game_date >= 1836.11.1 game_date < 1836.12.1 } value = 546 }
-	if = { limit = { game_date >= 1836.12.1 game_date < 1837.1.1 } value = 515 }
-	if = { limit = { game_date >= 1837.1.1 game_date < 1837.2.1 } value = 484 }
-	if = { limit = { game_date >= 1837.2.1 game_date < 1837.3.1 } value = 456 }
-	if = { limit = { game_date >= 1837.3.1 game_date < 1837.4.1 } value = 425 }
-	if = { limit = { game_date >= 1837.4.1 game_date < 1837.5.1 } value = 395 }
-	if = { limit = { game_date >= 1837.5.1 game_date < 1837.6.1 } value = 364 }
-	if = { limit = { game_date >= 1837.6.1 game_date < 1837.7.1 } value = 334 }
-	if = { limit = { game_date >= 1837.7.1 game_date < 1837.8.1 } value = 303 }
-	if = { limit = { game_date >= 1837.8.1 game_date < 1837.9.1 } value = 272 }
-	if = { limit = { game_date >= 1837.9.1 game_date < 1837.10.1 } value = 242 }
-	if = { limit = { game_date >= 1837.10.1 game_date < 1837.11.1 } value = 211 }
-	if = { limit = { game_date >= 1837.11.1 game_date < 1837.12.1 } value = 181 }
-	if = { limit = { game_date >= 1837.12.1 game_date < 1838.1.1 } value = 150 }
-	if = { limit = { game_date >= 1838.1.1 game_date < 1838.2.1 } value = 119 }
-	if = { limit = { game_date >= 1838.2.1 game_date < 1838.3.1 } value = 91 }
-	if = { limit = { game_date >= 1838.3.1 game_date < 1838.4.1 } value = 60 }
-	if = { limit = { game_date >= 1838.4.1 game_date < 1838.5.1 } value = 30 }
-	if = { limit = { game_date >= 1838.5.1 game_date < 1838.6.1 } value = 30 }
-}
+#ca_paralysis_days_left = {
+#	value = 30
+#	if = { limit = { game_date >= 1836.1.1 game_date < 1836.2.1 } value = 850 }
+#	if = { limit = { game_date >= 1836.2.1 game_date < 1836.3.1 } value = 821 }
+#	if = { limit = { game_date >= 1836.3.1 game_date < 1836.4.1 } value = 790 }
+#	if = { limit = { game_date >= 1836.4.1 game_date < 1836.5.1 } value = 760 }
+#	if = { limit = { game_date >= 1836.5.1 game_date < 1836.6.1 } value = 729 }
+#	if = { limit = { game_date >= 1836.6.1 game_date < 1836.7.1 } value = 699 }
+#	if = { limit = { game_date >= 1836.7.1 game_date < 1836.8.1 } value = 668 }
+#	if = { limit = { game_date >= 1836.8.1 game_date < 1836.9.1 } value = 637 }
+#	if = { limit = { game_date >= 1836.9.1 game_date < 1836.10.1 } value = 607 }
+#	if = { limit = { game_date >= 1836.10.1 game_date < 1836.11.1 } value = 576 }
+#	if = { limit = { game_date >= 1836.11.1 game_date < 1836.12.1 } value = 546 }
+#	if = { limit = { game_date >= 1836.12.1 game_date < 1837.1.1 } value = 515 }
+#	if = { limit = { game_date >= 1837.1.1 game_date < 1837.2.1 } value = 484 }
+#	if = { limit = { game_date >= 1837.2.1 game_date < 1837.3.1 } value = 456 }
+#	if = { limit = { game_date >= 1837.3.1 game_date < 1837.4.1 } value = 425 }
+#	if = { limit = { game_date >= 1837.4.1 game_date < 1837.5.1 } value = 395 }
+#	if = { limit = { game_date >= 1837.5.1 game_date < 1837.6.1 } value = 364 }
+#	if = { limit = { game_date >= 1837.6.1 game_date < 1837.7.1 } value = 334 }
+#	if = { limit = { game_date >= 1837.7.1 game_date < 1837.8.1 } value = 303 }
+#	if = { limit = { game_date >= 1837.8.1 game_date < 1837.9.1 } value = 272 }
+#	if = { limit = { game_date >= 1837.9.1 game_date < 1837.10.1 } value = 242 }
+#	if = { limit = { game_date >= 1837.10.1 game_date < 1837.11.1 } value = 211 }
+#	if = { limit = { game_date >= 1837.11.1 game_date < 1837.12.1 } value = 181 }
+#	if = { limit = { game_date >= 1837.12.1 game_date < 1838.1.1 } value = 150 }
+#	if = { limit = { game_date >= 1838.1.1 game_date < 1838.2.1 } value = 119 }
+#	if = { limit = { game_date >= 1838.2.1 game_date < 1838.3.1 } value = 91 }
+#	if = { limit = { game_date >= 1838.3.1 game_date < 1838.4.1 } value = 60 }
+#	if = { limit = { game_date >= 1838.4.1 game_date < 1838.5.1 } value = 30 }
+#	if = { limit = { game_date >= 1838.5.1 game_date < 1838.6.1 } value = 30 }
+#}
 
 # Presion de los acreedores sobre el deudor (0-5).
 ca_debt_pressure_max = 5

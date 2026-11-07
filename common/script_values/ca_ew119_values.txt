@@ -1,0 +1,31 @@
+﻿############################################################################
+# CAFM Z4 - Datos del recuadro de la UCA en la ventana de .119
+############################################################################
+# Valor actual de la barra de la Federacion (0-200)
+ca_ew119_bar_value = {
+	value = 0
+	if = {
+		limit = { exists = je:je_historic_central_america_falls_apart }
+		add = "je:je_historic_central_america_falls_apart.scripted_bar_progress(frca_support_bar)"
+	}
+}
+# Tramo de la deuda inglesa (4 = el mas alto, 0 = sin deuda)
+ca_ew119_debt_tier = {
+	value = 0
+	if = {
+		limit = { je:je_ca_british_debt ?= { has_modifier = modifier_ca_british_debt_4 } }
+		value = 4
+	}
+	else_if = {
+		limit = { je:je_ca_british_debt ?= { has_modifier = modifier_ca_british_debt_3 } }
+		value = 3
+	}
+	else_if = {
+		limit = { je:je_ca_british_debt ?= { has_modifier = modifier_ca_british_debt_2 } }
+		value = 2
+	}
+	else_if = {
+		limit = { je:je_ca_british_debt ?= { has_modifier = modifier_ca_british_debt_1 } }
+		value = 1
+	}
+}

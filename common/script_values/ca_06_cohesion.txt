@@ -194,8 +194,4 @@ ca_cohesion_monthly_change = {
 		limit = { has_variable = ca_foreign_agitators }
 		add = { value = -0.5 desc = "CA_COH_FOREIGN_AGITATORS" }
 	}
-	if = {
-		limit = { has_journal_entry = je_ca_chartered_company }
-		add = { value = -0.25 desc = "CA_COH_CONCESSIONS" }
-	}
 }

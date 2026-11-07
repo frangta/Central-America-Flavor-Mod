@@ -1,0 +1,16 @@
+﻿############################################################################
+# CAFM Z5 - Mapas de diario (map_color). Scope: estado.
+# 0 fuera del istmo; en el istmo, 0.35 en calma y hasta 1 con turmoil alto.
+############################################################################
+ca_jemap_isthmus_unrest = {
+	value = 0
+	if = {
+		limit = { region = sr:region_central_america }
+		value = 0.35
+		add = {
+			value = turmoil
+			multiply = 0.65
+		}
+	}
+	max = 1
+}

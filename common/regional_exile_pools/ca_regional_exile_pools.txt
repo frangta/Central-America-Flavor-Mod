@@ -1,0 +1,20 @@
+﻿# CAFM Z6 - Exilio centroamericano (pool regional de 1.15)
+# Sin scripted triggers: los pools se cargan antes que common/scripted_triggers
+# (con is_ca_culture_country el juego se cerraba al cargar).
+ca_exile_pool = {
+	has_access = {
+		has_dlc_feature = regional_exile_pools
+		OR = {
+			country_has_primary_culture = cu:central_american
+			country_has_primary_culture = cu:costa_rican
+			country_has_primary_culture = cu:panamanian
+			country_has_primary_culture = cu:nicaraguan
+			country_has_primary_culture = cu:guatemalan
+			country_has_primary_culture = cu:el_salvadorian
+			country_has_primary_culture = cu:honduran
+			country_has_primary_culture = cu:chiapanecan
+			country_has_primary_culture = cu:ngabe_culture
+			country_has_primary_culture = cu:miskito
+		}
+	}
+}
