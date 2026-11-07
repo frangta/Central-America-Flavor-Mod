@@ -1,0 +1,350 @@
+﻿# ============================================================================
+# CAFM Z5 - Mapa de la Pacificacion del Norte (diario je_ca_pacificacion_norte)
+# Mapa de la frontera con costas, lago y frontera reales (Natural Earth), estilo antiguo, zona coloreada segun ca_pacificacion_progress,
+# marcadores de los hechos de 1836 y lista de etapas a la derecha.
+# ============================================================================
+
+types ca_pacificacion_types {
+	type ca_pacificacion_map_type = widget {
+		name = "ca_pacificacion_map_widget"
+		size = { 530 470 }
+
+		background = {
+			using = entry_bg_simple
+		}
+
+		textbox = {
+			position = { 10 6 }
+			size = { 510 26 }
+			align = left|nobaseline
+			using = fontsize_large
+			text = "CA_PN_HEADER"
+			tooltip = "CA_PN_HEADER_TT"
+		}
+
+		### Mapa
+		widget = {
+			name = "ca_pn_map"
+			position = { 8 40 }
+			size = { 315 420 }
+
+			icon = {
+				position = { 0 0 }
+				size = { 315 420 }
+				texture = "gfx/interface/ca_pacificacion/ca_pn_map_base.dds"
+				tooltip = "CA_PN_MAP_TT"
+			}
+
+			icon = {
+				position = { 0 0 }
+				size = { 315 420 }
+				texture = "gfx/interface/ca_pacificacion/ca_pn_zone_low.dds"
+				datacontext = "[GetScriptedGui('ca_pn_zone_low')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			icon = {
+				position = { 0 0 }
+				size = { 315 420 }
+				texture = "gfx/interface/ca_pacificacion/ca_pn_zone_mid.dds"
+				datacontext = "[GetScriptedGui('ca_pn_zone_mid')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+			icon = {
+				position = { 0 0 }
+				size = { 315 420 }
+				texture = "gfx/interface/ca_pacificacion/ca_pn_zone_high.dds"
+				datacontext = "[GetScriptedGui('ca_pn_zone_high')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+
+			icon = {
+				position = { 50 30 }
+				size = { 24 24 }
+				texture = "gfx/interface/ca_pacificacion/ca_pn_marker_politics.dds"
+				datacontext = "[GetScriptedGui('ca_pn_beat_1')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				tooltip = "CA_PN_BEAT_1_TT"
+			}
+			icon = {
+				position = { 124 186 }
+				size = { 24 24 }
+				texture = "gfx/interface/ca_pacificacion/ca_pn_marker_politics.dds"
+				datacontext = "[GetScriptedGui('ca_pn_beat_3')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				tooltip = "CA_PN_BEAT_3_TT"
+			}
+			icon = {
+				position = { 160 207 }
+				size = { 24 24 }
+				texture = "gfx/interface/ca_pacificacion/ca_pn_marker_battle.dds"
+				datacontext = "[GetScriptedGui('ca_pn_beat_4')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				tooltip = "CA_PN_BEAT_4_TT"
+			}
+			icon = {
+				position = { 110 174 }
+				size = { 24 24 }
+				texture = "gfx/interface/ca_pacificacion/ca_pn_marker_battle.dds"
+				datacontext = "[GetScriptedGui('ca_pn_beat_5')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				tooltip = "CA_PN_BEAT_5_TT"
+			}
+			icon = {
+				position = { 135 238 }
+				size = { 24 24 }
+				texture = "gfx/interface/ca_pacificacion/ca_pn_marker_battle.dds"
+				datacontext = "[GetScriptedGui('ca_pn_beat_6')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				tooltip = "CA_PN_BEAT_6_TT"
+			}
+			icon = {
+				position = { 87 66 }
+				size = { 24 24 }
+				texture = "gfx/interface/ca_pacificacion/ca_pn_marker_battle.dds"
+				datacontext = "[GetScriptedGui('ca_pn_beat_7')]"
+				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				tooltip = "CA_PN_BEAT_7_TT"
+			}
+		}
+
+		### Etapas
+		flowcontainer = {
+			position = { 334 40 }
+			direction = vertical
+			spacing = 2
+
+			textbox = {
+				size = { 186 22 }
+				align = left|nobaseline
+				text = "CA_PN_STAGES"
+			}
+
+			widget = {
+				size = { 186 34 }
+				datacontext = "[GetScriptedGui('ca_pn_beat_1')]"
+				tooltip = "CA_PN_BEAT_1_TT"
+				icon = {
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_check.dds"
+				}
+				icon = {
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_pending.dds"
+				}
+				textbox = {
+					position = { 24 0 }
+					size = { 162 34 }
+					multiline = yes
+					align = left|nobaseline
+					using = fontsize_small
+					text = "CA_PN_BEAT_1"
+				}
+			}
+			widget = {
+				size = { 186 34 }
+				datacontext = "[GetScriptedGui('ca_pn_beat_2')]"
+				tooltip = "CA_PN_BEAT_2_TT"
+				icon = {
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_check.dds"
+				}
+				icon = {
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_pending.dds"
+				}
+				textbox = {
+					position = { 24 0 }
+					size = { 162 34 }
+					multiline = yes
+					align = left|nobaseline
+					using = fontsize_small
+					text = "CA_PN_BEAT_2"
+				}
+			}
+			widget = {
+				size = { 186 34 }
+				datacontext = "[GetScriptedGui('ca_pn_beat_3')]"
+				tooltip = "CA_PN_BEAT_3_TT"
+				icon = {
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_check.dds"
+				}
+				icon = {
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_pending.dds"
+				}
+				textbox = {
+					position = { 24 0 }
+					size = { 162 34 }
+					multiline = yes
+					align = left|nobaseline
+					using = fontsize_small
+					text = "CA_PN_BEAT_3"
+				}
+			}
+			widget = {
+				size = { 186 34 }
+				datacontext = "[GetScriptedGui('ca_pn_beat_4')]"
+				tooltip = "CA_PN_BEAT_4_TT"
+				icon = {
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_check.dds"
+				}
+				icon = {
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_pending.dds"
+				}
+				textbox = {
+					position = { 24 0 }
+					size = { 162 34 }
+					multiline = yes
+					align = left|nobaseline
+					using = fontsize_small
+					text = "CA_PN_BEAT_4"
+				}
+			}
+			widget = {
+				size = { 186 34 }
+				datacontext = "[GetScriptedGui('ca_pn_beat_5')]"
+				tooltip = "CA_PN_BEAT_5_TT"
+				icon = {
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_check.dds"
+				}
+				icon = {
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_pending.dds"
+				}
+				textbox = {
+					position = { 24 0 }
+					size = { 162 34 }
+					multiline = yes
+					align = left|nobaseline
+					using = fontsize_small
+					text = "CA_PN_BEAT_5"
+				}
+			}
+			widget = {
+				size = { 186 34 }
+				datacontext = "[GetScriptedGui('ca_pn_beat_6')]"
+				tooltip = "CA_PN_BEAT_6_TT"
+				icon = {
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_check.dds"
+				}
+				icon = {
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_pending.dds"
+				}
+				textbox = {
+					position = { 24 0 }
+					size = { 162 34 }
+					multiline = yes
+					align = left|nobaseline
+					using = fontsize_small
+					text = "CA_PN_BEAT_6"
+				}
+			}
+			widget = {
+				size = { 186 34 }
+				datacontext = "[GetScriptedGui('ca_pn_beat_7')]"
+				tooltip = "CA_PN_BEAT_7_TT"
+				icon = {
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_check.dds"
+				}
+				icon = {
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_pending.dds"
+				}
+				textbox = {
+					position = { 24 0 }
+					size = { 162 34 }
+					multiline = yes
+					align = left|nobaseline
+					using = fontsize_small
+					text = "CA_PN_BEAT_7"
+				}
+			}
+			widget = {
+				size = { 186 34 }
+				datacontext = "[GetScriptedGui('ca_pn_beat_8')]"
+				tooltip = "CA_PN_BEAT_8_TT"
+				icon = {
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_check.dds"
+				}
+				icon = {
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+					position = { 0 7 }
+					size = { 20 20 }
+					texture = "gfx/interface/ca_pacificacion/ca_pn_pending.dds"
+				}
+				textbox = {
+					position = { 24 0 }
+					size = { 162 34 }
+					multiline = yes
+					align = left|nobaseline
+					using = fontsize_small
+					text = "CA_PN_BEAT_8"
+				}
+			}
+
+			widget = {
+				size = { 186 44 }
+				datacontext = "[GetScriptedGui('ca_pn_expedition_on')]"
+				textbox = {
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					size = { 186 44 }
+					multiline = yes
+					align = left|nobaseline
+					using = fontsize_small
+					text = "CA_PN_EXPEDITION_ON"
+				}
+				textbox = {
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+					size = { 186 44 }
+					multiline = yes
+					align = left|nobaseline
+					using = fontsize_small
+					text = "CA_PN_EXPEDITION_OFF"
+				}
+			}
+		}
+	}
+}
+
+# El diario busca un widget con este nombre a nivel superior del archivo
+ca_pacificacion_map_type = {
+	name = "ca_pacificacion_map_widget"
+}

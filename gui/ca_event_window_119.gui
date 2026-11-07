@@ -1,0 +1,1150 @@
+﻿types ca_event_window_119_types {
+
+	### Fila de datos del recuadro de la UCA (icono + texto)
+	type ca_ew119_data_row = widget {
+		size = { 540 30 }
+
+		icon = {
+			position = { 0 1 }
+			size = { 28 28 }
+			block "row_icon" {
+				texture = "gfx/interface/icons/event_icons/waving_flag.dds"
+			}
+		}
+
+		block "row_content" {}
+	}
+
+	### Tarjeta de un bando
+	type ca_ew119_card = widget {
+		size = { 350 250 }
+
+		background = {
+			using = entry_bg_simple
+		}
+
+		icon = {
+			position = { 0 0 }
+			size = { 350 8 }
+			block "card_band" {
+				texture = "gfx/interface/ca_event_119/ca_ew119_band_federal.dds"
+			}
+		}
+
+		icon = {
+			position = { 135 14 }
+			size = { 80 80 }
+			block "card_icon" {
+				texture = "gfx/interface/ca_event_119/ca_ew119_faction_federal.dds"
+			}
+		}
+
+		textbox = {
+			position = { 0 96 }
+			size = { 350 26 }
+			align = hcenter|nobaseline
+			using = fontsize_large
+			block "card_title" {
+				text = "CA_EW119_FED_TITLE"
+			}
+		}
+
+		textbox = {
+			position = { 30 124 }
+			size = { 150 22 }
+			align = right|nobaseline
+			using = fontsize_small
+			text = "CA_EW119_DIFFICULTY"
+		}
+
+		block "card_difficulty" {}
+
+		textbox = {
+			position = { 15 150 }
+			size = { 320 96 }
+			multiline = yes
+			align = top|left
+			using = fontsize_small
+			block "card_desc" {
+				text = "CA_EW119_FED_DESC"
+			}
+		}
+
+		block "card_tooltip" {
+			tooltip = "CA_EW119_FED_TT"
+		}
+	}
+
+	### Ventana del evento .119 (basada en event_window de vanilla 1.15)
+	type ca_ew119_window = default_popup_two_lines {
+		datacontext = "[EventWindow.GetEvent]"
+
+		alpha = 0
+
+		blockoverride "minimize" {
+			minimize_button_large = {
+				onclick = "[PopupManager.HideOpenEvent(Event.Self)]"
+				parentanchor = center
+				shortcut = "close_window"
+			}
+		}
+
+		blockoverride "header_close_button_visibility" {
+			visible = yes
+		}
+
+		blockoverride "window_header_name" {
+			raw_text = "#BOLD [EventWindow.GetTitle]#!"
+		}
+
+		blockoverride "content" {}
+
+		blockoverride "second_text" {
+			text = "EVENT_WINDOW_EVENT_LOCATION"
+		}
+
+		blockoverride "goto_visibility" {
+			visible = yes
+		}
+
+		blockoverride "goto_properties" {
+			onclick = "[EventWindow.AccessEvent.AccessState.ZoomToCapital]"
+			tooltip = "ZOOM_TO_EVENT_WINDOW_STATE"
+			enabled = "[Not( EventWindow.AccessEvent.AccessState.IsZoomingToCapital )]"
+		}
+
+		state = {
+			trigger_on_create = yes
+			name = 1
+			duration = 0.3
+			using = Animation_Curve_EaseOut
+			alpha = 1
+			using = Snapshot_Mute_World_100
+			using = Snapshot_Mute_Vfx_War_100
+			start_sound = {
+				soundeffect = "[Event.GetOnOpenedSoundEvent]"
+			}
+		}
+
+		flowcontainer = {
+			resizeparent = yes
+			direction = vertical
+			margin = { 35 0 }
+			margin_bottom = 20
+			spacing = 8
+
+			### ARRIBA: RECUADRO DE LA UCA (izquierda) + TEXTO DEL EVENTO (derecha)
+			container = {
+				minimumsize = { 1120 -1 }
+				position = { 0 10 }
+
+				icon = {
+					texture = "gfx/interface/event_window/event_inner_frame.dds"
+					size = { 100% 100% }
+					spriteType = Corneredtiled
+					spriteborder = { 25 25 }
+					spriteborder_right = 610
+					spriteborder_top = 600
+					texture_density = 2
+
+					modify_texture = {
+						texture = "gfx/interface/backgrounds/default_bg_shading.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = overlay
+					}
+
+					modify_texture = {
+						using = texture_velvet
+					}
+				}
+
+				widget = {
+					position = { 3 3 }
+					size = { 100% 100% }
+
+					# El video del evento, apagado, de fondo
+					video_icon = {
+						visible = "[Event.HasVideo]"
+						video = "[Event.GetVideo]"
+						size = { 100% 100% }
+						alwaystransparent = yes
+						loop = no
+						alpha = 0.3
+
+						modify_texture = {
+							texture = "gfx/interface/masks/fade_horizontal_right.dds"
+							spriteType = Corneredstretched
+							spriteborder = { 45 45 }
+							spriteborder_bottom = 0
+							blend_mode = alphamultiply
+							texture_density = 2
+						}
+
+						modify_texture = {
+							using = texture_velvet
+						}
+					}
+
+					### Recuadro: el estado de la Union en 1836
+					widget = {
+						name = "ca_ew119_uca_box"
+						position = { 20 14 }
+						size = { 580 476 }
+
+						background = {
+							using = entry_bg_simple
+						}
+
+						textbox = {
+							position = { 0 6 }
+							size = { 580 26 }
+							align = hcenter|nobaseline
+							using = fontsize_large
+							text = "CA_EW119_BOX_TITLE"
+						}
+
+							widget = {
+								name = "ca_ew119_minimap"
+								position = { 110 36 }
+								size = { 360 287 }
+
+								icon = {
+									position = { 0 0 }
+									size = { 360 287 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_base.dds"
+								}
+								icon = {
+									position = { 22 66 }
+									size = { 60 46 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_cip_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cip_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 22 66 }
+									size = { 60 46 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_cip_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cip_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 22 66 }
+									size = { 60 46 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_cip_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cip_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 22 66 }
+									size = { 60 46 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_cip_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cip_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 55 68 }
+									size = { 48 60 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_alt_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_alt_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 55 68 }
+									size = { 48 60 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_alt_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_alt_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 55 68 }
+									size = { 48 60 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_alt_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_alt_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 55 68 }
+									size = { 48 60 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_alt_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_alt_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 77 19 }
+									size = { 86 115 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_gua_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_gua_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 77 19 }
+									size = { 86 115 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_gua_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_gua_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 77 19 }
+									size = { 86 115 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_gua_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_gua_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 77 19 }
+									size = { 86 115 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_gua_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_gua_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 95 22 }
+									size = { 55 37 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_pet_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_gua_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 95 22 }
+									size = { 55 37 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_pet_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_gua_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 95 22 }
+									size = { 55 37 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_pet_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_gua_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 95 22 }
+									size = { 55 37 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_pet_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_gua_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 137 19 }
+									size = { 56 66 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_blz_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_blz_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 137 19 }
+									size = { 56 66 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_blz_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_blz_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 137 19 }
+									size = { 56 66 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_blz_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_blz_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 137 19 }
+									size = { 56 66 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_blz_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_blz_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 137 19 }
+									size = { 56 66 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_blz_foreign.dds"
+									datacontext = "[GetScriptedGui('ca_mm_blz_foreign')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 109 121 }
+									size = { 84 37 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_els_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_els_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 109 121 }
+									size = { 84 37 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_els_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_els_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 109 121 }
+									size = { 84 37 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_els_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_els_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 109 121 }
+									size = { 84 37 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_els_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_els_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 138 74 }
+									size = { 170 83 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_hon_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_hon_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 138 74 }
+									size = { 170 83 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_hon_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_hon_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 138 74 }
+									size = { 170 83 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_hon_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_hon_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 138 74 }
+									size = { 170 83 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_hon_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_hon_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 259 101 }
+									size = { 48 94 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_mos_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_mos_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 259 101 }
+									size = { 48 94 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_mos_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_mos_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 259 101 }
+									size = { 48 94 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_mos_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_mos_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 259 101 }
+									size = { 48 94 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_mos_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_mos_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 259 101 }
+									size = { 48 94 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_mos_foreign.dds"
+									datacontext = "[GetScriptedGui('ca_mm_mos_foreign')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 184 106 }
+									size = { 121 108 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_nic_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_nic_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 184 106 }
+									size = { 121 108 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_nic_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_nic_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 184 106 }
+									size = { 121 108 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_nic_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_nic_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 184 106 }
+									size = { 121 108 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_nic_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_nic_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 232 205 }
+									size = { 29 40 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_gnc_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 232 205 }
+									size = { 29 40 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_gnc_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 232 205 }
+									size = { 29 40 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_gnc_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 232 205 }
+									size = { 29 40 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_gnc_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 232 202 }
+									size = { 94 85 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_cos_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 232 202 }
+									size = { 94 85 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_cos_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 232 202 }
+									size = { 94 85 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_cos_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 232 202 }
+									size = { 94 85 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_cos_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 310 247 }
+									size = { 35 31 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_boc_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_boc_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 310 247 }
+									size = { 35 31 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_boc_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_boc_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 310 247 }
+									size = { 35 31 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_boc_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_boc_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 310 247 }
+									size = { 35 31 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_boc_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_boc_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 0 0 }
+									size = { 360 287 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_labels.dds"
+								}
+								icon = {
+									position = { 0 0 }
+									size = { 360 287 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_frame.dds"
+								}
+							}
+
+						flowcontainer = {
+							position = { 20 326 }
+							direction = vertical
+							spacing = 0
+
+							### 1. Barra de la Federacion
+							ca_ew119_data_row = {
+								tooltip = "CA_EW119_BAR_TT"
+								blockoverride "row_icon" {
+									texture = "gfx/interface/icons/event_icons/waving_flag.dds"
+								}
+								blockoverride "row_content" {
+									textbox = {
+										position = { 36 0 }
+										size = { 500 30 }
+										align = left|nobaseline
+										text = "CA_EW119_BAR"
+									}
+								}
+							}
+
+							### 2. Lealtad de los 5 estados
+							ca_ew119_data_row = {
+								tooltip = "CA_EW119_LOYALTY_TT"
+								blockoverride "row_icon" {
+									texture = "gfx/interface/icons/ai_attitude_icons/loyal.dds"
+								}
+								blockoverride "row_content" {
+									textbox = {
+										position = { 36 0 }
+										size = { 170 30 }
+										align = left|nobaseline
+										text = "CA_EW119_LOYALTY"
+									}
+									widget = {
+										position = { 210 0 }
+										size = { 64 30 }
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_loyal.dds"
+											datacontext = "[GetScriptedGui('ca_mm_gua_loyal')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_wavering.dds"
+											datacontext = "[GetScriptedGui('ca_mm_gua_wavering')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_rebel.dds"
+											datacontext = "[GetScriptedGui('ca_mm_gua_rebel')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_separated.dds"
+											datacontext = "[GetScriptedGui('ca_mm_gua_separated')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										textbox = {
+											position = { 23 0 }
+											size = { 40 30 }
+											align = left|nobaseline
+											using = fontsize_small
+											text = "CA_EW119_GUA"
+										}
+									}
+									widget = {
+										position = { 274 0 }
+										size = { 64 30 }
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_loyal.dds"
+											datacontext = "[GetScriptedGui('ca_mm_els_loyal')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_wavering.dds"
+											datacontext = "[GetScriptedGui('ca_mm_els_wavering')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_rebel.dds"
+											datacontext = "[GetScriptedGui('ca_mm_els_rebel')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_separated.dds"
+											datacontext = "[GetScriptedGui('ca_mm_els_separated')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										textbox = {
+											position = { 23 0 }
+											size = { 40 30 }
+											align = left|nobaseline
+											using = fontsize_small
+											text = "CA_EW119_ELS"
+										}
+									}
+									widget = {
+										position = { 338 0 }
+										size = { 64 30 }
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_loyal.dds"
+											datacontext = "[GetScriptedGui('ca_mm_hon_loyal')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_wavering.dds"
+											datacontext = "[GetScriptedGui('ca_mm_hon_wavering')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_rebel.dds"
+											datacontext = "[GetScriptedGui('ca_mm_hon_rebel')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_separated.dds"
+											datacontext = "[GetScriptedGui('ca_mm_hon_separated')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										textbox = {
+											position = { 23 0 }
+											size = { 40 30 }
+											align = left|nobaseline
+											using = fontsize_small
+											text = "CA_EW119_HON"
+										}
+									}
+									widget = {
+										position = { 402 0 }
+										size = { 64 30 }
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_loyal.dds"
+											datacontext = "[GetScriptedGui('ca_mm_nic_loyal')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_wavering.dds"
+											datacontext = "[GetScriptedGui('ca_mm_nic_wavering')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_rebel.dds"
+											datacontext = "[GetScriptedGui('ca_mm_nic_rebel')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_separated.dds"
+											datacontext = "[GetScriptedGui('ca_mm_nic_separated')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										textbox = {
+											position = { 23 0 }
+											size = { 40 30 }
+											align = left|nobaseline
+											using = fontsize_small
+											text = "CA_EW119_NIC"
+										}
+									}
+									widget = {
+										position = { 466 0 }
+										size = { 64 30 }
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_loyal.dds"
+											datacontext = "[GetScriptedGui('ca_mm_cos_loyal')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_wavering.dds"
+											datacontext = "[GetScriptedGui('ca_mm_cos_wavering')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_rebel.dds"
+											datacontext = "[GetScriptedGui('ca_mm_cos_rebel')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										icon = {
+											position = { 0 5 }
+											size = { 20 20 }
+											texture = "gfx/interface/ca_event_119/ca_ew119_dot_separated.dds"
+											datacontext = "[GetScriptedGui('ca_mm_cos_separated')]"
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										}
+										textbox = {
+											position = { 23 0 }
+											size = { 40 30 }
+											align = left|nobaseline
+											using = fontsize_small
+											text = "CA_EW119_COS"
+										}
+									}
+								}
+							}
+
+							### 3. Deuda inglesa
+							ca_ew119_data_row = {
+								tooltip = "CA_EW119_DEBT_TT"
+								blockoverride "row_icon" {
+									texture = "gfx/interface/icons/diplomatic_treaties_articles_icons/take_on_debt_treaties.dds"
+								}
+								blockoverride "row_content" {
+									textbox = {
+										position = { 36 0 }
+										size = { 500 30 }
+										align = left|nobaseline
+										text = "CA_EW119_DEBT"
+									}
+								}
+							}
+
+							### 4. Paralisis federal
+							ca_ew119_data_row = {
+								tooltip = "CA_EW119_PARALYSIS_TT"
+								blockoverride "row_icon" {
+									texture = "gfx/interface/icons/law_icons/parliamentary_republic.dds"
+								}
+								blockoverride "row_content" {
+									widget = {
+										size = { 540 30 }
+										datacontext = "[GetScriptedGui('ca_ew119_paralysis_on')]"
+										textbox = {
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+											position = { 36 0 }
+											size = { 500 30 }
+											align = left|nobaseline
+											text = "CA_EW119_PARALYSIS_ON"
+										}
+										textbox = {
+											visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+											position = { 36 0 }
+											size = { 500 30 }
+											align = left|nobaseline
+											text = "CA_EW119_PARALYSIS_OFF"
+										}
+									}
+								}
+							}
+
+							### 5. Ejercito federal
+							ca_ew119_data_row = {
+								tooltip = "CA_EW119_ARMY_TT"
+								blockoverride "row_icon" {
+									texture = "gfx/interface/icons/alert_icons/suboptimal_army.dds"
+								}
+								blockoverride "row_content" {
+									widget = {
+										size = { 540 30 }
+										datacontext = "[GetScriptedGui('ca_ew119_disarray_on')]"
+										textbox = {
+											visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+											position = { 36 0 }
+											size = { 500 30 }
+											align = left|nobaseline
+											text = "CA_EW119_ARMY_ON"
+										}
+										textbox = {
+											visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+											position = { 36 0 }
+											size = { 500 30 }
+											align = left|nobaseline
+											text = "CA_EW119_ARMY_OFF"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				### Texto del evento (derecha), igual que vanilla pero sin las opciones
+				flowcontainer = {
+					minimumsize = { -1 500 }
+					direction = vertical
+					spacing = 16
+					parentanchor = right|vcenter
+					margin = { 25 30 }
+
+					background = {
+						using = entry_bg_simple_solid
+						margin = { -15 -20 }
+					}
+
+					background = {
+						using = fade_center_colored_black
+					}
+
+					textbox = {
+						name = "description"
+						multiline = yes
+						autoresize = yes
+						minimumsize = { 440 -1 }
+						maximumsize = { 460 -1 }
+						parentanchor = top|hcenter
+						align = nobaseline
+						margin = { 10 0 }
+						using = fontsize_large
+						raw_text = "#bold [EventWindow.GetDescription]#!"
+					}
+
+					divider_decorative = {}
+
+					textbox = {
+						name = "flavortext"
+						multiline = yes
+						autoresize = yes
+						minimumsize = { 440 -1 }
+						maximumsize = { 460 -1 }
+						parentanchor = top|hcenter
+						align = top|left
+						margin = { 10 10 }
+						raw_text = "[EventWindow.GetFlavor]"
+					}
+
+					button = {
+						visible = "[InDebugMode]"
+						parentanchor = hcenter
+						size = { 440 40 }
+						using = default_button
+						raw_text = "DEBUG: Open Event in text editor"
+						onclick = "[EventWindow.AccessEvent.OpenInEditor]"
+					}
+
+					textbox = {
+						visible = [InDebugMode]
+						parentanchor = hcenter
+						align = hcenter
+						raw_text = "Event ID: [Event.GetKey|v]"
+					}
+				}
+			}
+
+			### ABAJO: LOS TRES BANDOS
+			divider_decorative = {}
+
+			textbox = {
+				parentanchor = hcenter
+				autoresize = yes
+				align = hcenter|nobaseline
+				using = fontsize_large
+				text = "CA_EW119_CHOOSE"
+			}
+
+			widget = {
+				parentanchor = hcenter
+				size = { 1080 250 }
+
+				ca_ew119_card = {
+					position = { 0 0 }
+					blockoverride "card_difficulty" {
+						icon = {
+							position = { 188 124 }
+							size = { 22 22 }
+							texture = "gfx/interface/ca_event_119/ca_ew119_pip_on.dds"
+						}
+						icon = {
+							position = { 212 124 }
+							size = { 22 22 }
+							texture = "gfx/interface/ca_event_119/ca_ew119_pip_on.dds"
+						}
+						icon = {
+							position = { 236 124 }
+							size = { 22 22 }
+							texture = "gfx/interface/ca_event_119/ca_ew119_pip_off.dds"
+						}
+					}
+				}
+
+				ca_ew119_card = {
+					position = { 365 0 }
+					blockoverride "card_band" {
+						texture = "gfx/interface/ca_event_119/ca_ew119_band_centralist.dds"
+					}
+					blockoverride "card_icon" {
+						texture = "gfx/interface/ca_event_119/ca_ew119_faction_centralist.dds"
+					}
+					blockoverride "card_title" {
+						text = "CA_EW119_CEN_TITLE"
+					}
+					blockoverride "card_difficulty" {
+						icon = {
+							position = { 188 124 }
+							size = { 22 22 }
+							texture = "gfx/interface/ca_event_119/ca_ew119_pip_on.dds"
+						}
+						icon = {
+							position = { 212 124 }
+							size = { 22 22 }
+							texture = "gfx/interface/ca_event_119/ca_ew119_pip_on.dds"
+						}
+						icon = {
+							position = { 236 124 }
+							size = { 22 22 }
+							texture = "gfx/interface/ca_event_119/ca_ew119_pip_on.dds"
+						}
+					}
+					blockoverride "card_desc" {
+						text = "CA_EW119_CEN_DESC"
+					}
+					blockoverride "card_tooltip" {
+						tooltip = "CA_EW119_CEN_TT"
+					}
+				}
+
+				ca_ew119_card = {
+					position = { 730 0 }
+					blockoverride "card_band" {
+						texture = "gfx/interface/ca_event_119/ca_ew119_band_state.dds"
+					}
+					blockoverride "card_icon" {
+						texture = "gfx/interface/ca_event_119/ca_ew119_faction_state.dds"
+					}
+					blockoverride "card_title" {
+						text = "CA_EW119_STA_TITLE"
+					}
+					blockoverride "card_difficulty" {
+						textbox = {
+							position = { 188 124 }
+							size = { 140 22 }
+							align = left|nobaseline
+							using = fontsize_small
+							text = "CA_EW119_DIFF_VARIES"
+						}
+					}
+					blockoverride "card_desc" {
+						text = "CA_EW119_STA_DESC"
+					}
+					blockoverride "card_tooltip" {
+						tooltip = "CA_EW119_STA_TT"
+					}
+				}
+			}
+
+			### Botones de las opciones, en fila y alineados con las tarjetas
+			flowcontainer = {
+				parentanchor = hcenter
+				datamodel = "[EventWindow.GetOptions]"
+				spacing = 15
+
+				item = {
+					container = {
+
+						widget = {
+							visible = "[EventOption.IsHighlightedOption]"
+							size = { 350 56 }
+
+							button = {
+								size = { 350 56 }
+								using = default_button_primary_action
+								tooltip = "[EventOption.GetDesc]"
+								using = tooltip_ws
+								using = confirm_button_sound
+								onclick = "[EventOption.Select]"
+								enabled = "[EventOption.IsEnabled]"
+							}
+
+							textbox = {
+								position = { 12 0 }
+								size = { 326 56 }
+								multiline = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								text = "[EventOption.GetText]"
+							}
+						}
+
+						widget = {
+							visible = "[Not(EventOption.IsHighlightedOption)]"
+							size = { 350 56 }
+
+							button = {
+								size = { 350 56 }
+								using = default_button_action
+								tooltip = "EVENT_OPTION_TOOLTIP"
+								using = tooltip_ws
+								using = confirm_button_sound
+								onclick = "[EventOption.Select]"
+								enabled = "[EventOption.IsEnabled]"
+							}
+
+							textbox = {
+								position = { 12 0 }
+								size = { 296 56 }
+								multiline = yes
+								align = hcenter|nobaseline
+								using = fontsize_small
+								text = "[EventOption.GetText]"
+							}
+
+							### Tiempo hasta que se elige la opcion por defecto
+							round_progress_default = {
+								visible = "[EventOption.IsDefaultOption]"
+								parentanchor = right|vcenter
+								position = { -12 0.5 }
+								size = { 27 27 }
+								tooltip = "DEFAULT_EVENT_OPTION"
+								value = "[Event.GetPercentageRemainingDays]"
+
+								icon = {
+									size = { 26 26 }
+									position = { -0.2 -0.2 }
+									parentanchor = center
+									texture = "gfx/interface/icons/generic_icons/event_default_option.dds"
+								}
+							}
+						}
+					}
+				}
+			}
+
+			### Guia y aviso historico
+			flowcontainer = {
+				parentanchor = hcenter
+				spacing = 20
+
+				button = {
+					size = { 260 38 }
+					using = default_button
+					text = "CA_EW119_GUIDE"
+					tooltip = "CA_EW119_GUIDE_TT"
+					datacontext = "[GetScriptedGui('ca_ew119_open_guide')]"
+					onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+
+				textbox = {
+					parentanchor = vcenter
+					autoresize = yes
+					align = left|nobaseline
+					using = fontsize_small
+					text = "CA_EW119_HISTORICAL_HINT"
+				}
+			}
+		}
+	}
+}
