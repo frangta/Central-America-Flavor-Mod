@@ -650,3 +650,157 @@ nic_william_walker_character_template = {
 		set_global_variable = { name = cafm_hc_walker value = this }
 	}
 }
+
+# ---------------------------------------------------------------------
+# CAFM Z10 — gobernantes nuevos de la tabla 1836–1850
+# ---------------------------------------------------------------------
+cafm_joaquin_cossio = {
+	# Joaquín del Cosío — cast NIC · nivel C · certeza P
+	# NOTAS: Director interino 5 ene–22 oct 1839 (lista de la Fundación Enrique Bolaños); legitimista.
+#        Se funden Patricio Rivas (6 días, may 1839) e Hilario Ulloa (22 oct–21 nov 1839).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Joaquin"
+	last_name = "cafm_del_Cossio"
+	historical = yes
+	female = no
+	birth_date = 1790.1.1			# M: fecha desconocida
+	culture = cu:nicaraguan
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_nic
+		set_global_variable = { name = cafm_hc_joaquin_cossio value = this }
+	}
+}
+
+cafm_tomas_valladares = {
+	# Tomás Valladares (Balladares) — cast NIC · nivel C · certeza P
+	# NOTAS: Nacido en 1780. Brigadier; liberal y unionista. Supremo Director interino 21 nov 1839–27 ago 1840;
+#        presidente del Congreso 1841–1843; vencido por Malespín en 1844.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Tomas"
+	last_name = "cafm_Valladares"
+	historical = yes
+	female = no
+	birth_date = 1780.1.1			# P: solo el año
+	culture = cu:nicaraguan
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+	role = general
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_armed_forces
+	ideology = ideology_ca_federalist
+
+	# --- ATRIBUTOS MILITARES ---
+	commander_rank = commander_rank_1
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		brave
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_nic
+		set_global_variable = { name = cafm_hc_tomas_valladares value = this }
+	}
+}
+
+cafm_manuel_perez = {
+	# Manuel Pérez — cast NIC · nivel C · certeza P
+	# NOTAS: Supremo Director 31 may 1843–nov 1844 (democrático). Se funden Madriz, Selva y Sáenz hasta el 4 abr 1845
+#        (guerra de Malespín y sitio de León).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Manuel"
+	last_name = "cafm_Perez"
+	historical = yes
+	female = no
+	birth_date = 1790.1.1			# M: fecha desconocida
+	culture = cu:nicaraguan
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_nic
+		set_global_variable = { name = cafm_hc_manuel_perez value = this }
+	}
+}
+
+cafm_jose_guerrero = {
+	# José María Guerrero de Arcos y Molina — cast NIC · nivel C · certeza P
+	# NOTAS: Supremo Director 6 abr 1847–1 ene 1849. Se funden los interinatos de Terán y Rosales (hasta el 1 abr 1849).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Jose_Maria"
+	last_name = "cafm_Guerrero"
+	historical = yes
+	female = no
+	birth_date = 1799.1.1			# M: fecha desconocida
+	culture = cu:nicaraguan
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_nic
+		set_global_variable = { name = cafm_hc_jose_guerrero value = this }
+	}
+}

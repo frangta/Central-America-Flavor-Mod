@@ -1,0 +1,138 @@
+﻿cafm_the_rights_of_man = {
+	is_shown = {
+		is_ca_culture_country = yes
+		NOT = { has_modifier = cafm_era_rights_of_man }
+		NOT = { has_modifier = cafm_era_political_ideology }
+		NOT = { has_modifier = cafm_era_state_and_government }
+		NOT = { has_modifier = cafm_era_dreams_of_empire }
+		NOT = { has_modifier = cafm_era_means_of_production }
+		NOT = { has_modifier = cafm_era_flaws_of_democracy }
+	}
+	possible = {
+		has_technology_researched = rationalism
+	}
+	when_taken = {
+		cafm_clear_era_modifiers = yes
+		add_modifier = { name = cafm_era_rights_of_man }
+	}
+	ai_chance = {
+		value = 100
+	}
+}
+
+cafm_political_ideology = {
+	is_shown = {
+		is_ca_culture_country = yes
+		OR = {
+			has_technology_researched = rationalism
+			has_technology_researched = empiricism
+		}
+		NOT = { has_modifier = cafm_era_political_ideology }
+		NOT = { has_modifier = cafm_era_state_and_government }
+		NOT = { has_modifier = cafm_era_dreams_of_empire }
+		NOT = { has_modifier = cafm_era_means_of_production }
+		NOT = { has_modifier = cafm_era_flaws_of_democracy }
+	}
+	possible = {
+		has_technology_researched = empiricism
+	}
+	when_taken = {
+		cafm_clear_era_modifiers = yes
+		add_modifier = { name = cafm_era_political_ideology }
+	}
+	ai_chance = {
+		value = 100
+	}
+}
+
+cafm_of_state_n_government = {
+	is_shown = {
+		is_ca_culture_country = yes
+		OR = {
+			has_technology_researched = empiricism
+			has_technology_researched = nationalism
+		}
+		NOT = { has_modifier = cafm_era_state_and_government }
+		NOT = { has_modifier = cafm_era_dreams_of_empire }
+		NOT = { has_modifier = cafm_era_means_of_production }
+		NOT = { has_modifier = cafm_era_flaws_of_democracy }
+	}
+	possible = {
+		has_technology_researched = nationalism
+	}
+	when_taken = {
+		cafm_clear_era_modifiers = yes
+		add_modifier = { name = cafm_era_state_and_government }
+	}
+	ai_chance = {
+		value = 100
+	}
+}
+
+cafm_dreams_of_empire = {
+	is_shown = {
+		is_ca_culture_country = yes
+		OR = {
+			has_technology_researched = nationalism
+			has_technology_researched = pan-nationalism
+		}
+		NOT = { has_modifier = cafm_era_dreams_of_empire }
+		NOT = { has_modifier = cafm_era_means_of_production }
+		NOT = { has_modifier = cafm_era_flaws_of_democracy }
+	}
+	possible = {
+		has_technology_researched = pan-nationalism
+	}
+	when_taken = {
+		cafm_clear_era_modifiers = yes
+		add_modifier = { name = cafm_era_dreams_of_empire }
+		set_variable = cafm_era_patria_grande
+	}
+	ai_chance = {
+		value = 100
+	}
+}
+
+cafm_the_means_of_production = {
+	is_shown = {
+		is_ca_culture_country = yes
+		OR = {
+			has_technology_researched = pan-nationalism
+			has_technology_researched = socialism
+		}
+		NOT = { has_modifier = cafm_era_means_of_production }
+		NOT = { has_modifier = cafm_era_flaws_of_democracy }
+	}
+	possible = {
+		has_technology_researched = socialism
+	}
+	when_taken = {
+		cafm_clear_era_modifiers = yes
+		add_modifier = { name = cafm_era_means_of_production }
+	}
+	ai_chance = {
+		value = 100
+	}
+}
+
+cafm_the_flaws_of_democracy = {
+	is_shown = {
+		is_ca_culture_country = yes
+		OR = {
+			has_technology_researched = socialism
+			has_technology_researched = corporatism
+		}
+		NOT = { has_modifier = cafm_era_flaws_of_democracy }
+	}
+	possible = {
+		has_technology_researched = corporatism
+	}
+	when_taken = {
+		cafm_clear_era_modifiers = yes
+		add_modifier = { name = cafm_era_flaws_of_democracy }
+	}
+	ai_chance = {
+		value = 100
+	}
+}
+

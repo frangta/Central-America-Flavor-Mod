@@ -303,3 +303,43 @@ cafm_urbano_ugarte = {
 		latest_usage_date = 1840.6.1
 	}
 }
+
+# ---------------------------------------------------------------------
+# CAFM Z12 — gobernantes nuevos de la tabla 1836–1850
+# ---------------------------------------------------------------------
+cafm_fernando_antonio_martinez = {
+	# Fernando Antonio Martínez — cast ALT · nivel C · certeza P
+	# NOTAS: Encabeza el gobierno provisional de Los Altos restaurado (5 sep 1848–8 may 1849, cuando Carrera
+#        toma Quetzaltenango).
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Fernando_Antonio"
+	last_name = "cafm_Martinez"
+	historical = yes
+	female = no
+	birth_date = 1800.1.1			# M: fecha desconocida
+	culture = cu:guatemalan
+	religion = rel:catholic
+	home_region = STATE_GUATEMALA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_alt
+		set_global_variable = { name = cafm_hc_fernando_antonio_martinez value = this }
+	}
+}

@@ -127,7 +127,7 @@ ai_strategy_unify_central_america = {
                         state_region = s:STATE_YUCATAN
                     }
                 }
-                can_reach_target_state = { TARGET_STATE = scope:target_state }
+                can_reach_target_state_to_conquer = { TARGET_STATE = scope:target_state }
             }
             add = {
                 value = 90
@@ -170,7 +170,7 @@ ai_strategy_unify_central_america = {
                     scope:target_country = {
                         is_unification_candidate = GCA
                     }
-                    can_reach_target_country = { TARGET_COUNTRY = scope:target_country }
+                    can_reach_target_country_to_conquer = { TARGET_COUNTRY = scope:target_country }
                 }
                 add = 250
             }
@@ -240,6 +240,7 @@ ai_strategy_unify_central_america = {
         is_subject = no
         is_unification_candidate = GCA
         NOT = { country_tier = empire }
+        ca_ai_unification_allowed = yes
     }
 
     # Peso base para elegir la strategy
@@ -388,7 +389,7 @@ ai_strategy_cos_isolated_autonomist = {
             value = 0
             if = {
                 limit = {
-                    can_reach_target_state = { TARGET_STATE = scope:target_state }
+                    can_reach_target_state_to_conquer = { TARGET_STATE = scope:target_state }
                     scope:target_state = {
                         OR = {
                             state_region = s:STATE_PANAMA
@@ -929,7 +930,7 @@ ai_strategy_gua_aggressive_hegemon = {
             value = 0
             if = {
                 limit = {
-                    can_reach_target_state = { TARGET_STATE = scope:target_state }
+                    can_reach_target_state_to_conquer = { TARGET_STATE = scope:target_state }
                     scope:target_state = {
                         OR = {
                             state_region = s:STATE_SAN_SALVADOR
@@ -1118,7 +1119,7 @@ ai_strategy_els_14_families = {
     building_group_weights = {
         bg_plantations = 4.0
         bg_agriculture = 2.0
-        bg_government_funded_institutions = 0.1 # Odian las escuelas públicas
+        bg_government = 0.1 # Odian las escuelas públicas
     }
 
     goods_stances = {
@@ -1173,7 +1174,7 @@ ai_strategy_els_central_american_prussia = {
             value = 0
             if = {
                 limit = {
-                    can_reach_target_state = { TARGET_STATE = scope:target_state }
+                    can_reach_target_state_to_conquer = { TARGET_STATE = scope:target_state }
                     scope:target_state = {
                         OR = {
                             state_region = s:STATE_GUATEMALA
@@ -1269,7 +1270,7 @@ ai_strategy_hon_mining_banana_enclave = {
         bg_plantations = 3.0
         bg_logging = 1.5
         bg_manufacturing = 0.1 # Nulo interés en industrializarse
-        bg_government_funded_institutions = 0.1
+        bg_government = 0.1
     }
 
     # Posturas comerciales para inundar el mercado de frutas y minerales
@@ -1771,8 +1772,8 @@ ai_strategy_uca_authority_management = {
     # No construye industria nueva; gasta en edificios gubernamentales y 
     # puertos para mantener la cohesión de la unión.
     building_group_weights = {
-        bg_government_funded_institutions = 3.0
-        bg_ports = 2.0
+        bg_government = 3.0
+        bg_private_infrastructure = 2.0
         bg_manufacturing = 0.1
     }
 

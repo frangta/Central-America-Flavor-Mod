@@ -507,3 +507,154 @@ els_francisco_duenas_character_template = {
 		set_global_variable = { name = cafm_hc_duenas value = this }
 	}
 }
+
+# ---------------------------------------------------------------------
+# CAFM Z8 — gobernantes nuevos de la tabla 1836–1850
+# ---------------------------------------------------------------------
+cafm_timoteo_menendez = {
+	# Timoteo Menéndez — cast ELS · nivel C · certeza V (cargo)
+	# NOTAS: Nacido en Ahuachapán. Jefe interino 23 may–7 jun 1837 y 6 ene 1838–23 may 1839.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Timoteo"
+	last_name = "cafm_Menendez"
+	historical = yes
+	female = no
+	birth_date = 1790.1.1			# M: fecha desconocida
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_timoteo_menendez value = this }
+	}
+}
+
+cafm_antonio_jose_canas = {
+	# Antonio José Cañas — cast ELS · nivel C · certeza V
+	# NOTAS: Nacido en San Vicente el 26 oct 1785. Militar y diplomático; ministro de Menéndez (1838); jefe
+#        23 may–11 jul 1839 y 7 abr–20 sep 1840 (lo derriba Malespín). Muere el 24 feb 1844.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Antonio_Jose"
+	last_name = "cafm_Canas"
+	historical = yes
+	female = no
+	birth_date = 1785.10.26			# V
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_ca_federalist
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_antonio_jose_canas value = this }
+	}
+}
+
+cafm_norberto_ramirez = {
+	# Norberto Ramírez Áreas — cast ELS · nivel C · certeza V
+	# NOTAS: Nacido en León el 15 abr 1802; abogado. Jefe de El Salvador (20 sep 1840–7 ene 1841) y Supremo
+#        Director de Nicaragua (1 abr 1849–1 abr 1851). Multinacional: cast ELS, pasa a NIC por la tabla.
+#        Muere en León el 11 jul 1856.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Norberto"
+	last_name = "cafm_Ramirez"
+	historical = yes
+	female = no
+	birth_date = 1802.4.15			# V
+	culture = cu:nicaraguan
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_norberto_ramirez value = this }
+	}
+}
+
+cafm_joaquin_eufrasio_guzman = {
+	# Joaquín Eufrasio Guzmán — cast ELS · nivel C · certeza P
+	# NOTAS: Vicepresidente; presidente interino 9 may–16 jun 1844 y 25 oct 1844–21 feb 1846 (se funden los
+#        interinatos de Fermín Palacios). Muere en 1875.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Joaquin_Eufrasio"
+	last_name = "cafm_Guzman"
+	historical = yes
+	female = no
+	birth_date = 1801.1.1			# P: solo el año
+	culture = cu:el_salvadorian
+	religion = rel:catholic
+	home_region = STATE_SAN_SALVADOR
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_els
+		set_global_variable = { name = cafm_hc_joaquin_eufrasio_guzman value = this }
+	}
+}

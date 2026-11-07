@@ -1,0 +1,121 @@
+﻿# Z2 (D): economia por era para los paises centroamericanos.
+# Peso 80: por debajo de las estrategias administrativas de cada pais (100-150),
+# asi que solo mandan cuando el pais no tiene la suya (Los Altos, Chiapas, Panama, o
+# cuando la estrategia propia no se cumple).
+
+# Anil y grana: la economia de 1836, hasta que llega el cafe.
+ai_strategy_ca_era_dye = {
+    icon = "gfx/interface/icons/ai_strategy_icons/agricultural_expansion.dds"
+    type = administrative
+
+    building_group_weights = {
+        bg_plantations = 3.0
+        bg_agriculture = 1.5
+        bg_light_industry = 1.2
+    }
+
+    goods_stances = {
+        dye = { stance = wants_export }
+        fabric = { stance = wants_export }
+        grain = { stance = wants_high_supply }
+    }
+
+    possible = {
+        is_ca_culture_country = yes
+        game_date < 1860.1.1
+        NOT = { has_journal_entry = je_ca_coffee_boom }
+        NOT = { has_variable = ca_coffee_boom_consolidated }
+        NOT = { has_journal_entry = je_ca_agro_export_boom }
+    }
+
+    weight = { value = 80 }
+}
+
+# La republica del cafe: con el diario del cafe activo o consolidado.
+ai_strategy_ca_era_coffee = {
+    icon = "gfx/interface/icons/ai_strategy_icons/agricultural_expansion.dds"
+    type = administrative
+
+    building_group_weights = {
+        bg_plantations = 4.0
+        bg_infrastructure = 2.0
+        bg_agriculture = 1.0
+    }
+
+
+    goods_stances = {
+        coffee = { stance = wants_export }
+    }
+
+    possible = {
+        is_ca_culture_country = yes
+        NOT = { has_journal_entry = je_ca_agro_export_boom }
+        OR = {
+            has_journal_entry = je_ca_coffee_boom
+            has_variable = ca_coffee_boom_consolidated
+        }
+    }
+
+    weight = { value = 80 }
+}
+
+# Banano y maderas: con el diario de la agroexportacion activo o completado.
+ai_strategy_ca_era_banana = {
+    icon = "gfx/interface/icons/ai_strategy_icons/resource_expansion.dds"
+    type = administrative
+
+    building_group_weights = {
+        bg_plantations = 4.0
+        bg_logging = 2.0
+        bg_private_infrastructure = 2.0
+    }
+
+
+    goods_stances = {
+        fruit = { stance = wants_export }
+        wood = { stance = wants_export }
+        coffee = { stance = wants_export }
+    }
+
+    possible = {
+        is_ca_culture_country = yes
+        OR = {
+            has_journal_entry = je_ca_agro_export_boom
+            has_variable = ca_agro_export_miracle_completed
+        }
+    }
+
+    weight = { value = 80 }
+}
+
+# La ruta del canal: Panama (Nicaragua ya tiene la suya, ai_strategy_nic_canal_empire).
+ai_strategy_ca_canal_empire = {
+    icon = "gfx/interface/icons/ai_strategy_icons/resource_expansion.dds"
+    type = administrative
+
+    building_group_weights = {
+        bg_infrastructure = 5.0
+        bg_trade = 3.0
+        bg_manufacturing = 1.5
+        bg_agriculture = 0.5
+    }
+
+    subsidies = {
+        building_railway = must_have
+        building_port = must_have
+    }
+
+    goods_stances = {
+        tools = { stance = wants_high_supply }
+        clippers = { stance = wants_high_supply }
+        coal = { stance = wants_high_supply }
+    }
+
+    possible = {
+        c:PNM ?= THIS
+        is_at_war = no
+        game_date >= 1848.1.1 # fiebre del oro: el transito por el istmo
+    }
+
+    weight = { value = 90 }
+}

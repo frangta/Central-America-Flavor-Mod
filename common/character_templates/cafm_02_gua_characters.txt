@@ -847,3 +847,43 @@ gua_barrios_character_template = {
 		chance = 90
 	}
 }
+
+# ---------------------------------------------------------------------
+# CAFM Z7 — gobernantes nuevos de la tabla 1836–1850
+# ---------------------------------------------------------------------
+cafm_juan_antonio_martinez = {
+	# Juan Antonio Martínez — cast GUA · nivel C · certeza P
+	# NOTAS: Presidente interino tras la renuncia de Carrera (16 ago–28 nov 1848). Se funde el interinato de
+#        José Bernardo Escobar (28 nov 1848–1 ene 1849). Muere en Guatemala el 30 abr 1854.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Juan_Antonio"
+	last_name = "cafm_Martinez"
+	historical = yes
+	female = no
+	birth_date = 1800.1.1			# M: año de nacimiento desconocido
+	culture = cu:guatemalan
+	religion = rel:catholic
+	home_region = STATE_GUATEMALA
+
+	# --- ROLES E IDENTIDAD ---
+	role = character_role_politician
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_gua
+		set_global_variable = { name = cafm_hc_juan_antonio_martinez_gua value = this }
+	}
+}
