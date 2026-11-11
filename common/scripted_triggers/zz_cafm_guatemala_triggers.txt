@@ -1,0 +1,36 @@
+﻿# =====================================================================
+# CAFM — GUATEMALA (1836–1851): triggers de las cadenas.
+# =====================================================================
+
+# Quién vive la cadena de Guatemala: el estado de Guatemala, o la Federación
+# mientras Guatemala siga siendo suya (la capital de la Unión).
+ca_gua_is_guatemala = {
+	OR = {
+		c:GUA ?= this
+		AND = {
+			c:UCA ?= this
+			NOT = { exists = c:GUA }
+			any_scope_state = {
+				state_region = s:STATE_GUATEMALA
+			}
+		}
+	}
+}
+
+# Las opciones alternativas solo salen fuera del modo histórico.
+ca_gua_alt_history = {
+	NOT = { has_global_variable = ca_world_historic }
+	NOT = { has_variable = gua_historic_mode }
+}
+
+# La Montaña está viva (para los botones).
+ca_gua_montana_activa = {
+	has_journal_entry = je_ca_gua_montana
+	has_variable = gua_montana
+}
+
+# Los Lucíos están vivos (para los botones).
+ca_gua_lucios_activos = {
+	has_journal_entry = je_ca_gua_lucios
+	has_variable = gua_lucios
+}

@@ -1,0 +1,428 @@
+﻿# =====================================================================
+# CAFM — Modificadores de Nicaragua (fase 2), Honduras (fase 2) y la
+# Mosquitia. Solo tipos que el mod ya usa en la 1.15. Las cifras son
+# propuestas de balance: cambiarlas aqui.
+# hon_gobierno_civil, ca_ig_approval_up y ca_ig_approval_down ya existen
+# en el mod y no se redefinen.
+# =====================================================================
+
+# --- NICARAGUA: fase 2 ---
+
+# PAIS. 2 anos. La asamblea de Chinandega.
+nic_asamblea_constituyente = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_add = 15
+	interest_group_ig_intelligentsia_pol_str_mult = 0.1
+}
+
+# PAIS. 20 anos. Libre, soberano e independiente (30 abr 1838).
+nic_estado_soberano = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_authority_add = 100
+	country_legitimacy_base_add = 10
+}
+
+# PAIS. 10 anos. Nicaragua no rompe el pacto federal.
+nic_fidelidad_federal = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_legitimacy_base_add = -5
+	interest_group_ig_intelligentsia_pol_str_mult = 0.2
+}
+
+# PAIS. 15 anos. La Constitucion del 12 nov 1838.
+nic_constitucion_1838 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_add = 20
+	country_legitimacy_base_add = 10
+}
+
+# PAIS. 3 anos. La guerra con El Salvador de 1839.
+nic_guerra_del_38 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_expenses_add = 150
+	state_conscription_rate_add = 0.05
+}
+
+# PAIS. 5 anos. Fonseca manda el ejercito.
+nic_gran_mariscal_mando = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	interest_group_ig_armed_forces_pol_str_mult = 0.25
+	country_legitimacy_base_add = -5
+}
+
+# PAIS. 5 anos. Levas, prensa cerrada y escuelas cerradas.
+nic_levas_del_mariscal = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	state_conscription_rate_add = 0.1
+	interest_group_ig_intelligentsia_pol_str_mult = -0.25
+	state_education_access_add = -0.05
+}
+
+# PAIS. 15 anos. El Gran Mariscal se queda (final malo).
+nic_gran_mariscal = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	interest_group_ig_armed_forces_pol_str_mult = 0.35
+	country_legitimacy_base_add = -15
+	state_education_access_add = -0.05
+}
+
+# PAIS. 10 anos. Cae Fonseca y vuelve el gobierno civil.
+nic_gobierno_civil = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 15
+	interest_group_ig_armed_forces_pol_str_mult = -0.15
+}
+
+# PAIS. 10 anos. Leon saqueada y quemada (24 ene 1845).
+nic_leon_saqueada = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	state_tax_capacity_mult = -0.2
+	country_legitimacy_base_add = -10
+	state_mortality_mult = 0.05
+}
+
+# PAIS. 5 anos. La amnistia del 10 may 1845.
+nic_amnistia = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_legitimacy_base_add = 8
+	country_loyalists_from_legitimacy_mult = 0.1
+}
+
+# PAIS. 20 anos. La sede en Managua (24 jul 1846).
+nic_capital_managua = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 15
+	country_bureaucracy_add = 20
+}
+
+# PAIS. 10 anos. Legitimistas contra Democraticos (final malo).
+nic_guerra_de_bandos = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	country_legitimacy_base_add = -20
+	state_tax_capacity_mult = -0.2
+	interest_group_ig_landowners_pol_str_mult = 0.15
+}
+
+# PAIS. 10 anos. Un Director por cuatro anos (alternativa).
+nic_mandato_largo = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_add = 15
+	country_legitimacy_base_add = 5
+}
+
+# PAIS. 5 anos. La protesta diplomatica por San Juan del Norte.
+nic_protesta_en_londres = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_prestige_add = 5
+}
+
+# PAIS. 12 anos. San Juan del Norte cedido al reino misquito.
+nic_greytown_cedido = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_tax_capacity_mult = -0.12
+	country_prestige_add = -10
+}
+
+# PAIS. 15 anos. El contrato del transito (26 ago 1849).
+nic_contrato_del_transito = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_minting_add = 10
+	interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.2
+}
+
+# PAIS. 10 anos. El rio explotado por el Estado.
+nic_rio_del_estado = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_add = 10
+	state_tax_capacity_mult = 0.08
+}
+
+# PAIS. 20 anos. El peaje de la ruta del transito.
+nic_peaje_del_san_juan = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_tax_capacity_mult = 0.2
+	country_minting_add = 15
+	state_migration_pull_mult = 0.1
+}
+
+# PAIS. 20 anos. La ruta funciona y es nuestra (final bueno).
+nic_ruta_del_transito = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	state_tax_capacity_mult = 0.25
+	country_prestige_add = 15
+	state_infrastructure_add = 10
+}
+
+# PAIS. 15 anos. El San Juan lo administran otros (final malo).
+nic_rio_ajeno = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_tax_capacity_mult = -0.15
+	country_prestige_add = -10
+}
+
+# --- HONDURAS: fase 2 ---
+
+# PAIS. 10 anos. Honduras no declara la separacion.
+hon_fidelidad_federal = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_legitimacy_base_add = -5
+	interest_group_ig_intelligentsia_pol_str_mult = 0.2
+}
+
+# PAIS. 15 anos. La Constitucion del Estado de 1839.
+hon_constitucion_1839 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_add = 20
+	country_legitimacy_base_add = 10
+}
+
+# PAIS. 15 anos. La Constitucion del 4 feb 1848.
+hon_constitucion_1848 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_add = 20
+	country_legitimacy_base_add = 12
+}
+
+# PAIS. 15 anos. Hay constitucion y se cumple.
+hon_constitucion_vigente = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_legitimacy_base_add = 10
+	country_loyalists_from_legitimacy_mult = 0.1
+}
+
+# PAIS. 20 anos. El Colegio Tridentino de Comayagua.
+hon_colegio_tridentino = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_education_access_add = 0.05
+	interest_group_ig_devout_pol_str_mult = 0.2
+}
+
+# PAIS. 20 anos. Un colegio laico en vez del seminario.
+hon_colegio_laico = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_education_access_add = 0.05
+	interest_group_ig_intelligentsia_pol_str_mult = 0.2
+}
+
+# PAIS. 20 anos. El puerto de La Paz, en el golfo de Fonseca.
+hon_puerto_de_la_paz = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_tax_capacity_mult = 0.15
+	state_infrastructure_add = 8
+}
+
+# PAIS. 20 anos. El diezmo de 1829 restituido.
+hon_diezmo_restituido = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_bureaucracy_add = 20
+	interest_group_ig_devout_pol_str_mult = 0.25
+	interest_group_ig_intelligentsia_pol_str_mult = -0.1
+}
+
+# PAIS. 20 anos. La Universidad del padre Jose Trinidad Reyes.
+hon_universidad_nacional = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_education_access_add = 0.08
+	interest_group_ig_intelligentsia_pol_str_mult = 0.25
+	country_bureaucracy_add = 15
+}
+
+# PAIS. 5 anos. La guerra declarada a los Estados Unidos (1847).
+hon_gesto_mexicano = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_prestige_add = 5
+	interest_group_ig_intelligentsia_pol_str_mult = 0.1
+}
+
+# PAIS. 5 anos. No meterse donde no hay nada que ganar.
+hon_prudencia_diplomatica = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_expenses_add = -50
+	country_legitimacy_base_add = 5
+}
+
+# PAIS. 10 anos. Aduana en los rios de la costa norte.
+hon_aduana_de_la_costa = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_tax_capacity_mult = 0.1
+	building_group_bg_logging_throughput_add = 0.05
+}
+
+# PAIS. 3 anos. La Isla del Tigre ocupada.
+hon_isla_ocupada = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_prestige_add = -15
+	state_tax_capacity_mult = -0.1
+}
+
+# PAIS. 10 anos. Un puerto bajo bandera ajena.
+hon_puerto_ocupado = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_tax_capacity_mult = -0.15
+	country_prestige_add = -10
+}
+
+# PAIS. 10 anos. El pacto de Chinandega de Squier (nov 1849).
+hon_pacto_de_chinandega = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_prestige_add = 10
+	country_military_goods_cost_mult = -0.05
+}
+
+# PAIS. 5 anos. La alianza con El Salvador (4 ene 1851).
+hon_alianza_ocotepeque = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_military_goods_cost_mult = -0.1
+	state_conscription_rate_add = 0.05
+}
+
+# PAIS. 20 anos. Hay Estado: constitucion, puerto y universidad.
+hon_estado_en_pie = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_bureaucracy_add = 25
+	country_legitimacy_base_add = 12
+}
+
+# PAIS. 20 anos. La Republica hecha (final bueno).
+hon_republica_hecha = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_bureaucracy_add = 30
+	country_legitimacy_base_add = 20
+	country_prestige_add = 15
+}
+
+# PAIS. 15 anos. Una republica de papel (final malo).
+hon_republica_de_papel = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_bureaucracy_add = -15
+	country_legitimacy_base_add = -15
+}
+
+# PAIS. 20 anos. La costa norte gobernada de verdad (final bueno).
+hon_costa_recuperada = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	state_tax_capacity_mult = 0.15
+	country_prestige_add = 15
+	building_group_bg_logging_throughput_add = 0.1
+}
+
+# PAIS. 20 anos. La costa norte perdida (final malo).
+hon_costa_perdida = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	state_tax_capacity_mult = -0.2
+	country_prestige_add = -20
+}
+
+# PAIS. 20 anos. Ni una aduana entre Trujillo y Gracias a Dios.
+hon_costa_sin_aduana = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_tax_capacity_mult = -0.15
+	building_group_bg_logging_throughput_add = -0.1
+}
+
+# --- MOSQUITIA (MKT) ---
+
+# PAIS. 20 anos. Londres reconoce el reino (1837).
+mkt_reino_reconocido = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_add = 10
+	country_legitimacy_base_add = 10
+}
+
+# PAIS. 10 anos. Un consul general decide en Bluefields.
+mkt_consul_en_bluefields = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_bureaucracy_add = 15
+	country_legitimacy_base_add = -10
+	country_prestige_add = -5
+}
+
+# PAIS. 20 anos. El reino no firma nada por si solo.
+mkt_tutela_britanica = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_legitimacy_base_add = -15
+	country_authority_add = -50
+	country_expenses_add = -50
+}
+
+# PAIS. 20 anos. El reino archivado en Belice (final malo).
+mkt_oficina_en_belice = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	country_legitimacy_base_add = -20
+	country_authority_add = -100
+	country_prestige_add = -15
+}
+
+# PAIS. 20 anos. Una corona que decide (final bueno).
+mkt_corona_propia = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 20
+	country_authority_add = 100
+	country_prestige_add = 15
+}
+
+# PAIS. 15 anos. El consejo criollo de Bluefields legisla.
+mkt_consejo_que_legisla = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_add = 20
+	interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.2
+}
+
+# PAIS. 20 anos. Milicia, tribunales y registro de tierras.
+mkt_estado_del_reino = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_bureaucracy_add = 25
+	country_authority_add = 50
+	state_conscription_rate_add = 0.05
+}
+
+# PAIS. 20 anos. El reino en pie (final bueno).
+mkt_reino_hecho = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_bureaucracy_add = 30
+	country_legitimacy_base_add = 20
+	country_prestige_add = 15
+}
+
+# PAIS. 15 anos. Un reino que es una orilla (final malo).
+mkt_solo_una_costa = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_bureaucracy_add = -15
+	state_tax_capacity_mult = -0.15
+}
+
+# PAIS. 15 anos. Los derechos de puerto de Greytown.
+mkt_aduana_de_greytown = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_tax_capacity_mult = 0.2
+	country_minting_add = 10
+}
+
+# PAIS. 15 anos. Licencias de corte a las companias de Belice.
+mkt_licencias_de_caoba = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_group_bg_logging_throughput_add = 0.1
+	state_tax_capacity_mult = 0.1
+}
+
+# PAIS. 15 anos. Zarzaparrilla, carey y las balandras jamaiquinas.
+mkt_comercio_de_la_costa = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_tax_capacity_mult = 0.08
+	interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.15
+}
+
+# PAIS. 20 anos. Gobernar rio arriba por medio de los caciques.
+mkt_pacto_con_los_caciques = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_authority_add = 50
+	country_legitimacy_base_add = 8
+}
+
+# PAIS. 15 anos. Frontera acordada en Cabo Gracias a Dios.
+mkt_frontera_acordada = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_prestige_add = 5
+	country_legitimacy_base_add = 5
+}
+

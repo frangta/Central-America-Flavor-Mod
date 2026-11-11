@@ -1,0 +1,17 @@
+﻿############################################################################
+# CAFM - Rediseño del diario de la UCA, entrega 1 (10 nov 2026)
+############################################################################
+
+# Final "Republica unitaria" (10 anos)
+ca_frca_unitary_republic = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_authority_add = 75
+	country_bureaucracy_add = 25
+	country_legitimacy_base_add = -5
+}
+
+# Lucha interna de un IG: el gobierno negocia con las dos facciones (1 ano)
+ca_ig_struggle_negotiation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_legitimacy_base_add = -5
+}

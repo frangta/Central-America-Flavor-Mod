@@ -1,0 +1,87 @@
+﻿# =====================================================================
+# CAFM — Triggers de Nicaragua (fase 2), Honduras (fase 2) y la Mosquitia.
+# =====================================================================
+
+# Quien vive la cadena de Nicaragua: el estado, o la UCA mientras Nicaragua
+# siga siendo suya (antes del 30 de abril de 1838).
+ca_nic_is_nicaragua = {
+	OR = {
+		c:NIC ?= this
+		AND = {
+			c:UCA ?= this
+			NOT = { exists = c:NIC }
+			any_scope_state = {
+				state_region = s:STATE_NICARAGUA
+			}
+		}
+	}
+}
+
+ca_hon_is_honduras = {
+	OR = {
+		c:HON ?= this
+		AND = {
+			c:UCA ?= this
+			NOT = { exists = c:HON }
+			any_scope_state = {
+				state_region = s:STATE_HONDURAS
+			}
+		}
+	}
+}
+
+ca_mkt_is_mosquitia = {
+	c:MKT ?= this
+}
+
+# Las opciones alternativas solo salen fuera del modo historico.
+ca_nic_alt_history = {
+	NOT = { has_global_variable = ca_world_historic }
+	NOT = { has_variable = nic_historic_mode }
+}
+
+ca_hon_alt_history = {
+	NOT = { has_global_variable = ca_world_historic }
+	NOT = { has_variable = hon_historic_mode }
+}
+
+ca_mkt_alt_history = {
+	NOT = { has_global_variable = ca_world_historic }
+	NOT = { has_variable = mkt_historic_mode }
+}
+
+# Diarios activos (para los botones)
+ca_nic_division_activo = {
+	has_journal_entry = je_ca_nic_division
+	has_variable = nic_division
+}
+
+ca_nic_fonseca_activo = {
+	has_journal_entry = je_ca_nic_fonseca
+	has_variable = nic_fonseca
+}
+
+ca_nic_transito_activo = {
+	has_journal_entry = je_ca_nic_transito
+	has_variable = nic_transito
+}
+
+ca_hon_republica_activo = {
+	has_journal_entry = je_ca_hon_republica
+	has_variable = hon_republica
+}
+
+ca_hon_costa_activo = {
+	has_journal_entry = je_ca_hon_costa
+	has_variable = hon_costa
+}
+
+ca_mkt_protectorado_activo = {
+	has_journal_entry = je_ca_mkt_protectorado
+	has_variable = mkt_protectorado
+}
+
+ca_mkt_reino_activo = {
+	has_journal_entry = je_ca_mkt_reino
+	has_variable = mkt_reino
+}

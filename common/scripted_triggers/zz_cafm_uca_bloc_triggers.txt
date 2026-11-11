@@ -1,0 +1,107 @@
+﻿############################################################################
+# CAFM - Rediseño del diario de la UCA, entrega 1 (10 nov 2026)
+# Triggers de los bandos y de la lucha interna de los IG.
+############################################################################
+
+# --- Bando de un IG (scope: interest_group) ---
+ca_ig_in_bloc_federal = { has_ideology = ideology:ideology_central_american_federal }
+ca_ig_in_bloc_centralist = { has_ideology = ideology:ideology_central_american_reactionary_2 }
+ca_ig_in_bloc_separatist = { has_ideology = ideology:ideology_ca_separatist }
+ca_ig_in_any_bloc = {
+	OR = {
+		ca_ig_in_bloc_federal = yes
+		ca_ig_in_bloc_centralist = yes
+		ca_ig_in_bloc_separatist = yes
+	}
+}
+
+# --- Lucha interna (scope: UCA). Uso: ca_struggle_active_for = { IG = armed_forces } ---
+ca_struggle_active_for = {
+	has_journal_entry = je_ca_ig_struggle_$IG$
+}
+
+# Hay sitio para otra lucha (maximo ca_bloc_struggle_max a la vez).
+ca_struggle_slot_free = {
+	OR = {
+		NOT = { has_variable = ca_struggle_active }
+		var:ca_struggle_active < ca_bloc_struggle_max
+	}
+}
+
+# El IG puede entrar en el mecanismo este mes (existe, sin lucha y sin espera).
+ca_struggle_ig_ready = {
+	exists = ig:ig_$IG$
+	NOT = { has_journal_entry = je_ca_ig_struggle_$IG$ }
+	NOT = { has_variable = ca_struggle_cd_$IG$ }
+}
+
+# El lider del IG tiene la ideologia de lider del bando al que va (TO) o del que viene (FROM).
+# El bando separatista no tiene ideologia de lider propia: no cuenta.
+ca_struggle_leader_backs_to = {
+	has_variable = ca_struggle_$IG$_to
+	OR = {
+		AND = {
+			var:ca_struggle_$IG$_to = flag:federal
+			ig:ig_$IG$ ?= { leader ?= { has_ideology = ideology:ideology_ca_federalist } }
+		}
+		AND = {
+			var:ca_struggle_$IG$_to = flag:centralist
+			ig:ig_$IG$ ?= { leader ?= { has_ideology = ideology:ideology_ca_unitarian } }
+		}
+	}
+}
+ca_struggle_leader_backs_from = {
+	has_variable = ca_struggle_$IG$_from
+	OR = {
+		AND = {
+			var:ca_struggle_$IG$_from = flag:federal
+			ig:ig_$IG$ ?= { leader ?= { has_ideology = ideology:ideology_ca_federalist } }
+		}
+		AND = {
+			var:ca_struggle_$IG$_from = flag:centralist
+			ig:ig_$IG$ ?= { leader ?= { has_ideology = ideology:ideology_ca_unitarian } }
+		}
+	}
+}
+
+# --- Diario de la UCA: extremos de la barra de mi bando (scope: UCA) ---
+# La barra es relativa al jugador: negativo = mi bando gana, positivo = el rival.
+# Por eso el fracaso es +100 en las DOS rutas; lo que cambia es que fracaso es.
+# La barra se lee desde el diario (scripted_bar_progress solo funciona en scope de diario).
+ca_fvc_servile_coup = {
+	ca_frca_route_federal = yes
+	je:je_historic_central_america_falls_apart ?= {
+		"scripted_bar_progress(ca_frca_fvc_bar)" >= 100
+	}
+}
+ca_fvc_liberal_revolution = {
+	ca_frca_route_centralist = yes
+	je:je_historic_central_america_falls_apart ?= {
+		"scripted_bar_progress(ca_frca_fvc_bar)" >= 100
+	}
+}
+
+# ===========================================================================
+# Entrega 2: pestanas de botones del diario de la UCA (scope: UCA)
+# ===========================================================================
+ca_uca_tab_gov = {
+	OR = {
+		NOT = { has_variable = ca_uca_tab }
+		var:ca_uca_tab = flag:gov
+	}
+}
+ca_uca_tab_states = {
+	has_variable = ca_uca_tab
+	var:ca_uca_tab = flag:states
+}
+ca_uca_tab_crisis = {
+	has_variable = ca_uca_tab
+	var:ca_uca_tab = flag:crisis
+}
+# El boton sale en su pestana; la IA ve todos. Uso: ca_uca_button_tab = { TAB = gov }
+ca_uca_button_tab = {
+	OR = {
+		is_ai = yes
+		ca_uca_tab_$TAB$ = yes
+	}
+}

@@ -1,0 +1,201 @@
+﻿# =====================================================================
+# CAFM — GUATEMALA (1836–1851): modificadores de ca_guatemala_events y de
+# los diarios de la Montaña y los Lucíos. Diseño: CAFM_GUATEMALA.md
+# Solo tipos de modificador comprobados contra modifiers.log de la 1.15.
+# Las cifras son propuestas de balance.
+# =====================================================================
+
+# --- FASE 1: el experimento liberal y la Montaña ---
+
+# PAÍS. Los Códigos de Livingston en vigor: jurado y habeas corpus en un país
+# con más del 90 % de analfabetismo.
+gua_codigos_livingston = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds
+	country_legitimacy_base_add = 5
+	country_bureaucracy_add = -20
+	interest_group_ig_devout_pol_str_mult = 0.15
+}
+
+# PAÍS. 3 años. Los Códigos solo en la capital: el campo sigue con los alcaldes.
+gua_livingston_capital = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds
+	country_legitimacy_base_add = 2
+}
+
+# PAÍS. 5 años. El cólera y el rumor del envenenamiento.
+gua_colera_morbus = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	state_mortality_mult = 0.25
+	state_birth_rate_mult = -0.1
+}
+
+# PAÍS. 3 años. Cordones sanitarios: nadie entra ni sale de los pueblos.
+gua_cordones_sanitarios = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_mortality_mult = -0.1
+	state_tax_capacity_mult = -0.1
+}
+
+# PAÍS. 2 años. Los curas reparten la medicina.
+gua_curas_medicina = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_mortality_mult = -0.15
+	interest_group_ig_devout_pol_str_mult = 0.2
+}
+
+# PAÍS. Mientras la barra pase de 80. La Montaña ya no se puede contener.
+gua_montana_incontenible = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	state_tax_capacity_mult = -0.25
+	country_authority_add = -100
+	interest_group_ig_rural_folk_pol_str_mult = 0.3
+}
+
+# PAÍS. 1 año. Comisionados a la Montaña (botón).
+gua_comisionados_montana = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_authority_add = -50
+}
+
+# PAÍS. 2 años. Represión ejemplar en los pueblos.
+gua_represion_pueblos = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	country_authority_add = 40
+	interest_group_ig_rural_folk_pol_str_mult = -0.15
+}
+
+# PAÍS. 5 años. Los ejidos garantizados: una legua cuadrada para cada pueblo.
+gua_ejidos_garantizados = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_tax_capacity_mult = -0.1
+	interest_group_ig_rural_folk_pol_str_mult = 0.15
+}
+
+# PAÍS. 10 años. El experimento liberal sobrevive (final bueno de la Montaña).
+gua_experimento_liberal = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_legitimacy_base_add = 10
+	country_bureaucracy_add = 20
+	interest_group_ig_intelligentsia_pol_str_mult = 0.2
+}
+
+# PAÍS. 5 años. Las demandas de la Montaña cumplidas: ni tierra ni empleos a extranjeros.
+gua_demandas_cumplidas = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_tax_capacity_mult = -0.15
+	interest_group_ig_rural_folk_pol_str_mult = 0.25
+	country_legitimacy_base_add = 5
+}
+
+# --- FASE 2: la guerra por Guatemala ---
+
+# PAÍS. 3 años. Guerra de guerrillas en la Montaña.
+gua_guerra_montana = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_military_goods_cost_mult = -0.2
+	state_infrastructure_add = -10
+}
+
+# PAÍS. 5 años. Guatemala, libre y soberana (17 abr 1839).
+gua_estado_soberano = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_authority_add = 100
+	country_legitimacy_base_add = 10
+}
+
+# PAÍS. 10 años. Los Altos reconquistado y resentido.
+gua_altos_resentido = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_tax_capacity_mult = -0.1
+	state_dependent_political_participation_add = -0.05
+}
+
+# PAÍS. 10 años. El vencedor de Morazán.
+gua_vencedor_de_morazan = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 15
+	interest_group_ig_armed_forces_pol_str_mult = 0.2
+}
+
+# --- FASE 3: el orden conservador ---
+
+# PAÍS. 15 años. La grana de Amatitlán y Antigua.
+gua_grana_de_los_valles = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_cotton_plantation_throughput_add = 0.2
+	building_group_bg_agriculture_throughput_add = 0.1
+}
+
+# PAÍS. 15 años. Grana y añil repartidos: menos ingreso, más estable.
+gua_grana_y_anil = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_group_bg_agriculture_throughput_add = 0.05
+	state_tax_capacity_mult = 0.1
+}
+
+# PAÍS. 10 años. El juez de tierras del Convenio de Guadalupe.
+gua_juez_de_tierras = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds
+	country_bureaucracy_add = -10
+	interest_group_ig_rural_folk_pol_str_mult = 0.1
+}
+
+# PAÍS. 10 años. La ley de trabajo de 1846: trabajo forzoso para quien no tenga recursos.
+gua_trabajo_forzoso = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	building_group_bg_agriculture_throughput_add = 0.15
+	interest_group_ig_rural_folk_pol_str_mult = -0.2
+}
+
+# PAÍS. 10 años. El estanco del aguardiente.
+gua_estanco_aguardiente = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_tax_capacity_mult = 0.2
+}
+
+# PAÍS. 20 años. La República de Guatemala (Decreto 15, 21 mar 1847).
+gua_republica_de_guatemala = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 15
+	country_authority_add = 100
+	country_bureaucracy_add = 20
+}
+
+# --- FASE 4: los Lucíos ---
+
+# PAÍS. Mientras la barra pase de 90. Los Lucíos dominan el oriente.
+gua_lucios_dominan = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	state_tax_capacity_mult = -0.2
+	country_authority_add = -75
+}
+
+# PAÍS. 5 años. El Tratado de Zacapa.
+gua_tratado_zacapa = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_legitimacy_base_add = 5
+	interest_group_ig_armed_forces_pol_str_mult = -0.1
+}
+
+# PAÍS. 10 años. Carrera, comandante general del ejército (ago 1849).
+gua_carrera_comandante = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_armed_forces_pol_str_mult = 0.25
+	country_authority_add = 75
+	state_conscription_rate_add = 0.05
+}
+
+# PAÍS. 10 años. El vencedor de La Arada (2 feb 1851).
+gua_vencedor_de_la_arada = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 20
+	interest_group_ig_armed_forces_pol_str_mult = 0.2
+}
+
+# PAÍS. 10 años. Los liberales vuelven al poder (final malo de los Lucíos).
+gua_restauracion_liberal = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	interest_group_ig_intelligentsia_pol_str_mult = 0.3
+	interest_group_ig_devout_pol_str_mult = -0.2
+	country_legitimacy_base_add = -10
+}
