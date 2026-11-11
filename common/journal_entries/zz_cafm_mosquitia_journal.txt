@@ -1,0 +1,168 @@
+﻿# =====================================================================
+# CAFM — MOSQUITIA (MKT, 1836-1851): los dos diarios del reino.
+# Los eventos con fecha los lanza ca_mkt_beats (pulso mensual del
+# on_action cafm_nhm_monthly). Aqui solo van los limites 0-100, los
+# umbrales de la barra y la deriva mensual.
+# =====================================================================
+
+je_ca_mkt_protectorado = {
+	icon = "gfx/interface/icons/event_icons/event_colonial.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:mkt_protectorado
+	}
+	goal_add_value = {
+		add = 60
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_mkt_protectorado_status_oficina
+				trigger = { var:mkt_protectorado >= ca_mkt_protectorado_oficina }
+			}
+			triggered_desc = {
+				desc = je_ca_mkt_protectorado_status_tutela
+				trigger = { var:mkt_protectorado >= ca_mkt_protectorado_tutela }
+			}
+			triggered_desc = {
+				desc = je_ca_mkt_protectorado_status_consul
+				trigger = { var:mkt_protectorado >= ca_mkt_protectorado_consul }
+			}
+			triggered_desc = {
+				desc = je_ca_mkt_protectorado_status_corona
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_mkt_protectorado_conclusion_corona
+		color = "gold_positive"
+		trigger = {
+			var:mkt_protectorado <= 20
+		}
+		effect = {
+			remove_variable = mkt_protectorado
+			add_modifier = { name = mkt_corona_propia years = 20 }
+		}
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_mkt_protectorado_conclusion_oficina
+		color = "blue_negative"
+		trigger = {
+			var:mkt_protectorado >= ca_mkt_protectorado_oficina
+		}
+		effect = {
+			remove_variable = mkt_protectorado
+			add_modifier = { name = mkt_oficina_en_belice years = 20 }
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_mkt_protectorado_clamp = yes
+			ca_mkt_protectorado_thresholds = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_mkt_protectorado_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}
+je_ca_mkt_reino = {
+	icon = "gfx/interface/icons/event_icons/event_documents.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:mkt_reino
+	}
+	goal_add_value = {
+		add = 80
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_mkt_reino_status_estado
+				trigger = { var:mkt_reino >= ca_mkt_reino_estado }
+			}
+			triggered_desc = {
+				desc = je_ca_mkt_reino_status_consejo
+				trigger = { var:mkt_reino >= ca_mkt_reino_consejo }
+			}
+			triggered_desc = {
+				desc = je_ca_mkt_reino_status_costa
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_mkt_reino_conclusion_hecho
+		color = "gold_positive"
+		trigger = {
+			var:mkt_reino >= 100
+		}
+		effect = {
+			remove_variable = mkt_reino
+			add_modifier = { name = mkt_reino_hecho years = 20 }
+		}
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_mkt_reino_conclusion_costa
+		color = "blue_negative"
+		trigger = {
+			game_date >= 1855.1.1
+			var:mkt_reino < ca_mkt_reino_consejo
+		}
+		effect = {
+			remove_variable = mkt_reino
+			add_modifier = { name = mkt_solo_una_costa years = 15 }
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_mkt_reino_clamp = yes
+			ca_mkt_reino_thresholds = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_mkt_reino_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}

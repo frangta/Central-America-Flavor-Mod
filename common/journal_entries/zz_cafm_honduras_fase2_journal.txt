@@ -1,0 +1,168 @@
+﻿# =====================================================================
+# CAFM — HONDURAS — FASE 2 (1838-1852): los dos diarios nuevos.
+# Los eventos con fecha los lanza ca_hon_beats (pulso mensual del
+# on_action cafm_nhm_monthly). Aqui solo van los limites 0-100, los
+# umbrales de la barra y la deriva mensual.
+# =====================================================================
+
+je_ca_hon_republica = {
+	icon = "gfx/interface/icons/event_icons/event_documents.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:hon_republica
+	}
+	goal_add_value = {
+		add = 80
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_hon_republica_status_nacion
+				trigger = { var:hon_republica >= ca_hon_republica_nacion }
+			}
+			triggered_desc = {
+				desc = je_ca_hon_republica_status_estado
+				trigger = { var:hon_republica >= ca_hon_republica_estado }
+			}
+			triggered_desc = {
+				desc = je_ca_hon_republica_status_papel
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_hon_republica_conclusion_hecha
+		color = "gold_positive"
+		trigger = {
+			var:hon_republica >= 100
+		}
+		effect = {
+			remove_variable = hon_republica
+			add_modifier = { name = hon_republica_hecha years = 20 }
+		}
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_hon_republica_conclusion_papel
+		color = "blue_negative"
+		trigger = {
+			game_date >= 1853.1.1
+			var:hon_republica < ca_hon_republica_estado
+		}
+		effect = {
+			remove_variable = hon_republica
+			add_modifier = { name = hon_republica_de_papel years = 15 }
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_hon_republica_clamp = yes
+			ca_hon_republica_thresholds = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_hon_republica_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}
+je_ca_hon_costa = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:hon_costa
+	}
+	goal_add_value = {
+		add = 50
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_hon_costa_status_perdida
+				trigger = { var:hon_costa >= ca_hon_costa_perdida }
+			}
+			triggered_desc = {
+				desc = je_ca_hon_costa_status_ocupacion
+				trigger = { var:hon_costa >= ca_hon_costa_ocupacion }
+			}
+			triggered_desc = {
+				desc = je_ca_hon_costa_status_presion
+				trigger = { var:hon_costa >= ca_hon_costa_presion }
+			}
+			triggered_desc = {
+				desc = je_ca_hon_costa_status_nuestra
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_hon_costa_conclusion_recuperada
+		color = "gold_positive"
+		trigger = {
+			var:hon_costa <= 20
+		}
+		effect = {
+			remove_variable = hon_costa
+			add_modifier = { name = hon_costa_recuperada years = 20 }
+		}
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_hon_costa_conclusion_perdida
+		color = "blue_negative"
+		trigger = {
+			var:hon_costa >= ca_hon_costa_perdida
+		}
+		effect = {
+			remove_variable = hon_costa
+			add_modifier = { name = hon_costa_perdida years = 20 }
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_hon_costa_clamp = yes
+			ca_hon_costa_thresholds = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_hon_costa_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}

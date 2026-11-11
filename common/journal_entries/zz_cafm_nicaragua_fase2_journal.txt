@@ -1,0 +1,255 @@
+﻿# =====================================================================
+# CAFM — NICARAGUA — FASE 2 (1838-1851): los tres diarios.
+# Los eventos con fecha los lanza ca_nic_beats (pulso mensual del
+# on_action cafm_nhm_monthly). Aqui solo van los limites 0-100, los
+# umbrales de la barra y la deriva mensual.
+# =====================================================================
+
+je_ca_nic_division = {
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:nic_division
+	}
+	goal_add_value = {
+		add = 70
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_nic_division_status_guerra
+				trigger = { var:nic_division >= ca_nic_division_guerra }
+			}
+			triggered_desc = {
+				desc = je_ca_nic_division_status_ruptura
+				trigger = { var:nic_division >= ca_nic_division_ruptura }
+			}
+			triggered_desc = {
+				desc = je_ca_nic_division_status_tension
+				trigger = { var:nic_division >= ca_nic_division_tension }
+			}
+			triggered_desc = {
+				desc = je_ca_nic_division_status_baja
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_nic_division_conclusion_managua
+		color = "gold_positive"
+		trigger = {
+			has_variable = nic_pacto_managua
+		}
+		effect = {
+			remove_variable = nic_division
+			add_modifier = { name = nic_capital_managua years = 20 }
+		}
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_nic_division_conclusion_guerra
+		color = "blue_negative"
+		trigger = {
+			var:nic_division >= ca_nic_division_guerra
+		}
+		effect = {
+			remove_variable = nic_division
+			add_modifier = { name = nic_guerra_de_bandos years = 10 }
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_nic_division_clamp = yes
+			ca_nic_division_thresholds = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_nic_division_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}
+je_ca_nic_fonseca = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:nic_fonseca
+	}
+	goal_add_value = {
+		add = 90
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_nic_fonseca_status_dictadura
+				trigger = { var:nic_fonseca >= ca_nic_fonseca_dictadura }
+			}
+			triggered_desc = {
+				desc = je_ca_nic_fonseca_status_mariscal
+				trigger = { var:nic_fonseca >= ca_nic_fonseca_mariscal }
+			}
+			triggered_desc = {
+				desc = je_ca_nic_fonseca_status_mando
+				trigger = { var:nic_fonseca >= ca_nic_fonseca_mando }
+			}
+			triggered_desc = {
+				desc = je_ca_nic_fonseca_status_baja
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_nic_fonseca_conclusion_caido
+		color = "gold_positive"
+		trigger = {
+			has_variable = nic_fonseca_caido
+		}
+		effect = {
+			remove_variable = nic_fonseca
+			add_modifier = { name = nic_gobierno_civil years = 10 }
+		}
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_nic_fonseca_conclusion_mariscal
+		color = "blue_negative"
+		trigger = {
+			var:nic_fonseca >= 100
+		}
+		effect = {
+			remove_variable = nic_fonseca
+			set_variable = nic_mariscal_perpetuo
+			add_modifier = { name = nic_gran_mariscal years = 15 }
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_nic_fonseca_clamp = yes
+			ca_nic_fonseca_thresholds = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_nic_fonseca_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}
+je_ca_nic_transito = {
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:nic_transito
+	}
+	goal_add_value = {
+		add = 100
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_nic_transito_status_ruta
+				trigger = { var:nic_transito >= ca_nic_transito_ruta }
+			}
+			triggered_desc = {
+				desc = je_ca_nic_transito_status_contrato
+				trigger = { var:nic_transito >= ca_nic_transito_contrato }
+			}
+			triggered_desc = {
+				desc = je_ca_nic_transito_status_interes
+				trigger = { var:nic_transito >= ca_nic_transito_interes }
+			}
+			triggered_desc = {
+				desc = je_ca_nic_transito_status_bajo
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_nic_transito_conclusion_nuestra
+		color = "gold_positive"
+		trigger = {
+			var:nic_transito >= 100
+		}
+		effect = {
+			remove_variable = nic_transito
+			add_modifier = { name = nic_ruta_del_transito years = 20 }
+		}
+	}
+
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_nic_transito_conclusion_ajena
+		color = "blue_negative"
+		trigger = {
+			game_date >= 1852.1.1
+			var:nic_transito < ca_nic_transito_contrato
+		}
+		effect = {
+			remove_variable = nic_transito
+			add_modifier = { name = nic_rio_ajeno years = 15 }
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_nic_transito_clamp = yes
+			ca_nic_transito_thresholds = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_nic_transito_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}

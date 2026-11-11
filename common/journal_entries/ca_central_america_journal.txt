@@ -107,8 +107,13 @@ je_historic_central_america_falls_apart = {
 	scripted_button = ca_button_supreme_levy
 	scripted_button = ca_button_standing_army
 	scripted_button = ca_request_intervention_button # F7: peticiones de intervencion de los estados
+	# Entrega 2 UCA: botones nuevos de la ruta federal (zz_cafm_uca_buttons.txt)
+	scripted_button = ca_button_reform_1835
+	scripted_button = ca_button_federal_commissioners
+	scripted_button = ca_button_federal_reserve_army
 
 	scripted_progress_bar = frca_support_bar
+	scripted_progress_bar = ca_frca_fvc_bar # UCA: mi bando (izq.) <-> el rival (der.)
 	weight = 100
 
 	# F9: minimapa de lealtad (gui/ca_frca_minimap.gui)
@@ -116,6 +121,17 @@ je_historic_central_america_falls_apart = {
 		gui = "gui/ca_frca_minimap.gui"
 		name = "ca_frca_minimap_widget"
 		container = "custom_widget_container_1"
+	}
+	# Entrega 2 UCA: aspecto de la ruta (sustituye el icono) y pestanas de botones
+	widget = {
+		gui = "gui/ca_uca_panel.gui"
+		name = "ca_uca_header_widget"
+		container = "custom_widget_container_je_icon"
+	}
+	widget = {
+		gui = "gui/ca_uca_panel.gui"
+		name = "ca_uca_tabs_widget"
+		container = "custom_widget_container_2"
 	}
 
 	on_monthly_pulse = {
@@ -135,6 +151,7 @@ je_historic_central_america_falls_apart = {
 			}
 			ca_route_apply_pending_amendments = yes # F11
 			ca_livingston_historic_repeal = yes # F16
+			ca_bloc_monthly = yes # Entrega 1 UCA: barra F<->C e ideologias de los IG
 		}
 		# Eventos de la crisis. Se ordenan por fase en F5-F8, cuando se reescriben.
 		events = {
@@ -191,6 +208,7 @@ je_historic_central_america_falls_apart = {
 	}
 
 	# A y B se evaluan el 1845.1.1; C en cuanto se firma la Dieta (solo ruta federal).
+	# Entrega 1 UCA: ruta centralista = B o la Republica unitaria (fase IV); ruta federal = A, B o C.
 	outcome = {
 		conclusion_desc = je_standard_failure_conclusion_desc
 		flags = { hidden invalid_outcome }
@@ -206,60 +224,122 @@ je_historic_central_america_falls_apart = {
 		conclusion_desc = je_standard_completion_conclusion_desc
 		color = "gold_positive"
 		trigger = {
-			OR = {
-				# A. La Republica sobrevive
-				AND = {
-					custom_tooltip = { text = je_frca_outcome_a_tt always = yes }
-					custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
-					custom_tooltip = {
-						text = je_frca_not_won_war_tt
-						NOT = { has_variable = frca_won_war }
+			# Entrega 1 UCA: cada ruta solo muestra sus finales (trigger_if oculta los de la otra).
+			trigger_if = {
+				limit = { ca_frca_route_centralist = yes }
+				OR = {
+					# B. Union por la espada
+					AND = {
+						custom_tooltip = { text = je_frca_outcome_b_tt always = yes }
+						custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
+						custom_tooltip = {
+							text = uca_won_war_tt
+							has_variable = frca_won_war
+						}
+						custom_tooltip = {
+							text = je_frca_core_regions_tt
+							ca_frca_holds_core_regions = yes
+						}
+						custom_tooltip = {
+							text = je_frca_bar_threshold_b_tt
+							scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_threshold_b }
+						}
+						custom_tooltip = {
+							text = je_frca_fronts_lost_max_2_tt
+							ca_frca_fronts_lost_count <= 2
+						}
 					}
-					custom_tooltip = {
-						text = je_frca_core_regions_tt
-						ca_frca_holds_core_regions = yes
+					# R. La Republica unitaria (nuevo)
+					AND = {
+						custom_tooltip = { text = je_frca_outcome_unitary_tt always = yes }
+						custom_tooltip = {
+							text = je_frca_unitary_phase_tt
+							ca_frca_phase_ge = { VALUE = 4 }
+						}
+						custom_tooltip = {
+							text = je_frca_unitary_congress_tt
+							has_variable = frca_congress_dissolved
+						}
+						custom_tooltip = {
+							text = je_frca_unitary_capital_tt
+							has_variable = frca_capital_guatemala
+						}
+						custom_tooltip = {
+							text = je_frca_unitary_army_tt
+							has_variable = frca_standing_army
+						}
+						custom_tooltip = {
+							text = je_frca_bar_threshold_unitary_tt
+							scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_threshold_unitary }
+						}
+						custom_tooltip = {
+							text = je_frca_unitary_power_tt
+							ca_bloc_power_centralist >= ca_bloc_unitary_power_min
+						}
+						custom_tooltip = {
+							text = je_frca_core_regions_tt
+							ca_frca_holds_core_regions = yes
+						}
+						is_at_war = no
 					}
-					custom_tooltip = {
-						text = je_frca_bar_threshold_a_tt
-						scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_threshold_a }
-					}
-					custom_tooltip = {
-						text = je_frca_fronts_lost_max_1_tt
-						ca_frca_fronts_lost_count <= 1
-					}
-					is_at_war = no
 				}
-				# B. Union por la espada
-				AND = {
-					custom_tooltip = { text = je_frca_outcome_b_tt always = yes }
-					custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
-					custom_tooltip = {
-						text = uca_won_war_tt
-						has_variable = frca_won_war
+			}
+			trigger_else = {
+				OR = {
+					# A. La Republica sobrevive
+					AND = {
+						custom_tooltip = { text = je_frca_outcome_a_tt always = yes }
+						custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
+						custom_tooltip = {
+							text = je_frca_not_won_war_tt
+							NOT = { has_variable = frca_won_war }
+						}
+						custom_tooltip = {
+							text = je_frca_core_regions_tt
+							ca_frca_holds_core_regions = yes
+						}
+						custom_tooltip = {
+							text = je_frca_bar_threshold_a_tt
+							scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_threshold_a }
+						}
+						custom_tooltip = {
+							text = je_frca_federal_power_a_tt
+							ca_bloc_power_federal >= ca_bloc_federal_a_power_min
+						}
+						custom_tooltip = {
+							text = je_frca_fronts_lost_max_1_tt
+							ca_frca_fronts_lost_count <= 1
+						}
+						is_at_war = no
 					}
-					custom_tooltip = {
-						text = je_frca_core_regions_tt
-						ca_frca_holds_core_regions = yes
+					# B. Union por la espada
+					AND = {
+						custom_tooltip = { text = je_frca_outcome_b_tt always = yes }
+						custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
+						custom_tooltip = {
+							text = uca_won_war_tt
+							has_variable = frca_won_war
+						}
+						custom_tooltip = {
+							text = je_frca_core_regions_tt
+							ca_frca_holds_core_regions = yes
+						}
+						custom_tooltip = {
+							text = je_frca_bar_threshold_b_tt
+							scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_threshold_b }
+						}
+						custom_tooltip = {
+							text = je_frca_fronts_lost_max_2_tt
+							ca_frca_fronts_lost_count <= 2
+						}
 					}
-					custom_tooltip = {
-						text = je_frca_bar_threshold_b_tt
-						scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_threshold_b }
-					}
-					custom_tooltip = {
-						text = je_frca_fronts_lost_max_2_tt
-						ca_frca_fronts_lost_count <= 2
-					}
-				}
-				# C. La Confederacion (la marca la pone "Convocar la Dieta", F9/F12)
-				AND = {
-					custom_tooltip = { text = je_frca_outcome_c_tt always = yes }
-					custom_tooltip = {
-						text = je_frca_route_federal_tt
-						ca_frca_route_federal = yes
-					}
-					custom_tooltip = {
-						text = je_frca_diet_signed_tt
-						has_variable = frca_diet_signed
+					# C. La Confederacion (la marca la pone "Convocar la Dieta", F9/F12)
+					AND = {
+						custom_tooltip = { text = je_frca_outcome_c_tt always = yes }
+						custom_tooltip = {
+							text = je_frca_diet_signed_tt
+							has_variable = frca_diet_signed
+						}
 					}
 				}
 			}
@@ -267,14 +347,19 @@ je_historic_central_america_falls_apart = {
 		effect = {
 			ca_frca_journal_cleanup = yes
 			if = {
-				limit = { has_variable = frca_diet_signed }
+				limit = { ca_frca_route_federal = yes has_variable = frca_diet_signed }
 				set_variable = frca_outcome_c
 				ca_frca_outcome_c = yes
 			}
 			else_if = {
-				limit = { has_variable = frca_won_war }
+				limit = { has_variable = frca_won_war game_date >= 1845.1.1 }
 				set_variable = frca_outcome_b
 				ca_frca_outcome_b = yes
+			}
+			else_if = {
+				limit = { ca_frca_route_centralist = yes }
+				set_variable = frca_outcome_unitary
+				ca_frca_outcome_unitary = yes
 			}
 			else = {
 				set_variable = frca_outcome_a
@@ -290,34 +375,81 @@ je_historic_central_america_falls_apart = {
 		conclusion_desc = je_standard_failure_conclusion_desc
 		color = "blue_negative"
 		trigger = {
-			OR = {
-				custom_tooltip = {
-					text = frca_support_failed_tt
-					scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" <= 0 }
+			# Entrega 1 UCA: cada ruta solo muestra sus fracasos.
+			trigger_if = {
+				limit = { ca_frca_route_federal = yes }
+				OR = {
+					custom_tooltip = {
+						text = frca_support_failed_tt
+						scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" <= 0 }
+					}
+					# CAFM F6: con la IA historica, la Federacion sigue hasta "El exilio de Morazan"
+					# aunque los estados se separen y se reconozcan (como en 1838-1840)
+					custom_tooltip = {
+						text = je_frca_fail_independent_tt
+						NOT = { ca_frca_ai_historic = yes }
+						ca_core_states_independent_count >= 3
+					}
+					custom_tooltip = {
+						text = frca_lost_war_tt
+						has_variable = frca_lost_war
+					}
+					custom_tooltip = {
+						text = je_frca_fail_recognized_tt
+						NOT = { ca_frca_ai_historic = yes }
+						ca_frca_core_independence_recognized = yes
+					}
+					custom_tooltip = {
+						text = je_frca_fail_exile_tt
+						has_variable = frca_morazan_exiled
+					}
+					custom_tooltip = {
+						text = je_frca_fail_servile_coup_tt
+						ca_fvc_servile_coup = yes
+					}
 				}
-				# CAFM F6: con la IA historica, la Federacion sigue hasta "El exilio de Morazan"
-				# aunque los estados se separen y se reconozcan (como en 1838-1840)
-				custom_tooltip = {
-					text = je_frca_fail_independent_tt
-					NOT = { ca_frca_ai_historic = yes }
-					ca_core_states_independent_count >= 3
-				}
-				custom_tooltip = {
-					text = frca_lost_war_tt
-					has_variable = frca_lost_war
-				}
-				custom_tooltip = {
-					text = je_frca_fail_recognized_tt
-					NOT = { ca_frca_ai_historic = yes }
-					ca_frca_core_independence_recognized = yes
-				}
-				custom_tooltip = {
-					text = je_frca_fail_exile_tt
-					has_variable = frca_morazan_exiled
+			}
+			trigger_else = {
+				OR = {
+					custom_tooltip = {
+						text = frca_support_failed_tt
+						scope:journal_entry = { "scripted_bar_progress(frca_support_bar)" <= 0 }
+					}
+					# CAFM F6: con la IA historica, la Federacion sigue hasta "El exilio de Morazan"
+					# aunque los estados se separen y se reconozcan (como en 1838-1840)
+					custom_tooltip = {
+						text = je_frca_fail_independent_tt
+						NOT = { ca_frca_ai_historic = yes }
+						ca_core_states_independent_count >= 3
+					}
+					custom_tooltip = {
+						text = frca_lost_war_tt
+						has_variable = frca_lost_war
+					}
+					custom_tooltip = {
+						text = je_frca_fail_recognized_tt
+						NOT = { ca_frca_ai_historic = yes }
+						ca_frca_core_independence_recognized = yes
+					}
+					custom_tooltip = {
+						text = je_frca_fail_liberal_revolution_tt
+						ca_fvc_liberal_revolution = yes
+					}
 				}
 			}
 		}
 		effect = {
+			# Entrega 1 UCA: se marca la causa para los eventos de la entrega 2
+			if = {
+				limit = { ca_fvc_servile_coup = yes }
+				set_variable = frca_servile_coup
+				trigger_event = { id = cafm_uca_route.5 popup = yes } # Entrega 2: el golpe servil
+			}
+			else_if = {
+				limit = { ca_fvc_liberal_revolution = yes }
+				set_variable = frca_liberal_revolution
+				trigger_event = { id = cafm_uca_route.6 popup = yes } # Entrega 2: la revolucion liberal
+			}
 			set_variable = frca_outcome_d1
 			ca_frca_journal_cleanup = yes
 			activate_law = law_type:law_ca_caudillismo # F13 (A3): D1 trae la era de los caudillos

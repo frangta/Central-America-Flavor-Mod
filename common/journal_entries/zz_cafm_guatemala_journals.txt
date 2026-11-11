@@ -1,0 +1,203 @@
+﻿# =====================================================================
+# CAFM — GUATEMALA (1836–1851): diarios de la Montaña y de los Lucíos.
+# Diseño: CAFM_GUATEMALA.md. Estilo igual al de Honduras y Nicaragua fase 1:
+# barra por variable (current_value + goal_add_value), pulso semanal con las
+# etapas por fecha y pulso mensual con la deriva.
+#
+# je_ca_gua_montana  (1837–1839): la rebelión campesina contra Gálvez.
+#                    Subir es malo para el gobierno liberal.
+# je_ca_gua_lucios   (1847–1851): la revuelta de los Lucíos contra Carrera.
+#                    Subir es malo para el gobierno conservador.
+# =====================================================================
+
+# =====================================================================
+# LA MONTAÑA (1837–1839)
+# La añade ca_guatemala_events.2 (los Códigos de Livingston), que pone
+# var:gua_montana en 10 ANTES de añadir el diario, así el objetivo queda en 100.
+# =====================================================================
+je_ca_gua_montana = {
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:gua_montana
+	}
+	goal_add_value = {
+		add = 90
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_gua_montana_status_incontenible
+				trigger = { var:gua_montana >= 80 }
+			}
+			triggered_desc = {
+				desc = je_ca_gua_montana_status_alta
+				trigger = { var:gua_montana >= 40 }
+			}
+			triggered_desc = {
+				desc = je_ca_gua_montana_status_baja
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	# El gobierno liberal sobrevive: la Montaña se apaga antes de 1838.
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_gua_montana_conclusion_apagada
+		color = "gold_positive"
+		trigger = {
+			var:gua_montana <= 0
+			NOT = { has_variable = gua_carrera_en_la_capital }
+		}
+		effect = {
+			set_variable = gua_montana_apagada
+			add_modifier = { name = gua_experimento_liberal months = 120 }
+			remove_variable = gua_montana
+		}
+	}
+
+	# Carrera entra en la capital: cae el gobierno liberal (lo marca .13).
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_gua_montana_conclusion_carrera
+		color = "blue_negative"
+		trigger = {
+			has_variable = gua_carrera_en_la_capital
+		}
+		effect = {
+			remove_variable = gua_montana
+			if = {
+				limit = { has_modifier = gua_montana_incontenible }
+				remove_modifier = gua_montana_incontenible
+			}
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_gua_montana_clamp = yes
+			ca_gua_montana_thresholds = yes
+			ca_gua_montana_beats = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_gua_montana_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}
+
+# =====================================================================
+# LOS LUCÍOS (1847–1851)
+# La añade ca_guatemala_events.28, que pone var:gua_lucios en 20.
+# =====================================================================
+je_ca_gua_lucios = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:gua_lucios
+	}
+	goal_add_value = {
+		add = 80
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_gua_lucios_status_sitio
+				trigger = { var:gua_lucios >= 90 }
+			}
+			triggered_desc = {
+				desc = je_ca_gua_lucios_status_alta
+				trigger = { var:gua_lucios >= 50 }
+			}
+			triggered_desc = {
+				desc = je_ca_gua_lucios_status_baja
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	# La Arada (.37) o la revuelta se apaga.
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_gua_lucios_conclusion_arada
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				has_variable = gua_la_arada_ganada
+				var:gua_lucios <= 0
+			}
+		}
+		effect = {
+			set_variable = gua_lucios_derrotados
+			remove_variable = gua_lucios
+			if = {
+				limit = { has_modifier = gua_lucios_dominan }
+				remove_modifier = gua_lucios_dominan
+			}
+		}
+	}
+
+	# Los liberales toman el país y Carrera no vuelve.
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_gua_lucios_conclusion_liberales
+		color = "blue_negative"
+		trigger = {
+			OR = {
+				has_variable = gua_liberales_triunfan
+				AND = {
+					var:gua_lucios >= 100
+					NOT = { has_variable = gua_carrera_restituido }
+				}
+			}
+		}
+		effect = {
+			set_variable = gua_liberales_triunfan
+			remove_variable = gua_lucios
+			add_modifier = { name = gua_restauracion_liberal months = 120 }
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_gua_lucios_clamp = yes
+			ca_gua_lucios_thresholds = yes
+			ca_gua_lucios_beats = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_gua_lucios_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}

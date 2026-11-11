@@ -192,12 +192,25 @@ je_ca_historic_situation_in_guatemala = {
 	on_monthly_pulse = {
 		events = {
 			ca_central_america.15 # F16: el colera en Guatemala (si existe GUA)
-			ca_guatemala_events.5 # La caida de Galvez (1838)
+			ca_guatemala_events.5 # La caida de Galvez (1838); la .13 la marca como vista
 			ca_guatemala_events.6 # Ratificacion institucional (dic 1842)
 			ca_guatemala_events.7 # Carrera presidente (dic 1844)
-			ca_guatemala_events.8 # La renuncia de Carrera (ago 1848)
+			ca_guatemala_events.8 # La renuncia de Carrera (ago 1848); la .32 la marca como vista
 		}
 	}
+
+	# CAFM Guatemala 1836-1851: las etapas por fecha de las 4 fases.
+	on_weekly_pulse = {
+		effect = {
+			ca_gua_beats = yes
+		}
+	}
+
+	# CAFM Guatemala 1836-1851: los 4 botones del diseño §4.4
+	scripted_button = ca_button_gua_comisionados
+	scripted_button = ca_button_gua_juez_tierras
+	scripted_button = ca_button_gua_estanco
+	scripted_button = ca_button_gua_llamar_caudillo
 
 	weight = 100
 	transferable = no

@@ -1,0 +1,877 @@
+﻿############################################################################
+# CAFM - Rediseño del diario de la UCA, entrega 1 (10 nov 2026)
+# Diarios temporales de lucha interna, uno por tipo de IG. Los abre ca_struggle_start
+# (zz_cafm_uca_bloc_effects.txt). Duran como minimo 1 mes y como maximo 24.
+############################################################################
+
+je_ca_ig_struggle_armed_forces = {
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
+
+	should_be_pinned_by_default_involved = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_federal
+				trigger = { has_variable = ca_struggle_armed_forces_to var:ca_struggle_armed_forces_to = flag:federal }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_centralist
+				trigger = { has_variable = ca_struggle_armed_forces_to var:ca_struggle_armed_forces_to = flag:centralist }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	scripted_progress_bar = ca_ig_struggle_armed_forces_bar
+	weight = 50
+
+	on_monthly_pulse = {
+		effect = {
+			ca_struggle_monthly = { IG = armed_forces }
+		}
+	}
+
+	# El IG ya no existe, o el diario de la UCA termino.
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				NOT = { exists = ig:ig_armed_forces }
+				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+			}
+		}
+		effect = {
+			ca_struggle_end_quiet = { IG = armed_forces }
+		}
+	}
+
+	# El IG se pasa al bando rival.
+	outcome = {
+		header = je_ca_ig_struggle_change_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_change_conclusion
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_armed_forces_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_change_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_armed_forces_bar)" >= 100 }
+			}
+		}
+		effect = {
+			ca_struggle_end_change = { IG = armed_forces }
+		}
+	}
+
+	# El IG conserva su bando.
+	outcome = {
+		header = je_ca_ig_struggle_keep_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_keep_conclusion
+		color = "blue_negative"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_armed_forces_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_keep_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_armed_forces_bar)" <= 0 }
+			}
+		}
+		effect = {
+			ca_struggle_end_keep = { IG = armed_forces }
+		}
+	}
+
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = je_ca_ig_struggle_timeout_conclusion
+		flags = { timeout }
+		effect = {
+			custom_tooltip = je_ca_ig_struggle_timeout_tt
+			ca_struggle_end_quiet = { IG = armed_forces }
+		}
+	}
+
+	timeout = 730
+
+	transferable = no
+}
+
+je_ca_ig_struggle_devout = {
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
+
+	should_be_pinned_by_default_involved = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_federal
+				trigger = { has_variable = ca_struggle_devout_to var:ca_struggle_devout_to = flag:federal }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_centralist
+				trigger = { has_variable = ca_struggle_devout_to var:ca_struggle_devout_to = flag:centralist }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	scripted_progress_bar = ca_ig_struggle_devout_bar
+	weight = 50
+
+	on_monthly_pulse = {
+		effect = {
+			ca_struggle_monthly = { IG = devout }
+		}
+	}
+
+	# El IG ya no existe, o el diario de la UCA termino.
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				NOT = { exists = ig:ig_devout }
+				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+			}
+		}
+		effect = {
+			ca_struggle_end_quiet = { IG = devout }
+		}
+	}
+
+	# El IG se pasa al bando rival.
+	outcome = {
+		header = je_ca_ig_struggle_change_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_change_conclusion
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_devout_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_change_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_devout_bar)" >= 100 }
+			}
+		}
+		effect = {
+			ca_struggle_end_change = { IG = devout }
+		}
+	}
+
+	# El IG conserva su bando.
+	outcome = {
+		header = je_ca_ig_struggle_keep_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_keep_conclusion
+		color = "blue_negative"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_devout_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_keep_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_devout_bar)" <= 0 }
+			}
+		}
+		effect = {
+			ca_struggle_end_keep = { IG = devout }
+		}
+	}
+
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = je_ca_ig_struggle_timeout_conclusion
+		flags = { timeout }
+		effect = {
+			custom_tooltip = je_ca_ig_struggle_timeout_tt
+			ca_struggle_end_quiet = { IG = devout }
+		}
+	}
+
+	timeout = 730
+
+	transferable = no
+}
+
+je_ca_ig_struggle_industrialists = {
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
+
+	should_be_pinned_by_default_involved = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_federal
+				trigger = { has_variable = ca_struggle_industrialists_to var:ca_struggle_industrialists_to = flag:federal }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_centralist
+				trigger = { has_variable = ca_struggle_industrialists_to var:ca_struggle_industrialists_to = flag:centralist }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	scripted_progress_bar = ca_ig_struggle_industrialists_bar
+	weight = 50
+
+	on_monthly_pulse = {
+		effect = {
+			ca_struggle_monthly = { IG = industrialists }
+		}
+	}
+
+	# El IG ya no existe, o el diario de la UCA termino.
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				NOT = { exists = ig:ig_industrialists }
+				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+			}
+		}
+		effect = {
+			ca_struggle_end_quiet = { IG = industrialists }
+		}
+	}
+
+	# El IG se pasa al bando rival.
+	outcome = {
+		header = je_ca_ig_struggle_change_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_change_conclusion
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_industrialists_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_change_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_industrialists_bar)" >= 100 }
+			}
+		}
+		effect = {
+			ca_struggle_end_change = { IG = industrialists }
+		}
+	}
+
+	# El IG conserva su bando.
+	outcome = {
+		header = je_ca_ig_struggle_keep_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_keep_conclusion
+		color = "blue_negative"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_industrialists_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_keep_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_industrialists_bar)" <= 0 }
+			}
+		}
+		effect = {
+			ca_struggle_end_keep = { IG = industrialists }
+		}
+	}
+
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = je_ca_ig_struggle_timeout_conclusion
+		flags = { timeout }
+		effect = {
+			custom_tooltip = je_ca_ig_struggle_timeout_tt
+			ca_struggle_end_quiet = { IG = industrialists }
+		}
+	}
+
+	timeout = 730
+
+	transferable = no
+}
+
+je_ca_ig_struggle_intelligentsia = {
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
+
+	should_be_pinned_by_default_involved = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_federal
+				trigger = { has_variable = ca_struggle_intelligentsia_to var:ca_struggle_intelligentsia_to = flag:federal }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_centralist
+				trigger = { has_variable = ca_struggle_intelligentsia_to var:ca_struggle_intelligentsia_to = flag:centralist }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	scripted_progress_bar = ca_ig_struggle_intelligentsia_bar
+	weight = 50
+
+	on_monthly_pulse = {
+		effect = {
+			ca_struggle_monthly = { IG = intelligentsia }
+		}
+	}
+
+	# El IG ya no existe, o el diario de la UCA termino.
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				NOT = { exists = ig:ig_intelligentsia }
+				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+			}
+		}
+		effect = {
+			ca_struggle_end_quiet = { IG = intelligentsia }
+		}
+	}
+
+	# El IG se pasa al bando rival.
+	outcome = {
+		header = je_ca_ig_struggle_change_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_change_conclusion
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_intelligentsia_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_change_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_intelligentsia_bar)" >= 100 }
+			}
+		}
+		effect = {
+			ca_struggle_end_change = { IG = intelligentsia }
+		}
+	}
+
+	# El IG conserva su bando.
+	outcome = {
+		header = je_ca_ig_struggle_keep_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_keep_conclusion
+		color = "blue_negative"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_intelligentsia_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_keep_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_intelligentsia_bar)" <= 0 }
+			}
+		}
+		effect = {
+			ca_struggle_end_keep = { IG = intelligentsia }
+		}
+	}
+
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = je_ca_ig_struggle_timeout_conclusion
+		flags = { timeout }
+		effect = {
+			custom_tooltip = je_ca_ig_struggle_timeout_tt
+			ca_struggle_end_quiet = { IG = intelligentsia }
+		}
+	}
+
+	timeout = 730
+
+	transferable = no
+}
+
+je_ca_ig_struggle_landowners = {
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
+
+	should_be_pinned_by_default_involved = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_federal
+				trigger = { has_variable = ca_struggle_landowners_to var:ca_struggle_landowners_to = flag:federal }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_centralist
+				trigger = { has_variable = ca_struggle_landowners_to var:ca_struggle_landowners_to = flag:centralist }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	scripted_progress_bar = ca_ig_struggle_landowners_bar
+	weight = 50
+
+	on_monthly_pulse = {
+		effect = {
+			ca_struggle_monthly = { IG = landowners }
+		}
+	}
+
+	# El IG ya no existe, o el diario de la UCA termino.
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				NOT = { exists = ig:ig_landowners }
+				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+			}
+		}
+		effect = {
+			ca_struggle_end_quiet = { IG = landowners }
+		}
+	}
+
+	# El IG se pasa al bando rival.
+	outcome = {
+		header = je_ca_ig_struggle_change_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_change_conclusion
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_landowners_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_change_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_landowners_bar)" >= 100 }
+			}
+		}
+		effect = {
+			ca_struggle_end_change = { IG = landowners }
+		}
+	}
+
+	# El IG conserva su bando.
+	outcome = {
+		header = je_ca_ig_struggle_keep_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_keep_conclusion
+		color = "blue_negative"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_landowners_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_keep_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_landowners_bar)" <= 0 }
+			}
+		}
+		effect = {
+			ca_struggle_end_keep = { IG = landowners }
+		}
+	}
+
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = je_ca_ig_struggle_timeout_conclusion
+		flags = { timeout }
+		effect = {
+			custom_tooltip = je_ca_ig_struggle_timeout_tt
+			ca_struggle_end_quiet = { IG = landowners }
+		}
+	}
+
+	timeout = 730
+
+	transferable = no
+}
+
+je_ca_ig_struggle_petty_bourgeoisie = {
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
+
+	should_be_pinned_by_default_involved = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_federal
+				trigger = { has_variable = ca_struggle_petty_bourgeoisie_to var:ca_struggle_petty_bourgeoisie_to = flag:federal }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_centralist
+				trigger = { has_variable = ca_struggle_petty_bourgeoisie_to var:ca_struggle_petty_bourgeoisie_to = flag:centralist }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	scripted_progress_bar = ca_ig_struggle_petty_bourgeoisie_bar
+	weight = 50
+
+	on_monthly_pulse = {
+		effect = {
+			ca_struggle_monthly = { IG = petty_bourgeoisie }
+		}
+	}
+
+	# El IG ya no existe, o el diario de la UCA termino.
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				NOT = { exists = ig:ig_petty_bourgeoisie }
+				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+			}
+		}
+		effect = {
+			ca_struggle_end_quiet = { IG = petty_bourgeoisie }
+		}
+	}
+
+	# El IG se pasa al bando rival.
+	outcome = {
+		header = je_ca_ig_struggle_change_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_change_conclusion
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_petty_bourgeoisie_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_change_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_petty_bourgeoisie_bar)" >= 100 }
+			}
+		}
+		effect = {
+			ca_struggle_end_change = { IG = petty_bourgeoisie }
+		}
+	}
+
+	# El IG conserva su bando.
+	outcome = {
+		header = je_ca_ig_struggle_keep_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_keep_conclusion
+		color = "blue_negative"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_petty_bourgeoisie_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_keep_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_petty_bourgeoisie_bar)" <= 0 }
+			}
+		}
+		effect = {
+			ca_struggle_end_keep = { IG = petty_bourgeoisie }
+		}
+	}
+
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = je_ca_ig_struggle_timeout_conclusion
+		flags = { timeout }
+		effect = {
+			custom_tooltip = je_ca_ig_struggle_timeout_tt
+			ca_struggle_end_quiet = { IG = petty_bourgeoisie }
+		}
+	}
+
+	timeout = 730
+
+	transferable = no
+}
+
+je_ca_ig_struggle_rural_folk = {
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
+
+	should_be_pinned_by_default_involved = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_federal
+				trigger = { has_variable = ca_struggle_rural_folk_to var:ca_struggle_rural_folk_to = flag:federal }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_centralist
+				trigger = { has_variable = ca_struggle_rural_folk_to var:ca_struggle_rural_folk_to = flag:centralist }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	scripted_progress_bar = ca_ig_struggle_rural_folk_bar
+	weight = 50
+
+	on_monthly_pulse = {
+		effect = {
+			ca_struggle_monthly = { IG = rural_folk }
+		}
+	}
+
+	# El IG ya no existe, o el diario de la UCA termino.
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				NOT = { exists = ig:ig_rural_folk }
+				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+			}
+		}
+		effect = {
+			ca_struggle_end_quiet = { IG = rural_folk }
+		}
+	}
+
+	# El IG se pasa al bando rival.
+	outcome = {
+		header = je_ca_ig_struggle_change_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_change_conclusion
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_rural_folk_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_change_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_rural_folk_bar)" >= 100 }
+			}
+		}
+		effect = {
+			ca_struggle_end_change = { IG = rural_folk }
+		}
+	}
+
+	# El IG conserva su bando.
+	outcome = {
+		header = je_ca_ig_struggle_keep_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_keep_conclusion
+		color = "blue_negative"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_rural_folk_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_keep_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_rural_folk_bar)" <= 0 }
+			}
+		}
+		effect = {
+			ca_struggle_end_keep = { IG = rural_folk }
+		}
+	}
+
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = je_ca_ig_struggle_timeout_conclusion
+		flags = { timeout }
+		effect = {
+			custom_tooltip = je_ca_ig_struggle_timeout_tt
+			ca_struggle_end_quiet = { IG = rural_folk }
+		}
+	}
+
+	timeout = 730
+
+	transferable = no
+}
+
+je_ca_ig_struggle_trade_unions = {
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	group = je_group_internal_affairs
+
+	activation_description = {
+		always = yes
+	}
+
+	should_be_pinned_by_default_involved = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_federal
+				trigger = { has_variable = ca_struggle_trade_unions_to var:ca_struggle_trade_unions_to = flag:federal }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_centralist
+				trigger = { has_variable = ca_struggle_trade_unions_to var:ca_struggle_trade_unions_to = flag:centralist }
+			}
+			triggered_desc = {
+				desc = je_ca_ig_struggle_status_to_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	scripted_progress_bar = ca_ig_struggle_trade_unions_bar
+	weight = 50
+
+	on_monthly_pulse = {
+		effect = {
+			ca_struggle_monthly = { IG = trade_unions }
+		}
+	}
+
+	# El IG ya no existe, o el diario de la UCA termino.
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			OR = {
+				NOT = { exists = ig:ig_trade_unions }
+				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+			}
+		}
+		effect = {
+			ca_struggle_end_quiet = { IG = trade_unions }
+		}
+	}
+
+	# El IG se pasa al bando rival.
+	outcome = {
+		header = je_ca_ig_struggle_change_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_change_conclusion
+		color = "gold_positive"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_trade_unions_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_change_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_trade_unions_bar)" >= 100 }
+			}
+		}
+		effect = {
+			ca_struggle_end_change = { IG = trade_unions }
+		}
+	}
+
+	# El IG conserva su bando.
+	outcome = {
+		header = je_ca_ig_struggle_keep_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_ig_struggle_keep_conclusion
+		color = "blue_negative"
+		trigger = {
+			custom_tooltip = {
+				text = je_ca_ig_struggle_min_time_tt
+				NOT = { has_variable = ca_struggle_trade_unions_lock }
+			}
+			custom_tooltip = {
+				text = je_ca_ig_struggle_keep_tt
+				scope:journal_entry = { "scripted_bar_progress(ca_ig_struggle_trade_unions_bar)" <= 0 }
+			}
+		}
+		effect = {
+			ca_struggle_end_keep = { IG = trade_unions }
+		}
+	}
+
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = je_ca_ig_struggle_timeout_conclusion
+		flags = { timeout }
+		effect = {
+			custom_tooltip = je_ca_ig_struggle_timeout_tt
+			ca_struggle_end_quiet = { IG = trade_unions }
+		}
+	}
+
+	timeout = 730
+
+	transferable = no
+}

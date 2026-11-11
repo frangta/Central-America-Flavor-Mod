@@ -8,7 +8,8 @@
 je_ca_nic_conspiracy = {
 	icon = "gfx/interface/icons/event_icons/event_skull.dds"
 	group = je_group_historical_content
-
+	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
 	activation_description = {
 		always = yes
 	}
