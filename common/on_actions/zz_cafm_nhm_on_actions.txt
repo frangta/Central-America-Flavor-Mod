@@ -1,0 +1,27 @@
+﻿# =====================================================================
+# CAFM — Pulso mensual de Nicaragua (fase 2), Honduras (fase 2) y la
+# Mosquitia. Un solo on_action para los tres: cada uno arranca su propia
+# cadena cuando le toca, sin tocar ningun archivo del mod.
+# Patron copiado de zz_cafm_frca_on_actions.txt.
+# =====================================================================
+
+on_monthly_pulse_country = {
+	on_actions = { cafm_nhm_monthly }
+}
+
+cafm_nhm_monthly = {
+	effect = {
+		if = {
+			limit = { ca_nic_is_nicaragua = yes }
+			ca_nic_beats = yes
+		}
+		if = {
+			limit = { ca_hon_is_honduras = yes }
+			ca_hon_beats = yes
+		}
+		if = {
+			limit = { ca_mkt_is_mosquitia = yes }
+			ca_mkt_beats = yes
+		}
+	}
+}
