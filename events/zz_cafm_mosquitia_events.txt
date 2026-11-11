@@ -1,0 +1,766 @@
+﻿namespace = ca_mosquitia_events
+
+# =====================================================================
+# CAFM — MOSQUITIA (MKT, 1836-1851)
+# Namespace nuevo: el mod no tenia ningun evento ni diario de la Mosquitia,
+# solo banderas, pops, estados, nombres dinamicos y dos plantillas de rey.
+# Los lanza ca_mkt_beats desde el on_action cafm_nhm_monthly; .20 lo lanza
+# el umbral maximo de la barra del protectorado.
+# Fuentes: es.wikipedia «Nacion Misquita» (reconocimiento de 1837;
+#   desembarco en San Juan del Norte el 12 ago 1841; protectorado de 1844
+#   y Patrick Walker consul general en Bluefields; limites del cabo de
+#   Honduras a la boca del San Juan; ultimatum vencido el 1 ene 1848 y la
+#   toma del puerto; tratado del 7 mar 1848 y Greytown; Clayton-Bulwer;
+#   el Prometheus el 21 nov 1850); en.wikipedia «George Augustus Frederic II»
+#   (testamento de 1840; regencia reconocida el 4 may 1843 con el principe
+#   Wellington, el coronel Johnson y el general Lowrey; coronacion en
+#   Belice el 7 may 1845 con unos 12 anos; disolucion de la regencia en
+#   1846 y consejo de criollos de Bluefields; leyes de milicia, tierras,
+#   procedimiento judicial y corte de madera).
+# =====================================================================
+
+ca_mosquitia_events.1 = {
+	type = country_event
+	title = ca_mosquitia_events.1.t
+	desc = ca_mosquitia_events.1.d
+	flavor = ca_mosquitia_events.1.f
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	icon = "gfx/interface/icons/event_icons/event_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.1.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_10_tt
+			change_variable = { name = mkt_reino add = 10 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_up_5_tt
+			change_variable = { name = mkt_protectorado add = 5 }
+		}
+		add_modifier = { name = mkt_reino_reconocido years = 20 }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_mosquitia_events.1.b
+		trigger = {
+			ca_mkt_alt_history = yes
+		}
+		custom_tooltip = {
+			text = mkt_reino_up_5_tt
+			change_variable = { name = mkt_reino add = 5 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_down_10_tt
+			change_variable = { name = mkt_protectorado subtract = 10 }
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_mosquitia_events.2 = {
+	type = country_event
+	title = ca_mosquitia_events.2.t
+	desc = ca_mosquitia_events.2.d
+	flavor = ca_mosquitia_events.2.f
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	icon = "gfx/interface/icons/event_icons/event_documents.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.2.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_12_tt
+			change_variable = { name = mkt_reino add = 12 }
+		}
+		set_variable = mkt_rey_menor
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_mosquitia_events.2.b
+		custom_tooltip = {
+			text = mkt_reino_down_5_tt
+			change_variable = { name = mkt_reino subtract = 5 }
+		}
+		set_variable = mkt_rey_menor
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_mosquitia_events.3 = {
+	type = country_event
+	title = ca_mosquitia_events.3.t
+	desc = ca_mosquitia_events.3.d
+	flavor = ca_mosquitia_events.3.f
+	duration = 3
+	event_image = {
+		video = "africa_construction_colony"
+	}
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.3.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_10_tt
+			change_variable = { name = mkt_reino add = 10 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_up_10_tt
+			change_variable = { name = mkt_protectorado add = 10 }
+		}
+		set_variable = mkt_reclamo_san_juan
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_mosquitia_events.3.b
+		custom_tooltip = {
+			text = mkt_protectorado_down_5_tt
+			change_variable = { name = mkt_protectorado subtract = 5 }
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_mosquitia_events.4 = {
+	type = country_event
+	title = ca_mosquitia_events.4.t
+	desc = ca_mosquitia_events.4.d
+	flavor = ca_mosquitia_events.4.f
+	duration = 3
+	event_image = {
+		video = "southamerica_aristocrats"
+	}
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.4.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_5_tt
+			change_variable = { name = mkt_reino add = 5 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_up_5_tt
+			change_variable = { name = mkt_protectorado add = 5 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_mosquitia_events.4.b
+		custom_tooltip = {
+			text = mkt_reino_up_10_tt
+			change_variable = { name = mkt_reino add = 10 }
+		}
+		add_authority = 50
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_mosquitia_events.5 = {
+	type = country_event
+	title = ca_mosquitia_events.5.t
+	desc = ca_mosquitia_events.5.d
+	flavor = ca_mosquitia_events.5.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.5.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_protectorado_up_20_tt
+			change_variable = { name = mkt_protectorado add = 20 }
+		}
+		custom_tooltip = {
+			text = mkt_reino_up_10_tt
+			change_variable = { name = mkt_reino add = 10 }
+		}
+		add_modifier = { name = mkt_consul_en_bluefields years = 10 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_mosquitia_events.5.b
+		custom_tooltip = {
+			text = mkt_protectorado_up_10_tt
+			change_variable = { name = mkt_protectorado add = 10 }
+		}
+		custom_tooltip = {
+			text = mkt_reino_up_5_tt
+			change_variable = { name = mkt_reino add = 5 }
+		}
+		set_variable = mkt_sello_propio
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_mosquitia_events.6 = {
+	type = country_event
+	title = ca_mosquitia_events.6.t
+	desc = ca_mosquitia_events.6.d
+	flavor = ca_mosquitia_events.6.f
+	duration = 3
+	event_image = {
+		video = "africa_construction_colony"
+	}
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.6.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_10_tt
+			change_variable = { name = mkt_reino add = 10 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_up_5_tt
+			change_variable = { name = mkt_protectorado add = 5 }
+		}
+		ai_chance = { base = 65 }
+	}
+	option = {
+		name = ca_mosquitia_events.6.b
+		custom_tooltip = {
+			text = mkt_reino_up_5_tt
+			change_variable = { name = mkt_reino add = 5 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_down_5_tt
+			change_variable = { name = mkt_protectorado subtract = 5 }
+		}
+		ai_chance = { base = 35 }
+	}
+}
+
+ca_mosquitia_events.7 = {
+	type = country_event
+	title = ca_mosquitia_events.7.t
+	desc = ca_mosquitia_events.7.d
+	flavor = ca_mosquitia_events.7.f
+	duration = 3
+	event_image = {
+		video = "southamerica_christianity"
+	}
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.7.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_protectorado_up_10_tt
+			change_variable = { name = mkt_protectorado add = 10 }
+		}
+		custom_tooltip = {
+			text = mkt_reino_up_8_tt
+			change_variable = { name = mkt_reino add = 8 }
+		}
+		ai_chance = { base = 65 }
+	}
+	option = {
+		name = ca_mosquitia_events.7.b
+		trigger = {
+			ca_mkt_alt_history = yes
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_down_10_tt
+			change_variable = { name = mkt_protectorado subtract = 10 }
+		}
+		custom_tooltip = {
+			text = mkt_reino_up_12_tt
+			change_variable = { name = mkt_reino add = 12 }
+		}
+		ai_chance = { base = 35 }
+	}
+}
+
+ca_mosquitia_events.8 = {
+	type = country_event
+	title = ca_mosquitia_events.8.t
+	desc = ca_mosquitia_events.8.d
+	flavor = ca_mosquitia_events.8.f
+	duration = 3
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.8.a
+		default_option = yes
+		set_variable = mkt_consejo_criollo
+		remove_variable = mkt_rey_menor
+		custom_tooltip = {
+			text = mkt_reino_up_15_tt
+			change_variable = { name = mkt_reino add = 15 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_down_5_tt
+			change_variable = { name = mkt_protectorado subtract = 5 }
+		}
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_mosquitia_events.8.b
+		custom_tooltip = {
+			text = mkt_protectorado_up_10_tt
+			change_variable = { name = mkt_protectorado add = 10 }
+		}
+		custom_tooltip = {
+			text = mkt_reino_down_5_tt
+			change_variable = { name = mkt_reino subtract = 5 }
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_mosquitia_events.9 = {
+	type = country_event
+	title = ca_mosquitia_events.9.t
+	desc = ca_mosquitia_events.9.d
+	flavor = ca_mosquitia_events.9.f
+	duration = 3
+	event_image = {
+		video = "asia_politician_parliament_motion"
+	}
+	icon = "gfx/interface/icons/event_icons/event_documents.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.9.a
+		default_option = yes
+		set_variable = mkt_milicia
+		custom_tooltip = {
+			text = mkt_reino_up_20_tt
+			change_variable = { name = mkt_reino add = 20 }
+		}
+		add_modifier = { name = mkt_consejo_que_legisla years = 15 }
+		ai_chance = { base = 75 }
+	}
+	option = {
+		name = ca_mosquitia_events.9.b
+		set_variable = mkt_milicia
+		custom_tooltip = {
+			text = mkt_reino_up_8_tt
+			change_variable = { name = mkt_reino add = 8 }
+		}
+		ai_chance = { base = 25 }
+	}
+}
+
+ca_mosquitia_events.10 = {
+	type = country_event
+	title = ca_mosquitia_events.10.t
+	desc = ca_mosquitia_events.10.d
+	flavor = ca_mosquitia_events.10.f
+	duration = 3
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.10.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_protectorado_up_10_tt
+			change_variable = { name = mkt_protectorado add = 10 }
+		}
+		custom_tooltip = {
+			text = mkt_reino_up_5_tt
+			change_variable = { name = mkt_reino add = 5 }
+		}
+		ai_chance = { base = 65 }
+	}
+	option = {
+		name = ca_mosquitia_events.10.b
+		trigger = {
+			ca_mkt_alt_history = yes
+			exists = c:NIC
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_down_10_tt
+			change_variable = { name = mkt_protectorado subtract = 10 }
+		}
+		custom_tooltip = {
+			text = mkt_reino_up_8_tt
+			change_variable = { name = mkt_reino add = 8 }
+		}
+		ai_chance = { base = 35 }
+	}
+}
+
+ca_mosquitia_events.11 = {
+	type = country_event
+	title = ca_mosquitia_events.11.t
+	desc = ca_mosquitia_events.11.d
+	flavor = ca_mosquitia_events.11.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.11.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_15_tt
+			change_variable = { name = mkt_reino add = 15 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_up_10_tt
+			change_variable = { name = mkt_protectorado add = 10 }
+		}
+		set_variable = mkt_greytown
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_mosquitia_events.11.b
+		custom_tooltip = {
+			text = mkt_reino_up_15_tt
+			change_variable = { name = mkt_reino add = 15 }
+		}
+		set_variable = mkt_greytown
+		set_variable = mkt_sello_propio
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_mosquitia_events.12 = {
+	type = country_event
+	title = ca_mosquitia_events.12.t
+	desc = ca_mosquitia_events.12.d
+	flavor = ca_mosquitia_events.12.f
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	icon = "gfx/interface/icons/event_icons/event_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.12.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_15_tt
+			change_variable = { name = mkt_reino add = 15 }
+		}
+		add_modifier = { name = mkt_aduana_de_greytown years = 15 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_mosquitia_events.12.b
+		custom_tooltip = {
+			text = mkt_reino_up_8_tt
+			change_variable = { name = mkt_reino add = 8 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_down_5_tt
+			change_variable = { name = mkt_protectorado subtract = 5 }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_mosquitia_events.13 = {
+	type = country_event
+	title = ca_mosquitia_events.13.t
+	desc = ca_mosquitia_events.13.d
+	flavor = ca_mosquitia_events.13.f
+	duration = 3
+	event_image = {
+		video = "unspecific_devastation"
+	}
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.13.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_protectorado_down_15_tt
+			change_variable = { name = mkt_protectorado subtract = 15 }
+		}
+		custom_tooltip = {
+			text = mkt_reino_up_10_tt
+			change_variable = { name = mkt_reino add = 10 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_mosquitia_events.13.b
+		custom_tooltip = {
+			text = mkt_protectorado_up_10_tt
+			change_variable = { name = mkt_protectorado add = 10 }
+		}
+		set_variable = mkt_subvencion
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_mosquitia_events.14 = {
+	type = country_event
+	title = ca_mosquitia_events.14.t
+	desc = ca_mosquitia_events.14.d
+	flavor = ca_mosquitia_events.14.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.14.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_protectorado_down_5_tt
+			change_variable = { name = mkt_protectorado subtract = 5 }
+		}
+		set_variable = mkt_clayton_bulwer
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_mosquitia_events.14.b
+		custom_tooltip = {
+			text = mkt_reino_up_8_tt
+			change_variable = { name = mkt_reino add = 8 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_down_10_tt
+			change_variable = { name = mkt_protectorado subtract = 10 }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_mosquitia_events.15 = {
+	type = country_event
+	title = ca_mosquitia_events.15.t
+	desc = ca_mosquitia_events.15.d
+	flavor = ca_mosquitia_events.15.f
+	duration = 3
+	event_image = {
+		video = "southamerica_war_civilians"
+	}
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.15.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_10_tt
+			change_variable = { name = mkt_reino add = 10 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_down_5_tt
+			change_variable = { name = mkt_protectorado subtract = 5 }
+		}
+		ai_chance = { base = 55 }
+	}
+	option = {
+		name = ca_mosquitia_events.15.b
+		custom_tooltip = {
+			text = mkt_protectorado_up_10_tt
+			change_variable = { name = mkt_protectorado add = 10 }
+		}
+		ai_chance = { base = 45 }
+	}
+}
+
+ca_mosquitia_events.16 = {
+	type = country_event
+	title = ca_mosquitia_events.16.t
+	desc = ca_mosquitia_events.16.d
+	flavor = ca_mosquitia_events.16.f
+	duration = 3
+	event_image = {
+		video = "middleeast_jungle_expedition"
+	}
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.16.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_12_tt
+			change_variable = { name = mkt_reino add = 12 }
+		}
+		add_modifier = { name = mkt_licencias_de_caoba years = 15 }
+		ai_chance = { base = 65 }
+	}
+	option = {
+		name = ca_mosquitia_events.16.b
+		custom_tooltip = {
+			text = mkt_reino_down_5_tt
+			change_variable = { name = mkt_reino subtract = 5 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_down_5_tt
+			change_variable = { name = mkt_protectorado subtract = 5 }
+		}
+		ai_chance = { base = 35 }
+	}
+}
+
+ca_mosquitia_events.17 = {
+	type = country_event
+	title = ca_mosquitia_events.17.t
+	desc = ca_mosquitia_events.17.d
+	flavor = ca_mosquitia_events.17.f
+	duration = 3
+	event_image = {
+		video = "asia_farmers_market"
+	}
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.17.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_8_tt
+			change_variable = { name = mkt_reino add = 8 }
+		}
+		add_modifier = { name = mkt_comercio_de_la_costa years = 15 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_mosquitia_events.17.b
+		custom_tooltip = {
+			text = mkt_reino_up_5_tt
+			change_variable = { name = mkt_reino add = 5 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_up_5_tt
+			change_variable = { name = mkt_protectorado add = 5 }
+		}
+		add_treasury = 10000
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_mosquitia_events.18 = {
+	type = country_event
+	title = ca_mosquitia_events.18.t
+	desc = ca_mosquitia_events.18.d
+	flavor = ca_mosquitia_events.18.f
+	duration = 3
+	event_image = {
+		video = "middleeast_jungle_expedition"
+	}
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.18.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_10_tt
+			change_variable = { name = mkt_reino add = 10 }
+		}
+		add_modifier = { name = mkt_pacto_con_los_caciques years = 20 }
+		ai_chance = { base = 55 }
+	}
+	option = {
+		name = ca_mosquitia_events.18.b
+		custom_tooltip = {
+			text = mkt_reino_up_5_tt
+			change_variable = { name = mkt_reino add = 5 }
+		}
+		add_treasury = -8000
+		add_radicals = { value = 0.05 }
+		ai_chance = { base = 45 }
+	}
+}
+
+ca_mosquitia_events.19 = {
+	type = country_event
+	title = ca_mosquitia_events.19.t
+	desc = ca_mosquitia_events.19.d
+	flavor = ca_mosquitia_events.19.f
+	duration = 3
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.19.a
+		default_option = yes
+		custom_tooltip = {
+			text = mkt_reino_up_8_tt
+			change_variable = { name = mkt_reino add = 8 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_up_5_tt
+			change_variable = { name = mkt_protectorado add = 5 }
+		}
+		ai_chance = { base = 55 }
+	}
+	option = {
+		name = ca_mosquitia_events.19.b
+		custom_tooltip = {
+			text = mkt_reino_up_5_tt
+			change_variable = { name = mkt_reino add = 5 }
+		}
+		add_modifier = { name = mkt_frontera_acordada years = 15 }
+		ai_chance = { base = 45 }
+	}
+}
+
+ca_mosquitia_events.20 = {
+	type = country_event
+	title = ca_mosquitia_events.20.t
+	desc = ca_mosquitia_events.20.d
+	flavor = ca_mosquitia_events.20.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	icon = "gfx/interface/icons/event_icons/event_documents.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_mosquitia_events.20.a
+		default_option = yes
+		add_modifier = { name = mkt_oficina_en_belice years = 20 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_mosquitia_events.20.b
+		custom_tooltip = {
+			text = mkt_protectorado_down_25_tt
+			change_variable = { name = mkt_protectorado subtract = 25 }
+		}
+		custom_tooltip = {
+			text = mkt_reino_up_10_tt
+			change_variable = { name = mkt_reino add = 10 }
+		}
+		add_treasury = -10000
+		ai_chance = { base = 40 }
+	}
+}
+

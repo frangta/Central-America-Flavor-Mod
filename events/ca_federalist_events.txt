@@ -15,7 +15,7 @@ ca_federalist_events.1 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		ca_frca_route_federal = yes
 		ca_frca_journal_active = yes
 		NOT = { has_variable = ca_fed_1_fired }
@@ -59,7 +59,7 @@ ca_federalist_events.2 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		ca_frca_route_federal = yes
 		ca_frca_journal_active = yes
 		NOT = { has_variable = ca_fed_2_fired }
@@ -106,7 +106,7 @@ ca_federalist_events.3 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		ca_frca_route_federal = yes
 		ca_frca_journal_active = yes
 		NOT = { has_variable = ca_fed_3_fired }
@@ -149,7 +149,7 @@ ca_federalist_events.4 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		ca_frca_route_federal = yes
 		ca_frca_journal_active = yes
 		NOT = { has_variable = ca_fed_4_fired }
@@ -184,7 +184,7 @@ ca_federalist_events.5 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		ca_frca_route_federal = yes
 		NOT = { has_variable = ca_fed_5_fired }
 	}
@@ -226,7 +226,7 @@ ca_federalist_events.6 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_escuela_laica
 		ca_frca_route_federal = yes
 
@@ -267,7 +267,7 @@ ca_federalist_events.7 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_escuela_laica
 		ca_frca_route_federal = yes
 
@@ -308,7 +308,7 @@ ca_federalist_events.8 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_escuela_laica
 		ca_frca_route_federal = yes
 
@@ -349,7 +349,7 @@ ca_federalist_events.9 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_total_separation
 		ca_frca_route_federal = yes
 
@@ -389,7 +389,7 @@ ca_federalist_events.10 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_total_separation
 		ca_frca_route_federal = yes
 
@@ -431,7 +431,7 @@ ca_federalist_events.11 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_total_separation
 		ca_frca_route_federal = yes
 
@@ -472,7 +472,7 @@ ca_federalist_events.12 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_municipalismo
 		ca_frca_route_federal = yes
 
@@ -512,7 +512,7 @@ ca_federalist_events.13 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_municipalismo
 		ca_frca_route_federal = yes
 
@@ -569,7 +569,7 @@ ca_federalist_events.14 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_municipalismo
 		ca_frca_route_federal = yes
 
@@ -605,7 +605,7 @@ ca_federalist_events.15 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		ca_frca_route_federal = yes
 		ca_frca_journal_active = yes
 		NOT = { has_variable = ca_fed_15_cd }
@@ -641,7 +641,7 @@ ca_federalist_events.16 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		ca_frca_route_federal = yes
 		ca_frca_journal_active = yes
 		NOT = { has_variable = ca_fed_16_cd }
@@ -678,7 +678,7 @@ ca_federalist_events.17 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		ca_frca_route_federal = yes
 		ca_frca_journal_active = yes
 		NOT = { has_variable = ca_fed_17_cd }
@@ -715,7 +715,7 @@ ca_federalist_events.18 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		ca_frca_route_federal = yes
 		ca_frca_journal_active = yes
 		NOT = { has_variable = ca_fed_18_cd }
@@ -752,7 +752,7 @@ ca_federalist_events.19 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		ca_frca_route_federal = yes
 		ca_frca_journal_active = yes
 		NOT = { has_variable = ca_fed_19_cd }
@@ -788,7 +788,7 @@ ca_federalist_events.20 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		ca_frca_route_federal = yes
 		ca_frca_journal_active = yes
 		exists = ruler

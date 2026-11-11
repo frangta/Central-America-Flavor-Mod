@@ -1,0 +1,294 @@
+﻿namespace = cafm_uca_route
+
+############################################################################
+# CAFM - Rediseño del diario de la UCA, entrega 2 (10 nov 2026)
+#  .1/.2  presentacion de la ruta federal / centralista
+#  .3/.4  aviso de la barra F<->C: conspiracion servil / pronunciamiento liberal
+#  .5/.6  golpe servil / revolucion liberal (fracaso del diario)
+#  .7/.8  un bando domina / se derrumba (texto segun ca_bloc_event_bloc)
+#  .9     cierre de la Republica unitaria
+#  .10    boton federal "Reforma constitucional de 1835"
+############################################################################
+
+cafm_uca_route.1 = {
+	type = country_event
+	placement = root
+	title = cafm_uca_route.1.t
+	desc = cafm_uca_route.1.d
+	flavor = cafm_uca_route.1.f
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	option = {
+		name = cafm_uca_route.1.a
+		default_option = yes
+		custom_tooltip = cafm_uca_route.1.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_uca_route.2 = {
+	type = country_event
+	placement = root
+	title = cafm_uca_route.2.t
+	desc = cafm_uca_route.2.d
+	flavor = cafm_uca_route.2.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	option = {
+		name = cafm_uca_route.2.a
+		default_option = yes
+		custom_tooltip = cafm_uca_route.2.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_uca_route.3 = {
+	type = country_event
+	placement = root
+	title = cafm_uca_route.3.t
+	desc = cafm_uca_route.3.d
+	flavor = cafm_uca_route.3.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	option = {
+		name = cafm_uca_route.3.a
+		default_option = yes
+		ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_f15 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = cafm_uca_route.3.b
+		ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_f5 }
+		add_modifier = { name = ca_ig_struggle_negotiation months = 12 }
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = cafm_uca_route.3.c
+		custom_tooltip = cafm_uca_route.3.c_tt
+		ai_chance = { base = 20 }
+	}
+}
+
+cafm_uca_route.4 = {
+	type = country_event
+	placement = root
+	title = cafm_uca_route.4.t
+	desc = cafm_uca_route.4.d
+	flavor = cafm_uca_route.4.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	option = {
+		name = cafm_uca_route.4.a
+		default_option = yes
+		ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_c15 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = cafm_uca_route.4.b
+		ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_c5 }
+		add_modifier = { name = ca_ig_struggle_negotiation months = 12 }
+		ai_chance = { base = 40 }
+	}
+
+	option = {
+		name = cafm_uca_route.4.c
+		custom_tooltip = cafm_uca_route.4.c_tt
+		ai_chance = { base = 20 }
+	}
+}
+
+cafm_uca_route.5 = {
+	type = country_event
+	placement = root
+	title = cafm_uca_route.5.t
+	desc = cafm_uca_route.5.d
+	flavor = cafm_uca_route.5.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	option = {
+		name = cafm_uca_route.5.a
+		default_option = yes
+		add_modifier = { name = ca_frca_coup_regime months = 60 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 60 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 60 } }
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_uca_route.6 = {
+	type = country_event
+	placement = root
+	title = cafm_uca_route.6.t
+	desc = cafm_uca_route.6.d
+	flavor = cafm_uca_route.6.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	option = {
+		name = cafm_uca_route.6.a
+		default_option = yes
+		add_modifier = { name = ca_frca_coup_regime months = 60 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 60 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down months = 60 } }
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_uca_route.7 = {
+	type = country_event
+	placement = root
+	title = cafm_uca_route.7.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = cafm_uca_route.7.d_federal
+				trigger = { has_variable = ca_bloc_event_bloc var:ca_bloc_event_bloc = flag:federal }
+			}
+			triggered_desc = {
+				desc = cafm_uca_route.7.d_centralist
+				trigger = { has_variable = ca_bloc_event_bloc var:ca_bloc_event_bloc = flag:centralist }
+			}
+			triggered_desc = {
+				desc = cafm_uca_route.7.d_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = cafm_uca_route.7.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	option = {
+		name = cafm_uca_route.7.a
+		default_option = yes
+		if = {
+			limit = { var:ca_bloc_event_bloc = flag:federal }
+			ca_uca_bar_add = { BAR = frca_support_bar VALUE = 10 }
+		}
+		else_if = {
+			limit = { var:ca_bloc_event_bloc = flag:centralist }
+			ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_c10 }
+		}
+		else = {
+			ca_uca_bar_add = { BAR = frca_support_bar VALUE = -10 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_uca_route.8 = {
+	type = country_event
+	placement = root
+	title = cafm_uca_route.8.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = cafm_uca_route.8.d_federal
+				trigger = { has_variable = ca_bloc_event_bloc var:ca_bloc_event_bloc = flag:federal }
+			}
+			triggered_desc = {
+				desc = cafm_uca_route.8.d_centralist
+				trigger = { has_variable = ca_bloc_event_bloc var:ca_bloc_event_bloc = flag:centralist }
+			}
+			triggered_desc = {
+				desc = cafm_uca_route.8.d_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = cafm_uca_route.8.f
+	event_image = { video = "unspecific_vandalized_storefront" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	option = {
+		name = cafm_uca_route.8.a
+		default_option = yes
+		if = {
+			limit = { var:ca_bloc_event_bloc = flag:federal }
+			ca_uca_bar_add = { BAR = frca_support_bar VALUE = -5 }
+		}
+		else_if = {
+			limit = { var:ca_bloc_event_bloc = flag:centralist }
+			ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_f10 }
+		}
+		else = {
+			ca_uca_bar_add = { BAR = frca_support_bar VALUE = 10 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_uca_route.9 = {
+	type = country_event
+	placement = root
+	title = cafm_uca_route.9.t
+	desc = cafm_uca_route.9.d
+	flavor = cafm_uca_route.9.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	option = {
+		name = cafm_uca_route.9.a
+		default_option = yes
+		custom_tooltip = cafm_uca_route.9.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_uca_route.10 = {
+	type = country_event
+	placement = root
+	title = cafm_uca_route.10.t
+	desc = cafm_uca_route.10.d
+	flavor = cafm_uca_route.10.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	option = {
+		name = cafm_uca_route.10.a
+		add_modifier = { name = ca_frca_reform_1835_imposed months = 60 }
+		ca_frca_loyalty_down = { TAG = hon }
+		ca_frca_loyalty_down = { TAG = cos }
+		ai_chance = { base = 30 }
+	}
+
+	option = {
+		name = cafm_uca_route.10.b
+		default_option = yes
+		add_modifier = { name = ca_frca_reform_1835_negotiated months = 60 }
+		ca_uca_bar_add = { BAR = frca_support_bar VALUE = 10 }
+		ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_f5 }
+		ai_chance = { base = 70 }
+	}
+}
+

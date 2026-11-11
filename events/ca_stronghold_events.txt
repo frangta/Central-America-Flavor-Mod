@@ -1,0 +1,978 @@
+﻿namespace = ca_stronghold_events
+
+# CAFM P11: ciclo de los bastiones (strongholds) en los estados de un pais.
+# Federal y unitario: surge (.1/.2) -> se consolida (.3/.4) -> se fortalece (.5/.6) -> mantenimiento (.7/.8)
+# -> decae (.9/.10) -> resurge (.11/.12). Liberal (.13), servil (.14), conservador (.15) y separatista (.16).
+# Pulso anual ca_p11_yearly (zz_ca_p11_on_actions.txt).
+
+ca_stronghold_events.1 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.1.t
+	desc = ca_stronghold_events.1.d
+	flavor = ca_stronghold_events.1.f
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.05 }
+		any_scope_state = {
+			is_incorporated = yes
+			NOT = { ca_p11_state_has_fed_sh = yes }
+			NOT = { has_modifier = waning_federal_stronghold }
+			NOT = { ca_p11_state_has_uni_sh = yes }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				NOT = { ca_p11_state_has_fed_sh = yes }
+				NOT = { has_modifier = waning_federal_stronghold }
+				NOT = { ca_p11_state_has_uni_sh = yes }
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.1.a
+		default_option = yes
+		scope:ca_p11_state = {
+			add_modifier = { name = federal_stronghold_small_nation }
+			set_variable = { name = ca_sh_fed_grow days = 730 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_stronghold_events.1.b
+		scope:ca_p11_state = {
+			add_radicals_in_state = { value = small_radicals strata = middle }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_stronghold_events.2 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.2.t
+	desc = ca_stronghold_events.2.d
+	flavor = ca_stronghold_events.2.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.05 }
+		any_scope_state = {
+			is_incorporated = yes
+			NOT = { ca_p11_state_has_uni_sh = yes }
+			NOT = { has_modifier = waning_unitary_stronghold }
+			NOT = { ca_p11_state_has_fed_sh = yes }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				NOT = { ca_p11_state_has_uni_sh = yes }
+				NOT = { has_modifier = waning_unitary_stronghold }
+				NOT = { ca_p11_state_has_fed_sh = yes }
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.2.a
+		default_option = yes
+		scope:ca_p11_state = {
+			add_modifier = { name = unitary_stronghold_small_nation }
+			set_variable = { name = ca_sh_uni_grow days = 730 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_stronghold_events.2.b
+		scope:ca_p11_state = {
+			add_radicals_in_state = { value = small_radicals strata = upper }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_stronghold_events.3 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.3.t
+	desc = ca_stronghold_events.3.d
+	flavor = ca_stronghold_events.3.f
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.10 }
+		any_scope_state = {
+			is_incorporated = yes
+			has_modifier = federal_stronghold_small_nation
+			NOT = { has_variable = ca_sh_fed_grow }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				has_modifier = federal_stronghold_small_nation
+				NOT = { has_variable = ca_sh_fed_grow }
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.3.a
+		default_option = yes
+		scope:ca_p11_state = {
+			if = { limit = { has_modifier = federal_stronghold_small_nation } remove_modifier = federal_stronghold_small_nation }
+			add_modifier = { name = federal_stronghold }
+			set_variable = { name = ca_sh_fed_grow days = 1825 }
+		}
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_stronghold_events.3.b
+		scope:ca_p11_state = {
+			add_radicals_in_state = { value = medium_radicals strata = middle }
+			set_variable = { name = ca_sh_fed_grow days = 730 }
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_stronghold_events.4 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.4.t
+	desc = ca_stronghold_events.4.d
+	flavor = ca_stronghold_events.4.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.10 }
+		any_scope_state = {
+			is_incorporated = yes
+			has_modifier = unitary_stronghold_small_nation
+			NOT = { has_variable = ca_sh_uni_grow }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				has_modifier = unitary_stronghold_small_nation
+				NOT = { has_variable = ca_sh_uni_grow }
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.4.a
+		default_option = yes
+		scope:ca_p11_state = {
+			if = { limit = { has_modifier = unitary_stronghold_small_nation } remove_modifier = unitary_stronghold_small_nation }
+			add_modifier = { name = unitary_stronghold }
+			set_variable = { name = ca_sh_uni_grow days = 1825 }
+		}
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_stronghold_events.4.b
+		scope:ca_p11_state = {
+			add_radicals_in_state = { value = medium_radicals strata = upper }
+			set_variable = { name = ca_sh_uni_grow days = 730 }
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_stronghold_events.5 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.5.t
+	desc = ca_stronghold_events.5.d
+	flavor = ca_stronghold_events.5.f
+	event_image = { video = "unspecific_devastation" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.20 }
+		ig:ig_intelligentsia ?= { is_in_government = yes }
+		any_scope_state = {
+			is_incorporated = yes
+			has_modifier = federal_stronghold
+			NOT = { has_variable = ca_sh_fed_grow }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				has_modifier = federal_stronghold
+				NOT = { has_variable = ca_sh_fed_grow }
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.5.a
+		default_option = yes
+		scope:ca_p11_state = {
+			if = { limit = { has_modifier = federal_stronghold } remove_modifier = federal_stronghold }
+			add_modifier = { name = age_of_federal_stronghold }
+		}
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_stronghold_events.5.b
+		scope:ca_p11_state = {
+			set_variable = { name = ca_sh_fed_grow days = 1825 }
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_stronghold_events.6 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.6.t
+	desc = ca_stronghold_events.6.d
+	flavor = ca_stronghold_events.6.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.20 }
+		OR = {
+			ig:ig_armed_forces ?= { is_in_government = yes }
+			ig:ig_devout ?= { is_in_government = yes }
+			ig:ig_landowners ?= { is_powerful = yes }
+		}
+		any_scope_state = {
+			is_incorporated = yes
+			has_modifier = unitary_stronghold
+			NOT = { has_variable = ca_sh_uni_grow }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				has_modifier = unitary_stronghold
+				NOT = { has_variable = ca_sh_uni_grow }
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.6.a
+		default_option = yes
+		scope:ca_p11_state = {
+			if = { limit = { has_modifier = unitary_stronghold } remove_modifier = unitary_stronghold }
+			add_modifier = { name = age_of_unitary_stronghold }
+		}
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_stronghold_events.6.b
+		scope:ca_p11_state = {
+			set_variable = { name = ca_sh_uni_grow days = 1825 }
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_stronghold_events.7 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.7.t
+	desc = ca_stronghold_events.7.d
+	flavor = ca_stronghold_events.7.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ig:ig_intelligentsia ?= { is_in_government = yes }
+		any_scope_state = {
+			is_incorporated = yes
+			OR = {
+				has_modifier = federal_stronghold
+				has_modifier = age_of_federal_stronghold
+			}
+			NOT = { has_variable = ca_sh_fed_upkeep }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				OR = {
+					has_modifier = federal_stronghold
+					has_modifier = age_of_federal_stronghold
+				}
+				NOT = { has_variable = ca_sh_fed_upkeep }
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.7.a
+		default_option = yes
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_small }
+		}
+		add_treasury = { value = ca_money_small multiply = -1 }
+		scope:ca_p11_state = {
+			set_variable = { name = ca_sh_fed_upkeep years = 5 }
+			add_loyalists_in_state = { value = small_radicals }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_stronghold_events.7.b
+		scope:ca_p11_state = {
+			set_variable = { name = ca_sh_fed_upkeep years = 2 }
+			random_list = {
+				1 = {
+					if = { limit = { has_modifier = age_of_federal_stronghold } remove_modifier = age_of_federal_stronghold add_modifier = { name = federal_stronghold } }
+					else_if = { limit = { has_modifier = federal_stronghold } remove_modifier = federal_stronghold add_modifier = { name = waning_federal_stronghold } }
+				}
+				1 = { }
+			}
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_stronghold_events.8 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.8.t
+	desc = ca_stronghold_events.8.d
+	flavor = ca_stronghold_events.8.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		OR = {
+			ig:ig_landowners ?= { is_in_government = yes }
+			ig:ig_devout ?= { is_in_government = yes }
+		}
+		any_scope_state = {
+			is_incorporated = yes
+			OR = {
+				has_modifier = unitary_stronghold
+				has_modifier = age_of_unitary_stronghold
+			}
+			NOT = { has_variable = ca_sh_uni_upkeep }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				OR = {
+					has_modifier = unitary_stronghold
+					has_modifier = age_of_unitary_stronghold
+				}
+				NOT = { has_variable = ca_sh_uni_upkeep }
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.8.a
+		default_option = yes
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_small }
+		}
+		add_treasury = { value = ca_money_small multiply = -1 }
+		scope:ca_p11_state = {
+			set_variable = { name = ca_sh_uni_upkeep years = 5 }
+			add_loyalists_in_state = { value = small_radicals }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_stronghold_events.8.b
+		scope:ca_p11_state = {
+			set_variable = { name = ca_sh_uni_upkeep years = 2 }
+			random_list = {
+				1 = {
+					if = { limit = { has_modifier = age_of_unitary_stronghold } remove_modifier = age_of_unitary_stronghold add_modifier = { name = unitary_stronghold } }
+					else_if = { limit = { has_modifier = unitary_stronghold } remove_modifier = unitary_stronghold add_modifier = { name = waning_unitary_stronghold } }
+				}
+				1 = { }
+			}
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_stronghold_events.9 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.9.t
+	desc = ca_stronghold_events.9.d
+	flavor = ca_stronghold_events.9.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.05 } }
+		any_scope_state = {
+			is_incorporated = yes
+			OR = {
+				has_modifier = federal_stronghold_small_nation
+				has_modifier = federal_stronghold
+				has_modifier = age_of_federal_stronghold
+			}
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				OR = {
+					has_modifier = federal_stronghold_small_nation
+					has_modifier = federal_stronghold
+					has_modifier = age_of_federal_stronghold
+				}
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.9.a
+		default_option = yes
+		scope:ca_p11_state = {
+			if = { limit = { has_modifier = federal_stronghold_small_nation } remove_modifier = federal_stronghold_small_nation }
+			if = { limit = { has_modifier = federal_stronghold } remove_modifier = federal_stronghold }
+			if = { limit = { has_modifier = age_of_federal_stronghold } remove_modifier = age_of_federal_stronghold }
+			add_modifier = { name = waning_federal_stronghold }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_stronghold_events.9.b
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_medium }
+		}
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		scope:ca_p11_state = {
+			set_variable = { name = ca_sh_fed_upkeep years = 5 }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_stronghold_events.10 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.10.t
+	desc = ca_stronghold_events.10.d
+	flavor = ca_stronghold_events.10.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.05 } }
+		any_scope_state = {
+			is_incorporated = yes
+			OR = {
+				has_modifier = unitary_stronghold_small_nation
+				has_modifier = unitary_stronghold
+				has_modifier = age_of_unitary_stronghold
+			}
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				OR = {
+					has_modifier = unitary_stronghold_small_nation
+					has_modifier = unitary_stronghold
+					has_modifier = age_of_unitary_stronghold
+				}
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.10.a
+		default_option = yes
+		scope:ca_p11_state = {
+			if = { limit = { has_modifier = unitary_stronghold_small_nation } remove_modifier = unitary_stronghold_small_nation }
+			if = { limit = { has_modifier = unitary_stronghold } remove_modifier = unitary_stronghold }
+			if = { limit = { has_modifier = age_of_unitary_stronghold } remove_modifier = age_of_unitary_stronghold }
+			add_modifier = { name = waning_unitary_stronghold }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_stronghold_events.10.b
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_medium }
+		}
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		scope:ca_p11_state = {
+			set_variable = { name = ca_sh_uni_upkeep years = 5 }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_stronghold_events.11 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.11.t
+	desc = ca_stronghold_events.11.d
+	flavor = ca_stronghold_events.11.f
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.10 }
+		any_scope_state = {
+			is_incorporated = yes
+			has_modifier = waning_federal_stronghold
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				has_modifier = waning_federal_stronghold
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.11.a
+		default_option = yes
+		scope:ca_p11_state = {
+			if = { limit = { has_modifier = waning_federal_stronghold } remove_modifier = waning_federal_stronghold }
+			add_modifier = { name = federal_stronghold_small_nation }
+			set_variable = { name = ca_sh_fed_grow days = 730 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_stronghold_events.11.b
+		scope:ca_p11_state = {
+			add_radicals_in_state = { value = small_radicals strata = middle }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_stronghold_events.12 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.12.t
+	desc = ca_stronghold_events.12.d
+	flavor = ca_stronghold_events.12.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.10 }
+		any_scope_state = {
+			is_incorporated = yes
+			has_modifier = waning_unitary_stronghold
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				has_modifier = waning_unitary_stronghold
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.12.a
+		default_option = yes
+		scope:ca_p11_state = {
+			if = { limit = { has_modifier = waning_unitary_stronghold } remove_modifier = waning_unitary_stronghold }
+			add_modifier = { name = unitary_stronghold_small_nation }
+			set_variable = { name = ca_sh_uni_grow days = 730 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_stronghold_events.12.b
+		scope:ca_p11_state = {
+			add_radicals_in_state = { value = small_radicals strata = upper }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_stronghold_events.13 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.13.t
+	desc = ca_stronghold_events.13.d
+	flavor = ca_stronghold_events.13.f
+	event_image = { video = "middleeast_middleclass_cafe" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_liberal VALUE = 0.05 }
+		any_scope_state = {
+			is_incorporated = yes
+			NOT = { has_modifier = age_of_liberal_stronghold }
+			NOT = { has_modifier = fading_liberal_stronghold }
+			NOT = { has_variable = ca_sh_lib_grow }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				NOT = { has_modifier = age_of_liberal_stronghold }
+				NOT = { has_modifier = fading_liberal_stronghold }
+				NOT = { has_variable = ca_sh_lib_grow }
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.13.a
+		default_option = yes
+		scope:ca_p11_state = {
+			if = {
+				limit = { has_modifier = liberal_stronghold }
+				remove_modifier = liberal_stronghold
+				add_modifier = { name = age_of_liberal_stronghold }
+			}
+			else_if = {
+				limit = { has_modifier = liberal_stronghold_small_nation }
+				remove_modifier = liberal_stronghold_small_nation
+				add_modifier = { name = liberal_stronghold }
+			}
+			else = {
+				add_modifier = { name = liberal_stronghold_small_nation }
+			}
+			set_variable = { name = ca_sh_lib_grow days = 1095 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_stronghold_events.13.b
+		scope:ca_p11_state = {
+			set_variable = { name = ca_sh_lib_grow days = 730 }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_stronghold_events.14 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.14.t
+	desc = ca_stronghold_events.14.d
+	flavor = ca_stronghold_events.14.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_reactionary VALUE = 0.05 }
+		any_scope_state = {
+			is_incorporated = yes
+			NOT = { has_modifier = age_of_reactionary_stronghold }
+			NOT = { has_modifier = fading_reactionary_stronghold }
+			NOT = { has_variable = ca_sh_rea_grow }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				NOT = { has_modifier = age_of_reactionary_stronghold }
+				NOT = { has_modifier = fading_reactionary_stronghold }
+				NOT = { has_variable = ca_sh_rea_grow }
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.14.a
+		default_option = yes
+		scope:ca_p11_state = {
+			if = {
+				limit = { has_modifier = reactionary_stronghold }
+				remove_modifier = reactionary_stronghold
+				add_modifier = { name = age_of_reactionary_stronghold }
+			}
+			else_if = {
+				limit = { has_modifier = reactionary_stronghold_small_nation }
+				remove_modifier = reactionary_stronghold_small_nation
+				add_modifier = { name = reactionary_stronghold }
+			}
+			else = {
+				add_modifier = { name = reactionary_stronghold_small_nation }
+			}
+			set_variable = { name = ca_sh_rea_grow days = 1095 }
+		}
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_stronghold_events.14.b
+		scope:ca_p11_state = {
+			set_variable = { name = ca_sh_rea_grow days = 730 }
+			if = { limit = { has_modifier = reactionary_stronghold } remove_modifier = reactionary_stronghold add_modifier = { name = fading_reactionary_stronghold months = 120 } }
+		}
+		ig:ig_devout ?= { add_modifier = { name = ca_p11_ig_humiliated months = 24 } }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_stronghold_events.15 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.15.t
+	desc = ca_stronghold_events.15.d
+	flavor = ca_stronghold_events.15.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ig:ig_landowners ?= { is_powerful = yes }
+		any_scope_state = {
+			is_incorporated = yes
+			NOT = { has_modifier = age_of_conservative_stronghold }
+			NOT = { has_variable = ca_sh_con_grow }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				NOT = { has_modifier = age_of_conservative_stronghold }
+				NOT = { has_variable = ca_sh_con_grow }
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.15.a
+		default_option = yes
+		scope:ca_p11_state = {
+			if = {
+				limit = { has_modifier = conservative_stronghold }
+				remove_modifier = conservative_stronghold
+				add_modifier = { name = age_of_conservative_stronghold }
+			}
+			else_if = {
+				limit = { has_modifier = conservative_stronghold_small_nation }
+				remove_modifier = conservative_stronghold_small_nation
+				add_modifier = { name = conservative_stronghold }
+			}
+			else = {
+				add_modifier = { name = conservative_stronghold_small_nation }
+			}
+			set_variable = { name = ca_sh_con_grow days = 1095 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_stronghold_events.15.b
+		scope:ca_p11_state = {
+			set_variable = { name = ca_sh_con_grow days = 730 }
+			add_radicals_in_state = { value = medium_radicals strata = upper }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_stronghold_events.16 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_stronghold_events.16.t
+	desc = ca_stronghold_events.16.d
+	flavor = ca_stronghold_events.16.f
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_sh_sep_cd }
+		any_scope_state = {
+			is_incorporated = yes
+			OR = {
+				has_modifier = separatism_stronghold
+				has_modifier = separatism_stronghold_small_nation
+			}
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_state }
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				is_incorporated = yes
+				OR = {
+					has_modifier = separatism_stronghold
+					has_modifier = separatism_stronghold_small_nation
+				}
+			}
+			save_scope_as = ca_p11_state
+		}
+	}
+	option = {
+		name = ca_stronghold_events.16.a
+		default_option = yes
+		set_variable = { name = ca_sh_sep_cd years = 5 }
+		scope:ca_p11_state = {
+			if = { limit = { has_modifier = separatism_stronghold } remove_modifier = separatism_stronghold }
+			if = { limit = { has_modifier = separatism_stronghold_small_nation } remove_modifier = separatism_stronghold_small_nation }
+			add_modifier = { name = suppressed_separatism_stronghold }
+			add_radicals_in_state = { value = medium_radicals }
+		}
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_stronghold_events.16.b
+		set_variable = { name = ca_sh_sep_cd years = 5 }
+		scope:ca_p11_state = {
+			add_loyalists_in_state = { value = small_radicals }
+		}
+		ai_chance = { base = 50 }
+	}
+}

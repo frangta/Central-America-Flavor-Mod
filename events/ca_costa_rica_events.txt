@@ -252,7 +252,7 @@ ca_costa_rica_events.41 = {
         set_variable = ca_cos_ligueros_indultados
         if = {
             limit = { NOT = { has_global_variable = cafm_hc_villasenor } }
-            create_character = { template = cafm_vicente_villasenor }
+            cafm_spawn_or_transfer = { KEY = villasenor TEMPLATE = cafm_vicente_villasenor RULER = no }
         }
         add_loyalists = { value = 0.05 culture = cu:costa_rican }
         ca_cos_change_soberania_effect = { VALUE = 5 }
@@ -777,7 +777,7 @@ ca_costa_rica_events.99 = {
             # Manuel Quijano se pone al frente de Guanacaste
             if = {
                 limit = { NOT = { has_global_variable = cafm_hc_quijano } }
-                c:PC2 = { create_character = { template = cafm_manuel_quijano } }
+                c:PC2 = { cafm_spawn_or_transfer = { KEY = quijano TEMPLATE = cafm_manuel_quijano RULER = no } }
             }
             
             # Guanacaste se alía con Nicaragua si existe
@@ -1379,10 +1379,7 @@ ca_costa_rica_events.192 = {
     immediate = {
         set_variable = ca_cos_programa_aguilar_fired
         # Aguilar asume como jefe de Estado
-        create_character = {
-            template = cos_manuel_aguilar_character_template
-            ruler = yes
-        }
+        cafm_spawn_or_transfer = { KEY = aguilar_chacon TEMPLATE = cos_manuel_aguilar_character_template RULER = yes }
     }
 
     # Historica: amnistia, fin del fuero militar y poderes repartidos
@@ -1515,10 +1512,7 @@ ca_costa_rica_events.195 = {
     # Aceptarla: gobierna el vicejefe Juan Mora Fernandez
     option = {
         name = ca_costa_rica_events.195.b
-        create_character = {
-            template = cafm_juan_mora_fernandez
-            ruler = yes
-        }
+        cafm_spawn_or_transfer = { KEY = juan_mora_fernandez TEMPLATE = cafm_juan_mora_fernandez RULER = yes }
         ai_chance = { base = 20 }
     }
 }
@@ -1552,10 +1546,7 @@ ca_costa_rica_events.20 = {
             limit = { ruler ?= { NOT = { has_variable = is_carrillo } } }
             ruler = { exile_character = yes }
             global_var:cafm_hc_carrillo ?= { exile_character = yes }
-            create_character = {
-                template = cos_braulio_carrillo_character_template
-                ruler = yes
-            }
+            cafm_spawn_or_transfer = { KEY = carrillo TEMPLATE = cos_braulio_carrillo_character_template RULER = yes }
         }
     }
 
@@ -2141,10 +2132,7 @@ ca_costa_rica_events.22 = {
     # El viejo Juan Mora Fernandez (97 votos en la historia)
     option = {
         name = ca_costa_rica_events.22.c
-        create_character = {
-            template = cafm_juan_mora_fernandez
-            ruler = yes
-        }
+        cafm_spawn_or_transfer = { KEY = juan_mora_fernandez TEMPLATE = cafm_juan_mora_fernandez RULER = yes }
         ai_chance = { base = 5 }
     }
 }
@@ -2167,20 +2155,14 @@ ca_costa_rica_events.221 = {
         default_option = yes
         remove_variable = ca_cos_gobierno_oreamuno
         set_variable = ca_cos_gobierno_gallegos
-        create_character = {
-            template = cafm_jose_rafael_gallegos
-            ruler = yes
-        }
+        cafm_spawn_or_transfer = { KEY = gallegos TEMPLATE = cafm_jose_rafael_gallegos RULER = yes }
         ai_chance = { base = 80 }
     }
 
     # Obligar a Oreamuno a gobernar
     option = {
         name = ca_costa_rica_events.221.b
-        create_character = {
-            template = cafm_francisco_maria_oreamuno
-            ruler = yes
-        }
+        cafm_spawn_or_transfer = { KEY = oreamuno TEMPLATE = cafm_francisco_maria_oreamuno RULER = yes }
         add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
         ai_chance = { base = 20 }
     }
@@ -2237,10 +2219,7 @@ ca_costa_rica_events.223 = {
         remove_variable = ca_cos_gobierno_gallegos
         remove_variable = ca_cos_gobierno_oreamuno
         set_variable = ca_cos_gobierno_alfaro
-        create_character = {
-            template = cos_jose_maria_alfaro_character_template
-            ruler = yes
-        }
+        cafm_spawn_or_transfer = { KEY = alfaro_zamora TEMPLATE = cos_jose_maria_alfaro_character_template RULER = yes }
         add_loyalists = { value = 0.05 interest_group = ig:ig_armed_forces }
         ai_chance = { base = 80 }
     }
@@ -2297,10 +2276,7 @@ ca_costa_rica_events.23 = {
         default_option = yes
         remove_variable = ca_cos_gobierno_alfaro
         set_variable = ca_cos_gobierno_castro
-        create_character = {
-            template = cos_castro_character_template
-            ruler = yes
-        }
+        cafm_spawn_or_transfer = { KEY = castro_madriz TEMPLATE = cos_castro_character_template RULER = yes }
         add_loyalists = { value = 0.05 interest_group = ig:ig_intelligentsia }
         ai_chance = { base = 80 }
     }
@@ -2426,7 +2402,7 @@ ca_costa_rica_events.234 = {
         set_variable = ca_cos_renuncia_castro_fired
         if = {
             limit = { NOT = { has_global_variable = cafm_hc_jose_manuel_quiros } }
-            create_character = { template = cafm_jose_manuel_quiros }
+            cafm_spawn_or_transfer = { KEY = jose_manuel_quiros TEMPLATE = cafm_jose_manuel_quiros RULER = no }
         }
     }
 
@@ -2466,10 +2442,7 @@ ca_costa_rica_events.24 = {
     option = {
         name = ca_costa_rica_events.24.a
         default_option = yes
-        create_character = {
-            template = cos_juan_rafael_mora_character_template
-            ruler = yes
-        }
+        cafm_spawn_or_transfer = { KEY = juan_rafael_mora TEMPLATE = cos_juan_rafael_mora_character_template RULER = yes }
         add_loyalists = { value = 0.05 interest_group = ig:ig_landowners }
         ai_chance = { base = 75 }
     }
@@ -2477,20 +2450,14 @@ ca_costa_rica_events.24 = {
     # Rafael Moya (32 votos en la historia)
     option = {
         name = ca_costa_rica_events.24.b
-        create_character = {
-            template = cafm_rafael_moya
-            ruler = yes
-        }
+        cafm_spawn_or_transfer = { KEY = rafael_moya TEMPLATE = cafm_rafael_moya RULER = yes }
         ai_chance = { base = 20 }
     }
 
     # Manuel Antonio Bonilla, el carrillista (9 votos en la historia)
     option = {
         name = ca_costa_rica_events.24.c
-        create_character = {
-            template = cafm_manuel_antonio_bonilla
-            ruler = yes
-        }
+        cafm_spawn_or_transfer = { KEY = bonilla_nava TEMPLATE = cafm_manuel_antonio_bonilla RULER = yes }
         ai_chance = { base = 5 }
     }
 }
@@ -2716,16 +2683,13 @@ ca_costa_rica_events.320 = {
 					}
 				}
 			}
-			create_character = {
-				template = UCA_francisco_morazan
-				ruler = yes
-			}
+			cafm_spawn_or_transfer = { KEY = morazan TEMPLATE = UCA_francisco_morazan RULER = yes }
 		}
 
 		# Villasenor, el general que se paso al Aguila en El Jocote
 		if = {
 			limit = { NOT = { has_global_variable = cafm_hc_villasenor } }
-			create_character = { template = cafm_vicente_villasenor }
+			cafm_spawn_or_transfer = { KEY = villasenor TEMPLATE = cafm_vicente_villasenor RULER = no }
 		}
 
 		if = {
@@ -2924,7 +2888,7 @@ ca_costa_rica_events.340 = {
 		# Villasenor sale con 400 hombres; el Jocote se decide en cuatro dias
 		if = {
 			limit = { NOT = { has_global_variable = cafm_hc_villasenor } }
-			create_character = { template = cafm_vicente_villasenor }
+			cafm_spawn_or_transfer = { KEY = villasenor TEMPLATE = cafm_vicente_villasenor RULER = no }
 		}
 		trigger_event = { id = ca_costa_rica_events.341 days = 4 }
 	}
@@ -2998,7 +2962,7 @@ ca_costa_rica_events.350 = {
 		# Pancha Carrasco combate contra el Aguila
 		if = {
 			limit = { NOT = { has_global_variable = cafm_hc_pancha_carrasco } }
-			create_character = { template = cafm_pancha_carrasco }
+			cafm_spawn_or_transfer = { KEY = pancha_carrasco TEMPLATE = cafm_pancha_carrasco RULER = no }
 		}
 	}
 
@@ -3035,10 +2999,7 @@ ca_costa_rica_events.350 = {
 
 	# Pinto Soares asume la jefatura (11-27 de septiembre)
 	after = {
-		create_character = {
-			template = cafm_antonio_pinto_soares
-			ruler = yes
-		}
+		cafm_spawn_or_transfer = { KEY = pinto_soares TEMPLATE = cafm_antonio_pinto_soares RULER = yes }
 		trigger_event = { id = ca_costa_rica_events.351 days = 16 }
 	}
 }
@@ -3067,10 +3028,7 @@ ca_costa_rica_events.351 = {
 	option = {
 		name = ca_costa_rica_events.351.a
 		default_option = yes
-		create_character = {
-			template = cos_jose_maria_alfaro_character_template
-			ruler = yes
-		}
+		cafm_spawn_or_transfer = { KEY = alfaro_zamora TEMPLATE = cos_jose_maria_alfaro_character_template RULER = yes }
 		# Pinto Soares restablecio las relaciones con el resto de Centroamerica
 		c:GUA ?= { change_relations = { country = ROOT value = 20 } }
 		c:ELS ?= { change_relations = { country = ROOT value = 20 } }

@@ -1,0 +1,331 @@
+﻿namespace = ca_frca_ai
+
+# Z2 (F): la UCA de la IA usa los botones del minimapa con eventos ocultos.
+# Los lanza el pulso mensual de je_historic_central_america_falls_apart (33 % cada uno,
+# una accion cada ~3 meses). Usan los mismos efectos, costos y esperas que los botones.
+#   .1 Acciones por estado (solo IA dinamica): el estado con menos lealtad; si empatan, el de mas turmoil.
+#      Ruta federal: campana federal, si no negociar. Ruta centralista: intendente, si no cooptar.
+#   .2 Defensa regional (IA historica y dinamica): Bocas del Toro y la Mosquitia.
+
+ca_frca_ai.1 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		is_ai = yes
+		ca_frca_ai_dynamic = yes
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				has_variable = frca_loyalty_gua
+				var:frca_loyalty_gua = 1
+				s:STATE_GUATEMALA = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = gua }
+			}
+			ca_ai_do_state_action = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_els
+				var:frca_loyalty_els = 1
+				s:STATE_SAN_SALVADOR = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = els }
+			}
+			ca_ai_do_state_action = { TAG = els CTAG = ELS STATE = STATE_SAN_SALVADOR }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_hon
+				var:frca_loyalty_hon = 1
+				s:STATE_HONDURAS = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = hon }
+			}
+			ca_ai_do_state_action = { TAG = hon CTAG = HON STATE = STATE_HONDURAS }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_nic
+				var:frca_loyalty_nic = 1
+				s:STATE_NICARAGUA = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = nic }
+			}
+			ca_ai_do_state_action = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_cos
+				var:frca_loyalty_cos = 1
+				s:STATE_COSTA_RICA = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = cos }
+			}
+			ca_ai_do_state_action = { TAG = cos CTAG = COS STATE = STATE_COSTA_RICA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_alt
+				var:frca_loyalty_alt = 1
+				s:STATE_GUATEMALA = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = alt }
+			}
+			ca_ai_do_state_action = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_cip
+				var:frca_loyalty_cip = 1
+				s:STATE_CHIAPAS = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = cip }
+			}
+			ca_ai_do_state_action = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_gua
+				var:frca_loyalty_gua = 1
+				ca_ai_can_act_state = { TAG = gua }
+			}
+			ca_ai_do_state_action = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_els
+				var:frca_loyalty_els = 1
+				ca_ai_can_act_state = { TAG = els }
+			}
+			ca_ai_do_state_action = { TAG = els CTAG = ELS STATE = STATE_SAN_SALVADOR }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_hon
+				var:frca_loyalty_hon = 1
+				ca_ai_can_act_state = { TAG = hon }
+			}
+			ca_ai_do_state_action = { TAG = hon CTAG = HON STATE = STATE_HONDURAS }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_nic
+				var:frca_loyalty_nic = 1
+				ca_ai_can_act_state = { TAG = nic }
+			}
+			ca_ai_do_state_action = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_cos
+				var:frca_loyalty_cos = 1
+				ca_ai_can_act_state = { TAG = cos }
+			}
+			ca_ai_do_state_action = { TAG = cos CTAG = COS STATE = STATE_COSTA_RICA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_alt
+				var:frca_loyalty_alt = 1
+				ca_ai_can_act_state = { TAG = alt }
+			}
+			ca_ai_do_state_action = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_cip
+				var:frca_loyalty_cip = 1
+				ca_ai_can_act_state = { TAG = cip }
+			}
+			ca_ai_do_state_action = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_gua
+				var:frca_loyalty_gua = 2
+				s:STATE_GUATEMALA = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = gua }
+			}
+			ca_ai_do_state_action = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_els
+				var:frca_loyalty_els = 2
+				s:STATE_SAN_SALVADOR = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = els }
+			}
+			ca_ai_do_state_action = { TAG = els CTAG = ELS STATE = STATE_SAN_SALVADOR }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_hon
+				var:frca_loyalty_hon = 2
+				s:STATE_HONDURAS = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = hon }
+			}
+			ca_ai_do_state_action = { TAG = hon CTAG = HON STATE = STATE_HONDURAS }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_nic
+				var:frca_loyalty_nic = 2
+				s:STATE_NICARAGUA = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = nic }
+			}
+			ca_ai_do_state_action = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_cos
+				var:frca_loyalty_cos = 2
+				s:STATE_COSTA_RICA = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = cos }
+			}
+			ca_ai_do_state_action = { TAG = cos CTAG = COS STATE = STATE_COSTA_RICA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_alt
+				var:frca_loyalty_alt = 2
+				s:STATE_GUATEMALA = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = alt }
+			}
+			ca_ai_do_state_action = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_cip
+				var:frca_loyalty_cip = 2
+				s:STATE_CHIAPAS = { any_scope_state = { turmoil >= 0.2 } }
+				ca_ai_can_act_state = { TAG = cip }
+			}
+			ca_ai_do_state_action = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_gua
+				var:frca_loyalty_gua = 2
+				ca_ai_can_act_state = { TAG = gua }
+			}
+			ca_ai_do_state_action = { TAG = gua CTAG = GUA STATE = STATE_GUATEMALA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_els
+				var:frca_loyalty_els = 2
+				ca_ai_can_act_state = { TAG = els }
+			}
+			ca_ai_do_state_action = { TAG = els CTAG = ELS STATE = STATE_SAN_SALVADOR }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_hon
+				var:frca_loyalty_hon = 2
+				ca_ai_can_act_state = { TAG = hon }
+			}
+			ca_ai_do_state_action = { TAG = hon CTAG = HON STATE = STATE_HONDURAS }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_nic
+				var:frca_loyalty_nic = 2
+				ca_ai_can_act_state = { TAG = nic }
+			}
+			ca_ai_do_state_action = { TAG = nic CTAG = NIC STATE = STATE_NICARAGUA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_cos
+				var:frca_loyalty_cos = 2
+				ca_ai_can_act_state = { TAG = cos }
+			}
+			ca_ai_do_state_action = { TAG = cos CTAG = COS STATE = STATE_COSTA_RICA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_alt
+				var:frca_loyalty_alt = 2
+				ca_ai_can_act_state = { TAG = alt }
+			}
+			ca_ai_do_state_action = { TAG = alt CTAG = ALT STATE = STATE_GUATEMALA }
+		}
+		else_if = {
+			limit = {
+				has_variable = frca_loyalty_cip
+				var:frca_loyalty_cip = 2
+				ca_ai_can_act_state = { TAG = cip }
+			}
+			ca_ai_do_state_action = { TAG = cip CTAG = CIP STATE = STATE_CHIAPAS }
+		}
+	}
+}
+
+ca_frca_ai.2 = {
+	type = country_event
+	hidden = yes
+
+	trigger = {
+		is_ai = yes
+		OR = {
+			ca_frca_ai_historic = yes
+			ca_frca_ai_dynamic = yes
+		}
+	}
+
+	immediate = {
+		# 1. Bocas del Toro con poco control (< 30)
+		if = {
+			limit = {
+				ca_bocas_held_by_uca = yes
+				NOT = { ca_bocas_control_ge = { VALUE = 30 } }
+				ca_mm_region_ready = { KEY = boc_garrison }
+				ca_mm_can_pay = { VALUE = ca_money_medium }
+			}
+			ca_mm_act_boc_garrison = yes
+		}
+		else_if = {
+			limit = {
+				ca_bocas_held_by_uca = yes
+				NOT = { ca_bocas_control_ge = { VALUE = 30 } }
+				NOT = { has_global_variable = ca_bocas_native_pact }
+				ca_mm_region_ready = { KEY = boc_native_pact }
+				ca_cohesion_can_spend = { VALUE = 5 }
+			}
+			ca_mm_act_boc_native_pact = yes
+		}
+		else_if = {
+			limit = {
+				ca_bocas_held_by_uca = yes
+				NOT = { ca_bocas_control_ge = { VALUE = 30 } }
+				exists = c:GBR
+				ca_mm_region_ready = { KEY = boc_protest }
+			}
+			ca_mm_act_boc_protest = yes
+		}
+		# 2. Frente britanico (Mosquitia) en Tenso o peor
+		else_if = {
+			limit = {
+				ca_frca_front_ge = { FRONT = british VALUE = 1 }
+				ca_mm_region_ready = { KEY = mos_commissioner }
+				ca_cohesion_can_spend = { VALUE = 10 }
+				ca_mm_can_pay = { VALUE = ca_money_small }
+			}
+			ca_mm_act_mos_commissioner = yes
+		}
+		else_if = {
+			limit = {
+				ca_frca_front_ge = { FRONT = british VALUE = 1 }
+				exists = c:MKT
+				ca_mm_region_ready = { KEY = mos_king }
+				ca_cohesion_can_spend = { VALUE = 5 }
+			}
+			ca_mm_act_mos_king = yes
+		}
+		else_if = {
+			limit = {
+				ca_frca_front_ge = { FRONT = british VALUE = 1 }
+				exists = c:GBR
+				ca_mm_region_ready = { KEY = mos_protest }
+			}
+			ca_mm_act_mos_protest = yes
+		}
+	}
+}

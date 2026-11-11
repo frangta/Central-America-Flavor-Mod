@@ -6360,7 +6360,7 @@ ca_central_america.59 = {
 	duration = 3
 
 	trigger = {
-		this = c:PNM
+		c:PNM ?= this # arreglo 10 nov: el Istmo puede no existir
 		is_subject = no
 		NOT = { has_variable = ca_isthmus_59_fired }
 		has_global_variable = ca_pnm_born
@@ -7482,7 +7482,7 @@ ca_central_america.75 = {
 	duration = 3
 
 	trigger = {
-		this = c:PNM
+		c:PNM ?= this # arreglo 10 nov: el Istmo puede no existir
 		NOT = { has_variable = ca_isthmus_75_fired }
 	}
 	option = {
@@ -9823,7 +9823,7 @@ ca_central_america.118 = {
 ca_central_america.119 = {
     type = country_event
     placement = root
-
+    gui_window = ca_event_window_119
     title = ca_central_america.119.t
     desc = ca_central_america.119.d
     flavor = ca_central_america.119.f

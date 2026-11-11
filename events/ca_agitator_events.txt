@@ -1,0 +1,412 @@
+﻿namespace = ca_agitator_events
+
+# CAFM P11: nacen agitadores federalistas (.1-.4) y unitarios (.5-.8).
+# Disparo: pulso mensual ca_p11_monthly. Maximo 2 agitadores por ideologia en el pais.
+
+ca_agitator_events.1 = {
+	type = country_event
+	placement = root
+	title = ca_agitator_events.1.t
+	desc = ca_agitator_events.1.d
+	flavor = ca_agitator_events.1.f
+	event_image = { video = "europenorthamerica_rich_and_poor" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.05 }
+		ig:ig_intelligentsia ?= { is_marginal = no }
+		NOT = {
+			any_scope_character = {
+				has_role = character_role_agitator
+				has_ideology = ideology:ideology_ca_federalist
+				count >= 2
+			}
+		}
+	}
+
+	immediate = {
+		save_scope_as = ca_p11_country_scope
+	}
+	option = {
+		name = ca_agitator_events.1.a
+		default_option = yes
+		create_character = {
+			is_agitator = yes
+			interest_group = ig_intelligentsia
+			ideology = ideology_ca_federalist
+			traits = { inspirational_orator }
+		}
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_federalist }
+			add_modifier = { name = ca_modifier_pop_attraction_low months = 12 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_agitator_events.1.b
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		add_radicals = { value = small_radicals interest_group = ig:ig_intelligentsia }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_agitator_events.2 = {
+	type = country_event
+	placement = root
+	title = ca_agitator_events.2.t
+	desc = ca_agitator_events.2.d
+	flavor = ca_agitator_events.2.f
+	event_image = { video = "middleeast_middleclass_cafe" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.05 }
+		ig:ig_petty_bourgeoisie ?= { is_marginal = no }
+		NOT = {
+			any_scope_character = {
+				has_role = character_role_agitator
+				has_ideology = ideology:ideology_ca_federalist
+				count >= 2
+			}
+		}
+	}
+
+	immediate = {
+		save_scope_as = ca_p11_country_scope
+	}
+	option = {
+		name = ca_agitator_events.2.a
+		default_option = yes
+		create_character = {
+			is_agitator = yes
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_ca_federalist
+			traits = { meticulous }
+		}
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_federalist }
+			add_modifier = { name = ca_modifier_pop_attraction_low months = 12 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_agitator_events.2.b
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		add_radicals = { value = small_radicals interest_group = ig:ig_petty_bourgeoisie }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_agitator_events.3 = {
+	type = country_event
+	placement = root
+	title = ca_agitator_events.3.t
+	desc = ca_agitator_events.3.d
+	flavor = ca_agitator_events.3.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.05 }
+		ig:ig_armed_forces ?= { is_marginal = no }
+		NOT = {
+			any_scope_character = {
+				has_role = character_role_agitator
+				has_ideology = ideology:ideology_ca_morazanista
+				count >= 2
+			}
+		}
+	}
+
+	immediate = {
+		save_scope_as = ca_p11_country_scope
+	}
+	option = {
+		name = ca_agitator_events.3.a
+		default_option = yes
+		create_character = {
+			is_agitator = yes
+			interest_group = ig_armed_forces
+			ideology = ideology_ca_morazanista
+			traits = { honorable }
+		}
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_federalist }
+			add_modifier = { name = ca_modifier_pop_attraction_low months = 12 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_agitator_events.3.b
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		add_radicals = { value = small_radicals interest_group = ig:ig_armed_forces }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_agitator_events.4 = {
+	type = country_event
+	placement = root
+	title = ca_agitator_events.4.t
+	desc = ca_agitator_events.4.d
+	flavor = ca_agitator_events.4.f
+	event_image = { video = "africa_diplomats_negotiating" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.05 }
+		ig:ig_intelligentsia ?= { is_marginal = no }
+		NOT = {
+			any_scope_character = {
+				has_role = character_role_agitator
+				has_ideology = ideology:ideology_ca_federalist
+				count >= 2
+			}
+		}
+	}
+
+	immediate = {
+		save_scope_as = ca_p11_country_scope
+	}
+	option = {
+		name = ca_agitator_events.4.a
+		default_option = yes
+		create_character = {
+			is_agitator = yes
+			interest_group = ig_intelligentsia
+			ideology = ideology_ca_federalist
+			traits = { charismatic }
+		}
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_federalist }
+			add_modifier = { name = ca_modifier_pop_attraction_low months = 12 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_agitator_events.4.b
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		add_radicals = { value = small_radicals interest_group = ig:ig_intelligentsia }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_agitator_events.5 = {
+	type = country_event
+	placement = root
+	title = ca_agitator_events.5.t
+	desc = ca_agitator_events.5.d
+	flavor = ca_agitator_events.5.f
+	event_image = { video = "southamerica_christianity" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.05 }
+		ig:ig_devout ?= { is_marginal = no }
+		NOT = {
+			any_scope_character = {
+				has_role = character_role_agitator
+				has_ideology = ideology:ideology_ca_unitarian
+				count >= 2
+			}
+		}
+	}
+
+	immediate = {
+		save_scope_as = ca_p11_country_scope
+	}
+	option = {
+		name = ca_agitator_events.5.a
+		default_option = yes
+		create_character = {
+			is_agitator = yes
+			interest_group = ig_devout
+			ideology = ideology_ca_unitarian
+			traits = { inspirational_orator }
+		}
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_unitarian }
+			add_modifier = { name = ca_modifier_pop_attraction_low months = 12 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_agitator_events.5.b
+		ig:ig_devout ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		add_radicals = { value = small_radicals interest_group = ig:ig_devout }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_agitator_events.6 = {
+	type = country_event
+	placement = root
+	title = ca_agitator_events.6.t
+	desc = ca_agitator_events.6.d
+	flavor = ca_agitator_events.6.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.05 }
+		ig:ig_landowners ?= { is_marginal = no }
+		NOT = {
+			any_scope_character = {
+				has_role = character_role_agitator
+				has_ideology = ideology:ideology_ca_unitarian
+				count >= 2
+			}
+		}
+	}
+
+	immediate = {
+		save_scope_as = ca_p11_country_scope
+	}
+	option = {
+		name = ca_agitator_events.6.a
+		default_option = yes
+		create_character = {
+			is_agitator = yes
+			interest_group = ig_landowners
+			ideology = ideology_ca_unitarian
+			traits = { ambitious }
+		}
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_unitarian }
+			add_modifier = { name = ca_modifier_pop_attraction_low months = 12 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_agitator_events.6.b
+		ig:ig_landowners ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		add_radicals = { value = small_radicals interest_group = ig:ig_landowners }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_agitator_events.7 = {
+	type = country_event
+	placement = root
+	title = ca_agitator_events.7.t
+	desc = ca_agitator_events.7.d
+	flavor = ca_agitator_events.7.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.05 }
+		ig:ig_armed_forces ?= { is_marginal = no }
+		NOT = {
+			any_scope_character = {
+				has_role = character_role_agitator
+				has_ideology = ideology:ideology_ca_unitarian
+				count >= 2
+			}
+		}
+	}
+
+	immediate = {
+		save_scope_as = ca_p11_country_scope
+	}
+	option = {
+		name = ca_agitator_events.7.a
+		default_option = yes
+		create_character = {
+			is_agitator = yes
+			interest_group = ig_armed_forces
+			ideology = ideology_ca_unitarian
+			traits = { wrathful }
+		}
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_unitarian }
+			add_modifier = { name = ca_modifier_pop_attraction_low months = 12 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_agitator_events.7.b
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		add_radicals = { value = small_radicals interest_group = ig:ig_armed_forces }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_agitator_events.8 = {
+	type = country_event
+	placement = root
+	title = ca_agitator_events.8.t
+	desc = ca_agitator_events.8.d
+	flavor = ca_agitator_events.8.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.05 }
+		ig:ig_devout ?= { is_marginal = no }
+		NOT = {
+			any_scope_character = {
+				has_role = character_role_agitator
+				has_ideology = ideology:ideology_ca_unitarian
+				count >= 2
+			}
+		}
+	}
+
+	immediate = {
+		save_scope_as = ca_p11_country_scope
+	}
+	option = {
+		name = ca_agitator_events.8.a
+		default_option = yes
+		create_character = {
+			is_agitator = yes
+			interest_group = ig_devout
+			ideology = ideology_ca_unitarian
+			traits = { bigoted }
+		}
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_unitarian }
+			add_modifier = { name = ca_modifier_pop_attraction_low months = 12 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_agitator_events.8.b
+		ig:ig_devout ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		add_radicals = { value = small_radicals interest_group = ig:ig_devout }
+		ai_chance = { base = 40 }
+	}
+}

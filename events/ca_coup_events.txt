@@ -1,0 +1,450 @@
+﻿namespace = ca_coup_events
+
+# CAFM P11: golpes de Estado unitario (.1) y federalista (.2) para la UCA y los estados.
+# Barra oculta ca_coup_plot (0-100): .3-.7 la mueven; .8 golpe con exito (>= 100); .9 fracaso (<= 0); .10 consecuencias.
+# ca_coup_side: 1 unitario, 2 federalista. Pulsos en zz_ca_p11_on_actions.txt.
+
+ca_coup_events.1 = {
+	type = country_event
+	placement = root
+	title = ca_coup_events.1.t
+	desc = ca_coup_events.1.d
+	flavor = ca_coup_events.1.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_coup_plot }
+		NOT = { has_variable = ca_p11_coup_cd }
+		NOT = { has_variable = recent_coup_or_revolution_var }
+		is_at_war = no
+		trigger_if = {
+			limit = { exists = c:UCA this = c:UCA }
+			NOT = { ca_frca_ai_historic = yes }
+		}
+		OR = {
+			ig:ig_armed_forces ?= { is_in_government = no ig_approval < 0 }
+			ig:ig_devout ?= { is_in_government = no ig_approval < 0 }
+			ig:ig_landowners ?= { is_in_government = no ig_approval < 0 }
+		}
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.05 }
+	}
+
+	immediate = {
+		set_variable = { name = ca_coup_side value = 1 }
+		set_variable = { name = ca_coup_plot value = 30 }
+	}
+	option = {
+		name = ca_coup_events.1.a
+		default_option = yes
+		change_variable = { name = ca_coup_plot add = 10 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_coup_events.1.b
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_small }
+		}
+		add_treasury = { value = ca_money_small multiply = -1 }
+		change_variable = { name = ca_coup_plot add = -10 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_coup_events.2 = {
+	type = country_event
+	placement = root
+	title = ca_coup_events.2.t
+	desc = ca_coup_events.2.d
+	flavor = ca_coup_events.2.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_coup_plot }
+		NOT = { has_variable = ca_p11_coup_cd }
+		NOT = { has_variable = recent_coup_or_revolution_var }
+		is_at_war = no
+		trigger_if = {
+			limit = { exists = c:UCA this = c:UCA }
+			NOT = { ca_frca_ai_historic = yes }
+		}
+		ig:ig_intelligentsia ?= { is_in_government = no ig_approval < 0 }
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.05 }
+	}
+
+	immediate = {
+		set_variable = { name = ca_coup_side value = 2 }
+		set_variable = { name = ca_coup_plot value = 30 }
+	}
+	option = {
+		name = ca_coup_events.2.a
+		default_option = yes
+		change_variable = { name = ca_coup_plot add = 10 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_coup_events.2.b
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_small }
+		}
+		add_treasury = { value = ca_money_small multiply = -1 }
+		change_variable = { name = ca_coup_plot add = -10 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_coup_events.3 = {
+	type = country_event
+	placement = root
+	title = ca_coup_events.3.t
+	desc = ca_coup_events.3.d
+	flavor = ca_coup_events.3.f
+	event_image = { video = "unspecific_vandalized_storefront" }
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		has_variable = ca_coup_plot
+		has_variable = ca_coup_side
+	}
+	cancellation_trigger = {
+		NOT = { has_variable = ca_coup_plot }
+	}
+
+	immediate = {
+
+	}
+	option = {
+		name = ca_coup_events.3.a
+		default_option = yes
+		change_variable = { name = ca_coup_plot add = -25 }
+		add_modifier = { name = ca_p11_plot_paranoia months = 12 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_coup_events.3.b
+		change_variable = { name = ca_coup_plot add = -10 }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_coup_events.4 = {
+	type = country_event
+	placement = root
+	title = ca_coup_events.4.t
+	desc = ca_coup_events.4.d
+	flavor = ca_coup_events.4.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		has_variable = ca_coup_plot
+		has_variable = ca_coup_side
+	}
+	cancellation_trigger = {
+		NOT = { has_variable = ca_coup_plot }
+	}
+
+	immediate = {
+
+	}
+	option = {
+		name = ca_coup_events.4.a
+		default_option = yes
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_medium }
+		}
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		change_variable = { name = ca_coup_plot add = -20 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_coup_events.4.b
+		change_variable = { name = ca_coup_plot add = -10 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_p11_ig_humiliated months = 24 } }
+		ai_chance = { base = 30 }
+	}
+	option = {
+		name = ca_coup_events.4.c
+		change_variable = { name = ca_coup_plot add = 15 }
+		ai_chance = { base = 10 }
+	}
+}
+
+ca_coup_events.5 = {
+	type = country_event
+	placement = root
+	title = ca_coup_events.5.t
+	desc = ca_coup_events.5.d
+	flavor = ca_coup_events.5.f
+	event_image = { video = "africa_diplomats_negotiating" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		has_variable = ca_coup_plot
+		has_variable = ca_coup_side
+	}
+	cancellation_trigger = {
+		NOT = { has_variable = ca_coup_plot }
+	}
+
+	immediate = {
+
+	}
+	option = {
+		name = ca_coup_events.5.a
+		default_option = yes
+		change_variable = { name = ca_coup_plot add = -10 }
+		add_modifier = { name = ca_p11_lost_revenue months = 6 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_coup_events.5.b
+		change_variable = { name = ca_coup_plot add = 15 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_coup_events.6 = {
+	type = country_event
+	placement = root
+	title = ca_coup_events.6.t
+	desc = ca_coup_events.6.d
+	flavor = ca_coup_events.6.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		has_variable = ca_coup_plot
+		has_variable = ca_coup_side
+	}
+	cancellation_trigger = {
+		NOT = { has_variable = ca_coup_plot }
+	}
+
+	immediate = {
+
+	}
+	option = {
+		name = ca_coup_events.6.a
+		default_option = yes
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_small }
+		}
+		add_treasury = { value = ca_money_small multiply = -1 }
+		change_variable = { name = ca_coup_plot add = -15 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_coup_events.6.b
+		change_variable = { name = ca_coup_plot add = -5 }
+		add_radicals = { value = small_radicals pop_type = soldiers }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_coup_events.7 = {
+	type = country_event
+	placement = root
+	title = ca_coup_events.7.t
+	desc = ca_coup_events.7.d
+	flavor = ca_coup_events.7.f
+	event_image = { video = "middleeast_middleclass_cafe" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		has_variable = ca_coup_plot
+		has_variable = ca_coup_side
+	}
+	cancellation_trigger = {
+		NOT = { has_variable = ca_coup_plot }
+	}
+
+	immediate = {
+
+	}
+	option = {
+		name = ca_coup_events.7.a
+		default_option = yes
+		change_variable = { name = ca_coup_plot add = -15 }
+		ig:ig_devout ?= { add_modifier = { name = ca_p11_ig_coopted months = 12 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_p11_ig_coopted months = 12 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_coup_events.7.b
+		change_variable = { name = ca_coup_plot add = -5 }
+		add_radicals = { value = small_radicals strata = middle }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_coup_events.8 = {
+	type = country_event
+	placement = root
+	title = ca_coup_events.8.t
+	desc = ca_coup_events.8.d
+	flavor = ca_coup_events.8.f
+	event_image = { video = "ep1_transfer_of_authority" }
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_variable = ca_coup_plot
+		has_variable = ca_coup_side
+		var:ca_coup_plot >= 100
+	}
+
+	immediate = {
+		set_variable = { name = ca_p11_coup_side_won value = var:ca_coup_side }
+	}
+	option = {
+		name = ca_coup_events.8.a
+		default_option = yes
+		if = {
+			limit = { var:ca_coup_side = 1 }
+			ig:ig_armed_forces ?= {
+				if = { limit = { is_in_government = no } add_ruling_interest_group = yes }
+			}
+			ig:ig_intelligentsia ?= {
+				if = { limit = { is_in_government = yes } remove_ruling_interest_group = yes }
+			}
+			if = {
+				limit = { NOT = { has_law = law_type:law_autocracy } }
+				activate_law = law_type:law_autocracy
+			}
+			if = {
+				limit = { exists = c:UCA this = c:UCA ca_frca_journal_active = yes }
+				ca_frca_bar_moderate_down = yes
+			}
+		}
+		else = {
+			ig:ig_intelligentsia ?= {
+				if = { limit = { is_in_government = no } add_ruling_interest_group = yes }
+			}
+			ig:ig_devout ?= {
+				if = { limit = { is_in_government = yes } remove_ruling_interest_group = yes }
+			}
+			if = {
+				limit = { exists = c:UCA this = c:UCA ca_frca_journal_active = yes }
+				ca_frca_bar_minor_up = yes
+			}
+		}
+		set_variable = { name = recent_coup_or_revolution_var days = 730 }
+		set_variable = { name = ca_p11_coup_cd years = 5 }
+		add_modifier = { name = ca_p11_coup_regime months = 60 }
+		trigger_event = { id = ca_coup_events.10 days = 60 }
+		remove_variable = ca_coup_plot
+		remove_variable = ca_coup_side
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_coup_events.9 = {
+	type = country_event
+	placement = root
+	title = ca_coup_events.9.t
+	desc = ca_coup_events.9.d
+	flavor = ca_coup_events.9.f
+	event_image = { video = "unspecific_vandalized_storefront" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_variable = ca_coup_plot
+		has_variable = ca_coup_side
+		var:ca_coup_plot <= 0
+	}
+
+	immediate = {
+
+	}
+	option = {
+		name = ca_coup_events.9.a
+		default_option = yes
+		if = {
+			limit = { var:ca_coup_side = 1 }
+			ig:ig_armed_forces ?= { add_modifier = { name = ca_p11_ig_purged months = 36 } }
+		}
+		else = {
+			ig:ig_intelligentsia ?= { add_modifier = { name = ca_p11_ig_purged months = 36 } }
+		}
+		set_variable = { name = ca_p11_coup_cd years = 5 }
+		remove_variable = ca_coup_plot
+		remove_variable = ca_coup_side
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_coup_events.9.b
+		add_modifier = { name = ca_p11_civil_peace months = 24 }
+		set_variable = { name = ca_p11_coup_cd years = 3 }
+		remove_variable = ca_coup_plot
+		remove_variable = ca_coup_side
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_coup_events.10 = {
+	type = country_event
+	placement = root
+	title = ca_coup_events.10.t
+	desc = ca_coup_events.10.d
+	flavor = ca_coup_events.10.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		has_variable = ca_p11_coup_side_won
+	}
+
+	immediate = {
+
+	}
+	option = {
+		name = ca_coup_events.10.a
+		default_option = yes
+		add_modifier = { name = ca_p11_civil_peace months = 24 }
+		remove_variable = ca_p11_coup_side_won
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_coup_events.10.b
+		if = {
+			limit = { var:ca_p11_coup_side_won = 1 }
+			ig:ig_intelligentsia ?= { add_modifier = { name = ca_p11_ig_purged months = 60 } }
+		}
+		else = {
+			ig:ig_devout ?= { add_modifier = { name = ca_p11_ig_purged months = 60 } }
+		}
+		add_radicals = { value = medium_radicals }
+		remove_variable = ca_p11_coup_side_won
+		ai_chance = { base = 50 }
+	}
+}

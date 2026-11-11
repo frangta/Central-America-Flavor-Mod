@@ -1,0 +1,1344 @@
+﻿namespace = ca_guatemala_events
+
+############################################################################
+# CAFM — GUATEMALA 1836–1851. Diseño: CAFM_GUATEMALA.md
+#
+# .1              Introducción (ya existía)
+# .38, .3–.15       Fase 1: el experimento liberal y la Montaña (1836–1838)
+# .16 – .21       Fase 2: la guerra por Guatemala (1838–1840)
+# .22 – .27       Fase 3: el orden conservador (1841–1847)
+# .28 – .37       Fase 4: los Lucíos y el regreso del caudillo (1847–1851)
+# .5 .6 .7 .8     Los de gobernantes que ya existían, enganchados a las cadenas
+#
+# Las fechas las lleva ca_gua_beats (zz_cafm_guatemala_effects.txt), llamado
+# por el pulso semanal de je_ca_historic_situation_in_guatemala.
+# Las opciones alternativas solo salen fuera del modo histórico.
+############################################################################
+
+ca_guatemala_events.38 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.38.t
+	desc = ca_guatemala_events.38.d
+	flavor = ca_guatemala_events.38.f
+	duration = 3
+	event_image = { video = "asia_politician_parliament_motion" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+
+	immediate = {
+		set_variable = { name = gua_montana value = ca_gua_montana_inicio }
+		if = {
+			limit = { NOT = { has_journal_entry = je_ca_gua_montana } }
+			add_journal_entry = { type = je_ca_gua_montana }
+		}
+	}
+	option = {
+		name = ca_guatemala_events.38.a
+		default_option = yes
+		set_variable = gua_livingston_vigente
+		add_modifier = { name = gua_codigos_livingston }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = {
+			text = gua_montana_up_10_tt
+			change_variable = { name = gua_montana add = 10 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.38.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		set_variable = gua_livingston_vigente
+		set_variable = gua_livingston_capital
+		add_modifier = { name = gua_livingston_capital months = 36 }
+		custom_tooltip = {
+			text = gua_montana_up_4_tt
+			change_variable = { name = gua_montana add = 4 }
+		}
+		ai_chance = { base = 20 }
+	}
+
+	option = {
+		name = ca_guatemala_events.38.c
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		set_variable = gua_livingston_suspendido
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = {
+			text = gua_montana_down_5_tt
+			change_variable = { name = gua_montana subtract = 5 }
+		}
+		ai_chance = { base = 10 }
+	}
+
+}
+
+ca_guatemala_events.3 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.3.t
+	desc = ca_guatemala_events.3.d
+	flavor = ca_guatemala_events.3.f
+	duration = 3
+	event_image = { video = "middleeast_jungle_expedition" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+
+	immediate = {
+		set_variable = gua_colera_activo
+	}
+	option = {
+		name = ca_guatemala_events.3.a
+		default_option = yes
+		add_modifier = { name = gua_colera_morbus months = 60 }
+		add_modifier = { name = gua_cordones_sanitarios months = 36 }
+		custom_tooltip = {
+			text = gua_montana_up_15_tt
+			change_variable = { name = gua_montana add = 15 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.3.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		add_modifier = { name = gua_colera_morbus months = 60 }
+		custom_tooltip = {
+			text = gua_montana_up_2_tt
+			change_variable = { name = gua_montana add = 2 }
+		}
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		name = ca_guatemala_events.3.c
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		add_modifier = { name = gua_colera_morbus months = 60 }
+		add_modifier = { name = gua_curas_medicina months = 24 }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = {
+			text = gua_montana_up_5_tt
+			change_variable = { name = gua_montana add = 5 }
+		}
+		ai_chance = { base = 15 }
+	}
+
+}
+
+ca_guatemala_events.4 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.4.t
+	desc = ca_guatemala_events.4.d
+	flavor = ca_guatemala_events.4.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.4.a
+		default_option = yes
+		custom_tooltip = {
+			text = gua_montana_up_10_tt
+			change_variable = { name = gua_montana add = 10 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.4.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		custom_tooltip = {
+			text = gua_montana_down_5_tt
+			change_variable = { name = gua_montana subtract = 5 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 15 }
+	}
+
+	option = {
+		name = ca_guatemala_events.4.c
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		add_modifier = { name = gua_represion_pueblos months = 24 }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		custom_tooltip = {
+			text = gua_montana_up_15_tt
+			change_variable = { name = gua_montana add = 15 }
+		}
+		ai_chance = { base = 15 }
+	}
+
+}
+
+ca_guatemala_events.9 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.9.t
+	desc = ca_guatemala_events.9.d
+	flavor = ca_guatemala_events.9.f
+	duration = 3
+	event_image = { video = "unspecific_vandalized_storefront" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+
+	immediate = {
+		ca_gua_create_once = { KEY = mejia TEMPLATE = gua_teodoro_mejia_character_template }
+		global_var:cafm_hc_mejia ?= { save_scope_as = gua_mejia }
+	}
+	option = {
+		name = ca_guatemala_events.9.a
+		default_option = yes
+		custom_tooltip = gua_e9_a_tt
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = ca_guatemala_events.9.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		custom_tooltip = {
+			text = gua_montana_up_10_tt
+			change_variable = { name = gua_montana add = 10 }
+		}
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+	option = {
+		name = ca_guatemala_events.9.c
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		custom_tooltip = {
+			text = gua_montana_down_8_tt
+			change_variable = { name = gua_montana subtract = 8 }
+		}
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_guatemala_events.10 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.10.t
+	desc = ca_guatemala_events.10.d
+	flavor = ca_guatemala_events.10.f
+	duration = 3
+	event_image = { video = "unspecific_signed_contract" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_documents.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.10.a
+		default_option = yes
+		set_variable = gua_amnistia_1837
+		custom_tooltip = {
+			text = gua_montana_down_5_tt
+			change_variable = { name = gua_montana subtract = 5 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.10.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		custom_tooltip = {
+			text = gua_montana_up_5_tt
+			change_variable = { name = gua_montana add = 5 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.11 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.11.t
+	desc = ca_guatemala_events.11.d
+	flavor = ca_guatemala_events.11.f
+	duration = 3
+	event_image = { video = "asia_farmers_market" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.11.a
+		default_option = yes
+		set_variable = gua_ejidos_garantizados
+		add_modifier = { name = gua_ejidos_garantizados months = 60 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = {
+			text = gua_montana_down_10_tt
+			change_variable = { name = gua_montana subtract = 10 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.11.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = {
+			text = gua_montana_up_12_tt
+			change_variable = { name = gua_montana add = 12 }
+		}
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.12 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.12.t
+	desc = ca_guatemala_events.12.d
+	flavor = ca_guatemala_events.12.f
+	duration = 3
+	event_image = { video = "asia_farmers_market" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.12.a
+		default_option = yes
+		set_variable = gua_legua_cuadrada
+		set_variable = gua_ejidos_garantizados
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		custom_tooltip = {
+			text = gua_montana_down_10_tt
+			change_variable = { name = gua_montana subtract = 10 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.12.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = {
+			text = gua_montana_up_10_tt
+			change_variable = { name = gua_montana add = 10 }
+		}
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.13 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.13.t
+	desc = ca_guatemala_events.13.d
+	flavor = ca_guatemala_events.13.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+
+	immediate = {
+		ca_gua_montana_thresholds = yes
+		global_var:cafm_hc_carrera ?= { save_scope_as = gua_carrera }
+	}
+	option = {
+		name = ca_guatemala_events.13.a
+		default_option = yes
+		set_variable = gua_carrera_en_la_capital
+		set_variable = gua_galvez_fallen
+		set_variable = gua_elec_1837_fired
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ca_gua_create_once = { KEY = molina TEMPLATE = gua_felipe_molina_character_template }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_guatemala_events.13.b
+		trigger = {
+			ca_gua_alt_history = yes
+			var:gua_montana < 80
+		}
+		custom_tooltip = {
+			text = gua_montana_down_30_tt
+			change_variable = { name = gua_montana subtract = 30 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_guatemala_events.14 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.14.t
+	desc = ca_guatemala_events.14.d
+	flavor = ca_guatemala_events.14.f
+	duration = 3
+	event_image = { video = "asia_farmers_market" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.14.a
+		default_option = yes
+		set_variable = gua_demandas_cumplidas
+		add_modifier = { name = gua_demandas_cumplidas months = 60 }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ig:ig_industrialists ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.14.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = {
+			text = gua_montana_up_20_tt
+			change_variable = { name = gua_montana add = 20 }
+		}
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.15 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.15.t
+	desc = ca_guatemala_events.15.d
+	flavor = ca_guatemala_events.15.f
+	duration = 3
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.15.a
+		default_option = yes
+		set_variable = gua_altos_separado
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.15.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		set_variable = gua_altos_separado
+		set_variable = gua_altos_guerra_temprana
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.16 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.16.t
+	desc = ca_guatemala_events.16.d
+	flavor = ca_guatemala_events.16.f
+	duration = 3
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.16.a
+		default_option = yes
+		set_variable = gua_guerra_guerrillas
+		add_modifier = { name = gua_guerra_montana months = 36 }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.16.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.17 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.17.t
+	desc = ca_guatemala_events.17.d
+	flavor = ca_guatemala_events.17.f
+	duration = 3
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.17.a
+		default_option = yes
+		set_variable = gua_villa_nueva
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.17.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.18 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.18.t
+	desc = ca_guatemala_events.18.d
+	flavor = ca_guatemala_events.18.f
+	duration = 3
+	event_image = { video = "unspecific_signed_contract" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_handshake.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.18.a
+		default_option = yes
+		set_variable = gua_tregua_guzman
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.18.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.19 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.19.t
+	desc = ca_guatemala_events.19.d
+	flavor = ca_guatemala_events.19.f
+	duration = 3
+	event_image = { video = "unspecific_military_parade" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_flag.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.19.a
+		default_option = yes
+		set_variable = gua_separada_1839
+		add_modifier = { name = gua_estado_soberano months = 60 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_guatemala_events.19.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		set_variable = gua_separada_1839
+		set_variable = gua_carrera_temprano
+		add_modifier = { name = gua_estado_soberano months = 60 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_guatemala_events.20 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.20.t
+	desc = ca_guatemala_events.20.d
+	flavor = ca_guatemala_events.20.f
+	duration = 3
+	event_image = { video = "unspecific_military_parade" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.20.a
+		default_option = yes
+		set_variable = gua_altos_reconquistado
+		add_modifier = { name = gua_altos_resentido months = 120 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_guatemala_events.20.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		set_variable = gua_altos_autonomo
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_guatemala_events.21 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.21.t
+	desc = ca_guatemala_events.21.d
+	flavor = ca_guatemala_events.21.f
+	duration = 3
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.21.a
+		default_option = yes
+		set_variable = gua_morazan_derrotado
+		add_modifier = { name = gua_vencedor_de_morazan months = 120 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_guatemala_events.21.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_guatemala_events.22 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.22.t
+	desc = ca_guatemala_events.22.d
+	flavor = ca_guatemala_events.22.f
+	duration = 3
+	event_image = { video = "asia_farmers_market" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.22.a
+		default_option = yes
+		set_variable = gua_grana
+		add_modifier = { name = gua_grana_de_los_valles months = 180 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.22.b
+		set_variable = gua_grana_y_anil
+		add_modifier = { name = gua_grana_y_anil months = 180 }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.23 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.23.t
+	desc = ca_guatemala_events.23.d
+	flavor = ca_guatemala_events.23.f
+	duration = 3
+	event_image = { video = "unspecific_signed_contract" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.23.a
+		default_option = yes
+		set_variable = gua_juez_de_tierras
+		add_modifier = { name = gua_juez_de_tierras months = 120 }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.23.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.24 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.24.t
+	desc = ca_guatemala_events.24.d
+	flavor = ca_guatemala_events.24.f
+	duration = 3
+	event_image = { video = "asia_farmers_market" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_agriculture.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.24.a
+		default_option = yes
+		set_variable = gua_trabajo_forzoso
+		add_modifier = { name = gua_trabajo_forzoso months = 120 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.24.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.25 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.25.t
+	desc = ca_guatemala_events.25.d
+	flavor = ca_guatemala_events.25.f
+	duration = 3
+	event_image = { video = "unspecific_vandalized_storefront" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.25.a
+		default_option = yes
+		set_variable = gua_estanco_aguardiente
+		add_modifier = { name = gua_estanco_aguardiente months = 120 }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.25.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.27 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.27.t
+	desc = ca_guatemala_events.27.d
+	flavor = ca_guatemala_events.27.f
+	duration = 3
+	event_image = { video = "unspecific_military_parade" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_flag.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.27.a
+		default_option = yes
+		set_variable = gua_republica_1847
+		add_modifier = { name = gua_republica_de_guatemala months = 240 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_guatemala_events.27.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		set_variable = gua_sigue_estado
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_guatemala_events.26 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.26.t
+	desc = ca_guatemala_events.26.d
+	flavor = ca_guatemala_events.26.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.26.a
+		default_option = yes
+		add_modifier = { name = gua_represion_pueblos months = 24 }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.26.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.28 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.28.t
+	desc = ca_guatemala_events.28.d
+	flavor = ca_guatemala_events.28.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+
+	immediate = {
+		set_variable = { name = gua_lucios value = ca_gua_lucios_inicio }
+		if = {
+			limit = { NOT = { has_journal_entry = je_ca_gua_lucios } }
+			add_journal_entry = { type = je_ca_gua_lucios }
+		}
+		ca_gua_create_once = { KEY = lucio_lopez TEMPLATE = gua_jose_lucio_lopez_character_template }
+		global_var:cafm_hc_lucio_lopez ?= { save_scope_as = gua_lucio_lopez }
+	}
+	option = {
+		name = ca_guatemala_events.28.a
+		default_option = yes
+		custom_tooltip = gua_e28_a_tt
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.28.b
+		custom_tooltip = {
+			text = gua_lucios_down_10_tt
+			change_variable = { name = gua_lucios subtract = 10 }
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.29 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.29.t
+	desc = ca_guatemala_events.29.d
+	flavor = ca_guatemala_events.29.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.29.a
+		default_option = yes
+		custom_tooltip = {
+			text = gua_lucios_up_15_tt
+			change_variable = { name = gua_lucios add = 15 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.29.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		custom_tooltip = {
+			text = gua_lucios_up_5_tt
+			change_variable = { name = gua_lucios add = 5 }
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.30 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.30.t
+	desc = ca_guatemala_events.30.d
+	flavor = ca_guatemala_events.30.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.30.a
+		default_option = yes
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.30.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		custom_tooltip = {
+			text = gua_lucios_up_10_tt
+			change_variable = { name = gua_lucios add = 10 }
+		}
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.31 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.31.t
+	desc = ca_guatemala_events.31.d
+	flavor = ca_guatemala_events.31.f
+	duration = 3
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+
+	immediate = {
+		global_var:cafm_hc_serapio_cruz ?= { save_scope_as = gua_serapio }
+	}
+	option = {
+		name = ca_guatemala_events.31.a
+		default_option = yes
+		set_variable = gua_patzun
+		custom_tooltip = {
+			text = gua_lucios_down_5_tt
+			change_variable = { name = gua_lucios subtract = 5 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.31.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		custom_tooltip = {
+			text = gua_lucios_up_10_tt
+			change_variable = { name = gua_lucios add = 10 }
+		}
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.32 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.32.t
+	desc = ca_guatemala_events.32.d
+	flavor = ca_guatemala_events.32.f
+	duration = 3
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.32.a
+		default_option = yes
+		set_variable = gua_carrera_exiliado
+		set_variable = gua_elec_1848_fired
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		custom_tooltip = {
+			text = gua_lucios_down_5_tt
+			change_variable = { name = gua_lucios subtract = 5 }
+		}
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_guatemala_events.32.b
+		trigger = {
+			ca_gua_alt_history = yes
+			var:gua_lucios < 60
+		}
+		custom_tooltip = {
+			text = gua_lucios_up_15_tt
+			change_variable = { name = gua_lucios add = 15 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_guatemala_events.33 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.33.t
+	desc = ca_guatemala_events.33.d
+	flavor = ca_guatemala_events.33.f
+	duration = 3
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.33.a
+		default_option = yes
+		set_variable = gua_altos_1848_guerra
+		custom_tooltip = {
+			text = gua_lucios_up_10_tt
+			change_variable = { name = gua_lucios add = 10 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.33.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		set_variable = gua_altos_reconocido
+		custom_tooltip = {
+			text = gua_lucios_down_5_tt
+			change_variable = { name = gua_lucios subtract = 5 }
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.34 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.34.t
+	desc = ca_guatemala_events.34.d
+	flavor = ca_guatemala_events.34.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+
+	immediate = {
+		ca_gua_create_once = { KEY = vicente_cruz TEMPLATE = gua_vicente_cruz_character_template }
+		global_var:cafm_hc_vicente_cruz ?= { save_scope_as = gua_vicente_cruz }
+	}
+	option = {
+		name = ca_guatemala_events.34.a
+		default_option = yes
+		custom_tooltip = {
+			text = gua_lucios_down_10_tt
+			change_variable = { name = gua_lucios subtract = 10 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.34.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		custom_tooltip = {
+			text = gua_lucios_down_5_tt
+			change_variable = { name = gua_lucios subtract = 5 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.35 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.35.t
+	desc = ca_guatemala_events.35.d
+	flavor = ca_guatemala_events.35.f
+	duration = 3
+	event_image = { video = "unspecific_signed_contract" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_handshake.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.35.a
+		default_option = yes
+		set_variable = gua_tratado_zacapa
+		add_modifier = { name = gua_tratado_zacapa months = 60 }
+		custom_tooltip = {
+			text = gua_lucios_down_15_tt
+			change_variable = { name = gua_lucios subtract = 15 }
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_guatemala_events.35.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		custom_tooltip = {
+			text = gua_lucios_up_10_tt
+			change_variable = { name = gua_lucios add = 10 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_guatemala_events.36 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.36.t
+	desc = ca_guatemala_events.36.d
+	flavor = ca_guatemala_events.36.f
+	duration = 3
+	event_image = { video = "unspecific_military_parade" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.36.a
+		default_option = yes
+		set_variable = gua_carrera_restituido
+		add_modifier = { name = gua_carrera_comandante months = 120 }
+		custom_tooltip = {
+			text = gua_lucios_down_20_tt
+			change_variable = { name = gua_lucios subtract = 20 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_guatemala_events.36.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		custom_tooltip = {
+			text = gua_lucios_up_15_tt
+			change_variable = { name = gua_lucios add = 15 }
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_guatemala_events.37 = {
+	type = country_event
+	placement = ROOT
+	title = ca_guatemala_events.37.t
+	desc = ca_guatemala_events.37.d
+	flavor = ca_guatemala_events.37.f
+	duration = 3
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_gua_is_guatemala = yes
+	}
+	option = {
+		name = ca_guatemala_events.37.a
+		default_option = yes
+		set_variable = gua_la_arada_ganada
+		add_modifier = { name = gua_vencedor_de_la_arada months = 120 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_guatemala_events.37.b
+		trigger = {
+			ca_gua_alt_history = yes
+		}
+		set_variable = gua_la_arada_perdida
+		custom_tooltip = {
+			text = gua_lucios_up_20_tt
+			change_variable = { name = gua_lucios add = 20 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+

@@ -14,7 +14,7 @@ ca_centralist_events.1 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_ai = no
 		ca_frca_route_centralist = yes
 		ca_frca_journal_active = yes
@@ -57,7 +57,7 @@ ca_centralist_events.2 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_ai = no
 		ca_frca_route_centralist = yes
 		ca_frca_journal_active = yes
@@ -91,7 +91,7 @@ ca_centralist_events.3 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_ai = no
 		ca_frca_route_centralist = yes
 		ca_frca_journal_active = yes
@@ -134,7 +134,7 @@ ca_centralist_events.4 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_ai = no
 		ca_frca_route_centralist = yes
 		ca_frca_journal_active = yes
@@ -175,7 +175,7 @@ ca_centralist_events.5 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_ai = no
 		ca_frca_route_centralist = yes
 		NOT = { has_variable = ca_cen_5_fired }
@@ -207,7 +207,7 @@ ca_centralist_events.7 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_central_american_unitary
 		is_ai = no
 		ca_frca_route_centralist = yes
@@ -248,7 +248,7 @@ ca_centralist_events.8 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_central_american_unitary
 		is_ai = no
 		ca_frca_route_centralist = yes
@@ -291,7 +291,7 @@ ca_centralist_events.9 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_central_american_unitary
 		is_ai = no
 		ca_frca_route_centralist = yes
@@ -333,7 +333,7 @@ ca_centralist_events.10 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_guardia_nacional
 		is_ai = no
 		ca_frca_route_centralist = yes
@@ -387,7 +387,7 @@ ca_centralist_events.11 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_guardia_nacional
 		is_ai = no
 		ca_frca_route_centralist = yes
@@ -437,7 +437,7 @@ ca_centralist_events.12 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_ca_guardia_nacional
 		is_ai = no
 		ca_frca_route_centralist = yes
@@ -479,7 +479,7 @@ ca_centralist_events.13 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_state_religion
 		is_ai = no
 		ca_frca_route_centralist = yes
@@ -520,7 +520,7 @@ ca_centralist_events.14 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_state_religion
 		is_ai = no
 		ca_frca_route_centralist = yes
@@ -562,7 +562,7 @@ ca_centralist_events.15 = {
 	}
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_enacting_law = law_type:law_state_religion
 		is_ai = no
 		ca_frca_route_centralist = yes
@@ -598,7 +598,7 @@ ca_centralist_events.6 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_ai = no
 		ca_frca_route_centralist = yes
 		ca_frca_journal_active = yes
@@ -654,7 +654,7 @@ ca_centralist_events.16 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_ai = no
 		ca_frca_route_centralist = yes
 		ca_frca_journal_active = yes
@@ -690,7 +690,7 @@ ca_centralist_events.17 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_ai = no
 		ca_frca_route_centralist = yes
 		ca_frca_journal_active = yes
@@ -725,7 +725,7 @@ ca_centralist_events.18 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_ai = no
 		ca_frca_route_centralist = yes
 		ca_frca_journal_active = yes
@@ -764,7 +764,7 @@ ca_centralist_events.19 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_ai = no
 		ca_frca_route_centralist = yes
 		ca_frca_journal_active = yes
@@ -799,7 +799,7 @@ ca_centralist_events.20 = {
 	duration = 3
 
 	trigger = {
-		this = c:UCA
+		c:UCA ?= this # arreglo 10 nov: la UCA puede no existir
 		is_ai = no
 		ca_frca_route_centralist = yes
 		ca_frca_journal_active = yes

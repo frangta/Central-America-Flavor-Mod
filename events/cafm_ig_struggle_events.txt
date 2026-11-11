@@ -1,0 +1,215 @@
+﻿namespace = cafm_ig_struggle
+
+############################################################################
+# CAFM - Rediseño del diario de la UCA, entrega 1 (10 nov 2026)
+# Ideologias de los IG: lucha interna (.1 inicio, .2 cambia, .3 se mantiene),
+# un IG se une a un bando (.4) o lo pierde (.5). Los lanza zz_cafm_uca_bloc_effects.txt.
+# El IG va en scope:ca_struggle_ig (variable ca_struggle_ig de la UCA).
+############################################################################
+
+cafm_ig_struggle.1 = {
+	type = country_event
+	placement = root
+	title = cafm_ig_struggle.1.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = cafm_ig_struggle.1.d_federal
+				trigger = { has_variable = ca_struggle_last_to var:ca_struggle_last_to = flag:federal }
+			}
+			triggered_desc = {
+				desc = cafm_ig_struggle.1.d_centralist
+				trigger = { has_variable = ca_struggle_last_to var:ca_struggle_last_to = flag:centralist }
+			}
+			triggered_desc = {
+				desc = cafm_ig_struggle.1.d_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = cafm_ig_struggle.1.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	immediate = {
+		var:ca_struggle_ig ?= { save_scope_as = ca_struggle_ig }
+	}
+
+	# Apoyar el cambio: la barra sube 20 en el proximo pulso del diario de lucha.
+	option = {
+		name = cafm_ig_struggle.1.a
+		custom_tooltip = cafm_ig_struggle.1.a_tt
+		ca_struggle_choose = { CHOICE = support }
+		ai_chance = { base = 30 }
+	}
+	# Resistir: la barra baja 20 y el IG se molesta.
+	option = {
+		name = cafm_ig_struggle.1.b
+		default_option = yes
+		custom_tooltip = cafm_ig_struggle.1.b_tt
+		ca_struggle_choose = { CHOICE = resist }
+		scope:ca_struggle_ig ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 40 }
+	}
+	# Negociar: la barra no se mueve; cuesta legitimidad.
+	option = {
+		name = cafm_ig_struggle.1.c
+		add_modifier = { name = ca_ig_struggle_negotiation months = 12 }
+		ai_chance = { base = 30 }
+	}
+}
+
+cafm_ig_struggle.2 = {
+	type = country_event
+	placement = root
+	title = cafm_ig_struggle.2.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = cafm_ig_struggle.2.d_federal
+				trigger = { has_variable = ca_struggle_last_to var:ca_struggle_last_to = flag:federal }
+			}
+			triggered_desc = {
+				desc = cafm_ig_struggle.2.d_centralist
+				trigger = { has_variable = ca_struggle_last_to var:ca_struggle_last_to = flag:centralist }
+			}
+			triggered_desc = {
+				desc = cafm_ig_struggle.2.d_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = cafm_ig_struggle.2.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	immediate = {
+		var:ca_struggle_ig ?= { save_scope_as = ca_struggle_ig }
+	}
+
+	option = {
+		name = cafm_ig_struggle.2.a
+		default_option = yes
+		custom_tooltip = cafm_ig_struggle.2.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_ig_struggle.3 = {
+	type = country_event
+	placement = root
+	title = cafm_ig_struggle.3.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = cafm_ig_struggle.3.d_federal
+				trigger = { has_variable = ca_struggle_last_from var:ca_struggle_last_from = flag:federal }
+			}
+			triggered_desc = {
+				desc = cafm_ig_struggle.3.d_centralist
+				trigger = { has_variable = ca_struggle_last_from var:ca_struggle_last_from = flag:centralist }
+			}
+			triggered_desc = {
+				desc = cafm_ig_struggle.3.d_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = cafm_ig_struggle.3.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	immediate = {
+		var:ca_struggle_ig ?= { save_scope_as = ca_struggle_ig }
+	}
+
+	option = {
+		name = cafm_ig_struggle.3.a
+		default_option = yes
+		custom_tooltip = cafm_ig_struggle.3.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_ig_struggle.4 = {
+	type = country_event
+	placement = root
+	title = cafm_ig_struggle.4.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = cafm_ig_struggle.4.d_federal
+				trigger = { has_variable = ca_struggle_last_to var:ca_struggle_last_to = flag:federal }
+			}
+			triggered_desc = {
+				desc = cafm_ig_struggle.4.d_centralist
+				trigger = { has_variable = ca_struggle_last_to var:ca_struggle_last_to = flag:centralist }
+			}
+			triggered_desc = {
+				desc = cafm_ig_struggle.4.d_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = cafm_ig_struggle.4.f
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	immediate = {
+		var:ca_struggle_ig ?= { save_scope_as = ca_struggle_ig }
+	}
+
+	option = {
+		name = cafm_ig_struggle.4.a
+		default_option = yes
+		custom_tooltip = cafm_ig_struggle.4.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_ig_struggle.5 = {
+	type = country_event
+	placement = root
+	title = cafm_ig_struggle.5.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = cafm_ig_struggle.5.d_federal
+				trigger = { has_variable = ca_struggle_last_from var:ca_struggle_last_from = flag:federal }
+			}
+			triggered_desc = {
+				desc = cafm_ig_struggle.5.d_centralist
+				trigger = { has_variable = ca_struggle_last_from var:ca_struggle_last_from = flag:centralist }
+			}
+			triggered_desc = {
+				desc = cafm_ig_struggle.5.d_separatist
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = cafm_ig_struggle.5.f
+	event_image = { video = "unspecific_vandalized_storefront" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	immediate = {
+		var:ca_struggle_ig ?= { save_scope_as = ca_struggle_ig }
+	}
+
+	option = {
+		name = cafm_ig_struggle.5.a
+		default_option = yes
+		custom_tooltip = cafm_ig_struggle.5.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+

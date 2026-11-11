@@ -872,7 +872,7 @@ ca_honduras_events.42 = {
 		remove_variable = hon_pespire_talks
 		add_modifier = { name = hon_gobierno_civil months = 60 }
 		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
-		scope:hon_exile = { exile_character = yes }
+		scope:hon_exile = { exile_character = { exile_pool = ca_exile_pool years = 5 } }
 		set_variable = { name = hon_exile_may_return days = 1825 }
 		if = {
 			limit = { exists = scope:hon_mediator }

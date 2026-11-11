@@ -1,0 +1,885 @@
+﻿namespace = ca_honduras_events
+
+# =====================================================================
+# CAFM — HONDURAS — FASE 2 (1838-1851)
+# IDs .43-.69 (el mod usa .1-.18, .41 y .42). Los lanza ca_hon_beats,
+# desde el on_action cafm_nhm_monthly.
+# .67 pone hon_pespire, que es lo que le faltaba a je_ca_hon_caudillo de
+# la fase 1 para poder completarse (hueco G10 del registro).
+# Fuentes: El Pulso (Honduras), «Honduras (1839-1870) el nacimiento de la
+#   Republica»: Zelaya y Ayes 21 sep 1839 en Juticalpa, San Pedro
+#   Perulapan 25 sep 1839, La Soledad 13 nov 1839, Ferrera electo 6 jun
+#   1840 y juramentado 1 ene 1841, Colegio Tridentino, puerto de La Paz,
+#   diezmo de 1829 restituido, bienes de la Iglesia devueltos en 1843,
+#   fin de periodo 31 dic 1844, Coronado Chavez 8 ene 1845 con Guardiola
+#   y Casto Alvarado, Lindo 12 feb 1847, guerra a los Estados Unidos en
+#   apoyo a Mexico, Constitucion de 1848, Universidad del padre Jose
+#   Trinidad Reyes; en.wikipedia «Anglo-Honduran Conflict»: Plumper en
+#   Trujillo oct 1849 (1.200 pesos), Chatfield y el Gorgon en la Isla del
+#   Tigre, pacto de Chinandega de Squier nov 1849, devolucion 26 dic 1849
+#   con 21 canonazos, Squier ene 1850, Clayton-Bulwer 19 abr 1850.
+# =====================================================================
+
+ca_honduras_events.43 = {
+	type = country_event
+	title = ca_honduras_events.43.t
+	desc = ca_honduras_events.43.d
+	flavor = ca_honduras_events.43.f
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	icon = "gfx/interface/icons/event_icons/event_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.43.a
+		default_option = yes
+		add_authority = 100
+		custom_tooltip = {
+			text = hon_republica_up_5_tt
+			change_variable = { name = hon_republica add = 5 }
+		}
+		ai_chance = { base = 80 }
+	}
+	option = {
+		name = ca_honduras_events.43.b
+		trigger = {
+			ca_hon_alt_history = yes
+		}
+		custom_tooltip = {
+			text = hon_republica_down_5_tt
+			change_variable = { name = hon_republica subtract = 5 }
+		}
+		add_modifier = { name = hon_fidelidad_federal months = 120 }
+		ai_chance = { base = 20 }
+	}
+}
+
+ca_honduras_events.44 = {
+	type = country_event
+	title = ca_honduras_events.44.t
+	desc = ca_honduras_events.44.d
+	flavor = ca_honduras_events.44.f
+	duration = 3
+	event_image = {
+		video = "southamerica_aristocrats"
+	}
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.44.a
+		default_option = yes
+		ca_hon_create_once = { KEY = cafm_hc_zelaya_ayes TEMPLATE = hon_jose_zelaya_character_template }
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_honduras_events.45 = {
+	type = country_event
+	title = ca_honduras_events.45.t
+	desc = ca_honduras_events.45.d
+	flavor = ca_honduras_events.45.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.45.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_down_3_tt
+			change_variable = { name = hon_republica subtract = 3 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_honduras_events.46 = {
+	type = country_event
+	title = ca_honduras_events.46.t
+	desc = ca_honduras_events.46.d
+	flavor = ca_honduras_events.46.f
+	duration = 3
+	event_image = {
+		video = "southamerica_war_civilians"
+	}
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.46.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_down_5_tt
+			change_variable = { name = hon_republica subtract = 5 }
+		}
+		add_treasury = -10000
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_honduras_events.46.b
+		custom_tooltip = {
+			text = hon_republica_up_5_tt
+			change_variable = { name = hon_republica add = 5 }
+		}
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_honduras_events.47 = {
+	type = country_event
+	title = ca_honduras_events.47.t
+	desc = ca_honduras_events.47.d
+	flavor = ca_honduras_events.47.f
+	duration = 3
+	event_image = {
+		video = "asia_politician_parliament_motion"
+	}
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.47.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_up_12_tt
+			change_variable = { name = hon_republica add = 12 }
+		}
+		add_modifier = { name = hon_constitucion_1839 years = 15 }
+		ai_chance = { base = 75 }
+	}
+	option = {
+		name = ca_honduras_events.47.b
+		custom_tooltip = {
+			text = hon_republica_down_5_tt
+			change_variable = { name = hon_republica subtract = 5 }
+		}
+		add_authority = 100
+		ai_chance = { base = 25 }
+	}
+}
+
+ca_honduras_events.48 = {
+	type = country_event
+	title = ca_honduras_events.48.t
+	desc = ca_honduras_events.48.d
+	flavor = ca_honduras_events.48.f
+	duration = 3
+	event_image = {
+		video = "southamerica_election"
+	}
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.48.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_up_8_tt
+			change_variable = { name = hon_republica add = 8 }
+		}
+		ca_hon_create_once = { KEY = cafm_hc_ferrera TEMPLATE = hon_francisco_ferrera_character_template }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 48 } }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_honduras_events.48.b
+		trigger = {
+			ca_hon_alt_history = yes
+		}
+		custom_tooltip = {
+			text = hon_republica_up_12_tt
+			change_variable = { name = hon_republica add = 12 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 48 } }
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_honduras_events.69 = {
+	type = country_event
+	title = ca_honduras_events.69.t
+	desc = ca_honduras_events.69.d
+	flavor = ca_honduras_events.69.f
+	duration = 3
+	event_image = {
+		video = "middleeast_jungle_expedition"
+	}
+	icon = "gfx/interface/icons/event_icons/event_colonial.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.69.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_costa_down_5_tt
+			change_variable = { name = hon_costa subtract = 5 }
+		}
+		add_modifier = { name = hon_aduana_de_la_costa months = 120 }
+		ai_chance = { base = 55 }
+	}
+	option = {
+		name = ca_honduras_events.69.b
+		custom_tooltip = {
+			text = hon_costa_up_8_tt
+			change_variable = { name = hon_costa add = 8 }
+		}
+		ai_chance = { base = 45 }
+	}
+}
+
+ca_honduras_events.49 = {
+	type = country_event
+	title = ca_honduras_events.49.t
+	desc = ca_honduras_events.49.d
+	flavor = ca_honduras_events.49.f
+	duration = 3
+	event_image = {
+		video = "unspecific_research"
+	}
+	icon = "gfx/interface/icons/event_icons/event_religion.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.49.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_up_8_tt
+			change_variable = { name = hon_republica add = 8 }
+		}
+		add_modifier = { name = hon_colegio_tridentino years = 20 }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 48 } }
+		ai_chance = { base = 65 }
+	}
+	option = {
+		name = ca_honduras_events.49.b
+		trigger = {
+			ca_hon_alt_history = yes
+		}
+		custom_tooltip = {
+			text = hon_republica_up_8_tt
+			change_variable = { name = hon_republica add = 8 }
+		}
+		add_modifier = { name = hon_colegio_laico years = 20 }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down months = 48 } }
+		ai_chance = { base = 35 }
+	}
+}
+
+ca_honduras_events.50 = {
+	type = country_event
+	title = ca_honduras_events.50.t
+	desc = ca_honduras_events.50.d
+	flavor = ca_honduras_events.50.f
+	duration = 3
+	event_image = {
+		video = "asia_farmers_market"
+	}
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.50.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_up_10_tt
+			change_variable = { name = hon_republica add = 10 }
+		}
+		add_modifier = { name = hon_puerto_de_la_paz years = 20 }
+		ai_chance = { base = 75 }
+	}
+	option = {
+		name = ca_honduras_events.50.b
+		custom_tooltip = {
+			text = hon_republica_down_3_tt
+			change_variable = { name = hon_republica subtract = 3 }
+		}
+		ai_chance = { base = 25 }
+	}
+}
+
+ca_honduras_events.51 = {
+	type = country_event
+	title = ca_honduras_events.51.t
+	desc = ca_honduras_events.51.d
+	flavor = ca_honduras_events.51.f
+	duration = 3
+	event_image = {
+		video = "southamerica_christianity"
+	}
+	icon = "gfx/interface/icons/event_icons/event_religion.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.51.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_up_8_tt
+			change_variable = { name = hon_republica add = 8 }
+		}
+		add_modifier = { name = hon_diezmo_restituido years = 20 }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 60 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_honduras_events.51.b
+		custom_tooltip = {
+			text = hon_republica_down_5_tt
+			change_variable = { name = hon_republica subtract = 5 }
+		}
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down months = 60 } }
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_honduras_events.52 = {
+	type = country_event
+	title = ca_honduras_events.52.t
+	desc = ca_honduras_events.52.d
+	flavor = ca_honduras_events.52.f
+	duration = 3
+	event_image = {
+		video = "unspecific_sick_in_hospital"
+	}
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.52.a
+		default_option = yes
+		add_treasury = -15000
+		custom_tooltip = {
+			text = hon_republica_up_5_tt
+			change_variable = { name = hon_republica add = 5 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_honduras_events.52.b
+		custom_tooltip = {
+			text = hon_republica_down_5_tt
+			change_variable = { name = hon_republica subtract = 5 }
+		}
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_honduras_events.53 = {
+	type = country_event
+	title = ca_honduras_events.53.t
+	desc = ca_honduras_events.53.d
+	flavor = ca_honduras_events.53.f
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	icon = "gfx/interface/icons/event_icons/event_religion.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.53.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_up_5_tt
+			change_variable = { name = hon_republica add = 5 }
+		}
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 60 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 60 } }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_honduras_events.53.b
+		custom_tooltip = {
+			text = hon_republica_down_8_tt
+			change_variable = { name = hon_republica subtract = 8 }
+		}
+		add_treasury = 20000
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_honduras_events.54 = {
+	type = country_event
+	title = ca_honduras_events.54.t
+	desc = ca_honduras_events.54.d
+	flavor = ca_honduras_events.54.f
+	duration = 3
+	event_image = {
+		video = "unspecific_vandalized_storefront"
+	}
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.54.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_down_5_tt
+			change_variable = { name = hon_republica subtract = 5 }
+		}
+		add_treasury = -15000
+		add_authority = 50
+		ai_chance = { base = 55 }
+	}
+	option = {
+		name = ca_honduras_events.54.b
+		custom_tooltip = {
+			text = hon_republica_up_5_tt
+			change_variable = { name = hon_republica add = 5 }
+		}
+		add_radicals = { value = -0.05 }
+		ai_chance = { base = 45 }
+	}
+}
+
+ca_honduras_events.55 = {
+	type = country_event
+	title = ca_honduras_events.55.t
+	desc = ca_honduras_events.55.d
+	flavor = ca_honduras_events.55.f
+	duration = 3
+	event_image = {
+		video = "southamerica_election"
+	}
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.55.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_up_8_tt
+			change_variable = { name = hon_republica add = 8 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_honduras_events.55.b
+		trigger = {
+			ca_hon_alt_history = yes
+		}
+		custom_tooltip = {
+			text = hon_republica_down_10_tt
+			change_variable = { name = hon_republica subtract = 10 }
+		}
+		if = {
+			limit = { has_variable = hon_caudillo }
+			change_variable = { name = hon_caudillo add = 15 }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_honduras_events.56 = {
+	type = country_event
+	title = ca_honduras_events.56.t
+	desc = ca_honduras_events.56.d
+	flavor = ca_honduras_events.56.f
+	duration = 3
+	event_image = {
+		video = "southamerica_aristocrats"
+	}
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.56.a
+		default_option = yes
+		ca_hon_create_once = { KEY = cafm_hc_coronado_chavez TEMPLATE = cafm_coronado_chavez }
+		ca_hon_create_once = { KEY = cafm_hc_guardiola TEMPLATE = hon_jose_santos_guardiola_character_template }
+		custom_tooltip = {
+			text = hon_republica_up_5_tt
+			change_variable = { name = hon_republica add = 5 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_honduras_events.57 = {
+	type = country_event
+	title = ca_honduras_events.57.t
+	desc = ca_honduras_events.57.d
+	flavor = ca_honduras_events.57.f
+	duration = 3
+	event_image = {
+		video = "southamerica_aristocrats"
+	}
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.57.a
+		default_option = yes
+		ca_hon_create_once = { KEY = cafm_hc_lindo TEMPLATE = juan_lindo_character_template }
+		custom_tooltip = {
+			text = hon_republica_up_10_tt
+			change_variable = { name = hon_republica add = 10 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_honduras_events.58 = {
+	type = country_event
+	title = ca_honduras_events.58.t
+	desc = ca_honduras_events.58.d
+	flavor = ca_honduras_events.58.f
+	duration = 3
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.58.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_up_5_tt
+			change_variable = { name = hon_republica add = 5 }
+		}
+		add_modifier = { name = hon_gesto_mexicano months = 60 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_honduras_events.58.b
+		custom_tooltip = {
+			text = hon_republica_up_3_tt
+			change_variable = { name = hon_republica add = 3 }
+		}
+		add_modifier = { name = hon_prudencia_diplomatica months = 60 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_honduras_events.59 = {
+	type = country_event
+	title = ca_honduras_events.59.t
+	desc = ca_honduras_events.59.d
+	flavor = ca_honduras_events.59.f
+	duration = 3
+	event_image = {
+		video = "unspecific_research"
+	}
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.59.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_up_15_tt
+			change_variable = { name = hon_republica add = 15 }
+		}
+		ca_hon_create_once = { KEY = cafm_hc_jose_trinidad_reyes TEMPLATE = cafm_jose_trinidad_reyes }
+		add_modifier = { name = hon_universidad_nacional years = 20 }
+		ai_chance = { base = 80 }
+	}
+	option = {
+		name = ca_honduras_events.59.b
+		custom_tooltip = {
+			text = hon_republica_up_5_tt
+			change_variable = { name = hon_republica add = 5 }
+		}
+		ai_chance = { base = 20 }
+	}
+}
+
+ca_honduras_events.60 = {
+	type = country_event
+	title = ca_honduras_events.60.t
+	desc = ca_honduras_events.60.d
+	flavor = ca_honduras_events.60.f
+	duration = 3
+	event_image = {
+		video = "asia_politician_parliament_motion"
+	}
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.60.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_republica_up_12_tt
+			change_variable = { name = hon_republica add = 12 }
+		}
+		add_modifier = { name = hon_constitucion_1848 years = 15 }
+		ai_chance = { base = 75 }
+	}
+	option = {
+		name = ca_honduras_events.60.b
+		custom_tooltip = {
+			text = hon_republica_up_3_tt
+			change_variable = { name = hon_republica add = 3 }
+		}
+		add_authority = 50
+		ai_chance = { base = 25 }
+	}
+}
+
+ca_honduras_events.61 = {
+	type = country_event
+	title = ca_honduras_events.61.t
+	desc = ca_honduras_events.61.d
+	flavor = ca_honduras_events.61.f
+	duration = 3
+	event_image = {
+		video = "southamerica_war_civilians"
+	}
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.61.a
+		default_option = yes
+		add_treasury = -12000
+		custom_tooltip = {
+			text = hon_costa_up_10_tt
+			change_variable = { name = hon_costa add = 10 }
+		}
+		set_variable = hon_protesta_en_londres
+		ai_chance = { base = 55 }
+	}
+	option = {
+		name = ca_honduras_events.61.b
+		custom_tooltip = {
+			text = hon_costa_up_5_tt
+			change_variable = { name = hon_costa add = 5 }
+		}
+		set_variable = hon_guarnicion_trujillo
+		add_treasury = -20000
+		ai_chance = { base = 45 }
+	}
+}
+
+ca_honduras_events.62 = {
+	type = country_event
+	title = ca_honduras_events.62.t
+	desc = ca_honduras_events.62.d
+	flavor = ca_honduras_events.62.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.62.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_costa_up_20_tt
+			change_variable = { name = hon_costa add = 20 }
+		}
+		set_variable = hon_protesta_en_londres
+		add_modifier = { name = hon_isla_ocupada months = 36 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_honduras_events.62.b
+		custom_tooltip = {
+			text = hon_costa_up_15_tt
+			change_variable = { name = hon_costa add = 15 }
+		}
+		set_variable = hon_squier_oferta
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_honduras_events.63 = {
+	type = country_event
+	title = ca_honduras_events.63.t
+	desc = ca_honduras_events.63.d
+	flavor = ca_honduras_events.63.f
+	duration = 3
+	event_image = {
+		video = "africa_diplomats_negotiating"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.63.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_costa_down_10_tt
+			change_variable = { name = hon_costa subtract = 10 }
+		}
+		add_modifier = { name = hon_pacto_de_chinandega years = 10 }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_honduras_events.63.b
+		custom_tooltip = {
+			text = hon_costa_down_5_tt
+			change_variable = { name = hon_costa subtract = 5 }
+		}
+		set_variable = hon_protesta_en_londres
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_honduras_events.64 = {
+	type = country_event
+	title = ca_honduras_events.64.t
+	desc = ca_honduras_events.64.d
+	flavor = ca_honduras_events.64.f
+	duration = 3
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+	icon = "gfx/interface/icons/event_icons/event_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.64.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_costa_down_20_tt
+			change_variable = { name = hon_costa subtract = 20 }
+		}
+		custom_tooltip = {
+			text = hon_republica_up_8_tt
+			change_variable = { name = hon_republica add = 8 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_honduras_events.65 = {
+	type = country_event
+	title = ca_honduras_events.65.t
+	desc = ca_honduras_events.65.d
+	flavor = ca_honduras_events.65.f
+	duration = 3
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.65.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_costa_down_5_tt
+			change_variable = { name = hon_costa subtract = 5 }
+		}
+		custom_tooltip = {
+			text = hon_republica_up_5_tt
+			change_variable = { name = hon_republica add = 5 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_honduras_events.66 = {
+	type = country_event
+	title = ca_honduras_events.66.t
+	desc = ca_honduras_events.66.d
+	flavor = ca_honduras_events.66.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.66.a
+		default_option = yes
+		custom_tooltip = {
+			text = hon_costa_down_15_tt
+			change_variable = { name = hon_costa subtract = 15 }
+		}
+		set_variable = hon_clayton_bulwer
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_honduras_events.67 = {
+	type = country_event
+	title = ca_honduras_events.67.t
+	desc = ca_honduras_events.67.d
+	flavor = ca_honduras_events.67.f
+	duration = 3
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.67.a
+		default_option = yes
+		set_variable = hon_pespire
+		custom_tooltip = {
+			text = hon_republica_up_15_tt
+			change_variable = { name = hon_republica add = 15 }
+		}
+		if = {
+			limit = { has_variable = hon_caudillo }
+			change_variable = { name = hon_caudillo subtract = 30 }
+		}
+		add_modifier = { name = hon_gobierno_civil years = 10 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 60 } }
+		ai_chance = { base = 65 }
+	}
+	option = {
+		name = ca_honduras_events.67.b
+		if = {
+			limit = { has_variable = hon_caudillo }
+			change_variable = { name = hon_caudillo add = 20 }
+		}
+		custom_tooltip = {
+			text = hon_republica_down_10_tt
+			change_variable = { name = hon_republica subtract = 10 }
+		}
+		add_treasury = -25000
+		ai_chance = { base = 35 }
+	}
+}
+
+ca_honduras_events.68 = {
+	type = country_event
+	title = ca_honduras_events.68.t
+	desc = ca_honduras_events.68.d
+	flavor = ca_honduras_events.68.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_honduras_events.68.a
+		default_option = yes
+		add_modifier = { name = hon_alianza_ocotepeque years = 5 }
+		custom_tooltip = {
+			text = hon_republica_up_5_tt
+			change_variable = { name = hon_republica add = 5 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_honduras_events.68.b
+		custom_tooltip = {
+			text = hon_republica_up_8_tt
+			change_variable = { name = hon_republica add = 8 }
+		}
+		add_modifier = { name = hon_prudencia_diplomatica months = 60 }
+		ai_chance = { base = 40 }
+	}
+}
+

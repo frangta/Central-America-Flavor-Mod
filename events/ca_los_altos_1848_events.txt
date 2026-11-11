@@ -1,0 +1,55 @@
+﻿namespace = ca_los_altos_1848
+
+# CAFM Z14: la restauración de Los Altos (26 ago 1848).
+# La lanza cafm_altos_1848_pulse (zz_cafm_cast_effects.txt) en Guatemala, solo en el mundo histórico.
+# Fuentes: Estado de Los Altos y Agustín Guzmán (Wikipedia ES/EN): proclamación del 26 ago 1848,
+# gobierno de Fernando Antonio Martínez desde el 5 sep 1848, fin el 8 may 1849.
+
+ca_los_altos_1848.1 = {
+	type = country_event
+	placement = root
+	title = ca_los_altos_1848.1.t
+	desc = ca_los_altos_1848.1.d
+	flavor = ca_los_altos_1848.1.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:GUA ?= this
+		NOT = { exists = c:ALT }
+	}
+
+	# a. Dejar que Quetzaltenango se gobierne (histórico)
+	option = {
+		name = ca_los_altos_1848.1.a
+		default_option = yes
+		ca_create_post_losaltoswithoutsoconusco_effect = yes
+		ai_chance = { base = 80 }
+	}
+
+	# b. Negociar con los altenses: Los Altos se queda, con autonomía
+	option = {
+		name = ca_los_altos_1848.1.b
+		p:x42124E.state ?= { add_modifier = { name = ca_autonomy_granted years = 5 } }
+		add_modifier = { name = ca_secession_concessions years = 2 }
+		ai_chance = { base = 10 }
+	}
+
+	# c. Aplastar la rebelión: Los Altos se separa y Guatemala va a la guerra
+	option = {
+		name = ca_los_altos_1848.1.c
+		ca_create_post_losaltoswithoutsoconusco_effect = yes
+		if = {
+			limit = { exists = c:ALT }
+			create_diplomatic_play = {
+				name = ca_altos_1848_play
+				type = dp_annex_war
+				target_country = c:ALT
+				escalation = 50
+			}
+		}
+		ai_chance = { base = 10 }
+	}
+}

@@ -1,0 +1,923 @@
+﻿namespace = ca_nicaragua_events
+
+# =====================================================================
+# CAFM — NICARAGUA — FASE 2 (1838-1851)
+# IDs .26-.52 (el mod usa .1-.25). Los lanza ca_nic_beats, desde el
+# on_action cafm_nhm_monthly; .50, .51 y .52 los lanzan los umbrales de
+# la barra de la division.
+# Fuentes: Fundacion Enrique Bolanos («Amnistias en Nicaragua»: asamblea
+#   de Chinandega 31 mar 1838, separacion 30 abr 1838, tratado con
+#   Honduras 18 ene 1839, mando a Fonseca abr 1839, Choluteca 29 ago 1844,
+#   sitio de Leon nov 1844, Montenegro 8 dic 1844, Selva en Masaya 16 dic,
+#   caida de Leon 24 ene 1845, Sandoval 4 abr 1845, amnistia 10 may 1845,
+#   Chelon Valle jun 1845, Managua ciudad 24 jul 1846); es.wikipedia
+#   «Nacion Misquita» (San Juan del Norte 12 ago 1841 y 1 ene 1848,
+#   tratado de 7 mar 1848, Clayton-Bulwer, Prometheus 21 nov 1850);
+#   en.wikipedia «History of the Nicaragua Canal» (contrato 26 ago 1849).
+# =====================================================================
+
+ca_nicaragua_events.26 = {
+	type = country_event
+	title = ca_nicaragua_events.26.t
+	desc = ca_nicaragua_events.26.d
+	flavor = ca_nicaragua_events.26.f
+	duration = 3
+	event_image = {
+		video = "asia_politician_parliament_motion"
+	}
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.26.a
+		default_option = yes
+		add_modifier = { name = nic_asamblea_constituyente months = 24 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_nicaragua_events.26.b
+		custom_tooltip = {
+			text = nic_division_up_8_tt
+			change_variable = { name = nic_division add = 8 }
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_nicaragua_events.27 = {
+	type = country_event
+	title = ca_nicaragua_events.27.t
+	desc = ca_nicaragua_events.27.d
+	flavor = ca_nicaragua_events.27.f
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	icon = "gfx/interface/icons/event_icons/event_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.27.a
+		default_option = yes
+		add_modifier = { name = nic_estado_soberano years = 20 }
+		add_authority = 100
+		ai_chance = { base = 80 }
+	}
+	option = {
+		name = ca_nicaragua_events.27.b
+		trigger = {
+			ca_nic_alt_history = yes
+		}
+		custom_tooltip = {
+			text = nic_division_up_10_tt
+			change_variable = { name = nic_division add = 10 }
+		}
+		add_modifier = { name = nic_fidelidad_federal months = 120 }
+		ai_chance = { base = 20 }
+	}
+}
+
+ca_nicaragua_events.28 = {
+	type = country_event
+	title = ca_nicaragua_events.28.t
+	desc = ca_nicaragua_events.28.d
+	flavor = ca_nicaragua_events.28.f
+	duration = 3
+	event_image = {
+		video = "asia_politician_parliament_motion"
+	}
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.28.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_division_down_5_tt
+			change_variable = { name = nic_division subtract = 5 }
+		}
+		add_modifier = { name = nic_constitucion_1838 years = 15 }
+		ai_chance = { base = 75 }
+	}
+	option = {
+		name = ca_nicaragua_events.28.b
+		custom_tooltip = {
+			text = nic_division_up_8_tt
+			change_variable = { name = nic_division add = 8 }
+		}
+		add_authority = 50
+		ai_chance = { base = 25 }
+	}
+}
+
+ca_nicaragua_events.29 = {
+	type = country_event
+	title = ca_nicaragua_events.29.t
+	desc = ca_nicaragua_events.29.d
+	flavor = ca_nicaragua_events.29.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.29.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_fonseca_up_10_tt
+			change_variable = { name = nic_fonseca add = 10 }
+		}
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		add_modifier = { name = nic_guerra_del_38 months = 36 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_nicaragua_events.29.b
+		custom_tooltip = {
+			text = nic_fonseca_down_5_tt
+			change_variable = { name = nic_fonseca subtract = 5 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_nicaragua_events.30 = {
+	type = country_event
+	title = ca_nicaragua_events.30.t
+	desc = ca_nicaragua_events.30.d
+	flavor = ca_nicaragua_events.30.f
+	duration = 3
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.30.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_fonseca_up_15_tt
+			change_variable = { name = nic_fonseca add = 15 }
+		}
+		ca_nic_create_once = { KEY = cafm_hc_casto_fonseca TEMPLATE = cafm_casto_fonseca }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_nicaragua_events.30.b
+		trigger = {
+			ca_nic_alt_history = yes
+		}
+		custom_tooltip = {
+			text = nic_fonseca_down_5_tt
+			change_variable = { name = nic_fonseca subtract = 5 }
+		}
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_nicaragua_events.31 = {
+	type = country_event
+	title = ca_nicaragua_events.31.t
+	desc = ca_nicaragua_events.31.d
+	flavor = ca_nicaragua_events.31.f
+	duration = 3
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.31.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_fonseca_up_20_tt
+			change_variable = { name = nic_fonseca add = 20 }
+		}
+		add_modifier = { name = nic_levas_del_mariscal months = 60 }
+		ai_chance = { base = 55 }
+	}
+	option = {
+		name = ca_nicaragua_events.31.b
+		custom_tooltip = {
+			text = nic_fonseca_down_10_tt
+			change_variable = { name = nic_fonseca subtract = 10 }
+		}
+		custom_tooltip = {
+			text = nic_division_up_10_tt
+			change_variable = { name = nic_division add = 10 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 45 }
+	}
+}
+
+ca_nicaragua_events.41 = {
+	type = country_event
+	title = ca_nicaragua_events.41.t
+	desc = ca_nicaragua_events.41.d
+	flavor = ca_nicaragua_events.41.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.41.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_transito_up_5_tt
+			change_variable = { name = nic_transito add = 5 }
+		}
+		add_modifier = { name = nic_protesta_en_londres months = 60 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_nicaragua_events.41.b
+		custom_tooltip = {
+			text = nic_transito_up_10_tt
+			change_variable = { name = nic_transito add = 10 }
+		}
+		set_variable = nic_san_juan_guarnecido
+		add_treasury = -10000
+		ai_chance = { base = 30 }
+	}
+	option = {
+		name = ca_nicaragua_events.41.c
+		set_variable = nic_san_juan_perdido
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		ai_chance = { base = 20 }
+	}
+}
+
+ca_nicaragua_events.32 = {
+	type = country_event
+	title = ca_nicaragua_events.32.t
+	desc = ca_nicaragua_events.32.d
+	flavor = ca_nicaragua_events.32.f
+	duration = 3
+	event_image = {
+		video = "southamerica_war_civilians"
+	}
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.32.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_fonseca_down_10_tt
+			change_variable = { name = nic_fonseca subtract = 10 }
+		}
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_nicaragua_events.33 = {
+	type = country_event
+	title = ca_nicaragua_events.33.t
+	desc = ca_nicaragua_events.33.d
+	flavor = ca_nicaragua_events.33.f
+	duration = 3
+	event_image = {
+		video = "southamerica_war_civilians"
+	}
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.33.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_division_up_10_tt
+			change_variable = { name = nic_division add = 10 }
+		}
+		custom_tooltip = {
+			text = nic_fonseca_up_5_tt
+			change_variable = { name = nic_fonseca add = 5 }
+		}
+		ca_nic_create_once = { KEY = cafm_hc_emiliano_madriz TEMPLATE = cafm_emiliano_madriz }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_nicaragua_events.33.b
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		set_variable = nic_granada_negocia
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_nicaragua_events.34 = {
+	type = country_event
+	title = ca_nicaragua_events.34.t
+	desc = ca_nicaragua_events.34.d
+	flavor = ca_nicaragua_events.34.f
+	duration = 3
+	event_image = {
+		video = "africa_diplomats_negotiating"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.34.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_nicaragua_events.34.b
+		custom_tooltip = {
+			text = nic_division_up_15_tt
+			change_variable = { name = nic_division add = 15 }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_nicaragua_events.35 = {
+	type = country_event
+	title = ca_nicaragua_events.35.t
+	desc = ca_nicaragua_events.35.d
+	flavor = ca_nicaragua_events.35.f
+	duration = 3
+	event_image = {
+		video = "southamerica_aristocrats"
+	}
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.35.a
+		default_option = yes
+		ca_nic_create_once = { KEY = cafm_hc_silvestre_selva TEMPLATE = cafm_silvestre_selva }
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_nicaragua_events.36 = {
+	type = country_event
+	title = ca_nicaragua_events.36.t
+	desc = ca_nicaragua_events.36.d
+	flavor = ca_nicaragua_events.36.f
+	duration = 3
+	event_image = {
+		video = "unspecific_devastation"
+	}
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.36.a
+		default_option = yes
+		set_variable = nic_fonseca_caido
+		custom_tooltip = {
+			text = nic_fonseca_down_40_tt
+			change_variable = { name = nic_fonseca subtract = 40 }
+		}
+		custom_tooltip = {
+			text = nic_division_up_15_tt
+			change_variable = { name = nic_division add = 15 }
+		}
+		add_modifier = { name = nic_leon_saqueada years = 10 }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_nicaragua_events.36.b
+		set_variable = nic_fonseca_caido
+		custom_tooltip = {
+			text = nic_fonseca_down_40_tt
+			change_variable = { name = nic_fonseca subtract = 40 }
+		}
+		custom_tooltip = {
+			text = nic_division_up_8_tt
+			change_variable = { name = nic_division add = 8 }
+		}
+		add_treasury = -20000
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_nicaragua_events.37 = {
+	type = country_event
+	title = ca_nicaragua_events.37.t
+	desc = ca_nicaragua_events.37.d
+	flavor = ca_nicaragua_events.37.f
+	duration = 3
+	event_image = {
+		video = "southamerica_election"
+	}
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.37.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_division_down_5_tt
+			change_variable = { name = nic_division subtract = 5 }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_nicaragua_events.38 = {
+	type = country_event
+	title = ca_nicaragua_events.38.t
+	desc = ca_nicaragua_events.38.d
+	flavor = ca_nicaragua_events.38.f
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.38.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_division_down_10_tt
+			change_variable = { name = nic_division subtract = 10 }
+		}
+		add_modifier = { name = nic_amnistia months = 60 }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_nicaragua_events.38.b
+		custom_tooltip = {
+			text = nic_division_up_10_tt
+			change_variable = { name = nic_division add = 10 }
+		}
+		add_authority = 50
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_nicaragua_events.39 = {
+	type = country_event
+	title = ca_nicaragua_events.39.t
+	desc = ca_nicaragua_events.39.d
+	flavor = ca_nicaragua_events.39.f
+	duration = 3
+	event_image = {
+		video = "unspecific_vandalized_storefront"
+	}
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.39.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		add_treasury = -10000
+		ai_chance = { base = 55 }
+	}
+	option = {
+		name = ca_nicaragua_events.39.b
+		custom_tooltip = {
+			text = nic_division_down_3_tt
+			change_variable = { name = nic_division subtract = 3 }
+		}
+		ai_chance = { base = 45 }
+	}
+}
+
+ca_nicaragua_events.40 = {
+	type = country_event
+	title = ca_nicaragua_events.40.t
+	desc = ca_nicaragua_events.40.d
+	flavor = ca_nicaragua_events.40.f
+	duration = 3
+	event_image = {
+		video = "africa_construction_colony"
+	}
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.40.a
+		default_option = yes
+		set_variable = nic_pacto_managua
+		custom_tooltip = {
+			text = nic_division_down_20_tt
+			change_variable = { name = nic_division subtract = 20 }
+		}
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_nicaragua_events.40.b
+		set_variable = nic_capital_alterna
+		custom_tooltip = {
+			text = nic_division_down_8_tt
+			change_variable = { name = nic_division subtract = 8 }
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_nicaragua_events.49 = {
+	type = country_event
+	title = ca_nicaragua_events.49.t
+	desc = ca_nicaragua_events.49.d
+	flavor = ca_nicaragua_events.49.f
+	duration = 3
+	event_image = {
+		video = "southamerica_election"
+	}
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.49.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_nicaragua_events.49.b
+		trigger = {
+			ca_nic_alt_history = yes
+		}
+		custom_tooltip = {
+			text = nic_division_down_5_tt
+			change_variable = { name = nic_division subtract = 5 }
+		}
+		add_modifier = { name = nic_mandato_largo years = 10 }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_nicaragua_events.42 = {
+	type = country_event
+	title = ca_nicaragua_events.42.t
+	desc = ca_nicaragua_events.42.d
+	flavor = ca_nicaragua_events.42.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_before_the_battle"
+	}
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.42.a
+		default_option = yes
+		set_variable = nic_san_juan_perdido
+		custom_tooltip = {
+			text = nic_transito_up_15_tt
+			change_variable = { name = nic_transito add = 15 }
+		}
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_nicaragua_events.42.b
+		custom_tooltip = {
+			text = nic_transito_up_10_tt
+			change_variable = { name = nic_transito add = 10 }
+		}
+		custom_tooltip = {
+			text = nic_division_up_10_tt
+			change_variable = { name = nic_division add = 10 }
+		}
+		add_treasury = -25000
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_nicaragua_events.43 = {
+	type = country_event
+	title = ca_nicaragua_events.43.t
+	desc = ca_nicaragua_events.43.d
+	flavor = ca_nicaragua_events.43.f
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.43.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_transito_up_10_tt
+			change_variable = { name = nic_transito add = 10 }
+		}
+		add_modifier = { name = nic_greytown_cedido years = 12 }
+		ai_chance = { base = 55 }
+	}
+	option = {
+		name = ca_nicaragua_events.43.b
+		custom_tooltip = {
+			text = nic_transito_up_5_tt
+			change_variable = { name = nic_transito add = 5 }
+		}
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		ai_chance = { base = 45 }
+	}
+}
+
+ca_nicaragua_events.44 = {
+	type = country_event
+	title = ca_nicaragua_events.44.t
+	desc = ca_nicaragua_events.44.d
+	flavor = ca_nicaragua_events.44.f
+	duration = 3
+	event_image = {
+		video = "africa_diplomats_negotiating"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.44.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_transito_up_15_tt
+			change_variable = { name = nic_transito add = 15 }
+		}
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_nicaragua_events.44.b
+		custom_tooltip = {
+			text = nic_transito_down_5_tt
+			change_variable = { name = nic_transito subtract = 5 }
+		}
+		add_authority = 50
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_nicaragua_events.45 = {
+	type = country_event
+	title = ca_nicaragua_events.45.t
+	desc = ca_nicaragua_events.45.d
+	flavor = ca_nicaragua_events.45.f
+	duration = 3
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.45.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_transito_up_25_tt
+			change_variable = { name = nic_transito add = 25 }
+		}
+		add_modifier = { name = nic_contrato_del_transito years = 15 }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_nicaragua_events.45.b
+		custom_tooltip = {
+			text = nic_transito_up_5_tt
+			change_variable = { name = nic_transito add = 5 }
+		}
+		add_modifier = { name = nic_rio_del_estado years = 10 }
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_nicaragua_events.46 = {
+	type = country_event
+	title = ca_nicaragua_events.46.t
+	desc = ca_nicaragua_events.46.d
+	flavor = ca_nicaragua_events.46.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_gold_prospectors"
+	}
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.46.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_transito_up_20_tt
+			change_variable = { name = nic_transito add = 20 }
+		}
+		add_modifier = { name = nic_peaje_del_san_juan years = 20 }
+		ai_chance = { base = 75 }
+	}
+	option = {
+		name = ca_nicaragua_events.46.b
+		custom_tooltip = {
+			text = nic_transito_up_5_tt
+			change_variable = { name = nic_transito add = 5 }
+		}
+		ai_chance = { base = 25 }
+	}
+}
+
+ca_nicaragua_events.47 = {
+	type = country_event
+	title = ca_nicaragua_events.47.t
+	desc = ca_nicaragua_events.47.d
+	flavor = ca_nicaragua_events.47.f
+	duration = 3
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.47.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_transito_up_10_tt
+			change_variable = { name = nic_transito add = 10 }
+		}
+		set_variable = nic_clayton_bulwer
+		ai_chance = { base = 100 }
+	}
+}
+
+ca_nicaragua_events.48 = {
+	type = country_event
+	title = ca_nicaragua_events.48.t
+	desc = ca_nicaragua_events.48.d
+	flavor = ca_nicaragua_events.48.f
+	duration = 3
+	event_image = {
+		video = "southamerica_war_civilians"
+	}
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.48.a
+		default_option = yes
+		custom_tooltip = {
+			text = nic_transito_up_5_tt
+			change_variable = { name = nic_transito add = 5 }
+		}
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_nicaragua_events.48.b
+		custom_tooltip = {
+			text = nic_transito_down_5_tt
+			change_variable = { name = nic_transito subtract = 5 }
+		}
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_nicaragua_events.50 = {
+	type = country_event
+	title = ca_nicaragua_events.50.t
+	desc = ca_nicaragua_events.50.d
+	flavor = ca_nicaragua_events.50.f
+	duration = 3
+	event_image = {
+		video = "southamerica_election"
+	}
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.50.a
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 35 }
+	}
+	option = {
+		name = ca_nicaragua_events.50.b
+		custom_tooltip = {
+			text = nic_division_up_5_tt
+			change_variable = { name = nic_division add = 5 }
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		ai_chance = { base = 35 }
+	}
+	option = {
+		name = ca_nicaragua_events.50.c
+		default_option = yes
+		custom_tooltip = {
+			text = nic_division_down_5_tt
+			change_variable = { name = nic_division subtract = 5 }
+		}
+		add_authority = -100
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_nicaragua_events.51 = {
+	type = country_event
+	title = ca_nicaragua_events.51.t
+	desc = ca_nicaragua_events.51.d
+	flavor = ca_nicaragua_events.51.f
+	duration = 3
+	event_image = {
+		video = "africa_diplomats_negotiating"
+	}
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.51.a
+		default_option = yes
+		set_variable = nic_pacto_managua
+		custom_tooltip = {
+			text = nic_division_down_25_tt
+			change_variable = { name = nic_division subtract = 25 }
+		}
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_nicaragua_events.51.b
+		custom_tooltip = {
+			text = nic_division_up_10_tt
+			change_variable = { name = nic_division add = 10 }
+		}
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_nicaragua_events.52 = {
+	type = country_event
+	title = ca_nicaragua_events.52.t
+	desc = ca_nicaragua_events.52.d
+	flavor = ca_nicaragua_events.52.f
+	duration = 3
+	event_image = {
+		video = "southamerica_war_civilians"
+	}
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = ca_nicaragua_events.52.a
+		default_option = yes
+		add_modifier = { name = nic_guerra_de_bandos years = 10 }
+		add_radicals = { value = 0.1 }
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = ca_nicaragua_events.52.b
+		trigger = {
+			ca_nic_alt_history = yes
+		}
+		custom_tooltip = {
+			text = nic_division_down_30_tt
+			change_variable = { name = nic_division subtract = 30 }
+		}
+		add_treasury = -30000
+		ai_chance = { base = 30 }
+	}
+}
+

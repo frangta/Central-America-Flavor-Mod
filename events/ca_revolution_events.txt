@@ -1,0 +1,653 @@
+﻿namespace = ca_revolution_events
+
+# CAFM P11: guerra civil y revolucion. .1-.5 revolucion federalista, .6-.9 unitaria,
+# .10-.12 cualquier revolucion de esos dos movimientos o secesion. Pulso: ca_p11_revolution_monthly.
+
+ca_revolution_events.1 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_revolution_events.1.t
+	desc = ca_revolution_events.1.d
+	flavor = ca_revolution_events.1.f
+	event_image = { video = "unspecific_devastation" }
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			is_civil_war_type = revolution
+			political_movement ?= { is_political_movement_type = movement_ca_federalist }
+		}
+		any_scope_state = { is_in_revolt = yes }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				is_civil_war_type = revolution
+				political_movement ?= { is_political_movement_type = movement_ca_federalist }
+			}
+			save_scope_as = ongoing_revolution
+		}
+		random_scope_state = {
+			limit = { is_in_revolt = yes }
+			save_scope_as = ca_p11_state
+		}
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.1.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_medium }
+		scope:ca_p11_state = { add_radicals_in_state = { value = medium_radicals strata = middle } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_revolution_events.1.b
+		scope:ca_p11_state = { add_modifier = { name = ca_p11_state_barricades months = 6 } }
+		random_list = {
+			1 = { scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_small } }
+			1 = { scope:ongoing_revolution = { add_civil_war_progress = revolution_advance_small } }
+		}
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_revolution_events.2 = {
+	type = country_event
+	placement = root
+	title = ca_revolution_events.2.t
+	desc = ca_revolution_events.2.d
+	flavor = ca_revolution_events.2.f
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			is_civil_war_type = revolution
+			political_movement ?= { is_political_movement_type = movement_ca_federalist }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				is_civil_war_type = revolution
+				political_movement ?= { is_political_movement_type = movement_ca_federalist }
+			}
+			save_scope_as = ongoing_revolution
+		}
+
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.2.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_small }
+		add_radicals = { value = small_radicals strata = middle }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_revolution_events.2.b
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_advance_small }
+		add_loyalists = { value = small_radicals strata = middle }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_revolution_events.3 = {
+	type = country_event
+	placement = root
+	title = ca_revolution_events.3.t
+	desc = ca_revolution_events.3.d
+	flavor = ca_revolution_events.3.f
+	event_image = { video = "europenorthamerica_rich_and_poor" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			is_civil_war_type = revolution
+			political_movement ?= { is_political_movement_type = movement_ca_federalist }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				is_civil_war_type = revolution
+				political_movement ?= { is_political_movement_type = movement_ca_federalist }
+			}
+			save_scope_as = ongoing_revolution
+		}
+
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.3.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_medium }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_p11_ig_humiliated months = 36 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_revolution_events.3.b
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_small }
+		add_loyalists = { value = small_radicals pop_type = academics }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_revolution_events.4 = {
+	type = country_event
+	placement = root
+	title = ca_revolution_events.4.t
+	desc = ca_revolution_events.4.d
+	flavor = ca_revolution_events.4.f
+	event_image = { video = "unspecific_devastation" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			is_civil_war_type = revolution
+			political_movement ?= { is_political_movement_type = movement_ca_federalist }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				is_civil_war_type = revolution
+				political_movement ?= { is_political_movement_type = movement_ca_federalist }
+			}
+			save_scope_as = ongoing_revolution
+		}
+
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.4.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_small }
+		add_modifier = { name = ca_p11_army_split months = 12 }
+		add_radicals = { value = medium_radicals pop_type = soldiers }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_revolution_events.4.b
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_medium }
+		}
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_medium }
+		ai_chance = { base = 60 }
+	}
+	option = {
+		name = ca_revolution_events.4.c
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_advance_medium }
+		ai_chance = { base = 10 }
+	}
+}
+
+ca_revolution_events.5 = {
+	type = country_event
+	placement = root
+	title = ca_revolution_events.5.t
+	desc = ca_revolution_events.5.d
+	flavor = ca_revolution_events.5.f
+	event_image = { video = "africa_diplomats_negotiating" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			is_civil_war_type = revolution
+			political_movement ?= { is_political_movement_type = movement_ca_federalist }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				is_civil_war_type = revolution
+				political_movement ?= { is_political_movement_type = movement_ca_federalist }
+			}
+			save_scope_as = ongoing_revolution
+		}
+
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.5.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_small }
+		add_modifier = { name = ca_p11_martial_law months = 12 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_revolution_events.5.b
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_advance_medium }
+		ai_chance = { base = 20 }
+	}
+	option = {
+		name = ca_revolution_events.5.c
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_medium }
+		}
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_medium }
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_revolution_events.6 = {
+	type = country_event
+	placement = scope:ca_p11_state
+	title = ca_revolution_events.6.t
+	desc = ca_revolution_events.6.d
+	flavor = ca_revolution_events.6.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			is_civil_war_type = revolution
+			political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+		}
+		any_scope_state = { is_in_revolt = yes }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				is_civil_war_type = revolution
+				political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+			}
+			save_scope_as = ongoing_revolution
+		}
+		random_scope_state = {
+			limit = { is_in_revolt = yes }
+			save_scope_as = ca_p11_state
+		}
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.6.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_small }
+		ig:ig_devout ?= { add_modifier = { name = ca_p11_ig_humiliated months = 36 } }
+		scope:ca_p11_state = { add_radicals_in_state = { value = medium_radicals strata = lower } }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_revolution_events.6.b
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_medium }
+		ig:ig_devout ?= { add_modifier = { name = ca_p11_ig_coopted months = 24 } }
+		ai_chance = { base = 60 }
+	}
+}
+
+ca_revolution_events.7 = {
+	type = country_event
+	placement = root
+	title = ca_revolution_events.7.t
+	desc = ca_revolution_events.7.d
+	flavor = ca_revolution_events.7.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			is_civil_war_type = revolution
+			political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				is_civil_war_type = revolution
+				political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+			}
+			save_scope_as = ongoing_revolution
+		}
+
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.7.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_medium }
+		add_radicals = { value = large_radicals strata = lower }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_revolution_events.7.b
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_small }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_p11_ig_coopted months = 24 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_p11_ig_humiliated months = 24 } }
+		ai_chance = { base = 60 }
+	}
+}
+
+ca_revolution_events.8 = {
+	type = country_event
+	placement = root
+	title = ca_revolution_events.8.t
+	desc = ca_revolution_events.8.d
+	flavor = ca_revolution_events.8.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			is_civil_war_type = revolution
+			political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				is_civil_war_type = revolution
+				political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+			}
+			save_scope_as = ongoing_revolution
+		}
+
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.8.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_medium }
+		ig:ig_landowners ?= { add_modifier = { name = ca_p11_ig_purged months = 60 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_revolution_events.8.b
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_small }
+		ig:ig_landowners ?= { add_modifier = { name = ca_p11_ig_coopted months = 24 } }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_revolution_events.9 = {
+	type = country_event
+	placement = root
+	title = ca_revolution_events.9.t
+	desc = ca_revolution_events.9.d
+	flavor = ca_revolution_events.9.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			is_civil_war_type = revolution
+			political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				is_civil_war_type = revolution
+				political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+			}
+			save_scope_as = ongoing_revolution
+		}
+
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.9.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_small }
+		add_radicals = { value = medium_radicals pop_type = officers }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_revolution_events.9.b
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_medium }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_p11_ig_emboldened months = 36 } }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_revolution_events.10 = {
+	type = country_event
+	placement = root
+	title = ca_revolution_events.10.t
+	desc = ca_revolution_events.10.d
+	flavor = ca_revolution_events.10.f
+	event_image = { video = "unspecific_vandalized_storefront" }
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			OR = {
+				is_civil_war_type = secession
+				political_movement ?= { is_political_movement_type = movement_ca_federalist }
+				political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+			}
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				OR = {
+					is_civil_war_type = secession
+					political_movement ?= { is_political_movement_type = movement_ca_federalist }
+					political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+				}
+			}
+			save_scope_as = ongoing_revolution
+		}
+
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.10.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_small }
+		add_modifier = { name = ca_p11_lost_revenue months = 6 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_revolution_events.10.b
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_advance_small }
+		add_modifier = { name = ca_p11_lost_revenue months = 12 }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_revolution_events.11 = {
+	type = country_event
+	placement = root
+	title = ca_revolution_events.11.t
+	desc = ca_revolution_events.11.d
+	flavor = ca_revolution_events.11.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			OR = {
+				is_civil_war_type = secession
+				political_movement ?= { is_political_movement_type = movement_ca_federalist }
+				political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+			}
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				OR = {
+					is_civil_war_type = secession
+					political_movement ?= { is_political_movement_type = movement_ca_federalist }
+					political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+				}
+			}
+			save_scope_as = ongoing_revolution
+		}
+
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.11.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_medium }
+		add_modifier = { name = ca_p11_foreign_mediation months = 24 }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_revolution_events.11.b
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_advance_small }
+		add_loyalists = { value = small_radicals }
+		ai_chance = { base = 60 }
+	}
+}
+
+ca_revolution_events.12 = {
+	type = country_event
+	placement = root
+	title = ca_revolution_events.12.t
+	desc = ca_revolution_events.12.d
+	flavor = ca_revolution_events.12.f
+	event_image = { video = "unspecific_vandalized_storefront" }
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = 1825 }
+
+	trigger = {
+		ca_p11_country = yes
+		NOT = { has_variable = ca_p11_rev_cd }
+		any_civil_war = {
+			OR = {
+				is_civil_war_type = secession
+				political_movement ?= { is_political_movement_type = movement_ca_federalist }
+				political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+			}
+		}
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ongoing_revolution }
+	}
+
+	immediate = {
+		random_civil_war = {
+			limit = {
+				OR = {
+					is_civil_war_type = secession
+					political_movement ?= { is_political_movement_type = movement_ca_federalist }
+					political_movement ?= { is_political_movement_type = movement_ca_unitarian }
+				}
+			}
+			save_scope_as = ongoing_revolution
+		}
+
+		set_variable = { name = ca_p11_rev_cd days = 30 }
+	}
+	option = {
+		name = ca_revolution_events.12.a
+		default_option = yes
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_small }
+		add_loyalists = { value = medium_radicals }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_revolution_events.12.b
+		scope:ongoing_revolution = { add_civil_war_progress = revolution_retreat_medium }
+		add_radicals = { value = medium_radicals }
+		ai_chance = { base = 50 }
+	}
+}

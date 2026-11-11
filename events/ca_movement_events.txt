@@ -1,0 +1,459 @@
+﻿namespace = ca_movement_events
+
+# CAFM P11: eventos de los movimientos federalista (.1-.5) y unitario (.6-.10).
+# Disparo: pulso mensual ca_p11_monthly (zz_ca_p11_on_actions.txt).
+
+ca_movement_events.1 = {
+	type = country_event
+	placement = root
+	title = ca_movement_events.1.t
+	desc = ca_movement_events.1.d
+	flavor = ca_movement_events.1.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.03 }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_movement }
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_federalist }
+			save_scope_as = ca_p11_movement
+		}
+	}
+	option = {
+		name = ca_movement_events.1.a
+		default_option = yes
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_low months = 24 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_p11_ig_emboldened months = 24 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_movement_events.1.b
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_radicalism_low months = 24 } }
+		add_radicals = { value = small_radicals strata = middle }
+		ai_chance = { base = 30 }
+	}
+	option = {
+		name = ca_movement_events.1.c
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_low months = 12 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_p11_ig_coopted months = 24 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		ai_chance = { base = 20 }
+	}
+}
+
+ca_movement_events.2 = {
+	type = country_event
+	placement = root
+	title = ca_movement_events.2.t
+	desc = ca_movement_events.2.d
+	flavor = ca_movement_events.2.f
+	event_image = { video = "middleeast_middleclass_cafe" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.03 }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_movement }
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_federalist }
+			save_scope_as = ca_p11_movement
+		}
+	}
+	option = {
+		name = ca_movement_events.2.a
+		default_option = yes
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_mid months = 12 } }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_movement_events.2.b
+		trigger = {
+			ig:ig_intelligentsia ?= { is_in_government = no }
+		}
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_radicalism_low months = 24 } }
+		add_radicals = { value = small_radicals interest_group = ig:ig_intelligentsia }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_movement_events.2.c
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_small }
+		}
+		add_treasury = { value = ca_money_small multiply = -1 }
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_low months = 12 } }
+		ai_chance = { base = 20 }
+	}
+}
+
+ca_movement_events.3 = {
+	type = country_event
+	placement = root
+	title = ca_movement_events.3.t
+	desc = ca_movement_events.3.d
+	flavor = ca_movement_events.3.f
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.03 }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_movement }
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_federalist }
+			save_scope_as = ca_p11_movement
+		}
+	}
+	option = {
+		name = ca_movement_events.3.a
+		default_option = yes
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_low months = 24 } }
+		if = {
+			limit = { exists = c:UCA this = c:UCA ca_frca_journal_active = yes }
+			ca_frca_bar_minor_up = yes
+		}
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_movement_events.3.b
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_radicalism_low months = 12 } }
+		add_radicals = { value = small_radicals strata = lower }
+		ai_chance = { base = 50 }
+	}
+}
+
+ca_movement_events.4 = {
+	type = country_event
+	placement = root
+	title = ca_movement_events.4.t
+	desc = ca_movement_events.4.d
+	flavor = ca_movement_events.4.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.03 }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_movement }
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_federalist }
+			save_scope_as = ca_p11_movement
+		}
+	}
+	option = {
+		name = ca_movement_events.4.a
+		default_option = yes
+		add_modifier = { name = ca_p11_civil_peace months = 12 }
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_low months = 12 } }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_movement_events.4.b
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_radicalism_mid months = 12 } }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_movement_events.4.c
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_radicalism_low months = 24 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		ai_chance = { base = 20 }
+	}
+}
+
+ca_movement_events.5 = {
+	type = country_event
+	placement = root
+	title = ca_movement_events.5.t
+	desc = ca_movement_events.5.d
+	flavor = ca_movement_events.5.f
+	event_image = { video = "asia_politician_parliament_motion" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_federalist VALUE = 0.03 }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_movement }
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_federalist }
+			save_scope_as = ca_p11_movement
+		}
+	}
+	option = {
+		name = ca_movement_events.5.a
+		default_option = yes
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_mid months = 12 } }
+		capital = { add_radicals_in_state = { value = small_radicals strata = upper } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_movement_events.5.b
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_radicalism_mid months = 12 } }
+		capital = { add_radicals_in_state = { value = medium_radicals strata = middle } }
+		ai_chance = { base = 30 }
+	}
+	option = {
+		name = ca_movement_events.5.c
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_low months = 12 } }
+		capital = { add_loyalists_in_state = { value = small_radicals } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		ai_chance = { base = 20 }
+	}
+}
+
+ca_movement_events.6 = {
+	type = country_event
+	placement = root
+	title = ca_movement_events.6.t
+	desc = ca_movement_events.6.d
+	flavor = ca_movement_events.6.f
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.03 }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_movement }
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_unitarian }
+			save_scope_as = ca_p11_movement
+		}
+	}
+	option = {
+		name = ca_movement_events.6.a
+		default_option = yes
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_low months = 24 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_p11_ig_emboldened months = 24 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_movement_events.6.b
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_radicalism_mid months = 12 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_p11_ig_humiliated months = 24 } }
+		ai_chance = { base = 30 }
+	}
+}
+
+ca_movement_events.7 = {
+	type = country_event
+	placement = root
+	title = ca_movement_events.7.t
+	desc = ca_movement_events.7.d
+	flavor = ca_movement_events.7.f
+	event_image = { video = "southamerica_christianity" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.03 }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_movement }
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_unitarian }
+			save_scope_as = ca_p11_movement
+		}
+	}
+	option = {
+		name = ca_movement_events.7.a
+		default_option = yes
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_mid months = 12 } }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_movement_events.7.b
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_radicalism_mid months = 12 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_p11_ig_humiliated months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_p11_ig_emboldened months = 12 } }
+		ai_chance = { base = 40 }
+	}
+}
+
+ca_movement_events.8 = {
+	type = country_event
+	placement = root
+	title = ca_movement_events.8.t
+	desc = ca_movement_events.8.d
+	flavor = ca_movement_events.8.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.03 }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_movement }
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_unitarian }
+			save_scope_as = ca_p11_movement
+		}
+	}
+	option = {
+		name = ca_movement_events.8.a
+		default_option = yes
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_low months = 24 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_p11_ig_coopted months = 24 } }
+		if = {
+			limit = { exists = c:UCA this = c:UCA ca_frca_journal_active = yes }
+			ca_frca_bar_minor_down = yes
+		}
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_movement_events.8.b
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_radicalism_low months = 12 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_p11_ig_humiliated months = 24 } }
+		ai_chance = { base = 60 }
+	}
+}
+
+ca_movement_events.9 = {
+	type = country_event
+	placement = root
+	title = ca_movement_events.9.t
+	desc = ca_movement_events.9.d
+	flavor = ca_movement_events.9.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.03 }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_movement }
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_unitarian }
+			save_scope_as = ca_p11_movement
+		}
+	}
+	option = {
+		name = ca_movement_events.9.a
+		default_option = yes
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_mid months = 12 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_p11_ig_emboldened months = 24 } }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_movement_events.9.b
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_radicalism_mid months = 12 } }
+		add_radicals = { value = medium_radicals strata = lower }
+		ai_chance = { base = 40 }
+	}
+	option = {
+		name = ca_movement_events.9.c
+		trigger = {
+			ca_mm_can_pay = { VALUE = ca_money_small }
+		}
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_p11_ig_coopted months = 24 } }
+		ai_chance = { base = 20 }
+	}
+}
+
+ca_movement_events.10 = {
+	type = country_event
+	placement = root
+	title = ca_movement_events.10.t
+	desc = ca_movement_events.10.d
+	flavor = ca_movement_events.10.f
+	event_image = { video = "middleeast_middleclass_cafe" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		ca_p11_country = yes
+		ca_p11_movement_ge = { TYPE = movement_ca_unitarian VALUE = 0.03 }
+	}
+	cancellation_trigger = {
+		NOT = { exists = scope:ca_p11_movement }
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_ca_unitarian }
+			save_scope_as = ca_p11_movement
+		}
+	}
+	option = {
+		name = ca_movement_events.10.a
+		default_option = yes
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_pop_attraction_low months = 24 } }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = ca_movement_events.10.b
+		scope:ca_p11_movement ?= { add_modifier = { name = ca_modifier_radicalism_low months = 12 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_p11_ig_humiliated months = 12 } }
+		ai_chance = { base = 50 }
+	}
+}
