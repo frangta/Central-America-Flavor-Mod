@@ -1,0 +1,16 @@
+﻿# =====================================================================
+# CAFM — GUATEMALA (1836–1851): umbrales de las dos barras.
+# Las cifras se ajustan aquí, después de probar. Diseño: CAFM_GUATEMALA.md
+# =====================================================================
+
+# --- La Montaña (var:gua_montana, 0–100; empieza en 10) ---
+ca_gua_montana_inicio = 10
+ca_gua_montana_carrera = 40			# aparece Carrera como general rebelde
+ca_gua_montana_adelanta = 60		# fuera del modo histórico, adelanta la marcha a la capital
+ca_gua_montana_incontenible = 80	# modificador gua_montana_incontenible
+
+# --- Los Lucíos (var:gua_lucios, 0–100; empieza en 20) ---
+ca_gua_lucios_inicio = 20
+ca_gua_lucios_renuncia = 50			# Carrera renuncia antes de tiempo
+ca_gua_lucios_altos = 70			# Los Altos se separa antes de tiempo
+ca_gua_lucios_sitio = 90			# los Lucíos dominan el oriente

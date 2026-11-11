@@ -1,0 +1,530 @@
+﻿# =====================================================================
+# CAFM — GUATEMALA (1836–1851): efectos de las 4 fases.
+# Diseño: CAFM_GUATEMALA.md
+#
+# ca_gua_beats          Las etapas por fecha de las 4 fases. Lo llama el pulso
+#                       semanal de je_ca_historic_situation_in_guatemala.
+# ca_gua_montana_*      Límites, umbrales y deriva de var:gua_montana.
+# ca_gua_lucios_*       Lo mismo para var:gua_lucios.
+#
+# Todo en scope de país (GUA, o la UCA cuando lleva Guatemala).
+# =====================================================================
+
+# =====================================================================
+# LAS ETAPAS POR FECHA (pulso semanal del diario de la situación)
+# Una etapa por semana, en orden: cada una exige que no haya salido ya.
+# =====================================================================
+ca_gua_beats = {
+	# ---------- FASE 1: el experimento liberal y la Montaña ----------
+	# 1 ene 1837: entran en vigor los Códigos de Livingston. Abre el diario.
+	if = {
+		limit = {
+			game_date >= 1837.1.1
+			NOT = { has_variable = gua_e2_fired }
+		}
+		set_variable = gua_e2_fired
+		trigger_event = { id = ca_guatemala_events.38 popup = yes }
+	}
+	# mar 1837: el cólera llega a Chiquimula y Mita
+	else_if = {
+		limit = {
+			game_date >= 1837.3.1
+			has_variable = gua_e2_fired
+			NOT = { has_variable = gua_e3_fired }
+		}
+		set_variable = gua_e3_fired
+		trigger_event = { id = ca_guatemala_events.3 popup = yes }
+	}
+	# 6 may 1837: Mataquescuintla
+	else_if = {
+		limit = {
+			game_date >= 1837.5.6
+			has_variable = gua_e3_fired
+			NOT = { has_variable = gua_e4_fired }
+		}
+		set_variable = gua_e4_fired
+		trigger_event = { id = ca_guatemala_events.4 popup = yes }
+	}
+	# jun 1837: Teodoro Mejía y el manifiesto del veneno
+	else_if = {
+		limit = {
+			game_date >= 1837.6.10
+			has_variable = gua_e4_fired
+			NOT = { has_variable = gua_e9_fired }
+		}
+		set_variable = gua_e9_fired
+		trigger_event = { id = ca_guatemala_events.9 popup = yes }
+	}
+	# 22 jun 1837: la amnistía de Gálvez
+	else_if = {
+		limit = {
+			game_date >= 1837.6.22
+			has_variable = gua_e9_fired
+			NOT = { has_variable = gua_e10_fired }
+		}
+		set_variable = gua_e10_fired
+		trigger_event = { id = ca_guatemala_events.10 popup = yes }
+	}
+	# 26 jun – 27 jul 1837: el decreto de Jumay
+	else_if = {
+		limit = {
+			game_date >= 1837.6.26
+			has_variable = gua_e10_fired
+			NOT = { has_variable = gua_e11_fired }
+		}
+		set_variable = gua_e11_fired
+		trigger_event = { id = ca_guatemala_events.11 popup = yes }
+	}
+	# nov 1837: una legua cuadrada de ejido para cada pueblo
+	else_if = {
+		limit = {
+			game_date >= 1837.11.1
+			has_variable = gua_e11_fired
+			NOT = { has_variable = gua_e12_fired }
+		}
+		set_variable = gua_e12_fired
+		trigger_event = { id = ca_guatemala_events.12 popup = yes }
+	}
+	# 28–31 ene 1838: Carrera entra en la capital (o antes, si la barra llega a 100)
+	else_if = {
+		limit = {
+			has_variable = gua_e2_fired
+			NOT = { has_variable = gua_e13_fired }
+			OR = {
+				game_date >= 1838.1.28
+				AND = {
+					has_variable = gua_montana
+					var:gua_montana >= 100
+				}
+			}
+		}
+		set_variable = gua_e13_fired
+		trigger_event = { id = ca_guatemala_events.13 popup = yes }
+	}
+	# feb 1838: las demandas de la Montaña
+	else_if = {
+		limit = {
+			game_date >= 1838.2.5
+			has_variable = gua_carrera_en_la_capital
+			NOT = { has_variable = gua_e14_fired }
+		}
+		set_variable = gua_e14_fired
+		trigger_event = { id = ca_guatemala_events.14 popup = yes }
+	}
+	# feb 1838: Los Altos se separa
+	else_if = {
+		limit = {
+			game_date >= 1838.2.20
+			has_variable = gua_e13_fired
+			NOT = { has_variable = gua_e15_fired }
+		}
+		set_variable = gua_e15_fired
+		trigger_event = { id = ca_guatemala_events.15 popup = yes }
+	}
+
+	# ---------- FASE 2: la guerra por Guatemala ----------
+	# mediados de mar 1838: Morazán invade
+	else_if = {
+		limit = {
+			game_date >= 1838.3.15
+			has_variable = gua_e13_fired
+			NOT = { has_variable = gua_e16_fired }
+		}
+		set_variable = gua_e16_fired
+		trigger_event = { id = ca_guatemala_events.16 popup = yes }
+	}
+	# 9–11 sep 1838: Antigua y Villa Nueva
+	else_if = {
+		limit = {
+			game_date >= 1838.9.9
+			has_variable = gua_e16_fired
+			NOT = { has_variable = gua_e17_fired }
+		}
+		set_variable = gua_e17_fired
+		trigger_event = { id = ca_guatemala_events.17 popup = yes }
+	}
+	# fines de 1838: la tregua con Agustín Guzmán
+	else_if = {
+		limit = {
+			game_date >= 1838.11.15
+			has_variable = gua_e17_fired
+			NOT = { has_variable = gua_e18_fired }
+		}
+		set_variable = gua_e18_fired
+		trigger_event = { id = ca_guatemala_events.18 popup = yes }
+	}
+	# 13–17 abr 1839: la segunda entrada y la separación de la Federación
+	else_if = {
+		limit = {
+			game_date >= 1839.4.13
+			has_variable = gua_e18_fired
+			NOT = { has_variable = gua_e19_fired }
+		}
+		set_variable = gua_e19_fired
+		trigger_event = { id = ca_guatemala_events.19 popup = yes }
+	}
+	# ene–feb 1840: la reconquista de Los Altos
+	else_if = {
+		limit = {
+			game_date >= 1840.1.20
+			has_variable = gua_e19_fired
+			NOT = { has_variable = gua_e20_fired }
+		}
+		set_variable = gua_e20_fired
+		trigger_event = { id = ca_guatemala_events.20 popup = yes }
+	}
+	# mar 1840: la última invasión de Morazán
+	else_if = {
+		limit = {
+			game_date >= 1840.3.18
+			has_variable = gua_e19_fired
+			NOT = { has_variable = gua_e21_fired }
+		}
+		set_variable = gua_e21_fired
+		trigger_event = { id = ca_guatemala_events.21 popup = yes }
+	}
+
+	# ---------- FASE 3: el orden conservador ----------
+	# 1841–1843: la grana de los valles
+	else_if = {
+		limit = {
+			game_date >= 1841.6.1
+			NOT = { has_variable = gua_e22_fired }
+		}
+		set_variable = gua_e22_fired
+		trigger_event = { id = ca_guatemala_events.22 popup = yes }
+	}
+	# 11 mar 1844: el Convenio de Guadalupe
+	else_if = {
+		limit = {
+			game_date >= 1844.3.11
+			NOT = { has_variable = gua_e23_fired }
+		}
+		set_variable = gua_e23_fired
+		trigger_event = { id = ca_guatemala_events.23 popup = yes }
+	}
+	# ago 1846: la ley de trabajo
+	else_if = {
+		limit = {
+			game_date >= 1846.8.1
+			NOT = { has_variable = gua_e24_fired }
+		}
+		set_variable = gua_e24_fired
+		trigger_event = { id = ca_guatemala_events.24 popup = yes }
+	}
+	# ene 1847: el estanco del aguardiente y la escasez
+	else_if = {
+		limit = {
+			game_date >= 1847.1.15
+			NOT = { has_variable = gua_e25_fired }
+		}
+		set_variable = gua_e25_fired
+		trigger_event = { id = ca_guatemala_events.25 popup = yes }
+	}
+	# 21 mar 1847: el Decreto 15, la República de Guatemala
+	else_if = {
+		limit = {
+			game_date >= 1847.3.21
+			NOT = { has_variable = gua_e27_fired }
+		}
+		set_variable = gua_e27_fired
+		trigger_event = { id = ca_guatemala_events.27 popup = yes }
+	}
+	# 21 may 1847: San Juan Sacatepéquez
+	else_if = {
+		limit = {
+			game_date >= 1847.5.21
+			NOT = { has_variable = gua_e26_fired }
+		}
+		set_variable = gua_e26_fired
+		trigger_event = { id = ca_guatemala_events.26 popup = yes }
+	}
+
+	# ---------- FASE 4: los Lucíos y el regreso del caudillo ----------
+	# verano de 1847: José Lucio López se levanta en Palencia. Abre el diario.
+	else_if = {
+		limit = {
+			game_date >= 1847.7.1
+			NOT = { has_variable = gua_e28_fired }
+		}
+		set_variable = gua_e28_fired
+		trigger_event = { id = ca_guatemala_events.28 popup = yes }
+	}
+	# oct 1847: el asalto a la hacienda de Palencia
+	else_if = {
+		limit = {
+			game_date >= 1847.10.10
+			has_variable = gua_e28_fired
+			NOT = { has_variable = gua_e29_fired }
+		}
+		set_variable = gua_e29_fired
+		trigger_event = { id = ca_guatemala_events.29 popup = yes }
+	}
+	# feb 1848: San Jerónimo y Santa Catarina Mita
+	else_if = {
+		limit = {
+			game_date >= 1848.2.10
+			has_variable = gua_e29_fired
+			NOT = { has_variable = gua_e30_fired }
+		}
+		set_variable = gua_e30_fired
+		trigger_event = { id = ca_guatemala_events.30 popup = yes }
+	}
+	# 1848: Sotero Carrera y la rebelión de Serapio Cruz
+	else_if = {
+		limit = {
+			game_date >= 1848.5.1
+			has_variable = gua_e30_fired
+			NOT = { has_variable = gua_e31_fired }
+		}
+		set_variable = gua_e31_fired
+		trigger_event = { id = ca_guatemala_events.31 popup = yes }
+	}
+	# ago 1848: la renuncia de Carrera (o antes, con la barra en 50)
+	else_if = {
+		limit = {
+			has_variable = gua_e28_fired
+			NOT = { has_variable = gua_e32_fired }
+			OR = {
+				game_date >= 1848.8.16
+				AND = {
+					has_variable = gua_lucios
+					var:gua_lucios >= ca_gua_lucios_renuncia
+				}
+			}
+		}
+		set_variable = gua_e32_fired
+		trigger_event = { id = ca_guatemala_events.32 popup = yes }
+	}
+	# 26 ago 1848: Los Altos se declara independiente otra vez
+	else_if = {
+		limit = {
+			game_date >= 1848.8.26
+			has_variable = gua_e32_fired
+			NOT = { has_variable = gua_e33_fired }
+		}
+		set_variable = gua_e33_fired
+		trigger_event = { id = ca_guatemala_events.33 popup = yes }
+	}
+	# dic 1848: Vicente Cruz sitia la capital
+	else_if = {
+		limit = {
+			game_date >= 1848.12.5
+			has_variable = gua_e32_fired
+			NOT = { has_variable = gua_e34_fired }
+		}
+		set_variable = gua_e34_fired
+		trigger_event = { id = ca_guatemala_events.34 popup = yes }
+	}
+	# fines de 1848 – 1849: Paredes y el Tratado de Zacapa
+	else_if = {
+		limit = {
+			game_date >= 1849.1.15
+			has_variable = gua_e34_fired
+			NOT = { has_variable = gua_e35_fired }
+		}
+		set_variable = gua_e35_fired
+		trigger_event = { id = ca_guatemala_events.35 popup = yes }
+	}
+	# abr–ago 1849: el regreso de Carrera
+	else_if = {
+		limit = {
+			game_date >= 1849.8.1
+			has_variable = gua_e35_fired
+			NOT = { has_variable = gua_e36_fired }
+		}
+		set_variable = gua_e36_fired
+		trigger_event = { id = ca_guatemala_events.36 popup = yes }
+	}
+	# 2 feb 1851: La Arada
+	else_if = {
+		limit = {
+			game_date >= 1851.2.2
+			has_variable = gua_e28_fired
+			NOT = { has_variable = gua_e37_fired }
+		}
+		set_variable = gua_e37_fired
+		trigger_event = { id = ca_guatemala_events.37 popup = yes }
+	}
+}
+
+# =====================================================================
+# LA MONTAÑA: límites, umbrales y deriva
+# =====================================================================
+ca_gua_montana_clamp = {
+	if = {
+		limit = { var:gua_montana > 100 }
+		set_variable = { name = gua_montana value = 100 }
+	}
+	if = {
+		limit = { var:gua_montana < 0 }
+		set_variable = { name = gua_montana value = 0 }
+	}
+}
+
+ca_gua_montana_thresholds = {
+	# 40: aparece Carrera como general rebelde
+	if = {
+		limit = {
+			var:gua_montana >= ca_gua_montana_carrera
+			NOT = { has_global_variable = cafm_hc_carrera }
+			NOT = { has_variable = gua_carrera_created }
+		}
+		set_variable = gua_carrera_created
+		create_character = { template = gua_rafael_carrera_character_template }
+	}
+	# 80: la Montaña es incontenible
+	if = {
+		limit = {
+			var:gua_montana >= ca_gua_montana_incontenible
+			NOT = { has_modifier = gua_montana_incontenible }
+		}
+		add_modifier = { name = gua_montana_incontenible }
+	}
+	else_if = {
+		limit = {
+			var:gua_montana < ca_gua_montana_incontenible
+			has_modifier = gua_montana_incontenible
+		}
+		remove_modifier = gua_montana_incontenible
+	}
+}
+
+ca_gua_montana_drift = {
+	# --- Sube ---
+	# Los Códigos de Livingston siguen en vigor
+	if = {
+		limit = {
+			has_variable = gua_livingston_vigente
+			NOT = { has_variable = gua_livingston_suspendido }
+		}
+		change_variable = { name = gua_montana add = 2 }
+	}
+	# El cólera recorre el país
+	if = {
+		limit = { has_variable = gua_colera_activo }
+		change_variable = { name = gua_montana add = 2 }
+	}
+	# El campesinado está descontento
+	if = {
+		limit = { ig:ig_rural_folk ?= { ig_approval < 0 } }
+		change_variable = { name = gua_montana add = 1 }
+	}
+	# La Iglesia está fuera del gobierno
+	if = {
+		limit = { ig:ig_devout ?= { is_in_government = no } }
+		change_variable = { name = gua_montana add = 1 }
+	}
+	# Siguen las ventas de tierras comunales
+	if = {
+		limit = {
+			NOT = { has_variable = gua_ejidos_garantizados }
+		}
+		change_variable = { name = gua_montana add = 2 }
+	}
+	# --- Baja ---
+	# Los ejidos están garantizados
+	if = {
+		limit = { has_variable = gua_ejidos_garantizados }
+		change_variable = { name = gua_montana subtract = 2 }
+	}
+	# La Iglesia está en el gobierno
+	if = {
+		limit = { ig:ig_devout ?= { is_in_government = yes } }
+		change_variable = { name = gua_montana subtract = 1 }
+	}
+	# El campesinado está contento
+	if = {
+		limit = { ig:ig_rural_folk ?= { ig_approval > 0 } }
+		change_variable = { name = gua_montana subtract = 2 }
+	}
+	# Los comisionados calman la Montaña (botón)
+	if = {
+		limit = { has_modifier = gua_comisionados_montana }
+		change_variable = { name = gua_montana subtract = 1 }
+	}
+}
+
+# =====================================================================
+# LOS LUCÍOS: límites, umbrales y deriva
+# =====================================================================
+ca_gua_lucios_clamp = {
+	if = {
+		limit = { var:gua_lucios > 100 }
+		set_variable = { name = gua_lucios value = 100 }
+	}
+	if = {
+		limit = { var:gua_lucios < 0 }
+		set_variable = { name = gua_lucios value = 0 }
+	}
+}
+
+ca_gua_lucios_thresholds = {
+	# 90: los Lucíos dominan el oriente
+	if = {
+		limit = {
+			var:gua_lucios >= ca_gua_lucios_sitio
+			NOT = { has_modifier = gua_lucios_dominan }
+		}
+		add_modifier = { name = gua_lucios_dominan }
+	}
+	else_if = {
+		limit = {
+			var:gua_lucios < ca_gua_lucios_sitio
+			has_modifier = gua_lucios_dominan
+		}
+		remove_modifier = gua_lucios_dominan
+	}
+}
+
+ca_gua_lucios_drift = {
+	# --- Sube ---
+	change_variable = { name = gua_lucios add = 1 }
+	# El trabajo forzoso de 1846
+	if = {
+		limit = { has_variable = gua_trabajo_forzoso }
+		change_variable = { name = gua_lucios add = 2 }
+	}
+	# El estanco del aguardiente
+	if = {
+		limit = { has_variable = gua_estanco_aguardiente }
+		change_variable = { name = gua_lucios add = 2 }
+	}
+	# El Salvador los apoya
+	if = {
+		limit = { has_variable = gua_els_hostil }
+		change_variable = { name = gua_lucios add = 1 }
+	}
+	# --- Baja ---
+	# El Tratado de Zacapa
+	if = {
+		limit = { has_variable = gua_tratado_zacapa }
+		change_variable = { name = gua_lucios subtract = 2 }
+	}
+	# Carrera manda el ejército
+	if = {
+		limit = { has_variable = gua_carrera_restituido }
+		change_variable = { name = gua_lucios subtract = 2 }
+	}
+	# El juez de tierras del Convenio de Guadalupe
+	if = {
+		limit = { has_variable = gua_juez_de_tierras }
+		change_variable = { name = gua_lucios subtract = 1 }
+	}
+}
+
+# =====================================================================
+# Ayudas
+# =====================================================================
+# Crea a un personaje de Guatemala una sola vez. Uso:
+# ca_gua_create_once = { KEY = mejia TEMPLATE = gua_teodoro_mejia_character_template }
+ca_gua_create_once = {
+	if = {
+		limit = {
+			NOT = { has_global_variable = cafm_hc_$KEY$ }
+			NOT = { has_variable = gua_created_$KEY$ }
+		}
+		set_variable = gua_created_$KEY$
+		create_character = { template = $TEMPLATE$ }
+	}
+}

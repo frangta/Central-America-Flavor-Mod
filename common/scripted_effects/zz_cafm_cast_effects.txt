@@ -568,7 +568,7 @@ cafm_cast_move = {
 	if = {
 		limit = {
 			NOT = { has_global_variable = cafm_dead_$KEY$ }
-			global_var:cafm_hc_$KEY$ ?= { is_ruler = no }
+			global_var:cafm_hc_$KEY$ ?= { is_ruler_of_any_country = no }
 			NOT = { any_scope_character = { this = global_var:cafm_hc_$KEY$ } }
 			any_country = {
 				is_ai = yes

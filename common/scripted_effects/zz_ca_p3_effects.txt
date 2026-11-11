@@ -155,7 +155,7 @@ ca_debt_front_british = {
 # Gran Bretana lanza la guerra de la deuda. Scope: GBR, con scope:ca_debtor_scope.
 # Objetivo segun la situacion (punto 2):
 #   historico: Honduras (isla del Tigre, Islas de la Bahia) o Nicaragua (San Juan) -> puerto de tratado;
-#              si no, humillacion y reparaciones (cobro de reclamaciones)
+#              si no, humillacion (cobro de reclamaciones; en 1.15 sin reparaciones)
 #   dinamico:  UCA debil -> protectorado; Mosquitia (MKT o la UCA con Nicaragua) o costa caribe -> puerto de tratado;
 #              si no, humillacion y reparaciones
 ca_debt_gbr_launch_war = {
@@ -174,11 +174,7 @@ ca_debt_gbr_launch_war = {
 			type = dp_ca_debt_protectorate
 			target_country = scope:ca_debtor_scope
 			escalation = 60
-			add_war_goal = {
-				holder = scope:ca_debt_gbr_scope
-				type = war_reparations
-				target_country = scope:ca_debtor_scope
-			}
+			# 1.15: war_reparations ya no existe (las reparaciones son un articulo de tratado). El objetivo lo pone el tipo de jugada.
 		}
 	}
 	else_if = {
@@ -244,11 +240,7 @@ ca_debt_gbr_launch_war = {
 			type = dp_ca_debt_gunboat
 			target_country = scope:ca_debtor_scope
 			escalation = 60
-			add_war_goal = {
-				holder = scope:ca_debt_gbr_scope
-				type = war_reparations
-				target_country = scope:ca_debtor_scope
-			}
+			# 1.15: war_reparations ya no existe (las reparaciones son un articulo de tratado). El objetivo lo pone el tipo de jugada.
 		}
 	}
 	scope:ca_debtor_scope = {
@@ -272,10 +264,6 @@ ca_debt_gbr_play_treaty_port = {
 			type = take_treaty_port
 			target_state = scope:ca_debt_target_state
 		}
-		add_war_goal = {
-			holder = scope:ca_debt_gbr_scope
-			type = war_reparations
-			target_country = scope:ca_debtor_scope
-		}
+		# 1.15: war_reparations ya no existe (las reparaciones son un articulo de tratado). El objetivo lo pone el tipo de jugada.
 	}
 }

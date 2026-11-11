@@ -1,0 +1,361 @@
+﻿# =====================================================================
+# CAFM — Los 12 botones de Nicaragua (fase 2), Honduras (fase 2) y la
+# Mosquitia. Cuatro por pais, cada uno atado a su diario, asi que no
+# aparecen todos a la vez.
+# =====================================================================
+
+ca_button_nic_mediar = {
+	name = "ca_button_nic_mediar"
+	desc = "ca_button_nic_mediar_desc"
+
+	visible = {
+		ca_nic_is_nicaragua = yes
+		ca_nic_division_activo = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = nic_mediar_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = nic_mediar_cd days = 365 }
+		add_treasury = -12000
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		custom_tooltip = {
+			text = nic_division_down_10_tt
+			change_variable = { name = nic_division subtract = 10 }
+		}
+	}
+
+	ai_chance = { value = 55 }
+}
+
+ca_button_nic_capital_alterna = {
+	name = "ca_button_nic_capital_alterna"
+	desc = "ca_button_nic_capital_alterna_desc"
+
+	visible = {
+		ca_nic_is_nicaragua = yes
+		ca_nic_division_activo = yes
+		NOT = { has_variable = nic_capital_alterna }
+		NOT = { has_variable = nic_pacto_managua }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = nic_capital_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = nic_capital_cd days = 730 }
+		set_variable = nic_capital_alterna
+		add_authority = -50
+		custom_tooltip = {
+			text = nic_division_down_8_tt
+			change_variable = { name = nic_division subtract = 8 }
+		}
+	}
+
+	ai_chance = { value = 45 }
+}
+
+ca_button_nic_pagar_al_mariscal = {
+	name = "ca_button_nic_pagar_al_mariscal"
+	desc = "ca_button_nic_pagar_al_mariscal_desc"
+
+	visible = {
+		ca_nic_is_nicaragua = yes
+		ca_nic_fonseca_activo = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = nic_fonseca_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = nic_fonseca_cd days = 730 }
+		add_treasury = -20000
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		custom_tooltip = {
+			text = nic_fonseca_down_15_tt
+			change_variable = { name = nic_fonseca subtract = 15 }
+		}
+	}
+
+	ai_chance = { value = 50 }
+}
+
+ca_button_nic_cortejar_companias = {
+	name = "ca_button_nic_cortejar_companias"
+	desc = "ca_button_nic_cortejar_companias_desc"
+
+	visible = {
+		ca_nic_is_nicaragua = yes
+		ca_nic_transito_activo = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = nic_transito_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = nic_transito_cd days = 365 }
+		add_treasury = -8000
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		custom_tooltip = {
+			text = nic_transito_up_10_tt
+			change_variable = { name = nic_transito add = 10 }
+		}
+	}
+
+	ai_chance = { value = 60 }
+}
+
+ca_button_hon_ordenar_hacienda = {
+	name = "ca_button_hon_ordenar_hacienda"
+	desc = "ca_button_hon_ordenar_hacienda_desc"
+
+	visible = {
+		ca_hon_is_honduras = yes
+		ca_hon_republica_activo = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = hon_hacienda_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = hon_hacienda_cd days = 365 }
+		add_treasury = -15000
+		add_modifier = { name = hon_constitucion_vigente months = 60 }
+		custom_tooltip = {
+			text = hon_republica_up_8_tt
+			change_variable = { name = hon_republica add = 8 }
+		}
+	}
+
+	ai_chance = { value = 55 }
+}
+
+ca_button_hon_pactar_con_el_clero = {
+	name = "ca_button_hon_pactar_con_el_clero"
+	desc = "ca_button_hon_pactar_con_el_clero_desc"
+
+	visible = {
+		ca_hon_is_honduras = yes
+		ca_hon_republica_activo = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = hon_clero_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = hon_clero_cd days = 730 }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 48 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		custom_tooltip = {
+			text = hon_republica_up_5_tt
+			change_variable = { name = hon_republica add = 5 }
+		}
+	}
+
+	ai_chance = { value = 50 }
+}
+
+ca_button_hon_guarnecer_trujillo = {
+	name = "ca_button_hon_guarnecer_trujillo"
+	desc = "ca_button_hon_guarnecer_trujillo_desc"
+
+	visible = {
+		ca_hon_is_honduras = yes
+		ca_hon_costa_activo = yes
+		NOT = { has_variable = hon_guarnicion_trujillo }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = hon_trujillo_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = hon_trujillo_cd days = 730 }
+		set_variable = hon_guarnicion_trujillo
+		add_treasury = -20000
+		custom_tooltip = {
+			text = hon_costa_down_10_tt
+			change_variable = { name = hon_costa subtract = 10 }
+		}
+	}
+
+	ai_chance = { value = 50 }
+}
+
+ca_button_hon_protestar_en_londres = {
+	name = "ca_button_hon_protestar_en_londres"
+	desc = "ca_button_hon_protestar_en_londres_desc"
+
+	visible = {
+		ca_hon_is_honduras = yes
+		ca_hon_costa_activo = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = hon_londres_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = hon_londres_cd days = 1095 }
+		set_variable = hon_protesta_en_londres
+		custom_tooltip = {
+			text = hon_costa_down_8_tt
+			change_variable = { name = hon_costa subtract = 8 }
+		}
+	}
+
+	ai_chance = { value = 55 }
+}
+
+ca_button_mkt_pedir_subvencion = {
+	name = "ca_button_mkt_pedir_subvencion"
+	desc = "ca_button_mkt_pedir_subvencion_desc"
+
+	visible = {
+		ca_mkt_is_mosquitia = yes
+		ca_mkt_protectorado_activo = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = mkt_subvencion_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = mkt_subvencion_cd days = 730 }
+		set_variable = mkt_subvencion
+		add_treasury = 15000
+		custom_tooltip = {
+			text = mkt_protectorado_up_10_tt
+			change_variable = { name = mkt_protectorado add = 10 }
+		}
+	}
+
+	ai_chance = { value = 50 }
+}
+
+ca_button_mkt_firmar_con_el_sello = {
+	name = "ca_button_mkt_firmar_con_el_sello"
+	desc = "ca_button_mkt_firmar_con_el_sello_desc"
+
+	visible = {
+		ca_mkt_is_mosquitia = yes
+		ca_mkt_protectorado_activo = yes
+		has_variable = mkt_sello_propio
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = mkt_sello_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = mkt_sello_cd days = 1095 }
+		add_authority = 50
+		custom_tooltip = {
+			text = mkt_protectorado_down_12_tt
+			change_variable = { name = mkt_protectorado subtract = 12 }
+		}
+	}
+
+	ai_chance = { value = 55 }
+}
+
+ca_button_mkt_convocar_consejo = {
+	name = "ca_button_mkt_convocar_consejo"
+	desc = "ca_button_mkt_convocar_consejo_desc"
+
+	visible = {
+		ca_mkt_is_mosquitia = yes
+		ca_mkt_reino_activo = yes
+		has_variable = mkt_consejo_criollo
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = mkt_consejo_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = mkt_consejo_cd days = 365 }
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		custom_tooltip = {
+			text = mkt_reino_up_10_tt
+			change_variable = { name = mkt_reino add = 10 }
+		}
+	}
+
+	ai_chance = { value = 60 }
+}
+
+ca_button_mkt_conceder_cortes = {
+	name = "ca_button_mkt_conceder_cortes"
+	desc = "ca_button_mkt_conceder_cortes_desc"
+
+	visible = {
+		ca_mkt_is_mosquitia = yes
+		ca_mkt_reino_activo = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = mkt_cortes_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = mkt_cortes_cd days = 365 }
+		add_treasury = 10000
+		add_modifier = { name = mkt_licencias_de_caoba months = 60 }
+		custom_tooltip = {
+			text = mkt_reino_up_8_tt
+			change_variable = { name = mkt_reino add = 8 }
+		}
+		custom_tooltip = {
+			text = mkt_protectorado_up_5_tt
+			change_variable = { name = mkt_protectorado add = 5 }
+		}
+	}
+
+	ai_chance = { value = 55 }
+}
+

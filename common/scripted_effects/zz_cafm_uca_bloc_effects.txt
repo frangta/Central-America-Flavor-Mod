@@ -1,0 +1,523 @@
+﻿############################################################################
+# CAFM - Rediseño del diario de la UCA, entrega 1 (10 nov 2026)
+# Efectos: pulso de los bandos, barra F<->C, ideologias de los IG, lucha interna,
+# final "Republica unitaria". Scope: UCA salvo que se diga otra cosa.
+############################################################################
+
+# ===========================================================================
+# Pulso mensual (lo llama el diario je_historic_central_america_falls_apart)
+# ===========================================================================
+ca_bloc_monthly = {
+	ca_bloc_fvc_route_check = yes
+	ca_uca_route_events_monthly = yes # Entrega 2: presentacion, avisos, dominio y derrumbe
+	# Un IG al azar por mes entra en el mecanismo de ideologias.
+	random_list = {
+		1 = { ca_bloc_ig_check = { IG = armed_forces } }
+		1 = { ca_bloc_ig_check = { IG = devout } }
+		1 = { ca_bloc_ig_check = { IG = industrialists } }
+		1 = { ca_bloc_ig_check = { IG = intelligentsia } }
+		1 = { ca_bloc_ig_check = { IG = landowners } }
+		1 = { ca_bloc_ig_check = { IG = petty_bourgeoisie } }
+		1 = { ca_bloc_ig_check = { IG = rural_folk } }
+		1 = { ca_bloc_ig_check = { IG = trade_unions } }
+	}
+}
+
+# Pone la barra en -30 (mi bando algo por delante) al elegir ruta y al cambiarla.
+ca_bloc_fvc_route_check = {
+	if = {
+		limit = {
+			ca_frca_route_centralist = yes
+			OR = {
+				NOT = { has_variable = ca_fvc_route }
+				AND = {
+					has_variable = ca_fvc_route
+					NOT = { var:ca_fvc_route = flag:centralist }
+				}
+			}
+		}
+		je:je_historic_central_america_falls_apart ?= {
+			set_bar_progress = { name = ca_frca_fvc_bar value = ca_fvc_start_centralist }
+		}
+		set_variable = { name = ca_fvc_route value = flag:centralist }
+	}
+	else_if = {
+		limit = {
+			ca_frca_route_federal = yes
+			OR = {
+				NOT = { has_variable = ca_fvc_route }
+				AND = {
+					has_variable = ca_fvc_route
+					NOT = { var:ca_fvc_route = flag:federal }
+				}
+			}
+		}
+		je:je_historic_central_america_falls_apart ?= {
+			set_bar_progress = { name = ca_frca_fvc_bar value = ca_fvc_start_federal }
+		}
+		set_variable = { name = ca_fvc_route value = flag:federal }
+	}
+}
+
+# ===========================================================================
+# Ideologias de los IG. Uso: ca_bloc_ig_check = { IG = armed_forces }
+# Un IG con bando: lo pierde si su bando se derrumba, o abre una lucha si un rival
+# es fuerte y le saca ventaja. Un IG sin bando: se une al bando muy fuerte.
+# ===========================================================================
+ca_bloc_ig_check = {
+	if = {
+		limit = { ca_struggle_ig_ready = { IG = $IG$ } }
+		if = {
+			limit = { ig:ig_$IG$ = { ca_ig_in_bloc_federal = yes } }
+			if = {
+				limit = { ca_bloc_power_federal <= ca_bloc_collapse }
+				ca_bloc_ig_lose = { IG = $IG$ BLOC = federal }
+			}
+			else_if = {
+				limit = {
+					ca_struggle_slot_free = yes
+					ig:ig_$IG$ = { ig_clout >= ca_bloc_struggle_clout_min }
+					ca_bloc_power_centralist >= ca_bloc_struggle_rival_min
+					ca_bloc_gap_centralist_over_federal >= ca_bloc_struggle_gap_min
+					ca_bloc_power_centralist >= ca_bloc_power_separatist
+				}
+				ca_struggle_start = { IG = $IG$ FROM = federal TO = centralist }
+			}
+			else_if = {
+				limit = {
+					ca_struggle_slot_free = yes
+					ig:ig_$IG$ = { ig_clout >= ca_bloc_struggle_clout_min }
+					ca_bloc_power_separatist >= ca_bloc_struggle_rival_min
+					ca_bloc_gap_separatist_over_federal >= ca_bloc_struggle_gap_min
+					ca_bloc_power_separatist > ca_bloc_power_centralist
+				}
+				ca_struggle_start = { IG = $IG$ FROM = federal TO = separatist }
+			}
+		}
+		else_if = {
+			limit = { ig:ig_$IG$ = { ca_ig_in_bloc_centralist = yes } }
+			if = {
+				limit = { ca_bloc_power_centralist <= ca_bloc_collapse }
+				ca_bloc_ig_lose = { IG = $IG$ BLOC = centralist }
+			}
+			else_if = {
+				limit = {
+					ca_struggle_slot_free = yes
+					ig:ig_$IG$ = { ig_clout >= ca_bloc_struggle_clout_min }
+					ca_bloc_power_federal >= ca_bloc_struggle_rival_min
+					ca_bloc_gap_federal_over_centralist >= ca_bloc_struggle_gap_min
+					ca_bloc_power_federal >= ca_bloc_power_separatist
+				}
+				ca_struggle_start = { IG = $IG$ FROM = centralist TO = federal }
+			}
+			else_if = {
+				limit = {
+					ca_struggle_slot_free = yes
+					ig:ig_$IG$ = { ig_clout >= ca_bloc_struggle_clout_min }
+					ca_bloc_power_separatist >= ca_bloc_struggle_rival_min
+					ca_bloc_gap_separatist_over_centralist >= ca_bloc_struggle_gap_min
+					ca_bloc_power_separatist > ca_bloc_power_federal
+				}
+				ca_struggle_start = { IG = $IG$ FROM = centralist TO = separatist }
+			}
+		}
+		else_if = {
+			limit = { ig:ig_$IG$ = { ca_ig_in_bloc_separatist = yes } }
+			if = {
+				limit = { ca_bloc_power_separatist <= ca_bloc_collapse }
+				ca_bloc_ig_lose = { IG = $IG$ BLOC = separatist }
+			}
+			else_if = {
+				limit = {
+					ca_struggle_slot_free = yes
+					ig:ig_$IG$ = { ig_clout >= ca_bloc_struggle_clout_min }
+					ca_bloc_power_federal >= ca_bloc_struggle_rival_min
+					ca_bloc_gap_federal_over_separatist >= ca_bloc_struggle_gap_min
+					ca_bloc_power_federal >= ca_bloc_power_centralist
+				}
+				ca_struggle_start = { IG = $IG$ FROM = separatist TO = federal }
+			}
+			else_if = {
+				limit = {
+					ca_struggle_slot_free = yes
+					ig:ig_$IG$ = { ig_clout >= ca_bloc_struggle_clout_min }
+					ca_bloc_power_centralist >= ca_bloc_struggle_rival_min
+					ca_bloc_gap_centralist_over_separatist >= ca_bloc_struggle_gap_min
+					ca_bloc_power_centralist > ca_bloc_power_federal
+				}
+				ca_struggle_start = { IG = $IG$ FROM = separatist TO = centralist }
+			}
+		}
+		else_if = {
+			limit = { ig:ig_$IG$ = { ig_clout >= ca_bloc_gain_clout_min } }
+			if = {
+				limit = {
+					ca_bloc_power_federal >= ca_bloc_gain_power_min
+					ca_bloc_power_federal >= ca_bloc_power_centralist
+					ca_bloc_power_federal >= ca_bloc_power_separatist
+				}
+				ca_bloc_ig_gain = { IG = $IG$ BLOC = federal }
+			}
+			else_if = {
+				limit = {
+					ca_bloc_power_centralist >= ca_bloc_gain_power_min
+					ca_bloc_power_centralist >= ca_bloc_power_federal
+					ca_bloc_power_centralist >= ca_bloc_power_separatist
+				}
+				ca_bloc_ig_gain = { IG = $IG$ BLOC = centralist }
+			}
+			else_if = {
+				limit = {
+					ca_bloc_power_separatist >= ca_bloc_gain_power_min
+					ca_bloc_power_separatist >= ca_bloc_power_federal
+					ca_bloc_power_separatist >= ca_bloc_power_centralist
+				}
+				ca_bloc_ig_gain = { IG = $IG$ BLOC = separatist }
+			}
+		}
+	}
+}
+
+# Agregar o quitar la ideologia de un bando a un IG (scope: interest_group).
+ca_ig_bloc_add_federal = { add_ideology = ideology_central_american_federal }
+ca_ig_bloc_remove_federal = { remove_ideology = ideology_central_american_federal }
+ca_ig_bloc_add_centralist = { add_ideology = ideology_central_american_reactionary_2 }
+ca_ig_bloc_remove_centralist = { remove_ideology = ideology_central_american_reactionary_2 }
+ca_ig_bloc_add_separatist = { add_ideology = ideology_ca_separatist }
+ca_ig_bloc_remove_separatist = { remove_ideology = ideology_ca_separatist }
+
+# El IG pierde la ideologia de su bando (derrumbe). Uso: ca_bloc_ig_lose = { IG = x BLOC = federal }
+ca_bloc_ig_lose = {
+	ig:ig_$IG$ = { ca_ig_bloc_remove_$BLOC$ = yes }
+	set_variable = { name = ca_struggle_cd_$IG$ days = ca_bloc_struggle_cooldown }
+	set_variable = { name = ca_struggle_ig value = ig:ig_$IG$ }
+	set_variable = { name = ca_struggle_last_from value = flag:$BLOC$ }
+	trigger_event = { id = cafm_ig_struggle.5 popup = yes }
+}
+
+# El IG sin bando se une a uno. Uso: ca_bloc_ig_gain = { IG = x BLOC = federal }
+ca_bloc_ig_gain = {
+	ig:ig_$IG$ = { ca_ig_bloc_add_$BLOC$ = yes }
+	set_variable = { name = ca_struggle_cd_$IG$ days = ca_bloc_struggle_cooldown }
+	set_variable = { name = ca_struggle_ig value = ig:ig_$IG$ }
+	set_variable = { name = ca_struggle_last_to value = flag:$BLOC$ }
+	trigger_event = { id = cafm_ig_struggle.4 popup = yes }
+}
+
+# ===========================================================================
+# Lucha interna
+# ===========================================================================
+
+# Abre la lucha. Uso: ca_struggle_start = { IG = x FROM = federal TO = centralist }
+ca_struggle_start = {
+	set_variable = { name = ca_struggle_$IG$_from value = flag:$FROM$ }
+	set_variable = { name = ca_struggle_$IG$_to value = flag:$TO$ }
+	set_variable = { name = ca_struggle_$IG$_lock days = ca_bloc_struggle_min_days }
+	if = {
+		limit = { NOT = { has_variable = ca_struggle_active } }
+		set_variable = { name = ca_struggle_active value = 0 }
+	}
+	change_variable = { name = ca_struggle_active add = 1 }
+	ca_struggle_compute_gap = { IG = $IG$ }
+	add_journal_entry = { type = je_ca_ig_struggle_$IG$ }
+	set_variable = { name = ca_struggle_ig value = ig:ig_$IG$ }
+	set_variable = { name = ca_struggle_last_from value = flag:$FROM$ }
+	set_variable = { name = ca_struggle_last_to value = flag:$TO$ }
+	trigger_event = { id = cafm_ig_struggle.1 popup = yes }
+}
+
+# Diferencia de poder: bando al que va (TO) menos bando del que viene (FROM).
+ca_struggle_compute_gap = {
+	if = {
+		limit = { var:ca_struggle_$IG$_to = flag:federal }
+		set_variable = { name = ca_struggle_$IG$_gap value = ca_bloc_power_federal }
+	}
+	else_if = {
+		limit = { var:ca_struggle_$IG$_to = flag:centralist }
+		set_variable = { name = ca_struggle_$IG$_gap value = ca_bloc_power_centralist }
+	}
+	else_if = {
+		limit = { var:ca_struggle_$IG$_to = flag:separatist }
+		set_variable = { name = ca_struggle_$IG$_gap value = ca_bloc_power_separatist }
+	}
+	if = {
+		limit = { var:ca_struggle_$IG$_from = flag:federal }
+		change_variable = { name = ca_struggle_$IG$_gap subtract = ca_bloc_power_federal }
+	}
+	else_if = {
+		limit = { var:ca_struggle_$IG$_from = flag:centralist }
+		change_variable = { name = ca_struggle_$IG$_gap subtract = ca_bloc_power_centralist }
+	}
+	else_if = {
+		limit = { var:ca_struggle_$IG$_from = flag:separatist }
+		change_variable = { name = ca_struggle_$IG$_gap subtract = ca_bloc_power_separatist }
+	}
+}
+
+# Pulso de cada diario de lucha: diferencia de poder y lo elegido en el evento de inicio.
+ca_struggle_monthly = {
+	if = {
+		limit = { has_variable = ca_struggle_$IG$_to has_variable = ca_struggle_$IG$_from }
+		ca_struggle_compute_gap = { IG = $IG$ }
+	}
+	if = {
+		limit = { has_variable = ca_struggle_$IG$_support }
+		je:je_ca_ig_struggle_$IG$ ?= { add_progress = { name = ca_ig_struggle_$IG$_bar value = ca_bloc_struggle_option } }
+		remove_variable = ca_struggle_$IG$_support
+	}
+	if = {
+		limit = { has_variable = ca_struggle_$IG$_resist }
+		je:je_ca_ig_struggle_$IG$ ?= { add_progress = { name = ca_ig_struggle_$IG$_bar value = ca_bloc_struggle_option_neg } }
+		remove_variable = ca_struggle_$IG$_resist
+	}
+}
+
+# Opcion del evento de inicio para el IG guardado en scope:ca_struggle_ig.
+# Uso: ca_struggle_choose = { CHOICE = support } (o resist)
+ca_struggle_choose = {
+	if = {
+		limit = { scope:ca_struggle_ig = { is_interest_group_type = ig_armed_forces } }
+		set_variable = ca_struggle_armed_forces_$CHOICE$
+	}
+	else_if = {
+		limit = { scope:ca_struggle_ig = { is_interest_group_type = ig_devout } }
+		set_variable = ca_struggle_devout_$CHOICE$
+	}
+	else_if = {
+		limit = { scope:ca_struggle_ig = { is_interest_group_type = ig_industrialists } }
+		set_variable = ca_struggle_industrialists_$CHOICE$
+	}
+	else_if = {
+		limit = { scope:ca_struggle_ig = { is_interest_group_type = ig_intelligentsia } }
+		set_variable = ca_struggle_intelligentsia_$CHOICE$
+	}
+	else_if = {
+		limit = { scope:ca_struggle_ig = { is_interest_group_type = ig_landowners } }
+		set_variable = ca_struggle_landowners_$CHOICE$
+	}
+	else_if = {
+		limit = { scope:ca_struggle_ig = { is_interest_group_type = ig_petty_bourgeoisie } }
+		set_variable = ca_struggle_petty_bourgeoisie_$CHOICE$
+	}
+	else_if = {
+		limit = { scope:ca_struggle_ig = { is_interest_group_type = ig_rural_folk } }
+		set_variable = ca_struggle_rural_folk_$CHOICE$
+	}
+	else_if = {
+		limit = { scope:ca_struggle_ig = { is_interest_group_type = ig_trade_unions } }
+		set_variable = ca_struggle_trade_unions_$CHOICE$
+	}
+}
+
+# Cambia la ideologia del IG: quita la del bando FROM y pone la del bando TO.
+ca_struggle_apply_change = {
+	if = {
+		limit = { var:ca_struggle_$IG$_from = flag:federal }
+		ig:ig_$IG$ ?= { ca_ig_bloc_remove_federal = yes }
+	}
+	if = {
+		limit = { var:ca_struggle_$IG$_from = flag:centralist }
+		ig:ig_$IG$ ?= { ca_ig_bloc_remove_centralist = yes }
+	}
+	if = {
+		limit = { var:ca_struggle_$IG$_from = flag:separatist }
+		ig:ig_$IG$ ?= { ca_ig_bloc_remove_separatist = yes }
+	}
+	if = {
+		limit = { var:ca_struggle_$IG$_to = flag:federal }
+		ig:ig_$IG$ ?= { ca_ig_bloc_add_federal = yes }
+	}
+	if = {
+		limit = { var:ca_struggle_$IG$_to = flag:centralist }
+		ig:ig_$IG$ ?= { ca_ig_bloc_add_centralist = yes }
+	}
+	if = {
+		limit = { var:ca_struggle_$IG$_to = flag:separatist }
+		ig:ig_$IG$ ?= { ca_ig_bloc_add_separatist = yes }
+	}
+}
+
+# El bando rival pierde la lucha: pierde poder durante un ano.
+ca_struggle_apply_malus = {
+	if = {
+		limit = { var:ca_struggle_$IG$_to = flag:federal }
+		set_variable = { name = ca_bloc_malus_federal days = 365 }
+	}
+	if = {
+		limit = { var:ca_struggle_$IG$_to = flag:centralist }
+		set_variable = { name = ca_bloc_malus_centralist days = 365 }
+	}
+	if = {
+		limit = { var:ca_struggle_$IG$_to = flag:separatist }
+		set_variable = { name = ca_bloc_malus_separatist days = 365 }
+	}
+}
+
+# Guarda el IG y los bandos para el evento final antes de limpiar.
+ca_struggle_save_for_event = {
+	set_variable = { name = ca_struggle_ig value = ig:ig_$IG$ }
+	set_variable = { name = ca_struggle_last_from value = var:ca_struggle_$IG$_from }
+	set_variable = { name = ca_struggle_last_to value = var:ca_struggle_$IG$_to }
+}
+
+# Final: el IG se pasa al bando rival.
+ca_struggle_end_change = {
+	ca_struggle_save_for_event = { IG = $IG$ }
+	ca_struggle_apply_change = { IG = $IG$ }
+	ca_struggle_cleanup = { IG = $IG$ }
+	trigger_event = { id = cafm_ig_struggle.2 popup = yes }
+}
+
+# Final: el IG conserva su bando y el rival pierde poder.
+ca_struggle_end_keep = {
+	ca_struggle_save_for_event = { IG = $IG$ }
+	ca_struggle_apply_malus = { IG = $IG$ }
+	ca_struggle_cleanup = { IG = $IG$ }
+	trigger_event = { id = cafm_ig_struggle.3 popup = yes }
+}
+
+# Final sin cambios (24 meses sin decidirse, o el diario de la UCA ya no existe).
+ca_struggle_end_quiet = {
+	ca_struggle_cleanup = { IG = $IG$ }
+}
+
+ca_struggle_cleanup = {
+	remove_variable = ca_struggle_$IG$_from
+	remove_variable = ca_struggle_$IG$_to
+	remove_variable = ca_struggle_$IG$_gap
+	remove_variable = ca_struggle_$IG$_lock
+	remove_variable = ca_struggle_$IG$_support
+	remove_variable = ca_struggle_$IG$_resist
+	set_variable = { name = ca_struggle_cd_$IG$ days = ca_bloc_struggle_cooldown }
+	if = {
+		limit = { has_variable = ca_struggle_active var:ca_struggle_active > 0 }
+		change_variable = { name = ca_struggle_active subtract = 1 }
+	}
+}
+
+# ===========================================================================
+# Final "Republica unitaria" (ruta centralista). Scope: UCA.
+# ===========================================================================
+ca_frca_outcome_unitary = {
+	set_global_variable = ca_frca_unitary_republic
+	activate_law = law_type:law_ca_central_american_unitary
+	add_modifier = { name = ca_frca_unitary_republic months = 120 }
+	ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 60 } }
+	ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 60 } }
+	ca_frca_six_states_check = yes
+	trigger_event = { id = cafm_uca_route.9 popup = yes } # Entrega 2: cierre de la Republica unitaria
+}
+
+# ===========================================================================
+# Entrega 2: eventos de la ruta (namespace cafm_uca_route). Scope: UCA.
+# Como maximo un evento de esta lista por mes.
+# ===========================================================================
+ca_uca_route_events_monthly = {
+	# Presentacion de la ruta (solo jugador, una vez por ruta, despues del .119)
+	if = {
+		limit = {
+			is_ai = no
+			has_variable = ca_faction_federal
+			NOT = { has_variable = ca_uca_presented_federal }
+		}
+		set_variable = ca_uca_presented_federal
+		trigger_event = { id = cafm_uca_route.1 popup = yes }
+	}
+	else_if = {
+		limit = {
+			is_ai = no
+			has_variable = ca_faction_centralist
+			NOT = { has_variable = ca_uca_presented_centralist }
+		}
+		set_variable = ca_uca_presented_centralist
+		trigger_event = { id = cafm_uca_route.2 popup = yes }
+	}
+	# Avisos de la barra de mi bando (>= +50 = el rival manda; uno cada 5 anos)
+	else_if = {
+		limit = {
+			ca_frca_route_federal = yes
+			NOT = { has_variable = ca_fvc_warning_cd }
+			je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(ca_frca_fvc_bar)" >= 50 }
+		}
+		set_variable = { name = ca_fvc_warning_cd days = 1825 }
+		trigger_event = { id = cafm_uca_route.3 popup = yes }
+	}
+	else_if = {
+		limit = {
+			ca_frca_route_centralist = yes
+			NOT = { has_variable = ca_fvc_warning_cd }
+			je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(ca_frca_fvc_bar)" >= 50 }
+		}
+		set_variable = { name = ca_fvc_warning_cd days = 1825 }
+		trigger_event = { id = cafm_uca_route.4 popup = yes }
+	}
+	else = {
+		ca_uca_bloc_power_events = yes
+	}
+}
+
+# Dominio (>= 60) y derrumbe (<= 15) de los bandos; uno cada 5 anos por bando.
+ca_uca_bloc_power_events = {
+	if = {
+		limit = {
+			ca_bloc_power_federal >= ca_bloc_dominant
+			NOT = { has_variable = ca_bloc_dom_cd_federal }
+		}
+		set_variable = { name = ca_bloc_dom_cd_federal days = 1825 }
+		set_variable = { name = ca_bloc_event_bloc value = flag:federal }
+		trigger_event = { id = cafm_uca_route.7 popup = yes }
+	}
+	else_if = {
+		limit = {
+			ca_bloc_power_centralist >= ca_bloc_dominant
+			NOT = { has_variable = ca_bloc_dom_cd_centralist }
+		}
+		set_variable = { name = ca_bloc_dom_cd_centralist days = 1825 }
+		set_variable = { name = ca_bloc_event_bloc value = flag:centralist }
+		trigger_event = { id = cafm_uca_route.7 popup = yes }
+	}
+	else_if = {
+		limit = {
+			ca_bloc_power_separatist >= ca_bloc_dominant
+			NOT = { has_variable = ca_bloc_dom_cd_separatist }
+		}
+		set_variable = { name = ca_bloc_dom_cd_separatist days = 1825 }
+		set_variable = { name = ca_bloc_event_bloc value = flag:separatist }
+		trigger_event = { id = cafm_uca_route.7 popup = yes }
+	}
+	else_if = {
+		limit = {
+			ca_bloc_power_federal <= ca_bloc_collapse
+			NOT = { has_variable = ca_bloc_col_cd_federal }
+		}
+		set_variable = { name = ca_bloc_col_cd_federal days = 1825 }
+		set_variable = { name = ca_bloc_event_bloc value = flag:federal }
+		trigger_event = { id = cafm_uca_route.8 popup = yes }
+	}
+	else_if = {
+		limit = {
+			ca_bloc_power_centralist <= ca_bloc_collapse
+			NOT = { has_variable = ca_bloc_col_cd_centralist }
+		}
+		set_variable = { name = ca_bloc_col_cd_centralist days = 1825 }
+		set_variable = { name = ca_bloc_event_bloc value = flag:centralist }
+		trigger_event = { id = cafm_uca_route.8 popup = yes }
+	}
+	else_if = {
+		limit = {
+			ca_bloc_power_separatist <= ca_bloc_collapse
+			NOT = { has_variable = ca_bloc_col_cd_separatist }
+		}
+		set_variable = { name = ca_bloc_col_cd_separatist days = 1825 }
+		set_variable = { name = ca_bloc_event_bloc value = flag:separatist }
+		trigger_event = { id = cafm_uca_route.8 popup = yes }
+	}
+}
+
+# Mueve la barra principal o la barra F<->C del diario de la UCA.
+# Uso: ca_uca_bar_add = { BAR = frca_support_bar VALUE = 10 }
+ca_uca_bar_add = {
+	je:je_historic_central_america_falls_apart ?= {
+		add_progress = { name = $BAR$ value = $VALUE$ }
+	}
+}

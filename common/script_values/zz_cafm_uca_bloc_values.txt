@@ -1,0 +1,256 @@
+﻿############################################################################
+# CAFM - Rediseño del diario de la UCA, entrega 1 (10 nov 2026)
+# Constantes y poder de los tres bandos (federalista, centralista, separatista).
+# Scope de todos los valores: UCA. Las cifras se ajustan aqui, despues de probar.
+############################################################################
+
+# ===========================================================================
+# CONSTANTES
+# ===========================================================================
+
+# --- Mini barras de poder (0-100) = IG (40) + movimiento (30) + estados (30) ---
+ca_bloc_weight_igs = 40			# tope de la parte de los grupos de interes
+ca_bloc_weight_mov = 30			# tope de la parte del movimiento
+ca_bloc_weight_states = 30		# tope de la parte de los estados
+ca_bloc_dominant = 60			# el bando domina (evento en la entrega 2)
+ca_bloc_collapse = 15			# el bando se derrumba: sus IG pueden perder la ideologia
+ca_bloc_struggle_malus = 5		# poder que pierde el bando que pierde una lucha interna (1 ano)
+
+# --- Ideologias de los IG y lucha interna ---
+ca_bloc_struggle_rival_min = 55		# poder minimo del bando rival para abrir una lucha
+ca_bloc_struggle_gap_min = 15		# ventaja minima del rival sobre el bando del IG
+ca_bloc_struggle_clout_min = 0.05	# clout minimo del IG (los marginales no cuentan)
+ca_bloc_gain_power_min = 70			# un IG sin bando se une a uno con este poder
+ca_bloc_gain_clout_min = 0.10		# clout minimo para unirse sin lucha
+ca_bloc_struggle_max = 2			# luchas a la vez
+ca_bloc_struggle_cooldown = 730		# dias de espera del mismo IG tras una lucha o un cambio
+ca_bloc_struggle_min_days = 30		# duracion minima de una lucha (1 mes)
+ca_bloc_struggle_option = 20		# lo que mueve la barra "apoyar" o "resistir" en el evento
+ca_bloc_struggle_option_neg = -20
+
+# --- Barra Federalistas <-> Centralistas (-100 centralista ... +100 federal) ---
+ca_fvc_start_federal = -30		# ambas rutas arrancan igual: tu bando algo por delante
+ca_fvc_start_centralist = -30
+ca_fvc_warning = 50				# aviso (eventos en la entrega 2)
+ca_fvc_fail = 100				# extremo: golpe servil (-100) o revolucion liberal (+100)
+ca_fvc_ruler = 1				# gobernante federalista (+) o unitario (-)
+ca_fvc_law_unitary = -1
+ca_fvc_law_federal = 0.25
+ca_fvc_ig_in_government = 0.5	# por cada IG de bando en el gobierno
+ca_fvc_gap_divisor = 40			# (poder federal - poder centralista) / 40
+ca_fvc_congress_dissolved = -0.5
+ca_fvc_concordat = -0.25
+ca_fvc_livingston_repealed = -0.25
+ca_fvc_standing_army = -0.5
+ca_fvc_federal_reserve_army = -0.5	# entrega 2: boton federal, cada mes
+ca_fvc_reserve_army_once = 15		# entrega 2: boton federal, al pulsarlo (empuja hacia el rival)
+ca_fvc_warning_neg = -50			# (sin uso tras el rediseno relativo de la barra)
+
+# --- Final "Republica unitaria" (ruta centralista) ---
+ca_frca_bar_threshold_unitary = 100	# barra principal minima
+ca_bloc_unitary_power_min = 60		# poder centralista minimo
+ca_bloc_federal_a_power_min = 50	# final A: poder federalista minimo
+
+# ===========================================================================
+# PODER DE LOS BANDOS (0-100)
+# ===========================================================================
+
+# --- Federalista ---
+ca_bloc_power_federal_igs = {
+	value = 0
+	every_interest_group = {
+		limit = { has_ideology = ideology:ideology_central_american_federal }
+		add = this.ig_clout
+	}
+	multiply = 100
+	max = ca_bloc_weight_igs
+}
+ca_bloc_power_federal_mov = {
+	value = 0
+	every_political_movement = {
+		limit = { is_political_movement_type = movement_ca_federalist }
+		add = this.political_movement_support
+	}
+	multiply = 100
+	max = ca_bloc_weight_mov
+}
+ca_bloc_power_federal_states = {
+	value = ca_core_states_loyal_count
+	multiply = 6
+	max = ca_bloc_weight_states
+}
+ca_bloc_power_federal = {
+	value = ca_bloc_power_federal_igs
+	add = ca_bloc_power_federal_mov
+	add = ca_bloc_power_federal_states
+	if = {
+		limit = { has_variable = ca_bloc_malus_federal }
+		subtract = ca_bloc_struggle_malus
+	}
+	min = 0
+	max = 100
+}
+
+# --- Centralista ---
+ca_bloc_power_centralist_igs = {
+	value = 0
+	every_interest_group = {
+		limit = { has_ideology = ideology:ideology_central_american_reactionary_2 }
+		add = this.ig_clout
+	}
+	multiply = 100
+	max = ca_bloc_weight_igs
+}
+ca_bloc_power_centralist_mov = {
+	value = 0
+	every_political_movement = {
+		limit = { is_political_movement_type = movement_ca_unitarian }
+		add = this.political_movement_support
+	}
+	multiply = 100
+	max = ca_bloc_weight_mov
+}
+# Ley unitaria 10, estado de sitio 5, intendentes 3 c/u, reformas centralistas 4 c/u.
+ca_bloc_power_centralist_states = {
+	value = 0
+	if = { limit = { has_law_or_variant = law_type:law_ca_central_american_unitary } add = 10 }
+	if = { limit = { has_modifier = ca_state_of_siege } add = 5 }
+	if = { limit = { has_variable = frca_intendant_cd_gua } add = 3 }
+	if = { limit = { has_variable = frca_intendant_cd_els } add = 3 }
+	if = { limit = { has_variable = frca_intendant_cd_hon } add = 3 }
+	if = { limit = { has_variable = frca_intendant_cd_nic } add = 3 }
+	if = { limit = { has_variable = frca_intendant_cd_cos } add = 3 }
+	if = { limit = { has_variable = frca_congress_dissolved } add = 4 }
+	if = { limit = { has_variable = frca_capital_guatemala } add = 4 }
+	if = { limit = { has_variable = frca_standing_army } add = 4 }
+	max = ca_bloc_weight_states
+}
+ca_bloc_power_centralist = {
+	value = ca_bloc_power_centralist_igs
+	add = ca_bloc_power_centralist_mov
+	add = ca_bloc_power_centralist_states
+	if = {
+		limit = { has_variable = ca_bloc_malus_centralist }
+		subtract = ca_bloc_struggle_malus
+	}
+	min = 0
+	max = 100
+}
+
+# --- Separatista ---
+ca_bloc_power_separatist_igs = {
+	value = 0
+	every_interest_group = {
+		limit = { has_ideology = ideology:ideology_ca_separatist }
+		add = this.ig_clout
+	}
+	multiply = 100
+	max = ca_bloc_weight_igs
+}
+ca_bloc_power_separatist_mov = {
+	value = 0
+	every_political_movement = {
+		limit = {
+			OR = {
+				is_political_movement_type = movement_ca_guatemala_national
+				is_political_movement_type = movement_ca_elsalvador_national
+				is_political_movement_type = movement_ca_honduras_national
+				is_political_movement_type = movement_ca_nicaragua_national
+				is_political_movement_type = movement_ca_costarica_national
+				is_political_movement_type = movement_ca_los_altos_national
+				is_political_movement_type = movement_ca_chiapas_national
+				is_political_movement_type = movement_ca_panama_national
+			}
+		}
+		add = this.political_movement_support
+	}
+	multiply = 100
+	max = ca_bloc_weight_mov
+}
+# Rebeldes 4 c/u, separados 6 c/u.
+ca_bloc_power_separatist_states = {
+	value = ca_core_states_rebel_count
+	multiply = 4
+	add = {
+		value = ca_core_states_separated_count
+		multiply = 6
+	}
+	max = ca_bloc_weight_states
+}
+ca_bloc_power_separatist = {
+	value = ca_bloc_power_separatist_igs
+	add = ca_bloc_power_separatist_mov
+	add = ca_bloc_power_separatist_states
+	if = {
+		limit = { has_variable = ca_bloc_malus_separatist }
+		subtract = ca_bloc_struggle_malus
+	}
+	min = 0
+	max = 100
+}
+
+# --- Diferencias entre bandos (para los triggers de lucha) ---
+ca_bloc_gap_centralist_over_federal = { value = ca_bloc_power_centralist subtract = ca_bloc_power_federal }
+ca_bloc_gap_separatist_over_federal = { value = ca_bloc_power_separatist subtract = ca_bloc_power_federal }
+ca_bloc_gap_federal_over_centralist = { value = ca_bloc_power_federal subtract = ca_bloc_power_centralist }
+ca_bloc_gap_separatist_over_centralist = { value = ca_bloc_power_separatist subtract = ca_bloc_power_centralist }
+ca_bloc_gap_federal_over_separatist = { value = ca_bloc_power_federal subtract = ca_bloc_power_separatist }
+ca_bloc_gap_centralist_over_separatist = { value = ca_bloc_power_centralist subtract = ca_bloc_power_separatist }
+
+# --- Barra F<->C: cuantos IG de cada bando hay en el gobierno ---
+ca_fvc_federal_igs_in_government = {
+	value = 0
+	every_interest_group = {
+		limit = {
+			is_in_government = yes
+			has_ideology = ideology:ideology_central_american_federal
+		}
+		add = ca_fvc_ig_in_government
+	}
+}
+ca_fvc_centralist_igs_in_government = {
+	value = 0
+	every_interest_group = {
+		limit = {
+			is_in_government = yes
+			has_ideology = ideology:ideology_central_american_reactionary_2
+		}
+		subtract = ca_fvc_ig_in_government
+	}
+}
+ca_fvc_power_gap = {
+	value = ca_bloc_gap_federal_over_centralist
+	divide = ca_fvc_gap_divisor
+}
+
+# ---------------------------------------------------------------------------
+# Signo de la barra segun la ruta. La barra es RELATIVA AL JUGADOR:
+#   negativo = mi bando gana (polo izquierdo)   positivo = el rival gana (derecho)
+# En la ruta centralista los factores ya estan escritos con ese signo, asi que
+# vale +1; en la federal hay que invertirlos todos.
+# ---------------------------------------------------------------------------
+ca_fvc_sign = {
+	value = 1
+	if = {
+		limit = { ca_frca_route_federal = yes }
+		multiply = -1
+	}
+}
+
+ca_fvc_sign_neg = {
+	value = ca_fvc_sign
+	multiply = -1
+}
+
+# ---------------------------------------------------------------------------
+# Desplazamientos de la barra con el signo de la ruta ya aplicado.
+#   _c = el hecho favorece a los CENTRALISTAS   _f = favorece a los FEDERALISTAS
+# El resultado es negativo si favorece a MI bando y positivo si favorece al rival,
+# sea cual sea la ruta. Los usan los eventos de cafm_uca_route_events.txt.
+# ---------------------------------------------------------------------------
+ca_fvc_shift_c5  = { value = -5  multiply = ca_fvc_sign }
+ca_fvc_shift_c10 = { value = -10 multiply = ca_fvc_sign }
+ca_fvc_shift_c15 = { value = -15 multiply = ca_fvc_sign }
+ca_fvc_shift_f5  = { value = 5   multiply = ca_fvc_sign }
+ca_fvc_shift_f10 = { value = 10  multiply = ca_fvc_sign }
+ca_fvc_shift_f15 = { value = 15  multiply = ca_fvc_sign }

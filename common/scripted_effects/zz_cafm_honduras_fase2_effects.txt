@@ -1,0 +1,378 @@
+﻿# =====================================================================
+# CAFM — HONDURAS — FASE 2 (1838-1852): efectos.
+# =====================================================================
+
+# Crea un personaje una sola vez (registro global anti-duplicados).
+ca_hon_create_once = {
+	if = {
+		limit = { NOT = { has_global_variable = $KEY$ } }
+		create_character = { template = $TEMPLATE$ }
+	}
+}
+
+# Arranques.
+ca_hon_f2_start = {
+	set_variable = hon_f2_started
+	set_variable = { name = hon_republica value = ca_hon_republica_inicio }
+	add_journal_entry = { type = je_ca_hon_republica }
+}
+
+ca_hon_costa_start = {
+	set_variable = { name = hon_costa value = ca_hon_costa_inicio }
+	add_journal_entry = { type = je_ca_hon_costa }
+}
+
+ca_hon_beats = {
+	# Un solo evento por mes, en orden de fecha.
+	if = {
+		limit = {
+			NOT = { has_variable = hon_f2_started }
+			game_date >= 1838.10.1
+		}
+		ca_hon_f2_start = yes
+	}
+
+	# La cadena con fecha solo corre cuando la cadena ya arranco.
+	if = {
+		limit = { has_variable = hon_f2_started }
+
+		if = {
+			limit = {
+				NOT = { has_variable = hon_e43_fired }
+				game_date >= 1838.10.26
+			}
+			set_variable = hon_e43_fired
+			trigger_event = { id = ca_honduras_events.43 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e44_fired }
+				game_date >= 1839.9.21
+			}
+			set_variable = hon_e44_fired
+			trigger_event = { id = ca_honduras_events.44 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e45_fired }
+				game_date >= 1839.9.25
+			}
+			set_variable = hon_e45_fired
+			trigger_event = { id = ca_honduras_events.45 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e46_fired }
+				game_date >= 1839.11.13
+			}
+			set_variable = hon_e46_fired
+			trigger_event = { id = ca_honduras_events.46 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e47_fired }
+				game_date >= 1839.12.11
+			}
+			set_variable = hon_e47_fired
+			trigger_event = { id = ca_honduras_events.47 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e48_fired }
+				game_date >= 1841.1.1
+			}
+			set_variable = hon_e48_fired
+			trigger_event = { id = ca_honduras_events.48 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e69_fired }
+				game_date >= 1841.4.1
+			}
+			set_variable = hon_e69_fired
+			ca_hon_costa_start = yes
+			trigger_event = { id = ca_honduras_events.69 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e49_fired }
+				game_date >= 1841.6.1
+			}
+			set_variable = hon_e49_fired
+			trigger_event = { id = ca_honduras_events.49 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e50_fired }
+				game_date >= 1841.8.1
+			}
+			set_variable = hon_e50_fired
+			trigger_event = { id = ca_honduras_events.50 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e51_fired }
+				game_date >= 1841.10.1
+			}
+			set_variable = hon_e51_fired
+			trigger_event = { id = ca_honduras_events.51 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e52_fired }
+				game_date >= 1841.12.1
+			}
+			set_variable = hon_e52_fired
+			trigger_event = { id = ca_honduras_events.52 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e53_fired }
+				game_date >= 1843.6.1
+			}
+			set_variable = hon_e53_fired
+			trigger_event = { id = ca_honduras_events.53 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e54_fired }
+				game_date >= 1843.11.1
+			}
+			set_variable = hon_e54_fired
+			trigger_event = { id = ca_honduras_events.54 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e55_fired }
+				game_date >= 1844.12.31
+			}
+			set_variable = hon_e55_fired
+			trigger_event = { id = ca_honduras_events.55 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e56_fired }
+				game_date >= 1845.1.8
+			}
+			set_variable = hon_e56_fired
+			trigger_event = { id = ca_honduras_events.56 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e57_fired }
+				game_date >= 1847.2.12
+			}
+			set_variable = hon_e57_fired
+			trigger_event = { id = ca_honduras_events.57 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e58_fired }
+				game_date >= 1847.5.1
+			}
+			set_variable = hon_e58_fired
+			trigger_event = { id = ca_honduras_events.58 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e59_fired }
+				game_date >= 1847.8.1
+			}
+			set_variable = hon_e59_fired
+			trigger_event = { id = ca_honduras_events.59 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e60_fired }
+				game_date >= 1848.2.4
+			}
+			set_variable = hon_e60_fired
+			trigger_event = { id = ca_honduras_events.60 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e61_fired }
+				game_date >= 1849.10.1
+			}
+			set_variable = hon_e61_fired
+			trigger_event = { id = ca_honduras_events.61 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e62_fired }
+				game_date >= 1849.10.16
+			}
+			set_variable = hon_e62_fired
+			trigger_event = { id = ca_honduras_events.62 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e63_fired }
+				game_date >= 1849.11.1
+			}
+			set_variable = hon_e63_fired
+			trigger_event = { id = ca_honduras_events.63 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e64_fired }
+				game_date >= 1849.12.26
+			}
+			set_variable = hon_e64_fired
+			trigger_event = { id = ca_honduras_events.64 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e65_fired }
+				game_date >= 1850.1.1
+			}
+			set_variable = hon_e65_fired
+			trigger_event = { id = ca_honduras_events.65 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e66_fired }
+				game_date >= 1850.4.19
+			}
+			set_variable = hon_e66_fired
+			trigger_event = { id = ca_honduras_events.66 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e67_fired }
+				game_date >= 1850.6.1
+			}
+			set_variable = hon_e67_fired
+			trigger_event = { id = ca_honduras_events.67 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = hon_e68_fired }
+				game_date >= 1851.1.4
+			}
+			set_variable = hon_e68_fired
+			trigger_event = { id = ca_honduras_events.68 popup = yes }
+		}
+	}
+}
+
+ca_hon_republica_clamp = {
+	if = {
+		limit = { var:hon_republica > 100 }
+		set_variable = { name = hon_republica value = 100 }
+	}
+	if = {
+		limit = { var:hon_republica < 0 }
+		set_variable = { name = hon_republica value = 0 }
+	}
+}
+
+ca_hon_republica_thresholds = {
+	if = {
+		limit = {
+			NOT = { has_variable = hon_rep_nacion_fired }
+			var:hon_republica >= ca_hon_republica_nacion
+		}
+		set_variable = hon_rep_nacion_fired
+		add_modifier = { name = hon_estado_en_pie months = 240 }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = hon_rep_estado_fired }
+			var:hon_republica >= ca_hon_republica_estado
+		}
+		set_variable = hon_rep_estado_fired
+		add_modifier = { name = hon_constitucion_vigente months = 180 }
+	}
+}
+
+ca_hon_republica_drift = {
+	# La Iglesia en paz con el Estado.
+	if = {
+		limit = { ig:ig_devout ?= { ig_approval > 0 } }
+		change_variable = { name = hon_republica add = 1 }
+	}
+	# Los letrados en paz con el Estado.
+	if = {
+		limit = { ig:ig_intelligentsia ?= { ig_approval > 0 } }
+		change_variable = { name = hon_republica add = 1 }
+	}
+	# Gobierno civil tras Pespire.
+	if = {
+		limit = { has_variable = hon_pespire }
+		change_variable = { name = hon_republica add = 2 }
+	}
+	# La guerra se come la hacienda.
+	if = {
+		limit = { is_at_war = yes }
+		change_variable = { name = hon_republica subtract = 2 }
+	}
+	# El ejercito descontento.
+	if = {
+		limit = { ig:ig_armed_forces ?= { ig_approval < 0 } }
+		change_variable = { name = hon_republica subtract = 1 }
+	}
+}
+
+ca_hon_costa_clamp = {
+	if = {
+		limit = { var:hon_costa > 100 }
+		set_variable = { name = hon_costa value = 100 }
+	}
+	if = {
+		limit = { var:hon_costa < 0 }
+		set_variable = { name = hon_costa value = 0 }
+	}
+}
+
+ca_hon_costa_thresholds = {
+	if = {
+		limit = {
+			NOT = { has_variable = hon_cos_perdida_fired }
+			var:hon_costa >= ca_hon_costa_perdida
+		}
+		set_variable = hon_cos_perdida_fired
+		add_modifier = { name = hon_costa_sin_aduana months = 240 }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = hon_cos_ocupacion_fired }
+			var:hon_costa >= ca_hon_costa_ocupacion
+		}
+		set_variable = hon_cos_ocupacion_fired
+		add_modifier = { name = hon_puerto_ocupado months = 120 }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = hon_cos_presion_fired }
+			var:hon_costa >= ca_hon_costa_presion
+		}
+		set_variable = hon_cos_presion_fired
+	}
+}
+
+ca_hon_costa_drift = {
+	# Los cortes de Belice avanzan sin permiso de nadie.
+	change_variable = { name = hon_costa add = 1 }
+	# El reino misquito reclama la costa.
+	if = {
+		limit = { exists = c:MKT }
+		change_variable = { name = hon_costa add = 1 }
+	}
+	# La protesta diplomatica surte algun efecto.
+	if = {
+		limit = { has_variable = hon_protesta_en_londres }
+		change_variable = { name = hon_costa subtract = 2 }
+	}
+	# Hay guarnicion en Trujillo.
+	if = {
+		limit = { has_variable = hon_guarnicion_trujillo }
+		change_variable = { name = hon_costa subtract = 2 }
+	}
+	# Clayton-Bulwer ata las manos de Londres.
+	if = {
+		limit = { has_variable = hon_clayton_bulwer }
+		change_variable = { name = hon_costa subtract = 3 }
+	}
+}
+

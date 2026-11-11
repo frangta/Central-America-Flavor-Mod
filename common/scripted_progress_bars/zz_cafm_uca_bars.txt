@@ -1,0 +1,484 @@
+﻿############################################################################
+# CAFM - Rediseño del diario de la UCA, entrega 1 (10 nov 2026)
+# Barra Federalistas <-> Centralistas y barras de lucha interna de los IG.
+# Scope de monthly_progress: la UCA (dueno del diario).
+############################################################################
+
+# BARRA RELATIVA AL JUGADOR (rediseno del 10 nov 2026):
+#   -100 = mi bando domina el gobierno federal   +100 = el bando rival domina
+# El polo izquierdo es SIEMPRE mi bando, asi que las etiquetas se intercambian
+# con la ruta y los factores se multiplican por ca_fvc_sign.
+# Fracaso en las dos rutas = +100: golpe servil (ruta federal) o revolucion
+# liberal (ruta centralista). Arranca en -30 (ca_bloc_fvc_route_check).
+ca_frca_fvc_bar = {
+	name = "ca_frca_fvc_bar_name"
+	# Polo izquierdo = MI bando; polo derecho = el rival. Cambian con la ruta.
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ca_frca_fvc_bar_mine_centralist
+				trigger = { ca_frca_route_centralist = yes }
+			}
+			triggered_desc = {
+				desc = ca_frca_fvc_bar_mine_federal
+				trigger = { always = yes }
+			}
+		}
+	}
+	second_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ca_frca_fvc_bar_rival_federal
+				trigger = { ca_frca_route_centralist = yes }
+			}
+			triggered_desc = {
+				desc = ca_frca_fvc_bar_rival_centralist
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	progress_texture = "gfx/interface/progressbar/progressbar_default.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_bad.dds"
+	marker = yes
+	# Sin iconos fijos: el polo izquierdo cambia de bando segun la ruta y un icono
+	# fijo quedaria al lado de la etiqueta equivocada.
+
+	monthly_progress = {
+		# Gobernante
+		progress_condition = {
+			limit = { ruler ?= { has_ideology = ideology:ideology_ca_federalist } }
+			add = { value = ca_fvc_ruler multiply = ca_fvc_sign desc = "CA_FVC_RULER_FEDERAL" }
+			else = {
+				limit = { ruler ?= { has_ideology = ideology:ideology_ca_unitarian } }
+				add = { value = ca_fvc_ruler multiply = ca_fvc_sign_neg desc = "CA_FVC_RULER_UNITARIAN" }
+			}
+		}
+		# Ley de estructura de la Union
+		progress_condition = {
+			limit = { has_law_or_variant = law_type:law_ca_central_american_unitary }
+			add = { value = ca_fvc_law_unitary multiply = ca_fvc_sign desc = "CA_FVC_LAW_UNITARY" }
+			else = {
+				limit = { has_law_or_variant = law_type:law_ca_central_american_federal }
+				add = { value = ca_fvc_law_federal multiply = ca_fvc_sign desc = "CA_FVC_LAW_FEDERAL" }
+			}
+		}
+		# IG de cada bando en el gobierno
+		progress_condition = {
+			limit = { ca_fvc_federal_igs_in_government > 0 }
+			add = { value = ca_fvc_federal_igs_in_government multiply = ca_fvc_sign desc = "CA_FVC_FEDERAL_IGS" }
+		}
+		progress_condition = {
+			limit = { ca_fvc_centralist_igs_in_government < 0 }
+			add = { value = ca_fvc_centralist_igs_in_government multiply = ca_fvc_sign desc = "CA_FVC_CENTRALIST_IGS" }
+		}
+		# Poder de los bandos
+		progress_condition = {
+			limit = { ca_bloc_power_federal > ca_bloc_power_centralist }
+			add = { value = ca_fvc_power_gap multiply = ca_fvc_sign desc = "CA_FVC_POWER_FEDERAL" }
+			else = {
+				limit = { ca_bloc_power_centralist > ca_bloc_power_federal }
+				add = { value = ca_fvc_power_gap multiply = ca_fvc_sign desc = "CA_FVC_POWER_CENTRALIST" }
+			}
+		}
+		# Reformas centralistas
+		progress_condition = {
+			limit = { has_variable = frca_congress_dissolved }
+			add = { value = ca_fvc_congress_dissolved multiply = ca_fvc_sign desc = "CA_FVC_CONGRESS_DISSOLVED" }
+		}
+		progress_condition = {
+			limit = { has_variable = frca_concordat }
+			add = { value = ca_fvc_concordat multiply = ca_fvc_sign desc = "CA_FVC_CONCORDAT" }
+		}
+		progress_condition = {
+			limit = { has_variable = frca_livingston_repealed }
+			add = { value = ca_fvc_livingston_repealed multiply = ca_fvc_sign desc = "CA_FVC_LIVINGSTON_REPEALED" }
+		}
+		progress_condition = {
+			limit = { has_variable = frca_standing_army }
+			add = { value = ca_fvc_standing_army multiply = ca_fvc_sign desc = "CA_FVC_STANDING_ARMY" }
+		}
+		# Entrega 2: ruta federal
+		progress_condition = {
+			limit = { has_variable = frca_federal_reserve_army }
+			add = { value = ca_fvc_federal_reserve_army multiply = ca_fvc_sign desc = "CA_FVC_FEDERAL_RESERVE_ARMY" }
+		}
+	}
+
+	start_value = 0
+	min_value = -100
+	max_value = 100
+}
+
+# ===========================================================================
+# Lucha interna de un IG (una barra por tipo de IG; je_ca_ig_struggle_<ig>)
+# 0 = el IG conserva su bando; 100 = el IG se pasa al bando rival. Arranca en 50.
+# ===========================================================================
+ca_ig_struggle_armed_forces_bar = {
+	name = "ca_ig_struggle_bar_name"
+	desc = "ca_ig_struggle_bar_desc"
+	second_desc = "ca_ig_struggle_bar_desc2"
+
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_default.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+	marker = yes
+
+	monthly_progress = {
+		# Diferencia de poder entre el bando rival y el del IG (se calcula en el pulso del diario)
+		progress_condition = {
+			limit = { has_variable = ca_struggle_armed_forces_gap var:ca_struggle_armed_forces_gap > 0 }
+			add = { value = var:ca_struggle_armed_forces_gap divide = 10 max = 3 desc = "CA_STRUGGLE_POWER_TO" }
+			else = {
+				limit = { has_variable = ca_struggle_armed_forces_gap var:ca_struggle_armed_forces_gap < 0 }
+				add = { value = var:ca_struggle_armed_forces_gap divide = 10 min = -3 desc = "CA_STRUGGLE_POWER_FROM" }
+			}
+		}
+		# Aprobacion del IG
+		progress_condition = {
+			limit = { ig:ig_armed_forces ?= { ig_approval <= -5 } }
+			add = { value = 1 desc = "CA_STRUGGLE_IG_ANGRY" }
+			else = {
+				limit = { ig:ig_armed_forces ?= { ig_approval >= 5 } }
+				add = { value = -1 desc = "CA_STRUGGLE_IG_HAPPY" }
+			}
+		}
+		# Ideologia del lider del IG
+		progress_condition = {
+			limit = { ca_struggle_leader_backs_to = { IG = armed_forces } }
+			add = { value = 1 desc = "CA_STRUGGLE_LEADER_TO" }
+			else = {
+				limit = { ca_struggle_leader_backs_from = { IG = armed_forces } }
+				add = { value = -1 desc = "CA_STRUGGLE_LEADER_FROM" }
+			}
+		}
+	}
+
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+
+ca_ig_struggle_devout_bar = {
+	name = "ca_ig_struggle_bar_name"
+	desc = "ca_ig_struggle_bar_desc"
+	second_desc = "ca_ig_struggle_bar_desc2"
+
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_default.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+	marker = yes
+
+	monthly_progress = {
+		# Diferencia de poder entre el bando rival y el del IG (se calcula en el pulso del diario)
+		progress_condition = {
+			limit = { has_variable = ca_struggle_devout_gap var:ca_struggle_devout_gap > 0 }
+			add = { value = var:ca_struggle_devout_gap divide = 10 max = 3 desc = "CA_STRUGGLE_POWER_TO" }
+			else = {
+				limit = { has_variable = ca_struggle_devout_gap var:ca_struggle_devout_gap < 0 }
+				add = { value = var:ca_struggle_devout_gap divide = 10 min = -3 desc = "CA_STRUGGLE_POWER_FROM" }
+			}
+		}
+		# Aprobacion del IG
+		progress_condition = {
+			limit = { ig:ig_devout ?= { ig_approval <= -5 } }
+			add = { value = 1 desc = "CA_STRUGGLE_IG_ANGRY" }
+			else = {
+				limit = { ig:ig_devout ?= { ig_approval >= 5 } }
+				add = { value = -1 desc = "CA_STRUGGLE_IG_HAPPY" }
+			}
+		}
+		# Ideologia del lider del IG
+		progress_condition = {
+			limit = { ca_struggle_leader_backs_to = { IG = devout } }
+			add = { value = 1 desc = "CA_STRUGGLE_LEADER_TO" }
+			else = {
+				limit = { ca_struggle_leader_backs_from = { IG = devout } }
+				add = { value = -1 desc = "CA_STRUGGLE_LEADER_FROM" }
+			}
+		}
+	}
+
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+
+ca_ig_struggle_industrialists_bar = {
+	name = "ca_ig_struggle_bar_name"
+	desc = "ca_ig_struggle_bar_desc"
+	second_desc = "ca_ig_struggle_bar_desc2"
+
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_default.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+	marker = yes
+
+	monthly_progress = {
+		# Diferencia de poder entre el bando rival y el del IG (se calcula en el pulso del diario)
+		progress_condition = {
+			limit = { has_variable = ca_struggle_industrialists_gap var:ca_struggle_industrialists_gap > 0 }
+			add = { value = var:ca_struggle_industrialists_gap divide = 10 max = 3 desc = "CA_STRUGGLE_POWER_TO" }
+			else = {
+				limit = { has_variable = ca_struggle_industrialists_gap var:ca_struggle_industrialists_gap < 0 }
+				add = { value = var:ca_struggle_industrialists_gap divide = 10 min = -3 desc = "CA_STRUGGLE_POWER_FROM" }
+			}
+		}
+		# Aprobacion del IG
+		progress_condition = {
+			limit = { ig:ig_industrialists ?= { ig_approval <= -5 } }
+			add = { value = 1 desc = "CA_STRUGGLE_IG_ANGRY" }
+			else = {
+				limit = { ig:ig_industrialists ?= { ig_approval >= 5 } }
+				add = { value = -1 desc = "CA_STRUGGLE_IG_HAPPY" }
+			}
+		}
+		# Ideologia del lider del IG
+		progress_condition = {
+			limit = { ca_struggle_leader_backs_to = { IG = industrialists } }
+			add = { value = 1 desc = "CA_STRUGGLE_LEADER_TO" }
+			else = {
+				limit = { ca_struggle_leader_backs_from = { IG = industrialists } }
+				add = { value = -1 desc = "CA_STRUGGLE_LEADER_FROM" }
+			}
+		}
+	}
+
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+
+ca_ig_struggle_intelligentsia_bar = {
+	name = "ca_ig_struggle_bar_name"
+	desc = "ca_ig_struggle_bar_desc"
+	second_desc = "ca_ig_struggle_bar_desc2"
+
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_default.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+	marker = yes
+
+	monthly_progress = {
+		# Diferencia de poder entre el bando rival y el del IG (se calcula en el pulso del diario)
+		progress_condition = {
+			limit = { has_variable = ca_struggle_intelligentsia_gap var:ca_struggle_intelligentsia_gap > 0 }
+			add = { value = var:ca_struggle_intelligentsia_gap divide = 10 max = 3 desc = "CA_STRUGGLE_POWER_TO" }
+			else = {
+				limit = { has_variable = ca_struggle_intelligentsia_gap var:ca_struggle_intelligentsia_gap < 0 }
+				add = { value = var:ca_struggle_intelligentsia_gap divide = 10 min = -3 desc = "CA_STRUGGLE_POWER_FROM" }
+			}
+		}
+		# Aprobacion del IG
+		progress_condition = {
+			limit = { ig:ig_intelligentsia ?= { ig_approval <= -5 } }
+			add = { value = 1 desc = "CA_STRUGGLE_IG_ANGRY" }
+			else = {
+				limit = { ig:ig_intelligentsia ?= { ig_approval >= 5 } }
+				add = { value = -1 desc = "CA_STRUGGLE_IG_HAPPY" }
+			}
+		}
+		# Ideologia del lider del IG
+		progress_condition = {
+			limit = { ca_struggle_leader_backs_to = { IG = intelligentsia } }
+			add = { value = 1 desc = "CA_STRUGGLE_LEADER_TO" }
+			else = {
+				limit = { ca_struggle_leader_backs_from = { IG = intelligentsia } }
+				add = { value = -1 desc = "CA_STRUGGLE_LEADER_FROM" }
+			}
+		}
+	}
+
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+
+ca_ig_struggle_landowners_bar = {
+	name = "ca_ig_struggle_bar_name"
+	desc = "ca_ig_struggle_bar_desc"
+	second_desc = "ca_ig_struggle_bar_desc2"
+
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_default.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+	marker = yes
+
+	monthly_progress = {
+		# Diferencia de poder entre el bando rival y el del IG (se calcula en el pulso del diario)
+		progress_condition = {
+			limit = { has_variable = ca_struggle_landowners_gap var:ca_struggle_landowners_gap > 0 }
+			add = { value = var:ca_struggle_landowners_gap divide = 10 max = 3 desc = "CA_STRUGGLE_POWER_TO" }
+			else = {
+				limit = { has_variable = ca_struggle_landowners_gap var:ca_struggle_landowners_gap < 0 }
+				add = { value = var:ca_struggle_landowners_gap divide = 10 min = -3 desc = "CA_STRUGGLE_POWER_FROM" }
+			}
+		}
+		# Aprobacion del IG
+		progress_condition = {
+			limit = { ig:ig_landowners ?= { ig_approval <= -5 } }
+			add = { value = 1 desc = "CA_STRUGGLE_IG_ANGRY" }
+			else = {
+				limit = { ig:ig_landowners ?= { ig_approval >= 5 } }
+				add = { value = -1 desc = "CA_STRUGGLE_IG_HAPPY" }
+			}
+		}
+		# Ideologia del lider del IG
+		progress_condition = {
+			limit = { ca_struggle_leader_backs_to = { IG = landowners } }
+			add = { value = 1 desc = "CA_STRUGGLE_LEADER_TO" }
+			else = {
+				limit = { ca_struggle_leader_backs_from = { IG = landowners } }
+				add = { value = -1 desc = "CA_STRUGGLE_LEADER_FROM" }
+			}
+		}
+	}
+
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+
+ca_ig_struggle_petty_bourgeoisie_bar = {
+	name = "ca_ig_struggle_bar_name"
+	desc = "ca_ig_struggle_bar_desc"
+	second_desc = "ca_ig_struggle_bar_desc2"
+
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_default.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+	marker = yes
+
+	monthly_progress = {
+		# Diferencia de poder entre el bando rival y el del IG (se calcula en el pulso del diario)
+		progress_condition = {
+			limit = { has_variable = ca_struggle_petty_bourgeoisie_gap var:ca_struggle_petty_bourgeoisie_gap > 0 }
+			add = { value = var:ca_struggle_petty_bourgeoisie_gap divide = 10 max = 3 desc = "CA_STRUGGLE_POWER_TO" }
+			else = {
+				limit = { has_variable = ca_struggle_petty_bourgeoisie_gap var:ca_struggle_petty_bourgeoisie_gap < 0 }
+				add = { value = var:ca_struggle_petty_bourgeoisie_gap divide = 10 min = -3 desc = "CA_STRUGGLE_POWER_FROM" }
+			}
+		}
+		# Aprobacion del IG
+		progress_condition = {
+			limit = { ig:ig_petty_bourgeoisie ?= { ig_approval <= -5 } }
+			add = { value = 1 desc = "CA_STRUGGLE_IG_ANGRY" }
+			else = {
+				limit = { ig:ig_petty_bourgeoisie ?= { ig_approval >= 5 } }
+				add = { value = -1 desc = "CA_STRUGGLE_IG_HAPPY" }
+			}
+		}
+		# Ideologia del lider del IG
+		progress_condition = {
+			limit = { ca_struggle_leader_backs_to = { IG = petty_bourgeoisie } }
+			add = { value = 1 desc = "CA_STRUGGLE_LEADER_TO" }
+			else = {
+				limit = { ca_struggle_leader_backs_from = { IG = petty_bourgeoisie } }
+				add = { value = -1 desc = "CA_STRUGGLE_LEADER_FROM" }
+			}
+		}
+	}
+
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+
+ca_ig_struggle_rural_folk_bar = {
+	name = "ca_ig_struggle_bar_name"
+	desc = "ca_ig_struggle_bar_desc"
+	second_desc = "ca_ig_struggle_bar_desc2"
+
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_default.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+	marker = yes
+
+	monthly_progress = {
+		# Diferencia de poder entre el bando rival y el del IG (se calcula en el pulso del diario)
+		progress_condition = {
+			limit = { has_variable = ca_struggle_rural_folk_gap var:ca_struggle_rural_folk_gap > 0 }
+			add = { value = var:ca_struggle_rural_folk_gap divide = 10 max = 3 desc = "CA_STRUGGLE_POWER_TO" }
+			else = {
+				limit = { has_variable = ca_struggle_rural_folk_gap var:ca_struggle_rural_folk_gap < 0 }
+				add = { value = var:ca_struggle_rural_folk_gap divide = 10 min = -3 desc = "CA_STRUGGLE_POWER_FROM" }
+			}
+		}
+		# Aprobacion del IG
+		progress_condition = {
+			limit = { ig:ig_rural_folk ?= { ig_approval <= -5 } }
+			add = { value = 1 desc = "CA_STRUGGLE_IG_ANGRY" }
+			else = {
+				limit = { ig:ig_rural_folk ?= { ig_approval >= 5 } }
+				add = { value = -1 desc = "CA_STRUGGLE_IG_HAPPY" }
+			}
+		}
+		# Ideologia del lider del IG
+		progress_condition = {
+			limit = { ca_struggle_leader_backs_to = { IG = rural_folk } }
+			add = { value = 1 desc = "CA_STRUGGLE_LEADER_TO" }
+			else = {
+				limit = { ca_struggle_leader_backs_from = { IG = rural_folk } }
+				add = { value = -1 desc = "CA_STRUGGLE_LEADER_FROM" }
+			}
+		}
+	}
+
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+
+ca_ig_struggle_trade_unions_bar = {
+	name = "ca_ig_struggle_bar_name"
+	desc = "ca_ig_struggle_bar_desc"
+	second_desc = "ca_ig_struggle_bar_desc2"
+
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_default.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+	marker = yes
+
+	monthly_progress = {
+		# Diferencia de poder entre el bando rival y el del IG (se calcula en el pulso del diario)
+		progress_condition = {
+			limit = { has_variable = ca_struggle_trade_unions_gap var:ca_struggle_trade_unions_gap > 0 }
+			add = { value = var:ca_struggle_trade_unions_gap divide = 10 max = 3 desc = "CA_STRUGGLE_POWER_TO" }
+			else = {
+				limit = { has_variable = ca_struggle_trade_unions_gap var:ca_struggle_trade_unions_gap < 0 }
+				add = { value = var:ca_struggle_trade_unions_gap divide = 10 min = -3 desc = "CA_STRUGGLE_POWER_FROM" }
+			}
+		}
+		# Aprobacion del IG
+		progress_condition = {
+			limit = { ig:ig_trade_unions ?= { ig_approval <= -5 } }
+			add = { value = 1 desc = "CA_STRUGGLE_IG_ANGRY" }
+			else = {
+				limit = { ig:ig_trade_unions ?= { ig_approval >= 5 } }
+				add = { value = -1 desc = "CA_STRUGGLE_IG_HAPPY" }
+			}
+		}
+		# Ideologia del lider del IG
+		progress_condition = {
+			limit = { ca_struggle_leader_backs_to = { IG = trade_unions } }
+			add = { value = 1 desc = "CA_STRUGGLE_LEADER_TO" }
+			else = {
+				limit = { ca_struggle_leader_backs_from = { IG = trade_unions } }
+				add = { value = -1 desc = "CA_STRUGGLE_LEADER_FROM" }
+			}
+		}
+	}
+
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+

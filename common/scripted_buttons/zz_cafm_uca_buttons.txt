@@ -1,0 +1,188 @@
+﻿############################################################################
+# CAFM - Rediseño del diario de la UCA, entrega 2 (10 nov 2026)
+# Botones nuevos de la ruta federal (como maximo 4 de la ruta a la vez):
+#   Fase I      Reforma constitucional de 1835 (una vez)   pestana Gobierno
+#   Fases I-III Comisionados de conciliacion (cada 12 meses) pestana Gobierno
+#   Fases II-IV Ejercito federal de reserva (una vez)       pestana Crisis
+############################################################################
+
+# Reforma de 1835: abre el evento cafm_uca_route.10 (imponerla o negociarla con los estados).
+ca_button_reform_1835 = {
+	name = "ca_button_reform_1835"
+	desc = "ca_button_reform_1835_desc"
+
+	visible = {
+		ca_frca_route_federal = yes
+		NOT = { ca_frca_phase_ge = { VALUE = 2 } } # fase I
+		NOT = { has_variable = frca_reform_1835 }
+		ca_uca_button_tab = { TAB = gov }
+	}
+
+	possible = {
+		always = yes
+	}
+
+	effect = {
+		set_variable = frca_reform_1835
+		trigger_event = { id = cafm_uca_route.10 popup = yes }
+	}
+
+	ai_chance = { value = 50 }
+}
+
+# Comisionados de conciliacion: la lealtad del estado menos leal (rebelde y luego vacilante,
+# en el orden GUA, ELS, HON, NIC, COS) sube un nivel. Cuesta autoridad durante 12 meses.
+ca_button_federal_commissioners = {
+	name = "ca_button_federal_commissioners"
+	desc = "ca_button_federal_commissioners_desc"
+
+	visible = {
+		ca_frca_route_federal = yes
+		NOT = { ca_frca_phase_ge = { VALUE = 4 } } # fases I-III
+		ca_uca_button_tab = { TAB = gov }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = frca_commissioners_cd }
+		}
+		custom_tooltip = {
+			text = ca_button_federal_commissioners_target_tt
+			OR = {
+				AND = {
+					ca_frca_loyalty_le = { TAG = gua VALUE = 2 }
+					ca_frca_loyalty_ge = { TAG = gua VALUE = 1 }
+				}
+				AND = {
+					ca_frca_loyalty_le = { TAG = els VALUE = 2 }
+					ca_frca_loyalty_ge = { TAG = els VALUE = 1 }
+				}
+				AND = {
+					ca_frca_loyalty_le = { TAG = hon VALUE = 2 }
+					ca_frca_loyalty_ge = { TAG = hon VALUE = 1 }
+				}
+				AND = {
+					ca_frca_loyalty_le = { TAG = nic VALUE = 2 }
+					ca_frca_loyalty_ge = { TAG = nic VALUE = 1 }
+				}
+				AND = {
+					ca_frca_loyalty_le = { TAG = cos VALUE = 2 }
+					ca_frca_loyalty_ge = { TAG = cos VALUE = 1 }
+				}
+			}
+		}
+	}
+
+	effect = {
+		set_variable = { name = frca_commissioners_cd days = 365 }
+		add_modifier = { name = ca_frca_commissioners_cost months = 12 }
+		custom_tooltip = ca_button_federal_commissioners_effect_tt
+		hidden_effect = {
+		if = {
+			limit = {
+				ca_frca_loyalty_le = { TAG = gua VALUE = 1 }
+				ca_frca_loyalty_ge = { TAG = gua VALUE = 1 }
+			}
+			ca_frca_loyalty_up = { TAG = gua }
+		}
+		else_if = {
+			limit = {
+				ca_frca_loyalty_le = { TAG = els VALUE = 1 }
+				ca_frca_loyalty_ge = { TAG = els VALUE = 1 }
+			}
+			ca_frca_loyalty_up = { TAG = els }
+		}
+		else_if = {
+			limit = {
+				ca_frca_loyalty_le = { TAG = hon VALUE = 1 }
+				ca_frca_loyalty_ge = { TAG = hon VALUE = 1 }
+			}
+			ca_frca_loyalty_up = { TAG = hon }
+		}
+		else_if = {
+			limit = {
+				ca_frca_loyalty_le = { TAG = nic VALUE = 1 }
+				ca_frca_loyalty_ge = { TAG = nic VALUE = 1 }
+			}
+			ca_frca_loyalty_up = { TAG = nic }
+		}
+		else_if = {
+			limit = {
+				ca_frca_loyalty_le = { TAG = cos VALUE = 1 }
+				ca_frca_loyalty_ge = { TAG = cos VALUE = 1 }
+			}
+			ca_frca_loyalty_up = { TAG = cos }
+		}
+		else_if = {
+			limit = {
+				ca_frca_loyalty_le = { TAG = gua VALUE = 2 }
+				ca_frca_loyalty_ge = { TAG = gua VALUE = 2 }
+			}
+			ca_frca_loyalty_up = { TAG = gua }
+		}
+		else_if = {
+			limit = {
+				ca_frca_loyalty_le = { TAG = els VALUE = 2 }
+				ca_frca_loyalty_ge = { TAG = els VALUE = 2 }
+			}
+			ca_frca_loyalty_up = { TAG = els }
+		}
+		else_if = {
+			limit = {
+				ca_frca_loyalty_le = { TAG = hon VALUE = 2 }
+				ca_frca_loyalty_ge = { TAG = hon VALUE = 2 }
+			}
+			ca_frca_loyalty_up = { TAG = hon }
+		}
+		else_if = {
+			limit = {
+				ca_frca_loyalty_le = { TAG = nic VALUE = 2 }
+				ca_frca_loyalty_ge = { TAG = nic VALUE = 2 }
+			}
+			ca_frca_loyalty_up = { TAG = nic }
+		}
+		else_if = {
+			limit = {
+				ca_frca_loyalty_le = { TAG = cos VALUE = 2 }
+				ca_frca_loyalty_ge = { TAG = cos VALUE = 2 }
+			}
+			ca_frca_loyalty_up = { TAG = cos }
+		}
+		}
+	}
+
+	ai_chance = { value = 40 }
+}
+
+# Ejercito federal de reserva: mas fuerza militar, pero el ejercito gana peso en el gobierno
+# (la barra Federalistas <-> Centralistas baja 15 y luego 0,5 al mes).
+ca_button_federal_reserve_army = {
+	name = "ca_button_federal_reserve_army"
+	desc = "ca_button_federal_reserve_army_desc"
+
+	visible = {
+		ca_frca_route_federal = yes
+		ca_frca_phase_ge = { VALUE = 2 } # fases II-IV
+		NOT = { has_variable = frca_federal_reserve_army }
+		ca_uca_button_tab = { TAB = crisis }
+	}
+
+	possible = {
+		always = yes
+	}
+
+	effect = {
+		set_variable = frca_federal_reserve_army
+		add_modifier = { name = ca_frca_federal_reserve_army }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = ca_button_federal_reserve_army_fvc_tt
+		hidden_effect = {
+			je:je_historic_central_america_falls_apart ?= {
+				add_progress = { name = ca_frca_fvc_bar value = ca_fvc_reserve_army_once }
+			}
+		}
+	}
+
+	ai_chance = { value = 30 }
+}

@@ -1,0 +1,124 @@
+﻿# =====================================================================
+# CAFM — GUATEMALA: los 4 botones del diario de la situación.
+# Diseño: CAFM_GUATEMALA.md §4.4
+# =====================================================================
+
+# Comisionados a la Montaña: bajan la barra, cuestan autoridad. Cada 12 meses.
+ca_button_gua_comisionados = {
+	name = "ca_button_gua_comisionados"
+	desc = "ca_button_gua_comisionados_desc"
+
+	visible = {
+		ca_gua_is_guatemala = yes
+		ca_gua_montana_activa = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = gua_comisionados_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = gua_comisionados_cd days = 365 }
+		add_modifier = { name = gua_comisionados_montana months = 12 }
+		custom_tooltip = {
+			text = gua_montana_down_8_tt
+			change_variable = { name = gua_montana subtract = 8 }
+		}
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 12 } }
+	}
+
+	ai_chance = { value = 50 }
+}
+
+# Juez de tierras: el Convenio de Guadalupe aplicado a fondo. Una sola vez.
+ca_button_gua_juez_tierras = {
+	name = "ca_button_gua_juez_tierras"
+	desc = "ca_button_gua_juez_tierras_desc"
+
+	visible = {
+		ca_gua_is_guatemala = yes
+		game_date >= 1844.3.11
+		NOT = { has_variable = gua_juez_de_tierras }
+	}
+
+	possible = {
+		always = yes
+	}
+
+	effect = {
+		set_variable = gua_juez_de_tierras
+		add_modifier = { name = gua_juez_de_tierras months = 120 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		if = {
+			limit = { has_variable = gua_lucios }
+			custom_tooltip = {
+				text = gua_lucios_down_10_tt
+				change_variable = { name = gua_lucios subtract = 10 }
+			}
+		}
+	}
+
+	ai_chance = { value = 40 }
+}
+
+# Estanco del aguardiente: más ingresos, más Lucíos. Se puede poner y quitar.
+ca_button_gua_estanco = {
+	name = "ca_button_gua_estanco"
+	desc = "ca_button_gua_estanco_desc"
+
+	visible = {
+		ca_gua_is_guatemala = yes
+		game_date >= 1847.1.1
+		NOT = { has_variable = gua_estanco_aguardiente }
+	}
+
+	possible = {
+		always = yes
+	}
+
+	effect = {
+		set_variable = gua_estanco_aguardiente
+		add_modifier = { name = gua_estanco_aguardiente months = 120 }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		if = {
+			limit = { has_variable = gua_lucios }
+			custom_tooltip = {
+				text = gua_lucios_up_5_tt
+				change_variable = { name = gua_lucios add = 5 }
+			}
+		}
+	}
+
+	ai_chance = { value = 60 }
+}
+
+# Llamar al caudillo: trae a Carrera del exilio antes de tiempo.
+ca_button_gua_llamar_caudillo = {
+	name = "ca_button_gua_llamar_caudillo"
+	desc = "ca_button_gua_llamar_caudillo_desc"
+
+	visible = {
+		ca_gua_is_guatemala = yes
+		has_variable = gua_carrera_exiliado
+		NOT = { has_variable = gua_carrera_restituido }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_gua_llamar_caudillo_tt
+			has_variable = gua_lucios
+			var:gua_lucios >= 40
+		}
+	}
+
+	effect = {
+		set_variable = gua_e36_fired
+		trigger_event = { id = ca_guatemala_events.36 popup = yes }
+	}
+
+	ai_chance = { value = 30 }
+}

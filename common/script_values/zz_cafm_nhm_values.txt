@@ -1,0 +1,50 @@
+﻿# =====================================================================
+# CAFM — Umbrales de las tres cadenas. Son propuestas de balance:
+# cambiar aqui y no en los eventos.
+# =====================================================================
+
+# --- NICARAGUA: la division del Estado (Leon contra Granada) ---
+# Sube con la guerra de bandos; a 100 el Estado se parte.
+ca_nic_division_inicio = 30
+ca_nic_division_tension = 50   # la rivalidad se vuelve publica
+ca_nic_division_ruptura = 75   # cada ciudad con su gobierno
+ca_nic_division_guerra = 100   # guerra de bandos
+
+# --- NICARAGUA: el Gran Mariscal (Casto Fonseca, 1839-1845) ---
+ca_nic_fonseca_inicio = 10
+ca_nic_fonseca_mando = 30      # recibe el mando general
+ca_nic_fonseca_mariscal = 55   # se hace llamar Gran Mariscal
+ca_nic_fonseca_dictadura = 80  # levas, prensa cerrada, escuelas cerradas
+
+# --- NICARAGUA: la ruta del transito (1841-1851) ---
+ca_nic_transito_inicio = 0
+ca_nic_transito_interes = 35   # las potencias se fijan en el San Juan
+ca_nic_transito_contrato = 65  # hay contrato firmado
+ca_nic_transito_ruta = 90      # la ruta funciona y paga
+
+# --- HONDURAS: el nacimiento de la Republica ---
+ca_hon_republica_inicio = 20
+ca_hon_republica_estado = 45   # hay constitucion y gobierno
+ca_hon_republica_nacion = 70   # hay universidad, puerto y hacienda
+ca_hon_republica_hecha = 100
+
+# --- HONDURAS: la costa que no gobernamos ---
+# Sube cuando los britanicos aprietan; a 100 se pierde la costa.
+ca_hon_costa_inicio = 50
+ca_hon_costa_presion = 65      # cortes de caoba y buques de guerra
+ca_hon_costa_ocupacion = 85    # un puerto o una isla ocupada
+ca_hon_costa_perdida = 100
+
+# --- MOSQUITIA: la corona y el protector ---
+# Sube con la tutela britanica; a 100 el reino es una oficina en Belice.
+ca_mkt_protectorado_inicio = 40
+ca_mkt_protectorado_consul = 60   # un consul decide en Bluefields
+ca_mkt_protectorado_tutela = 80   # el reino no firma nada por si solo
+ca_mkt_protectorado_oficina = 100
+
+# --- MOSQUITIA: el reino de la Mosquitia ---
+# Sube con el consejo, la milicia, las leyes y el puerto.
+ca_mkt_reino_inicio = 20
+ca_mkt_reino_consejo = 45      # hay consejo que legisla
+ca_mkt_reino_estado = 70       # milicia, tribunales y tierras
+ca_mkt_reino_hecho = 100

@@ -1,15 +1,29 @@
 ﻿############################################################################
 # CAFM F3 - Barra de la Federacion (0-200, inicio 75)
-# El cambio mensual es el script value ca_frca_monthly_change
-# (common/script_values/ca_01_federation.txt), con un desc por factor:
+# El cambio mensual se escribe dentro de la barra (entrega 1 UCA, 10 nov 2026); el script
+# value ca_frca_monthly_change queda con las mismas cifras para quien lo lea. Un desc por factor:
 #   estado nucleo o miembro Leal +1 · Vacilante 0 · Rebelde -1
 #   Separado sin paz -2 · con paz -1 · ley unitaria +1 / confederada -2
 #   lobby profederalista fuerte +1 · frente Critico -1 / Perdido -2 (fase IV)
 # Se quitan las <x>_support_var y la deriva de +4 al mes del sistema viejo.
 ############################################################################
+# CAFM entrega 1 UCA (10 nov 2026): el texto cambia con la ruta y los factores se escriben
+# aqui con progress_condition para que el panel del diario los liste (antes estaban en el
+# script value ca_frca_monthly_change, que se suma pero no se lista). Mismas cifras.
 frca_support_bar = {
 	name = "my_frca_support_bar_name"
-	desc = "my_frca_support_bar_desc"
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { ca_frca_route_centralist = yes }
+				desc = my_frca_support_bar_desc_centralist
+			}
+			triggered_desc = {
+				trigger = { always = yes }
+				desc = my_frca_support_bar_desc
+			}
+		}
+	}
 	second_desc = "my_frca_support_bar_desc2"
 	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
 	background_texture = "gfx/interface/progressbar/progressbar_bad.dds"
@@ -18,7 +32,172 @@ frca_support_bar = {
 	marker = yes
 
 	monthly_progress = {
-		add = ca_frca_monthly_change
+		# --- GUA ---
+		progress_condition = {
+			limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua >= ca_loyalty_loyal }
+			add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_GUA_LOYAL" }
+			else = {
+				limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua = ca_loyalty_rebel }
+				add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_GUA_REBEL" }
+				else = {
+					limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua <= ca_loyalty_separated has_variable = frca_recognized_gua }
+					add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_GUA_SEPARATED_PEACE" }
+					else = {
+						limit = { has_variable = frca_loyalty_gua var:frca_loyalty_gua <= ca_loyalty_separated }
+						add = { value = ca_frca_monthly_separated desc = "CA_FRCA_GUA_SEPARATED" }
+					}
+				}
+			}
+		}
+		# --- ELS ---
+		progress_condition = {
+			limit = { has_variable = frca_loyalty_els var:frca_loyalty_els >= ca_loyalty_loyal }
+			add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_ELS_LOYAL" }
+			else = {
+				limit = { has_variable = frca_loyalty_els var:frca_loyalty_els = ca_loyalty_rebel }
+				add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_ELS_REBEL" }
+				else = {
+					limit = { has_variable = frca_loyalty_els var:frca_loyalty_els <= ca_loyalty_separated has_variable = frca_recognized_els }
+					add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_ELS_SEPARATED_PEACE" }
+					else = {
+						limit = { has_variable = frca_loyalty_els var:frca_loyalty_els <= ca_loyalty_separated }
+						add = { value = ca_frca_monthly_separated desc = "CA_FRCA_ELS_SEPARATED" }
+					}
+				}
+			}
+		}
+		# --- HON ---
+		progress_condition = {
+			limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon >= ca_loyalty_loyal }
+			add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_HON_LOYAL" }
+			else = {
+				limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon = ca_loyalty_rebel }
+				add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_HON_REBEL" }
+				else = {
+					limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon <= ca_loyalty_separated has_variable = frca_recognized_hon }
+					add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_HON_SEPARATED_PEACE" }
+					else = {
+						limit = { has_variable = frca_loyalty_hon var:frca_loyalty_hon <= ca_loyalty_separated }
+						add = { value = ca_frca_monthly_separated desc = "CA_FRCA_HON_SEPARATED" }
+					}
+				}
+			}
+		}
+		# --- NIC ---
+		progress_condition = {
+			limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic >= ca_loyalty_loyal }
+			add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_NIC_LOYAL" }
+			else = {
+				limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic = ca_loyalty_rebel }
+				add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_NIC_REBEL" }
+				else = {
+					limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic <= ca_loyalty_separated has_variable = frca_recognized_nic }
+					add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_NIC_SEPARATED_PEACE" }
+					else = {
+						limit = { has_variable = frca_loyalty_nic var:frca_loyalty_nic <= ca_loyalty_separated }
+						add = { value = ca_frca_monthly_separated desc = "CA_FRCA_NIC_SEPARATED" }
+					}
+				}
+			}
+		}
+		# --- COS ---
+		progress_condition = {
+			limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos >= ca_loyalty_loyal }
+			add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_COS_LOYAL" }
+			else = {
+				limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos = ca_loyalty_rebel }
+				add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_COS_REBEL" }
+				else = {
+					limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos <= ca_loyalty_separated has_variable = frca_recognized_cos }
+					add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_COS_SEPARATED_PEACE" }
+					else = {
+						limit = { has_variable = frca_loyalty_cos var:frca_loyalty_cos <= ca_loyalty_separated }
+						add = { value = ca_frca_monthly_separated desc = "CA_FRCA_COS_SEPARATED" }
+					}
+				}
+			}
+		}
+		# --- ALT ---
+		progress_condition = {
+			limit = { has_variable = frca_loyalty_alt var:frca_loyalty_alt >= ca_loyalty_loyal }
+			add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_ALT_LOYAL" }
+			else = {
+				limit = { has_variable = frca_loyalty_alt var:frca_loyalty_alt = ca_loyalty_rebel }
+				add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_ALT_REBEL" }
+				else = {
+					limit = { has_variable = frca_loyalty_alt var:frca_loyalty_alt <= ca_loyalty_separated has_variable = frca_recognized_alt }
+					add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_ALT_SEPARATED_PEACE" }
+					else = {
+						limit = { has_variable = frca_loyalty_alt var:frca_loyalty_alt <= ca_loyalty_separated }
+						add = { value = ca_frca_monthly_separated desc = "CA_FRCA_ALT_SEPARATED" }
+					}
+				}
+			}
+		}
+		# --- CIP ---
+		progress_condition = {
+			limit = { has_variable = frca_loyalty_cip var:frca_loyalty_cip >= ca_loyalty_loyal }
+			add = { value = ca_frca_monthly_loyal desc = "CA_FRCA_CIP_LOYAL" }
+			else = {
+				limit = { has_variable = frca_loyalty_cip var:frca_loyalty_cip = ca_loyalty_rebel }
+				add = { value = ca_frca_monthly_rebel desc = "CA_FRCA_CIP_REBEL" }
+				else = {
+					limit = { has_variable = frca_loyalty_cip var:frca_loyalty_cip <= ca_loyalty_separated has_variable = frca_recognized_cip }
+					add = { value = ca_frca_monthly_separated_peace desc = "CA_FRCA_CIP_SEPARATED_PEACE" }
+					else = {
+						limit = { has_variable = frca_loyalty_cip var:frca_loyalty_cip <= ca_loyalty_separated }
+						add = { value = ca_frca_monthly_separated desc = "CA_FRCA_CIP_SEPARATED" }
+					}
+				}
+			}
+		}
+		# --- Ley de estructura de la Union ---
+		progress_condition = {
+			limit = { has_law_or_variant = law_type:law_ca_central_american_unitary }
+			add = { value = ca_frca_monthly_law_unitary desc = "CA_FRCA_LAW_UNITARY" }
+			else = {
+				limit = { has_law_or_variant = law_type:law_ca_central_american_confederated }
+				add = { value = ca_frca_monthly_law_confederated desc = "CA_FRCA_LAW_CONFEDERATED" }
+			}
+		}
+		# --- Lobby profederalista (peso de sus grupos >= 25 %) ---
+		progress_condition = {
+			limit = { ca_frca_pro_federal_lobby_clout >= ca_frca_monthly_lobby_clout }
+			add = { value = ca_frca_monthly_lobby desc = "CA_FRCA_LOBBY" }
+		}
+		# --- Frentes (solo fase IV) ---
+		progress_condition = {
+			limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_british var:frca_front_british >= ca_front_lost }
+			add = { value = ca_frca_monthly_front_lost desc = "CA_FRCA_FRONT_BRITISH_LOST" }
+			else = {
+				limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_british var:frca_front_british = ca_front_critical }
+				add = { value = ca_frca_monthly_front_critical desc = "CA_FRCA_FRONT_BRITISH_CRITICAL" }
+			}
+		}
+		progress_condition = {
+			limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_mexican var:frca_front_mexican >= ca_front_lost }
+			add = { value = ca_frca_monthly_front_lost desc = "CA_FRCA_FRONT_MEXICAN_LOST" }
+			else = {
+				limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_mexican var:frca_front_mexican = ca_front_critical }
+				add = { value = ca_frca_monthly_front_critical desc = "CA_FRCA_FRONT_MEXICAN_CRITICAL" }
+			}
+		}
+		progress_condition = {
+			limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_conservative var:frca_front_conservative >= ca_front_lost }
+			add = { value = ca_frca_monthly_front_lost desc = "CA_FRCA_FRONT_CONSERVATIVE_LOST" }
+			else = {
+				limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_conservative var:frca_front_conservative = ca_front_critical }
+				add = { value = ca_frca_monthly_front_critical desc = "CA_FRCA_FRONT_CONSERVATIVE_CRITICAL" }
+			}
+		}
+		progress_condition = {
+			limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_caudillos var:frca_front_caudillos >= ca_front_lost }
+			add = { value = ca_frca_monthly_front_lost desc = "CA_FRCA_FRONT_CAUDILLOS_LOST" }
+			else = {
+				limit = { has_variable = frca_phase var:frca_phase >= 4 has_variable = frca_front_caudillos var:frca_front_caudillos = ca_front_critical }
+				add = { value = ca_frca_monthly_front_critical desc = "CA_FRCA_FRONT_CAUDILLOS_CRITICAL" }
+			}
+		}
 	}
 
 	start_value = 75

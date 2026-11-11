@@ -1,0 +1,428 @@
+﻿# =====================================================================
+# CAFM — NICARAGUA — FASE 2 (1838-1851): efectos.
+# =====================================================================
+
+# Crea un personaje una sola vez (registro global anti-duplicados).
+ca_nic_create_once = {
+	if = {
+		limit = { NOT = { has_global_variable = $KEY$ } }
+		create_character = { template = $TEMPLATE$ }
+	}
+}
+
+# Arranques. Los llama ca_nic_beats; ponen la variable y anaden el diario.
+ca_nic_f2_start = {
+	set_variable = nic_f2_started
+	set_variable = { name = nic_division value = ca_nic_division_inicio }
+	add_journal_entry = { type = je_ca_nic_division }
+}
+
+ca_nic_fonseca_start = {
+	set_variable = { name = nic_fonseca value = ca_nic_fonseca_inicio }
+	add_journal_entry = { type = je_ca_nic_fonseca }
+}
+
+ca_nic_transito_start = {
+	set_variable = { name = nic_transito value = ca_nic_transito_inicio }
+	add_journal_entry = { type = je_ca_nic_transito }
+}
+
+ca_nic_beats = {
+	# Un solo evento por mes, en orden de fecha.
+	if = {
+		limit = {
+			NOT = { has_variable = nic_f2_started }
+			game_date >= 1838.3.1
+		}
+		ca_nic_f2_start = yes
+	}
+
+	# La cadena con fecha solo corre cuando la cadena ya arranco.
+	if = {
+		limit = { has_variable = nic_f2_started }
+
+		if = {
+			limit = {
+				NOT = { has_variable = nic_e26_fired }
+				game_date >= 1838.3.31
+			}
+			set_variable = nic_e26_fired
+			trigger_event = { id = ca_nicaragua_events.26 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e27_fired }
+				game_date >= 1838.4.30
+			}
+			set_variable = nic_e27_fired
+			trigger_event = { id = ca_nicaragua_events.27 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e28_fired }
+				game_date >= 1838.11.12
+			}
+			set_variable = nic_e28_fired
+			trigger_event = { id = ca_nicaragua_events.28 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e29_fired }
+				game_date >= 1839.1.18
+			}
+			set_variable = nic_e29_fired
+			trigger_event = { id = ca_nicaragua_events.29 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e30_fired }
+				game_date >= 1839.4.1
+			}
+			set_variable = nic_e30_fired
+			ca_nic_fonseca_start = yes
+			trigger_event = { id = ca_nicaragua_events.30 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e31_fired }
+				game_date >= 1839.9.1
+			}
+			set_variable = nic_e31_fired
+			trigger_event = { id = ca_nicaragua_events.31 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e41_fired }
+				game_date >= 1841.8.12
+			}
+			set_variable = nic_e41_fired
+			ca_nic_transito_start = yes
+			trigger_event = { id = ca_nicaragua_events.41 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e32_fired }
+				game_date >= 1844.8.29
+			}
+			set_variable = nic_e32_fired
+			trigger_event = { id = ca_nicaragua_events.32 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e33_fired }
+				game_date >= 1844.11.1
+			}
+			set_variable = nic_e33_fired
+			trigger_event = { id = ca_nicaragua_events.33 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e34_fired }
+				game_date >= 1844.12.8
+			}
+			set_variable = nic_e34_fired
+			trigger_event = { id = ca_nicaragua_events.34 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e35_fired }
+				game_date >= 1844.12.16
+			}
+			set_variable = nic_e35_fired
+			trigger_event = { id = ca_nicaragua_events.35 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e36_fired }
+				game_date >= 1845.1.24
+			}
+			set_variable = nic_e36_fired
+			trigger_event = { id = ca_nicaragua_events.36 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e37_fired }
+				game_date >= 1845.4.4
+			}
+			set_variable = nic_e37_fired
+			trigger_event = { id = ca_nicaragua_events.37 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e38_fired }
+				game_date >= 1845.5.10
+			}
+			set_variable = nic_e38_fired
+			trigger_event = { id = ca_nicaragua_events.38 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e39_fired }
+				game_date >= 1845.6.15
+			}
+			set_variable = nic_e39_fired
+			trigger_event = { id = ca_nicaragua_events.39 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e40_fired }
+				game_date >= 1846.7.24
+			}
+			set_variable = nic_e40_fired
+			trigger_event = { id = ca_nicaragua_events.40 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e49_fired }
+				game_date >= 1847.1.1
+			}
+			set_variable = nic_e49_fired
+			trigger_event = { id = ca_nicaragua_events.49 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e42_fired }
+				game_date >= 1848.1.1
+			}
+			set_variable = nic_e42_fired
+			trigger_event = { id = ca_nicaragua_events.42 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e43_fired }
+				game_date >= 1848.3.7
+			}
+			set_variable = nic_e43_fired
+			trigger_event = { id = ca_nicaragua_events.43 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e44_fired }
+				game_date >= 1849.6.1
+			}
+			set_variable = nic_e44_fired
+			trigger_event = { id = ca_nicaragua_events.44 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e45_fired }
+				game_date >= 1849.8.26
+			}
+			set_variable = nic_e45_fired
+			trigger_event = { id = ca_nicaragua_events.45 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e46_fired }
+				game_date >= 1850.3.1
+			}
+			set_variable = nic_e46_fired
+			trigger_event = { id = ca_nicaragua_events.46 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e47_fired }
+				game_date >= 1850.4.19
+			}
+			set_variable = nic_e47_fired
+			trigger_event = { id = ca_nicaragua_events.47 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = nic_e48_fired }
+				game_date >= 1850.11.21
+			}
+			set_variable = nic_e48_fired
+			trigger_event = { id = ca_nicaragua_events.48 popup = yes }
+		}
+	}
+}
+
+ca_nic_division_clamp = {
+	if = {
+		limit = { var:nic_division > 100 }
+		set_variable = { name = nic_division value = 100 }
+	}
+	if = {
+		limit = { var:nic_division < 0 }
+		set_variable = { name = nic_division value = 0 }
+	}
+}
+
+ca_nic_division_thresholds = {
+	if = {
+		limit = {
+			NOT = { has_variable = nic_div_guerra_fired }
+			var:nic_division >= ca_nic_division_guerra
+		}
+		set_variable = nic_div_guerra_fired
+		trigger_event = { id = ca_nicaragua_events.52 popup = yes }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = nic_div_ruptura_fired }
+			var:nic_division >= ca_nic_division_ruptura
+		}
+		set_variable = nic_div_ruptura_fired
+		trigger_event = { id = ca_nicaragua_events.51 popup = yes }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = nic_div_tension_fired }
+			var:nic_division >= ca_nic_division_tension
+		}
+		set_variable = nic_div_tension_fired
+		trigger_event = { id = ca_nicaragua_events.50 popup = yes }
+	}
+}
+
+ca_nic_division_drift = {
+	# La rivalidad entre Leon y Granada no se apaga sola.
+	change_variable = { name = nic_division add = 1 }
+	# Granada fuera del reparto.
+	if = {
+		limit = { ig:ig_landowners ?= { ig_approval < 0 } }
+		change_variable = { name = nic_division add = 2 }
+	}
+	# Leon fuera del reparto.
+	if = {
+		limit = { ig:ig_intelligentsia ?= { ig_approval < 0 } }
+		change_variable = { name = nic_division add = 2 }
+	}
+	# La capital alterna calma a las dos ciudades.
+	if = {
+		limit = { has_variable = nic_capital_alterna }
+		change_variable = { name = nic_division subtract = 2 }
+	}
+	# La guerra arma a los bandos.
+	if = {
+		limit = { is_at_war = yes }
+		change_variable = { name = nic_division add = 1 }
+	}
+	# Managua ya es la sede.
+	if = {
+		limit = { has_variable = nic_pacto_managua }
+		change_variable = { name = nic_division subtract = 5 }
+	}
+}
+
+ca_nic_fonseca_clamp = {
+	if = {
+		limit = { var:nic_fonseca > 100 }
+		set_variable = { name = nic_fonseca value = 100 }
+	}
+	if = {
+		limit = { var:nic_fonseca < 0 }
+		set_variable = { name = nic_fonseca value = 0 }
+	}
+}
+
+ca_nic_fonseca_thresholds = {
+	if = {
+		limit = {
+			NOT = { has_variable = nic_fon_dictadura_fired }
+			var:nic_fonseca >= ca_nic_fonseca_dictadura
+		}
+		set_variable = nic_fon_dictadura_fired
+		add_modifier = { name = nic_levas_del_mariscal months = 60 }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = nic_fon_mariscal_fired }
+			var:nic_fonseca >= ca_nic_fonseca_mariscal
+		}
+		set_variable = nic_fon_mariscal_fired
+		add_modifier = { name = nic_gran_mariscal_mando months = 60 }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = nic_fon_mando_fired }
+			var:nic_fonseca >= ca_nic_fonseca_mando
+		}
+		set_variable = nic_fon_mando_fired
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 60 } }
+	}
+}
+
+ca_nic_fonseca_drift = {
+	# El mando militar se va comiendo al gobierno.
+	change_variable = { name = nic_fonseca add = 1 }
+	# Las Fuerzas Armadas en el gobierno.
+	if = {
+		limit = { ig:ig_armed_forces ?= { is_in_government = yes } }
+		change_variable = { name = nic_fonseca add = 1 }
+	}
+	# En guerra decide el cuartel.
+	if = {
+		limit = { is_at_war = yes }
+		change_variable = { name = nic_fonseca add = 2 }
+	}
+	# La Intelligentsia en el gobierno.
+	if = {
+		limit = { ig:ig_intelligentsia ?= { is_in_government = yes } }
+		change_variable = { name = nic_fonseca subtract = 1 }
+	}
+	# Fonseca ya cayo.
+	if = {
+		limit = { has_variable = nic_fonseca_caido }
+		change_variable = { name = nic_fonseca subtract = 10 }
+	}
+}
+
+ca_nic_transito_clamp = {
+	if = {
+		limit = { var:nic_transito > 100 }
+		set_variable = { name = nic_transito value = 100 }
+	}
+	if = {
+		limit = { var:nic_transito < 0 }
+		set_variable = { name = nic_transito value = 0 }
+	}
+}
+
+ca_nic_transito_thresholds = {
+	if = {
+		limit = {
+			NOT = { has_variable = nic_tra_ruta_fired }
+			var:nic_transito >= ca_nic_transito_ruta
+		}
+		set_variable = nic_tra_ruta_fired
+		add_modifier = { name = nic_peaje_del_san_juan months = 240 }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = nic_tra_contrato_fired }
+			var:nic_transito >= ca_nic_transito_contrato
+		}
+		set_variable = nic_tra_contrato_fired
+		add_modifier = { name = nic_contrato_del_transito months = 180 }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = nic_tra_interes_fired }
+			var:nic_transito >= ca_nic_transito_interes
+		}
+		set_variable = nic_tra_interes_fired
+	}
+}
+
+ca_nic_transito_drift = {
+	# El rio San Juan interesa cada ano un poco mas.
+	change_variable = { name = nic_transito add = 1 }
+	# La fiebre del oro de California.
+	if = {
+		limit = { game_date >= 1849.1.1 }
+		change_variable = { name = nic_transito add = 1 }
+	}
+	# La boca del rio no es nuestra.
+	if = {
+		limit = { has_variable = nic_san_juan_perdido }
+		change_variable = { name = nic_transito subtract = 2 }
+	}
+	# Hay guarnicion en San Juan del Norte.
+	if = {
+		limit = { has_variable = nic_san_juan_guarnecido }
+		change_variable = { name = nic_transito add = 2 }
+	}
+}
+

@@ -1,0 +1,42 @@
+﻿############################################################################
+# CAFM - Rediseño del diario de la UCA, entrega 2 (10 nov 2026)
+# Scripted GUIs del panel de aspecto (gui/ca_uca_panel.gui) y de las pestañas
+# de botones. Scope: la UCA (JournalEntry.GetCountry).
+############################################################################
+
+# --- Ruta (para el aspecto del encabezado) ---
+ca_uca_route_federal_sgui = {
+	scope = country
+	is_shown = { ca_frca_route_federal = yes }
+}
+ca_uca_route_centralist_sgui = {
+	scope = country
+	is_shown = { ca_frca_route_centralist = yes }
+}
+
+# --- Pestanas de botones: Gobierno / Estados / Crisis ---
+# La pestana elegida se guarda en la variable ca_uca_tab de la UCA (Gobierno si no existe).
+ca_uca_tab_gov_sgui = {
+	scope = country
+	effect = { set_variable = { name = ca_uca_tab value = flag:gov } }
+}
+ca_uca_tab_gov_on_sgui = {
+	scope = country
+	is_shown = { ca_uca_tab_gov = yes }
+}
+ca_uca_tab_states_sgui = {
+	scope = country
+	effect = { set_variable = { name = ca_uca_tab value = flag:states } }
+}
+ca_uca_tab_states_on_sgui = {
+	scope = country
+	is_shown = { ca_uca_tab_states = yes }
+}
+ca_uca_tab_crisis_sgui = {
+	scope = country
+	effect = { set_variable = { name = ca_uca_tab value = flag:crisis } }
+}
+ca_uca_tab_crisis_on_sgui = {
+	scope = country
+	is_shown = { ca_uca_tab_crisis = yes }
+}

@@ -1,0 +1,308 @@
+﻿# =====================================================================
+# CAFM — MOSQUITIA (MKT, 1836-1851): efectos.
+# =====================================================================
+
+# Arranque: en cuanto exista el reino. Los dos diarios a la vez.
+ca_mkt_start = {
+	set_variable = mkt_started
+	set_variable = { name = mkt_protectorado value = ca_mkt_protectorado_inicio }
+	set_variable = { name = mkt_reino value = ca_mkt_reino_inicio }
+	add_journal_entry = { type = je_ca_mkt_protectorado }
+	add_journal_entry = { type = je_ca_mkt_reino }
+}
+
+# Crea un personaje una sola vez (registro global anti-duplicados).
+ca_mkt_create_once = {
+	if = {
+		limit = { NOT = { has_global_variable = $KEY$ } }
+		create_character = { template = $TEMPLATE$ }
+	}
+}
+
+ca_mkt_beats = {
+	# Un solo evento por mes. Los cuatro ultimos son de ambiente y van al final.
+	if = {
+		limit = {
+			NOT = { has_variable = mkt_started }
+			always = yes
+		}
+		ca_mkt_start = yes
+	}
+
+	# La cadena con fecha solo corre cuando la cadena ya arranco.
+	if = {
+		limit = { has_variable = mkt_started }
+
+		if = {
+			limit = {
+				NOT = { has_variable = mkt_e1_fired }
+				game_date >= 1837.1.1
+			}
+			set_variable = mkt_e1_fired
+			trigger_event = { id = ca_mosquitia_events.1 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e2_fired }
+				game_date >= 1840.6.1
+			}
+			set_variable = mkt_e2_fired
+			trigger_event = { id = ca_mosquitia_events.2 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e3_fired }
+				game_date >= 1841.8.12
+			}
+			set_variable = mkt_e3_fired
+			trigger_event = { id = ca_mosquitia_events.3 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e4_fired }
+				game_date >= 1843.5.4
+			}
+			set_variable = mkt_e4_fired
+			trigger_event = { id = ca_mosquitia_events.4 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e5_fired }
+				game_date >= 1844.3.1
+			}
+			set_variable = mkt_e5_fired
+			ca_mkt_create_once = { KEY = cafm_hc_patrick_walker TEMPLATE = cafm_patrick_walker }
+			trigger_event = { id = ca_mosquitia_events.5 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e6_fired }
+				game_date >= 1844.6.1
+			}
+			set_variable = mkt_e6_fired
+			trigger_event = { id = ca_mosquitia_events.6 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e7_fired }
+				game_date >= 1845.5.7
+			}
+			set_variable = mkt_e7_fired
+			trigger_event = { id = ca_mosquitia_events.7 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e8_fired }
+				game_date >= 1846.2.1
+			}
+			set_variable = mkt_e8_fired
+			trigger_event = { id = ca_mosquitia_events.8 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e9_fired }
+				game_date >= 1846.8.1
+			}
+			set_variable = mkt_e9_fired
+			trigger_event = { id = ca_mosquitia_events.9 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e10_fired }
+				game_date >= 1847.11.1
+			}
+			set_variable = mkt_e10_fired
+			trigger_event = { id = ca_mosquitia_events.10 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e11_fired }
+				game_date >= 1848.1.1
+			}
+			set_variable = mkt_e11_fired
+			trigger_event = { id = ca_mosquitia_events.11 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e12_fired }
+				game_date >= 1848.3.7
+			}
+			set_variable = mkt_e12_fired
+			trigger_event = { id = ca_mosquitia_events.12 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e13_fired }
+				game_date >= 1848.9.1
+			}
+			set_variable = mkt_e13_fired
+			trigger_event = { id = ca_mosquitia_events.13 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e14_fired }
+				game_date >= 1850.4.19
+			}
+			set_variable = mkt_e14_fired
+			trigger_event = { id = ca_mosquitia_events.14 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e15_fired }
+				game_date >= 1850.11.21
+			}
+			set_variable = mkt_e15_fired
+			trigger_event = { id = ca_mosquitia_events.15 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e16_fired }
+				game_date >= 1842.1.1
+			}
+			set_variable = mkt_e16_fired
+			trigger_event = { id = ca_mosquitia_events.16 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e17_fired }
+				game_date >= 1846.1.1
+			}
+			set_variable = mkt_e17_fired
+			trigger_event = { id = ca_mosquitia_events.17 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e18_fired }
+				game_date >= 1847.1.1
+			}
+			set_variable = mkt_e18_fired
+			trigger_event = { id = ca_mosquitia_events.18 popup = yes }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_variable = mkt_e19_fired }
+				game_date >= 1849.1.1
+			}
+			set_variable = mkt_e19_fired
+			exists = c:HON
+			trigger_event = { id = ca_mosquitia_events.19 popup = yes }
+		}
+	}
+}
+
+ca_mkt_protectorado_clamp = {
+	if = {
+		limit = { var:mkt_protectorado > 100 }
+		set_variable = { name = mkt_protectorado value = 100 }
+	}
+	if = {
+		limit = { var:mkt_protectorado < 0 }
+		set_variable = { name = mkt_protectorado value = 0 }
+	}
+}
+
+ca_mkt_protectorado_thresholds = {
+	if = {
+		limit = {
+			NOT = { has_variable = mkt_pro_oficina_fired }
+			var:mkt_protectorado >= ca_mkt_protectorado_oficina
+		}
+		set_variable = mkt_pro_oficina_fired
+		trigger_event = { id = ca_mosquitia_events.20 popup = yes }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = mkt_pro_tutela_fired }
+			var:mkt_protectorado >= ca_mkt_protectorado_tutela
+		}
+		set_variable = mkt_pro_tutela_fired
+		add_modifier = { name = mkt_tutela_britanica months = 240 }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = mkt_pro_consul_fired }
+			var:mkt_protectorado >= ca_mkt_protectorado_consul
+		}
+		set_variable = mkt_pro_consul_fired
+		add_modifier = { name = mkt_consul_en_bluefields months = 180 }
+	}
+}
+
+ca_mkt_protectorado_drift = {
+	# Londres paga, y quien paga manda.
+	change_variable = { name = mkt_protectorado add = 1 }
+	# La subvencion anual de Belice.
+	if = {
+		limit = { has_variable = mkt_subvencion }
+		change_variable = { name = mkt_protectorado add = 2 }
+	}
+	# El consejo de Bluefields decide por si mismo.
+	if = {
+		limit = { has_variable = mkt_consejo_criollo }
+		change_variable = { name = mkt_protectorado subtract = 2 }
+	}
+	# Un reino con instituciones necesita menos tutor.
+	if = {
+		limit = { var:mkt_reino >= ca_mkt_reino_estado }
+		change_variable = { name = mkt_protectorado subtract = 2 }
+	}
+}
+
+ca_mkt_reino_clamp = {
+	if = {
+		limit = { var:mkt_reino > 100 }
+		set_variable = { name = mkt_reino value = 100 }
+	}
+	if = {
+		limit = { var:mkt_reino < 0 }
+		set_variable = { name = mkt_reino value = 0 }
+	}
+}
+
+ca_mkt_reino_thresholds = {
+	if = {
+		limit = {
+			NOT = { has_variable = mkt_rei_estado_fired }
+			var:mkt_reino >= ca_mkt_reino_estado
+		}
+		set_variable = mkt_rei_estado_fired
+		add_modifier = { name = mkt_estado_del_reino months = 240 }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = mkt_rei_consejo_fired }
+			var:mkt_reino >= ca_mkt_reino_consejo
+		}
+		set_variable = mkt_rei_consejo_fired
+		add_modifier = { name = mkt_consejo_que_legisla months = 180 }
+	}
+}
+
+ca_mkt_reino_drift = {
+	# El consejo legisla.
+	if = {
+		limit = { has_variable = mkt_consejo_criollo }
+		change_variable = { name = mkt_reino add = 2 }
+	}
+	# Hay milicia propia.
+	if = {
+		limit = { has_variable = mkt_milicia }
+		change_variable = { name = mkt_reino add = 1 }
+	}
+	# Greytown paga aduana.
+	if = {
+		limit = { has_variable = mkt_greytown }
+		change_variable = { name = mkt_reino add = 2 }
+	}
+	# La guerra deshace lo poco que hay.
+	if = {
+		limit = { is_at_war = yes }
+		change_variable = { name = mkt_reino subtract = 2 }
+	}
+	# Un rey de doce anos no gobierna.
+	if = {
+		limit = { has_variable = mkt_rey_menor }
+		change_variable = { name = mkt_reino subtract = 1 }
+	}
+}
+
