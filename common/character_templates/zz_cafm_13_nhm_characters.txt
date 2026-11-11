@@ -1,0 +1,149 @@
+﻿# =====================================================================
+# CAFM — Plantillas que faltaban para Nicaragua (fase 2), Honduras
+# (fase 2) y la Mosquitia. Mismo esquema por bloques que cafm_01..cafm_10.
+# Los demás ya existen: Fonseca, Sandoval, Guerrero, Norberto Ramírez,
+# Núñez, Coronado Chávez, Guardiola, Lindo, Zelaya y Ayes, Ferrera y los
+# dos reyes misquitos.
+# Certeza: V verificado · P parcial
+# =====================================================================
+
+cafm_patrick_walker = {
+	# Patrick Walker — cast MKT · certeza V
+	# NOTAS: cónsul general británico ante el rey misquito desde 1844, con
+	# sede en Bluefields. Muere en 1848, poco después de la toma de
+	# San Juan del Norte.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Patrick"
+	last_name = "cafm_Walker"
+	historical = yes
+	female = no
+	birth_date = 1812.1.1
+	culture = cu:british
+	religion = rel:protestant
+	home_region = STATE_NICARAGUA
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_authoritarian
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		meticulous
+		imperious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_mkt
+		set_global_variable = { name = cafm_hc_patrick_walker value = this }
+	}
+}
+
+cafm_silvestre_selva = {
+	# Silvestre Selva — cast NIC · certeza V
+	# NOTAS: lo acuerdan Montenegro (por Granada) y Malespín el 8 dic 1844;
+	# toma el cargo en Masaya el 16 dic 1844.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Silvestre"
+	last_name = "cafm_Selva"
+	historical = yes
+	female = no
+	birth_date = 1796.1.1
+	culture = primary_culture
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_landowners
+	ideology = ideology_granadine_legitimism
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		cautious
+		tactful
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_nic
+		set_global_variable = { name = cafm_hc_silvestre_selva value = this }
+	}
+}
+
+cafm_emiliano_madriz = {
+	# Emiliano Madriz — cast NIC · certeza P
+	# NOTAS: director supremo durante el sitio de León (nov 1844); muere
+	# cuando la ciudad cae, el 24 ene 1845.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Emiliano"
+	last_name = "cafm_Madriz"
+	historical = yes
+	female = no
+	birth_date = 1800.1.1
+	culture = primary_culture
+	religion = rel:catholic
+	home_region = STATE_NICARAGUA
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_intelligentsia
+	ideology = ideology_liberal_leader
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		brave
+		persistent
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_nic
+		set_global_variable = { name = cafm_hc_emiliano_madriz value = this }
+	}
+}
+
+cafm_jose_trinidad_reyes = {
+	# José Trinidad Reyes — cast HON · certeza V
+	# NOTAS: sacerdote y fundador de la Academia Literaria de Tegucigalpa,
+	# de donde sale la Universidad Nacional durante el gobierno de Lindo.
+
+	# --- DATOS BÁSICOS ---
+	first_name = "cafm_Jose_Trinidad"
+	last_name = "cafm_Reyes"
+	historical = yes
+	female = no
+	birth_date = 1797.6.11
+	culture = primary_culture
+	religion = rel:catholic
+	home_region = STATE_HONDURAS
+
+	# --- POLÍTICA Y RIQUEZA ---
+	interest_group = ig_devout
+	ideology = ideology_reformer
+
+	# --- RASGOS (TRAITS) ---
+	traits = {
+		erudite
+		pious
+	}
+
+	# --- GENERACIÓN DINÁMICA DE RASGOS ---
+	trait_generation = { }			# vacío: personaje histórico, sin rasgos aleatorios
+
+	# --- EFECTOS AL CREARSE ---
+	on_created = {
+		set_variable = cafm_cast_hon
+		set_global_variable = { name = cafm_hc_jose_trinidad_reyes value = this }
+	}
+}

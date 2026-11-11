@@ -1,7 +1,7 @@
 ﻿REPLACE:ELS = {
 	states = { STATE_SAN_SALVADOR }
 	possible = {
-              c:UCA = {
+              c:UCA ?= { # arreglo 10 nov: la UCA puede no existir
 			   NOT = {
 			   has_variable = is_frca_var
 			   }
@@ -14,7 +14,7 @@
 REPLACE:GUA = {
 	states = { STATE_GUATEMALA }
 	possible = {
-              c:UCA = {
+              c:UCA ?= { # arreglo 10 nov: la UCA puede no existir
 			   NOT = {
 			   has_variable = is_frca_var
 			   }
@@ -27,7 +27,7 @@ REPLACE:GUA = {
 REPLACE:ALT = {
 	provinces = { xD9BEFE x78C465 xBD8628  }
 	possible = {
-              c:UCA = {
+              c:UCA ?= { # arreglo 10 nov: la UCA puede no existir
 			   NOT = {
 			   has_variable = is_frca_var
 			   }
@@ -40,7 +40,7 @@ REPLACE:ALT = {
 REPLACE:NIC = {
 	states = { STATE_NICARAGUA }
 	possible = {
-              c:UCA = {
+              c:UCA ?= { # arreglo 10 nov: la UCA puede no existir
 			   NOT = {
 			   has_variable = is_frca_var
 			   }
@@ -53,7 +53,7 @@ REPLACE:NIC = {
 REPLACE:HON = {
 	states = { STATE_HONDURAS }
 	possible = {
-              c:UCA = {
+              c:UCA ?= { # arreglo 10 nov: la UCA puede no existir
 			   NOT = {
 			   has_variable = is_frca_var
 			   }
@@ -66,7 +66,7 @@ REPLACE:HON = {
 REPLACE:COS = {
 	states = { STATE_COSTA_RICA }
 	possible = {
-              c:UCA = {
+              c:UCA ?= { # arreglo 10 nov: la UCA puede no existir
 			   NOT = {
 			   has_variable = is_frca_var
 			   }

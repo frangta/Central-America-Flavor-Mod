@@ -1,0 +1,146 @@
+﻿# =====================================================================
+# CAFM — GUATEMALA: los 4 personajes que piden las cadenas de 1836–1851.
+# Diseño: CAFM_GUATEMALA.md. Los 19 de cafm_02_gua_characters.txt no se tocan.
+# Nivel C: los crea un evento. Certeza: V verificado, P probable, M por confirmar.
+# =====================================================================
+
+gua_teodoro_mejia_character_template = {
+	# Teodoro Mejía — cast GUA · nivel C (ca_guatemala_events.9) · certeza P
+	# NOTAS: Pequeño agricultor de Santa Rosa, elegido jefe por los campesinos en junio
+	#        de 1837. Derrotó a la tropa de la capital y publicó el manifiesto que acusaba
+	#        al gobierno de envenenar a los campesinos con el pretexto del cólera.
+	#        Fuente: Solórzano, Anuario de Estudios Centroamericanos (UCR), 1987.
+	#        Fecha de nacimiento desconocida: se pone 1800 como aproximación.
+
+	first_name = "cafm_Teodoro"
+	last_name = "cafm_Mejia"
+	historical = yes
+	female = no
+	birth_date = 1800.1.1			# M: año desconocido
+	culture = cu:guatemalan
+	religion = rel:catholic
+	home_region = STATE_GUATEMALA
+
+	role = character_role_agitator
+
+	interest_group = ig_rural_folk
+	ideology = ideology_ca_peasant_caudillismo
+
+	traits = {
+		firebrand
+		persistent
+	}
+
+	trait_generation = { }
+
+	on_created = {
+		set_variable = cafm_cast_gua
+		set_global_variable = { name = cafm_hc_mejia value = this }
+	}
+}
+
+gua_jose_lucio_lopez_character_template = {
+	# José Lucio López — cast GUA · nivel C (ca_guatemala_events.28) · certeza P
+	# NOTAS: Hacendado de Palencia. Encabezó en el verano de 1847 la revuelta de Sansur y
+	#        San Guayaba contra Carrera. Lo mataron pronto, pero los demás jefes siguieron
+	#        con su nombre: los "Lucíos". Fuente: Solórzano (UCR), 1987.
+
+	first_name = "cafm_Jose_Lucio"
+	last_name = "cafm_Lopez"
+	historical = yes
+	female = no
+	birth_date = 1805.1.1			# M: año desconocido
+	culture = cu:guatemalan
+	religion = rel:catholic
+	home_region = STATE_GUATEMALA
+
+	role = character_role_agitator
+	role = general
+
+	interest_group = ig_landowners
+	ideology = ideology_ca_caudillismo_jingoist
+
+	commander_rank = commander_rank_1
+	hq = region_central_america
+
+	traits = {
+		ambitious
+		brave
+	}
+
+	trait_generation = { }
+
+	on_created = {
+		set_variable = cafm_cast_gua
+		set_global_variable = { name = cafm_hc_lucio_lopez value = this }
+	}
+}
+
+gua_vicente_cruz_character_template = {
+	# Vicente Cruz — cast GUA · nivel C (ca_guatemala_events.34) · certeza P
+	# NOTAS: Antiguo vicepresidente de Carrera. En diciembre de 1848 sitió la capital al
+	#        frente de los rebeldes. Hermano de Serapio Cruz, que ya está en el mod.
+	#        Fuente: Solórzano (UCR), 1987.
+
+	first_name = "cafm_Vicente"
+	last_name = "cafm_Cruz"
+	historical = yes
+	female = no
+	birth_date = 1800.1.1			# M: año desconocido
+	culture = cu:guatemalan
+	religion = rel:catholic
+	home_region = STATE_GUATEMALA
+
+	role = general
+
+	interest_group = ig_armed_forces
+	ideology = ideology_ca_caudillismo_jingoist
+
+	commander_rank = commander_rank_2
+	hq = region_central_america
+
+	traits = {
+		ambitious
+		expert_defensive_strategist
+	}
+
+	trait_generation = { }
+
+	on_created = {
+		set_variable = cafm_cast_gua
+		set_global_variable = { name = cafm_hc_vicente_cruz value = this }
+	}
+}
+
+gua_felipe_molina_character_template = {
+	# Felipe Molina — cast GUA · nivel C (ca_guatemala_events.13) · certeza P
+	# NOTAS: Ministro general en febrero de 1838. Prometió a Carrera que el gobierno
+	#        cumpliría las demandas campesinas. Fuente: "Política agraria y reacción
+	#        campesina en Guatemala" (Dialnet 4007892).
+
+	first_name = "cafm_Felipe"
+	last_name = "cafm_Molina"
+	historical = yes
+	female = no
+	birth_date = 1800.1.1			# M: año desconocido
+	culture = cu:guatemalan
+	religion = rel:catholic
+	home_region = STATE_GUATEMALA
+
+	role = character_role_politician
+
+	interest_group = ig_intelligentsia
+	ideology = ideology_ca_constitutionalist
+
+	traits = {
+		meticulous
+		persistent
+	}
+
+	trait_generation = { }
+
+	on_created = {
+		set_variable = cafm_cast_gua
+		set_global_variable = { name = cafm_hc_molina value = this }
+	}
+}
