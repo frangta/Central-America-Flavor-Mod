@@ -206,372 +206,401 @@
 
 							widget = {
 								name = "ca_ew119_minimap"
-								position = { 110 36 }
-								size = { 360 287 }
+								position = { 112 36 }
+								size = { 356 288 }
 
 								icon = {
 									position = { 0 0 }
-									size = { 360 287 }
+									size = { 356 288 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_base.dds"
 								}
 								icon = {
-									position = { 22 66 }
-									size = { 60 46 }
+									position = { 10 15 }
+									size = { 102 96 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_cip_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cip_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 22 66 }
-									size = { 60 46 }
+									position = { 10 15 }
+									size = { 102 96 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_cip_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cip_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 22 66 }
-									size = { 60 46 }
+									position = { 10 15 }
+									size = { 102 96 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_cip_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cip_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 22 66 }
-									size = { 60 46 }
+									position = { 10 15 }
+									size = { 102 96 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_cip_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cip_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 55 68 }
-									size = { 48 60 }
+									position = { 60 66 }
+									size = { 51 57 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_alt_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_alt_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 55 68 }
-									size = { 48 60 }
+									position = { 60 66 }
+									size = { 51 57 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_alt_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_alt_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 55 68 }
-									size = { 48 60 }
+									position = { 60 66 }
+									size = { 51 57 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_alt_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_alt_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 55 68 }
-									size = { 48 60 }
+									position = { 60 66 }
+									size = { 51 57 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_alt_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_alt_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 77 19 }
-									size = { 86 115 }
+									position = { 78 66 }
+									size = { 90 67 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_gua_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_gua_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 77 19 }
-									size = { 86 115 }
+									position = { 78 66 }
+									size = { 90 67 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_gua_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_gua_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 77 19 }
-									size = { 86 115 }
+									position = { 78 66 }
+									size = { 90 67 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_gua_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_gua_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 77 19 }
-									size = { 86 115 }
+									position = { 78 66 }
+									size = { 90 67 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_gua_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_gua_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 95 22 }
-									size = { 55 37 }
+									position = { 81 20 }
+									size = { 64 56 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_pet_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_gua_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 95 22 }
-									size = { 55 37 }
+									position = { 81 20 }
+									size = { 64 56 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_pet_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_gua_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 95 22 }
-									size = { 55 37 }
+									position = { 81 20 }
+									size = { 64 56 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_pet_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_gua_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 95 22 }
-									size = { 55 37 }
+									position = { 81 20 }
+									size = { 64 56 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_pet_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_gua_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 137 19 }
-									size = { 56 66 }
+									position = { 139 1 }
+									size = { 41 73 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_blz_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_blz_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 137 19 }
-									size = { 56 66 }
+									position = { 139 1 }
+									size = { 41 73 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_blz_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_blz_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 137 19 }
-									size = { 56 66 }
+									position = { 139 1 }
+									size = { 41 73 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_blz_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_blz_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 137 19 }
-									size = { 56 66 }
+									position = { 139 1 }
+									size = { 41 73 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_blz_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_blz_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 137 19 }
-									size = { 56 66 }
+									position = { 139 1 }
+									size = { 41 73 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_blz_foreign.dds"
 									datacontext = "[GetScriptedGui('ca_mm_blz_foreign')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 109 121 }
-									size = { 84 37 }
+									position = { 116 110 }
+									size = { 67 38 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_els_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_els_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 109 121 }
-									size = { 84 37 }
+									position = { 116 110 }
+									size = { 67 38 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_els_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_els_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 109 121 }
-									size = { 84 37 }
+									position = { 116 110 }
+									size = { 67 38 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_els_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_els_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 109 121 }
-									size = { 84 37 }
+									position = { 116 110 }
+									size = { 67 38 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_els_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_els_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 138 74 }
-									size = { 170 83 }
+									position = { 135 30 }
+									size = { 146 123 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_hon_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_hon_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 138 74 }
-									size = { 170 83 }
+									position = { 135 30 }
+									size = { 146 123 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_hon_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_hon_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 138 74 }
-									size = { 170 83 }
+									position = { 135 30 }
+									size = { 146 123 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_hon_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_hon_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 138 74 }
-									size = { 170 83 }
+									position = { 135 30 }
+									size = { 146 123 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_hon_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_hon_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 259 101 }
-									size = { 48 94 }
+									position = { 250 68 }
+									size = { 63 139 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_mos_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_mos_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 259 101 }
-									size = { 48 94 }
+									position = { 250 68 }
+									size = { 63 139 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_mos_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_mos_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 259 101 }
-									size = { 48 94 }
+									position = { 250 68 }
+									size = { 63 139 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_mos_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_mos_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 259 101 }
-									size = { 48 94 }
+									position = { 250 68 }
+									size = { 63 139 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_mos_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_mos_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 259 101 }
-									size = { 48 94 }
+									position = { 250 68 }
+									size = { 63 139 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_mos_foreign.dds"
 									datacontext = "[GetScriptedGui('ca_mm_mos_foreign')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 184 106 }
-									size = { 121 108 }
+									position = { 179 92 }
+									size = { 108 121 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_nic_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_nic_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 184 106 }
-									size = { 121 108 }
+									position = { 179 92 }
+									size = { 108 121 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_nic_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_nic_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 184 106 }
-									size = { 121 108 }
+									position = { 179 92 }
+									size = { 108 121 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_nic_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_nic_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 184 106 }
-									size = { 121 108 }
+									position = { 179 92 }
+									size = { 108 121 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_nic_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_nic_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 232 205 }
-									size = { 29 40 }
+									position = { 225 197 }
+									size = { 34 43 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_gnc_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cos_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 232 205 }
-									size = { 29 40 }
+									position = { 225 197 }
+									size = { 34 43 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_gnc_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cos_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 232 205 }
-									size = { 29 40 }
+									position = { 225 197 }
+									size = { 34 43 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_gnc_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cos_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 232 205 }
-									size = { 29 40 }
+									position = { 225 197 }
+									size = { 34 43 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_gnc_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cos_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 232 202 }
-									size = { 94 85 }
+									position = { 238 201 }
+									size = { 75 84 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_cos_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cos_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 232 202 }
-									size = { 94 85 }
+									position = { 238 201 }
+									size = { 75 84 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_cos_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cos_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 232 202 }
-									size = { 94 85 }
+									position = { 238 201 }
+									size = { 75 84 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_cos_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cos_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 232 202 }
-									size = { 94 85 }
+									position = { 238 201 }
+									size = { 75 84 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_cos_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_cos_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
+								# 18 nov 2026: Talamanca (sigue a Costa Rica)
 								icon = {
-									position = { 310 247 }
-									size = { 35 31 }
+									position = { 288 231 }
+									size = { 29 27 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_tal_loyal.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_loyal')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 288 231 }
+									size = { 29 27 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_tal_wavering.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_wavering')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 288 231 }
+									size = { 29 27 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_tal_rebel.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_rebel')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 288 231 }
+									size = { 29 27 }
+									texture = "gfx/interface/ca_minimap/ca_minimap_tal_separated.dds"
+									datacontext = "[GetScriptedGui('ca_mm_cos_separated')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								}
+								icon = {
+									position = { 304 240 }
+									size = { 28 25 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_boc_loyal.dds"
 									datacontext = "[GetScriptedGui('ca_mm_boc_loyal')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 310 247 }
-									size = { 35 31 }
+									position = { 304 240 }
+									size = { 28 25 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_boc_wavering.dds"
 									datacontext = "[GetScriptedGui('ca_mm_boc_wavering')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 310 247 }
-									size = { 35 31 }
+									position = { 304 240 }
+									size = { 28 25 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_boc_rebel.dds"
 									datacontext = "[GetScriptedGui('ca_mm_boc_rebel')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
-									position = { 310 247 }
-									size = { 35 31 }
+									position = { 304 240 }
+									size = { 28 25 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_boc_separated.dds"
 									datacontext = "[GetScriptedGui('ca_mm_boc_separated')]"
 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 								icon = {
 									position = { 0 0 }
-									size = { 360 287 }
+									size = { 356 288 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_labels.dds"
 								}
 								icon = {
 									position = { 0 0 }
-									size = { 360 287 }
+									size = { 356 288 }
 									texture = "gfx/interface/ca_minimap/ca_minimap_frame.dds"
 								}
 							}
