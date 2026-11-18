@@ -38,8 +38,10 @@
  # 2. MOVEMENTS, LOBBIES & MODIFIERS
  # ==========================================
  movement_ca_federalist: "Federalist Movement"
+ movement_ca_unitarian_name: "Federalist Movement"
  movement_ca_federalist_desc: "A political movement seeking to grant ultimate sovereignty to the individual states."
- movement_ca_unitarian: "Unitarian Movement"
+ movement_ca_unitarian: "Centralist/Unitarian Movement"
+ movement_ca_federalist_name: "Centralist/Unitarian Movement"
  movement_ca_unitarian_desc: "A political movement demanding absolute centralization of power in the capital."
  
  lobby_pro_federalist: "Pro-Federation Lobby"
@@ -123,9 +125,11 @@
  je_national_geological_survey:0 "National Geological Survey"
  je_national_geological_survey_reason:0 "To fully exploit our nation's hidden natural wealth, we must commission a comprehensive geological survey. Mapping our untamed regions will reveal new veins of minerals and potential excavation sites."
  je_annex_subject_overlord:0 "Integrating [SCOPE.sCountry('annex_target_scope').GetName]"
+ je_annex_subject_overlord_concluded:0 "Integrating a Subject"
  je_annex_subject_overlord_reason:0 "We have begun the process of fully integrating our subject into our nation. As long as no foreign power interferes, its institutions will gradually merge with ours."
  je_annex_subject_overlord_goal:0 "Months of integration"
  je_annex_subject_junior:0 "Integration into [SCOPE.sCountry('overlord_scope').GetName]"
+ je_annex_subject_junior_concluded:0 "Integration into the Overlord"
  je_annex_subject_junior_reason:0 "Our overlord has begun the process of absorbing our nation. Unless a foreign power intervenes, we will soon cease to exist as a separate state."
  je_annex_subject_junior_goal:0 "Months of integration"
 

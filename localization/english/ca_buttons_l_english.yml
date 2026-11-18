@@ -24,28 +24,16 @@
  CA_MM_CIP_INFO:0 "Loyalty: #bold [GetPlayer.MakeScope.Var('frca_loyalty_cip').GetValue|0]#! / 3\nLoyal: +1 to the Federation bar each month. Rebel: -1. Separated: -2 (-1 with peace)."
  CA_MM_BOC_NAME:0 "Bocas del Toro"
  CA_MM_BOC_TT:0 "#bold Bocas del Toro#!\nThe Caribbean coast disputed with New Granada. Green: held by the Federation. Grey: lost."
- CA_MM_BOC_INFO:0 "The Caribbean coast disputed with New Granada and Britain.
-Effective control: #bold [GetGlobalVariable('ca_bocas_control').GetValue|0]#! / 100
-With 60 or more, a British or Granadine seizure fails."
- CA_MM_PET_TT:0 "#bold Petén#!
-Part of the State of Guatemala; it shares its loyalty.
-Click to see its panel."
- CA_MM_GNC_TT:0 "#bold Guanacaste#!
-The Nicoya district, part of the State of Costa Rica since 1824; it shares its loyalty.
-Click to see its panel."
- CA_MM_MOS_TT:0 "#bold Mosquito Coast#!
-Red: held by the Miskito Kingdom under British protection. Otherwise it follows Nicaragua.
-Click to see its panel."
- CA_MM_BLZ_TT:0 "#bold Belize#!
-Red: British settlement. Otherwise it follows Guatemala.
-Click to see the Petén panel."
+ CA_MM_BOC_INFO:0 "The Caribbean coast disputed with New Granada and Britain.\nEffective control: #bold [GetGlobalVariable('ca_bocas_control').GetValue|0]#! / 100\nWith 60 or more, a British or Granadine seizure fails."
+ CA_MM_PET_TT:0 "#bold Petén#!\nPart of the State of Guatemala; it shares its loyalty.\nClick to see its panel."
+ CA_MM_GNC_TT:0 "#bold Guanacaste#!\nThe Nicoya district, part of the State of Costa Rica since 1824; it shares its loyalty.\nClick to see its panel."
+ CA_MM_MOS_TT:0 "#bold Mosquito Coast#!\nRed: held by the Miskito Kingdom under British protection. Otherwise it follows Nicaragua.\nClick to see its panel."
+ CA_MM_BLZ_TT:0 "#bold Belize#!\nRed: British settlement. Otherwise it follows Guatemala.\nClick to see the Petén panel."
  CA_MM_ACTION_CAMPAIGN:0 "Federal campaign"
  CA_MM_ACTION_NEGOTIATE:0 "Negotiate autonomy"
  CA_MM_ACTION_INTENDANT:0 "Military intendant"
  CA_MM_ACTION_SIEGE:0 "State of siege"
  CA_MM_ACTION_COOPT:0 "Co-opt a caudillo"
- ca_mm_cooldown_tt:0 "This action was taken recently in this State."
- ca_mm_member_tt:0 "The State is still part of the Federation (not Separated)."
  ca_button_convoke_diet:0 "Convoke the Diet"
  ca_button_convoke_diet_desc:0 "Call the delegates of the States to a Diet to sign a Pact of Confederation. The Federation will not survive as it was, but the Union may survive as a Confederation."
  ca_button_supreme_levy:0 "Supreme Levy"
