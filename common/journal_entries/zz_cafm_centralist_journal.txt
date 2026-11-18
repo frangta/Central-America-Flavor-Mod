@@ -1,0 +1,349 @@
+############################################################################
+# CAFM - Ruta centralista de la UCA (18 nov 2026)
+# Diario je_ca_centralist_republic. Lo abre ca_central_america.119 (opcion B) desde
+# ca_frca_choose_route. En esta ruta el diario general (je_historic_central_america_falls_apart)
+# NO se abre: este diario hace todo lo que el general hace (fases, lealtad, secesiones,
+# frentes, minimapa, D1/D2) y anade lo suyo (unidad, C<->F, apoyo del ejercito, objetivos).
+# Diseno: claude/CAFM_RUTA_CENTRALISTA.md.
+############################################################################
+
+je_ca_centralist_republic = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	should_be_pinned_by_default_involved = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
+
+	possible = {
+		c:UCA ?= THIS
+		has_variable = ca_faction_centralist
+	}
+
+	# Como el diario general: fase I, lealtad inicial, frentes en 0 y Bocas.
+	immediate = {
+		ca_frca_journal_setup = yes
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_centralist_status_crisis
+				trigger = {
+					scope:journal_entry = { "scripted_bar_progress(ca_frca_unity_bar)" < ca_cen_unity_crisis }
+				}
+			}
+			triggered_desc = {
+				desc = je_frca_status_centralist_4
+				trigger = { ca_frca_phase_ge = { VALUE = 4 } }
+			}
+			triggered_desc = {
+				desc = je_frca_status_centralist_3
+				trigger = { ca_frca_phase_ge = { VALUE = 3 } }
+			}
+			triggered_desc = {
+				desc = je_frca_status_centralist_2
+				trigger = { ca_frca_phase_ge = { VALUE = 2 } }
+			}
+			triggered_desc = {
+				desc = je_ca_centralist_status_objectives
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	# Fase I: objetivos
+	scripted_button = ca_cen_button_reorganize
+	scripted_button = ca_cen_button_propaganda
+	scripted_button = ca_cen_button_campaign
+	scripted_button = ca_cen_button_conspiracy
+	scripted_button = ca_cen_button_coup
+	# Reformas
+	scripted_button = ca_cen_button_dissolve_congress
+	scripted_button = ca_cen_button_capital_guatemala
+	scripted_button = ca_cen_button_concordat
+	scripted_button = ca_cen_button_repeal_livingston
+	scripted_button = ca_cen_button_press_watch
+	scripted_button = ca_cen_button_monopolies
+	scripted_button = ca_cen_button_supreme_levy
+	scripted_button = ca_cen_button_standing_army
+	# Intervenciones (en los dos diarios)
+	scripted_button = je_nicaragua_intervention_central_america_button
+	scripted_button = je_costa_rica_intervention_central_america_button
+	scripted_button = je_honduras_intervention_central_america_button
+	scripted_button = je_guatemala_intervention_central_america_button
+	scripted_button = je_el_salvador_intervention_central_america_button
+	scripted_button = je_los_altos_intervention_central_america_button
+	scripted_button = ca_request_intervention_button
+
+	scripted_progress_bar = ca_frca_unity_bar
+	scripted_progress_bar = ca_frca_cvf_bar
+	scripted_progress_bar = ca_cen_army_bar
+	weight = 100
+
+	# Minimapa de lealtad y panel de la ruta (leen la UCA con JournalEntry.GetCountry)
+	widget = {
+		gui = "gui/ca_frca_minimap.gui"
+		name = "ca_frca_minimap_widget"
+		container = "custom_widget_container_1"
+	}
+	widget = {
+		gui = "gui/ca_uca_panel.gui"
+		name = "ca_uca_header_widget"
+		container = "custom_widget_container_je_icon"
+	}
+	widget = {
+		gui = "gui/ca_uca_panel.gui"
+		name = "ca_uca_tabs_widget"
+		container = "custom_widget_container_2"
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_frca_monthly_update = yes # lealtad, miembros y fases (ca_cen_phase_update)
+			ca_frca_secession_monthly = yes
+			ca_frca_federal_war_check = yes
+			ca_route_apply_pending_amendments = yes
+			ca_livingston_historic_repeal = yes
+			ca_bloc_monthly = yes # C<->F (avisos), poder de los bandos e ideologias de los IG
+			ca_cen_monthly = yes # objetivos, golpe, eleccion, separatistas y leyes
+		}
+		events = {
+			ca_central_america.1 # La propuesta del periodico (Los Altos)
+			ca_central_america.121 # El peso de Guatemala (1836-1837)
+			ca_central_america.120 # El grito del sexto estado
+			ca_central_america.3 # Establecimiento de Los Altos
+			ca_central_america.14 # Los Codigos Livingston (ago 1836 - ene 1837)
+			ca_central_america.15 # El colera en Guatemala
+			ca_central_america.20 # Separatismo en Guatemala
+			ca_central_america.19 # Separatismo en Nicaragua
+			ca_central_america.46 # Independencia de Nicaragua
+			ca_central_america.18 # Separatismo en Costa Rica
+			ca_central_america.45 # Independencia de Costa Rica
+			ca_central_america.79 # Decreto del 30 may 1838 (tras apartar a Morazan)
+			ca_central_america.6 # Bocas del Toro: introduccion
+			ca_central_america.9 # Bocas del Toro: la Federacion decide
+			ca_central_america.10 # Bocas del Toro: la dependencia
+			ca_central_america.12 # La usurpacion granadina
+			ca_central_america.62 # El Istmo pide unirse
+			ca_central_america.42 # La guerra federal
+			ca_central_america.43 # Derrota en la guerra federal
+			ca_central_america.44 # Victoria en la guerra federal
+			ca_central_america.77 # El exilio de Morazan
+			ca_central_america.151 # Frente britanico perdido
+			ca_central_america.153 # Frente mexicano perdido
+			ca_central_america.155 # Frente conservador perdido
+			ca_central_america.157 # Frente de caudillos perdido
+			ca_central_america.21 # Separatismo en Honduras
+			ca_central_america.48 # Independencia de Honduras
+			ca_central_america.47 # Independencia de Guatemala
+			ca_central_america.22 # Separatismo en El Salvador
+			ca_central_america.99 # Independencia de El Salvador
+		}
+		random_events = {
+			90 = 0
+			15 = ca_central_america.150
+			15 = ca_central_america.152
+			15 = ca_central_america.154
+			15 = ca_central_america.156
+			# Ambiente de la ruta centralista (5 anos de espera cada uno)
+			8 = ca_centralist_events.16
+			8 = ca_centralist_events.17
+			8 = ca_centralist_events.18
+			8 = ca_centralist_events.19
+			4 = ca_centralist_events.20
+		}
+	}
+
+	# La UCA desaparece
+	outcome = {
+		conclusion_desc = je_standard_failure_conclusion_desc
+		flags = { hidden invalid_outcome }
+		trigger = {
+			NOT = { exists = c:UCA }
+		}
+		effect = { }
+	}
+
+	# Exito: la Republica unitaria o B (Union por la espada, 1845)
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_standard_completion_conclusion_desc
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				# La Republica unitaria
+				AND = {
+					custom_tooltip = { text = je_frca_outcome_unitary_tt always = yes }
+					custom_tooltip = {
+						text = je_ca_centralist_unity_full_tt
+						scope:journal_entry = { "scripted_bar_progress(ca_frca_unity_bar)" >= ca_cen_unity_complete }
+					}
+					custom_tooltip = {
+						text = je_frca_unitary_phase_tt
+						ca_frca_phase_ge = { VALUE = 4 }
+					}
+					custom_tooltip = {
+						text = je_frca_unitary_congress_tt
+						has_variable = frca_congress_dissolved
+					}
+					custom_tooltip = {
+						text = je_frca_unitary_capital_tt
+						has_variable = frca_capital_guatemala
+					}
+					custom_tooltip = {
+						text = je_frca_unitary_army_tt
+						has_variable = frca_standing_army
+					}
+					custom_tooltip = {
+						text = je_frca_unitary_power_tt
+						ca_bloc_power_centralist >= ca_bloc_unitary_power_min
+					}
+					custom_tooltip = {
+						text = je_frca_core_regions_tt
+						ca_frca_holds_core_regions = yes
+					}
+					is_at_war = no
+				}
+				# B. Union por la espada
+				AND = {
+					custom_tooltip = { text = je_frca_outcome_b_tt always = yes }
+					custom_tooltip = { text = frca_survived_time_tt game_date >= 1845.1.1 }
+					custom_tooltip = {
+						text = uca_won_war_tt
+						has_variable = frca_won_war
+					}
+					custom_tooltip = {
+						text = je_frca_core_regions_tt
+						ca_frca_holds_core_regions = yes
+					}
+					custom_tooltip = {
+						text = je_ca_centralist_unity_b_tt
+						scope:journal_entry = { "scripted_bar_progress(ca_frca_unity_bar)" >= ca_cen_unity_threshold_b }
+					}
+					custom_tooltip = {
+						text = je_frca_fronts_lost_max_2_tt
+						ca_frca_fronts_lost_count <= 2
+					}
+				}
+			}
+		}
+		effect = {
+			ca_frca_journal_cleanup = yes
+			if = {
+				limit = { has_variable = frca_won_war game_date >= 1845.1.1 }
+				set_variable = frca_outcome_b
+				ca_frca_outcome_b = yes
+			}
+			else = {
+				set_variable = frca_outcome_unitary
+				ca_frca_outcome_unitary = yes
+			}
+			ca_frca_fire_hook = { HOOK = 5 }
+		}
+	}
+
+	# Fracaso (D1): la Republica se rompe
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_standard_failure_conclusion_desc
+		color = "blue_negative"
+		trigger = {
+			OR = {
+				custom_tooltip = {
+					text = je_ca_centralist_unity_zero_tt
+					scope:journal_entry = { "scripted_bar_progress(ca_frca_unity_bar)" <= 0 }
+				}
+				custom_tooltip = {
+					text = je_frca_fail_independent_tt
+					ca_core_states_independent_count >= 3
+				}
+				custom_tooltip = {
+					text = frca_lost_war_tt
+					has_variable = frca_lost_war
+				}
+				custom_tooltip = {
+					text = je_frca_fail_recognized_tt
+					ca_frca_core_independence_recognized = yes
+				}
+				custom_tooltip = {
+					text = je_frca_fail_liberal_revolution_tt
+					ca_fvc_liberal_revolution = yes
+				}
+				custom_tooltip = {
+					text = je_ca_centralist_fail_separatist_tt
+					ca_cen_separatist_revolt = yes
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = { ca_fvc_liberal_revolution = yes }
+				set_variable = frca_liberal_revolution
+				trigger_event = { id = cafm_uca_route.6 popup = yes }
+			}
+			else_if = {
+				limit = { ca_cen_separatist_revolt = yes }
+				set_variable = frca_separatist_revolt
+			}
+			set_variable = frca_outcome_d1
+			ca_frca_journal_cleanup = yes
+			activate_law = law_type:law_ca_caudillismo # D1 trae la era de los caudillos (decidido)
+			trigger_event = { id = ca_central_america.13 popup = yes }
+			custom_tooltip = central_america_capital_tt
+			hidden_effect = {
+				ig:ig_landowners ?= {
+					remove_ideology = ideology_central_american_reactionary
+					remove_ideology = ideology_central_american_reactionary_2
+					add_ideology = ideology_caudillismo
+				}
+				ig:ig_armed_forces ?= {
+					remove_ideology = ideology_central_american_reactionary
+					remove_ideology = ideology_central_american_reactionary_2
+				}
+				ig:ig_devout ?= {
+					add_ideology = ideology_paternalistic
+					remove_ideology = ideology_central_american_reactionary
+				}
+				remove_variable = is_frca_var
+			}
+		}
+	}
+
+	# D2: 1845 sin completar (por fecha; se dejan 7 dias para comprobar B)
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = JOURNAL_ENTRY_TIMEOUT_CONCLUSION_DESC
+		trigger = {
+			custom_tooltip = { text = je_ca_centralist_deadline_tt game_date >= 1845.1.8 }
+		}
+		effect = {
+			custom_tooltip = je_frca_timeout_d2_tt
+			set_variable = frca_outcome_d2
+			ca_frca_journal_cleanup = yes
+			trigger_event = { id = ca_central_america.122 popup = yes } # La Federacion se desvanece
+			ca_frca_fire_hook = { HOOK = 5 }
+		}
+	}
+	# Respaldo por si el outcome por fecha no salta
+	outcome = {
+		header = JOURNAL_ENTRY_TIMEOUT
+		effect_header = JOURNAL_ENTRY_ON_TIMEOUT
+		conclusion_desc = JOURNAL_ENTRY_TIMEOUT_CONCLUSION_DESC
+		flags = { timeout }
+		effect = {
+			set_variable = frca_outcome_d2
+			ca_frca_journal_cleanup = yes
+			trigger_event = { id = ca_central_america.122 popup = yes }
+		}
+	}
+	timeout = 3400
+
+	transferable = no
+}

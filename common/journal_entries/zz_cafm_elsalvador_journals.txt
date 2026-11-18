@@ -1,0 +1,286 @@
+﻿# =====================================================================
+# CAFM — EL SALVADOR (1836–1851): los tres diarios.
+# Estilo igual al de Honduras, Nicaragua y Guatemala: barra por variable
+# (current_value + goal_add_value), pulso semanal con las etapas por fecha
+# y pulso mensual con la deriva.
+#
+# je_ca_els_bastion   (1839–1841) El último bastión federal. Subir es malo.
+# je_ca_els_malespin  (1843–1846) El caudillo. Subir es malo.
+# je_ca_els_arada     (1848–1851) El camino a La Arada. Subir acerca la guerra.
+# =====================================================================
+
+# =====================================================================
+# EL ÚLTIMO BASTIÓN (1839–1841)
+# La añade ca_el_salvador_events.14 (Guatemala se retira), que pone
+# var:els_disolucion en 40 ANTES de añadir el diario.
+# =====================================================================
+je_ca_els_bastion = {
+	icon = "gfx/interface/icons/event_icons/event_flags/event_uca_flag.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:els_disolucion
+	}
+	goal_add_value = {
+		add = 60
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_els_bastion_status_sola
+				trigger = { var:els_disolucion >= 70 }
+			}
+			triggered_desc = {
+				desc = je_ca_els_bastion_status_media
+				trigger = { var:els_disolucion >= 40 }
+			}
+			triggered_desc = {
+				desc = je_ca_els_bastion_status_viva
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	# La Federación sobrevive: historia alternativa.
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_els_bastion_conclusion_salvada
+		color = "gold_positive"
+		trigger = {
+			var:els_disolucion <= 0
+			NOT = { has_variable = els_federacion_disuelta }
+		}
+		effect = {
+			set_variable = els_federacion_salvada
+			add_modifier = { name = els_union_salvada months = 120 }
+			remove_variable = els_disolucion
+		}
+	}
+
+	# El Salvador disuelve la Federación (lo marca .18).
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_els_bastion_conclusion_disuelta
+		color = "blue_negative"
+		trigger = {
+			has_variable = els_federacion_disuelta
+		}
+		effect = {
+			remove_variable = els_disolucion
+			if = {
+				limit = { has_modifier = els_ultimo_bastion }
+				remove_modifier = els_ultimo_bastion
+			}
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_els_disolucion_clamp = yes
+			ca_els_disolucion_thresholds = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_els_disolucion_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}
+
+# =====================================================================
+# EL CAUDILLO MALESPÍN (1843–1846)
+# La añade ca_el_salvador_events.25, que pone var:els_malespin en 20.
+# =====================================================================
+je_ca_els_malespin = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:els_malespin
+	}
+	goal_add_value = {
+		add = 80
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_els_malespin_status_regimen
+				trigger = { var:els_malespin >= 80 }
+			}
+			triggered_desc = {
+				desc = je_ca_els_malespin_status_alta
+				trigger = { var:els_malespin >= 40 }
+			}
+			triggered_desc = {
+				desc = je_ca_els_malespin_status_baja
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	# Lo deponen (2 feb 1845) o muere (25 nov 1846).
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_els_malespin_conclusion_caido
+		color = "gold_positive"
+		trigger = {
+			has_variable = els_malespin_caido
+		}
+		effect = {
+			remove_variable = els_malespin
+			if = {
+				limit = { has_modifier = els_regimen_malespin }
+				remove_modifier = els_regimen_malespin
+			}
+		}
+	}
+
+	# El caudillo se queda con el Estado.
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_els_malespin_conclusion_perpetuo
+		color = "blue_negative"
+		trigger = {
+			OR = {
+				has_variable = els_malespin_perpetuo
+				AND = {
+					game_date >= 1847.1.1
+					var:els_malespin >= 100
+				}
+			}
+		}
+		effect = {
+			set_variable = els_malespin_perpetuo
+			add_modifier = { name = els_regimen_malespin months = 120 }
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_els_malespin_clamp = yes
+			ca_els_malespin_thresholds = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_els_malespin_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}
+
+# =====================================================================
+# EL CAMINO A LA ARADA (1848–1851)
+# La añade ca_el_salvador_events.36 (Vasconcelos), que pone var:els_arada en 0.
+# Cuanto más alta esté el 2 de febrero de 1851, mejor le va a El Salvador.
+# =====================================================================
+je_ca_els_arada = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+
+	activation_description = {
+		always = yes
+	}
+
+	current_value = {
+		value = root.var:els_arada
+	}
+	goal_add_value = {
+		add = 100
+	}
+	progressbar = yes
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ca_els_arada_status_listo
+				trigger = { var:els_arada >= 75 }
+			}
+			triggered_desc = {
+				desc = je_ca_els_arada_status_medio
+				trigger = { var:els_arada >= 40 }
+			}
+			triggered_desc = {
+				desc = je_ca_els_arada_status_bajo
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	# La guerra se gana, o nunca llega a haberla.
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		conclusion_desc = je_ca_els_arada_conclusion_victoria
+		color = "gold_positive"
+		trigger = {
+			OR = {
+				has_variable = els_arada_ganada
+				AND = {
+					game_date >= 1851.3.1
+					NOT = { has_variable = els_arada_perdida }
+					NOT = { has_variable = els_arada_ganada }
+				}
+			}
+		}
+		effect = {
+			remove_variable = els_arada
+		}
+	}
+
+	# La derrota del 2 de febrero de 1851.
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		conclusion_desc = je_ca_els_arada_conclusion_derrota
+		color = "blue_negative"
+		trigger = {
+			has_variable = els_arada_perdida
+		}
+		effect = {
+			remove_variable = els_arada
+			add_modifier = { name = els_desastre_de_la_arada months = 120 }
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			ca_els_arada_clamp = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ca_els_arada_drift = yes
+		}
+	}
+
+	weight = 200
+	transferable = no
+	can_revolution_inherit = no
+}

@@ -47,7 +47,7 @@ je_ca_ig_struggle_armed_forces = {
 		trigger = {
 			OR = {
 				NOT = { exists = ig:ig_armed_forces }
-				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+				NOT = { ca_frca_journal_active = yes } # ruta centralista: cualquiera de los dos diarios
 			}
 		}
 		effect = {
@@ -156,7 +156,7 @@ je_ca_ig_struggle_devout = {
 		trigger = {
 			OR = {
 				NOT = { exists = ig:ig_devout }
-				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+				NOT = { ca_frca_journal_active = yes } # ruta centralista: cualquiera de los dos diarios
 			}
 		}
 		effect = {
@@ -265,7 +265,7 @@ je_ca_ig_struggle_industrialists = {
 		trigger = {
 			OR = {
 				NOT = { exists = ig:ig_industrialists }
-				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+				NOT = { ca_frca_journal_active = yes } # ruta centralista: cualquiera de los dos diarios
 			}
 		}
 		effect = {
@@ -374,7 +374,7 @@ je_ca_ig_struggle_intelligentsia = {
 		trigger = {
 			OR = {
 				NOT = { exists = ig:ig_intelligentsia }
-				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+				NOT = { ca_frca_journal_active = yes } # ruta centralista: cualquiera de los dos diarios
 			}
 		}
 		effect = {
@@ -483,7 +483,7 @@ je_ca_ig_struggle_landowners = {
 		trigger = {
 			OR = {
 				NOT = { exists = ig:ig_landowners }
-				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+				NOT = { ca_frca_journal_active = yes } # ruta centralista: cualquiera de los dos diarios
 			}
 		}
 		effect = {
@@ -592,7 +592,7 @@ je_ca_ig_struggle_petty_bourgeoisie = {
 		trigger = {
 			OR = {
 				NOT = { exists = ig:ig_petty_bourgeoisie }
-				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+				NOT = { ca_frca_journal_active = yes } # ruta centralista: cualquiera de los dos diarios
 			}
 		}
 		effect = {
@@ -701,7 +701,7 @@ je_ca_ig_struggle_rural_folk = {
 		trigger = {
 			OR = {
 				NOT = { exists = ig:ig_rural_folk }
-				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+				NOT = { ca_frca_journal_active = yes } # ruta centralista: cualquiera de los dos diarios
 			}
 		}
 		effect = {
@@ -810,7 +810,7 @@ je_ca_ig_struggle_trade_unions = {
 		trigger = {
 			OR = {
 				NOT = { exists = ig:ig_trade_unions }
-				NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+				NOT = { ca_frca_journal_active = yes } # ruta centralista: cualquiera de los dos diarios
 			}
 		}
 		effect = {

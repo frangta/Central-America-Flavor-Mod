@@ -53,22 +53,6 @@ je_historic_central_america_falls_apart = {
 				}
 			}
 			triggered_desc = {
-				desc = je_frca_status_centralist_4
-				trigger = { ca_frca_route_centralist = yes ca_frca_phase_ge = { VALUE = 4 } }
-			}
-			triggered_desc = {
-				desc = je_frca_status_centralist_3
-				trigger = { ca_frca_route_centralist = yes ca_frca_phase_ge = { VALUE = 3 } }
-			}
-			triggered_desc = {
-				desc = je_frca_status_centralist_2
-				trigger = { ca_frca_route_centralist = yes ca_frca_phase_ge = { VALUE = 2 } }
-			}
-			triggered_desc = {
-				desc = je_frca_status_centralist_1
-				trigger = { ca_frca_route_centralist = yes }
-			}
-			triggered_desc = {
 				desc = je_frca_status_federal_4
 				trigger = { ca_frca_phase_ge = { VALUE = 4 } }
 			}
@@ -97,15 +81,8 @@ je_historic_central_america_falls_apart = {
 	scripted_button = je_los_altos_intervention_central_america_button # F9
 	scripted_button = federal_congress_decree_button
 	scripted_button = ca_button_convoke_diet # F9: ruta federal, fase IV
-	# F9: ruta centralista (globales; los botones por estado estan en el minimapa)
-	scripted_button = ca_button_dissolve_congress
-	scripted_button = ca_button_concordat
-	scripted_button = ca_button_repeal_livingston
-	scripted_button = ca_button_capital_guatemala
-	scripted_button = ca_button_federal_monopolies
-	scripted_button = ca_button_press_watch
-	scripted_button = ca_button_supreme_levy
-	scripted_button = ca_button_standing_army
+	# Ruta centralista (18 nov 2026): sus botones pasan a je_ca_centralist_republic
+	# (zz_cafm_centralist_journal.txt); este diario ya no se abre en esa ruta.
 	scripted_button = ca_request_intervention_button # F7: peticiones de intervencion de los estados
 	# Entrega 2 UCA: botones nuevos de la ruta federal (zz_cafm_uca_buttons.txt)
 	scripted_button = ca_button_reform_1835
@@ -199,11 +176,7 @@ je_historic_central_america_falls_apart = {
 			8 = ca_federalist_events.17
 			8 = ca_federalist_events.18
 			8 = ca_federalist_events.19
-			8 = ca_centralist_events.16
-			8 = ca_centralist_events.17
-			8 = ca_centralist_events.18
-			8 = ca_centralist_events.19
-			4 = ca_centralist_events.20
+			# Ruta centralista (18 nov 2026): sus eventos de ambiente pasan a je_ca_centralist_republic
 		}
 	}
 

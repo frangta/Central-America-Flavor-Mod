@@ -54,7 +54,7 @@ ca_on_game_started = {
 		c:UCA ?= {
 			if = {
 				limit = {
-					has_journal_entry = je_historic_central_america_falls_apart
+					ca_frca_journal_active = yes # ruta centralista: cualquiera de los dos diarios
 					NOT = { has_variable = frca_phase }
 				}
 				ca_frca_journal_setup = yes

@@ -172,9 +172,22 @@ je_ca_historic_situation_in_elsalvador = {
 			ca_el_salvador_events.10 # La primera eleccion constitucional (sep 1842)
 			ca_el_salvador_events.11 # El desafio de Malespin (feb 1844)
 			ca_el_salvador_events.12 # La caida de Malespin (feb 1846)
-			ca_el_salvador_events.13 # Vasconcelos (feb 1848)
+			ca_el_salvador_events.13 # Vasconcelos (feb 1848); la .36 la marca como vista
 		}
 	}
+
+	# CAFM El Salvador 1836-1851: las etapas por fecha de las 4 fases.
+	on_weekly_pulse = {
+		effect = {
+			ca_els_beats = yes
+		}
+	}
+
+	# CAFM El Salvador 1836-1851: los 4 botones
+	scripted_button = ca_button_els_pagar_federal
+	scripted_button = ca_button_els_llamar_estados
+	scripted_button = ca_button_els_cortejar_obispo
+	scripted_button = ca_button_els_comprar_fusiles
 
 	weight = 100
 	transferable = no
