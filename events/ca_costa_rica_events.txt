@@ -1217,9 +1217,7 @@ ca_costa_rica_events.18 = {
         name = ca_costa_rica_events.18.a
         default_option = yes
         # CAFM fix: frca_support es una barra, no una variable
-        je:je_historic_central_america_falls_apart ?= {
-            add_progress = { value = -15 name = frca_support_bar }
-        }
+        ca_frca_bar_add = { VALUE = -15 } # ruta centralista: mueve el diario que este abierto
         c:COS ?= {
             add_modifier = { name = ca_federal_betrayal_disapproval months = 60 }
             change_relations = { country = c:UCA value = -50 }
@@ -1231,9 +1229,7 @@ ca_costa_rica_events.18 = {
     # Alternativa: a las armas por Centroamerica
     option = {
         name = ca_costa_rica_events.18.b
-        je:je_historic_central_america_falls_apart ?= {
-            add_progress = { value = 30 name = frca_support_bar }
-        }
+        ca_frca_bar_add = { VALUE = 30 } # ruta centralista: mueve el diario que este abierto
         c:COS ?= {
             change_relations = { country = c:UCA value = 80 }
             add_loyalists = { value = 0.10 culture = cu:costa_rican }

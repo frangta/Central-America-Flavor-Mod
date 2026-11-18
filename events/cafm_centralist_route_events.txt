@@ -1,0 +1,529 @@
+﻿namespace = cafm_cen
+
+############################################################################
+# CAFM - Ruta centralista de la UCA (18 nov 2026)
+# Eventos del diario je_ca_centralist_republic. Solo el jugador (la IA no juega esta ruta).
+#  .1  objetivo 1: el ejercito abraza el centralismo
+#  .2  objetivo 2: apoyo de los Estados
+#  .3  la conspiracion contra Morazan (asesinato)
+#  .4  el golpe se prepara · .5 rumores en los cuarteles · .6 golpe con exito · .7 golpe descubierto
+#  .8  la eleccion federal de 1838 · .9 el ejercito al margen de la campana
+#  .10 Morazan contraataca (plazo: 1 dic 1838)
+#  .11 aparecen los separatistas
+#  .12-.14 leyes de la Republica (unitaria, guardia nacional, religion de Estado)
+############################################################################
+
+cafm_cen.1 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.1.t
+	desc = cafm_cen.1.d
+	flavor = cafm_cen.1.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		NOT = { has_variable = ca_cen_army_converted }
+	}
+
+	option = {
+		name = cafm_cen.1.a
+		default_option = yes
+		ca_cen_army_convert = yes
+		custom_tooltip = cafm_cen.1.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_cen.2 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.2.t
+	desc = cafm_cen.2.d
+	flavor = cafm_cen.2.f
+	event_image = { video = "southamerica_aristocrats" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+	}
+
+	option = {
+		name = cafm_cen.2.a
+		default_option = yes
+		ca_cen_unity_add = { VALUE = ca_cen_unity_obj_states }
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_cen.3 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.3.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = cafm_cen.3.d_success
+				trigger = { has_variable = ca_cen_kill_result var:ca_cen_kill_result = flag:success }
+			}
+			triggered_desc = {
+				desc = cafm_cen.3.d_failure
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = cafm_cen.3.f
+	event_image = { video = "unspecific_vandalized_storefront" }
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		has_variable = ca_cen_kill_result
+	}
+
+	# La conspiracion triunfa: Morazan muere y un general unitario toma el poder.
+	option = {
+		name = cafm_cen.3.a
+		default_option = yes
+		trigger = { var:ca_cen_kill_result = flag:success }
+		ca_cen_install_general_ruler = yes
+		ca_cen_morazan_out = { KILL = yes }
+		ca_cen_morazan_removed = { CAUSE = kill }
+		ca_cen_unity_add = { VALUE = ca_cen_unity_morazan_kill }
+		add_modifier = { name = ca_cen_morazan_martyr months = 60 }
+		ca_frca_loyalty_down = { TAG = els }
+		remove_variable = ca_cen_kill_result
+		ai_chance = { base = 100 }
+	}
+	# La conspiracion fracasa: escandalo.
+	option = {
+		name = cafm_cen.3.b
+		trigger = { var:ca_cen_kill_result = flag:failure }
+		ca_cen_army_add = { VALUE = ca_cen_army_scandal }
+		ca_uca_rival_add = { VALUE = ca_fvc_shift_f10 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		remove_variable = ca_cen_kill_result
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_cen.4 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.4.t
+	desc = cafm_cen.4.d
+	flavor = cafm_cen.4.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		has_variable = ca_cen_coup_plot
+	}
+
+	option = {
+		name = cafm_cen.4.a
+		default_option = yes
+		change_variable = { name = ca_cen_coup_plot add = 10 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = cafm_cen.4.b
+		trigger = { ca_mm_can_pay = { VALUE = ca_money_medium } }
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		change_variable = { name = ca_cen_coup_plot add = 20 }
+		ai_chance = { base = 50 }
+	}
+}
+
+cafm_cen.5 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.5.t
+	desc = cafm_cen.5.d
+	flavor = cafm_cen.5.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		has_variable = ca_cen_coup_plot
+	}
+
+	option = {
+		name = cafm_cen.5.a
+		default_option = yes
+		trigger = { ca_mm_can_pay = { VALUE = ca_money_small } }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		change_variable = { name = ca_cen_coup_plot add = 15 }
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = cafm_cen.5.b
+		change_variable = { name = ca_cen_coup_plot add = 5 }
+		add_radicals = { value = small_radicals pop_type = soldiers }
+		ai_chance = { base = 30 }
+	}
+	option = {
+		name = cafm_cen.5.c
+		change_variable = { name = ca_cen_coup_plot add = -15 }
+		ai_chance = { base = 20 }
+	}
+}
+
+cafm_cen.6 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.6.t
+	desc = cafm_cen.6.d
+	flavor = cafm_cen.6.f
+	event_image = { video = "ep1_transfer_of_authority" }
+	icon = "gfx/interface/icons/event_icons/bicorne_hat.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		has_variable = ca_cen_coup_plot
+	}
+
+	option = {
+		name = cafm_cen.6.a
+		default_option = yes
+		if = {
+			limit = { NOT = { has_law = law_type:law_autocracy } }
+			activate_law = law_type:law_autocracy
+		}
+		ca_cen_coup_success = yes
+		ai_chance = { base = 50 }
+	}
+	option = {
+		name = cafm_cen.6.b
+		ca_cen_coup_success = yes
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+		ai_chance = { base = 50 }
+	}
+}
+
+cafm_cen.7 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.7.t
+	desc = cafm_cen.7.d
+	flavor = cafm_cen.7.f
+	event_image = { video = "unspecific_vandalized_storefront" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		has_variable = ca_cen_coup_plot
+	}
+
+	option = {
+		name = cafm_cen.7.a
+		default_option = yes
+		remove_variable = ca_cen_coup_plot
+		set_variable = { name = ca_cen_coup_cd days = 1095 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_p11_ig_purged months = 36 } }
+		ca_cen_army_add = { VALUE = ca_cen_army_scandal }
+		ca_uca_rival_add = { VALUE = ca_fvc_shift_f15 }
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_cen.8 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.8.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = cafm_cen.8.d_won
+				trigger = { has_variable = ca_cen_election_won }
+			}
+			triggered_desc = {
+				desc = cafm_cen.8.d_lost
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = cafm_cen.8.f
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		NOT = { has_variable = frca_morazan_removed }
+	}
+
+	immediate = {
+		if = {
+			limit = { ca_cen_election_centralist > ca_cen_election_federal }
+			set_variable = ca_cen_election_won
+		}
+	}
+
+	# Gana un centralista
+	option = {
+		name = cafm_cen.8.a
+		default_option = yes
+		trigger = { has_variable = ca_cen_election_won }
+		ca_cen_install_civil_ruler = yes
+		ca_cen_morazan_leaves = yes
+		ca_cen_morazan_removed = { CAUSE = election }
+		remove_variable = ca_cen_election_won
+		ai_chance = { base = 100 }
+	}
+	# Morazan, reelegido
+	option = {
+		name = cafm_cen.8.b
+		trigger = { NOT = { has_variable = ca_cen_election_won } }
+		ca_uca_rival_add = { VALUE = ca_fvc_shift_f10 }
+		remove_variable = ca_cen_campaign
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_cen.9 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.9.t
+	desc = cafm_cen.9.d
+	flavor = cafm_cen.9.f
+	event_image = { video = "southamerica_election" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		NOT = { has_variable = frca_morazan_removed }
+	}
+
+	option = {
+		name = cafm_cen.9.a
+		default_option = yes
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_cen_army_neutral months = 2 } }
+		custom_tooltip = cafm_cen.9.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_cen.10 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.10.t
+	desc = cafm_cen.10.d
+	flavor = cafm_cen.10.f
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		NOT = { has_variable = frca_morazan_removed }
+	}
+
+	option = {
+		name = cafm_cen.10.a
+		default_option = yes
+		ca_uca_rival_add = { VALUE = ca_cen_counterattack_shift }
+		trigger_event = { id = cafm_uca_route.4 days = 7 popup = yes }
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_cen.11 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.11.t
+	desc = cafm_cen.11.d
+	flavor = cafm_cen.11.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		NOT = { has_variable = ca_separatists_emerged }
+	}
+
+	option = {
+		name = cafm_cen.11.a
+		default_option = yes
+		set_variable = ca_separatists_emerged
+		# El estado menos leal da el primer paso
+		if = {
+			limit = { ca_frca_loyalty_le = { TAG = nic VALUE = 2 } ca_frca_loyalty_ge = { TAG = nic VALUE = 1 } }
+			ca_frca_loyalty_down = { TAG = nic }
+		}
+		else_if = {
+			limit = { ca_frca_loyalty_le = { TAG = gua VALUE = 2 } ca_frca_loyalty_ge = { TAG = gua VALUE = 1 } }
+			ca_frca_loyalty_down = { TAG = gua }
+		}
+		else_if = {
+			limit = { ca_frca_loyalty_le = { TAG = hon VALUE = 2 } ca_frca_loyalty_ge = { TAG = hon VALUE = 1 } }
+			ca_frca_loyalty_down = { TAG = hon }
+		}
+		else_if = {
+			limit = { ca_frca_loyalty_le = { TAG = cos VALUE = 2 } ca_frca_loyalty_ge = { TAG = cos VALUE = 1 } }
+			ca_frca_loyalty_down = { TAG = cos }
+		}
+		custom_tooltip = cafm_cen.11.a_tt
+		ai_chance = { base = 100 }
+	}
+}
+
+cafm_cen.12 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.12.t
+	desc = cafm_cen.12.d
+	flavor = cafm_cen.12.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		has_variable = frca_congress_dissolved
+		NOT = { has_law_or_variant = law_type:law_ca_central_american_unitary }
+		NOT = { exists = currently_enacting_law }
+	}
+
+	immediate = {
+		set_variable = { name = ca_cen_law_cd days = 365 }
+	}
+
+	option = {
+		name = cafm_cen.12.a
+		default_option = yes
+		set_variable = ca_cen_law_unitary_started
+		start_enactment = law_type:law_ca_central_american_unitary
+		ai_chance = { base = 100 }
+	}
+	option = {
+		name = cafm_cen.12.b
+		set_variable = { name = ca_cen_law_unitary_postponed days = 730 }
+		ai_chance = { base = 0 }
+	}
+}
+
+cafm_cen.13 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.13.t
+	desc = cafm_cen.13.d
+	flavor = cafm_cen.13.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		has_variable = frca_congress_dissolved
+		NOT = { has_law_or_variant = law_type:law_ca_guardia_nacional }
+		NOT = { exists = currently_enacting_law }
+	}
+
+	immediate = {
+		set_variable = { name = ca_cen_law_cd days = 365 }
+	}
+
+	option = {
+		name = cafm_cen.13.a
+		default_option = yes
+		set_variable = ca_cen_law_guard_started
+		start_enactment = law_type:law_ca_guardia_nacional
+		ai_chance = { base = 100 }
+	}
+	option = {
+		name = cafm_cen.13.b
+		set_variable = { name = ca_cen_law_guard_postponed days = 730 }
+		ai_chance = { base = 0 }
+	}
+}
+
+cafm_cen.14 = {
+	type = country_event
+	placement = root
+	title = cafm_cen.14.t
+	desc = cafm_cen.14.d
+	flavor = cafm_cen.14.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:UCA ?= this
+		ca_frca_route_centralist = yes
+		ca_cen_journal_active = yes
+		has_variable = frca_congress_dissolved
+		NOT = { has_law_or_variant = law_type:law_state_religion }
+		NOT = { exists = currently_enacting_law }
+	}
+
+	immediate = {
+		set_variable = { name = ca_cen_law_cd days = 365 }
+	}
+
+	option = {
+		name = cafm_cen.14.a
+		default_option = yes
+		set_variable = ca_cen_law_religion_started
+		start_enactment = law_type:law_state_religion
+		ai_chance = { base = 100 }
+	}
+	option = {
+		name = cafm_cen.14.b
+		set_variable = { name = ca_cen_law_religion_postponed days = 730 }
+		ai_chance = { base = 0 }
+	}
+}
+

@@ -1,0 +1,1214 @@
+﻿namespace = ca_el_salvador_events
+
+############################################################################
+# CAFM — EL SALVADOR 1836–1851.
+#
+# .1                Introducción (ya existía)
+# .14 – .23         Fase 1: el último bastión federal (1839–1841)
+# .24 – .31         Fase 2: el caudillo Malespín (1842–1846)
+# .32 – .34         Fase 3: el añil (1847–1848)
+# .35 – .43         Fase 4: Vasconcelos y La Arada (1848–1851)
+# .9 .10 .11 .12 .13  Los de gobernantes que ya existían
+#
+# Las fechas las lleva ca_els_beats (zz_cafm_elsalvador_effects.txt), llamado
+# por el pulso semanal de je_ca_historic_situation_in_elsalvador.
+############################################################################
+
+ca_el_salvador_events.14 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.14.t
+	desc = ca_el_salvador_events.14.d
+	flavor = ca_el_salvador_events.14.f
+	duration = 3
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+
+	immediate = {
+		set_variable = { name = els_disolucion value = ca_els_disolucion_inicio }
+		if = {
+			limit = { NOT = { has_journal_entry = je_ca_els_bastion } }
+			add_journal_entry = { type = je_ca_els_bastion }
+		}
+	}
+	option = {
+		name = ca_el_salvador_events.14.a
+		default_option = yes
+		set_variable = els_sostener_union
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = {
+			text = els_disolucion_down_5_tt
+			change_variable = { name = els_disolucion subtract = 5 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.14.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		set_variable = els_tesoro_vacio
+		custom_tooltip = {
+			text = els_disolucion_up_10_tt
+			change_variable = { name = els_disolucion add = 10 }
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.15 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.15.t
+	desc = ca_el_salvador_events.15.d
+	flavor = ca_el_salvador_events.15.f
+	duration = 3
+	event_image = { video = "asia_politician_parliament_motion" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_constitutional.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.15.a
+		default_option = yes
+		set_variable = els_cuatro_ministerios
+		add_modifier = { name = els_administracion_canas months = 60 }
+		custom_tooltip = {
+			text = els_disolucion_down_3_tt
+			change_variable = { name = els_disolucion subtract = 3 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.15.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		custom_tooltip = {
+			text = els_disolucion_up_3_tt
+			change_variable = { name = els_disolucion add = 3 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.16 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.16.t
+	desc = ca_el_salvador_events.16.d
+	flavor = ca_el_salvador_events.16.f
+	duration = 3
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.16.a
+		default_option = yes
+		add_modifier = { name = els_pagar_ejercito_federal months = 24 }
+		custom_tooltip = {
+			text = els_disolucion_down_5_tt
+			change_variable = { name = els_disolucion subtract = 5 }
+		}
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.16.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		custom_tooltip = {
+			text = els_disolucion_up_8_tt
+			change_variable = { name = els_disolucion add = 8 }
+		}
+		add_treasury = 10000
+		ai_chance = { base = 40 }
+	}
+
+}
+
+ca_el_salvador_events.17 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.17.t
+	desc = ca_el_salvador_events.17.d
+	flavor = ca_el_salvador_events.17.f
+	duration = 3
+	event_image = { video = "unspecific_military_parade" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+
+	immediate = {
+		ca_els_create_once = { KEY = malespin TEMPLATE = els_francisco_malespin_character_template }
+		global_var:cafm_hc_malespin ?= { save_scope_as = els_malespin_char }
+	}
+	option = {
+		name = ca_el_salvador_events.17.a
+		default_option = yes
+		set_variable = els_malespin_comandante
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = {
+			text = els_disolucion_up_5_tt
+			change_variable = { name = els_disolucion add = 5 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.17.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		custom_tooltip = {
+			text = els_disolucion_down_3_tt
+			change_variable = { name = els_disolucion subtract = 3 }
+		}
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.18 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.18.t
+	desc = ca_el_salvador_events.18.d
+	flavor = ca_el_salvador_events.18.f
+	duration = 3
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.18.a
+		default_option = yes
+		set_variable = els_federacion_disuelta
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.18.b
+		trigger = {
+			ca_els_alt_history = yes
+			var:els_disolucion < 90
+		}
+		custom_tooltip = {
+			text = els_disolucion_down_40_tt
+			change_variable = { name = els_disolucion subtract = 40 }
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_el_salvador_events.19 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.19.t
+	desc = ca_el_salvador_events.19.d
+	flavor = ca_el_salvador_events.19.f
+	duration = 3
+	event_image = { video = "southamerica_aristocrats" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.19.a
+		default_option = yes
+		set_variable = els_morazan_exiliado
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.19.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		set_variable = els_morazan_retenido
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.20 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.20.t
+	desc = ca_el_salvador_events.20.d
+	flavor = ca_el_salvador_events.20.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.20.a
+		default_option = yes
+		set_variable = els_canas_derribado
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.20.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.21 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.21.t
+	desc = ca_el_salvador_events.21.d
+	flavor = ca_el_salvador_events.21.f
+	duration = 3
+	event_image = { video = "asia_politician_parliament_motion" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.21.a
+		default_option = yes
+		set_variable = els_lindo_jefe
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.21.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.22 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.22.t
+	desc = ca_el_salvador_events.22.d
+	flavor = ca_el_salvador_events.22.f
+	duration = 3
+	event_image = { video = "asia_politician_parliament_motion" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_constitutional.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.22.a
+		default_option = yes
+		set_variable = els_universidad
+		add_modifier = { name = els_universidad months = 240 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.22.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		add_treasury = 5000
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_el_salvador_events.23 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.23.t
+	desc = ca_el_salvador_events.23.d
+	flavor = ca_el_salvador_events.23.f
+	duration = 3
+	event_image = { video = "unspecific_military_parade" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.23.a
+		default_option = yes
+		set_variable = els_soberano_1841
+		add_modifier = { name = els_estado_soberano months = 240 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.23.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		set_variable = els_sigue_federal
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_el_salvador_events.24 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.24.t
+	desc = ca_el_salvador_events.24.d
+	flavor = ca_el_salvador_events.24.f
+	duration = 3
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.24.a
+		default_option = yes
+		set_variable = els_morazan_rechazado
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.24.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		set_variable = els_morazan_acogido
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.25 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.25.t
+	desc = ca_el_salvador_events.25.d
+	flavor = ca_el_salvador_events.25.f
+	duration = 3
+	event_image = { video = "asia_politician_parliament_motion" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_religion.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+
+	immediate = {
+		set_variable = { name = els_malespin value = ca_els_malespin_inicio }
+		if = {
+			limit = { NOT = { has_journal_entry = je_ca_els_malespin } }
+			add_journal_entry = { type = je_ca_els_malespin }
+		}
+		ca_els_create_once = { KEY = viteri TEMPLATE = cafm_jorge_viteri }
+		global_var:cafm_hc_viteri ?= { save_scope_as = els_viteri }
+	}
+	option = {
+		name = ca_el_salvador_events.25.a
+		default_option = yes
+		set_variable = els_viteri_aliado
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = {
+			text = els_malespin_up_15_tt
+			change_variable = { name = els_malespin add = 15 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.25.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		set_variable = els_viteri_roto
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		custom_tooltip = {
+			text = els_malespin_down_10_tt
+			change_variable = { name = els_malespin subtract = 10 }
+		}
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.26 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.26.t
+	desc = ca_el_salvador_events.26.d
+	flavor = ca_el_salvador_events.26.f
+	duration = 3
+	event_image = { video = "unspecific_military_parade" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.26.a
+		default_option = yes
+		set_variable = els_malespin_presidente
+		set_variable = els_elec_1844_fired
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		custom_tooltip = {
+			text = els_malespin_up_20_tt
+			change_variable = { name = els_malespin add = 20 }
+		}
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.26.b
+		trigger = {
+			ca_els_alt_history = yes
+			var:els_malespin < 60
+		}
+		custom_tooltip = {
+			text = els_malespin_down_20_tt
+			change_variable = { name = els_malespin subtract = 20 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_el_salvador_events.27 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.27.t
+	desc = ca_el_salvador_events.27.d
+	flavor = ca_el_salvador_events.27.f
+	duration = 3
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.27.a
+		default_option = yes
+		set_variable = els_guerra_nicaragua
+		add_modifier = { name = els_guerra_del_caudillo months = 36 }
+		custom_tooltip = {
+			text = els_malespin_up_10_tt
+			change_variable = { name = els_malespin add = 10 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.27.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		custom_tooltip = {
+			text = els_malespin_down_10_tt
+			change_variable = { name = els_malespin subtract = 10 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.28 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.28.t
+	desc = ca_el_salvador_events.28.d
+	flavor = ca_el_salvador_events.28.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.28.a
+		default_option = yes
+		set_variable = els_leon_tomada
+		custom_tooltip = {
+			text = els_malespin_up_10_tt
+			change_variable = { name = els_malespin add = 10 }
+		}
+		add_treasury = 20000
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.28.b
+		set_variable = els_leon_respetada
+		custom_tooltip = {
+			text = els_malespin_down_5_tt
+			change_variable = { name = els_malespin subtract = 5 }
+		}
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 40 }
+	}
+
+}
+
+ca_el_salvador_events.29 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.29.t
+	desc = ca_el_salvador_events.29.d
+	flavor = ca_el_salvador_events.29.f
+	duration = 3
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+
+	immediate = {
+		ca_els_create_once = { KEY = gerardo_barrios TEMPLATE = els_gerardo_barrios_character_template }
+		global_var:cafm_hc_gerardo_barrios ?= { save_scope_as = els_barrios }
+	}
+	option = {
+		name = ca_el_salvador_events.29.a
+		default_option = yes
+		set_variable = els_barrios_cabanas
+		set_variable = els_malespin_depuesto
+		custom_tooltip = {
+			text = els_malespin_down_30_tt
+			change_variable = { name = els_malespin subtract = 30 }
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.29.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		custom_tooltip = {
+			text = els_malespin_up_15_tt
+			change_variable = { name = els_malespin add = 15 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.30 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.30.t
+	desc = ca_el_salvador_events.30.d
+	flavor = ca_el_salvador_events.30.f
+	duration = 3
+	event_image = { video = "asia_politician_parliament_motion" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_religion.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.30.a
+		default_option = yes
+		set_variable = els_excomunion
+		set_variable = els_viteri_roto
+		remove_variable = els_viteri_aliado
+		custom_tooltip = {
+			text = els_malespin_down_20_tt
+			change_variable = { name = els_malespin subtract = 20 }
+		}
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.30.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		set_variable = els_viteri_expulsado
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		custom_tooltip = {
+			text = els_malespin_up_10_tt
+			change_variable = { name = els_malespin add = 10 }
+		}
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_el_salvador_events.31 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.31.t
+	desc = ca_el_salvador_events.31.d
+	flavor = ca_el_salvador_events.31.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.31.a
+		default_option = yes
+		set_variable = els_malespin_caido
+		set_variable = els_malespin_muerto
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.31.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		custom_tooltip = {
+			text = els_malespin_up_20_tt
+			change_variable = { name = els_malespin add = 20 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_el_salvador_events.32 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.32.t
+	desc = ca_el_salvador_events.32.d
+	flavor = ca_el_salvador_events.32.f
+	duration = 3
+	event_image = { video = "asia_farmers_market" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.32.a
+		default_option = yes
+		set_variable = els_ferias_san_miguel
+		add_modifier = { name = els_ferias_san_miguel months = 180 }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.32.b
+		set_variable = els_embarque_directo
+		add_modifier = { name = els_embarque_directo months = 180 }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.33 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.33.t
+	desc = ca_el_salvador_events.33.d
+	flavor = ca_el_salvador_events.33.f
+	duration = 3
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.33.a
+		default_option = yes
+		set_variable = els_habilitacion
+		add_modifier = { name = els_habilitacion months = 180 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.33.b
+		set_variable = els_credito_publico
+		add_modifier = { name = els_credito_publico months = 180 }
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.34 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.34.t
+	desc = ca_el_salvador_events.34.d
+	flavor = ca_el_salvador_events.34.f
+	duration = 3
+	event_image = { video = "africa_construction_colony" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.34.a
+		default_option = yes
+		set_variable = els_puerto_la_union
+		add_modifier = { name = els_puerto_la_union months = 180 }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.34.b
+		set_variable = els_acajutla
+		add_modifier = { name = els_acajutla months = 180 }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.36 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.36.t
+	desc = ca_el_salvador_events.36.d
+	flavor = ca_el_salvador_events.36.f
+	duration = 3
+	event_image = { video = "southamerica_election" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+
+	immediate = {
+		set_variable = { name = els_arada value = ca_els_arada_inicio }
+		if = {
+			limit = { NOT = { has_journal_entry = je_ca_els_arada } }
+			add_journal_entry = { type = je_ca_els_arada }
+		}
+		ca_els_create_once = { KEY = vasconcelos TEMPLATE = els_doroteo_vasconcelos_character_template }
+		global_var:cafm_hc_vasconcelos ?= { save_scope_as = els_vasconcelos }
+	}
+	option = {
+		name = ca_el_salvador_events.36.a
+		default_option = yes
+		set_variable = els_vasconcelos
+		set_variable = els_elec_1848_fired
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		custom_tooltip = {
+			text = els_arada_up_10_tt
+			change_variable = { name = els_arada add = 10 }
+		}
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.36.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		custom_tooltip = {
+			text = els_arada_down_10_tt
+			change_variable = { name = els_arada subtract = 10 }
+		}
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_el_salvador_events.37 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.37.t
+	desc = ca_el_salvador_events.37.d
+	flavor = ca_el_salvador_events.37.f
+	duration = 3
+	event_image = { video = "unspecific_politicians_arguing" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.37.a
+		default_option = yes
+		set_variable = els_asilo_liberales
+		custom_tooltip = {
+			text = els_arada_up_15_tt
+			change_variable = { name = els_arada add = 15 }
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.37.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		custom_tooltip = {
+			text = els_arada_down_5_tt
+			change_variable = { name = els_arada subtract = 5 }
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.35 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.35.t
+	desc = ca_el_salvador_events.35.d
+	flavor = ca_el_salvador_events.35.f
+	duration = 3
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.35.a
+		default_option = yes
+		set_variable = els_bloqueo_britanico
+		add_modifier = { name = els_bloqueo_britanico months = 24 }
+		custom_tooltip = {
+			text = els_arada_down_10_tt
+			change_variable = { name = els_arada subtract = 10 }
+		}
+		ai_chance = { base = 60 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.35.b
+		set_variable = els_pagar_a_chatfield
+		add_treasury = -30000
+		ig:ig_petty_bourgeoisie ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 40 }
+	}
+
+}
+
+ca_el_salvador_events.38 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.38.t
+	desc = ca_el_salvador_events.38.d
+	flavor = ca_el_salvador_events.38.f
+	duration = 3
+	event_image = { video = "unspecific_military_parade" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.38.a
+		default_option = yes
+		set_variable = els_restos_morazan
+		add_modifier = { name = els_memoria_de_morazan months = 120 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		custom_tooltip = {
+			text = els_arada_up_10_tt
+			change_variable = { name = els_arada add = 10 }
+		}
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.38.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+
+ca_el_salvador_events.39 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.39.t
+	desc = ca_el_salvador_events.39.d
+	flavor = ca_el_salvador_events.39.f
+	duration = 3
+	event_image = { video = "unspecific_signed_contract" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_spy.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.39.a
+		default_option = yes
+		set_variable = els_financia_montana
+		add_treasury = -20000
+		custom_tooltip = {
+			text = els_arada_up_20_tt
+			change_variable = { name = els_arada add = 20 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.39.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		custom_tooltip = {
+			text = els_arada_down_5_tt
+			change_variable = { name = els_arada subtract = 5 }
+		}
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.40 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.40.t
+	desc = ca_el_salvador_events.40.d
+	flavor = ca_el_salvador_events.40.f
+	duration = 3
+	event_image = { video = "unspecific_signed_contract" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_diplomacy.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.40.a
+		default_option = yes
+		set_variable = els_alianza_ocotepeque
+		add_modifier = { name = els_alianza_ocotepeque months = 60 }
+		custom_tooltip = {
+			text = els_arada_up_15_tt
+			change_variable = { name = els_arada add = 15 }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.40.b
+		custom_tooltip = {
+			text = els_arada_down_10_tt
+			change_variable = { name = els_arada subtract = 10 }
+		}
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.41 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.41.t
+	desc = ca_el_salvador_events.41.d
+	flavor = ca_el_salvador_events.41.f
+	duration = 3
+	event_image = { video = "asia_politician_parliament_motion" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_constitutional.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.41.a
+		default_option = yes
+		set_variable = els_ultimatum
+		custom_tooltip = {
+			text = els_arada_up_10_tt
+			change_variable = { name = els_arada add = 10 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.41.b
+		set_variable = els_sin_guerra
+		custom_tooltip = {
+			text = els_arada_down_30_tt
+			change_variable = { name = els_arada subtract = 30 }
+		}
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.42 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.42.t
+	desc = ca_el_salvador_events.42.d
+	flavor = ca_el_salvador_events.42.f
+	duration = 3
+	event_image = { video = "europenorthamerica_before_the_battle" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.42.a
+		default_option = yes
+		trigger = {
+			var:els_arada < ca_els_arada_listo
+		}
+		set_variable = els_arada_perdida
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.42.b
+		trigger = {
+			var:els_arada >= ca_els_arada_listo
+		}
+		set_variable = els_arada_ganada
+		add_modifier = { name = els_vencedor_de_chiquimula months = 120 }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up_massive months = 36 } }
+		ai_chance = { base = 70 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.42.c
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		set_variable = els_arada_evitada
+		custom_tooltip = {
+			text = els_arada_down_50_tt
+			change_variable = { name = els_arada subtract = 50 }
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 30 }
+	}
+
+}
+
+ca_el_salvador_events.43 = {
+	type = country_event
+	placement = ROOT
+	title = ca_el_salvador_events.43.t
+	desc = ca_el_salvador_events.43.d
+	flavor = ca_el_salvador_events.43.f
+	duration = 3
+	event_image = { video = "southamerica_war_civilians" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	trigger = {
+		ca_els_is_elsalvador = yes
+	}
+	option = {
+		name = ca_el_salvador_events.43.a
+		default_option = yes
+		set_variable = els_paz_con_guatemala
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 80 }
+	}
+
+	option = {
+		name = ca_el_salvador_events.43.b
+		trigger = {
+			ca_els_alt_history = yes
+		}
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_rural_folk ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		ai_chance = { base = 20 }
+	}
+
+}
+

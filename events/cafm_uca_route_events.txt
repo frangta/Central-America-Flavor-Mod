@@ -62,14 +62,14 @@ cafm_uca_route.3 = {
 	option = {
 		name = cafm_uca_route.3.a
 		default_option = yes
-		ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_f15 }
+		ca_uca_rival_add = { VALUE = ca_fvc_shift_f15 }
 		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
 		ai_chance = { base = 40 }
 	}
 
 	option = {
 		name = cafm_uca_route.3.b
-		ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_f5 }
+		ca_uca_rival_add = { VALUE = ca_fvc_shift_f5 }
 		add_modifier = { name = ca_ig_struggle_negotiation months = 12 }
 		ai_chance = { base = 40 }
 	}
@@ -95,14 +95,14 @@ cafm_uca_route.4 = {
 	option = {
 		name = cafm_uca_route.4.a
 		default_option = yes
-		ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_c15 }
+		ca_uca_rival_add = { VALUE = ca_fvc_shift_c15 }
 		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
 		ai_chance = { base = 40 }
 	}
 
 	option = {
 		name = cafm_uca_route.4.b
-		ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_c5 }
+		ca_uca_rival_add = { VALUE = ca_fvc_shift_c5 }
 		add_modifier = { name = ca_ig_struggle_negotiation months = 12 }
 		ai_chance = { base = 40 }
 	}
@@ -187,14 +187,14 @@ cafm_uca_route.7 = {
 		default_option = yes
 		if = {
 			limit = { var:ca_bloc_event_bloc = flag:federal }
-			ca_uca_bar_add = { BAR = frca_support_bar VALUE = 10 }
+			ca_uca_main_add = { VALUE = 10 }
 		}
 		else_if = {
 			limit = { var:ca_bloc_event_bloc = flag:centralist }
-			ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_c10 }
+			ca_uca_rival_add = { VALUE = ca_fvc_shift_c10 }
 		}
 		else = {
-			ca_uca_bar_add = { BAR = frca_support_bar VALUE = -10 }
+			ca_uca_main_add = { VALUE = -10 }
 		}
 		ai_chance = { base = 100 }
 	}
@@ -231,14 +231,14 @@ cafm_uca_route.8 = {
 		default_option = yes
 		if = {
 			limit = { var:ca_bloc_event_bloc = flag:federal }
-			ca_uca_bar_add = { BAR = frca_support_bar VALUE = -5 }
+			ca_uca_main_add = { VALUE = -5 }
 		}
 		else_if = {
 			limit = { var:ca_bloc_event_bloc = flag:centralist }
-			ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_f10 }
+			ca_uca_rival_add = { VALUE = ca_fvc_shift_f10 }
 		}
 		else = {
-			ca_uca_bar_add = { BAR = frca_support_bar VALUE = 10 }
+			ca_uca_main_add = { VALUE = 10 }
 		}
 		ai_chance = { base = 100 }
 	}
@@ -286,8 +286,8 @@ cafm_uca_route.10 = {
 		name = cafm_uca_route.10.b
 		default_option = yes
 		add_modifier = { name = ca_frca_reform_1835_negotiated months = 60 }
-		ca_uca_bar_add = { BAR = frca_support_bar VALUE = 10 }
-		ca_uca_bar_add = { BAR = ca_frca_fvc_bar VALUE = ca_fvc_shift_f5 }
+		ca_uca_main_add = { VALUE = 10 }
+		ca_uca_rival_add = { VALUE = ca_fvc_shift_f5 }
 		ai_chance = { base = 70 }
 	}
 }

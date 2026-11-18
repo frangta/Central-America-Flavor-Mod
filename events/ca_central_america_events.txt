@@ -2146,6 +2146,11 @@ ca_central_america.14 = {
 		name = ca_central_america.14.b
 		set_variable = ca_livingston_rejected
 		add_modifier = { name = ca_reforms_stalled months = 24 }
+		# Ruta centralista (18 nov 2026): rechazar los codigos cuenta como la derogacion (+5 de unidad)
+		if = {
+			limit = { ca_frca_route_centralist = yes }
+			ca_cen_unity_add = { VALUE = ca_cen_unity_livingston }
+		}
 		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
 		ai_chance = { base = 30
 		modifier = { trigger = { ca_frca_ai_historic = yes } add = -20 }
@@ -2387,6 +2392,7 @@ ca_central_america.18 = {
 	trigger = {
 		NOT = { has_global_variable = ca_sep_cos_fired }
 		ca_frca_journal_active = yes
+		ca_cen_separatists_allowed = yes # ruta centralista (18 nov 2026): solo tras aparecer los separatistas
 		OR = {
 			# V1
 			AND = {
@@ -2578,6 +2584,7 @@ ca_central_america.19 = {
 	trigger = {
 		NOT = { has_global_variable = ca_sep_nic_fired }
 		ca_frca_journal_active = yes
+		ca_cen_separatists_allowed = yes # ruta centralista (18 nov 2026): solo tras aparecer los separatistas
 		OR = {
 			# V1
 			AND = {
@@ -2783,6 +2790,7 @@ ca_central_america.20 = {
 	trigger = {
 		NOT = { has_global_variable = ca_sep_gua_fired }
 		ca_frca_journal_active = yes
+		ca_cen_separatists_allowed = yes # ruta centralista (18 nov 2026): solo tras aparecer los separatistas
 		OR = {
 			# V1
 			AND = {
@@ -2974,6 +2982,7 @@ ca_central_america.21 = {
 	trigger = {
 		NOT = { has_global_variable = ca_sep_hon_fired }
 		ca_frca_journal_active = yes
+		ca_cen_separatists_allowed = yes # ruta centralista (18 nov 2026): solo tras aparecer los separatistas
 		OR = {
 			# V1
 			AND = {
@@ -3179,6 +3188,7 @@ ca_central_america.22 = {
 	trigger = {
 		NOT = { has_global_variable = ca_sep_els_fired }
 		ca_frca_journal_active = yes
+		ca_cen_separatists_allowed = yes # ruta centralista (18 nov 2026): solo tras aparecer los separatistas
 		# El Salvador solo se separa si la capital de la UCA no esta en San Salvador (grupo 11)
 		c:UCA ?= { capital = { NOT = { state_region = s:STATE_SAN_SALVADOR } } }
 		OR = {
@@ -3358,6 +3368,7 @@ ca_central_america.23 = {
 	trigger = {
 		NOT = { has_global_variable = ca_sep_alt_fired }
 		ca_frca_journal_active = yes
+		ca_cen_separatists_allowed = yes # ruta centralista (18 nov 2026): solo tras aparecer los separatistas
 		c:ALT ?= this
 		is_subject_of = c:UCA
 		NOT = { has_variable = ca_role_separatist }
@@ -5077,6 +5088,7 @@ ca_central_america.42 = {
 				NOT = { ca_frca_ai_historic = yes }
 				OR = {
 					je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" <= ca_frca_bar_crisis }
+					je:je_ca_centralist_republic ?= { "scripted_bar_progress(ca_frca_unity_bar)" <= ca_cen_unity_crisis } # ruta centralista
 					ca_core_states_separated_count >= 2
 				}
 			}
@@ -5114,7 +5126,12 @@ ca_central_america.42 = {
 		ai_chance = {
 			base = 30
 			modifier = {
-				trigger = { je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" < 30 } }
+				trigger = {
+					OR = {
+						je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" < 30 }
+						je:je_ca_centralist_republic ?= { "scripted_bar_progress(ca_frca_unity_bar)" < 15 }
+					}
+				}
 				add = 40
 			}
 			modifier = { trigger = { ca_frca_ai_historic = yes } add = -1000 }
@@ -7656,10 +7673,18 @@ ca_central_america.79 = {
 		ca_frca_journal_active = yes
 		game_date >= 1838.5.30
 		NOT = { has_variable = frca_decree_event_fired }
+		# Ruta centralista (18 nov 2026): solo despues de apartar a Morazan (objetivo 4) y si el
+		# Congreso sigue abierto. Su opcion b equivale al boton "Disolver el Congreso".
+		trigger_if = {
+			limit = { ca_frca_route_centralist = yes }
+			has_variable = frca_morazan_removed
+			NOT = { has_variable = frca_congress_dissolved }
+		}
 		OR = {
 			is_ai = yes
 			has_variable = ca_self_determination
 			game_date >= 1838.11.30
+			ca_frca_route_centralist = yes # 18 nov 2026: en su fecha (30 may 1838)
 		}
 	}
 
@@ -7686,7 +7711,7 @@ ca_central_america.79 = {
 		set_variable = frca_decree_vetoed
 		if = {
 			limit = { ca_frca_route_centralist = yes }
-			set_variable = frca_congress_dissolved
+			ca_cen_dissolve_congress_core = yes # 18 nov 2026: quita la paralisis, como el boton
 		}
 		ca_frca_set_phase = { VALUE = 2 }
 		ca_frca_bar_moderate_up = yes
@@ -9924,7 +9949,7 @@ ca_central_america.120 = {
 
 	trigger = {
 		this = c:UCA
-		has_journal_entry = je_historic_central_america_falls_apart
+		ca_frca_journal_active = yes # ruta centralista: Los Altos tambien en esa ruta
 		has_global_variable = ca_los_altos_question
 		exists = s:STATE_GUATEMALA.region_state:UCA
 		NOT = { exists = c:ALT }
