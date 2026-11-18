@@ -1,0 +1,22 @@
+############################################################################
+# CAFM - Ruta centralista de la UCA (18 nov 2026). Modificadores.
+############################################################################
+
+# Boton "Propaganda" (objetivo 3): mas apoyo al movimiento unitario.
+ca_cen_propaganda = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	state_pop_support_movement_ca_unitarian_add = 15
+}
+
+# Morazan asesinado: un martir para los federalistas.
+ca_cen_morazan_martyr = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds"
+	state_pop_support_movement_ca_federalist_add = 25
+	political_movement_radicalism_add = 0.10
+}
+
+# Grupo de interes: el ejercito se aparta de la campana electoral de 1838 (cafm_cen.9).
+ca_cen_army_neutral = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_negative.dds"
+	interest_group_pol_str_mult = -0.50
+}

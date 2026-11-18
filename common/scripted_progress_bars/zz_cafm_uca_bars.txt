@@ -12,31 +12,12 @@
 # liberal (ruta centralista). Arranca en -30 (ca_bloc_fvc_route_check).
 ca_frca_fvc_bar = {
 	name = "ca_frca_fvc_bar_name"
-	# Polo izquierdo = MI bando; polo derecho = el rival. Cambian con la ruta.
-	desc = {
-		first_valid = {
-			triggered_desc = {
-				desc = ca_frca_fvc_bar_mine_centralist
-				trigger = { ca_frca_route_centralist = yes }
-			}
-			triggered_desc = {
-				desc = ca_frca_fvc_bar_mine_federal
-				trigger = { always = yes }
-			}
-		}
-	}
-	second_desc = {
-		first_valid = {
-			triggered_desc = {
-				desc = ca_frca_fvc_bar_rival_federal
-				trigger = { ca_frca_route_centralist = yes }
-			}
-			triggered_desc = {
-				desc = ca_frca_fvc_bar_rival_centralist
-				trigger = { always = yes }
-			}
-		}
-	}
+	# Ruta centralista (18 nov 2026): esta barra es solo de la ruta federal (diario general).
+	# Orientacion fija: izquierda = federalistas (mi bando), derecha = centralistas.
+	# 18 nov 2026: mi bando a la DERECHA (+100), el rival a la izquierda (-100).
+	# Lo que me ayuda sale positivo (verde). Aviso a -50; fracaso a -100.
+	desc = "ca_frca_fvc_bar_rival_centralist"
+	second_desc = "ca_frca_fvc_bar_mine_federal"
 
 	progress_texture = "gfx/interface/progressbar/progressbar_default.dds"
 	background_texture = "gfx/interface/progressbar/progressbar_bad.dds"
@@ -48,64 +29,64 @@ ca_frca_fvc_bar = {
 		# Gobernante
 		progress_condition = {
 			limit = { ruler ?= { has_ideology = ideology:ideology_ca_federalist } }
-			add = { value = ca_fvc_ruler multiply = ca_fvc_sign desc = "CA_FVC_RULER_FEDERAL" }
+			add = { value = ca_fvc_ruler multiply = 1 desc = "CA_FVC_RULER_FEDERAL" }
 			else = {
 				limit = { ruler ?= { has_ideology = ideology:ideology_ca_unitarian } }
-				add = { value = ca_fvc_ruler multiply = ca_fvc_sign_neg desc = "CA_FVC_RULER_UNITARIAN" }
+				add = { value = ca_fvc_ruler multiply = -1 desc = "CA_FVC_RULER_UNITARIAN" }
 			}
 		}
 		# Ley de estructura de la Union
 		progress_condition = {
 			limit = { has_law_or_variant = law_type:law_ca_central_american_unitary }
-			add = { value = ca_fvc_law_unitary multiply = ca_fvc_sign desc = "CA_FVC_LAW_UNITARY" }
+			add = { value = ca_fvc_law_unitary multiply = 1 desc = "CA_FVC_LAW_UNITARY" }
 			else = {
 				limit = { has_law_or_variant = law_type:law_ca_central_american_federal }
-				add = { value = ca_fvc_law_federal multiply = ca_fvc_sign desc = "CA_FVC_LAW_FEDERAL" }
+				add = { value = ca_fvc_law_federal multiply = 1 desc = "CA_FVC_LAW_FEDERAL" }
 			}
 		}
 		# IG de cada bando en el gobierno
 		progress_condition = {
 			limit = { ca_fvc_federal_igs_in_government > 0 }
-			add = { value = ca_fvc_federal_igs_in_government multiply = ca_fvc_sign desc = "CA_FVC_FEDERAL_IGS" }
+			add = { value = ca_fvc_federal_igs_in_government multiply = 1 desc = "CA_FVC_FEDERAL_IGS" }
 		}
 		progress_condition = {
 			limit = { ca_fvc_centralist_igs_in_government < 0 }
-			add = { value = ca_fvc_centralist_igs_in_government multiply = ca_fvc_sign desc = "CA_FVC_CENTRALIST_IGS" }
+			add = { value = ca_fvc_centralist_igs_in_government multiply = 1 desc = "CA_FVC_CENTRALIST_IGS" }
 		}
 		# Poder de los bandos
 		progress_condition = {
 			limit = { ca_bloc_power_federal > ca_bloc_power_centralist }
-			add = { value = ca_fvc_power_gap multiply = ca_fvc_sign desc = "CA_FVC_POWER_FEDERAL" }
+			add = { value = ca_fvc_power_gap multiply = 1 desc = "CA_FVC_POWER_FEDERAL" }
 			else = {
 				limit = { ca_bloc_power_centralist > ca_bloc_power_federal }
-				add = { value = ca_fvc_power_gap multiply = ca_fvc_sign desc = "CA_FVC_POWER_CENTRALIST" }
+				add = { value = ca_fvc_power_gap multiply = 1 desc = "CA_FVC_POWER_CENTRALIST" }
 			}
 		}
 		# Reformas centralistas
 		progress_condition = {
 			limit = { has_variable = frca_congress_dissolved }
-			add = { value = ca_fvc_congress_dissolved multiply = ca_fvc_sign desc = "CA_FVC_CONGRESS_DISSOLVED" }
+			add = { value = ca_fvc_congress_dissolved multiply = 1 desc = "CA_FVC_CONGRESS_DISSOLVED" }
 		}
 		progress_condition = {
 			limit = { has_variable = frca_concordat }
-			add = { value = ca_fvc_concordat multiply = ca_fvc_sign desc = "CA_FVC_CONCORDAT" }
+			add = { value = ca_fvc_concordat multiply = 1 desc = "CA_FVC_CONCORDAT" }
 		}
 		progress_condition = {
 			limit = { has_variable = frca_livingston_repealed }
-			add = { value = ca_fvc_livingston_repealed multiply = ca_fvc_sign desc = "CA_FVC_LIVINGSTON_REPEALED" }
+			add = { value = ca_fvc_livingston_repealed multiply = 1 desc = "CA_FVC_LIVINGSTON_REPEALED" }
 		}
 		progress_condition = {
 			limit = { has_variable = frca_standing_army }
-			add = { value = ca_fvc_standing_army multiply = ca_fvc_sign desc = "CA_FVC_STANDING_ARMY" }
+			add = { value = ca_fvc_standing_army multiply = 1 desc = "CA_FVC_STANDING_ARMY" }
 		}
 		# Entrega 2: ruta federal
 		progress_condition = {
 			limit = { has_variable = frca_federal_reserve_army }
-			add = { value = ca_fvc_federal_reserve_army multiply = ca_fvc_sign desc = "CA_FVC_FEDERAL_RESERVE_ARMY" }
+			add = { value = ca_fvc_federal_reserve_army multiply = 1 desc = "CA_FVC_FEDERAL_RESERVE_ARMY" }
 		}
 	}
 
-	start_value = 0
+	start_value = 30
 	min_value = -100
 	max_value = 100
 }

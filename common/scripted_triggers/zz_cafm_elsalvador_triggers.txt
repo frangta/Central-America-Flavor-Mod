@@ -1,0 +1,39 @@
+﻿# =====================================================================
+# CAFM — EL SALVADOR (1836–1851): triggers de las cadenas.
+# =====================================================================
+
+# Quién vive la cadena de El Salvador: el estado, o la Federación mientras
+# San Salvador siga siendo suyo (que es lo que pasó de 1839 a 1840).
+ca_els_is_elsalvador = {
+	OR = {
+		c:ELS ?= this
+		AND = {
+			c:UCA ?= this
+			NOT = { exists = c:ELS }
+			any_scope_state = {
+				state_region = s:STATE_SAN_SALVADOR
+			}
+		}
+	}
+}
+
+# Las opciones alternativas solo salen fuera del modo histórico.
+ca_els_alt_history = {
+	NOT = { has_global_variable = ca_world_historic }
+	NOT = { has_variable = els_historic_mode }
+}
+
+ca_els_bastion_activo = {
+	has_journal_entry = je_ca_els_bastion
+	has_variable = els_disolucion
+}
+
+ca_els_malespin_activo = {
+	has_journal_entry = je_ca_els_malespin
+	has_variable = els_malespin
+}
+
+ca_els_arada_activo = {
+	has_journal_entry = je_ca_els_arada
+	has_variable = els_arada
+}

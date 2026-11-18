@@ -1,0 +1,195 @@
+﻿############################################################################
+# CAFM - Ruta centralista de la UCA (18 nov 2026). Barras del diario
+# je_ca_centralist_republic. Scope de monthly_progress: la UCA.
+############################################################################
+
+# ---------------------------------------------------------------------------
+# Unidad: cuanto de la Republica gobierna de verdad la capital (0-100).
+# 80 abre la fase IV; 100 = Republica unitaria.
+# ---------------------------------------------------------------------------
+ca_frca_unity_bar = {
+	name = "ca_frca_unity_bar_name"
+	# 18 nov 2026: desc / second_desc son las etiquetas cortas de los dos extremos de la barra
+	desc = "ca_frca_unity_bar_left"
+	second_desc = "ca_frca_unity_bar_right"
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_bad.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+
+	monthly_progress = {
+		progress_condition = {
+			limit = { has_law_or_variant = law_type:law_ca_central_american_unitary }
+			add = { value = ca_cen_monthly_law_unitary desc = "CA_CEN_UNITY_LAW_UNITARY" }
+		}
+		progress_condition = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					is_in_government = yes
+					has_ideology = ideology:ideology_central_american_reactionary_2
+				}
+			}
+			add = { value = ca_cen_monthly_army_gov desc = "CA_CEN_UNITY_ARMY_GOV" }
+		}
+		progress_condition = {
+			limit = { ca_core_states_loyal_count > 0 }
+			add = { value = ca_cen_monthly_loyal_factor desc = "CA_CEN_UNITY_LOYAL" }
+		}
+		progress_condition = {
+			limit = { ca_core_states_rebel_count > 0 }
+			add = { value = ca_cen_monthly_rebel_factor desc = "CA_CEN_UNITY_REBEL" }
+		}
+		progress_condition = {
+			limit = { ca_core_states_separated_count > 0 }
+			add = { value = ca_cen_monthly_separated_factor desc = "CA_CEN_UNITY_SEPARATED" }
+		}
+		progress_condition = {
+			limit = { ig:ig_intelligentsia ?= { is_in_government = yes } }
+			add = { value = ca_cen_monthly_intelligentsia desc = "CA_CEN_UNITY_INTELLIGENTSIA" }
+		}
+		progress_condition = {
+			limit = { je:je_ca_centralist_republic ?= { "scripted_bar_progress(ca_frca_cvf_bar)" <= -50 } }
+			add = { value = ca_cen_monthly_rival desc = "CA_CEN_UNITY_RIVAL" }
+		}
+	}
+
+	start_value = 20
+	min_value = 0
+	max_value = 100
+}
+
+# ---------------------------------------------------------------------------
+# Quien manda en la Republica: centralistas (izq., -100) <-> federalistas (der., +100).
+# Solo ruta centralista. +50 = pronunciamiento liberal; +100 = revolucion liberal.
+# (Copia de la F<->C del diario general, con la orientacion fija de esta ruta.)
+# ---------------------------------------------------------------------------
+ca_frca_cvf_bar = {
+	name = "ca_frca_cvf_bar_name"
+	# 18 nov 2026: mi bando a la DERECHA (+100), el rival a la izquierda (-100).
+	# Lo que me ayuda sale positivo (verde). Aviso a -50; fracaso a -100.
+	desc = "ca_frca_fvc_bar_rival_federal"
+	second_desc = "ca_frca_fvc_bar_mine_centralist"
+
+	progress_texture = "gfx/interface/progressbar/progressbar_default.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_bad.dds"
+	marker = yes
+	# Izquierda = centralistas (mi bando). Derecha = federalistas y liberales.
+
+	monthly_progress = {
+		# Gobernante
+		progress_condition = {
+			limit = { ruler ?= { has_ideology = ideology:ideology_ca_federalist } }
+			add = { value = ca_fvc_ruler multiply = -1 desc = "CA_FVC_RULER_FEDERAL" }
+			else = {
+				limit = { ruler ?= { has_ideology = ideology:ideology_ca_unitarian } }
+				add = { value = ca_fvc_ruler multiply = 1 desc = "CA_FVC_RULER_UNITARIAN" }
+			}
+		}
+		# Ley de estructura de la Union
+		progress_condition = {
+			limit = { has_law_or_variant = law_type:law_ca_central_american_unitary }
+			add = { value = ca_fvc_law_unitary multiply = -1 desc = "CA_FVC_LAW_UNITARY" }
+			else = {
+				limit = { has_law_or_variant = law_type:law_ca_central_american_federal }
+				add = { value = ca_fvc_law_federal multiply = -1 desc = "CA_FVC_LAW_FEDERAL" }
+			}
+		}
+		# IG de cada bando en el gobierno
+		progress_condition = {
+			limit = { ca_fvc_federal_igs_in_government > 0 }
+			add = { value = ca_fvc_federal_igs_in_government multiply = -1 desc = "CA_FVC_FEDERAL_IGS" }
+		}
+		progress_condition = {
+			limit = { ca_fvc_centralist_igs_in_government < 0 }
+			add = { value = ca_fvc_centralist_igs_in_government multiply = -1 desc = "CA_FVC_CENTRALIST_IGS" }
+		}
+		# Poder de los bandos
+		progress_condition = {
+			limit = { ca_bloc_power_federal > ca_bloc_power_centralist }
+			add = { value = ca_fvc_power_gap multiply = -1 desc = "CA_FVC_POWER_FEDERAL" }
+			else = {
+				limit = { ca_bloc_power_centralist > ca_bloc_power_federal }
+				add = { value = ca_fvc_power_gap multiply = -1 desc = "CA_FVC_POWER_CENTRALIST" }
+			}
+		}
+		# Reformas centralistas
+		progress_condition = {
+			limit = { has_variable = frca_congress_dissolved }
+			add = { value = ca_fvc_congress_dissolved multiply = -1 desc = "CA_FVC_CONGRESS_DISSOLVED" }
+		}
+		progress_condition = {
+			limit = { has_variable = frca_concordat }
+			add = { value = ca_fvc_concordat multiply = -1 desc = "CA_FVC_CONCORDAT" }
+		}
+		progress_condition = {
+			limit = { has_variable = frca_livingston_repealed }
+			add = { value = ca_fvc_livingston_repealed multiply = -1 desc = "CA_FVC_LIVINGSTON_REPEALED" }
+		}
+		progress_condition = {
+			limit = { has_variable = frca_standing_army }
+			add = { value = ca_fvc_standing_army multiply = -1 desc = "CA_FVC_STANDING_ARMY" }
+		}
+	}
+
+	start_value = 30
+	min_value = -100
+	max_value = 100
+}
+
+
+
+# ---------------------------------------------------------------------------
+# Objetivo 1: Apoyo del ejercito (0-100). A 100 el ejercito se pasa al centralismo
+# (cafm_cen.1). Despues ya no se mueve.
+# ---------------------------------------------------------------------------
+ca_cen_army_bar = {
+	name = "ca_cen_army_bar_name"
+	desc = "ca_cen_army_bar_left"
+	second_desc = "ca_cen_army_bar_right"
+	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
+	background_texture = "gfx/interface/progressbar/progressbar_default.dds"
+	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"
+	glow_line_texture = "gfx/interface/progressbar/progressbar_gold_glow_line.dds"
+
+	monthly_progress = {
+		progress_condition = {
+			limit = {
+				NOT = { has_variable = ca_cen_army_converted }
+				ca_cen_unitarian_generals > 0
+			}
+			add = { value = ca_cen_army_general_factor desc = "CA_CEN_ARMY_GENERALS" }
+		}
+		progress_condition = {
+			limit = {
+				NOT = { has_variable = ca_cen_army_converted }
+				ig:ig_armed_forces ?= { is_in_government = yes }
+			}
+			add = { value = ca_cen_army_gov desc = "CA_CEN_ARMY_GOV" }
+		}
+		progress_condition = {
+			limit = {
+				NOT = { has_variable = ca_cen_army_converted }
+				ig:ig_armed_forces ?= { ig_approval >= 5 }
+			}
+			add = { value = ca_cen_army_approval desc = "CA_CEN_ARMY_HAPPY" }
+			else = {
+				limit = {
+					NOT = { has_variable = ca_cen_army_converted }
+					ig:ig_armed_forces ?= { ig_approval <= -5 }
+				}
+				add = { value = ca_cen_army_angry desc = "CA_CEN_ARMY_ANGRY" }
+			}
+		}
+		progress_condition = {
+			limit = {
+				NOT = { has_variable = ca_cen_army_converted }
+				ca_cen_morazan_leads_army = yes
+			}
+			add = { value = ca_cen_army_morazan desc = "CA_CEN_ARMY_MORAZAN" }
+		}
+	}
+
+	start_value = 30
+	min_value = 0
+	max_value = 100
+}

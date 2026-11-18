@@ -37,6 +37,7 @@ ca_debt_debtor_weak = {
 	c:UCA ?= this
 	OR = {
 		je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" < ca_frca_bar_crisis }
+		je:je_ca_centralist_republic ?= { "scripted_bar_progress(ca_frca_unity_bar)" < ca_cen_unity_crisis } # ruta centralista
 		has_variable = frca_federal_war_declared
 		has_revolution = yes
 	}

@@ -12,7 +12,10 @@
 # script value ca_frca_monthly_change, que se suma pero no se lista). Mismas cifras.
 frca_support_bar = {
 	name = "my_frca_support_bar_name"
-	desc = {
+	# 18 nov 2026: la barra se llena hacia la derecha (200 = Federacion fuerte, 0 = disolucion):
+	# separatistas a la izquierda, mi bando a la derecha.
+	desc = "my_frca_support_bar_desc2"
+	second_desc = {
 		first_valid = {
 			triggered_desc = {
 				trigger = { ca_frca_route_centralist = yes }
@@ -24,7 +27,6 @@ frca_support_bar = {
 			}
 		}
 	}
-	second_desc = "my_frca_support_bar_desc2"
 	progress_texture = "gfx/interface/progressbar/progressbar_gold.dds"
 	background_texture = "gfx/interface/progressbar/progressbar_bad.dds"
 	glow_texture = "gfx/interface/progressbar/progressbar_gold_glow.dds"

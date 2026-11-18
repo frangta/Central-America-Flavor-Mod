@@ -71,13 +71,14 @@ ca_struggle_leader_backs_from = {
 ca_fvc_servile_coup = {
 	ca_frca_route_federal = yes
 	je:je_historic_central_america_falls_apart ?= {
-		"scripted_bar_progress(ca_frca_fvc_bar)" >= 100
+		"scripted_bar_progress(ca_frca_fvc_bar)" <= -100 # 18 nov 2026: el rival a la izquierda
 	}
 }
 ca_fvc_liberal_revolution = {
 	ca_frca_route_centralist = yes
-	je:je_historic_central_america_falls_apart ?= {
-		"scripted_bar_progress(ca_frca_fvc_bar)" >= 100
+	# Ruta centralista (18 nov 2026): la C<->F vive en el diario centralista
+	je:je_ca_centralist_republic ?= {
+		"scripted_bar_progress(ca_frca_cvf_bar)" <= -100 # 18 nov 2026: el rival a la izquierda
 	}
 }
 

@@ -1,0 +1,149 @@
+﻿# =====================================================================
+# CAFM — EL SALVADOR (1836–1851): modificadores de ca_el_salvador_events y
+# de los tres diarios. Solo tipos comprobados contra modifiers.log de la 1.15.
+# Las cifras son propuestas de balance.
+# =====================================================================
+
+# --- FASE 1: el último bastión federal ---
+
+# PAÍS. Mientras la barra pase de 70. El Salvador sostiene solo la Federación.
+els_ultimo_bastion = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_expenses_add = 150
+	state_tax_capacity_mult = -0.15
+	country_legitimacy_base_add = 5
+}
+
+# PAÍS. 5 años. Los cuatro ministerios de Cañas.
+els_administracion_canas = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_add = 25
+	country_legitimacy_base_add = 5
+}
+
+# PAÍS. 2 años. El Salvador paga de su bolsillo al ejército federal.
+els_pagar_ejercito_federal = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 250
+	interest_group_ig_armed_forces_pol_str_mult = -0.1
+}
+
+# PAÍS. 10 años. La Unión sobrevive (final bueno del primer diario).
+els_union_salvada = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_legitimacy_base_add = 15
+	interest_group_ig_intelligentsia_pol_str_mult = 0.2
+}
+
+# PAÍS. 20 años. Estado libre, soberano e independiente (22 feb 1841).
+els_estado_soberano = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_authority_add = 100
+	country_legitimacy_base_add = 10
+}
+
+# PAÍS. 20 años. La Universidad de El Salvador (16 feb 1841).
+els_universidad = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_bureaucracy_add = 20
+	interest_group_ig_intelligentsia_pol_str_mult = 0.2
+	state_education_access_add = 0.05
+}
+
+# --- FASE 2: el caudillo Malespín ---
+
+# PAÍS. Mientras la barra pase de 80. El régimen del caudillo.
+els_regimen_malespin = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	interest_group_ig_armed_forces_pol_str_mult = 0.3
+	country_legitimacy_base_add = -10
+	country_authority_add = 50
+}
+
+# PAÍS. 3 años. La guerra del caudillo contra Nicaragua.
+els_guerra_del_caudillo = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_expenses_add = 200
+	state_conscription_rate_add = 0.05
+}
+
+# --- FASE 3: el añil ---
+
+# PAÍS. 15 años. Las ferias de noviembre en San Miguel.
+els_ferias_san_miguel = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_tax_capacity_mult = 0.15
+	building_group_bg_agriculture_throughput_add = 0.05
+}
+
+# PAÍS. 15 años. Embarque directo por el Cabo de Hornos.
+els_embarque_directo = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_group_bg_agriculture_throughput_add = 0.1
+}
+
+# PAÍS. 15 años. La habilitación: adelantos al 5 % contra la cosecha de añil.
+els_habilitacion = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_group_bg_agriculture_throughput_add = 0.15
+	interest_group_ig_landowners_pol_str_mult = 0.2
+}
+
+# PAÍS. 15 años. Crédito público en vez de habilitación.
+els_credito_publico = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_tax_capacity_mult = 0.1
+	interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.15
+}
+
+# PAÍS. 15 años. El puerto de La Unión, el mejor fondeadero del oriente.
+els_puerto_la_union = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_tax_capacity_mult = 0.2
+	state_infrastructure_add = 10
+}
+
+# PAÍS. 15 años. Acajutla y el occidente.
+els_acajutla = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_tax_capacity_mult = 0.12
+	state_infrastructure_add = 8
+}
+
+# --- FASE 4: Vasconcelos y La Arada ---
+
+# PAÍS. 2 años. El bloqueo británico de 1848–1850.
+els_bloqueo_britanico = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	state_tax_capacity_mult = -0.25
+	country_expenses_add = 100
+}
+
+# PAÍS. 10 años. Los restos de Morazán vuelven a San Salvador.
+els_memoria_de_morazan = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 10
+	interest_group_ig_intelligentsia_pol_str_mult = 0.15
+}
+
+# PAÍS. 5 años. La alianza de Ocotepeque con Honduras.
+els_alianza_ocotepeque = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_military_goods_cost_mult = -0.1
+	state_conscription_rate_add = 0.05
+}
+
+# PAÍS. 10 años. El desastre del 2 de febrero de 1851.
+els_desastre_de_la_arada = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	country_legitimacy_base_add = -20
+	interest_group_ig_armed_forces_pol_str_mult = -0.25
+	state_conscription_rate_add = -0.05
+}
+
+# PAÍS. 10 años. El Salvador gana en Chiquimula (historia alternativa).
+els_vencedor_de_chiquimula = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 20
+	interest_group_ig_armed_forces_pol_str_mult = 0.25
+}

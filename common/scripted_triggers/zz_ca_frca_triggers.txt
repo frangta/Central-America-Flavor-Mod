@@ -28,7 +28,13 @@ ca_is_member_state = {
 
 # El diario de la Federacion esta activo.
 ca_frca_journal_active = {
-	c:UCA ?= { has_journal_entry = je_historic_central_america_falls_apart }
+	# Ruta centralista (18 nov 2026): vale cualquiera de los dos diarios de la Federacion
+	c:UCA ?= {
+		OR = {
+			has_journal_entry = je_historic_central_america_falls_apart
+			has_journal_entry = je_ca_centralist_republic
+		}
+	}
 }
 
 # Lealtad de un estado menor o igual / mayor o igual que VALUE.

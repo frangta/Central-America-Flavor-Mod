@@ -1,0 +1,73 @@
+############################################################################
+# CAFM - Ruta centralista de la UCA (18 nov 2026). Condiciones.
+############################################################################
+
+# El diario centralista esta abierto.
+ca_cen_journal_active = {
+	c:UCA ?= { has_journal_entry = je_ca_centralist_republic }
+}
+
+# Eventos de separatismo .18-.23: en la ruta centralista solo salen cuando han
+# aparecido los separatistas (contador ca_cen_sep_pressure). En la federal, siempre.
+ca_cen_separatists_allowed = {
+	OR = {
+		NOT = { ca_frca_route_centralist = yes }
+		c:UCA ?= { has_variable = ca_separatists_emerged }
+	}
+}
+
+# --- Objetivos de la fase I (scope: UCA) ---
+
+# 1. El ejercito ya es centralista.
+ca_cen_army_won = {
+	has_variable = ca_cen_army_converted
+}
+
+# 2. Apoyo de los Estados: 2 Estados nucleo Leales, o un Estado con influencia centralista >= 2.
+ca_cen_states_support = {
+	OR = {
+		ca_core_states_loyal_count >= 2
+		any_country = {
+			is_subject_of = c:UCA
+			has_variable = ca_centralist_influence
+			var:ca_centralist_influence >= 2
+		}
+	}
+}
+
+# 4. Morazan (o un federalista) sigue gobernando la UCA.
+ca_cen_federalist_in_power = {
+	ruler ?= {
+		OR = {
+			has_variable = is_morazan
+			has_ideology = ideology:ideology_ca_federalist
+		}
+	}
+}
+
+# Morazan sigue en la UCA (gobernante o no).
+ca_cen_morazan_in_uca = {
+	any_scope_character = { has_variable = is_morazan }
+}
+
+# Morazan es el lider del ejercito.
+ca_cen_morazan_leads_army = {
+	ig:ig_armed_forces ?= { leader ?= { has_variable = is_morazan } }
+}
+
+# Se puede intentar el asesinato: generales unitarios, o poder centralista suficiente.
+ca_cen_can_conspire = {
+	custom_tooltip = {
+		text = ca_cen_can_conspire_tt
+		OR = {
+			ca_cen_unitarian_generals >= 1
+			ca_bloc_power_centralist >= ca_cen_kill_power_min
+		}
+	}
+}
+
+# Fracaso por revuelta separatista: tras aparecer los separatistas, 3 de 5 Estados en lealtad minima.
+ca_cen_separatist_revolt = {
+	has_variable = ca_separatists_emerged
+	ca_cen_core_low_loyalty_count >= 3
+}
