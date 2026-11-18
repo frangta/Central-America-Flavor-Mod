@@ -1,0 +1,386 @@
+﻿############################################################################
+# CAFM - Ruta centralista de la UCA (18 nov 2026). Efectos.
+# Diario je_ca_centralist_republic (zz_cafm_centralist_journal.txt).
+# Diseno: claude/CAFM_RUTA_CENTRALISTA.md. Scope: UCA salvo que se diga otra cosa.
+############################################################################
+
+# ---------------------------------------------------------------------------
+# Barras del diario centralista
+# ---------------------------------------------------------------------------
+
+# Suma VALUE a la unidad (0-100). No hace nada fuera de la ruta centralista.
+# Uso: ca_cen_unity_add = { VALUE = ca_cen_unity_capital }
+ca_cen_unity_add = {
+	c:UCA ?= {
+		je:je_ca_centralist_republic ?= {
+			add_progress = { name = ca_frca_unity_bar value = $VALUE$ }
+		}
+	}
+}
+
+# Suma VALUE al apoyo del ejercito (0-100). Uso: ca_cen_army_add = { VALUE = 10 }
+ca_cen_army_add = {
+	c:UCA ?= {
+		if = {
+			limit = { NOT = { has_variable = ca_cen_army_converted } }
+			je:je_ca_centralist_republic ?= {
+				add_progress = { name = ca_cen_army_bar value = $VALUE$ }
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Arranque: escenario centralista de los IG, pero el ejercito sigue federal
+# (objetivo 1). Lo llama ca_frca_choose_route.
+# ---------------------------------------------------------------------------
+ca_cen_ig_config_start = {
+	ca_ig_config_centralist = yes
+	ig:ig_armed_forces ?= {
+		remove_ideology = ideology_central_american_reactionary_2
+		add_ideology = ideology_central_american_federal
+	}
+	set_variable = { name = ca_cen_sep_pressure value = 0 }
+}
+
+# Objetivo 1 cumplido: el ejercito se pasa al centralismo.
+ca_cen_army_convert = {
+	set_variable = ca_cen_army_converted
+	ig:ig_armed_forces ?= {
+		remove_ideology = ideology_central_american_federal
+		add_ideology = ideology_central_american_reactionary_2
+		add_modifier = { name = ca_ig_approval_up months = 24 }
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Disolver el Congreso: lo comparten el boton y .79 b. Quita la paralisis
+# federal (las leyes se pueden aprobar) y abre la fase II.
+# ---------------------------------------------------------------------------
+ca_cen_dissolve_congress_core = {
+	set_variable = frca_congress_dissolved
+	set_variable = frca_decree_event_fired # .79 ya no sale
+	if = {
+		limit = { has_modifier = ca_federal_paralysis }
+		remove_modifier = ca_federal_paralysis
+	}
+	custom_tooltip = ca_cen_paralysis_lifted_tt
+	ca_frca_set_phase = { VALUE = 2 }
+	ig:ig_intelligentsia ?= { add_modifier = { name = ca_federal_betrayal_disapproval months = 36 } }
+}
+
+# ---------------------------------------------------------------------------
+# Fases de la ruta centralista (lo llama ca_frca_phase_update)
+#   I -> II : Congreso disuelto (boton o .79 b)
+#   II -> III: un Estado nucleo separado, o el 1 feb 1839
+#   III -> IV: unidad >= 80
+# ---------------------------------------------------------------------------
+ca_cen_phase_update = {
+	if = {
+		limit = {
+			has_variable = frca_phase
+			var:frca_phase = 1
+			has_variable = frca_congress_dissolved
+		}
+		ca_frca_set_phase = { VALUE = 2 }
+	}
+	else_if = {
+		limit = {
+			has_variable = frca_phase
+			var:frca_phase = 2
+			OR = {
+				ca_core_states_separated_count >= 1
+				game_date >= 1839.2.1
+			}
+		}
+		ca_frca_set_phase = { VALUE = 3 }
+	}
+	else_if = {
+		limit = {
+			has_variable = frca_phase
+			var:frca_phase = 3
+			je:je_ca_centralist_republic ?= { "scripted_bar_progress(ca_frca_unity_bar)" >= ca_cen_unity_phase4 }
+		}
+		ca_frca_set_phase = { VALUE = 4 }
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Apartar a Morazan (objetivo 4)
+# ---------------------------------------------------------------------------
+
+# Marca el objetivo como cumplido. CAUSE = coup / kill / election / other
+ca_cen_morazan_removed = {
+	set_variable = { name = frca_morazan_removed value = flag:$CAUSE$ }
+	ca_cen_unity_add = { VALUE = ca_cen_unity_morazan }
+	remove_variable = ca_cen_coup_plot
+}
+
+# Quita a Morazan del juego para siempre (muerte o destierro) y lo registra en el
+# reparto historico, para que nadie lo vuelva a crear. KILL = yes (muerte) / no (destierro).
+# Llamar despues de poner al nuevo gobernante.
+ca_cen_morazan_out = {
+	if = {
+		limit = { any_scope_character = { has_variable = is_morazan } }
+		random_scope_character = {
+			limit = { has_variable = is_morazan }
+			save_scope_as = ca_cen_morazan
+		}
+	}
+	else_if = {
+		limit = { global_var:cafm_hc_morazan ?= { always = yes } }
+		global_var:cafm_hc_morazan = { save_scope_as = ca_cen_morazan }
+	}
+	scope:ca_cen_morazan ?= {
+		if = {
+			limit = { always = $KILL$ }
+			kill_character = yes
+		}
+		else = {
+			exile_character = yes
+		}
+	}
+	set_global_variable = cafm_dead_morazan
+}
+
+# Un general unitario toma el poder (golpe o asesinato).
+ca_cen_install_general_ruler = {
+	create_character = {
+		ruler = yes
+		is_general = yes
+		interest_group = ig_armed_forces
+		ideology = ideology_ca_unitarian
+	}
+}
+
+# Un civil centralista gana la eleccion: Aycinena si vive (vuelve del exilio en 1837);
+# si no, un politico unitario de los terratenientes.
+ca_cen_install_civil_ruler = {
+	if = {
+		limit = {
+			game_date >= 1837.1.1
+			NOT = { has_global_variable = cafm_dead_mariano_aycinena }
+		}
+		cafm_spawn_or_transfer = {
+			KEY = mariano_aycinena
+			TEMPLATE = gua_mariano_aycinena_character_template
+			RULER = yes
+		}
+	}
+	else = {
+		create_character = {
+			ruler = yes
+			interest_group = ig_landowners
+			ideology = ideology_ca_unitarian
+		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# Pulso mensual del diario centralista (despues de ca_frca_monthly_update)
+# ---------------------------------------------------------------------------
+ca_cen_monthly = {
+	# --- Leyes: unidad una vez ---
+	if = {
+		limit = {
+			has_law_or_variant = law_type:law_ca_central_american_unitary
+			NOT = { has_variable = ca_cen_law_unitary_given }
+		}
+		set_variable = ca_cen_law_unitary_given
+		ca_cen_unity_add = { VALUE = ca_cen_unity_law_unitary }
+	}
+	if = {
+		limit = {
+			has_variable = ca_cen_law_unitary_given
+			has_law_or_variant = law_type:law_ca_central_american_federal
+			NOT = { has_variable = ca_cen_law_federal_back }
+		}
+		set_variable = ca_cen_law_federal_back
+		ca_cen_unity_add = { VALUE = ca_cen_unity_law_federal_back }
+	}
+	if = {
+		limit = {
+			has_law_or_variant = law_type:law_ca_guardia_nacional
+			NOT = { has_variable = ca_cen_law_guard_given }
+		}
+		set_variable = ca_cen_law_guard_given
+		ca_cen_unity_add = { VALUE = ca_cen_unity_law_minor }
+	}
+	if = {
+		limit = {
+			has_law_or_variant = law_type:law_state_religion
+			NOT = { has_variable = ca_cen_law_religion_given }
+		}
+		set_variable = ca_cen_law_religion_given
+		ca_cen_unity_add = { VALUE = ca_cen_unity_law_minor }
+	}
+
+	# --- Objetivo 1: el ejercito ---
+	if = {
+		limit = {
+			NOT = { has_variable = ca_cen_army_converted }
+			NOT = { has_variable = ca_cen_army_event_pending }
+			je:je_ca_centralist_republic ?= { "scripted_bar_progress(ca_cen_army_bar)" >= 100 }
+		}
+		set_variable = { name = ca_cen_army_event_pending days = 60 }
+		trigger_event = { id = cafm_cen.1 popup = yes }
+	}
+
+	# --- Objetivo 2: apoyo de los Estados ---
+	if = {
+		limit = {
+			NOT = { has_variable = ca_cen_obj_states_done }
+			ca_cen_states_support = yes
+		}
+		set_variable = ca_cen_obj_states_done
+		trigger_event = { id = cafm_cen.2 popup = yes }
+	}
+
+	# --- Objetivo 4: Morazan ---
+	if = {
+		limit = { NOT = { has_variable = frca_morazan_removed } }
+		# Salio del poder por otra via (muerte, eleccion normal...)
+		if = {
+			limit = {
+				NOT = { ca_cen_federalist_in_power = yes }
+				NOT = { ca_cen_morazan_in_uca = yes }
+			}
+			ca_cen_morazan_removed = { CAUSE = other }
+		}
+		# Golpe en marcha
+		else_if = {
+			limit = {
+				has_variable = ca_cen_coup_plot
+				NOT = { has_variable = ca_cen_coup_event_pending }
+			}
+			change_variable = { name = ca_cen_coup_plot add = ca_cen_coup_monthly }
+			if = {
+				limit = { var:ca_cen_coup_plot >= 100 }
+				set_variable = { name = ca_cen_coup_event_pending days = 60 }
+				trigger_event = { id = cafm_cen.6 popup = yes }
+			}
+			else_if = {
+				limit = { var:ca_cen_coup_plot <= 0 }
+				set_variable = { name = ca_cen_coup_event_pending days = 60 }
+				trigger_event = { id = cafm_cen.7 popup = yes }
+			}
+			else = {
+				random = { chance = 15 trigger_event = { id = cafm_cen.5 popup = yes } }
+			}
+		}
+		# Antes de la eleccion federal: el ejercito se aparta de la campana
+		if = {
+			limit = {
+				game_date >= 1838.5.1
+				NOT = { has_variable = ca_cen_pre_election_fired }
+			}
+			set_variable = ca_cen_pre_election_fired
+			trigger_event = { id = cafm_cen.9 popup = yes }
+		}
+		# La eleccion federal del 1 jun 1838
+		if = {
+			limit = {
+				game_date >= 1838.6.1
+				NOT = { has_variable = ca_cen_election_fired }
+			}
+			set_variable = ca_cen_election_fired
+			trigger_event = { id = cafm_cen.8 popup = yes }
+		}
+		# Plazo: 1 dic 1838
+		if = {
+			limit = {
+				game_date >= 1838.12.1
+				NOT = { has_variable = ca_cen_counterattack_fired }
+			}
+			set_variable = ca_cen_counterattack_fired
+			trigger_event = { id = cafm_cen.10 popup = yes }
+		}
+	}
+
+	# --- Separatistas: contador ---
+	if = {
+		limit = { NOT = { has_variable = ca_separatists_emerged } }
+		if = {
+			limit = { NOT = { has_variable = ca_cen_sep_pressure } }
+			set_variable = { name = ca_cen_sep_pressure value = 0 }
+		}
+		change_variable = { name = ca_cen_sep_pressure add = ca_cen_sep_pressure_monthly }
+		if = {
+			limit = { var:ca_cen_sep_pressure < 0 }
+			set_variable = { name = ca_cen_sep_pressure value = 0 }
+		}
+		if = {
+			limit = {
+				var:ca_cen_sep_pressure >= ca_cen_sep_threshold
+				NOT = { has_variable = ca_cen_sep_event_pending }
+			}
+			set_variable = { name = ca_cen_sep_event_pending days = 60 }
+			trigger_event = { id = cafm_cen.11 popup = yes }
+		}
+	}
+
+	# --- Leyes de la Republica (Congreso disuelto, sin paralisis) ---
+	if = {
+		limit = {
+			has_variable = frca_congress_dissolved
+			NOT = { exists = currently_enacting_law }
+			NOT = { has_variable = ca_cen_law_cd }
+		}
+		random = {
+			chance = 25
+			if = {
+				limit = {
+					NOT = { has_law_or_variant = law_type:law_ca_central_american_unitary }
+					NOT = { has_variable = ca_cen_law_unitary_postponed }
+				}
+				trigger_event = { id = cafm_cen.12 popup = yes }
+			}
+			else_if = {
+				limit = {
+					has_law_or_variant = law_type:law_ca_central_american_unitary
+					NOT = { has_law_or_variant = law_type:law_ca_guardia_nacional }
+					NOT = { has_variable = ca_cen_law_guard_postponed }
+				}
+				trigger_event = { id = cafm_cen.13 popup = yes }
+			}
+			else_if = {
+				limit = {
+					has_variable = frca_concordat
+					NOT = { has_law_or_variant = law_type:law_state_religion }
+					NOT = { has_variable = ca_cen_law_religion_postponed }
+				}
+				trigger_event = { id = cafm_cen.14 popup = yes }
+			}
+		}
+	}
+}
+
+# Golpe con exito (cafm_cen.6): un general unitario gobierna; Morazan, desterrado.
+ca_cen_coup_success = {
+	ca_cen_install_general_ruler = yes
+	ca_cen_morazan_out = { KILL = no }
+	ca_cen_morazan_removed = { CAUSE = coup }
+	ca_cen_unity_add = { VALUE = ca_cen_unity_morazan_coup }
+	set_variable = { name = recent_coup_or_revolution_var days = 730 }
+	ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down_massive months = 36 } }
+	add_radicals = { value = medium_radicals strata = middle }
+}
+
+# Pierde la eleccion (cafm_cen.8): Morazan deja la UCA. Como en la historia, se va a
+# El Salvador si existe; si no, al destierro (y se registra en el reparto historico).
+# Llamar despues de poner al nuevo gobernante.
+ca_cen_morazan_leaves = {
+	if = {
+		limit = {
+			exists = c:ELS
+			any_scope_character = { has_variable = is_morazan }
+		}
+		random_scope_character = {
+			limit = { has_variable = is_morazan }
+			transfer_character = c:ELS
+		}
+	}
+	else = {
+		ca_cen_morazan_out = { KILL = no }
+	}
+}

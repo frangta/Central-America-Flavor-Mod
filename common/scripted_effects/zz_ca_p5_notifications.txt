@@ -58,7 +58,10 @@ ca_notif_monthly = {
 	# Barra de la Federacion por debajo de 50
 	if = {
 		limit = {
-			je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" < ca_frca_bar_crisis }
+			OR = {
+				je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" < ca_frca_bar_crisis }
+				je:je_ca_centralist_republic ?= { "scripted_bar_progress(ca_frca_unity_bar)" < ca_cen_unity_crisis } # ruta centralista
+			}
 			NOT = { has_variable = ca_notif_bar_low }
 		}
 		set_variable = ca_notif_bar_low
@@ -67,7 +70,8 @@ ca_notif_monthly = {
 	else_if = {
 		limit = {
 			has_variable = ca_notif_bar_low
-			je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" >= ca_frca_bar_crisis }
+			NOT = { je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(frca_support_bar)" < ca_frca_bar_crisis } }
+			NOT = { je:je_ca_centralist_republic ?= { "scripted_bar_progress(ca_frca_unity_bar)" < ca_cen_unity_crisis } }
 		}
 		remove_variable = ca_notif_bar_low
 	}

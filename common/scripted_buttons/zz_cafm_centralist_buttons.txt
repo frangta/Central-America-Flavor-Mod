@@ -1,0 +1,381 @@
+############################################################################
+# CAFM - Ruta centralista de la UCA (18 nov 2026). Botones del diario
+# je_ca_centralist_republic. Sustituyen a los 8 botones centralistas de
+# ca_flavor_buttons.txt (que ya no estan en ningun diario).
+# Fases: I objetivos, capital, concordato, Livingston, disolver el Congreso
+#        II prensa vigilada, estancos  ·  III leva suprema, ejercito permanente
+# Pestanas: Gobierno (objetivos y reformas) / Crisis (fuerza).
+# Solo los usa el jugador (la IA nunca juega esta ruta): ai_chance 0.
+############################################################################
+
+# ===========================================================================
+# Objetivo 1: reorganizar a los centralistas y ganarse al ejercito
+# ===========================================================================
+ca_cen_button_reorganize = {
+	name = "ca_cen_button_reorganize"
+	desc = "ca_cen_button_reorganize_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		NOT = { has_variable = ca_cen_army_converted }
+		ca_uca_button_tab = { TAB = gov }
+	}
+	possible = {
+		custom_tooltip = { text = ca_button_cooldown_tt NOT = { has_variable = ca_cen_reorganize_cd } }
+		ca_mm_can_pay = { VALUE = ca_money_small }
+	}
+	effect = {
+		set_variable = { name = ca_cen_reorganize_cd days = 180 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		ca_cen_army_add = { VALUE = ca_cen_army_reorganize }
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 12 } }
+	}
+	ai_chance = { value = 0 }
+}
+
+# ===========================================================================
+# Objetivo 3: propaganda (antes de que aparezcan los separatistas)
+# Sube el movimiento unitario, el poder centralista y la unidad; baja la presion separatista.
+# ===========================================================================
+ca_cen_button_propaganda = {
+	name = "ca_cen_button_propaganda"
+	desc = "ca_cen_button_propaganda_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		ca_uca_button_tab = { TAB = gov }
+	}
+	possible = {
+		custom_tooltip = { text = ca_button_cooldown_tt NOT = { has_variable = ca_cen_propaganda_cd } }
+		ca_mm_can_pay = { VALUE = ca_money_small }
+	}
+	effect = {
+		set_variable = { name = ca_cen_propaganda_cd days = 365 }
+		set_variable = { name = ca_cen_propaganda_active days = 365 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		add_modifier = { name = ca_cen_propaganda months = 12 }
+		ca_cen_unity_add = { VALUE = ca_cen_unity_propaganda }
+		if = {
+			limit = {
+				has_variable = ca_cen_sep_pressure
+				NOT = { has_variable = ca_separatists_emerged }
+			}
+			change_variable = { name = ca_cen_sep_pressure add = ca_cen_sep_propaganda_once }
+		}
+		custom_tooltip = ca_cen_button_propaganda_tt
+	}
+	ai_chance = { value = 0 }
+}
+
+# ===========================================================================
+# Objetivo 4: apartar a Morazan (o al federalista que gobierne). Plazo: 1 dic 1838.
+# ===========================================================================
+
+# Conspiracion: asesinato. Exige generales unitarios o poder centralista.
+ca_cen_button_conspiracy = {
+	name = "ca_cen_button_conspiracy"
+	desc = "ca_cen_button_conspiracy_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		NOT = { has_variable = frca_morazan_removed }
+		ca_cen_morazan_in_uca = yes
+		ca_uca_button_tab = { TAB = crisis }
+	}
+	possible = {
+		custom_tooltip = { text = ca_button_cooldown_tt NOT = { has_variable = ca_cen_conspiracy_cd } }
+		NOT = { has_variable = ca_cen_coup_plot }
+		ca_cen_can_conspire = yes
+		ca_mm_can_pay = { VALUE = ca_money_medium }
+	}
+	effect = {
+		set_variable = { name = ca_cen_conspiracy_cd days = 730 }
+		add_treasury = { value = ca_money_medium multiply = -1 }
+		hidden_effect = {
+			random_list = {
+				30 = {
+					modifier = { if = { limit = { has_variable = ca_cen_army_converted } add = 20 } }
+					modifier = { if = { limit = { ca_cen_unitarian_generals >= 2 } add = 10 } }
+					modifier = { if = { limit = { ca_bloc_power_centralist >= 60 } add = 15 } }
+					set_variable = { name = ca_cen_kill_result value = flag:success }
+				}
+				70 = {
+					set_variable = { name = ca_cen_kill_result value = flag:failure }
+				}
+			}
+		}
+		trigger_event = { id = cafm_cen.3 popup = yes }
+	}
+	ai_chance = { value = 0 }
+}
+
+# Golpe de Estado: exige el ejercito centralista y poderoso.
+ca_cen_button_coup = {
+	name = "ca_cen_button_coup"
+	desc = "ca_cen_button_coup_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		NOT = { has_variable = frca_morazan_removed }
+		NOT = { has_variable = ca_cen_coup_plot }
+		ca_uca_button_tab = { TAB = crisis }
+	}
+	possible = {
+		custom_tooltip = { text = ca_button_cooldown_tt NOT = { has_variable = ca_cen_coup_cd } }
+		custom_tooltip = { text = ca_cen_army_won_tt ca_cen_army_won = yes }
+		ig:ig_armed_forces ?= { is_powerful = yes }
+	}
+	effect = {
+		set_variable = { name = ca_cen_coup_plot value = ca_cen_coup_start }
+		trigger_event = { id = cafm_cen.4 popup = yes }
+	}
+	ai_chance = { value = 0 }
+}
+
+# Campana unitaria para la eleccion del 1 jun 1838 (maximo 3).
+ca_cen_button_campaign = {
+	name = "ca_cen_button_campaign"
+	desc = "ca_cen_button_campaign_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		NOT = { has_variable = frca_morazan_removed }
+		NOT = { has_variable = ca_cen_election_fired }
+		game_date >= 1837.1.1
+		ca_uca_button_tab = { TAB = gov }
+	}
+	possible = {
+		custom_tooltip = { text = ca_button_cooldown_tt NOT = { has_variable = ca_cen_campaign_cd } }
+		custom_tooltip = {
+			text = ca_cen_campaign_max_tt
+			OR = {
+				NOT = { has_variable = ca_cen_campaign }
+				var:ca_cen_campaign < 3
+			}
+		}
+		ca_mm_can_pay = { VALUE = ca_money_small }
+	}
+	effect = {
+		set_variable = { name = ca_cen_campaign_cd days = 120 }
+		add_treasury = { value = ca_money_small multiply = -1 }
+		if = {
+			limit = { NOT = { has_variable = ca_cen_campaign } }
+			set_variable = { name = ca_cen_campaign value = 0 }
+		}
+		change_variable = { name = ca_cen_campaign add = 1 }
+		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 12 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 12 } }
+	}
+	ai_chance = { value = 0 }
+}
+
+# ===========================================================================
+# Fase I
+# ===========================================================================
+
+# Disolver el Congreso: abre la fase II y quita la paralisis. Exige apartar antes a Morazan.
+ca_cen_button_dissolve_congress = {
+	name = "ca_button_dissolve_congress"
+	desc = "ca_cen_button_dissolve_congress_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		NOT = { has_variable = frca_congress_dissolved }
+		NOT = { has_variable = frca_decree_event_fired }
+		ca_uca_button_tab = { TAB = gov }
+	}
+	possible = {
+		custom_tooltip = { text = ca_cen_morazan_removed_tt has_variable = frca_morazan_removed }
+	}
+	effect = {
+		ca_cen_dissolve_congress_core = yes
+		ca_cen_unity_add = { VALUE = ca_cen_unity_dissolve }
+	}
+	ai_chance = { value = 0 }
+}
+
+ca_cen_button_capital_guatemala = {
+	name = "ca_button_capital_guatemala"
+	desc = "ca_button_capital_guatemala_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		NOT = { ca_frca_phase_ge = { VALUE = 4 } }
+		NOT = { has_variable = frca_capital_guatemala }
+		ca_uca_button_tab = { TAB = gov }
+	}
+	possible = {
+		exists = s:STATE_GUATEMALA.region_state:UCA
+	}
+	effect = {
+		set_variable = frca_capital_guatemala
+		set_capital = STATE_GUATEMALA
+		ca_frca_loyalty_up = { TAG = gua }
+		ca_frca_loyalty_down = { TAG = els }
+		ca_cen_unity_add = { VALUE = ca_cen_unity_capital }
+	}
+	ai_chance = { value = 0 }
+}
+
+ca_cen_button_concordat = {
+	name = "ca_button_concordat"
+	desc = "ca_button_concordat_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		NOT = { has_variable = frca_concordat }
+		ca_uca_button_tab = { TAB = gov }
+	}
+	possible = {
+		always = yes
+	}
+	effect = {
+		set_variable = frca_concordat
+		ca_frca_front_change = { FRONT = conservative VALUE = -1 }
+		ca_frca_loyalty_up = { TAG = gua }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 36 } }
+		add_modifier = { name = ca_concordat }
+		ca_cen_unity_add = { VALUE = ca_cen_unity_concordat }
+	}
+	ai_chance = { value = 0 }
+}
+
+# Solo si se aplicaron los codigos en .14; si se rechazaron, el +5 ya se dio alli.
+ca_cen_button_repeal_livingston = {
+	name = "ca_button_repeal_livingston"
+	desc = "ca_button_repeal_livingston_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		NOT = { ca_frca_phase_ge = { VALUE = 3 } }
+		NOT = { has_variable = frca_livingston_repealed }
+		has_modifier = uca_new_penal_code
+		ca_uca_button_tab = { TAB = gov }
+	}
+	possible = {
+		always = yes
+	}
+	effect = {
+		set_variable = frca_livingston_repealed
+		remove_modifier = uca_new_penal_code
+		ca_frca_loyalty_up = { TAG = gua }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		add_modifier = { name = ca_livingston_repealed months = 60 }
+		ca_cen_unity_add = { VALUE = ca_cen_unity_livingston }
+	}
+	ai_chance = { value = 0 }
+}
+
+# ===========================================================================
+# Fase II
+# ===========================================================================
+ca_cen_button_press_watch = {
+	name = "ca_button_press_watch"
+	desc = "ca_button_press_watch_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		ca_frca_phase_ge = { VALUE = 2 }
+		ca_uca_button_tab = { TAB = gov }
+	}
+	possible = {
+		custom_tooltip = { text = ca_button_cooldown_tt NOT = { has_variable = frca_press_cd } }
+	}
+	effect = {
+		set_variable = { name = frca_press_cd days = 365 }
+		set_variable = { name = frca_press_watch days = 180 }
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
+		add_modifier = { name = ca_press_watch months = 12 }
+		ca_cen_unity_add = { VALUE = ca_cen_unity_press }
+	}
+	ai_chance = { value = 0 }
+}
+
+ca_cen_button_monopolies = {
+	name = "ca_button_federal_monopolies"
+	desc = "ca_button_federal_monopolies_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		ca_frca_phase_ge = { VALUE = 2 }
+		ca_uca_button_tab = { TAB = crisis }
+	}
+	possible = {
+		custom_tooltip = { text = ca_button_cooldown_tt NOT = { has_variable = frca_monopolies_cd } }
+	}
+	effect = {
+		set_variable = { name = frca_monopolies_cd days = 365 }
+		add_modifier = { name = ca_federal_monopolies months = 12 }
+		ca_frca_front_change = { FRONT = british VALUE = -1 }
+		ca_cen_unity_add = { VALUE = ca_cen_unity_monopolies }
+		# El estado mas pobre (Honduras, luego Nicaragua, Costa Rica, El Salvador, Guatemala) pierde lealtad
+		if = {
+			limit = { ca_frca_loyalty_ge = { TAG = hon VALUE = 2 } }
+			ca_frca_loyalty_down = { TAG = hon }
+			s:STATE_HONDURAS.region_state:UCA ?= { add_modifier = { name = ca_federal_campaign_unrest months = 12 } }
+		}
+		else_if = {
+			limit = { ca_frca_loyalty_ge = { TAG = nic VALUE = 2 } }
+			ca_frca_loyalty_down = { TAG = nic }
+			s:STATE_NICARAGUA.region_state:UCA ?= { add_modifier = { name = ca_federal_campaign_unrest months = 12 } }
+		}
+		else_if = {
+			limit = { ca_frca_loyalty_ge = { TAG = cos VALUE = 2 } }
+			ca_frca_loyalty_down = { TAG = cos }
+			s:STATE_COSTA_RICA.region_state:UCA ?= { add_modifier = { name = ca_federal_campaign_unrest months = 12 } }
+		}
+		else_if = {
+			limit = { ca_frca_loyalty_ge = { TAG = els VALUE = 2 } }
+			ca_frca_loyalty_down = { TAG = els }
+			s:STATE_SAN_SALVADOR.region_state:UCA ?= { add_modifier = { name = ca_federal_campaign_unrest months = 12 } }
+		}
+		else_if = {
+			limit = { ca_frca_loyalty_ge = { TAG = gua VALUE = 2 } }
+			ca_frca_loyalty_down = { TAG = gua }
+			s:STATE_GUATEMALA.region_state:UCA ?= { add_modifier = { name = ca_federal_campaign_unrest months = 12 } }
+		}
+	}
+	ai_chance = { value = 0 }
+}
+
+# ===========================================================================
+# Fase III
+# ===========================================================================
+ca_cen_button_supreme_levy = {
+	name = "ca_button_supreme_levy"
+	desc = "ca_button_supreme_levy_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		ca_frca_phase_ge = { VALUE = 3 }
+		ca_uca_button_tab = { TAB = crisis }
+	}
+	possible = {
+		custom_tooltip = { text = ca_button_cooldown_tt NOT = { has_variable = frca_levy_cd } }
+	}
+	effect = {
+		set_variable = { name = frca_levy_cd days = 730 }
+		add_modifier = { name = ca_supreme_levy months = 24 }
+		ca_cen_unity_add = { VALUE = ca_cen_unity_levy }
+		ca_cen_army_add = { VALUE = ca_cen_army_levy }
+		ruler ?= { add_modifier = { name = ca_unpopular_ruler_modifier months = 24 } }
+		ca_frca_front_change = { FRONT = caudillos VALUE = 1 }
+		add_radicals = { value = small_radicals strata = lower } # pagas con el campesinado
+	}
+	ai_chance = { value = 0 }
+}
+
+ca_cen_button_standing_army = {
+	name = "ca_button_standing_army"
+	desc = "ca_button_standing_army_desc"
+	visible = {
+		ca_frca_route_centralist = yes
+		ca_frca_phase_ge = { VALUE = 3 }
+		NOT = { has_variable = frca_standing_army }
+		ca_uca_button_tab = { TAB = crisis }
+	}
+	possible = {
+		custom_tooltip = { text = ca_cen_army_won_tt ca_cen_army_won = yes }
+	}
+	effect = {
+		set_variable = frca_standing_army
+		ca_frca_front_change = { FRONT = caudillos VALUE = -1 }
+		add_modifier = { name = ca_standing_army }
+		ca_cen_unity_add = { VALUE = ca_cen_unity_standing_army }
+		# Los estados con milicia propia (miembros) pierden lealtad
+		every_country = {
+			limit = { is_subject_of = c:UCA }
+			ca_state_loyalty_down = yes
+		}
+	}
+	ai_chance = { value = 0 }
+}

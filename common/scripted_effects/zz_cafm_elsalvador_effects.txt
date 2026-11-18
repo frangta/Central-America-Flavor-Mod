@@ -1,0 +1,533 @@
+﻿# =====================================================================
+# CAFM — EL SALVADOR (1836–1851): efectos de las 4 fases.
+#
+# ca_els_beats            Las etapas por fecha. Lo llama el pulso semanal de
+#                         je_ca_historic_situation_in_elsalvador.
+# ca_els_disolucion_*     Límites, umbrales y deriva de var:els_disolucion.
+# ca_els_malespin_*       Lo mismo para var:els_malespin.
+# ca_els_arada_*          Lo mismo para var:els_arada.
+# =====================================================================
+
+# =====================================================================
+# LAS ETAPAS POR FECHA (pulso semanal del diario de la situación)
+# =====================================================================
+ca_els_beats = {
+	# ---------- FASE 1: el último bastión federal ----------
+	# 17 abr 1839: Guatemala se retira y El Salvador queda solo. Abre el diario.
+	if = {
+		limit = {
+			game_date >= 1839.4.17
+			NOT = { has_variable = els_e14_fired }
+		}
+		set_variable = els_e14_fired
+		trigger_event = { id = ca_el_salvador_events.14 popup = yes }
+	}
+	# may–jul 1839: Cañas organiza los cuatro ministerios
+	else_if = {
+		limit = {
+			game_date >= 1839.5.23
+			has_variable = els_e14_fired
+			NOT = { has_variable = els_e15_fired }
+		}
+		set_variable = els_e15_fired
+		trigger_event = { id = ca_el_salvador_events.15 popup = yes }
+	}
+	# 1 feb 1840: Vigil preside una federación de un solo estado
+	else_if = {
+		limit = {
+			game_date >= 1840.2.1
+			has_variable = els_e15_fired
+			NOT = { has_variable = els_e16_fired }
+		}
+		set_variable = els_e16_fired
+		trigger_event = { id = ca_el_salvador_events.16 popup = yes }
+	}
+	# mar 1840: Carrera nombra a Malespín comandante del ejército salvadoreño
+	else_if = {
+		limit = {
+			game_date >= 1840.3.10
+			has_variable = els_e16_fired
+			NOT = { has_variable = els_e17_fired }
+		}
+		set_variable = els_e17_fired
+		trigger_event = { id = ca_el_salvador_events.17 popup = yes }
+	}
+	# 31 mar 1840: El Salvador disuelve la Federación (o antes, con la barra en 100)
+	else_if = {
+		limit = {
+			has_variable = els_e14_fired
+			NOT = { has_variable = els_e18_fired }
+			OR = {
+				game_date >= 1840.3.31
+				AND = {
+					has_variable = els_disolucion
+					var:els_disolucion >= ca_els_disolucion_fin
+				}
+			}
+		}
+		set_variable = els_e18_fired
+		trigger_event = { id = ca_el_salvador_events.18 popup = yes }
+	}
+	# 8 abr 1840: Morazán y Vigil zarpan hacia el sur
+	else_if = {
+		limit = {
+			game_date >= 1840.4.8
+			has_variable = els_e18_fired
+			NOT = { has_variable = els_e19_fired }
+		}
+		set_variable = els_e19_fired
+		trigger_event = { id = ca_el_salvador_events.19 popup = yes }
+	}
+	# 20 sep 1840: la revuelta de Malespín contra Cañas
+	else_if = {
+		limit = {
+			game_date >= 1840.9.20
+			has_variable = els_e19_fired
+			NOT = { has_variable = els_e20_fired }
+		}
+		set_variable = els_e20_fired
+		trigger_event = { id = ca_el_salvador_events.20 popup = yes }
+	}
+	# 7 ene 1841: Juan Lindo, jefe provisional
+	else_if = {
+		limit = {
+			game_date >= 1841.1.7
+			has_variable = els_e20_fired
+			NOT = { has_variable = els_e21_fired }
+		}
+		set_variable = els_e21_fired
+		trigger_event = { id = ca_el_salvador_events.21 popup = yes }
+	}
+	# 16 feb 1841: la Universidad de El Salvador
+	else_if = {
+		limit = {
+			game_date >= 1841.2.16
+			has_variable = els_e21_fired
+			NOT = { has_variable = els_e22_fired }
+		}
+		set_variable = els_e22_fired
+		trigger_event = { id = ca_el_salvador_events.22 popup = yes }
+	}
+	# 22 feb 1841: estado libre, soberano e independiente
+	else_if = {
+		limit = {
+			game_date >= 1841.2.22
+			has_variable = els_e21_fired
+			NOT = { has_variable = els_e23_fired }
+		}
+		set_variable = els_e23_fired
+		trigger_event = { id = ca_el_salvador_events.23 popup = yes }
+	}
+
+	# ---------- FASE 2: el caudillo Malespín ----------
+	# 1842: Morazán quiere volver y Malespín se lo impide
+	else_if = {
+		limit = {
+			game_date >= 1842.2.1
+			NOT = { has_variable = els_e24_fired }
+		}
+		set_variable = els_e24_fired
+		trigger_event = { id = ca_el_salvador_events.24 popup = yes }
+	}
+	# dic 1843: Malespín rompe con Juan José Guzmán. Abre el diario del caudillo.
+	else_if = {
+		limit = {
+			game_date >= 1843.12.1
+			NOT = { has_variable = els_e25_fired }
+		}
+		set_variable = els_e25_fired
+		trigger_event = { id = ca_el_salvador_events.25 popup = yes }
+	}
+	# 1 feb 1844: Malespín toma la presidencia (o antes, con la barra en 60)
+	else_if = {
+		limit = {
+			has_variable = els_e25_fired
+			NOT = { has_variable = els_e26_fired }
+			OR = {
+				game_date >= 1844.2.1
+				AND = {
+					has_variable = els_malespin
+					var:els_malespin >= ca_els_malespin_presidente
+				}
+			}
+		}
+		set_variable = els_e26_fired
+		trigger_event = { id = ca_el_salvador_events.26 popup = yes }
+	}
+	# oct 1844: la guerra contra Nicaragua
+	else_if = {
+		limit = {
+			game_date >= 1844.10.1
+			has_variable = els_e26_fired
+			NOT = { has_variable = els_e27_fired }
+		}
+		set_variable = els_e27_fired
+		trigger_event = { id = ca_el_salvador_events.27 popup = yes }
+	}
+	# 24 ene 1845: la toma de León
+	else_if = {
+		limit = {
+			game_date >= 1845.1.24
+			has_variable = els_e27_fired
+			NOT = { has_variable = els_e28_fired }
+		}
+		set_variable = els_e28_fired
+		trigger_event = { id = ca_el_salvador_events.28 popup = yes }
+	}
+	# 2 feb 1845: Barrios y Cabañas lo deponen
+	else_if = {
+		limit = {
+			game_date >= 1845.2.2
+			has_variable = els_e28_fired
+			NOT = { has_variable = els_e29_fired }
+		}
+		set_variable = els_e29_fired
+		trigger_event = { id = ca_el_salvador_events.29 popup = yes }
+	}
+	# 1845: la excomunión
+	else_if = {
+		limit = {
+			game_date >= 1845.6.1
+			has_variable = els_e29_fired
+			NOT = { has_variable = els_e30_fired }
+		}
+		set_variable = els_e30_fired
+		trigger_event = { id = ca_el_salvador_events.30 popup = yes }
+	}
+	# 25 nov 1846: lo asesinan en San Fernando
+	else_if = {
+		limit = {
+			game_date >= 1846.11.25
+			has_variable = els_e30_fired
+			NOT = { has_variable = els_e31_fired }
+		}
+		set_variable = els_e31_fired
+		trigger_event = { id = ca_el_salvador_events.31 popup = yes }
+	}
+
+	# ---------- FASE 3: el añil ----------
+	# nov 1847: las ferias de San Miguel
+	else_if = {
+		limit = {
+			game_date >= 1847.11.1
+			NOT = { has_variable = els_e32_fired }
+		}
+		set_variable = els_e32_fired
+		trigger_event = { id = ca_el_salvador_events.32 popup = yes }
+	}
+	# 1847: la habilitación
+	else_if = {
+		limit = {
+			game_date >= 1847.12.1
+			has_variable = els_e32_fired
+			NOT = { has_variable = els_e33_fired }
+		}
+		set_variable = els_e33_fired
+		trigger_event = { id = ca_el_salvador_events.33 popup = yes }
+	}
+	# 1848: el puerto de La Unión
+	else_if = {
+		limit = {
+			game_date >= 1848.4.1
+			has_variable = els_e33_fired
+			NOT = { has_variable = els_e34_fired }
+		}
+		set_variable = els_e34_fired
+		trigger_event = { id = ca_el_salvador_events.34 popup = yes }
+	}
+
+	# ---------- FASE 4: Vasconcelos y La Arada ----------
+	# 7 feb 1848: Vasconcelos, presidente. Abre el diario de La Arada.
+	else_if = {
+		limit = {
+			game_date >= 1848.2.7
+			NOT = { has_variable = els_e36_fired }
+		}
+		set_variable = els_e36_fired
+		trigger_event = { id = ca_el_salvador_events.36 popup = yes }
+	}
+	# 26 ago 1848: Los Altos y el asilo a los liberales guatemaltecos
+	else_if = {
+		limit = {
+			game_date >= 1848.8.26
+			has_variable = els_e36_fired
+			NOT = { has_variable = els_e37_fired }
+		}
+		set_variable = els_e37_fired
+		trigger_event = { id = ca_el_salvador_events.37 popup = yes }
+	}
+	# 1848–1850: el bloqueo británico
+	else_if = {
+		limit = {
+			game_date >= 1849.1.1
+			has_variable = els_e36_fired
+			NOT = { has_variable = els_e35_fired }
+		}
+		set_variable = els_e35_fired
+		trigger_event = { id = ca_el_salvador_events.35 popup = yes }
+	}
+	# 1849: los restos de Morazán vuelven a San Salvador
+	else_if = {
+		limit = {
+			game_date >= 1849.6.1
+			has_variable = els_e36_fired
+			NOT = { has_variable = els_e38_fired }
+		}
+		set_variable = els_e38_fired
+		trigger_event = { id = ca_el_salvador_events.38 popup = yes }
+	}
+	# 1850: dinero y armas para la Montaña guatemalteca
+	else_if = {
+		limit = {
+			game_date >= 1850.6.1
+			has_variable = els_e36_fired
+			NOT = { has_variable = els_e39_fired }
+		}
+		set_variable = els_e39_fired
+		trigger_event = { id = ca_el_salvador_events.39 popup = yes }
+	}
+	# 4 ene 1851: la alianza de Ocotepeque con Juan Lindo
+	else_if = {
+		limit = {
+			game_date >= 1851.1.4
+			has_variable = els_e36_fired
+			NOT = { has_variable = els_e40_fired }
+		}
+		set_variable = els_e40_fired
+		trigger_event = { id = ca_el_salvador_events.40 popup = yes }
+	}
+	# 28 ene 1851: el ultimátum a Guatemala
+	else_if = {
+		limit = {
+			game_date >= 1851.1.28
+			has_variable = els_e40_fired
+			has_variable = els_alianza_ocotepeque
+			NOT = { has_variable = els_e41_fired }
+		}
+		set_variable = els_e41_fired
+		trigger_event = { id = ca_el_salvador_events.41 popup = yes }
+	}
+	# 2 feb 1851: La Arada
+	else_if = {
+		limit = {
+			game_date >= 1851.2.2
+			has_variable = els_e41_fired
+			NOT = { has_variable = els_e42_fired }
+		}
+		set_variable = els_e42_fired
+		trigger_event = { id = ca_el_salvador_events.42 popup = yes }
+	}
+	# feb 1851: Carrera ocupa Santa Ana
+	else_if = {
+		limit = {
+			game_date >= 1851.2.20
+			has_variable = els_arada_perdida
+			NOT = { has_variable = els_e43_fired }
+		}
+		set_variable = els_e43_fired
+		trigger_event = { id = ca_el_salvador_events.43 popup = yes }
+	}
+}
+
+# =====================================================================
+# EL ÚLTIMO BASTIÓN: límites, umbrales y deriva
+# =====================================================================
+ca_els_disolucion_clamp = {
+	if = {
+		limit = { var:els_disolucion > 100 }
+		set_variable = { name = els_disolucion value = 100 }
+	}
+	if = {
+		limit = { var:els_disolucion < 0 }
+		set_variable = { name = els_disolucion value = 0 }
+	}
+}
+
+ca_els_disolucion_thresholds = {
+	if = {
+		limit = {
+			var:els_disolucion >= ca_els_disolucion_sola
+			NOT = { has_modifier = els_ultimo_bastion }
+		}
+		add_modifier = { name = els_ultimo_bastion }
+	}
+	else_if = {
+		limit = {
+			var:els_disolucion < ca_els_disolucion_sola
+			has_modifier = els_ultimo_bastion
+		}
+		remove_modifier = els_ultimo_bastion
+	}
+}
+
+ca_els_disolucion_drift = {
+	# --- Sube: la Federación se deshace ---
+	change_variable = { name = els_disolucion add = 1 }
+	# Cada estado que ya no está en la Unión
+	if = {
+		limit = { NOT = { exists = c:UCA } }
+		change_variable = { name = els_disolucion add = 2 }
+	}
+	# El tesoro no da para sostener un gobierno federal
+	if = {
+		limit = { has_variable = els_tesoro_vacio }
+		change_variable = { name = els_disolucion add = 2 }
+	}
+	# El ejército ya no obedece al gobierno civil
+	if = {
+		limit = { ig:ig_armed_forces ?= { ig_approval < 0 } }
+		change_variable = { name = els_disolucion add = 1 }
+	}
+	# --- Baja: todavía se puede salvar ---
+	# Los liberales sostienen la Unión
+	if = {
+		limit = { ig:ig_intelligentsia ?= { is_in_government = yes } }
+		change_variable = { name = els_disolucion subtract = 1 }
+	}
+	# Hay otro estado que sigue en la Federación
+	if = {
+		limit = { has_variable = els_aliado_federal }
+		change_variable = { name = els_disolucion subtract = 2 }
+	}
+	# El gobierno paga al ejército federal
+	if = {
+		limit = { has_modifier = els_pagar_ejercito_federal }
+		change_variable = { name = els_disolucion subtract = 2 }
+	}
+}
+
+# =====================================================================
+# MALESPÍN: límites, umbrales y deriva
+# =====================================================================
+ca_els_malespin_clamp = {
+	if = {
+		limit = { var:els_malespin > 100 }
+		set_variable = { name = els_malespin value = 100 }
+	}
+	if = {
+		limit = { var:els_malespin < 0 }
+		set_variable = { name = els_malespin value = 0 }
+	}
+}
+
+ca_els_malespin_thresholds = {
+	if = {
+		limit = {
+			var:els_malespin >= ca_els_malespin_regimen
+			NOT = { has_modifier = els_regimen_malespin }
+		}
+		add_modifier = { name = els_regimen_malespin }
+	}
+	else_if = {
+		limit = {
+			var:els_malespin < ca_els_malespin_regimen
+			has_modifier = els_regimen_malespin
+		}
+		remove_modifier = els_regimen_malespin
+	}
+}
+
+ca_els_malespin_drift = {
+	# --- Sube ---
+	# Las Fuerzas Armadas descontentas con el gobierno civil
+	if = {
+		limit = { ig:ig_armed_forces ?= { ig_approval < 0 } }
+		change_variable = { name = els_malespin add = 2 }
+	}
+	# El obispo Viteri lo respalda
+	if = {
+		limit = { has_variable = els_viteri_aliado }
+		change_variable = { name = els_malespin add = 2 }
+	}
+	# El Salvador en guerra
+	if = {
+		limit = { is_at_war = yes }
+		change_variable = { name = els_malespin add = 1 }
+	}
+	# Gobierno sin legitimidad
+	if = {
+		limit = { government_legitimacy < 50 }
+		change_variable = { name = els_malespin add = 1 }
+	}
+	# --- Baja ---
+	# Los liberales en el gobierno
+	if = {
+		limit = { ig:ig_intelligentsia ?= { is_in_government = yes } }
+		change_variable = { name = els_malespin subtract = 1 }
+	}
+	# La Iglesia le ha retirado el apoyo
+	if = {
+		limit = { has_variable = els_viteri_roto }
+		change_variable = { name = els_malespin subtract = 3 }
+	}
+	# Barrios y Cabañas conspiran contra él
+	if = {
+		limit = { has_variable = els_barrios_cabanas }
+		change_variable = { name = els_malespin subtract = 2 }
+	}
+}
+
+# =====================================================================
+# EL CAMINO A LA ARADA: límites y deriva
+# =====================================================================
+ca_els_arada_clamp = {
+	if = {
+		limit = { var:els_arada > 100 }
+		set_variable = { name = els_arada value = 100 }
+	}
+	if = {
+		limit = { var:els_arada < 0 }
+		set_variable = { name = els_arada value = 0 }
+	}
+}
+
+ca_els_arada_drift = {
+	# --- Sube: nos acercamos a la guerra ---
+	# Los liberales guatemaltecos exiliados empujan
+	if = {
+		limit = { has_variable = els_asilo_liberales }
+		change_variable = { name = els_arada add = 2 }
+	}
+	# Pagamos a la Montaña guatemalteca
+	if = {
+		limit = { has_variable = els_financia_montana }
+		change_variable = { name = els_arada add = 2 }
+	}
+	# Honduras está con nosotros
+	if = {
+		limit = { has_variable = els_alianza_ocotepeque }
+		change_variable = { name = els_arada add = 3 }
+	}
+	# El ejército está contento y pagado
+	if = {
+		limit = { ig:ig_armed_forces ?= { ig_approval > 0 } }
+		change_variable = { name = els_arada add = 1 }
+	}
+	# --- Baja: la guerra se aleja ---
+	# El bloqueo británico nos ahoga
+	if = {
+		limit = { has_variable = els_bloqueo_britanico }
+		change_variable = { name = els_arada subtract = 2 }
+	}
+	# El añil no se vende
+	if = {
+		limit = { has_variable = els_anil_en_crisis }
+		change_variable = { name = els_arada subtract = 1 }
+	}
+}
+
+# =====================================================================
+# Ayudas
+# =====================================================================
+# Crea un personaje una sola vez.
+# Uso: ca_els_create_once = { KEY = viteri TEMPLATE = els_jorge_viteri_character_template }
+ca_els_create_once = {
+	if = {
+		limit = {
+			NOT = { has_global_variable = cafm_hc_$KEY$ }
+			NOT = { has_variable = els_created_$KEY$ }
+		}
+		set_variable = els_created_$KEY$
+		create_character = { template = $TEMPLATE$ }
+	}
+}

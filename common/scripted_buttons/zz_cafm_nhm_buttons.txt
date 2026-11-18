@@ -55,7 +55,7 @@ ca_button_nic_capital_alterna = {
 	effect = {
 		set_variable = { name = nic_capital_cd days = 730 }
 		set_variable = nic_capital_alterna
-		add_authority = -50
+		country_authority_add = -50
 		custom_tooltip = {
 			text = nic_division_down_8_tt
 			change_variable = { name = nic_division subtract = 8 }
@@ -287,7 +287,7 @@ ca_button_mkt_firmar_con_el_sello = {
 
 	effect = {
 		set_variable = { name = mkt_sello_cd days = 1095 }
-		add_authority = 50
+		country_authority_add = 50
 		custom_tooltip = {
 			text = mkt_protectorado_down_12_tt
 			change_variable = { name = mkt_protectorado subtract = 12 }

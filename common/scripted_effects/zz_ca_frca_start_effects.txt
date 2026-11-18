@@ -42,10 +42,28 @@ ca_frca_choose_route = {
 	remove_variable = ca_faction_separatist
 	remove_variable = ca_state_selection_to_playing
 	set_variable = ca_faction_$ROUTE$
-	# F18 (E): el ejercito se pasa al centralismo; la Iglesia sin Reaccion; intelectuales y pequena burguesia siguen federales
+	# Ruta centralista (18 nov 2026): el diario de la Federacion se abre aqui, antes de los
+	# efectos de la opcion de .119. Federal: el diario general. Centralista: solo el suyo.
+	if = {
+		limit = {
+			has_variable = ca_faction_centralist
+			NOT = { has_journal_entry = je_ca_centralist_republic }
+		}
+		add_journal_entry = { type = je_ca_centralist_republic }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = ca_faction_centralist }
+			NOT = { has_journal_entry = je_historic_central_america_falls_apart }
+		}
+		add_journal_entry = { type = je_historic_central_america_falls_apart }
+	}
+	# Ruta centralista (18 nov 2026): el ejercito NO se pasa al centralismo al elegir la ruta.
+	# Se aplica el resto del escenario centralista; el ejercito conserva su ideologia federal
+	# hasta completar el objetivo 1 (barra "Apoyo del ejercito", ca_cen_army_converts).
 	if = {
 		limit = { has_variable = ca_faction_centralist }
-		ca_ig_config_centralist = yes
+		ca_cen_ig_config_start = yes
 	}
 	if = {
 		limit = { is_ai = yes }
@@ -75,6 +93,11 @@ ca_frca_selector_leave_uca = {
 	remove_variable = frca_selector_from_119
 	remove_variable = frca_selector_from_79
 	set_variable = ca_faction_federal
+	# Ruta centralista (18 nov 2026): la UCA de la IA usa el diario general
+	if = {
+		limit = { NOT = { has_journal_entry = je_historic_central_america_falls_apart } }
+		add_journal_entry = { type = je_historic_central_america_falls_apart }
+	}
 	ca_frca_ai_roll = yes
 	ca_cohesion_start = yes # P2
 	if = {

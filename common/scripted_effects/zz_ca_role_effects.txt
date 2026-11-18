@@ -82,6 +82,7 @@ ca_role_ai_monthly = {
 				5 = {
 					trigger = { ca_role_can_support_centralists = yes }
 					modifier = { if = { limit = { overlord ?= { has_law_or_variant = law_type:law_state_religion } } add = 30 } }
+					modifier = { if = { limit = { ca_frca_route_centralist = yes } add = 15 } } # 18 nov 2026: de 5 a 20 con la UCA centralista
 					ca_role_do_support_centralists = yes
 				}
 				60 = { }

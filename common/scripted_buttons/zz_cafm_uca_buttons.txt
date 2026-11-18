@@ -179,7 +179,7 @@ ca_button_federal_reserve_army = {
 		custom_tooltip = ca_button_federal_reserve_army_fvc_tt
 		hidden_effect = {
 			je:je_historic_central_america_falls_apart ?= {
-				add_progress = { name = ca_frca_fvc_bar value = ca_fvc_reserve_army_once }
+				add_progress = { name = ca_frca_fvc_bar value = { value = ca_fvc_reserve_army_once multiply = -1 } } # 18 nov 2026: mi bando a la derecha
 			}
 		}
 	}

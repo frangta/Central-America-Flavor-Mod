@@ -129,6 +129,11 @@ ca_bloc_power_centralist = {
 	value = ca_bloc_power_centralist_igs
 	add = ca_bloc_power_centralist_mov
 	add = ca_bloc_power_centralist_states
+	# Ruta centralista (18 nov 2026): propaganda activa
+	if = {
+		limit = { has_variable = ca_cen_propaganda_active }
+		add = ca_cen_propaganda_power
+	}
 	if = {
 		limit = { has_variable = ca_bloc_malus_centralist }
 		subtract = ca_bloc_struggle_malus

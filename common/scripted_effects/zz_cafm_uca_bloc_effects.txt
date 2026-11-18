@@ -23,38 +23,14 @@ ca_bloc_monthly = {
 	}
 }
 
-# Pone la barra en -30 (mi bando algo por delante) al elegir ruta y al cambiarla.
+# Ruta centralista (18 nov 2026): cada barra arranca ya en -30 (start_value) y tiene
+# orientacion fija (F<->C en el diario general, C<->F en el centralista). Solo se guarda la ruta.
 ca_bloc_fvc_route_check = {
 	if = {
-		limit = {
-			ca_frca_route_centralist = yes
-			OR = {
-				NOT = { has_variable = ca_fvc_route }
-				AND = {
-					has_variable = ca_fvc_route
-					NOT = { var:ca_fvc_route = flag:centralist }
-				}
-			}
-		}
-		je:je_historic_central_america_falls_apart ?= {
-			set_bar_progress = { name = ca_frca_fvc_bar value = ca_fvc_start_centralist }
-		}
+		limit = { ca_frca_route_centralist = yes }
 		set_variable = { name = ca_fvc_route value = flag:centralist }
 	}
-	else_if = {
-		limit = {
-			ca_frca_route_federal = yes
-			OR = {
-				NOT = { has_variable = ca_fvc_route }
-				AND = {
-					has_variable = ca_fvc_route
-					NOT = { var:ca_fvc_route = flag:federal }
-				}
-			}
-		}
-		je:je_historic_central_america_falls_apart ?= {
-			set_bar_progress = { name = ca_frca_fvc_bar value = ca_fvc_start_federal }
-		}
+	else = {
 		set_variable = { name = ca_fvc_route value = flag:federal }
 	}
 }
@@ -437,7 +413,7 @@ ca_uca_route_events_monthly = {
 		limit = {
 			ca_frca_route_federal = yes
 			NOT = { has_variable = ca_fvc_warning_cd }
-			je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(ca_frca_fvc_bar)" >= 50 }
+			je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(ca_frca_fvc_bar)" <= -50 }
 		}
 		set_variable = { name = ca_fvc_warning_cd days = 1825 }
 		trigger_event = { id = cafm_uca_route.3 popup = yes }
@@ -446,7 +422,7 @@ ca_uca_route_events_monthly = {
 		limit = {
 			ca_frca_route_centralist = yes
 			NOT = { has_variable = ca_fvc_warning_cd }
-			je:je_historic_central_america_falls_apart ?= { "scripted_bar_progress(ca_frca_fvc_bar)" >= 50 }
+			je:je_ca_centralist_republic ?= { "scripted_bar_progress(ca_frca_cvf_bar)" <= -50 }
 		}
 		set_variable = { name = ca_fvc_warning_cd days = 1825 }
 		trigger_event = { id = cafm_uca_route.4 popup = yes }
@@ -519,5 +495,34 @@ ca_uca_bloc_power_events = {
 ca_uca_bar_add = {
 	je:je_historic_central_america_falls_apart ?= {
 		add_progress = { name = $BAR$ value = $VALUE$ }
+	}
+}
+
+# Ruta centralista (18 nov 2026): helpers que escriben en el diario que este abierto.
+# Barra principal: frca_support_bar (general) o la unidad (centralista, a escala).
+# Uso: ca_uca_main_add = { VALUE = 10 }
+ca_uca_main_add = {
+	je:je_historic_central_america_falls_apart ?= {
+		add_progress = { name = frca_support_bar value = $VALUE$ }
+	}
+	je:je_ca_centralist_republic ?= {
+		add_progress = {
+			name = ca_frca_unity_bar
+			value = {
+				value = $VALUE$
+				multiply = ca_cen_unity_scale
+			}
+		}
+	}
+}
+# Barra del rival: F<->C (general) o C<->F (centralista). VALUE positivo = el rival gana.
+# 18 nov 2026: las barras tienen mi bando a la derecha, asi que aqui se cambia el signo.
+# Uso: ca_uca_rival_add = { VALUE = ca_fvc_shift_c10 }
+ca_uca_rival_add = {
+	je:je_historic_central_america_falls_apart ?= {
+		add_progress = { name = ca_frca_fvc_bar value = { value = $VALUE$ multiply = -1 } }
+	}
+	je:je_ca_centralist_republic ?= {
+		add_progress = { name = ca_frca_cvf_bar value = { value = $VALUE$ multiply = -1 } }
 	}
 }

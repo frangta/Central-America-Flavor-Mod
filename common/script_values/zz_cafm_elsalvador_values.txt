@@ -1,0 +1,23 @@
+﻿# =====================================================================
+# CAFM — EL SALVADOR (1836–1851): umbrales de las tres barras.
+# Las cifras se ajustan aquí, después de probar.
+# =====================================================================
+
+# --- El último bastión (var:els_disolucion, 0–100; empieza en 40) ---
+# Sube = la Federación se deshace. A 100, El Salvador la disuelve.
+ca_els_disolucion_inicio = 40		# Guatemala ya se retiró en abril de 1839
+ca_els_disolucion_sola = 70			# El Salvador se queda solo: modificador
+ca_els_disolucion_fin = 100			# se disuelve la Federación (31 mar 1840)
+
+# --- Malespín (var:els_malespin, 0–100; empieza en 20) ---
+ca_els_malespin_inicio = 20
+ca_els_malespin_comandante = 40		# el caudillo manda el ejército
+ca_els_malespin_presidente = 60		# toma la presidencia antes de tiempo
+ca_els_malespin_regimen = 80		# modificador els_regimen_malespin
+
+# --- El camino a La Arada (var:els_arada, 0–100; empieza en 0) ---
+# Sube con cada paso hacia la guerra contra Guatemala.
+ca_els_arada_inicio = 0
+ca_els_arada_alianza = 50			# hace falta esto para firmar Ocotepeque
+ca_els_arada_ultimatum = 75			# el ultimátum sale solo
+ca_els_arada_listo = 90				# el ejército está de verdad preparado

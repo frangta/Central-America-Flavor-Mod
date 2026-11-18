@@ -1,0 +1,134 @@
+﻿# =====================================================================
+# CAFM — EL SALVADOR: los 4 botones del diario de la situación.
+# =====================================================================
+
+# Pagar al ejército federal: la Federación aguanta un poco más.
+ca_button_els_pagar_federal = {
+	name = "ca_button_els_pagar_federal"
+	desc = "ca_button_els_pagar_federal_desc"
+
+	visible = {
+		ca_els_is_elsalvador = yes
+		ca_els_bastion_activo = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = els_pagar_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = els_pagar_cd days = 365 }
+		add_modifier = { name = els_pagar_ejercito_federal months = 24 }
+		add_treasury = -15000
+		custom_tooltip = {
+			text = els_disolucion_down_10_tt
+			change_variable = { name = els_disolucion subtract = 10 }
+		}
+	}
+
+	ai_chance = { value = 40 }
+}
+
+# Llamar a los otros estados: busca un aliado federal.
+ca_button_els_llamar_estados = {
+	name = "ca_button_els_llamar_estados"
+	desc = "ca_button_els_llamar_estados_desc"
+
+	visible = {
+		ca_els_is_elsalvador = yes
+		ca_els_bastion_activo = yes
+		NOT = { has_variable = els_aliado_federal }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_els_llamar_estados_tt
+			OR = {
+				exists = c:HON
+				exists = c:NIC
+			}
+		}
+	}
+
+	effect = {
+		set_variable = els_aliado_federal
+		custom_tooltip = {
+			text = els_disolucion_down_15_tt
+			change_variable = { name = els_disolucion subtract = 15 }
+		}
+		ig:ig_intelligentsia ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+	}
+
+	ai_chance = { value = 50 }
+}
+
+# Cortejar al obispo: la Iglesia decide si el caudillo manda.
+ca_button_els_cortejar_obispo = {
+	name = "ca_button_els_cortejar_obispo"
+	desc = "ca_button_els_cortejar_obispo_desc"
+
+	visible = {
+		ca_els_is_elsalvador = yes
+		ca_els_malespin_activo = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = els_obispo_cd }
+		}
+	}
+
+	effect = {
+		set_variable = { name = els_obispo_cd days = 730 }
+		ig:ig_devout ?= { add_modifier = { name = ca_ig_approval_up months = 36 } }
+		if = {
+			limit = { has_variable = els_viteri_aliado }
+			remove_variable = els_viteri_aliado
+			set_variable = els_viteri_roto
+		}
+		custom_tooltip = {
+			text = els_malespin_down_10_tt
+			change_variable = { name = els_malespin subtract = 10 }
+		}
+	}
+
+	ai_chance = { value = 40 }
+}
+
+# Comprar fusiles en Belice: prepara la guerra contra Guatemala.
+ca_button_els_comprar_fusiles = {
+	name = "ca_button_els_comprar_fusiles"
+	desc = "ca_button_els_comprar_fusiles_desc"
+
+	visible = {
+		ca_els_is_elsalvador = yes
+		ca_els_arada_activo = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ca_button_cooldown_tt
+			NOT = { has_variable = els_fusiles_cd }
+		}
+		custom_tooltip = {
+			text = ca_button_els_comprar_fusiles_tt
+			NOT = { has_variable = els_bloqueo_britanico }
+		}
+	}
+
+	effect = {
+		set_variable = { name = els_fusiles_cd days = 365 }
+		add_treasury = -25000
+		ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
+		custom_tooltip = {
+			text = els_arada_up_10_tt
+			change_variable = { name = els_arada add = 10 }
+		}
+	}
+
+	ai_chance = { value = 50 }
+}

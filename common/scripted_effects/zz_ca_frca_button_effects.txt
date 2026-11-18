@@ -54,12 +54,13 @@ ca_frca_action_intendant = {
 		ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_down months = 24 } }
 	}
 	set_variable = { name = frca_intendant_cd_$TAG$ days = 180 }
+	ca_cen_unity_add = { VALUE = ca_cen_unity_intendant } # ruta centralista (18 nov 2026)
 }
 
 # Estado de sitio (centralista): la lealtad no baja durante 12 meses; barra -10; -legitimidad.
 ca_frca_action_siege = {
 	set_variable = { name = frca_loyalty_lock_$TAG$ days = 365 }
-	ca_frca_bar_minor_down = yes
+	ca_cen_unity_add = { VALUE = ca_cen_unity_siege } # ruta centralista (18 nov 2026): en vez de la barra -10
 	add_modifier = { name = ca_state_of_siege months = 12 }
 	set_variable = { name = frca_siege_cd_$TAG$ days = 365 }
 }
@@ -73,6 +74,7 @@ ca_frca_action_coopt = {
 	ig:ig_landowners ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
 	ig:ig_armed_forces ?= { add_modifier = { name = ca_ig_approval_up months = 24 } }
 	set_variable = { name = frca_coopt_cd_$TAG$ days = 365 }
+	ca_cen_unity_add = { VALUE = ca_cen_unity_coopt } # ruta centralista (18 nov 2026)
 }
 
 # IA en modo dinamico: usa la campana federal en el estado con la lealtad mas baja

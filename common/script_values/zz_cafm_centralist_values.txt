@@ -1,0 +1,173 @@
+############################################################################
+# CAFM - Ruta centralista de la UCA (18 nov 2026)
+# Diario je_ca_centralist_republic: constantes y valores calculados.
+# Diseno: claude/CAFM_RUTA_CENTRALISTA.md. Todas las cifras se ajustan en el balance.
+############################################################################
+
+# --- Barra de unidad (ca_frca_unity_bar, 0-100) ---
+ca_cen_unity_start = 20
+ca_cen_unity_phase4 = 80			# abre la fase IV
+ca_cen_unity_complete = 100			# Republica unitaria
+ca_cen_unity_threshold_b = 40		# final B (Union por la espada)
+ca_cen_unity_crisis = 25			# equivalente de ca_frca_bar_crisis (guerra .42, deuda, aviso)
+ca_cen_unity_scale = 0.5			# la escala comun ca_frca_bar_* (0-200) se aplica a la mitad
+
+# Botones (unidad)
+ca_cen_unity_dissolve = 10
+ca_cen_unity_capital = 10
+ca_cen_unity_standing_army = 15
+ca_cen_unity_concordat = 5
+ca_cen_unity_livingston = 5
+ca_cen_unity_levy = 5
+ca_cen_unity_monopolies = 3
+ca_cen_unity_press = 3
+ca_cen_unity_propaganda = 2
+ca_cen_unity_intendant = 4
+ca_cen_unity_coopt = 3
+ca_cen_unity_siege = 2
+
+# Leyes (unidad, una vez)
+ca_cen_unity_law_unitary = 15
+ca_cen_unity_law_minor = 5			# guardia nacional, religion de Estado
+ca_cen_unity_law_federal_back = -20
+
+# Objetivos de la fase I (unidad)
+ca_cen_unity_obj_states = 5
+ca_cen_unity_morazan = 10
+ca_cen_unity_morazan_coup = 5		# extra por el golpe
+ca_cen_unity_morazan_kill = -5		# coste del asesinato
+
+# Factores mensuales de la unidad
+ca_cen_monthly_law_unitary = 1
+ca_cen_monthly_army_gov = 1
+ca_cen_monthly_loyal = 0.5
+ca_cen_monthly_rebel = -0.5
+ca_cen_monthly_separated = -1
+ca_cen_monthly_intelligentsia = -1
+ca_cen_monthly_rival = -1
+
+# --- Barra "Apoyo del ejercito" (ca_cen_army_bar, 0-100) ---
+ca_cen_army_start = 30
+ca_cen_army_reorganize = 10
+ca_cen_army_general = 0.5			# por cada general unitario
+ca_cen_army_gov = 1
+ca_cen_army_approval = 1
+ca_cen_army_morazan = -1			# Morazan sigue siendo el lider del ejercito
+ca_cen_army_angry = -1
+ca_cen_army_scandal = -10			# asesinato fallido
+ca_cen_army_levy = 5
+
+# --- Barra C<->F (ca_frca_cvf_bar, -100 a +100) ---
+ca_cen_counterattack_shift = 30		# Morazan contraataca (positivo = los federalistas ganan)
+
+# --- Presion separatista (variable ca_cen_sep_pressure) ---
+ca_cen_sep_threshold = 30
+ca_cen_sep_rebel = 1
+ca_cen_sep_wavering = 0.5
+ca_cen_sep_law = 1
+ca_cen_sep_concordat = 1
+ca_cen_sep_capital = 1
+ca_cen_sep_turmoil = 0.5
+ca_cen_sep_date = 2					# desde 1838
+ca_cen_sep_propaganda = -1
+ca_cen_sep_propaganda_once = -5		# al pulsar el boton
+
+# --- Propaganda ---
+ca_cen_propaganda_power = 5			# poder centralista (mini barra) mientras dura
+
+# --- Golpe de Estado (variable ca_cen_coup_plot, 0-100) ---
+ca_cen_coup_start = 30
+
+# --- Elecciones de 1838 ---
+ca_cen_campaign_points = 10			# por cada campana unitaria (maximo 3)
+
+# --- Asesinato ---
+ca_cen_kill_power_min = 45			# poder centralista minimo si no hay generales unitarios
+
+# ===========================================================================
+# Valores calculados (scope: UCA)
+# ===========================================================================
+
+# Generales con ideologia unitaria en la UCA.
+ca_cen_unitarian_generals = {
+	value = 0
+	every_scope_character = {
+		limit = {
+			has_role = character_role_general
+			has_ideology = ideology:ideology_ca_unitarian
+		}
+		add = 1
+	}
+}
+
+ca_cen_army_general_factor = {
+	value = ca_cen_unitarian_generals
+	multiply = ca_cen_army_general
+}
+
+ca_cen_monthly_loyal_factor = {
+	value = ca_core_states_loyal_count
+	multiply = ca_cen_monthly_loyal
+}
+ca_cen_monthly_rebel_factor = {
+	value = ca_core_states_rebel_count
+	multiply = ca_cen_monthly_rebel
+}
+ca_cen_monthly_separated_factor = {
+	value = ca_core_states_separated_count
+	multiply = ca_cen_monthly_separated
+}
+
+# Estados nucleo en lealtad minima (Rebelde o Separado): fracaso por revuelta separatista.
+ca_cen_core_low_loyalty_count = {
+	value = ca_core_states_rebel_count
+	add = ca_core_states_separated_count
+}
+
+# Presion separatista que se suma cada mes.
+ca_cen_sep_pressure_monthly = {
+	value = 0
+	add = { value = ca_core_states_rebel_count multiply = ca_cen_sep_rebel }
+	add = { value = ca_core_states_wavering_count multiply = ca_cen_sep_wavering }
+	if = {
+		limit = {
+			OR = {
+				has_law_or_variant = law_type:law_ca_central_american_unitary
+				has_variable = ca_cen_law_unitary_started
+			}
+		}
+		add = ca_cen_sep_law
+	}
+	if = { limit = { has_variable = frca_concordat } add = ca_cen_sep_concordat }
+	if = { limit = { has_variable = frca_capital_guatemala } add = ca_cen_sep_capital }
+	if = {
+		limit = { any_scope_state = { turmoil >= 0.2 } }
+		add = ca_cen_sep_turmoil
+	}
+	if = { limit = { game_date >= 1838.1.1 } add = ca_cen_sep_date }
+	if = { limit = { has_variable = ca_cen_propaganda_active } add = ca_cen_sep_propaganda }
+}
+
+# Avance mensual del golpe.
+ca_cen_coup_monthly = {
+	value = 3
+	if = { limit = { ig:ig_armed_forces ?= { is_powerful = yes } } add = 3 }
+	if = { limit = { ig:ig_armed_forces ?= { ig_approval >= 5 } } add = 2 }
+	if = { limit = { ig:ig_intelligentsia ?= { is_powerful = yes } } add = -3 }
+	if = { limit = { ig:ig_petty_bourgeoisie ?= { is_in_government = yes } } add = -2 }
+	add = ca_cen_unitarian_generals
+	min = -5
+	max = 12
+}
+
+# Puntos de los centralistas en la eleccion de 1838.
+ca_cen_election_centralist = {
+	value = ca_bloc_power_centralist
+	if = {
+		limit = { has_variable = ca_cen_campaign }
+		add = { value = var:ca_cen_campaign multiply = ca_cen_campaign_points }
+	}
+}
+ca_cen_election_federal = {
+	value = ca_bloc_power_federal
+}

@@ -3,10 +3,11 @@
 ############################################################################
 # Valor actual de la barra de la Federacion (0-200)
 ca_ew119_bar_value = {
-	value = 0
+	# Ruta centralista (18 nov 2026): en la ventana de .119 todavia no hay diario; se muestra el inicio
+	value = ca_frca_bar_start
 	if = {
 		limit = { exists = je:je_historic_central_america_falls_apart }
-		add = "je:je_historic_central_america_falls_apart.scripted_bar_progress(frca_support_bar)"
+		value = "je:je_historic_central_america_falls_apart.scripted_bar_progress(frca_support_bar)"
 	}
 }
 # Tramo de la deuda inglesa (4 = el mas alto, 0 = sin deuda)

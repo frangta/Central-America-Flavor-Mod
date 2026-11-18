@@ -16,6 +16,16 @@ ca_frca_bar_add = {
 		je:je_historic_central_america_falls_apart ?= {
 			add_progress = { value = $VALUE$ name = frca_support_bar }
 		}
+		# Ruta centralista (18 nov 2026): la escala comun mueve la barra de unidad (0-100)
+		je:je_ca_centralist_republic ?= {
+			add_progress = {
+				value = {
+					value = $VALUE$
+					multiply = ca_cen_unity_scale
+				}
+				name = ca_frca_unity_bar
+			}
+		}
 	}
 }
 
@@ -29,6 +39,17 @@ ca_frca_bar_subtract = {
 					multiply = -1
 				}
 				name = frca_support_bar
+			}
+		}
+		# Ruta centralista (18 nov 2026)
+		je:je_ca_centralist_republic ?= {
+			add_progress = {
+				value = {
+					value = $VALUE$
+					multiply = ca_cen_unity_scale
+					multiply = -1
+				}
+				name = ca_frca_unity_bar
 			}
 		}
 	}
@@ -431,7 +452,12 @@ ca_frca_set_phase = {
 #   II -> III: 1839.2.1 (fin del mandato de Morazan) o 2 estados nucleo separados
 #   III -> IV: victoria .44 (frca_won_war) o sin guerra federal hasta 1840.6.1
 ca_frca_phase_update = {
+	# Ruta centralista (18 nov 2026): las fases solo avanzan por sus puertas (ca_cen_phase_update)
 	if = {
+		limit = { ca_frca_route_centralist = yes }
+		ca_cen_phase_update = yes
+	}
+	else_if = {
 		limit = {
 			var:frca_phase = 1
 			OR = {
