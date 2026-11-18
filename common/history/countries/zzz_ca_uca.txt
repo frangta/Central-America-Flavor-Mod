@@ -104,9 +104,8 @@
 		set_variable = { name = frca_preserved }
 
  
- 		add_journal_entry = {
-			type = je_historic_central_america_falls_apart
-		}
+ 		# CAFM ruta centralista (18 nov 2026): el diario de la Federacion ya no se abre aqui.
+		# Lo abre ca_central_america.119 segun la ruta (ca_frca_choose_route / ca_frca_selector_leave_uca).
 		add_journal_entry = {
 			type = je_ca_british_debt
 		}

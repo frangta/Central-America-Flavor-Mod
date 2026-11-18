@@ -1,4 +1,45 @@
 ﻿BUILDINGS={
+	# =====================================================================
+	# CAFM — Edificios de historia de Centroamérica
+	# Actualizado el 18 nov 2026: economía de exportación y puertos.
+	#
+	# Criterio histórico (fuentes al final):
+	# - La grana/cochinilla era EL producto de exportación en 1836: pasó del
+	#   7,7 % de las exportaciones al Reino Unido en 1821-25 al 63,6 % en
+	#   1836-40. Se cultivaba alrededor de la capital, Amatitlán, Petapa y
+	#   Antigua, PRINCIPALMENTE POR PEQUEÑOS PRODUCTORES.
+	# - El añil era el rey anterior, ya en caída: de 1,2 millones de libras
+	#   en 1826 a 873.750 en 1834. También de pequeños productores, que lo
+	#   vendían a intermediarios en las ferias de la ciudad de Guatemala.
+	# - Por eso las plantaciones de tinte van SIN add_ownership: la captura
+	#   del valor era comercial y crediticia (Consulado de Comercio, la
+	#   "familia" Aycinena), no de una oligarquía de haciendas. Esa es la
+	#   raíz del resentimiento salvadoreño, y conviene que la mecánica no
+	#   diga lo contrario.
+	# - El tabaco era el principal producto de Costa Rica y era ESTANCO
+	#   fiscal (la siembra se liberó en 1832): ese sí va a nombre del Estado.
+	# - En 1839 el porcentaje de exportaciones que salía por el Pacífico
+	#   todavía era bajo: el Atlántico (Omoa, Trujillo, Izabal vía Belice)
+	#   pesa más que el Pacífico.
+	#
+	# Notas técnicas:
+	# - En la 1.15 hay UN building_port por estado, colocado en el ancla del
+	#   estado. Omoa y Trujillo son por tanto el puerto de Honduras con
+	#   nivel 2, no dos edificios.
+	# - Lo nuevo va sin activate_production_methods a propósito: el juego
+	#   activa el método por defecto de cada grupo, que es el más primitivo
+	#   y es el correcto para 1836.
+	# - Todo lo nuevo va envuelto en el mismo if = { limit = { NOT = {
+	#   has_building = ... } } } que ya usaban los cuarteles, para no
+	#   duplicar lo que vanilla ya coloque.
+	# - STATE_PANAMA queda fuera a propósito: sus provincias se reparten
+	#   entre UCA, NC2 y NC3 en ca_states.txt y el ancla del puerto ya da
+	#   problemas.
+	# =====================================================================
+
+	# ---------------------------------------------------------------------
+	# GUATEMALA — el núcleo económico de la Federación
+	# ---------------------------------------------------------------------
 	s:STATE_GUATEMALA={
 		region_state:UCA={
 			create_building={
@@ -13,8 +54,228 @@
 				activate_production_methods={ "pm_scholastic_education" "pm_religious_academia" }
 			}
 
+			# La grana. El producto de exportación de 1836, de pequeños
+			# productores: sin dueño, los dividendos se quedan en los pops.
+			if = {
+				limit = { NOT = { has_building = building_dye_plantation } }
+				create_building={
+					building="building_dye_plantation"
+					level=4
+					reserves=1
+				}
+			}
+
+			# Los obrajes y tejedores. Gálvez los exoneró de alcabala, pero
+			# las importaciones inglesas los estaban quebrando: nivel simbólico.
+			if = {
+				limit = { NOT = { has_building = building_textile_mill } }
+				create_building={
+					building="building_textile_mill"
+					level=1
+					reserves=1
+				}
+			}
+
+			# Izabal: receptoría de rentas y entrada de la mercancía inglesa
+			# desde Belice. Puerto del Estado.
+			if = {
+				limit = { NOT = { has_building = building_port } }
+				create_building={
+					building="building_port"
+					level=2
+					add_ownership={
+						country={
+							country="c:UCA"
+							levels=2
+						}
+					}
+					reserves=1
+				}
+			}
+
+			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
+			if = {
+				limit = { NOT = { has_building = building_barrack } }
+				create_building={
+					building="building_barrack"
+					level=3
+					reserves=1
+					activate_production_methods={ "pm_no_organization" }
+				}
+			}
 		}
 	}
+
+	# ---------------------------------------------------------------------
+	# SAN SALVADOR — el añil
+	# ---------------------------------------------------------------------
+	s:STATE_SAN_SALVADOR={
+		region_state:UCA={
+			# El añil, en caída pero todavía la vida de El Salvador.
+			# Sin dueño: pequeños productores que vendían a intermediarios
+			# guatemaltecos.
+			if = {
+				limit = { NOT = { has_building = building_dye_plantation } }
+				create_building={
+					building="building_dye_plantation"
+					level=3
+					reserves=1
+				}
+			}
+
+			# Acajutla y La Unión, en el Pacífico: tráfico menor que el Atlántico.
+			if = {
+				limit = { NOT = { has_building = building_port } }
+				create_building={
+					building="building_port"
+					level=1
+					add_ownership={
+						country={
+							country="c:UCA"
+							levels=1
+						}
+					}
+					reserves=1
+				}
+			}
+                        create_building={
+				building="building_government_administration"
+				add_ownership={
+					country={
+						country="c:UCA"
+						levels=1
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_simple_organization" "pm_professional_bureaucrats" "pm_secular_bureaucrats" }
+			}
+			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
+			if = {
+				limit = { NOT = { has_building = building_barrack } }
+				create_building={
+					building="building_barrack"
+					level=3
+					reserves=1
+					activate_production_methods={ "pm_no_organization" }
+				}
+			}
+		}
+	}
+
+	# ---------------------------------------------------------------------
+	# HONDURAS — la puerta atlántica de la Federación
+	# ---------------------------------------------------------------------
+	s:STATE_HONDURAS={
+		region_state:UCA={
+			# Añil hondureño, de pequeños productores.
+			if = {
+				limit = { NOT = { has_building = building_dye_plantation } }
+				create_building={
+					building="building_dye_plantation"
+					level=1
+					reserves=1
+				}
+			}
+
+			# Ganado: circulaba en el comercio interno de la región.
+			if = {
+				limit = { NOT = { has_building = building_livestock_ranch } }
+				create_building={
+					building="building_livestock_ranch"
+					level=1
+					reserves=1
+				}
+			}
+
+			# Maderas de la costa atlántica. Es el edificio con la fuente más
+			# débil de todo el archivo: las maderas constan como parte de la
+			# exportación colonial, pero sin cifras. Nivel 1.
+			if = {
+				limit = { NOT = { has_building = building_logging_camp } }
+				create_building={
+					building="building_logging_camp"
+					level=1
+					reserves=1
+				}
+			}
+
+			# Omoa y Trujillo. Las fuentes dicen que bloquearlos "acabaría
+			# con la república naciente": el puerto más importante del mod.
+			if = {
+				limit = { NOT = { has_building = building_port } }
+				create_building={
+					building="building_port"
+					level=2
+					add_ownership={
+						country={
+							country="c:UCA"
+							levels=2
+						}
+					}
+					reserves=1
+				}
+			}
+
+			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
+			if = {
+				limit = { NOT = { has_building = building_barrack } }
+				create_building={
+					building="building_barrack"
+					level=3
+					reserves=1
+					activate_production_methods={ "pm_no_organization" }
+				}
+			}
+		}
+	}
+
+	# ---------------------------------------------------------------------
+	# NICARAGUA
+	# ---------------------------------------------------------------------
+	s:STATE_NICARAGUA={
+		region_state:UCA={
+			# Añil nicaragüense, de pequeños productores.
+			if = {
+				limit = { NOT = { has_building = building_dye_plantation } }
+				create_building={
+					building="building_dye_plantation"
+					level=1
+					reserves=1
+				}
+			}
+
+			# El Realejo en el Pacífico y San Juan del Norte en el Caribe.
+			if = {
+				limit = { NOT = { has_building = building_port } }
+				create_building={
+					building="building_port"
+					level=1
+					add_ownership={
+						country={
+							country="c:UCA"
+							levels=1
+						}
+					}
+					reserves=1
+				}
+			}
+
+			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
+			if = {
+				limit = { NOT = { has_building = building_barrack } }
+				create_building={
+					building="building_barrack"
+					level=2
+					reserves=1
+					activate_production_methods={ "pm_no_organization" }
+				}
+			}
+		}
+	}
+
+	# ---------------------------------------------------------------------
+	# COSTA RICA — el tabaco y el café naciente
+	# ---------------------------------------------------------------------
 	s:STATE_COSTA_RICA={
 		region_state:UCA={
 			create_building={
@@ -47,7 +308,7 @@
 				building="building_maize_farm"
 				add_ownership={
 					building={
-						type="building_manor_house"
+						type="building_maize_farm"
 						country="c:UCA"
 						levels=1
 						region="STATE_COSTA_RICA"
@@ -56,66 +317,41 @@
 				reserves=1
 				activate_production_methods={ "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled"  }
 			}
-		}
-	}
-	s:STATE_SAN_SALVADOR={
-		region_state:UCA={
-			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
+
+			# El tabaco: el principal producto de exportación de Costa Rica y
+			# fuente fiscal del Estado. Era estanco (la siembra se liberó en
+			# 1832), así que este sí va a nombre de la Federación. Nivel por
+			# encima del café, que todavía estaba empezando.
 			if = {
-				limit = { NOT = { has_building = building_barrack } }
+				limit = { NOT = { has_building = building_tobacco_plantation } }
 				create_building={
-					building="building_barrack"
-					level=3
+					building="building_tobacco_plantation"
+					add_ownership={
+						country={
+							country="c:UCA"
+							levels=1
+						}
+					}
 					reserves=1
-					activate_production_methods={ "pm_no_organization" }
 				}
 			}
-		}
-	}
-	s:STATE_GUATEMALA={
-		region_state:UCA={
-			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
+
+			# Puntarenas, en el Pacífico.
 			if = {
-				limit = { NOT = { has_building = building_barrack } }
+				limit = { NOT = { has_building = building_port } }
 				create_building={
-					building="building_barrack"
-					level=3
+					building="building_port"
+					level=1
+					add_ownership={
+						country={
+							country="c:UCA"
+							levels=1
+						}
+					}
 					reserves=1
-					activate_production_methods={ "pm_no_organization" }
 				}
 			}
-		}
-	}
-	s:STATE_HONDURAS={
-		region_state:UCA={
-			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
-			if = {
-				limit = { NOT = { has_building = building_barrack } }
-				create_building={
-					building="building_barrack"
-					level=3
-					reserves=1
-					activate_production_methods={ "pm_no_organization" }
-				}
-			}
-		}
-	}
-	s:STATE_NICARAGUA={
-		region_state:UCA={
-			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
-			if = {
-				limit = { NOT = { has_building = building_barrack } }
-				create_building={
-					building="building_barrack"
-					level=2
-					reserves=1
-					activate_production_methods={ "pm_no_organization" }
-				}
-			}
-		}
-	}
-	s:STATE_COSTA_RICA={
-		region_state:UCA={
+
 			# CAFM F2: cuarteles para las formaciones de 1836, solo si vanilla no da ninguno
 			if = {
 				limit = { NOT = { has_building = building_barrack } }
@@ -129,3 +365,20 @@
 		}
 	}
 }
+
+# =====================================================================
+# Fuentes
+# - "Economía de El Salvador en las Provincias Unidas del Centro de
+#   América" (es.wikipedia): añil de pequeños productores vendido a
+#   intermediarios; grana del 7,7 % al 63,6 % de las exportaciones al
+#   Reino Unido; tabaco como principal producto de Costa Rica.
+# - ICEFI, "La época independiente, 1821-1944", cap. III: grana de 70 mil
+#   libras en 1830 a 700 mil en 1835, cultivada alrededor de la capital,
+#   Amatitlán, Petapa y Antigua por pequeños productores; tabaco liberado
+#   en 1832; tejedores quebrados por las importaciones inglesas; Omoa y
+#   Trujillo como puertos cuyo bloqueo acabaría con la república.
+# - Comisión Portuaria Nacional de Guatemala, "Historia portuaria
+#   nacional": en 1839 el porcentaje de exportaciones por el Pacífico era
+#   bajo; Iztapa cobró importancia en los años 1850; San José se
+#   estableció en 1853 (por eso no está aquí).
+# =====================================================================
