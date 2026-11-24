@@ -1,23 +1,125 @@
 ﻿# ============================================================================
-# CAFM P1 punto 1 - Widget de je_ca_state_role_in_federation (gui/ca_subject_role_widgets.gui)
-# Va en custom_widget_container_1 (el mismo del minimapa), sin parentanchor, para que el
-# diario le reserve su alto. Orden: la barra del diario (ca_federal_spectrum_bar) arriba,
-# luego este recuadro con el estado y sus facciones, y abajo los 4 botones en rejilla 2x2.
-# Los 4 scripted_button se quitaron del diario para que no se pinten aparte.
+# CAFM P12 - Widget de je_ca_state_role_in_federation (gui/ca_subject_role_widgets.gui)
+# Va en custom_widget_container_1, sin parentanchor, para que el diario le reserve su alto.
+# El diario pinta encima la barra ca_federal_spectrum_bar. Debajo, este widget:
+#   1. Las tres zonas del espectro; la activa resaltada (sguis ca_role_zone_*_gui).
+#      El tooltip de cada zona explica su efecto.
+#   2. Recuadro: gobernante, aguja, lealtad, lucha interna y facciones (CA_ROLE_BOX).
+#   3. Los 4 botones en rejilla 2x2; el texto dice hacia donde mueve la aguja cada uno.
 # ============================================================================
 
 types ca_subject_role_types {
 	type ca_subject_role_widget = widget {
 		name = "ca_subject_role_widget"
-		size = { 530 172 }
+		size = { 530 200 }
 
 		background = {
 			using = entry_bg_simple
 		}
 
-		# --- Recuadro del estado ---
+		# --- 1. Zonas del espectro ---
 		widget = {
 			position = { 8 6 }
+			size = { 514 26 }
+
+			# centralist
+			widget = {
+				position = { 0 0 }
+				size = { 168 26 }
+				datacontext = "[GetScriptedGui('ca_role_zone_centralist_gui')]"
+				tooltip = "ca_role_zone_cen_tt"
+				background = {
+					using = entry_bg_simple
+				}
+				widget = {
+					size = { 168 26 }
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					background = {
+						using = entry_bg_simple_solid
+					}
+				}
+				textbox = {
+					size = { 168 26 }
+					align = hcenter|nobaseline
+					using = fontsize_small
+					text = "ca_role_zone_cen_on"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				textbox = {
+					size = { 168 26 }
+					align = hcenter|nobaseline
+					using = fontsize_small
+					text = "ca_role_zone_cen_off"
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+				}
+			}
+			# federal
+			widget = {
+				position = { 173 0 }
+				size = { 168 26 }
+				datacontext = "[GetScriptedGui('ca_role_zone_federal_gui')]"
+				tooltip = "ca_role_zone_fed_tt"
+				background = {
+					using = entry_bg_simple
+				}
+				widget = {
+					size = { 168 26 }
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					background = {
+						using = entry_bg_simple_solid
+					}
+				}
+				textbox = {
+					size = { 168 26 }
+					align = hcenter|nobaseline
+					using = fontsize_small
+					text = "ca_role_zone_fed_on"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				textbox = {
+					size = { 168 26 }
+					align = hcenter|nobaseline
+					using = fontsize_small
+					text = "ca_role_zone_fed_off"
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+				}
+			}
+			# separatist
+			widget = {
+				position = { 346 0 }
+				size = { 168 26 }
+				datacontext = "[GetScriptedGui('ca_role_zone_separatist_gui')]"
+				tooltip = "ca_role_zone_sep_tt"
+				background = {
+					using = entry_bg_simple
+				}
+				widget = {
+					size = { 168 26 }
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					background = {
+						using = entry_bg_simple_solid
+					}
+				}
+				textbox = {
+					size = { 168 26 }
+					align = hcenter|nobaseline
+					using = fontsize_small
+					text = "ca_role_zone_sep_on"
+					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
+				textbox = {
+					size = { 168 26 }
+					align = hcenter|nobaseline
+					using = fontsize_small
+					text = "ca_role_zone_sep_off"
+					visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+				}
+			}
+		}
+
+		# --- 2. Recuadro del estado ---
+		widget = {
+			position = { 8 38 }
 			size = { 514 92 }
 
 			background = {
@@ -34,15 +136,15 @@ types ca_subject_role_types {
 			}
 		}
 
-		# --- Botones (2 x 2) ---
+		# --- 3. Botones (2 x 2) ---
 		widget = {
-			position = { 0 104 }
+			position = { 0 136 }
 			size = { 530 64 }
 
 			button_standard = {
 				position = { 8 0 }
 				size = { 255 28 }
-				text = "ca_button_support_federation"
+				text = "ca_role_btn_federation"
 				datacontext = "[GetScriptedGui('ca_role_support_federation')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 				enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -52,7 +154,7 @@ types ca_subject_role_types {
 			button_standard = {
 				position = { 267 0 }
 				size = { 255 28 }
-				text = "ca_button_support_confederation"
+				text = "ca_role_btn_confederation"
 				datacontext = "[GetScriptedGui('ca_role_support_confederation')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 				enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -62,7 +164,7 @@ types ca_subject_role_types {
 			button_standard = {
 				position = { 8 32 }
 				size = { 255 28 }
-				text = "ca_button_sabotage_federation"
+				text = "ca_role_btn_sabotage"
 				datacontext = "[GetScriptedGui('ca_role_sabotage_federation')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 				enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -72,7 +174,7 @@ types ca_subject_role_types {
 			button_standard = {
 				position = { 267 32 }
 				size = { 255 28 }
-				text = "ca_button_support_centralistas"
+				text = "ca_role_btn_centralists"
 				datacontext = "[GetScriptedGui('ca_role_support_centralists')]"
 				visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 				enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
