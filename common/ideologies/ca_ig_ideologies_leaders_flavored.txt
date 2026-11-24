@@ -67,6 +67,10 @@ ideology_ca_unitarian = {
         law_ca_central_american_unitary = strongly_approve
         law_ca_central_american_federal = disapprove
         law_ca_central_american_confederated = strongly_disapprove
+        # CAFM P13: leyes de Estado
+        law_ca_departmental_state = strongly_approve
+        law_ca_confederated_state = disapprove
+        law_ca_autonomous_state = strongly_disapprove
     }
 
     lawgroup_bureaucracy = { 
@@ -85,7 +89,7 @@ ideology_ca_unitarian = {
 	interest_group_leader_weight = {
 		value = 20
 		if = {
-			limit = { owner = { OR = { has_law_or_variant = law_type:law_ca_central_american_unitary has_variable = ca_faction_centralist } } }
+			limit = { owner = { OR = { ca_p13_country_centralist_law = yes has_variable = ca_faction_centralist } } }
 			add = 40
 		}
 	}
@@ -105,6 +109,10 @@ ideology_ca_federalist = {
         law_ca_central_american_unitary = strongly_disapprove
         law_ca_central_american_federal = strongly_approve
         law_ca_central_american_confederated = approve 
+        # CAFM P13: leyes de Estado
+        law_ca_federal_state = strongly_approve
+        law_ca_departmental_state = strongly_disapprove
+        law_ca_sovereign_state = disapprove
     }
 
     lawgroup_bureaucracy = { 
@@ -123,7 +131,7 @@ ideology_ca_federalist = {
 	interest_group_leader_weight = {
 		value = 25
 		if = {
-			limit = { owner = { has_law_or_variant = law_type:law_ca_central_american_federal } }
+			limit = { owner = { ca_p13_country_federal_law = yes } } # CAFM P13: tambien Estado federado
 			add = 50
 		}
 	}
@@ -814,6 +822,10 @@ ideology_ca_morazanista = {
         law_ca_central_american_unitary = strongly_disapprove 
         law_ca_central_american_federal = strongly_approve
         law_ca_central_american_confederated = disapprove
+        # CAFM P13: leyes de Estado
+        law_ca_federal_state = strongly_approve
+        law_ca_departmental_state = strongly_disapprove
+        law_ca_sovereign_state = strongly_disapprove
     }
 
 	lawgroup_trade_policy = {
@@ -847,7 +859,7 @@ ideology_ca_morazanista = {
 	interest_group_leader_weight = {
 		value = 15
 		if = {
-			limit = { owner = { has_law_or_variant = law_type:law_ca_central_american_federal } }
+			limit = { owner = { ca_p13_country_federal_law = yes } } # CAFM P13: tambien Estado federado
 			add = 30
 		}
 	}

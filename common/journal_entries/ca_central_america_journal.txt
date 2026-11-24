@@ -626,21 +626,19 @@ je_ca_state_role_in_federation = {
 		container = "custom_widget_container_1"
 	}
 
-	# CAFM P1 punto 1: antes el primer texto tenia "always = yes" y los demas no salian nunca.
+	# CAFM P12: el texto sale de la zona de la aguja del espectro federal.
 	status_desc = {
 		first_valid = {
 			triggered_desc = {
-				desc = je_ca_state_role_in_federation_support_federation
-				trigger = {
-					has_variable = ca_federalist_influence
-					OR = {
-						NOT = { has_variable = ca_separatist_influence }
-						var:ca_federalist_influence >= var:ca_separatist_influence
-					}
-				}
+				desc = je_ca_state_role_in_federation_zone_centralist
+				trigger = { ca_role_zone_centralist = yes }
 			}
 			triggered_desc = {
-				desc = je_ca_state_role_in_federation_support_confederation
+				desc = je_ca_state_role_in_federation_zone_separatist
+				trigger = { ca_role_zone_separatist = yes }
+			}
+			triggered_desc = {
+				desc = je_ca_state_role_in_federation_zone_federal
 				trigger = { always = yes }
 			}
 		}
@@ -648,7 +646,6 @@ je_ca_state_role_in_federation = {
 
 	is_shown_in_lobby = {
 		OR = {
-			c:CIP ?= this
 			c:COS ?= this
 			c:NIC ?= this
 			c:HON ?= this
@@ -668,6 +665,7 @@ je_ca_state_role_in_federation = {
 	on_monthly_pulse = {
 		effect = {
 			ca_role_ai_monthly = yes # P1 punto 1
+			ca_role_spectrum_refresh = yes # P12: modificador de zona y golpe centralista
 		}
 		events = {
 			ca_central_america.18 # Separatismo en Costa Rica 
@@ -702,7 +700,9 @@ je_ca_state_role_in_federation = {
 				NOT = { is_subject_of = c:UCA }
 			}
 		}
-		effect = { }
+		effect = {
+			ca_role_spectrum_clear = yes # P12
+		}
 	}
 }
 

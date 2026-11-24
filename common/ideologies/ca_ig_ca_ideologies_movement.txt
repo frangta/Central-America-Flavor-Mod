@@ -3,20 +3,40 @@
 ideology_ca_unitarian_movement = {
     icon = "gfx/interface/icons/ideology_icons/cafm_ideology_centralist_ig.dds"
 
-
+    # CAFM P13: los 8 niveles de la estructura del Estado, Iglesia y sufragio
     lawgroup_ca_state_structure = {
         law_ca_central_american_unitary = strongly_approve
         law_ca_central_american_federal = strongly_disapprove
         law_ca_central_american_confederated = strongly_disapprove
         law_ca_departmental_state = strongly_approve
+        law_ca_federal_state = disapprove
+        law_ca_confederated_state = strongly_disapprove
         law_ca_autonomous_state = strongly_disapprove
+        law_ca_sovereign_state = disapprove
     }
 
-    lawgroup_bureaucracy = { 
+    lawgroup_bureaucracy = {
         law_hereditary_bureaucrats = strongly_disapprove
         law_appointed_bureaucrats = strongly_approve # Control desde la capital
         law_elected_bureaucrats = strongly_disapprove
         law_ca_municipalismo = strongly_disapprove
+    }
+
+    lawgroup_church_and_state = {
+        law_state_religion = strongly_approve
+        law_freedom_of_conscience = disapprove
+        law_total_separation = strongly_disapprove
+        law_state_atheism = strongly_disapprove
+    }
+
+    lawgroup_distribution_of_power = {
+        law_autocracy = approve
+        law_oligarchy = strongly_approve
+        law_landed_voting = approve
+        law_wealth_voting = neutral
+        law_census_voting = disapprove
+        law_universal_suffrage = strongly_disapprove
+        law_anarchy = strongly_disapprove
     }
 }
 
@@ -26,20 +46,42 @@ ideology_ca_unitarian_movement = {
 ideology_ca_federalist_movement = {
     icon = "gfx/interface/icons/ideology_icons/cafm_ideology_federalist_ig.dds"
 
-
+    # CAFM P13: los 8 niveles de la estructura del Estado, Iglesia y sufragio
     lawgroup_ca_state_structure = {
         law_ca_central_american_unitary = strongly_disapprove
         law_ca_central_american_federal = strongly_approve
-        law_ca_central_american_confederated = neutral # Aceptable como compromiso
+        law_ca_central_american_confederated = disapprove # Antesala de la disolucion
         law_ca_federal_state = strongly_approve
+        law_ca_confederated_state = disapprove
         law_ca_departmental_state = strongly_disapprove
+        law_ca_autonomous_state = disapprove
+        law_ca_sovereign_state = strongly_disapprove # Quieren la Union de vuelta
     }
 
-    lawgroup_bureaucracy = { 
+    lawgroup_bureaucracy = {
         law_hereditary_bureaucrats = strongly_disapprove
         law_appointed_bureaucrats = disapprove
         law_elected_bureaucrats = strongly_approve # Poder local
         law_ca_municipalismo = approve
+    }
+
+    # Reformas de Galvez y Morazan: anticlericales, no ateos
+    lawgroup_church_and_state = {
+        law_state_religion = disapprove
+        law_freedom_of_conscience = strongly_approve
+        law_total_separation = approve
+        law_state_atheism = strongly_disapprove
+    }
+
+    # Constitucion de 1824: sufragio amplio e indirecto
+    lawgroup_distribution_of_power = {
+        law_autocracy = strongly_disapprove
+        law_oligarchy = disapprove
+        law_landed_voting = disapprove
+        law_wealth_voting = neutral
+        law_census_voting = strongly_approve
+        law_universal_suffrage = approve
+        law_anarchy = strongly_disapprove
     }
 }
 
@@ -112,10 +154,16 @@ ideology_ca_separatist_movement = {
 ideology_central_american_reactionary_movement = {
     icon = "gfx/interface/icons/ideology_icons/cafm_ideology_servile_ig.dds"
 
+    # CAFM P13: la soberania de cada Estado (Carrera desde 1839)
     lawgroup_ca_state_structure = {
         law_ca_central_american_unitary = strongly_disapprove
         law_ca_central_american_federal = disapprove
-        law_ca_central_american_confederated = approve
+        law_ca_central_american_confederated = strongly_approve
+        law_ca_federal_state = disapprove
+        law_ca_confederated_state = approve
+        law_ca_departmental_state = strongly_disapprove
+        law_ca_autonomous_state = strongly_approve
+        law_ca_sovereign_state = strongly_approve
     }
 
     lawgroup_policing = {
@@ -124,7 +172,7 @@ ideology_central_american_reactionary_movement = {
         law_militarized_police = strongly_disapprove
         law_no_police = neutral
     }
-    
+
     lawgroup_church_and_state = {
         law_state_religion = strongly_approve
         law_freedom_of_conscience = disapprove

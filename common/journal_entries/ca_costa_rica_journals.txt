@@ -362,13 +362,17 @@ je_ca_cos_bocas_del_toro = {
 		conclusion_desc = je_standard_completion_conclusion_desc
 		color = "gold_positive"
 		trigger = {
-			OR = {
-				has_variable = ca_epifania_tragica          # 18.a: la Federacion calla
-				has_variable = ca_cos_bocas_apoyo_federal   # 18.b: la Federacion va a la guerra
-				has_variable = ca_cos_bocas_rechazo_temprano # 14.b: la UCA no financia a Galindo
-				has_variable = ca_cos_bocas_renuncia        # 13.b / 162.c: Costa Rica renuncia
-				has_variable = ca_cos_bocas_reclamo_propio  # 162.b: Carrillo responde solo
-				has_variable = ca_cos_bocas_defendida       # 161.b: Paredes se retira
+			# CAFM P14: con texto propio (antes "The Country has the variable in question" x6)
+			custom_tooltip = {
+				text = je_ca_cos_bocas_del_toro_complete_tt
+				OR = {
+					has_variable = ca_epifania_tragica          # 18.a: la Federacion calla
+					has_variable = ca_cos_bocas_apoyo_federal   # 18.b: la Federacion va a la guerra
+					has_variable = ca_cos_bocas_rechazo_temprano # 14.b: la UCA no financia a Galindo
+					has_variable = ca_cos_bocas_renuncia        # 13.b / 162.c: Costa Rica renuncia
+					has_variable = ca_cos_bocas_reclamo_propio  # 162.b: Carrillo responde solo
+					has_variable = ca_cos_bocas_defendida       # 161.b: Paredes se retira
+				}
 			}
 		}
 		effect = {
