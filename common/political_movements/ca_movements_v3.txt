@@ -44,7 +44,11 @@ movement_ca_autocratic_autonomist = {
     
 	
     disband_trigger = {
-                has_variable = ca_organization_apro
+        # CAFM P13: nacen con APRO (solo la UCA). Antes se disolvian con APRO: nunca existian.
+        NOT = { has_variable = ca_organization_apro }
+
+    
+	
     }
 
     character_support_trigger = {
@@ -160,7 +164,11 @@ movement_ca_constitutionalist = {
 
 	
     disband_trigger = {
-                has_variable = ca_organization_apro
+        # CAFM P13: nacen con APRO (solo la UCA). Antes se disolvian con APRO: nunca existian.
+        NOT = { has_variable = ca_organization_apro }
+
+
+	
     }
 
     character_support_trigger = {
@@ -277,7 +285,11 @@ movement_ca_secularist = {
     
 
     disband_trigger = {
-                has_variable = ca_organization_apro
+        # CAFM P13: nacen con APRO (solo la UCA). Antes se disolvian con APRO: nunca existian.
+        NOT = { has_variable = ca_organization_apro }
+
+    
+
     }
 
     character_support_trigger = {
@@ -393,7 +405,11 @@ movement_ca_criollo_liberal = {
 	
 
     disband_trigger = {
-                has_variable = ca_organization_apro
+        # CAFM P13: nacen con APRO (solo la UCA). Antes se disolvian con APRO: nunca existian.
+        NOT = { has_variable = ca_organization_apro }
+	
+	
+
     }
 
     character_support_trigger = {
@@ -508,7 +524,10 @@ movement_ca_communalist = {
 
 
     disband_trigger = {
-                has_variable = ca_organization_apro
+        # CAFM P13: nacen con APRO (solo la UCA). Antes se disolvian con APRO: nunca existian.
+        NOT = { has_variable = ca_organization_apro }
+
+
     }
 
     character_support_trigger = {

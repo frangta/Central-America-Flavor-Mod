@@ -9,6 +9,9 @@ ca_role_do_support_federation = {
 	set_variable = { name = support_cooldown days = 365 }
 	change_variable = { name = ca_federalist_influence add = 1 }
 	ca_fvs_bar_change = { VALUE = 10 }
+	# P12: aguja hacia 0 (hasta 8). Se calcula aqui, en el pais: dentro del diario no vale.
+	set_local_variable = { name = ca_role_to_center value = ca_role_spectrum_to_center }
+	ca_role_spectrum_add = { VALUE = local_var:ca_role_to_center }
 	if = {
 		limit = { var:ca_federalist_influence >= 2 }
 		ca_state_loyalty_up = yes
@@ -22,6 +25,7 @@ ca_role_do_support_confederation = {
 		change_variable = { name = ca_separatist_influence add = 1 }
 	}
 	ca_fvs_bar_change = { VALUE = -5 }
+	ca_role_spectrum_add = { VALUE = 5 } # P12
 	set_variable = ca_confederation_candidate
 }
 
@@ -29,6 +33,7 @@ ca_role_do_sabotage_federation = {
 	set_variable = { name = sabotage_cooldown days = 180 }
 	change_variable = { name = ca_separatist_influence add = 1 }
 	ca_fvs_bar_change = { VALUE = -10 }
+	ca_role_spectrum_add = { VALUE = 10 } # P12
 	ca_state_loyalty_down = yes
 	if = {
 		limit = { var:ca_separatist_influence >= 3 }
@@ -40,16 +45,14 @@ ca_role_do_sabotage_federation = {
 ca_role_do_support_centralists = {
 	set_variable = { name = pretorian_cooldown days = 730 }
 	change_variable = { name = ca_centralist_influence add = 1 }
+	ca_role_spectrum_add = { VALUE = -10 } # P12
 	add_radicals = {
 		value = small_radicals
 		strata = lower
 	}
-	if = {
-		limit = { var:ca_centralist_influence >= 3 }
-		set_variable = ca_centralist_coup_ready
-		custom_tooltip = ca_button_centralist_coup_tt
-		c:UCA ?= { trigger_event = { id = ca_centralist_events.6 days = 7 } }
-	}
+	# P12: el golpe solo se prepara con la aguja en la zona centralista. Si llega a 3 fuera
+	# de ella, ca_role_spectrum_refresh lo prepara cuando la aguja entre en la zona.
+	ca_role_try_centralist_coup = yes
 }
 
 # La IA usa los botones con los mismos pesos que tenian los scripted_button (una vez al mes, 25 %).
@@ -62,31 +65,93 @@ ca_role_ai_monthly = {
 		random = {
 			chance = 25
 			random_list = {
-				30 = {
+				# P12: mismos pesos que los botones (ca_role_ai_values.txt)
+				0 = {
 					trigger = { ca_role_can_support_federation = yes }
-					modifier = { if = { limit = { ig:ig_intelligentsia ?= { is_in_government = yes } } add = 30 } }
-					modifier = { if = { limit = { has_variable = ca_role_separatist } multiply = 0 } }
+					modifier = { add = ca_role_ai_w_federation }
 					ca_role_do_support_federation = yes
 				}
-				20 = {
+				0 = {
 					trigger = { ca_role_can_support_confederation = yes }
-					modifier = { if = { limit = { ig:ig_landowners ?= { is_in_government = yes } } add = 10 } }
+					modifier = { add = ca_role_ai_w_confederation }
 					ca_role_do_support_confederation = yes
 				}
-				10 = {
+				0 = {
 					trigger = { ca_role_can_sabotage_federation = yes }
-					modifier = { if = { limit = { has_variable = ca_carrilo_decret } add = 80 } }
-					modifier = { if = { limit = { ig:ig_landowners ?= { is_in_government = yes } } add = 20 } }
+					modifier = { add = ca_role_ai_w_sabotage }
 					ca_role_do_sabotage_federation = yes
 				}
-				5 = {
+				0 = {
 					trigger = { ca_role_can_support_centralists = yes }
-					modifier = { if = { limit = { overlord ?= { has_law_or_variant = law_type:law_state_religion } } add = 30 } }
-					modifier = { if = { limit = { ca_frca_route_centralist = yes } add = 15 } } # 18 nov 2026: de 5 a 20 con la UCA centralista
+					modifier = { add = ca_role_ai_w_centralists }
 					ca_role_do_support_centralists = yes
 				}
 				60 = { }
 			}
 		}
+	}
+}
+
+# ---------------------------------------------------------------------------
+# CAFM P12 - Espectro federal (barra ca_federal_spectrum_bar del diario)
+# Zonas: centralismo <= -17 | federalismo -16..+16 | separatismo >= +17
+# ---------------------------------------------------------------------------
+
+# Mueve la aguja. Uso: ca_role_spectrum_add = { VALUE = 10 } (positivo = hacia el separatismo)
+ca_role_spectrum_add = {
+	je:je_ca_state_role_in_federation ?= {
+		add_progress = { name = ca_federal_spectrum_bar value = $VALUE$ }
+	}
+}
+
+# Pone el modificador de la zona actual y quita los otros dos. Scope: pais del estado.
+ca_role_spectrum_refresh = {
+	if = {
+		limit = { ca_role_zone_centralist = yes }
+		ca_role_spectrum_set = { ZONE = centralist }
+	}
+	else_if = {
+		limit = { ca_role_zone_separatist = yes }
+		ca_role_spectrum_set = { ZONE = separatist }
+	}
+	else = {
+		ca_role_spectrum_set = { ZONE = federal }
+	}
+	ca_role_try_centralist_coup = yes
+}
+ca_role_spectrum_set = {
+	if = {
+		limit = { NOT = { has_modifier = ca_spectrum_zone_$ZONE$ } }
+		ca_role_spectrum_clear = yes
+		add_modifier = { name = ca_spectrum_zone_$ZONE$ }
+	}
+}
+ca_role_spectrum_clear = {
+	if = {
+		limit = { has_modifier = ca_spectrum_zone_centralist }
+		remove_modifier = ca_spectrum_zone_centralist
+	}
+	if = {
+		limit = { has_modifier = ca_spectrum_zone_federal }
+		remove_modifier = ca_spectrum_zone_federal
+	}
+	if = {
+		limit = { has_modifier = ca_spectrum_zone_separatist }
+		remove_modifier = ca_spectrum_zone_separatist
+	}
+}
+
+# Golpe centralista: faccion centralista a 3 y aguja en la zona centralista. Una sola vez.
+ca_role_try_centralist_coup = {
+	if = {
+		limit = {
+			has_variable = ca_centralist_influence
+			var:ca_centralist_influence >= 3
+			NOT = { has_variable = ca_centralist_coup_ready }
+			ca_role_zone_centralist = yes
+		}
+		set_variable = ca_centralist_coup_ready
+		custom_tooltip = ca_button_centralist_coup_tt
+		c:UCA ?= { trigger_event = { id = ca_centralist_events.6 days = 7 } }
 	}
 }

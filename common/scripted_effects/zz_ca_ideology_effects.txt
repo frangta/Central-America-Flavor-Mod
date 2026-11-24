@@ -324,11 +324,77 @@ ca_ig_strip_all = {
 	}
 }
 
+# Cambia el eje de un grupo. Uso: ca_ig_axis_set = { IG = ig_intelligentsia AXIS = ca_pact_confederalist }
+ca_ig_axis_set = {
+	ig:$IG$ ?= {
+		remove_ideology = ideology_central_american_federal
+		remove_ideology = ideology_ca_servile
+		remove_ideology = ideology_ca_pact_confederalist
+		remove_ideology = ideology_ca_separatist
+		add_ideology = ideology_$AXIS$
+	}
+}
+
+# Sustituye una ideologia por otra en un grupo. Uso: ca_ig_swap = { IG = ig_devout FROM = ca_moralist TO = ca_papal_moralist }
+ca_ig_swap = {
+	ig:$IG$ ?= {
+		if = {
+			limit = { has_ideology = ideology:ideology_$FROM$ }
+			remove_ideology = ideology_$FROM$
+			add_ideology = ideology_$TO$
+		}
+	}
+}
+
+# CAFM P13: movido aqui; el juego daba "Scripted effect should have no arguments"
+# porque se usaba (lineas de member/independent) antes de definirse.
+# Variantes por pais (seccion 4.5) y eje del comercio (decision 3). Scope: pais.
+ca_ig_config_variants = {
+	if = {
+		limit = { c:GUA ?= this }
+		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_servile }
+		# CAFM P13: ca_liberal y ca_agroexportadores chocaban en 13 leyes con el eje servil
+		ig:ig_industrialists ?= {
+			remove_ideology = ideology_ca_liberal
+			remove_ideology = ideology_ca_agroexportadores
+		}
+		ca_ig_swap = { IG = ig_landowners FROM = ca_criollo_paternalistic TO = ca_criollo_elite }
+		ca_ig_swap = { IG = ig_rural_folk FROM = ca_communalist TO = ca_indigenous_communalism }
+	}
+	else_if = {
+		limit = { OR = { c:ELS ?= this c:ALT ?= this } }
+		ca_ig_axis_set = { IG = ig_industrialists AXIS = central_american_federal }
+		if = {
+			limit = { c:ALT ?= this }
+			ca_ig_swap = { IG = ig_rural_folk FROM = ca_communalist TO = ca_indigenous_communalism }
+		}
+	}
+	else_if = {
+		limit = { c:HON ?= this }
+		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_pact_confederalist }
+		ig:ig_armed_forces ?= { add_ideology = ideology_ca_autocratic_autonomist }
+	}
+	else_if = {
+		limit = { c:NIC ?= this }
+		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_pact_confederalist }
+		ca_ig_swap = { IG = ig_intelligentsia FROM = ca_secularist TO = ca_criollo_liberal }
+	}
+	else_if = {
+		limit = { c:COS ?= this }
+		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_separatist }
+		if = {
+			limit = { game_date >= 1840.1.1 }
+			ca_ig_swap = { IG = ig_industrialists FROM = ca_agroexportadores TO = ca_coffee_liberal }
+		}
+	}
+}
+
 # Escenario: federal (CAFM_IDEOLOGIES_RESTRUCTURE.md, seccion 4). Scope: pais.
 ca_ig_config_federal = {
 	ca_ig_strip_all = yes
 	ig:ig_armed_forces ?= {
-		add_ideology = ideology_ca_caudillismo_jingoist
+		# CAFM P13: sin ideology_ca_caudillismo_jingoist (chocaba con el eje federal
+		# en caudillismo, ejercito federal y junta)
 		add_ideology = ideology_central_american_federal
 	}
 	ig:ig_devout ?= {
@@ -443,7 +509,8 @@ ca_ig_config_member = {
 ca_ig_config_independent = {
 	ca_ig_strip_all = yes
 	ig:ig_armed_forces ?= {
-		add_ideology = ideology_law_regionalist_militia
+		# CAFM P13: sin ideology_law_regionalist_militia (chocaba con el caudillismo);
+		# la milicia regional queda para el estado miembro
 		add_ideology = ideology_ca_caudillismo_jingoist
 	}
 	ig:ig_devout ?= {
@@ -477,64 +544,6 @@ ca_ig_config_independent = {
 	}
 	ca_ig_config_variants = yes
 	set_variable = { name = ca_ig_scenario value = 4 }
-}
-
-# Cambia el eje de un grupo. Uso: ca_ig_axis_set = { IG = ig_intelligentsia AXIS = ca_pact_confederalist }
-ca_ig_axis_set = {
-	ig:$IG$ ?= {
-		remove_ideology = ideology_central_american_federal
-		remove_ideology = ideology_ca_servile
-		remove_ideology = ideology_ca_pact_confederalist
-		remove_ideology = ideology_ca_separatist
-		add_ideology = ideology_$AXIS$
-	}
-}
-
-# Sustituye una ideologia por otra en un grupo. Uso: ca_ig_swap = { IG = ig_devout FROM = ca_moralist TO = ca_papal_moralist }
-ca_ig_swap = {
-	ig:$IG$ ?= {
-		if = {
-			limit = { has_ideology = ideology:ideology_$FROM$ }
-			remove_ideology = ideology_$FROM$
-			add_ideology = ideology_$TO$
-		}
-	}
-}
-
-# Variantes por pais (seccion 4.5) y eje del comercio (decision 3). Scope: pais.
-ca_ig_config_variants = {
-	if = {
-		limit = { c:GUA ?= this }
-		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_servile }
-		ca_ig_swap = { IG = ig_landowners FROM = ca_criollo_paternalistic TO = ca_criollo_elite }
-		ca_ig_swap = { IG = ig_rural_folk FROM = ca_communalist TO = ca_indigenous_communalism }
-	}
-	else_if = {
-		limit = { OR = { c:ELS ?= this c:ALT ?= this } }
-		ca_ig_axis_set = { IG = ig_industrialists AXIS = central_american_federal }
-		if = {
-			limit = { c:ALT ?= this }
-			ca_ig_swap = { IG = ig_rural_folk FROM = ca_communalist TO = ca_indigenous_communalism }
-		}
-	}
-	else_if = {
-		limit = { c:HON ?= this }
-		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_pact_confederalist }
-		ig:ig_armed_forces ?= { add_ideology = ideology_ca_autocratic_autonomist }
-	}
-	else_if = {
-		limit = { c:NIC ?= this }
-		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_pact_confederalist }
-		ca_ig_swap = { IG = ig_intelligentsia FROM = ca_secularist TO = ca_criollo_liberal }
-	}
-	else_if = {
-		limit = { c:COS ?= this }
-		ca_ig_axis_set = { IG = ig_industrialists AXIS = ca_separatist }
-		if = {
-			limit = { game_date >= 1840.1.1 }
-			ca_ig_swap = { IG = ig_industrialists FROM = ca_agroexportadores TO = ca_coffee_liberal }
-		}
-	}
 }
 
 # ---------------------------------------------------------------------------

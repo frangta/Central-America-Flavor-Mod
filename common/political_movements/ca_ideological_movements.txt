@@ -12,7 +12,7 @@ movement_ca_liberal = {
         ideology_radical
         ideology_humanitarian
         ideology_ca_liberal_monarchist
-        ideology_ca_secularist
+        # CAFM P13: ideology_ca_secularist es de grupo de interes, no de personaje
 
     }
 
@@ -40,18 +40,8 @@ movement_ca_liberal = {
         add_movement_enthusiasm_modifier = yes
     }
     disband_trigger = {
-        
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-            country_has_primary_culture = cu:panamanian
-        }
-        
-        NOT = { has_variable = ca_organization_apro }
+        # CAFM P13: antes se disolvia en todo pais centroamericano sin APRO (bucle)
+        NOT = { only_centralamericans_cultures = yes }
     }
 	
     #on_disbanded = {
@@ -214,32 +204,16 @@ movement_ca_reactionary = {
 		country_should_exclusively_focus_on_modernization = no
 		has_law_or_variant = law_type:law_slavery_banned
 		country_has_voting_franchise = yes
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-        }
+        ca_fedmov_country = yes # CAFM P13
     }
 
     creation_weight = { value = 100 }
     on_created = { add_movement_enthusiasm_modifier = yes }
 
     disband_trigger = {
-        
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-            country_has_primary_culture = cu:panamanian
-        }
-        
-        NOT = { has_variable = ca_organization_apro }
+        # CAFM P13: antes se disolvia en todo pais centroamericano sin APRO (bucle)
+        NOT = { ca_fedmov_country = yes }
+
     }
 
     on_disbanded = {
@@ -419,62 +393,49 @@ movement_ca_reactionary = {
 }
 
 # ==============================================
-# MOVIMIENTO UNITARIO (Centralistas )
+# MOVIMIENTO UNITARIO (Centralistas, "serviles" de la capital)
+# CAFM P13: rediseno. Es el centralismo (los Aycinena, la Republica unitaria).
+# La soberania de cada Estado (Carrera desde 1839) es el movimiento reaccionario.
 # ==============================================
 movement_ca_unitarian = {
     category = movement_category_ideological
-    ideology = ideology_ca_unitarian_movement 
+    ideology = ideology_ca_unitarian_movement
 
+    # Solo ideologias de personaje
     character_ideologies = {
         ideology_ca_unitarian
-        ideology_authoritarian
-        ideology_ca_autocratic_autonomist
         ideology_central_america_caudillo
+        ideology_authoritarian
     }
 
     creation_trigger = {
         NOT = {
             any_political_movement = { is_political_movement_type = movement_ca_unitarian }
         }
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-        }
+        ca_fedmov_country = yes
     }
 
     creation_weight = { value = 100 }
     on_created = { add_movement_enthusiasm_modifier = yes }
 
+    # CAFM P13: antes se disolvia en todo pais centroamericano sin APRO (bucle)
     disband_trigger = {
-        
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-            country_has_primary_culture = cu:panamanian
-        }
-        
-        NOT = { has_variable = ca_organization_apro }
+        NOT = { ca_fedmov_country = yes }
     }
 
-    on_disbanded = {
-        
-        #hidden_effect = { remove_modifier = fervor_ideologico }
-    }
-	
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_ca_unitarian
             has_ideology = ideology:ideology_central_america_caudillo
-            has_ideology = ideology:ideology_authoritarian
-
+            AND = {
+                has_ideology = ideology:ideology_authoritarian
+                scope:interest_group ?= {
+                    OR = {
+                        has_ideology = ideology:ideology_ca_servile
+                        has_ideology = ideology:ideology_central_american_reactionary_2
+                    }
+                }
+            }
         }
     }
 
@@ -489,23 +450,33 @@ movement_ca_unitarian = {
             multiply = 3
         }
     }
-    
-    # -- REGLAS DE APOYO DE LA POBLACIÓN --
+
+    # Ejercito, hacendados, Iglesia y comercio; o cualquier grupo con el eje servil
+    can_pressure_interest_group = {
+        OR = {
+            is_interest_group_type = ig_armed_forces
+            is_interest_group_type = ig_landowners
+            is_interest_group_type = ig_devout
+            has_ideology = ideology:ideology_ca_servile
+            has_ideology = ideology:ideology_central_american_reactionary_2
+        }
+    }
+
     pop_support_trigger = {
         NOT = { is_pop_type = slaves }
     }
 
     pop_support_factors = {
-        movement_support_soldiers
+        movement_support_clergymen
         movement_support_officers
         movement_support_bureaucrats
+        movement_support_soldiers
         movement_support_aristocrats
         movement_support_peasants
-        movement_support_laborers
     }
 
     pop_support_weight = {
-        # 1. Supresión/Fomento
+        # 1. Supresion / fomento (igual que vanilla)
         if = {
             limit = {
                 exists = scope:political_movement
@@ -528,8 +499,12 @@ movement_ca_unitarian = {
             }
         }
 
-        # 2. Preferencias Profesionales (Fuerza del Estado y Militares)
+        # 2. Clero, Estado y armas
         if = {
+            limit = { is_pop_type = clergymen }
+            add = 40
+        }
+        else_if = {
             limit = { is_pop_type = officers }
             add = 35
         }
@@ -543,95 +518,177 @@ movement_ca_unitarian = {
         }
         else_if = {
             limit = { is_pop_type = aristocrats }
-            add = 20
+            add = 25
         }
-        # CAFM: base rural del orden conservador (Rebelion de la Montana, 1837-1838)
+        # base rural del orden conservador (Rebelion de la Montana, 1837-1838)
         else_if = {
             limit = { is_pop_type = peasants }
-            add = 20
+            add = 15
         }
         else_if = {
             limit = { is_pop_type = laborers }
             add = 10
         }
 
-        # 3. Fuerte en la capital
+        # 3. Geografia: la capital y Guatemala; debil en San Salvador y Honduras
         if = {
             limit = { state = { is_capital = yes } }
             multiply = 1.5
         }
+        if = {
+            limit = { state = { state_region = s:STATE_GUATEMALA } }
+            multiply = 1.3
+        }
+        else_if = {
+            limit = {
+                state = {
+                    OR = {
+                        state_region = s:STATE_SAN_SALVADOR
+                        state_region = s:STATE_HONDURAS
+                    }
+                }
+            }
+            multiply = 0.7
+        }
 
+        # 4. Radicalismo
         multiply = {
             value = pop_radical_fraction
             add = 1
         }
     }
 
+    # Radicalismo propio (scope: movimiento)
+    additional_radicalism_factors = {
+        value = 0
+        # Leyes laicas
+        if = {
+            limit = { owner = { NOT = { has_law_or_variant = law_type:law_state_religion } } }
+            add = 0.10
+        }
+        # Estructura floja: confederacion, Estado autonomo o soberano
+        if = {
+            limit = { owner = { ca_p13_country_loose_law = yes } }
+            add = 0.10
+        }
+        # La Federacion se deshace (fase 3 o mas del diario de la UCA)
+        if = {
+            limit = { ca_frca_phase_ge = { VALUE = 3 } }
+            add = 0.05
+        }
+        # Contento con la republica unitaria o el departamento
+        if = {
+            limit = { owner = { ca_p13_country_centralist_law = yes } }
+            add = -0.10
+        }
+        # Concordia civil (P11)
+        if = {
+            limit = { owner = { has_modifier = ca_p11_civil_peace } }
+            add = -0.10
+        }
+    }
+
     revolution = {
-        possible = { political_movement_support >= 0.05 }
+        possible = { political_movement_support >= 0.10 }
         weight = { value = 150 }
+        # Ejercito, hacendados, Iglesia y grupos con el eje servil
+        interest_group_can_join = {
+            OR = {
+                is_interest_group_type = ig_armed_forces
+                is_interest_group_type = ig_landowners
+                is_interest_group_type = ig_devout
+                has_ideology = ideology:ideology_ca_servile
+                has_ideology = ideology:ideology_central_american_reactionary_2
+            }
+        }
+        # Se suman los bastiones unitarios; los federales se quedan leales
+        state_weight = {
+            value = 1
+            if = {
+                limit = { ca_p13_state_uni_stronghold = yes }
+                multiply = 3
+            }
+            if = {
+                limit = { ca_p13_state_fed_stronghold = yes }
+                multiply = 0
+            }
+        }
+    }
+
+    # Secesion: los bastiones unitarios se separan de un gobierno federal o flojo
+    secession = {
+        possible = {
+            political_movement_support >= 0.10
+            owner = {
+                NOT = { ca_p13_country_centralist_law = yes }
+                any_scope_state = { ca_p13_state_uni_stronghold = yes }
+            }
+        }
+        weight = { value = 75 }
+        interest_group_can_join = {
+            OR = {
+                is_interest_group_type = ig_armed_forces
+                is_interest_group_type = ig_landowners
+                is_interest_group_type = ig_devout
+                has_ideology = ideology:ideology_ca_servile
+            }
+        }
+        # Solo los bastiones unitarios
+        state_weight = {
+            value = 0
+            if = {
+                limit = { ca_p13_state_uni_stronghold = yes }
+                value = 1
+            }
+        }
     }
 }
 
+
 # ==============================================
-# MOVIMIENTO FEDERALISTA (Legalistas / Unionistas)
+# MOVIMIENTO FEDERALISTA (Legalistas / Unionistas / Morazanistas)
+# CAFM P13: rediseno.
 # ==============================================
 movement_ca_federalist = {
     category = movement_category_ideological
-    ideology = ideology_ca_federalist_movement 
+    ideology = ideology_ca_federalist_movement
 
+    # Solo ideologias de personaje
     character_ideologies = {
         ideology_ca_federalist
-        ideology_ca_liberal
+        ideology_ca_morazanista
         ideology_republican_leader
         ideology_liberal_leader
-        ideology_ca_constitutionalist
     }
 
     creation_trigger = {
         NOT = {
             any_political_movement = { is_political_movement_type = movement_ca_federalist }
         }
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-        }
+        ca_fedmov_country = yes
     }
 
     creation_weight = { value = 100 }
     on_created = { add_movement_enthusiasm_modifier = yes }
+
+    # CAFM P13: antes se disolvia en todo pais centroamericano sin APRO (bucle)
     disband_trigger = {
-        
-        OR = {
-            country_has_primary_culture = cu:central_american
-            country_has_primary_culture = cu:guatemalan
-            country_has_primary_culture = cu:el_salvadorian
-            country_has_primary_culture = cu:honduran
-            country_has_primary_culture = cu:nicaraguan
-            country_has_primary_culture = cu:costa_rican
-            country_has_primary_culture = cu:panamanian
-        }
-        
-        NOT = { has_variable = ca_organization_apro }
+        NOT = { ca_fedmov_country = yes }
     }
 
-    on_disbanded = {
-        
-        #hidden_effect = { remove_modifier = fervor_ideologico }
-    }
+    # Federalistas y morazanistas; republicanos y liberales solo si su grupo
+    # tiene el eje federal (antes: cualquier agitador de la intelligentsia)
     character_support_trigger = {
         OR = {
             has_ideology = ideology:ideology_ca_federalist
-            has_ideology = ideology:ideology_ca_constitutionalist
-            scope:interest_group ?= {
+            has_ideology = ideology:ideology_ca_morazanista
+            AND = {
                 OR = {
-                    has_ideology = ideology:ideology_liberal
-                    has_ideology = ideology:ideology_republican
-                    is_interest_group_type = ig_intelligentsia
+                    has_ideology = ideology:ideology_republican_leader
+                    has_ideology = ideology:ideology_liberal_leader
+                }
+                scope:interest_group ?= {
+                    has_ideology = ideology:ideology_central_american_federal
                 }
             }
         }
@@ -644,12 +701,21 @@ movement_ca_federalist = {
             multiply = 5
         }
         else_if = {
-            limit = { has_ideology = ideology:ideology_republican_leader }
-            multiply = 2
+            limit = { has_ideology = ideology:ideology_ca_morazanista }
+            multiply = 4
         }
     }
-    
-    # -- REGLAS DE APOYO DE LA POBLACIÓN --
+
+    # Intelectuales, artesanos y campesinos; o cualquier grupo con el eje federal
+    can_pressure_interest_group = {
+        OR = {
+            is_interest_group_type = ig_intelligentsia
+            is_interest_group_type = ig_petty_bourgeoisie
+            is_interest_group_type = ig_rural_folk
+            has_ideology = ideology:ideology_central_american_federal
+        }
+    }
+
     pop_support_trigger = {
         NOT = { is_pop_type = slaves }
     }
@@ -664,7 +730,7 @@ movement_ca_federalist = {
     }
 
     pop_support_weight = {
-        # 1. Supresión/Fomento
+        # 1. Supresion / fomento (igual que vanilla)
         if = {
             limit = {
                 exists = scope:political_movement
@@ -687,13 +753,13 @@ movement_ca_federalist = {
             }
         }
 
-        # 2. Bono Urbano
+        # 2. Bono urbano
         add = {
             value = 10
             multiply = state.state_urbanization_rate
         }
 
-        # 3. Apoyo Profesional
+        # 3. Apoyo profesional
         if = {
             limit = { is_pop_type = academics }
             add = 35
@@ -710,7 +776,7 @@ movement_ca_federalist = {
             limit = { is_pop_type = bureaucrats }
             add = 15
         }
-        # CAFM: jornaleros y artesanos urbanos, tropa de las milicias liberales
+        # jornaleros y artesanos urbanos, tropa de las milicias liberales
         else_if = {
             limit = { is_pop_type = laborers }
             add = 15
@@ -719,10 +785,13 @@ movement_ca_federalist = {
             limit = { is_pop_type = peasants }
             add = 8
         }
+        # El clero no apoya a los federalistas
+        else_if = {
+            limit = { is_pop_type = clergymen }
+            multiply = 0.2
+        }
 
-        # 4. Multiplicador de Alfabetización
-        # CAFM: no se aplica a campesinos ni jornaleros (casi todos analfabetos
-        # en 1836; con el multiplicador su apoyo quedaba en ~1/5)
+        # 4. Alfabetizacion (no a campesinos ni jornaleros: casi todos analfabetos en 1836)
         if = {
             limit = {
                 NOR = {
@@ -736,18 +805,87 @@ movement_ca_federalist = {
             }
         }
 
-        # 5. Multiplicador de Radicalismo
+        # 5. Geografia: fuerte en El Salvador y Honduras; debil en Guatemala
+        if = {
+            limit = {
+                state = {
+                    OR = {
+                        state_region = s:STATE_SAN_SALVADOR
+                        state_region = s:STATE_HONDURAS
+                    }
+                }
+            }
+            multiply = 1.3
+        }
+        else_if = {
+            limit = { state = { state_region = s:STATE_GUATEMALA } }
+            multiply = 0.8
+        }
+
+        # 6. Radicalismo
         multiply = {
             value = pop_radical_fraction
             add = 1
         }
     }
 
+    # Radicalismo propio (scope: movimiento)
+    additional_radicalism_factors = {
+        value = 0
+        # Paralisis federal
+        if = {
+            limit = { owner = { has_modifier = ca_federal_paralysis } }
+            add = 0.10
+        }
+        # Republica unitaria o Estado convertido en departamento
+        if = {
+            limit = { owner = { ca_p13_country_centralist_law = yes } }
+            add = 0.15
+        }
+        # La UCA va por la ruta centralista
+        if = {
+            limit = { ca_frca_route_centralist = yes }
+            add = 0.05
+        }
+        # Contento con la republica federal o el Estado federado
+        if = {
+            limit = { owner = { ca_p13_country_federal_law = yes } }
+            add = -0.10
+        }
+        # Concordia civil (P11)
+        if = {
+            limit = { owner = { has_modifier = ca_p11_civil_peace } }
+            add = -0.10
+        }
+    }
+
     revolution = {
-        possible = { political_movement_support >= 0.05 }
+        possible = { political_movement_support >= 0.10 }
         weight = { value = 100 }
+        # Intelectuales, artesanos, campesinos y grupos con el eje federal
+        interest_group_can_join = {
+            OR = {
+                is_interest_group_type = ig_intelligentsia
+                is_interest_group_type = ig_petty_bourgeoisie
+                is_interest_group_type = ig_rural_folk
+                has_ideology = ideology:ideology_central_american_federal
+            }
+        }
+        # Se suman los bastiones federales; los unitarios se quedan leales
+        state_weight = {
+            value = 1
+            if = {
+                limit = { ca_p13_state_fed_stronghold = yes }
+                multiply = 3
+            }
+            if = {
+                limit = { ca_p13_state_uni_stronghold = yes }
+                multiply = 0
+            }
+        }
     }
 }
+
 # ==============================================
 # MOVIMIENTO CARRILLISTA (Autocracia Aislacionista de Costa Rica)
 # Objetivo: Autocracia, Burocracia Designada y Aislamiento del caos federal
@@ -759,7 +897,7 @@ movement_ca_carrillista = {
     character_ideologies = {
         ideology_carrillismo
         ideology_authoritarian
-        ideology_ca_criollo_paternalistic
+        # CAFM P13: ideology_ca_criollo_paternalistic es de grupo de interes, no de personaje
         ideology_central_america_caudillo
     }
 
