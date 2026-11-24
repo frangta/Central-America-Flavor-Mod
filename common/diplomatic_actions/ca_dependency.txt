@@ -246,7 +246,9 @@
                 }
             }
         }
-
+        will_break = {
+        	always = no
+        }
 		# CAFM fix: estaba fuera del bloque ai (sobraba una llave) y apuntaba a ca_unify_countries
 		will_propose = {
 			scope:target_country = {
