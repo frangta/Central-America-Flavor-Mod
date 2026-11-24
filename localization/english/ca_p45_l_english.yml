@@ -1,6 +1,5 @@
 ﻿l_english:
  # CAFM P1 punto 1: widget del diario del estado
- CA_ROLE_BOX:0 "#bold [GetPlayer.GetRuler.GetFullName]#! governs the State.\nLoyalty to the Federation: #bold [GetPlayer.MakeScope.ScriptValue('ca_role_own_loyalty')|0]#! / 3  ·  Internal struggle: #bold [GetPlayer.MakeScope.Var('ca_fvs_bar').GetValue|0]#! / 100 (100 = federalists win)\nFactions in the State: Federalists #bold [GetPlayer.MakeScope.Var('ca_federalist_influence').GetValue|0]#! / 3 · Centralists #bold [GetPlayer.MakeScope.Var('ca_centralist_influence').GetValue|0]#! / 3 · Separatists #bold [GetPlayer.MakeScope.Var('ca_separatist_influence').GetValue|0]#! / 3"
 
  # CAFM P4: zonas nuevas del minimapa
  CA_MM_MOS_NAME:0 "Mosquito Coast"
