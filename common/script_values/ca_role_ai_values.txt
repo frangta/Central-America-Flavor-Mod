@@ -1,0 +1,88 @@
+﻿# CAFM P12 - Pesos de la IA para los 4 botones de je_ca_state_role_in_federation.
+# Los leen los scripted_gui (ca_role_sgui.txt) y el respaldo ca_role_ai_monthly
+# (zz_ca_role_effects.txt): cambiar un peso aqui lo cambia en los dos.
+# Scope: pais del estado.
+
+# Apoyar la Federacion (aguja hacia 0)
+ca_role_ai_w_federation = {
+	value = 30
+	if = {
+		limit = { ig:ig_intelligentsia ?= { is_in_government = yes } }
+		add = 30
+	}
+	# Con la UCA federal, el estado vuelve al centro si se va a un extremo
+	if = {
+		limit = {
+			ca_frca_route_federal = yes
+			OR = {
+				ca_role_zone_separatist = yes
+				ca_role_zone_centralist = yes
+			}
+		}
+		add = 20
+	}
+	if = {
+		limit = { has_variable = ca_role_separatist }
+		multiply = 0
+	}
+}
+
+# Apoyar la Confederacion (+5)
+ca_role_ai_w_confederation = {
+	value = 20
+	if = {
+		limit = { ig:ig_landowners ?= { is_in_government = yes } }
+		add = 10
+	}
+}
+
+# Sabotear la Federacion (+10)
+ca_role_ai_w_sabotage = {
+	value = 10
+	if = {
+		limit = { has_variable = ca_carrilo_decret }
+		add = 80
+	}
+	if = {
+		limit = { ig:ig_landowners ?= { is_in_government = yes } }
+		add = 20
+	}
+}
+
+# Apoyar a los centralistas (-10)
+ca_role_ai_w_centralists = {
+	value = 5
+	if = {
+		limit = { overlord ?= { has_law_or_variant = law_type:law_state_religion } }
+		add = 30
+	}
+	if = {
+		limit = { ca_frca_route_centralist = yes }
+		add = 15 # 18 nov 2026: de 5 a 20 con la UCA centralista
+	}
+	# Con la UCA centralista, frenar a un estado que se va al separatismo
+	if = {
+		limit = {
+			ca_frca_route_centralist = yes
+			ca_role_zone_separatist = yes
+		}
+		add = 20
+	}
+}
+
+# Valor de la aguja (de -50 a +50). 0 si el estado no tiene el diario.
+ca_role_spectrum_value = {
+	value = 0
+	if = {
+		limit = { has_journal_entry = je_ca_state_role_in_federation }
+		add = "je:je_ca_state_role_in_federation.scripted_bar_progress(ca_federal_spectrum_bar)"
+	}
+}
+
+# Boton "Apoyar la Federacion": lleva la aguja hacia 0, como mucho 8 puntos.
+ca_role_spectrum_to_center = {
+	value = ca_role_spectrum_value
+	multiply = -1
+	min = -8
+	max = 8
+}
