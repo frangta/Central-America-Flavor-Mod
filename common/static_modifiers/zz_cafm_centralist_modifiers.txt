@@ -10,13 +10,13 @@ ca_cen_propaganda = {
 
 # Morazan asesinado: un martir para los federalistas.
 ca_cen_morazan_martyr = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds"
 	state_pop_support_movement_ca_federalist_add = 25
 	political_movement_radicalism_add = 0.10
 }
 
 # Grupo de interes: el ejercito se aparta de la campana electoral de 1838 (cafm_cen.9).
 ca_cen_army_neutral = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_negative.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds"
 	interest_group_pol_str_mult = -0.50
 }

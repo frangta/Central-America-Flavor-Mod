@@ -10,7 +10,7 @@
 # PAÍS. Los Códigos de Livingston en vigor: jurado y habeas corpus en un país
 # con más del 90 % de analfabetismo.
 gua_codigos_livingston = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
 	country_legitimacy_base_add = 5
 	country_bureaucracy_add = -20
 	interest_group_ig_devout_pol_str_mult = 0.15
@@ -18,13 +18,13 @@ gua_codigos_livingston = {
 
 # PAÍS. 3 años. Los Códigos solo en la capital: el campo sigue con los alcaldes.
 gua_livingston_capital = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
 	country_legitimacy_base_add = 2
 }
 
 # PAÍS. 5 años. El cólera y el rumor del envenenamiento.
 gua_colera_morbus = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
 	state_mortality_mult = 0.25
 	state_birth_rate_mult = -0.1
 }
@@ -59,7 +59,7 @@ gua_comisionados_montana = {
 
 # PAÍS. 2 años. Represión ejemplar en los pueblos.
 gua_represion_pueblos = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
 	country_authority_add = 40
 	interest_group_ig_rural_folk_pol_str_mult = -0.15
 }
@@ -135,7 +135,7 @@ gua_grana_y_anil = {
 
 # PAÍS. 10 años. El juez de tierras del Convenio de Guadalupe.
 gua_juez_de_tierras = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
 	country_bureaucracy_add = -10
 	interest_group_ig_rural_folk_pol_str_mult = 0.1
 }

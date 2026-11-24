@@ -13,14 +13,9 @@ ca_role_support_federation = {
 	}
 	ai_is_valid = {
 		is_ai = yes
-		NOT = { has_variable = ca_role_separatist }
 	}
 	ai_chance = {
-		base = 30
-		modifier = {
-			ig:ig_intelligentsia ?= { is_in_government = yes }
-			add = 30
-		}
+		value = ca_role_ai_w_federation # P12: ca_role_ai_values.txt
 	}
 	ai_frequency = 1
 }
@@ -40,11 +35,7 @@ ca_role_support_confederation = {
 		is_ai = yes
 	}
 	ai_chance = {
-		base = 20
-		modifier = {
-			ig:ig_landowners ?= { is_in_government = yes }
-			add = 10
-		}
+		value = ca_role_ai_w_confederation # P12: ca_role_ai_values.txt
 	}
 	ai_frequency = 1
 }
@@ -64,15 +55,7 @@ ca_role_sabotage_federation = {
 		is_ai = yes
 	}
 	ai_chance = {
-		base = 10
-		modifier = {
-			has_variable = ca_carrilo_decret
-			add = 80
-		}
-		modifier = {
-			ig:ig_landowners ?= { is_in_government = yes }
-			add = 20
-		}
+		value = ca_role_ai_w_sabotage # P12: ca_role_ai_values.txt
 	}
 	ai_frequency = 1
 }
@@ -92,11 +75,21 @@ ca_role_support_centralists = {
 		is_ai = yes
 	}
 	ai_chance = {
-		base = 5
-		modifier = {
-			overlord ?= { has_law_or_variant = law_type:law_state_religion }
-			add = 30
-		}
+		value = ca_role_ai_w_centralists # P12: ca_role_ai_values.txt
 	}
 	ai_frequency = 1
+}
+
+# CAFM P12 - Zonas del espectro para el widget (solo is_shown; no son botones).
+ca_role_zone_centralist_gui = {
+	scope = country
+	is_shown = { ca_role_zone_centralist = yes }
+}
+ca_role_zone_federal_gui = {
+	scope = country
+	is_shown = { ca_role_zone_federal = yes }
+}
+ca_role_zone_separatist_gui = {
+	scope = country
+	is_shown = { ca_role_zone_separatist = yes }
 }

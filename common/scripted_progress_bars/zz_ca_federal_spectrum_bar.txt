@@ -8,7 +8,8 @@
 # Negativo = el Estado se somete a la capital (unitarios/serviles).
 # Cero     = pacto federal de 1824.
 # Positivo = soberania del Estado (confederacion o ruptura).
-# Los botones del diario mueven la aguja; aqui va la deriva mensual.
+# Los botones del diario mueven la aguja (ca_role_spectrum_add, P12); aqui va la deriva mensual.
+# P12: deriva separatista maxima +3.5/mes (antes +6); el centro tira desde +-10 (antes +-5).
 # El alcance (root) es el pais del Estado miembro.
 # ====================================================================
 
@@ -57,7 +58,7 @@ ca_federal_spectrum_bar = {
 		if = {
 			limit = {
 				ig:ig_intelligentsia ?= { is_in_government = yes }
-				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" > 5 }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" > 10 }
 			}
 			add = {
 				desc = "ca_spectrum_liberals_in_government"
@@ -67,7 +68,7 @@ ca_federal_spectrum_bar = {
 		else_if = {
 			limit = {
 				ig:ig_intelligentsia ?= { is_in_government = yes }
-				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" < -5 }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" < -10 }
 			}
 			add = {
 				desc = "ca_spectrum_liberals_in_government"
@@ -77,7 +78,7 @@ ca_federal_spectrum_bar = {
 		if = {
 			limit = {
 				ig:ig_petty_bourgeoisie ?= { is_in_government = yes }
-				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" > 5 }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" > 10 }
 			}
 			add = {
 				desc = "ca_spectrum_artisans_in_government"
@@ -87,7 +88,7 @@ ca_federal_spectrum_bar = {
 		else_if = {
 			limit = {
 				ig:ig_petty_bourgeoisie ?= { is_in_government = yes }
-				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" < -5 }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" < -10 }
 			}
 			add = {
 				desc = "ca_spectrum_artisans_in_government"
@@ -97,7 +98,7 @@ ca_federal_spectrum_bar = {
 		if = {
 			limit = {
 				overlord ?= { has_law_or_variant = law_type:law_ca_central_american_federal }
-				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" > 5 }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" > 10 }
 			}
 			add = {
 				desc = "ca_spectrum_overlord_federal"
@@ -107,7 +108,7 @@ ca_federal_spectrum_bar = {
 		else_if = {
 			limit = {
 				overlord ?= { has_law_or_variant = law_type:law_ca_central_american_federal }
-				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" < -5 }
+				je:je_ca_state_role_in_federation ?= { "scripted_bar_progress(ca_federal_spectrum_bar)" < -10 }
 			}
 			add = {
 				desc = "ca_spectrum_overlord_federal"
@@ -120,14 +121,14 @@ ca_federal_spectrum_bar = {
 			limit = { liberty_desire >= 50 }
 			add = {
 				desc = "ca_spectrum_high_liberty_desire"
-				value = 2
+				value = 1
 			}
 		}
 		else_if = {
 			limit = { liberty_desire >= 25 }
 			add = {
 				desc = "ca_spectrum_liberty_desire"
-				value = 1
+				value = 0.5
 			}
 		}
 		if = {
@@ -141,7 +142,7 @@ ca_federal_spectrum_bar = {
 			limit = { ig:ig_rural_folk ?= { is_powerful = yes } }
 			add = {
 				desc = "ca_spectrum_rural_particularism"
-				value = 1
+				value = 0.5
 			}
 		}
 		if = {
@@ -150,14 +151,14 @@ ca_federal_spectrum_bar = {
 			}
 			add = {
 				desc = "ca_spectrum_overlord_confederated"
-				value = 1
+				value = 0.5
 			}
 		}
 		if = {
 			limit = { has_technology_researched = nationalism }
 			add = {
 				desc = "ca_spectrum_nationalism"
-				value = 1
+				value = 0.5
 			}
 		}
 	}

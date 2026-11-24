@@ -54,3 +54,29 @@ ca_role_can_support_centralists = {
 	}
 	ig:ig_armed_forces ?= { is_powerful = yes }
 }
+
+# CAFM P12 - Zonas del espectro federal (ca_role_spectrum_value). Scope: pais del estado.
+ca_role_zone_centralist = {
+	has_journal_entry = je_ca_state_role_in_federation
+	ca_role_spectrum_value <= -17
+}
+ca_role_zone_separatist = {
+	has_journal_entry = je_ca_state_role_in_federation
+	ca_role_spectrum_value >= 17
+}
+ca_role_zone_federal = {
+	has_journal_entry = je_ca_state_role_in_federation
+	NOT = { ca_role_zone_centralist = yes }
+	NOT = { ca_role_zone_separatist = yes }
+}
+# Para los eventos de separatismo y declaracion en modo dinamico: aguja en la zona
+# separatista. Si el estado no tiene el diario, no bloquea (como antes de P12).
+ca_role_spectrum_allows_separatism = {
+	custom_tooltip = {
+		text = ca_role_spectrum_allows_separatism_tt
+		OR = {
+			NOT = { has_journal_entry = je_ca_state_role_in_federation }
+			ca_role_spectrum_value >= 17
+		}
+	}
+}

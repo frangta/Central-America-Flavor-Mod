@@ -83,7 +83,7 @@ ca_private_gold_reserve_modifier = {
 # (movement_liberal / movement_radical / movement_modernizer). Si alguno no existe
 # en 1.13, error.log dirá "modifier type definition does not exist".
 ca_federal_paralysis = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_negative.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds"
 	country_cannot_start_law_enactment_bool = yes
 	country_cannot_cancel_law_enactment_bool = yes
 	country_disallow_agitator_invites_bool = yes
@@ -97,13 +97,13 @@ ca_federal_paralysis = {
 }
 
 ca_funding_separatists_modifier = {
-	icon = "gfx/interface/icons/modifier_icons/modifier_taxes_down.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
 	country_authority_add = -50
 	state_tax_capacity_mult = -0.10 # Desvías impuestos para comprar armas
 }
 
 ca_funding_federalists_modifier = {
-	icon = "gfx/interface/icons/modifier_icons/modifier_bureaucracy_down.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
 	country_bureaucracy_add = -50 # Gastas tu burocracia ayudando a la capital
 }
 
@@ -165,7 +165,7 @@ ca_separatist_agitation_modifier = {
 }
 
 ca_mountain_vein_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_gold_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
 	building_gold_mine_throughput_add = 0.30
 	building_group_bg_extraction_construction_efficiency_add = 0.20
 }
@@ -178,27 +178,27 @@ ca_radical_agitation_modifier = {
 
 # --- Aprobación de grupos de interés (aplicar SIEMPRE dentro de ig:ig_xxx = { }) ---
 ca_ig_approval_up = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_generic_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
 	interest_group_approval_add = 2
 }
 ca_ig_approval_down = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_generic_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
 	interest_group_approval_add = -2
 }
 ca_ig_approval_states_rights = {
-	icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_up.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds"
 	interest_group_approval_add = 3
 }
 ca_ig_disapproval_federal_betrayal = {
-	icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_down.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds"
 	interest_group_approval_add = -3
 }
 ca_ig_approval_strong_republic = {
-	icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_up.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds"
 	interest_group_approval_add = 4
 }
 ca_ig_disapproval_centralist_tyranny = {
-	icon = "gfx/interface/icons/modifier_icons/modifier_ig_approval_down.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds"
 	interest_group_approval_add = -4
 }
 
@@ -211,13 +211,13 @@ ca_newspaper_censored_modifier = {
 }
 
 ca_humiliated_federation_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_prestige_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
 	country_prestige_add = -20
 	country_influence_add = -50
 }
 
 ca_reasserted_sovereignty_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_prestige_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
 	country_prestige_add = 15
 	country_authority_add = 100
 }
@@ -233,28 +233,28 @@ ca_direct_administration_modifier = {
 # CAFM-FIX: tenía building_throughput_add repetido dos veces (0.15 + 0.10 = +25 % a TODO).
 # Según el comentario del evento .7 la idea era +10 % de madera.
 ca_british_outpost_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_wood_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
 	building_group_bg_logging_throughput_add = 0.10
 }
 
 # CAFM-FIX: country_expenses_add es una cantidad PLANA de dinero por semana
 # (tu deuda inglesa usa 100-500). 0.05 / 0.10 / 0.20 equivalían a cero.
 ca_funding_low_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
 	country_expenses_add = 100
 }
 ca_funding_med_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
 	country_expenses_add = 250
 }
 ca_funding_high_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
 	country_expenses_add = 500
 }
 
 # CAFM-FIX: country_minting_add = 0.10 es plano (0.1 libras). Era +10 % -> _mult.
 ca_recovered_funds_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
 	country_minting_mult = 0.10
 }
 
@@ -264,47 +264,47 @@ ca_failed_expedition_modifier = {
 }
 
 ca_infrastructure_boom_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_road_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
 	state_infrastructure_add = 10
 	state_construction_mult = 0.15
 }
 
 ca_deep_vein_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_gold_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
 	building_gold_mine_throughput_add = 0.20
 }
 
 ca_gold_rush_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_gold_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
 	state_migration_pull_add = 25
 	state_turmoil_effects_mult = 0.10
 }
 
 # CAFM-FIX: state_<pop>_investment_pool_contribution_add es porcentaje: 10 = +1000 %.
 ca_foreign_monopoly_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_diplomacy_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
 	building_gold_mine_throughput_add = 0.10
 	state_capitalists_investment_pool_contribution_add = 0.10
 	state_aristocrats_investment_pool_contribution_add = 0.10
 }
 
 ca_anti_corruption_campaign_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_scales_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
 	country_bureaucracy_mult = 0.10
 }
 
 ca_state_corruption_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_scales_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
 	country_bureaucracy_mult = -0.15
 }
 
 ca_jungle_fever_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
 	state_mortality_mult = 0.25
 }
 
 ca_archaeological_find_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_prestige_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
 	country_prestige_add = 10
 }
 
@@ -314,12 +314,12 @@ ca_geological_innovation = {
 }
 
 ca_abundant_coal_modifier = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_coal_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
 	building_coal_mine_throughput_add = 0.20
 }
 
 ca_private_mining_rights = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_money_positive.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
 	building_gold_mine_throughput_add = 0.05
 	interest_group_ig_industrialists_approval_add = 2
 }
@@ -532,7 +532,7 @@ ca_religious_education_drive = {
 
 # --- Modificadores de Estado (Map Impact - Event 79) ---
 ca_separatist_unrest = {
-	icon = "gfx/interface/icons/modifier_icons/modifier_devastation.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds"
 	state_turmoil_effects_mult = 0.25 # Añade 25% de agitación directa al estado
 	state_tax_capacity_mult = -0.20 # Reduce la recaudación por la rebeldía
 }
@@ -819,14 +819,14 @@ waning_federal_stronghold = {
 
 # --- UNITARIOS ---
 unitary_stronghold = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
 	country_authority_add = 25                              # CAFM-FLOW (solo en estados)
 	state_radicals_and_loyalists_from_sol_change_mult = 0.05
 	state_pop_support_movement_ca_unitarian_add = 25
 }
 
 unitary_stronghold_small_nation = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_positive.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
 	country_authority_add = 10                              # CAFM-FLOW
 	state_decree_cost_mult = -0.10
 	state_pop_support_movement_ca_unitarian_add = 10
@@ -835,7 +835,7 @@ unitary_stronghold_small_nation = {
 # CAFM-FIX: state_political_movement_ca_unitarian_radicalism_add es script_only y nada
 # lo lee: no hacía nada. Se sustituye por más radicales desde movimientos en el estado.
 waning_unitary_stronghold = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gavel_negative.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds"
 	# Caos por falta de autoridad
 	country_authority_add = -20                             # CAFM-FLOW
 	state_radicals_and_loyalists_from_sol_change_mult = 0.15
@@ -865,20 +865,20 @@ suppressed_separatism_stronghold = {
 
 # --- REACCIONARIOS ---
 reactionary_stronghold = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_neutral.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds"
 	state_pop_support_movement_ca_reactionary_add = 30
 	interest_group_ig_petty_bourgeoisie_pop_attraction_mult = 0.25   # CAFM-FLOW
 	interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.20          # CAFM-FLOW
 }
 
 reactionary_stronghold_small_nation = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_speech_positive.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
 	state_pop_support_movement_ca_reactionary_add = 30
 	interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.15          # CAFM-FLOW
 }
 
 fading_reactionary_stronghold = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_speech_negative.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	# La gente abandona las ideas reaccionarias
 	state_pop_support_movement_ca_reactionary_add = -30
 	interest_group_ig_petty_bourgeoisie_pop_attraction_mult = -0.25  # CAFM-FLOW
@@ -908,14 +908,14 @@ conservative_stronghold_small_nation = {
 
 # --- LIBERALES ---
 liberal_stronghold = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_tech_positive.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds"
 	state_pop_support_movement_ca_liberal_add = 30
 	interest_group_ig_intelligentsia_pop_attraction_mult = 0.25      # CAFM-FLOW
 	interest_group_ig_intelligentsia_pol_str_mult = 0.20             # CAFM-FLOW
 }
 
 age_of_liberal_stronghold = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_tech_positive.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds"
 	state_pop_support_movement_ca_liberal_add = 50
 	interest_group_ig_intelligentsia_pop_attraction_mult = 0.40      # CAFM-FLOW
 	interest_group_ig_intelligentsia_pol_str_mult = 0.30             # CAFM-FLOW
@@ -923,7 +923,7 @@ age_of_liberal_stronghold = {
 }
 
 liberal_stronghold_small_nation = {
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_neutral.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds"
 	state_pop_support_movement_ca_liberal_add = 10
 	interest_group_ig_intelligentsia_pop_attraction_mult = 0.15      # CAFM-FLOW
 	interest_group_ig_intelligentsia_pol_str_mult = 0.10             # CAFM-FLOW
@@ -999,12 +999,12 @@ ca_nationalist_fervor_military_modifier = { # evento 105.b
 }
 
 ca_el_cafe_federal_modifier = { # evento 106 (Costa Rica y el café)
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
 	building_group_bg_agriculture_throughput_add = -0.05
 }
 
 ca_coffee_exports_seized_modifier = { # evento 104.b (reemplaza el trigger a ca_costa_rica_events.99)
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
 	building_group_bg_agriculture_throughput_add = -0.1
 }
 
@@ -1030,12 +1030,12 @@ ca_triunfo_caudillismo_modifier = { # evento 109
 }
 
 ca_rural_pacification_cost_modifier = { # evento 110.b
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
 	country_expenses_add = 500
 }
 
 ca_total_intervention_economy_penalty = { # evento 111
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
 	state_construction_mult = -0.1
 	state_tax_collection_mult = -0.05
 }
@@ -1052,7 +1052,7 @@ ca_capital_under_siege_defense_modifier = { # evento 113.a
 }
 
 ca_capital_tax_collapse_modifier = { # evento 113.a
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_negative.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
 	state_tax_collection_mult = -0.15
 }
 
@@ -1073,7 +1073,7 @@ ca_authority_boost = { # evento 120.b
 }
 
 ca_fiscal_support_kept = { # evento 121.b
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_money_positive.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
 	state_tax_collection_mult = 0.05
 }
 
@@ -1153,12 +1153,12 @@ ca_low_pollution_modifier = { # ca_prospecting 20.b
 # ---------------- GRUPO DE INTERÉS ----------------
 
 ca_ig_approval_up_massive = { # evento 5.c
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_generic_positive.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
 	interest_group_approval_add = 5
 }
 
 ca_ig_betrayal_anger_modifier = { # evento 105.a
-	icon = "gfx/interface/icons/timed_modifier_icons/modifier_generic_negative.dds"
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	interest_group_approval_add = -3
 }
 

@@ -1,0 +1,58 @@
+﻿# CAFM P13 - Paises donde existen los movimientos federalista, unitario y reaccionario.
+# Los cinco estados y la UCA siempre. Panama y Chiapas solo si aceptan la cultura
+# centroamericana (aceptacion base >= 60; sube o baja el numero si hace falta).
+ca_fedmov_country = {
+	OR = {
+		country_has_primary_culture = cu:central_american
+		country_has_primary_culture = cu:guatemalan
+		country_has_primary_culture = cu:el_salvadorian
+		country_has_primary_culture = cu:honduran
+		country_has_primary_culture = cu:nicaraguan
+		country_has_primary_culture = cu:costa_rican
+		AND = {
+			OR = {
+				country_has_primary_culture = cu:panamanian
+				country_has_primary_culture = cu:chiapanecan
+			}
+			cultural_acceptance_base = { target = cu:central_american value >= 60 }
+		}
+	}
+}
+
+# Scope: estado. Bastion federal / unitario en cualquier nivel (age_of_* son de P11).
+ca_p13_state_fed_stronghold = {
+	OR = {
+		has_modifier = federal_stronghold_small_nation
+		has_modifier = federal_stronghold
+		has_modifier = age_of_federal_stronghold
+	}
+}
+ca_p13_state_uni_stronghold = {
+	OR = {
+		has_modifier = unitary_stronghold_small_nation
+		has_modifier = unitary_stronghold
+		has_modifier = age_of_unitary_stronghold
+	}
+}
+
+# Scope: pais. Ley de la estructura del Estado del lado centralista / del lado federal.
+ca_p13_country_centralist_law = {
+	OR = {
+		has_law_or_variant = law_type:law_ca_central_american_unitary
+		has_law_or_variant = law_type:law_ca_departmental_state
+	}
+}
+ca_p13_country_federal_law = {
+	OR = {
+		has_law_or_variant = law_type:law_ca_central_american_federal
+		has_law_or_variant = law_type:law_ca_federal_state
+	}
+}
+ca_p13_country_loose_law = {
+	OR = {
+		has_law_or_variant = law_type:law_ca_central_american_confederated
+		has_law_or_variant = law_type:law_ca_confederated_state
+		has_law_or_variant = law_type:law_ca_autonomous_state
+		has_law_or_variant = law_type:law_ca_sovereign_state
+	}
+}

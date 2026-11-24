@@ -52,7 +52,7 @@ nic_gran_mariscal_mando = {
 
 # PAIS. 5 anos. Levas, prensa cerrada y escuelas cerradas.
 nic_levas_del_mariscal = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
 	state_conscription_rate_add = 0.1
 	interest_group_ig_intelligentsia_pol_str_mult = -0.25
 	state_education_access_add = -0.05
@@ -60,7 +60,7 @@ nic_levas_del_mariscal = {
 
 # PAIS. 15 anos. El Gran Mariscal se queda (final malo).
 nic_gran_mariscal = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
 	interest_group_ig_armed_forces_pol_str_mult = 0.35
 	country_legitimacy_base_add = -15
 	state_education_access_add = -0.05
@@ -75,7 +75,7 @@ nic_gobierno_civil = {
 
 # PAIS. 10 anos. Leon saqueada y quemada (24 ene 1845).
 nic_leon_saqueada = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
 	state_tax_capacity_mult = -0.2
 	country_legitimacy_base_add = -10
 	state_mortality_mult = 0.05
@@ -97,7 +97,7 @@ nic_capital_managua = {
 
 # PAIS. 10 anos. Legitimistas contra Democraticos (final malo).
 nic_guerra_de_bandos = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
 	country_legitimacy_base_add = -20
 	state_tax_capacity_mult = -0.2
 	interest_group_ig_landowners_pol_str_mult = 0.15
@@ -308,7 +308,7 @@ hon_costa_recuperada = {
 
 # PAIS. 20 anos. La costa norte perdida (final malo).
 hon_costa_perdida = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
 	state_tax_capacity_mult = -0.2
 	country_prestige_add = -20
 }
@@ -347,7 +347,7 @@ mkt_tutela_britanica = {
 
 # PAIS. 20 anos. El reino archivado en Belice (final malo).
 mkt_oficina_en_belice = {
-	icon = gfx/interface/icons/timed_modifier_icons/modifier_skull_negative.dds
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
 	country_legitimacy_base_add = -20
 	country_authority_add = -100
 	country_prestige_add = -15
